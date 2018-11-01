@@ -1,0 +1,621 @@
+:root {
+  --layout-background: #f0f2f5;
+  --color-ok: #52c41a;
+  --color-fail: red;
+  --rhythm: 8px;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.checkbox-group--vertical .ant-checkbox-group-item {
+  display: block;
+}
+
+.checkbox-group--vertical .ant-checkbox-group-item:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.bottom-line {
+  padding-bottom: 8px;
+  border-bottom: 1px solid #E9E9E9;
+  margin-bottom: 8px;
+}
+
+.disable-dnd * {
+  -webkit-user-drag: none !important;
+  -khtml-user-drag: none !important;
+  -moz-user-drag: none !important;
+  -o-user-drag: none !important;
+  user-drag: none !important;
+}
+
+.test-report__ok svg {
+  fill: var(--color-ok);
+}
+.test-report__fail svg {
+  fill: var(--color-fail);
+}
+
+.test-report__suite {
+  padding: 4px 8px 4px 8px;
+}
+.test-report__describe {
+  padding: 4px 8px 4px 24px;
+}
+.test-report__it {
+  padding: 4px 8px 4px 24px;
+}
+.test-report__it__title {
+  color: gray;
+}
+.test-report__it__exception {
+  padding: 4px 8px 4px 32px;
+  color: var(--color-fail);
+}
+
+.welcome {
+  padding: 0 16px;
+}
+
+/* Ignore content of A for e.target */
+a > .anticon {
+  pointer-events: none;
+}
+
+body {
+  background-color: #f0f2f5;
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+.row--centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal--instant .ant-modal-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  bottom: initial;
+  height: 100vh;
+  left: 0;
+  width: 100vw;
+  margin: 0;
+  position: absolute;
+  background-color: transparent;
+  border: 0;
+}
+
+.modal--instant .ant-modal-wrap .ant-modal {
+  width: 90%;
+  max-height: 90%;
+  padding: 0;
+  top: initial;
+}
+.ant-modal-sentinel {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.token--target {
+  font-weight: bold;
+}
+.token--param {
+  opacity: 0.7;
+}
+
+.link--action {
+  padding: 12px 4px;
+}
+.link--action + .ant-divider-vertical {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.is-invisible {
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap; /* 1 */
+}
+
+
+
+.ant-form-explain > span {
+  font-size: 13px;
+  color: #ad6800;
+}
+
+[draggable=false] {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.critical-error {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.critical-error > * {
+  flex: 0 0 auto;
+}
+.critical-error h2 {
+  font-size: 48px;
+}
+.critical-error h1 {
+  font-size: 28px;
+}
+.critical-error p {
+  font-size: 14px;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.tr-badge {
+  padding: var(--rhythm);
+  margin-bottom: var(--rhythm);
+  color: white;
+  font-weight: bold;
+  border-radius: 2px;
+}
+
+.tr-badge.is-ok {
+  background: var(--color-ok);
+}
+
+.tr-badge.is-fail {
+  background: var(--color-fail);
+}
+
+.tr-row {
+  margin: 0;
+}
+.tr-row > dt {
+  width: 120px;
+}
+.tr-row > * {
+  display: inline-block;
+  padding: 4px var(--rhythm);
+}
+
+nav >  ul, nav >  ul ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.layout {
+  min-height: 100vh;
+}
+
+.ant-menu-item > kbd::before {
+  content: "\0000a0";
+}
+.ant-menu-item > kbd {
+  font-size: .8em;
+  opacity: 0.8;
+}
+
+.layout-content {
+  /* where header/footer height is 52px */
+  height: calc(100vh - 52px - 52px);
+  overflow-y: auto;
+  padding: 16px 16px 0 16px;
+  /* disabling margincollapsing  */
+  display: inline-block;
+  width: 100%;
+}
+
+.layout-content > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
+  background: #fff;
+  padding: 16px;
+}
+
+.layout-content > .ant-tabs-card > div.ant-tabs-bar {
+  margin: 0;
+}
+
+/*.layout-content .ant-table-body > table tr > td {
+  padding: 8px;
+}*/
+
+/* Project navigator takes all available space vertically*/
+.ant-layout-sider-children {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.ant-layout-sider-children > *:not(:last-child) {
+  flex: 0 0 auto;
+}
+.ant-layout-sider-children .project-navigator {
+  flex: 1 1 auto;
+}
+
+root > .ant-spin {
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  background: var(--layout-background);
+}
+
+root > .ant-spin > * {
+  flex: 0 0 auto;
+}
+
+
+.project-navigator {
+  margin: var(--rhythm) 0 0 0;
+  background: #002f5c;
+  opacity: 1;
+  transition: opacity 300ms ease-in-out;
+  will-change: opacity;
+  color: rgba(255, 255, 255, 0.65);
+  display: flex;
+  flex-flow: column nowrap;
+}
+.project-navigator__nav {
+  flex: 1 1 auto;
+  padding: var(--rhythm) 0;
+  height: 100%;
+  overflow: auto;
+  max-width: 250px;
+}
+
+.project-navigator__nav > .project-navigator__li {
+  opacity: 0.6;
+  cursor: initial;
+}
+
+
+li.project-navigator__li {
+  padding-left: 16px;
+}
+
+li.project-navigator__li:hover {
+  color: white;
+}
+
+.project-navigator__li {
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  cursor: pointer;
+  padding: 6px 16px;
+  user-select: none;
+}
+
+.project-navigator__li.is-active {
+  background: #00529e;
+  color: white;
+}
+
+.project-navigator__add {
+  position: absolute;
+  display: block;
+  right: 16px;
+  top: var(--rhythm);
+  color: rgba(255, 255, 255, 0.65);
+}
+.project-navigator__add:hover {
+  color: white;
+}
+
+.project-navigator h2 {
+  flex: 0 0 auto;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 8px 16px;
+  margin: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.ant-layout-sider-collapsed .project-navigator {
+  opacity: 0;
+  transition: none;
+}
+
+/* special layout for input:disabled + button browser */
+.fieldset-browse {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-end;
+}
+
+.fieldset-browse > .ant-form-item:first-child {
+  flex: 1 1 100%;
+  padding-right: var(--rhythm);
+}
+.fieldset-browse > .ant-form-item:last-child {
+  flex: 0 0 auto;
+}
+
+/* centring spinner for the entire layout */
+root > .ant-spin-nested-loading > div > .ant-spin {
+  max-height: none;
+  height: 100vh;
+  position: fixed;
+}
+
+.toolbar {
+   -webkit-app-region: drag;
+   width: 100%;
+   padding: var(--rhythm) 24px;
+   display: flex;
+   flex-flow: row nowrap;
+   align-items: center;
+   background: #d7dde4;
+   padding-left: 16px;
+}
+
+.toolbar > div:first-child {
+  flex: 1 1 100%;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.toolbar > div:last-child {
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+.toolbar a {
+   -webkit-app-region: no-drag;
+}
+
+[data-balloon] {
+  line-height: 16px;
+  font-size: 14px;
+  text-align: left;
+}
+
+/* prevent Tooltips hiding within label */
+.command-form .ant-form-item-label {
+  overflow: initial;
+}
+
+/* Inlin rows look to narrow, give them a pad  */
+.command-form .ant-form-inline .ant-row {
+ padding-top: var(--rhythm);
+ padding-bottom: var(--rhythm);
+}
+
+/* fixing right pad on nested tables */
+.group-table .ant-table-expanded-row-level-1 > td:last-child {
+  padding-right: 0;
+}
+
+.command-form__fieldset legend {
+  font-size: 14px;
+  border-style: dashed;
+}
+
+.logo {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  height: 82px;
+  position: relative;
+  background: #002140;
+  width: 100%;
+
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+}
+
+.logo h1 {
+  font-size: 24px;
+  margin: 0 0 0 var(--rhythm);
+  color: white;
+}
+
+.logo .logo__item {
+  position: absolute;
+  height: 50px;
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  will-change: opacity, transform;
+
+}
+
+.logo__item h1 span {
+  display: block;
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: normal;
+  color: white;
+  opacity: .9;
+  text-align: center;
+}
+
+.logo__item.logo__collapsed {
+  left: calc(50% - 25px);
+}
+
+.logo__item.logo__expanded {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  left: calc(50% - 77px);
+
+}
+
+.logo.is-collapsed > .logo__collapsed {
+  opacity: 1;
+  transform: scale(1);
+}
+.logo.is-expanded > .logo__collapsed {
+  transition: none;
+}
+.logo.is-expanded > .logo__expanded {
+  opacity: 1;
+  transform: scale(1);
+}
+.logo.is-collapsed > .logo__expanded {
+  transition: none;
+}
+
+.layout-icon {
+font-size: 24px;
+color: #000;
+margin-left: var(--rhythm);
+}
+
+.char-pad--left {
+  margin-left: 4px;
+}
+
+.ant-layout > .ant-layout-footer {
+padding: var(--rhythm) 24px;
+}
+.ant-form.cell-form .ant-form-item {
+margin-bottom: 0;
+}
+
+.ant-form.cell-form .ant-form-explain {
+position: absolute;
+padding: 6px;
+background-color: rgba(255, 255, 255, .8);
+}
+
+.ant-form.suite-form {
+margin: 16px 16px 16px 16px;
+}
+
+.box-margin-left {
+  margin-left: var(--rhythm);
+}
+
+.box-margin-right {
+  margin-right: var(--rhythm);
+}
+
+.box-margin-horizontal {
+margin-left: var(--rhythm);
+margin-right: var(--rhythm);
+}
+
+.box-margin-vertical {
+margin-top: var(--rhythm);
+margin-bottom: var(--rhythm);
+}
+
+.container--editable-cell {
+padding-right: 24px;
+}
+
+.container--editable-cell .anticon:first-child {
+margin-right: 5px;
+}
+
+.editable-row .ant-form-explain {
+position: absolute;
+font-size: 12px;
+margin-top: -4px;
+}
+
+.editable-cell {
+position: relative;
+}
+
+.editable-cell-icon,
+.editable-cell-icon-check {
+cursor: pointer;
+}
+
+
+.editable-cell-icon {
+line-height: 14px;
+position: absolute;
+right: 0;
+top: 50%;
+margin-top: -7px;
+display: none;
+}
+
+td:hover .editable-cell-icon {
+display: inline-block;
+}
+
+.editable-cell-icon:hover,
+.editable-cell-icon-check:hover {
+color: #108ee9;
+}
+
+.ant-table-tbody > tr.ant-table-expanded-row:hover > td {
+  background: none;
+}
+
+.ant-table-tbody > tr:hover > td {
+  background: #e6f7ff;
+}
+
+.btn--save {
+  margin-right: var(--rhythm);
+}
+
+.td {
+  margin: 0;
+}
+
+
+/* Preventing D&D on actions cell */
+.ant-table-tbody > tr > td.table-actions-cell {
+  padding: 0;
+}
+
+.table-actions {
+  padding: 16px 8px;
+  display: inline-block;
+  cursor: initial;
+}
+
+.draggable-table tr.drop-over-downward td {
+  border-bottom: 2px dashed #1890ff;
+}
+
+.draggable-table tr.drop-over-upward td {
+  border-top: 2px dashed #1890ff;
+}
+
+.ant-table-row-expand-icon-cell {
+  padding-left: 8px;
+  padding-right: 8px;
+}

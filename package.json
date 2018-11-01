@@ -1,0 +1,128 @@
+{
+  "name": "puppetry",
+  "description": "App to build end-to-end automation tests without a line of code",
+  "version": "0.1.0-RC0",
+  "author": "Dmitry Sheiko (http://dsheiko.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dsheiko/puppetry"
+  },
+  "bugs": {
+    "url": "https://github.com/dsheiko/puppetry/issues"
+  },
+  "main": "./main.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack --config webpack.config.js",
+    "watch": "webpack --watch  --config webpack.config.js",
+    "package": "electron-packager . puppetry --platform=all",
+    "pkg:mac": "electron-packager . puppetry --icon=assets/puppetry.icns --overwrite",
+    "start": "ELECTRON_ENV=dev  electron .",
+    "lint": "eslint --ext=js,jsx ./src",
+    "lint:fix": "eslint --ext=js,jsx --fix ./src",
+    "preversion": "npm lint && npm test && npm run build",
+    "postversion": "git push && git push --tags"
+  },
+  "jest": {
+    "verbose": true,
+    "testEnvironment": "node",
+    "setupFiles": [
+      "./jest.setup.js"
+    ],
+    "testRegex": "(/__tests__/.*|(\\.|/)(spec))\\.jsx?$",
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "modulePaths": [
+      "src"
+    ]
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.1.2",
+    "balloon-css": "^0.5.0",
+    "chokidar": "^2.0.4",
+    "cross-env": "^5.2.0",
+    "custom-error-instance": "^2.1.1",
+    "electron-context-menu": "^0.10.0",
+    "hotkeys-js": "^3.3.8",
+    "immutability-helper": "^2.8.1",
+    "lodash.debounce": "^4.0.8",
+    "prop-types": "^15.6.2",
+    "puppeteer": "^1.9.0",
+    "react": "^16.6.0",
+    "react-dnd": "^5.0.0",
+    "react-dnd-html5-backend": "^5.0.1",
+    "react-dom": "^16.5.2",
+    "react-hot-keys": "^1.2.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.1",
+    "redux-actions": "^2.6.3",
+    "redux-promise": "^0.6.0",
+    "redux-thunk": "^2.3.0",
+    "regenerator-runtime": "^0.12.1",
+    "shelljs": "^0.8.2",
+    "uniqid": "^5.0.3",
+    "validate": "^4.5.1",
+    "antd": "^3.10.1",
+    "jest": "^23.6.0",
+    "jest-cli": "^23.6.0",
+    "xml2js": "^0.4.19"
+  },
+  "license": {
+    "type": "MIT",
+    "url": "https://www.opensource.org/licenses/mit-license.php"
+  },
+  "devDependencies": {
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
+    "redux-devtools-extension": "^2.13.5",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.1.2",
+    "@babel/node": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-decorators": "^7.1.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^1.0.0",
+    "electron": "^3.0.5",
+    "electron-debug": "^2.0.0",
+    "electron-devtools-installer": "^2.2.4",
+    "electron-packager": "^12.2.0",
+
+    "eslint": "^5.7.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
+
+    "style-loader": "^0.23.1",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "webpack": "^4.22.0",
+    "webpack-cli": "^3.1.2"
+  },
+  "keywords": [
+    "browser",
+    "puppetry",
+    "Puppeteer",
+    "automation",
+    "end-to-end",
+    "e2e",
+    "integration",
+    "test",
+    "testing",
+    "runner"
+  ]
+}

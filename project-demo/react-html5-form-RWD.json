@@ -1,0 +1,198 @@
+{
+  "title": "react-html5-form-RWD",
+  "timeout": 50000,
+  "savedAt": "2018-11-01T14:21:11.990Z",
+  "loadedAt": "2018-11-01T14:19:34.067Z",
+  "modified": true,
+  "filename": "react-html5-form-RWD.json",
+  "targets": {
+    "36ijnyo00no": {
+      "editing": false,
+      "id": "36ijnyo00no",
+      "key": "36ijnyo00no",
+      "target": "SEL_JUMBOTRON_DESC",
+      "selector": ".jumbotron p.gt-small",
+      "title": ""
+    },
+    "36ijnyo9jrd": {
+      "editing": false,
+      "id": "36ijnyo9jrd",
+      "key": "36ijnyo9jrd",
+      "target": "SEL_EMAIL",
+      "selector": "[name=email]",
+      "title": ""
+    },
+    "36ijnyo9z8m": {
+      "editing": false,
+      "id": "36ijnyo9z8m",
+      "key": "36ijnyo9z8m",
+      "target": "SEL_FNAME",
+      "selector": "[name=firstName]",
+      "title": ""
+    }
+  },
+  "groups": {
+    "36ijnyo161a": {
+      "editing": false,
+      "id": "36ijnyo161a",
+      "key": "36ijnyo161a",
+      "title": "Main page",
+      "tests": {
+        "36ijnyo1oho": {
+          "editing": false,
+          "id": "36ijnyo1oho",
+          "key": "36ijnyo1oho",
+          "title": "on PC/Notebook 1280x1024",
+          "commands": {
+            "36ijnyo2pxx": {
+              "editing": false,
+              "id": "36ijnyo2pxx",
+              "key": "36ijnyo2pxx",
+              "target": "page",
+              "method": "setViewport",
+              "params": {
+                "width": 1280,
+                "height": 1024
+              },
+              "groupId": "36ijnyo161a",
+              "testId": "36ijnyo1oho"
+            },
+            "36ijnyo3ewr": {
+              "editing": false,
+              "id": "36ijnyo3ewr",
+              "key": "36ijnyo3ewr",
+              "target": "page",
+              "method": "goto",
+              "params": {
+                "url": "https://dsheiko.github.io/react-html5-form/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "groupId": "36ijnyo161a",
+              "testId": "36ijnyo1oho"
+            },
+            "36ijnyo5d8m": {
+              "editing": false,
+              "id": "36ijnyo5d8m",
+              "key": "36ijnyo5d8m",
+              "target": "SEL_JUMBOTRON_DESC",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "boolean",
+                "value": true
+              },
+              "groupId": "36ijnyo161a",
+              "testId": "36ijnyo1oho"
+            },
+            "36ijnyob255": {
+              "editing": false,
+              "id": "36ijnyob255",
+              "key": "36ijnyob255",
+              "target": "SEL_EMAIL",
+              "method": "assertPosition",
+              "assert": {
+                "assertion": "position",
+                "position": "left",
+                "target": "SEL_FNAME"
+              },
+              "groupId": "36ijnyo161a",
+              "testId": "36ijnyo1oho"
+            },
+            "36ijnyo5q0w": {
+              "editing": false,
+              "id": "36ijnyo5q0w",
+              "key": "36ijnyo5q0w",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "on 1280x1024",
+                "fullPage": false,
+                "omitBackground": false
+              },
+              "groupId": "36ijnyo161a",
+              "testId": "36ijnyo1oho"
+            }
+          },
+          "groupId": "36ijnyo161a"
+        },
+        "36ijnyo2e41": {
+          "editing": false,
+          "id": "36ijnyo2e41",
+          "key": "36ijnyo2e41",
+          "title": "on iPhone X",
+          "commands": {
+            "36ijnyo3yw0": {
+              "editing": false,
+              "id": "36ijnyo3yw0",
+              "key": "36ijnyo3yw0",
+              "target": "page",
+              "method": "emulate",
+              "params": {
+                "device": "iPhone X"
+              },
+              "groupId": "36ijnyo161a",
+              "testId": "36ijnyo2e41"
+            },
+            "36ijnyo4p85": {
+              "editing": false,
+              "id": "36ijnyo4p85",
+              "key": "36ijnyo4p85",
+              "target": "page",
+              "method": "goto",
+              "params": {
+                "url": "https://dsheiko.github.io/react-html5-form/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "groupId": "36ijnyo161a",
+              "testId": "36ijnyo2e41"
+            },
+            "36ijnyo6nwg": {
+              "editing": false,
+              "id": "36ijnyo6nwg",
+              "key": "36ijnyo6nwg",
+              "target": "SEL_JUMBOTRON_DESC",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "boolean",
+                "value": false
+              },
+              "groupId": "36ijnyo161a",
+              "testId": "36ijnyo2e41"
+            },
+            "3fejnyofvuf": {
+              "editing": false,
+              "id": "3fejnyofvuf",
+              "key": "3fejnyofvuf",
+              "target": "SEL_EMAIL",
+              "method": "assertPosition",
+              "assert": {
+                "assertion": "position",
+                "position": "above",
+                "target": "SEL_FNAME"
+              },
+              "groupId": "36ijnyo161a",
+              "testId": "36ijnyo2e41"
+            },
+            "3fejnyoglbz": {
+              "editing": false,
+              "id": "3fejnyoglbz",
+              "key": "3fejnyoglbz",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "on iPhone X",
+                "fullPage": false,
+                "omitBackground": false
+              },
+              "groupId": "36ijnyo161a",
+              "testId": "36ijnyo2e41"
+            }
+          },
+          "groupId": "36ijnyo161a"
+        }
+      }
+    }
+  },
+  "puppetry": "0.1.0-RC0"
+}
