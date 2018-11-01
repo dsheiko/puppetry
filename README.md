@@ -12,7 +12,7 @@
 
 App to build end-to-end automation tests without a line of code.
 
-![screenshot](https://raw.githubusercontent.com/dsheiko/puppetry/master/gh-pages/assets/img/puppetry-welcome)
+![screenshot](https://raw.githubusercontent.com/dsheiko/puppetry/master/gh-pages/assets/img/puppetry-welcome.png)
 
 # Key Features
 - Features Headless Chrome (Puppeteer) and Jest
