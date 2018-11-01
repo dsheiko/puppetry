@@ -1,0 +1,39 @@
+{
+  "name": "Test Project",
+  "panels": [
+    "groups"
+  ],
+  "groups": {
+    "_1": {
+      "key": 0,
+      "value": false,
+      "tests": {}
+    },
+    "_2": {
+      "key": 1,
+      "value": true,
+      "tests": {
+        "_2_1": {
+          "key": 0,
+          "value": false
+        },
+        "_2_2": {
+          "key": 1,
+          "value": false
+        },
+        "olhjnyhrjcg": {
+          "key": "olhjnyhrjcg",
+          "value": true
+        },
+        "olhjnyhro5a": {
+          "key": "olhjnyhro5a",
+          "value": true
+        }
+      }
+    }
+  },
+  "modified": false,
+  "projectDirectory": "/home/sheiko/Sites/os/puppetry/demo",
+  "lastOpenSuite": "Demo--Suite--Foo.json",
+  "puppetry": "0.1.0-RC0"
+}

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <defs>
+  <linearGradient y2="0" x2="1" y1="1" x1="1" id="svg_7">
+   <stop offset="0" stop-opacity="1" stop-color="#00aeef"/>
+   <stop offset="1" stop-opacity="0" stop-color="#00aeef"/>
+  </linearGradient>
+ </defs>
+ <g>
+  <title>Layer 1</title>
+  <circle stroke="url(#svg_7)" fill-opacity="0.01" id="svg_1" r="90" cy="100" cx="100" stroke-width="15"/>
+  <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="1s" repeatCount="indefinite"></animateTransform>
+ </g>
+</svg>

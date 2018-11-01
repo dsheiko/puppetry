@@ -1,0 +1,25 @@
+{
+  "name": "generated-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test jest",
+    "test:debug": "cross-env DEBUG=true jest --detectOpenHandles"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "jest": {
+    "verbose": true,
+    "testMatch": [
+      "**/*.spec.js"
+    ]
+  },
+  "dependencies": {
+    "cross-env": "^5.2.0",
+    "jest": "^23.6.0",
+    "puppeteer": "^1.9.0",
+    "shelljs": "^0.8.2"
+  }
+}

@@ -1,0 +1,435 @@
+{
+  "title": "react-html5-form",
+  "timeout": 50000,
+  "savedAt": "2018-10-31T15:25:48.244Z",
+  "loadedAt": "2018-10-31T16:26:59.439Z",
+  "modified": true,
+  "filename": "testing.json",
+  "targets": {
+    "_1": {
+      "editing": false,
+      "id": "_1",
+      "key": 0,
+      "target": "EMAIL_INPUT",
+      "selector": "input[name=email]",
+      "title": ""
+    },
+    "_2": {
+      "editing": false,
+      "id": "_2",
+      "key": 1,
+      "target": "VAT_INPUT",
+      "selector": "input[name=vatId]",
+      "title": ""
+    },
+    "_4": {
+      "editing": false,
+      "id": "_4",
+      "key": 3,
+      "target": "FNAME_INPUT",
+      "selector": "//*[@id=\"firstNameInput\"]",
+      "title": ""
+    },
+    "_5": {
+      "editing": false,
+      "id": "_5",
+      "key": 4,
+      "target": "DAY_SELECT",
+      "selector": "[name=day]",
+      "title": ""
+    },
+    "_7": {
+      "editing": false,
+      "id": "_7",
+      "key": 6,
+      "target": "MONTH_SELECT",
+      "selector": "[name=month]",
+      "title": ""
+    },
+    "_3": {
+      "editing": false,
+      "id": "_3",
+      "key": 2,
+      "target": "SUBMIT_BTN",
+      "selector": "button[type=submit]",
+      "title": ""
+    }
+  },
+  "groups": {
+    "_2": {
+      "editing": false,
+      "id": "_2",
+      "key": 1,
+      "title": "Form initialization",
+      "tests": {
+        "_2_1": {
+          "editing": false,
+          "id": "_2_1",
+          "key": 0,
+          "title": "represents valid state",
+          "commands": {
+            "_2_1_2": {
+              "editing": false,
+              "id": "_2_1_2",
+              "key": 1,
+              "target": "page",
+              "method": "goto",
+              "params": {
+                "url": "https://dsheiko.github.io/react-html5-form/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "9hnjnx8celp": {
+              "editing": false,
+              "id": "9hnjnx8celp",
+              "key": "9hnjnx8celp",
+              "target": "page",
+              "method": "emulate",
+              "params": {
+                "device": "Blackberry PlayBook landscape"
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "_2_1_1": {
+              "editing": false,
+              "id": "_2_1_1",
+              "key": 0,
+              "target": "page",
+              "method": "setViewport",
+              "params": {
+                "width": 1280,
+                "height": 1024
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "9yajnx9h29k": {
+              "editing": false,
+              "id": "9yajnx9h29k",
+              "key": "9yajnx9h29k",
+              "target": "page",
+              "method": "clickMouse",
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0,
+                "x": 10,
+                "y": 10
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "_2_1_3": {
+              "editing": false,
+              "id": "_2_1_3",
+              "key": 2,
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "Form initially in valid state",
+                "fullPage": false,
+                "omitBackground": false
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "9yajnx9jctd": {
+              "editing": false,
+              "id": "9yajnx9jctd",
+              "key": "9yajnx9jctd",
+              "target": "page",
+              "method": "waitFor",
+              "params": {
+                "value": 12
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "9yajnx9kld5": {
+              "editing": false,
+              "id": "9yajnx9kld5",
+              "key": "9yajnx9kld5",
+              "target": "page",
+              "method": "assertContent",
+              "assert": {
+                "assertion": "contains",
+                "type": "string",
+                "value": "REACT-HTML5-FORM DEMO"
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "a61jnx9qz1r": {
+              "editing": false,
+              "id": "a61jnx9qz1r",
+              "key": "a61jnx9qz1r",
+              "target": "page",
+              "method": "assertNodeCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "gt",
+                "value": 1
+              },
+              "params": {
+                "selector": "input"
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "aakjnxa1nt9": {
+              "editing": false,
+              "id": "aakjnxa1nt9",
+              "key": "aakjnxa1nt9",
+              "target": "page",
+              "method": "assertTitle",
+              "assert": {
+                "assertion": "contains",
+                "type": "string",
+                "value": "Demo"
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "bfjjnxb7hpt": {
+              "editing": false,
+              "id": "bfjjnxb7hpt",
+              "key": "bfjjnxb7hpt",
+              "target": "EMAIL_INPUT",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "equals",
+                "type": "string",
+                "value": "email"
+              },
+              "params": {
+                "name": "name"
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "1s4jnwxib69": {
+              "editing": false,
+              "id": "1s4jnwxib69",
+              "key": "1s4jnwxib69",
+              "target": "SUBMIT_BTN",
+              "method": "assertBoundingBox",
+              "assert": {
+                "assertion": "boundingBox",
+                "xOperator": "gt",
+                "xValue": 0,
+                "yOperator": "gt",
+                "yValue": 0,
+                "wOperator": "gt",
+                "wValue": 0,
+                "hOperator": "gt",
+                "hValue": 0
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "bfjjnxb9cq2": {
+              "editing": false,
+              "id": "bfjjnxb9cq2",
+              "key": "bfjjnxb9cq2",
+              "target": "SUBMIT_BTN",
+              "method": "assertHtml",
+              "assert": {
+                "assertion": "equals",
+                "type": "string",
+                "value": "Submit"
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "62ejnx426it": {
+              "editing": false,
+              "id": "62ejnx426it",
+              "key": "62ejnx426it",
+              "target": "SUBMIT_BTN",
+              "method": "assertMatchesSelector",
+              "assert": {
+                "assertion": "selector",
+                "value": ".btn"
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "217jnwy0pvt": {
+              "editing": false,
+              "id": "217jnwy0pvt",
+              "key": "217jnwy0pvt",
+              "target": "DAY_SELECT",
+              "method": "assertPosition",
+              "assert": {
+                "assertion": "position",
+                "position": "left",
+                "target": "MONTH_SELECT"
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "1s4jnwxk7kn": {
+              "editing": false,
+              "id": "1s4jnwxk7kn",
+              "key": "1s4jnwxk7kn",
+              "target": "SUBMIT_BTN",
+              "method": "assertProperty",
+              "assert": {
+                "assertion": "contains",
+                "type": "string",
+                "value": "Submit"
+              },
+              "params": {
+                "name": "innerHTML"
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "4s6jnx131jn": {
+              "editing": false,
+              "id": "4s6jnx131jn",
+              "key": "4s6jnx131jn",
+              "target": "SUBMIT_BTN",
+              "method": "assertStyle",
+              "assert": {
+                "assertion": "equals",
+                "type": "string",
+                "value": "rgb(0, 123, 255)"
+              },
+              "params": {
+                "name": "border-color"
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "4hpjnx0ej4g": {
+              "editing": false,
+              "id": "4hpjnx0ej4g",
+              "key": "4hpjnx0ej4g",
+              "target": "EMAIL_INPUT",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "boolean",
+                "value": true
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "bfjjnxbb475": {
+              "editing": false,
+              "id": "bfjjnxbb475",
+              "key": "bfjjnxbb475",
+              "target": "EMAIL_INPUT",
+              "method": "type",
+              "params": {
+                "value": "aa@aa.com"
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "bfjjnxbbs4i": {
+              "editing": false,
+              "id": "bfjjnxbbs4i",
+              "key": "bfjjnxbbs4i",
+              "target": "DAY_SELECT",
+              "method": "select",
+              "params": {
+                "value": "..."
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "bfjjnxbcskf": {
+              "editing": false,
+              "id": "bfjjnxbcskf",
+              "key": "bfjjnxbcskf",
+              "target": "FNAME_INPUT",
+              "method": "focus",
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "bfjjnxbd548": {
+              "editing": false,
+              "id": "bfjjnxbd548",
+              "key": "bfjjnxbd548",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "fname focused",
+                "fullPage": false,
+                "omitBackground": false
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "bfjjnxbdkzj": {
+              "editing": false,
+              "id": "bfjjnxbdkzj",
+              "key": "bfjjnxbdkzj",
+              "target": "SUBMIT_BTN",
+              "method": "hover",
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "bfjjnxbe73o": {
+              "editing": false,
+              "id": "bfjjnxbe73o",
+              "key": "bfjjnxbe73o",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "submit hovered",
+                "fullPage": false,
+                "omitBackground": false
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "bfjjnxberkk": {
+              "editing": false,
+              "id": "bfjjnxberkk",
+              "key": "bfjjnxberkk",
+              "target": "SUBMIT_BTN",
+              "method": "click",
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "bfjjnxbf2pl": {
+              "editing": false,
+              "id": "bfjjnxbf2pl",
+              "key": "bfjjnxbf2pl",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "page submitted",
+                "fullPage": false,
+                "omitBackground": false
+              },
+              "groupId": "_2",
+              "testId": "_2_1"
+            }
+          },
+          "groupId": "_2"
+        },
+        "cmqjnxdjk90": {
+          "editing": false,
+          "id": "cmqjnxdjk90",
+          "key": "cmqjnxdjk90",
+          "title": "foo",
+          "commands": {},
+          "groupId": "_2"
+        }
+      }
+    }
+  },
+  "puppetry": "0.1.0-RC0"
+}
