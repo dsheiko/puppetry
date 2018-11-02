@@ -19,8 +19,8 @@
     "test": "jest",
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --watch  --config webpack.config.js",
-    "package": "electron-packager . puppetry --platform=win32 --asar --overwrite",
-    "pkg:mac": "electron-packager . puppetry --icon=assets/icon.icns --overwrite",
+    "package": "electron-packager . puppetry --platform=win32 --asar --overwrite --icon=assets/icon.icns --out dist/",
+    "setup": "electron-installer-windows --src dist/app-win32-x64/ --dest dist/installers/"
     "start": "ELECTRON_ENV=dev  electron .",
     "lint": "eslint --ext=js,jsx ./src",
     "lint:fix": "eslint --ext=js,jsx --fix ./src",
@@ -101,6 +101,7 @@
     "electron": "^3.0.5",
     "electron-debug": "^2.0.0",
     "electron-devtools-installer": "^2.2.4",
+    "electron-installer-windows": "^1.1.0",
     "electron-packager": "^12.2.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
