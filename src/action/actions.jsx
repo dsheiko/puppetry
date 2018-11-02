@@ -134,22 +134,25 @@ actions.loadSettings = () => ( dispatch, getState ) => {
 
 actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
   const projectDirectory = directory || getState().settings.projectDirectory;
+  let project;
   if ( !projectDirectory ) {
     throw new InvalidArgumentError( "Empty project directory" );
   }
-  const project = await readProject( projectDirectory );
-  ipcRenderer.send( E_PROJECT_LOADED, projectDirectory );
-  directory && dispatch( actions.saveSettings({ projectDirectory }) );
-  dispatch( actions.setProject( project ) );
   try {
+    dispatch( actions.updateApp({ loading: true }) );
+    project = await readProject( projectDirectory );
+    project.projectDirectory = projectDirectory;
+    ipcRenderer.send( E_PROJECT_LOADED, projectDirectory );
+    directory && dispatch( actions.saveSettings({ projectDirectory }) );
+    dispatch( actions.setProject( project ) );
     project.lastOpenSuite && dispatch( await actions.openSuiteFile( project.lastOpenSuite ) );
+
   } catch ( err ) {
-    dispatch( actions.setError({
-      visible: true,
-      message: "Cannot open file",
-      description: err.message
-    }) );
+    console.warn( err );
+  } finally {
+    dispatch( actions.updateApp({ loading: false }) );
   }
+
   return project;
 };
 

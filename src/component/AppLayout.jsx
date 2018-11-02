@@ -95,7 +95,7 @@ export class AppLayout extends React.Component {
                   <TabGroup action={ action } store={ store } />
                 </If>
                 <If exp={ !tabsAnyTrue }>
-                  <Welcome action={ action } />
+                  <Welcome action={ action } projectDirectory={ projectDirectory } />
                 </If>
 
               </div>
