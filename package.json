@@ -20,7 +20,7 @@
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --watch  --config webpack.config.js",
     "package": "electron-packager . puppetry --platform=win32 --asar --overwrite --icon=assets/icon.icns --out dist/",
-    "setup": "electron-installer-windows --src dist/app-win32-x64/ --dest dist/installers/"
+    "setup": "electron-installer-windows --src dist/app-win32-x64/ --dest dist/installers/",
     "start": "ELECTRON_ENV=dev  electron .",
     "lint": "eslint --ext=js,jsx ./src",
     "lint:fix": "eslint --ext=js,jsx --fix ./src",
