@@ -2,21 +2,25 @@
   "name": "puppetry",
   "description": "App to build end-to-end automation tests without a line of code",
   "version": "0.1.0-RC0",
-  "author": "Dmitry Sheiko (http://dsheiko.com)",
+  "author": "Dmitry Sheiko <me@dsheiko.com> (http://dsheiko.com)",
   "repository": {
     "type": "git",
     "url": "https://github.com/dsheiko/puppetry"
   },
   "bugs": {
-    "url": "https://github.com/dsheiko/puppetry/issues"
+    "url": "https://github.com/dsheiko/puppetry/issues",
+    "email": "me@dsheiko.com"
   },
+  "maintainers": [
+    "Dmitry Sheiko <me@dsheiko.com> (http://dsheiko.com)"
+  ],
   "main": "./main.js",
   "scripts": {
     "test": "jest",
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --watch  --config webpack.config.js",
-    "package": "electron-packager . puppetry --platform=all",
-    "pkg:mac": "electron-packager . puppetry --icon=assets/puppetry.icns --overwrite",
+    "package": "electron-packager . puppetry --platform=win32 --asar --overwrite",
+    "pkg:mac": "electron-packager . puppetry --icon=assets/icon.icns --overwrite",
     "start": "ELECTRON_ENV=dev  electron .",
     "lint": "eslint --ext=js,jsx ./src",
     "lint:fix": "eslint --ext=js,jsx --fix ./src",
@@ -42,7 +46,11 @@
     ]
   },
   "dependencies": {
+    "@babel/core": "^7.1.2",
     "@babel/runtime": "^7.1.2",
+    "antd": "^3.10.1",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
     "balloon-css": "^0.5.0",
     "chokidar": "^2.0.4",
     "cross-env": "^5.2.0",
@@ -50,9 +58,11 @@
     "electron-context-menu": "^0.10.0",
     "hotkeys-js": "^3.3.8",
     "immutability-helper": "^2.8.1",
+    "jest": "^23.6.0",
+    "jest-cli": "^23.6.0",
     "lodash.debounce": "^4.0.8",
     "prop-types": "^15.6.2",
-    "puppeteer": "^1.9.0",
+    "puppeteer": "^1.10.0",
     "react": "^16.6.0",
     "react-dnd": "^5.0.0",
     "react-dnd-html5-backend": "^5.0.1",
@@ -67,9 +77,6 @@
     "shelljs": "^0.8.2",
     "uniqid": "^5.0.3",
     "validate": "^4.5.1",
-    "antd": "^3.10.1",
-    "jest": "^23.6.0",
-    "jest-cli": "^23.6.0",
     "xml2js": "^0.4.19"
   },
   "license": {
@@ -77,13 +84,7 @@
     "url": "https://www.opensource.org/licenses/mit-license.php"
   },
   "devDependencies": {
-    "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.6.0",
-    "redux-devtools-extension": "^2.13.5",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-jest": "^23.6.0",
     "@babel/cli": "^7.1.2",
-    "@babel/core": "^7.1.2",
     "@babel/node": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-proposal-decorators": "^7.1.2",
@@ -93,7 +94,6 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
-
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^0.1.19",
@@ -102,12 +102,13 @@
     "electron-debug": "^2.0.0",
     "electron-devtools-installer": "^2.2.4",
     "electron-packager": "^12.2.0",
-
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0",
     "eslint": "^5.7.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
-
+    "redux-devtools-extension": "^2.13.5",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.22.0",
