@@ -21,7 +21,7 @@ App to build end-to-end automation tests without a line of code.
 
 ```
 # clone the project
-git clone git@github.com:dsheiko/puppetry.git
+git clone https://github.com/dsheiko/puppetry.git
 cd puppetry
 
 # install dependencies
