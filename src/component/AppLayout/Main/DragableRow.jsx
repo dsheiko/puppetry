@@ -61,7 +61,7 @@ class BodyRow extends React.Component {
       )
     );
   }
-};
+}
 
 function getModel( className ) {
   return className.split( " " )
@@ -73,7 +73,7 @@ const rowSource = {
           return {
             index: props.index,
             id: props[ "data-row-key" ],
-            model: getModel( props[ "className" ] )
+            model: getModel( props[ "className" ])
           };
         }
       },
@@ -85,10 +85,10 @@ const rowSource = {
                 dragModel = monitor.getItem().model,
                 hoverIndex = props.index,
                 hoverId = props[ "data-row-key" ],
-                hoverModel = getModel( props[ "className" ] );
-              if (dragModel !== hoverModel) {
-                console.log("no region");
-              }
+                hoverModel = getModel( props[ "className" ]);
+          if ( dragModel !== hoverModel ) {
+            console.log( "no region" );
+          }
           // Don"t replace items with themselves
           if ( dragIndex === hoverIndex || dragModel !== hoverModel ) {
             return;

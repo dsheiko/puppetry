@@ -375,8 +375,8 @@ export const reducer = handleActions(
 
       // Moving between tests/groups
       if ( !srcArr.find( command => command.id === payload.sourceId ) ) {
-        const commands = getCommandsFlat( state.suite.groups );
-        const sourceCommand = commands.find( command => command.id  === payload.sourceId ),
+        const commands = getCommandsFlat( state.suite.groups ),
+              sourceCommand = commands.find( command => command.id  === payload.sourceId ),
               targetCommand = commands.find( command => command.id  === payload.targetId );
         return transferCommand( state, sourceCommand, targetCommand );
       }

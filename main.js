@@ -1,11 +1,16 @@
 
 const { session, protocol, app, BrowserWindow } = require( "electron" ),
       path = require( "path" ),
+      log = require( "electron-log" ),
       url = require( "url" );
 
 // Keep a global reference of the window object, if you don"t, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+
+process.on( "uncaughtException", ( err ) => {
+  log( `Caught exception: ${err}\n` );
+});
 
 function createWindow() {
 

@@ -17,10 +17,10 @@ export function getTestsFlat( groups ) {
 
 function arrayToMap( array ) {
 
-  return array.reduce(( carry, entry ) => {
+  return array.reduce( ( carry, entry ) => {
     carry[ entry.id ] = { ...entry };
     return carry;
-  }, {} );
+  }, {});
 }
 
 export function removeMapEntry( map, id ) {
@@ -28,7 +28,7 @@ export function removeMapEntry( map, id ) {
 }
 
 export function appendMapEntry( map, targetEntry ) {
-  return arrayToMap( [ targetEntry, ...Object.values( map ) ] );
+  return arrayToMap([ targetEntry, ...Object.values( map ) ]);
 }
 
 export function transferTest( state, sourceTest, targetTest ) {
@@ -56,35 +56,35 @@ export function transferCommand( state, sourceCommand, targetCommand ) {
   const sourceCommands = state.suite.groups[ sourceCommand.groupId ].tests[ sourceCommand.testId ].commands,
         targetCommands = state.suite.groups[ targetCommand.groupId ].tests[ targetCommand.testId ].commands,
 
-  temp = update( state, {
+        temp = update( state, {
+          suite: {
+            groups: {
+              // remove
+              [ sourceCommand.groupId ]: {
+                tests: {
+                  [ sourceCommand.testId ]: {
+                    commands: {
+                      $set: removeMapEntry( sourceCommands, sourceCommand.id )
+                    }
+                  }
+                }
+              }
+            }
+          }});
+
+  return update( temp, {
     suite: {
       groups: {
-        // remove
-        [ sourceCommand.groupId ]: {
+        // add
+        [ targetCommand.groupId ]: {
           tests: {
-            [ sourceCommand.testId ]: {
+            [ targetCommand.testId ]: {
               commands: {
-                $set: removeMapEntry( sourceCommands, sourceCommand.id )
+                $set: appendMapEntry( targetCommands, sourceCommand )
               }
             }
           }
         }
       }
     }});
-
-    return update( temp, {
-      suite: {
-        groups: {
-          // add
-          [ targetCommand.groupId ]: {
-            tests: {
-              [ targetCommand.testId ]: {
-                commands: {
-                  $set: appendMapEntry( targetCommands, sourceCommand )
-                }
-              }
-            }
-          }
-        }
-      }});
 }
