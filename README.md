@@ -17,6 +17,13 @@ App to build end-to-end automation tests without a line of code.
 - Generated tests can be run by CI-server
 - Can be used by QA engineers with no programming background
 
+E2E testing for the Web in a nutshell is about locating a target, applying a command  on it, asserting the result complies the given constraints. Where target can be either a [HTML element](https://en.wikipedia.org/wiki/HTML_element) or the entire page. Commands for the page can be such as "goto to a URL", "make a screenshot". For an element - click, focus, type a text and so on. As for assertions we can check for example that element's property or attribute has a specified value, or element's position and size match the provided criteria.
+
+Puppetry offer you a UI to create and manage your E2E tests. Namely it allows:
+- to declare element targets as pairs a arbitrary variable / CSS selector or Xpath. Element can be easily located with Chrome DevTool. [Then you just right-click on it and copy selector or XPath](https://www.youtube.com/watch?v=du2Jnm-TzJc).
+- to manage your test structure (suite, test group, test)
+- to manage commands and assertions
+
 ## How To Run
 
 ```
