@@ -48,15 +48,15 @@ export class Welcome extends AbstractComponent {
           { " " } <a href="#empty" onClick={ this.onOpenDemoProject }>demo project</a> or
           { " " } <a href="#empty" onClick={ this.onCreateProject }>create a new one</a>.</p>
         <p>Project may contain one or more <mark>suites</mark>. Every suite includes:</p>
-        <ul>
-          <li><mark>Test group</mark> - consists of one or more logically related tests</li>
-          <li><mark>Test</mark> - consists of one or more commands and assertions</li>
-          <li><mark>Command</mark> - instruction to Puppeteer, can be a command like
-            <code>page.goto(&quot;some URL&quot;)</code> or an assertion
-            <code>BUTTON.property(&quot;disabled&quot;) == true</code></li>
-          <li><mark>Test targets</mark> - can be <code>page</code>
-          or any target node specified in Test targets pane.</li>
-        </ul>
+
+        <p>E2E testing for the Web in a nutshell is about locating a target, applying a command  on it, asserting the result complies the given constraints. Where target can be either a <a href="https://en.wikipedia.org/wiki/HTML_element">HTML element</a> or the entire page. Commands for the page can be such as “goto to a URL”, “make a screenshot”. For an element - click, focus, type a text and so on. As for assertions we can check for example that element’s property or attribute has a specified value, or element’s position and size match the provided criteria.</p>
+<p>Puppetry offer you a UI to create and manage your E2E tests. Namely it allows:</p>
+<ul>
+<li>to declare element targets as pairs a arbitrary variable / CSS selector or Xpath. Element can be easily located with Chrome DevTool. <a href="https://www.youtube.com/watch?v=du2Jnm-TzJc">Then you just right-click on it and copy selector or XPath</a>.</li>
+<li>to manage your test structure (suite, test group, test)</li>
+<li>to manage commands and assertions</li>
+</ul>
+
         <p>If you experience any problems with application, please, report to { " " }
           <a onClick={ this.onExtClick }
             href="https://github.com/dsheiko/puppetry/issues"
