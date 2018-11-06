@@ -8,9 +8,14 @@ import thunkMiddleware from "redux-thunk";
 import promiseMiddleware from "redux-promise";
 import { composeWithDevTools } from "redux-devtools-extension";
 import ErrorBoundary from "component/ErrorBoundary";
+import log from "electron-log";
 
 import { App } from "./container/App.jsx";
 import { reducer } from "./reducer/reducers";
+
+process.on( "uncaughtException", ( err ) => {
+  log.warn( `Renderer process: Caught exception: ${err}` );
+});
 
 // Store enhancement
 const storeEnhancer = composeWithDevTools( compose(

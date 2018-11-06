@@ -28,12 +28,16 @@
         "olhjnyhro5a": {
           "key": "olhjnyhro5a",
           "value": true
+        },
+        "cmqjnxdjk90": {
+          "key": "cmqjnxdjk90",
+          "value": true
         }
       }
     }
   },
   "modified": false,
-  "projectDirectory": "/home/sheiko/Sites/os/puppetry/demo",
-  "lastOpenSuite": "Demo--Suite--Foo.json",
-  "puppetry": "0.1.0-RC0"
+  "projectDirectory": "/home/sheiko/Sites/os/puppetry/project-test",
+  "lastOpenSuite": "testing.json",
+  "puppetry": "0.1.0-RC1"
 }

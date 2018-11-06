@@ -17,7 +17,11 @@ App to build end-to-end automation tests without a line of code.
 - Generated tests can be run by CI-server
 - Can be used by QA engineers with no programming background
 
-## How To Run
+
+
+## Contributing
+
+### How To Run
 
 ```
 # clone the project

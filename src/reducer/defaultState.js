@@ -2,11 +2,14 @@ const DEFAULT_STATE = {
   // Settings stored in localStorage
   settings: {
     projectDirectory: "",
-    exportDirectory: ""
+    exportDirectory: "",
+    lastCheckedVersion: "",
+    checkDate: ""
   },
   // Runtime state
   app: {
     loading: false,
+    readyToRunTests: false,
     alert: {
       visible: false,
       title: "Error",
@@ -24,6 +27,7 @@ const DEFAULT_STATE = {
     confirmDeleteModal: false,
     exportProjectModal: false,
     testReportModal: false,
+    installRuntimeTestModal: false,
 
     commandModal: {
       isVisible: false,

@@ -5,7 +5,7 @@ import { E_RUN_TESTS } from "constant";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
-import { exportProject, createRuntimeTemp } from "service/io";
+import { exportProject, getRuntimeTestPath } from "service/io";
 import { millisecondsToStr } from "service/utils";
 import { Icon, Spin, Button } from "antd";
 import { join } from "path";
@@ -20,7 +20,8 @@ export class TestReport extends AbstractComponent {
     checkedList: PropTypes.arrayOf( PropTypes.string ).isRequired,
     targets: PropTypes.any,
     action: PropTypes.shape({
-      setError: PropTypes.func.isRequired
+      setError: PropTypes.func.isRequired,
+      removeAppTab: PropTypes.func.isRequired
     })
   }
 
@@ -36,7 +37,7 @@ export class TestReport extends AbstractComponent {
 
   run = async () => {
     try {
-      this.runtimeTemp = createRuntimeTemp();
+      this.runtimeTemp = getRuntimeTestPath();
       this.setState({ loading: true });
       const specList = await exportProject( this.props.projectDirectory, this.runtimeTemp, this.props.checkedList,
               this.props.targets ),

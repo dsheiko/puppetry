@@ -86,9 +86,7 @@ const rowSource = {
                 hoverIndex = props.index,
                 hoverId = props[ "data-row-key" ],
                 hoverModel = getModel( props[ "className" ]);
-          if ( dragModel !== hoverModel ) {
-            console.log( "no region" );
-          }
+
           // Don"t replace items with themselves
           if ( dragIndex === hoverIndex || dragModel !== hoverModel ) {
             return;

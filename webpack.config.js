@@ -2,7 +2,8 @@ const { join } = require( "path" ),
       pkg = require( "./package.json" ),
       CleanWebpackPlugin = require( "clean-webpack-plugin" ),
       SRC_FULL_PATH = join( __dirname, "./src/" ),
-      PUBLIC_PATH = "./build/",
+      MAIN_FULL_PATH = join( __dirname, "./app/" ),
+      PUBLIC_PATH = "./app/build/",
       PUBLIC_FULL_PATH = join( __dirname, PUBLIC_PATH );
 
 module.exports = {
@@ -31,12 +32,10 @@ module.exports = {
     // https://nodejs.org/api/modules.html
     // and checks SRC_FULL_PATH/mymodule.js
     resolve: {
-       alias: {
-        "test-generator": join( __dirname, "test-generator/" )
-       },
        modules: [
         "node_modules",
-        SRC_FULL_PATH
+        SRC_FULL_PATH,
+        MAIN_FULL_PATH
       ],
       extensions: [ ".js", ".jsx" ]
     },

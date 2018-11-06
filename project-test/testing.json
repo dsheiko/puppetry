@@ -1,8 +1,8 @@
 {
   "title": "react-html5-form",
   "timeout": 50000,
-  "savedAt": "2018-10-31T15:25:48.244Z",
-  "loadedAt": "2018-10-31T16:26:59.439Z",
+  "savedAt": "2018-11-06T14:08:08.063Z",
+  "loadedAt": "2018-11-06T14:18:23.614Z",
   "modified": true,
   "filename": "testing.json",
   "targets": {
@@ -425,11 +425,71 @@
           "id": "cmqjnxdjk90",
           "key": "cmqjnxdjk90",
           "title": "foo",
-          "commands": {},
+          "commands": {
+            "fosjo5t61po": {
+              "editing": false,
+              "id": "fosjo5t61po",
+              "key": "fosjo5t61po",
+              "target": "page",
+              "method": "goto",
+              "params": {
+                "url": "https://dsheiko.github.io/react-html5-form/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "groupId": "_2",
+              "testId": "cmqjnxdjk90"
+            },
+            "fosjo5t4khr": {
+              "editing": false,
+              "id": "fosjo5t4khr",
+              "key": "fosjo5t4khr",
+              "target": "EMAIL_INPUT",
+              "method": "toggleClass",
+              "params": {
+                "name": "is-marked",
+                "toggle": "add"
+              },
+              "groupId": "_2",
+              "testId": "cmqjnxdjk90"
+            },
+            "fosjo5t6jbr": {
+              "editing": false,
+              "id": "fosjo5t6jbr",
+              "key": "fosjo5t6jbr",
+              "target": "EMAIL_INPUT",
+              "method": "assertContainsClass",
+              "assert": {
+                "assertion": "boolean",
+                "value": true
+              },
+              "params": {
+                "name": "form-control"
+              },
+              "groupId": "_2",
+              "testId": "cmqjnxdjk90"
+            },
+            "g8cjo5tl6kc": {
+              "editing": false,
+              "id": "g8cjo5tl6kc",
+              "key": "g8cjo5tl6kc",
+              "target": "EMAIL_INPUT",
+              "method": "assertContainsClass",
+              "assert": {
+                "assertion": "boolean",
+                "value": true
+              },
+              "params": {
+                "name": "is-marked"
+              },
+              "groupId": "_2",
+              "testId": "cmqjnxdjk90"
+            }
+          },
           "groupId": "_2"
         }
       }
     }
   },
-  "puppetry": "0.1.0-RC0"
+  "puppetry": "0.1.0-RC1"
 }

@@ -1,15 +1,18 @@
+import log from "electron-log";
 import { createActions } from "redux-actions";
 import { validate, validatePlain } from "../service/validate";
 import { writeSuite, readSuite, removeSuite,
   getProjectFiles, writeProject,
   readProject, removeRuntimeTemp,
+  isRuntimeTestPathReady,
   normalizeFilename } from "../service/io";
 import { closeApp } from "service/utils";
 import { InvalidArgumentError } from "error";
 import DEFAULT_STATE from "reducer/defaultState";
-import { ipcRenderer } from "electron";
+import { ipcRenderer, remote } from "electron";
 import { E_PROJECT_LOADED, E_SUITE_LOADED } from "constant";
-import { remote } from "electron";
+import { getDateString, checkNewVersion } from "../service/http";
+
 
 const STORAGE_KEY_SETTINGS = "settings",
 
@@ -148,7 +151,7 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
     project.lastOpenSuite && dispatch( await actions.openSuiteFile( project.lastOpenSuite ) );
 
   } catch ( err ) {
-    console.warn( err );
+    log.warn( `Renderer process: actions.loadProject(${ project.lastOpenSuite }): ${ err }` );
   } finally {
     dispatch( actions.updateApp({ loading: false }) );
   }
@@ -241,6 +244,16 @@ actions.setLoadingFor = ( ms ) => async ( dispatch ) => {
   }, ms );
 };
 
+actions.checkNewVersion = () => async ( dispatch, getState ) => {
+  const { settings } = getState(),
+        checkDate = getDateString();
+  // Only once a day
+  if ( settings.checkDate !== checkDate ) {
+    await checkNewVersion( settings.lastCheckedVersion );
+  }
+  return dispatch( actions.saveSettings({ checkDate }) );
+};
+
 actions.openSuiteFile = ( filename ) => ( dispatch ) => {
   dispatch( actions.updateApp({ loading: true }) );
   try {
@@ -251,7 +264,7 @@ actions.openSuiteFile = ( filename ) => ( dispatch ) => {
       message: "Cannot open file",
       description: e.message
     }) );
-    console.warn( e );
+    log.warn( `Renderer process: actions.openSuiteFile: ${ e }` );
   }
   dispatch( actions.updateApp({ loading: false }) );
 };
@@ -267,6 +280,11 @@ actions.closeApp = () => async ( dispatch, getState ) => {
   }
   removeRuntimeTemp();
   closeApp();
+};
+
+
+actions.checkRuntimeTestDirReady = () => async ( dispatch ) => {
+  return dispatch( actions.updateApp({ readyToRunTests: isRuntimeTestPathReady() }) );
 };
 
 async function saveProject( store ) {

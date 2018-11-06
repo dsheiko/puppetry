@@ -1,7 +1,7 @@
 {
   "name": "puppetry",
   "description": "App to build end-to-end automation tests without a line of code",
-  "version": "0.1.0-RC0",
+  "version": "0.1.0-RC1",
   "author": "Dmitry Sheiko <me@dsheiko.com> (http://dsheiko.com)",
   "repository": {
     "type": "git",
@@ -14,13 +14,13 @@
   "maintainers": [
     "Dmitry Sheiko <me@dsheiko.com> (http://dsheiko.com)"
   ],
-  "main": "./main.js",
+  "main": "./app/main.js",
   "scripts": {
     "test": "jest",
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --watch  --config webpack.config.js",
-    "package": "electron-packager . puppetry --platform=win32 --asar --overwrite --icon=assets/icon.icns --out dist/",
-    "setup:win": "cross-env DEBUG=electron-installer-windows electron-installer-windows --src dist/puppetry-win32-x64/ --dest dist/installers/ --config=win-inst-config.json",
+    "pack": "npm run build & electron-builder --dir",
+    "dist": "npm run build & electron-builder -mwl -c.mac.identity=null",
     "start": "cross-env ELECTRON_ENV=dev  electron .",
     "lint": "eslint --ext=js,jsx ./src",
     "lint:fix": "eslint --ext=js,jsx --fix ./src",
@@ -42,7 +42,8 @@
       "^.+\\.jsx?$": "babel-jest"
     },
     "modulePaths": [
-      "src"
+      "src",
+      "app"
     ]
   },
   "dependencies": {
@@ -62,8 +63,8 @@
     "jest": "^23.6.0",
     "jest-cli": "^23.6.0",
     "lodash.debounce": "^4.0.8",
+    "npm": "^6.4.1",
     "prop-types": "^15.6.2",
-    "puppeteer": "^1.10.0",
     "react": "^16.6.0",
     "react-dnd": "^5.0.0",
     "react-dnd-html5-backend": "^5.0.1",
@@ -74,17 +75,16 @@
     "redux-actions": "^2.6.3",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
-    "regenerator-runtime": "^0.12.1",
+    "semver": "^5.6.0",
     "shelljs": "^0.8.2",
     "uniqid": "^5.0.3",
     "validate": "^4.5.1",
     "xml2js": "^0.4.19"
   },
-  "license": {
-    "type": "MIT",
-    "url": "https://www.opensource.org/licenses/mit-license.php"
-  },
+  "license": "(GPL-3.0 OR MIT)",
   "devDependencies": {
+    "live-plugin-manager": "^0.12.0",
+    "regenerator-runtime": "^0.12.1",
     "@babel/cli": "^7.1.2",
     "@babel/node": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
@@ -102,8 +102,6 @@
     "electron": "^3.0.5",
     "electron-debug": "^2.0.0",
     "electron-devtools-installer": "^2.2.4",
-    "electron-installer-windows": "^1.1.0",
-    "electron-packager": "^12.2.0",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "eslint": "^5.7.0",
@@ -127,5 +125,57 @@
     "test",
     "testing",
     "runner"
-  ]
+  ],
+  "build": {
+    "appId": "com.dsheiko.puppetry",
+    "productName": "puppetry",
+    "compression": "normal",
+    "artifactName": "${name}-${os}-v${version}-${arch}.${ext}",
+    "directories": {
+      "buildResources": "app/assets"
+    },
+    "files": [
+      "app",
+      "jest-pkg",
+      "project-demo"
+    ],
+    "asar": true,
+    "asarUnpack": [
+      "project-demo/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.testing",
+      "target": [
+        "zip"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": true,
+      "artifactName": "${name}Setup-${os}-v${version}-${arch}.${ext}"
+    },
+    "linux": {
+      "category": "Testing",
+      "target": [
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "executableName": "puppetry"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    }
+  }
 }

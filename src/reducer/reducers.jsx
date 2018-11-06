@@ -18,12 +18,11 @@ export const reducer = handleActions(
 
 
     [ actions.setError ]: ( state, { payload }) => {
+      const inject = { title: "Error", type: "error", ...payload };
       return update( state, {
         app: {
           alert: {
-            title: "Error",
-            type: "error",
-            $merge: payload
+            $set: inject
           }
         }});
     },

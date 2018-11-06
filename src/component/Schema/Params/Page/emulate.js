@@ -1,4 +1,4 @@
-import devices from "puppeteer/DeviceDescriptors";
+import devices from "vendor/puppeteer/DeviceDescriptors";
 import { SELECT } from "../../constants";
 
 const options = devices.map( i =>  ({
@@ -7,12 +7,10 @@ const options = devices.map( i =>  ({
 }) );
 
 export const emulate = {
-  template: ({ params }) => {
-    console.log( "params", params );return `
+  template: ({ params }) => `
       // Emulating device "${ params.device }"
       await bs.page.emulate( devices[ "${ params.device }" ] );
-  `;
-  },
+  `,
   description: `It emulates given device metrics and user agent`,
   params: [
     {

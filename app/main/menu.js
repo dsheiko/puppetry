@@ -1,7 +1,7 @@
 const { app, ipcMain, Menu } = require( "electron" ),
       { E_PROJECT_LOADED, E_SUITE_LOADED, E_MENU_NEW_PROJECT, E_MENU_NEW_SUITE,
         E_MENU_OPEN_PROJECT, E_MENU_SAVE_SUITE, E_MENU_SAVE_SUITE_AS,
-        E_MENU_OPEN_SUITE, E_MENU_EXPORT_PROJECT, E_MENU_EXIT_APP, E_MENU_RUN } = require( "../src/constant" );
+        E_MENU_OPEN_SUITE, E_MENU_EXPORT_PROJECT, E_MENU_EXIT_APP, E_MENU_RUN } = require( "../constant" );
 
 function buildAppMenu( win, projectDirectory = null, suiteFilename = null ) {
   const template = [
