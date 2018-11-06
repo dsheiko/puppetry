@@ -1,7 +1,7 @@
 {
   "name": "puppetry",
   "description": "App to build end-to-end automation tests without a line of code",
-  "version": "0.1.0-RC.0",
+  "version": "0.1.0-RC.1",
   "author": "Dmitry Sheiko <me@dsheiko.com> (http://dsheiko.com)",
   "repository": {
     "type": "git",
