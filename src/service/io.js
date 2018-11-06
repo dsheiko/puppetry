@@ -282,6 +282,11 @@ export function isRuntimeTestPathReady() {
   }
 }
 
+export function removeRuntimeTestPath() {
+  const nodeDir = join( getRuntimeTestPath() );
+  shell.rm( "-rf" , nodeDir );
+}
+
 export function initRuntimeTestPath() {
   const dir = getRuntimeTestPath(),
         JEST_PKG = getJestPkgDirectory();
