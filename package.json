@@ -83,8 +83,6 @@
   },
   "license": "(GPL-3.0 OR MIT)",
   "devDependencies": {
-    "live-plugin-manager": "^0.12.0",
-    "regenerator-runtime": "^0.12.1",
     "@babel/cli": "^7.1.2",
     "@babel/node": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
@@ -100,6 +98,7 @@
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
     "electron": "^3.0.5",
+    "electron-builder": "^20.31.2",
     "electron-debug": "^2.0.0",
     "electron-devtools-installer": "^2.2.4",
     "enzyme": "^3.7.0",
@@ -108,7 +107,9 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
+    "live-plugin-manager": "^0.12.0",
     "redux-devtools-extension": "^2.13.5",
+    "regenerator-runtime": "^0.12.1",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.22.0",
@@ -141,6 +142,7 @@
     ],
     "asar": true,
     "asarUnpack": [
+      "jest-pkg/**/*",
       "project-demo/**/*"
     ],
     "mac": {

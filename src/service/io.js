@@ -17,6 +17,7 @@ const PROJECT_FILE_NAME = ".puppertyrc",
       readdir = util.promisify( fs.readdir ),
       cache = {};
 
+shell.config.fatal = true;
 
 function noop() {
 }
@@ -30,12 +31,15 @@ export function normalizeFilename( str ) {
 // Evaluate constant only by demand, thus it doesn break in unit-tests
 function getRuntimeTemp() {
   const APP_PATH = remote.app.getAppPath();
-  return join( APP_PATH, "runtime-temp" );
+  return join( APP_PATH, RUNTIME_TEST_DIRECTORY );
 }
 
 // Evaluate constant only by demand, thus it doesn break in unit-tests
 function getJestPkgDirectory() {
-  const APP_PATH = remote.app.getAppPath();
+  const APP_PATH = remote.app.getAppPath()
+   .replace( /app\.asar\/?$/, "app.asar.unpacked" );
+
+;
   return join( APP_PATH, "jest-pkg" );
 }
 
@@ -90,7 +94,8 @@ export async function exportProject( projectDirectory, outputDirectory, suiteFil
   try {
     removeExport( outputDirectory );
     shell.mkdir( "-p" , testDir );
-    shell.cp( "-Rf" , JEST_PKG + "/*", outputDirectory );
+    shell.chmod( "-R", "+w", outputDirectory );
+    shell.cp( "-RLf" , JEST_PKG + "/*", outputDirectory  );
 
     for ( const filename of suiteFiles ) {
       const specContent = await exportSuite( projectDirectory, filename, targets ),
@@ -290,9 +295,15 @@ export function removeRuntimeTestPath() {
 export function initRuntimeTestPath() {
   const dir = getRuntimeTestPath(),
         JEST_PKG = getJestPkgDirectory();
-  if ( fs.existsSync( JEST_PKG + "/package.json" ) ) {
+  if ( fs.existsSync( dir + "/package.json" ) ) {
     return;
   }
-  shell.mkdir( "-p" , dir );
-  shell.cp( "-f" , JEST_PKG + "/package.json", dir );
+  try {
+    shell.mkdir( "-p" , dir );
+    shell.chmod( "-R", "+w", dir );
+    shell.cp( "-f" , JEST_PKG + "/package.json", dir + "/" );
+    
+  } catch ( e ) {
+    log.warn( `Renderer process: io.initRuntimeTestPath: ${ e }` );
+  }
 }
