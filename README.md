@@ -1,6 +1,6 @@
 <h1 align="center">
 	<br>
-	<img src="https://raw.githubusercontent.com/dsheiko/puppetry/master/assets/puppetry.png" alt="Puppetry" width="200" />
+	<img src="https://github.com/dsheiko/puppetry/raw/master/app/assets/puppetry.png" alt="Puppetry" width="200" />
 	<br>
 	Puppetry
 	<br>
