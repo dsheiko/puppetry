@@ -7,7 +7,7 @@ import { ipcRenderer } from "electron";
 import AbstractComponent from "component/AbstractComponent";
 import { E_RUNTIME_TEST_PROGRESS, E_RUNTIME_TEST_MILESTONE,
   E_RUNTIME_TEST_ERROR, E_INSTALL_RUNTIME_TEST } from "constant";
-import { getRuntimeTestPath, initRuntimeTestPath } from "service/io";
+import { removeRuntimeTestPath, getRuntimeTestPath, initRuntimeTestPath } from "service/io";
 
 const NPM_MILESTONES = {
   "stage:loadCurrentTree": "loading current tree",
@@ -100,6 +100,9 @@ export class InstallRuntimeTestModal extends AbstractComponent {
       this.setState({
         error: args[ 1 ]
       });
+      // clean up
+      removeRuntimeTestPath();
+      this.props.action.updateApp({ readyToRunTests: false });
     });
 
     ipcRenderer.removeAllListeners( E_RUNTIME_TEST_MILESTONE );
