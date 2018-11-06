@@ -1,8 +1,8 @@
 {
   "name": "Demo Project",
   "panels": [
-    "groups",
-    "targets"
+    "targets",
+    "groups"
   ],
   "groups": {
     "_1": {
@@ -73,5 +73,5 @@
   "modified": false,
   "projectDirectory": "/home/sheiko/Sites/os/puppetry/project-demo",
   "lastOpenSuite": "react-html5-form-RWD.json",
-  "puppetry": "0.1.0-RC0"
+  "puppetry": "0.1.0-RC1"
 }

@@ -5,10 +5,30 @@
   --rhythm: 8px;
 }
 
+.ant-alert-description > ul {
+  padding-left: 16px;
+}
+
 * {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.npm-install .ant-progress {
+  width: calc(100% - 32px);
+}
+.npm-install.with-bytes .ant-progress {
+  width: calc(100% - 80px);
+}
+
+
+.npm-install .ant-alert {
+  margin-top: 24px;
+}
+
+.is-not-ready {
+  opacity: .5;
 }
 
 .checkbox-group--vertical .ant-checkbox-group-item {
@@ -528,17 +548,17 @@ margin: 16px 16px 16px 16px;
 }
 
 .box-margin-horizontal {
-margin-left: var(--rhythm);
-margin-right: var(--rhythm);
+  margin-left: var(--rhythm);
+  margin-right: var(--rhythm);
 }
 
 .box-margin-vertical {
-margin-top: var(--rhythm);
-margin-bottom: var(--rhythm);
+  margin-top: var(--rhythm);
+  margin-bottom: var(--rhythm);
 }
 
 .container--editable-cell {
-padding-right: 24px;
+  padding-right: 24px;
 }
 
 .container--editable-cell .anticon:first-child {

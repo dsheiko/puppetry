@@ -9,7 +9,7 @@ const { session, protocol, app, BrowserWindow } = require( "electron" ),
 let mainWindow;
 
 process.on( "uncaughtException", ( err ) => {
-  log( `Caught exception: ${err}\n` );
+  log.warn( `Main process: Caught exception: ${err}` );
 });
 
 function createWindow() {
@@ -53,7 +53,7 @@ function createWindow() {
   require( "./main/event-dispatcher" );
 
   // Open the DevTools.
-  //mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on( "closed", () => {

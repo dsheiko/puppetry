@@ -15,6 +15,10 @@ exports.E_MENU_OPEN_SUITE = "menuOpenSuite";
 exports.E_MENU_EXPORT_PROJECT = "menuExportProject";
 exports.E_MENU_EXIT_APP = "menuExitApp";
 exports.E_MENU_RUN = "menuRun";
+exports.E_INSTALL_RUNTIME_TEST = "installRuntimeTest";
+exports.E_RUNTIME_TEST_PROGRESS = "runtimeTestProgress";
+exports.E_RUNTIME_TEST_MILESTONE = "runtimeTestMilestone";
+exports.E_RUNTIME_TEST_ERROR = "runtimeTestError";
 
 exports.E_FILE_NAVIGATOR_UPDATED = "fileNavigatorUpdated";
 exports.E_WATCH_FILE_NAVIGATOR = "watchFileNavigator";
@@ -24,3 +28,4 @@ exports.A_FORM_ITEM_WARNING = "warning";
 exports.A_FORM_ITEM_ERROR = "error";
 exports.A_FORM_ITEM_VALIDATING = "validating";
 
+exports.RUNTIME_TEST_DIRECTORY = ".runtime-test";

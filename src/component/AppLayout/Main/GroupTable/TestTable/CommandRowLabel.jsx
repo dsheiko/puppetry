@@ -1,3 +1,4 @@
+import log from "electron-log";
 import React from "react";
 import PropTypes from "prop-types";
 import { Icon } from "antd";
@@ -78,7 +79,7 @@ export class CommandRowLabel extends React.Component {
          return "";
        }
      } catch ( err ) {
-       console.warn( err );
+       log.warn( `Renderer process: CommandRowLabel::buildTargetAddon: ${ err }` );
      }
    }
 

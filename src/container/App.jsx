@@ -1,4 +1,5 @@
 import React from "react";
+import log from "electron-log";
 import PropTypes from "prop-types";
 import { ipcRenderer } from "electron";
 import { connect } from "react-redux";
@@ -30,9 +31,14 @@ export class App extends React.Component {
   async componentDidMount() {
     const { loadProject,
             loadSettings,
-            loadProjectFiles
+            loadProjectFiles,
+            checkRuntimeTestDirReady,
+            checkNewVersion
           } = this.props.action,
           settings = loadSettings();
+
+    checkRuntimeTestDirReady();
+    checkNewVersion();
 
     if ( !settings.projectDirectory ) {
       return;
@@ -45,7 +51,8 @@ export class App extends React.Component {
       }, 300 ) );
       ipcRenderer.send( E_WATCH_FILE_NAVIGATOR, settings.projectDirectory );
     } catch ( e ) {
-      console.log( e );
+      log.warn( `Renderer process: App: ${ e }` );
+      console.warn( e );
     }
 
   }

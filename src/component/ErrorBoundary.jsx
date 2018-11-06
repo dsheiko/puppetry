@@ -1,3 +1,4 @@
+import log from "electron-log";
 import React from "react";
 import PropTypes from "prop-types";
 import { shell } from "electron";
@@ -26,6 +27,7 @@ export default class ErrorBoundary extends React.Component {
   }
 
   componentDidCatch( error ) {
+    log.warn( `Renderer process:ErrorBoundary: ${ error }` );
     console.warn( error );
     // Display fallback UI
     this.setState({ hasError: true });

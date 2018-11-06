@@ -27,7 +27,7 @@ export class MainMenu extends React.Component {
       saveSuite: PropTypes.func.isRequired,
       closeApp: PropTypes.func.isRequired
     }),
-
+    readyToRunTests: PropTypes.bool.isRequired,
     projectDirectory: PropTypes.string.isRequired,
     suiteFilename: PropTypes.string.isRequired
   }
@@ -91,6 +91,10 @@ export class MainMenu extends React.Component {
     this.props.action.updateApp({ testReportModal: true });
   }
 
+  onRuntimeTestInstall = () => {
+    this.props.action.updateApp({ installRuntimeTestModal: true });
+  }
+
   onExit = () => {
     this.props.action.closeApp();
   }
@@ -122,7 +126,7 @@ export class MainMenu extends React.Component {
 
   render() {
     const hotkeys = Object.keys( this.hotkeyMap ).join( ", " ),
-          { projectDirectory, suiteFilename } = this.props;
+          { projectDirectory, suiteFilename, readyToRunTests } = this.props;
     return (
       <ErrorBoundary>
         <Hotkeys
@@ -151,7 +155,10 @@ export class MainMenu extends React.Component {
               <Menu.Item key="8">Exit</Menu.Item>
 
             </SubMenu>
-            <Menu.Item key="1" disabled={ !projectDirectory } onClick={ this.onTestReport }>
+            <Menu.Item key="1"
+              className={ readyToRunTests ? "" : "is-not-ready" }
+              disabled={ !projectDirectory } onClick={ readyToRunTests
+                ? this.onTestReport : this.onRuntimeTestInstall }>
               <span><Icon type="right-square-o" /><span>Run... <kbd>F6</kbd></span></span>
             </Menu.Item>
 

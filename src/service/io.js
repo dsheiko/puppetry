@@ -1,17 +1,25 @@
 import fs from "fs";
 import shell from "shelljs";
-import { join, parse } from "path";
+import { join, parse, dirname } from "path";
 import { IoError, InvalidArgumentError } from "error";
 import util from "util";
 import { remote } from "electron";
+import log from "electron-log";
 import TestGenerator from "service/TestGenerator";
 import { schema } from "component/Schema/schema";
+import { RUNTIME_TEST_DIRECTORY } from "constant";
+import findLogPath from "electron-log/lib/transports/file/find-log-path";
 
 const PROJECT_FILE_NAME = ".puppertyrc",
       readFile = util.promisify( fs.readFile ),
       writeFile = util.promisify( fs.writeFile ),
       unlink = util.promisify( fs.unlink ),
-      readdir = util.promisify( fs.readdir );
+      readdir = util.promisify( fs.readdir ),
+      cache = {};
+
+
+function noop() {
+}
 
 
 export function normalizeFilename( str ) {
@@ -80,7 +88,6 @@ export async function exportProject( projectDirectory, outputDirectory, suiteFil
         JEST_PKG = getJestPkgDirectory();
 
   try {
-    //shell.rm( "-rf" , outputDirectory );
     removeExport( outputDirectory );
     shell.mkdir( "-p" , testDir );
     shell.cp( "-Rf" , JEST_PKG + "/*", outputDirectory );
@@ -95,7 +102,7 @@ export async function exportProject( projectDirectory, outputDirectory, suiteFil
 
     return specFiles;
   } catch ( e ) {
-    console.warn( e );
+    log.warn( `Renderer process: io.exportProject: ${ e }` );
     throw new IoError( `Cannot export into ${ outputDirectory }.
           Please make sure that you have write permission for it` );
   }
@@ -121,7 +128,7 @@ export async function writeSuite( directory, file, data ) {
   try {
     await writeFile( filePath, data, "utf8" );
   } catch ( e ) {
-    console.warn( e );
+    log.warn( `Renderer process: io.writeSuite: ${ e }` );
     throw new IoError( `Suite file ${filePath} cannot be written.
           Please make sure that you have write permission for it` );
   }
@@ -147,7 +154,7 @@ export async function readSuite( directory, file ) {
     const text = await readFile( filePath, "utf8" );
     return parseJson( text, filePath );
   } catch ( e ) {
-    console.warn( e );
+    log.warn( `Renderer process: io.readSuite: ${ e }` );
     throw new IoError( `Suite file ${filePath} cannot be open.
           Please make sure that the file exists and that you have read permission for it` );
   }
@@ -166,7 +173,7 @@ export async function removeSuite( directory, file ) {
   try {
     await unlink( filePath );
   } catch ( e ) {
-    console.warn( e );
+    log.warn( `Renderer process: io.removeSuite: ${ e }` );
     throw new IoError( `Suite file ${filePath} cannot be removed.` );
   }
 }
@@ -181,7 +188,7 @@ function parseJson( text, filePath ) {
   try {
     return JSON.parse( text || "{}" );
   } catch ( e ) {
-    console.warn( e );
+    log.warn( `Renderer process: io.parseJson: ${ e }` );
     throw new IoError( `File ${filePath} seems to be corrupted.` );
   }
 }
@@ -200,7 +207,7 @@ export async function readDir( directory, ext ) {
     return  ( await readdir( directory ) )
       .filter( file => file.endsWith( ext ) );
   } catch ( e ) {
-    console.warn( e );
+    log.warn( `Renderer process: io.getProjectFiles: ${ e }` );
     return [];
   }
 }
@@ -214,7 +221,7 @@ export  function isProject( directory ) {
   try {
     return fs.lstatSync( filePath ).isFile();
   } catch ( e ) {
-    console.warn( e );
+    log.warn( `Renderer process: io.getBasename: ${ e }` );
     return false;
   }
 }
@@ -230,7 +237,7 @@ export async function readProject( directory ) {
     const text = await readFile( filePath, "utf8" );
     return parseJson( text, filePath );
   } catch ( e ) {
-    console.warn( e );
+    log.warn( `Renderer process: io.readProject: ${ e }` );
     throw new IoError( `Project file ${filePath} cannot be open.
           Please make sure that the file exists and that you have read permission for it` );
   }
@@ -246,8 +253,41 @@ export async function writeProject( directory, data ) {
   try {
     await writeFile( filePath, JSON.stringify( data, null, "  " ), "utf8" );
   } catch ( e ) {
-    console.warn( e );
+    log.warn( `Renderer process: io.writeProject: ${ e }` );
     throw new IoError( `Project file ${filePath} cannot be written.
           Please make sure that you have write permission for it` );
   }
+}
+
+export function getAppInstallPath() {
+  if ( "appInstallPath" in cache ) {
+    return cache[ "appInstallPath" ];
+  }
+  const appInstallPath = dirname( findLogPath( remote.app.getName() ) );
+  cache[ "appInstallPath" ] = appInstallPath;
+  return appInstallPath;
+}
+
+export function getRuntimeTestPath() {
+  return join( getAppInstallPath(), RUNTIME_TEST_DIRECTORY );
+}
+
+export function isRuntimeTestPathReady() {
+  const nodeDir = join( getRuntimeTestPath(), "node_modules" );
+  try {
+    return fs.lstatSync( nodeDir ).isDirectory();
+  } catch ( e ) {
+    noop( e );
+    return false;
+  }
+}
+
+export function initRuntimeTestPath() {
+  const dir = getRuntimeTestPath(),
+        JEST_PKG = getJestPkgDirectory();
+  if ( fs.existsSync( JEST_PKG + "/package.json" ) ) {
+    return;
+  }
+  shell.mkdir( "-p" , dir );
+  shell.cp( "-f" , JEST_PKG + "/package.json", dir );
 }

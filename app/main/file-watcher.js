@@ -1,5 +1,6 @@
 const chokidar = require( "chokidar" ),
-      { E_FILE_NAVIGATOR_UPDATED } = require( "../src/constant" );
+      log = require( "electron-log" ),
+      { E_FILE_NAVIGATOR_UPDATED } = require( "../constant" );
 
 let watcher;
 
@@ -31,6 +32,6 @@ module.exports = ( event, path ) => {
         event.sender.send( E_FILE_NAVIGATOR_UPDATED, path,  "unlink" );
       })
       .on( "error", ( error ) => {
-        console.log( "chokidar error:", error );
+        log.error( `Main process: chokidar: ${ error }` );
       });
 };

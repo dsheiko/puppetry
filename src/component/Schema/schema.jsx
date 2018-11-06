@@ -21,6 +21,9 @@ import { assertBoundingBox } from "./Params/Element/assertBoundingBox";
 import { assertPosition } from "./Params/Element/assertPosition";
 import { assertStyle } from "./Params/Element/assertStyle";
 import { assertMatchesSelector } from "./Params/Element/assertMatchesSelector";
+import { toggleClass } from "./Params/Element/toggleClass";
+import { assertContainsClass } from "./Params/Element/assertContainsClass";
+
 
 import { tplQuery, tplSuite, tplGroup, tplTest } from "./Jest";
 
@@ -37,6 +40,7 @@ export const schema = {
     focus,
     click,
     hover,
+    toggleClass,
     assertAttribute,
     assertProperty,
     assertVisible,
@@ -44,7 +48,8 @@ export const schema = {
     assertBoundingBox,
     assertPosition,
     assertStyle,
-    assertMatchesSelector
+    assertMatchesSelector,
+    assertContainsClass
   },
   page: {
     emulate,

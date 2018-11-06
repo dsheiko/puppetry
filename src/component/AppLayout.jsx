@@ -19,6 +19,7 @@ import { TestReportModal  } from "./Modal/TestReportModal";
 import { ExportProjectModal } from "./Modal/ExportProjectModal";
 import { OpenSuiteModal } from "./Modal/OpenSuiteModal";
 import { CommandModal } from "./AppLayout/Main/GroupTable/TestTable/CommandModal";
+import { InstallRuntimeTestModal } from "./Modal/InstallRuntimeTestModal";
 import { TabGroup  } from "./TabGroup";
 import If from "component/Global/If";
 
@@ -74,6 +75,7 @@ export class AppLayout extends React.Component {
                 action={action}
                 projectDirectory={ projectDirectory }
                 suiteFilename={store.suite.filename}
+                readyToRunTests={store.app.readyToRunTests}
                 project={store.project} />
 
               <If exp={ store.app.project.files.length }>
@@ -167,6 +169,10 @@ export class AppLayout extends React.Component {
           targets={ commandModal.targets }
           action={ action }
           record={ commandModal.record } />
+
+        <InstallRuntimeTestModal
+          action={ action }
+          isVisible={ store.app.installRuntimeTestModal } />
 
       </ErrorBoundary>
     );
