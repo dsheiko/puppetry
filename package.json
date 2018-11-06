@@ -155,6 +155,10 @@
       "deleteAppDataOnUninstall": true,
       "artifactName": "${name}Setup-${os}-v${version}-${arch}.${ext}"
     },
+    "appImage": {
+      "description": "App to build end-to-end automation tests without a line of code",
+      "category": "Development"
+    },
     "linux": {
       "category": "Testing",
       "target": [
