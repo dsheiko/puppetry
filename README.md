@@ -16,6 +16,7 @@ App to build end-to-end automation tests without a line of code.
 
 [![Puppetry - v0.1.0](https://raw.githubusercontent.com/dsheiko/puppetry/master/gh-pages/assets/img/puppetry-welcome.png)](https://youtu.be/ogUBL-XVGRU "Puppetry - v0.1.0")
 
+
 # Key Features
 - Features Headless Chrome (Puppeteer) and Jest
 - Generated tests can be run by CI-server
