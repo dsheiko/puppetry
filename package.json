@@ -23,7 +23,7 @@
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --watch  --config webpack.config.js",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder -mwl -c.mac.identity=null",
+    "dist": "electron-builder -mwl -appImage -c.mac.identity=null",
     "start": "cross-env ELECTRON_ENV=dev  electron .",
     "lint": "eslint --ext=js,jsx ./src",
     "lint:fix": "eslint --ext=js,jsx --fix ./src",
@@ -150,7 +150,7 @@
       "project-demo/**/*"
     ],
     "mac": {
-      "category": "public.app-category.testing",
+      "category": "public.app-category.developer-tools",
       "target": [
         "zip"
       ]
@@ -166,10 +166,10 @@
       "category": "Development"
     },
     "linux": {
-      "category": "Testing",
+      "category": "Development",
       "target": [
         {
-          "target": "deb",
+          "target": "appImage",
           "arch": [
             "x64"
           ]
