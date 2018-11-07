@@ -7,7 +7,7 @@ import { remote } from "electron";
 import log from "electron-log";
 import TestGenerator from "service/TestGenerator";
 import { schema } from "component/Schema/schema";
-import { RUNTIME_TEST_DIRECTORY } from "constant";
+import { JEST_PKG_DIRECTORY, RUNTIME_TEST_DIRECTORY, DEMO_PROJECT_DIRECTORY } from "constant";
 import findLogPath from "electron-log/lib/transports/file/find-log-path";
 
 const PROJECT_FILE_NAME = ".puppertyrc",
@@ -28,20 +28,6 @@ export function normalizeFilename( str ) {
   return str.replace( re, "--" );
 }
 
-// Evaluate constant only by demand, thus it doesn break in unit-tests
-function getRuntimeTemp() {
-  const APP_PATH = remote.app.getAppPath();
-  return join( APP_PATH, RUNTIME_TEST_DIRECTORY );
-}
-
-// Evaluate constant only by demand, thus it doesn break in unit-tests
-function getJestPkgDirectory() {
-  const APP_PATH = remote.app.getAppPath()
-   .replace( /app\.asar\/?$/, "app.asar.unpacked" );
-
-;
-  return join( APP_PATH, "jest-pkg" );
-}
 
 export function normalizeName( str ) {
   const re = /[^a-zA-Z0-9_-]/g;
@@ -49,13 +35,12 @@ export function normalizeName( str ) {
 }
 
 export function createRuntimeTemp() {
-  const RUNTIME_TEMP = getRuntimeTemp();
+  const RUNTIME_TEMP = getRuntimeTestPath();
   shell.mkdir( "-p" , RUNTIME_TEMP );
   return RUNTIME_TEMP;
 }
+
 export function removeRuntimeTemp() {
-  const RUNTIME_TEMP = getRuntimeTemp();
-  shell.rm( "-rf" , RUNTIME_TEMP );
 }
 
 export function removeExport( exportDirectory ) {
@@ -226,7 +211,7 @@ export  function isProject( directory ) {
   try {
     return fs.lstatSync( filePath ).isFile();
   } catch ( e ) {
-    log.warn( `Renderer process: io.getBasename: ${ e }` );
+    log.warn( `Renderer process: io.isProject: ${ e }` );
     return false;
   }
 }
@@ -264,6 +249,20 @@ export async function writeProject( directory, data ) {
   }
 }
 
+function getAsarUnpackedAppDirectory() {
+  return remote.app.getAppPath()
+    .replace( /app\.asar\/?$/, "app.asar.unpacked" );
+}
+
+// Evaluate constant only by demand, thus it doesn break in unit-tests
+function getJestPkgDirectory() {
+  return join( getAsarUnpackedAppDirectory(), JEST_PKG_DIRECTORY );
+}
+
+export function getDemoProjectDirectory() {
+  return join( getAsarUnpackedAppDirectory(), DEMO_PROJECT_DIRECTORY );
+}
+
 export function getAppInstallPath() {
   if ( "appInstallPath" in cache ) {
     return cache[ "appInstallPath" ];
@@ -271,6 +270,10 @@ export function getAppInstallPath() {
   const appInstallPath = dirname( findLogPath( remote.app.getName() ) );
   cache[ "appInstallPath" ] = appInstallPath;
   return appInstallPath;
+}
+
+export function getLogPath() {
+  return join( getAppInstallPath(), "log.log" );
 }
 
 export function getRuntimeTestPath() {
@@ -289,6 +292,7 @@ export function isRuntimeTestPathReady() {
 
 export function removeRuntimeTestPath() {
   const nodeDir = join( getRuntimeTestPath() );
+  log.warn( `Renderer process: removeRuntimeTestPath` );
   shell.rm( "-rf" , nodeDir );
 }
 
@@ -302,7 +306,6 @@ export function initRuntimeTestPath() {
     shell.mkdir( "-p" , dir );
     shell.chmod( "-R", "+w", dir );
     shell.cp( "-f" , JEST_PKG + "/package.json", dir + "/" );
-    
   } catch ( e ) {
     log.warn( `Renderer process: io.initRuntimeTestPath: ${ e }` );
   }

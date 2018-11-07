@@ -4,6 +4,7 @@ import AbstractComponent from "component/AbstractComponent";
 import { Spin, Modal, Button, Alert } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { shell } from "electron";
+import { getLogPath } from "service/io";
 
 export class AlertMessageModal extends AbstractComponent {
 
@@ -18,6 +19,23 @@ export class AlertMessageModal extends AbstractComponent {
     spinning: false
   }
 
+  onOpenLog = () => {
+    this.setState({ spinning: true });
+    shell.openItem( getLogPath() );
+    setTimeout( () => {
+      this.setState({ spinning: false });
+    }, 300 );
+  }
+
+  onReportIssue = ( e ) => {
+    e.preventDefault();
+    this.setState({ spinning: true });
+    shell.openExternal( "https://github.com/dsheiko/puppetry/issues" );
+    setTimeout( () => {
+      this.setState({ spinning: false });
+    }, 700 );
+  }
+
   close() {
     this.props.action.removeAppTab( "testReport" );
     this.props.action.updateApp({ alert: { visible: false }});
@@ -26,16 +44,6 @@ export class AlertMessageModal extends AbstractComponent {
   onClickCancel = ( e ) => {
     e.preventDefault();
     this.close();
-  }
-
-  onReportIssue = ( e ) => {
-    e.preventDefault();
-    this.setState({ spinning: true });
-    shell.openExternal( "https://github.com/dsheiko/puppetry/issues" );
-    setTimeout( () => {
-      this.setState({ spinning: true });
-      this.close();
-    }, 800 );
   }
 
 
@@ -50,6 +58,9 @@ export class AlertMessageModal extends AbstractComponent {
           closable
           onCancel={this.onClickCancel}
           footer={[
+            ( <Button key="log" onClick={this.onOpenLog}>
+              Open error log
+            </Button> ),
             ( <Button key="cancel" onClick={this.onReportIssue}>
               Report issue
             </Button> ),

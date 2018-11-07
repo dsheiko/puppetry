@@ -14,6 +14,11 @@
   "maintainers": [
     "Dmitry Sheiko <me@dsheiko.com> (http://dsheiko.com)"
   ],
+  {
+    "engines" : {
+      "node" : ">=9.0.0"
+    }
+  },
   "main": "./app/main.js",
   "scripts": {
     "test": "jest",
@@ -107,6 +112,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
+    "esprima": "^4.0.1",
     "live-plugin-manager": "^0.12.0",
     "redux-devtools-extension": "^2.13.5",
     "regenerator-runtime": "^0.12.1",

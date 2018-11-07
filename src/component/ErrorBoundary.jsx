@@ -3,6 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { shell } from "electron";
 import { Icon } from "antd";
+import { getLogPath } from "service/io";
 
 export default class ErrorBoundary extends React.Component {
 
@@ -26,6 +27,12 @@ export default class ErrorBoundary extends React.Component {
     setLoadingFor( 1000 );
   }
 
+  onOpenLog = ( e ) => {
+    e.preventDefault();
+    shell.openItem( getLogPath() );
+    this.props.action.setLoadingFor( 500 );
+  }
+
   componentDidCatch( error ) {
     log.warn( `Renderer process:ErrorBoundary: ${ error }` );
     console.warn( error );
@@ -40,7 +47,9 @@ export default class ErrorBoundary extends React.Component {
         <h2><Icon type="frown-o" /></h2>
         <h1>Opps! Something went wrong.</h1>
         <p>Please report the issue on { " " }
-          <a onClick={ this.onExtClick } href="https://github.com/dsheiko/puppetry/issues">GitHub</a>.</p>
+          <a onClick={ this.onExtClick } href="https://github.com/dsheiko/puppetry/issues">GitHub</a>.
+            It would help if you attach <a href="#here" onClick={ this.onOpenLog }>Error log</a> content to the report.
+        </p>
       </div> );
     }
     return this.props.children;

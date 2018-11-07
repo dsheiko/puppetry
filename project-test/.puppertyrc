@@ -15,7 +15,7 @@
       "tests": {
         "_2_1": {
           "key": 0,
-          "value": false
+          "value": true
         },
         "_2_2": {
           "key": 1,
@@ -39,5 +39,5 @@
   "modified": false,
   "projectDirectory": "/home/sheiko/Sites/os/puppetry/project-test",
   "lastOpenSuite": "testing.json",
-  "puppetry": "0.1.0-RC1"
+  "puppetry": "0.1.0-RC.1"
 }

@@ -5,6 +5,18 @@
   --rhythm: 8px;
 }
 
+/* goto.URL screen wide in form builder */
+.ant-row.ant-form-inline.edit-command-inline .ant-row.ant-form-item {
+  display: flex;
+}
+
+.ant-row.ant-form-inline.edit-command-inline .ant-row.ant-form-item  .ant-form-item-label {
+  flex: 0 0 auto;
+}
+.ant-row.ant-form-inline.edit-command-inline .ant-row.ant-form-item .ant-form-item-control-wrapper {
+  flex: 1 1 auto;
+}
+
 .ant-alert-description > ul {
   padding-left: 16px;
 }
