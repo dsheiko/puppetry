@@ -10,25 +10,6 @@ import { E_RUNTIME_TEST_PROGRESS, E_RUNTIME_TEST_MILESTONE,
 import { lockRuntimeTestPath, removeRuntimeTestPath, getRuntimeTestPath,
   initRuntimeTestPath, getLogPath } from "service/io";
 
-const NPM_MILESTONES = {
-  "stage:loadCurrentTree": "loading current tree",
-  "stage:loadIdealTree:cloneCurrentTree": "cloning current tree",
-  "stage:loadIdealTree:loadShrinkwrap": "loading shrink wrap",
-  "stage:loadIdealTree:loadAllDepsIntoIdealTree": "fetching all dependencies",
-  "stage:loadIdealTree": "loading ideal tree",
-  "stage:generateActionsToTake": "generating actions",
-  "action:extract": "extracting",
-  "action:finalize": "finalizing",
-  "action:refresh-package-json": "refreshing package.json",
-  "action:preinstall": "running pre-install",
-  "action:build": "building",
-  "action:install": "installing",
-  "action:postinstall": "running post-install",
-  "stage:executeActions": "execution",
-  "stage:rollbackFailedOptional": "checking for rollback options",
-  "stage:runTopLevelLifecycles": ""
-};
-
 notification.config({
   placement: "bottomRight"
 });
@@ -201,8 +182,7 @@ export class InstallRuntimeTestModal extends AbstractComponent {
 
             </If>
             <If exp={ milestone && !error && !isDone }>
-              <Alert message={ milestone in NPM_MILESTONES
-                ? `${ NPM_MILESTONES[ milestone ] }...` : milestone } type="success"   />
+              <Alert style={{ height: 60 }} message={ milestone } type="success"   />
             </If>
           </div>
         </Modal>

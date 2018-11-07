@@ -1,6 +1,8 @@
-const npm = require( "npm" ),
+const npmlog = require( "npm/node_modules/npmlog" ),
+      npm = require( "npm" ),
       { join } = require( "path" ),
       log = require( "electron-log" ),
+      
       { E_RUNTIME_TEST_PROGRESS, E_RUNTIME_TEST_MILESTONE, E_RUNTIME_TEST_ERROR } = require( "../constant" ),
       NPM_MILESTONES = {
        "stage:loadCurrentTree": 6.25,
@@ -57,9 +59,21 @@ exports.installRuntimeTest = ( event, appInstallDirectory ) => {
   if ( !appInstallDirectory ) {
     return;
   }
-  process.on("time", milestone => {
-    event.sender.send( E_RUNTIME_TEST_MILESTONE, milestone );
+
+  npmlog.on( "log", msg => {
+    if ( msg.prefix === "postinstall" ) {
+      event.sender.send( E_RUNTIME_TEST_MILESTONE, `postinstall ${ msg.message }` );
+      return;
+    }
+    if ( msg.prefix === "fetch" ) {
+      event.sender.send( E_RUNTIME_TEST_MILESTONE, `fetch ${ msg.message }` );
+      return;
+    }    
   });
+
+  // process.on("time", milestone => {
+  //   event.sender.send( E_RUNTIME_TEST_MILESTONE, milestone );
+  // });
 
   process.on("timeEnd", milestone => {
     if ( !( milestone in NPM_MILESTONES ) ) {
@@ -80,6 +94,7 @@ exports.installRuntimeTest = ( event, appInstallDirectory ) => {
 
   npm.load({
     loaded: false,
+    progress: false,
     "ignore-scripts": true,
     "no-audit": true
   }, ( err ) => {
