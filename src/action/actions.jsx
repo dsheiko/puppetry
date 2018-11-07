@@ -144,12 +144,13 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
   try {
     dispatch( actions.updateApp({ loading: true }) );
     project = await readProject( projectDirectory );
-    project.projectDirectory = projectDirectory;
-    ipcRenderer.send( E_PROJECT_LOADED, projectDirectory );
-    directory && dispatch( actions.saveSettings({ projectDirectory }) );
-    dispatch( actions.setProject( project ) );
-    project.lastOpenSuite && dispatch( await actions.openSuiteFile( project.lastOpenSuite ) );
-
+    if ( project ) {
+      project.projectDirectory = projectDirectory;
+      ipcRenderer.send( E_PROJECT_LOADED, projectDirectory );
+      directory && dispatch( actions.saveSettings({ projectDirectory }) );
+      dispatch( actions.setProject( project ) );
+      project.lastOpenSuite && dispatch( await actions.openSuiteFile( project.lastOpenSuite ) );
+    }
   } catch ( err ) {
     log.warn( `Renderer process: actions.loadProject(${ project.lastOpenSuite }): ${ err }` );
   } finally {

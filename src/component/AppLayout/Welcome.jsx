@@ -1,15 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { remote } from "electron";
 import debounce from "lodash.debounce";
-import { join } from "path";
 import { ipcRenderer } from "electron";
 import AbstractComponent from "component/AbstractComponent";
 import { E_FILE_NAVIGATOR_UPDATED, E_WATCH_FILE_NAVIGATOR } from "constant";
-
-const APP_DIRECTORY = remote.app.getAppPath(),
-      DEMO_DIRECTORY = join( APP_DIRECTORY, "project-demo" );
-
+import { getDemoProjectDirectory } from "service/io";
 
 export class Welcome extends AbstractComponent {
 
@@ -25,7 +20,7 @@ export class Welcome extends AbstractComponent {
   onOpenDemoProject = async ( e ) => {
     const { loadProject, loadProjectFiles } = this.props.action;
     e.preventDefault();
-    await loadProject( DEMO_DIRECTORY );
+    await loadProject( getDemoProjectDirectory() );
 
     ipcRenderer.on( E_FILE_NAVIGATOR_UPDATED, debounce( () => {
       loadProjectFiles();

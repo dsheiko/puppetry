@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import { notification, Alert, Progress, Modal, Button } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
-import { ipcRenderer } from "electron";
+import { ipcRenderer, shell } from "electron";
 import AbstractComponent from "component/AbstractComponent";
 import { E_RUNTIME_TEST_PROGRESS, E_RUNTIME_TEST_MILESTONE,
   E_RUNTIME_TEST_ERROR, E_INSTALL_RUNTIME_TEST } from "constant";
-import { removeRuntimeTestPath, getRuntimeTestPath, initRuntimeTestPath } from "service/io";
+import { removeRuntimeTestPath, getRuntimeTestPath, initRuntimeTestPath, getLogPath } from "service/io";
 
 const NPM_MILESTONES = {
   "stage:loadCurrentTree": "loading current tree",
@@ -79,6 +79,15 @@ export class InstallRuntimeTestModal extends AbstractComponent {
     });
   }
 
+  onOpenLog = () => {
+    shell.openItem( getLogPath() );
+  }
+
+  onReportIssue = ( e ) => {
+    e.preventDefault();
+    shell.openExternal( "https://github.com/dsheiko/puppetry/issues" );
+  }
+
   componentDidMount() {
 
     ipcRenderer.removeAllListeners( E_RUNTIME_TEST_PROGRESS );
@@ -114,6 +123,7 @@ export class InstallRuntimeTestModal extends AbstractComponent {
 
   }
 
+
   render() {
     const { isVisible } = this.props,
           { milestone, error, progress, isDone, process, downloaded } = this.state,
@@ -123,6 +133,12 @@ export class InstallRuntimeTestModal extends AbstractComponent {
     if ( progress === 0 || error ) {
       buttons.push( <Button key="back" onClick={this.onClickCancel}>Cancel</Button> );
     }
+
+    if ( error ) {
+      buttons.push( <Button key="log" onClick={this.onOpenLog}>Open error log</Button> );
+      buttons.push( <Button key="cancel" onClick={this.onReportIssue}>Report issue</Button> );
+    }
+
     buttons.push( <Button
       key="submit"
       type="primary"

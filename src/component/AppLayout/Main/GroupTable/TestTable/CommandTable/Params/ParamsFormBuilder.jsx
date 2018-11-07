@@ -97,7 +97,7 @@ export class ParamsFormBuilder extends React.Component {
   renderRow = ( row, inx ) => {
 
     const rowNode = (
-      <Row gutter={24} key={ `row${inx}` } className={ row.inline ? "ant-form-inline" : null }>
+      <Row gutter={24} key={ `row${inx}` } className={ row.inline ? "ant-form-inline edit-command-inline" : null }>
         <Col span={24} >
           { row.items.map( this.renderFormItem ) }
         </Col>
