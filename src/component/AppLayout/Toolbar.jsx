@@ -57,7 +57,7 @@ export class Toolbar extends React.Component {
         <div className="toolbar">
           <div>
             <If exp={ project.projectDirectory }>
-              <Icon type="folder" />{ " " }
+              <Icon type="project" />{ " " }
               Project: { project.name }
             </If>
           </div>

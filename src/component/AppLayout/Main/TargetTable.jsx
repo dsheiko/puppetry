@@ -15,7 +15,7 @@ export class TargetTable extends AbstractEditableTable {
       {
         title: "Target",
         dataIndex: "target",
-        width: "calc(50% - 80px)",
+        width: "30%",
         render: ( text, record ) => (
           <EditableCell
             record={ record }
@@ -29,7 +29,7 @@ export class TargetTable extends AbstractEditableTable {
       {
         title: "Selector",
         dataIndex: "selector",
-        width: "calc(50% - 80px)",
+        width: "calc(70% - 160px)",
         render: ( text, record ) => (
           <EditableCell
             record={ record }

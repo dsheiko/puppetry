@@ -31,3 +31,4 @@ exports.A_FORM_ITEM_VALIDATING = "validating";
 exports.RUNTIME_TEST_DIRECTORY = ".runtime-test";
 exports.JEST_PKG_DIRECTORY = "jest-pkg";
 exports.DEMO_PROJECT_DIRECTORY = "project-demo";
+exports.PUPPETRY_LOCK_FILE = "puppetry-lock.json";

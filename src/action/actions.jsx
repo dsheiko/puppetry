@@ -3,7 +3,7 @@ import { createActions } from "redux-actions";
 import { validate, validatePlain } from "../service/validate";
 import { writeSuite, readSuite, removeSuite,
   getProjectFiles, writeProject,
-  readProject, removeRuntimeTemp,
+  readProject, removeRuntimeTestPath,
   isRuntimeTestPathReady,
   normalizeFilename } from "../service/io";
 import { closeApp } from "service/utils";
@@ -287,13 +287,16 @@ actions.closeApp = () => async ( dispatch, getState ) => {
   if ( modified ) {
     return dispatch( actions.updateApp({ closeAppModal: true }) );
   }
-  removeRuntimeTemp();
   closeApp();
 };
 
 
 actions.checkRuntimeTestDirReady = () => async ( dispatch ) => {
-  return dispatch( actions.updateApp({ readyToRunTests: isRuntimeTestPathReady() }) );
+  const readyToRunTests = await isRuntimeTestPathReady();
+  if ( !readyToRunTests ) {
+    removeRuntimeTestPath();
+  }
+  return dispatch( actions.updateApp({ readyToRunTests }) );
 };
 
 async function saveProject( store ) {
