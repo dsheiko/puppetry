@@ -7,7 +7,7 @@ import { ipcRenderer, shell } from "electron";
 import AbstractComponent from "component/AbstractComponent";
 import { E_RUNTIME_TEST_PROGRESS, E_RUNTIME_TEST_MILESTONE,
   E_RUNTIME_TEST_ERROR, E_INSTALL_RUNTIME_TEST } from "constant";
-import { removeRuntimeTestPath, getRuntimeTestPath, initRuntimeTestPath, getLogPath } from "service/io";
+import { lockRuntimeTestPath, removeRuntimeTestPath, getRuntimeTestPath, initRuntimeTestPath, getLogPath } from "service/io";
 
 const NPM_MILESTONES = {
   "stage:loadCurrentTree": "loading current tree",
@@ -73,10 +73,17 @@ export class InstallRuntimeTestModal extends AbstractComponent {
   }
 
   onComplete = () => {
-    this.props.action.updateApp({
-      installRuntimeTestModal: false,
-      testReportModal: true
-    });
+    try {
+      lockRuntimeTestPath();
+      this.props.action.updateApp({
+        installRuntimeTestModal: false,
+        testReportModal: true
+      });
+    } catch ( e ) {
+      this.setState({
+        error: e.message
+      });
+    }
   }
 
   onOpenLog = () => {

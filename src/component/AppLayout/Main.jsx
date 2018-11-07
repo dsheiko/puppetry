@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Tabs } from "antd";
+import { Tabs, Icon } from "antd";
 import { GroupTable  } from "./Main/GroupTable";
 import { SuiteForm  } from "./Main/SuiteForm";
 import { TargetTable  } from "./Main/TargetTable";
@@ -23,7 +23,9 @@ export class Main extends React.Component {
   }
 
   render() {
-    const { action, store } = this.props;
+    const { action, store } = this.props,
+          targetsLabel = ( <span><Icon type="select" />Test targets</span> ),
+          groupsLabel = ( <span><Icon type="audit" />Test groups</span> );
     let activeKey = "targets";
     if ( store.project.panels ) {
       [ activeKey ] = store.project.panels;
@@ -40,13 +42,13 @@ export class Main extends React.Component {
             animated={ false }
             onChange={ this.onTabChange }
           >
-            <TabPane tab="Test targets" key="targets">
+            <TabPane tab={ targetsLabel } key="targets">
               <p>Target constants used to address an element on the page.
               One can use DevTools to inspect the DOM and copy selectors</p>
               <TargetTable action={action} targets={store.suite.targets} />
             </TabPane>
 
-            <TabPane tab="Test groups" key="groups">
+            <TabPane tab={ groupsLabel } key="groups">
               <p>You can use drag&apos;n&apos;drop to re-arrange rows representing tests or test groups.</p>
               <GroupTable
                 action={action}

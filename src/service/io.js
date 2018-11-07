@@ -7,7 +7,7 @@ import { remote } from "electron";
 import log from "electron-log";
 import TestGenerator from "service/TestGenerator";
 import { schema } from "component/Schema/schema";
-import { JEST_PKG_DIRECTORY, RUNTIME_TEST_DIRECTORY, DEMO_PROJECT_DIRECTORY } from "constant";
+import { PUPPETRY_LOCK_FILE, JEST_PKG_DIRECTORY, RUNTIME_TEST_DIRECTORY, DEMO_PROJECT_DIRECTORY } from "constant";
 import findLogPath from "electron-log/lib/transports/file/find-log-path";
 
 const PROJECT_FILE_NAME = ".puppertyrc",
@@ -15,6 +15,7 @@ const PROJECT_FILE_NAME = ".puppertyrc",
       writeFile = util.promisify( fs.writeFile ),
       unlink = util.promisify( fs.unlink ),
       readdir = util.promisify( fs.readdir ),
+      lstat = util.promisify( fs.lstat ),
       cache = {};
 
 shell.config.fatal = true;
@@ -291,12 +292,43 @@ export function getRuntimeTestPath() {
   return join( getAppInstallPath(), RUNTIME_TEST_DIRECTORY );
 }
 
-export function isRuntimeTestPathReady() {
-  const nodeDir = join( getRuntimeTestPath(), "node_modules" );
+export async function isRuntimeTestPathReady() {
+  const lockFile = getLockRuntimeTestPath();
   try {
-    return fs.lstatSync( nodeDir ).isDirectory();
+    if ( ! ( await lstat( lockFile ) ).isFile() ) {
+      log.warn( `Renderer process: RuntimeTest not ready, reason: lock not found` );
+      return false;
+    }
+    const lock = JSON.parse( await readFile( lockFile, "utf8" ) );
+    if ( lock.version !== remote.app.getVersion() ) {
+      log.warn( `Renderer process: RuntimeTest not ready, reason: version does not match` );
+      return false;
+    }
+    return true;
   } catch ( e ) {
-    noop( e );
+    log.warn( `Renderer process: RuntimeTest not ready, reason: could not lstat` );
+    return false;
+  }
+}
+
+function getLockRuntimeTestPath() {
+  return join( getRuntimeTestPath(), "node_modules", PUPPETRY_LOCK_FILE );
+}
+
+export function lockRuntimeTestPath() {
+  const lockFile = getLockRuntimeTestPath(),
+        version = remote.app.getVersion(),
+        now = new Date(),
+        data = {
+          version,
+          installed: now.toString()
+        };
+  try {
+    fs.writeFileSync( lockFile, JSON.stringify( data, null, "  " ), "utf8" );
+  } catch ( e ) {
+    log.warn( `Renderer process: lockRuntimeTestPath(${ lockFile })` );
+    throw new IoError( `Could not write file ${ lockFile }.
+          Please make sure that you have write permission for it` );
     return false;
   }
 }
