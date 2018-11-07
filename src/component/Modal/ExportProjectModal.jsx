@@ -72,7 +72,7 @@ export class ExportProjectModal extends React.Component {
     }
     this.props.action.saveSettings({ exportDirectory: selectedDirectory });
     try {
-      await exportProject( projectDirectory, selectedDirectory, checkedList, this.props.targets );
+      await exportProject( projectDirectory, selectedDirectory, checkedList );
       message.info( `Project exported in ${ selectedDirectory }` );
       this.props.action.updateApp({ exportProjectModal: false });
     } catch ( err ) {

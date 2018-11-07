@@ -10,9 +10,9 @@ import { closeApp } from "service/utils";
 import { InvalidArgumentError } from "error";
 import DEFAULT_STATE from "reducer/defaultState";
 import { ipcRenderer, remote } from "electron";
-import { E_PROJECT_LOADED, E_SUITE_LOADED } from "constant";
+import { E_FILE_NAVIGATOR_UPDATED, E_WATCH_FILE_NAVIGATOR, E_PROJECT_LOADED, E_SUITE_LOADED } from "constant";
 import { getDateString, checkNewVersion } from "../service/http";
-
+import debounce from "lodash.debounce";
 
 const STORAGE_KEY_SETTINGS = "settings",
 
@@ -144,15 +144,15 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
   try {
     dispatch( actions.updateApp({ loading: true }) );
     project = await readProject( projectDirectory );
-    if ( project ) {
-      project.projectDirectory = projectDirectory;
-      ipcRenderer.send( E_PROJECT_LOADED, projectDirectory );
-      directory && dispatch( actions.saveSettings({ projectDirectory }) );
-      dispatch( actions.setProject( project ) );
-      project.lastOpenSuite && dispatch( await actions.openSuiteFile( project.lastOpenSuite ) );
-    }
+    project.projectDirectory = projectDirectory;
+    ipcRenderer.send( E_PROJECT_LOADED, projectDirectory );
+    directory && dispatch( actions.saveSettings({ projectDirectory }) );
+    dispatch( actions.setProject( project ) );
+    dispatch( actions.loadProjectFiles( projectDirectory ) );
+    dispatch( actions.watchProjectFiles( projectDirectory ) );
+    project.lastOpenSuite && dispatch( await actions.openSuiteFile( project.lastOpenSuite ) );
   } catch ( err ) {
-    log.warn( `Renderer process: actions.loadProject(${ project.lastOpenSuite }): ${ err }` );
+    log.warn( `Renderer process: actions.loadProject(${projectDirectory }): ${ err }` );
   } finally {
     dispatch( actions.updateApp({ loading: false }) );
   }
@@ -160,6 +160,19 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
   return project;
 };
 
+actions.watchProjectFiles = ( directory = null ) => async ( dispatch, getState ) => {
+  const projectDirectory = directory || getState().settings.projectDirectory;
+  ipcRenderer.on( E_FILE_NAVIGATOR_UPDATED, debounce( () => {
+    dispatch( actions.loadProjectFiles( projectDirectory ) );
+  }, 300 ) );
+  ipcRenderer.send( E_WATCH_FILE_NAVIGATOR, projectDirectory );
+};
+
+actions.loadProjectFiles = ( directory = null ) => async ( dispatch, getState ) => {
+  const projectDirectory = directory || getState().settings.projectDirectory,
+        files = await getProjectFiles( projectDirectory );
+  dispatch( actions.updateApp({ project: { files }}) );
+};
 
 actions.removeSuite = ( filename ) => async ( dispatch, getState ) => {
   if ( !filename || typeof filename !== "string" ) {
@@ -232,11 +245,6 @@ actions.loadSuite = ( filename ) => async ( dispatch, getState ) => {
   dispatch( actions.addAppTab( "suite" ) );
 };
 
-actions.loadProjectFiles = () => async ( dispatch, getState ) => {
-  const { projectDirectory } = getState().settings,
-        files = await getProjectFiles( projectDirectory );
-  dispatch( actions.updateApp({ project: { files }}) );
-};
 
 actions.setLoadingFor = ( ms ) => async ( dispatch ) => {
   dispatch( actions.updateApp({ loading: true }) );

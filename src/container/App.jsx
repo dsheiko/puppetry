@@ -1,13 +1,10 @@
 import React from "react";
 import log from "electron-log";
 import PropTypes from "prop-types";
-import { ipcRenderer } from "electron";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { AppLayout } from "../component/AppLayout";
 import actions from "../action/actions";
-import debounce from "lodash.debounce";
-import { E_FILE_NAVIGATOR_UPDATED, E_WATCH_FILE_NAVIGATOR } from "constant";
 
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({ store: state }),
@@ -31,7 +28,6 @@ export class App extends React.Component {
   async componentDidMount() {
     const { loadProject,
             loadSettings,
-            loadProjectFiles,
             checkRuntimeTestDirReady,
             checkNewVersion
           } = this.props.action,
@@ -46,10 +42,6 @@ export class App extends React.Component {
 
     try {
       await loadProject();
-      ipcRenderer.on( E_FILE_NAVIGATOR_UPDATED, debounce( () => {
-        loadProjectFiles();
-      }, 300 ) );
-      ipcRenderer.send( E_WATCH_FILE_NAVIGATOR, settings.projectDirectory );
     } catch ( e ) {
       log.warn( `Renderer process: App: ${ e }` );
       console.warn( e );

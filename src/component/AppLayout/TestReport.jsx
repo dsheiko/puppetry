@@ -21,7 +21,8 @@ export class TestReport extends AbstractComponent {
     targets: PropTypes.any,
     action: PropTypes.shape({
       setError: PropTypes.func.isRequired,
-      removeAppTab: PropTypes.func.isRequired
+      removeAppTab: PropTypes.func.isRequired,
+      saveSuite: PropTypes.func.isRequired
     })
   }
 
@@ -36,11 +37,11 @@ export class TestReport extends AbstractComponent {
   }
 
   run = async () => {
+    this.props.action.saveSuite();
     try {
       this.runtimeTemp = getRuntimeTestPath();
       this.setState({ loading: true });
-      const specList = await exportProject( this.props.projectDirectory, this.runtimeTemp, this.props.checkedList,
-              this.props.targets ),
+      const specList = await exportProject( this.props.projectDirectory, this.runtimeTemp, this.props.checkedList ),
             report = ipcRenderer.sendSync( E_RUN_TESTS, this.runtimeTemp, specList );
 
       this.setState({
@@ -115,8 +116,17 @@ export class TestReport extends AbstractComponent {
   }
 
   render() {
-    const { report, loading, ok } = this.state,
-          details = "testResults" in report ? TestReport.getDetails( report.testResults ) : {};
+    const { report, loading, ok } = this.state;
+
+    if ( report !== {} && !report ) {
+      this.props.action.setError({
+        visible: true,
+        message: "Cannot export project",
+        description: "Jest testing framework could not run the tests"
+      });
+    }
+
+    const details = "testResults" in report ? TestReport.getDetails( report.testResults ) : {};
 
     return ( <ErrorBoundary>
       <If exp={ loading }>
