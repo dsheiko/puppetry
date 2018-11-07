@@ -1,12 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ipcRenderer } from "electron";
 import AbstractForm from "component/AbstractForm";
 import { Form, Modal, Button } from "antd";
 import BrowseDirectory from "component/Global/BrowseDirectory";
 import ErrorBoundary from "component/ErrorBoundary";
 import { isProject } from "service/io";
-import { E_WATCH_FILE_NAVIGATOR, A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS } from "constant";
+import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS } from "constant";
 
 const connectForm = Form.create();
 
@@ -15,7 +14,9 @@ export class OpenProjectModal extends AbstractForm {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired
+      updateApp: PropTypes.func.isRequired,
+      loadProject: PropTypes.func.isRequired,
+      saveSettings: PropTypes.func.isRequired
     }),
 
     isVisible: PropTypes.bool.isRequired,
@@ -35,7 +36,7 @@ export class OpenProjectModal extends AbstractForm {
   }
 
   onClickOk = async ( e ) => {
-    const { updateApp, loadProject, loadProjectFiles, saveSettings } = this.props.action,
+    const { updateApp, loadProject, saveSettings } = this.props.action,
           projectDirectory = this.state.selectedDirectory || this.props.projectDirectory;
 
     e.preventDefault();
@@ -45,8 +46,6 @@ export class OpenProjectModal extends AbstractForm {
     saveSettings({ projectDirectory });
     updateApp({ openProjectModal: false });
     await loadProject();
-    await loadProjectFiles();
-    ipcRenderer.send( E_WATCH_FILE_NAVIGATOR, projectDirectory );
   }
 
   isBrowseDirectoryValid() {

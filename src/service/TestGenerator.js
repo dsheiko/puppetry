@@ -1,3 +1,5 @@
+import log from "electron-log";
+
 export default class TestGenerator {
 
   constructor( suite, schema, targets ) {
@@ -29,6 +31,7 @@ export default class TestGenerator {
       });
     } catch ( err ) {
       console.warn( "parseCommand error:", err, command );
+      log.warn( `Renderer process: TestGenerator.parseCommand: ${ err }` );
       throw err;
     }
   }
@@ -75,6 +78,7 @@ export default class TestGenerator {
       });
     } catch ( err ) {
       console.warn( "generate error:", err );
+      log.warn( `Renderer process: TestGenerator.generate: ${ err }` );
       throw err;
     }
   }

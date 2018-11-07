@@ -53,12 +53,11 @@ export function removeExport( exportDirectory ) {
  * Export a single suite
  * @param {String} projectDirectory
  * @param {String} filename
- * @param {Object[]} targets
  * @returns {String} - spec.js content
  */
-export async function exportSuite( projectDirectory, filename, targets ) {
+export async function exportSuite( projectDirectory, filename ) {
   const suite = await readSuite( projectDirectory, filename ),
-        gen = new TestGenerator( suite, schema, targets );
+        gen = new TestGenerator( suite, schema, suite.targets );
   return gen.generate();
 }
 
@@ -68,10 +67,9 @@ export async function exportSuite( projectDirectory, filename, targets ) {
  * @param {String} projectDirectory
  * @param {String} outputDirectory
  * @param {String[]} suiteFiles ["foo.json",..]
- * @param {Object[]} targets
  * @returns {String[]} - ["foo.spec.js",..]
  */
-export async function exportProject( projectDirectory, outputDirectory, suiteFiles, targets ) {
+export async function exportProject( projectDirectory, outputDirectory, suiteFiles ) {
   const testDir = join( outputDirectory, "specs" ),
         specFiles = [],
         JEST_PKG = getJestPkgDirectory();
@@ -83,7 +81,7 @@ export async function exportProject( projectDirectory, outputDirectory, suiteFil
     shell.cp( "-RLf" , JEST_PKG + "/*", outputDirectory  );
 
     for ( const filename of suiteFiles ) {
-      const specContent = await exportSuite( projectDirectory, filename, targets ),
+      const specContent = await exportSuite( projectDirectory, filename ),
             specFilename = parse( filename ).name + ".spec.js",
             specPath = join( testDir, specFilename );
       await writeFile( specPath, specContent, "utf8" );
@@ -92,7 +90,7 @@ export async function exportProject( projectDirectory, outputDirectory, suiteFil
 
     return specFiles;
   } catch ( e ) {
-    log.warn( `Renderer process: io.exportProject: ${ e }` );
+    log.warn( `Renderer process: io.exportProject(${ testDir }): ${ e }` );
     throw new IoError( `Cannot export into ${ outputDirectory }.
           Please make sure that you have write permission for it` );
   }
@@ -260,7 +258,20 @@ function getJestPkgDirectory() {
 }
 
 export function getDemoProjectDirectory() {
-  return join( getAsarUnpackedAppDirectory(), DEMO_PROJECT_DIRECTORY );
+  const SRC_DIR = join( getAsarUnpackedAppDirectory(), DEMO_PROJECT_DIRECTORY ),
+        DEST_DIR = join( getAppInstallPath(), DEMO_PROJECT_DIRECTORY );
+
+  if ( !fs.existsSync( join( DEST_DIR, ".puppertyrc" ) ) ) {
+    try {
+      shell.mkdir( "-p" , DEST_DIR );
+      shell.chmod( "-R", "+w", DEST_DIR );
+      shell.cp( "-Rf", SRC_DIR, getAppInstallPath() );
+    } catch ( e ) {
+      log.warn( `Renderer process: io.getDemoProjectDirectory(${SRC_DIR}, ${DEST_DIR}):`
+        + ` ${ e }` );
+    }
+  }
+  return DEST_DIR;
 }
 
 export function getAppInstallPath() {
@@ -297,16 +308,16 @@ export function removeRuntimeTestPath() {
 }
 
 export function initRuntimeTestPath() {
-  const dir = getRuntimeTestPath(),
-        JEST_PKG = getJestPkgDirectory();
-  if ( fs.existsSync( dir + "/package.json" ) ) {
+  const DEST_DIR = getRuntimeTestPath(),
+        SRC_DIR = getJestPkgDirectory();
+  if ( fs.existsSync( join( DEST_DIR, "/package.json" ) ) ) {
     return;
   }
   try {
-    shell.mkdir( "-p" , dir );
-    shell.chmod( "-R", "+w", dir );
-    shell.cp( "-f" , JEST_PKG + "/package.json", dir + "/" );
+    shell.mkdir( "-p" , DEST_DIR );
+    shell.chmod( "-R", "+w", DEST_DIR );
+    shell.cp( "-f" , SRC_DIR + "/package.json", DEST_DIR + "/" );
   } catch ( e ) {
-    log.warn( `Renderer process: io.initRuntimeTestPath: ${ e }` );
+    log.warn( `Renderer process: io.initRuntimeTestPath(${SRC_DIR}, ${DEST_DIR}): ${ e }` );
   }
 }

@@ -17,6 +17,11 @@ module.exports = {
     // https://github.com/evcohen/eslint-plugin-jsx-a11y#difference-between-recommended-and-strict-mode
     "plugin:jsx-a11y/recommended"
   ],
+  "settings": {
+    "react": {
+      "version": "16.6" // React version, default to the latest React stable release
+    }
+  },
   //  A wrapper for Babel's parser used for ESLint
   // https://github.com/babel/babel-eslint
   "parser": "babel-eslint",
