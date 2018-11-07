@@ -14,8 +14,7 @@
   "maintainers": [
     "Dmitry Sheiko <me@dsheiko.com> (http://dsheiko.com)"
   ],
-  {
-    "engines" : {
+  "engines" : {
       "node" : ">=9.0.0"
     }
   },
