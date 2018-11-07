@@ -20,10 +20,6 @@ const PROJECT_FILE_NAME = ".puppertyrc",
 
 shell.config.fatal = true;
 
-function noop() {
-}
-
-
 export function normalizeFilename( str ) {
   const re = /[^a-zA-Z0-9_-]/g;
   return str.replace( re, "--" );
@@ -306,7 +302,7 @@ export async function isRuntimeTestPathReady() {
     }
     return true;
   } catch ( e ) {
-    log.warn( `Renderer process: RuntimeTest not ready, reason: could not lstat` );
+    log.warn( `Renderer process: RuntimeTest not ready, reason: could not lstat ${ e }` );
     return false;
   }
 }
@@ -326,10 +322,9 @@ export function lockRuntimeTestPath() {
   try {
     fs.writeFileSync( lockFile, JSON.stringify( data, null, "  " ), "utf8" );
   } catch ( e ) {
-    log.warn( `Renderer process: lockRuntimeTestPath(${ lockFile })` );
+    log.warn( `Renderer process: lockRuntimeTestPath(${ lockFile }) ${ e }` );
     throw new IoError( `Could not write file ${ lockFile }.
           Please make sure that you have write permission for it` );
-    return false;
   }
 }
 

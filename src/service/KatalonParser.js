@@ -11,7 +11,7 @@ const { parseString } = require( "xml2js" ),
       VAR_PREF = "ELH_";
 
 
-class KatalonParser {
+export default class KatalonParser {
 
   constructor() {
     this.varCounter = 0;
@@ -23,13 +23,19 @@ class KatalonParser {
     switch ( true ) {
     case target.startsWith( `name=` ):
       return `[name="${ target.replace( /^name=/, "" ) }"]`;
+    case target.startsWith( `id=` ):
+      return `#${ target.replace( /^id=/, "" ) }`;
     case target.startsWith( `xpath=` ):
       return target.replace( /^xpath=/, "" );
     case target.startsWith( `link=` ):
-      content = target.replace( /^link=/, "" ).trim(), // Reviews (2)
-      matches = content.match( /\((\d)\)$/ ),
-      text = content.replace( matches[ 0 ], "" ).trim();
-      return `//a[${ text }]`;
+      content = target.replace( /^link=/, "" ).trim(); // get Reviews (2)
+      // get 2  out of Reviews (2)
+      matches = content.match( /\((\d)\)$/ );
+      // get Reviews  out of Reviews (2)
+      text = matches ? content.replace( matches[ 0 ], "" ).trim() : content;
+      return matches
+        ? `//a[text()="${ text }"][${ matches[ 0 ].replace( /\D/g, "" ) }]`
+        : `//a[text()="${ text }"]`;
     default:
       return target;
     }
@@ -87,17 +93,17 @@ class KatalonParser {
   }
 }
 
-async function main() {
-  try {
-    const xml = await readFile( "test.xml", "utf8" ),
-          parser = new KatalonParser(),
-          out = await parser.parse( xml );
-
-    console.log( out );
-
-  } catch ( err ) {
-    console.error( err );
-  }
-}
-
-main();
+//async function main() {
+//  try {
+//    const xml = await readFile( "test.xml", "utf8" ),
+//          parser = new KatalonParser(),
+//          out = await parser.parse( xml );
+//
+//    console.log( out );
+//
+//  } catch ( err ) {
+//    console.error( err );
+//  }
+//}
+//
+//main();
