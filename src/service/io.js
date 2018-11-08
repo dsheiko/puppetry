@@ -288,6 +288,16 @@ export function getRuntimeTestPath() {
   return join( getAppInstallPath(), RUNTIME_TEST_DIRECTORY );
 }
 
+export function getRuntimeTestPathSafe() {
+  const dir = getRuntimeTestPath();
+  try {
+    shell.mkdir( "-p" , dir );
+  } catch ( err ) {
+    log.warn( `Renderer process: getRuntimeTestPathSafe ${ err }` );
+  }
+  return dir;
+}
+
 export async function isRuntimeTestPathReady() {
   const lockFile = getLockRuntimeTestPath();
   try {

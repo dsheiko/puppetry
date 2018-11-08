@@ -8,7 +8,7 @@ import AbstractComponent from "component/AbstractComponent";
 import { E_RUNTIME_TEST_PROGRESS, E_RUNTIME_TEST_MILESTONE,
   E_RUNTIME_TEST_ERROR, E_INSTALL_RUNTIME_TEST } from "constant";
 import { lockRuntimeTestPath, removeRuntimeTestPath, getRuntimeTestPath,
-  initRuntimeTestPath, getLogPath } from "service/io";
+  initRuntimeTestPath, getLogPath, getRuntimeTestPathSafe } from "service/io";
 
 notification.config({
   placement: "bottomRight"
@@ -32,10 +32,22 @@ export class InstallRuntimeTestModal extends AbstractComponent {
     isDone: false
   }
 
+  resetState() {
+    this.setState({
+      milestone: "",
+      downloaded: 0,
+      process: "",
+      error: "",
+      progress: 0,
+      isDone: false
+    });
+  }
+
 
   onClickCancel = ( e ) => {
     const { error, progress } = this.state;
     e.preventDefault();
+    this.resetState();
     if ( progress > 0 && !error ) {
       return;
     }
@@ -61,11 +73,16 @@ export class InstallRuntimeTestModal extends AbstractComponent {
         installRuntimeTestModal: false,
         testReportModal: true
       });
+      this.resetState();
     } catch ( e ) {
       this.setState({
         error: e.message
       });
     }
+  }
+
+  onOpenAppDataDirectory = () => {
+    shell.openItem( getRuntimeTestPathSafe() );
   }
 
   onOpenLog = () => {
@@ -96,7 +113,12 @@ export class InstallRuntimeTestModal extends AbstractComponent {
     ipcRenderer.removeAllListeners( E_RUNTIME_TEST_ERROR );
     ipcRenderer.on( E_RUNTIME_TEST_ERROR, ( ...args ) => {
       this.setState({
-        error: args[ 1 ]
+        error: args[ 1 ],
+        milestone: "",
+        downloaded: 0,
+        process: "",
+        progress: 0,
+        isDone: false
       });
       // clean up
       removeRuntimeTestPath();
@@ -149,9 +171,18 @@ export class InstallRuntimeTestModal extends AbstractComponent {
           footer={ buttons }
         >
 
-          <p>In order to run the test within the application you have to install missing dependencies
+          <p>In order to run the test within the application you need to install missing dependencies
           (<a onClick={ this.onExtClick } href="https://pptr.dev" rel="nofollow">Puppeteer</a>
           { " " } and <a onClick={ this.onExtClick } href="https://jestjs.io/" rel="nofollow">Jest</a>)
+          </p>
+          <p>
+          We use { " " }<a onClick={ this.onExtClick } href="https://www.npmjs.com" rel="nofollow">
+          Node package manager</a>{ " " }
+          to fetch, validate and install dependencies. It’s reliable and considerably fast.
+          Yet the mentioned bundles consist of more than 400 separate packages and take in total ~350MB.
+          So the installation time depends on your network conditions, may take a few minutes.
+          The packages will be delivered in
+            <a onClick={ this.onOpenAppDataDirectory } href="#app">app data directory</a>
           </p>
           <If exp={ error }>
             <div data-show="true" className="ant-alert ant-alert-error ant-alert-with-description ant-alert-no-icon">
@@ -182,7 +213,7 @@ export class InstallRuntimeTestModal extends AbstractComponent {
 
             </If>
             <If exp={ milestone && !error && !isDone }>
-              <Alert style={{ height: 60 }} message={ milestone } type="success"   />
+              <Alert style={{ height: 60, overflow: "hidden" }} message={ milestone } type="success"   />
             </If>
           </div>
         </Modal>

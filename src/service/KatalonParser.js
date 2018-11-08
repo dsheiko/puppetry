@@ -37,7 +37,8 @@ export default class KatalonParser {
         ? `//a[text()="${ text }"][${ matches[ 0 ].replace( /\D/g, "" ) }]`
         : `//a[text()="${ text }"]`;
     default:
-      return target;
+      // ignore
+      return null;
     }
 
   }
@@ -50,21 +51,78 @@ export default class KatalonParser {
     }
     return this.varMap[ selector ];
   }
-
+  // open  <URI>
   onopen({ target }) {
     return {
       target: "page",
       method: "goto",
-      params: { url: target }
+      params: {
+        url: target,
+        timeout: 30000,
+        waitUntil: "load"
+      }
     };
   }
 
+  // click <SELECTOR>
   onclick({ target }) {
+    const selector = this.generateTarget( target );
+    if ( !selector ) {
+      return null;
+    }
     return {
-      target: this.generateTarget( target ),
+      target: selector,
       method: "click",
-      params: { }
+      params: {
+        button: "left",
+        clickCount: 1,
+        delay: 0
+      }
+    };
+  }
 
+  // doubleClick <SELECTOR>
+  ondoubleClick({ target }) {
+    const selector = this.generateTarget( target );
+    if ( !selector ) {
+      return null;
+    }
+    return {
+      target: selector,
+      method: "click",
+      params: {
+        button: "left",
+        clickCount: 1,
+        delay: 0
+      }
+    };
+  }
+
+  // type <SELECTOR> <VALUE>
+  ontype({ target, value }) {
+    const selector = this.generateTarget( target );
+    if ( !selector ) {
+      return null;
+    }
+    return {
+      target: selector,
+      method: "type",
+      params: {
+        value
+      }
+
+    };
+  }
+
+  // focus <SELECTOR>
+  onfocus({ target, value }) {
+    const selector = this.generateTarget( target );
+    if ( !selector ) {
+      return null;
+    }
+    return {
+      target: selector,
+      method: "focus"
     };
   }
 
@@ -79,7 +137,8 @@ export default class KatalonParser {
                     method = `on${ command }`;
 
               if ( method in this ) {
-                carry.push( this[ method ]({ target, value }) );
+                let commandEntity = this[ method ]({ target, value });
+                commandEntity && carry.push( commandEntity );
               }
               return carry;
             }, []);
