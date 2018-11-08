@@ -74,6 +74,7 @@ export async function exportProject( projectDirectory, outputDirectory, suiteFil
   try {
     removeExport( outputDirectory );
     shell.mkdir( "-p" , testDir );
+    shell.mkdir( "-p" , join( outputDirectory, "screenshots" ) );
     shell.chmod( "-R", "+w", outputDirectory );
     shell.cp( "-RLf" , JEST_PKG + "/*", outputDirectory  );
 
