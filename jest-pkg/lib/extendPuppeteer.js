@@ -22,7 +22,7 @@ ElementHandle.prototype.isVisible = async function(){
   const boundingBox = await this.boundingBox(),
         handle = await this._page.evaluateHandle( ( el ) =>
           window.getComputedStyle( el, null ).getPropertyValue( "opacity" ), this ),
-        opacity = parseInt( await handle.jsonValue(), 10 );
+        opacity = parseFloat( await handle.jsonValue() );
   return ( opacity !== 0 && boundingBox !== null );
 };
 

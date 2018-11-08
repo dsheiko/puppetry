@@ -18,7 +18,7 @@ export class AssertBoolean extends React.Component {
   render () {
     const { getFieldDecorator } = this.props.form,
           { record } = this.props,
-          value = record.assert.value || "";
+          value = Boolean( record.assert.value );
     return (
       <Row gutter={24}>
 
