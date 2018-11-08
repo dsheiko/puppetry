@@ -213,7 +213,7 @@ export class InstallRuntimeTestModal extends AbstractComponent {
 
             </If>
             <If exp={ milestone && !error && !isDone }>
-              <Alert style={{ height: 60, overflow: "hidden" }} message={ milestone } type="success"   />
+              <Alert style={{ height: 56, overflow: "hidden" }} message={ milestone } type="success"   />
             </If>
           </div>
         </Modal>
