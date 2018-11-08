@@ -246,6 +246,30 @@ actions.loadSuite = ( filename ) => async ( dispatch, getState ) => {
 };
 
 
+actions.saveProject = ({ projectDirectory, name }) => async ( dispatch, getState ) => {
+  try {
+    if ( !name ) {
+      throw new InvalidArgumentError( "Empty suite name" );
+    }
+    if ( !projectDirectory ) {
+      throw new InvalidArgumentError( "Empty project directory" );
+    }
+
+    await dispatch( actions.setProject({ projectDirectory, name }) );
+    await saveProject( getState() );
+    await dispatch( actions.loadProjectFiles( projectDirectory ) );
+    await dispatch( actions.watchProjectFiles( projectDirectory ) );
+    await dispatch( actions.removeAppTab( "suite" ) );
+
+  } catch ( e ) {
+    dispatch( actions.setError({
+      visible: true,
+      message: "Cannot save project",
+      description: e.message
+    }) );
+  }
+};
+
 actions.setLoadingFor = ( ms ) => async ( dispatch ) => {
   dispatch( actions.updateApp({ loading: true }) );
   setTimeout( () => {
