@@ -19,7 +19,11 @@ ElementHandle.prototype.select = async function( value ) {
  * @returns {Promise<Boolean>}
  **/
 ElementHandle.prototype.isVisible = async function(){
-  return ( await this.boundingBox() !== null );
+  const boundingBox = await this.boundingBox(),
+        handle = await this._page.evaluateHandle( ( el ) =>
+          window.getComputedStyle( el, null ).getPropertyValue( "opacity" ), this ),
+        opacity = parseInt( await handle.jsonValue(), 10 );
+  return ( opacity !== 0 && boundingBox !== null );
 };
 
 /**
