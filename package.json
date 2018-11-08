@@ -1,6 +1,6 @@
 {
   "name": "puppetry",
-  "description": "App to build end-to-end automation tests without a line of code",
+  "description": "Web testing solution for non-developers.",
   "version": "0.1.0-RC.2",
   "author": "Dmitry Sheiko <me@dsheiko.com> (http://dsheiko.com)",
   "repository": {
