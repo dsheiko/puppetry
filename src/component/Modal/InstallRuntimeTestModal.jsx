@@ -181,7 +181,7 @@ export class InstallRuntimeTestModal extends AbstractComponent {
           to fetch, validate and install dependencies. It’s reliable and considerably fast.
           Yet the mentioned bundles consist of more than 400 separate packages and take in total ~350MB.
           So the installation time depends on your network conditions, may take a few minutes.
-          The packages will be delivered in
+          The packages will be delivered in { " " }
             <a onClick={ this.onOpenAppDataDirectory } href="#app">app data directory</a>
           </p>
           <If exp={ error }>
