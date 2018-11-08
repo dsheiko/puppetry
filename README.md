@@ -10,24 +10,31 @@
 [![Build Status](https://travis-ci.org/dsheiko/puppetry.png)](https://travis-ci.org/dsheiko/puppetry)
 [![Join the chat at https://gitter.im/dsheiko/puppetry](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dsheiko/puppetry?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-<h3 align="center">CODELESS END-TO-END TESTING</h3>
+<h3 align="center">CODELESS END-TO-END AUTOMATED TESTING</h3>
 
-App to build end-to-end automation tests without a line of code.
+Web testing solution for non-developers.
 
 [![Puppetry - v0.1.0](https://raw.githubusercontent.com/dsheiko/puppetry/master/gh-pages/assets/img/puppetry-welcome.png)](https://youtu.be/ogUBL-XVGRU "Puppetry - v0.1.0")
 
 
 # Key Features
-- Features Headless Chrome (Puppeteer) and Jest
-- Generated tests can be run by CI-server
+
 - Can be used by QA engineers with no programming background
+- Features Headless Chrome (Puppeteer) and Jest
+- Generated tests can be run within the application as well as exported e.g. for CI-server
 
-E2E testing for the Web in a nutshell is about locating a target, applying a command  on it, asserting the result complies the given constraints. Where target can be either a [HTML element](https://en.wikipedia.org/wiki/HTML_element) or the entire page. Commands for the page can be such as "goto to a URL", "make a screenshot". For an element - click, focus, type a text and so on. As for assertions we can check for example that element's property or attribute has a specified value, or element's position and size match the provided criteria.
+# Welcome Puppetry
+E2E testing for the Web in a nutshell is about locating a target, applying a browser method on it,
+asserting the new page (DOM) state. Where target can be either a [HTML element](https://en.wikipedia.org/wiki/HTML_element)
+or the entire page. Page methods can be such as "goto to a URL", "make a screenshot".
+For an element - `click`, `focus`, `type a text` and so on. As for assertions we can check for example that element's property
+or attribute has a specified value, or element's position and size match the provided criteria.
 
-Puppetry offers you a UI to create and manage your E2E tests. Namely it allows:
-- to declare element targets as pairs a arbitrary variable / CSS selector or Xpath. Element can be easily located with Chrome DevTool. [Then you just right-click on it and copy selector or XPath](https://www.youtube.com/watch?v=du2Jnm-TzJc).
-- to manage your test structure (suite, test group, test)
-- to manage commands and assertions
+Puppetry offers you an easy-to-use UI where you choose browser methods and assertions from a predefined list, with predefined settings, guided by extensive tips.
+Namely you can do the following:
+- to declare element targets as pairs `variable = locator`, where locator can be either CSS selector or Xpath. When using Chrome DevTool [you just right-click on a target element and copy selector or XPath](https://www.youtube.com/watch?v=du2Jnm-TzJc)
+- to manage your test structure in BDD style ( project, suite, test group, test )
+- to manage browser methods and assertions
 
 ## Download
 
@@ -42,26 +49,16 @@ Current only the following OS are supported:
 
 ## Contributing
 
-- please note [the great document](https://github.com/firstcontributions/first-contributions) about first contributions
-- here used a coding style, based on jQuery's JavaScript Style Guide. You can find the validation rules in `.eslintrc` and check the code by running `npm run lint`
+- get acquainted with guides
+  - [the great document](https://github.com/firstcontributions/first-contributions) about first contributions
+  - [Dev-Notes](https://github.com/dsheiko/puppetry/wiki/Dev-Notes), e.g. on how to add a browser method/assertion
+- examine the [Backlog](https://github.com/dsheiko/puppetry/wiki/Backlog), suggest new features
+- look into existing Issues, come up with a fix (`master` branch)
+- implement new features (`dev` branch)
 
+Please adhere the coding style. We have one based on jQuery's JavaScript Style Guide. You can find the validation rules in `.eslintrc`
+and lint the code by running `npm run lint`
 
-### How To Run in Development Mode
-
-```
-# clone the project
-git clone https://github.com/dsheiko/puppetry.git
-cd puppetry
-
-# install dependencies
-npm install
-
-# build JavaScript
-npm run build
-
-# run the app
-npm start
-```
 
 ## Credits
 
