@@ -112,6 +112,24 @@ describe( "Schema.target", () => {
 
     });
 
+     describe( "setAttribute.template", () => {
+
+      it( "returns expected", () => {
+        const code = schema.element.setAttribute.template({
+          target: FIX_TARGET,
+          method: "setAttribute",
+          targetSeletor: ".foo",
+          params: {
+            name: "checked",
+            value: "true"
+          }
+        });
+        expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+      });
+
+
+    });
+
     describe( "type.template", () => {
 
       it( "returns expected", () => {

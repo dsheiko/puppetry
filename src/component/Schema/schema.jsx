@@ -23,6 +23,7 @@ import { assertStyle } from "./Params/Element/assertStyle";
 import { assertMatchesSelector } from "./Params/Element/assertMatchesSelector";
 import { toggleClass } from "./Params/Element/toggleClass";
 import { assertContainsClass } from "./Params/Element/assertContainsClass";
+import { setAttribute } from "./Params/Element/setAttribute";
 
 
 import { tplQuery, tplSuite, tplGroup, tplTest } from "./Jest";
@@ -41,6 +42,7 @@ export const schema = {
     click,
     hover,
     toggleClass,
+    setAttribute,
     assertAttribute,
     assertProperty,
     assertVisible,
