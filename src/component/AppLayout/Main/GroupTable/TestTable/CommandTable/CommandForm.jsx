@@ -112,7 +112,12 @@ export class CommandForm extends React.Component {
           target = this.state.target || record.target,
           method = this.state.method || record.method,
           schema = getSchema( target, method ),
-          Assert = schema && schema.assert ? schema.assert.node : null;
+          Assert = schema && schema.assert ? schema.assert.node : null,
+          safeRecord = {
+            params: {},
+            assert: {},
+            ...record
+          };
 
     return (
       <Form onSubmit={this.handleSubmit} className="command-form">
@@ -177,7 +182,11 @@ export class CommandForm extends React.Component {
               <span>Parameters</span>
             </legend>
 
-            <ParamsFormBuilder schema={ schema } targets={ targets } record={ record } form={ this.props.form } />
+            <ParamsFormBuilder
+              schema={ schema }
+              targets={ targets }
+              record={ safeRecord }
+              form={ this.props.form } />
 
           </fieldset>
         </If>
@@ -190,7 +199,7 @@ export class CommandForm extends React.Component {
             { Assert ? <Assert
               targets={ targets }
               form={ this.props.form }
-              record={record} /> : null }
+              record={ safeRecord } /> : null }
           </fieldset>
         </If>
 

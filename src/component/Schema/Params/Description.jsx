@@ -13,11 +13,11 @@ export class Description extends AbstractComponent {
     if ( match ) {
       const [ divider, text, url ] = match,
             [ lhand, rhand ] = msg.split( divider );
-      return ( <p><Icon type="exclamation-circle-o" />{ " " }
+      return ( <p><Icon type="exclamation-circle" />{ " " }
         { lhand } <a onClick={this.onExtClick} href={ url }>{ text }</a>
         { rhand }</p> );
     }
-    return ( <p><Icon type="exclamation-circle-o" /> { msg }</p> );
+    return ( <p><Icon type="exclamation-circle" /> { msg }</p> );
   }
 
 }

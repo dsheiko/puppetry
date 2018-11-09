@@ -70,6 +70,7 @@ export class InstallRuntimeTestModal extends AbstractComponent {
     try {
       lockRuntimeTestPath();
       this.props.action.updateApp({
+        readyToRunTests: true,
         installRuntimeTestModal: false,
         testReportModal: true
       });
