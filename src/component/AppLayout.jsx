@@ -20,6 +20,7 @@ import { ExportProjectModal } from "./Modal/ExportProjectModal";
 import { OpenSuiteModal } from "./Modal/OpenSuiteModal";
 import { CommandModal } from "./AppLayout/Main/GroupTable/TestTable/CommandModal";
 import { InstallRuntimeTestModal } from "./Modal/InstallRuntimeTestModal";
+import { ConfirmSaveChanges } from "./Modal/ConfirmSaveChanges";
 import { TabGroup  } from "./TabGroup";
 import If from "component/Global/If";
 
@@ -173,6 +174,12 @@ export class AppLayout extends React.Component {
         <InstallRuntimeTestModal
           action={ action }
           isVisible={ store.app.installRuntimeTestModal } />
+
+        <ConfirmSaveChanges
+          action={action}
+          suiteFilename={ store.suite.filename }
+          newFilename={ store.app.confirmSaveChangesFile }
+          isVisible={ store.app.confirmSaveChangesModal } />
 
       </ErrorBoundary>
     );

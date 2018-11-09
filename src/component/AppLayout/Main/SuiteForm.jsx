@@ -31,12 +31,14 @@ export class SuiteForm extends AbstractForm {
               { updateSuite }  = this.props.action;
 
         updateSuite({ title, timeout });
+        this.props.form.resetFields();
       }
     });
   }
 
   render() {
     const { getFieldDecorator, getFieldsError } = this.props.form;
+    
     return (
       <Form layout="inline" className="suite-form" onSubmit={ this.onSubmit }>
         <FormItem  label="Suite title">

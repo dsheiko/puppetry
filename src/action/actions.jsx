@@ -209,7 +209,7 @@ actions.createSuite = ( rawFilename, title ) => async ( dispatch, getState ) => 
   }
 };
 
-actions.saveSuite = ( options = {}) => async ( dispatch, getState ) => {
+actions.saveSuite = ( options = {} ) => async ( dispatch, getState ) => {
   const store = getState(),
         { projectDirectory } = store.settings,
         { filename } = { ...store.suite, ...options };
@@ -225,7 +225,7 @@ actions.saveSuite = ( options = {}) => async ( dispatch, getState ) => {
 
     await saveProject( store );
 
-    dispatch( actions.updateSuite({ savedAt: new Date() }) );
+    dispatch( actions.updateSuite({ savedAt: new Date(), modified: false }) );
     dispatch( actions.updateApp({ closeAppModal: false }) );
   } catch ( e ) {
     dispatch( actions.setError({
@@ -302,9 +302,20 @@ actions.openSuiteFile = ( filename ) => ( dispatch ) => {
   dispatch( actions.updateApp({ loading: false }) );
 };
 
+actions.openSuiteFileConfirm = ( filename ) => ( dispatch, getState ) => {
+  const { modified } = getState().suite;
+  if ( modified ) {
+    return dispatch( actions.updateApp({
+      confirmSaveChangesFile: filename,
+      confirmSaveChangesModal: true
+    }) );
+  }
+  return dispatch( actions.openSuiteFile( filename ) );
+};
+
 actions.closeApp = () => async ( dispatch, getState ) => {
   const store = getState(),
-        { modified } = store.suite.modified;
+        { modified } = store.suite;
 
   await saveProject( store );
 

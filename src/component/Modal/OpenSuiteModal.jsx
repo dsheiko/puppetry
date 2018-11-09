@@ -14,7 +14,8 @@ export class OpenSuiteModal extends AbstractForm {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired
+      updateApp: PropTypes.func.isRequired,
+      openSuiteFileConfirm: PropTypes.func.isRequired
     }),
     isVisible: PropTypes.bool.isRequired,
     projectDirectory: PropTypes.string
@@ -33,7 +34,7 @@ export class OpenSuiteModal extends AbstractForm {
   }
 
   onClickOk = async ( e ) => {
-    const { openSuiteFile } = this.props.action,
+    const { openSuiteFileConfirm } = this.props.action,
           selectedFile = this.state.selectedFile;
 
     e.preventDefault();
@@ -41,7 +42,7 @@ export class OpenSuiteModal extends AbstractForm {
       return;
     }
 
-    openSuiteFile( basename( selectedFile ) );
+    openSuiteFileConfirm( basename( selectedFile ) );
     this.props.action.updateApp({ openSuiteModal: false });
   }
 
