@@ -149,7 +149,7 @@ export class MainMenu extends React.Component {
                 Save Suite { " " }<kbd>{ ostr( "Ctrl-S" ) }</kbd></Menu.Item>
               <Menu.Item key="5" disabled={ !suiteFilename } onClick={ this.onSaveAs }>
                 Save Suite As...</Menu.Item>
-              <Menu.Item key="6" disabled={ !projectDirectory } onClick={ this.onOpenSuite }>Open Suite</Menu.Item>
+              <Menu.Item key="6" disabled={ !projectDirectory } onClick={ this.onOpenSuite }>Open Suite...</Menu.Item>
               <Menu.Item key="7" disabled={ !projectDirectory } onClick={ this.onExportProject }>
                 Export Project... { " " }<kbd>{ ostr( "Ctrl-Shift-E" ) }</kbd></Menu.Item>
               <Menu.Item key="8">Exit</Menu.Item>

@@ -34,7 +34,7 @@ export class Main extends React.Component {
     return (
       <ErrorBoundary>
         <div>
-          <SuiteForm  action={action} title={store.suite.title} />
+          <SuiteForm  action={action} title={ store.suite.title } />
 
           <Tabs
             activeKey={ activeKey }

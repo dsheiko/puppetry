@@ -18,9 +18,12 @@ const DEFAULT_STATE = {
       description: ""
     },
     selectedFile: "",
+    confirmSaveChangesFile: "",
+
     newProjectModal: false,
     openProjectModal: false,
     saveSuiteAsModal: false,
+    confirmSaveChangesModal: false,
     closeAppModal: false,
     newSuiteModal: false,
     openSuiteModal: false,

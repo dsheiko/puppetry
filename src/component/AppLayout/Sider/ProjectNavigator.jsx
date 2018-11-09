@@ -11,7 +11,7 @@ export class ProjectNavigator extends React.Component {
   static propTypes = {
     action:  PropTypes.shape({
       updateApp: PropTypes.func.isRequired,
-      openSuiteFile: PropTypes.func.isRequired,
+      openSuiteFileConfirm: PropTypes.func.isRequired,
       removeSuite: PropTypes.func.isRequired
     }),
 
@@ -25,10 +25,10 @@ export class ProjectNavigator extends React.Component {
   }
 
   onDblClick = ( e ) => {
-    const { openSuiteFile } = this.props.action,
+    const { openSuiteFileConfirm } = this.props.action,
           file = e.target.dataset.id;
     e.preventDefault();
-    openSuiteFile( file );
+    openSuiteFileConfirm( file );
   }
 
   onRightClick = ( e ) => {
