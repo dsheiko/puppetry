@@ -35,7 +35,7 @@ export default class ErrorBoundary extends React.Component {
 
   onReload = ( e ) => {
     e.preventDefault();
-    remote.getCurrentWindow.reload();
+    remote.getCurrentWindow().reload();
   }
 
   componentDidCatch( error ) {

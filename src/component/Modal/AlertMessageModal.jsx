@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import AbstractComponent from "component/AbstractComponent";
 import { Spin, Modal, Button, Alert } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
-import { shell } from "electron";
+import { shell, remote } from "electron";
 import { getLogPath } from "service/io";
 
 export class AlertMessageModal extends AbstractComponent {
@@ -46,6 +46,11 @@ export class AlertMessageModal extends AbstractComponent {
     this.close();
   }
 
+  onReload = ( e ) => {
+    e.preventDefault();
+    remote.getCurrentWindow().reload();
+  }
+
 
   render() {
     const { isVisible, alert } = this.props;
@@ -58,6 +63,9 @@ export class AlertMessageModal extends AbstractComponent {
           closable
           onCancel={this.onClickCancel}
           footer={[
+            ( <Button key="reload" onClick={this.onReload}>
+              Reload
+            </Button> ),
             ( <Button key="log" onClick={this.onOpenLog}>
               Open error log
             </Button> ),
