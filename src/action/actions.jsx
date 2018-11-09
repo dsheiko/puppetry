@@ -325,6 +325,13 @@ actions.closeApp = () => async ( dispatch, getState ) => {
   closeApp();
 };
 
+actions.cloneCommand = ( command ) => async ( dispatch, getState ) => {
+  const groups = getState().suite.groups,
+        source = groups[ command.groupId ].tests[ command.testId ].commands[ command.id ];
+
+  dispatch( actions.addCommand( source ) );
+};
+
 
 actions.checkRuntimeTestDirReady = () => async ( dispatch ) => {
   const readyToRunTests = await isRuntimeTestPathReady();

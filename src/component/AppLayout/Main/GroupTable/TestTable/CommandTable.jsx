@@ -4,6 +4,9 @@ import AbstractDnDTable from "../../AbstractDnDTable";
 import { connectDnD } from "../../DragableRow";
 import { CommandRowLabel } from "./CommandRowLabel";
 import ErrorBoundary from "component/ErrorBoundary";
+import { remote } from "electron";
+
+const { Menu, MenuItem } = remote;
 
 @connectDnD
 export class CommandTable extends AbstractDnDTable {
@@ -30,6 +33,31 @@ export class CommandTable extends AbstractDnDTable {
     });
   }
 
+  onRow = ( record, index ) => ({
+    index,
+    moveRow: this.moveRow,
+    onContextMenu: ( e ) => {
+      //console.log({ record, title: "rclick" });
+      e.preventDefault();
+      const menu = new Menu();
+
+      menu.append( new MenuItem({
+        label: "Edit",
+        click: () => this.onEdit( record )
+      }));
+
+      menu.append( new MenuItem({
+        label: "Clone",
+        click: () => this.cloneRecord( record )
+      }));
+      
+      menu.popup({
+        x: e.x,
+        y: e.y
+      });
+    }
+  });
+
   updateRecord = ( options ) => {
     const update = this.props.action[ `update${this.model}` ];
     update( this.extendActionOptions( options  ) );
@@ -39,6 +67,12 @@ export class CommandTable extends AbstractDnDTable {
   removeRecord = ( id ) => {
     const update = this.props.action[ `remove${this.model}` ];
     update( this.extendActionOptions({ id }) );
+    this.updateSuiteModified();
+  }
+
+  cloneRecord = ( command ) => {
+    const update = this.props.action[ `clone${this.model}` ];
+    update( command );
     this.updateSuiteModified();
   }
 
