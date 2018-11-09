@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Select } from "antd";
-import { schema } from "component/Schema/schema";
+import { schema, displayMethod } from "component/Schema/schema";
 
 const Option = Select.Option;
 
@@ -18,6 +18,10 @@ export class PageMethodSelect extends React.Component {
     this.props.setFieldsValue({ method: value });
   }
 
+  static beauitifyMethod() {
+
+  }
+
   render() {
     const { initialValue } = this.props;
     return (
@@ -32,7 +36,8 @@ export class PageMethodSelect extends React.Component {
           .indexOf( input.toLowerCase() ) >= 0 }
       >
         {
-          Object.keys( schema.page ).map( method => ( <Option key={ method }>{ method }</Option> ) )
+          Object.keys( schema.page ).map( method => ( <Option key={ method }>
+            {  displayMethod( method ) }</Option> ) )
         }
       </Select>
     );
