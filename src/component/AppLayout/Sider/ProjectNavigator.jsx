@@ -33,7 +33,7 @@ export class ProjectNavigator extends React.Component {
 
   onRightClick = ( e ) => {
     const file = e.target.dataset.id,
-          { updateApp, openSuiteFile } = this.props.action;
+          { updateApp, openSuiteFileConfirm } = this.props.action;
 
     e.preventDefault();
 
@@ -42,7 +42,7 @@ export class ProjectNavigator extends React.Component {
     menu.append( new MenuItem({
       label: "Open",
       click: () => {
-        openSuiteFile( file );
+        openSuiteFileConfirm( file );
       }
     }) );
 

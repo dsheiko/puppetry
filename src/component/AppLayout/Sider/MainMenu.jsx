@@ -72,10 +72,14 @@ export class MainMenu extends React.Component {
   }
 
   onNewProject = () => {
+    // @TODO remove with Confirm dialog
+    this.props.action.saveSuite();
     this.props.action.updateApp({ newProjectModal: true });
   }
 
   onOpenProject = () => {
+    // @TODO remove with Confirm dialog
+    this.props.action.saveSuite();
     this.props.action.updateApp({ openProjectModal: true });
   }
 
@@ -84,6 +88,8 @@ export class MainMenu extends React.Component {
   }
 
   onNewSuite = () => {
+    // @TODO remove with Confirm dialog
+    this.props.action.saveSuite();
     this.props.action.updateApp({ newSuiteModal: true });
   }
 

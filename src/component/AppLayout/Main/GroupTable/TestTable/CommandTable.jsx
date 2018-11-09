@@ -44,13 +44,13 @@ export class CommandTable extends AbstractDnDTable {
       menu.append( new MenuItem({
         label: "Edit",
         click: () => this.onEdit( record )
-      }));
+      }) );
 
       menu.append( new MenuItem({
         label: "Clone",
         click: () => this.cloneRecord( record )
-      }));
-      
+      }) );
+
       menu.popup({
         x: e.x,
         y: e.y
