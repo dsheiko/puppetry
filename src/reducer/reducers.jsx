@@ -354,7 +354,13 @@ export const reducer = handleActions(
                             assert: "",
                             params: {}
                           };
-                    commands[ id ] = { ...defaultState, ...payload };
+                    
+                    commands[ id ] = {
+                      ...defaultState,
+                      ...payload,
+                      id,
+                      key: id
+                    };
                     return commands;
                   }
                 }
