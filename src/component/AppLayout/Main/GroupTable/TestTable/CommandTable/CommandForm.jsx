@@ -8,6 +8,7 @@ import { ParamsFormBuilder } from "./Params/ParamsFormBuilder";
 import If from "component/Global/If";
 import { getSchema } from "component/Schema/schema";
 import { Description } from "component/Schema/Params/Description";
+import ErrorBoundary from "component/ErrorBoundary";
 
 
 const FormItem = Form.Item,
@@ -120,90 +121,94 @@ export class CommandForm extends React.Component {
           };
 
     return (
-      <Form onSubmit={this.handleSubmit} className="command-form">
-        <If exp={ this.state.error }>
-          <Alert
-            message="Notice"
-            description={ this.state.error }
-            type="warning"
-            closable />
-        </If>
-        <Row gutter={24}>
-          <Col xl={8} lg={12} md={24}>
-            <FormItem label="Target"
-              help={ targets.length ? null: "Consider adding test targets in the suite" }>
-              {getFieldDecorator( "target", {
-                initialValue: record.target,
-                rules: [{
-                  required: true,
-                  message: "Please select target"
-                }]
-              })(
-                <TargetSelect
-                  setFieldsValue={ setFieldsValue }
+      <ErrorBoundary>
+        <Form onSubmit={this.handleSubmit} className="command-form">
+          <If exp={ this.state.error }>
+            <Alert
+              message="Notice"
+              description={ this.state.error }
+              type="warning"
+              closable />
+          </If>
+          <Row gutter={24}>
+            <Col xl={8} lg={12} md={24}>
+              <FormItem label="Target"
+                help={ targets.length ? null: "Consider adding test targets in the suite" }>
+                {getFieldDecorator( "target", {
+                  initialValue: record.target,
+                  rules: [{
+                    required: true,
+                    message: "Please select target"
+                  }]
+                })(
+                  <TargetSelect
+                    setFieldsValue={ setFieldsValue }
+                    targets={ targets }
+                    initialValue={ record.target }
+                    changeTarget={ this.changeTarget } />
+                )}
+              </FormItem>
+            </Col>
+
+            <Col xl={8} lg={12} md={24}>
+              <FormItem label="Method">
+                {getFieldDecorator( "method", {
+                  initialValue: record.method,
+                  rules: [{
+                    required: true,
+                    message: "Please select method"
+                  }]
+                })(
+                  target === "page"
+                    ? <PageMethodSelect
+                      initialValue={ record.method }
+                      changeMethod={ this.changeMethod }
+                      setFieldsValue={ setFieldsValue } />
+                    : <TargetMethodSelect
+                      initialValue={ record.method }
+                      changeMethod={ this.changeMethod }
+                      setFieldsValue={ setFieldsValue } />
+                )}
+              </FormItem>
+            </Col>
+
+          </Row>
+
+          <If exp={ schema && schema.description }>
+            <Description schema={ schema } target={ target } />
+          </If>
+
+          <If exp={ schema && schema.params.length }>
+            <fieldset className="command-form ">
+              <legend>
+                <span>Parameters</span>
+              </legend>
+              <ErrorBoundary>
+                <ParamsFormBuilder
+                  schema={ schema }
                   targets={ targets }
-                  initialValue={ record.target }
-                  changeTarget={ this.changeTarget } />
-              )}
-            </FormItem>
-          </Col>
+                  record={ safeRecord }
+                  form={ this.props.form } />
+              </ErrorBoundary>
+            </fieldset>
+          </If>
 
-          <Col xl={8} lg={12} md={24}>
-            <FormItem label="Method">
-              {getFieldDecorator( "method", {
-                initialValue: record.method,
-                rules: [{
-                  required: true,
-                  message: "Please select method"
-                }]
-              })(
-                target === "page"
-                  ? <PageMethodSelect
-                    initialValue={ record.method }
-                    changeMethod={ this.changeMethod }
-                    setFieldsValue={ setFieldsValue } />
-                  : <TargetMethodSelect
-                    initialValue={ record.method }
-                    changeMethod={ this.changeMethod }
-                    setFieldsValue={ setFieldsValue } />
-              )}
-            </FormItem>
-          </Col>
+          <If exp={ Assert }>
+            <fieldset className="command-form ">
+              <legend>
+                <span>Assertions</span>
+              </legend>
+              <ErrorBoundary>
+                { Assert ? <Assert
+                  targets={ targets }
+                  form={ this.props.form }
+                  record={ safeRecord } /> : null }
+              </ErrorBoundary>
+            </fieldset>
+          </If>
 
-        </Row>
-
-        <If exp={ schema && schema.description }>
-          <Description schema={ schema } target={ target } />
-        </If>
-
-        <If exp={ schema && schema.params.length }>
-          <fieldset className="command-form ">
-            <legend>
-              <span>Parameters</span>
-            </legend>
-
-            <ParamsFormBuilder
-              schema={ schema }
-              targets={ targets }
-              record={ safeRecord }
-              form={ this.props.form } />
-
-          </fieldset>
-        </If>
-
-        <If exp={ Assert }>
-          <fieldset className="command-form ">
-            <legend>
-              <span>Assertions</span>
-            </legend>
-            { Assert ? <Assert
-              targets={ targets }
-              form={ this.props.form }
-              record={ safeRecord } /> : null }
-          </fieldset>
-        </If>
-
-      </Form>
+        </Form>
+      </ErrorBoundary>
     );
   }
 }

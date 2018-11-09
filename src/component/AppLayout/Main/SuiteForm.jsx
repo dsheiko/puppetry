@@ -38,7 +38,7 @@ export class SuiteForm extends AbstractForm {
 
   render() {
     const { getFieldDecorator, getFieldsError } = this.props.form;
-    
+
     return (
       <Form layout="inline" className="suite-form" onSubmit={ this.onSubmit }>
         <FormItem  label="Suite title">

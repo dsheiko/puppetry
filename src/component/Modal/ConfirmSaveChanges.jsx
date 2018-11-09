@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
 import { msgDataSaved } from "component/Global/Message";
 import { Modal, Button } from "antd";
-import { closeApp } from "service/utils";
 import ErrorBoundary from "component/ErrorBoundary";
 
 
@@ -21,11 +20,11 @@ export class ConfirmSaveChanges extends AbstractForm {
      isVisible: PropTypes.bool.isRequired
    }
 
-  next() {
-    const { newFilename } = this.props;
-    this.props.action.updateApp({ confirmSaveChangesModal: false });
-    this.props.action.openSuiteFile( newFilename );
-  }
+   next() {
+     const { newFilename } = this.props;
+     this.props.action.updateApp({ confirmSaveChangesModal: false });
+     this.props.action.openSuiteFile( newFilename );
+   }
 
   onClose = ( e ) => {
     e.preventDefault();
@@ -40,11 +39,12 @@ export class ConfirmSaveChanges extends AbstractForm {
   onClickOk = async ( e ) => {
     e.preventDefault();
     await this.props.action.saveSuite();
+    msgDataSaved();
     this.next();
   }
 
   render() {
-    const { isVisible, suiteFilename, cb } = this.props;
+    const { isVisible, suiteFilename } = this.props;
 
     return (
       <ErrorBoundary>

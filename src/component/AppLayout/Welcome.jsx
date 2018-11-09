@@ -54,7 +54,7 @@ or attribute has a specified value, or element{"'"}s position and size match the
           <li>
           to declare element targets as pairs <code>variable = locator</code>, where locator can be either
           CSS selector or Xpath. When using Chrome DevTool
-          { " " } <a onClick={ this.onExtClick } href="https://www.youtube.com/watch?v=du2Jnm-TzJc">you
+            { " " } <a onClick={ this.onExtClick } href="https://www.youtube.com/watch?v=du2Jnm-TzJc">you
           just right-click on a target element and copy selector or XPath</a>
           </li>
           <li>to manage your test structure ( project, suite, test group, test )</li>

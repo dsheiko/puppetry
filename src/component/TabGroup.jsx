@@ -12,7 +12,8 @@ export class TabGroup extends React.Component {
   static propTypes = {
     action:  PropTypes.shape({
       removeAppTab: PropTypes.func.isRequired,
-      setAppTab: PropTypes.func.isRequired
+      setAppTab: PropTypes.func.isRequired,
+      saveSuite: PropTypes.func.isRequired
     }),
     store: PropTypes.object.isRequired
   }
@@ -26,6 +27,8 @@ export class TabGroup extends React.Component {
   }
 
   remove = ( targetKey ) => {
+    // @TODO remove with Confirm dialog
+    targetKey === "suite" && this.props.action.saveSuite();
     this.props.action.removeAppTab( targetKey );
   }
 

@@ -354,7 +354,7 @@ export const reducer = handleActions(
                             assert: "",
                             params: {}
                           };
-                    
+
                     commands[ id ] = {
                       ...defaultState,
                       ...payload,

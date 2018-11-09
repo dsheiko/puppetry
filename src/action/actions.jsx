@@ -121,6 +121,8 @@ const STORAGE_KEY_SETTINGS = "settings",
  * Thunk actions
  */
 
+// SETTINGS
+
 actions.saveSettings = ( payload ) => ( dispatch, getState ) => {
   const settings = { ...getState().settings, ...payload };
   localStorage.setItem( STORAGE_KEY_SETTINGS, JSON.stringify( settings ) );
@@ -134,6 +136,7 @@ actions.loadSettings = () => ( dispatch, getState ) => {
   return settings;
 };
 
+// PROJECT
 
 actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
   const projectDirectory = directory || getState().settings.projectDirectory;
@@ -174,6 +177,30 @@ actions.loadProjectFiles = ( directory = null ) => async ( dispatch, getState ) 
   dispatch( actions.updateApp({ project: { files }}) );
 };
 
+actions.saveProject = ({ projectDirectory, name }) => async ( dispatch, getState ) => {
+  try {
+    if ( !name ) {
+      throw new InvalidArgumentError( "Empty suite name" );
+    }
+    if ( !projectDirectory ) {
+      throw new InvalidArgumentError( "Empty project directory" );
+    }
+
+    await dispatch( actions.setProject({ projectDirectory, name }) );
+    await saveProject( getState() );
+    await dispatch( actions.loadProjectFiles( projectDirectory ) );
+    await dispatch( actions.watchProjectFiles( projectDirectory ) );
+    await dispatch( actions.removeAppTab( "suite" ) );
+
+  } catch ( e ) {
+    dispatch( actions.setError({
+      visible: true,
+      message: "Cannot save project",
+      description: e.message
+    }) );
+  }
+};
+
 actions.removeSuite = ( filename ) => async ( dispatch, getState ) => {
   if ( !filename || typeof filename !== "string" ) {
     throw new InvalidArgumentError( "Filename is not a string or empty" );
@@ -182,6 +209,7 @@ actions.removeSuite = ( filename ) => async ( dispatch, getState ) => {
   removeSuite( projectDirectory, filename );
 };
 
+// SUITE
 
 actions.createSuite = ( rawFilename, title ) => async ( dispatch, getState ) => {
   if ( !rawFilename || typeof rawFilename !== "string" ) {
@@ -209,7 +237,16 @@ actions.createSuite = ( rawFilename, title ) => async ( dispatch, getState ) => 
   }
 };
 
-actions.saveSuite = ( options = {} ) => async ( dispatch, getState ) => {
+actions.loadSuite = ( filename ) => async ( dispatch, getState ) => {
+  const { projectDirectory } = getState().settings,
+        suite = await readSuite( projectDirectory, filename );
+  dispatch( actions.setProject({ lastOpenSuite: filename }) );
+  dispatch( actions.resetSuite({ ...suite, loadedAt: new Date(), filename, modified: false }) );
+  ipcRenderer.send( E_SUITE_LOADED, projectDirectory, filename );
+  dispatch( actions.addAppTab( "suite" ) );
+};
+
+actions.saveSuite = ( options = {}) => async ( dispatch, getState ) => {
   const store = getState(),
         { projectDirectory } = store.settings,
         { filename } = { ...store.suite, ...options };
@@ -234,57 +271,6 @@ actions.saveSuite = ( options = {} ) => async ( dispatch, getState ) => {
       description: e.message
     }) );
   }
-};
-
-actions.loadSuite = ( filename ) => async ( dispatch, getState ) => {
-  const { projectDirectory } = getState().settings,
-        suite = await readSuite( projectDirectory, filename );
-  dispatch( actions.setProject({ lastOpenSuite: filename }) );
-  dispatch( actions.resetSuite({ ...suite, loadedAt: new Date(), filename, modified: false }) );
-  ipcRenderer.send( E_SUITE_LOADED, projectDirectory, filename );
-  dispatch( actions.addAppTab( "suite" ) );
-};
-
-
-actions.saveProject = ({ projectDirectory, name }) => async ( dispatch, getState ) => {
-  try {
-    if ( !name ) {
-      throw new InvalidArgumentError( "Empty suite name" );
-    }
-    if ( !projectDirectory ) {
-      throw new InvalidArgumentError( "Empty project directory" );
-    }
-
-    await dispatch( actions.setProject({ projectDirectory, name }) );
-    await saveProject( getState() );
-    await dispatch( actions.loadProjectFiles( projectDirectory ) );
-    await dispatch( actions.watchProjectFiles( projectDirectory ) );
-    await dispatch( actions.removeAppTab( "suite" ) );
-
-  } catch ( e ) {
-    dispatch( actions.setError({
-      visible: true,
-      message: "Cannot save project",
-      description: e.message
-    }) );
-  }
-};
-
-actions.setLoadingFor = ( ms ) => async ( dispatch ) => {
-  dispatch( actions.updateApp({ loading: true }) );
-  setTimeout( () => {
-    dispatch( actions.updateApp({ loading: false }) );
-  }, ms );
-};
-
-actions.checkNewVersion = () => async ( dispatch, getState ) => {
-  const { settings } = getState(),
-        checkDate = getDateString();
-  // Only once a day
-  if ( settings.checkDate !== checkDate ) {
-    await checkNewVersion( settings.lastCheckedVersion );
-  }
-  return dispatch( actions.saveSettings({ checkDate }) );
 };
 
 actions.openSuiteFile = ( filename ) => ( dispatch ) => {
@@ -313,6 +299,25 @@ actions.openSuiteFileConfirm = ( filename ) => ( dispatch, getState ) => {
   return dispatch( actions.openSuiteFile( filename ) );
 };
 
+// APP
+
+actions.setLoadingFor = ( ms ) => async ( dispatch ) => {
+  dispatch( actions.updateApp({ loading: true }) );
+  setTimeout( () => {
+    dispatch( actions.updateApp({ loading: false }) );
+  }, ms );
+};
+
+actions.checkNewVersion = () => async ( dispatch, getState ) => {
+  const { settings } = getState(),
+        checkDate = getDateString();
+  // Only once a day
+  if ( settings.checkDate !== checkDate ) {
+    await checkNewVersion( settings.lastCheckedVersion );
+  }
+  return dispatch( actions.saveSettings({ checkDate }) );
+};
+
 actions.closeApp = () => async ( dispatch, getState ) => {
   const store = getState(),
         { modified } = store.suite;
@@ -325,13 +330,14 @@ actions.closeApp = () => async ( dispatch, getState ) => {
   closeApp();
 };
 
+// MISC
+
 actions.cloneCommand = ( command ) => async ( dispatch, getState ) => {
   const groups = getState().suite.groups,
         source = groups[ command.groupId ].tests[ command.testId ].commands[ command.id ];
 
   dispatch( actions.addCommand( source ) );
 };
-
 
 actions.checkRuntimeTestDirReady = () => async ( dispatch ) => {
   const readyToRunTests = await isRuntimeTestPathReady();
