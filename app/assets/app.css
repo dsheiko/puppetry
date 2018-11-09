@@ -5,6 +5,10 @@
   --rhythm: 8px;
 }
 
+.method-title i {
+  opacity: 0.7;
+}
+
 /* goto.URL screen wide in form builder */
 .ant-row.ant-form-inline.edit-command-inline .ant-row.ant-form-item {
   display: flex;

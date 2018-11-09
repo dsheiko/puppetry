@@ -78,6 +78,20 @@ describe( "Schema.target", () => {
 
     });
 
+     describe( "tap.template", () => {
+
+      it( "returns expected", () => {
+        const code = schema.element.tap.template({
+          target: FIX_TARGET,
+          method: "tap",
+          targetSeletor: ".foo"
+        });
+        expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+      });
+
+
+    });
+
 
     describe( "hover.template", () => {
 

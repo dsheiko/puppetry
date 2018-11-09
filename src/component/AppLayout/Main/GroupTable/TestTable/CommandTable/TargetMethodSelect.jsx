@@ -1,7 +1,7 @@
 import React from "react";
 import { Select } from "antd";
 import PropTypes from "prop-types";
-import { schema } from "component/Schema/schema";
+import { schema, displayMethod } from "component/Schema/schema";
 
 const Option = Select.Option;
 
@@ -33,7 +33,8 @@ export class TargetMethodSelect extends React.Component {
       >
 
         {
-          Object.keys( schema.element ).map( method => ( <Option key={ method }>{ method }</Option> ) )
+          Object.keys( schema.element ).map( method => ( <Option key={ method }>
+          { displayMethod( method ) }</Option> ) )
         }
       </Select>
     );

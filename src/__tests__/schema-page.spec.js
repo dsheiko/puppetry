@@ -64,6 +64,8 @@ describe( "Schema.page (templates generate valid JavaScript)", () => {
 
   });
 
+
+
   describe( "assertTitle.template", () => {
 
     it( "with equals assertion", () => {
@@ -134,6 +136,17 @@ describe( "Schema.page (templates generate valid JavaScript)", () => {
 
   });
 
+   describe( "tapTouchscreen.template", () => {
+
+    it( "with coordinates", () => {
+      const code = schema.page.tapTouchscreen.template({ target: "page", params: {
+        x: 1,
+        y: 2
+      }});
+      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    });
+  });
+
 
   describe( "goto.template", () => {
 
@@ -175,6 +188,23 @@ describe( "Schema.page (templates generate valid JavaScript)", () => {
 
     it( "with all options", () => {
       const code = schema.page.waitForNavigation.template({ target: "page", params: {
+        waitUntil: "load",
+        timeout: 1000
+      }});
+      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    });
+
+  });
+
+  describe( "reload.template", () => {
+
+    it( "without options", () => {
+      const code = schema.page.reload.template({ target: "page", params: {}});
+      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    });
+
+    it( "with all options", () => {
+      const code = schema.page.reload.template({ target: "page", params: {
         waitUntil: "load",
         timeout: 1000
       }});
