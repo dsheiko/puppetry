@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Form, Row, Col, Alert } from "antd";
 import { TargetSelect } from "./TargetSelect";
-import { TargetMethodSelect } from "./TargetMethodSelect";
+import { ElementMethodSelect } from "./ElementMethodSelect";
 import { PageMethodSelect } from "./PageMethodSelect";
 import { ParamsFormBuilder } from "./Params/ParamsFormBuilder";
 import If from "component/Global/If";
@@ -35,7 +35,7 @@ export class CommandForm extends React.Component {
      record: PropTypes.object.isRequired,
      closeModal: PropTypes.func.isRequired,
      submitted: PropTypes.bool.isRequired,
-     onSubmitted: PropTypes.func.isRequired
+     resetSubmitted: PropTypes.func.isRequired
    }
 
    constructor( props ) {
@@ -55,11 +55,11 @@ export class CommandForm extends React.Component {
 
 
   handleSubmit = ( e = null ) => {
-    const { record, closeModal, onSubmitted } = this.props;
+    const { record, closeModal, resetSubmitted } = this.props;
     e && e.preventDefault();
+    resetSubmitted();
     this.props.form.validateFieldsAndScroll( ( err, values ) => {
       if ( !err ) {
-        onSubmitted();
         this.updateSuiteModified();
         this.props.action[ record.id ? "updateCommand" : "addCommand" ]({
           id: record.id,
@@ -70,7 +70,6 @@ export class CommandForm extends React.Component {
           params: values.params,
           assert: values.assert
         });
-
         closeModal();
       }
     });
@@ -164,7 +163,7 @@ export class CommandForm extends React.Component {
                       initialValue={ record.method }
                       changeMethod={ this.changeMethod }
                       setFieldsValue={ setFieldsValue } />
-                    : <TargetMethodSelect
+                    : <ElementMethodSelect
                       initialValue={ record.method }
                       changeMethod={ this.changeMethod }
                       setFieldsValue={ setFieldsValue } />
@@ -206,7 +205,6 @@ export class CommandForm extends React.Component {
               </ErrorBoundary>
             </fieldset>
           </If>
-
         </Form>
       </ErrorBoundary>
     );

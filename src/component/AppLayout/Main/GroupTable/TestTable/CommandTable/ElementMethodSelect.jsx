@@ -1,11 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Select } from "antd";
+import PropTypes from "prop-types";
 import { schema, displayMethod } from "component/Schema/schema";
 
 const Option = Select.Option;
 
-export class PageMethodSelect extends React.Component {
+export class ElementMethodSelect extends React.Component {
 
   static propTypes = {
     changeMethod: PropTypes.func.isRequired,
@@ -16,10 +16,6 @@ export class PageMethodSelect extends React.Component {
   onSelect = ( value ) => {
     this.props.changeMethod( value );
     this.props.setFieldsValue({ method: value });
-  }
-
-  static beauitifyMethod() {
-
   }
 
   render() {
@@ -35,9 +31,10 @@ export class PageMethodSelect extends React.Component {
           .toLowerCase()
           .indexOf( input.toLowerCase() ) >= 0 }
       >
+
         {
-          Object.keys( schema.page ).map( method => ( <Option key={ method }>
-            {  displayMethod( "page", method ) }</Option> ) )
+          Object.keys( schema.element ).map( method => ( <Option key={ method }>
+            { displayMethod( "element", method ) }</Option> ) )
         }
       </Select>
     );

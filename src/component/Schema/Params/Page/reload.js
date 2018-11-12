@@ -14,7 +14,7 @@ export const reload = {
     `;
   },
   description: `Referesh the page`,
-    params: [
+  params: [
     {
       inline: true,
       legend: "Options",

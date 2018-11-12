@@ -1,0 +1,168 @@
+{
+  "title": "Drag and droop on test groups/test/commands",
+  "timeout": 50000,
+  "savedAt": "2018-11-01T12:33:26.172Z",
+  "loadedAt": "2018-11-01T13:11:51.328Z",
+  "modified": false,
+  "filename": "Demo--Suite--Foo.json",
+  "targets": {
+    "_1": {
+      "editing": false,
+      "id": "_1",
+      "key": 0,
+      "target": "FOO",
+      "selector": ".foo",
+      "tag": "DIV"
+    },
+    "_2": {
+      "editing": false,
+      "id": "_2",
+      "key": 1,
+      "target": "BAR",
+      "selector": ".bar",
+      "tag": "DIV"
+    },
+    "_3": {
+      "editing": false,
+      "id": "_3",
+      "key": 2,
+      "target": "BAZ",
+      "selector": ".baz",
+      "title": ""
+    }
+  },
+  "groups": {
+    "_1": {
+      "editing": false,
+      "id": "_1",
+      "key": 0,
+      "title": "Object Foo",
+      "tests": {
+        "olhjnyhqwm9": {
+          "editing": false,
+          "id": "olhjnyhqwm9",
+          "key": "olhjnyhqwm9",
+          "title": "does somthing 1",
+          "commands": {},
+          "groupId": "_1"
+        },
+        "olhjnyhr4zd": {
+          "editing": false,
+          "id": "olhjnyhr4zd",
+          "key": "olhjnyhr4zd",
+          "title": "does something 2",
+          "commands": {
+            "ghjnyklqj0": {
+              "editing": false,
+              "id": "ghjnyklqj0",
+              "key": "ghjnyklqj0",
+              "target": "page",
+              "method": "goto",
+              "params": {
+                "url": "http://google.com",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "groupId": "_1",
+              "testId": "olhjnyhr4zd"
+            },
+            "ghjnykm5rs": {
+              "editing": false,
+              "id": "ghjnykm5rs",
+              "key": "ghjnykm5rs",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "foo foo",
+                "fullPage": false,
+                "omitBackground": false
+              },
+              "groupId": "_1",
+              "testId": "olhjnyhr4zd"
+            },
+            "ghjnyknp01": {
+              "editing": false,
+              "id": "ghjnyknp01",
+              "key": "ghjnyknp01",
+              "target": "FOO",
+              "method": "type",
+              "params": {
+                "value": "sssss"
+              },
+              "groupId": "_2",
+              "testId": "olhjnyhro5a"
+            }
+          },
+          "groupId": "_1"
+        }
+      }
+    },
+    "_2": {
+      "editing": false,
+      "id": "_2",
+      "key": 1,
+      "title": "Object Bar",
+      "tests": {
+        "olhjnyhrjcg": {
+          "editing": false,
+          "id": "olhjnyhrjcg",
+          "key": "olhjnyhrjcg",
+          "title": "does something 3",
+          "commands": {
+            "ghjnykmqal": {
+              "editing": false,
+              "id": "ghjnykmqal",
+              "key": "ghjnykmqal",
+              "target": "page",
+              "method": "goto",
+              "params": {
+                "url": "FOO",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "groupId": "_2",
+              "testId": "olhjnyhrjcg"
+            },
+            "ghjnykn1iw": {
+              "editing": false,
+              "id": "ghjnykn1iw",
+              "key": "ghjnykn1iw",
+              "target": "page",
+              "method": "emulate",
+              "params": {
+                "device": "Galaxy Note II landscape"
+              },
+              "groupId": "_2",
+              "testId": "olhjnyhrjcg"
+            }
+          },
+          "groupId": "_2"
+        },
+        "olhjnyhro5a": {
+          "editing": false,
+          "id": "olhjnyhro5a",
+          "key": "olhjnyhro5a",
+          "title": "does something 4",
+          "commands": {
+            "ghjnyknf37": {
+              "editing": false,
+              "id": "ghjnyknf37",
+              "key": "ghjnyknf37",
+              "target": "page",
+              "method": "goto",
+              "params": {
+                "url": "BAR",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "groupId": "_2",
+              "testId": "olhjnyhro5a"
+            }
+          },
+          "groupId": "_2"
+        }
+      }
+    }
+  },
+  "puppetry": "0.1.0-RC0"
+}

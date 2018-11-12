@@ -38,6 +38,6 @@
   },
   "modified": false,
   "projectDirectory": "/home/sheiko/Sites/os/puppetry/project-test",
-  "lastOpenSuite": "testing.json",
+  "lastOpenSuite": "all-methods.json",
   "puppetry": "0.1.0-RC.4"
 }

@@ -5,11 +5,14 @@ import { assertContent } from "./Params/Page/assertContent";
 import { assertTitle } from "./Params/Page/assertTitle";
 import { emulate } from "./Params/Page/emulate";
 import { clickMouse } from "./Params/Page/clickMouse";
-import { tapTouchscreen } from "./Params/Page/tapTouchscreen";
+import { tap as tapPage } from "./Params/Page/tap";
 import { goto } from "./Params/Page/goto";
 import { reload } from "./Params/Page/reload";
 import { waitFor } from "./Params/Page/waitFor";
+import { waitForSelector } from "./Params/Page/waitForSelector";
 import { press } from "./Params/Page/press";
+import { scroll as scrollPage } from "./Params/Page/scroll";
+import { assertScroll as assertScrollPage } from "./Params/Page/assertScroll";
 
 import { waitForNavigation } from "./Params/Page/waitForNavigation";
 import { assertNodeCount } from "./Params/Page/assertNodeCount";
@@ -29,40 +32,47 @@ import { assertMatchesSelector } from "./Params/Element/assertMatchesSelector";
 import { toggleClass } from "./Params/Element/toggleClass";
 import { assertContainsClass } from "./Params/Element/assertContainsClass";
 import { setAttribute } from "./Params/Element/setAttribute";
-import { tap } from "./Params/Element/tap";
-
+import { tap as tapElement } from "./Params/Element/tap";
+import { scroll as scrollElement } from "./Params/Element/scroll";
+import { assertScroll as assertScrollElement } from "./Params/Element/assertScroll";
 
 import { tplQuery, tplSuite, tplGroup, tplTest } from "./Jest";
 
 const methodLables = {
-  emulate: "emulate device",
-  setViewport: "set window size",
-  clickMouse: "click mouse",
-  tapTouchscreen: "tap",
-  press: "press a key",
-  screenshot: "make screenshot",
-  assertTitle: "assert page title",
-  assertContent: "assert page HTML",
-  waitFor: "wait for time/selector",
-  waitForNavigation: "wait for navigation",
-  assertNodeCount: "assert count of elements",
-
-  toggleClass: "toggle class",
-  setAttribute: "set attribute",
-  assertAttribute: "assert attribute",
-  assertProperty: "assert property",
-  assertVisible: "assert it is visible",
-  assertHtml: "assert HTML",
-  assertBoundingBox: "assert size/position",
-  assertPosition: "assert relative position",
-  assertStyle: "assert style",
-  assertMatchesSelector: "assert it matches selector",
-  assertContainsClass: "assert it contains class"
+  page: {
+    emulate: "emulate device",
+    setViewport: "set window size",
+    clickMouse: "click mouse",
+    tapTouchscreen: "tap",
+    press: "press a key",
+    screenshot: "make screenshot",
+    assertTitle: "assert page title",
+    assertContent: "assert page HTML",
+    waitFor: "wait for timeout",
+    waitForSelector: "wait for selector",
+    waitForNavigation: "wait for navigation",
+    assertNodeCount: "assert count of elements",
+    assertScrollPage: "assert window scroll offset"
+  },
+  element: {
+    toggleClass: "toggle class",
+    setAttribute: "set attribute",
+    assertAttribute: "assert attribute",
+    assertProperty: "assert property",
+    assertVisible: "assert it is visible",
+    assertHtml: "assert HTML",
+    assertBoundingBox: "assert size/position",
+    assertPosition: "assert relative position",
+    assertStyle: "assert style",
+    assertMatchesSelector: "assert it matches selector",
+    assertContainsClass: "assert it contains class",
+    assertScroll: "assert scroll offset"
+  }
 };
 
-export function displayMethod( method ) {
-  return method in methodLables
-    ? ( <span className="method-title">{ methodLables[ method ] + " " } <i>({ method })</i></span> )
+export function displayMethod( target, method ) {
+  return method in methodLables[ target ]
+    ? ( <span className="method-title">{ methodLables[ target ][ method ] + " " } <i>({ method })</i></span> )
     : method;
 }
 
@@ -78,7 +88,8 @@ export const schema = {
     select,
     focus,
     click,
-    tap,
+    tap: tapElement,
+    scroll: scrollElement,
     hover,
     toggleClass,
     setAttribute,
@@ -90,7 +101,8 @@ export const schema = {
     assertPosition,
     assertStyle,
     assertMatchesSelector,
-    assertContainsClass
+    assertContainsClass,
+    assertScroll: assertScrollElement
   },
   page: {
     emulate,
@@ -98,14 +110,17 @@ export const schema = {
     goto,
     screenshot,
     clickMouse,
-    tapTouchscreen,
+    tap: tapPage,
     press,
+    scroll: scrollPage,
     reload,
     waitFor,
+    waitForSelector,
     waitForNavigation,
     assertTitle,
     assertContent,
-    assertNodeCount
+    assertNodeCount,
+    assertScroll: assertScrollPage
   }
 };
 

@@ -71,26 +71,33 @@ export class ParamsFormBuilder extends React.Component {
 
   getInitialValue( item ) {
     const { record } = this.props,
+          initialValue = item.control === CHECKBOX ? false : item.initialValue,
           key = item.name.replace( /^params\./, "" );
+
     return ( ( record.params && record.params.hasOwnProperty( key ) )
       ? record.params[ key ]
-      : item.initialValue );
+      : initialValue );
   }
 
   renderFormItem = ( item, inx ) => {
     const { getFieldDecorator } = this.props.form,
           labelNode = item.tooltip ? getLabel( item.label, item.tooltip ) : item.label,
-          initialValue = this.getInitialValue( item );
+          initialValue = this.getInitialValue( item ),
+          decoratorOptions =  {
+            initialValue,
+            rules: item.rules
+          };
+
+    if ( item.control === CHECKBOX ) {
+      decoratorOptions.valuePropName = ( initialValue ? "checked" : "data-ok" );
+      decoratorOptions.initialValue = true;
+    }
 
     return (
       <FormItem
         label={ item.control !== CHECKBOX ? labelNode : "" }
-        help={ item.help || null }
         key={ `item${inx}` }>
-        { getFieldDecorator( item.name, {
-          initialValue,
-          rules: item.rules
-        })( this.renderControl( item ) ) }
+        { getFieldDecorator( item.name, decoratorOptions )( this.renderControl( item ) ) }
       </FormItem> );
   }
 
@@ -98,7 +105,7 @@ export class ParamsFormBuilder extends React.Component {
 
     const rowNode = (
       <Row gutter={24} key={ `row${inx}` } className={ row.inline ? "ant-form-inline edit-command-inline" : null }>
-        <Col span={24} >
+        <Col span={ row.span || 24} >
           { row.items.map( this.renderFormItem ) }
         </Col>
       </Row> );
