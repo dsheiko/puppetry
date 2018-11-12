@@ -112,6 +112,7 @@ export class ParamsFormBuilder extends React.Component {
             icon="question-circle"
           /> )}
         </legend>
+        { row.description && ( <p>{ row.description }</p> )}
         { rowNode }
       </fieldset> ) : rowNode;
   }

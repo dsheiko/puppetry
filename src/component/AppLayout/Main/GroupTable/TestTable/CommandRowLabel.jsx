@@ -21,6 +21,15 @@ export class CommandRowLabel extends React.Component {
      switch ( method ) {
      case "goto":
        return `("${ params.url }")`;
+     case "press":
+       text = [ params.modifierKey1,
+        params.modifierKey2,
+        params.modifierKey3,
+        params.key ]
+         .filter( key => Boolean( key ) )
+         .map( key => `${ key }` )
+         .join( "+" );
+       return `("${ text }")`;
      case "emulate":
        return `("${ params.device }")`;
      case "querySelectorAll":
@@ -53,9 +62,12 @@ export class CommandRowLabel extends React.Component {
        switch ( method ) {
        case "assertProperty":
        case "assertAttribute":
+       case "toggleClass":
          return `("${ params.name }")`;
        case "assertStyle":
          return `("${ params.name }", "${ params.pseudo || "null" }")`;
+      case "assertContainsClass":
+         return `(${ assert.value ? "" : "NOT " }"${ params.name }")`;
        case "select":
        case "type":
          return `("${ params.value }")`;
