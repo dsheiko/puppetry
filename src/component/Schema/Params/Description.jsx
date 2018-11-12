@@ -1,5 +1,4 @@
 import React from "react";
-import { Icon } from "antd";
 import AbstractComponent from "component/AbstractComponent";
 
 export class Description extends AbstractComponent {
@@ -13,11 +12,11 @@ export class Description extends AbstractComponent {
     if ( match ) {
       const [ divider, text, url ] = match,
             [ lhand, rhand ] = msg.split( divider );
-      return ( <p><Icon type="exclamation-circle" />{ " " }
+      return ( <p className="command-description">
         { lhand } <a onClick={this.onExtClick} href={ url }>{ text }</a>
         { rhand }</p> );
     }
-    return ( <p><Icon type="exclamation-circle" /> { msg }</p> );
+    return ( <p className="command-description">{ msg }</p> );
   }
 
 }

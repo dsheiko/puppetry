@@ -9,7 +9,7 @@ import { tapTouchscreen } from "./Params/Page/tapTouchscreen";
 import { goto } from "./Params/Page/goto";
 import { reload } from "./Params/Page/reload";
 import { waitFor } from "./Params/Page/waitFor";
-
+import { press } from "./Params/Page/press";
 
 import { waitForNavigation } from "./Params/Page/waitForNavigation";
 import { assertNodeCount } from "./Params/Page/assertNodeCount";
@@ -39,6 +39,7 @@ const methodLables = {
   setViewport: "set window size",
   clickMouse: "click mouse",
   tapTouchscreen: "tap",
+  press: "press a key",
   screenshot: "make screenshot",
   assertTitle: "assert page title",
   assertContent: "assert page HTML",
@@ -98,6 +99,7 @@ export const schema = {
     screenshot,
     clickMouse,
     tapTouchscreen,
+    press,
     reload,
     waitFor,
     waitForNavigation,

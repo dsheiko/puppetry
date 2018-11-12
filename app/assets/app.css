@@ -2,11 +2,16 @@
   --layout-background: #f0f2f5;
   --color-ok: #52c41a;
   --color-fail: red;
+  --color-primary: #40a9ff;
   --rhythm: 8px;
 }
 
 .method-title i {
   opacity: 0.7;
+}
+
+.command-description svg {
+  fill: var(--color-primary);
 }
 
 /* goto.URL screen wide in form builder */

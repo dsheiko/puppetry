@@ -196,6 +196,49 @@ describe( "Schema.page (templates generate valid JavaScript)", () => {
 
   });
 
+  describe( "press.template", () => {
+
+    it( "with only main key", () => {
+      const code = schema.page.press.template({ target: "page", params: {
+        key: "Enter",
+        modifierKey1: "",
+        modifierKey2: "",
+        modifierKey3: ""
+      }});
+      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    });
+
+    it( "with one modifier", () => {
+      const code = schema.page.press.template({ target: "page", params: {
+        key: "Enter",
+        modifierKey1: "Shift",
+        modifierKey2: "",
+        modifierKey3: ""
+      }});
+      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    });
+
+    it( "with two modifiers", () => {
+      const code = schema.page.press.template({ target: "page", params: {
+        key: "Enter",
+        modifierKey1: "Shift",
+        modifierKey2: "Control",
+        modifierKey3: ""
+      }});
+      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    });
+
+    it( "with three modifiers", () => {
+      const code = schema.page.press.template({ target: "page", params: {
+        key: "Enter",
+        modifierKey1: "Shift",
+        modifierKey2: "Control",
+        modifierKey3: "Alt"
+      }});
+      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    });
+  });
+
   describe( "reload.template", () => {
 
     it( "without options", () => {

@@ -1,8 +1,8 @@
 {
   "title": "react-html5-form",
   "timeout": 50000,
-  "savedAt": "2018-11-06T14:08:08.063Z",
-  "loadedAt": "2018-11-07T11:09:42.710Z",
+  "savedAt": "2018-11-12T10:08:26.829Z",
+  "loadedAt": "2018-11-12T10:10:44.236Z",
   "modified": false,
   "filename": "testing.json",
   "targets": {
@@ -484,6 +484,36 @@
               },
               "groupId": "_2",
               "testId": "cmqjnxdjk90"
+            },
+            "j9ujoe3gtyk": {
+              "editing": false,
+              "id": "j9ujoe3gtyk",
+              "key": "j9ujoe3gtyk",
+              "target": "page",
+              "method": "press",
+              "params": {
+                "key": "b",
+                "modifierKey1": "Shift",
+                "modifierKey2": "Control",
+                "modifierKey3": ""
+              },
+              "groupId": "_2",
+              "testId": "cmqjnxdjk90"
+            },
+            "k1qjoe59xax": {
+              "editing": false,
+              "id": "k1qjoe59xax",
+              "key": "k1qjoe59xax",
+              "target": "page",
+              "method": "press",
+              "params": {
+                "key": "Enter",
+                "modifierKey1": "",
+                "modifierKey2": "",
+                "modifierKey3": ""
+              },
+              "groupId": "_2",
+              "testId": "cmqjnxdjk90"
             }
           },
           "groupId": "_2"
@@ -491,5 +521,5 @@
       }
     }
   },
-  "puppetry": "0.1.0-RC.1"
+  "puppetry": "0.1.0-RC.4"
 }
