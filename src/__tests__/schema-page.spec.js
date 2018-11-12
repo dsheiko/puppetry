@@ -136,10 +136,21 @@ describe( "Schema.page (templates generate valid JavaScript)", () => {
 
   });
 
-   describe( "tapTouchscreen.template", () => {
+   describe( "tap.template", () => {
 
     it( "with coordinates", () => {
-      const code = schema.page.tapTouchscreen.template({ target: "page", params: {
+      const code = schema.page.tap.template({ target: "page", params: {
+        x: 1,
+        y: 2
+      }});
+      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    });
+  });
+
+  describe( "scroll.template", () => {
+
+    it( "with coordinates", () => {
+      const code = schema.page.scroll.template({ target: "page", params: {
         x: 1,
         y: 2
       }});
@@ -173,6 +184,26 @@ describe( "Schema.page (templates generate valid JavaScript)", () => {
     it( "with value", () => {
       const code = schema.page.waitFor.template({ target: "page", params: {
         value: 1000
+      }});
+      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    });
+
+  });
+
+  describe( "waitForSelector.template", () => {
+
+    it( "without options", () => {
+      const code = schema.page.waitForSelector.template({ target: "page", params: {
+          value: "div"
+      }});
+      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    });
+
+    it( "with all options", () => {
+      const code = schema.page.waitForSelector.template({ target: "page", params: {
+        value: "div",
+        visible: "true",
+        timeout: 1000
       }});
       expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
     });
@@ -270,6 +301,25 @@ describe( "Schema.page (templates generate valid JavaScript)", () => {
           selector: ".foo"
         }
       });
+      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    });
+  });
+
+   describe( "assertScroll.template", () => {
+
+    it( "with assertion", () => {
+      const code = schema.page.assertScroll.template({
+        target: "page",
+        assert: {
+          assertion: "number",
+          operator: "gt",
+          value: 10
+        },
+        params: {
+          direction: "horizontally"
+        }
+      });
+
       expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
     });
   });

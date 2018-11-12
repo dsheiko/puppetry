@@ -34,3 +34,5 @@ exports.RUNTIME_TEST_DIRECTORY = ".runtime-test";
 exports.JEST_PKG_DIRECTORY = "jest-pkg";
 exports.DEMO_PROJECT_DIRECTORY = "project-demo";
 exports.PUPPETRY_LOCK_FILE = "puppetry-lock.json";
+
+exports.TXT_PARAM_IS_REQUIRED = "Parameter is required";

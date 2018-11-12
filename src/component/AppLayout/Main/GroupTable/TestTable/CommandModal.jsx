@@ -29,7 +29,7 @@ export class CommandModal extends React.Component {
     this.setState({ submitted: true });
   }
 
-  onSubmitted = () => {
+  resetSubmitted = () => {
     this.setState({ submitted: false });
   }
 
@@ -56,7 +56,7 @@ export class CommandModal extends React.Component {
 
           deferCommandForm = () => <CommandForm
             submitted={ submitted }
-            onSubmitted={ this.onSubmitted }
+            resetSubmitted={ this.resetSubmitted }
             action={ action }
             commands={ commands }
             closeModal={ this.onCancel }

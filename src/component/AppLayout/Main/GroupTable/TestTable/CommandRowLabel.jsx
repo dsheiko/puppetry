@@ -23,15 +23,17 @@ export class CommandRowLabel extends React.Component {
        return `("${ params.url }")`;
      case "press":
        text = [ params.modifierKey1,
-        params.modifierKey2,
-        params.modifierKey3,
-        params.key ]
+         params.modifierKey2,
+         params.modifierKey3,
+         params.key ]
          .filter( key => Boolean( key ) )
          .map( key => `${ key }` )
          .join( "+" );
        return `("${ text }")`;
      case "emulate":
        return `("${ params.device }")`;
+     case "scroll":
+       return `(x: ${ params.x }, y: ${ params.y })`;
      case "querySelectorAll":
        return `("${ params.selector }")`;
      case "screenshot":
@@ -42,6 +44,9 @@ export class CommandRowLabel extends React.Component {
        return `(${ params.width }, ${ params.height })`;
      case "waitFor":
        return `(${ params.value })`;
+     case "waitForSelector":
+       text = ( params.visible === "on" ? " is visible" : ( params.hidden === "on"  ? " is hidden" : "" ) );
+       return `("${ params.value }"${ text })`;
      case "waitForNavigation":
        return params.waitUntil ? `(${ params.waitUntil })` : `(${ params.timeout })`;
      case "assertNodeCount":
@@ -50,7 +55,10 @@ export class CommandRowLabel extends React.Component {
      case "assertTitle":
        text = assert.value.length > 20 ? "..." : "";
        return assert.value ? `("${ assert.value.substr( 0, 20 ) + text }")` : "";
-
+     case "assertScroll":
+       return params.direction === "horizontally"
+         ? `(scrollX ${ OPERATOR_MAP[ assert.operator ] }  ${ assert.value })`
+         : `(scrollY ${ OPERATOR_MAP[ assert.operator ] }  ${ assert.value })`;
      default:
        return "";
      }
@@ -66,13 +74,19 @@ export class CommandRowLabel extends React.Component {
          return `("${ params.name }")`;
        case "assertStyle":
          return `("${ params.name }", "${ params.pseudo || "null" }")`;
-      case "assertContainsClass":
+       case "assertContainsClass":
          return `(${ assert.value ? "" : "NOT " }"${ params.name }")`;
+       case "scroll":
+         return `(h: ${ params.x }, v: ${ params.y })`;
        case "select":
        case "type":
          return `("${ params.value }")`;
        case "assertVisible":
          return `("${ assert.value ? "true" : "false" }")`;
+       case "assertScroll":
+         return params.direction === "horizontally"
+           ? `(scrollLeft ${ OPERATOR_MAP[ assert.operator ] }  ${ assert.value })`
+           : `(scrollTop ${ OPERATOR_MAP[ assert.operator ] }  ${ assert.value })`;
        case "assertMatchesSelector":
          return `("${ assert.value }")`;
        case "assertHtml":

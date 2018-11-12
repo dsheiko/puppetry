@@ -20,7 +20,7 @@ export const waitFor = {
           placeholder: "",
           rules: [{
             required: true,
-            message: "Enter URL"
+            message: "Parameter is required"
           }]
         }
       ]
