@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { remote } from "electron";
+import { confirmUnsavedChanges, confirmDeleteFile } from "service/smalltalk";
+import classNames from "classnames";
 
 const { Menu, MenuItem } = remote;
 
@@ -10,46 +12,74 @@ export class ProjectNavigator extends React.Component {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired,
-      openSuiteFileConfirm: PropTypes.func.isRequired,
-      removeSuite: PropTypes.func.isRequired
+      openSuiteFile: PropTypes.func.isRequired,
+      removeSuite: PropTypes.func.isRequired,
+      saveSuite: PropTypes.func.isRequired,
+      setSuite: PropTypes.func.isRequired
     }),
 
     files: PropTypes.arrayOf( PropTypes.string ).isRequired,
     projectName: PropTypes.string.isRequired,
-    active: PropTypes.string.isRequired
+    active: PropTypes.string.isRequired,
+    suiteModified: PropTypes.bool.isRequired
+  }
+
+  state = {
+    dblClicked: ""
   }
 
   onClick = ( e ) => {
     e.preventDefault();
   }
 
-  onDblClick = ( e ) => {
-    const { openSuiteFileConfirm } = this.props.action,
-          file = e.target.dataset.id;
+  onDblClick = async ( e ) => {
     e.preventDefault();
-    openSuiteFileConfirm( file );
+    const { openSuiteFile } = this.props.action,
+          file = e.target.dataset.id;
+
+    if ( this.props.suiteModified ) {
+      await confirmUnsavedChanges({
+        saveSuite: this.props.action.saveSuite,
+        setSuite: this.props.action.setSuite
+      });
+    }
+
+    openSuiteFile( file );
   }
 
   onRightClick = ( e ) => {
     const file = e.target.dataset.id,
-          { updateApp, openSuiteFileConfirm } = this.props.action;
+          { openSuiteFile, removeSuite } = this.props.action;
 
     e.preventDefault();
+    this.setState({ dblClicked: file });
 
     const menu = new Menu();
 
+    menu.on( "menu-will-close", () => {
+      this.setState({ dblClicked: "" });
+    });
+
     menu.append( new MenuItem({
       label: "Open",
-      click: () => {
-        openSuiteFileConfirm( file );
+      click: async () => {
+        if ( this.props.suiteModified ) {
+          await confirmUnsavedChanges({
+            saveSuite: this.props.action.saveSuite,
+            setSuite: this.props.action.setSuite
+          });
+        }
+        openSuiteFile( file );
       }
     }) );
 
     menu.append( new MenuItem({
       label: "Delete",
-      click: () => {
-        updateApp({ confirmDeleteModal: true, selectedFile: file });
+      click: async () => {
+        const sure = await confirmDeleteFile( file );
+        if ( sure ) {
+          removeSuite( file );
+        }
       }
     }) );
     menu.popup({
@@ -76,7 +106,11 @@ export class ProjectNavigator extends React.Component {
                   onDoubleClick={ this.onDblClick }
                   onContextMenu={ this.onRightClick }
                   data-id={ file }
-                  className={ `${ active === file ? "is-active" : "" } project-navigator__li` }>
+                  className={ classNames({
+                    "project-navigator__li": true,
+                    "is-active": active === file,
+                    "is-dbl-clicked": this.state.dblClicked ===  file
+                  }) }>
                   <Icon type="file" /> { file }
                 </li>
               ) ) }

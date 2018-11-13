@@ -5,6 +5,7 @@ import { ipcRenderer } from "electron";
 import Hotkeys from "react-hot-keys";
 import ErrorBoundary from "component/ErrorBoundary";
 import { msgDataSaved } from "component/Global/Message";
+import { confirmUnsavedChanges } from "service/smalltalk";
 import { E_MENU_NEW_PROJECT, E_MENU_NEW_SUITE,
   E_MENU_OPEN_PROJECT, E_MENU_SAVE_SUITE, E_MENU_SAVE_SUITE_AS,
   E_MENU_OPEN_SUITE, E_MENU_EXPORT_PROJECT, E_MENU_EXIT_APP, E_MENU_RUN } from "constant";
@@ -25,11 +26,12 @@ export class MainMenu extends React.Component {
     action:  PropTypes.shape({
       updateApp: PropTypes.func.isRequired,
       saveSuite: PropTypes.func.isRequired,
-      closeApp: PropTypes.func.isRequired
+      setSuite: PropTypes.func.isRequired
     }),
     readyToRunTests: PropTypes.bool.isRequired,
     projectDirectory: PropTypes.string.isRequired,
-    suiteFilename: PropTypes.string.isRequired
+    suiteFilename: PropTypes.string.isRequired,
+    suiteModified: PropTypes.bool.isRequired
   }
 
 
@@ -71,25 +73,43 @@ export class MainMenu extends React.Component {
     this.props.action.updateApp({ saveSuiteAsModal: true });
   }
 
-  onNewProject = () => {
-    // @TODO remove with Confirm dialog
-    this.props.action.saveSuite();
+  onNewProject = async () => {
+    if ( this.props.suiteModified ) {
+      await confirmUnsavedChanges({
+        saveSuite: this.props.action.saveSuite,
+        setSuite: this.props.action.setSuite
+      });
+    }
     this.props.action.updateApp({ newProjectModal: true });
   }
 
-  onOpenProject = () => {
-    // @TODO remove with Confirm dialog
-    this.props.action.saveSuite();
+  onOpenProject = async () => {
+    if ( this.props.suiteModified ) {
+      await confirmUnsavedChanges({
+        saveSuite: this.props.action.saveSuite,
+        setSuite: this.props.action.setSuite
+      });
+    }
     this.props.action.updateApp({ openProjectModal: true });
   }
 
-  onOpenSuite = () => {
+  onOpenSuite = async () => {
+    if ( this.props.suiteModified ) {
+      await confirmUnsavedChanges({
+        saveSuite: this.props.action.saveSuite,
+        setSuite: this.props.action.setSuite
+      });
+    }
     this.props.action.updateApp({ openSuiteModal: true });
   }
 
-  onNewSuite = () => {
-    // @TODO remove with Confirm dialog
-    this.props.action.saveSuite();
+  onNewSuite = async () => {
+    if ( this.props.suiteModified ) {
+      await confirmUnsavedChanges({
+        saveSuite: this.props.action.saveSuite,
+        setSuite: this.props.action.setSuite
+      });
+    }
     this.props.action.updateApp({ newSuiteModal: true });
   }
 
@@ -101,7 +121,13 @@ export class MainMenu extends React.Component {
     this.props.action.updateApp({ installRuntimeTestModal: true });
   }
 
-  onExit = () => {
+  onExit = async () => {
+    if ( this.props.suiteModified ) {
+      await confirmUnsavedChanges({
+        saveSuite: this.props.action.saveSuite,
+        setSuite: this.props.action.setSuite
+      });
+    }
     this.props.action.closeApp();
   }
 

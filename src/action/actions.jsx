@@ -263,7 +263,6 @@ actions.saveSuite = ( options = {}) => async ( dispatch, getState ) => {
     await saveProject( store );
 
     dispatch( actions.updateSuite({ savedAt: new Date(), modified: false }) );
-    dispatch( actions.updateApp({ closeAppModal: false }) );
   } catch ( e ) {
     dispatch( actions.setError({
       visible: true,
@@ -288,17 +287,6 @@ actions.openSuiteFile = ( filename ) => ( dispatch ) => {
   dispatch( actions.updateApp({ loading: false }) );
 };
 
-actions.openSuiteFileConfirm = ( filename ) => ( dispatch, getState ) => {
-  const { modified } = getState().suite;
-  if ( modified ) {
-    return dispatch( actions.updateApp({
-      confirmSaveChangesFile: filename,
-      confirmSaveChangesModal: true
-    }) );
-  }
-  return dispatch( actions.openSuiteFile( filename ) );
-};
-
 // APP
 
 actions.setLoadingFor = ( ms ) => async ( dispatch ) => {
@@ -319,14 +307,8 @@ actions.checkNewVersion = () => async ( dispatch, getState ) => {
 };
 
 actions.closeApp = () => async ( dispatch, getState ) => {
-  const store = getState(),
-        { modified } = store.suite;
-
+  const store = getState();
   await saveProject( store );
-
-  if ( modified ) {
-    return dispatch( actions.updateApp({ closeAppModal: true }) );
-  }
   closeApp();
 };
 

@@ -10,6 +10,7 @@
   opacity: 0.7;
 }
 
+
 .command-description svg {
   fill: var(--color-primary);
 }
@@ -358,6 +359,11 @@ li.project-navigator__li:hover {
 
 .project-navigator__li.is-active {
   background: #00529e;
+  color: white;
+}
+
+.project-navigator__nav .is-dbl-clicked {
+  background: rgb(0, 21, 41);
   color: white;
 }
 

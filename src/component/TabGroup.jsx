@@ -4,6 +4,7 @@ import { Tabs } from "antd";
 import { Main } from "./AppLayout/Main";
 import { TestReport } from "./AppLayout/TestReport";
 import ErrorBoundary from "component/ErrorBoundary";
+import { confirmUnsavedChanges } from "service/smalltalk";
 
 const TabPane = Tabs.TabPane;
 
@@ -13,7 +14,8 @@ export class TabGroup extends React.Component {
     action:  PropTypes.shape({
       removeAppTab: PropTypes.func.isRequired,
       setAppTab: PropTypes.func.isRequired,
-      saveSuite: PropTypes.func.isRequired
+      saveSuite: PropTypes.func.isRequired,
+      setSuite: PropTypes.func.isRequired
     }),
     store: PropTypes.object.isRequired
   }
@@ -26,9 +28,13 @@ export class TabGroup extends React.Component {
     this.props.action.setAppTab( targetKey );
   }
 
-  remove = ( targetKey ) => {
-    // @TODO remove with Confirm dialog
-    targetKey === "suite" && this.props.action.saveSuite();
+  remove = async ( targetKey ) => {
+    if ( targetKey === "suite" && this.props.store.suite.modified ) {
+      await confirmUnsavedChanges({
+        saveSuite: this.props.action.saveSuite,
+        setSuite: this.props.action.setSuite
+      });
+    }
     this.props.action.removeAppTab( targetKey );
   }
 
