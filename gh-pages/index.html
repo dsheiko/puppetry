@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Puppetry - codeless end-to-end testing</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="./vendor/glider/glider.min.css" rel="stylesheet" type="text/css"/>
+    <!--link href="./assets/index.css" rel="stylesheet" type="text/css"/-->
+    <style>
+body {
+  background-color: #002f5c;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 32px;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 40px;
+  line-height: 48px;
+}
+
+h2 {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+h3 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.hero-grid {
+  display: flex;
+
+}
+
+.hero-card {
+  flex: 1 1 33%;
+  padding: 16px;
+}
+
+.hero-card__icon {
+  width: 100%;
+  max-width: 160px;
+}
+
+.page-container {
+  max-width: 1200px;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="page-container">
+      <header>
+
+<a class="github-button" href="https://github.com/dsheiko/puppetry/fork" data-icon="octicon-repo-forked" data-size="large" aria-label="Fork dsheiko/puppetry on GitHub">Fork</a>
+<a class="github-button" href="https://github.com/dsheiko/puppetry" data-icon="octicon-star" data-size="large" aria-label="Star dsheiko/puppetry on GitHub">Star</a>
+
+      </header>
+    <h1 align="center">
+      <br>
+      <img src="./assets/img/puppetry.png" alt="Puppetry" width="200" />
+      <br>
+      Puppetry
+      <br>
+    </h1>
+    <h2 align="center">CODELESS END-TO-END AUTOMATED TESTING</h2>
+
+    <div class="hero-grid">
+      <div class="hero-card">
+        <h3>Web testing solution for non-developers</h3>
+        <img class="hero-card__icon" src="./assets/img/round-touch_app-24px.svg?2" alt="" />
+      </div>
+      <div class="hero-card">
+        <h3>Tests in app and on CI-server</h3>
+      </div>
+      <div class="hero-card">
+        <h3>Standing on the shoulders of giants</h3>
+      </div>
+    </div>
+    </div>
+
+    <section>
+     <h3>Web testing solution for non-developers</h3>
+     <div class="glider-contain">
+        <div class="glider">
+          <div>your content here2</div>
+          <div>your content here3</div>
+          <div>your content here4</div>
+          <div>your content here5</div>
+        </div>
+        <div class="dots"></div>
+        <a class="glider-prev">«</a>
+        <a class="glider-next">»</a>
+      </div>
+    </section>
+
+    <script src="./vendor/glider/glider.min.js" type="text/javascript"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script>
+      window.addEventListener( "load", function(){
+        document.querySelector( ".glider" ).Glider({
+        });
+      });
+    </script>
+  </body>
+</html>
