@@ -33,3 +33,18 @@ export async function confirmDeleteFile( selectedFile = "" ) {
     }
 }
 
+export async function confirmDeleteEntity( entity = "" ) {
+  try {
+    await smalltalk
+      .confirm( "Confirm Delete", `Are you sure you want to delete ${ entity }?` , {
+        buttons: {
+          ok: "Yes",
+          cancel: "No"
+        }
+      });
+      return true;
+    } catch ( e ) {
+      return false;
+    }
+}
+

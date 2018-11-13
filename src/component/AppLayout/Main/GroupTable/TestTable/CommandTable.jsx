@@ -4,6 +4,7 @@ import AbstractDnDTable from "../../AbstractDnDTable";
 import { connectDnD } from "../../DragableRow";
 import { CommandRowLabel } from "./CommandRowLabel";
 import ErrorBoundary from "component/ErrorBoundary";
+import { confirmDeleteEntity } from "service/smalltalk";
 import { remote } from "electron";
 
 const { Menu, MenuItem } = remote;
@@ -17,7 +18,7 @@ export class CommandTable extends AbstractDnDTable {
       {
         title: "Comand",
         dataIndex: "target",
-        width: "calc(100% - 160px)",
+
         render: ( text, record ) => ( <CommandRowLabel record={ record } /> )
       },
       this.getActionColumn()
@@ -33,30 +34,36 @@ export class CommandTable extends AbstractDnDTable {
     });
   }
 
-  onRow = ( record, index ) => ({
-    index,
-    moveRow: this.moveRow,
-    onContextMenu: ( e ) => {
-      //console.log({ record, title: "rclick" });
-      e.preventDefault();
-      const menu = new Menu();
+  onContextMenu = ( e, record  ) => {
+    e.preventDefault();
+    const menu = new Menu();
 
-      menu.append( new MenuItem({
-        label: "Edit",
-        click: () => this.onEdit( record )
-      }) );
+    menu.append( new MenuItem({
+      label: "Edit",
+      click: () => this.onEditCommand( record )
+    }) );
 
-      menu.append( new MenuItem({
-        label: "Clone",
-        click: () => this.cloneRecord( record )
-      }) );
+    menu.append( new MenuItem({
+      label: "Clone",
+      click: () => this.cloneRecord( record )
+    }) );
 
-      menu.popup({
-        x: e.x,
-        y: e.y
-      });
-    }
-  });
+    menu.append( new MenuItem({
+      type: "separator"
+    }));
+
+    menu.append( new MenuItem({
+      label: "Delete",
+      click: async () => {
+        await confirmDeleteEntity( "command" ) && this.removeRecord( record.id );
+      }
+    }) );
+
+    menu.popup({
+      x: e.x,
+      y: e.y
+    });
+  }
 
   updateRecord = ( options ) => {
     const update = this.props.action[ `update${this.model}` ];
@@ -91,7 +98,7 @@ export class CommandTable extends AbstractDnDTable {
     }
   }
 
-  onEdit( record ) {
+  onEditCommand( record ) {
     const { updateApp } = this.props.action;
 
     updateApp({
