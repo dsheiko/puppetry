@@ -10,17 +10,14 @@ import { AppFooter } from "./AppLayout/AppFooter";
 import { Welcome } from "./AppLayout/Welcome";
 import { NewProjectModal  } from "./Modal/NewProjectModal";
 import { OpenProjectModal  } from "./Modal/OpenProjectModal";
-import { CloseAppModal  } from "./Modal/CloseAppModal";
 import { SaveSuiteAsModal  } from "./Modal/SaveSuiteAsModal";
 import { NewSuiteModal  } from "./Modal/NewSuiteModal";
 import { AlertMessageModal } from "./Modal/AlertMessageModal";
-import { ConfirmDeleteModal } from "./Modal/ConfirmDeleteModal";
 import { TestReportModal  } from "./Modal/TestReportModal";
 import { ExportProjectModal } from "./Modal/ExportProjectModal";
 import { OpenSuiteModal } from "./Modal/OpenSuiteModal";
 import { CommandModal } from "./AppLayout/Main/GroupTable/TestTable/CommandModal";
 import { InstallRuntimeTestModal } from "./Modal/InstallRuntimeTestModal";
-import { ConfirmSaveChanges } from "./Modal/ConfirmSaveChanges";
 import { TabGroup  } from "./TabGroup";
 import If from "component/Global/If";
 
@@ -73,15 +70,17 @@ export class AppLayout extends React.Component {
               </div>
 
               <MainMenu
-                action={action}
+                action={ action }
                 projectDirectory={ projectDirectory }
-                suiteFilename={store.suite.filename}
-                readyToRunTests={store.app.readyToRunTests}
-                project={store.project} />
+                suiteFilename={ store.suite.filename }
+                suiteModified={ store.suite.modified }
+                readyToRunTests={ store.app.readyToRunTests }
+                project={ store.project } />
 
               <If exp={ store.app.project.files.length }>
                 <ProjectNavigator
                   projectName={ store.project.name }
+                  suiteModified={ store.suite.modified }
                   files={ store.app.project.files }
                   active={ store.suite.filename }
                   action={action} />
@@ -90,7 +89,7 @@ export class AppLayout extends React.Component {
 
             </Sider>
             <Layout>
-              <Toolbar project={ store.project } action={ action } />
+              <Toolbar project={ store.project } suiteModified={ store.suite.modified } action={ action } />
 
               <div className="layout-content">
 
@@ -133,11 +132,6 @@ export class AppLayout extends React.Component {
           files={ store.app.project.files }
           filename={ store.suite.filename } />
 
-        <CloseAppModal
-          action={action}
-          suiteFilename={ store.suite.filename }
-          isVisible={store.app.closeAppModal} />
-
         <NewSuiteModal
           action={action}
           isVisible={store.app.newSuiteModal} />
@@ -146,10 +140,7 @@ export class AppLayout extends React.Component {
         <AlertMessageModal action={action}
           isVisible={ store.app.alert.visible }
           alert={ store.app.alert } />
-        <ConfirmDeleteModal action={action}
-          isVisible={ store.app.confirmDeleteModal }
-          selectedFile={ store.app.selectedFile } />
-
+        
         <TestReportModal
           action={action}
           currentSuite={ store.suite.filename }
@@ -175,11 +166,6 @@ export class AppLayout extends React.Component {
           action={ action }
           isVisible={ store.app.installRuntimeTestModal } />
 
-        <ConfirmSaveChanges
-          action={action}
-          suiteFilename={ store.suite.filename }
-          newFilename={ store.app.confirmSaveChangesFile }
-          isVisible={ store.app.confirmSaveChangesModal } />
 
       </ErrorBoundary>
     );

@@ -22,6 +22,10 @@ module.exports = {
       "version": "16.6" // React version, default to the latest React stable release
     }
   },
+
+  "globals": {
+    "smalltalk": true
+  },
   //  A wrapper for Babel's parser used for ESLint
   // https://github.com/babel/babel-eslint
   "parser": "babel-eslint",

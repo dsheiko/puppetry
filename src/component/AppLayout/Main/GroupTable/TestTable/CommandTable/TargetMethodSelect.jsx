@@ -34,7 +34,7 @@ export class TargetMethodSelect extends React.Component {
 
         {
           Object.keys( schema.element ).map( method => ( <Option key={ method }>
-          { displayMethod( method ) }</Option> ) )
+            { displayMethod( method ) }</Option> ) )
         }
       </Select>
     );

@@ -1,0 +1,106 @@
+{
+  "_from": "smalltalk",
+  "_id": "smalltalk@3.2.2",
+  "_inBundle": false,
+  "_integrity": "sha512-UwHCzzIg89XEwC6KkIAQcQbXt9rZNt/iUgmiQn8uaHx9CSXczMbYa70wy9+ZiTW+PkKmYvFG+CZNhxJaeNFpcg==",
+  "_location": "/smalltalk",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "smalltalk",
+    "name": "smalltalk",
+    "escapedName": "smalltalk",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/smalltalk/-/smalltalk-3.2.2.tgz",
+  "_shasum": "08d8dbdb8a229f615a2ea706fd1f73fa2424a447",
+  "_spec": "smalltalk",
+  "_where": "/home/sheiko/Sites/os/puppetry",
+  "author": {
+    "name": "coderaiser",
+    "email": "mnemonic.enemy@gmail.com",
+    "url": "http://coderaiser.github.io/"
+  },
+  "bugs": {
+    "url": "https://github.com/coderaiser/smalltalk/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "@cloudcmd/create-element": "^1.0.0",
+    "currify": "^3.0.0",
+    "fullstore": "^1.0.0"
+  },
+  "deprecated": false,
+  "description": "Promise-based Alert, Confirm and Prompt replacement",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "autoprefixer": "^9.1.0",
+    "babel-loader": "^8.0.0",
+    "clean-css-loader": "^1.0.1",
+    "coveralls": "^3.0.0",
+    "css-loader": "^1.0.0",
+    "css-modules-require-hook": "^4.2.3",
+    "eslint": "^5.0.0",
+    "nodemon": "^1.9.2",
+    "nyc": "^13.0.1",
+    "redrun": "^7.0.0",
+    "rimraf": "^2.5.3",
+    "sinon": "^7.1.0",
+    "style-loader": "^0.23.0",
+    "stylelint": "^9.1.1",
+    "stylelint-config-standard": "^18.0.0",
+    "tape": "^4.6.0",
+    "url-loader": "^1.0.1",
+    "webpack": "^4.1.0",
+    "webpack-cli": "^3.0.8",
+    "wraptile": "^2.0.0"
+  },
+  "homepage": "http://github.com/coderaiser/smalltalk",
+  "keywords": [
+    "modal",
+    "alert",
+    "confirm",
+    "prompt"
+  ],
+  "license": "MIT",
+  "main": "legacy/smalltalk.js",
+  "name": "smalltalk",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coderaiser/smalltalk.git"
+  },
+  "scripts": {
+    "build": "redrun clean init build:*",
+    "build:js": "redrun compile:* legacy:*",
+    "clean": "rimraf dist legacy native",
+    "compile:client": "webpack --progress --mode production",
+    "compile:server": "babel -d legacy lib",
+    "coverage": "nyc npm test",
+    "init": "mkdirp native",
+    "legacy:index": "echo \"module.exports = require('./smalltalk');\" > legacy/index.js",
+    "legacy:native": "echo \"module.exports = require('../legacy/smalltalk.native');\" > native/index.js",
+    "lint": "redrun lint:*",
+    "lint:css": "stylelint css/*.css",
+    "lint:js": "eslint lib test webpack.config.js",
+    "report": "nyc report --reporter=text-lcov | coveralls",
+    "test": "tape 'test/**/*.js'",
+    "test:update": "UPDATE_FIXTURE=1 redrun test",
+    "watch": "nodemon --watch lib --watch test --exec",
+    "watch:client": "redrun compile:client -- --watch",
+    "watch:coverage": "redrun watch -- redrun coverage",
+    "watch:lint": "npm run watch -- 'npm run lint'",
+    "watch:lint:js": "npm run watch -- \"run lint:js\"",
+    "watch:test": "npm run watch -- npm test",
+    "wisdom": "npm run build"
+  },
+  "version": "3.2.2"
+}

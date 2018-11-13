@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { remote } from "electron";
 import { Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
+import { confirmUnsavedChanges } from "service/smalltalk";
 import If from "component/Global/If";
 
 const win = remote.getCurrentWindow();
@@ -11,8 +12,11 @@ export class Toolbar extends React.Component {
 
   static propTypes = {
     action:  PropTypes.shape({
-      closeApp: PropTypes.func.isRequired
+      saveSuite: PropTypes.func.isRequired,
+      setSuite: PropTypes.func.isRequired
     }),
+
+    suiteModified: PropTypes.bool.isRequired,
 
     project:  PropTypes.shape({
       modified: PropTypes.bool.isRequired,
@@ -44,7 +48,13 @@ export class Toolbar extends React.Component {
     win.maximize();
   }
 
-  onClose = () => {
+  onClose = async () => {
+    if ( this.props.suiteModified ) {
+       await confirmUnsavedChanges({
+        saveSuite: this.props.action.saveSuite,
+        setSuite: this.props.action.setSuite
+      });
+    }
     this.props.action.closeApp();
   }
 

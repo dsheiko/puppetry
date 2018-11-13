@@ -57,6 +57,7 @@
     "babel-jest": "^23.6.0",
     "balloon-css": "^0.5.0",
     "chokidar": "^2.0.4",
+    "classnames": "^2.2.6",
     "cross-env": "^5.2.0",
     "custom-error-instance": "^2.1.1",
     "electron-context-menu": "^0.10.0",
