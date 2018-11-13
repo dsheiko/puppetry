@@ -17,7 +17,6 @@ export class GroupTable extends AbstractEditableTable {
       {
         title: "Group",
         dataIndex: "title",
-        width: "calc(100% - 160px)",
         render: ( text, record ) => (
           <EditableCell
             prefixIcon={ recordPrefIcon }

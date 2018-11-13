@@ -17,7 +17,7 @@ export class TestTable extends AbstractEditableTable {
       {
         title: "Test",
         dataIndex: "title",
-        width: "calc(100% - 160px)",
+        
         render: ( text, record ) => (
           <EditableCell
             prefixIcon={ recordPrefIcon }

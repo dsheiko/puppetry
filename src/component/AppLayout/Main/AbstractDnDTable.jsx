@@ -1,6 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { DragableRow } from "./DragableRow";
+import { confirmDeleteEntity } from "service/smalltalk";
+import { remote } from "electron";
+
+const { Menu, MenuItem } = remote;
 
 export default class AbstractDnDTable extends React.Component {
 
@@ -21,10 +25,41 @@ export default class AbstractDnDTable extends React.Component {
    }
  };
 
+  onContextMenu = ( e, record ) => {
+    e.preventDefault();
+    const menu = new Menu();
+
+    menu.append( new MenuItem({
+      label: "Edit",
+      click: () => this.onEdit( record )
+    }) );
+
+    menu.append( new MenuItem({
+      type: "separator"
+    }));
+
+    menu.append( new MenuItem({
+      label: "Delete",
+      click: async () => {
+        await confirmDeleteEntity( "command" ) && this.removeRecord( record.id );
+      }
+    }) );
+
+    menu.popup({
+      x: e.x,
+      y: e.y
+    });
+  }
+
   onRow = ( record, index ) => ({
     index,
-    moveRow: this.moveRow
+    moveRow: this.moveRow,
+    onContextMenu: ( e ) => this.onContextMenu( e, record )
   });
+
+  onEdit = ( record ) => {
+    this.toggleEdit( record.id, true )
+  }
 
   /**
    * Extending for pareants
