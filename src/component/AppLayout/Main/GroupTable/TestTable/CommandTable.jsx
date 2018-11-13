@@ -94,7 +94,7 @@ export class CommandTable extends AbstractDnDTable {
     // Only when we add a new command to the list, so we can edit it in the modal
     if ( prevProps.commands.length !== this.props.commands.length ) {
       const newlyAdded = this.props.commands.find( command => !command.target && !command.method );
-      newlyAdded && this.onEdit( newlyAdded );
+      newlyAdded && this.onEditCommand( newlyAdded );
     }
   }
 
@@ -120,7 +120,7 @@ export class CommandTable extends AbstractDnDTable {
       render: ( text, record ) => ( <span>
         <a className="link--action"
           tabIndex={-1} role="button"
-          onClick={ () => this.onEdit( record ) }>Edit</a>
+          onClick={ () => this.onEditCommand( record ) }>Edit</a>
         <Divider type="vertical" />
         <Popconfirm title="Sure to delete?" onConfirm={() => this.removeRecord( record.id )}>
           <a className="link--action" tabIndex={-2} role="button">Delete</a>
