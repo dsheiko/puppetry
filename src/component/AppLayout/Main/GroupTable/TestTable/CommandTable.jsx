@@ -43,6 +43,16 @@ export class CommandTable extends AbstractDnDTable {
       click: () => this.onEditCommand( record )
     }) );
 
+    menu.append( new MenuItem(
+      record.disabled ? {
+        label: "Enable",
+        click: () => this.updateRecord({ id: record.id, disabled: false })
+      } : {
+        label: "Disable",
+        click: () => this.updateRecord({ id: record.id, disabled: true })
+      }
+    ));
+
     menu.append( new MenuItem({
       label: "Clone",
       click: () => this.cloneRecord( record )
@@ -129,13 +139,18 @@ export class CommandTable extends AbstractDnDTable {
     };
   }
 
+  onRowClassName = ( record ) => {
+
+    return `model--command${ record.disabled ? " row-disabled" : "" }` ;
+  }
+
   render() {
     const commands = this.props.commands.filter( command => command.target && command.method );
     return ( <ErrorBoundary>
       <Table
         className="draggable-table"
         components={ this.components }
-        rowClassName="model--command"
+        rowClassName={ this.onRowClassName }
         onRow={ this.onRow }
         showHeader={ false }
         dataSource={ commands }

@@ -5,11 +5,10 @@ export const scroll = {
   template: ({ params }) => {
     const { x, y } = params;
     return justify( `
-      // Scrolls the document in the window by the given amount.
-      await bs.page.evaluate(( x, y ) => {
-        window.scrollBy( x, y );
-      }, ${ parseInt( x, 10 ) }, ${ parseInt( y, 10 ) });
-    ` );
+// Scrolls the document in the window by the given amount.
+await bs.page.evaluate(( x, y ) => {
+  window.scrollBy( x, y );
+}, ${ parseInt( x, 10 ) }, ${ parseInt( y, 10 ) });` );
   },
   description: `Scrolls the document in the window by the given amount`,
   params: [

@@ -147,7 +147,8 @@ export const reducer = handleActions(
                     id,
                     key: id,
                     target: "",
-                    selector: ""
+                    selector: "",
+                    disabled: false
                   };
             targets[ id ] = { ...defaultState, ...payload };
             return targets;
@@ -206,7 +207,8 @@ export const reducer = handleActions(
                     id,
                     key: id,
                     title: "",
-                    tests: {}
+                    tests: {},
+                    disabled: false
                   };
             groups[ id ] = { ...defaultState, ...payload };
             return groups;
@@ -268,7 +270,8 @@ export const reducer = handleActions(
                         id,
                         key: id,
                         title: "",
-                        commands: {}
+                        commands: {},
+                        disabled: false
                       };
                 tests[ id ] = { ...defaultState, ...payload };
                 return tests;
@@ -352,7 +355,8 @@ export const reducer = handleActions(
                             target: "",
                             method: "",
                             assert: "",
-                            params: {}
+                            params: {},
+                            disabled: false
                           };
 
                     commands[ id ] = {

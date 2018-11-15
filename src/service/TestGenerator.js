@@ -43,6 +43,7 @@ export default class TestGenerator {
     }
 
     const body = commands
+      .filter( record => record.disabled !== true )
       .map( this.parseCommand )
       .join( "\n" );
     return this.schema.jest.tplTest({

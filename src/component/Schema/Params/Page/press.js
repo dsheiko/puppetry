@@ -35,11 +35,10 @@ export const press = {
               .map( key => modifierPress( key, action ) ).join( "" );
           };
     return justify( `
-      // Emulate key press
-      ${ renderModifiers( "down" ) }
-      await bs.page.keyboard.press( "${ key }" );
-      ${ renderModifiers( "up" ) }
-    ` );
+// Emulate key press
+${ renderModifiers( "down" ) }
+await bs.page.keyboard.press( "${ key }" );
+${ renderModifiers( "up" ) }` );
   },
 
   description: `Emulate pressing on a key, optinally with modifiers such as ⇧, ⌥, alt, control, ⌘`,

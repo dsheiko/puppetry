@@ -94,7 +94,7 @@ export class ProjectNavigator extends React.Component {
       <ErrorBoundary>
         <div className="project-navigator">
           <h2>Project
-            <span className="project-navigator__add"><Icon type="file-add" /></span>
+            <span className="project-navigator__add"></span>
           </h2>
 
           <nav className="project-navigator__nav">
