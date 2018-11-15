@@ -310,8 +310,13 @@ actions.checkNewVersion = () => async ( dispatch, getState ) => {
 
 actions.closeApp = () => async ( dispatch, getState ) => {
   const store = getState();
-  await saveProject( store );
+  try {
+    await saveProject( store );
+  } catch ( e ) {
+    noop( e );
+  }
   closeApp();
+
 };
 
 // MISC
@@ -340,6 +345,10 @@ async function saveProject( store ) {
     puppetry: version,
     modified: false
   });
+}
+
+function noop() {
+
 }
 
 export default actions;

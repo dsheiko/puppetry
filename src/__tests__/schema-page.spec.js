@@ -113,10 +113,10 @@ describe( "Schema.page (templates generate valid JavaScript)", () => {
 
   });
 
-  describe( "clickMouse.template", () => {
+  describe( "click.template", () => {
 
     it( "with coordinates", () => {
-      const code = schema.page.clickMouse.template({ target: "page", params: {
+      const code = schema.page.click.template({ target: "page", params: {
         x: 1,
         y: 2
       }});
@@ -124,7 +124,7 @@ describe( "Schema.page (templates generate valid JavaScript)", () => {
     });
 
     it( "with all options", () => {
-      const code = schema.page.clickMouse.template({ target: "page", params: {
+      const code = schema.page.click.template({ target: "page", params: {
         x: 1,
         y: 2,
         button: "left",

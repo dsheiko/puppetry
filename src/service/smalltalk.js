@@ -1,5 +1,8 @@
 import { msgDataSaved } from "component/Global/Message";
 
+function noop() {
+}
+
 export async function confirmUnsavedChanges({ saveSuite, setSuite }) {
   try {
     await smalltalk
@@ -9,13 +12,14 @@ export async function confirmUnsavedChanges({ saveSuite, setSuite }) {
           cancel: "Discard changes"
         }
       });
-      saveSuite();
-      msgDataSaved();
-      return true;
-    } catch ( e ) {
-      setSuite({ modified: false });
-      return false;
-    }
+    saveSuite();
+    msgDataSaved();
+    return true;
+  } catch ( e ) {
+    noop( e );
+    setSuite({ modified: false });
+    return false;
+  }
 }
 
 export async function confirmDeleteFile( selectedFile = "" ) {
@@ -27,10 +31,11 @@ export async function confirmDeleteFile( selectedFile = "" ) {
           cancel: "No"
         }
       });
-      return true;
-    } catch ( e ) {
-      return false;
-    }
+    return true;
+  } catch ( e ) {
+    noop( e );
+    return false;
+  }
 }
 
 export async function confirmDeleteEntity( entity = "" ) {
@@ -42,9 +47,10 @@ export async function confirmDeleteEntity( entity = "" ) {
           cancel: "No"
         }
       });
-      return true;
-    } catch ( e ) {
-      return false;
-    }
+    return true;
+  } catch ( e ) {
+    noop( e );
+    return false;
+  }
 }
 

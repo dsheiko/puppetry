@@ -13,7 +13,8 @@ export class Toolbar extends React.Component {
   static propTypes = {
     action:  PropTypes.shape({
       saveSuite: PropTypes.func.isRequired,
-      setSuite: PropTypes.func.isRequired
+      setSuite: PropTypes.func.isRequired,
+      closeApp: PropTypes.func.isRequired
     }),
 
     suiteModified: PropTypes.bool.isRequired,
@@ -50,7 +51,7 @@ export class Toolbar extends React.Component {
 
   onClose = async () => {
     if ( this.props.suiteModified ) {
-       await confirmUnsavedChanges({
+      await confirmUnsavedChanges({
         saveSuite: this.props.action.saveSuite,
         setSuite: this.props.action.setSuite
       });

@@ -51,7 +51,7 @@ export class CommandTable extends AbstractDnDTable {
         label: "Disable",
         click: () => this.updateRecord({ id: record.id, disabled: true })
       }
-    ));
+    ) );
 
     menu.append( new MenuItem({
       label: "Clone",
@@ -60,7 +60,7 @@ export class CommandTable extends AbstractDnDTable {
 
     menu.append( new MenuItem({
       type: "separator"
-    }));
+    }) );
 
     menu.append( new MenuItem({
       label: "Delete",

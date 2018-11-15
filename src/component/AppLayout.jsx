@@ -140,7 +140,7 @@ export class AppLayout extends React.Component {
         <AlertMessageModal action={action}
           isVisible={ store.app.alert.visible }
           alert={ store.app.alert } />
-        
+
         <TestReportModal
           action={action}
           currentSuite={ store.suite.filename }

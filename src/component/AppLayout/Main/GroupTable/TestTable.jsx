@@ -17,7 +17,7 @@ export class TestTable extends AbstractEditableTable {
       {
         title: "Test",
         dataIndex: "title",
-        
+
         render: ( text, record ) => (
           <EditableCell
             prefixIcon={ recordPrefIcon }

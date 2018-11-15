@@ -235,6 +235,9 @@ export async function readProject( directory ) {
  * @param {Object} data
  */
 export async function writeProject( directory, data ) {
+  if ( !directory ) {
+    return;
+  }
   const filePath = join( directory, PROJECT_FILE_NAME );
   try {
     await writeFile( filePath, JSON.stringify( data, null, "  " ), "utf8" );
