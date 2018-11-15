@@ -14,6 +14,7 @@ import { App } from "./container/App.jsx";
 import { reducer } from "./reducer/reducers";
 
 process.on( "uncaughtException", ( err ) => {
+  console.error( "uncaughtException", err );
   log.warn( `Renderer process: Caught exception: ${err}` );
 });
 

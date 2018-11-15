@@ -641,6 +641,10 @@ color: #108ee9;
   margin: 0;
 }
 
+.row-disabled {
+  color: rgba(0,0,0, .3);
+}
+
 
 /* Preventing D&D on actions cell */
 .ant-table-tbody > tr > td.table-actions-cell {

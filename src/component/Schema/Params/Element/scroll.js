@@ -5,12 +5,11 @@ export const scroll = {
   template: ( command ) => {
     const { x, y } = command.params;
     return justify( `
-      // Set the number of pixels that an element's content is scrolled horizontally/vertically.
-      await bs.page.$eval( '${ command.targetSeletor }',  ( el, x, y ) => {
-        el.scrollTop = x;
-        el.scrollLeft = y;
-      }, ${ parseInt( x, 10 ) }, ${ parseInt( y, 10 ) } );
-    ` );
+// Set the number of pixels that an element's content is scrolled horizontally/vertically.
+await bs.page.$eval( '${ command.targetSeletor }',  ( el, x, y ) => {
+  el.scrollTop = x;
+  el.scrollLeft = y;
+}, ${ parseInt( x, 10 ) }, ${ parseInt( y, 10 ) } );` );
   },
   description: `Sets the number of pixels that an element's content is scrolled horizontally/vertically.`,
   params: [
