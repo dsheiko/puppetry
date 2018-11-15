@@ -8,30 +8,34 @@ module.exports = ( event, path ) => {
     // If repeating call, remove existing listeners from files
     watcher && watcher.close();
 
-    watcher = chokidar.watch( path, {
-        ignored: /[\/\\]\./,
-        depth: 1,
-        alwaysStat: false,
-        persistent: true
+    watcher = chokidar.watch( "*.json", {
+      depth: 1,
+      cwd: path,
+      alwaysStat: false,
+      persistent: true,
+      usePolling: true,
+      interval: 100,
+      ignored: ".puppertyrc"
     });
 
     watcher
-      .on( "add", ( path ) => {
+      .on( "add", () => {
         event.sender.send( E_FILE_NAVIGATOR_UPDATED, path,  "add" );
       })
-      .on( "addDir", ( path ) => {
+      .on( "addDir", () => {
         event.sender.send( E_FILE_NAVIGATOR_UPDATED, path,  "addDir" );
       })
-      .on( "change", ( path ) => {
+      .on( "change", () => {
         event.sender.send( E_FILE_NAVIGATOR_UPDATED, path,  "change" );
       })
-      .on( "unlink", ( path ) => {
+      .on( "unlink", () => {
         event.sender.send( E_FILE_NAVIGATOR_UPDATED, path,  "unlink" );
       })
-      .on( "unlinkDir", ( path ) => {
+      .on( "unlinkDir", () => {
         event.sender.send( E_FILE_NAVIGATOR_UPDATED, path,  "unlink" );
       })
       .on( "error", ( error ) => {
         log.error( `Main process: chokidar: ${ error }` );
       });
+
 };

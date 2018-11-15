@@ -165,6 +165,8 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
 
 actions.watchProjectFiles = ( directory = null ) => async ( dispatch, getState ) => {
   const projectDirectory = directory || getState().settings.projectDirectory;
+  // We have to subscribe every time, because it's bound to EVENt sent with ipcRenderer.send
+  ipcRenderer.removeAllListeners( "E_FILE_NAVIGATOR_UPDATED" );
   ipcRenderer.on( E_FILE_NAVIGATOR_UPDATED, debounce( () => {
     dispatch( actions.loadProjectFiles( projectDirectory ) );
   }, 300 ) );
