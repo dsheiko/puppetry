@@ -36,7 +36,7 @@ export default class AbstractDnDTable extends React.Component {
 
     menu.append( new MenuItem({
       type: "separator"
-    }));
+    }) );
 
     menu.append( new MenuItem({
       label: "Delete",
@@ -58,7 +58,7 @@ export default class AbstractDnDTable extends React.Component {
   });
 
   onEdit = ( record ) => {
-    this.toggleEdit( record.id, true )
+    this.toggleEdit( record.id, true );
   }
 
   /**

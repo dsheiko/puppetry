@@ -1,7 +1,7 @@
 import { INPUT_NUMBER, SELECT } from "../../constants";
 import { isEveryValueMissing } from "service/utils";
 
-export const clickMouse = {
+export const click = {
   template: ({ params }) => {
     const { x, y, button, clickCount, delay } = params,
           options = {

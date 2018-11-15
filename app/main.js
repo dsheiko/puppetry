@@ -1,5 +1,5 @@
 
-const { session, protocol, app, BrowserWindow } = require( "electron" ),
+const { session, protocol, app, BrowserWindow, nativeImage } = require( "electron" ),
       path = require( "path" ),
       log = require( "electron-log" ),
       url = require( "url" );
@@ -14,7 +14,8 @@ process.on( "uncaughtException", ( err ) => {
 
 function createWindow() {
 
-  const PROTOCOL = "file";
+  const PROTOCOL = "file",
+        icon = nativeImage.createFromPath( path.join( __dirname, "assets/512x512.png" ) );
 
   if ( process.env.ELECTRON_ENV === "dev" ) {
     const {
@@ -30,6 +31,8 @@ function createWindow() {
         .catch((err) => console.log('An error occurred: ', err));
   }
 
+
+
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1200,
@@ -38,9 +41,9 @@ function createWindow() {
     minHeight: 540,
     frame: false,
     devTools: process.env.ELECTRON_ENV === "dev",
-    icon: path.join( __dirname, "assets/favicon-96x96.png" )
+    title: "Puppetry",
+    icon
   });
-
 
   // and load the index.html of the app.
   mainWindow.loadURL( url.format({
@@ -74,7 +77,7 @@ app.on( "window-all-closed", () => {
   // On OS X it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if ( process.platform !== "darwin" ) {
-    app.quit();
+    app.exit( 0 );
   }
 });
 

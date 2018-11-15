@@ -4,7 +4,7 @@ import { setViewport } from "./Params/Page/setViewport";
 import { assertContent } from "./Params/Page/assertContent";
 import { assertTitle } from "./Params/Page/assertTitle";
 import { emulate } from "./Params/Page/emulate";
-import { clickMouse } from "./Params/Page/clickMouse";
+import { click as clickPage } from "./Params/Page/click";
 import { tap as tapPage } from "./Params/Page/tap";
 import { goto } from "./Params/Page/goto";
 import { reload } from "./Params/Page/reload";
@@ -42,7 +42,7 @@ const methodLables = {
   page: {
     emulate: "emulate device",
     setViewport: "set window size",
-    clickMouse: "click mouse",
+    click: "click mouse",
     tapTouchscreen: "tap",
     press: "press a key",
     screenshot: "make screenshot",
@@ -109,7 +109,7 @@ export const schema = {
     setViewport,
     goto,
     screenshot,
-    clickMouse,
+    click: clickPage,
     tap: tapPage,
     press,
     scroll: scrollPage,

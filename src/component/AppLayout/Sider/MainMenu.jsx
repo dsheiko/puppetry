@@ -26,7 +26,8 @@ export class MainMenu extends React.Component {
     action:  PropTypes.shape({
       updateApp: PropTypes.func.isRequired,
       saveSuite: PropTypes.func.isRequired,
-      setSuite: PropTypes.func.isRequired
+      setSuite: PropTypes.func.isRequired,
+      closeApp: PropTypes.func.isRequired
     }),
     readyToRunTests: PropTypes.bool.isRequired,
     projectDirectory: PropTypes.string.isRequired,
