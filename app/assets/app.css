@@ -451,7 +451,7 @@ root > .ant-spin-nested-loading > div > .ant-spin {
   overflow: initial;
 }
 
-/* Inlin rows look to narrow, give them a pad  */
+/* Inline rows look to narrow, give them a pad  */
 .command-form .ant-form-inline .ant-row {
  padding-top: var(--rhythm);
  padding-bottom: var(--rhythm);
@@ -582,19 +582,27 @@ margin: 16px 16px 16px 16px;
   margin-top: var(--rhythm);
   margin-bottom: var(--rhythm);
 }
+/* Prevent nested table doesn't peek out of host */
+.ant-table-wrapper {
+  width: 100%;
+}
+
+.ant-table-tbody > tr.ant-table-expanded-row td > .ant-table-wrapper {
+  margin: -16px -16px -17px 0;
+}
 
 .container--editable-cell {
   padding-right: 24px;
 }
 
 .container--editable-cell .anticon:first-child {
-margin-right: 5px;
+  margin-right: 5px;
 }
 
 .editable-row .ant-form-explain {
-position: absolute;
-font-size: 12px;
-margin-top: -4px;
+  position: absolute;
+  font-size: 12px;
+  margin-top: -4px;
 }
 
 .editable-cell {
@@ -603,26 +611,26 @@ position: relative;
 
 .editable-cell-icon,
 .editable-cell-icon-check {
-cursor: pointer;
+  cursor: pointer;
 }
 
 
 .editable-cell-icon {
-line-height: 14px;
-position: absolute;
-right: 0;
-top: 50%;
-margin-top: -7px;
-display: none;
+  line-height: 14px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  margin-top: -7px;
+  display: none;
 }
 
 td:hover .editable-cell-icon {
-display: inline-block;
+  display: inline-block;
 }
 
 .editable-cell-icon:hover,
 .editable-cell-icon-check:hover {
-color: #108ee9;
+  color: #108ee9;
 }
 
 .ant-table-tbody > tr.ant-table-expanded-row:hover > td {
@@ -652,6 +660,7 @@ color: #108ee9;
 }
 
 .table-actions {
+  width: 160px;
   padding: 16px 8px;
   display: inline-block;
   cursor: initial;

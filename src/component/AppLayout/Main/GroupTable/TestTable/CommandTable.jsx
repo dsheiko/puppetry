@@ -127,7 +127,8 @@ export class CommandTable extends AbstractDnDTable {
       title: "Action",
       dataIndex: "action",
       width: 160,
-      render: ( text, record ) => ( <span>
+      className: "table-actions-cell",
+      render: ( text, record ) => ( <span className="table-actions" role="status" >
         <a className="link--action"
           tabIndex={-1} role="button"
           onClick={ () => this.onEditCommand( record ) }>Edit</a>
