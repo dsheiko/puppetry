@@ -27,7 +27,8 @@ export class MainMenu extends React.Component {
       updateApp: PropTypes.func.isRequired,
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired,
-      closeApp: PropTypes.func.isRequired
+      closeApp: PropTypes.func.isRequired,
+      removeAppTab: PropTypes.func.isRequired
     }),
     readyToRunTests: PropTypes.bool.isRequired,
     projectDirectory: PropTypes.string.isRequired,
@@ -121,6 +122,7 @@ export class MainMenu extends React.Component {
         setSuite: this.props.action.setSuite
       });
     }
+    this.props.action.removeAppTab( "testReport" );
     this.props.action.updateApp({ testReportModal: true });
   }
 
