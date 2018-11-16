@@ -6,32 +6,25 @@
   "groups": {
     "_1": {
       "key": 0,
-      "value": false,
-      "tests": {}
+      "value": true,
+      "tests": {
+        "olhjnyhqwm9": {
+          "key": "olhjnyhqwm9",
+          "value": false
+        },
+        "olhjnyhr4zd": {
+          "key": "olhjnyhr4zd",
+          "value": true
+        }
+      }
     },
     "_2": {
       "key": 1,
       "value": true,
       "tests": {
-        "_2_1": {
-          "key": 0,
-          "value": false
-        },
-        "_2_2": {
-          "key": 1,
-          "value": false
-        },
         "olhjnyhrjcg": {
           "key": "olhjnyhrjcg",
           "value": false
-        },
-        "olhjnyhro5a": {
-          "key": "olhjnyhro5a",
-          "value": false
-        },
-        "cmqjnxdjk90": {
-          "key": "cmqjnxdjk90",
-          "value": true
         }
       }
     },

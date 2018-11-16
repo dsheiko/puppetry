@@ -60,6 +60,10 @@ export class GroupTable extends AbstractEditableTable {
       action={this.props.action} /> );
   }
 
+  onRowClassName = ( record ) => {
+    return `model--group${ record.disabled ? " row-disabled" : "" }` ;
+  }
+
   render() {
     const groups = Object.values( this.props.groups ),
           expanded = Object.values( this.props.expanded )
@@ -73,7 +77,7 @@ export class GroupTable extends AbstractEditableTable {
             className="draggable-table"
             components={this.components}
             onRow={this.onRow}
-            rowClassName="model--group"
+            rowClassName={ this.onRowClassName }
             showHeader={false}
             defaultExpandedRowKeys={ expanded }
             dataSource={ groups }

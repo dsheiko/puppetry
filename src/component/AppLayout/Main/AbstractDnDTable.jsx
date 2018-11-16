@@ -34,6 +34,16 @@ export default class AbstractDnDTable extends React.Component {
       click: () => this.onEdit( record )
     }) );
 
+    menu.append( new MenuItem(
+      record.disabled ? {
+        label: "Enable",
+        click: () => this.updateRecord({ id: record.id, disabled: false })
+      } : {
+        label: "Disable",
+        click: () => this.updateRecord({ id: record.id, disabled: true })
+      }
+    ) );
+
     menu.append( new MenuItem({
       label: "Clone",
       click: () => this.cloneRecord( record )
@@ -67,7 +77,6 @@ export default class AbstractDnDTable extends React.Component {
   }
 
   cloneRecord = ( command ) => {
-    console.log(`clone${this.model}`);
     const update = this.props.action[ `clone${this.model}` ];
     update( command );
     this.updateSuiteModified();

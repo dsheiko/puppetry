@@ -1,9 +1,9 @@
 {
   "title": "Drag and droop on test groups/test/commands",
   "timeout": 50000,
-  "savedAt": "2018-11-01T12:33:26.172Z",
-  "loadedAt": "2018-11-16T11:04:30.611Z",
-  "modified": false,
+  "savedAt": "2018-11-16T12:06:41.161Z",
+  "loadedAt": "2018-11-16T12:06:12.916Z",
+  "modified": true,
   "filename": "test-groups-dnd.json",
   "targets": {
     "_1": {
@@ -42,8 +42,24 @@
           "editing": false,
           "id": "olhjnyhqwm9",
           "key": "olhjnyhqwm9",
-          "title": "does somthing 1",
-          "commands": {},
+          "title": "does something 1",
+          "commands": {
+            "bwbjojyty8n": {
+              "editing": false,
+              "id": "bwbjojyty8n",
+              "key": "bwbjojyty8n",
+              "target": "page",
+              "method": "goto",
+              "params": {
+                "url": "http://www.google.com",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "groupId": "_1",
+              "testId": "olhjnyhqwm9"
+            }
+          },
           "groupId": "_1"
         },
         "olhjnyhr4zd": {
@@ -78,7 +94,8 @@
                 "omitBackground": false
               },
               "groupId": "_1",
-              "testId": "olhjnyhr4zd"
+              "testId": "olhjnyhr4zd",
+              "disabled": false
             },
             "ghjnyknp01": {
               "editing": false,
@@ -89,13 +106,16 @@
               "params": {
                 "value": "sssss"
               },
-              "groupId": "_2",
-              "testId": "olhjnyhro5a"
+              "groupId": "_1",
+              "testId": "olhjnyhr4zd",
+              "disabled": false
             }
           },
-          "groupId": "_1"
+          "groupId": "_1",
+          "disabled": false
         }
-      }
+      },
+      "disabled": false
     },
     "_2": {
       "editing": false,

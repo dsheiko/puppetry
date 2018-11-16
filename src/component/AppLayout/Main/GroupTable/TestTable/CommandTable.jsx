@@ -87,13 +87,6 @@ export class CommandTable extends AbstractDnDTable {
     this.updateSuiteModified();
   }
 
-//  cloneRecord = ( command ) => {
-//    const update = this.props.action[ `clone${this.model}` ];
-//    update( command );
-//    this.updateSuiteModified();
-//  }
-
-
   addRecord = () => {
     const update = this.props.action[ `add${this.model}` ];
     update( this.extendActionOptions({ target: "", method: "" }) );
@@ -141,7 +134,6 @@ export class CommandTable extends AbstractDnDTable {
   }
 
   onRowClassName = ( record ) => {
-
     return `model--command${ record.disabled ? " row-disabled" : "" }` ;
   }
 

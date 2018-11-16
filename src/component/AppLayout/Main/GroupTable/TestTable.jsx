@@ -68,6 +68,10 @@ export class TestTable extends AbstractEditableTable {
       .map( item => item.key );
   }
 
+  onRowClassName = ( record ) => {
+    return `model--test${ record.disabled ? " row-disabled" : "" }` ;
+  }
+
   render() {
     const { tests } = this.props,
           expanded = this.selectExpanded();
@@ -77,7 +81,7 @@ export class TestTable extends AbstractEditableTable {
           className="draggable-table"
           components={this.components}
           onRow={this.onRow}
-          rowClassName="model--test"
+          rowClassName={ this.onRowClassName }
           expandedRowRender={ this.renderExpandedTable }
           defaultExpandedRowKeys={ expanded }
           showHeader={ false }

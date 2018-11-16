@@ -37,13 +37,13 @@ export default class TestGenerator {
   }
 
   parseTest = ( test ) => {
-    const commands = Object.values( test.commands );
+    const commands = Object.values( test.commands )
+            .filter( record => record.disabled !== true );
     if ( !commands.length ) {
       return "";
     }
 
     const body = commands
-      .filter( record => record.disabled !== true )
       .map( this.parseCommand )
       .join( "\n" );
     return this.schema.jest.tplTest({
@@ -53,7 +53,8 @@ export default class TestGenerator {
   }
 
   parseGroup = ( group, gInx ) => {
-    const tests = Object.values( group.tests );
+    const tests = Object.values( group.tests )
+      .filter( test => test.disabled !== true );
     if ( !tests.length ) {
       return "";
       //throw new Error( `'groups.${gInx}.tests' shall not be empty` );
@@ -74,6 +75,7 @@ export default class TestGenerator {
         title: this.suite.title,
         targets: this.parseTargets( this.suite.targets ),
         body: Object.values( this.suite.groups )
+          .filter( group => group.disabled !== true )
           .map( this.parseGroup )
           .join( "\n" )
       });
