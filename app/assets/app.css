@@ -650,7 +650,21 @@ td:hover .editable-cell-icon {
 }
 
 .row-disabled {
-  color: rgba(0,0,0, .3);
+  color: rgba(0,0,0, .5);
+  background-color: #fff3e0;
+}
+.row-disabled .table-actions-cell {
+  position: relative;
+}
+
+.row-disabled .table-actions-cell::after {
+  content: " ";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #e65100;
 }
 
 

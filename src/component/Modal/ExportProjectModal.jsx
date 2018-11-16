@@ -70,6 +70,7 @@ export class ExportProjectModal extends React.Component {
     if ( !this.isValid() ) {
       return;
     }
+    this.setState({ locked: true });
     this.props.action.saveSettings({ exportDirectory: selectedDirectory });
     try {
       await exportProject( projectDirectory, selectedDirectory, checkedList );
@@ -81,6 +82,8 @@ export class ExportProjectModal extends React.Component {
         message: "Cannot export project",
         description: err.message
       });
+    } finally {
+      this.setState({ locked: false });
     }
   }
 
@@ -123,7 +126,7 @@ export class ExportProjectModal extends React.Component {
               key="submit"
               type="primary"
               autoFocus={ true }
-              disabled={ !checkedList.length || !this.findSelectedDirectory() }
+              disabled={ this.state.locked || !checkedList.length || !this.findSelectedDirectory() }
               onClick={this.onClickOk}>
               Export
             </Button> )

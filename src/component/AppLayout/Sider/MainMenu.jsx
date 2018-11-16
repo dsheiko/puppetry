@@ -114,7 +114,13 @@ export class MainMenu extends React.Component {
     this.props.action.updateApp({ newSuiteModal: true });
   }
 
-  onTestReport = () => {
+  onTestReport = async () => {
+    if ( this.props.suiteModified ) {
+      await confirmUnsavedChanges({
+        saveSuite: this.props.action.saveSuite,
+        setSuite: this.props.action.setSuite
+      });
+    }
     this.props.action.updateApp({ testReportModal: true });
   }
 
@@ -132,7 +138,13 @@ export class MainMenu extends React.Component {
     this.props.action.closeApp();
   }
 
-  onExportProject = () => {
+  onExportProject = async () => {
+    if ( this.props.suiteModified ) {
+      await confirmUnsavedChanges({
+        saveSuite: this.props.action.saveSuite,
+        setSuite: this.props.action.setSuite
+      });
+    }
     return this.props.action.updateApp({ exportProjectModal: true });
   }
 
