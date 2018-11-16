@@ -38,7 +38,7 @@ export default class TestGenerator {
 
   parseTest = ( test ) => {
     const commands = Object.values( test.commands )
-            .filter( record => record.disabled !== true );
+      .filter( record => record.disabled !== true );
     if ( !commands.length ) {
       return "";
     }

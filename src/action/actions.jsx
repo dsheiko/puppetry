@@ -329,11 +329,11 @@ actions.closeApp = () => async ( dispatch, getState ) => {
  * @param {Object} [options] - e.g. { testId: "", groupId: "" }
  * @returns {Function}
  */
-actions.cloneCommand = ( command, options = {} ) => async ( dispatch, getState ) => {
+actions.cloneCommand = ( command, options = {}) => async ( dispatch, getState ) => {
   const groups = getState().suite.groups,
         source = groups[ command.groupId ].tests[ command.testId ].commands[ command.id ];
 
-  dispatch( actions.addCommand( { ...source, ...options } ) );
+  dispatch( actions.addCommand({ ...source, ...options }) );
 };
 
 /**
@@ -342,7 +342,7 @@ actions.cloneCommand = ( command, options = {} ) => async ( dispatch, getState )
  * @param {Object} [options] - e.g. { groupId: "" }
  * @returns {Function}
  */
-actions.cloneTest = ( test, options = {} ) => async ( dispatch, getState ) => {
+actions.cloneTest = ( test, options = {}) => async ( dispatch, getState ) => {
   const groups = getState().suite.groups,
         prototype = groups[ test.groupId ].tests[ test.id ],
         id = uniqid(),
@@ -355,7 +355,7 @@ actions.cloneTest = ( test, options = {} ) => async ( dispatch, getState ) => {
 
   dispatch( actions.updateTest( clone ) );
   Object.values( prototype.commands ).forEach( command => {
-     dispatch( actions.cloneCommand( command, { testId: id, groupId: clone.groupId } ) );
+    dispatch( actions.cloneCommand( command, { testId: id, groupId: clone.groupId }) );
   });
 };
 
@@ -374,9 +374,9 @@ actions.cloneGroup = ( group ) => async ( dispatch, getState ) => {
           }
         });
 
-  dispatch( actions.updateGroup( { ...source, id, key: id } ) );
+  dispatch( actions.updateGroup({ ...source, id, key: id }) );
   Object.values( prototype.tests ).forEach( test => {
-     dispatch( actions.cloneTest( test, { groupId: id } ) );
+    dispatch( actions.cloneTest( test, { groupId: id }) );
   });
 };
 
