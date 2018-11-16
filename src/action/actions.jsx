@@ -1,4 +1,6 @@
 import log from "electron-log";
+import update from "immutability-helper";
+import uniqid from "uniqid";
 import { createActions } from "redux-actions";
 import { validate, validatePlain } from "../service/validate";
 import { writeSuite, readSuite, removeSuite,
@@ -321,11 +323,61 @@ actions.closeApp = () => async ( dispatch, getState ) => {
 
 // MISC
 
-actions.cloneCommand = ( command ) => async ( dispatch, getState ) => {
+/**
+ *
+ * @param {Object} command
+ * @param {Object} [options] - e.g. { testId: "", groupId: "" }
+ * @returns {Function}
+ */
+actions.cloneCommand = ( command, options = {} ) => async ( dispatch, getState ) => {
   const groups = getState().suite.groups,
         source = groups[ command.groupId ].tests[ command.testId ].commands[ command.id ];
 
-  dispatch( actions.addCommand( source ) );
+  dispatch( actions.addCommand( { ...source, ...options } ) );
+};
+
+/**
+ *
+ * @param {Object} test
+ * @param {Object} [options] - e.g. { groupId: "" }
+ * @returns {Function}
+ */
+actions.cloneTest = ( test, options = {} ) => async ( dispatch, getState ) => {
+  const groups = getState().suite.groups,
+        prototype = groups[ test.groupId ].tests[ test.id ],
+        id = uniqid(),
+        source = update( prototype, {
+          commands: {
+            $set: {}
+          }
+        }),
+        clone = { ...source, ...options, id, key: id };
+
+  dispatch( actions.updateTest( clone ) );
+  Object.values( prototype.commands ).forEach( command => {
+     dispatch( actions.cloneCommand( command, { testId: id, groupId: clone.groupId } ) );
+  });
+};
+
+/**
+ *
+ * @param {Object} group
+ * @returns {Function}
+ */
+actions.cloneGroup = ( group ) => async ( dispatch, getState ) => {
+  const suite = getState().suite,
+        prototype = suite.groups[ group.id ],
+        id = uniqid(),
+        source = update( prototype, {
+          tests: {
+            $set: {}
+          }
+        });
+
+  dispatch( actions.updateGroup( { ...source, id, key: id } ) );
+  Object.values( prototype.tests ).forEach( test => {
+     dispatch( actions.cloneTest( test, { groupId: id } ) );
+  });
 };
 
 actions.checkRuntimeTestDirReady = () => async ( dispatch ) => {

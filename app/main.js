@@ -1,5 +1,5 @@
 
-const { session, protocol, app, BrowserWindow, nativeImage } = require( "electron" ),
+const { session, protocol, app, BrowserWindow } = require( "electron" ),
       path = require( "path" ),
       log = require( "electron-log" ),
       url = require( "url" );
@@ -15,7 +15,7 @@ process.on( "uncaughtException", ( err ) => {
 function createWindow() {
 
   const PROTOCOL = "file",
-        icon = nativeImage.createFromPath( path.join( __dirname, "assets/512x512.png" ) );
+        icon = path.join( __dirname, "assets/512x512.png" );
 
   if ( process.env.ELECTRON_ENV === "dev" ) {
     const {

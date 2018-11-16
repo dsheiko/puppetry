@@ -35,6 +35,11 @@ export default class AbstractDnDTable extends React.Component {
     }) );
 
     menu.append( new MenuItem({
+      label: "Clone",
+      click: () => this.cloneRecord( record )
+    }) );
+
+    menu.append( new MenuItem({
       type: "separator"
     }) );
 
@@ -59,6 +64,13 @@ export default class AbstractDnDTable extends React.Component {
 
   onEdit = ( record ) => {
     this.toggleEdit( record.id, true );
+  }
+
+  cloneRecord = ( command ) => {
+    console.log(`clone${this.model}`);
+    const update = this.props.action[ `clone${this.model}` ];
+    update( command );
+    this.updateSuiteModified();
   }
 
   /**
