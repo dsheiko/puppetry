@@ -14,7 +14,7 @@
 
 Puppetry is an open-source desktop application that gives non-developers the ability to create, manage, and integrate automated tests for Web
 
-![Puppetry - v0.1.0](https://raw.githubusercontent.com/dsheiko/puppetry/master/docs/assets/img/puppetry-welcome.png)
+![Puppetry - v1.0.0](https://raw.githubusercontent.com/dsheiko/puppetry/master/docs/assets/img/puppetry-welcome.png)
 
 [:tv: Watch introduction video](https://youtu.be/3DK04Eps5IQ  "Introduction to Puppetry0")
 
