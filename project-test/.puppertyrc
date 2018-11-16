@@ -23,21 +23,35 @@
         },
         "olhjnyhrjcg": {
           "key": "olhjnyhrjcg",
-          "value": true
+          "value": false
         },
         "olhjnyhro5a": {
           "key": "olhjnyhro5a",
-          "value": true
+          "value": false
         },
         "cmqjnxdjk90": {
           "key": "cmqjnxdjk90",
           "value": true
         }
       }
+    },
+    "bd2jojxw3tv": {
+      "key": "bd2jojxw3tv",
+      "value": true,
+      "tests": {
+        "bd2jojxw3zt": {
+          "key": "bd2jojxw3zt",
+          "value": false
+        },
+        "bd2jojxw48p": {
+          "key": "bd2jojxw48p",
+          "value": false
+        }
+      }
     }
   },
   "modified": false,
   "projectDirectory": "/home/sheiko/Sites/os/puppetry/project-test",
-  "lastOpenSuite": "all-methods.json",
-  "puppetry": "0.1.0-RC.4"
+  "lastOpenSuite": "test-groups-dnd.json",
+  "puppetry": "0.1.0-RC.5"
 }

@@ -87,11 +87,11 @@ export class CommandTable extends AbstractDnDTable {
     this.updateSuiteModified();
   }
 
-  cloneRecord = ( command ) => {
-    const update = this.props.action[ `clone${this.model}` ];
-    update( command );
-    this.updateSuiteModified();
-  }
+//  cloneRecord = ( command ) => {
+//    const update = this.props.action[ `clone${this.model}` ];
+//    update( command );
+//    this.updateSuiteModified();
+//  }
 
 
   addRecord = () => {
