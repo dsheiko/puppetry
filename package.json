@@ -174,7 +174,14 @@
         {
           "target": "appImage",
           "arch": [
-            "x64"
+            "x64",
+            "ia32",
+            "armv7l",
+            "arm64",
+            "x64",
+            "ia32",
+            "armv7l",
+            "arm64"
           ]
         }
       ],
