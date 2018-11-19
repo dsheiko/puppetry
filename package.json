@@ -176,12 +176,8 @@
           "arch": [
             "x64",
             "ia32",
-            "armv7l",
             "arm64",
-            "x64",
-            "ia32",
-            "armv7l",
-            "arm64"
+            "armv7l"
           ]
         }
       ],
