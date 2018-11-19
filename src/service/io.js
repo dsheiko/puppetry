@@ -10,7 +10,7 @@ import { schema } from "component/Schema/schema";
 import { PUPPETRY_LOCK_FILE, JEST_PKG_DIRECTORY, RUNTIME_TEST_DIRECTORY, DEMO_PROJECT_DIRECTORY } from "constant";
 import findLogPath from "electron-log/lib/transports/file/find-log-path";
 
-const PROJECT_FILE_NAME = ".puppertyrc",
+const PROJECT_FILE_NAME = ".puppetryrc",
       readFile = util.promisify( fs.readFile ),
       writeFile = util.promisify( fs.writeFile ),
       unlink = util.promisify( fs.unlink ),
@@ -262,7 +262,7 @@ export function getDemoProjectDirectory() {
   const SRC_DIR = join( getAsarUnpackedAppDirectory(), DEMO_PROJECT_DIRECTORY ),
         DEST_DIR = join( getAppInstallPath(), DEMO_PROJECT_DIRECTORY );
 
-  if ( !fs.existsSync( join( DEST_DIR, ".puppertyrc" ) ) ) {
+  if ( !fs.existsSync( join( DEST_DIR, ".puppetryrc" ) ) ) {
     try {
       shell.mkdir( "-p" , DEST_DIR );
       shell.chmod( "-R", "+w", DEST_DIR );

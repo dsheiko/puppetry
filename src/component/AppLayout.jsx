@@ -62,7 +62,7 @@ export class AppLayout extends React.Component {
                 </div>
                 <div className="logo__item logo__expanded" >
                   <img src="./assets/puppetry.svg" alt="Puppetry" />
-                  <h1>Pupperty
+                  <h1>Puppetry
                     <span>ver.{ " " + remote.app.getVersion() }</span>
                   </h1>
 
