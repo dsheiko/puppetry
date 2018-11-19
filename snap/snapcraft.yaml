@@ -4,13 +4,23 @@
   version: '1.0.0'
   summary: Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline
   description: |
-    Puppetry is an open-source scriptless test automation tool built on top of Google’s Puppeteer. It can be used by QA engineers with no programming background. Puppetry can also export the tests into a Jest.js project that can be  included into CI/CD pipeline. 
+    Puppetry is an open-source scriptless test automation tool built on top of Google’s Puppeteer. It can be used by QA engineers with no programming background. Puppetry can also export the tests into a Jest.js project that can be  included into CI/CD pipeline.
 
   grade: stable
   confinement: strict
 
   parts:
-    my-part:
-      # See 'snapcraft plugins'
-      plugin: nil
-  
+    electron-app:
+      source: app/
+      plugin: nodejs
+
+    after:
+      - desktop-gtk2
+
+    build: node_modules/.bin/electron-builder
+    install: |
+      mkdir $SNAPCRAFT_PART_INSTALL/app
+      mv dist/linux-unpacked/* $SNAPCRAFT_PART_INSTALL/app
+    prime:
+      - -node_modules
+
