@@ -16,7 +16,7 @@ Puppetry is an open-source desktop application that gives non-developers the abi
 
 ![Puppetry - v1.0.0](https://raw.githubusercontent.com/dsheiko/puppetry/master/docs/assets/img/puppetry-welcome.png)
 
-[:tv: Watch introduction video](https://youtu.be/3DK04Eps5IQ  "Introduction to Puppetry0")
+[:tv: Watch introduction video](https://www.youtube.com/watch?v=4DLnak6qU68  "Introduction to Puppetry0")
 
 
 # Key Features
