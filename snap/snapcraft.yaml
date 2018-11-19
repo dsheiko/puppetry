@@ -1,6 +1,6 @@
 
   # After registering a name on build.snapcraft.io, commit an uncommented line:
-  # name: dsheiko
+  name: puppetry
   version: '1.0.0'
   summary: Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline
   description: |
