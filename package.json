@@ -168,6 +168,11 @@
       "description": "App to build end-to-end automation tests without a line of code",
       "category": "Development"
     },
+    "snap": {
+      "grade": "stable",
+      "confinement": "classic",
+      "summary": "Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline"
+    },
     "linux": {
       "category": "Development",
       "target": [
