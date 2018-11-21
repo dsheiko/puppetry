@@ -1,5 +1,4 @@
 
-  # After registering a name on build.snapcraft.io, commit an uncommented line:
   name: puppetry
   version: '1.0.0'
   summary: Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline
@@ -9,20 +8,31 @@
   icon: app/assets/256x256.png
 
   grade: stable
-  confinement: strict
+  confinement: classic
+
+  apps:
+    puppetry:
+      command: desktop-launch $SNAP/puppetry/puppetry
 
   parts:
-    electron-app:
-      source: app/
+    src:
+      source: .
       plugin: nodejs
+      node-engine: 11.0.0
+      build-packages:
+      - libgtk2.0-0
+      - libxtst-dev
+      - libxss-dev
+      - libgconf2-dev
+      - libnss3
 
       after:
         - desktop-gtk2
 
-      build: build_puppetry/node_modules/.bin/electron-builder
+      build: |
+        npm run build &&
+        node_modules/.bin/build --linux snap
       install: |
-        mkdir $SNAPCRAFT_PART_INSTALL/app
-        mv dist/linux-unpacked/* $SNAPCRAFT_PART_INSTALL/app
-      prime:
-        - -node_modules
+        mkdir $SNAPCRAFT_PART_INSTALL/puppetry
+        cp -v -r dist/linux-unpacked/* $SNAPCRAFT_PART_INSTALL/puppetry
 
