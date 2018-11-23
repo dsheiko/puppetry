@@ -12,7 +12,7 @@ import { E_MENU_NEW_PROJECT, E_MENU_NEW_SUITE,
 
 
 const SubMenu = Menu.SubMenu,
-      isMac = process.platform === "win32",
+      isMac = process.platform === "darwin",
       ostr = ( kbd ) => {
         if ( !isMac ) {
           return kbd;
@@ -53,7 +53,12 @@ export class MainMenu extends React.Component {
     "ctrl+shift+e": "onExportProject",
     "command+shift+e": "onExportProject",
 
-    "f6": "onTestReport"
+    "f6": "onF6"
+  }
+
+  onF6 = () => {
+    const { readyToRunTests } = this.props;
+    this[ readyToRunTests ? "onTestReport" : "onRuntimeTestInstall" ]();
   }
 
   onKeyDown = ( keyNm, e ) => {
@@ -202,7 +207,7 @@ export class MainMenu extends React.Component {
               <Menu.Item key="8">Exit</Menu.Item>
 
             </SubMenu>
-            <Menu.Item key="1"
+            <Menu.Item key="10"
               className={ readyToRunTests ? "" : "is-not-ready" }
               disabled={ !projectDirectory } onClick={ readyToRunTests
                 ? this.onTestReport : this.onRuntimeTestInstall }>
