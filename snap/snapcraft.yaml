@@ -20,11 +20,12 @@
       plugin: nodejs
       node-engine: 11.0.0
       build-packages:
-      - libgtk2.0-0
-      - libxtst-dev
-      - libxss-dev
-      - libgconf2-dev
-      - libnss3
+        - python
+        - libgtk2.0-0
+        - libxtst-dev
+        - libxss-dev
+        - libgconf2-dev
+        - libnss3
 
       after:
         - desktop-gtk2

@@ -315,6 +315,15 @@ body {
   margin-right: auto;
 }
 
+.btn--sm {
+    font-size: 13px;
+    border-radius: 2px;
+    height: 32px;
+    line-height: 32px;
+    min-width: 32px;
+    padding: 0 8px;
+}
+
 .btn--md {
   font-size: 14px;
   border-radius: 2px;
