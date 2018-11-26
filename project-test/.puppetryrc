@@ -24,7 +24,11 @@
       "tests": {
         "olhjnyhrjcg": {
           "key": "olhjnyhrjcg",
-          "value": false
+          "value": true
+        },
+        "_2_1": {
+          "key": 0,
+          "value": true
         }
       }
     },
@@ -44,7 +48,6 @@
     }
   },
   "modified": false,
-  "projectDirectory": "/home/sheiko/Sites/os/puppetry/project-test",
-  "lastOpenSuite": "test-groups-dnd.json",
-  "puppetry": "0.1.0-RC.5"
+  "lastOpenSuite": "all-methods.json",
+  "puppetry": "1.0.0"
 }

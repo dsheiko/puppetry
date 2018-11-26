@@ -15,8 +15,9 @@ export const assertAttribute = {
   assert: {
     node: AssertValue
   },
-  description: `Retrieves the current value of the given
-  [attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes) of {target} target`,
+  description: `Asserts that the
+  specified [attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes)
+  of {target} target  satisfies the given constraint`,
   params: [
     {
       inline: false,

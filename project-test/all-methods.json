@@ -2,8 +2,8 @@
   "title": "All available methods",
   "timeout": 50000,
   "savedAt": "2018-11-12T16:22:48.977Z",
-  "loadedAt": "2018-11-15T10:52:04.815Z",
-  "modified": true,
+  "loadedAt": "2018-11-26T11:36:17.876Z",
+  "modified": false,
   "filename": "all-methods.json",
   "targets": {
     "_1": {
@@ -107,19 +107,20 @@
               "groupId": "_2",
               "testId": "_2_1"
             },
-            "9yajnx9h29k": {
+            "3qqjoy6zm34": {
               "editing": false,
-              "id": "9yajnx9h29k",
-              "key": "9yajnx9h29k",
+              "id": "3qqjoy6zm34",
+              "key": "3qqjoy6zm34",
               "target": "page",
-              "method": "clickMouse",
+              "method": "click",
               "params": {
+                "x": 10,
+                "y": 10,
                 "button": "left",
                 "clickCount": 1,
-                "delay": 0,
-                "x": 10,
-                "y": 10
+                "delay": 0
               },
+              "disabled": false,
               "groupId": "_2",
               "testId": "_2_1"
             },
@@ -597,5 +598,5 @@
       }
     }
   },
-  "puppetry": "0.1.0-RC.4"
+  "puppetry": "1.0.0"
 }

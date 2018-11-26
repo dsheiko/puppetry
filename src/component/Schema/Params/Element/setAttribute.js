@@ -12,7 +12,7 @@ export const setAttribute = {
     el.setAttribute( prop, value );
   }, `
     + `"${ command.params.name }", ${ command.params.value } )` ),
-  description: `Set the value of an [attribute](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute)`
+  description: `Sets the value of an [attribute](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute)`
     + ` on {target} target`,
   params: [
     {

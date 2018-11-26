@@ -40,16 +40,17 @@ export const click = {
           control: INPUT_NUMBER,
           label: "clickCount",
           initialValue: 1,
-          tooltip: "",
+          tooltip: "Set 2 for double click",
           placeholder: "",
           rules: []
         },
         {
           name: "params.delay",
           control: INPUT_NUMBER,
-          label: "delay",
+          label: "delay (ms)",
           initialValue: 0,
-          tooltip: "",
+          tooltip: "Time to wait between mousedown (pointing device button is pressed) "
+            + "and mouseup (pointing device button is released) in milliseconds.",
           placeholder: "",
           rules: []
         }

@@ -24,7 +24,7 @@ export const click = {
         {
           name: "params.x",
           control: INPUT_NUMBER,
-          label: "x",
+          label: "x (px)",
           tooltip: "",
           placeholder: "",
           rules: [{
@@ -35,22 +35,14 @@ export const click = {
         {
           name: "params.y",
           control: INPUT_NUMBER,
-          label: "y",
+          label: "y (px)",
           tooltip: "",
           placeholder: "",
           rules: [{
             required: true,
             message: "Enter cursor Y coordinate in pixels"
           }]
-        }
-      ]
-    },
-
-    {
-      inline: true,
-      legend: "Options",
-      tooltip: "",
-      items: [
+        },
         {
           name: "params.button",
           control: SELECT,
@@ -71,20 +63,20 @@ export const click = {
           control: INPUT_NUMBER,
           label: "clickCount",
           initialValue: 1,
-          tooltip: "",
+          tooltip: "Set 2 for double click",
           placeholder: "",
           rules: []
         },
         {
           name: "params.delay",
           control: INPUT_NUMBER,
-          label: "delay",
+          label: "delay (ms)",
           initialValue: 0,
-          tooltip: "",
+          tooltip: "Time to wait between mousedown (pointing device button is pressed) "
+            + "and mouseup (pointing device button is released) in milliseconds.",
           placeholder: "",
           rules: []
         }
-
       ]
     }
   ]

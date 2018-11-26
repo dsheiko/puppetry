@@ -7,7 +7,7 @@ export const assertHtml = {
     command,
     `// Asserting that HTML content of the focused element satisfies the given constraint`
   ),
-  description: `Retrieves HTML content of the focused element`,
+  description: `Asserts that the HTML content of the focused element satisfies the given constraint`,
   assert: {
     node: AssertValue
   },

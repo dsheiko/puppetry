@@ -11,7 +11,7 @@ export const assertNodeCount = {
   assert: {
     node: AssertNumber
   },
-  description: `Retrieves an array of all the nodes within the DOM corresponding to a given selector`,
+  description: `Asserts that number of elements matching a specified selector satisfies the given constraint`,
   params: [
     {
       inline: true,

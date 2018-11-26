@@ -21,7 +21,6 @@ export class Toolbar extends React.Component {
 
     project:  PropTypes.shape({
       modified: PropTypes.bool.isRequired,
-      projectDirectory: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired
     })
   }
@@ -67,7 +66,7 @@ export class Toolbar extends React.Component {
       <ErrorBoundary>
         <div className="toolbar">
           <div>
-            <If exp={ project.projectDirectory }>
+            <If exp={ project.name }>
               <Icon type="project" />{ " " }
               Project: { project.name }
             </If>
