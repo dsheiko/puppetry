@@ -7,7 +7,7 @@ export const assertContent = {
     command,
     `// Asserting that page HTML satisfies the given constraint`
   ),
-  description: `Retrieves the full HTML contents of the page, including the doctype`,
+  description: `Asserts that the page content (HTML) satisfies the given constraint`,
   assert: {
     node: AssertValue
   },

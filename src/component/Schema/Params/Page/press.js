@@ -41,7 +41,7 @@ await bs.page.keyboard.press( "${ key }" );
 ${ renderModifiers( "up" ) }` );
   },
 
-  description: `Emulate pressing on a key, optinally with modifiers such as ⇧, ⌥, alt, control, ⌘`,
+  description: `Emulates pressing on a key, optinally with modifiers such as ⇧, ⌥, alt, control, ⌘`,
 
   params: [
     {

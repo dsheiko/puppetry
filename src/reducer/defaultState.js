@@ -56,7 +56,6 @@ const DEFAULT_STATE = {
     panels: [],
     groups: {},
     modified: false,
-    projectDirectory: "",
     lastOpenSuite: ""
   },
   // actual (Selected) suite

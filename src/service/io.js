@@ -10,7 +10,8 @@ import { schema } from "component/Schema/schema";
 import { PUPPETRY_LOCK_FILE, JEST_PKG_DIRECTORY, RUNTIME_TEST_DIRECTORY, DEMO_PROJECT_DIRECTORY } from "constant";
 import findLogPath from "electron-log/lib/transports/file/find-log-path";
 
-const PROJECT_FILE_NAME = ".puppertyrc",
+const PROJECT_FILE_NAME = ".puppetryrc",
+      PROJECT_FALLBAK_NAME = ".puppertyrc",
       readFile = util.promisify( fs.readFile ),
       writeFile = util.promisify( fs.writeFile ),
       unlink = util.promisify( fs.unlink ),
@@ -202,14 +203,10 @@ export function getBasename( filename ) {
   return filename ? filename.replace( /\.json$/, "" ) : "";
 }
 
+
 export  function isProject( directory ) {
-  const filePath = join( directory, PROJECT_FILE_NAME );
-  try {
-    return fs.lstatSync( filePath ).isFile();
-  } catch ( e ) {
-    log.warn( `Renderer process: io.isProject: ${ e }` );
-    return false;
-  }
+  return fs.existsSync( join( directory, PROJECT_FILE_NAME ) )
+    || fs.existsSync( join( directory, PROJECT_FALLBAK_NAME ) );
 }
 
 /**
@@ -218,7 +215,9 @@ export  function isProject( directory ) {
  * @returns {Array|Object}
  */
 export async function readProject( directory ) {
-  const filePath = join( directory, PROJECT_FILE_NAME );
+  const validPath = join( directory, PROJECT_FILE_NAME ),
+        fallbackPath = join( directory, PROJECT_FALLBAK_NAME ),
+        filePath = fs.existsSync( validPath ) ? validPath : fallbackPath;
   try {
     const text = await readFile( filePath, "utf8" );
     return parseJson( text, filePath );
@@ -262,7 +261,7 @@ export function getDemoProjectDirectory() {
   const SRC_DIR = join( getAsarUnpackedAppDirectory(), DEMO_PROJECT_DIRECTORY ),
         DEST_DIR = join( getAppInstallPath(), DEMO_PROJECT_DIRECTORY );
 
-  if ( !fs.existsSync( join( DEST_DIR, ".puppertyrc" ) ) ) {
+  if ( !fs.existsSync( join( DEST_DIR, ".puppetryrc" ) ) ) {
     try {
       shell.mkdir( "-p" , DEST_DIR );
       shell.chmod( "-R", "+w", DEST_DIR );

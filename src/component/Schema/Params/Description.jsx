@@ -1,7 +1,14 @@
 import React from "react";
+import PropTypes from "prop-types";
 import AbstractComponent from "component/AbstractComponent";
 
 export class Description extends AbstractComponent {
+
+  static propTypes = {
+    target: PropTypes.any,
+    schema: PropTypes.any
+  }
+
   render() {
     const { schema, target } = this.props;
     if ( !schema ) {

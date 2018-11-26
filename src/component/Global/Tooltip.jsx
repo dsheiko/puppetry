@@ -6,7 +6,7 @@ export default function Tooltip( props ) {
   return ( <span className="char-pad--left"
     data-balloon={ props.title }
     data-balloon-length="xlarge"
-    data-balloon-pos="up">
+    data-balloon-pos="right">
     { props.icon ? ( <Icon type={props.icon}  /> ) : props.children }
   </span> );
 }

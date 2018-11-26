@@ -10,7 +10,8 @@ export const assertScroll = {
     `// Asserting that scroll offset on ${ command.target } `
       + `satisfies the given constraint`
   ),
-  description: `Assert that scroll offset on the target satisfies the given constraint`,
+  description: `Asserts that [scroll](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTop)
+offset on the target satisfies the given constraint`,
   assert: {
     node: AssertNumber
   },

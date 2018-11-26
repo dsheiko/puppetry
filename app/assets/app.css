@@ -6,8 +6,20 @@
   --rhythm: 8px;
 }
 
+.modal--instant .ant-modal-footer {
+  position: sticky;
+  bottom: 0;
+  background-color: white;
+}
+
 .method-title i {
   opacity: 0.7;
+}
+
+.command-opt-description {
+  font-size: 13px;
+  line-height: 18px;
+  padding: 8px 0;
 }
 
 .command-description svg {
