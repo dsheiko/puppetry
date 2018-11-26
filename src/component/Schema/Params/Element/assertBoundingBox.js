@@ -7,8 +7,10 @@ export const assertBoundingBox = {
     command,
     `// Asserting that the bounding box of the element satisfies the given constraint`
   ),
-  description: `Retrieves the bounding box of the
-  element (relative to the main frame), or null if the element is not visible`,
+  description: `Asserts that the
+  [bounding box](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect)
+  (size and position) of {target} target satisfies the given constraint`,
+
   assert: {
     node: AssertBoundingBox
   },

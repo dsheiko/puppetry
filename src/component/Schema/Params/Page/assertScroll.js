@@ -9,7 +9,8 @@ export const assertScroll = {
     command,
     `// Asserting that window scroll offset satisfies the given constraint`
   ),
-  description: `Assert that window scroll offset satisfies the given constraint`,
+  description: `Asserts that [window scroll](https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll)
+ offset satisfies the given constraint`,
   assert: {
     node: AssertNumber
   },

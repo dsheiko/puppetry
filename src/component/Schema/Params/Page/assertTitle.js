@@ -7,7 +7,7 @@ export const assertTitle = {
     command,
     `// Asserting that page title satisfies the given constraint`
   ),
-  description: `Retrieves the page title`,
+  description: `Asserts that the page title satisfies the given constraint`,
   assert: {
     node: AssertValue
   },

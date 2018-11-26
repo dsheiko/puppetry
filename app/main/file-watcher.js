@@ -15,7 +15,7 @@ module.exports = ( event, path ) => {
       persistent: true,
       usePolling: true,
       interval: 100,
-      ignored: ".puppertyrc"
+      ignored: ".puppetryrc"
     });
 
     watcher

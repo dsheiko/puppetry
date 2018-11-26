@@ -5,7 +5,7 @@ export const setViewport = {
       // Defining browser viewport
       await bs.page.setViewport( ${ JSON.stringify( params ) } );
   `,
-  description: `Defines browser viewport`,
+  description: `Defines browser viewport, where the viewport is the user's visible area of a web page`,
   params: [
     {
       inline: true,
@@ -15,7 +15,7 @@ export const setViewport = {
         {
           name: "params.width",
           control: INPUT_NUMBER,
-          label: "width",
+          label: "width (px)",
           tooltip: "",
           placeholder: "",
           rules: [{
@@ -26,7 +26,7 @@ export const setViewport = {
         {
           name: "params.height",
           control: INPUT_NUMBER,
-          label: "height",
+          label: "height (px)",
           tooltip: "",
           placeholder: "",
           rules: [{
@@ -46,7 +46,8 @@ export const setViewport = {
           name: "params.deviceScaleFactor",
           control: INPUT_NUMBER,
           label: "device scale factor",
-          tooltip: "Device scale factor (can be thought of as dpr)",
+          tooltip: "Device scale factor aka Device Pixel Ratio. By default is 1, maximum value 8. E.g. "
+            + "for retina display the value is 2",
           placeholder: "",
           rules: []
         }

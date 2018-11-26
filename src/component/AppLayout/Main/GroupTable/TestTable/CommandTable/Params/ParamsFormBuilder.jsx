@@ -98,6 +98,7 @@ export class ParamsFormBuilder extends React.Component {
         label={ item.control !== CHECKBOX ? labelNode : "" }
         key={ `item${inx}` }>
         { getFieldDecorator( item.name, decoratorOptions )( this.renderControl( item ) ) }
+        { item.description ? <div className="command-opt-description">{ item.description }</div> : "" }
       </FormItem> );
   }
 

@@ -11,7 +11,7 @@ export const emulate = {
       // Emulating device "${ params.device }"
       await bs.page.emulate( devices[ "${ params.device }" ] );
   `,
-  description: `It emulates given device metrics and user agent`,
+  description: `Emulates given device metrics and user agent`,
   params: [
     {
       inline: false,

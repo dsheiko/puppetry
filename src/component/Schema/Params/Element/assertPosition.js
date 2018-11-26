@@ -10,8 +10,7 @@ export const assertPosition = {
     command,
     `// Asserting that the bounding box of the element satisfies the given constraint`
   ),
-  description: `Retrieves the bounding box of the
-  element (relative to the main frame), or null if the element is not visible`,
+  description: `Asserts {target} target's position relative to other given target`,
   assert: {
     node: AssertPosition
   },

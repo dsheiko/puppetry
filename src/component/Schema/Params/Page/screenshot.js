@@ -27,7 +27,7 @@ export const screenshot = {
       await bs.page.screenshot( png( "${ name }"${ optArg }) );
   `;
   },
-  description: `Takes a screenshot of the page or a specified region`,
+  description: `Takes a screenshot of the page or a specified region.`,
   params: [
     {
       inline: false,
@@ -82,7 +82,7 @@ export const screenshot = {
         {
           name: "params.x",
           control: INPUT_NUMBER,
-          label: "x",
+          label: "x (px)",
           tooltip: "",
           placeholder: "",
           rules: []
@@ -90,7 +90,7 @@ export const screenshot = {
         {
           name: "params.y",
           control: INPUT_NUMBER,
-          label: "y",
+          label: "y (px)",
           tooltip: "",
           placeholder: "",
           rules: []
@@ -98,7 +98,7 @@ export const screenshot = {
         {
           name: "params.width",
           control: INPUT_NUMBER,
-          label: "width",
+          label: "width (px)",
           tooltip: "",
           placeholder: "",
           rules: []
@@ -106,7 +106,7 @@ export const screenshot = {
         {
           name: "params.height",
           control: INPUT_NUMBER,
-          label: "height",
+          label: "height (px)",
           tooltip: "",
           placeholder: "",
           rules: []
