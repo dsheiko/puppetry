@@ -2,8 +2,8 @@
   "title": "All available methods",
   "timeout": 50000,
   "savedAt": "2018-11-12T16:22:48.977Z",
-  "loadedAt": "2018-11-26T11:36:17.876Z",
-  "modified": false,
+  "loadedAt": "2018-12-07T07:53:57.619Z",
+  "modified": true,
   "filename": "all-methods.json",
   "targets": {
     "_1": {
@@ -417,6 +417,64 @@
               },
               "groupId": "_2",
               "testId": "_2_1"
+            },
+            "lwwjpdqhytm": {
+              "editing": false,
+              "id": "lwwjpdqhytm",
+              "key": "lwwjpdqhytm",
+              "target": "SUBMIT_BTN",
+              "method": "setAttribute",
+              "params": {
+                "name": "disabled",
+                "value": "true"
+              },
+              "disabled": false,
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "lwwjpdqjdc2": {
+              "editing": false,
+              "id": "lwwjpdqjdc2",
+              "key": "lwwjpdqjdc2",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "btn disabled now",
+                "fullPage": true,
+                "omitBackground": true
+              },
+              "disabled": false,
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "lwwjpdqjr9x": {
+              "editing": false,
+              "id": "lwwjpdqjr9x",
+              "key": "lwwjpdqjr9x",
+              "target": "SUBMIT_BTN",
+              "method": "setAttribute",
+              "params": {
+                "name": "disabled",
+                "value": "false"
+              },
+              "disabled": false,
+              "groupId": "_2",
+              "testId": "_2_1"
+            },
+            "lwwjpdqkcpx": {
+              "editing": false,
+              "id": "lwwjpdqkcpx",
+              "key": "lwwjpdqkcpx",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "btn not disabled now",
+                "fullPage": true,
+                "omitBackground": true
+              },
+              "disabled": false,
+              "groupId": "_2",
+              "testId": "_2_1"
             }
           },
           "groupId": "_2"
@@ -598,5 +656,5 @@
       }
     }
   },
-  "puppetry": "1.0.0"
+  "puppetry": "1.0.1"
 }
