@@ -17,7 +17,14 @@ const PROJECT_FILE_NAME = ".puppetryrc",
       unlink = util.promisify( fs.unlink ),
       readdir = util.promisify( fs.readdir ),
       lstat = util.promisify( fs.lstat ),
-      cache = {};
+      cache = {},
+      EXPORT_ASSETS = [
+        "specs",
+        "screenshots",
+        "lib",
+        "package.json",
+        "README.md"
+      ];
 
 shell.config.fatal = true;
 
@@ -43,7 +50,7 @@ export function removeRuntimeTemp() {
 
 export function removeExport( exportDirectory ) {
   fs.readdirSync( exportDirectory )
-    .filter( name => name !== "node_modules" )
+    .filter( name => EXPORT_ASSETS.includes( name ) )
     .forEach( name => shell.rm( "-rf" , join( exportDirectory, name ) ) );
 }
 
