@@ -1,4 +1,5 @@
 import log from "electron-log";
+import { TestGeneratorError } from "error";
 
 export default class TestGenerator {
 
@@ -16,9 +17,9 @@ export default class TestGenerator {
   }
 
   parseCommand = ( command ) => {
+    const { target, method, params, assert } = command,
+          src = target === "page" ? "page" : "element";
     try {
-      const { target, method, params, assert } = command,
-            src = target === "page" ? "page" : "element";
       if ( ! ( method in this.schema[ src ]) ) {
         return [];
       }
@@ -32,7 +33,7 @@ export default class TestGenerator {
     } catch ( err ) {
       console.warn( "parseCommand error:", err, command );
       log.warn( `Renderer process: TestGenerator.parseCommand: ${ err }` );
-      throw err;
+      throw new TestGeneratorError( `${ err.message } in ${ target }.${ method }` );
     }
   }
 
@@ -82,7 +83,7 @@ export default class TestGenerator {
     } catch ( err ) {
       console.warn( "generate error:", err );
       log.warn( `Renderer process: TestGenerator.generate: ${ err }` );
-      throw err;
+      throw new TestGeneratorError( err.message );
     }
   }
 }
