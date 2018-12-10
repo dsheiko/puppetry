@@ -6,3 +6,5 @@ export const RuntimeError = CustomError( "RuntimeError", CaughtException, { mess
 export const ValidationError = CustomError( "ValidationError", CaughtException, { message: "Validation error" });
 export const InvalidArgumentError = CustomError( "InvalidArgumentError", CaughtException, {
   message: "Invalid argument error" });
+export const TestGeneratorError = CustomError( "TestGeneratorError",
+  CaughtException, { message: "Test generatorerror" });

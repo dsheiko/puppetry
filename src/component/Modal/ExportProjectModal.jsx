@@ -6,6 +6,7 @@ import { exportProject } from "service/io";
 import BrowseDirectory from "component/Global/BrowseDirectory";
 import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS } from "constant";
 import If from "component/Global/If";
+import { TestGeneratorError } from "error";
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -77,9 +78,10 @@ export class ExportProjectModal extends React.Component {
       message.info( `Project exported in ${ selectedDirectory }` );
       this.props.action.updateApp({ exportProjectModal: false });
     } catch ( err ) {
+      const message = err instanceof TestGeneratorError ? "Test parser error" : "Cannot export project";
       this.props.action.setError({
         visible: true,
-        message: "Cannot export project",
+        message,
         description: err.message
       });
     } finally {

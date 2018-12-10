@@ -18,7 +18,7 @@ export const screenshot = {
           options = isClipEmpty ? baseOptions : { ...baseOptions, clip };
 
     if ( !isClipEmpty && isSomeValueMissing( clip ) ) {
-      throw new Error( "You have to provide all clip parameters" );
+      throw new Error( "You have to provide either all clip parameters or none" );
     }
 
     const optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;

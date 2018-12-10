@@ -1,7 +1,7 @@
 import fs from "fs";
 import shell from "shelljs";
 import { join, parse, dirname } from "path";
-import { IoError, InvalidArgumentError } from "error";
+import { IoError, InvalidArgumentError, CaughtException } from "error";
 import util from "util";
 import { remote } from "electron";
 import log from "electron-log";
@@ -97,6 +97,9 @@ export async function exportProject( projectDirectory, outputDirectory, suiteFil
     return specFiles;
   } catch ( e ) {
     log.warn( `Renderer process: io.exportProject(${ testDir }): ${ e }` );
+    if (  e instanceof CaughtException ) {
+      throw e;
+    }
     throw new IoError( `Cannot export into ${ outputDirectory }.
           Please make sure that you have write permission for it` );
   }
