@@ -9,6 +9,7 @@ import { exportProject, getRuntimeTestPath } from "service/io";
 import { millisecondsToStr } from "service/utils";
 import { Icon, Spin, Button } from "antd";
 import { join } from "path";
+import { TestGeneratorError } from "error";
 
 let counter = 0;
 
@@ -50,9 +51,10 @@ export class TestReport extends AbstractComponent {
         ok: true
       });
     } catch ( err ) {
+      const message = err instanceof TestGeneratorError ? "Test parser error" : "Cannot run tests";
       this.props.action.setError({
         visible: true,
-        message: "Cannot export project",
+        message,
         description: err.message
       });
     }

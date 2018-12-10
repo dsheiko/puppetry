@@ -1,9 +1,9 @@
 {
   "title": "All available methods",
   "timeout": 50000,
-  "savedAt": "2018-11-12T16:22:48.977Z",
-  "loadedAt": "2018-12-07T07:53:57.619Z",
-  "modified": true,
+  "savedAt": "2018-12-10T09:03:32.848Z",
+  "loadedAt": "2018-12-10T09:30:06.670Z",
+  "modified": false,
   "filename": "all-methods.json",
   "targets": {
     "_1": {
@@ -132,8 +132,8 @@
               "method": "screenshot",
               "params": {
                 "name": "Form initially in valid state",
-                "fullPage": false,
-                "omitBackground": false
+                "fullPage": true,
+                "omitBackground": true
               },
               "groupId": "_2",
               "testId": "_2_1"
@@ -483,7 +483,7 @@
           "editing": false,
           "id": "cmqjnxdjk90",
           "key": "cmqjnxdjk90",
-          "title": "foo",
+          "title": "foo \"22\"",
           "commands": {
             "fosjo5t61po": {
               "editing": false,
@@ -656,5 +656,5 @@
       }
     }
   },
-  "puppetry": "1.0.1"
+  "puppetry": "1.0.2"
 }
