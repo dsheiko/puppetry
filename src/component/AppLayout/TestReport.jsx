@@ -42,7 +42,11 @@ export class TestReport extends AbstractComponent {
     try {
       this.runtimeTemp = getRuntimeTestPath();
       this.setState({ loading: true });
-      const specList = await exportProject( this.props.projectDirectory, this.runtimeTemp, this.props.checkedList ),
+      const specList = await exportProject(
+              this.props.projectDirectory,
+              this.runtimeTemp,
+              this.props.checkedList,
+              this.props.headless ),
             report = ipcRenderer.sendSync( E_RUN_TESTS, this.runtimeTemp, specList );
 
       this.setState({
