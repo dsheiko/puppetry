@@ -1,8 +1,8 @@
 {
   "title": "All available methods",
   "timeout": 50000,
-  "savedAt": "2018-12-11T09:00:39.724Z",
-  "loadedAt": "2018-12-11T09:05:46.374Z",
+  "savedAt": "2018-12-11T09:45:43.656Z",
+  "loadedAt": "2018-12-11T09:30:50.813Z",
   "modified": false,
   "filename": "all-methods.json",
   "targets": {
@@ -656,5 +656,5 @@
       }
     }
   },
-  "puppetry": "1.0.3"
+  "puppetry": "1.0.4"
 }

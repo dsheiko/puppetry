@@ -90,7 +90,7 @@ export async function exportProject( projectDirectory, outputDirectory, suiteFil
     if ( !headless ) {
       const browserSession = join( outputDirectory, "lib/BrowserSession.js" ),
             text = await readFile( browserSession, "utf8" );
-      await writeFile( browserSession, text.replace( "process.env.DEBUG", "true" ), "utf8" );
+      await writeFile( browserSession, text.replace( "process.env.RUN_IN_BROWSER", "true" ), "utf8" );
     }
 
     for ( const filename of suiteFiles ) {
