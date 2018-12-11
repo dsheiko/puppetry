@@ -10,7 +10,7 @@
 [![Build Status](https://travis-ci.org/dsheiko/puppetry.png)](https://travis-ci.org/dsheiko/puppetry)
 [![Join the chat at https://gitter.im/dsheiko/puppetry](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dsheiko/puppetry?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Total downloads](https://img.shields.io/github/downloads/dsheiko/puppetry/total.svg)](https://github.com/dsheiko/puppetry/releases)
-[![Latest download](https://img.shields.io/github/downloads/dsheiko/puppetry/v1.0.3/total.svg)](https://github.com/dsheiko/puppetry/releases/latest)
+[![Latest download](https://img.shields.io/github/downloads/dsheiko/puppetry/v1.0.4/total.svg)](https://github.com/dsheiko/puppetry/releases/latest)
 
 <h3 align="center">CODELESS END-TO-END AUTOMATED TESTING</h3>
 
