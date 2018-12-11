@@ -18,7 +18,7 @@ class BrowserSession {
   async setup() {
     this.browser = await puppeteer.launch(
        // when called like DEBUG=true jest open in a browser
-       process.env.DEBUG
+       process.env.RUN_IN_BROWSER
         ? {
             headless: false,
             slowMo: 40,
