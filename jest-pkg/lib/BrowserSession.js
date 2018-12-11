@@ -24,7 +24,10 @@ class BrowserSession {
             slowMo: 40,
             devtools: false
           }
-        : {}
+        : {
+          headless: true,
+          devtools: false
+        }
     );
     this.page = await this.browser.newPage();
   }

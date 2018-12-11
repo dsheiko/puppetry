@@ -74,7 +74,7 @@ export class ExportProjectModal extends React.Component {
     this.setState({ locked: true });
     this.props.action.saveSettings({ exportDirectory: selectedDirectory });
     try {
-      await exportProject( projectDirectory, selectedDirectory, checkedList );
+      await exportProject( projectDirectory, selectedDirectory, checkedList, true );
       message.info( `Project exported in ${ selectedDirectory }` );
       this.props.action.updateApp({ exportProjectModal: false });
     } catch ( err ) {

@@ -72,9 +72,10 @@ export async function exportSuite( projectDirectory, filename ) {
  * @param {String} projectDirectory
  * @param {String} outputDirectory
  * @param {String[]} suiteFiles ["foo.json",..]
+ * @param {Boolean} headless
  * @returns {String[]} - ["foo.spec.js",..]
  */
-export async function exportProject( projectDirectory, outputDirectory, suiteFiles ) {
+export async function exportProject( projectDirectory, outputDirectory, suiteFiles, headless ) {
   const testDir = join( outputDirectory, "specs" ),
         specFiles = [],
         JEST_PKG = getJestPkgDirectory();
@@ -85,6 +86,12 @@ export async function exportProject( projectDirectory, outputDirectory, suiteFil
     shell.mkdir( "-p" , join( outputDirectory, "screenshots" ) );
     shell.chmod( "-R", "+w", outputDirectory );
     shell.cp( "-RLf" , JEST_PKG + "/*", outputDirectory  );
+
+    if ( !headless ) {
+      const browserSession = join( outputDirectory, "lib/BrowserSession.js" ),
+            text = await readFile( browserSession, "utf8" );
+      await writeFile( browserSession, text.replace( "process.env.DEBUG", "true" ), "utf8" );
+    }
 
     for ( const filename of suiteFiles ) {
       const specContent = await exportSuite( projectDirectory, filename ),

@@ -20,6 +20,7 @@ const DEFAULT_STATE = {
     selectedFile: "",
     confirmSaveChangesFile: "",
 
+
     newProjectModal: false,
     openProjectModal: false,
     saveSuiteAsModal: false,
@@ -43,7 +44,9 @@ const DEFAULT_STATE = {
       },
       active: "suite"
     },
+
     checkedList: [],
+    headless: true,
 
     // Dynamic info coming not from project file, but from file watcher
     project: {
