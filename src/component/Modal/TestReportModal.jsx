@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Alert, Checkbox, Modal, Button } from "antd";
+import { Alert, Checkbox, Modal, Button, Switch } from "antd";
+import Tooltip from "component/Global/Tooltip";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
 
@@ -23,7 +24,8 @@ export class TestReportModal extends React.Component {
     checkedList: [],
     indeterminate: true,
     checkAll: false,
-    modified: false
+    modified: false,
+    headless: true
   }
 
   onChange = ( checkedList ) => {
@@ -46,6 +48,12 @@ export class TestReportModal extends React.Component {
     });
   }
 
+  onSwitchChange = ( checked ) => {
+    this.setState({
+      headless: !checked
+    });
+  }
+
   onClickCancel = ( e ) => {
     e.preventDefault();
     this.props.action.updateApp({ testReportModal: false });
@@ -57,7 +65,7 @@ export class TestReportModal extends React.Component {
           current = files.find( file => currentSuite === file ),
           checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
-    this.props.action.updateApp({ checkedList, testReportModal: false });
+    this.props.action.updateApp({ checkedList, testReportModal: false, headless: this.state.headless });
     this.props.action.removeAppTab( "testReport" );
     this.props.action.addAppTab( "testReport" );
   }
@@ -91,6 +99,14 @@ export class TestReportModal extends React.Component {
         >
 
           <If exp={ files.length }>
+            <div className="bottom-line">
+              <Switch checkedChildren="On" unCheckedChildren="Off" onChange={ this.onSwitchChange } />
+              { " " } run in browser <Tooltip
+                title={ "By default the tests are running in headless mode (faster). "
+                  + "But you can switch for browser mode and see what is really hapenning on the page" }
+                icon="question-circle"
+              />
+            </div>
             <p>Please select suites to run:</p>
             <div className="bottom-line">
               <Checkbox
