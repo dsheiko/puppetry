@@ -140,7 +140,7 @@ export class TestReport extends AbstractComponent {
       </If>
 
       <If exp={ ok && !loading }>
-        <div>
+        <div id="cTestReport">
 
           <p>
             <Button

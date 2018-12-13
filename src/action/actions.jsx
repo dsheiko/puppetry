@@ -132,7 +132,9 @@ actions.saveSettings = ( payload ) => ( dispatch, getState ) => {
 };
 
 actions.loadSettings = () => ( dispatch, getState ) => {
-  const saved = JSON.parse( localStorage.getItem( STORAGE_KEY_SETTINGS ) || "{}" ),
+  const saved = process.env.PUPPETRY_CLEAN_START
+          ? {}
+          : JSON.parse( localStorage.getItem( STORAGE_KEY_SETTINGS ) || "{}" ),
         settings = { ...getState().settings, ...saved };
   dispatch( actions.setSettings( settings ) );
   return settings;

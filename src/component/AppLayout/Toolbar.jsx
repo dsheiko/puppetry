@@ -64,11 +64,11 @@ export class Toolbar extends React.Component {
 
     return (
       <ErrorBoundary>
-        <div className="toolbar">
+        <div id="cToolbar" className="toolbar">
           <div>
             <If exp={ project.name }>
               <Icon type="project" />{ " " }
-              Project: { project.name }
+              Project: { " " }<span id="cToolbarProjectName">{ project.name }</span>
             </If>
           </div>
           <div>
