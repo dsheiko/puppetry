@@ -55,6 +55,7 @@ export class TargetTable extends AbstractEditableTable {
       <div className="box-margin-vertical">
         <ErrorBoundary>
           <Table
+            id="cTargetTable"
             className="draggable-table"
             components={this.components}
             onRow={this.onRow}

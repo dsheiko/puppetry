@@ -10,6 +10,7 @@ app/build
 dist
 tmp
 runtime-temp
+src/__e2e__/screenshots
 
 # Runtime data
 pids

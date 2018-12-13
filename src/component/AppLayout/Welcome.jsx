@@ -27,13 +27,15 @@ export class Welcome extends AbstractComponent {
 
   render() {
     return (
-      <div className="welcome">
+      <div className="welcome" id="cWelcome">
         <h1>Welcome!</h1>
         <p>You are using Puppetry, web testing solution for non-developers.</p>
 
         <p>What you can do now is to open a
-          { " " } <Button onClick={ this.onOpenDemoProject }>demo project</Button> or
-          { " " } <Button onClick={ this.onCreateProject }>create a new one</Button>.</p>
+          { " " } <Button id="cWelcomeDemoProjectBtn"
+            onClick={ this.onOpenDemoProject }>demo project</Button> or
+          { " " } <Button id="cWelcomeNewProjectBtn"
+            onClick={ this.onCreateProject }>create a new one</Button>.</p>
         <br />
         <p>
         E2E testing for the Web in a nutshell is about locating a target, applying a browser method on it,
