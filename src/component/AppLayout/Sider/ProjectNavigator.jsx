@@ -92,7 +92,7 @@ export class ProjectNavigator extends React.Component {
     const { projectName, files, active } = this.props;
     return (
       <ErrorBoundary>
-        <div className="project-navigator">
+        <div id="cProjectNavigator" className="project-navigator">
           <h2>Project
             <span className="project-navigator__add"></span>
           </h2>

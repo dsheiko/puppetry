@@ -74,6 +74,7 @@ export class GroupTable extends AbstractEditableTable {
       <div className="box-margin-vertical group-table">
         <ErrorBoundary>
           <Table
+            id="cGroupTable"
             className="draggable-table"
             components={this.components}
             onRow={this.onRow}

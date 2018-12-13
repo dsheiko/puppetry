@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { remote } from "electron";
+import classNames  from "classnames";
 import {  Spin, Layout } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { Toolbar } from "./AppLayout/Toolbar";
@@ -48,7 +49,10 @@ export class AppLayout extends React.Component {
     return (
       <ErrorBoundary>
         <Spin spinning={store.app.loading} size="large">
-          <Layout className="layout">
+          <Layout className={classNames({
+            layout: true,
+            "is-loading": store.app.loading
+          })} id="cLayout">
 
             <Sider
               collapsible

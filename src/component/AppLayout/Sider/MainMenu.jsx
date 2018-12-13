@@ -185,7 +185,7 @@ export class MainMenu extends React.Component {
           keyName={ hotkeys }
           onKeyDown={ this.onKeyDown }
         >
-          <Menu theme="dark"  mode="vertical" selectable={ false }>
+          <Menu id="cMainMenu" theme="dark"  mode="vertical" selectable={ false }>
 
             <SubMenu
               key="sub1"

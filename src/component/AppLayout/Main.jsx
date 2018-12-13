@@ -33,7 +33,7 @@ export class Main extends React.Component {
 
     return (
       <ErrorBoundary>
-        <div>
+        <div id="cMain">
           <SuiteForm  action={action} title={ store.suite.title } />
 
           <Tabs
