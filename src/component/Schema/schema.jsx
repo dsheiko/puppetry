@@ -72,7 +72,8 @@ const methodLables = {
 
 export function displayMethod( target, method ) {
   return method in methodLables[ target ]
-    ? ( <span className="method-title">{ methodLables[ target ][ method ] + " " } <i>({ method })</i></span> )
+    ? ( <span className="method-title" data-keyword={ method }>{
+      methodLables[ target ][ method ] + " " } <i>({ method })</i></span> )
     : method;
 }
 
