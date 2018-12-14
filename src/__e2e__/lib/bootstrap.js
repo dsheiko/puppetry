@@ -47,19 +47,22 @@ class Ctx {
     await this.app.client.pause( 300 );
   }
 
-  async setBrowseDirectory( dirKey ) {
-    await this.app.client.execute(( dir ) => {
-      const el = document.getElementById( "cBrowseDirectoryInput" );
-      el.removeAttribute( "disabled" );
-      el.setAttribute( "value", dir );
-    }, this.getTmpDir( dirKey ) );
+  async setAttribute( selector, attr, value ) {
+    await this.app.client.execute( ( selector, attr, value ) => {
+      const el = document.querySelector( selector );
+      if ( typeof value === "undefined" ) {
+        el.removeAttribute( attr );
+        return;
+      }
+      el.setAttribute( attr, value );
+    }, selector, attr, value );
   }
 
   async boundaryError() {
     return await this.app.client.isExisting( ".critical-error" );
   }
 
-  setupTmpDir( key ) {
+  createTmpDir( key ) {
     this.tmpDir[ key ] = tmp.dirSync().name;
   }
 

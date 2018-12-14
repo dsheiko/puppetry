@@ -29,7 +29,7 @@ export class Welcome extends AbstractComponent {
     return (
       <div className="welcome" id="cWelcome">
         <h1>Welcome!</h1>
-        <p>You are using Puppetry, web testing solution for non-developers.</p>
+        <p>You are using Puppetry, scriptless E2E test automation tool.</p>
 
         <p>What you can do now is to open a
           { " " } <Button id="cWelcomeDemoProjectBtn"
