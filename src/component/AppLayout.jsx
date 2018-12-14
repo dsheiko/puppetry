@@ -131,6 +131,9 @@ export class AppLayout extends React.Component {
         <OpenSuiteModal
           action={action}
           projectDirectory={ projectDirectory }
+          suiteModified={ store.suite.modified }
+          files={ store.app.project.files }
+          active={ store.suite.filename }
           isVisible={store.app.openSuiteModal} />
 
         <SaveSuiteAsModal
