@@ -60,6 +60,7 @@ export default class BrowseDirectory extends React.Component {
           >
             <Input
               disabled={ true }
+              id="cBrowseDirectoryInput"
               value={ this.state.selectedDirectory || defaultDirectory }  />
           </FormItem>
           <FormItem>
