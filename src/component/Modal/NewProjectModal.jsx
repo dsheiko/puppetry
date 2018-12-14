@@ -80,6 +80,7 @@ export class NewProjectModal extends AbstractForm {
       <ErrorBoundary>
         <Modal
           title="New Project"
+          className="c-new-project-modal"
           visible={ isVisible }
           closable
           onCancel={this.onClickCancel}
@@ -94,7 +95,7 @@ export class NewProjectModal extends AbstractForm {
             </Button> )
           ]}
         >
-          <Form >
+          <Form>
             <FormItem  label="Project name">
               { getFieldDecorator( "name", {
                 initialValue: projectName,
