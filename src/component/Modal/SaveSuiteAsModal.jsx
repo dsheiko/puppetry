@@ -4,6 +4,7 @@ import AbstractForm from "component/AbstractForm";
 import { Form, Modal,  Input, Button } from "antd";
 import { getBasename } from "service/io";
 import ErrorBoundary from "component/ErrorBoundary";
+import * as classes from "./classes";
 
 /*eslint no-useless-escape: 0*/
 
@@ -65,8 +66,14 @@ export class SaveSuiteAsModal extends AbstractForm {
           closable
           onCancel={ this.onClickCancel }
           footer={[
-            ( <Button key="back" onClick={this.onClickCancel}>Cancel</Button> ),
-            ( <Button key="submit" type="primary"
+            ( <Button
+              className={ classes.BTN_CANCEL }
+              key="back"
+              onClick={this.onClickCancel}>Cancel</Button> ),
+            ( <Button
+              className={ classes.BTN_OK }
+              key="submit"
+              type="primary"
               disabled={ this.hasErrors( getFieldsError() ) }
               autoFocus={ true }
               onClick={this.onClickOk}>

@@ -9,6 +9,7 @@ import { MainMenu } from "./AppLayout/Sider/MainMenu";
 import { ProjectNavigator  } from "./AppLayout/Sider/ProjectNavigator";
 import { AppFooter } from "./AppLayout/AppFooter";
 import { Welcome } from "./AppLayout/Welcome";
+import { Info } from "./AppLayout/Info";
 import { NewProjectModal  } from "./Modal/NewProjectModal";
 import { OpenProjectModal  } from "./Modal/OpenProjectModal";
 import { SaveSuiteAsModal  } from "./Modal/SaveSuiteAsModal";
@@ -101,7 +102,9 @@ export class AppLayout extends React.Component {
                   <TabGroup action={ action } store={ store } />
                 </If>
                 <If exp={ !tabsAnyTrue }>
-                  <Welcome action={ action } projectDirectory={ projectDirectory } />
+                  { projectDirectory ? ( <Info action={ action } store={ store } /> )
+                    : ( <Welcome action={ action } projectDirectory={ projectDirectory } /> )
+                  }
                 </If>
 
               </div>

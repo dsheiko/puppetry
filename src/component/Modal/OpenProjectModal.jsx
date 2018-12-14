@@ -6,6 +6,7 @@ import BrowseDirectory from "component/Global/BrowseDirectory";
 import ErrorBoundary from "component/ErrorBoundary";
 import { isProject } from "service/io";
 import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS } from "constant";
+import * as classes from "./classes";
 
 const connectForm = Form.create();
 
@@ -83,8 +84,14 @@ export class OpenProjectModal extends AbstractForm {
           onCancel={this.onClickCancel}
           onOk={this.onClickOk}
           footer={[
-            ( <Button key="back" onClick={this.onClickCancel}>Cancel</Button> ),
-            ( <Button key="submit" type="primary"
+            ( <Button
+              className={ classes.BTN_CANCEL }
+              key="back"
+              onClick={this.onClickCancel}>Cancel</Button> ),
+            ( <Button
+              className={ classes.BTN_OK }
+              key="submit"
+              type="primary"
               autoFocus={ true }
               disabled={ this.hasErrors( getFieldsError() ) || this.state.locked }
               onClick={this.onClickOk}>

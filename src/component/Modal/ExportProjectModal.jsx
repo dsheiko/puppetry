@@ -7,6 +7,7 @@ import BrowseDirectory from "component/Global/BrowseDirectory";
 import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS } from "constant";
 import If from "component/Global/If";
 import { TestGeneratorError } from "error";
+import * as classes from "./classes";
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -123,8 +124,11 @@ export class ExportProjectModal extends React.Component {
           className="checkbox-group--vertical"
 
           footer={[
-            ( <Button key="back" onClick={this.onClickCancel}>Cancel</Button> ),
             ( <Button
+              className={ classes.BTN_CANCEL }
+              key="back" onClick={this.onClickCancel}>Cancel</Button> ),
+            ( <Button
+              className={ classes.BTN_OK }
               key="submit"
               type="primary"
               autoFocus={ true }

@@ -1,13 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
-import { Form, Modal, Button, Input } from "antd";
+import { Form, Modal, Button, Input, Row, Col, Collapse } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
+import If from "component/Global/If";
+import { normalizeFilename } from "service/io";
+import * as classes from "./classes";
 
 /*eslint no-useless-escape: 0*/
 
 const FormItem = Form.Item,
-      connectForm = Form.create();
+      connectForm = Form.create(),
+      normalizeSuiteName = ( val ) => {
+        return normalizeFilename( val ).toLowerCase();
+      },
+      Panel = Collapse.Panel;
 
 @connectForm
 export class NewSuiteModal extends AbstractForm {
@@ -21,6 +28,9 @@ export class NewSuiteModal extends AbstractForm {
     isVisible: PropTypes.bool.isRequired
   }
 
+  state = {
+    displayFilename: ""
+  };
 
   onClickCancel = ( e ) => {
     e.preventDefault();
@@ -33,6 +43,9 @@ export class NewSuiteModal extends AbstractForm {
 
     e.preventDefault();
     validateFields( ( err, values ) => {
+      if ( !values.filename ) {
+        values.filename = normalizeSuiteName( values.title );
+      }
       const { title, filename } = values;
       if ( err ) {
         return;
@@ -40,6 +53,10 @@ export class NewSuiteModal extends AbstractForm {
       createSuite( filename, title );
       updateApp({ newSuiteModal: false });
     });
+  }
+
+  onNameChange = ( e ) => {
+    this.setState({ displayFilename: normalizeSuiteName( e.target.value ) });
   }
 
   render() {
@@ -55,7 +72,12 @@ export class NewSuiteModal extends AbstractForm {
           closable
           onCancel={this.onClickCancel}
           footer={[
-            ( <Button autoFocus={ true } key="submit" type="primary" onClick={this.onClickOk}>
+            ( <Button
+              autoFocus={ true }
+              className={ classes.BTN_OK }
+              key="submit"
+              type="primary"
+              onClick={this.onClickOk}>
               Create
             </Button> ) ]}
         >
@@ -68,23 +90,39 @@ export class NewSuiteModal extends AbstractForm {
                   message: "Please enter suite title"
                 }]
               })(
-                <Input placeholder="e.g. Main page" />
+                <Input onChange={ this.onNameChange } placeholder="e.g. Main page" />
               )}
             </FormItem>
-            <FormItem  label="Suite filename (without extension)">
-              { getFieldDecorator( "filename", {
-                rules: [{
-                  required: true,
-                  message: "Please enter suite filename"
-                },
-                {
-                  pattern: /^[0-9a-zA-Z_\-\.]{3,250}$/,
-                  message: "Invalid filename"
-                }]
-              })(
-                <Input placeholder="e.g. main-page" />
-              )}
-            </FormItem>
+            <p>Optionally you can specify suite file name manually, otherwise it will be generated automatically
+              <If exp={ this.state.displayFilename }>
+                { " " } as { " " } <b className="color--primary"><i>{ this.state.displayFilename }.json</i></b>
+              </If>
+            </p>
+            <Collapse>
+              <Panel header="Specify filename">
+                <FormItem
+                  label={ <span>Suite filename <span className="is-optional">(without extension)</span></span> }
+                >
+                  { getFieldDecorator( "filename", {
+                    rules: [
+                      {
+                        pattern: /^[0-9a-zA-Z_\-\.]{3,250}$/,
+                        message: "Invalid filename"
+                      }]
+                  })(
+                    <Row>
+                      <Col span="22">
+                        <Input placeholder="e.g. main-page" />
+                      </Col>
+                      <Col span="2">
+                        { " " }.json
+                      </Col>
+                    </Row>
+                  )}
+                </FormItem>
+              </Panel>
+            </Collapse>
+
 
           </Form>
 
