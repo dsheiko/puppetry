@@ -5,6 +5,7 @@ import { Form, Modal, Input, Button } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import BrowseDirectory from "component/Global/BrowseDirectory";
 import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS } from "constant";
+import * as classes from "./classes";
 
 const FormItem = Form.Item,
       connectForm = Form.create();
@@ -86,8 +87,14 @@ export class NewProjectModal extends AbstractForm {
           onCancel={this.onClickCancel}
           onOk={this.onClickOk}
           footer={[
-            ( <Button key="back" onClick={this.onClickCancel}>Cancel</Button> ),
-            ( <Button key="submit" type="primary"
+            ( <Button
+              key="back"
+              className={ classes.BTN_CANCEL }
+              onClick={this.onClickCancel}>Cancel</Button> ),
+            ( <Button
+              key="submit"
+              type="primary"
+              className={ classes.BTN_OK }
               disabled={ this.hasErrors( getFieldsError() ) || this.state.locked }
               autoFocus={ true }
               onClick={this.onClickOk}>

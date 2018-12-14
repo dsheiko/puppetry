@@ -5,6 +5,7 @@ import { Spin, Modal, Button, Alert } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { shell, remote } from "electron";
 import { getLogPath } from "service/io";
+import * as classes from "./classes";
 
 export class AlertMessageModal extends AbstractComponent {
 
@@ -63,16 +64,25 @@ export class AlertMessageModal extends AbstractComponent {
           closable
           onCancel={this.onClickCancel}
           footer={[
-            ( <Button key="reload" onClick={this.onReload}>
+            ( <Button
+              key="reload"
+              className={ classes.BTN_RELOAD }
+              onClick={this.onReload}>
               Reload
             </Button> ),
-            ( <Button key="log" onClick={this.onOpenLog}>
+            ( <Button
+              className={ classes.BTN_LOG }
+              key="log" onClick={this.onOpenLog}>
               Open error log
             </Button> ),
-            ( <Button key="cancel" onClick={this.onReportIssue}>
+            ( <Button
+              className={ classes.BTN_CANCEL }
+              key="cancel" onClick={this.onReportIssue}>
               Report issue
             </Button> ),
-            ( <Button autoFocus={ true } key="submit" type="primary" onClick={this.onClickCancel}>
+            ( <Button
+              className={ classes.BTN_OK }
+              autoFocus={ true } key="submit" type="primary" onClick={this.onClickCancel}>
               Ok
             </Button> ) ]}
         >

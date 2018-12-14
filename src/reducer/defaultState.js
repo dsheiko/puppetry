@@ -8,6 +8,7 @@ const DEFAULT_STATE = {
   },
   // Runtime state
   app: {
+    greeting: "Hello!",
     loading: false,
     readyToRunTests: false,
     alert: {

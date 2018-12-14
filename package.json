@@ -19,8 +19,8 @@
   },
   "main": "./app/main.js",
   "scripts": {
-    "test": "jest",
-    "test:e2e": "jest src/__e2e__/__tests__/app.spec.js",
+    "test": "jest --config=jest.cfg.unit.js",
+    "test:e2e": "jest --config=jest.cfg.e2e.js --runInBand",
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --watch  --config webpack.config.js",
     "pack": "electron-builder --dir",
@@ -33,25 +33,7 @@
     "postversion": "git push && git push --tags",
     "publish:snapcraft": "snapcraft push dist/puppetry-linux-v$npm_package_version-amd64.snap --release stable"
   },
-  "jest": {
-    "verbose": true,
-    "testEnvironment": "node",
-    "setupFiles": [
-      "./jest.setup.js"
-    ],
-    "testRegex": "src/__tests__/.+\\.spec\\.jsx?$",
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
-    ],
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    },
-    "modulePaths": [
-      "src",
-      "app"
-    ]
-  },
+
   "dependencies": {
     "@babel/core": "^7.1.2",
     "@babel/runtime": "^7.1.2",

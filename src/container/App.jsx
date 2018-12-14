@@ -6,8 +6,23 @@ import { bindActionCreators } from "redux";
 import { AppLayout } from "../component/AppLayout";
 import actions from "../action/actions";
 
-// Mapping state to the props
-const mapStateToProps = ( state ) => ({ store: state }),
+const GREETINGS = [ "Greetings",
+        "Hi there",
+        "How's everything?",
+        "How are things?",
+        "Good to see you",
+        "Great to see you",
+        "Nice to see you",
+        "How have you been?",
+        "Nice to see you again.",
+        "Greetings and salutations!",
+        "How are you doing today?",
+        "What have you been up to?",
+        "How are you feeling today?"
+      ],
+
+      // Mapping state to the props
+      mapStateToProps = ( state ) => ({ store: state }),
       // Mapping actions to the props
       mapDispatchToProps = ( dispatch ) => ({
         action: bindActionCreators( actions, dispatch )
@@ -29,10 +44,12 @@ export class App extends React.Component {
     const { loadProject,
             loadSettings,
             checkRuntimeTestDirReady,
-            checkNewVersion
+            checkNewVersion,
+            updateApp
           } = this.props.action,
           settings = loadSettings();
 
+    updateApp({ greeting: GREETINGS[ Math.floor( Math.random() * GREETINGS.length ) ] });
     checkRuntimeTestDirReady();
     checkNewVersion();
 

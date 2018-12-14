@@ -4,6 +4,7 @@ import { Alert, Checkbox, Modal, Button, Switch } from "antd";
 import Tooltip from "component/Global/Tooltip";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
+import * as classes from "./classes";
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -86,8 +87,12 @@ export class TestReportModal extends React.Component {
           className="checkbox-group--vertical"
 
           footer={[
-            ( <Button key="back" onClick={this.onClickCancel}>Cancel</Button> ),
             ( <Button
+              className={ classes.BTN_CANCEL }
+              key="back"
+              onClick={this.onClickCancel}>Cancel</Button> ),
+            ( <Button
+              className={ classes.BTN_OK }
               key="submit"
               type="primary"
               autoFocus={ true }

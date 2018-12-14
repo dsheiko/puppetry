@@ -5,6 +5,7 @@ import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
 import { ipcRenderer, shell } from "electron";
 import AbstractComponent from "component/AbstractComponent";
+import * as classes from "./classes";
 import { E_RUNTIME_TEST_PROGRESS, E_RUNTIME_TEST_MILESTONE,
   E_RUNTIME_TEST_ERROR, E_INSTALL_RUNTIME_TEST } from "constant";
 import { lockRuntimeTestPath, removeRuntimeTestPath, getRuntimeTestPath,
@@ -143,15 +144,25 @@ export class InstallRuntimeTestModal extends AbstractComponent {
           buttons = [];
 
     if ( progress === 0 || error ) {
-      buttons.push( <Button key="back" onClick={this.onClickCancel}>Cancel</Button> );
+      buttons.push( <Button
+        key="back"
+        className={ classes.BTN_CANCEL }
+        onClick={this.onClickCancel}>Cancel</Button> );
     }
 
     if ( error ) {
-      buttons.push( <Button key="log" onClick={this.onOpenLog}>Open error log</Button> );
-      buttons.push( <Button key="cancel" onClick={this.onReportIssue}>Report issue</Button> );
+      buttons.push( <Button
+        key="log"
+        className={ classes.BTN_LOG }
+        onClick={this.onOpenLog}>Open error log</Button> );
+      buttons.push( <Button
+        key="cancel"
+        className={ classes.BTN_CANCEL }
+        onClick={this.onReportIssue}>Report issue</Button> );
     }
 
     buttons.push( <Button
+      className={ classes.BTN_OK }
       key="submit"
       type="primary"
       autoFocus={ true }
