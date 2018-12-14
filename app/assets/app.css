@@ -6,6 +6,30 @@
   --rhythm: 8px;
 }
 
+.info .ant-row {
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.info .ant-row > div {
+  display: flex;
+  align-items: center;
+}
+
+.modal-file-navigator {
+  max-height: 50vh;
+  min-height: 150px;
+  overflow-y: scroll;
+}
+.modal-file-navigator .ant-menu-vertical > .ant-menu-item {
+  line-height: 24px;
+  height: 24px;
+}
+.modal-file-navigator .ant-menu-vertical > .ant-menu-item:nth-child(even) {
+  background-color: #f5f5f4;
+}
+
 .color--primary {
   color: var( --color-primary );
 }

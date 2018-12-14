@@ -1,16 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { basename } from "path";
 import AbstractForm from "component/AbstractForm";
-import { Form, Modal, Button } from "antd";
-import BrowseFile from "component/Global/BrowseFile";
+import { Modal, Menu, Alert } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
-import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS } from "constant";
-import * as classes from "./classes";
+import If from "component/Global/If";
+import { confirmUnsavedChanges } from "service/smalltalk";
 
-const connectForm = Form.create();
 
-@connectForm
 export class OpenSuiteModal extends AbstractForm {
 
   static propTypes = {
@@ -18,15 +14,9 @@ export class OpenSuiteModal extends AbstractForm {
       updateApp: PropTypes.func.isRequired,
       openSuiteFile: PropTypes.func.isRequired
     }),
+    files: PropTypes.arrayOf( PropTypes.string ).isRequired,
     isVisible: PropTypes.bool.isRequired,
     projectDirectory: PropTypes.string
-  }
-
-  state = {
-    locked: false,
-    browseFilValidateStatus: "",
-    browseFilValidateMessage: "",
-    selectedFile: ""
   }
 
   onClickCancel = ( e ) => {
@@ -34,73 +24,49 @@ export class OpenSuiteModal extends AbstractForm {
     this.props.action.updateApp({ openSuiteModal: false });
   }
 
-  onClickOk = async ( e ) => {
-    const { openSuiteFile } = this.props.action,
-          selectedFile = this.state.selectedFile;
+  onClick = async ( file ) => {
+    const { openSuiteFile } = this.props.action;
 
-    e.preventDefault();
-    if ( !this.isBrowseDirectoryValid() ) {
-      return;
+    if ( this.props.suiteModified ) {
+      await confirmUnsavedChanges({
+        saveSuite: this.props.action.saveSuite,
+        setSuite: this.props.action.setSuite
+      });
     }
 
-    openSuiteFile( basename( selectedFile ) );
+    openSuiteFile( file );
     this.props.action.updateApp({ openSuiteModal: false });
   }
 
-  isBrowseDirectoryValid() {
-    if ( !this.state.selectedFile ) {
-      this.setState({ locked: true,  browseFilValidateStatus: A_FORM_ITEM_ERROR });
-      return false;
-    }
-
-    this.setState({ locked: false,  browseFilValidateStatus: A_FORM_ITEM_SUCCESS });
-    return true;
-  }
-
-  getSelectedFile = ( selectedFile ) => {
-    this.setState({ selectedFile, locked: false });
-  }
-
   render() {
-    const { isVisible } = this.props,
-          { getFieldsError } = this.props.form;
+    const { isVisible, files } = this.props;
 
     return (
       <ErrorBoundary>
         <Modal
-          title="Open Project"
+          title="Open Suite"
           visible={ isVisible }
           closable
           onCancel={this.onClickCancel}
-          onOk={this.onClickOk}
-          footer={[
-            ( <Button
-              className={ classes.BTN_CANCEL }
-              key="back"
-              onClick={this.onClickCancel}>Cancel</Button> ),
-            ( <Button
-              className={ classes.BTN_OK }
-              key="submit"
-              type="primary"
-              autoFocus={ true }
-              disabled={ this.hasErrors( getFieldsError() ) || this.state.locked }
-              onClick={this.onClickOk}>
-              Open
-            </Button> )
-          ]}
+          footer={ null }
         >
-          <Form >
 
-            <BrowseFile
-              validateStatus={ this.state.browseFilValidateStatus }
-              validateMessage={ this.state.browseFilValidateMessage }
-              getSelectedFile={ this.getSelectedFile }
-              defaultPath={ this.props.projectDirectory }
-              label="Select a suite" />
-
-          </Form>
+          <div className="modal-file-navigator">
+            <If exp={ files.length }>
+              <Menu>
+                { files.map( ( file, inx ) => (
+                  <Menu.Item
+                    onClick={ () => this.onClick( file ) }
+                    key={ inx }>{ file }</Menu.Item>
+                ) )}
+              </Menu>
+            </If>
+            <If exp={ !files.length }>
+              <Alert message="Project is empty" type="warning" />
+            </If>
+          </div>
         </Modal>
       </ErrorBoundary>
     );
   }
-}
+};

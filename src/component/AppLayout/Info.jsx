@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button } from "antd";
+import { Button, Row, Col, Input } from "antd";
 import AbstractComponent from "component/AbstractComponent";
 import { getDemoProjectDirectory } from "service/io";
 
@@ -31,17 +31,36 @@ export class Info extends AbstractComponent {
 
 
   render() {
+    const { store } = this.props;
     return (
-      <div className="welcome" id="cInfo">
-        <h1>{ this.props.store.app.greeting }</h1>
+      <div className="welcome info" id="cInfo">
 
-        <p>Apparently you have just opened a project. Now you can
+        <Row gutter="16">
+          <Col span="2">
+                Project
+          </Col>
+          <Col span="22">
+            <Input disabled value={ store.project.name } />
+          </Col>
+        </Row>
+
+        <Row>
+          <Col span="2">
+                Location
+          </Col>
+          <Col span="22">
+            <Input disabled value={ store.settings.projectDirectory } />
+          </Col>
+        </Row>
+
+
+        <p>You have opened a project. Now you can
           { " " } <Button id="cInfoCreateBtn"
             onClick={ this.onCreate }>create</Button> or
           { " " } <Button id="cInfoOpenBtn"
             onClick={ this.onOpen }>open</Button>
-          { " " } a test suite file.</p><p>Besides, your can still open { " " } <Button id="cInfoDemoProjectBtn"
-          onClick={ this.onOpenDemoProject }>the demo project</Button> </p>
+          { " " } a test suite file.</p><p>Besides, your can still open the { " " } <Button id="cInfoDemoProjectBtn"
+          onClick={ this.onOpenDemoProject }>demo project</Button> </p>
         <br />
         <p>While on that subject, let’s brush up on Puppetry structure:</p>
         <ul>
