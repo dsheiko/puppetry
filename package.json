@@ -33,7 +33,6 @@
     "postversion": "git push && git push --tags",
     "publish:snapcraft": "snapcraft push dist/puppetry-linux-v$npm_package_version-amd64.snap --release stable"
   },
-
   "dependencies": {
     "@babel/core": "^7.1.2",
     "@babel/runtime": "^7.1.2",
