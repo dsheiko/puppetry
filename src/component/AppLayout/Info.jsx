@@ -35,20 +35,20 @@ export class Info extends AbstractComponent {
     return (
       <div className="welcome info" id="cInfo">
 
-        <Row gutter="16">
-          <Col span="2">
+        <Row gutter={16}>
+          <Col span={2}>
                 Project
           </Col>
-          <Col span="22">
+          <Col span={22}>
             <Input disabled value={ store.project.name } />
           </Col>
         </Row>
 
-        <Row>
-          <Col span="2">
+        <Row gutter={16}>
+          <Col span={2}>
                 Location
           </Col>
-          <Col span="22">
+          <Col span={22}>
             <Input disabled value={ store.settings.projectDirectory } />
           </Col>
         </Row>
