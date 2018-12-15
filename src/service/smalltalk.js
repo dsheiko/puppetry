@@ -54,3 +54,39 @@ export async function confirmDeleteEntity( entity = "" ) {
   }
 }
 
+export async function confirmCreateProject() {
+  try {
+    await smalltalk
+      .confirm( "Confirm Create",
+        `The target directory is not empty. Are you sure you want to `
+      + `create project there?` , {
+          buttons: {
+            ok: "Yes",
+            cancel: "No"
+          }
+        });
+    return true;
+  } catch ( e ) {
+    noop( e );
+    return false;
+  }
+}
+
+
+export async function confirmExportProject() {
+  try {
+    await smalltalk
+      .confirm( "Confirm Export",
+        `The target directory is not empty. Are you sure you want to `
+      + `export project there?` , {
+          buttons: {
+            ok: "Yes",
+            cancel: "No"
+          }
+        });
+    return true;
+  } catch ( e ) {
+    noop( e );
+    return false;
+  }
+}

@@ -5,6 +5,8 @@ import { Form, Modal, Input, Button } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import BrowseDirectory from "component/Global/BrowseDirectory";
 import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS } from "constant";
+import { isDirEmpty } from "service/io";
+import { confirmCreateProject } from "service/smalltalk";
 import * as classes from "./classes";
 
 const FormItem = Form.Item,
@@ -36,7 +38,7 @@ export class NewProjectModal extends AbstractForm {
     this.props.action.updateApp({ newProjectModal: false });
   }
 
-  onClickOk = ( e ) => {
+  onClickOk = async ( e ) => {
     const { validateFields } = this.props.form,
           { updateApp, saveSettings, saveProject } = this.props.action,
           projectDirectory = this.state.selectedDirectory || this.props.projectDirectory;
@@ -44,6 +46,11 @@ export class NewProjectModal extends AbstractForm {
     e.preventDefault();
 
     if ( !this.isBrowseDirectoryValid() ) {
+      return;
+    }
+
+    console.log( 44,  projectDirectory , isDirEmpty( projectDirectory ) );
+    if ( !isDirEmpty( projectDirectory ) && !await confirmCreateProject() ) {
       return;
     }
 

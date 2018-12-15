@@ -6,6 +6,10 @@
   --rhythm: 8px;
 }
 
+body .smalltalk {
+  z-index: 1500;
+}
+
 .info .ant-row {
   margin-bottom: 16px;
   display: flex;
