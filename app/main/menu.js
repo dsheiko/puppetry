@@ -3,7 +3,7 @@ const { app, ipcMain, Menu } = require( "electron" ),
         E_MENU_OPEN_PROJECT, E_MENU_SAVE_SUITE, E_MENU_SAVE_SUITE_AS,
         E_MENU_OPEN_SUITE, E_MENU_EXPORT_PROJECT, E_MENU_EXIT_APP, E_MENU_RUN } = require( "../constant" );
 
-function buildAppMenu( win, projectDirectory = null, suiteFilename = null ) {
+function buildAppMenu( win, projectDirectory = null, suiteFilename = null, files = [] ) {
   const template = [
     {
       label: "File",
@@ -44,14 +44,14 @@ function buildAppMenu( win, projectDirectory = null, suiteFilename = null ) {
         },
         {
           label: "Open Suite...",
-          enabled: Boolean( projectDirectory ),
+          enabled: Boolean( projectDirectory ) && Boolean( files.length ),
           click () {
             win.send( E_MENU_OPEN_SUITE );
           }
         },
         {
           label: "Export Project...",
-          enabled: Boolean( projectDirectory ),
+          enabled: Boolean( projectDirectory ) && Boolean( suiteFilename ),
           click () {
             win.send( E_MENU_EXPORT_PROJECT );
           }
@@ -108,8 +108,8 @@ function buildAppMenu( win, projectDirectory = null, suiteFilename = null ) {
 module.exports = function( win ) {
 
 
-  ipcMain.on( E_SUITE_LOADED, ( event, projectDirectory, suiteFilename ) => {
-    buildAppMenu( win, projectDirectory, suiteFilename );
+  ipcMain.on( E_SUITE_LOADED, ( event, projectDirectory, suiteFilename, files ) => {
+    buildAppMenu( win, projectDirectory, suiteFilename, files );
   });
 
   ipcMain.on( E_PROJECT_LOADED, ( event, projectDirectory ) => {
