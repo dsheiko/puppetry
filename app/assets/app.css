@@ -261,8 +261,8 @@ body {
 }
 
 .tr-badge {
-  padding: var(--rhythm);
-  margin-bottom: var(--rhythm);
+  padding: 8px;
+  margin-bottom: 8px;
   color: white;
   font-weight: bold;
   border-radius: 2px;
@@ -284,7 +284,7 @@ body {
 }
 .tr-row > * {
   display: inline-block;
-  padding: 4px var(--rhythm);
+  padding: 4px 8px;
 }
 
 nav >  ul, nav >  ul ol {
@@ -360,7 +360,7 @@ root > .ant-spin > * {
 
 
 .project-navigator {
-  margin: var(--rhythm) 0 0 0;
+  margin: 8px 0 0 0;
   background: #002f5c;
   opacity: 1;
   transition: opacity 300ms ease-in-out;
@@ -371,10 +371,14 @@ root > .ant-spin > * {
 }
 .project-navigator__nav {
   flex: 1 1 auto;
-  padding: var(--rhythm) 0;
-  height: 100%;
-  overflow: auto;
+  padding: 8px 0;
   max-width: 250px;
+}
+
+.project-navigator__nav > ul {
+  height: 100%;
+  max-height: calc(100vh - 324px);
+  overflow: auto;
 }
 
 .project-navigator__nav > .project-navigator__li {
@@ -414,7 +418,7 @@ li.project-navigator__li:hover {
   position: absolute;
   display: block;
   right: 16px;
-  top: var(--rhythm);
+  top: 8px;
   color: rgba(255, 255, 255, 0.65);
 }
 .project-navigator__add:hover {
@@ -445,7 +449,7 @@ li.project-navigator__li:hover {
 
 .fieldset-browse > .ant-form-item:first-child {
   flex: 1 1 100%;
-  padding-right: var(--rhythm);
+  padding-right: 8px;
 }
 .fieldset-browse > .ant-form-item:last-child {
   flex: 0 0 auto;
@@ -461,7 +465,7 @@ root > .ant-spin-nested-loading > div > .ant-spin {
 .toolbar {
    -webkit-app-region: drag;
    width: 100%;
-   padding: var(--rhythm) 24px;
+   padding: 8px 24px;
    display: flex;
    flex-flow: row nowrap;
    align-items: center;
@@ -497,8 +501,8 @@ root > .ant-spin-nested-loading > div > .ant-spin {
 
 /* Inline rows look to narrow, give them a pad  */
 .command-form .ant-form-inline .ant-row {
- padding-top: var(--rhythm);
- padding-bottom: var(--rhythm);
+ padding-top: 8px;
+ padding-bottom: 8px;
 }
 
 /* fixing right pad on nested tables */
@@ -528,7 +532,7 @@ root > .ant-spin-nested-loading > div > .ant-spin {
 
 .logo h1 {
   font-size: 24px;
-  margin: 0 0 0 var(--rhythm);
+  margin: 0 0 0 8px;
   color: white;
 }
 
@@ -585,7 +589,7 @@ root > .ant-spin-nested-loading > div > .ant-spin {
 .layout-icon {
 font-size: 24px;
 color: #000;
-margin-left: var(--rhythm);
+margin-left: 8px;
 }
 
 .char-pad--left {
@@ -593,7 +597,7 @@ margin-left: var(--rhythm);
 }
 
 .ant-layout > .ant-layout-footer {
-padding: var(--rhythm) 24px;
+padding: 8px 24px;
 }
 .ant-form.cell-form .ant-form-item {
 margin-bottom: 0;
@@ -610,21 +614,21 @@ margin: 16px 16px 16px 16px;
 }
 
 .box-margin-left {
-  margin-left: var(--rhythm);
+  margin-left: 8px;
 }
 
 .box-margin-right {
-  margin-right: var(--rhythm);
+  margin-right: 8px;
 }
 
 .box-margin-horizontal {
-  margin-left: var(--rhythm);
-  margin-right: var(--rhythm);
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 .box-margin-vertical {
-  margin-top: var(--rhythm);
-  margin-bottom: var(--rhythm);
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 /* Prevent nested table doesn't peek out of host */
 .ant-table-wrapper {
@@ -686,7 +690,7 @@ td:hover .editable-cell-icon {
 }
 
 .btn--save {
-  margin-right: var(--rhythm);
+  margin-right: 8px;
 }
 
 .td {
