@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Button, Row, Col, Input } from "antd";
 import AbstractComponent from "component/AbstractComponent";
+import If from "component/Global/If";
 import { getDemoProjectDirectory } from "service/io";
 
 
@@ -34,10 +35,10 @@ export class Info extends AbstractComponent {
     const { store } = this.props;
     return (
       <div className="welcome info" id="cInfo">
-
+        <h1>Project</h1>
         <Row gutter={16}>
           <Col span={2}>
-                Project
+              Name
           </Col>
           <Col span={22}>
             <Input disabled value={ store.project.name } />
@@ -46,7 +47,7 @@ export class Info extends AbstractComponent {
 
         <Row gutter={16}>
           <Col span={2}>
-                Location
+              Location
           </Col>
           <Col span={22}>
             <Input disabled value={ store.settings.projectDirectory } />
@@ -54,12 +55,23 @@ export class Info extends AbstractComponent {
         </Row>
 
 
-        <p>You have opened a project. Now you can
-          { " " } <Button id="cInfoCreateBtn"
-            onClick={ this.onCreate }>create</Button> or
-          { " " } <Button id="cInfoOpenBtn"
-            onClick={ this.onOpen }>open</Button>
-          { " " } a test suite file.</p><p>Besides, your can still open the { " " } <Button id="cInfoDemoProjectBtn"
+        <p>You have a project open. { " " }
+          <If exp={ store.app.project.files.length }>
+            Now you can
+            { " " } <Button id="cInfoCreateBtn"
+              onClick={ this.onCreate }>create</Button> or
+            { " " } <Button id="cInfoOpenBtn"
+              onClick={ this.onOpen }>open</Button>
+            { " " } a test suite file.
+          </If>
+          <If exp={ !store.app.project.files.length }>
+             Now you can
+            { " " } <Button id="cInfoCreateBtn"
+              onClick={ this.onCreate }>create</Button>
+            { " " } the first test suite file.
+          </If>
+        </p>
+        <p>Besides, your can switch to the { " " } <Button id="cInfoDemoProjectBtn"
           onClick={ this.onOpenDemoProject }>demo project</Button> </p>
         <br />
         <p>While on that subject, let’s brush up on Puppetry structure:</p>
