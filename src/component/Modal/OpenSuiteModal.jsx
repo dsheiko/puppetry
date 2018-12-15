@@ -69,4 +69,4 @@ export class OpenSuiteModal extends AbstractForm {
       </ErrorBoundary>
     );
   }
-};
+}

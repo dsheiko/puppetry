@@ -51,7 +51,7 @@ function buildAppMenu( win, projectDirectory = null, suiteFilename = null, files
         },
         {
           label: "Export Project...",
-          enabled: Boolean( projectDirectory ) && Boolean( suiteFilename ),
+          enabled: Boolean( projectDirectory ),
           click () {
             win.send( E_MENU_EXPORT_PROJECT );
           }

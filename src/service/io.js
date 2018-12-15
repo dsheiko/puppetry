@@ -48,6 +48,13 @@ export function createRuntimeTemp() {
 export function removeRuntimeTemp() {
 }
 
+
+export function isExportDirEmpty( exportDirectory ) {
+  return !fs.readdirSync( exportDirectory )
+    .filter( name => !EXPORT_ASSETS.includes( name ) )
+    .length;
+}
+
 export function removeExport( exportDirectory ) {
   fs.readdirSync( exportDirectory )
     .filter( name => EXPORT_ASSETS.includes( name ) )
@@ -204,6 +211,15 @@ function parseJson( text, filePath ) {
  */
 export async function getProjectFiles( directory ) {
   return await readDir( directory, ".json" );
+}
+
+export function isDirEmpty( directory ) {
+  try {
+    return !fs.readdirSync( directory ).length;
+  } catch ( e ) {
+    log.warn( `Renderer process: io.isDirEmpty: ${ e }` );
+    return false;
+  }
 }
 
 export async function readDir( directory, ext ) {
