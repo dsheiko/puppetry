@@ -2,11 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Alert, Checkbox, Modal, Button, message } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
-import { exportProject } from "service/io";
+import { exportProject, isExportDirEmpty } from "service/io";
 import BrowseDirectory from "component/Global/BrowseDirectory";
 import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS } from "constant";
 import If from "component/Global/If";
 import { TestGeneratorError } from "error";
+import { confirmExportProject } from "service/smalltalk";
 import * as classes from "./classes";
 
 const CheckboxGroup = Checkbox.Group;
@@ -72,6 +73,11 @@ export class ExportProjectModal extends React.Component {
     if ( !this.isValid() ) {
       return;
     }
+
+    if ( !isExportDirEmpty( selectedDirectory ) && !await confirmExportProject() ) {
+      return;
+    }
+
     this.setState({ locked: true });
     this.props.action.saveSettings({ exportDirectory: selectedDirectory });
     try {
