@@ -243,11 +243,12 @@ actions.createSuite = ( rawFilename, title ) => async ( dispatch, getState ) => 
 };
 
 actions.loadSuite = ( filename ) => async ( dispatch, getState ) => {
-  const { projectDirectory } = getState().settings,
+  const store = getState(),
+        { projectDirectory } = store.settings,
         suite = await readSuite( projectDirectory, filename );
   dispatch( actions.setProject({ lastOpenSuite: filename }) );
   dispatch( actions.resetSuite({ ...suite, loadedAt: new Date(), filename, modified: false }) );
-  ipcRenderer.send( E_SUITE_LOADED, projectDirectory, filename );
+  ipcRenderer.send( E_SUITE_LOADED, projectDirectory, filename, store.app.project.files );
   dispatch( actions.addAppTab( "suite" ) );
 };
 

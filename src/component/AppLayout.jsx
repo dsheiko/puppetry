@@ -76,6 +76,7 @@ export class AppLayout extends React.Component {
 
               <MainMenu
                 action={ action }
+                files={ store.app.project.files }
                 projectDirectory={ projectDirectory }
                 suiteFilename={ store.suite.filename }
                 suiteModified={ store.suite.modified }
