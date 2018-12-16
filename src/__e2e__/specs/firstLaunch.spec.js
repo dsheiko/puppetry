@@ -26,6 +26,26 @@ describe( "First launch", () => {
     test( "toolbar does not have project name", async () => {
       expect( await ctx.client.isExisting( "#cToolbarProjectName" ) ).not.toBeTruthy();
     });
+
+
+
+  });
+
+
+  describe( "Create project", () => {
+    test( "pane has Create New Project button", async () => {
+      expect( await ctx.client.isExisting( "#cWelcomeNewProjectBtn" ) ).toBeTruthy();
+    });
+    test( "clicking on Create New Project opens modal", async () => {
+      await ctx.client.pause( 300 );
+      await ctx.client.click( "#cWelcomeNewProjectBtn" );
+      await ctx.screenshot( "welcome--new-project" );
+      expect( await ctx.client.isExisting( ".c-new-project-modal"  ) ).toBeTruthy();
+
+      await ctx.client.click( ".c-new-project-modal .btn--modal-cancel" );
+      await ctx.client.pause( 300 );
+      await ctx.screenshot( "welcome--new-project-closed" );
+    });
   });
 
   describe( "Demo project", () => {
@@ -35,7 +55,7 @@ describe( "First launch", () => {
       await ctx.client.waitForExist( "#cMain" );
       await ctx.waitUntilLayoutUpdates();
       expect( await ctx.boundaryError() ).toBeFalsy();
-      await ctx.screenshot( "demo-project" );
+      await ctx.screenshot( "welcome--demo-project" );
     });
   });
 
