@@ -324,5 +324,20 @@ describe( "Schema.page (templates generate valid JavaScript)", () => {
     });
   });
 
+  describe( "evaluate.template", () => {
+
+    it( "with code", () => {
+      const code = schema.page.evaluate.template({
+        target: "page",
+        params: {
+          value: `const foo = "FOO";
+          const bar = "BAR";
+`
+        }
+      });
+      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    });
+  });
+
 
 });

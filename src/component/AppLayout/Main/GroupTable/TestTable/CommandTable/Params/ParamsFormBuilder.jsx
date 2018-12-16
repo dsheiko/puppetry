@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Input, InputNumber, Checkbox, Row, Col, Select  } from "antd";
+import { Form, Input, InputNumber, Checkbox, Row, Col, Select } from "antd";
 import Tooltip from "component/Global/Tooltip";
-import { INPUT, INPUT_NUMBER, CHECKBOX, SELECT } from "component/Schema/constants";
+import { INPUT, INPUT_NUMBER, CHECKBOX, SELECT, TEXTAREA } from "component/Schema/constants";
 const FormItem = Form.Item,
       Option = Select.Option,
+
 
       getLabel = ( desc, tooltip ) => (
         <span>
@@ -38,6 +39,10 @@ export class ParamsFormBuilder extends React.Component {
       return ( <Input placeholder={ item.placeholder } /> );
     case INPUT_NUMBER:
       return ( <InputNumber /> );
+    case TEXTAREA:
+      return ( <Input.TextArea
+        placeholder={ item.placeholder }
+        rows={ 4 } /> );
     case SELECT:
       return ( <Select
         showSearch
