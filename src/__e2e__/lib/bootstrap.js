@@ -7,10 +7,12 @@ const { Application } = require( "spectron" ),
       DIST_PATH = join( ROOT_PATH, "dist" ),
       manifest = require( join( ROOT_PATH, "package.json" ) ),
       APP_PATH = process.platform === "win32" ? join( DIST_PATH, "win-unpacked", "puppetry.exe" ) :
-        ( process.platform === "darwin" ? join( DIST_PATH, "mac", "puppetry.app" )
+        ( process.platform === "darwin" ? join( DIST_PATH, "mac", "puppetry.app", "Contents", "MacOS", "puppetry" )
           : join( DIST_PATH, "linux-unpacked", "puppetry" ) );
 
 shell.config.fatal = true;
+
+shell.mkdir( "-p" , join( __dirname, "..", "screenshots" ) );
 
 class Ctx {
 
