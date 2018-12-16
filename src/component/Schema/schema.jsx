@@ -11,6 +11,7 @@ import { reload } from "./Params/Page/reload";
 import { waitFor } from "./Params/Page/waitFor";
 import { waitForSelector } from "./Params/Page/waitForSelector";
 import { press } from "./Params/Page/press";
+import { evaluate } from "./Params/Page/evaluate";
 import { scroll as scrollPage } from "./Params/Page/scroll";
 import { assertScroll as assertScrollPage } from "./Params/Page/assertScroll";
 
@@ -52,7 +53,8 @@ const methodLables = {
     waitForSelector: "wait for selector",
     waitForNavigation: "wait for navigation",
     assertNodeCount: "assert count of elements",
-    assertScrollPage: "assert window scroll offset"
+    assertScrollPage: "assert window scroll offset",
+    evaluate: "inject JavaScript"
   },
   element: {
     toggleClass: "toggle class",
@@ -118,6 +120,7 @@ export const schema = {
     waitFor,
     waitForSelector,
     waitForNavigation,
+    evaluate,
     assertTitle,
     assertContent,
     assertNodeCount,

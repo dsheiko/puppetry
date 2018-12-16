@@ -40,6 +40,8 @@ export class CommandRowLabel extends React.Component {
        return `("${ params.name }")`;
      case "click":
        return `(${ params.x }, ${ params.y })`;
+     case "evaluate":
+       return `(${ params.value.trim().substr( 0, 80 ) }...)`;
      case "setViewport":
        return `(${ params.width }, ${ params.height })`;
      case "waitFor":
