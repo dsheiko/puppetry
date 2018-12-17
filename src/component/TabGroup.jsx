@@ -60,6 +60,7 @@ export class TabGroup extends React.Component {
     return (
       <ErrorBoundary>
         <Tabs
+          className="c-tab-group-suite"
           hideAdd={ true }
           animated={ false }
           type="editable-card"

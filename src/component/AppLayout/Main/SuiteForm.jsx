@@ -11,6 +11,7 @@ export class SuiteForm extends AbstractForm {
 
   static propTypes = {
     title: PropTypes.string,
+    timeout: PropTypes.number,
     form: PropTypes.shape({
       validateFieldsAndScroll: PropTypes.func.isRequired,
       getFieldDecorator: PropTypes.func.isRequired,
@@ -81,6 +82,7 @@ export class SuiteForm extends AbstractForm {
         </FormItem>
         <FormItem>
           <Button
+            id="cSuiteFormChangeBtn"
             type="primary"
             htmlType="submit"
             disabled={ this.hasErrors( getFieldsError() ) }
@@ -89,4 +91,4 @@ export class SuiteForm extends AbstractForm {
       </Form>
     );
   }
-}
+};
