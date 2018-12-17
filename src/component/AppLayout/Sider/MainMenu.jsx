@@ -69,7 +69,10 @@ export class MainMenu extends React.Component {
   }
 
   onSave = () => {
-    const { suiteFilename } = this.props;
+    const { suiteFilename, projectDirectory } = this.props;
+    if ( !projectDirectory ) {
+      return;
+    }
     if ( !suiteFilename ) {
       return this.onSaveAs();
     }
@@ -78,6 +81,10 @@ export class MainMenu extends React.Component {
   }
 
   onSaveAs = () => {
+    const { projectDirectory } = this.props;
+    if ( !projectDirectory ) {
+      return;
+    }
     this.props.action.updateApp({ saveSuiteAsModal: true });
   }
 
@@ -102,6 +109,10 @@ export class MainMenu extends React.Component {
   }
 
   onOpenSuite = async () => {
+    const { projectDirectory, files } = this.props;
+    if ( !projectDirectory || !files.length ) {
+      return;
+    }
     if ( this.props.suiteModified ) {
       await confirmUnsavedChanges({
         saveSuite: this.props.action.saveSuite,
@@ -112,6 +123,10 @@ export class MainMenu extends React.Component {
   }
 
   onNewSuite = async () => {
+    const { projectDirectory } = this.props;
+    if ( !projectDirectory ) {
+      return;
+    }
     if ( this.props.suiteModified ) {
       await confirmUnsavedChanges({
         saveSuite: this.props.action.saveSuite,
@@ -133,6 +148,10 @@ export class MainMenu extends React.Component {
   }
 
   onRuntimeTestInstall = () => {
+    const { projectDirectory } = this.props;
+    if ( !projectDirectory ) {
+      return;
+    }
     this.props.action.updateApp({ installRuntimeTestModal: true });
   }
 
@@ -147,6 +166,10 @@ export class MainMenu extends React.Component {
   }
 
   onExportProject = async () => {
+    const { projectDirectory } = this.props;
+    if ( !projectDirectory ) {
+      return;
+    }
     if ( this.props.suiteModified ) {
       await confirmUnsavedChanges({
         saveSuite: this.props.action.saveSuite,
@@ -186,31 +209,37 @@ export class MainMenu extends React.Component {
           keyName={ hotkeys }
           onKeyDown={ this.onKeyDown }
         >
-          <Menu id="cMainMenu" theme="dark"  mode="vertical" selectable={ false }>
+          <Menu id="cMainMenu"
+            forceSubMenuRender={ Boolean( process.env.PUPPETRY_SPECTRON ) }
+            theme="dark"
+            mode="vertical"
+            selectable={ false }>
 
             <SubMenu
               key="sub1"
+              id="cMainMenuFile"
               title={<span><Icon type="file" /><span>File</span></span>}
             >
-              <Menu.Item key="1" onClick={ this.onNewProject }>
+              <Menu.Item key="1" onClick={ this.onNewProject } id="cMainMenuNewProject">
                 New Project... { " " }<kbd>{ ostr( "Ctrl-Shift-N" ) }</kbd></Menu.Item>
-              <Menu.Item key="2" disabled={ !projectDirectory } onClick={ this.onNewSuite }>
+              <Menu.Item key="2" disabled={ !projectDirectory } onClick={ this.onNewSuite } id="cMainMenuNewSuite">
                 New Suite... { " " }<kbd>{ ostr( "Ctrl-N" ) }</kbd></Menu.Item>
-              <Menu.Item key="3" onClick={ this.onOpenProject }>
+              <Menu.Item key="3" onClick={ this.onOpenProject } id="cMainMenuOpenProject">
                 Open Project... { " " }<kbd>{ ostr( "Ctrl-Shift-O" ) }</kbd></Menu.Item>
-              <Menu.Item key="4" disabled={ !suiteFilename } onClick={ this.onSave }>
+              <Menu.Item key="4" disabled={ !suiteFilename } onClick={ this.onSave } id="cMainMenuSaveSuite">
                 Save Suite { " " }<kbd>{ ostr( "Ctrl-S" ) }</kbd></Menu.Item>
-              <Menu.Item key="5" disabled={ !suiteFilename } onClick={ this.onSaveAs }>
+              <Menu.Item key="5" disabled={ !suiteFilename } onClick={ this.onSaveAs } id="cMainMenuSaveAsSuite">
                 Save Suite As...</Menu.Item>
-              <Menu.Item key="6" disabled={ !projectDirectory || !files.length  }
+              <Menu.Item key="6" disabled={ !projectDirectory || !files.length  } id="cMainMenuOpenSuite"
                 onClick={ this.onOpenSuite }>Open Suite...</Menu.Item>
-              <Menu.Item key="7" disabled={ !projectDirectory }
+              <Menu.Item key="7" disabled={ !projectDirectory } id="cMainMenuExportProject"
                 onClick={ this.onExportProject }>
                 Export Project... { " " }<kbd>{ ostr( "Ctrl-Shift-E" ) }</kbd></Menu.Item>
               <Menu.Item key="8">Exit</Menu.Item>
 
             </SubMenu>
             <Menu.Item key="10"
+              id="cMainMenuRun"
               className={ readyToRunTests ? "" : "is-not-ready" }
               disabled={ !projectDirectory } onClick={ readyToRunTests
                 ? this.onTestReport : this.onRuntimeTestInstall }>

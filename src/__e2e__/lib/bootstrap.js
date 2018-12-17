@@ -28,7 +28,8 @@ class Ctx {
     this.app = new Application({
       path: APP_PATH,
       env: {
-        PUPPETRY_CLEAN_START: true
+        PUPPETRY_CLEAN_START: true,
+        PUPPETRY_SPECTRON: true
       }
     });
     await this.app.start();
@@ -63,6 +64,22 @@ class Ctx {
       }
       el.setAttribute( attr, value );
     }, selector, attr, value );
+  }
+
+  async expectMenuItemsAvailable( spec ) {
+    const keys = Object.keys( spec );
+    for ( const selector of keys ) {
+      const isDisabled = await this.hasClass( selector, "ant-menu-item-disabled" );
+      expect( !isDisabled ).toBeEqual( spec[ selector ], `Menu.Item=${ selector }` );
+    }
+  }
+
+  async hasClass( selector, className ) {
+    expect( await this.app.client.isExisting( selector ) ).toBeOk( `selector=${ selector }` );
+    return ( await this.app.client.execute( ( selector, className ) => {
+      const el = document.querySelector( selector );
+      return el.classList.contains( className );
+    }, selector, className ) ).value;
   }
 
   async boundaryError() {
@@ -101,5 +118,49 @@ class Ctx {
   }
 
 }
+
+/**
+ * Helper
+ * @param {Boolean} pass
+ * @param {String} errorMsg
+ * @param {String} [vsMsg]
+ * @returns {Object}
+ */
+function expectReturn( pass, errorMsg, vsMsg = null ) {
+  const negativeErrorMsg = vsMsg || errorMsg.replace( " expected ", " not expected " );
+  return {
+    message: () => pass ? negativeErrorMsg : errorMsg,
+    pass
+  };
+}
+
+expect.extend({
+  /**
+   * Assert value is truthy
+   * @param {Boolean} received
+   * @param {String} source
+   * @returns {Object}
+   */
+  toBeOk( received, source ) {
+    const pass = Boolean( received );
+    return expectReturn( pass,
+      `[${ source }] expected ${ JSON.stringify( received ) } to be truthy`,
+      `[${ source }] expected ${ JSON.stringify( received ) } to be falsy` );
+  },
+
+  /**
+   * Assert values equal
+   * @param {String|Number|Boolean} received
+   * @param {String|Number|Boolean} value
+   * @param {String} source
+   * @returns {Object}
+   */
+  toBeEqual( received, value, source ) {
+    const pass = received === value;
+    return expectReturn( pass,
+      `[${ source }] expected ${ JSON.stringify( received ) } to equal ${ JSON.stringify( value ) }`,
+      `[${ source }] expected ${ JSON.stringify( received ) } not to equal ${ JSON.stringify( value ) }` );
+  }
+});
 
 exports.Ctx = Ctx;
