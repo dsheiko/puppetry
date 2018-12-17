@@ -23,6 +23,7 @@ export class TargetMethodSelect extends React.Component {
     return (
       <Select
         showSearch
+        className="select--target-method"
         defaultValue={ initialValue }
         placeholder="Select a method"
         optionFilterProp="children"

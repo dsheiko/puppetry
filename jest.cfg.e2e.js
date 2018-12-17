@@ -1,10 +1,13 @@
 module.exports = {
   verbose: true,
   testEnvironment: "node",
-
-  testRegex: "src/__e2e__/specs/.+\\.spec\\.js$",
+  setupFiles: [
+    "./jest.setup.js"
+  ],
+  testRegex: "src/__e2e__/specs/.+\\.spec\\.jsx?$",
   moduleFileExtensions: [
-    "js"
+    "js",
+    "jsx"
   ],
   modulePaths: [
     "src",

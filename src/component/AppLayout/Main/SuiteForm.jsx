@@ -91,4 +91,4 @@ export class SuiteForm extends AbstractForm {
       </Form>
     );
   }
-};
+}

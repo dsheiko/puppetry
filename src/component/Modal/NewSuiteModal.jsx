@@ -97,7 +97,7 @@ export class NewSuiteModal extends AbstractForm {
             <p>Optionally you can specify suite file name manually, otherwise it will be generated automatically
               <If exp={ this.state.displayFilename }>
                 { " " } as { " " } <b className="color--primary">
-                <i id="cNewSuiteModalFilenamePreview">{ this.state.displayFilename }.json</i></b>
+                  <i id="cNewSuiteModalFilenamePreview">{ this.state.displayFilename }.json</i></b>
               </If>
             </p>
             <Collapse>

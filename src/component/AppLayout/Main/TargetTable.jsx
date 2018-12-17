@@ -20,6 +20,7 @@ export class TargetTable extends AbstractEditableTable {
           <EditableCell
             record={ record }
             dataIndex="target"
+            className="input--target"
             placeholder="Enter target name"
             liftFormStateUp={ this.liftFormStateUp }
             updateRecord={ this.updateRecord }
@@ -34,6 +35,7 @@ export class TargetTable extends AbstractEditableTable {
           <EditableCell
             record={ record }
             dataIndex="selector"
+            className="input--selector"
             placeholder="Enter selector"
             liftFormStateUp={ this.liftFormStateUp }
             updateRecord={ this.updateRecord }
@@ -64,7 +66,8 @@ export class TargetTable extends AbstractEditableTable {
             columns={this.columns}
             pagination={false}
             rowClassName="model--target"
-            footer={() => ( <Button onClick={ this.addRecord }><Icon type="plus" />Add a target</Button> )}
+            footer={() => ( <Button id="cTargetTableAddBtn"
+              onClick={ this.addRecord }><Icon type="plus" />Add a target</Button> )}
           />
         </ErrorBoundary>
       </div>

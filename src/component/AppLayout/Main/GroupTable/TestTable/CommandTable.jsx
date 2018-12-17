@@ -142,6 +142,7 @@ export class CommandTable extends AbstractDnDTable {
     return ( <ErrorBoundary>
       <Table
         className="draggable-table"
+        id="cCommandTable"
         components={ this.components }
         rowClassName={ this.onRowClassName }
         onRow={ this.onRow }
@@ -149,7 +150,9 @@ export class CommandTable extends AbstractDnDTable {
         dataSource={ commands }
         columns={ this.columns }
         pagination={ false }
-        footer={() => ( <Button onClick={ this.addRecord }><Icon type="plus" />Add a command</Button> )}
+        footer={() => ( <Button
+          id="cCommandTableAddBtn"
+          onClick={ this.addRecord }><Icon type="plus" />Add a command</Button> )}
       />
     </ErrorBoundary> );
   }

@@ -23,14 +23,19 @@ export class ElementMethodSelect extends React.Component {
     return (
       <Select
         showSearch
+        className="select--element-method"
         defaultValue={ initialValue }
         placeholder="Select a method"
         optionFilterProp="children"
         onSelect={this.onSelect}
-        filterOption={( input, option ) => option.props.children
-          .toLowerCase()
-          .indexOf( input.toLowerCase() ) >= 0 }
-      >
+        filterOption={( input, option ) => {
+          const optNode = option.props.children,
+                // <option>keyword OR <option><span className="method-title" data-keyword="keyword">
+                keyword = typeof optNode === "string" ? optNode : optNode.props[ "data-keyword" ];
+          return keyword
+            .toLowerCase()
+            .indexOf( input.toLowerCase() ) >= 0;
+        }}>
 
         {
           Object.keys( schema.element ).map( method => ( <Option key={ method }>
