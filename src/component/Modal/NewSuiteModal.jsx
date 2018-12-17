@@ -68,6 +68,7 @@ export class NewSuiteModal extends AbstractForm {
         <Modal
           title="New Suite"
           visible={ isVisible }
+          className="c-new-suite-modal"
           disabled={ this.hasErrors( getFieldsError() )  }
           closable
           onCancel={this.onClickCancel}
@@ -95,7 +96,8 @@ export class NewSuiteModal extends AbstractForm {
             </FormItem>
             <p>Optionally you can specify suite file name manually, otherwise it will be generated automatically
               <If exp={ this.state.displayFilename }>
-                { " " } as { " " } <b className="color--primary"><i>{ this.state.displayFilename }.json</i></b>
+                { " " } as { " " } <b className="color--primary">
+                <i id="cNewSuiteModalFilenamePreview">{ this.state.displayFilename }.json</i></b>
               </If>
             </p>
             <Collapse>

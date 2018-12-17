@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Alert, Checkbox, Modal, Button, message } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
-import { exportProject, isExportDirEmpty } from "service/io";
+import { exportProject, isDirEmpty } from "service/io";
 import BrowseDirectory from "component/Global/BrowseDirectory";
 import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS } from "constant";
 import If from "component/Global/If";
@@ -74,7 +74,7 @@ export class ExportProjectModal extends React.Component {
       return;
     }
 
-    if ( !isExportDirEmpty( selectedDirectory ) && !await confirmExportProject() ) {
+    if ( !isDirEmpty( selectedDirectory ) && !await confirmExportProject() ) {
       return;
     }
 
