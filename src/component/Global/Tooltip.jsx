@@ -12,6 +12,7 @@ export default function Tooltip( props ) {
 }
 
 Tooltip.propTypes = {
+  pos: PropTypes.string,
   title: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   children: PropTypes.any

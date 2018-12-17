@@ -67,6 +67,7 @@ export class CommandModal extends React.Component {
       <InstantModal
         visible={ isVisible }
         title="Title"
+        id="cCommandModal"
         onOk={this.onOK}
         onCancel={this.onCancel}
         footer={[

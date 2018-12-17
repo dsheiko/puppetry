@@ -5,6 +5,7 @@ import { Icon } from "antd";
 export class InstantModal extends React.Component {
 
   static propTypes = {
+    id: PropTypes.string,
     visible: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired,
     onOk: PropTypes.func.isRequired,
@@ -29,9 +30,9 @@ export class InstantModal extends React.Component {
   }
 
   render() {
-    const { title, visible, footer, onCancel } = this.props;
+    const { title, visible, footer, onCancel, id } = this.props;
 
-    return ( <div className={ ( ( visible ) ? "" : "is-hidden" ) + " modal--instant" }>
+    return ( <div id={ id || "cInstantModal" } className={ ( ( visible ) ? "" : "is-hidden" ) + " modal--instant" }>
       <div className="ant-modal-mask" />
       <div tabIndex={-1} className="ant-modal-wrap " role="dialog" aria-labelledby={ this.id }>
         <div role="document" className="ant-modal">

@@ -27,6 +27,7 @@ export class PageMethodSelect extends React.Component {
     return (
       <Select
         showSearch
+        className="select--page-method"
         defaultValue={ initialValue }
         placeholder="Select a method"
         optionFilterProp="children"

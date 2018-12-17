@@ -271,6 +271,10 @@ export async function writeProject( directory, data ) {
     return;
   }
   const filePath = join( directory, PROJECT_FILE_NAME );
+  if ( !data.name ) {
+    log.warn( `Renderer process: io.writeProject: empty content ${ JSON.stringify( data ) } in ${ directory }` );
+    return;
+  }
   try {
     await writeFile( filePath, JSON.stringify( data, null, "  " ), "utf8" );
   } catch ( e ) {

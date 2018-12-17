@@ -8,10 +8,15 @@ describe( "First launch", () => {
 
   beforeAll( async () => {
     await ctx.startApp();
+    ctx.ns = "first-launch";
   });
 
   afterAll( async () => {
     await ctx.stopApp();
+  });
+
+  afterEach( async() => {
+    await ctx.checkLogErrors();
   });
 
   describe( "Welcome screen", () => {
@@ -21,7 +26,7 @@ describe( "First launch", () => {
       expect( await win.isVisible() ).toBeTruthy();
       expect( await ctx.client.isExisting( "#cWelcome" ) ).toBeTruthy();
       expect( await ctx.boundaryError() ).toBeFalsy();
-      await ctx.screenshot( "welcome-page" );
+      await ctx.screenshot( "welcome-screen" );
     });
 
     test( "toolbar does not have project name", async () => {
@@ -41,11 +46,11 @@ describe( "First launch", () => {
       await ctx.client.click( "#cWelcomeNewProjectBtn" );
       await ctx.client.pause( 300 );
       expect( await ctx.boundaryError() ).toBeFalsy();
-      await ctx.screenshot( "welcome--new-project" );
+      await ctx.screenshot( "new-project-modal" );
       expect( await ctx.client.isExisting( ".c-new-project-modal"  ) ).toBeTruthy();
       await ctx.client.click( `.c-new-project-modal ${ S.MODAL_CLOSE_ICON }` );
       await ctx.client.pause( 300 );
-      await ctx.screenshot( "welcome--new-project-closed" );
+      await ctx.screenshot( "new-project-closed" );
     });
   });
 
@@ -56,7 +61,7 @@ describe( "First launch", () => {
       await ctx.client.waitForExist( "#cMain" );
       await ctx.waitUntilLayoutUpdates();
       expect( await ctx.boundaryError() ).toBeFalsy();
-      await ctx.screenshot( "welcome--demo-project" );
+      await ctx.screenshot( "demo-project-screen" );
     });
   });
 
