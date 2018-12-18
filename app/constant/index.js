@@ -6,6 +6,7 @@ exports.E_RUN_TESTS = "runTests";
 exports.E_TEST_REPORTED = "testReported";
 exports.E_PROJECT_LOADED = "projectLoaded";
 exports.E_SUITE_LOADED = "suiteLoaded";
+exports.E_SUITE_LIST_UPDATED = "suiteListUpdated";
 exports.E_MENU_NEW_PROJECT = "menuNewProject";
 exports.E_MENU_NEW_SUITE = "menuNewSuite";
 exports.E_MENU_OPEN_PROJECT = "menuOpenProject";
