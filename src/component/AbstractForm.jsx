@@ -19,4 +19,12 @@ export default class AbstractForm extends AbstractComponent {
     return Object.keys( fieldsError ).some( field => fieldsError[ field ]);
   }
 
+  onKeyPress = ( e, cb ) => {
+    switch ( e.key ){
+      case "Enter":
+        cb( e );
+        return;
+    }
+  }
+
 }
