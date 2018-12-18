@@ -21,6 +21,7 @@ export class TestTable extends AbstractEditableTable {
         render: ( text, record ) => (
           <EditableCell
             prefixIcon={ recordPrefIcon }
+            onSubmit={ this.onSubmit }
             className="input--title"
             record={ record }
             dataIndex="title"
@@ -70,7 +71,7 @@ export class TestTable extends AbstractEditableTable {
   }
 
   onRowClassName = ( record ) => {
-    return `model--test${ record.disabled ? " row-disabled" : "" }` ;
+    return `model--test${ record.disabled ? " row-disabled" : "" } ` + this.getRightClickClassName( record );
   }
 
   render() {

@@ -7,6 +7,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
 
   state = {
     id: "",
+    contextMenuAnchor: null,
     fieldState: {
     }
   }
@@ -69,7 +70,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
     }
   }
 
-  onSubmit( id ) {
+  onSubmit = ( id ) => {
     const form = this.state.fieldState[ id ],
           options = this.fields.reduce( ( carry, field ) => {
             carry[ field ] = form[ field ].value;
@@ -122,6 +123,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
               tabIndex={20}
               type="primary"
               size="small"
+              className={ `btn--submit-editable model--${ this.model }` }
               disabled={ this.hasErrors( record.id ) }
               onClick={( () => this.onSubmit( record.id ) )}
             >Save</Button>
