@@ -99,7 +99,7 @@ export class SaveSuiteAsModal extends AbstractForm {
                   }
                 ]
               })(
-                <Input placeholder="e.g. my-new-suite" />
+                <Input placeholder="e.g. my-new-suite" onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
               )}
             </FormItem>
           </Form>

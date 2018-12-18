@@ -118,7 +118,7 @@ export class NewProjectModal extends AbstractForm {
                   message: "Please enter project name"
                 }]
               })(
-                <Input placeholder="Project name" />
+                <Input placeholder="Project name" onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
               )}
             </FormItem>
 
