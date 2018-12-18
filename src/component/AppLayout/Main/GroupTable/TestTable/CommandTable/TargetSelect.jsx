@@ -37,9 +37,11 @@ export class TargetSelect extends React.Component {
             .indexOf( input.toLowerCase() ) >= 0;
         }}>
         <Option value="page"><span data-keyword="page"><Icon type="file" /> page</span></Option>
-        { targets.map( ( item, inx ) => ( <Option key={inx} value={ item.target }>
-          <span data-keyword={ item.target }><Icon type="scan" /> { item.target }</span>
-        </Option> ) ) }
+        { targets
+          .filter( item => item.target )
+          .map( ( item, inx ) => ( <Option key={inx} value={ item.target }>
+            <span data-keyword={ item.target }><Icon type="scan" /> { item.target }</span>
+          </Option> ) ) }
       </Select>
     );
   }

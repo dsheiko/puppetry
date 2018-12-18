@@ -187,6 +187,7 @@ export class CommandForm extends React.Component {
                   schema={ schema }
                   targets={ targets }
                   record={ safeRecord }
+                  onSubmit={ this.handleSubmit }
                   form={ this.props.form } />
               </ErrorBoundary>
             </fieldset>
