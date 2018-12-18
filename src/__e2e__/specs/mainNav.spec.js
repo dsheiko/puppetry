@@ -56,7 +56,7 @@ describe( "Main Navigation", () => {
 
       await ctx.expectMenuItemsAvailable({
         "#cMainMenuNewProject": true,
-        //"#cMainMenuNewSuite": true,
+        "#cMainMenuNewSuite": true,
         "#cMainMenuOpenProject": true,
         "#cMainMenuSaveSuite": false,
         "#cMainMenuSaveAsSuite": false,
