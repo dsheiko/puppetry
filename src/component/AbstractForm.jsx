@@ -21,9 +21,9 @@ export default class AbstractForm extends AbstractComponent {
 
   onKeyPress = ( e, cb ) => {
     switch ( e.key ){
-      case "Enter":
-        cb( e );
-        return;
+    case "Enter":
+      cb( e );
+      return;
     }
   }
 
