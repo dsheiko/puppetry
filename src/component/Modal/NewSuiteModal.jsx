@@ -91,7 +91,8 @@ export class NewSuiteModal extends AbstractForm {
                   message: "Please enter suite title"
                 }]
               })(
-                <Input onChange={ this.onNameChange } placeholder="e.g. Main page" />
+                <Input onChange={ this.onNameChange } placeholder="e.g. Main page"
+                  onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
               )}
             </FormItem>
             <p>Optionally you can specify suite file name manually, otherwise it will be generated automatically
@@ -114,7 +115,8 @@ export class NewSuiteModal extends AbstractForm {
                   })(
                     <Row>
                       <Col span="22">
-                        <Input placeholder="e.g. main-page" />
+                        <Input placeholder="e.g. main-page"
+                          onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
                       </Col>
                       <Col span="2">
                         { " " }.json
