@@ -30,6 +30,9 @@ class Ctx {
       env: {
         PUPPETRY_CLEAN_START: true,
         PUPPETRY_SPECTRON: true
+      },
+      webdriverOptions: {
+        deprecationWarnings: false
       }
     });
     await this.app.start();
@@ -94,6 +97,28 @@ class Ctx {
         expect( log.level ).not.toEqual( "SEVERE" );
       }
     });
+ }
+
+// Under construction
+ async hover( selector, duration = 500 ) {
+   const { x, y } = ( await this.app.client.execute( ( selector ) => {
+      const el = document.querySelector( selector ),
+            { x, y, width, height } = el.getBoundingClientRect();
+            return { x: x + Math.ceil( width ), y: y + Math.ceil( height ) };
+    }, selector ) ).value;
+
+    await this.app.client.actions([{
+      "type": "pointer",
+      "id": "finger1",
+      "parameters": { "pointerType": "mouse" },
+      "actions": [
+        { "type": "pointerMove", "duration": 0, "x": x, "y": y },
+        { "type": "pointerDown", "button": 0 },
+        { "type": "pause", "duration": duration },
+        { "type": "pointerUp", "button": 0 }
+      ]
+    }]);
+
  }
 
   async select( selector, value ) {
