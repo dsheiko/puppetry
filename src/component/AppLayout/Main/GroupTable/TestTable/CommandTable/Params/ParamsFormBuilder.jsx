@@ -25,20 +25,32 @@ export class ParamsFormBuilder extends React.Component {
       setFieldsValue: PropTypes.func.isRequired
     }),
 
+    onSubmit: PropTypes.func.isRequired,
     record: PropTypes.object.isRequired,
     schema: PropTypes.any
   }
 
+  onKeyPress = ( e, cb ) => {
+    switch ( e.key ){
+    case "Enter":
+      cb( e );
+      return;
+    }
+  }
+
   renderControl = ( item ) => {
     const { setFieldsValue } = this.props.form,
+          { onSubmit } = this.props,
           onSelect = ( value ) => {
             setFieldsValue({ [ item.name ]: value });
           };
     switch ( item.control ) {
     case INPUT:
-      return ( <Input placeholder={ item.placeholder } /> );
+      return ( <Input placeholder={ item.placeholder }
+        onKeyPress={ ( e ) => this.onKeyPress( e, onSubmit ) } /> );
     case INPUT_NUMBER:
-      return ( <InputNumber /> );
+      return ( <InputNumber
+        onKeyPress={ ( e ) => this.onKeyPress( e, onSubmit ) } /> );
     case TEXTAREA:
       return ( <Input.TextArea
         placeholder={ item.placeholder }
