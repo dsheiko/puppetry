@@ -29,6 +29,12 @@ export default class AbstractDnDTable extends React.Component {
     e.preventDefault();
     const menu = new Menu();
 
+
+    this.setState({ contextMenuAnchor: record.id });
+    menu.on( "menu-will-close", () => {
+      this.setState({ contextMenuAnchor: null });
+    });
+
     menu.append( new MenuItem({
       label: "Edit",
       click: () => this.onEdit( record )
@@ -64,6 +70,17 @@ export default class AbstractDnDTable extends React.Component {
       x: e.x,
       y: e.y
     });
+  }
+
+  getRightClickClassName( record ) {
+    if ( !this.state || !this.state.contextMenuAnchor ) {
+      return "";
+    }
+    return this.state.contextMenuAnchor === record.id ? "is-right-clicked" : "";
+  }
+
+  onRowClassName = ( record ) => {
+    return this.getRightClickClassName( record );
   }
 
   onRow = ( record, index ) => ({
