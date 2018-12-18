@@ -21,6 +21,7 @@ export class GroupTable extends AbstractEditableTable {
           <EditableCell
             prefixIcon={ recordPrefIcon }
             record={ record }
+            onSubmit={ this.onSubmit }
             className="input--title"
             dataIndex="title"
             placeholder="Describe target or scenario you want to test"
@@ -62,7 +63,7 @@ export class GroupTable extends AbstractEditableTable {
   }
 
   onRowClassName = ( record ) => {
-    return `model--group${ record.disabled ? " row-disabled" : "" }` ;
+    return `model--group${ record.disabled ? " row-disabled" : "" } ` + this.getRightClickClassName( record );
   }
 
   render() {

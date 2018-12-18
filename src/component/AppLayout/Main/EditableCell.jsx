@@ -7,6 +7,7 @@ export class EditableCell extends React.Component {
 
   static propTypes = {
     dataIndex: PropTypes.string.isRequired,
+    onSubmit: PropTypes.func,
     placeholder: PropTypes.string.isRequired,
     className: PropTypes.string,
     record: PropTypes.object.isRequired,
@@ -43,6 +44,14 @@ export class EditableCell extends React.Component {
     liftFormStateUp( dataIndex, state, record.id );
   }
 
+  onKeyPress = ( e, record ) => {
+    switch ( e.key ){
+      case "Enter":
+        this.props.onSubmit && this.props.onSubmit( record.id );
+        return;
+    }
+  }
+
   /**
    * Lift state even before first input
    */
@@ -70,7 +79,8 @@ export class EditableCell extends React.Component {
                   prefix={ prefixIcon || null }
                   defaultValue={value}
                   className={ className || null }
-                  onChange={this.onChange}
+                  onChange={ this.onChange }
+                  onKeyPress={ ( e ) => this.onKeyPress( e, record ) }
                   placeholder={placeholder}
                   tabIndex={ dataIndex === "select" ? 2 : 1 }
                 />

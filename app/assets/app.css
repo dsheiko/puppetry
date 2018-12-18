@@ -6,6 +6,14 @@
   --rhythm: 8px;
 }
 
+.ant-form.cell-form .ant-form-explain {
+  z-index: 1;
+}
+
+.ant-table-row.is-right-clicked {
+  background: #f0f2f5;
+}
+
 body .smalltalk {
   z-index: 1500;
 }

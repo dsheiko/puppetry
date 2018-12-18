@@ -19,6 +19,7 @@ export class TargetTable extends AbstractEditableTable {
         render: ( text, record ) => (
           <EditableCell
             record={ record }
+            onSubmit={ this.onSubmit }
             dataIndex="target"
             className="input--target"
             placeholder="Enter target name"
@@ -34,6 +35,7 @@ export class TargetTable extends AbstractEditableTable {
         render: ( text, record ) => (
           <EditableCell
             record={ record }
+            onSubmit={ this.onSubmit }
             dataIndex="selector"
             className="input--selector"
             placeholder="Enter selector"
@@ -45,6 +47,10 @@ export class TargetTable extends AbstractEditableTable {
       this.getActionColumn()
     ];
 
+  }
+
+  onRowClassName = ( record ) => {
+    return "model--target " + this.getRightClickClassName( record );
   }
 
   fields = [ "target", "selector" ];
@@ -60,12 +66,13 @@ export class TargetTable extends AbstractEditableTable {
             id="cTargetTable"
             className="draggable-table"
             components={this.components}
+            rowClassName={ this.onRowClassName }
             onRow={this.onRow}
             showHeader={ true }
             dataSource={ data }
             columns={this.columns}
             pagination={false}
-            rowClassName="model--target"
+
             footer={() => ( <Button id="cTargetTableAddBtn"
               onClick={ this.addRecord }><Icon type="plus" />Add a target</Button> )}
           />
