@@ -61,7 +61,7 @@ class BodyRow extends React.Component {
       )
     );
   }
-};
+}
 
 function getModel( className ) {
   return className.split( " " )
