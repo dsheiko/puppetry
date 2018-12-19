@@ -87,7 +87,6 @@ export class TestTable extends AbstractEditableTable {
           rowClassName={ this.onRowClassName }
           expandedRowRender={ this.renderExpandedTable }
           defaultExpandedRowKeys={ expanded }
-          expandRowByClick={ true }
           showHeader={ false }
           dataSource={ tests }
           columns={ this.columns }

@@ -120,8 +120,10 @@ describe( "New Project", () => {
   });
 
   test( "expand group", async() => {
-    await ctx.client.click( `#cGroupTable ${ S.EDITABLE_ROW_EXPAND_ICON }` );
-    await ctx.screenshot( "group-expanded" );
+    if ( !await ctx.client.isExisting( `#cTestTableAddBtn` ) ) {
+      await ctx.client.click( `#cGroupTable ${ S.EDITABLE_ROW_EXPAND_ICON }` );
+      await ctx.screenshot( "group-expanded" );
+    }
   });
 
   test( "add a test", async() => {
@@ -136,9 +138,11 @@ describe( "New Project", () => {
   });
 
   test( "expand test", async() => {
-    await ctx.client.click( `#cTestTable ${ S.EDITABLE_ROW_EXPAND_ICON }` );
-    await ctx.screenshot( "test-expanded" );
-    await ctx.client.pause( 200 );
+    if ( !await ctx.client.isExisting( `#cCommandTableAddBtn` ) ) {
+      await ctx.client.click( `#cTestTable ${ S.EDITABLE_ROW_EXPAND_ICON }` );
+      await ctx.screenshot( "test-expanded" );
+      await ctx.client.pause( 200 );
+    }
   });
 
   test( "add a command", async() => {
