@@ -86,7 +86,6 @@ export class GroupTable extends AbstractEditableTable {
             dataSource={ groups }
             columns={this.columns}
             pagination={false}
-            expandRowByClick={ true }
             onExpand={this.onExpand}
             expandedRowRender={ this.renderExpandedTable }
             footer={() => ( <Button
