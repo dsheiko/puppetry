@@ -1,4 +1,8 @@
-const { ElementHandle } = require( "puppeteer/lib/ExecutionContext" );
+let { ElementHandle } = require( "puppeteer/lib/ExecutionContext" );
+// since version 1.12 ElementHandle moved out of ExecutionContext
+if ( ElementHandle === undefined ) {
+  ElementHandle = require( "puppeteer/lib/JSHandle" ).ElementHandle;
+}
 
 /**
  * Set value on a select element
