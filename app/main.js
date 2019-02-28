@@ -41,7 +41,7 @@ function createWindow() {
     minHeight: 540,
     frame: false,
     devTools: process.env.ELECTRON_ENV === "dev",
-    title: "Puppetry",
+    title: "FC Tester",
     icon
   });
 

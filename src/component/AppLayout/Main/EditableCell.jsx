@@ -73,7 +73,6 @@ export class EditableCell extends React.Component {
 				// record.editing = true;
 				updateRecord({...record, ...{editing: true}});
 			}}>
-				EDIT CELL?
 				{
 					editing ? (
 						<Form className="cell-form">

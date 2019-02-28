@@ -63,11 +63,11 @@ export class AppLayout extends React.Component {
             >
               <div className={ this.state.collapsed ? "logo is-collapsed" : "logo is-expanded"}>
                 <div className="logo__item logo__collapsed" >
-                  <img src="./assets/puppetry.svg" alt="Puppetry" />
+                  <img src="./assets/icon.svg" alt="FC TESTER" />
                 </div>
                 <div className="logo__item logo__expanded" >
-                  <img src="./assets/puppetry.svg" alt="Puppetry" />
-                  <h1>Puppetry
+                  <img src="./assets/icon.svg" alt="FC TESTER" />
+                  <h1>FC Tester
                     <span>ver.{ " " + remote.app.getVersion() }</span>
                   </h1>
 

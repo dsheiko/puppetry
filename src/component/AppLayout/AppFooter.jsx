@@ -37,7 +37,7 @@ export class AppFooter extends AbstractComponent {
               <a onClick={ this.onExtClick }
                 rel="noopener noreferrer"
                 title="Fork me"
-                className="layout-icon" href="https://github.com/dsheiko/puppetry"
+                className="layout-icon" href="https://github.com/agrublev/puppetry"
                 target="_blank"><Icon type="fork" /></a>
             </Col>
           </Row>

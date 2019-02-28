@@ -52,7 +52,7 @@ export default class ErrorBoundary extends React.Component {
         <h2><Icon type="frown-o" /></h2>
         <h1>Opps! Something went wrong.</h1>
         <p>Please report the issue on { " " }
-          <a onClick={ this.onExtClick } href="https://github.com/dsheiko/puppetry/issues">GitHub</a>.
+          <a onClick={ this.onExtClick } href="https://github.com/agrublev/puppetry/issues">GitHub</a>.
             It would be very much appreciated if you attach
           { " " }<a href="#errorlog" onClick={ this.onOpenLog }>Error log</a>{ " " } content to the report.
         </p>

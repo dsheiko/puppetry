@@ -207,7 +207,7 @@ export class InstallRuntimeTestModal extends AbstractComponent {
                   <li>Install npm tool
                   (<a onClick={ this.onExtClick } href="https://www.npmjs.com/get-npm">see here how to</a>)</li>
                   <li>Navigate to <code>{ getRuntimeTestPath() }</code> and run there npm install</li>
-                  <li>Restart Puppetry application</li>
+                  <li>Restart FC Test application</li>
                 </ul>
               </div>
             </div>
