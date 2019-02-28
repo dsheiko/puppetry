@@ -15,7 +15,7 @@ process.on( "uncaughtException", ( err ) => {
 function createWindow() {
 
   const PROTOCOL = "file",
-        icon = path.join( __dirname, "assets/512x512.png" );
+        icon = path.join( __dirname, "assets/icon.png" );
 
   if ( process.env.ELECTRON_ENV === "dev" ) {
     const {

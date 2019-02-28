@@ -1,5 +1,5 @@
 {
-  "name": "puppetry",
+  "name": "fctester",
   "description": "Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline",
   "version": "1.0.6",
   "author": "Dmitry Sheiko <me@dsheiko.com> (http://dsheiko.com)",
@@ -126,8 +126,8 @@
     "runner"
   ],
   "build": {
-    "appId": "com.dsheiko.puppetry",
-    "productName": "puppetry",
+    "appId": "com.freedcamp.fctester",
+    "productName": "FC Tester",
     "compression": "normal",
     "artifactName": "${name}-${os}-v${version}-${arch}.${ext}",
     "directories": {
