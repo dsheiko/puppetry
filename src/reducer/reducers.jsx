@@ -156,6 +156,13 @@ export const reducer = handleActions(
         }
       }}),
 
+    [ actions.clearTarget ]: ( state ) => update( state, {
+      suite: {
+        targets: {
+          $set: {}
+        }
+      }}),
+
     [ actions.swapTarget ]: ( state, { payload }) => {
       const srcArr = Object.values( state.suite.targets ),
             source = { ...srcArr[ payload.sourceInx ] },

@@ -752,3 +752,7 @@ td:hover .editable-cell-icon {
   padding-left: 8px;
   padding-right: 8px;
 }
+
+.ant-table-footer__toolbar button + button {
+  margin-left: 8px;
+}
