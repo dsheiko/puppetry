@@ -3,7 +3,7 @@ import { handleActions } from "redux-actions";
 import actions from "../action/actions";
 import update from "immutability-helper";
 import DEFAULT_STATE from "./defaultState";
-import { getTestsFlat, getCommandsFlat, transferTest, transferCommand } from "./helpers";
+import { getTestsFlat, getCommandsFlat, transferTest, transferCommand, isTargetNotUnique } from "./helpers";
 
 
 export const reducer = handleActions(
@@ -136,25 +136,30 @@ export const reducer = handleActions(
         $merge: payload
       }}),
 
-    [ actions.addTarget ]: ( state, { payload }) => update( state, {
-      suite: {
-        targets: {
-          $apply: ( ref ) => {
-            const targets = { ...ref },
-                  id = uniqid(),
-                  defaultState = {
-                    editing: false,
-                    id,
-                    key: id,
-                    target: "",
-                    selector: "",
-                    disabled: false
-                  };
-            targets[ id ] = { ...defaultState, ...payload };
-            return targets;
+    [ actions.addTarget ]: ( state, { payload }) => {
+      if ( payload.target && isTargetNotUnique( state, payload ) ) {
+        payload.target += "_" + uniqid().toUpperCase();
+      }
+      return update( state, {
+        suite: {
+          targets: {
+            $apply: ( ref ) => {
+              const targets = { ...ref },
+                    id = uniqid(),
+                    defaultState = {
+                      editing: false,
+                      id,
+                      key: id,
+                      target: "",
+                      selector: "",
+                      disabled: false
+                    };
+              targets[ id ] = { ...defaultState, ...payload };
+              return targets;
+            }
           }
-        }
-      }}),
+        }});
+    },
 
     [ actions.clearTarget ]: ( state ) => update( state, {
       suite: {
@@ -183,6 +188,9 @@ export const reducer = handleActions(
     },
 
     [ actions.updateTarget ]: ( state, { payload }) => {
+      if ( isTargetNotUnique( state, payload ) ) {
+        payload.target += "_" + uniqid().toUpperCase();
+      }
       return update( state, {
         suite: {
           targets: {
