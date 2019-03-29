@@ -58,6 +58,9 @@ const STORAGE_KEY_SETTINGS = "settings",
          * @returns {object}
          */
         UPDATE_SUITE: ( options ) => validate( "updateSuiteOptions", options ),
+
+        CLEAR_TARGET: ( options ) => options,
+        
         /**
          * @param {object} options = { target, selector, editing }
          * @returns {object}

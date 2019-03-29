@@ -53,6 +53,11 @@ export class TargetTable extends AbstractEditableTable {
     return "model--target " + this.getRightClickClassName( record );
   }
 
+  onShowEditTargetsAsCsv = ( e ) => {
+    e.preventDefault();
+    this.props.action.updateApp({ editTargetsAsCsvModal: true });
+  }
+
   fields = [ "target", "selector" ];
 
   model = "Target";
@@ -73,8 +78,12 @@ export class TargetTable extends AbstractEditableTable {
             columns={this.columns}
             pagination={false}
 
-            footer={() => ( <Button id="cTargetTableAddBtn"
-              onClick={ this.addRecord }><Icon type="plus" />Add a target</Button> )}
+            footer={() => ( <div className="ant-table-footer__toolbar">
+              <Button id="cTargetTableAddBtn"
+                onClick={ this.addRecord }><Icon type="plus" />Add a target</Button>
+              <Button type="dashed" id="cTargetTableEditCsvBtn"
+                onClick={ this.onShowEditTargetsAsCsv }><Icon type="edit" />Edit as CSV</Button>
+            </div> )}
           />
         </ErrorBoundary>
       </div>
