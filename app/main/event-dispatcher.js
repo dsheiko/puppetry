@@ -52,7 +52,7 @@ ipcMain.on( E_BROWSE_FILE, ( event, defaultPath ) => {
     defaultPath,
     properties: [ "openFile" ],
     filters: [
-      { name: "Suites", extensions: [ "json" ] }
+      { name: "Files" }
     ]
   }, ( files ) => {
     event.sender.send( E_FILE_SELECTED, files ? files[ 0 ] : "" );
