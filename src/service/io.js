@@ -30,7 +30,7 @@ shell.config.fatal = true;
 
 export function normalizeFilename( str ) {
   const re = /[^a-zA-Z0-9_-]/g;
-  return str.replace( re, "--" );
+  return ( str + "" ).replace( re, "--" );
 }
 
 

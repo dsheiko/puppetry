@@ -3,14 +3,19 @@ import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
 import { Form, Modal, Input, Button } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
+import If from "component/Global/If";
 import BrowseDirectory from "component/Global/BrowseDirectory";
 import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS } from "constant";
 import { isDirEmpty } from "service/io";
 import { confirmCreateProject } from "service/smalltalk";
+import { normalizeFilename } from "service/io";
 import * as classes from "./classes";
 
 const FormItem = Form.Item,
-      connectForm = Form.create();
+      connectForm = Form.create(),
+      normalizeSuiteName = ( val ) => {
+        return normalizeFilename( val ).toLowerCase();
+      };
 
 @connectForm
 export class NewProjectModal extends AbstractForm {
@@ -30,7 +35,8 @@ export class NewProjectModal extends AbstractForm {
   state = {
     locked: false,
     browseDirectoryValidateStatus: "",
-    selectedDirectory: ""
+    selectedDirectory: "",
+    displayFilename: ""
   }
 
   onClickCancel = ( e ) => {
@@ -40,7 +46,7 @@ export class NewProjectModal extends AbstractForm {
 
   onClickOk = async ( e ) => {
     const { validateFields } = this.props.form,
-          { updateApp, saveSettings, saveProject } = this.props.action,
+          { updateApp, saveSettings, saveProject, createSuite } = this.props.action,
           projectDirectory = this.state.selectedDirectory || this.props.projectDirectory;
 
     e.preventDefault();
@@ -49,19 +55,23 @@ export class NewProjectModal extends AbstractForm {
       return;
     }
 
-    console.log( 44,  projectDirectory , isDirEmpty( projectDirectory ) );
     if ( !isDirEmpty( projectDirectory ) && !await confirmCreateProject() ) {
       return;
     }
 
-    validateFields( ( err, values ) => {
-      const { name } = values;
+    validateFields( async ( err, values ) => {
+      const { name, suiteTitle } = values,
+            filename = normalizeSuiteName( suiteTitle );
+
       if ( err ) {
         return;
       }
+
       saveSettings({ projectDirectory });
       updateApp({ newProjectModal: false });
-      saveProject({ projectDirectory, name });
+      await saveProject({ projectDirectory, name });
+      await createSuite( filename, suiteTitle );
+      updateApp({ newSuiteModal: false });
     });
   }
 
@@ -77,6 +87,10 @@ export class NewProjectModal extends AbstractForm {
 
   getSelectedDirectory = ( selectedDirectory ) => {
     this.setState({ selectedDirectory, locked: false });
+  }
+
+  onNameChange = ( e ) => {
+    this.setState({ displayFilename: normalizeSuiteName( e.target.value ) });
   }
 
 
@@ -128,6 +142,30 @@ export class NewProjectModal extends AbstractForm {
               validateStatus={ this.state.browseDirectoryValidateStatus }
               getSelectedDirectory={ this.getSelectedDirectory }
               label="Project location" />
+
+
+            {
+              /*  New Suite */ ""
+            }
+
+            <FormItem  label="Suite title">
+              { getFieldDecorator( "suiteTitle", {
+                rules: [{
+                  required: true,
+                  message: "Please enter suite title"
+                }]
+              })(
+                <Input onChange={ this.onNameChange } placeholder="e.g. Main page"
+                  onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
+              )}
+            </FormItem>
+
+
+            <If exp={ this.state.displayFilename }>
+              <p>Suggested filename { " " } <b className="color--primary">
+                  <i id="cNewSuiteModalFilenamePreview">{ this.state.displayFilename }.json</i></b>
+              </p>
+            </If>
 
           </Form>
         </Modal>
