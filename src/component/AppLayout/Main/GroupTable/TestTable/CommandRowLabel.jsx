@@ -83,6 +83,8 @@ export class CommandRowLabel extends React.Component {
        case "select":
        case "type":
          return `("${ params.value }")`;
+       case "upload":
+         return `("${ params.path }")`;
        case "assertVisible":
          return `("${ assert.value ? "true" : "false" }")`;
        case "assertScroll":

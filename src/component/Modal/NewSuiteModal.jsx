@@ -114,11 +114,11 @@ export class NewSuiteModal extends AbstractForm {
                       }]
                   })(
                     <Row>
-                      <Col span="22">
+                      <Col span={ 22 }>
                         <Input placeholder="e.g. main-page"
                           onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
                       </Col>
-                      <Col span="2">
+                      <Col span={ 2 }>
                         { " " }.json
                       </Col>
                     </Row>

@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Input, InputNumber, Checkbox, Row, Col, Select } from "antd";
+import { Form, Input, InputNumber, Checkbox, Row, Col, Select, Button } from "antd";
 import Tooltip from "component/Global/Tooltip";
-import { INPUT, INPUT_NUMBER, CHECKBOX, SELECT, TEXTAREA } from "component/Schema/constants";
+import { FILE, INPUT, INPUT_NUMBER, CHECKBOX, SELECT, TEXTAREA } from "component/Schema/constants";
+import { ipcRenderer } from "electron";
+import { E_BROWSE_FILE, E_FILE_SELECTED } from "constant";
 const FormItem = Form.Item,
       Option = Select.Option,
 
@@ -38,6 +40,22 @@ export class ParamsFormBuilder extends React.Component {
     }
   }
 
+  onClickSelectFile = ( e, item ) => {
+    e.preventDefault();
+    this.filepathName = item.name;
+    ipcRenderer.send( E_BROWSE_FILE, "" );
+  }
+
+  componentDidMount() {
+    const { setFieldsValue } = this.props.form;
+    ipcRenderer.on( E_FILE_SELECTED, ( ...args ) => {
+      const selectedFile = args[ 1 ];
+      setFieldsValue({
+        [ this.filepathName ]: selectedFile
+      });
+    });
+  }
+
   renderControl = ( item ) => {
     const { setFieldsValue } = this.props.form,
           { onSubmit } = this.props,
@@ -55,6 +73,8 @@ export class ParamsFormBuilder extends React.Component {
       return ( <Input.TextArea
         placeholder={ item.placeholder }
         rows={ 4 } /> );
+    case FILE:
+        return ( <Input onClick={ this.onClickSelectFile } disabled  /> );
     case SELECT:
       return ( <Select
         showSearch
@@ -116,6 +136,9 @@ export class ParamsFormBuilder extends React.Component {
         key={ `item${inx}` }>
         { getFieldDecorator( item.name, decoratorOptions )( this.renderControl( item ) ) }
         { item.description ? <div className="command-opt-description">{ item.description }</div> : "" }
+        { item.control === FILE && <Button
+            onClick={ ( e ) => this.onClickSelectFile( e, item ) }>Select file</Button>
+        }
       </FormItem> );
   }
 

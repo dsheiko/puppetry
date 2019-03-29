@@ -21,6 +21,7 @@ import { assertProperty } from "./Params/Element/assertProperty";
 import { assertAttribute } from "./Params/Element/assertAttribute";
 import { assertVisible } from "./Params/Element/assertVisible";
 import { type } from "./Params/Element/type";
+import { upload } from "./Params/Element/upload";
 import { assertHtml } from "./Params/Element/assertHtml";
 import { focus } from "./Params/Element/focus";
 import { click } from "./Params/Element/click";
@@ -57,6 +58,7 @@ const methodLables = {
     evaluate: "inject JavaScript"
   },
   element: {
+    upload: "attach a file to file input",
     toggleClass: "toggle class",
     setAttribute: "set attribute",
     assertAttribute: "assert attribute",
@@ -91,6 +93,7 @@ export const schema = {
     select,
     focus,
     click,
+    upload,
     tap: tapElement,
     scroll: scrollElement,
     hover,
