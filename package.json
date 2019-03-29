@@ -37,6 +37,7 @@
   "dependencies": {
     "@babel/core": "^7.1.2",
     "@babel/runtime": "^7.1.2",
+    "ansi-to-html": "^0.6.10",
     "antd": "^3.11.2",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^23.6.0",

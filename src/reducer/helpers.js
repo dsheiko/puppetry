@@ -1,5 +1,9 @@
 import update from "immutability-helper";
 
+export function isTargetNotUnique( state, payload ) {
+  return Boolean( Object.values( state.suite.targets ).find( item => item.target === payload.target ) );
+}
+
 export function getCommandsFlat( groups ) {
   return Object.values( groups ).reduce( ( carry, group ) => {
     const commands = Object.values( group.tests ).reduce( ( carry, test ) => {

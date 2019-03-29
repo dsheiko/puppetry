@@ -7,9 +7,13 @@ import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
 import { exportProject, getRuntimeTestPath } from "service/io";
 import { millisecondsToStr } from "service/utils";
-import { Icon, Spin, Button } from "antd";
+import { Icon, Spin, Button, Collapse } from "antd";
 import { join } from "path";
 import { TestGeneratorError } from "error";
+import Convert from "ansi-to-html";
+
+const Panel = Collapse.Panel,
+      convert = new Convert();
 
 let counter = 0;
 
@@ -29,6 +33,7 @@ export class TestReport extends AbstractComponent {
 
   state = {
     report: {},
+    stdErr: "",
     loading: true,
     ok: false
   }
@@ -43,15 +48,16 @@ export class TestReport extends AbstractComponent {
       this.runtimeTemp = getRuntimeTestPath();
       this.setState({ loading: true });
       const specList = await exportProject(
-              this.props.projectDirectory,
-              this.runtimeTemp,
-              this.props.checkedList,
-              this.props.headless ),
-            report = ipcRenderer.sendSync( E_RUN_TESTS, this.runtimeTemp, specList );
+        this.props.projectDirectory,
+        this.runtimeTemp,
+        this.props.checkedList,
+        this.props.headless ),
+      res = ipcRenderer.sendSync( E_RUN_TESTS, this.runtimeTemp, specList );
 
       this.setState({
         loading: false,
-        report: report.results,
+        report: res.report.results,
+        stdErr: res.stdErr,
         ok: true
       });
     } catch ( err ) {
@@ -122,7 +128,7 @@ export class TestReport extends AbstractComponent {
   }
 
   render() {
-    const { report, loading, ok } = this.state;
+    const { report, loading, ok, stdErr } = this.state;
 
     if ( report !== {} && !report ) {
       this.props.action.setError({
@@ -153,6 +159,13 @@ export class TestReport extends AbstractComponent {
             ? ( <div className="tr-badge is-ok">PASSED</div> )
             : ( <div className="tr-badge is-fail">FAILED</div> ) }</div>
 
+
+
+          { ( stdErr && !report.success ) && <Collapse>
+            <Panel header="Error details" key="1">
+              <p dangerouslySetInnerHTML={{ __html: convert.toHtml( stdErr ) }}></p>
+            </Panel>
+          </Collapse> }
 
           <div className="bottom-line">
             { Object.keys( details ).map( suiteKey => ( <div key={ `k${ counter++ }` } className="test-report__suite">
