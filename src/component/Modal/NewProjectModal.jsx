@@ -163,7 +163,7 @@ export class NewProjectModal extends AbstractForm {
 
             <If exp={ this.state.displayFilename }>
               <p>Suggested filename { " " } <b className="color--primary">
-                  <i id="cNewSuiteModalFilenamePreview">{ this.state.displayFilename }.json</i></b>
+                <i id="cNewSuiteModalFilenamePreview">{ this.state.displayFilename }.json</i></b>
               </p>
             </If>
 

@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
 import { Form, Modal, Button, Input } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
-import If from "component/Global/If";
-import { normalizeFilename } from "service/io";
 import * as classes from "./classes";
 
 /*eslint no-useless-escape: 0*/
@@ -45,15 +43,15 @@ export class EditTargetsAsCsvModal extends AbstractForm {
       const data = values.csv.split( "\n" )
         .filter( line => line.trim() )
         .map( line => {
-            const chunks = line.split( "," ),
-                  target = chunks.shift(),
-                  selector = chunks.join( "," );
+          const chunks = line.split( "," ),
+                target = chunks.shift(),
+                selector = chunks.join( "," );
 
-            return {
-              target,
-              selector
-            };
-          });
+          return {
+            target,
+            selector
+          };
+        });
 
       clearTarget();
       data.forEach( chunk => {
@@ -66,7 +64,7 @@ export class EditTargetsAsCsvModal extends AbstractForm {
   render() {
     const { isVisible, targets } = this.props,
           initialValue = Object.values( targets )
-              .map( row => `${ row.target },${ row.selector }` ).join( "\n" ),
+            .map( row => `${ row.target },${ row.selector }` ).join( "\n" ),
           { getFieldDecorator, getFieldsError } = this.props.form;
 
     return (
@@ -90,7 +88,7 @@ export class EditTargetsAsCsvModal extends AbstractForm {
         >
 
           <Form>
-           <FormItem  label="Targets">
+            <FormItem  label="Targets">
               { getFieldDecorator( "csv", {
                 initialValue,
                 rules: [{
