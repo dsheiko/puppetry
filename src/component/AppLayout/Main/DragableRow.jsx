@@ -2,6 +2,8 @@ import React from "react";
 import { DragDropContext, DragSource, DropTarget } from "react-dnd";
 import HTML5Backend from "react-dnd-html5-backend";
 
+/* eslint react/prop-types: 0 */
+
 function dragDirection( dragIndex, hoverIndex, initialClientOffset, clientOffset, sourceClientOffset ) {
   const hoverMiddleY = ( initialClientOffset.y - sourceClientOffset.y ) / 2,
         hoverClientY = clientOffset.y - sourceClientOffset.y;

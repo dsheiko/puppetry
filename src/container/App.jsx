@@ -35,7 +35,10 @@ export class App extends React.Component {
     action: PropTypes.shape({
       loadProject: PropTypes.func.isRequired,
       loadSettings: PropTypes.func.isRequired,
-      loadProjectFiles: PropTypes.func.isRequired
+      loadProjectFiles: PropTypes.func.isRequired,
+      checkRuntimeTestDirReady: PropTypes.func.isRequired,
+      checkNewVersion: PropTypes.func.isRequired,
+      updateApp: PropTypes.func.isRequired
     }),
     store: PropTypes.object
   }

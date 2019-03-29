@@ -74,7 +74,7 @@ export class ParamsFormBuilder extends React.Component {
         placeholder={ item.placeholder }
         rows={ 4 } /> );
     case FILE:
-        return ( <Input onClick={ this.onClickSelectFile } disabled  /> );
+      return ( <Input onClick={ this.onClickSelectFile } disabled  /> );
     case SELECT:
       return ( <Select
         showSearch
@@ -137,7 +137,7 @@ export class ParamsFormBuilder extends React.Component {
         { getFieldDecorator( item.name, decoratorOptions )( this.renderControl( item ) ) }
         { item.description ? <div className="command-opt-description">{ item.description }</div> : "" }
         { item.control === FILE && <Button
-            onClick={ ( e ) => this.onClickSelectFile( e, item ) }>Select file</Button>
+          onClick={ ( e ) => this.onClickSelectFile( e, item ) }>Select file</Button>
         }
       </FormItem> );
   }

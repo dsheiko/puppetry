@@ -183,7 +183,7 @@ export class AppLayout extends React.Component {
           isVisible={ store.app.editTargetsAsCsvModal }
           targets={ store.suite.targets }
           action={ action }
-          />
+        />
 
 
       </ErrorBoundary>

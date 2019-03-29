@@ -45,7 +45,7 @@ describe( "Main Navigation", () => {
 
     test( "check items availability", async () => {
       await ctx.client.click( "#cWelcomeDemoProjectBtn" );
-      await ctx.client.pause( 500 );
+      await ctx.client.pause( 800 );
       // update component
       await ctx.client.moveToObject( "#cMainMenuFile" );
 

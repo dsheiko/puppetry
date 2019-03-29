@@ -48,11 +48,11 @@ export class TestReport extends AbstractComponent {
       this.runtimeTemp = getRuntimeTestPath();
       this.setState({ loading: true });
       const specList = await exportProject(
-        this.props.projectDirectory,
-        this.runtimeTemp,
-        this.props.checkedList,
-        this.props.headless ),
-      res = ipcRenderer.sendSync( E_RUN_TESTS, this.runtimeTemp, specList );
+              this.props.projectDirectory,
+              this.runtimeTemp,
+              this.props.checkedList,
+              this.props.headless ),
+            res = ipcRenderer.sendSync( E_RUN_TESTS, this.runtimeTemp, specList );
 
       this.setState({
         loading: false,
@@ -158,7 +158,6 @@ export class TestReport extends AbstractComponent {
           <div>{ report.success
             ? ( <div className="tr-badge is-ok">PASSED</div> )
             : ( <div className="tr-badge is-fail">FAILED</div> ) }</div>
-
 
 
           { ( stdErr && !report.success ) && <Collapse>
