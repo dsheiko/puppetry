@@ -50,7 +50,7 @@ function buildAppMenu( win, projectDirectory = null, suiteFilename = null, files
           }
         },
         {
-          label: "Export Project...",
+          label: "Export Project for CI...",
           enabled: Boolean( projectDirectory ),
           click () {
             win.send( E_MENU_EXPORT_PROJECT );

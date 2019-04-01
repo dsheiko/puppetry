@@ -234,7 +234,7 @@ export class MainMenu extends React.Component {
                 onClick={ this.onOpenSuite }>Open Suite...</Menu.Item>
               <Menu.Item key="7" disabled={ !projectDirectory } id="cMainMenuExportProject"
                 onClick={ this.onExportProject }>
-                Export Project... { " " }<kbd>{ ostr( "Ctrl-Shift-E" ) }</kbd></Menu.Item>
+                Export Project for CI... { " " }<kbd>{ ostr( "Ctrl-Shift-E" ) }</kbd></Menu.Item>
               <Menu.Item key="8">Exit</Menu.Item>
 
             </SubMenu>
