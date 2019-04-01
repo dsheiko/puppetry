@@ -1,7 +1,9 @@
 import update from "immutability-helper";
 
 export function isTargetNotUnique( state, payload ) {
-  return Boolean( Object.values( state.suite.targets ).find( item => item.target === payload.target ) );
+  return Boolean( Object.values( state.suite.targets )
+    .filter( item => item.id !== payload.id )
+    .find( item => item.target === payload.target ) );
 }
 
 export function getCommandsFlat( groups ) {
