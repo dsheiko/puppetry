@@ -14,8 +14,7 @@ ${ value }
     `You can access in your code Puppeteer Browser instance as 'bs', Page instance as 'bs.page'.`,
     `All the available methods asynchronous so you shall use them as 'await bs.page.goto( url );'`,
     `Element handlers corresponding your defined targets you can reach like 'await TARGET_NAME()'.`,
-    `For example 'await ( await INPUT_FNAME() ).type( "Jon" );' Where 'png' function is an available helper
-  to build a valid file path the title.`,
+    `For example 'await ( await INPUT_FNAME() ).type( "Jon" );'`,
     `Besides you can use Node.js modules. E.g. 'require( "http" ).request(..)'`,
     `Jest API is also available, so you can go with 'describe()', 'test()', 'expect()' and so on`
   ],

@@ -53,6 +53,7 @@ export class TabGroup extends React.Component {
                 targets={ store.suite.targets }
                 projectDirectory={ store.settings.projectDirectory }
                 headless={ store.app.headless }
+                launcherArgs={ store.app.launcherArgs }
                 checkedList={ store.app.checkedList } />
             </TabPane> )
           };

@@ -51,7 +51,9 @@ export class TestReport extends AbstractComponent {
               this.props.projectDirectory,
               this.runtimeTemp,
               this.props.checkedList,
-              this.props.headless ),
+              this.props.headless,
+              this.props.launcherArgs
+            ),
             res = ipcRenderer.sendSync( E_RUN_TESTS, this.runtimeTemp, specList );
 
       this.setState({

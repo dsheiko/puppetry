@@ -756,3 +756,16 @@ td:hover .editable-cell-icon {
 .ant-table-footer__toolbar button + button {
   margin-left: 8px;
 }
+
+.run-in-browser__layout {
+  display: flex;
+  justify-content: space-between;
+}
+
+.run-in-browser__layout {
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.run-in-browser__layout .ant-form-item-label label {
+  color: rgba(0, 0, 0, 0.65);
+}
