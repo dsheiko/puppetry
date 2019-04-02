@@ -7,8 +7,7 @@ import AbstractComponent from "component/AbstractComponent";
 import If from "component/Global/If";
 import * as classes from "./classes";
 
-const CheckboxGroup = Checkbox.Group,
-      { TextArea } = Input;
+const CheckboxGroup = Checkbox.Group;
 
 /**
  * Adds/removes args in the launcher args string
@@ -107,8 +106,7 @@ export class TestReportModal extends AbstractComponent {
     e.preventDefault();
     const { files, currentSuite } = this.props,
           current = files.find( file => currentSuite === file ),
-          checkedList = this.state.modified  ? this.state.checkedList : [ current ],
-          launcherArgs = this.inputLauncherArgsRef.current.value;
+          checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
     this.props.action.updateApp({
       checkedList,
@@ -156,35 +154,36 @@ export class TestReportModal extends AbstractComponent {
             <div className="bottom-line run-in-browser">
               <div className="run-in-browser__layout">
                 <div>
-                <Switch checkedChildren="On" unCheckedChildren="Off" onChange={ this.onSwitchChange } />
-                { " " } run in browser <Tooltip
-                  title={ "By default the tests are running in headless mode (faster). "
+                  <Switch checkedChildren="On" unCheckedChildren="Off" onChange={ this.onSwitchChange } />
+                  { " " } run in browser <Tooltip
+                    title={ "By default the tests are running in headless mode (faster). "
                     + "But you can switch for browser mode and see what is really hapenning on the page" }
-                  icon="question-circle"
-                />
+                    icon="question-circle"
+                  />
                 </div>
                 { !this.state.headless && <div>
-                { " " } <Checkbox
-                  onChange={ this.onCheckMaximize }
-                >
+                  { " " } <Checkbox
+                    onChange={ this.onCheckMaximize }
+                  >
                     maximized
-                </Checkbox>
+                  </Checkbox>
 
-                { " " } <Checkbox
-                  onChange={ this.onCheckFullscreen }
-                >
+                  { " " } <Checkbox
+                    onChange={ this.onCheckFullscreen }
+                  >
                     fullscreen
-                </Checkbox>
+                  </Checkbox>
                 </div> }
 
               </div>
               { !this.state.headless && <div>
                 <div className="ant-form-item-label">
-                <label htmlFor="target" title="Additional arguments">
+                  <label htmlFor="target" title="Additional arguments">
                   Additional arguments to pass to the browser{ " " }
-                  <a
-                    onClick={ this.onExtClick }
-                    href="http://peter.sh/experiments/chromium-command-line-switches/">(list of available options)</a></label>
+                    <a
+                      onClick={ this.onExtClick }
+                      href="http://peter.sh/experiments/chromium-command-line-switches/">
+                      (list of available options)</a></label>
                 </div>
                 <Input
                   onChange={ this.onChangeLauncherArgs }
