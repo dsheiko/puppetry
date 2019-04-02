@@ -1,14 +1,32 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Alert, Checkbox, Modal, Button, Switch } from "antd";
+import { Alert, Checkbox, Modal, Button, Switch, Input } from "antd";
 import Tooltip from "component/Global/Tooltip";
 import ErrorBoundary from "component/ErrorBoundary";
+import AbstractComponent from "component/AbstractComponent";
 import If from "component/Global/If";
 import * as classes from "./classes";
 
-const CheckboxGroup = Checkbox.Group;
+const CheckboxGroup = Checkbox.Group,
+      { TextArea } = Input;
 
-export class TestReportModal extends React.Component {
+/**
+ * Adds/removes args in the launcher args string
+ * @param {String} launcherArgs
+ * @param {String} value
+ * @param {Boolean} toggle
+ * @returns {String}
+ */
+export function updateLauncherArgs( launcherArgs, value, toggle ) {
+  if ( toggle ) {
+    return ( launcherArgs + ` ${ value } ` ).trim();
+  }
+  const re = new RegExp( `\\s?${ value }\\s?` );
+  return launcherArgs.replace( re, " " ).trim();
+}
+
+
+export class TestReportModal extends AbstractComponent {
 
   static propTypes = {
     action:  PropTypes.shape({
@@ -26,7 +44,14 @@ export class TestReportModal extends React.Component {
     indeterminate: true,
     checkAll: false,
     modified: false,
-    headless: true
+
+    headless: true,
+    launcherArgs: ""
+  }
+
+  constructor( props ) {
+    super( props );
+    this.inputLauncherArgsRef = React.createRef();
   }
 
   onChange = ( checkedList ) => {
@@ -55,6 +80,24 @@ export class TestReportModal extends React.Component {
     });
   }
 
+  onCheckMaximize = ( e ) => {
+    this.setState({
+      launcherArgs: updateLauncherArgs( this.state.launcherArgs, `--start-maximized`, e.target.checked )
+    });
+  }
+
+  onCheckFullscreen = ( e ) => {
+    this.setState({
+      launcherArgs: updateLauncherArgs( this.state.launcherArgs, `--start-fullscreen`, e.target.checked )
+    });
+  }
+
+  onChangeLauncherArgs = ( e ) => {
+    this.setState({
+      launcherArgs: e.target.value
+    });
+  }
+
   onClickCancel = ( e ) => {
     e.preventDefault();
     this.props.action.updateApp({ testReportModal: false });
@@ -64,9 +107,15 @@ export class TestReportModal extends React.Component {
     e.preventDefault();
     const { files, currentSuite } = this.props,
           current = files.find( file => currentSuite === file ),
-          checkedList = this.state.modified  ? this.state.checkedList : [ current ];
+          checkedList = this.state.modified  ? this.state.checkedList : [ current ],
+          launcherArgs = this.inputLauncherArgsRef.current.value;
 
-    this.props.action.updateApp({ checkedList, testReportModal: false, headless: this.state.headless });
+    this.props.action.updateApp({
+      checkedList,
+      testReportModal: false,
+      headless: this.state.headless,
+      launcherArgs: this.state.launcherArgs
+    });
     this.props.action.removeAppTab( "testReport" );
     this.props.action.addAppTab( "testReport" );
   }
@@ -104,14 +153,47 @@ export class TestReportModal extends React.Component {
         >
 
           <If exp={ files.length }>
-            <div className="bottom-line">
-              <Switch checkedChildren="On" unCheckedChildren="Off" onChange={ this.onSwitchChange } />
-              { " " } run in browser <Tooltip
-                title={ "By default the tests are running in headless mode (faster). "
-                  + "But you can switch for browser mode and see what is really hapenning on the page" }
-                icon="question-circle"
-              />
+            <div className="bottom-line run-in-browser">
+              <div className="run-in-browser__layout">
+                <div>
+                <Switch checkedChildren="On" unCheckedChildren="Off" onChange={ this.onSwitchChange } />
+                { " " } run in browser <Tooltip
+                  title={ "By default the tests are running in headless mode (faster). "
+                    + "But you can switch for browser mode and see what is really hapenning on the page" }
+                  icon="question-circle"
+                />
+                </div>
+                { !this.state.headless && <div>
+                { " " } <Checkbox
+                  onChange={ this.onCheckMaximize }
+                >
+                    maximized
+                </Checkbox>
+
+                { " " } <Checkbox
+                  onChange={ this.onCheckFullscreen }
+                >
+                    fullscreen
+                </Checkbox>
+                </div> }
+
+              </div>
+              { !this.state.headless && <div>
+                <div className="ant-form-item-label">
+                <label htmlFor="target" title="Additional arguments">
+                  Additional arguments to pass to the browser{ " " }
+                  <a
+                    onClick={ this.onExtClick }
+                    href="http://peter.sh/experiments/chromium-command-line-switches/">(list of available options)</a></label>
+                </div>
+                <Input
+                  onChange={ this.onChangeLauncherArgs }
+                  ref={ this.inputLauncherArgsRef }
+                  value={ this.state.launcherArgs }
+                  placeholder="--start-maximized --ignore-certificate-errors" />
+              </div> }
             </div>
+
             <p>Please select suites to run:</p>
             <div className="bottom-line">
               <Checkbox

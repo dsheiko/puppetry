@@ -16,19 +16,24 @@ class BrowserSession {
    * Obtain browser and page object on bootstrap
    */
   async setup() {
-    this.browser = await puppeteer.launch(
-       // when called like DEBUG=true jest open in a browser
-       process.env.RUN_IN_BROWSER
-        ? {
-            headless: false,
-            slowMo: 40,
-            devtools: false
-          }
-        : {
-          headless: true,
+    // when called like DEBUG=true jest open in a browser
+    const options = process.env.PUPPETEER_RUN_IN_BROWSER
+      ? {
+          headless: false,
+          slowMo: 40,
           devtools: false
         }
-    );
+      : {
+        headless: true,
+        devtools: false
+      },
+    launcherArgs = process.env.PUPPETEER_LAUNCHER_ARGS;
+
+    if ( launcherArgs ) {
+      options.args = launcherArgs.split( " " );
+    }
+
+    this.browser = await puppeteer.launch( options  );
     this.page = await this.browser.newPage();
   }
 

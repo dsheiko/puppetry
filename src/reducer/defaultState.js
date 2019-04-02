@@ -48,6 +48,7 @@ const DEFAULT_STATE = {
 
     checkedList: [],
     headless: true,
+    launcherArgs: "",
 
     // Dynamic info coming not from project file, but from file watcher
     project: {

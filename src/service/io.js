@@ -80,9 +80,12 @@ export async function exportSuite( projectDirectory, filename ) {
  * @param {String} outputDirectory
  * @param {String[]} suiteFiles ["foo.json",..]
  * @param {Boolean} headless
+ * @param {String} launcherArgs
  * @returns {String[]} - ["foo.spec.js",..]
  */
-export async function exportProject( projectDirectory, outputDirectory, suiteFiles, headless ) {
+export async function exportProject(
+  projectDirectory, outputDirectory, suiteFiles, headless, launcherArgs
+) {
   const testDir = join( outputDirectory, "specs" ),
         specFiles = [],
         JEST_PKG = getJestPkgDirectory();
@@ -95,9 +98,11 @@ export async function exportProject( projectDirectory, outputDirectory, suiteFil
     shell.cp( "-RLf" , JEST_PKG + "/*", outputDirectory  );
 
     if ( !headless ) {
-      const browserSession = join( outputDirectory, "lib/BrowserSession.js" ),
-            text = await readFile( browserSession, "utf8" );
-      await writeFile( browserSession, text.replace( "process.env.RUN_IN_BROWSER", "true" ), "utf8" );
+      const browserSession = join( outputDirectory, "lib/BrowserSession.js" );
+      let text = await readFile( browserSession, "utf8" );
+      text = text.replace( "process.env.PUPPETEER_RUN_IN_BROWSER", "true" );
+      text = text.replace( /process\.env\.PUPPETEER_LAUNCHER_ARGS/g, JSON.stringify( launcherArgs ) );
+      await writeFile( browserSession, text, "utf8" );
     }
 
     for ( const filename of suiteFiles ) {
