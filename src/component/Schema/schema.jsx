@@ -27,6 +27,7 @@ import { assertHtml } from "./Params/Element/assertHtml";
 import { focus } from "./Params/Element/focus";
 import { click } from "./Params/Element/click";
 import { hover } from "./Params/Element/hover";
+import { reset } from "./Params/Element/reset";
 import { select } from "./Params/Element/select";
 import { assertBoundingBox } from "./Params/Element/assertBoundingBox";
 import { assertPosition } from "./Params/Element/assertPosition";
@@ -95,6 +96,7 @@ export const schema = {
     select,
     focus,
     click,
+    reset,
     upload,
     tap: tapElement,
     scroll: scrollElement,
