@@ -66,6 +66,7 @@ const methodLables = {
   },
   element: {
     upload: "attach a file to file input",
+    reset: "reset input or form",
     toggleClass: "toggle class",
     setAttribute: "set attribute",
     assertAttribute: "assert attribute",
