@@ -16,12 +16,12 @@ class BrowserSession {
    * Obtain browser and page object on bootstrap
    */
   async setup() {
-    // when called like DEBUG=true jest open in a browser
+    // when called like PUPPETEER_RUN_IN_BROWSER=true jest open in a browser
     const options = process.env.PUPPETEER_RUN_IN_BROWSER
       ? {
           headless: false,
           slowMo: 40,
-          devtools: false
+          devtools: Boolean( process.env.PUPPETEER_DEVTOOLS )
         }
       : {
         headless: true,

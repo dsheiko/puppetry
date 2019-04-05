@@ -88,18 +88,9 @@ export class TestReport extends AbstractComponent {
       return "";
     }
     const [ text ] = msg,
-          pureText = TestReport.removeAnsiColors( text );
-    // Internal exceptions
-    if ( text.startsWith( `Error: Cannot find target` ) )  {
-      const [ ex ] = text.split( "\n" );
-      return ex;
-    }
-    // External exception
-    if ( pureText.includes( " at Object.test" ) )  {
-      const [ ex ] = pureText.split( " at Object.test" );
-      return ex;
-    }
-    return pureText;
+          pureText = TestReport.removeAnsiColors( text ),
+          [ ex ] = text.split( "\n" );
+    return ex.length > 10 ? ex : pureText;
   }
 
   /*eslint no-control-regex: 0*/
@@ -128,6 +119,7 @@ export class TestReport extends AbstractComponent {
       return { ...payload, ...carry };
     }, {});
   }
+
 
   render() {
     const { report, loading, ok, stdErr } = this.state;
