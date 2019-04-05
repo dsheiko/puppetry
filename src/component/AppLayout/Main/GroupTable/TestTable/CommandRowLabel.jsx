@@ -56,6 +56,7 @@ export class CommandRowLabel extends React.Component {
        return `(num of "${ params.selector }" ${ OPERATOR_MAP[ assert.operator ] } ${ assert.value })`;
      case "assertContent":
      case "assertTitle":
+     case "assertUrl":
        text = assert.value.length > 20 ? "..." : "";
        return assert.value ? `("${ assert.value.substr( 0, 20 ) + text }")` : "";
      case "assertScroll":

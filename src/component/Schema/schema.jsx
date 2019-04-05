@@ -3,6 +3,7 @@ import { screenshot } from "./Params/Page/screenshot";
 import { setViewport } from "./Params/Page/setViewport";
 import { assertContent } from "./Params/Page/assertContent";
 import { assertTitle } from "./Params/Page/assertTitle";
+import { assertUrl } from "./Params/Page/assertUrl";
 import { emulate } from "./Params/Page/emulate";
 import { click as clickPage } from "./Params/Page/click";
 import { tap as tapPage } from "./Params/Page/tap";
@@ -52,6 +53,7 @@ const methodLables = {
     press: "press a key",
     screenshot: "make screenshot",
     assertTitle: "assert page title",
+    assertUrl: "assert page URL",
     assertContent: "assert page HTML",
     waitFor: "wait for timeout",
     waitForSelector: "wait for selector",
@@ -133,6 +135,7 @@ export const schema = {
     runjs,
     debug,
     assertTitle,
+    assertUrl,
     assertContent,
     assertNodeCount,
     assertScroll: assertScrollPage
