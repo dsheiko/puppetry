@@ -67,9 +67,7 @@ module.exports = {
     }],
     // Control sanity of HTML anchors
     // https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/anchor-is-valid.md
-    "jsx-a11y/anchor-is-valid": [ "error", {
-        "aspects": [ "invalidHref" ]
-      } ],
+    "jsx-a11y/anchor-is-valid": "off",
     // The recommended options for this rule allow tabIndex on elements with the noninteractive tabpanel role.
     // https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-noninteractive-tabindex.md
     "jsx-a11y/no-noninteractive-tabindex": "off",

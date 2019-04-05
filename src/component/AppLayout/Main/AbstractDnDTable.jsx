@@ -27,8 +27,10 @@ export default class AbstractDnDTable extends React.Component {
 
   onContextMenu = ( e, record ) => {
     e.preventDefault();
+    if ( this.constructor.name === "TargetTable" ) {
+      return;
+    }
     const menu = new Menu();
-
 
     this.setState({ contextMenuAnchor: record.id });
     menu.on( "menu-will-close", () => {

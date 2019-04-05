@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, Popconfirm, Divider } from "antd";
+import { Icon, Menu, Dropdown, Button, Popconfirm, Divider } from "antd";
 import AbstractDnDTable from "./AbstractDnDTable";
 
 export default class AbstractEditableTable extends AbstractDnDTable {
@@ -108,6 +108,25 @@ export default class AbstractEditableTable extends AbstractDnDTable {
     });
   }
 
+  toggleEnable( record ) {
+    this.updateRecord({ id: record.id, disabled: !record.disabled });
+  }
+
+  getDropdownMenu( record ) {
+    return (
+      <Menu>
+        <Menu.Item>
+          <a role="menuitem" tabIndex={0}  onClick={ () => this.toggleEnable( record ) }>
+            { record.disabled ? "Enable" : "Disable" }
+          </a>
+        </Menu.Item>
+        <Menu.Item>
+          <a role="menuitem" tabIndex={0}  onClick={ () => this.cloneRecord( record ) }>Clone</a>
+        </Menu.Item>
+      </Menu>
+    );
+  }
+
   getActionColumn() {
     return {
       title: "Action",
@@ -145,6 +164,17 @@ export default class AbstractEditableTable extends AbstractDnDTable {
             <Popconfirm title="Sure to delete?" onConfirm={() => this.removeRecord( record.id )}>
               <a className="link--action">Delete</a>
             </Popconfirm>
+
+            { this.constructor.name !== "TargetTable" && <React.Fragment>
+              <Divider type="vertical" />
+
+              <Dropdown overlay={ this.getDropdownMenu( record ) }>
+                <a className="ant-dropdown-link" href="#">
+                  <Icon type="more" />
+                </a>
+              </Dropdown>
+            </React.Fragment> }
+
           </span>
         );
       }
