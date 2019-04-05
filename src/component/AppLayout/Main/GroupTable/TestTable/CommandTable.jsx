@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Icon, Button, Divider, Popconfirm } from "antd";
+import { Menu as AntdMenu, Dropdown, Table, Icon, Button, Divider, Popconfirm } from "antd";
 import AbstractDnDTable from "../../AbstractDnDTable";
 import { connectDnD } from "../../DragableRow";
 import { CommandRowLabel } from "./CommandRowLabel";
@@ -124,6 +124,25 @@ export class CommandTable extends AbstractDnDTable {
 
   }
 
+  toggleEnable( record ) {
+    this.updateRecord({ id: record.id, disabled: !record.disabled });
+  }
+
+  getDropdownMenu( record ) {
+    return (
+      <AntdMenu>
+        <AntdMenu.Item>
+          <a  role="menuitem" tabIndex={0} onClick={ () => this.toggleEnable( record ) }>
+            { record.disabled ? "Enable" : "Disable" }
+          </a>
+        </AntdMenu.Item>
+        <AntdMenu.Item>
+          <a role="menuitem" tabIndex={0} onClick={ () => this.cloneRecord( record ) }>Clone</a>
+        </AntdMenu.Item>
+      </AntdMenu>
+    );
+  }
+
   getActionColumn() {
     return {
       title: "Action",
@@ -134,10 +153,20 @@ export class CommandTable extends AbstractDnDTable {
         <a className="link--action"
           tabIndex={-1} role="button"
           onClick={ () => this.onEditCommand( record ) }>Edit</a>
+
         <Divider type="vertical" />
+
         <Popconfirm title="Sure to delete?" onConfirm={() => this.removeRecord( record.id )}>
           <a className="link--action" tabIndex={-2} role="button">Delete</a>
         </Popconfirm>
+
+        <Divider type="vertical" />
+
+        <Dropdown overlay={ this.getDropdownMenu( record ) }>
+          <a className="ant-dropdown-link" href="#">
+            <Icon type="more" />
+          </a>
+        </Dropdown>
       </span> )
     };
   }
