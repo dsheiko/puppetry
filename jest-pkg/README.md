@@ -18,3 +18,5 @@ You can pass additional arguments to pass to the browser instance by using env v
 npx cross-env PUPPETEER_RUN_IN_BROWSER=true PUPPETEER_LAUNCHER_ARGS="--start-maximized --ignore-certificate-errors" jest
 ```
 [List of Chromium Command Line Switches](https://peter.sh/experiments/chromium-command-line-switches/)
+
+Use `PUPPETEER_DEVTOOLS` env variable to enable DevTools

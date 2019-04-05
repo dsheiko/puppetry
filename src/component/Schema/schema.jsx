@@ -13,6 +13,7 @@ import { waitForSelector } from "./Params/Page/waitForSelector";
 import { press } from "./Params/Page/press";
 import { evaluate } from "./Params/Page/evaluate";
 import { runjs } from "./Params/Page/runjs";
+import { debug } from "./Params/Page/debug";
 import { scroll as scrollPage } from "./Params/Page/scroll";
 import { assertScroll as assertScrollPage } from "./Params/Page/assertScroll";
 
@@ -58,7 +59,8 @@ const methodLables = {
     assertNodeCount: "assert count of elements",
     assertScrollPage: "assert window scroll offset",
     evaluate: "evaluate JavaScript in the page context",
-    runjs: "run custom JavaScript in the suite"
+    runjs: "run custom JavaScript in the suite",
+    debug: "stop execution and call DevTools"
   },
   element: {
     upload: "attach a file to file input",
@@ -129,6 +131,7 @@ export const schema = {
     waitForNavigation,
     evaluate,
     runjs,
+    debug,
     assertTitle,
     assertContent,
     assertNodeCount,
