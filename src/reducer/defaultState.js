@@ -77,3 +77,39 @@ const DEFAULT_STATE = {
 };
 
 export default DEFAULT_STATE;
+
+
+export const groupDefaultState = ( id ) => ({
+  editing: false,
+  id,
+  key: id,
+  title: "",
+  tests: {},
+  disabled: false
+});
+
+export const testDefaultState = ( id ) => ({
+  editing: false,
+  id,
+  key: id,
+  title: "",
+  commands: {},
+  disabled: false
+});
+
+export const commandDefaultState = ( id ) => ({
+  editing: false,
+  id,
+  key: id,
+  target: "",
+  method: "",
+  assert: "",
+  params: {},
+  disabled: false
+});
+
+export const normalizeAdjacentPayload = ( payload ) => {
+  delete payload.options.id;
+  delete payload.options.key;
+  return payload;
+};
