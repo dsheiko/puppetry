@@ -82,6 +82,15 @@ const STORAGE_KEY_SETTINGS = "settings",
          */
         ADD_GROUP: ( options ) => validate( "addGroupOptions", options ),
         /**
+         * @param {object} options = { title, editing }
+         * @param {object} position = { "after": ID }
+         * @returns {object}
+         */
+        INSERT_ADJACENT_GROUP: ( options, position ) => ({
+          position,
+          options
+        }),
+        /**
          * @param {object} options = { id, title, editing }
          * @returns {object}
          */
@@ -97,6 +106,15 @@ const STORAGE_KEY_SETTINGS = "settings",
          */
         ADD_TEST: ( options ) => validate( "addTestOptions", options ),
         /**
+         * @param {object} options = { title, editing }
+         * @param {object} position = { "after": ID }
+         * @returns {object}
+         */
+        INSERT_ADJACENT_TEST: ( options, position ) => ({
+          position,
+          options
+        }),
+        /**
          * @param {object} options = { groupId, id, title, editing }
          * @returns {object}
          */
@@ -111,6 +129,15 @@ const STORAGE_KEY_SETTINGS = "settings",
          * @returns {object}
          */
         ADD_COMMAND: ( options ) => validate( "addCommandOptions", options ),
+        /**
+         * @param {object} options = { title, editing }
+         * @param {object} position = { "after": ID }
+         * @returns {object}
+         */
+        INSERT_ADJACENT_COMMAND: ( options, position ) => ({
+          position,
+          options
+        }),
         /**
          * @param {object} options = { testId, groupId, id, target, method, editing }
          * @returns {object}
@@ -339,9 +366,11 @@ actions.closeApp = () => async ( dispatch, getState ) => {
  */
 actions.cloneCommand = ( command, options = {}) => async ( dispatch, getState ) => {
   const groups = getState().suite.groups,
-        source = groups[ command.groupId ].tests[ command.testId ].commands[ command.id ];
-
-  dispatch( actions.addCommand({ ...source, ...options }) );
+        source = groups[ command.groupId ].tests[ command.testId ].commands[ command.id ],
+        merged = { ...source, ...options },
+        position = { after: command.id };
+  dispatch( actions.insertAdjacentCommand( merged, position ));
+  //dispatch( actions.addCommand({ ...source, ...options }) );
 };
 
 /**
@@ -359,9 +388,11 @@ actions.cloneTest = ( test, options = {}) => async ( dispatch, getState ) => {
             $set: {}
           }
         }),
-        clone = { ...source, ...options, id, key: id };
-
-  dispatch( actions.updateTest( clone ) );
+        clone = { ...source, ...options, id, key: id },
+        merged = { ...source, ...options },
+        position = { after: test.id };
+  dispatch( actions.insertAdjacentTest( merged, position ));
+  //dispatch( actions.updateTest( clone ) );
   Object.values( prototype.commands ).forEach( command => {
     dispatch( actions.cloneCommand( command, { testId: id, groupId: clone.groupId }) );
   });
@@ -380,9 +411,12 @@ actions.cloneGroup = ( group ) => async ( dispatch, getState ) => {
           tests: {
             $set: {}
           }
-        });
+        }),
+        merged = { ...source, id, key: id },
+        position = { after: group.id };
 
-  dispatch( actions.updateGroup({ ...source, id, key: id }) );
+  const res = dispatch( actions.insertAdjacentGroup( merged, position ));
+  //dispatch( actions.updateGroup({ ...source, id, key: id }) );
   Object.values( prototype.tests ).forEach( test => {
     dispatch( actions.cloneTest( test, { groupId: id }) );
   });

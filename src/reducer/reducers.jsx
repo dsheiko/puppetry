@@ -2,7 +2,12 @@ import uniqid from "uniqid";
 import { handleActions } from "redux-actions";
 import actions from "../action/actions";
 import update from "immutability-helper";
-import DEFAULT_STATE from "./defaultState";
+import DEFAULT_STATE, {
+  groupDefaultState,
+  testDefaultState,
+  commandDefaultState,
+  normalizeAdjacentPayload
+} from "./defaultState";
 import { getTestsFlat, getCommandsFlat, transferTest, transferCommand, isTargetNotUnique } from "./helpers";
 
 
@@ -217,19 +222,40 @@ export const reducer = handleActions(
           $apply: ( ref ) => {
             const groups = { ...ref },
                   id = uniqid(),
-                  defaultState = {
-                    editing: false,
-                    id,
-                    key: id,
-                    title: "",
-                    tests: {},
-                    disabled: false
-                  };
+                  defaultState = groupDefaultState( id );
             groups[ id ] = { ...defaultState, ...payload };
             return groups;
           }
         }
       }}),
+
+    // insert after/before
+    // payload{ options, position }
+    [ actions.insertAdjacentGroup ]: ( state, { payload }) => {
+      const { options, position } = normalizeAdjacentPayload( payload ),
+            { groups }  = state.suite,
+
+      entities = Object.values( groups ).reduce(( carry, group ) => {
+        if ( position.before && position.before === group.id ) {
+          const id = uniqid();
+          carry[ id ] = { ...groupDefaultState( id ), ...options };
+        }
+        carry[ group.id ] = group;
+        if ( position.after && position.after === group.id ) {
+          const id = uniqid();
+          carry[ id ] = { ...groupDefaultState( id ), ...options };
+        }
+        return carry;
+      }, {});
+
+      return update( state, {
+        suite: {
+          groups: {
+            $set: entities
+          }
+        }
+      });
+    },
 
     [ actions.swapGroup ]: ( state, { payload }) => {
       const srcArr = Object.values( state.suite.groups ),
@@ -279,22 +305,46 @@ export const reducer = handleActions(
             tests: {
               $apply: ( ref ) => {
                 const tests = { ...ref },
-                      id = uniqid(),
-                      defaultState = {
-                        editing: false,
-                        id,
-                        key: id,
-                        title: "",
-                        commands: {},
-                        disabled: false
-                      };
-                tests[ id ] = { ...defaultState, ...payload };
+                      id = uniqid();
+                tests[ id ] = { ...testDefaultState( id ), ...payload };
                 return tests;
               }
             }
           }
         }
       }}),
+
+    // insert after/before
+    // payload{ options, position }
+    [ actions.insertAdjacentTest ]: ( state, { payload }) => {
+      const { options, position } = normalizeAdjacentPayload( payload ),
+            { tests }  = state.suite.groups[ options.groupId ],
+
+      entities = Object.values( tests ).reduce(( carry, test ) => {
+        if ( position.before && position.before === test.id ) {
+          const id = uniqid();
+          carry[ id ] = { ...testDefaultState( id ), ...options };
+        }
+        carry[ test.id ] = test;
+        if ( position.after && position.after === test.id ) {
+          const id = uniqid();
+          carry[ id ] = { ...testDefaultState( id ), ...options };
+        }
+        return carry;
+      }, {});
+
+      return update( state, {
+        suite: {
+          groups: {
+            [ options.groupId ]: {
+              tests: {
+                $set: entities
+              }
+            }
+          }
+        }
+      });
+    },
 
     [ actions.swapTest ]: ( state, { payload }) => {
       const destGroupTests = Object.values( state.suite.groups[ payload.groupId ].tests ),
@@ -363,16 +413,7 @@ export const reducer = handleActions(
                   $apply: ( ref ) => {
                     const commands = { ...ref },
                           id = uniqid(),
-                          defaultState = {
-                            editing: false,
-                            id,
-                            key: id,
-                            target: "",
-                            method: "",
-                            assert: "",
-                            params: {},
-                            disabled: false
-                          };
+                          defaultState = commandDefaultState( id );
 
                     commands[ id ] = {
                       ...defaultState,
@@ -388,6 +429,44 @@ export const reducer = handleActions(
           }
         }
       }}),
+
+
+    // insert after/before
+    // payload{ options, position }
+    [ actions.insertAdjacentCommand ]: ( state, { payload }) => {
+      const { options, position } = normalizeAdjacentPayload( payload ),
+            { commands }  = state.suite.groups[ options.groupId ].tests[ options.testId ],
+
+      entities = Object.values( commands ).reduce(( carry, command ) => {
+        if ( position.before && position.before === command.id ) {
+          const id = uniqid();
+          carry[ id ] = { ...commandDefaultState( id ), ...options };
+        }
+        carry[ command.id ] = command;
+        if ( position.after && position.after === command.id ) {
+          const id = uniqid();
+          carry[ id ] = { ...commandDefaultState( id ), ...options };
+        }
+        return carry;
+      }, {});
+
+
+      return update( state, {
+        suite: {
+          groups: {
+            [ options.groupId ]: {
+              tests: {
+                 [ options.testId ]: {
+                    commands: {
+                      $set: entities
+                    }
+                  }
+              }
+            }
+          }
+        }
+      });
+    },
 
     [ actions.swapCommand ]: ( state, { payload }) => {
       const srcArr = Object.values( state.suite.groups[ payload.groupId ].tests[ payload.testId ].commands ),
