@@ -107,9 +107,3 @@ export const commandDefaultState = ( id ) => ({
   params: {},
   disabled: false
 });
-
-export const normalizeAdjacentPayload = ( payload ) => {
-  delete payload.options.id;
-  delete payload.options.key;
-  return payload;
-};

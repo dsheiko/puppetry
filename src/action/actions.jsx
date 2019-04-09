@@ -84,11 +84,13 @@ const STORAGE_KEY_SETTINGS = "settings",
         /**
          * @param {object} options = { title, editing }
          * @param {object} position = { "after": ID }
+         * @param {object} [id] - injected id for new entity
          * @returns {object}
          */
-        INSERT_ADJACENT_GROUP: ( options, position ) => ({
+        INSERT_ADJACENT_GROUP: ( options, position, id = null ) => ({
           position,
-          options
+          options,
+          id
         }),
         /**
          * @param {object} options = { id, title, editing }
@@ -102,17 +104,23 @@ const STORAGE_KEY_SETTINGS = "settings",
         REMOVE_GROUP: ( options ) => validate( "removeOptions", options ),
         /**
          * @param {object} options = { groupId, title, editing }
+         * @param {object} [id] - injected id for new entity
          * @returns {object}
          */
-        ADD_TEST: ( options ) => validate( "addTestOptions", options ),
+        ADD_TEST: ( options, id = null ) =>  ({
+          options,
+          id
+        }),
         /**
          * @param {object} options = { title, editing }
          * @param {object} position = { "after": ID }
+         * @param {object} [id] - injected id for new entity
          * @returns {object}
          */
-        INSERT_ADJACENT_TEST: ( options, position ) => ({
+        INSERT_ADJACENT_TEST: ( options, position, id = null ) => ({
           position,
-          options
+          options,
+          id
         }),
         /**
          * @param {object} options = { groupId, id, title, editing }
@@ -370,7 +378,6 @@ actions.cloneCommand = ( command, options = {}) => async ( dispatch, getState ) 
         merged = { ...source, ...options },
         position = { after: command.id };
   dispatch( actions.insertAdjacentCommand( merged, position ));
-  //dispatch( actions.addCommand({ ...source, ...options }) );
 };
 
 /**
@@ -381,20 +388,30 @@ actions.cloneCommand = ( command, options = {}) => async ( dispatch, getState ) 
  */
 actions.cloneTest = ( test, options = {}) => async ( dispatch, getState ) => {
   const groups = getState().suite.groups,
-        prototype = groups[ test.groupId ].tests[ test.id ],
+        source = groups[ test.groupId ].tests[ test.id ],
         id = uniqid(),
-        source = update( prototype, {
-          commands: {
-            $set: {}
-          }
-        }),
-        clone = { ...source, ...options, id, key: id },
         merged = { ...source, ...options },
         position = { after: test.id };
-  dispatch( actions.insertAdjacentTest( merged, position ));
-  //dispatch( actions.updateTest( clone ) );
-  Object.values( prototype.commands ).forEach( command => {
-    dispatch( actions.cloneCommand( command, { testId: id, groupId: clone.groupId }) );
+  dispatch( actions.insertAdjacentTest( merged, position, id ));
+  Object.values( source.commands ).forEach( command => {
+    dispatch( actions.addCommand( { ...command, testId: id, groupId: merged.groupId }) );
+  });
+};
+
+/**
+ * @private meant to be used only by cloneGroup
+ * @param {Object} test
+ * @param {Object} [options] - e.g. { groupId: "" }
+ * @returns {Function}
+ */
+actions.transferTest = ( test, options = {}) => async ( dispatch, getState ) => {
+  const groups = getState().suite.groups,
+        source = groups[ test.groupId ].tests[ test.id ],
+        id = uniqid(),
+        merged = { ...source, ...options };
+  dispatch( actions.addTest( merged, id ));
+  Object.values( source.commands ).forEach( command => {
+    dispatch( actions.addCommand( { ...command, testId: id, groupId: options.groupId }) );
   });
 };
 
@@ -405,20 +422,14 @@ actions.cloneTest = ( test, options = {}) => async ( dispatch, getState ) => {
  */
 actions.cloneGroup = ( group ) => async ( dispatch, getState ) => {
   const suite = getState().suite,
-        prototype = suite.groups[ group.id ],
+        source = suite.groups[ group.id ],
         id = uniqid(),
-        source = update( prototype, {
-          tests: {
-            $set: {}
-          }
-        }),
         merged = { ...source, id, key: id },
         position = { after: group.id };
 
-  const res = dispatch( actions.insertAdjacentGroup( merged, position ));
-  //dispatch( actions.updateGroup({ ...source, id, key: id }) );
-  Object.values( prototype.tests ).forEach( test => {
-    dispatch( actions.cloneTest( test, { groupId: id }) );
+  dispatch( actions.insertAdjacentGroup( merged, position, id ));
+  Object.values( source.tests ).forEach( test => {
+    dispatch( actions.transferTest( test, { groupId: id }) );
   });
 };
 
