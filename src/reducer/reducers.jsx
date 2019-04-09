@@ -5,10 +5,17 @@ import update from "immutability-helper";
 import DEFAULT_STATE, {
   groupDefaultState,
   testDefaultState,
-  commandDefaultState,
-  normalizeAdjacentPayload
+  commandDefaultState
 } from "./defaultState";
-import { getTestsFlat, getCommandsFlat, transferTest, transferCommand, isTargetNotUnique } from "./helpers";
+import {
+  getTestsFlat,
+  getCommandsFlat,
+  transferTest,
+  transferCommand,
+  isTargetNotUnique,
+  normalizeComplexPayload,
+  normalizePayload
+} from "./helpers";
 
 
 export const reducer = handleActions(
@@ -223,7 +230,7 @@ export const reducer = handleActions(
             const groups = { ...ref },
                   id = uniqid(),
                   defaultState = groupDefaultState( id );
-            groups[ id ] = { ...defaultState, ...payload };
+            groups[ id ] = { ...defaultState, ...normalizePayload( payload ), tests: {} };
             return groups;
           }
         }
@@ -232,18 +239,18 @@ export const reducer = handleActions(
     // insert after/before
     // payload{ options, position }
     [ actions.insertAdjacentGroup ]: ( state, { payload }) => {
-      const { options, position } = normalizeAdjacentPayload( payload ),
+      const { options, position, id } = normalizeComplexPayload( payload ),
             { groups }  = state.suite,
 
       entities = Object.values( groups ).reduce(( carry, group ) => {
         if ( position.before && position.before === group.id ) {
-          const id = uniqid();
-          carry[ id ] = { ...groupDefaultState( id ), ...options };
+          const gid = id || uniqid();
+          carry[ gid ] = { ...groupDefaultState( gid ), ...options, tests: {} };
         }
         carry[ group.id ] = group;
         if ( position.after && position.after === group.id ) {
-          const id = uniqid();
-          carry[ id ] = { ...groupDefaultState( id ), ...options };
+          const gid = id || uniqid();
+          carry[ gid ] = { ...groupDefaultState( gid ), ...options, tests: {} };
         }
         return carry;
       }, {});
@@ -298,37 +305,42 @@ export const reducer = handleActions(
         }
       }}),
 
-    [ actions.addTest ]: ( state, { payload }) => update( state, {
-      suite: {
-        groups: {
-          [ payload.groupId ]: {
-            tests: {
-              $apply: ( ref ) => {
-                const tests = { ...ref },
-                      id = uniqid();
-                tests[ id ] = { ...testDefaultState( id ), ...payload };
-                return tests;
+    [ actions.addTest ]: ( state, { payload }) => {
+      const { options, position, id } = normalizeComplexPayload( payload ),
+            { tests }  = state.suite.groups[ options.groupId ],
+            merge = {},
+            gid = id || uniqid();
+
+      merge[ gid ] = { ...testDefaultState( gid ), ...options, commands: {} };
+
+      return update( state, {
+        suite: {
+          groups: {
+            [ options.groupId ]: {
+              tests: {
+                $merge: merge
               }
             }
           }
         }
-      }}),
+      });
+    },
 
     // insert after/before
     // payload{ options, position }
     [ actions.insertAdjacentTest ]: ( state, { payload }) => {
-      const { options, position } = normalizeAdjacentPayload( payload ),
+      const { options, position, id } = normalizeComplexPayload( payload ),
             { tests }  = state.suite.groups[ options.groupId ],
 
       entities = Object.values( tests ).reduce(( carry, test ) => {
         if ( position.before && position.before === test.id ) {
-          const id = uniqid();
-          carry[ id ] = { ...testDefaultState( id ), ...options };
+          const gid = id || uniqid();
+          carry[ gid ] = { ...testDefaultState( gid ), ...options, commands: {} };
         }
         carry[ test.id ] = test;
         if ( position.after && position.after === test.id ) {
-          const id = uniqid();
-          carry[ id ] = { ...testDefaultState( id ), ...options };
+          const gid = id || uniqid();
+          carry[ gid ] = { ...testDefaultState( gid ), ...options, commands: {} };
         }
         return carry;
       }, {});
@@ -414,12 +426,9 @@ export const reducer = handleActions(
                     const commands = { ...ref },
                           id = uniqid(),
                           defaultState = commandDefaultState( id );
-
                     commands[ id ] = {
                       ...defaultState,
-                      ...payload,
-                      id,
-                      key: id
+                      ...normalizePayload( payload )
                     };
                     return commands;
                   }
@@ -434,7 +443,7 @@ export const reducer = handleActions(
     // insert after/before
     // payload{ options, position }
     [ actions.insertAdjacentCommand ]: ( state, { payload }) => {
-      const { options, position } = normalizeAdjacentPayload( payload ),
+      const { options, position } = normalizeComplexPayload( payload ),
             { commands }  = state.suite.groups[ options.groupId ].tests[ options.testId ],
 
       entities = Object.values( commands ).reduce(( carry, command ) => {

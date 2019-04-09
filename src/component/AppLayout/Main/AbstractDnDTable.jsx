@@ -97,8 +97,13 @@ export default class AbstractDnDTable extends React.Component {
 
   cloneRecord = ( command ) => {
     const update = this.props.action[ `clone${this.model}` ];
-    update( command );
-    this.updateSuiteModified();
+    this.props.action.updateApp({ loading: true });
+    // give it a chance to render loading state
+    setTimeout(() => {
+      update( command );
+      this.updateSuiteModified();
+      this.props.action.updateApp({ loading: false });
+    }, 200 );
   }
 
   /**
