@@ -6,6 +6,7 @@ import { CommandRowLabel } from "./CommandRowLabel";
 import ErrorBoundary from "component/ErrorBoundary";
 import { confirmDeleteEntity } from "service/smalltalk";
 import { remote } from "electron";
+import classNames from "classnames";
 
 const { Menu, MenuItem } = remote;
 
@@ -172,7 +173,11 @@ export class CommandTable extends AbstractDnDTable {
   }
 
   onRowClassName = ( record ) => {
-    return `model--command${ record.disabled ? " row-disabled" : "" } ` + this.getRightClickClassName( record );
+    return classNames({
+      "model--command" : true,
+      "row-disabled": record.disabled,
+      "row-failure": record.failure
+    }) + ` ` + this.getRightClickClassName( record );
   }
 
   render() {

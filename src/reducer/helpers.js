@@ -96,13 +96,21 @@ export function transferCommand( state, sourceCommand, targetCommand ) {
 }
 
 export const normalizeComplexPayload = ( payload ) => {
-  delete payload.options.id;
-  delete payload.options.key;
+  if ( "id" in  payload.options ) {
+    delete payload.options.id;
+  }
+  if ( "key" in  payload.options ) {
+    delete payload.options.key;
+  }
   return payload;
 };
 
 export const normalizePayload = ( payload ) => {
-  delete payload.id;
-  delete payload.key;
+  if ( "id" in  payload ) {
+    delete payload.id;
+  }
+  if ( "key" in  payload ) {
+    delete payload.key;
+  }
   return payload;
 };

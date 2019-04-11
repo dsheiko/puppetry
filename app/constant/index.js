@@ -38,3 +38,7 @@ exports.DEMO_PROJECT_DIRECTORY = "project-demo";
 exports.PUPPETRY_LOCK_FILE = "puppetry-lock.json";
 
 exports.TXT_PARAM_IS_REQUIRED = "Parameter is required";
+
+exports.COMMAND_ID_COMMENT = "// @puppetry-command-id=";
+exports.RUNNER_PUPPETRY = "RUNNER_PUPPETRY";
+exports.RUNNER_JEST = "RUNNER_JEST";

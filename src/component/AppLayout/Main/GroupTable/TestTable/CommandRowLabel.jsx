@@ -2,6 +2,7 @@ import log from "electron-log";
 import React from "react";
 import PropTypes from "prop-types";
 import { Icon } from "antd";
+import Tooltip from "component/Global/Tooltip";
 
 const OPERATOR_MAP = {
   gt: ">",
@@ -125,9 +126,14 @@ export class CommandRowLabel extends React.Component {
    render() {
      const { record } = this.props;
      return ( <div className="container--editable-cell">
+       <Tooltip
+         title={ record.failure }
+         icon="exclamation-circle"
+         pos="up" />
        <Icon type={ record.target === "page" ? "file" : "scan" } />
        <span className="token--target">{ record.target }</span>.{ record.method }
        <span className="token--param">{ CommandRowLabel.buildAddon( record ) }</span>
+
      </div> );
    }
 }

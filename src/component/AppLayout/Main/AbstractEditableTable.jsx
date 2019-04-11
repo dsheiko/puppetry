@@ -115,11 +115,12 @@ export default class AbstractEditableTable extends AbstractDnDTable {
   getDropdownMenu( record ) {
     return (
       <Menu>
-        <Menu.Item>
+        { ( typeof this.constructor.displayName === "undefined"
+          || this.constructor.displayName !== "TargetTable" ) && <Menu.Item>
           <a role="menuitem" tabIndex={0}  onClick={ () => this.toggleEnable( record ) }>
             { record.disabled ? "Enable" : "Disable" }
           </a>
-        </Menu.Item>
+        </Menu.Item> }
         <Menu.Item>
           <a role="menuitem" tabIndex={0}  onClick={ () => this.cloneRecord( record ) }>Clone</a>
         </Menu.Item>
@@ -165,15 +166,15 @@ export default class AbstractEditableTable extends AbstractDnDTable {
               <a className="link--action">Delete</a>
             </Popconfirm>
 
-            { this.constructor.name !== "TargetTable" && <React.Fragment>
-              <Divider type="vertical" />
 
-              <Dropdown overlay={ this.getDropdownMenu( record ) }>
-                <a className="ant-dropdown-link" href="#">
-                  <Icon type="more" />
-                </a>
-              </Dropdown>
-            </React.Fragment> }
+            <Divider type="vertical" />
+
+            <Dropdown overlay={ this.getDropdownMenu( record ) }>
+              <a className="ant-dropdown-link" href="#">
+                <Icon type="more" />
+              </a>
+            </Dropdown>
+
 
           </span>
         );
