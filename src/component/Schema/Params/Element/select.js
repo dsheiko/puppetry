@@ -15,7 +15,7 @@ export const select = {
         {
           name: "params.value",
           control: INPUT,
-          label: "Text of an option to look for",
+          label: "Text of an option value to look for",
           help: "",
           placeholder: "e.g. foo",
           initialValue: "",

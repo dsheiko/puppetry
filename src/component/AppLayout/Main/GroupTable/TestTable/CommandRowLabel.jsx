@@ -77,6 +77,8 @@ export class CommandRowLabel extends React.Component {
        case "assertAttribute":
        case "toggleClass":
          return `("${ params.name }")`;
+       case "setAttribute":
+         return `("${ params.name }", "${ params.value }")`;
        case "assertStyle":
          return `("${ params.name }", "${ params.pseudo || "null" }")`;
        case "assertContainsClass":

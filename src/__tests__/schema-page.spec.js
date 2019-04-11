@@ -339,5 +339,45 @@ describe( "Schema.page (templates generate valid JavaScript)", () => {
     });
   });
 
+  describe( "runjs.template", () => {
+
+    it( "with code", () => {
+      const code = schema.page.runjs.template({
+        target: "page",
+        params: {
+          value: `const foo = "FOO";
+          const bar = "BAR";
+`
+        }
+      });
+      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    });
+  });
+
+  describe( "debug.template", () => {
+
+    it( "with code", () => {
+      const code = schema.page.debug.template({
+        target: "page"
+      });
+      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    });
+  });
+
+
+  describe( "assertUrl.template", () => {
+
+    it( "with code", () => {
+      const code = schema.page.assertUrl.template({
+        target: "page",
+        assert: {
+          assertion: "equals",
+          value: "VALUE"
+        }
+      });
+      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    });
+  });
+
 
 });

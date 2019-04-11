@@ -69,8 +69,10 @@ describe( "New Project", () => {
 //    expect( await ctx.client.isExisting( S.MODAL_NEW_SUITE ) ).toBeTruthy();
 //  });
 
-  test( "app opens New Suite modal by clicking Create on Info page", async() => {
+  test( "app opens New Suite modal by clicking in main menu", async() => {
     // update component (move mouse cursor)
+    expect( await ctx.client.isExisting( "#cMainMenuFile" ) ).toBeTruthy();
+    expect( await ctx.client.isExisting( "#cMainMenuNewSuite" ) ).toBeTruthy();
     await ctx.client.moveToObject( "#cMainMenuFile" );
     await ctx.client.click( "#cMainMenuNewSuite" );
     await ctx.client.pause( 100 );
