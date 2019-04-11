@@ -355,6 +355,36 @@ describe( "Schema.target", () => {
 
     });
 
+    describe( "upload.template", () => {
+
+      it( "returns valid JavaScript", () => {
+        const code = schema.element.upload.template({
+          target: FIX_TARGET,
+          method: "upload",
+          targetSeletor: ".foo",
+          params: {
+            path: "/var/file"
+          }
+        });
+        expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+      });
+
+    });
+
+     describe( "reset.template", () => {
+
+      it( "returns valid JavaScript", () => {
+        const code = schema.element.reset.template({
+          target: FIX_TARGET,
+          method: "reset",
+          targetSeletor: ".foo"
+        });
+        expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+      });
+
+    });
+
+
 //    describe( "assertScroll.template", () => {
 //
 //    it( "with assertion", () => {
