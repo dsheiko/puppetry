@@ -1,11 +1,13 @@
 import log from "electron-log";
 import { TestGeneratorError } from "error";
+import { COMMAND_ID_COMMENT, RUNNER_PUPPETRY } from "constant";
 
 export default class TestGenerator {
 
-  constructor( suite, schema, targets ) {
+  constructor( suite, schema, targets, runner ) {
     this.schema = schema;
     this.suite = { ...suite };
+    this.runner = runner;
     this.targets = Object.values( targets ).reduce( ( carry, entry ) => {
       carry[ entry.target ] = entry.selector;
       return carry;
@@ -18,6 +20,7 @@ export default class TestGenerator {
       .map( this.schema.jest.tplQuery ).join( "\n" );
   }
 
+
   parseCommand = ( command ) => {
     const { target, method, params, assert } = command,
           src = target === "page" ? "page" : "element";
@@ -25,13 +28,17 @@ export default class TestGenerator {
       if ( ! ( method in this.schema[ src ]) ) {
         return [];
       }
-      return this.schema[ src ][ method ].template({
+      const chunk = this.schema[ src ][ method ].template({
         target,
         assert,
         params,
         targetSeletor: this.targets[ target ],
         method
       });
+      // Provide source code with markers
+      return this.runner === RUNNER_PUPPETRY
+        ? `${ COMMAND_ID_COMMENT }${ command.groupId }:${ command.testId }:${ command.id }\n${ chunk }`
+        : chunk;
     } catch ( err ) {
       console.warn( "parseCommand error:", err, command );
       log.warn( `Renderer process: TestGenerator.parseCommand: ${ err }` );

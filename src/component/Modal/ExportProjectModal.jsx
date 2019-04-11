@@ -4,7 +4,7 @@ import { Alert, Checkbox, Modal, Button, message } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { exportProject, isDirEmpty } from "service/io";
 import BrowseDirectory from "component/Global/BrowseDirectory";
-import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS } from "constant";
+import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, RUNNER_JEST } from "constant";
 import If from "component/Global/If";
 import { TestGeneratorError } from "error";
 import { confirmExportProject } from "service/smalltalk";
@@ -81,7 +81,12 @@ export class ExportProjectModal extends React.Component {
     this.setState({ locked: true });
     this.props.action.saveSettings({ exportDirectory: selectedDirectory });
     try {
-      await exportProject( projectDirectory, selectedDirectory, checkedList, true );
+      await exportProject(
+        projectDirectory,
+        selectedDirectory,
+        checkedList,
+        { runner: RUNNER_JEST }
+      );
       message.info( `Project exported in ${ selectedDirectory }` );
       this.props.action.updateApp({ exportProjectModal: false });
     } catch ( err ) {

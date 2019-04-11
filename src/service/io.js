@@ -7,7 +7,14 @@ import { remote } from "electron";
 import log from "electron-log";
 import TestGenerator from "service/TestGenerator";
 import { schema } from "component/Schema/schema";
-import { PUPPETRY_LOCK_FILE, JEST_PKG_DIRECTORY, RUNTIME_TEST_DIRECTORY, DEMO_PROJECT_DIRECTORY } from "constant";
+import {
+  PUPPETRY_LOCK_FILE,
+  JEST_PKG_DIRECTORY,
+  RUNTIME_TEST_DIRECTORY,
+  DEMO_PROJECT_DIRECTORY,
+  COMMAND_ID_COMMENT,
+  RUNNER_PUPPETRY
+} from "constant";
 import findLogPath from "electron-log/lib/transports/file/find-log-path";
 
 const PROJECT_FILE_NAME = ".puppetryrc",
@@ -27,6 +34,31 @@ const PROJECT_FILE_NAME = ".puppetryrc",
       ];
 
 shell.config.fatal = true;
+
+function findCommandIdInCode( lines, pos ) {
+  while ( pos >= 0 && !lines[ pos ].startsWith( COMMAND_ID_COMMENT ) ) {
+    pos--;
+  }
+  return lines[ pos ];
+}
+
+export async function parseReportedFailures( reportedErrorPositions ) {
+  const commands = [];
+  for ( const [ file, errors ] of Object.entries( reportedErrorPositions ) ) {
+    const lines = ( await readFile( file, "utf8" ) ).split( "\n" ).map( line => line.trim() );
+    for ( const error of errors ) {
+      const match = findCommandIdInCode( lines, error.line - 1 ); // line 1 equals index 0
+      if ( !match.startsWith( COMMAND_ID_COMMENT ) ) {
+        return;
+      }
+      const idComment = match.substr( COMMAND_ID_COMMENT.length ),
+            [ groupId, testId, id ] = idComment.split( ":" );
+      commands.push({ groupId, testId, id, failure: error.message });
+    }
+  }
+  return commands;
+}
+
 
 export function normalizeFilename( str ) {
   const re = /[^a-zA-Z0-9_-]/g;
@@ -67,9 +99,9 @@ export function removeExport( exportDirectory ) {
  * @param {String} filename
  * @returns {String} - spec.js content
  */
-export async function exportSuite( projectDirectory, filename ) {
+export async function exportSuite( projectDirectory, filename, runner ) {
   const suite = await readSuite( projectDirectory, filename ),
-        gen = new TestGenerator( suite, schema, suite.targets );
+        gen = new TestGenerator( suite, schema, suite.targets, runner );
   return gen.generate();
 }
 
@@ -79,16 +111,21 @@ export async function exportSuite( projectDirectory, filename ) {
  * @param {String} projectDirectory
  * @param {String} outputDirectory
  * @param {String[]} suiteFiles ["foo.json",..]
- * @param {Boolean} headless
+ *
+ * @param {Object} headless
  * @param {String} launcherArgs
  * @returns {String[]} - ["foo.spec.js",..]
  */
 export async function exportProject(
-  projectDirectory, outputDirectory, suiteFiles, headless, launcherArgs
+  projectDirectory,
+  outputDirectory,
+  suiteFiles,
+  { headless = true, launcherArgs = "", runner = RUNNER_PUPPETRY }
 ) {
   const testDir = join( outputDirectory, "specs" ),
         specFiles = [],
         JEST_PKG = getJestPkgDirectory();
+
   let hasDebugger = false;
 
   try {
@@ -99,7 +136,7 @@ export async function exportProject(
     shell.cp( "-RLf" , JEST_PKG + "/*", outputDirectory  );
 
     for ( const filename of suiteFiles ) {
-      let specContent = await exportSuite( projectDirectory, filename );
+      let specContent = await exportSuite( projectDirectory, filename, runner );
       const specFilename = parse( filename ).name + ".spec.js",
             specPath = join( testDir, specFilename ),
             specHasDebugger = specContent.includes( " debugger;" );

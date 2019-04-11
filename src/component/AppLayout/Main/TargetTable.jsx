@@ -8,6 +8,8 @@ import ErrorBoundary from "component/ErrorBoundary";
 @connectDnD
 export class TargetTable extends AbstractEditableTable {
 
+  static displayName = "TargetTable";
+
   constructor( props ) {
     super( props );
 
@@ -90,4 +92,3 @@ export class TargetTable extends AbstractEditableTable {
     );
   }
 }
-

@@ -12,7 +12,8 @@ export default class AbstractDnDTable extends React.Component {
     action:  PropTypes.shape({
       swapTest: PropTypes.func,
       swapGroup: PropTypes.func,
-      swapCommand: PropTypes.func
+      swapCommand: PropTypes.func,
+      updateApp: PropTypes.func
     }),
 
     groupId: PropTypes.string.isRequired,
@@ -27,9 +28,7 @@ export default class AbstractDnDTable extends React.Component {
 
   onContextMenu = ( e, record ) => {
     e.preventDefault();
-    if ( this.constructor.name === "TargetTable" ) {
-      return;
-    }
+
     const menu = new Menu();
 
     this.setState({ contextMenuAnchor: record.id });
@@ -42,15 +41,17 @@ export default class AbstractDnDTable extends React.Component {
       click: () => this.onEdit( record )
     }) );
 
-    menu.append( new MenuItem(
-      record.disabled ? {
-        label: "Enable",
-        click: () => this.updateRecord({ id: record.id, disabled: false })
-      } : {
-        label: "Disable",
-        click: () => this.updateRecord({ id: record.id, disabled: true })
-      }
-    ) );
+    if ( typeof this.constructor.displayName === "undefined" || this.constructor.displayName !== "TargetTable" ) {
+      menu.append( new MenuItem(
+        record.disabled ? {
+          label: "Enable",
+          click: () => this.updateRecord({ id: record.id, disabled: false })
+        } : {
+          label: "Disable",
+          click: () => this.updateRecord({ id: record.id, disabled: true })
+        }
+      ) );
+    }
 
     menu.append( new MenuItem({
       label: "Clone",
@@ -99,7 +100,7 @@ export default class AbstractDnDTable extends React.Component {
     const update = this.props.action[ `clone${this.model}` ];
     this.props.action.updateApp({ loading: true });
     // give it a chance to render loading state
-    setTimeout(() => {
+    setTimeout( () => {
       update( command );
       this.updateSuiteModified();
       this.props.action.updateApp({ loading: false });

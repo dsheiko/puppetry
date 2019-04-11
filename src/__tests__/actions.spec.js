@@ -25,7 +25,7 @@ describe( "Actions", () => {
 
     it( "performs addTarget", () => {
       const res = actions.addTarget({ target: FIX_TITLE, selector: FIX_TITLE });
-      expect( res.payload.target ).toEqual( FIX_TITLE );
+      expect( res.payload.options.target ).toEqual( FIX_TITLE );
     });
 
     it( "validates addTarget", () => {
@@ -69,7 +69,7 @@ describe( "Actions", () => {
 
     it( "performs addGroup", () => {
       const res = actions.addGroup({ title: FIX_TITLE });
-      expect( res.payload.title ).toEqual( FIX_TITLE );
+      expect( res.payload.options.title ).toEqual( FIX_TITLE );
     });
 
     it( "validates addGroup", () => {
@@ -112,7 +112,7 @@ describe( "Actions", () => {
 
     it( "performs addTest", () => {
       const res = actions.addTest({ groupId: FIX_ID, title: FIX_TITLE });
-      expect( res.payload.title ).toEqual( FIX_TITLE );
+      expect( res.payload.options.title ).toEqual( FIX_TITLE );
     });
 
     it( "validates addTest", () => {

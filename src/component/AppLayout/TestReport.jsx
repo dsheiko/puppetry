@@ -5,7 +5,7 @@ import { E_RUN_TESTS } from "constant";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
-import { exportProject, getRuntimeTestPath } from "service/io";
+import { exportProject, getRuntimeTestPath, parseReportedFailures } from "service/io";
 import { millisecondsToStr } from "service/utils";
 import { Icon, Spin, Button, Collapse } from "antd";
 import { join } from "path";
@@ -27,12 +27,15 @@ export class TestReport extends AbstractComponent {
     action: PropTypes.shape({
       setError: PropTypes.func.isRequired,
       removeAppTab: PropTypes.func.isRequired,
-      saveSuite: PropTypes.func.isRequired
+      saveSuite: PropTypes.func.isRequired,
+      updateCommand: PropTypes.func.isRequired,
+      resetCommandFailures: PropTypes.func.isRequired
     })
   }
 
   state = {
     report: {},
+    details: {},
     stdErr: "",
     loading: true,
     ok: false
@@ -44,25 +47,35 @@ export class TestReport extends AbstractComponent {
 
   run = async () => {
     this.props.action.saveSuite();
+    this.props.action.resetCommandFailures();
     try {
+      // contains file:line:col from error report
+      this.reportedFailures = [];
       this.runtimeTemp = getRuntimeTestPath();
       this.setState({ loading: true });
       const specList = await exportProject(
               this.props.projectDirectory,
               this.runtimeTemp,
               this.props.checkedList,
-              this.props.headless,
-              this.props.launcherArgs
+              {
+                headless: this.props.headless,
+                launcherArgs: this.props.launcherArgs
+              }
             ),
             res = ipcRenderer.sendSync( E_RUN_TESTS, this.runtimeTemp, specList );
 
       this.setState({
         loading: false,
         report: res.report.results,
+        details: "testResults" in res.report.results ? this.getDetails( res.report.results.testResults ) : {},
         stdErr: res.stdErr,
         ok: true
       });
+
+      this.highlightErrorsInSuite();
+
     } catch ( err ) {
+      console.error( err );
       const message = err instanceof TestGeneratorError ? "Test parser error" : "Cannot run tests";
       this.props.action.setError({
         visible: true,
@@ -71,6 +84,19 @@ export class TestReport extends AbstractComponent {
       });
     }
 
+  }
+
+  async highlightErrorsInSuite() {
+    try {
+      console.log( this.reportedFailures );
+      const commands = await parseReportedFailures( this.reportedFailures );
+      console.log( commands );
+      commands.forEach( ({ id, groupId, testId, failure }) => this.props.action.updateCommand({
+        id, groupId, testId, failure
+      }) );
+    } catch ( err ) {
+      console.error( err );
+    }
   }
 
   componentDidMount() {
@@ -83,14 +109,39 @@ export class TestReport extends AbstractComponent {
    * @param {String[]} msg
    * @returns {String}
    */
-  static normalizeFailureMessages( msg ) {
+  normalizeFailureMessages( msg ) {
     if ( !msg || !msg.length ) {
       return "";
     }
     const [ text ] = msg,
-          pureText = TestReport.removeAnsiColors( text ),
-          [ ex ] = text.split( "\n" );
-    return ex.length > 10 ? ex : pureText;
+          [ ex, filePos ] = text.split( "\n" ),
+          errMessage = TestReport.removeAnsiColors( ex.length > 10 ? ex : text );
+
+    filePos && this.parseReportFailureLocationLine( filePos.trim(), errMessage.substr( 0, 80 ) );
+    return errMessage;
+  }
+
+  /**-
+   * Parse report lines like:
+   *  "at Object.somecrpa (/tmp/.runtime-test/specs/react-html5-form-valid.spec.js:46:7)"
+   * @param String filePos
+   * @param String message
+   */
+  parseReportFailureLocationLine( filePos, message ) {
+    const re = /\((.*):(\d+):(\d+)\)$/,
+          match = filePos.match( re );
+    if ( !match ) {
+      return;
+    }
+    const file = match[ 1 ],
+          line = match[ 2 ];
+    if ( !( file in this.reportedFailures ) ) {
+      this.reportedFailures[ file ] = [];
+    }
+    this.reportedFailures[ file ].push({
+      line,
+      message
+    });
   }
 
   /*eslint no-control-regex: 0*/
@@ -100,7 +151,7 @@ export class TestReport extends AbstractComponent {
     return msg.replace( re, "" );
   }
 
-  static getDetails( testResults ) {
+  getDetails( testResults ) {
     return testResults.reduce( ( payload, entry ) => {
       const carry = entry.testResults.reduce( ( carry, test ) => {
         const [ suite, describe ] = test.ancestorTitles;
@@ -108,7 +159,7 @@ export class TestReport extends AbstractComponent {
         carry[ suite ][ describe ] = describe in carry[ suite ] ? carry[ suite ][ describe ] : [];
         carry[ suite ][ describe ].push({
           duration: test.duration,
-          failureMessages: TestReport.normalizeFailureMessages( test.failureMessages ),
+          failureMessages: this.normalizeFailureMessages( test.failureMessages ),
           location: test.location,
           numPassingAsserts: test.numPassingAsserts,
           status: test.status, // "passed"
@@ -120,9 +171,8 @@ export class TestReport extends AbstractComponent {
     }, {});
   }
 
-
   render() {
-    const { report, loading, ok, stdErr } = this.state;
+    const { report, loading, ok, stdErr, details } = this.state;
 
     if ( report !== {} && !report ) {
       this.props.action.setError({
@@ -131,8 +181,6 @@ export class TestReport extends AbstractComponent {
         description: "Jest testing framework could not run the tests"
       });
     }
-
-    const details = "testResults" in report ? TestReport.getDetails( report.testResults ) : {};
 
     return ( <ErrorBoundary>
       <If exp={ loading }>

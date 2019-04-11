@@ -1,5 +1,4 @@
 import log from "electron-log";
-import update from "immutability-helper";
 import uniqid from "uniqid";
 import { createActions } from "redux-actions";
 import { validate, validatePlain } from "../service/validate";
@@ -63,9 +62,24 @@ const STORAGE_KEY_SETTINGS = "settings",
 
         /**
          * @param {object} options = { target, selector, editing }
+         * @param {object} [id] - injected id for new entity
          * @returns {object}
          */
-        ADD_TARGET: ( options ) => validate( "addTargetOptions", options ),
+        ADD_TARGET: ( options, id = null ) => ({
+          options: validate( "addTargetOptions", options ),
+          id
+        }),
+        /**
+         * @param {object} options = { title, editing }
+         * @param {object} position = { "after": ID }
+         * @param {object} [id] - injected id for new entity
+         * @returns {object}
+         */
+        INSERT_ADJACENT_TARGET: ( options, position, id = null ) => ({
+          position,
+          options,
+          id
+        }),
         /**
          * @param {object} options = { id, target, selector, editing }
          * @returns {object}
@@ -78,9 +92,13 @@ const STORAGE_KEY_SETTINGS = "settings",
         REMOVE_TARGET: ( options ) => validate( "removeOptions", options ),
         /**
          * @param {object} options = { title, editing }
+         * @param {object} [id] - injected id for new entity
          * @returns {object}
          */
-        ADD_GROUP: ( options ) => validate( "addGroupOptions", options ),
+        ADD_GROUP: ( options, id = null ) => ({
+          options: validate( "addGroupOptions", options ),
+          id
+        }),
         /**
          * @param {object} options = { title, editing }
          * @param {object} position = { "after": ID }
@@ -108,7 +126,7 @@ const STORAGE_KEY_SETTINGS = "settings",
          * @returns {object}
          */
         ADD_TEST: ( options, id = null ) =>  ({
-          options,
+          options: validate( "addTestOptions", options ),
           id
         }),
         /**
@@ -368,6 +386,22 @@ actions.closeApp = () => async ( dispatch, getState ) => {
 
 /**
  *
+ * @returns {Function}
+ */
+actions.resetCommandFailures = () => async ( dispatch, getState ) => {
+  const { groups } = getState().suite;
+  Object.values( groups ).forEach( ( group ) => {
+    Object.values( group.tests ).forEach( ( test ) => {
+      const matches = Object.values( test.commands ).filter( command => Boolean( command.failure ) );
+      matches.forEach( ({ id, testId, groupId }) => dispatch(
+        actions.updateCommand({ id, testId, groupId, failure: "" })
+      ) );
+    });
+  });
+};
+
+/**
+ *
  * @param {Object} command
  * @param {Object} [options] - e.g. { testId: "", groupId: "" }
  * @returns {Function}
@@ -377,7 +411,7 @@ actions.cloneCommand = ( command, options = {}) => async ( dispatch, getState ) 
         source = groups[ command.groupId ].tests[ command.testId ].commands[ command.id ],
         merged = { ...source, ...options },
         position = { after: command.id };
-  dispatch( actions.insertAdjacentCommand( merged, position ));
+  dispatch( actions.insertAdjacentCommand( merged, position ) );
 };
 
 /**
@@ -392,9 +426,9 @@ actions.cloneTest = ( test, options = {}) => async ( dispatch, getState ) => {
         id = uniqid(),
         merged = { ...source, ...options },
         position = { after: test.id };
-  dispatch( actions.insertAdjacentTest( merged, position, id ));
+  dispatch( actions.insertAdjacentTest( merged, position, id ) );
   Object.values( source.commands ).forEach( command => {
-    dispatch( actions.addCommand( { ...command, testId: id, groupId: merged.groupId }) );
+    dispatch( actions.addCommand({ ...command, testId: id, groupId: merged.groupId }) );
   });
 };
 
@@ -409,9 +443,9 @@ actions.transferTest = ( test, options = {}) => async ( dispatch, getState ) => 
         source = groups[ test.groupId ].tests[ test.id ],
         id = uniqid(),
         merged = { ...source, ...options };
-  dispatch( actions.addTest( merged, id ));
+  dispatch( actions.addTest( merged, id ) );
   Object.values( source.commands ).forEach( command => {
-    dispatch( actions.addCommand( { ...command, testId: id, groupId: options.groupId }) );
+    dispatch( actions.addCommand({ ...command, testId: id, groupId: options.groupId }) );
   });
 };
 
@@ -427,10 +461,25 @@ actions.cloneGroup = ( group ) => async ( dispatch, getState ) => {
         merged = { ...source, id, key: id },
         position = { after: group.id };
 
-  dispatch( actions.insertAdjacentGroup( merged, position, id ));
+  dispatch( actions.insertAdjacentGroup( merged, position, id ) );
   Object.values( source.tests ).forEach( test => {
     dispatch( actions.transferTest( test, { groupId: id }) );
   });
+};
+
+/**
+ *
+ * @param {Object} group
+ * @returns {Function}
+ */
+actions.cloneTarget = ( target ) => async ( dispatch, getState ) => {
+  const suite = getState().suite,
+        source = suite.targets[ target.id ],
+        id = uniqid(),
+        merged = { ...source, id, key: id },
+        position = { after: target.id };
+
+  dispatch( actions.insertAdjacentTarget( merged, position, id ) );
 };
 
 actions.checkRuntimeTestDirReady = () => async ( dispatch ) => {

@@ -22,7 +22,7 @@ const FIX_TARGET = "TARGET",
 function addTarget( state, target, selector ) {
   return reducer( state, {
       type: actions.addTarget,
-      payload: { target, selector }
+      payload: { options: { target, selector } }
     });
 }
 function updateTarget( state, id, target, selector ) {
@@ -40,7 +40,7 @@ function getTarget( state, inx = 0 ) {
 function addGroup( state, title ) {
   return reducer( state, {
       type: actions.addGroup,
-      payload: { title }
+      payload: { options: { title } }
     });
 }
 
@@ -57,7 +57,7 @@ function insertAdjacentGroup( state, title, position ) {
 function addTest( state, title, groupId ) {
   return reducer( state, {
       type: actions.addTest,
-      payload: { title, groupId }
+      payload: { options: { title, groupId } }
     });
 }
 

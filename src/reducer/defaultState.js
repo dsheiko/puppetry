@@ -105,5 +105,15 @@ export const commandDefaultState = ( id ) => ({
   method: "",
   assert: "",
   params: {},
+  disabled: false,
+  failure: ""
+});
+
+export const targetDefaultState = ( id ) => ({
+  editing: false,
+  id,
+  key: id,
+  target: "",
+  selector: "",
   disabled: false
 });
