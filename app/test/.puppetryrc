@@ -1,0 +1,22 @@
+{
+  "name": "crytek",
+  "panels": [
+    "groups"
+  ],
+  "groups": {
+    "kcdjtr9oqh8": {
+      "key": "kcdjtr9oqh8",
+      "value": true,
+      "tests": {
+        "kcdjtr9oyys": {
+          "key": "kcdjtr9oyys",
+          "value": true
+        }
+      }
+    }
+  },
+  "modified": false,
+  "lastOpenSuite": "careeer--apply.json",
+  "puppetry": "1.0.9",
+  "projectDirectory": "/home/sheiko/crytek-e2e"
+}
