@@ -55,7 +55,10 @@ export class TabGroup extends React.Component {
                 headless={ store.app.headless }
                 launcherArgs={ store.app.launcherArgs }
                 checkedList={ store.app.checkedList } />
-            </TabPane> )
+            </TabPane> ),
+            settings: () => ( <TabPane tab={ "Settings" } key="settings" closable={ true }>
+                Hello settings
+              </TabPane> )
           };
 
     return (
