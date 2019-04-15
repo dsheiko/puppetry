@@ -41,7 +41,8 @@ const DEFAULT_STATE = {
     tabs: {
       available: {
         suite: false,
-        testReport: false
+        testReport: false,
+        settings: false
       },
       active: "suite"
     },

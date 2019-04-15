@@ -179,6 +179,10 @@ export class MainMenu extends React.Component {
     return this.props.action.updateApp({ exportProjectModal: true });
   }
 
+  onSettingsGit = async () => {
+    this.props.action.addAppTab( "settings" );
+  }
+
   componentDidMount() {
     ipcRenderer.removeAllListeners( E_MENU_NEW_PROJECT );
     ipcRenderer.on( E_MENU_NEW_PROJECT, this.onNewProject );
@@ -238,6 +242,16 @@ export class MainMenu extends React.Component {
               <Menu.Item key="8">Exit</Menu.Item>
 
             </SubMenu>
+
+            <SubMenu
+              key="sub2"
+              id="cMainMenuSettings"
+              title={<span><Icon type="setting" /><span>Settings</span></span>}
+            >
+              <Menu.Item key="11" onClick={ this.onSettingsGit } id="cMainMenuSettingsGit">
+                  Git...</Menu.Item>
+            </SubMenu>
+
             <Menu.Item key="10"
               id="cMainMenuRun"
               className={ readyToRunTests ? "" : "is-not-ready" }
