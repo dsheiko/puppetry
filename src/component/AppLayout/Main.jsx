@@ -24,8 +24,8 @@ export class Main extends React.Component {
 
   render() {
     const { action, store } = this.props,
-          targetsLabel = ( <span><Icon type="select" />Test targets</span> ),
-          groupsLabel = ( <span><Icon type="audit" />Test groups</span> );
+          targetsLabel = ( <span><Icon type="select" />Targets</span> ),
+          groupsLabel = ( <span><Icon type="audit" />Groups</span> );
     let activeKey = "targets";
     if ( store.project.panels ) {
       [ activeKey ] = store.project.panels;
@@ -34,7 +34,7 @@ export class Main extends React.Component {
     return (
       <ErrorBoundary>
         <div id="cMain">
-          <SuiteForm  action={action} title={ store.suite.title } timeout={ store.suite.timeout } />
+
 
           <Tabs
             activeKey={ activeKey }
@@ -42,7 +42,7 @@ export class Main extends React.Component {
             animated={ false }
             onChange={ this.onTabChange }
           >
-            <TabPane tab={ targetsLabel } key="targets">
+            <TabPane tab={ targetsLabel } key="targets" id="cSuitePanel">
               <p>Target constants used to address an element on the page.
               One can use DevTools to inspect the DOM and copy selectors</p>
               <TargetTable action={action} targets={store.suite.targets} />
@@ -55,6 +55,16 @@ export class Main extends React.Component {
                 expanded={store.project.groups}
                 groups={store.suite.groups}
                 targets={store.suite.targets} />
+            </TabPane>
+
+            <TabPane tab={ "Options" } key="options">
+               <SuiteForm  action={action} title={ store.suite.title } timeout={ store.suite.timeout } />
+            </TabPane>
+            <TabPane tab={ "Expressions" } key="expression">
+               <p>Expressions</p>
+            </TabPane>
+            <TabPane tab={ "Snippets" } key="snippets">
+               <p>Snippets</p>
             </TabPane>
 
           </Tabs>

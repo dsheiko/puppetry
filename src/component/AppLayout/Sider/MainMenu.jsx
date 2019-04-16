@@ -179,7 +179,7 @@ export class MainMenu extends React.Component {
     return this.props.action.updateApp({ exportProjectModal: true });
   }
 
-  onSettingsGit = async () => {
+  onSettings = async () => {
     this.props.action.addAppTab( "settings" );
   }
 
@@ -243,14 +243,8 @@ export class MainMenu extends React.Component {
 
             </SubMenu>
 
-            <SubMenu
-              key="sub2"
-              id="cMainMenuSettings"
-              title={<span><Icon type="setting" /><span>Settings</span></span>}
-            >
-              <Menu.Item key="11" onClick={ this.onSettingsGit } id="cMainMenuSettingsGit">
-                  Git...</Menu.Item>
-            </SubMenu>
+            <Menu.Item key="11" onClick={ this.onSettings } id="cMainMenuSettingsGit">
+                <span><Icon type="setting" /><span>Settings...</span></span></Menu.Item>
 
             <Menu.Item key="10"
               id="cMainMenuRun"
