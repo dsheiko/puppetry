@@ -54,7 +54,9 @@ export class AppLayout extends React.Component {
         <Spin spinning={store.app.loading} size="large">
           <Layout className={classNames({
             layout: true,
-            "is-loading": store.app.loading
+            "is-loading": store.app.loading,
+            "has-sticky-tabs-panel": tabs.active && tabs.active === "suite"
+
           })} id="cLayout">
 
             <Sider

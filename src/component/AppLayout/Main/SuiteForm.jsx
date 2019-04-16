@@ -41,7 +41,7 @@ export class SuiteForm extends AbstractForm {
     const { getFieldDecorator, getFieldsError } = this.props.form;
 
     return (
-      <Form id="cSuiteForm" layout="inline" className="suite-form" onSubmit={ this.onSubmit }>
+      <Form id="cSuiteForm" onSubmit={ this.onSubmit }>
         <FormItem  label="Suite title">
           { getFieldDecorator( "title", {
             initialValue: this.props.title,
@@ -86,7 +86,7 @@ export class SuiteForm extends AbstractForm {
             type="primary"
             htmlType="submit"
             disabled={ this.hasErrors( getFieldsError() ) }
-          >Change</Button>
+          >Save</Button>
         </FormItem>
       </Form>
     );
