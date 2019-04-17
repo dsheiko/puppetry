@@ -24,6 +24,8 @@ const STORAGE_KEY_SETTINGS = "settings",
 
         SET_SETTINGS: ( options ) => options,
 
+        SET_SETTINGS_GIT: ( options ) => options,
+
         SET_ERROR: ( options ) => validate( "errorOptions", options ),
 
         /**
@@ -39,6 +41,8 @@ const STORAGE_KEY_SETTINGS = "settings",
         SET_APP_TAB: ( tabKey ) => tabKey,
 
         SET_PROJECT: ( options ) => options,
+
+        UPDATE_PROJECT_PANES: ( panel, panes ) => ({ panel, panes }),
 
         SET_SUITE: ( options ) => validate( "updateSuiteOptions", options ),
 

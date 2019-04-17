@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Tabs } from "antd";
 import { Main } from "./AppLayout/Main";
+import { SettingsPanel } from "./AppLayout/Settings/SettingsPanel";
 import { TestReport } from "./AppLayout/TestReport";
 import ErrorBoundary from "component/ErrorBoundary";
 import { confirmUnsavedChanges } from "service/smalltalk";
@@ -57,7 +58,10 @@ export class TabGroup extends React.Component {
                 checkedList={ store.app.checkedList } />
             </TabPane> ),
             settings: () => ( <TabPane tab={ "Settings" } key="settings" closable={ true }>
-                Hello settings
+                <SettingsPanel
+                  action={ action }
+                  panels= { store.project.appPanels }
+                  />
               </TabPane> )
           };
 

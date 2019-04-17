@@ -110,6 +110,16 @@ describe( "Store", () => {
     store = createStore( reducer, storeEnhancer );
   });
 
+  describe( "Project", () => {
+
+     it( "changes panes", () => {
+        store.dispatch( actions.updateProjectPanes( "suite", [ FIX.ID1 ] ) );
+        const [ pane ] = store.getState().project.appPanels.suite.panes;
+        expect( pane ).toBe( FIX.ID1 );
+     });
+
+  });
+
   describe( "Suite", () => {
 
      it( "creates a target", () => {
