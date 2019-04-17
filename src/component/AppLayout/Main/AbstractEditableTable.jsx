@@ -53,7 +53,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
       return false;
     }
     const values = Object.values( this.state.fieldState[ id ]);
-    return values.some( state => !state.value ) || values.some( state => !!state.error );
+    return values.some( state => !state.pristine && !!state.error );
   }
 
   toggleEdit = ( id, editing ) => {
@@ -121,6 +121,9 @@ export default class AbstractEditableTable extends AbstractDnDTable {
             { record.disabled ? "Enable" : "Disable" }
           </a>
         </Menu.Item> }
+         <Menu.Item>
+          <a role="menuitem" tabIndex={0}  onClick={ () => this.insertRecord( record ) }>Insert</a>
+        </Menu.Item>
         <Menu.Item>
           <a role="menuitem" tabIndex={0}  onClick={ () => this.cloneRecord( record ) }>Clone</a>
         </Menu.Item>

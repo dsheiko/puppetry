@@ -25,7 +25,7 @@ export class TestTable extends AbstractEditableTable {
             className="input--title"
             record={ record }
             dataIndex="title"
-            placeholder="Describe the assertions you want to perform"
+            placeholder="Describe assertions you want to perform"
             liftFormStateUp={ this.liftFormStateUp }
             updateRecord={ this.updateRecord }
           />
@@ -71,7 +71,7 @@ export class TestTable extends AbstractEditableTable {
   }
 
   onRowClassName = ( record ) => {
-    return `model--test${ record.disabled ? " row-disabled" : "" } ` + this.getRightClickClassName( record );
+    return `model--test${ record.disabled ? " row-disabled" : "" } ` + this.buildRowClassName( record );
   }
 
   render() {
@@ -92,9 +92,7 @@ export class TestTable extends AbstractEditableTable {
           columns={ this.columns }
           onExpand={ this.onExpand }
           pagination={ false }
-          footer={() => ( <Button
-            id="cTestTableAddBtn"
-            onClick={ this.addRecord }><Icon type="plus" />Add a test</Button> )}
+
         />
       </ErrorBoundary>
     );

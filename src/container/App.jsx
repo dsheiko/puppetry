@@ -26,7 +26,9 @@ const GREETINGS = [ "Greetings",
       mapStateToProps = ( state ) => ({
         store: state,
         selector: {
-          getTargetDataTable: () => selectors.getTargetDataTable( state.suite.targets )
+          getTargetDataTable: () => selectors.getTargetDataTable( state.suite.targets ),
+          getGroupDataTable: () => selectors.getStructureDataTable( state.suite.groups ),
+          getTestDataTable: ( group ) => selectors.getStructureDataTable( group.tests )
         }
       }),
       // Mapping actions to the props

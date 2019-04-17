@@ -64,6 +64,11 @@ export class CommandTable extends AbstractDnDTable {
     ) );
 
     menu.append( new MenuItem({
+      label: "Insert",
+      click: () => this.insertRecord( record )
+    }) );
+
+    menu.append( new MenuItem({
       label: "Clone",
       click: () => this.cloneRecord( record )
     }) );
@@ -138,6 +143,9 @@ export class CommandTable extends AbstractDnDTable {
           </a>
         </AntdMenu.Item>
         <AntdMenu.Item>
+          <a role="menuitem" tabIndex={0} onClick={ () => this.insertRecord( record ) }>Insert</a>
+        </AntdMenu.Item>
+        <AntdMenu.Item>
           <a role="menuitem" tabIndex={0} onClick={ () => this.cloneRecord( record ) }>Clone</a>
         </AntdMenu.Item>
       </AntdMenu>
@@ -177,7 +185,14 @@ export class CommandTable extends AbstractDnDTable {
       "model--command" : true,
       "row-disabled": record.disabled,
       "row-failure": record.failure
-    }) + ` ` + this.getRightClickClassName( record );
+    }) + ` ` + this.buildRowClassName( record );
+  }
+
+  shouldComponentUpdate( nextProps ) {
+    if ( this.props.commands !== nextProps.commands ) {
+      return true;
+    }
+    return false;
   }
 
   render() {

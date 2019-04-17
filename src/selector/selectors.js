@@ -15,5 +15,20 @@ export function getTargetDataTable( targets ) {
     });
 
     return data;
+}
 
+export function getStructureDataTable( record ) {
+  const data = Object.values( record ),
+        id = uniqid();
+
+    data.push({
+      disabled: false,
+      editing: true,
+      adding: true,
+      id,
+      key: id,
+      title: ""
+    });
+
+    return data;
 }

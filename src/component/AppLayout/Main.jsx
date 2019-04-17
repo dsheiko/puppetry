@@ -51,10 +51,11 @@ export class Main extends React.Component {
             <TabPane tab={ groupsLabel } key="groups">
               <p>You can use drag&apos;n&apos;drop to re-arrange rows representing tests or test groups.</p>
               <GroupTable
-                action={action}
-                expanded={store.project.groups}
-                groups={store.suite.groups}
-                targets={store.suite.targets} />
+                action={ action }
+                selector={ selector }
+                expanded={ store.project.groups }
+                groups={ selector.getGroupDataTable() }
+                targets={ store.suite.targets } />
             </TabPane>
 
             <TabPane tab={ "Options" } key="options">

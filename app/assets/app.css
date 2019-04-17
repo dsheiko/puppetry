@@ -825,3 +825,7 @@ td:hover .editable-cell-icon {
 .disable-dnd td {
   cursor: initial !important;
 }
+
+.disable-expand > .ant-table-row-expand-icon-cell > * {
+  display: none;
+}

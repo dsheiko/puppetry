@@ -88,9 +88,7 @@ export class TestReport extends AbstractComponent {
 
   async highlightErrorsInSuite() {
     try {
-      console.log( this.reportedFailures );
       const commands = await parseReportedFailures( this.reportedFailures );
-      console.log( commands );
       commands.forEach( ({ id, groupId, testId, failure }) => this.props.action.updateCommand({
         id, groupId, testId, failure
       }) );
