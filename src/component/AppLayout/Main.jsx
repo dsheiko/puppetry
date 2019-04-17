@@ -23,7 +23,7 @@ export class Main extends React.Component {
   }
 
   render() {
-    const { action, store } = this.props,
+    const { action, store, selector } = this.props,
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
           groupsLabel = ( <span><Icon type="audit" />Groups</span> );
     let activeKey = "targets";
@@ -45,7 +45,7 @@ export class Main extends React.Component {
             <TabPane tab={ targetsLabel } key="targets" id="cSuitePanel">
               <p>Target constants used to address an element on the page.
               One can use DevTools to inspect the DOM and copy selectors</p>
-              <TargetTable action={action} targets={store.suite.targets} />
+              <TargetTable action={action} targets={ selector.getTargetDataTable() } />
             </TabPane>
 
             <TabPane tab={ groupsLabel } key="groups">

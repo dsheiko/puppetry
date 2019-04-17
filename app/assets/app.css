@@ -821,3 +821,7 @@ td:hover .editable-cell-icon {
 }
 
 /* End: Sticky app panels */
+
+.disable-dnd td {
+  cursor: initial !important;
+}

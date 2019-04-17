@@ -44,7 +44,7 @@ export class AppLayout extends React.Component {
   }
 
   render() {
-    const { action, store } = this.props,
+    const { action, store, selector } = this.props,
           { projectDirectory, exportDirectory } = store.settings,
           { commandModal, tabs } = store.app,
           tabsAnyTrue = Object.keys( tabs.available ).some( key => tabs.available[ key ]);
@@ -104,7 +104,7 @@ export class AppLayout extends React.Component {
               <div className="layout-content">
 
                 <If exp={ tabsAnyTrue }>
-                  <TabGroup action={ action } store={ store } />
+                  <TabGroup action={ action } store={ store } selector={ selector } />
                 </If>
                 <If exp={ !tabsAnyTrue }>
                   { projectDirectory ? ( <Info action={ action } store={ store } /> )
