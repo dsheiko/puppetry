@@ -136,6 +136,18 @@ export default class AbstractEditableTable extends AbstractDnDTable {
       className: "table-actions-cell",
       render: ( text, record ) => {
 
+        if ( record.adding ) {
+          return ( <span className="table-actions"  role="status" onMouseDown={( e ) => e.preventDefault()}>
+            <Button
+              tabIndex={20}
+              type="primary"
+              size="small"
+              className={ `btn--submit-editable model--${ this.model }` }
+              disabled={ this.hasErrors( record.id ) }
+              onClick={( () => this.onSubmit( record.id ) )}
+            >Add</Button>
+          </span> );
+        }
         if ( record.editing ) {
           return ( <span className="table-actions"  role="status" onMouseDown={( e ) => e.preventDefault()}>
 

@@ -53,6 +53,14 @@ class BodyRow extends React.Component {
       }
     }
 
+    if ( restProps.className.includes( "disable-dnd" ) ) {
+      return (<tr
+          {...restProps}
+          className={className}
+          style={ style }
+        />);
+    }
+
     return connectDragSource(
       connectDropTarget(
         <tr

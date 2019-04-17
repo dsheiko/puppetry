@@ -4,6 +4,7 @@ import AbstractEditableTable from "./AbstractEditableTable";
 import { EditableCell } from "./EditableCell";
 import { connectDnD } from "./DragableRow";
 import ErrorBoundary from "component/ErrorBoundary";
+import uniqid from "uniqid";
 
 @connectDnD
 export class TargetTable extends AbstractEditableTable {
@@ -64,8 +65,16 @@ export class TargetTable extends AbstractEditableTable {
 
   model = "Target";
 
+  shouldComponentUpdate( nextProps ) {
+    if ( this.props.targets !== nextProps.targets ) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
-    const data = Object.values( this.props.targets );
+    const data = this.props.targets;
+
     return (
       <div className="box-margin-vertical">
         <ErrorBoundary>
@@ -81,8 +90,6 @@ export class TargetTable extends AbstractEditableTable {
             pagination={false}
 
             footer={() => ( <div className="ant-table-footer__toolbar">
-              <Button id="cTargetTableAddBtn"
-                onClick={ this.addRecord }><Icon type="plus" />Add a target</Button>
               <Button type="dashed" id="cTargetTableEditCsvBtn"
                 onClick={ this.onShowEditTargetsAsCsv }><Icon type="edit" />Edit as CSV</Button>
             </div> )}

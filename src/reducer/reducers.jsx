@@ -243,7 +243,7 @@ export const reducer = handleActions(
             $apply: ( ref ) => {
               const targets = { ...ref },
                     id = payload.id;
-              targets[ id ] = { ...targets[ id ], ...payload };
+              targets[ id ] = { ...targets[ id ], ...payload, key: id };
               return targets;
             }
           }

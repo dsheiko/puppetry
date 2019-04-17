@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import classNames from "classnames";
 import { DragableRow } from "./DragableRow";
 import { confirmDeleteEntity } from "service/smalltalk";
 import { remote } from "electron";
@@ -77,9 +78,14 @@ export default class AbstractDnDTable extends React.Component {
 
   getRightClickClassName( record ) {
     if ( !this.state || !this.state.contextMenuAnchor ) {
-      return "";
+      return classNames({
+        "disable-dnd": record.adding
+      });
     }
-    return this.state.contextMenuAnchor === record.id ? "is-right-clicked" : "";
+    return classNames({
+      "is-right-clicked": this.state.contextMenuAnchor === record.id,
+      "disable-dnd": record.adding
+    });
   }
 
   onRowClassName = ( record ) => {

@@ -39,13 +39,13 @@ export class TabGroup extends React.Component {
   }
 
   render() {
-    const { store, action } = this.props,
+    const { store, action, selector } = this.props,
           { tabs } = store.app,
           { suite } = store,
 
           panes = {
             suite: () => ( <TabPane tab={ suite.filename || "Loading..." } key="suite" closable={ true }>
-              <Main action={ action } store={ store } />
+              <Main action={ action } store={ store } selector={ selector } />
             </TabPane> ),
             testReport: () => ( <TabPane tab="Test report" key="testReport" closable={ true }>
               <TestReport

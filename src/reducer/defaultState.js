@@ -116,5 +116,6 @@ export const targetDefaultState = ( id ) => ({
   key: id,
   target: "",
   selector: "",
-  disabled: false
+  disabled: false,
+  adding: false
 });

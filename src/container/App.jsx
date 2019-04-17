@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { AppLayout } from "../component/AppLayout";
 import actions from "../action/actions";
+import * as selectors from "../selector/selectors";
 
 const GREETINGS = [ "Greetings",
         "Hi there",
@@ -22,7 +23,12 @@ const GREETINGS = [ "Greetings",
       ],
 
       // Mapping state to the props
-      mapStateToProps = ( state ) => ({ store: state }),
+      mapStateToProps = ( state ) => ({
+        store: state,
+        selector: {
+          getTargetDataTable: () => selectors.getTargetDataTable( state.suite.targets )
+        }
+      }),
       // Mapping actions to the props
       mapDispatchToProps = ( dispatch ) => ({
         action: bindActionCreators( actions, dispatch )
@@ -71,9 +77,9 @@ export class App extends React.Component {
 
 
   render() {
-    const { action, store } = this.props;
+    const { action, store, selector } = this.props;
     return (
-      <AppLayout action={action} store={store} />
+      <AppLayout action={ action } store={ store } selector={ selector } />
     );
   }
 }
