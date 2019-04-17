@@ -53,7 +53,7 @@ export class TargetTable extends AbstractEditableTable {
   }
 
   onRowClassName = ( record ) => {
-    return "model--target " + this.getRightClickClassName( record );
+    return "model--target " + this.buildRowClassName( record );
   }
 
   onShowEditTargetsAsCsv = ( e ) => {

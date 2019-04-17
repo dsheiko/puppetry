@@ -327,7 +327,7 @@ export const reducer = handleActions(
               const groups = { ...ref },
                     id = payload.id;
 
-              groups[ id ] = { ...groups[ id ], ...payload, id };
+              groups[ id ] = { ...groups[ id ], ...payload, id, key: id };
               return groups;
             }
           }
@@ -431,7 +431,7 @@ export const reducer = handleActions(
               $apply: ( ref ) => {
                 const tests = { ...ref },
                       id = payload.id;
-                tests[ id ] = { ...tests[ id ], ...payload, id };
+                tests[ id ] = { ...tests[ id ], ...payload, id, key: id };
                 return tests;
               }
             }
@@ -557,7 +557,7 @@ export const reducer = handleActions(
                   $apply: ( ref ) => {
                     const commands = { ...ref },
                           id = payload.id;
-                    commands[ id ] = { ...commands[ id ], ...payload };
+                    commands[ id ] = { ...commands[ id ], ...payload, key: id };
                     return commands;
                   }
                 }

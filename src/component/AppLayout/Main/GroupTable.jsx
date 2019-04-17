@@ -24,7 +24,7 @@ export class GroupTable extends AbstractEditableTable {
             onSubmit={ this.onSubmit }
             className="input--title"
             dataIndex="title"
-            placeholder="Describe target or scenario you want to test"
+            placeholder="Describe a target or scenario you want to test"
             liftFormStateUp={ this.liftFormStateUp }
             updateRecord={ this.updateRecord }
           />
@@ -52,22 +52,31 @@ export class GroupTable extends AbstractEditableTable {
   }
 
   renderExpandedTable = ( group ) => {
-    const tests = Object.values( group.tests ),
+    const tests = this.props.selector.getTestDataTable( group ),
           targets = Object.values( this.props.targets );
     return ( <TestTable
       expanded={ this.props.expanded }
-      targets={targets}
-      tests={tests}
-      groupId={group.id}
-      action={this.props.action} /> );
+      targets={ targets }
+      tests={ tests }
+      groupId={ group.id }
+      action={ this.props.action } /> );
   }
 
   onRowClassName = ( record ) => {
-    return `model--group${ record.disabled ? " row-disabled" : "" } ` + this.getRightClickClassName( record );
+    return `model--group${ record.disabled ? " row-disabled" : "" } ` + this.buildRowClassName( record );
+  }
+
+  shouldComponentUpdate( nextProps ) {
+    if ( this.props.groups !== nextProps.groups
+      || this.props.expanded !== nextProps.expanded
+      || this.props.targets !== nextProps.targets ) {
+      return true;
+    }
+    return false;
   }
 
   render() {
-    const groups = Object.values( this.props.groups ),
+    const groups = this.props.groups,
           expanded = Object.values( this.props.expanded )
             .filter( item => Boolean( item.value ) )
             .map( item => item.key );
@@ -88,9 +97,6 @@ export class GroupTable extends AbstractEditableTable {
             pagination={false}
             onExpand={this.onExpand}
             expandedRowRender={ this.renderExpandedTable }
-            footer={() => ( <Button
-              id="cGroupTableAddBtn"
-              onClick={ this.addRecord }><Icon type="plus" />Add a group</Button> )}
           />
         </ErrorBoundary>
       </div>

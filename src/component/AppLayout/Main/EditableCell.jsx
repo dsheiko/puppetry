@@ -37,7 +37,8 @@ export class EditableCell extends React.Component {
           value = e.target.value,
           state = {
             value,
-            error: this.getError( value, dataIndex )
+            error: this.getError( value, dataIndex ),
+            pristine: false
           };
 
     this.setState( state );
@@ -57,7 +58,7 @@ export class EditableCell extends React.Component {
    */
   componentDidMount() {
     const { dataIndex, record, liftFormStateUp } = this.props;
-    liftFormStateUp( dataIndex, { value: record[ dataIndex ], error: "" }, record.id );
+    liftFormStateUp( dataIndex, { value: record[ dataIndex ], error: "", pristine: true }, record.id );
   }
 
   render() {

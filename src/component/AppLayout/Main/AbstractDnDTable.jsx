@@ -55,6 +55,11 @@ export default class AbstractDnDTable extends React.Component {
     }
 
     menu.append( new MenuItem({
+      label: "Insert",
+      click: () => this.insertRecord( record )
+    }) );
+
+    menu.append( new MenuItem({
       label: "Clone",
       click: () => this.cloneRecord( record )
     }) );
@@ -76,20 +81,22 @@ export default class AbstractDnDTable extends React.Component {
     });
   }
 
-  getRightClickClassName( record ) {
+  buildRowClassName( record ) {
     if ( !this.state || !this.state.contextMenuAnchor ) {
       return classNames({
-        "disable-dnd": record.adding
+        "disable-dnd": record.adding,
+        "disable-expand": record.adding
       });
     }
     return classNames({
       "is-right-clicked": this.state.contextMenuAnchor === record.id,
-      "disable-dnd": record.adding
+      "disable-dnd": record.adding,
+      "disable-expand": record.adding
     });
   }
 
   onRowClassName = ( record ) => {
-    return this.getRightClickClassName( record );
+    return this.buildRowClassName( record );
   }
 
   onRow = ( record, index ) => ({
@@ -102,12 +109,25 @@ export default class AbstractDnDTable extends React.Component {
     this.toggleEdit( record.id, true );
   }
 
-  cloneRecord = ( command ) => {
+  insertRecord = ( record ) => {
+    const update = this.props.action[ `insertAdjacent${this.model}` ],
+          node = { editing: true };
+    if ( "groupId" in record ) {
+      node.groupId = record.groupId;
+    }
+    if ( "testId" in record ) {
+      node.testId = record.testId;
+    }
+    update( node, { "after": record.id } );
+    this.updateSuiteModified();
+  }
+
+  cloneRecord = ( record ) => {
     const update = this.props.action[ `clone${this.model}` ];
     this.props.action.updateApp({ loading: true });
     // give it a chance to render loading state
     setTimeout( () => {
-      update( command );
+      update( record );
       this.updateSuiteModified();
       this.props.action.updateApp({ loading: false });
     }, 200 );
