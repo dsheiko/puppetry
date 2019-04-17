@@ -34,7 +34,6 @@ const DISABLE_STRIP = { strip: false },
 
       storeProject = new Schema({
         name: { type: String },
-        panels: { type: Array },
         groups: { type: Object },
         projectDirectory: { type: String }
       }, DISABLE_STRIP ),

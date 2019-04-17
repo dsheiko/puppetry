@@ -13,22 +13,26 @@ export class Main extends React.Component {
   static propTypes = {
     store: PropTypes.object.isRequired,
     action: PropTypes.shape({
-      setProject: PropTypes.func.isRequired
+      updateProjectPanes: PropTypes.func.isRequired
     })
   }
 
   onTabChange = ( targetKey ) => {
-    const panels = [ targetKey ];
-    this.props.action.setProject({ panels });
+    this.props.action.updateApp({ loading: true });
+    setTimeout(() => {
+      this.props.action.updateProjectPanes( "suite", [ targetKey ] );
+      this.props.action.updateApp({ loading: false });
+    }, 10 );
   }
 
   render() {
     const { action, store, selector } = this.props,
+          panes = store.project.appPanels.suite.panes,
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
           groupsLabel = ( <span><Icon type="audit" />Groups</span> );
     let activeKey = "targets";
-    if ( store.project.panels ) {
-      [ activeKey ] = store.project.panels;
+    if ( panes.length ) {
+      [ activeKey ] = panes;
     }
 
     return (
@@ -42,7 +46,7 @@ export class Main extends React.Component {
             animated={ false }
             onChange={ this.onTabChange }
           >
-            <TabPane tab={ targetsLabel } key="targets" id="cSuitePanel">
+            <TabPane tab={ targetsLabel } key="targets" id="cSuitePane">
               <p>Target constants used to address an element on the page.
               One can use DevTools to inspect the DOM and copy selectors</p>
               <TargetTable action={action} targets={ selector.getTargetDataTable() } />

@@ -829,3 +829,16 @@ td:hover .editable-cell-icon {
 .disable-expand > .ant-table-row-expand-icon-cell > * {
   display: none;
 }
+
+
+.settings-git-form .ant-form-item {
+  display: flex;
+}
+.settings-git-form .ant-form-item > .ant-form-item-label {
+  flex: 0 0 146px;
+  /* text-align: left; */
+
+}
+.settings-git-form .ant-form-item > .ant-form-item-control-wrapper {
+  flex: 1 0 auto;
+}

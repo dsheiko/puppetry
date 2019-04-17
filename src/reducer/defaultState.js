@@ -4,7 +4,15 @@ const DEFAULT_STATE = {
     projectDirectory: "",
     exportDirectory: "",
     lastCheckedVersion: "",
-    checkDate: ""
+    checkDate: "",
+    git: {
+      ready: false,
+      repository: "",
+      configUsername: "",
+      configEmail: "",
+      credentialsUsername: "",
+      credentialsPassword: ""
+    }
   },
   // Runtime state
   app: {
@@ -59,7 +67,17 @@ const DEFAULT_STATE = {
   // Project data stored in file
   project: {
     name: "",
-    panels: [],
+
+    // consider the structure: [Suite panel]-> [Targets pane][Groups pane]...
+    appPanels: {
+      suite: {
+        panes: []
+      },
+      settings: {
+        panes: []
+      }
+    },
+
     groups: {},
     modified: false,
     lastOpenSuite: ""

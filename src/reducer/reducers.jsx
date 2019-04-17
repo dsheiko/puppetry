@@ -29,6 +29,15 @@ export const reducer = handleActions(
         }});
     },
 
+    [ actions.setSettingsGit ]: ( state, { payload }) => {
+      return update( state, {
+        settings: {
+          git: {
+            $set: payload
+          }
+        }});
+    },
+
 
     [ actions.setError ]: ( state, { payload }) => {
       const inject = { title: "Error", type: "error", ...payload };
@@ -49,6 +58,22 @@ export const reducer = handleActions(
       return update( state, {
         project: {
           $merge: payload
+        }});
+    },
+
+    [ actions.updateProjectPanes ]: ( state, { payload }) => {
+      if ( !payload ) {
+        return state;
+      }
+      return update( state, {
+        project: {
+          appPanels: {
+            [ payload.panel ]: {
+              panes: {
+                $set: payload.panes
+              }
+            }
+          }
         }});
     },
 
