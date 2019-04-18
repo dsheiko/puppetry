@@ -93,6 +93,11 @@ export function removeExport( exportDirectory ) {
     .forEach( name => shell.rm( "-rf" , join( exportDirectory, name ) ) );
 }
 
+export function copyProject( srcDirectory, targetDirectory ) {
+  shell.rm( "-rf" , targetDirectory );
+  return shell.cp( "-r", srcDirectory, targetDirectory );
+}
+
 /**
  * Export a single suite
  * @param {String} projectDirectory

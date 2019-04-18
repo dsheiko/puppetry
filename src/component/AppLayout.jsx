@@ -18,6 +18,7 @@ import { AlertMessageModal } from "./Modal/AlertMessageModal";
 import { TestReportModal  } from "./Modal/TestReportModal";
 import { ExportProjectModal } from "./Modal/ExportProjectModal";
 import { OpenSuiteModal } from "./Modal/OpenSuiteModal";
+import { SaveProjectAsModal } from "./Modal/SaveProjectAsModal";
 import { CommandModal } from "./AppLayout/Main/GroupTable/TestTable/CommandModal";
 import { InstallRuntimeTestModal } from "./Modal/InstallRuntimeTestModal";
 import { EditTargetsAsCsvModal } from "./Modal/EditTargetsAsCsvModal";
@@ -144,6 +145,12 @@ export class AppLayout extends React.Component {
         <SaveSuiteAsModal
           action={action}
           isVisible={store.app.saveSuiteAsModal}
+          files={ store.app.project.files }
+          filename={ store.suite.filename } />
+
+        <SaveProjectAsModal
+          action={action}
+          isVisible={store.app.saveProjectAsModal}
           files={ store.app.project.files }
           filename={ store.suite.filename } />
 
