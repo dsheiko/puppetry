@@ -9,16 +9,9 @@ import { confirmUnsavedChanges } from "service/smalltalk";
 import { E_MENU_NEW_PROJECT, E_MENU_NEW_SUITE,
   E_MENU_OPEN_PROJECT, E_MENU_SAVE_SUITE, E_MENU_SAVE_SUITE_AS,
   E_MENU_OPEN_SUITE, E_MENU_EXPORT_PROJECT, E_MENU_EXIT_APP, E_MENU_RUN } from "constant";
+import { isMac, ostr } from "./MainMenu/helpers";
 
-
-const SubMenu = Menu.SubMenu,
-      isMac = process.platform === "darwin",
-      ostr = ( kbd ) => {
-        if ( !isMac ) {
-          return kbd;
-        }
-        return kbd.replace( "Ctrl", "⌘" );
-      };
+const SubMenu = Menu.SubMenu;
 
 export class MainMenu extends React.Component {
 

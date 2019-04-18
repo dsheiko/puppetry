@@ -4,15 +4,7 @@ const DEFAULT_STATE = {
     projectDirectory: "",
     exportDirectory: "",
     lastCheckedVersion: "",
-    checkDate: "",
-    git: {
-      ready: false,
-      repository: "",
-      configUsername: "",
-      configEmail: "",
-      credentialsUsername: "",
-      credentialsPassword: ""
-    }
+    checkDate: ""
   },
   // Runtime state
   app: {
@@ -81,7 +73,18 @@ const DEFAULT_STATE = {
 
     groups: {},
     modified: false,
-    lastOpenSuite: ""
+    lastOpenSuite: "",
+
+    git: {
+      initialized: false,
+      repository: "",
+      configUsername: "",
+      configEmail: "",
+      credentialsAcccessToken: "",
+      credentialsProvider: "",
+      credentialsUsername: "",
+      credentialsPassword: ""
+    }
   },
   // actual (Selected) suite
   suite: {

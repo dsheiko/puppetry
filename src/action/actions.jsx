@@ -25,7 +25,7 @@ const STORAGE_KEY_SETTINGS = "settings",
 
         SET_SETTINGS: ( options ) => options,
 
-        SET_SETTINGS_GIT: ( options ) => options,
+        SET_PROJECT_GIT: ( options ) => options,
 
         SET_ERROR: ( options ) => validate( "errorOptions", options ),
 
