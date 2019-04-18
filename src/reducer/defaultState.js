@@ -31,6 +31,7 @@ const DEFAULT_STATE = {
 
     editTargetsAsCsvModal: false,
     newProjectModal: false,
+    saveProjectAsModal: false,
     openProjectModal: false,
     saveSuiteAsModal: false,
     newSuiteModal: false,

@@ -88,6 +88,14 @@ export class MainMenu extends React.Component {
     this.props.action.updateApp({ saveSuiteAsModal: true });
   }
 
+  onSaveProjectAs = () => {
+    const { projectDirectory } = this.props;
+    if ( !projectDirectory ) {
+      return;
+    }
+    this.props.action.updateApp({ saveProjectAsModal: true });
+  }
+
   onNewProject = async () => {
     if ( this.props.suiteModified ) {
       await confirmUnsavedChanges({
@@ -220,22 +228,41 @@ export class MainMenu extends React.Component {
             selectable={ false }>
 
             <SubMenu
-              key="sub1"
+              key="file"
               id="cMainMenuFile"
               title={<span><Icon type="file" /><span>File</span></span>}
             >
-              <Menu.Item key="1" onClick={ this.onNewProject } id="cMainMenuNewProject">
+              <Menu.Item key="file1" onClick={ this.onNewProject } id="cMainMenuNewProject">
                 New Project... { " " }<kbd>{ ostr( "Ctrl-Shift-N" ) }</kbd></Menu.Item>
-              <Menu.Item key="2" disabled={ !projectDirectory } onClick={ this.onNewSuite } id="cMainMenuNewSuite">
+              <Menu.Item key="file7" disabled={ !projectDirectory } onClick={ this.onSaveProjectAs } id="cMainMenuSaveProjectAs">
+                Save Project As...</Menu.Item>
+              <Menu.Item key="file2" disabled={ !projectDirectory } onClick={ this.onNewSuite } id="cMainMenuNewSuite">
                 New Suite... { " " }<kbd>{ ostr( "Ctrl-N" ) }</kbd></Menu.Item>
-              <Menu.Item key="3" onClick={ this.onOpenProject } id="cMainMenuOpenProject">
+              <Menu.Item key="file3" onClick={ this.onOpenProject } id="cMainMenuOpenProject">
                 Open Project... { " " }<kbd>{ ostr( "Ctrl-Shift-O" ) }</kbd></Menu.Item>
-              <Menu.Item key="4" disabled={ !suiteFilename } onClick={ this.onSave } id="cMainMenuSaveSuite">
-                Save Suite { " " }<kbd>{ ostr( "Ctrl-S" ) }</kbd></Menu.Item>
-              <Menu.Item key="5" disabled={ !suiteFilename } onClick={ this.onSaveAs } id="cMainMenuSaveAsSuite">
-                Save Suite As...</Menu.Item>
-              <Menu.Item key="6" disabled={ !projectDirectory || !files.length  } id="cMainMenuOpenSuite"
+              <Menu.Item key="file4" disabled={ !projectDirectory || !files.length  } id="cMainMenuOpenSuite"
                 onClick={ this.onOpenSuite }>Open Suite...</Menu.Item>
+              <Menu.Item key="file5" disabled={ !suiteFilename } onClick={ this.onSave } id="cMainMenuSaveSuite">
+                Save Suite { " " }<kbd>{ ostr( "Ctrl-S" ) }</kbd></Menu.Item>
+              <Menu.Item key="file6" disabled={ !suiteFilename } onClick={ this.onSaveAs } id="cMainMenuSaveAsSuite">
+                Save Suite As...</Menu.Item>
+
+              <SubMenu
+                  key="git"
+                  id="cMainMenuFileGit"
+                  disabled={ !suiteFilename }
+                  title={<span><Icon type="branches" /><span>Git</span></span>}
+                >
+                <Menu.Item key="git1" disabled={ false } onClick={ () => {} } id="cMainMenuFileGitInit">Initialize</Menu.Item>
+                <Menu.Item key="git2" disabled={ false } onClick={ () => {} } id="cMainMenuFileGitClone">Clone...</Menu.Item>
+                <Menu.Item key="git3" disabled={ false } onClick={ () => {} } id="cMainMenuFileGitCheckout">Checkout...</Menu.Item>
+                <Menu.Item key="git4" disabled={ false } onClick={ () => {} } id="cMainMenuFileGitRevert">Revert...</Menu.Item>
+                <Menu.Item key="git5" disabled={ false } onClick={ () => {} }
+                  id="cMainMenuFileGitCommit">Commit...{ " " }<kbd>{ ostr( "Ctrl-Shift-S" ) }</kbd></Menu.Item>
+                <Menu.Item key="git6" disabled={ false } onClick={ () => {} } id="cMainMenuFileGitPull">Pull</Menu.Item>
+                <Menu.Item key="git7" disabled={ false } onClick={ () => {} } id="cMainMenuFileGitPush">Push</Menu.Item>
+              </SubMenu>
+
               <Menu.Item key="7" disabled={ !projectDirectory } id="cMainMenuExportProject"
                 onClick={ this.onExportProject }>
                 Export Project for CI... { " " }<kbd>{ ostr( "Ctrl-Shift-E" ) }</kbd></Menu.Item>

@@ -6,6 +6,7 @@ import { writeSuite, readSuite, removeSuite,
   getProjectFiles, writeProject,
   readProject, removeRuntimeTestPath,
   isRuntimeTestPathReady,
+  copyProject,
   normalizeFilename } from "../service/io";
 import { closeApp } from "service/utils";
 import { InvalidArgumentError } from "error";
@@ -504,6 +505,18 @@ async function saveProject( store ) {
     modified: false
   });
 }
+
+actions.copyProjectTo = ( targetDirectory ) => async ( dispatch, getState ) => {
+  const store = getState(),
+        sourceDirectory = store.settings.projectDirectory;
+  if ( !sourceDirectory ) {
+    return;
+  }
+  copyProject( sourceDirectory, targetDirectory );
+  await dispatch( actions.saveSettings({ projectDirectory: targetDirectory }) );
+  await dispatch( actions.loadProject() );
+};
+
 
 function noop() {
 
