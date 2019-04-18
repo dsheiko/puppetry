@@ -60,7 +60,7 @@ export class TabGroup extends React.Component {
             settings: () => ( <TabPane tab={ "Settings" } key="settings" closable={ true }>
                 <SettingsPanel
                   action={ action }
-                  panels= { store.project.appPanels }
+                  project={ store.project }
                   />
               </TabPane> )
           };

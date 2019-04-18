@@ -2,43 +2,41 @@ import React from "react";
 import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
 import { ruleValidateGenericString } from "service/utils";
-import { Form, Icon, Input, InputNumber, Button, Card } from "antd";
+import { Form, Radio, Select, Icon, Input, InputNumber, Button, Card } from "antd";
 const FormItem = Form.Item,
+      RadioGroup = Radio.Group,
+      Option = Select.Option,
       connectForm = Form.create();
 
 @connectForm
 export class GitPane extends AbstractForm {
 
-//  static propTypes = {
-//    title: PropTypes.string,
-//    timeout: PropTypes.number,
-//    form: PropTypes.shape({
-//      validateFieldsAndScroll: PropTypes.func.isRequired,
-//      getFieldDecorator: PropTypes.func.isRequired,
-//      getFieldsError: PropTypes.func.isRequired
-//    }),
-//    action: PropTypes.shape({
-//      updateSuite: PropTypes.func.isRequired,
-//      saveSuite: PropTypes.func.isRequired
-//    })
-//  }
+  state = {
+    authMethod: "password"
+  }
 
   onSubmit = ( e ) => {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll( ( err, values ) => {
+      console.log(values);
       if ( !err ) {
-        const title = values.title,
-              timeout = values.timeout,
-              { updateSuite }  = this.props.action;
-
-        updateSuite({ title, timeout });
-        this.props.form.resetFields();
+        const { setProjectGit }  = this.props.action;
+        //setProjectGit()
+        //this.props.form.resetFields();
       }
     });
   }
 
+  onAuthMethodChange = ( e ) => {
+    this.setState({
+      authMethod: e.target.value
+    });
+  }
+
   render() {
-    const { getFieldDecorator, getFieldsError } = this.props.form;
+    const { git } = this.props,
+          { authMethod } = this.state,
+          { getFieldDecorator, getFieldsError } = this.props.form;
 
     return (
       <Form id="cSuiteForm" className="settings-git-form" onSubmit={ this.onSubmit }>
@@ -48,7 +46,7 @@ export class GitPane extends AbstractForm {
 
         <FormItem  label="Repository location">
           { getFieldDecorator( "repository", {
-            initialValue: "",
+            initialValue: git.repository,
             rules: [
               {
                 required: true, message: "Please enter repository location"
@@ -68,13 +66,30 @@ export class GitPane extends AbstractForm {
           )}
         </FormItem>
 
+        <FormItem  label="Provider">
+          { getFieldDecorator( "credentialsPassword", {
+            initialValue: git.credentialsProvider,
+            rules: [
+              {
+                required: true, message: "Please select provider"
+              }
+            ]
+          })(
+             <Select>
+                <Option value="gitlab">Gitlab</Option>
+                <Option value="bitbucket">Bitbacket</Option>
+                <Option value="github" >Github</Option>
+                <Option value="other" >Other</Option>
+              </Select>
+          )}
+        </FormItem>
 
         <FormItem  label="Username">
           { getFieldDecorator( "credentialsUsername", {
-            initialValue: "",
+            initialValue: git.credentialsUsername,
             rules: [
               {
-                required: true, message: "Please enter repository location"
+                required: true, message: "Please enter username"
               },
               {
                 validator: ruleValidateGenericString
@@ -91,38 +106,57 @@ export class GitPane extends AbstractForm {
           )}
         </FormItem>
 
-        <FormItem  label="Email">
+         <RadioGroup onChange={ this.onAuthMethodChange } value={ this.state.authMethod }>
+            <Radio value="password">Password</Radio>
+            <Radio value="accessToken">Access token</Radio>
+        </RadioGroup>
+
+        { authMethod === "password" && <FormItem  label="Password">
           { getFieldDecorator( "credentialsPassword", {
-            initialValue: "",
+            initialValue: git.credentialsPassword,
             rules: [
-              {
-                required: true, message: "Please enter repository location"
-              },
-              {
-                validator: ruleValidateGenericString
-              },
               {
                 transform: ( value ) => value.trim()
               }
             ]
           })(
             <Input
+              type="password"
               onPressEnter={this.onSubmit}
-              placeholder="e.g. jon"
             />
           )}
-        </FormItem>
+        </FormItem> }
+
+        { authMethod === "accessToken" && <FormItem  label="Access Token">
+          { getFieldDecorator( "credentialsAcccessToken", {
+            initialValue: git.credentialsPassword,
+            rules: [
+              {
+                transform: ( value ) => value.trim()
+              }
+            ]
+          })(
+            <Input
+              type="password"
+              onPressEnter={this.onSubmit}
+            />
+          )}
+        </FormItem> }
+
+
+
+
 
         <h3>Git Config</h3>
         <p>Please provide your identity data. Every Git commit uses this information, so it's quite important.</p>
 
 
-          <FormItem  label="Username">
+          <FormItem  label="Full Name">
             { getFieldDecorator( "configUsername", {
-              initialValue: "",
+              initialValue: git.configUsername,
               rules: [
                 {
-                  required: true, message: "Please enter repository location"
+                  required: true, message: "Please enter full name"
                 },
                 {
                   validator: ruleValidateGenericString
@@ -134,17 +168,17 @@ export class GitPane extends AbstractForm {
             })(
               <Input
                 onPressEnter={this.onSubmit}
-                placeholder="e.g. jon"
+                placeholder="e.g. Jon Snow"
               />
             )}
           </FormItem>
 
         <FormItem  label="Email">
           { getFieldDecorator( "configEmail", {
-            initialValue: "",
+            initialValue: git.configEmail,
             rules: [
               {
-                required: true, message: "Please enter repository location"
+                required: true, message: "Please enter email"
               },
               {
                 validator: ruleValidateGenericString
@@ -156,7 +190,7 @@ export class GitPane extends AbstractForm {
           })(
             <Input
               onPressEnter={this.onSubmit}
-              placeholder="e.g. jon"
+              placeholder="e.g. jon@example.com"
             />
           )}
         </FormItem>

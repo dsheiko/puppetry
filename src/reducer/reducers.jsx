@@ -29,11 +29,11 @@ export const reducer = handleActions(
         }});
     },
 
-    [ actions.setSettingsGit ]: ( state, { payload }) => {
+    [ actions.setProjectGit ]: ( state, { payload }) => {
       return update( state, {
-        settings: {
+        project: {
           git: {
-            $set: payload
+            $merge: payload
           }
         }});
     },
