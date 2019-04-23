@@ -1,13 +1,15 @@
 import log from "electron-log";
+import { join } from "path";
 import { TestGeneratorError } from "error";
 import { COMMAND_ID_COMMENT, RUNNER_PUPPETRY } from "constant";
 
 export default class TestGenerator {
 
-  constructor( suite, schema, targets, runner ) {
+  constructor( suite, schema, targets, runner, projectDirectory ) {
     this.schema = schema;
     this.suite = { ...suite };
-    this.runner = runner;
+    this.projectDirectory = projectDirectory;
+    this.runner = runner; // RUNNER_PUPPETRY when embedded
     this.targets = Object.values( targets ).reduce( ( carry, entry ) => {
       carry[ entry.target ] = entry.selector;
       return carry;
@@ -84,6 +86,9 @@ export default class TestGenerator {
       return this.schema.jest.tplSuite({
         title: this.suite.title,
         targets: this.parseTargets( this.suite.targets ),
+        suite: this.suite,
+        runner: this.runner,
+        screenshotDirectory: join( this.projectDirectory, "screenshots" ),
         body: Object.values( this.suite.groups )
           .filter( group => group.disabled !== true )
           .map( this.parseGroup )

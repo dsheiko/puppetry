@@ -101,7 +101,7 @@ export function removeExport( exportDirectory ) {
  */
 export async function exportSuite( projectDirectory, filename, runner ) {
   const suite = await readSuite( projectDirectory, filename ),
-        gen = new TestGenerator( suite, schema, suite.targets, runner );
+        gen = new TestGenerator( suite, schema, suite.targets, runner, projectDirectory );
   return gen.generate();
 }
 
