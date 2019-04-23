@@ -31,7 +31,7 @@ const {
       devices = require( "puppeteer/DeviceDescriptors" );
 
 ${ runner === RUNNER_PUPPETRY ? `
-setPngBasePath( "${ screenshotDirectory }" );
+setPngBasePath( ${ JSON.stringify( screenshotDirectory ) } );
 ` : `` }
 
 jest.setTimeout( ${ suite.timeout || NETWORK_TIMEOUT} );

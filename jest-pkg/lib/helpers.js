@@ -13,7 +13,7 @@ let PATH_SCREENSHOTS = join( __dirname, "/../", "/screenshots");
      */
 const png = ( filePath, options = {} ) => {
         const normalizedPath = filePath.replace( /[^a-zA-Z\d\-\_\\\/]/g, "-" );
-        const path = `${PATH_SCREENSHOTS}/${normalizedPath}.png`;
+        const path = join( PATH_SCREENSHOTS, `${normalizedPath}.png` );
         shell.mkdir( "-p" , dirname( path ) );
         return { path, ...options };
       };
