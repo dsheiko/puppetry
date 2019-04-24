@@ -10,6 +10,7 @@ export class SettingsPanel extends React.Component {
 
   static propTypes = {
     project: PropTypes.object.isRequired,
+    projectDirectory: PropTypes.string,
     action: PropTypes.shape({
       updateProjectPanes: PropTypes.func.isRequired
     })
@@ -24,7 +25,7 @@ export class SettingsPanel extends React.Component {
   }
 
   render() {
-   const { action, project } = this.props,
+   const { action, project, projectDirectory } = this.props,
           panes = project.appPanels.settings.panes;
 
     let activeKey = "git";
@@ -43,7 +44,7 @@ export class SettingsPanel extends React.Component {
             onChange={ this.onTabChange }
           >
             <TabPane tab="GIT" key="git">
-              <GitPane action={ action } git={ project.git } />
+              <GitPane action={ action } git={ project.git } projectDirectory={ projectDirectory } />
             </TabPane>
 
           </Tabs>

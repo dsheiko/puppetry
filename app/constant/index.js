@@ -27,6 +27,10 @@ exports.E_GIT_INIT = "gitInit";
 exports.E_RENDERER_ERROR = "rendererError";
 exports.E_RENDERER_INFO = "rendererInfo";
 exports.E_GIT_COMMIT = "gitCommit";
+exports.E_GIT_PULL = "gitPull";
+exports.E_GIT_PUSH = "gitPush";
+exports.E_GIT_LOG = "gitLog";
+exports.E_GIT_SET_REMOTE = "gitSetRemote";
 
 exports.E_FILE_NAVIGATOR_UPDATED = "fileNavigatorUpdated";
 exports.E_WATCH_FILE_NAVIGATOR = "watchFileNavigator";
