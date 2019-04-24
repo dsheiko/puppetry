@@ -31,6 +31,7 @@ const DEFAULT_STATE = {
     exportProjectModal: false,
     testReportModal: false,
     installRuntimeTestModal: false,
+    newGitCommitModal: false,
 
     commandModal: {
       isVisible: false,
@@ -77,9 +78,11 @@ const DEFAULT_STATE = {
 
     git: {
       initialized: false,
-      repository: "",
+      hasRemote: false,
+      remoteRepository: "",
       configUsername: "",
       configEmail: "",
+      credentialsAuthMethod: "",
       credentialsAcccessToken: "",
       credentialsProvider: "",
       credentialsUsername: "",

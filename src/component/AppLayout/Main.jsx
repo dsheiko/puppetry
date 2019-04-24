@@ -37,7 +37,7 @@ export class Main extends React.Component {
 
     return (
       <ErrorBoundary>
-        <div id="cMain">
+        <div id="cMain" className="panes-container">
 
 
           <Tabs

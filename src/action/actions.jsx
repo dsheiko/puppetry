@@ -246,6 +246,11 @@ actions.loadProjectFiles = ( directory = null ) => async ( dispatch, getState ) 
   dispatch( actions.updateApp({ project: { files }}) );
 };
 
+actions.saveProjectGit = ( options ) => async ( dispatch, getState ) => {
+  await dispatch( actions.setProjectGit( options ) );
+  await saveProject( getState() );
+};
+
 actions.saveProject = ({ projectDirectory, name }) => async ( dispatch, getState ) => {
   try {
     if ( !name ) {

@@ -2,7 +2,7 @@ require( "./extendPuppeteer" );
 
 const bs = require( "./BrowserSession" );
 
-const { makePng, png } = require( "./helpers" );
+const { makePng, setPngBasePath, png } = require( "./helpers" );
 
 /**
  * Extending Puppeteer
@@ -219,5 +219,6 @@ module.exports = ( ns = null ) => ({
   bs,
   png: ( ns ? makePng( ns ) : png ),
   query,
-  makePng
+  makePng,
+  setPngBasePath
 });

@@ -34,7 +34,7 @@ export class SettingsPanel extends React.Component {
 
     return (
       <ErrorBoundary>
-        <div id="cSettingsPanel">
+        <div id="cSettingsPanel" className="panes-container">
 
           <Tabs
             activeKey={ activeKey }

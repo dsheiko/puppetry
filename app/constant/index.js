@@ -23,6 +23,10 @@ exports.E_RUNTIME_TEST_ERROR = "runtimeTestError";
 exports.E_SHOW_CONFIRM_DIALOG = "showConfirmDialog";
 exports.E_CONFIRM_DIALOG_VALUE = "confirmDialogValue";
 exports.E_ENTITY_CREATED = "entityCreated";
+exports.E_GIT_INIT = "gitInit";
+exports.E_RENDERER_ERROR = "rendererError";
+exports.E_RENDERER_INFO = "rendererInfo";
+exports.E_GIT_COMMIT = "gitCommit";
 
 exports.E_FILE_NAVIGATOR_UPDATED = "fileNavigatorUpdated";
 exports.E_WATCH_FILE_NAVIGATOR = "watchFileNavigator";
