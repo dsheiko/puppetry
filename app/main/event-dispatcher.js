@@ -2,7 +2,8 @@ const { ipcMain, dialog, remote } = require( "electron" ),
       { E_BROWSE_DIRECTORY, E_DIRECTORY_SELECTED, E_RUN_TESTS,
         E_TEST_REPORTED, E_WATCH_FILE_NAVIGATOR, E_BROWSE_FILE, E_FILE_SELECTED,
         E_INSTALL_RUNTIME_TEST, E_SHOW_CONFIRM_DIALOG, E_CONFIRM_DIALOG_VALUE,
-        E_GIT_INIT, E_GIT_COMMIT, E_RENDERER_ERROR, E_RENDERER_INFO
+        E_GIT_INIT, E_GIT_COMMIT, E_GIT_SET_REMOTE, E_RENDERER_ERROR, E_RENDERER_INFO,
+        E_GIT_PUSH, E_GIT_PULL
       } = require( "../constant" ),
       watchFiles = require( "./file-watcher" ),
       { installRuntimeTest } = require( "./install-runtime-test" ),
@@ -70,17 +71,42 @@ ipcMain.on( E_GIT_INIT, async ( event, projectDirectory ) => {
     await gitApi.init( projectDirectory );
     event.sender.send( E_RENDERER_INFO, "Empty local Git repository created" );
   } catch ( err ) {
-    event.sender.send( E_RENDERER_ERROR, err.message );
+    event.sender.send( E_RENDERER_ERROR, `Cannot initialize local Git: ${ err.message }` );
   }
 });
 
 ipcMain.on( E_GIT_COMMIT, async ( event, message, projectDirectory, username, email ) => {
   try {
-    console.log(message, projectDirectory, username, email);
-    
     const sha = await gitApi.commit( message, projectDirectory, username, email );
     event.sender.send( E_RENDERER_INFO, `New commit ${ sha } created` );
   } catch ( err ) {
-    event.sender.send( E_RENDERER_ERROR, err.message );
+    event.sender.send( E_RENDERER_ERROR, `Cannot commit changes: ${ err.message }` );
+  }
+});
+
+ipcMain.on( E_GIT_SET_REMOTE, async ( event, remoteRepository, projectDirectory, credentials  ) => {
+  try {
+    await gitApi.setRemote( remoteRepository, projectDirectory, credentials  );
+    event.sender.send( E_RENDERER_INFO, `New remote repository is set successfully` );
+  } catch ( err ) {
+    event.sender.send( E_RENDERER_ERROR, `Cannot set remote repository: ${ err.message }` );
+  }
+});
+
+ipcMain.on( E_GIT_PULL, async ( event, projectDirectory, credentials  ) => {
+  try {
+    await gitApi.pull( projectDirectory, credentials  );
+    event.sender.send( E_RENDERER_INFO, `Changes pulled from remote repository successfully` );
+  } catch ( err ) {
+    event.sender.send( E_RENDERER_ERROR, `Cannot pull from remote repository: ${ err.message }` );
+  }
+});
+
+ipcMain.on( E_GIT_PUSH, async ( event, projectDirectory, credentials  ) => {
+  try {
+    await gitApi.push( projectDirectory, credentials  );
+    event.sender.send( E_RENDERER_INFO, `Changes pushed to remote repository successfully` );
+  } catch ( err ) {
+    event.sender.send( E_RENDERER_ERROR, `Cannot push to remote repository: ${ err.message }` );
   }
 });

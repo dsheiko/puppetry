@@ -281,10 +281,10 @@ export class MainMenu extends GitEnhancedMenu {
                   onClick={ this.onFileGitCommit }
                   id="cMainMenuFileGitCommit">Commit...{ " " }<kbd>{ ostr( "Ctrl-Shift-S" ) }</kbd></Menu.Item>
                 <Menu.Item key="git6" disabled={ !git.initialized || !git.hasRemote }
-                  onClick={ () => {} } id="cMainMenuFileGitPull">
+                  onClick={ this.onFileGitPull } id="cMainMenuFileGitPull">
                   Pull</Menu.Item>
                 <Menu.Item key="git7" disabled={ !git.initialized || !git.hasRemote }
-                  onClick={ () => {} } id="cMainMenuFileGitPush">
+                  onClick={ this.onFileGitPush } id="cMainMenuFileGitPush">
                   Push</Menu.Item>
               </SubMenu>
 

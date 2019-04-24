@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
 import { ruleValidateGenericString } from "service/utils";
 import { message, Form, Radio, Select, Icon, Input, InputNumber, Button, Card } from "antd";
+import { ipcRenderer } from "electron";
+import { E_GIT_SET_REMOTE } from "constant";
 const FormItem = Form.Item,
       RadioGroup = Radio.Group,
       Option = Select.Option,
@@ -20,7 +22,9 @@ export class RemoteForm extends AbstractForm {
   }
 
   onSubmit = ( e ) => {
+    const { git, projectDirectory } = this.props;
     e.preventDefault();
+
     this.props.form.validateFieldsAndScroll( ( err, values ) => {
       if ( !err ) {
 
@@ -38,7 +42,17 @@ export class RemoteForm extends AbstractForm {
 
         saveProjectGit( { ...values, hasRemote: true } );
         this.props.form.resetFields();
-        message.info( `Data has been successfully updated` );
+
+        ipcRenderer.send(
+          E_GIT_SET_REMOTE,
+          values.remoteRepository,
+          projectDirectory,
+          {
+             credentialsUsername: values.credentialsUsername,
+             credentialsPassword: values.credentialsPassword,
+             credentialsAcccessToken: values.credentialsAcccessToken
+          }
+        );
       }
     });
   }
@@ -46,9 +60,6 @@ export class RemoteForm extends AbstractForm {
   onAuthMethodChange = ( e ) => {
     const { setProjectGit }  = this.props.action;
     setProjectGit({ credentialsAuthMethod: e.target.value });
-//    this.setState({
-//      authMethod: e.target.value
-//    });
   }
 
   render() {
@@ -92,7 +103,7 @@ export class RemoteForm extends AbstractForm {
           )}
         </FormItem>
 
-        <FormItem  label="Provider">
+        { false && <FormItem  label="Provider">
           { getFieldDecorator( "credentialsProvider", {
             initialValue: git.credentialsProvider,
             rules: [
@@ -108,7 +119,7 @@ export class RemoteForm extends AbstractForm {
                 <Option value="other" >Other</Option>
               </Select>
           )}
-        </FormItem>
+        </FormItem> }
 
         <FormItem  label="Username">
           { getFieldDecorator( "credentialsUsername", {
@@ -159,21 +170,37 @@ export class RemoteForm extends AbstractForm {
           )}
         </FormItem> }
 
-        { git.credentialsAuthMethod === "accessToken" && <FormItem  label="Access Token">
-          { getFieldDecorator( "credentialsAcccessToken", {
-            initialValue: git.credentialsAcccessToken,
-            rules: [
-              {
-                transform: ( value ) => value.trim()
-              }
-            ]
-          })(
-            <Input
-              type="password"
-              onPressEnter={this.onSubmit}
-            />
-          )}
-        </FormItem> }
+    { git.credentialsAuthMethod === "accessToken" && <React.Fragment>
+
+          <FormItem  label="Access Token">
+            { getFieldDecorator( "credentialsAcccessToken", {
+              initialValue: git.credentialsAcccessToken,
+              rules: [
+                {
+                  transform: ( value ) => value.trim()
+                }
+              ]
+            })(
+              <Input
+                type="password"
+                onPressEnter={this.onSubmit}
+              />
+            )}
+          </FormItem>
+          <p>
+    Many Git providers support two-factor authentication, meaning
+    you can create a Personal Access Token
+    (or an App Password in Bitbucket terms) and use that to authenticate
+    (
+      <a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/"
+        onClick={ this.onExtClick }>Instructions for GitHub</a>, { " " }
+      <a href="https://confluence.atlassian.com/bitbucket/app-passwords-828781300.html"
+        onClick={ this.onExtClick }>Instructions for Bitbucket</a>, { " " }
+      <a href="https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html"
+        onClick={ this.onExtClick }>Instructions for GitLab</a>
+    ).
+    </p>
+        </React.Fragment> }
 
         <FormItem className="form-buttons">
           <Button
@@ -181,12 +208,8 @@ export class RemoteForm extends AbstractForm {
             type="primary"
             htmlType="submit"
             disabled={ this.hasErrors( getFieldsError() ) }
-          >Save</Button>
+          >Set Remote Repository</Button>
 
-          <Button
-            type="primary"
-            disabled={ this.hasErrors( getFieldsError() ) }
-          >Set Remote</Button>
         </FormItem>
       </Form>
     );

@@ -14,7 +14,7 @@ const FormItem = Form.Item,
       connectForm = Form.create();
 
 @connectForm
-export class NewGitCommitModal extends AbstractForm {
+export class GitCheckoutModal extends AbstractForm {
 
   static propTypes = {
     action:  PropTypes.shape({

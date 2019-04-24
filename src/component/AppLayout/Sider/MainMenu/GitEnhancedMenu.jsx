@@ -1,13 +1,21 @@
 import React from "react";
 import { message } from "antd";
 import { ipcRenderer } from "electron";
-import { E_GIT_INIT } from "constant";
+import { E_GIT_INIT, E_GIT_PULL, E_GIT_PUSH } from "constant";
 
 
 export class GitEnhancedMenu extends React.Component {
 
   onFileGitCommit = () => {
     this.props.action.updateApp({ newGitCommitModal: true });
+  }
+
+  onFileGitPull = () => {
+    ipcRenderer.send( E_GIT_PULL, this.props.projectDirectory );
+  }
+
+  onFileGitPush = () => {
+    ipcRenderer.send( E_GIT_PUSH, this.props.projectDirectory );
   }
 
   onFileGitInitialize = () => {
