@@ -7,7 +7,7 @@ import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
 import { exportProject, getRuntimeTestPath, parseReportedFailures } from "service/io";
 import { millisecondsToStr } from "service/utils";
-import { Icon, Spin, Button, Collapse } from "antd";
+import { Icon, Spin, Button, Collapse, notification } from "antd";
 import { join } from "path";
 import { TestGeneratorError } from "error";
 import Convert from "ansi-to-html";
@@ -42,7 +42,11 @@ export class TestReport extends AbstractComponent {
   }
 
   onOpenDirectory = () => {
-    shell.openItem( join( this.runtimeTemp, "screenshots" ) );
+    shell.openItem( join( this.props.projectDirectory, "screenshots" ) );
+    notification.open({
+      message: "Opening system file manager",
+      description: "The requested directory will open in the default file manager in a few seconds"
+    });
   }
 
   run = async () => {

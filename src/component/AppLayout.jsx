@@ -22,6 +22,7 @@ import { SaveProjectAsModal } from "./Modal/SaveProjectAsModal";
 import { CommandModal } from "./AppLayout/Main/GroupTable/TestTable/CommandModal";
 import { InstallRuntimeTestModal } from "./Modal/InstallRuntimeTestModal";
 import { EditTargetsAsCsvModal } from "./Modal/EditTargetsAsCsvModal";
+import { NewGitCommitModal } from "./Modal/NewGitCommitModal";
 
 import { TabGroup  } from "./TabGroup";
 import If from "component/Global/If";
@@ -56,7 +57,8 @@ export class AppLayout extends React.Component {
           <Layout className={classNames({
             layout: true,
             "is-loading": store.app.loading,
-            "has-sticky-tabs-panel": tabs.active && tabs.active === "suite"
+            "has-sticky-tabs-panel": tabs.active
+              && ( tabs.active === "suite" || tabs.active === "settings" )
 
           })} id="cLayout">
 
@@ -191,6 +193,13 @@ export class AppLayout extends React.Component {
         <EditTargetsAsCsvModal
           isVisible={ store.app.editTargetsAsCsvModal }
           targets={ store.suite.targets }
+          action={ action }
+        />
+
+        <NewGitCommitModal
+          isVisible={ store.app.newGitCommitModal }
+          git={ store.project.git }
+          projectDirectory={ projectDirectory }
           action={ action }
         />
 

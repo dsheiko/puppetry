@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Menu, Icon } from "antd";
+import { Menu, Icon, message } from "antd";
 import { ipcRenderer } from "electron";
 import Hotkeys from "react-hot-keys";
 import ErrorBoundary from "component/ErrorBoundary";
@@ -8,12 +8,14 @@ import { msgDataSaved } from "component/Global/Message";
 import { confirmUnsavedChanges } from "service/smalltalk";
 import { E_MENU_NEW_PROJECT, E_MENU_NEW_SUITE,
   E_MENU_OPEN_PROJECT, E_MENU_SAVE_SUITE, E_MENU_SAVE_SUITE_AS,
-  E_MENU_OPEN_SUITE, E_MENU_EXPORT_PROJECT, E_MENU_EXIT_APP, E_MENU_RUN } from "constant";
+  E_MENU_OPEN_SUITE, E_MENU_EXPORT_PROJECT, E_MENU_EXIT_APP,
+  E_MENU_RUN, E_RENDERER_ERROR, E_RENDERER_INFO } from "constant";
 import { isMac, ostr } from "./MainMenu/helpers";
+import { GitEnhancedMenu } from "./MainMenu/GitEnhancedMenu";
 
 const SubMenu = Menu.SubMenu;
 
-export class MainMenu extends React.Component {
+export class MainMenu extends GitEnhancedMenu {
 
   static propTypes = {
     action:  PropTypes.shape({
@@ -34,6 +36,9 @@ export class MainMenu extends React.Component {
   hotkeyMap = {
     "ctrl+s": "onSave",
     "command+s": "onSave",
+
+    "ctrl+shift+s": "onFileGitCommit",
+    "command+shift+s": "onFileGitCommit",
 
     "ctrl+n": "onNewSuite",
     "command+n": "onNewSuite",
@@ -184,7 +189,19 @@ export class MainMenu extends React.Component {
     this.props.action.addAppTab( "settings" );
   }
 
+  onRendererInfo( ev, msg ) {
+    message.info( msg );
+  }
+
+  onRendererError( ev, msg ) {
+    message.error( msg );
+  }
+
   componentDidMount() {
+    ipcRenderer.removeAllListeners( E_RENDERER_INFO );
+    ipcRenderer.on( E_RENDERER_INFO, this.onRendererInfo );
+    ipcRenderer.removeAllListeners( E_RENDERER_ERROR );
+    ipcRenderer.on( E_RENDERER_ERROR, this.onRendererError );
     ipcRenderer.removeAllListeners( E_MENU_NEW_PROJECT );
     ipcRenderer.on( E_MENU_NEW_PROJECT, this.onNewProject );
     ipcRenderer.removeAllListeners( E_MENU_NEW_SUITE );
@@ -207,7 +224,9 @@ export class MainMenu extends React.Component {
 
   render() {
     const hotkeys = Object.keys( this.hotkeyMap ).join( ", " ),
-          { projectDirectory, suiteFilename, readyToRunTests, files } = this.props;
+          { projectDirectory, suiteFilename, readyToRunTests, files, project } = this.props,
+          git = project.git;
+
     return (
       <ErrorBoundary>
         <Hotkeys
@@ -246,14 +265,27 @@ export class MainMenu extends React.Component {
                   disabled={ !suiteFilename }
                   title={<span><Icon type="branches" /><span>Git</span></span>}
                 >
-                <Menu.Item key="git1" disabled={ false } onClick={ () => {} } id="cMainMenuFileGitInit">Initialize</Menu.Item>
-                <Menu.Item key="git2" disabled={ false } onClick={ () => {} } id="cMainMenuFileGitClone">Clone...</Menu.Item>
-                <Menu.Item key="git3" disabled={ false } onClick={ () => {} } id="cMainMenuFileGitCheckout">Checkout...</Menu.Item>
-                <Menu.Item key="git4" disabled={ false } onClick={ () => {} } id="cMainMenuFileGitRevert">Revert...</Menu.Item>
-                <Menu.Item key="git5" disabled={ false } onClick={ () => {} }
+                <Menu.Item key="git1" disabled={ git.initialized }
+                  onClick={ this.onFileGitInitialize } id="cMainMenuFileGitInit">
+                  Initialize</Menu.Item>
+                <Menu.Item key="git2" disabled={ !git.initialized || !git.hasRemote }
+                  onClick={ () => {} } id="cMainMenuFileGitClone">
+                  Clone...</Menu.Item>
+                <Menu.Item key="git3" disabled={ !git.initialized }
+                  onClick={ () => {} } id="cMainMenuFileGitCheckout">
+                  Checkout...</Menu.Item>
+                <Menu.Item key="git4" disabled={ !git.initialized }
+                  onClick={ () => {} } id="cMainMenuFileGitRevert">
+                  Revert...</Menu.Item>
+                <Menu.Item key="git5" disabled={ !git.initialized }
+                  onClick={ this.onFileGitCommit }
                   id="cMainMenuFileGitCommit">Commit...{ " " }<kbd>{ ostr( "Ctrl-Shift-S" ) }</kbd></Menu.Item>
-                <Menu.Item key="git6" disabled={ false } onClick={ () => {} } id="cMainMenuFileGitPull">Pull</Menu.Item>
-                <Menu.Item key="git7" disabled={ false } onClick={ () => {} } id="cMainMenuFileGitPush">Push</Menu.Item>
+                <Menu.Item key="git6" disabled={ !git.initialized || !git.hasRemote }
+                  onClick={ () => {} } id="cMainMenuFileGitPull">
+                  Pull</Menu.Item>
+                <Menu.Item key="git7" disabled={ !git.initialized || !git.hasRemote }
+                  onClick={ () => {} } id="cMainMenuFileGitPush">
+                  Push</Menu.Item>
               </SubMenu>
 
               <Menu.Item key="7" disabled={ !projectDirectory } id="cMainMenuExportProject"

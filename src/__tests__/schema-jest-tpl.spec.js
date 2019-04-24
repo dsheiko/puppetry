@@ -40,11 +40,15 @@ describe( "Schema.Jest", () => {
 
   describe( "tplSuite", () => {
     it( "returns valid JavaScript when plain values", () => {
-      const code = tplSuite({ title: "FOO", body: "const a = 1;", targets: "const b = 1;" });
+      const code = tplSuite({ title: "FOO", body: "const a = 1;", targets: "const b = 1;",
+        suite: { timeout: 5000 }
+      });
       expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
     });
     it( "returns valid JavaScript when quoted values", () => {
-      const code = tplSuite({ title: `Foo "Bar"`, body: "const a = 1;", targets: "const b = 1;" });
+      const code = tplSuite({ title: `Foo "Bar"`, body: "const a = 1;", targets: "const b = 1;",
+        suite: { timeout: 5000 }
+      });
       expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
     });
   });
