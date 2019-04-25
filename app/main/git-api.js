@@ -54,6 +54,22 @@ module.exports = {
     });
   },
 
+  async currentBranch( projectDirectory ) {
+    return await git.currentBranch({ dir: projectDirectory, fullname: false });
+  },
+
+  async hasModifiedFiles( projectDirectory ) {
+    const projectFiles = [ ...await readDir( projectDirectory, ".json" ), ".puppetryrc" ];
+    let modified = false;
+    for ( const file of projectFiles ) {
+      const fileStatus = await git.status({ dir: projectDirectory, filepath: file });
+      if ( fileStatus !== "unmodified" ) {
+        modified = true;
+      }
+    }
+    return modified;
+  },
+
   async log( projectDirectory ) {
     return await git.log({
       dir: projectDirectory,

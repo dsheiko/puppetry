@@ -13,9 +13,11 @@ import { InvalidArgumentError } from "error";
 import DEFAULT_STATE from "reducer/defaultState";
 import { ipcRenderer, remote } from "electron";
 import { E_FILE_NAVIGATOR_UPDATED, E_WATCH_FILE_NAVIGATOR,
-  E_PROJECT_LOADED, E_SUITE_LOADED, E_SUITE_LIST_UPDATED } from "constant";
+  E_PROJECT_LOADED, E_SUITE_LOADED, E_SUITE_LIST_UPDATED,
+  E_GIT_CURRENT_BRANCH, E_GIT_CURRENT_BRANCH_RESPONSE, E_CHECKOUT_MASTER_OPEN } from "constant";
 import { getDateString, checkNewVersion } from "../service/http";
 import debounce from "lodash.debounce";
+import mediator from "service/mediator";
 
 const STORAGE_KEY_SETTINGS = "settings",
 
@@ -203,6 +205,18 @@ actions.loadSettings = () => ( dispatch, getState ) => {
 };
 
 // PROJECT
+
+actions.checkGit = ( projectDirectory ) => async ( dispatch, getState ) => {
+  ipcRenderer.removeAllListeners( E_GIT_CURRENT_BRANCH_RESPONSE );
+  ipcRenderer.on( E_GIT_CURRENT_BRANCH_RESPONSE, ( ev, branch ) => {
+    if ( branch !== "master" ) {
+      console.log(branch);
+      dispatch( actions.updateApp({ gitDetachedHeadState: true }) );
+      mediator.emit( E_CHECKOUT_MASTER_OPEN, branch );
+    }
+  });
+  ipcRenderer.send( E_GIT_CURRENT_BRANCH, projectDirectory );
+};
 
 actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
   const projectDirectory = directory || getState().settings.projectDirectory;

@@ -55,3 +55,8 @@ export function millisecondsToStr( milliseconds ) {
 
   return milliseconds + "ms";
 }
+
+export function truncate( str, limit ) {
+  str = String( str );
+  return ( str.length > limit ) ? str.substr( 0, limit - 3 ) + '...' : str;
+}

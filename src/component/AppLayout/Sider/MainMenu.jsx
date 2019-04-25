@@ -224,7 +224,7 @@ export class MainMenu extends GitEnhancedMenu {
 
   render() {
     const hotkeys = Object.keys( this.hotkeyMap ).join( ", " ),
-          { projectDirectory, suiteFilename, readyToRunTests, files, project } = this.props,
+          { projectDirectory, suiteFilename, readyToRunTests, files, project, gitDetachedHeadState } = this.props,
           git = project.git;
 
     return (
@@ -246,9 +246,11 @@ export class MainMenu extends GitEnhancedMenu {
             >
               <Menu.Item key="file1" onClick={ this.onNewProject } id="cMainMenuNewProject">
                 New Project... { " " }<kbd>{ ostr( "Ctrl-Shift-N" ) }</kbd></Menu.Item>
-              <Menu.Item key="file7" disabled={ !projectDirectory } onClick={ this.onSaveProjectAs } id="cMainMenuSaveProjectAs">
+              <Menu.Item key="file7" disabled={ !projectDirectory }
+                onClick={ this.onSaveProjectAs } id="cMainMenuSaveProjectAs">
                 Save Project As...</Menu.Item>
-              <Menu.Item key="file2" disabled={ !projectDirectory } onClick={ this.onNewSuite } id="cMainMenuNewSuite">
+              <Menu.Item key="file2" disabled={ !projectDirectory }
+                onClick={ this.onNewSuite } id="cMainMenuNewSuite">
                 New Suite... { " " }<kbd>{ ostr( "Ctrl-N" ) }</kbd></Menu.Item>
               <Menu.Item key="file3" onClick={ this.onOpenProject } id="cMainMenuOpenProject">
                 Open Project... { " " }<kbd>{ ostr( "Ctrl-Shift-O" ) }</kbd></Menu.Item>
@@ -271,19 +273,19 @@ export class MainMenu extends GitEnhancedMenu {
                 <Menu.Item key="git2" disabled={ !git.initialized || !git.hasRemote }
                   onClick={ () => {} } id="cMainMenuFileGitClone">
                   Clone...</Menu.Item>
-                <Menu.Item key="git3" disabled={ !git.initialized }
-                  onClick={ this.onFileGitCheckout } id="cMainMenuFileGitCheckout">
-                  Checkout/Revert...</Menu.Item>
 
-                <Menu.Item key="git5" disabled={ !git.initialized }
+
+                <Menu.Item key="git3" disabled={ !git.initialized || gitDetachedHeadState }
+                  onClick={ this.onFileGitCheckout } id="cMainMenuFileGitCheckout">
+                  Checkout...</Menu.Item>
+
+                <Menu.Item key="git5" disabled={ !git.initialized || gitDetachedHeadState }
                   onClick={ this.onFileGitCommit }
                   id="cMainMenuFileGitCommit">Commit...{ " " }<kbd>{ ostr( "Ctrl-Shift-S" ) }</kbd></Menu.Item>
-                <Menu.Item key="git6" disabled={ !git.initialized || !git.hasRemote }
-                  onClick={ this.onFileGitPull } id="cMainMenuFileGitPull">
-                  Pull</Menu.Item>
-                <Menu.Item key="git7" disabled={ !git.initialized || !git.hasRemote }
-                  onClick={ this.onFileGitPush } id="cMainMenuFileGitPush">
-                  Push</Menu.Item>
+                <Menu.Item key="git6" disabled={ !git.initialized || !git.hasRemote || gitDetachedHeadState }
+                  onClick={ this.onFileGitSync } id="cMainMenuFileGitPull">
+                  Sync with remote</Menu.Item>
+
               </SubMenu>
 
               <Menu.Item key="7" disabled={ !projectDirectory } id="cMainMenuExportProject"

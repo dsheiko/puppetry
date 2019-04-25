@@ -1,10 +1,11 @@
 import React from "react";
 import { message } from "antd";
 import { ipcRenderer } from "electron";
-import { E_GIT_INIT, E_GIT_PULL, E_GIT_PUSH, E_GIT_LOG, E_GIT_LOG_RESPONSE } from "constant";
+import { E_GIT_INIT, E_GIT_SYNC, E_GIT_PUSH, E_GIT_LOG, E_GIT_LOG_RESPONSE } from "constant";
 
 
 export class GitEnhancedMenu extends React.Component {
+
 
   onFileGitCheckout = () => {
     this.props.action.updateApp({ gitCheckoutModal: true });
@@ -24,18 +25,9 @@ export class GitEnhancedMenu extends React.Component {
     this.props.action.updateApp({ newGitCommitModal: true });
   }
 
-  onFileGitPull = () => {
+  onFileGitSync = () => {
     const { git } = this.props.project;
-    ipcRenderer.send( E_GIT_PULL, this.props.projectDirectory, {
-      credentialsUsername: git.credentialsUsername,
-      credentialsPassword: git.credentialsPassword,
-      credentialsAcccessToken: git.credentialsAcccessToken
-   });
-  }
-
-  onFileGitPush = () => {
-    const { git } = this.props.project;
-    ipcRenderer.send( E_GIT_PUSH, this.props.projectDirectory, {
+    ipcRenderer.send( E_GIT_SYNC, this.props.projectDirectory, {
       credentialsUsername: git.credentialsUsername,
       credentialsPassword: git.credentialsPassword,
       credentialsAcccessToken: git.credentialsAcccessToken

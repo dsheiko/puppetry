@@ -1,14 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AbstractComponent from "component/AbstractComponent";
-import { Modal, Button, Table, Divider, Popconfirm } from "antd";
+import { Modal, Button, Table, Divider, Popconfirm, message, Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
 import { ipcRenderer } from "electron";
-import { E_GIT_LOG, E_GIT_LOG_RESPONSE, E_GIT_REVERT, E_GIT_REVERT_RESPONSE, 
-  E_GIT_CHECKOUT, E_GIT_CHECKOUT_RESPONSE } from "constant";
+import { E_GIT_LOG, E_GIT_LOG_RESPONSE, E_GIT_REVERT, E_GIT_REVERT_RESPONSE,
+  E_GIT_CHECKOUT, E_GIT_CHECKOUT_RESPONSE, E_CHECKOUT_MASTER_OPEN } from "constant";
 import * as classes from "./classes";
 import { timestampToDate } from "service/utils";
+import mediator from "service/mediator";
 
 /*eslint no-useless-escape: 0*/
 
@@ -44,25 +45,16 @@ export class GitCheckoutModal extends AbstractComponent {
       key: "actions",
       render: ( text, record ) => ( <span className="table-actions" role="status" onMouseDown={( e ) => e.preventDefault()}>
         <a className="link--action" tabIndex={-1}
-              role="button" onClick={() => this.checkoutRecord( record.oid )}>Checkout</a>
-
-        <Divider type="vertical" />
-
-        <Popconfirm title="Sure to revert?" onConfirm={() => this.revertRecord( record.oid )}>
-          <a className="link--action">Revert</a>
-        </Popconfirm>
-
+              role="button" onClick={() => this.checkoutRecord( record.oid, record.message )}>Checkout</a>
 
       </span> )
     }
   ]
 
-  revertRecord( oid ) {
-    ipcRenderer.send( E_GIT_REVERT, this.props.projectDirectory, oid );
-  }
 
-  checkoutRecord( oid ) {
-    ipcRenderer.send( E_GIT_CHECKOUT, this.props.projectDirectory, oid );
+  checkoutRecord( oid, comment ) {
+    ipcRenderer.send( E_GIT_CHECKOUT, this.props.projectDirectory, oid, comment );
+    this.props.action.updateApp({ gitCheckoutModal: false });
   }
 
   onClickCancel = ( e ) => {
@@ -70,17 +62,15 @@ export class GitCheckoutModal extends AbstractComponent {
     this.props.action.updateApp({ gitCheckoutModal: false });
   }
 
-  onCheckoutResponse = () => {
+  onCheckoutResponse = ( ev, oid, comment = "" ) => {
     this.props.action.loadProject();
-    this.props.action.updateApp({ gitCheckoutModal: false });
+    this.props.action.updateApp({ gitDetachedHeadState: true });
+    mediator.emit( E_CHECKOUT_MASTER_OPEN, comment );
   }
 
   componentDidMount() {
     ipcRenderer.removeAllListeners( E_GIT_CHECKOUT_RESPONSE );
     ipcRenderer.on( E_GIT_CHECKOUT_RESPONSE, this.onCheckoutResponse );
-    ipcRenderer.removeAllListeners( E_GIT_REVERT_RESPONSE );
-    ipcRenderer.on( E_GIT_REVERT_RESPONSE, this.onCheckoutResponse );
-
   }
 
   render() {
