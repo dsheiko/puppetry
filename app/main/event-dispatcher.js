@@ -3,8 +3,11 @@ const { ipcMain, dialog, remote } = require( "electron" ),
         E_TEST_REPORTED, E_WATCH_FILE_NAVIGATOR, E_BROWSE_FILE, E_FILE_SELECTED,
         E_INSTALL_RUNTIME_TEST, E_SHOW_CONFIRM_DIALOG, E_CONFIRM_DIALOG_VALUE,
         E_GIT_INIT, E_GIT_COMMIT, E_GIT_SET_REMOTE, E_RENDERER_ERROR, E_RENDERER_INFO,
-        E_GIT_PUSH, E_GIT_PULL, E_GIT_LOG, E_GIT_LOG_RESPONSE,
-        E_GIT_CHECKOUT, E_GIT_REVERT, E_GIT_CHECKOUT_RESPONSE, E_GIT_REVERT_RESPONSE
+        E_GIT_PUSH, E_GIT_SYNC, E_GIT_LOG, E_GIT_LOG_RESPONSE,
+        E_GIT_CHECKOUT, E_GIT_CHECKOUT_RESPONSE,
+        E_GIT_CHECKOUT_M, E_GIT_CHECKOUT_M_RESPONSE,
+        E_GIT_REVERT, E_GIT_REVERT_RESPONSE,
+        E_GIT_CURRENT_BRANCH, E_GIT_CURRENT_BRANCH_RESPONSE
       } = require( "../constant" ),
       watchFiles = require( "./file-watcher" ),
       { installRuntimeTest } = require( "./install-runtime-test" ),
@@ -94,8 +97,9 @@ ipcMain.on( E_GIT_SET_REMOTE, async ( event, remoteRepository, projectDirectory,
   }
 });
 
-ipcMain.on( E_GIT_PULL, async ( event, projectDirectory, credentials  ) => {
+ipcMain.on( E_GIT_SYNC, async ( event, projectDirectory, credentials  ) => {
   try {
+    await gitApi.push( projectDirectory, credentials  );
     await gitApi.pull( projectDirectory, credentials  );
     event.sender.send( E_RENDERER_INFO, `Changes pulled from remote repository successfully` );
   } catch ( err ) {
@@ -103,39 +107,37 @@ ipcMain.on( E_GIT_PULL, async ( event, projectDirectory, credentials  ) => {
   }
 });
 
-ipcMain.on( E_GIT_PUSH, async ( event, projectDirectory, credentials  ) => {
-  try {
-    await gitApi.push( projectDirectory, credentials  );
-    event.sender.send( E_RENDERER_INFO, `Changes pushed to remote repository successfully` );
-  } catch ( err ) {
-    event.sender.send( E_RENDERER_ERROR, `Cannot push to remote repository: ${ err.message }` );
-  }
-});
-
 ipcMain.on( E_GIT_LOG, async ( event, projectDirectory  ) => {
   try {
     event.sender.send( E_GIT_LOG_RESPONSE, await gitApi.log( projectDirectory ) );
   } catch ( err ) {
-    event.sender.send( E_RENDERER_ERROR, `Cannot push to remote repository: ${ err.message }` );
+    event.sender.send( E_RENDERER_ERROR, `Cannot receive log: ${ err.message }` );
   }
 });
 
-ipcMain.on( E_GIT_CHECKOUT, async ( event, projectDirectory, oid  ) => {
+ipcMain.on( E_GIT_CHECKOUT, async ( event, projectDirectory, oid, message ) => {
   try {
     await gitApi.checkout( projectDirectory, oid );
-    event.sender.send( E_GIT_CHECKOUT_RESPONSE, oid );
-    event.sender.send( E_RENDERER_INFO, `Index moved to project version ${ oid }` );
+    event.sender.send( E_GIT_CHECKOUT_RESPONSE, oid, message );
   } catch ( err ) {
-    event.sender.send( E_RENDERER_ERROR, `Cannot push to remote repository: ${ err.message }` );
+    event.sender.send( E_RENDERER_ERROR, `Cannot checkout to ${ oid }: ${ err.message }` );
   }
 });
 
-ipcMain.on( E_GIT_REVERT, async ( event, projectDirectory, oid  ) => {
+ipcMain.on( E_GIT_CHECKOUT_M, async ( event, projectDirectory ) => {
   try {
-    await gitApi.checkout( projectDirectory, oid );
-    event.sender.send( E_GIT_REVERT_RESPONSE, oid );
-    event.sender.send( E_RENDERER_INFO, `Reverted to version ${ oid }` );
+    await gitApi.checkout( projectDirectory, "master" );
+    event.sender.send( E_GIT_CHECKOUT_M_RESPONSE );
   } catch ( err ) {
-    event.sender.send( E_RENDERER_ERROR, `Cannot push to remote repository: ${ err.message }` );
+    event.sender.send( E_RENDERER_ERROR, `Cannot checkout to master: ${ err.message }` );
+  }
+});
+
+ipcMain.on( E_GIT_CURRENT_BRANCH, async ( event, projectDirectory ) => {
+  try {
+    const branch = await gitApi.currentBranch( projectDirectory );
+    event.sender.send( E_GIT_CURRENT_BRANCH_RESPONSE, branch );
+  } catch ( err ) {
+    // supress
   }
 });

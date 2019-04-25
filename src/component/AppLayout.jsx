@@ -4,6 +4,7 @@ import { remote } from "electron";
 import classNames  from "classnames";
 import {  Spin, Layout } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
+import { CheckoutMaster } from "component/Global/CheckoutMaster";
 import { Toolbar } from "./AppLayout/Toolbar";
 import { MainMenu } from "./AppLayout/Sider/MainMenu";
 import { ProjectNavigator  } from "./AppLayout/Sider/ProjectNavigator";
@@ -89,6 +90,7 @@ export class AppLayout extends React.Component {
                 suiteFilename={ store.suite.filename }
                 suiteModified={ store.suite.modified }
                 readyToRunTests={ store.app.readyToRunTests }
+                gitDetachedHeadState={ store.app.gitDetachedHeadState }
                 project={ store.project } />
 
               <If exp={ store.app.project.files.length }>
@@ -212,6 +214,10 @@ export class AppLayout extends React.Component {
           action={ action }
         />
 
+        <CheckoutMaster
+          projectDirectory={ projectDirectory }
+          action={ action }
+        />
 
       </ErrorBoundary>
     );

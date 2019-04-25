@@ -53,6 +53,7 @@ export class App extends React.Component {
 
   async componentDidMount() {
     const { loadProject,
+            checkGit,
             loadSettings,
             checkRuntimeTestDirReady,
             checkNewVersion,
@@ -70,6 +71,7 @@ export class App extends React.Component {
 
     try {
       await loadProject();
+      await checkGit( settings.projectDirectory );
     } catch ( e ) {
       log.warn( `Renderer process: App: ${ e }` );
       console.warn( e );

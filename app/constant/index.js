@@ -27,15 +27,22 @@ exports.E_GIT_INIT = "gitInit";
 exports.E_RENDERER_ERROR = "rendererError";
 exports.E_RENDERER_INFO = "rendererInfo";
 exports.E_GIT_COMMIT = "gitCommit";
-exports.E_GIT_PULL = "gitPull";
+exports.E_GIT_SYNC = "gitPull";
 exports.E_GIT_PUSH = "gitPush";
 exports.E_GIT_LOG = "gitLog";
 exports.E_GIT_LOG_RESPONSE = "gitLogResponse";
 exports.E_GIT_CHECKOUT = "gitCheckout";
 exports.E_GIT_CHECKOUT_RESPONSE = "gitCheckoutResponse";
+exports.E_GIT_CHECKOUT_M = "gitCheckoutMaster";
+exports.E_GIT_CHECKOUT_M_RESPONSE = "gitCheckoutMasterResponse";
 exports.E_GIT_REVERT = "gitRevert";
 exports.E_GIT_REVERT_RESPONSE = "gitRevertResponse";
 exports.E_GIT_SET_REMOTE = "gitSetRemote";
+exports.E_GIT_CURRENT_BRANCH = "gitCurrentBranch";
+exports.E_GIT_CURRENT_BRANCH_RESPONSE = "gitCurrentBranchResponse";
+
+exports.E_CHECKOUT_MASTER_OPEN = "checkoutMasterOpen";
+exports.E_CHECKOUT_MASTER_CLOSE = "checkoutMasterClose";
 
 
 exports.E_FILE_NAVIGATOR_UPDATED = "fileNavigatorUpdated";

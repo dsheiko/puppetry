@@ -22,6 +22,7 @@ const DEFAULT_STATE = {
     confirmSaveChangesFile: "",
 
     gitLogs: [],
+    gitDetachedHeadState: false,
 
     editTargetsAsCsvModal: false,
     newProjectModal: false,
