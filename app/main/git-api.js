@@ -38,6 +38,13 @@ module.exports = {
     await git.init({ dir: projectDirectory });
   },
 
+  async log( projectDirectory ) {
+    return await git.log({
+      dir: projectDirectory,
+      ref: "master"
+    });
+  },
+
   async push( projectDirectory, credentials ) {
     await git.push({
       dir: projectDirectory,

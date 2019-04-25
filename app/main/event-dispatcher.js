@@ -3,7 +3,7 @@ const { ipcMain, dialog, remote } = require( "electron" ),
         E_TEST_REPORTED, E_WATCH_FILE_NAVIGATOR, E_BROWSE_FILE, E_FILE_SELECTED,
         E_INSTALL_RUNTIME_TEST, E_SHOW_CONFIRM_DIALOG, E_CONFIRM_DIALOG_VALUE,
         E_GIT_INIT, E_GIT_COMMIT, E_GIT_SET_REMOTE, E_RENDERER_ERROR, E_RENDERER_INFO,
-        E_GIT_PUSH, E_GIT_PULL
+        E_GIT_PUSH, E_GIT_PULL, E_GIT_LOG, E_GIT_LOG_RESPONSE
       } = require( "../constant" ),
       watchFiles = require( "./file-watcher" ),
       { installRuntimeTest } = require( "./install-runtime-test" ),
@@ -106,6 +106,14 @@ ipcMain.on( E_GIT_PUSH, async ( event, projectDirectory, credentials  ) => {
   try {
     await gitApi.push( projectDirectory, credentials  );
     event.sender.send( E_RENDERER_INFO, `Changes pushed to remote repository successfully` );
+  } catch ( err ) {
+    event.sender.send( E_RENDERER_ERROR, `Cannot push to remote repository: ${ err.message }` );
+  }
+});
+
+ipcMain.on( E_GIT_LOG, async ( event, projectDirectory  ) => {
+  try {
+    event.sender.send( E_GIT_LOG_RESPONSE, await gitApi.log( projectDirectory ) );
   } catch ( err ) {
     event.sender.send( E_RENDERER_ERROR, `Cannot push to remote repository: ${ err.message }` );
   }

@@ -23,6 +23,7 @@ import { CommandModal } from "./AppLayout/Main/GroupTable/TestTable/CommandModal
 import { InstallRuntimeTestModal } from "./Modal/InstallRuntimeTestModal";
 import { EditTargetsAsCsvModal } from "./Modal/EditTargetsAsCsvModal";
 import { NewGitCommitModal } from "./Modal/NewGitCommitModal";
+import { GitCheckoutModal } from "./Modal/GitCheckoutModal";
 
 import { TabGroup  } from "./TabGroup";
 import If from "component/Global/If";
@@ -198,6 +199,13 @@ export class AppLayout extends React.Component {
 
         <NewGitCommitModal
           isVisible={ store.app.newGitCommitModal }
+          git={ store.project.git }
+          projectDirectory={ projectDirectory }
+          action={ action }
+        />
+
+        <GitCheckoutModal
+          isVisible={ store.app.gitCheckoutModal }
           git={ store.project.git }
           projectDirectory={ projectDirectory }
           action={ action }

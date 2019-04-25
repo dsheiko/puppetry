@@ -11,11 +11,21 @@ export class GitEnhancedMenu extends React.Component {
   }
 
   onFileGitPull = () => {
-    ipcRenderer.send( E_GIT_PULL, this.props.projectDirectory );
+    const { git } = this.props.project;
+    ipcRenderer.send( E_GIT_PULL, this.props.projectDirectory, {
+      credentialsUsername: git.credentialsUsername,
+      credentialsPassword: git.credentialsPassword,
+      credentialsAcccessToken: git.credentialsAcccessToken
+   });
   }
 
   onFileGitPush = () => {
-    ipcRenderer.send( E_GIT_PUSH, this.props.projectDirectory );
+    const { git } = this.props.project;
+    ipcRenderer.send( E_GIT_PUSH, this.props.projectDirectory, {
+      credentialsUsername: git.credentialsUsername,
+      credentialsPassword: git.credentialsPassword,
+      credentialsAcccessToken: git.credentialsAcccessToken
+   });
   }
 
   onFileGitInitialize = () => {

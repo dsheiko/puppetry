@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AbstractForm from "component/AbstractForm";
+import AbstractComponent from "component/AbstractComponent";
 import { Form, Modal, Button, Input, Row, Col, Collapse } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
 import { ipcRenderer } from "electron";
-import { E_GIT_COMMIT } from "constant";
+import { E_GIT_LOG, E_GIT_LOG_RESPONSE } from "constant";
 import * as classes from "./classes";
 
 /*eslint no-useless-escape: 0*/
@@ -13,8 +13,7 @@ import * as classes from "./classes";
 const FormItem = Form.Item,
       connectForm = Form.create();
 
-@connectForm
-export class GitCheckoutModal extends AbstractForm {
+export class GitCheckoutModal extends AbstractComponent {
 
   static propTypes = {
     action:  PropTypes.shape({
@@ -28,35 +27,36 @@ export class GitCheckoutModal extends AbstractForm {
 
   onClickCancel = ( e ) => {
     e.preventDefault();
-    this.props.action.updateApp({ newGitCommitModal: false });
+    this.props.action.updateApp({ gitCheckoutModal: false });
   }
 
   onClickOk = ( e ) => {
     const { createSuite, updateApp } = this.props.action,
-          { git, projectDirectory } = this.props,
-          { validateFields } = this.props.form;
+          { git, projectDirectory } = this.props;
 
     e.preventDefault();
-    validateFields( ( err, values ) => {
-      const { message } = values;
-      if ( err ) {
-        return;
-      }
-      ipcRenderer.send(
-        E_GIT_COMMIT,
-        message,
-        projectDirectory,
-        git.configUsername,
-        git.configEmail
-      );
-      updateApp({ newGitCommitModal: false });
-    });
+
+  }
+
+  onGitLogResponse( env, rsp ) {
+    console.log(env, rsp);
+  }
+
+  componentDidmount() {
+
+    ipcRenderer.send(
+        E_GIT_LOG,
+        this.props.projectDirectory
+    );
+
+    ipcRenderer.removeAllListeners( E_GIT_LOG_RESPONSE );
+    ipcRenderer.on( E_GIT_LOG_RESPONSE, this.onGitLogResponse );
+
   }
 
 
   render() {
-    const { isVisible } = this.props,
-          { getFieldDecorator, getFieldsError } = this.props.form;
+    const { isVisible } = this.props;
 
     return (
       <ErrorBoundary>
@@ -64,7 +64,6 @@ export class GitCheckoutModal extends AbstractForm {
           title="New Commit"
           visible={ isVisible }
           className="c-new-git-commit-modal"
-          disabled={ this.hasErrors( getFieldsError() )  }
           closable
           onCancel={this.onClickCancel}
           footer={[
@@ -78,26 +77,7 @@ export class GitCheckoutModal extends AbstractForm {
             </Button> ) ]}
         >
 
-          <Form >
-            <FormItem
-              extra="Please describe briefly the latest changes in your project.
-                This message will help you to identify the commit in the version list."
-              label="Commit description">
-              { getFieldDecorator( "message", {
-                rules: [{
-                  required: true,
-                  message: "Please enter commit description"
-                },
-                {
-                  transform: ( value ) => value.trim()
-                }]
-              })(
-                <Input onChange={ this.onNameChange } placeholder="e.g. Add page.screenshot in form submittion group"
-                  onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
-              )}
-            </FormItem>
-
-          </Form>
+         .....
 
         </Modal>
       </ErrorBoundary>
