@@ -32,6 +32,7 @@ const DEFAULT_STATE = {
     testReportModal: false,
     installRuntimeTestModal: false,
     newGitCommitModal: false,
+    gitCheckoutModal: false,
 
     commandModal: {
       isVisible: false,

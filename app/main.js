@@ -1,8 +1,11 @@
 
-const { session, protocol, app, BrowserWindow } = require( "electron" ),
+const electron = require( "electron" ),
+      { session, protocol, app, BrowserWindow } = electron,
       path = require( "path" ),
       log = require( "electron-log" ),
-      url = require( "url" );
+      url = require( "url" ),
+      APP_WIN_WIDTH = 1200,
+      APP_WIN_HEIGHT = 720; // 768
 
 // Keep a global reference of the window object, if you don"t, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -11,6 +14,13 @@ let mainWindow;
 process.on( "uncaughtException", ( err ) => {
   log.warn( `Main process: Caught exception: ${err}` );
 });
+
+function findExternalDisplay() {
+  const displays = electron.screen.getAllDisplays();
+  return displays.find( ( display ) => {
+    return display.bounds.x !== 0 || display.bounds.y !== 0;
+  });
+}
 
 function createWindow() {
 
@@ -32,18 +42,25 @@ function createWindow() {
   }
 
 
+  const externalDisplay = findExternalDisplay(),
+        position = externalDisplay
+            ? {
+              x: externalDisplay.bounds.x + Math.ceil( ( externalDisplay.bounds.width - APP_WIN_WIDTH ) / 2 ) ,
+              y: externalDisplay.bounds.y + Math.ceil( ( externalDisplay.bounds.height - APP_WIN_HEIGHT ) / 2 )
+            }
+            : {};
 
   // Create the browser window.
-  mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 720, // 768
+  mainWindow = new BrowserWindow( Object.assign({
+    width: APP_WIN_WIDTH,
+    height: APP_WIN_HEIGHT, // 768
     minWidth: 960,
     minHeight: 540,
     frame: false,
     devTools: process.env.ELECTRON_ENV === "dev",
     title: "Puppetry",
     icon
-  });
+  }, position ));
 
   // and load the index.html of the app.
   mainWindow.loadURL( url.format({
