@@ -21,6 +21,8 @@ const DEFAULT_STATE = {
     selectedFile: "",
     confirmSaveChangesFile: "",
 
+    gitLogs: [],
+
     editTargetsAsCsvModal: false,
     newProjectModal: false,
     saveProjectAsModal: false,

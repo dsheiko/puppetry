@@ -3,7 +3,8 @@ const { ipcMain, dialog, remote } = require( "electron" ),
         E_TEST_REPORTED, E_WATCH_FILE_NAVIGATOR, E_BROWSE_FILE, E_FILE_SELECTED,
         E_INSTALL_RUNTIME_TEST, E_SHOW_CONFIRM_DIALOG, E_CONFIRM_DIALOG_VALUE,
         E_GIT_INIT, E_GIT_COMMIT, E_GIT_SET_REMOTE, E_RENDERER_ERROR, E_RENDERER_INFO,
-        E_GIT_PUSH, E_GIT_PULL, E_GIT_LOG, E_GIT_LOG_RESPONSE
+        E_GIT_PUSH, E_GIT_PULL, E_GIT_LOG, E_GIT_LOG_RESPONSE,
+        E_GIT_CHECKOUT, E_GIT_REVERT, E_GIT_CHECKOUT_RESPONSE, E_GIT_REVERT_RESPONSE
       } = require( "../constant" ),
       watchFiles = require( "./file-watcher" ),
       { installRuntimeTest } = require( "./install-runtime-test" ),
@@ -114,6 +115,26 @@ ipcMain.on( E_GIT_PUSH, async ( event, projectDirectory, credentials  ) => {
 ipcMain.on( E_GIT_LOG, async ( event, projectDirectory  ) => {
   try {
     event.sender.send( E_GIT_LOG_RESPONSE, await gitApi.log( projectDirectory ) );
+  } catch ( err ) {
+    event.sender.send( E_RENDERER_ERROR, `Cannot push to remote repository: ${ err.message }` );
+  }
+});
+
+ipcMain.on( E_GIT_CHECKOUT, async ( event, projectDirectory, oid  ) => {
+  try {
+    await gitApi.checkout( projectDirectory, oid );
+    event.sender.send( E_GIT_CHECKOUT_RESPONSE, oid );
+    event.sender.send( E_RENDERER_INFO, `Index moved to project version ${ oid }` );
+  } catch ( err ) {
+    event.sender.send( E_RENDERER_ERROR, `Cannot push to remote repository: ${ err.message }` );
+  }
+});
+
+ipcMain.on( E_GIT_REVERT, async ( event, projectDirectory, oid  ) => {
+  try {
+    await gitApi.checkout( projectDirectory, oid );
+    event.sender.send( E_GIT_REVERT_RESPONSE, oid );
+    event.sender.send( E_RENDERER_INFO, `Reverted to version ${ oid }` );
   } catch ( err ) {
     event.sender.send( E_RENDERER_ERROR, `Cannot push to remote repository: ${ err.message }` );
   }

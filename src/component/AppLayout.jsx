@@ -206,6 +206,7 @@ export class AppLayout extends React.Component {
 
         <GitCheckoutModal
           isVisible={ store.app.gitCheckoutModal }
+          logs={ store.app.gitLogs }
           git={ store.project.git }
           projectDirectory={ projectDirectory }
           action={ action }

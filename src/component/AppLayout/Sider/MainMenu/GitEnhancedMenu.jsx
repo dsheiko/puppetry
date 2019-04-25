@@ -1,10 +1,24 @@
 import React from "react";
 import { message } from "antd";
 import { ipcRenderer } from "electron";
-import { E_GIT_INIT, E_GIT_PULL, E_GIT_PUSH } from "constant";
+import { E_GIT_INIT, E_GIT_PULL, E_GIT_PUSH, E_GIT_LOG, E_GIT_LOG_RESPONSE } from "constant";
 
 
 export class GitEnhancedMenu extends React.Component {
+
+  onFileGitCheckout = () => {
+    this.props.action.updateApp({ gitCheckoutModal: true });
+    setTimeout(() => {
+      ipcRenderer.send(
+          E_GIT_LOG,
+          this.props.projectDirectory
+      );
+      ipcRenderer.removeAllListeners( E_GIT_LOG_RESPONSE );
+      ipcRenderer.on( E_GIT_LOG_RESPONSE, ( ev, logs ) => {
+        this.props.action.updateApp({ gitLogs: logs });
+      });
+    }, 10 );
+  }
 
   onFileGitCommit = () => {
     this.props.action.updateApp({ newGitCommitModal: true });

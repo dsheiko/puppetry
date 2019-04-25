@@ -38,6 +38,22 @@ module.exports = {
     await git.init({ dir: projectDirectory });
   },
 
+
+  async checkout( projectDirectory, oid ) {
+    await git.checkout({
+      dir: projectDirectory,
+      ref: oid
+    });
+  },
+
+  async revert( projectDirectory, oid ) {
+    await this.checkout( projectDirectory, oid );
+    await git.resetIndex({
+      dir: projectDirectory,
+      ref: oid
+    });
+  },
+
   async log( projectDirectory ) {
     return await git.log({
       dir: projectDirectory,
