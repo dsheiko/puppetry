@@ -31,6 +31,10 @@ exports.E_GIT_PULL = "gitPull";
 exports.E_GIT_PUSH = "gitPush";
 exports.E_GIT_LOG = "gitLog";
 exports.E_GIT_LOG_RESPONSE = "gitLogResponse";
+exports.E_GIT_CHECKOUT = "gitCheckout";
+exports.E_GIT_CHECKOUT_RESPONSE = "gitCheckoutResponse";
+exports.E_GIT_REVERT = "gitRevert";
+exports.E_GIT_REVERT_RESPONSE = "gitRevertResponse";
 exports.E_GIT_SET_REMOTE = "gitSetRemote";
 
 

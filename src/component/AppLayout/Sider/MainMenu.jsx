@@ -272,11 +272,9 @@ export class MainMenu extends GitEnhancedMenu {
                   onClick={ () => {} } id="cMainMenuFileGitClone">
                   Clone...</Menu.Item>
                 <Menu.Item key="git3" disabled={ !git.initialized }
-                  onClick={ () => {} } id="cMainMenuFileGitCheckout">
-                  Checkout...</Menu.Item>
-                <Menu.Item key="git4" disabled={ !git.initialized }
-                  onClick={ () => {} } id="cMainMenuFileGitRevert">
-                  Revert...</Menu.Item>
+                  onClick={ this.onFileGitCheckout } id="cMainMenuFileGitCheckout">
+                  Checkout/Revert...</Menu.Item>
+
                 <Menu.Item key="git5" disabled={ !git.initialized }
                   onClick={ this.onFileGitCommit }
                   id="cMainMenuFileGitCommit">Commit...{ " " }<kbd>{ ostr( "Ctrl-Shift-S" ) }</kbd></Menu.Item>

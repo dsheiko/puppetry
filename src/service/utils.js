@@ -13,6 +13,19 @@ export const ruleValidateGenericString = ( rule, value, callback ) => {
   callback();
 };
 
+
+export function timestampToDate( timestamp ) {
+  const date = new Date( timestamp * 1000 ),
+        month = "0" + date.getMonth(),
+        day = "0" + date.getDate(),
+        hours = date.getHours(),
+        minutes = "0" + date.getMinutes(),
+        seconds = "0" + date.getSeconds();
+
+  return `${ date.getFullYear() }/${ month.substr( -2 ) }/${ day.substr( -2 ) }`
+    + ` ${ hours }:${ minutes.substr( -2 ) }:${ seconds.substr( -2 ) }`;
+}
+
 export const onExtClick = ( e ) => {
   e.preventDefault();
   const el = e.target;
