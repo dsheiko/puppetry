@@ -4,10 +4,13 @@ const path = require( "path" ),
       fs = require( "fs" ),
       util = require( "util" ),
       log = require( "electron-log" ),
+      tmp = require( "tmp-promise" ),
       REMOTE = "puppetry",
+      shell = require( "shelljs" ),
       readdir = util.promisify( fs.readdir );
 
 git.plugins.set( "fs", fs );
+shell.config.fatal = true;
 
 async function readDir( directory, ext ) {
   try {
@@ -17,6 +20,10 @@ async function readDir( directory, ext ) {
     log.warn( `Main process: git-api.readDir: ${ e }` );
     return [];
   }
+}
+
+async function getProjectFiles( projectDirectory ) {
+  return [ ...await readDir( projectDirectory, ".json" ), ".puppetryrc" ];
 }
 
 function getCredentialsPayload( credentials ) {
@@ -37,6 +44,9 @@ function wrap( res, method = "undefined" ) {
   return res;
 }
 
+
+
+
 module.exports = {
 
   async init( projectDirectory ) {
@@ -56,7 +66,7 @@ module.exports = {
   },
 
   async hasModifiedFiles( projectDirectory ) {
-    const projectFiles = [ ...await readDir( projectDirectory, ".json" ), ".puppetryrc" ];
+    const projectFiles = await getProjectFiles( projectDirectory );
     let modified = false;
     for ( const file of projectFiles ) {
       const fileStatus = await git.status({ dir: projectDirectory, filepath: file });
@@ -74,8 +84,38 @@ module.exports = {
     });
   },
 
+
+  async stashFiles( projectDirectory ) {
+    const files = await getProjectFiles( projectDirectory );
+    this.tmpDirObj = await tmp.dir();
+    files.forEach(( file ) => {
+      shell.cp( "-r", path.join( projectDirectory, file ), this.tmpDirObj.path );
+    });
+  },
+
+  async unstashFiles( projectDirectory ) {
+    const files = await getProjectFiles( this.tmpDirObj.path );
+    files.forEach(( file ) => {
+      shell.cp( "-r", path.join( this.tmpDirObj.path, file ), projectDirectory );
+    });
+  },
+
+  async sync( projectDirectory, credentials ) {
+    //@TODO change master to something (master protected n gitlab)
+
+    // stashFiles
+    // try fetch
+    // any conflicats?
+    // NO
+    //  push
+    // YES
+    //  unstashFiles
+    //  commit "Merging .."
+    //  push
+    this.tmpDirObj.cleanup();
+  },
+
   async push( projectDirectory, credentials ) {
-    console.log(getCredentialsPayload( credentials ));
     return wrap( await git.push({
       dir: projectDirectory,
       remote: REMOTE,
@@ -86,20 +126,23 @@ module.exports = {
   },
 
   async pull( projectDirectory, credentials ) {
-    let { fetchHead } = await git.fetch({
+    let { fetchHead } = wrap( await git.fetch({
       dir: projectDirectory,
       ref: "master",
       remote: REMOTE,
       singleBranch: true,
       ...getCredentialsPayload( credentials )
-    });
+    }), "fetch" );
+
     // Merge the remote tracking branch into the local one.
-    return wrap( await git.merge({
+    wrap( await git.merge({
       dir: projectDirectory,
-      fastForwardOnly: false,
       ours: "master",
+      fastForwardOnly: true,
       theirs: fetchHead
-    }), "pull" );
+    }), "merge" );
+
+    return await this.checkout( projectDirectory, "master" );
   },
 
   async setRemote( remoteRepository, projectDirectory, credentials ) {
@@ -117,7 +160,7 @@ module.exports = {
   },
 
   async commit( message, projectDirectory, username, email ) {
-    const projectFiles = [ ...await readDir( projectDirectory, ".json" ), ".puppetryrc" ],
+    const projectFiles = await getProjectFiles( projectDirectory ),
           staggedFiles = await git.listFiles({ dir: projectDirectory });
 
     for ( const file of projectFiles ) {
