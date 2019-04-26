@@ -14,7 +14,7 @@ async function readDir( directory, ext ) {
     return  ( await readdir( directory ) )
       .filter( file => file.endsWith( ext ) );
   } catch ( e ) {
-    log.warn( `Renderer process: git-api.readDir: ${ e }` );
+    log.warn( `Main process: git-api.readDir: ${ e }` );
     return [];
   }
 }
@@ -32,30 +32,27 @@ function getCredentialsPayload( credentials ) {
   };
 }
 
+function wrap( res, method = "undefined" ) {
+  res && log.debug( `Main process: git-api.${ method }: ${ JSON.stringify( res ) }` );
+  return res;
+}
+
 module.exports = {
 
   async init( projectDirectory ) {
-    await git.init({ dir: projectDirectory });
+    return wrap( await git.init({ dir: projectDirectory }), "init" );
   },
 
 
   async checkout( projectDirectory, oid ) {
-    await git.checkout({
+    return wrap( await git.checkout({
       dir: projectDirectory,
       ref: oid
-    });
-  },
-
-  async revert( projectDirectory, oid ) {
-    await this.checkout( projectDirectory, oid );
-    await git.resetIndex({
-      dir: projectDirectory,
-      ref: oid
-    });
+    }), "checkout" );
   },
 
   async currentBranch( projectDirectory ) {
-    return await git.currentBranch({ dir: projectDirectory, fullname: false });
+    return wrap( await git.currentBranch({ dir: projectDirectory, fullname: false }), "currentBranch" );
   },
 
   async hasModifiedFiles( projectDirectory ) {
@@ -78,34 +75,31 @@ module.exports = {
   },
 
   async push( projectDirectory, credentials ) {
-    await git.push({
+    console.log(getCredentialsPayload( credentials ));
+    return wrap( await git.push({
       dir: projectDirectory,
       remote: REMOTE,
       ref: "master",
       force: true,
       ...getCredentialsPayload( credentials )
-    });
+    }), "push" );
   },
 
   async pull( projectDirectory, credentials ) {
-    await git.pull({
+    let { fetchHead } = await git.fetch({
       dir: projectDirectory,
       ref: "master",
+      remote: REMOTE,
       singleBranch: true,
       ...getCredentialsPayload( credentials )
     });
-//    await git.fetch({
-//      dir: projectDirectory,
-//      ref: "master",
-//      depth: 1,
-//      singleBranch: true,
-//      tags: false
-//    });
-//    await git.merge({
-//      dir: projectDirectory,
-//      ours: "master",
-//      theirs: "remotes/origin/master"
-//    });
+    // Merge the remote tracking branch into the local one.
+    return wrap( await git.merge({
+      dir: projectDirectory,
+      fastForwardOnly: false,
+      ours: "master",
+      theirs: fetchHead
+    }), "pull" );
   },
 
   async setRemote( remoteRepository, projectDirectory, credentials ) {
@@ -114,12 +108,12 @@ module.exports = {
     } catch( err ) {
       // supress
     }
-    await git.addRemote({
+    return wrap( await git.addRemote({
       dir: projectDirectory,
       remote: REMOTE,
       url: remoteRepository,
       ...getCredentialsPayload( credentials )
-    });
+    }), "setRemote" );
   },
 
   async commit( message, projectDirectory, username, email ) {

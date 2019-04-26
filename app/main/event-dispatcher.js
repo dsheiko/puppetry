@@ -7,9 +7,11 @@ const { ipcMain, dialog, remote } = require( "electron" ),
         E_GIT_CHECKOUT, E_GIT_CHECKOUT_RESPONSE,
         E_GIT_CHECKOUT_M, E_GIT_CHECKOUT_M_RESPONSE,
         E_GIT_REVERT, E_GIT_REVERT_RESPONSE,
-        E_GIT_CURRENT_BRANCH, E_GIT_CURRENT_BRANCH_RESPONSE
+        E_GIT_CURRENT_BRANCH, E_GIT_CURRENT_BRANCH_RESPONSE,
+        E_GIT_COMMIT_RESPONSE
       } = require( "../constant" ),
       watchFiles = require( "./file-watcher" ),
+      log = require( "electron-log" ),
       { installRuntimeTest } = require( "./install-runtime-test" ),
       runTests = require( "./test-runner" ),
       gitApi = require( "./git-api" );
@@ -75,6 +77,7 @@ ipcMain.on( E_GIT_INIT, async ( event, projectDirectory ) => {
     await gitApi.init( projectDirectory );
     event.sender.send( E_RENDERER_INFO, "Empty local Git repository created" );
   } catch ( err ) {
+    log.error( `Main process: event-dispatcher.E_GIT_INNIT: ${ err.message }` );
     event.sender.send( E_RENDERER_ERROR, `Cannot initialize local Git: ${ err.message }` );
   }
 });
@@ -82,8 +85,10 @@ ipcMain.on( E_GIT_INIT, async ( event, projectDirectory ) => {
 ipcMain.on( E_GIT_COMMIT, async ( event, message, projectDirectory, username, email ) => {
   try {
     const sha = await gitApi.commit( message, projectDirectory, username, email );
+    event.sender.send( E_GIT_COMMIT_RESPONSE );
     event.sender.send( E_RENDERER_INFO, `New commit ${ sha } created` );
   } catch ( err ) {
+    log.error( `Main process: event-dispatcher.E_GIT_COMMIT: ${ err.message }` );
     event.sender.send( E_RENDERER_ERROR, `Cannot commit changes: ${ err.message }` );
   }
 });
@@ -93,17 +98,32 @@ ipcMain.on( E_GIT_SET_REMOTE, async ( event, remoteRepository, projectDirectory,
     await gitApi.setRemote( remoteRepository, projectDirectory, credentials  );
     event.sender.send( E_RENDERER_INFO, `New remote repository is set successfully` );
   } catch ( err ) {
+    log.error( `Main process: event-dispatcher.E_GIT_SET_REMOTE: ${ err.message }` );
     event.sender.send( E_RENDERER_ERROR, `Cannot set remote repository: ${ err.message }` );
   }
 });
 
+/**
+ *
+ * @param {Array} errors
+ */
+function throwIfErrors( errors ) {
+  if ( !errors ) {
+    return;
+  }
+  throw new Error( errors.join( ", " ) );
+}
+
 ipcMain.on( E_GIT_SYNC, async ( event, projectDirectory, credentials  ) => {
   try {
-    await gitApi.push( projectDirectory, credentials  );
-    await gitApi.pull( projectDirectory, credentials  );
+    const pushRes = await gitApi.push( projectDirectory, credentials  );
+    throwIfErrors( pushRes.errors );
+    const pullRes = await gitApi.pull( projectDirectory, credentials  );
+    throwIfErrors( pullRes.errors );
     event.sender.send( E_RENDERER_INFO, `Changes pulled from remote repository successfully` );
   } catch ( err ) {
-    event.sender.send( E_RENDERER_ERROR, `Cannot pull from remote repository: ${ err.message }` );
+    log.error( `Main process: event-dispatcher.E_GIT_SYNC: ${ err.message }` );
+    event.sender.send( E_RENDERER_ERROR, `Cannot sync with the remote repository: ${ err.message }` );
   }
 });
 
@@ -111,6 +131,7 @@ ipcMain.on( E_GIT_LOG, async ( event, projectDirectory  ) => {
   try {
     event.sender.send( E_GIT_LOG_RESPONSE, await gitApi.log( projectDirectory ) );
   } catch ( err ) {
+    log.error( `Main process: event-dispatcher.E_GIT_LOG: ${ err.message }` );
     event.sender.send( E_RENDERER_ERROR, `Cannot receive log: ${ err.message }` );
   }
 });
@@ -120,6 +141,7 @@ ipcMain.on( E_GIT_CHECKOUT, async ( event, projectDirectory, oid, message ) => {
     await gitApi.checkout( projectDirectory, oid );
     event.sender.send( E_GIT_CHECKOUT_RESPONSE, oid, message );
   } catch ( err ) {
+    log.error( `Main process: event-dispatcher.E_GIT_CHECKOUT: ${ err.message }` );
     event.sender.send( E_RENDERER_ERROR, `Cannot checkout to ${ oid }: ${ err.message }` );
   }
 });
@@ -129,6 +151,7 @@ ipcMain.on( E_GIT_CHECKOUT_M, async ( event, projectDirectory ) => {
     await gitApi.checkout( projectDirectory, "master" );
     event.sender.send( E_GIT_CHECKOUT_M_RESPONSE );
   } catch ( err ) {
+    log.error( `Main process: event-dispatcher.E_GIT_CHECKOUT_M: ${ err.message }` );
     event.sender.send( E_RENDERER_ERROR, `Cannot checkout to master: ${ err.message }` );
   }
 });

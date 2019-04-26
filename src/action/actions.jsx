@@ -8,7 +8,7 @@ import { writeSuite, readSuite, removeSuite,
   isRuntimeTestPathReady,
   copyProject,
   normalizeFilename } from "../service/io";
-import { closeApp } from "service/utils";
+import { closeApp, dateToTs } from "service/utils";
 import { InvalidArgumentError } from "error";
 import DEFAULT_STATE from "reducer/defaultState";
 import { ipcRenderer, remote } from "electron";
@@ -265,6 +265,11 @@ actions.saveProjectGit = ( options ) => async ( dispatch, getState ) => {
   await saveProject( getState() );
 };
 
+actions.touchProjectGit = ( options ) => async ( dispatch, getState ) => {
+  await dispatch( actions.setProjectGit( options ) );
+  await saveProject( getState(), true );
+};
+
 actions.saveProject = ({ projectDirectory, name }) => async ( dispatch, getState ) => {
   try {
     if ( !name ) {
@@ -308,7 +313,7 @@ actions.createSuite = ( rawFilename, title ) => async ( dispatch, getState ) => 
   }
   const { projectDirectory } = getState().settings,
         filename = normalizeFilename( rawFilename ) + ".json",
-        suite = { ...DEFAULT_STATE.suite, filename, title, savedAt: new Date() };
+        suite = { ...DEFAULT_STATE.suite, filename, title, savedAt: dateToTs() };
   try {
     if ( !projectDirectory ) {
       throw new InvalidArgumentError( "Empty project directory" );
@@ -330,7 +335,7 @@ actions.loadSuite = ( filename ) => async ( dispatch, getState ) => {
         { projectDirectory } = store.settings,
         suite = await readSuite( projectDirectory, filename );
   dispatch( actions.setProject({ lastOpenSuite: filename }) );
-  dispatch( actions.resetSuite({ ...suite, loadedAt: new Date(), filename, modified: false }) );
+  dispatch( actions.resetSuite({ ...suite, loadedAt: dateToTs(), filename, modified: false }) );
   ipcRenderer.send( E_SUITE_LOADED, projectDirectory, filename, store.app.project.files );
   dispatch( actions.addAppTab( "suite" ) );
 };
@@ -351,7 +356,7 @@ actions.saveSuite = ( options = {}) => async ( dispatch, getState ) => {
 
     await saveProject( store );
 
-    dispatch( actions.updateSuite({ savedAt: new Date(), modified: false }) );
+    dispatch( actions.updateSuite({ savedAt: dateToTs(), modified: false }) );
   } catch ( e ) {
     dispatch( actions.setError({
       visible: true,
@@ -514,13 +519,15 @@ actions.checkRuntimeTestDirReady = () => async ( dispatch ) => {
   return dispatch( actions.updateApp({ readyToRunTests }) );
 };
 
-async function saveProject( store ) {
+async function saveProject( store, isTouch = false ) {
   if ( !store.settings.projectDirectory ) {
     return;
   }
+  const ts = isTouch ? {} : { savedAt: dateToTs() };
   await writeProject( store.settings.projectDirectory,  {
     ...store.project,
     puppetry: version,
+    ...ts,
     modified: false
   });
 }

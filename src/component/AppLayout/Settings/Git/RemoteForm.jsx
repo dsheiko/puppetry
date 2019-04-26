@@ -48,6 +48,7 @@ export class RemoteForm extends AbstractForm {
           values.remoteRepository,
           projectDirectory,
           {
+             credentialsAuthMethod: git.credentialsAuthMethod,
              credentialsUsername: values.credentialsUsername,
              credentialsPassword: values.credentialsPassword,
              credentialsAcccessToken: values.credentialsAcccessToken

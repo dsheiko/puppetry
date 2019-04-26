@@ -1,11 +1,24 @@
 import React from "react";
 import { message } from "antd";
 import { ipcRenderer } from "electron";
-import { E_GIT_INIT, E_GIT_SYNC, E_GIT_PUSH, E_GIT_LOG, E_GIT_LOG_RESPONSE } from "constant";
+import { confirmUnsavedChanges } from "service/smalltalk";
+import { dateToTs } from "service/utils";
+import { E_GIT_INIT, E_GIT_SYNC, E_GIT_PUSH,
+  E_GIT_LOG, E_GIT_LOG_RESPONSE, E_GIT_COMMIT_RESPONSE } from "constant";
 
 
 export class GitEnhancedMenu extends React.Component {
 
+  gitEnhancedMenuDidMount() {
+    ipcRenderer.removeAllListeners( E_GIT_COMMIT_RESPONSE );
+    ipcRenderer.on( E_GIT_COMMIT_RESPONSE, this.onFileGitCommitResponse );
+  }
+
+  onFileGitCommitResponse = () => {
+    this.props.action.saveProjectGit({
+      commitedAt: dateToTs()
+    });
+  }
 
   onFileGitCheckout = () => {
     this.props.action.updateApp({ gitCheckoutModal: true });
@@ -21,17 +34,24 @@ export class GitEnhancedMenu extends React.Component {
     }, 10 );
   }
 
-  onFileGitCommit = () => {
-    this.props.action.updateApp({ newGitCommitModal: true });
+  onFileGitCommit = async () => {
+    if ( this.props.suiteModified ) {
+      await confirmUnsavedChanges({
+        saveSuite: this.props.action.saveSuite,
+        setSuite: this.props.action.setSuite
+      });
+    }
+    this.props.action.updateApp({ gitCommitModal: true });
   }
 
-  onFileGitSync = () => {
-    const { git } = this.props.project;
-    ipcRenderer.send( E_GIT_SYNC, this.props.projectDirectory, {
-      credentialsUsername: git.credentialsUsername,
-      credentialsPassword: git.credentialsPassword,
-      credentialsAcccessToken: git.credentialsAcccessToken
-   });
+  onFileGitSync = async () => {
+    if ( this.props.suiteModified ) {
+      await confirmUnsavedChanges({
+        saveSuite: this.props.action.saveSuite,
+        setSuite: this.props.action.setSuite
+      });
+    }
+    this.props.action.updateApp({ gitSyncModal: true });
   }
 
   onFileGitInitialize = () => {

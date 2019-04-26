@@ -34,7 +34,8 @@ const DEFAULT_STATE = {
     exportProjectModal: false,
     testReportModal: false,
     installRuntimeTestModal: false,
-    newGitCommitModal: false,
+    gitCommitModal: false,
+    gitSyncModal: false,
     gitCheckoutModal: false,
 
     commandModal: {
@@ -77,11 +78,13 @@ const DEFAULT_STATE = {
     },
 
     groups: {},
+    savedAt: 0,
     modified: false,
     lastOpenSuite: "",
 
     git: {
       initialized: false,
+      commitedAt: 0,
       hasRemote: false,
       remoteRepository: "",
       configUsername: "",
