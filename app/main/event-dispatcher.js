@@ -116,12 +116,12 @@ function throwIfErrors( errors ) {
 
 ipcMain.on( E_GIT_SYNC, async ( event, projectDirectory, credentials  ) => {
   try {
-    const pushRes = await gitApi.push( projectDirectory, credentials  );
-    throwIfErrors( pushRes.errors );
-    const pullRes = await gitApi.pull( projectDirectory, credentials  );
-    throwIfErrors( pullRes.errors );
+//    const pushRes = await gitApi.push( projectDirectory, credentials  );
+//    throwIfErrors( pushRes.errors );
+    await gitApi.pull( projectDirectory, credentials );
     event.sender.send( E_RENDERER_INFO, `Changes pulled from remote repository successfully` );
   } catch ( err ) {
+    console.error( err.message, err );
     log.error( `Main process: event-dispatcher.E_GIT_SYNC: ${ err.message }` );
     event.sender.send( E_RENDERER_ERROR, `Cannot sync with the remote repository: ${ err.message }` );
   }

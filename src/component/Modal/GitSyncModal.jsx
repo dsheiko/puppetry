@@ -88,7 +88,7 @@ export class GitSyncModal extends AbstractForm {
   render() {
     const { isVisible, git, savedAt } = this.props,
           { getFieldDecorator, getFieldsError } = this.props.form,
-          hasUncommited = ( git.commitedAt || 0 ) < ( savedAt || 0 ),
+          hasUncommited = false, //( git.commitedAt || 0 ) < ( savedAt || 0 ),
 
           actionComponent = hasUncommited ? ( <Button
             autoFocus={ true }
