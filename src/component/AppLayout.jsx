@@ -23,7 +23,8 @@ import { SaveProjectAsModal } from "./Modal/SaveProjectAsModal";
 import { CommandModal } from "./AppLayout/Main/GroupTable/TestTable/CommandModal";
 import { InstallRuntimeTestModal } from "./Modal/InstallRuntimeTestModal";
 import { EditTargetsAsCsvModal } from "./Modal/EditTargetsAsCsvModal";
-import { NewGitCommitModal } from "./Modal/NewGitCommitModal";
+import { GitCommitModal } from "./Modal/GitCommitModal";
+import { GitSyncModal } from "./Modal/GitSyncModal";
 import { GitCheckoutModal } from "./Modal/GitCheckoutModal";
 
 import { TabGroup  } from "./TabGroup";
@@ -199,9 +200,17 @@ export class AppLayout extends React.Component {
           action={ action }
         />
 
-        <NewGitCommitModal
-          isVisible={ store.app.newGitCommitModal }
+        <GitCommitModal
+          isVisible={ store.app.gitCommitModal }
           git={ store.project.git }
+          projectDirectory={ projectDirectory }
+          action={ action }
+        />
+
+        <GitSyncModal
+          isVisible={ store.app.gitSyncModal }
+          git={ store.project.git }
+          savedAt={ store.project.savedAt }
           projectDirectory={ projectDirectory }
           action={ action }
         />

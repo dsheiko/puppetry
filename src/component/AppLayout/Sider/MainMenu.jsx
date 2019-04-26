@@ -198,6 +198,7 @@ export class MainMenu extends GitEnhancedMenu {
   }
 
   componentDidMount() {
+    this.gitEnhancedMenuDidMount();
     ipcRenderer.removeAllListeners( E_RENDERER_INFO );
     ipcRenderer.on( E_RENDERER_INFO, this.onRendererInfo );
     ipcRenderer.removeAllListeners( E_RENDERER_ERROR );
@@ -284,7 +285,7 @@ export class MainMenu extends GitEnhancedMenu {
                   id="cMainMenuFileGitCommit">Commit...{ " " }<kbd>{ ostr( "Ctrl-Shift-S" ) }</kbd></Menu.Item>
                 <Menu.Item key="git6" disabled={ !git.initialized || !git.hasRemote || gitDetachedHeadState }
                   onClick={ this.onFileGitSync } id="cMainMenuFileGitPull">
-                  Sync with remote</Menu.Item>
+                  Sync with remote...</Menu.Item>
 
               </SubMenu>
 

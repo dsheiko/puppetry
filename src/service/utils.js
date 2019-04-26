@@ -13,8 +13,16 @@ export const ruleValidateGenericString = ( rule, value, callback ) => {
   callback();
 };
 
+/**
+ *
+ * @param {Date} date
+ * @returns {Number}
+ */
+export function dateToTs( date = new Date() ) {
+  return Math.round( date.getTime() / 1000 );
+}
 
-export function timestampToDate( timestamp ) {
+export function tsToDateString( timestamp ) {
   const date = new Date( timestamp * 1000 ),
         month = "0" + date.getMonth(),
         day = "0" + date.getDate(),

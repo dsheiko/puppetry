@@ -27,6 +27,7 @@ exports.E_GIT_INIT = "gitInit";
 exports.E_RENDERER_ERROR = "rendererError";
 exports.E_RENDERER_INFO = "rendererInfo";
 exports.E_GIT_COMMIT = "gitCommit";
+exports.E_GIT_COMMIT_RESPONSE = "gitCommitResponse";
 exports.E_GIT_SYNC = "gitPull";
 exports.E_GIT_PUSH = "gitPush";
 exports.E_GIT_LOG = "gitLog";

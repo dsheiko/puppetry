@@ -14,7 +14,7 @@ const FormItem = Form.Item,
       connectForm = Form.create();
 
 @connectForm
-export class NewGitCommitModal extends AbstractForm {
+export class GitCommitModal extends AbstractForm {
 
   static propTypes = {
     action:  PropTypes.shape({
@@ -28,7 +28,7 @@ export class NewGitCommitModal extends AbstractForm {
 
   onClickCancel = ( e ) => {
     e.preventDefault();
-    this.props.action.updateApp({ newGitCommitModal: false });
+    this.props.action.updateApp({ gitCommitModal: false });
   }
 
   onClickOk = ( e ) => {
@@ -49,7 +49,7 @@ export class NewGitCommitModal extends AbstractForm {
         git.configUsername,
         git.configEmail
       );
-      updateApp({ newGitCommitModal: false });
+      updateApp({ gitCommitModal: false });
     });
   }
 
@@ -63,7 +63,7 @@ export class NewGitCommitModal extends AbstractForm {
         <Modal
           title="New Commit"
           visible={ isVisible }
-          className="c-new-git-commit-modal"
+          className="c-git-commit-modal"
           disabled={ this.hasErrors( getFieldsError() )  }
           closable
           onCancel={this.onClickCancel}
@@ -74,7 +74,7 @@ export class NewGitCommitModal extends AbstractForm {
               key="submit"
               type="primary"
               onClick={this.onClickOk}>
-              Create
+              Commit
             </Button> ) ]}
         >
 
