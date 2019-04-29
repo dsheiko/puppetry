@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { DragableRow } from "./DragableRow";
 import { confirmDeleteEntity } from "service/smalltalk";
-import { remote } from "electron";
+import { remote, clipboard } from "electron";
 
 const { Menu, MenuItem } = remote;
 
@@ -42,6 +42,7 @@ export default class AbstractDnDTable extends React.Component {
       click: () => this.onEdit( record )
     }) );
 
+
     if ( typeof this.constructor.displayName === "undefined" || this.constructor.displayName !== "TargetTable" ) {
       menu.append( new MenuItem(
         record.disabled ? {
@@ -63,6 +64,22 @@ export default class AbstractDnDTable extends React.Component {
       label: "Clone",
       click: () => this.cloneRecord( record )
     }) );
+
+    menu.append( new MenuItem({
+      type: "separator"
+    }) );
+
+    menu.append( new MenuItem({
+      label: "Copy",
+      click: () => this.copyClipboard( record )
+    }) );
+
+
+    this.validClipboard() && menu.append( new MenuItem({
+      label: "Paste",
+      click: () => this.pasteClipboard( record )
+    }) );
+
 
     menu.append( new MenuItem({
       type: "separator"
@@ -107,6 +124,35 @@ export default class AbstractDnDTable extends React.Component {
 
   onEdit = ( record ) => {
     this.toggleEdit( record.id, true );
+  }
+
+  validClipboard() {
+    const payload = clipboard.readText();
+    return payload
+      && "app" in payload
+      && payload.app.name === remote.app.getName()
+      && payload.app.version === remote.app.getVersion()
+  }
+
+  pasteClipboard = ( record ) => {
+    const payload = clipboard.readText();
+    if ( !this.validClipboard() ) {
+      return;
+    }
+    const update = this.props.action[ `insertAdjacent${ payload.model }` ];
+    update( payload.data, { "after": record.id } );
+  }
+
+  copyClipboard = ( record ) => {
+    const payload = {
+      app: {
+        name: remote.app.getName(),
+        version: remote.app.getVersion()
+      },
+      model: this.model,
+      data: record
+    }
+    clipboard.writeText( JSON.stringify( payload, null, 2 ) );
   }
 
   insertRecord = ( record ) => {
