@@ -429,8 +429,44 @@ actions.resetCommandFailures = () => async ( dispatch, getState ) => {
   });
 };
 
+
+actions.pasteTarget = ( payload, dest ) => async ( dispatch ) => {
+  const position = { after: dest.id };
+  dispatch( actions.insertAdjacentTarget( payload, position ) );
+};
+
+actions.pasteCommand = ( payload, dest ) => async ( dispatch ) => {
+  const merged = { ...payload, testId: dest.testId, groupId: dest.groupId },
+        position = { after: dest.id };
+  dispatch( actions.insertAdjacentCommand( merged, position ) );
+};
+
+actions.pasteTest = ( payload, dest ) => async ( dispatch ) => {
+  const id = uniqid(),
+        merged = { ...payload, groupId: dest.groupId },
+        position = { after: dest.id };
+  dispatch( actions.insertAdjacentTest( merged, position, id ) );
+  Object.values( payload.commands ).forEach( command => {
+    dispatch( actions.addCommand({ ...command, testId: id, groupId: merged.groupId }) );
+  });
+};
+
+actions.pasteGroup = ( payload, dest ) => async ( dispatch ) => {
+  const groupId = uniqid(),
+        merged = { ...payload },
+        position = { after: dest.id };
+  dispatch( actions.insertAdjacentGroup( merged, position, groupId ) );
+  Object.values( payload.tests ).forEach( test => {
+    const testId = uniqid();
+    dispatch( actions.addTest({ ...test, groupId: groupId }, testId ) );
+    Object.values( test.commands ).forEach( command => {
+      dispatch( actions.addCommand({ ...command, testId, groupId }) );
+    });
+  });
+};
+
 /**
- *
+ * Clone command within the same test
  * @param {Object} command
  * @param {Object} [options] - e.g. { testId: "", groupId: "" }
  * @returns {Function}
@@ -444,7 +480,7 @@ actions.cloneCommand = ( command, options = {}) => async ( dispatch, getState ) 
 };
 
 /**
- *
+ * Clone test within the same group
  * @param {Object} test
  * @param {Object} [options] - e.g. { groupId: "" }
  * @returns {Function}
@@ -479,7 +515,7 @@ actions.transferTest = ( test, options = {}) => async ( dispatch, getState ) => 
 };
 
 /**
- *
+ * Clone command within the same root
  * @param {Object} group
  * @returns {Function}
  */

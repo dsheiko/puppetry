@@ -59,6 +59,7 @@ export class GroupTable extends AbstractEditableTable {
       targets={ targets }
       tests={ tests }
       groupId={ group.id }
+      selector={ this.props.selector }
       action={ this.props.action } /> );
   }
 

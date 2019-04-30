@@ -2,12 +2,12 @@
 export function findTargets( record ) {
   // group
   if ( "tests" in record ) {
-    record.tests.reduce(( carry, test ) => {
+    return Object.values( record.tests ).reduce(( carry, test ) => {
       return [ ...carry, ...findTargets( test ) ];
     }, []);
   }
   if ( "commands" in record ) {
-    return record.commands
+    return Object.values( record.commands )
       .filter( c => c.target !== "page" )
       .map( c => c.target );
   }

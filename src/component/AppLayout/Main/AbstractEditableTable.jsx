@@ -116,17 +116,20 @@ export default class AbstractEditableTable extends AbstractDnDTable {
     return (
       <Menu>
         { ( typeof this.constructor.displayName === "undefined"
-          || this.constructor.displayName !== "TargetTable" ) && <Menu.Item>
+          || this.constructor.displayName !== "TargetTable" ) && <Menu.Item key="enable">
           <a role="menuitem" tabIndex={0}  onClick={ () => this.toggleEnable( record ) }>
             { record.disabled ? "Enable" : "Disable" }
           </a>
         </Menu.Item> }
-         <Menu.Item>
+        <Menu.Item key="insert">
           <a role="menuitem" tabIndex={0}  onClick={ () => this.insertRecord( record ) }>Insert</a>
         </Menu.Item>
-        <Menu.Item>
+        <Menu.Item key="clone">
           <a role="menuitem" tabIndex={0}  onClick={ () => this.cloneRecord( record ) }>Clone</a>
         </Menu.Item>
+
+
+
       </Menu>
     );
   }

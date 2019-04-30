@@ -12,6 +12,8 @@ export class Main extends React.Component {
 
   static propTypes = {
     store: PropTypes.object.isRequired,
+    action: PropTypes.object.isRequired,
+    selector: PropTypes.object.isRequired,
     action: PropTypes.shape({
       updateProjectPanes: PropTypes.func.isRequired
     })
