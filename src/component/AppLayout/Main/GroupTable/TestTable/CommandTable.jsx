@@ -4,6 +4,7 @@ import AbstractDnDTable from "../../AbstractDnDTable";
 import { connectDnD } from "../../DragableRow";
 import { CommandRowLabel } from "./CommandRowLabel";
 import ErrorBoundary from "component/ErrorBoundary";
+import { RowDropdown } from "component/AppLayout/Main/RowDropdown";
 import { confirmDeleteEntity } from "service/smalltalk";
 import { remote } from "electron";
 import classNames from "classnames";
@@ -150,27 +151,6 @@ export class CommandTable extends AbstractDnDTable {
     this.updateRecord({ id: record.id, disabled: !record.disabled });
   }
 
-  getDropdownMenu( record ) {
-    return (
-      <AntdMenu>
-        <AntdMenu.Item>
-          <a  role="menuitem" tabIndex={0} onClick={ () => this.toggleEnable( record ) }>
-            { record.disabled ? "Enable" : "Disable" }
-          </a>
-        </AntdMenu.Item>
-        <AntdMenu.Item>
-          <a role="menuitem" tabIndex={0} onClick={ () => this.insertRecord( record ) }>Insert</a>
-        </AntdMenu.Item>
-        <AntdMenu.Item>
-          <a role="menuitem" tabIndex={0} onClick={ () => this.cloneRecord( record ) }>Clone</a>
-        </AntdMenu.Item>
-
-
-
-      </AntdMenu>
-    );
-  }
-
   getActionColumn() {
     return {
       title: "Action",
@@ -190,11 +170,17 @@ export class CommandTable extends AbstractDnDTable {
 
         <Divider type="vertical" />
 
-        <Dropdown overlay={ this.getDropdownMenu( record ) }>
-          <a className="ant-dropdown-link" href="#">
-            <Icon type="more" />
-          </a>
-        </Dropdown>
+        <RowDropdown
+          record={ record }
+          validClipboard={ this.validClipboard }
+          isNotTargetTable={ true }
+          toggleEnable={ this.toggleEnable }
+          insertRecord={ this.insertRecord }
+          cloneRecord={ this.cloneRecord }
+          copyClipboard={ this.copyClipboard }
+          pasteClipboard={ this.pasteClipboard }
+          />
+
       </span> )
     };
   }

@@ -51,7 +51,6 @@ export class GitSyncModal extends AbstractForm {
   }
 
   onCommitResponse = () => {
-    console.log("sss");
     this.props.action.saveProjectGit({
       commitedAt: dateToTs()
     });

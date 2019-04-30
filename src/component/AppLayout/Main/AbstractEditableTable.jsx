@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Icon, Menu, Dropdown, Button, Popconfirm, Divider } from "antd";
 import AbstractDnDTable from "./AbstractDnDTable";
+import { RowDropdown } from "./RowDropdown";
 
 export default class AbstractEditableTable extends AbstractDnDTable {
 
@@ -108,32 +109,6 @@ export default class AbstractEditableTable extends AbstractDnDTable {
     });
   }
 
-  toggleEnable( record ) {
-    this.updateRecord({ id: record.id, disabled: !record.disabled });
-  }
-
-  getDropdownMenu( record ) {
-    return (
-      <Menu>
-        { ( typeof this.constructor.displayName === "undefined"
-          || this.constructor.displayName !== "TargetTable" ) && <Menu.Item key="enable">
-          <a role="menuitem" tabIndex={0}  onClick={ () => this.toggleEnable( record ) }>
-            { record.disabled ? "Enable" : "Disable" }
-          </a>
-        </Menu.Item> }
-        <Menu.Item key="insert">
-          <a role="menuitem" tabIndex={0}  onClick={ () => this.insertRecord( record ) }>Insert</a>
-        </Menu.Item>
-        <Menu.Item key="clone">
-          <a role="menuitem" tabIndex={0}  onClick={ () => this.cloneRecord( record ) }>Clone</a>
-        </Menu.Item>
-
-
-
-      </Menu>
-    );
-  }
-
   getActionColumn() {
     return {
       title: "Action",
@@ -141,6 +116,8 @@ export default class AbstractEditableTable extends AbstractDnDTable {
       width: 160,
       className: "table-actions-cell",
       render: ( text, record ) => {
+        const isNotTargetTable = ( typeof this.constructor.displayName === "undefined"
+          || this.constructor.displayName !== "TargetTable" );
 
         if ( record.adding ) {
           return ( <span className="table-actions"  role="status" onMouseDown={( e ) => e.preventDefault()}>
@@ -187,12 +164,16 @@ export default class AbstractEditableTable extends AbstractDnDTable {
 
             <Divider type="vertical" />
 
-            <Dropdown overlay={ this.getDropdownMenu( record ) }>
-              <a className="ant-dropdown-link" href="#">
-                <Icon type="more" />
-              </a>
-            </Dropdown>
-
+            <RowDropdown
+              record={ record }
+              validClipboard={ this.validClipboard }
+              isNotTargetTable={ isNotTargetTable }
+              toggleEnable={ this.toggleEnable }
+              insertRecord={ this.insertRecord }
+              cloneRecord={ this.cloneRecord }
+              copyClipboard={ this.copyClipboard }
+              pasteClipboard={ this.pasteClipboard }
+              />
 
           </span>
         );
