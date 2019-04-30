@@ -846,3 +846,8 @@ td:hover .editable-cell-icon {
 .form-buttons .ant-form-item-children {
   float: right;
 }
+
+.ant-dropdown-menu-item-disabled a {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

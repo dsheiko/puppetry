@@ -28,7 +28,9 @@ const GREETINGS = [ "Greetings",
         selector: {
           getTargetDataTable: () => selectors.getTargetDataTable( state.suite.targets ),
           getGroupDataTable: () => selectors.getStructureDataTable( state.suite.groups ),
-          getTestDataTable: ( group ) => selectors.getStructureDataTable( group.tests )
+          getTestDataTable: ( group ) => selectors.getStructureDataTable( group.tests ),
+          getSelectedTargets: ( selection ) => selectors.getSelectedTargets( selection, state.suite.targets ),
+          hasTarget: ( target ) => selectors.hasTarget( target, state.suite.targets )
         }
       }),
       // Mapping actions to the props

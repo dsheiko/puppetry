@@ -32,3 +32,29 @@ export function getStructureDataTable( record ) {
 
     return data;
 }
+
+/**
+ *
+ * @param {String} target
+ * @param {Object} targets
+ * @returns {Boolean}
+ */
+export function hasTarget( target, targets ) {
+  return Boolean( Object.values( targets )
+    .find( item => target === item.target ) );
+}
+
+/**
+ *
+ * @param {Array} selection
+ * @param {Object} targets
+ * @returns {Object}
+ */
+export function getSelectedTargets( selection, targets ) {
+  return Object.values( targets )
+    .filter( target => selection.includes( target.target ) )
+    .reduce(( carry, target ) => {
+      carry[ target.id ] = target;
+      return carry;
+    }, {});
+}

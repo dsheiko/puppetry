@@ -57,6 +57,7 @@ export class TestTable extends AbstractEditableTable {
     return ( <CommandTable commands={commands}
       targets={targets}
       testId={test.id}
+      selector={ this.props.selector }
       groupId={test.groupId} action={this.props.action} /> );
   }
 

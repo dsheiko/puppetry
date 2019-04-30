@@ -78,6 +78,22 @@ export class CommandTable extends AbstractDnDTable {
     }) );
 
     menu.append( new MenuItem({
+      label: "Copy",
+      click: () => this.copyClipboard( record )
+    }) );
+
+
+    menu.append( new MenuItem({
+      label: "Paste",
+      click: () => this.pasteClipboard( record ),
+      enabled: this.validClipboard()
+    }) );
+
+    menu.append( new MenuItem({
+      type: "separator"
+    }) );
+
+    menu.append( new MenuItem({
       label: "Delete",
       click: async () => {
         await confirmDeleteEntity( "command" ) && this.removeRecord( record.id );
@@ -148,6 +164,9 @@ export class CommandTable extends AbstractDnDTable {
         <AntdMenu.Item>
           <a role="menuitem" tabIndex={0} onClick={ () => this.cloneRecord( record ) }>Clone</a>
         </AntdMenu.Item>
+
+
+
       </AntdMenu>
     );
   }

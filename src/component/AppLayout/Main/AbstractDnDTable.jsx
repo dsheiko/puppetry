@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { DragableRow } from "./DragableRow";
 import { confirmDeleteEntity } from "service/smalltalk";
+import { findTargets } from "service/suite";
 import { remote, clipboard } from "electron";
 
 const { Menu, MenuItem } = remote;
@@ -75,9 +76,10 @@ export default class AbstractDnDTable extends React.Component {
     }) );
 
 
-    this.validClipboard() && menu.append( new MenuItem({
+    menu.append( new MenuItem({
       label: "Paste",
-      click: () => this.pasteClipboard( record )
+      click: () => this.pasteClipboard( record ),
+      enabled: this.validClipboard()
     }) );
 
 
@@ -127,20 +129,39 @@ export default class AbstractDnDTable extends React.Component {
   }
 
   validClipboard() {
-    const payload = clipboard.readText();
-    return payload
-      && "app" in payload
-      && payload.app.name === remote.app.getName()
-      && payload.app.version === remote.app.getVersion()
+
+    try {
+      const payload = JSON.parse( clipboard.readText() || "{}" );
+      return payload
+        && typeof payload === "object"
+        && "app" in payload
+        && payload.app.name === remote.app.getName()
+        && payload.app.version === remote.app.getVersion()
+        && payload.model === this.model;
+    } catch ( err ) {
+      return false;
+    }
   }
 
   pasteClipboard = ( record ) => {
-    const payload = clipboard.readText();
     if ( !this.validClipboard() ) {
       return;
     }
-    const update = this.props.action[ `insertAdjacent${ payload.model }` ];
-    update( payload.data, { "after": record.id } );
+    const payload = JSON.parse( clipboard.readText() || "{}" ),
+          update = this.props.action[ `paste${ payload.model }` ];
+    this.props.action.updateApp({ loading: true });
+    setTimeout( () => {
+      // inject group/test/commands
+      update( payload.data, record );
+      // inject required targets
+      Object.values( payload.targets).forEach( target => {
+        if ( this.props.selector.hasTarget( target.target ) ) {
+          return;
+        }
+        this.props.action.addTarget( target );
+      });
+      this.props.action.updateApp({ loading: false });
+    }, 200 );
   }
 
   copyClipboard = ( record ) => {
@@ -150,8 +171,12 @@ export default class AbstractDnDTable extends React.Component {
         version: remote.app.getVersion()
       },
       model: this.model,
-      data: record
-    }
+      data: record,
+      targets: this.model === "Target"
+        ? []
+        : this.props.selector.getSelectedTargets( findTargets( record ) )
+    };
+
     clipboard.writeText( JSON.stringify( payload, null, 2 ) );
   }
 
