@@ -4,9 +4,12 @@ import classNames from "classnames";
 import { DragableRow } from "./DragableRow";
 import { confirmDeleteEntity } from "service/smalltalk";
 import { findTargets } from "service/suite";
+import { clipboardReadObj } from "service/copypaste";
 import { remote, clipboard } from "electron";
 
-const { Menu, MenuItem } = remote;
+const { Menu, MenuItem } = remote,
+      APP_NAME = remote.app.getName(),
+      APP_VERSION = remote.app.getVersion();
 
 export default class AbstractDnDTable extends React.Component {
 
@@ -128,16 +131,17 @@ export default class AbstractDnDTable extends React.Component {
     this.toggleEdit( record.id, true );
   }
 
-  validClipboard() {
+  toggleEnable = ( record ) => {
+    this.updateRecord({ id: record.id, disabled: !record.disabled });
+  }
 
+  validClipboard = () => {
     try {
-      const payload = JSON.parse( clipboard.readText() || "{}" );
+      const payload = clipboardReadObj();
       return payload
-        && typeof payload === "object"
-        && "app" in payload
-        && payload.app.name === remote.app.getName()
-        && payload.app.version === remote.app.getVersion()
-        && payload.model === this.model;
+        && payload.model === this.model
+        && payload.app.name === APP_NAME
+        && payload.app.version === APP_VERSION;
     } catch ( err ) {
       return false;
     }
@@ -147,7 +151,7 @@ export default class AbstractDnDTable extends React.Component {
     if ( !this.validClipboard() ) {
       return;
     }
-    const payload = JSON.parse( clipboard.readText() || "{}" ),
+    const payload = clipboardReadObj(),
           update = this.props.action[ `paste${ payload.model }` ];
     this.props.action.updateApp({ loading: true });
     setTimeout( () => {
@@ -167,8 +171,8 @@ export default class AbstractDnDTable extends React.Component {
   copyClipboard = ( record ) => {
     const payload = {
       app: {
-        name: remote.app.getName(),
-        version: remote.app.getVersion()
+        name: APP_NAME,
+        version: APP_VERSION
       },
       model: this.model,
       data: record,
@@ -176,7 +180,6 @@ export default class AbstractDnDTable extends React.Component {
         ? []
         : this.props.selector.getSelectedTargets( findTargets( record ) )
     };
-
     clipboard.writeText( JSON.stringify( payload, null, 2 ) );
   }
 
