@@ -12,17 +12,17 @@ export class Main extends React.Component {
 
   static propTypes = {
     store: PropTypes.object.isRequired,
-    action: PropTypes.object.isRequired,
     selector: PropTypes.object.isRequired,
     action: PropTypes.shape({
-      updateProjectPanes: PropTypes.func.isRequired
+      updateProjectPanes: PropTypes.func.isRequired,
+      updateApp: PropTypes.func.isRequired
     })
   }
 
   onTabChange = ( targetKey ) => {
     this.props.action.updateApp({ loading: true });
-    setTimeout(() => {
-      this.props.action.updateProjectPanes( "suite", [ targetKey ] );
+    setTimeout( () => {
+      this.props.action.updateProjectPanes( "suite", [ targetKey ]);
       this.props.action.updateApp({ loading: false });
     }, 10 );
   }
@@ -65,13 +65,13 @@ export class Main extends React.Component {
             </TabPane>
 
             <TabPane tab={ "Options" } key="options">
-               <SuiteForm  action={action} title={ store.suite.title } timeout={ store.suite.timeout } />
+              <SuiteForm  action={action} title={ store.suite.title } timeout={ store.suite.timeout } />
             </TabPane>
             <TabPane tab={ "Expressions" } key="expression">
-               <p>Expressions</p>
+              <p>Expressions</p>
             </TabPane>
             <TabPane tab={ "Snippets" } key="snippets">
-               <p>Snippets</p>
+              <p>Snippets</p>
             </TabPane>
 
           </Tabs>

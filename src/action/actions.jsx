@@ -206,11 +206,11 @@ actions.loadSettings = () => ( dispatch, getState ) => {
 
 // PROJECT
 
-actions.checkGit = ( projectDirectory ) => async ( dispatch, getState ) => {
+actions.checkGit = ( projectDirectory ) => async ( dispatch ) => {
   ipcRenderer.removeAllListeners( E_GIT_CURRENT_BRANCH_RESPONSE );
   ipcRenderer.on( E_GIT_CURRENT_BRANCH_RESPONSE, ( ev, branch ) => {
     if ( branch !== "master" ) {
-      console.log(branch);
+      console.log( branch );
       dispatch( actions.updateApp({ gitDetachedHeadState: true }) );
       mediator.emit( E_CHECKOUT_MASTER_OPEN, branch );
     }

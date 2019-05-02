@@ -10,7 +10,7 @@ import { E_MENU_NEW_PROJECT, E_MENU_NEW_SUITE,
   E_MENU_OPEN_PROJECT, E_MENU_SAVE_SUITE, E_MENU_SAVE_SUITE_AS,
   E_MENU_OPEN_SUITE, E_MENU_EXPORT_PROJECT, E_MENU_EXIT_APP,
   E_MENU_RUN, E_RENDERER_ERROR, E_RENDERER_INFO } from "constant";
-import { isMac, ostr } from "./MainMenu/helpers";
+import { ostr } from "./MainMenu/helpers";
 import { GitEnhancedMenu } from "./MainMenu/GitEnhancedMenu";
 
 const SubMenu = Menu.SubMenu;
@@ -263,11 +263,11 @@ export class MainMenu extends GitEnhancedMenu {
                 Save Suite As...</Menu.Item>
 
               <SubMenu
-                  key="git"
-                  id="cMainMenuFileGit"
-                  disabled={ !suiteFilename }
-                  title={<span><Icon type="branches" /><span>Git</span></span>}
-                >
+                key="git"
+                id="cMainMenuFileGit"
+                disabled={ !suiteFilename }
+                title={<span><Icon type="branches" /><span>Git</span></span>}
+              >
                 <Menu.Item key="git1" disabled={ git.initialized }
                   onClick={ this.onFileGitInitialize } id="cMainMenuFileGitInit">
                   Initialize</Menu.Item>
@@ -297,7 +297,7 @@ export class MainMenu extends GitEnhancedMenu {
             </SubMenu>
 
             <Menu.Item key="11" onClick={ this.onSettings } id="cMainMenuSettingsGit">
-                <span><Icon type="setting" /><span>Settings...</span></span></Menu.Item>
+              <span><Icon type="setting" /><span>Settings...</span></span></Menu.Item>
 
             <Menu.Item key="10"
               id="cMainMenuRun"

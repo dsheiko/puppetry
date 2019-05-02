@@ -4,7 +4,6 @@ import AbstractEditableTable from "./AbstractEditableTable";
 import { EditableCell } from "./EditableCell";
 import { connectDnD } from "./DragableRow";
 import ErrorBoundary from "component/ErrorBoundary";
-import uniqid from "uniqid";
 
 @connectDnD
 export class TargetTable extends AbstractEditableTable {

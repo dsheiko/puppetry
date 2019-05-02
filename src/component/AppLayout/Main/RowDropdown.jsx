@@ -5,14 +5,25 @@ import { Icon, Menu, Dropdown } from "antd";
 
 class RowDropdownOverlay extends React.Component {
 
+  static propTypes = {
+    record: PropTypes.object,
+    validClipboard: PropTypes.func,
+    isNotTargetTable: PropTypes.boolean,
+    toggleEnable: PropTypes.func,
+    insertRecord: PropTypes.func,
+    cloneRecord: PropTypes.func,
+    copyClipboard: PropTypes.func,
+    pasteClipboard: PropTypes.func,
+    close: PropTypes.func
+  }
+
   apply = ( action, record ) => {
     this.props[ action ]( record );
     this.props.close();
   }
 
   render() {
-    const { close, record, validClipboard, isNotTargetTable,
-            toggleEnable, insertRecord, cloneRecord, copyClipboard, pasteClipboard } = this.props,
+    const { record, validClipboard, isNotTargetTable } = this.props,
           isValidClipboard = validClipboard();
 
     return (
@@ -46,14 +57,13 @@ class RowDropdownOverlay extends React.Component {
 }
 
 
-
 export class RowDropdown extends React.Component {
 
   state = {
     visible: false
   }
 
-  getDropdownMenu( record ) {
+  getDropdownMenu() {
     return (
       <RowDropdownOverlay { ...this.props } close={ this.close } />
     );
@@ -68,11 +78,11 @@ export class RowDropdown extends React.Component {
   }
 
   render() {
-    return ( <Dropdown overlay={ this.getDropdownMenu( this.props.record ) }
+    return ( <Dropdown overlay={ this.getDropdownMenu() }
       visible={ this.state.visible }
       onVisibleChange={ this.onVisibleChange }
       placement="bottomRight"
-      >
+    >
       <a className="ant-dropdown-link" href="#">
         <Icon type="more" />
       </a>

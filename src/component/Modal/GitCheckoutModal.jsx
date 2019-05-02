@@ -1,12 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AbstractComponent from "component/AbstractComponent";
-import { Modal, Button, Table, Divider, Popconfirm, message, Icon, Tag } from "antd";
+import { Modal, Button, Table, Tag } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
-import If from "component/Global/If";
 import { ipcRenderer } from "electron";
-import { E_GIT_LOG, E_GIT_LOG_RESPONSE, E_GIT_REVERT, E_GIT_REVERT_RESPONSE,
-  E_GIT_CHECKOUT, E_GIT_CHECKOUT_RESPONSE, E_CHECKOUT_MASTER_OPEN } from "constant";
+import { E_GIT_CHECKOUT, E_GIT_CHECKOUT_RESPONSE, E_CHECKOUT_MASTER_OPEN } from "constant";
 import * as classes from "./classes";
 import { tsToDateString } from "service/utils";
 import mediator from "service/mediator";
@@ -42,14 +40,14 @@ export class GitCheckoutModal extends AbstractComponent {
       key: "message",
       width: "70%",
       render: ( value, record ) => <span><span title={ record.oid }><Tag>{
-      record.oid.substr( 0, 8 ) }</Tag></span>{ " " }<span>{ value }</span></span>
+        record.oid.substr( 0, 8 ) }</Tag></span>{ " " }<span>{ value }</span></span>
     }, {
       title: "Actions",
       key: "actions",
       render: ( text, record ) => ( <span className="table-actions"
         role="status" onMouseDown={( e ) => e.preventDefault()}>
         <a className="link--action" tabIndex={-1}
-              role="button" onClick={() => this.checkoutRecord( record.oid, record.message )}>Checkout</a>
+          role="button" onClick={() => this.checkoutRecord( record.oid, record.message )}>Checkout</a>
 
       </span> )
     }
@@ -79,7 +77,7 @@ export class GitCheckoutModal extends AbstractComponent {
 
   render() {
     const { isVisible, logs } = this.props,
-          rows = logs.map( row => ({ ...row, key: row.oid }));
+          rows = logs.map( row => ({ ...row, key: row.oid }) );
 
     return (
       <ErrorBoundary>
@@ -101,7 +99,7 @@ export class GitCheckoutModal extends AbstractComponent {
             </Button> ) ]}
         >
 
-         <Table dataSource={ rows } columns={ this.columns } />
+          <Table dataSource={ rows } columns={ this.columns } />
 
         </Modal>
       </ErrorBoundary>

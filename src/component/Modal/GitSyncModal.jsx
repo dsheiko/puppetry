@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
-import { Form, Modal, Button, Input, Row, Col, Collapse } from "antd";
+import { Form, Modal, Button, Input  } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
-import If from "component/Global/If";
 import { ipcRenderer } from "electron";
 import { E_GIT_COMMIT, E_GIT_SYNC, E_GIT_COMMIT_RESPONSE } from "constant";
 import { dateToTs } from "service/utils";
@@ -35,7 +34,7 @@ export class GitSyncModal extends AbstractForm {
     this.close();
   }
 
-  onClickSync= ( e ) => {
+  onClickSync= () => {
     this.sync();
   }
 
@@ -46,8 +45,8 @@ export class GitSyncModal extends AbstractForm {
       credentialsUsername: git.credentialsUsername,
       credentialsPassword: git.credentialsPassword,
       credentialsAcccessToken: git.credentialsAcccessToken
-   });
-   this.close();
+    });
+    this.close();
   }
 
   onCommitResponse = () => {
@@ -58,7 +57,7 @@ export class GitSyncModal extends AbstractForm {
   }
 
   onClickCommit= ( e ) => {
-    const { createSuite, updateApp } = this.props.action,
+    const { updateApp } = this.props.action,
           { git, projectDirectory } = this.props,
           { validateFields } = this.props.form;
 
@@ -85,7 +84,7 @@ export class GitSyncModal extends AbstractForm {
 
 
   render() {
-    const { isVisible, git, savedAt } = this.props,
+    const { isVisible } = this.props,
           { getFieldDecorator, getFieldsError } = this.props.form,
           hasUncommited = false, //( git.commitedAt || 0 ) < ( savedAt || 0 ),
 

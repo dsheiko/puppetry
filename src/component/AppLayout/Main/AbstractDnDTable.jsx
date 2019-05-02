@@ -18,9 +18,10 @@ export default class AbstractDnDTable extends React.Component {
       swapTest: PropTypes.func,
       swapGroup: PropTypes.func,
       swapCommand: PropTypes.func,
-      updateApp: PropTypes.func
+      updateApp: PropTypes.func,
+      addTarget: PropTypes.func
     }),
-
+    selector: PropTypes.object.isRequired,
     groupId: PropTypes.string.isRequired,
     testId: PropTypes.string.isRequired
   }
@@ -158,7 +159,7 @@ export default class AbstractDnDTable extends React.Component {
       // inject group/test/commands
       update( payload.data, record );
       // inject required targets
-      Object.values( payload.targets).forEach( target => {
+      Object.values( payload.targets ).forEach( target => {
         if ( this.props.selector.hasTarget( target.target ) ) {
           return;
         }
@@ -192,7 +193,7 @@ export default class AbstractDnDTable extends React.Component {
     if ( "testId" in record ) {
       node.testId = record.testId;
     }
-    update( node, { "after": record.id } );
+    update( node, { "after": record.id });
     this.updateSuiteModified();
   }
 

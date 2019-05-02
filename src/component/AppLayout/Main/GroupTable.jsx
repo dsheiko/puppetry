@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Icon, Button } from "antd";
+import { Table, Icon } from "antd";
 import AbstractEditableTable from "./AbstractEditableTable";
 import { connectDnD } from "./DragableRow";
 import ErrorBoundary from "component/ErrorBoundary";

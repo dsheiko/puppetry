@@ -18,7 +18,8 @@ export class TabGroup extends React.Component {
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired
     }),
-    store: PropTypes.object.isRequired
+    store: PropTypes.object.isRequired,
+    selector: PropTypes.object
   }
 
   onEdit = ( targetKey, action ) => {
@@ -58,12 +59,12 @@ export class TabGroup extends React.Component {
                 checkedList={ store.app.checkedList } />
             </TabPane> ),
             settings: () => ( <TabPane tab={ "Settings" } key="settings" closable={ true }>
-                <SettingsPanel
-                  action={ action }
-                  projectDirectory={ store.settings.projectDirectory }
-                  project={ store.project }
-                  />
-              </TabPane> )
+              <SettingsPanel
+                action={ action }
+                projectDirectory={ store.settings.projectDirectory }
+                project={ store.project }
+              />
+            </TabPane> )
           };
 
     return (

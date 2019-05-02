@@ -4,7 +4,6 @@ import AbstractForm from "component/AbstractForm";
 import { Form, Modal, Button } from "antd";
 import BrowseDirectory from "component/Global/BrowseDirectory";
 import ErrorBoundary from "component/ErrorBoundary";
-import { isProject } from "service/io";
 import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS } from "constant";
 import * as classes from "./classes";
 
@@ -12,6 +11,16 @@ const connectForm = Form.create();
 
 @connectForm
 export class SaveProjectAsModal extends AbstractForm {
+
+
+  static propTypes = {
+    action:  PropTypes.shape({
+      updateApp: PropTypes.func.isRequired,
+      copyProjectTo: PropTypes.func.isRequired
+    }),
+    isVisible: PropTypes.bool.isRequired,
+    projectDirectory: PropTypes.string.isRequired
+  }
 
   state = {
     locked: false,
@@ -53,8 +62,7 @@ export class SaveProjectAsModal extends AbstractForm {
 
 
   render() {
-    const { isVisible } = this.props,
-          { getFieldsError } = this.props.form;
+    const { isVisible } = this.props;
 
     return (
       <ErrorBoundary>
