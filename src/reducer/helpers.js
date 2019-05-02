@@ -1,4 +1,61 @@
 import update from "immutability-helper";
+import { findTargetNodes } from "../service/suite";
+
+
+
+function getTargetById( state, id ) {
+  return state.suite.targets[ id ];
+}
+
+export function updateTagetsInSuite( prevState, nextState, targetId ) {
+  const prevTargetName = getTargetById( prevState, targetId ).target,
+        nextTargetName = getTargetById( nextState, targetId ).target;
+
+  if ( prevTargetName === nextTargetName ) {
+    return nextState;
+  }
+
+  const targets = findTargetNodes( nextState.suite, prevTargetName );
+  console.log(targets);
+  if ( !targets.length ) {
+    return nextState;
+  }
+
+  let state = nextState;
+  targets.forEach( target => {
+    state = update( state, {
+        suite: {
+          groups: {
+            [ target.groupId ]: {
+              tests: {
+                [ target.testId ]: {
+                  commands: {
+                    [ target.id ]: {
+                      $apply: ( { ...command } ) => {
+                        command.target = command.target === prevTargetName ? nextTargetName : command.target;
+                        if ( "assert" in command
+                            && "target" in command.assert
+                            && command.assert.target === prevTargetName  ) {
+                            return update( command, {
+                              assert: {
+                                target: {
+                                  $set: nextTargetName
+                                }
+                              }
+                            });
+                        }
+                        return command;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }});
+  });
+  return state;
+}
 
 export function isTargetNotUnique( state, payload ) {
   return Boolean( Object.values( state.suite.targets )

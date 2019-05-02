@@ -1,4 +1,4 @@
-import { findTargets } from "../service/suite";
+import { findTargets, findTargetNodes } from "../service/suite";
 
 const FIX_SUITE = {
   "groups": {
@@ -216,6 +216,24 @@ describe( "service/suite", () => {
       expect( res.includes( "SEL_JUMBOTRON_DESC" ) ).toBe( true );
       expect( res.includes( "SEL_EMAIL" ) ).toBe( true );
       expect( res.includes( "SEL_FNAME" ) ).toBe( true );
+    });
+
+  });
+
+   describe( "findTargetNodes", () => {
+
+    it( "finds by target", () => {
+       const res = findTargetNodes( GROUP, "SEL_JUMBOTRON_DESC" );
+      expect( res.length ).toBe( 2 );
+      expect( res[ 0 ].id ).toBe( "36ijnyo5d8m" );
+      expect( res[ 1 ].id ).toBe( "36ijnyo6nwg" );
+    });
+
+    it( "finds by target mentioned in assert", () => {
+       const res = findTargetNodes( GROUP, "SEL_FNAME" );
+       expect( res.length ).toBe( 2 );
+       expect( res[ 0 ].id ).toBe( "36ijnyob255" );
+       expect( res[ 1 ].id ).toBe( "3fejnyofvuf" );
     });
 
   });
