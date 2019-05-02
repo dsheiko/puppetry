@@ -38,6 +38,7 @@ const DEFAULT_STATE = {
     gitCommitModal: false,
     gitSyncModal: false,
     gitCheckoutModal: false,
+    gitCloneModal: false,
 
     commandModal: {
       isVisible: false,

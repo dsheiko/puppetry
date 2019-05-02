@@ -26,6 +26,7 @@ import { EditTargetsAsCsvModal } from "./Modal/EditTargetsAsCsvModal";
 import { GitCommitModal } from "./Modal/GitCommitModal";
 import { GitSyncModal } from "./Modal/GitSyncModal";
 import { GitCheckoutModal } from "./Modal/GitCheckoutModal";
+import { GitCloneModal } from "./Modal/GitCloneModal";
 import { EditProjectModal } from "./Modal/EditProjectModal";
 
 import { TabGroup  } from "./TabGroup";
@@ -220,6 +221,13 @@ export class AppLayout extends React.Component {
         <GitCheckoutModal
           isVisible={ store.app.gitCheckoutModal }
           logs={ store.app.gitLogs }
+          git={ store.project.git }
+          projectDirectory={ projectDirectory }
+          action={ action }
+        />
+
+        <GitCloneModal
+          isVisible={ store.app.gitCloneModal }
           git={ store.project.git }
           projectDirectory={ projectDirectory }
           action={ action }

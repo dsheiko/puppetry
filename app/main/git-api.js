@@ -53,6 +53,16 @@ module.exports = {
     return wrap( await git.init({ dir: projectDirectory }), "init" );
   },
 
+  async clone( projectDirectory, url, credentials ) {
+    return wrap( await git.clone({
+      dir: projectDirectory,
+      url,
+      ...getCredentialsPayload( credentials ),
+      singleBranch: true,
+      depth: 1
+    }), "clone" );
+  },
+
 
   async checkout( projectDirectory, oid ) {
     return wrap( await git.checkout({
