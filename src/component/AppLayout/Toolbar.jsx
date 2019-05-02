@@ -5,6 +5,7 @@ import { Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { confirmUnsavedChanges } from "service/smalltalk";
 import If from "component/Global/If";
+import { truncate } from "service/utils";
 
 const win = remote.getCurrentWindow();
 
@@ -14,6 +15,7 @@ export class Toolbar extends React.Component {
     action:  PropTypes.shape({
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired,
+      updateApp: PropTypes.func.isRequired,
       closeApp: PropTypes.func.isRequired
     }),
 
@@ -58,6 +60,12 @@ export class Toolbar extends React.Component {
     this.props.action.closeApp();
   }
 
+  onEditProject = () => {
+    this.props.action.updateApp({
+      editProjectModal: true
+    });
+  }
+
   render() {
     const { isMaximized } = this.state,
           { project } = this.props;
@@ -68,7 +76,8 @@ export class Toolbar extends React.Component {
           <div>
             <If exp={ project.name }>
               <Icon type="project" />{ " " }
-              Project: { " " }<span id="cToolbarProjectName">{ project.name }</span>
+              Project: { " " }<span id="cToolbarProjectName">{ truncate( project.name, 80 ) }</span>
+              { " " }<a onClick={ this.onEditProject }><Icon type="tool" /></a>
             </If>
           </div>
           <div>

@@ -34,6 +34,7 @@ const DEFAULT_STATE = {
     exportProjectModal: false,
     testReportModal: false,
     installRuntimeTestModal: false,
+    editProjectModal: false,
     gitCommitModal: false,
     gitSyncModal: false,
     gitCheckoutModal: false,

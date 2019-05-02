@@ -5,6 +5,7 @@ import { Form, Modal, Button, Input, Row, Col, Collapse } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
 import { normalizeFilename } from "service/io";
+import { ruleValidateGenericString } from "service/utils";
 import * as classes from "./classes";
 
 /*eslint no-useless-escape: 0*/
@@ -89,6 +90,12 @@ export class NewSuiteModal extends AbstractForm {
                 rules: [{
                   required: true,
                   message: "Please enter suite title"
+                },
+                {
+                  validator: ruleValidateGenericString
+                },
+                {
+                  transform: ( value ) => value.trim()
                 }]
               })(
                 <Input onChange={ this.onNameChange } placeholder="e.g. Main page"

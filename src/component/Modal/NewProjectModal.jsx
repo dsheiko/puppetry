@@ -10,6 +10,7 @@ import { isDirEmpty } from "service/io";
 import { confirmCreateProject } from "service/smalltalk";
 import { normalizeFilename } from "service/io";
 import * as classes from "./classes";
+import { ruleValidateGenericString } from "service/utils";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
@@ -130,7 +131,14 @@ export class NewProjectModal extends AbstractForm {
                 rules: [{
                   required: true,
                   message: "Please enter project name"
-                }]
+                },
+                {
+                  validator: ruleValidateGenericString
+                },
+                {
+                  transform: ( value ) => value.trim()
+                }
+                ]
               })(
                 <Input placeholder="Project name" onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
               )}
