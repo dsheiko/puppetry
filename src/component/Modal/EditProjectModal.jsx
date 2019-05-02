@@ -2,9 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
 import { Form, Modal, Button, Input } from "antd";
-import BrowseDirectory from "component/Global/BrowseDirectory";
 import ErrorBoundary from "component/ErrorBoundary";
-import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS } from "constant";
 import * as classes from "./classes";
 import { getAppInstallPath } from "service/io";
 import { ruleValidateGenericString } from "service/utils";
@@ -38,7 +36,7 @@ export class EditProjectModal extends AbstractForm {
   onClickOk = async ( e ) => {
     const { validateFields } = this.props.form,
           { projectDirectory } = this.props,
-          { setProject, saveProject } = this.props.action;
+          { saveProject } = this.props.action;
 
     e.preventDefault();
 
@@ -75,14 +73,13 @@ export class EditProjectModal extends AbstractForm {
               key="submit"
               type="primary"
               autoFocus={ true }
+              disabled={ this.hasErrors( getFieldsError() )  }
               onClick={this.onClickOk}>
               Save
             </Button> )
           ]}
         >
           <Form>
-
-
 
 
             <FormItem  label="Project name">

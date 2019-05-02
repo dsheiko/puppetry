@@ -5,6 +5,7 @@
 - fix: update target in the suite recursively when target name changed
 
 ### Features
+- improve UI: add modal Edit Project to change project name and get info about project and app location
 - improve UI: app window is centered on the first display when one has multiple displays
 - improve UI: faster way to manage data-table records (targets/groups/tests) by keeping the last row always in editing more
 - improve UI: suite options moved under a tab and do not take space in main workspace
