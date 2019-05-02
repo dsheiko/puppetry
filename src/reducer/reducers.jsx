@@ -9,6 +9,7 @@ import DEFAULT_STATE, {
   targetDefaultState
 } from "./defaultState";
 import {
+  updateTagetsInSuite,
   getTestsFlat,
   getCommandsFlat,
   transferTest,
@@ -262,7 +263,7 @@ export const reducer = handleActions(
       if ( isTargetNotUnique( state, payload ) ) {
         payload.target += "_" + uniqid().toUpperCase();
       }
-      return update( state, {
+      const newState = update( state, {
         suite: {
           targets: {
             $apply: ( ref ) => {
@@ -273,6 +274,8 @@ export const reducer = handleActions(
             }
           }
         }});
+
+      return updateTagetsInSuite( state, newState, payload.id );
     },
 
     [ actions.removeTarget ]: ( state, { payload }) => update( state, {

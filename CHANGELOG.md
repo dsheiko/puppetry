@@ -2,6 +2,7 @@
 
 ### Bug fixes
 - fix: adding record row is not expandable
+- fix: update target in the suite recursively when target name changed
 
 ### Features
 - improve UI: app window is centered on the first display when one has multiple displays

@@ -19,8 +19,39 @@ export function findTargets( record ) {
   if ( record.target === "page" ) {
     return [];
   }
-  if ( "target" in record.assert ) {
+  if ( "assert" in record && "target" in record.assert ) {
     return [ ...new Set([ record.target, record.assert.target ]) ];
   }
   return [ record.target ];
+}
+
+function getCommandCoors( record ) {
+  return {
+    testId: record.testId,
+    groupId: record.groupId,
+    id: record.id
+  };
+}
+
+export function findTargetNodes( record, target ) {
+  // suite
+  if ( "groups" in record ) {
+    return Object.values( record.groups ).reduce(( carry, group ) => {
+      return [ ...carry, ...findTargetNodes( group, target ) ];
+    }, []);
+  }
+  // group
+  if ( "tests" in record ) {
+    return Object.values( record.tests ).reduce(( carry, test ) => {
+      return [ ...carry, ...findTargetNodes( test, target ) ];
+    }, []);
+  }
+  if ( "commands" in record ) {
+    return Object.values( record.commands )
+      .filter( c => c.target === target
+        || ( "assert" in c && "target" in c.assert && c.assert.target === target ) )
+      .reduce(( carry, command ) => {
+        return [ ...carry, getCommandCoors( command ) ];
+      }, []);
+  }
 }
