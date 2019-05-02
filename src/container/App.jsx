@@ -48,9 +48,11 @@ export class App extends React.Component {
       loadProjectFiles: PropTypes.func.isRequired,
       checkRuntimeTestDirReady: PropTypes.func.isRequired,
       checkNewVersion: PropTypes.func.isRequired,
-      updateApp: PropTypes.func.isRequired
+      updateApp: PropTypes.func.isRequired,
+      checkGit: PropTypes.func.isRequired
     }),
-    store: PropTypes.object
+    store: PropTypes.object,
+    selector: PropTypes.object
   }
 
   async componentDidMount() {

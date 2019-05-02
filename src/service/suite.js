@@ -2,7 +2,7 @@
 export function findTargets( record ) {
   // group
   if ( "tests" in record ) {
-    const targets = Object.values( record.tests ).reduce(( carry, test ) => {
+    const targets = Object.values( record.tests ).reduce( ( carry, test ) => {
       return [ ...carry, ...findTargets( test ) ];
     }, []);
     return [ ...new Set( targets ) ];
@@ -10,7 +10,7 @@ export function findTargets( record ) {
   if ( "commands" in record ) {
     const targets = Object.values( record.commands )
       .filter( c => c.target !== "page" )
-      .reduce(( carry, command ) => {
+      .reduce( ( carry, command ) => {
         return [ ...carry, ...findTargets( command ) ];
       }, []);
     return [ ...new Set( targets ) ];
@@ -36,13 +36,13 @@ function getCommandCoors( record ) {
 export function findTargetNodes( record, target ) {
   // suite
   if ( "groups" in record ) {
-    return Object.values( record.groups ).reduce(( carry, group ) => {
+    return Object.values( record.groups ).reduce( ( carry, group ) => {
       return [ ...carry, ...findTargetNodes( group, target ) ];
     }, []);
   }
   // group
   if ( "tests" in record ) {
-    return Object.values( record.tests ).reduce(( carry, test ) => {
+    return Object.values( record.tests ).reduce( ( carry, test ) => {
       return [ ...carry, ...findTargetNodes( test, target ) ];
     }, []);
   }
@@ -50,7 +50,7 @@ export function findTargetNodes( record, target ) {
     return Object.values( record.commands )
       .filter( c => c.target === target
         || ( "assert" in c && "target" in c.assert && c.assert.target === target ) )
-      .reduce(( carry, command ) => {
+      .reduce( ( carry, command ) => {
         return [ ...carry, getCommandCoors( command ) ];
       }, []);
   }

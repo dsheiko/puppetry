@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
-import { Form, Modal, Button, Input, Row, Col, Collapse } from "antd";
+import { Form, Modal, Button, Input } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
-import If from "component/Global/If";
 import { ipcRenderer } from "electron";
 import { E_GIT_COMMIT } from "constant";
 import * as classes from "./classes";
@@ -32,7 +31,7 @@ export class GitCommitModal extends AbstractForm {
   }
 
   onClickOk = ( e ) => {
-    const { createSuite, updateApp } = this.props.action,
+    const { updateApp } = this.props.action,
           { git, projectDirectory } = this.props,
           { validateFields } = this.props.form;
 

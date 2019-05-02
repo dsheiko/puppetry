@@ -123,7 +123,7 @@ module.exports = {
     "indent": [ "error", 2, {"VariableDeclarator": {"var": 2, "let": 2, "const": 3}} ],
     // Disallow Unused Variables
     "no-unused-vars": [ "error", {
-        "caughtErrors": "all",
+        "caughtErrors": "none",
         "args": "after-used",
         "ignoreRestSiblings": true
       } ],

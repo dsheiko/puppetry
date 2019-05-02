@@ -2,12 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
 import { ruleValidateGenericString } from "service/utils";
-import { message, Form, Radio, Select, Icon, Input, InputNumber, Button, Card } from "antd";
+import { message, Form, Input, Button } from "antd";
 const FormItem = Form.Item,
       connectForm = Form.create();
 
 @connectForm
 export class ConfigForm extends AbstractForm {
+
+   static propTypes = {
+     action: PropTypes.object.isRequired,
+     form: PropTypes.object.isRequired
+   }
 
   onSubmit = ( e ) => {
     e.preventDefault();
@@ -29,30 +34,30 @@ export class ConfigForm extends AbstractForm {
       <Form id="cGitconfigForm" className="settings-git-form" onSubmit={ this.onSubmit }>
 
         <h3>Git Config</h3>
-        <p>Please provide your identity data. Every Git commit uses this information, so it's quite important.</p>
+        <p>Please provide your identity data. Every Git commit uses this information, so it is quite important.</p>
 
 
-          <FormItem  label="Full Name">
-            { getFieldDecorator( "configUsername", {
-              initialValue: git.configUsername,
-              rules: [
-                {
-                  required: true, message: "Please enter full name"
-                },
-                {
-                  validator: ruleValidateGenericString
-                },
-                {
-                  transform: ( value ) => value.trim()
-                }
-              ]
-            })(
-              <Input
-                onPressEnter={this.onSubmit}
-                placeholder="e.g. Jon Snow"
-              />
-            )}
-          </FormItem>
+        <FormItem  label="Full Name">
+          { getFieldDecorator( "configUsername", {
+            initialValue: git.configUsername,
+            rules: [
+              {
+                required: true, message: "Please enter full name"
+              },
+              {
+                validator: ruleValidateGenericString
+              },
+              {
+                transform: ( value ) => value.trim()
+              }
+            ]
+          })(
+            <Input
+              onPressEnter={this.onSubmit}
+              placeholder="e.g. Jon Snow"
+            />
+          )}
+        </FormItem>
 
         <FormItem  label="Email">
           { getFieldDecorator( "configEmail", {

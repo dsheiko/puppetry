@@ -1,5 +1,4 @@
 import React from "react";
-import EventEmitter from "events";
 import AbstractComponent from "component/AbstractComponent";
 import { ipcRenderer } from "electron";
 import { truncate } from "service/utils";
@@ -35,17 +34,17 @@ export class CheckoutMaster extends AbstractComponent {
 
   onOpen = ( comment ) => {
     this.hide = message.open({
-      content: (<React.Fragment>You are on 'detached' version<br />
+      content: ( <React.Fragment>You are on &apos;detached&apos; version<br />
         { comment && <p><b>{ truncate( comment, 42 ) }</b></p> }
         <Button
           type="primary"
           onClick={ this.onCheckoutMaster }>
           Checkout master
-          </Button>
+        </Button>
 
-      </React.Fragment>),
+      </React.Fragment> ),
       duration: 0,
-      icon: (<Icon type="api" />)
+      icon: ( <Icon type="api" /> )
     });
   }
 

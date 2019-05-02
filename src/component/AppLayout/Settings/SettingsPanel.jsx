@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Tabs, Icon } from "antd";
+import { Tabs } from "antd";
 import { GitPane } from "./Git/GitPane";
 import ErrorBoundary from "component/ErrorBoundary";
 
@@ -12,20 +12,21 @@ export class SettingsPanel extends React.Component {
     project: PropTypes.object.isRequired,
     projectDirectory: PropTypes.string,
     action: PropTypes.shape({
-      updateProjectPanes: PropTypes.func.isRequired
+      updateProjectPanes: PropTypes.func.isRequired,
+      updateApp: PropTypes.func.isRequired
     })
   }
 
   onTabChange = ( targetKey ) => {
     this.props.action.updateApp({ loading: true });
-    setTimeout(() => {
-      this.props.action.updateProjectPanes( "settings", [ targetKey ] );
+    setTimeout( () => {
+      this.props.action.updateProjectPanes( "settings", [ targetKey ]);
       this.props.action.updateApp({ loading: false });
     }, 10 );
   }
 
   render() {
-   const { action, project, projectDirectory } = this.props,
+    const { action, project, projectDirectory } = this.props,
           panes = project.appPanels.settings.panes;
 
     let activeKey = "git";

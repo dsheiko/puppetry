@@ -1,13 +1,28 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { message } from "antd";
 import { ipcRenderer } from "electron";
 import { confirmUnsavedChanges } from "service/smalltalk";
 import { dateToTs } from "service/utils";
-import { E_GIT_INIT, E_GIT_SYNC, E_GIT_PUSH,
+import { E_GIT_INIT,
   E_GIT_LOG, E_GIT_LOG_RESPONSE, E_GIT_COMMIT_RESPONSE } from "constant";
 
 
 export class GitEnhancedMenu extends React.Component {
+
+  static propTypes = {
+    action:  PropTypes.shape({
+      updateApp: PropTypes.func.isRequired,
+      addAppTab: PropTypes.func.isRequired,
+      saveProjectGit: PropTypes.func.isRequired,
+      saveSuite: PropTypes.func.isRequired,
+      setSuite: PropTypes.func.isRequired
+    }),
+    project: PropTypes.object.isRequired,
+    readyToRunTests: PropTypes.bool.isRequired,
+    projectDirectory: PropTypes.string.isRequired,
+    suiteModified: PropTypes.bool.isRequired
+  }
 
   gitEnhancedMenuDidMount() {
     ipcRenderer.removeAllListeners( E_GIT_COMMIT_RESPONSE );
@@ -22,10 +37,10 @@ export class GitEnhancedMenu extends React.Component {
 
   onFileGitCheckout = () => {
     this.props.action.updateApp({ gitCheckoutModal: true });
-    setTimeout(() => {
+    setTimeout( () => {
       ipcRenderer.send(
-          E_GIT_LOG,
-          this.props.projectDirectory
+        E_GIT_LOG,
+        this.props.projectDirectory
       );
       ipcRenderer.removeAllListeners( E_GIT_LOG_RESPONSE );
       ipcRenderer.on( E_GIT_LOG_RESPONSE, ( ev, logs ) => {

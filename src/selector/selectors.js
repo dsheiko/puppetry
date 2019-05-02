@@ -4,33 +4,33 @@ export function getTargetDataTable( targets ) {
   const data = Object.values( targets ),
         id = uniqid();
 
-    data.push({
-      disabled: false,
-      editing: true,
-      adding: true,
-      id,
-      key: id,
-      target: "",
-      selector: ""
-    });
+  data.push({
+    disabled: false,
+    editing: true,
+    adding: true,
+    id,
+    key: id,
+    target: "",
+    selector: ""
+  });
 
-    return data;
+  return data;
 }
 
 export function getStructureDataTable( record ) {
   const data = Object.values( record ),
         id = uniqid();
 
-    data.push({
-      disabled: false,
-      editing: true,
-      adding: true,
-      id,
-      key: id,
-      title: ""
-    });
+  data.push({
+    disabled: false,
+    editing: true,
+    adding: true,
+    id,
+    key: id,
+    title: ""
+  });
 
-    return data;
+  return data;
 }
 
 /**
@@ -53,7 +53,7 @@ export function hasTarget( target, targets ) {
 export function getSelectedTargets( selection, targets ) {
   return Object.values( targets )
     .filter( target => selection.includes( target.target ) )
-    .reduce(( carry, target ) => {
+    .reduce( ( carry, target ) => {
       carry[ target.id ] = target;
       return carry;
     }, {});

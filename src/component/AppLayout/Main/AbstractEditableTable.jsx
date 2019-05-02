@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Icon, Menu, Dropdown, Button, Popconfirm, Divider } from "antd";
+import { Button, Popconfirm, Divider } from "antd";
 import AbstractDnDTable from "./AbstractDnDTable";
 import { RowDropdown } from "./RowDropdown";
 
@@ -173,7 +173,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
               cloneRecord={ this.cloneRecord }
               copyClipboard={ this.copyClipboard }
               pasteClipboard={ this.pasteClipboard }
-              />
+            />
 
           </span>
         );

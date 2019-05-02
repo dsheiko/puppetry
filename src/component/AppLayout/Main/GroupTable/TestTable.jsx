@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Icon, Button } from "antd";
+import { Table, Icon } from "antd";
 import AbstractEditableTable from "../AbstractEditableTable";
 import { CommandTable } from "./TestTable/CommandTable";
 import { EditableCell } from "../EditableCell";

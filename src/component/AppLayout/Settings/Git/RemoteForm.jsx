@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
 import { ruleValidateGenericString } from "service/utils";
-import { message, Form, Radio, Select, Icon, Input, InputNumber, Button, Card } from "antd";
+import { Form, Radio, Select, Input, Button } from "antd";
 import { ipcRenderer } from "electron";
 import { E_GIT_SET_REMOTE } from "constant";
 const FormItem = Form.Item,
@@ -13,8 +13,13 @@ const FormItem = Form.Item,
 @connectForm
 export class RemoteForm extends AbstractForm {
 
+  static propTypes = {
+    action: PropTypes.object.isRequired,
+    form: PropTypes.object.isRequired
+  }
+
   setFieldInvalid( field, message ) {
-     this.props.form.setFields({
+    this.props.form.setFields({
       [ field ]: {
         errors: [ new Error( message ) ]
       }
@@ -40,7 +45,7 @@ export class RemoteForm extends AbstractForm {
 
         const { saveProjectGit }  = this.props.action;
 
-        saveProjectGit( { ...values, hasRemote: true } );
+        saveProjectGit({ ...values, hasRemote: true });
         this.props.form.resetFields();
 
         ipcRenderer.send(
@@ -48,10 +53,10 @@ export class RemoteForm extends AbstractForm {
           values.remoteRepository,
           projectDirectory,
           {
-             credentialsAuthMethod: git.credentialsAuthMethod,
-             credentialsUsername: values.credentialsUsername,
-             credentialsPassword: values.credentialsPassword,
-             credentialsAcccessToken: values.credentialsAcccessToken
+            credentialsAuthMethod: git.credentialsAuthMethod,
+            credentialsUsername: values.credentialsUsername,
+            credentialsPassword: values.credentialsPassword,
+            credentialsAcccessToken: values.credentialsAcccessToken
           }
         );
       }
@@ -113,12 +118,12 @@ export class RemoteForm extends AbstractForm {
               }
             ]
           })(
-             <Select>
-                <Option value="gitlab">Gitlab</Option>
-                <Option value="bitbucket">Bitbacket</Option>
-                <Option value="github" >Github</Option>
-                <Option value="other" >Other</Option>
-              </Select>
+            <Select>
+              <Option value="gitlab">Gitlab</Option>
+              <Option value="bitbucket">Bitbacket</Option>
+              <Option value="github" >Github</Option>
+              <Option value="other" >Other</Option>
+            </Select>
           )}
         </FormItem> }
 
@@ -145,12 +150,12 @@ export class RemoteForm extends AbstractForm {
         </FormItem>
 
         <FormItem  label="Authentication method">
-         { getFieldDecorator( "credentialsAuthMethod", {
+          { getFieldDecorator( "credentialsAuthMethod", {
             initialValue: git.credentialsAuthMethod
           })(
             <RadioGroup onChange={ this.onAuthMethodChange }>
-               <Radio value="password">Password</Radio>
-               <Radio value="accessToken">Access token</Radio>
+              <Radio value="password">Password</Radio>
+              <Radio value="accessToken">Access token</Radio>
             </RadioGroup>
           )}
         </FormItem>
@@ -171,7 +176,7 @@ export class RemoteForm extends AbstractForm {
           )}
         </FormItem> }
 
-    { git.credentialsAuthMethod === "accessToken" && <React.Fragment>
+        { git.credentialsAuthMethod === "accessToken" && <React.Fragment>
 
           <FormItem  label="Access Token">
             { getFieldDecorator( "credentialsAcccessToken", {
@@ -193,14 +198,14 @@ export class RemoteForm extends AbstractForm {
     you can create a Personal Access Token
     (or an App Password in Bitbucket terms) and use that to authenticate
     (
-      <a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/"
-        onClick={ this.onExtClick }>Instructions for GitHub</a>, { " " }
-      <a href="https://confluence.atlassian.com/bitbucket/app-passwords-828781300.html"
-        onClick={ this.onExtClick }>Instructions for Bitbucket</a>, { " " }
-      <a href="https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html"
-        onClick={ this.onExtClick }>Instructions for GitLab</a>
+            <a href="https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/"
+              onClick={ this.onExtClick }>Instructions for GitHub</a>, { " " }
+            <a href="https://confluence.atlassian.com/bitbucket/app-passwords-828781300.html"
+              onClick={ this.onExtClick }>Instructions for Bitbucket</a>, { " " }
+            <a href="https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html"
+              onClick={ this.onExtClick }>Instructions for GitLab</a>
     ).
-    </p>
+          </p>
         </React.Fragment> }
 
         <FormItem className="form-buttons">

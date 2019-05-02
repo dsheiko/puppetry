@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu as AntdMenu, Dropdown, Table, Icon, Button, Divider, Popconfirm } from "antd";
+import { Table, Icon, Button, Divider, Popconfirm } from "antd";
 import AbstractDnDTable from "../../AbstractDnDTable";
 import { connectDnD } from "../../DragableRow";
 import { CommandRowLabel } from "./CommandRowLabel";
@@ -179,7 +179,7 @@ export class CommandTable extends AbstractDnDTable {
           cloneRecord={ this.cloneRecord }
           copyClipboard={ this.copyClipboard }
           pasteClipboard={ this.pasteClipboard }
-          />
+        />
 
       </span> )
     };
