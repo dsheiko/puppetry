@@ -29,6 +29,10 @@ export class GitEnhancedMenu extends React.Component {
     ipcRenderer.on( E_GIT_COMMIT_RESPONSE, this.onFileGitCommitResponse );
   }
 
+  onFileGitClone = () => {
+    this.props.action.updateApp({ gitCloneModal: true });
+  }
+
   onFileGitCommitResponse = () => {
     this.props.action.saveProjectGit({
       commitedAt: dateToTs()

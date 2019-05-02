@@ -8,6 +8,7 @@ const { ipcMain, dialog, remote } = require( "electron" ),
         E_GIT_CHECKOUT_M, E_GIT_CHECKOUT_M_RESPONSE,
         E_GIT_REVERT, E_GIT_REVERT_RESPONSE,
         E_GIT_CURRENT_BRANCH, E_GIT_CURRENT_BRANCH_RESPONSE,
+        E_GIT_CLONE, E_GIT_CLONE_RESPONSE,
         E_GIT_COMMIT_RESPONSE
       } = require( "../constant" ),
       watchFiles = require( "./file-watcher" ),
@@ -162,5 +163,15 @@ ipcMain.on( E_GIT_CURRENT_BRANCH, async ( event, projectDirectory ) => {
     event.sender.send( E_GIT_CURRENT_BRANCH_RESPONSE, branch );
   } catch ( err ) {
     // supress
+  }
+});
+
+ipcMain.on( E_GIT_CLONE, async ( event, projectDirectory, remoteRepository, credentials ) => {
+  try {
+    const branch = await gitApi.clone( projectDirectory, remoteRepository, credentials );
+    event.sender.send( E_GIT_CLONE_RESPONSE, branch );
+  } catch ( err ) {
+    log.error( `Main process: event-dispatcher.E_GIT_CLONE: ${ err.message }` );
+    event.sender.send( E_RENDERER_ERROR, `Cannot clone: ${ err.message }` );
   }
 });
