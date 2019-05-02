@@ -19,7 +19,7 @@ export class SaveProjectAsModal extends AbstractForm {
       copyProjectTo: PropTypes.func.isRequired
     }),
     isVisible: PropTypes.bool.isRequired,
-    projectDirectory: PropTypes.string.isRequired
+    projectDirectory: PropTypes.string
   }
 
   state = {

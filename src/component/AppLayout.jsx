@@ -26,6 +26,7 @@ import { EditTargetsAsCsvModal } from "./Modal/EditTargetsAsCsvModal";
 import { GitCommitModal } from "./Modal/GitCommitModal";
 import { GitSyncModal } from "./Modal/GitSyncModal";
 import { GitCheckoutModal } from "./Modal/GitCheckoutModal";
+import { EditProjectModal } from "./Modal/EditProjectModal";
 
 import { TabGroup  } from "./TabGroup";
 import If from "component/Global/If";
@@ -228,6 +229,12 @@ export class AppLayout extends React.Component {
           projectDirectory={ projectDirectory }
           action={ action }
         />
+
+        <EditProjectModal
+          isVisible={ store.app.editProjectModal }
+          projectName={ store.project.name }
+          projectDirectory={ projectDirectory }
+          action={ action } />
 
       </ErrorBoundary>
     );

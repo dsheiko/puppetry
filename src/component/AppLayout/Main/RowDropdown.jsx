@@ -8,7 +8,7 @@ class RowDropdownOverlay extends React.Component {
   static propTypes = {
     record: PropTypes.object,
     validClipboard: PropTypes.func,
-    isNotTargetTable: PropTypes.boolean,
+    isNotTargetTable: PropTypes.bool,
     toggleEnable: PropTypes.func,
     insertRecord: PropTypes.func,
     cloneRecord: PropTypes.func,

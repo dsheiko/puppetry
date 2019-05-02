@@ -273,7 +273,7 @@ actions.touchProjectGit = ( options ) => async ( dispatch, getState ) => {
 actions.saveProject = ({ projectDirectory, name }) => async ( dispatch, getState ) => {
   try {
     if ( !name ) {
-      throw new InvalidArgumentError( "Empty suite name" );
+      throw new InvalidArgumentError( "Empty project name" );
     }
     if ( !projectDirectory ) {
       throw new InvalidArgumentError( "Empty project directory" );
