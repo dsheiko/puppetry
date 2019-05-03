@@ -44,6 +44,7 @@
     "balloon-css": "^0.5.0",
     "chokidar": "^2.0.4",
     "classnames": "^2.2.6",
+    "tmp-promise": "^1.0.5",
     "cross-env": "^5.2.0",
     "custom-error-instance": "^2.1.1",
     "electron-context-menu": "^0.10.0",
@@ -106,7 +107,6 @@
     "regenerator-runtime": "^0.12.1",
     "spectron": "^5.0.0",
     "style-loader": "^0.23.1",
-    "tmp-promise": "^1.0.5",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.22.0",
     "webpack-cli": "^3.1.2"
