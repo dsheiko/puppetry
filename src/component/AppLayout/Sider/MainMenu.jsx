@@ -274,7 +274,7 @@ export class MainMenu extends GitEnhancedMenu {
                 <Menu.Item key="git2" disabled={ !git.initialized || !git.hasRemote }
                   onClick={ this.onFileGitClone } id="cMainMenuFileGitClone">
                   Clone...</Menu.Item>
-                  
+
                 <Menu.Item key="git3" disabled={ !git.initialized || gitDetachedHeadState }
                   onClick={ this.onFileGitCheckout } id="cMainMenuFileGitCheckout">
                   Checkout...</Menu.Item>

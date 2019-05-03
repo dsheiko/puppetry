@@ -88,7 +88,7 @@ export class GitEnhancedMenu extends React.Component {
       return;
     }
 
-    ipcRenderer.send( E_GIT_INIT, projectDirectory );
+    ipcRenderer.send( E_GIT_INIT, projectDirectory, git.configUsername, git.configEmail );
     this.props.action.saveProjectGit({ initialized: true });
   }
 

@@ -5,11 +5,13 @@ const path = require( "path" ),
       util = require( "util" ),
       log = require( "electron-log" ),
       tmp = require( "tmp-promise" ),
-      REMOTE = "puppetry",
+      REMOTE = "origin", // origin
+      MASTER = "master", // master
       shell = require( "shelljs" ),
       readdir = util.promisify( fs.readdir );
 
 git.plugins.set( "fs", fs );
+tmp.setGracefulCleanup();
 shell.config.fatal = true;
 
 async function readDir( directory, ext ) {
@@ -49,8 +51,9 @@ function wrap( res, method = "undefined" ) {
 
 module.exports = {
 
-  async init( projectDirectory ) {
-    return wrap( await git.init({ dir: projectDirectory }), "init" );
+  async init( projectDirectory, username, email ) {
+    wrap( await git.init({ dir: projectDirectory }), "init" );
+    await this.commit( `Initial commit`, projectDirectory, username, email );
   },
 
   async clone( projectDirectory, url, credentials ) {
@@ -90,14 +93,25 @@ module.exports = {
   async log( projectDirectory ) {
     return await git.log({
       dir: projectDirectory,
-      ref: "master"
+      ref: MASTER
     });
   },
 
 
+  async cleanupFiles( projectDirectory ) {
+    const files = await getProjectFiles( projectDirectory );
+    files.forEach(( file ) => {
+      shell.rm( path.join( projectDirectory, file ) );
+    });
+  },
+
+  async cleanupGit( projectDirectory ) {
+    shell.rm( "-rf", path.join( projectDirectory, ".git" ) );
+  },
+
   async stashFiles( projectDirectory ) {
     const files = await getProjectFiles( projectDirectory );
-    this.tmpDirObj = await tmp.dir();
+    this.tmpDirObj = await tmp.dir({ unsafeCleanup: true });
     files.forEach(( file ) => {
       shell.cp( "-r", path.join( projectDirectory, file ), this.tmpDirObj.path );
     });
@@ -110,49 +124,58 @@ module.exports = {
     });
   },
 
-  async sync( projectDirectory, credentials ) {
-    //@TODO change master to something (master protected n gitlab)
+  async sync( projectDirectory, credentials, username, email, remoteRepository ) {
 
-    // stashFiles
-    // try fetch
-    // any conflicats?
-    // NO
-    //  push
-    // YES
-    //  unstashFiles
-    //  commit "Merging .."
-    //  push
+    // just in case it isn't set uo
+    await this.setRemote( remoteRepository, projectDirectory, credentials );
+    await this.stashFiles( projectDirectory );
+    try {
+      await this.pull( projectDirectory, credentials, remoteRepository );
+    } catch ( err ) {
+      log.debug( `Main process: git-api.sync (1) ${ err.message }` );
+      await this.syncOnConflict( projectDirectory, credentials, username, email, remoteRepository );
+    }
+    try {
+      await this.push( projectDirectory, credentials );
+    } catch ( err ) {
+      // Probablly nothing to push
+      log.debug( `Main process: git-api.sync (2) ${ err.message }` );
+    }
     this.tmpDirObj.cleanup();
+
+  },
+
+  async syncOnConflict( projectDirectory, credentials, username, email, remoteRepository ) {
+    try {
+      await this.cleanupFiles( projectDirectory );
+      await this.cleanupGit( projectDirectory );
+      await this.clone( projectDirectory, remoteRepository, credentials );
+      await this.unstashFiles( projectDirectory );
+      await this.commit( `Solving merging conflicts: local changes`, projectDirectory, username, email );
+    } catch ( err ) {
+      log.error( `Main process: git-api.syncOnConflict ${ err.message }` );
+      await this.unstashFiles( projectDirectory );
+    }
   },
 
   async push( projectDirectory, credentials ) {
-    return wrap( await git.push({
+    wrap( await git.push({
       dir: projectDirectory,
       remote: REMOTE,
-      ref: "master",
+      ref: MASTER,
       force: true,
       ...getCredentialsPayload( credentials )
     }), "push" );
   },
 
   async pull( projectDirectory, credentials ) {
-    let { fetchHead } = wrap( await git.fetch({
+    wrap( await git.pull({
       dir: projectDirectory,
-      ref: "master",
-      remote: REMOTE,
+      ref: MASTER,
       singleBranch: true,
       ...getCredentialsPayload( credentials )
-    }), "fetch" );
+    }), "pull" );
 
-    // Merge the remote tracking branch into the local one.
-    wrap( await git.merge({
-      dir: projectDirectory,
-      ours: "master",
-      fastForwardOnly: true,
-      theirs: fetchHead
-    }), "merge" );
-
-    return await this.checkout( projectDirectory, "master" );
   },
 
   async setRemote( remoteRepository, projectDirectory, credentials ) {
@@ -174,9 +197,9 @@ module.exports = {
           staggedFiles = await git.listFiles({ dir: projectDirectory });
 
     for ( const file of projectFiles ) {
-      if ( !staggedFiles.includes( file ) ) {
+
         await git.add({ dir: projectDirectory, filepath: file });
-      }
+
     }
     return await git.commit({
       dir: projectDirectory,
