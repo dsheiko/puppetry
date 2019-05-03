@@ -70,6 +70,7 @@ function createWindow() {
   }) );
 
   require( "./main/menu" )( mainWindow );
+  require( "./main/capturePage" )( mainWindow );
   require( "./main/event-dispatcher" );
 
   // Open the DevTools.
