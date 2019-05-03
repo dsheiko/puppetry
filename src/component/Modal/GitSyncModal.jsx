@@ -125,6 +125,9 @@ export class GitSyncModal extends AbstractForm {
           <p>Please make sure your working branch <code>master</code> is not protected
           (See <a href="https://docs.gitlab.com/ee/user/project/protected_branches.html"
             onClick={ this.onExtClick }>Protected Branches at Gitlab</a>)</p>
+          <p><b>IMPORTANT</b> You may lose  your local version history. In case of merging conflicts
+          Puppetry simply fetches the version history of the remote repository
+          and puts your latest version on top of it.</p>
           { hasUncommited && <Form >
             <FormItem
               extra="Please describe briefly the latest changes in your project.
