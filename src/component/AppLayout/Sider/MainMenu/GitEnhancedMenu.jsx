@@ -54,6 +54,11 @@ export class GitEnhancedMenu extends React.Component {
   }
 
   onFileGitCommit = async () => {
+    const { project, gitDetachedHeadState } = this.props,
+          git = project.git;
+    if ( !git.initialized || gitDetachedHeadState ) {
+      return;
+    }
     if ( this.props.suiteModified ) {
       await confirmUnsavedChanges({
         saveSuite: this.props.action.saveSuite,
