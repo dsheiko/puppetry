@@ -557,10 +557,11 @@ actions.checkRuntimeTestDirReady = () => async ( dispatch ) => {
   return dispatch( actions.updateApp({ readyToRunTests }) );
 };
 
-async function saveProject( store, isTouch = false ) {
+export const saveProject = debounce( async ( store, isTouch = false ) => {
   if ( !store.settings.projectDirectory ) {
     return;
   }
+  console.log("Save...");
   const ts = isTouch ? {} : { savedAt: dateToTs() };
   await writeProject( store.settings.projectDirectory,  {
     ...store.project,
@@ -568,7 +569,7 @@ async function saveProject( store, isTouch = false ) {
     ...ts,
     modified: false
   });
-}
+}, 100 );
 
 actions.copyProjectTo = ( targetDirectory ) => async ( dispatch, getState ) => {
   const store = getState(),
