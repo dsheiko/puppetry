@@ -84,7 +84,7 @@ export class RemoteForm extends AbstractForm {
         or anywhere in the network
         (e.g. <a href="https://about.gitlab.com/install/" onClick={ this.onExtClick }>internal Gitlab server</a>).
         To be able to synchronize your
-        local changes with the remote repository (<code>push/pull</code>) you need
+        local changes with the remote repository you need
         to provide repository location and authentication data.</p>
 
         <FormItem  label="Repository location">

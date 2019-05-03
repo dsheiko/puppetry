@@ -67,12 +67,6 @@ export class Main extends React.Component {
             <TabPane tab={ "Options" } key="options">
               <SuiteForm  action={action} title={ store.suite.title } timeout={ store.suite.timeout } />
             </TabPane>
-            <TabPane tab={ "Expressions" } key="expression">
-              <p>Expressions</p>
-            </TabPane>
-            <TabPane tab={ "Snippets" } key="snippets">
-              <p>Snippets</p>
-            </TabPane>
 
           </Tabs>
 

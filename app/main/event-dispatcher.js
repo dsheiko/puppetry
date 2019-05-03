@@ -73,12 +73,12 @@ ipcMain.on( E_WATCH_FILE_NAVIGATOR, async ( event, projectDirectory ) => {
   watchFiles( event, projectDirectory );
 });
 
-ipcMain.on( E_GIT_INIT, async ( event, projectDirectory ) => {
+ipcMain.on( E_GIT_INIT, async ( event, projectDirectory, username, email ) => {
   try {
-    await gitApi.init( projectDirectory );
+    await gitApi.init( projectDirectory, username, email );
     event.sender.send( E_RENDERER_INFO, "Empty local Git repository created" );
   } catch ( err ) {
-    log.error( `Main process: event-dispatcher.E_GIT_INNIT: ${ err.message }` );
+    log.error( `Main process: event-dispatcher.E_GIT_INIT: ${ err.message }` );
     event.sender.send( E_RENDERER_ERROR, `Cannot initialize local Git: ${ err.message }` );
   }
 });
@@ -115,11 +115,9 @@ function throwIfErrors( errors ) {
   throw new Error( errors.join( ", " ) );
 }
 
-ipcMain.on( E_GIT_SYNC, async ( event, projectDirectory, credentials  ) => {
+ipcMain.on( E_GIT_SYNC, async ( event, projectDirectory, credentials, username, email, url  ) => {
   try {
-//    const pushRes = await gitApi.push( projectDirectory, credentials  );
-//    throwIfErrors( pushRes.errors );
-    await gitApi.pull( projectDirectory, credentials );
+    await gitApi.sync( projectDirectory, credentials, username, email, url );
     event.sender.send( E_RENDERER_INFO, `Changes pulled from remote repository successfully` );
   } catch ( err ) {
     console.error( err.message, err );

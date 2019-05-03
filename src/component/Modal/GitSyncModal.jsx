@@ -45,7 +45,7 @@ export class GitSyncModal extends AbstractForm {
       credentialsUsername: git.credentialsUsername,
       credentialsPassword: git.credentialsPassword,
       credentialsAcccessToken: git.credentialsAcccessToken
-    });
+    }, git.configUsername, git.configEmail, git.remoteRepository );
     this.close();
   }
 
@@ -122,6 +122,9 @@ export class GitSyncModal extends AbstractForm {
           you are going to find them in commit log (<code>File/Git/Checkout</code>) any versions.
           You can use copy/paste to transfer changes between versions.
           </p>
+          <p>Please make sure your working branch <code>master</code> is not protected
+          (See <a href="https://docs.gitlab.com/ee/user/project/protected_branches.html"
+            onClick={ this.onExtClick }>Protected Branches at Gitlab</a>)</p>
           { hasUncommited && <Form >
             <FormItem
               extra="Please describe briefly the latest changes in your project.

@@ -1,14 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
-import { Form, Modal, Input, Button } from "antd";
+import { Form, Modal, Button } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
-import If from "component/Global/If";
 import BrowseDirectory from "component/Global/BrowseDirectory";
 import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS } from "constant";
 import { isDirEmpty } from "service/io";
 import { confirmCreateProject } from "service/smalltalk";
-import { normalizeFilename } from "service/io";
 import { ipcRenderer } from "electron";
 import * as classes from "./classes";
 import { E_GIT_CLONE, E_GIT_CLONE_RESPONSE } from "constant";
@@ -94,9 +92,8 @@ export class GitCloneModal extends AbstractForm {
   }
 
 
-
   render() {
-    const { isVisible, projectName } = this.props;
+    const { isVisible } = this.props;
 
     return (
       <ErrorBoundary>

@@ -42,6 +42,10 @@ function findCommandIdInCode( lines, pos ) {
   return lines[ pos ];
 }
 
+export function isGitInitialized( projectDirectory ) {
+  return fs.existsSync( join( projectDirectory, ".git" ) );
+}
+
 export async function parseReportedFailures( reportedErrorPositions ) {
   const commands = [];
   for ( const [ file, errors ] of Object.entries( reportedErrorPositions ) ) {

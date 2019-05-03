@@ -7,6 +7,7 @@ import { writeSuite, readSuite, removeSuite,
   readProject, removeRuntimeTestPath,
   isRuntimeTestPathReady,
   copyProject,
+  isGitInitialized,
   normalizeFilename } from "../service/io";
 import { closeApp, dateToTs } from "service/utils";
 import { InvalidArgumentError } from "error";
@@ -216,6 +217,7 @@ actions.checkGit = ( projectDirectory ) => async ( dispatch ) => {
     }
   });
   ipcRenderer.send( E_GIT_CURRENT_BRANCH, projectDirectory );
+  dispatch( actions.setProjectGit({ initialized: isGitInitialized( projectDirectory ) }) );
 };
 
 actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
