@@ -8,7 +8,7 @@ import classNames from "classnames";
 
 const { Menu, MenuItem } = remote;
 
-export class ProjectNavigator extends React.Component {
+export class FileList extends React.Component {
 
   static propTypes = {
     action:  PropTypes.shape({
@@ -19,17 +19,20 @@ export class ProjectNavigator extends React.Component {
     }),
 
     files: PropTypes.arrayOf( PropTypes.string ).isRequired,
-    projectName: PropTypes.string.isRequired,
+    projectDirectory: PropTypes.string.isRequired,
+    projects: PropTypes.object.isRequired,
+
     active: PropTypes.string.isRequired,
     suiteModified: PropTypes.bool.isRequired
   }
 
   state = {
-    dblClicked: ""
+    clicked: ""
   }
 
   onClick = ( e ) => {
     e.preventDefault();
+    //this.setState({ clicked: e.target.dataset.id });
   }
 
   onDblClick = async ( e ) => {
@@ -52,12 +55,12 @@ export class ProjectNavigator extends React.Component {
           { openSuiteFile, removeSuite } = this.props.action;
 
     e.preventDefault();
-    this.setState({ dblClicked: file });
+    this.setState({ clicked: file });
 
     const menu = new Menu();
 
     menu.on( "menu-will-close", () => {
-      this.setState({ dblClicked: "" });
+      this.setState({ clicked: "" });
     });
 
     menu.append( new MenuItem({
@@ -89,35 +92,25 @@ export class ProjectNavigator extends React.Component {
   }
 
   render() {
-    const { projectName, files, active } = this.props;
+    const { projectDirectory, files, active } = this.props;
     return (
       <ErrorBoundary>
-        <div id="cProjectNavigator" className="project-navigator">
-          <h2>Project
-            <span className="project-navigator__add"></span>
-          </h2>
-
-          <nav className="project-navigator__nav">
-            <div  className="project-navigator__li"><Icon type="folder-open" /> { projectName }</div>
-            <ul>
-              { files.map( ( file, inx ) => (
-                <li key={ `f${inx}` }
-                  onClick={ this.onClick }
-                  onDoubleClick={ this.onDblClick }
-                  onContextMenu={ this.onRightClick }
-                  data-id={ file }
-                  className={ classNames({
-                    "project-navigator__li": true,
-                    "is-active": active === file,
-                    "is-dbl-clicked": this.state.dblClicked ===  file
-                  }) }>
-                  <Icon type="file" /> { file }
-                </li>
-              ) ) }
-            </ul>
-          </nav>
-
-        </div>
+      <ul>
+          { files.map( ( file, inx ) => (
+            <li key={ `f${inx}` }
+              onClick={ this.onClick }
+              onDoubleClick={ this.onDblClick }
+              onContextMenu={ this.onRightClick }
+              data-id={ file }
+              className={ classNames({
+                "project-navigator__li": true,
+                "is-active": active === file,
+                "is-clicked": this.state.clicked ===  file
+              }) }>
+              <Icon type="file" /> { file }
+            </li>
+          ) ) }
+      </ul>
       </ErrorBoundary>
     );
   }

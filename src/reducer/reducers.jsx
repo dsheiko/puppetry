@@ -50,9 +50,9 @@ export const reducer = handleActions(
         settings: {
           projects: {
             $unset: [ payload ]
-            }
           }
-        });
+        }
+      });
     },
 
     [ actions.setProjectGit ]: ( state, { payload }) => {
