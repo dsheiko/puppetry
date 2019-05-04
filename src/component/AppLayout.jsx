@@ -7,7 +7,7 @@ import ErrorBoundary from "component/ErrorBoundary";
 import { CheckoutMaster } from "component/Global/CheckoutMaster";
 import { Toolbar } from "./AppLayout/Toolbar";
 import { MainMenu } from "./AppLayout/Sider/MainMenu";
-import { ProjectNavigator  } from "./AppLayout/Sider/ProjectNavigator";
+import { ProjectExplorer  } from "./AppLayout/Sider/ProjectExplorer";
 import { AppFooter } from "./AppLayout/AppFooter";
 import { Welcome } from "./AppLayout/Welcome";
 import { Info } from "./AppLayout/Info";
@@ -98,8 +98,10 @@ export class AppLayout extends React.Component {
                 project={ store.project } />
 
               <If exp={ store.app.project.files.length }>
-                <ProjectNavigator
-                  projectName={ store.project.name }
+                <ProjectExplorer
+                  
+                  projectDirectory={ store.settings.projectDirectory }
+                  projects={ store.settings.projects }
                   suiteModified={ store.suite.modified }
                   files={ store.app.project.files }
                   active={ store.suite.filename }

@@ -387,20 +387,23 @@ root > .ant-spin > * {
   max-width: 250px;
 }
 
-.project-navigator__nav > ul {
+.project-navigator__nav  ul {
   height: 100%;
   max-height: calc(100vh - 324px);
   overflow: auto;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .project-navigator__nav > .project-navigator__li {
   opacity: 0.6;
-  cursor: initial;
 }
-
-
-li.project-navigator__li {
-  padding-left: 16px;
+.project-navigator__li > span {
+  display: block;
+}
+.project-navigator__li > span:hover {
+  color: white;
 }
 
 li.project-navigator__li:hover {
@@ -414,6 +417,14 @@ li.project-navigator__li:hover {
   cursor: pointer;
   padding: 6px 16px;
   user-select: none;
+  border: solid 1px transparent;
+}
+.project-navigator__li > ul {
+  margin: 4px 0;
+}
+
+.project-navigator__li .project-navigator__li {
+  padding-left: 8px;
 }
 
 .project-navigator__li.is-active {
@@ -421,9 +432,12 @@ li.project-navigator__li:hover {
   color: white;
 }
 
-.project-navigator__nav .is-dbl-clicked {
+.project-navigator__nav .is-clicked {
+  /*
   background: rgb(0, 21, 41);
   color: white;
+  */
+  border: dotted 1px white;
 }
 
 .project-navigator__add {
