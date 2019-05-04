@@ -200,7 +200,7 @@ export async function writeSuite( directory, file, data ) {
 
   const filePath = join( directory, file );
   try {
-    await writeFile( filePath, data, "utf8" );
+    fs.writeFileSync( filePath, data, "utf8" );
   } catch ( e ) {
     log.warn( `Renderer process: io.writeSuite: ${ e }` );
     throw new IoError( `Suite file ${filePath} cannot be written.
@@ -339,7 +339,7 @@ export async function writeProject( directory, data ) {
     return;
   }
   try {
-    await writeFile( filePath, JSON.stringify( data, null, "  " ), "utf8" );
+    fs.writeFileSync( filePath, JSON.stringify( data, null, "  " ), "utf8" );
   } catch ( e ) {
     log.warn( `Renderer process: io.writeProject: ${ e }` );
     throw new IoError( `Project file ${filePath} cannot be written.
