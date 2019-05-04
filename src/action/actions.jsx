@@ -28,6 +28,10 @@ const STORAGE_KEY_SETTINGS = "settings",
 
         SET_SETTINGS: ( options ) => options,
 
+        ADD_SETTINGS_PROJECT: ( options ) => options,
+
+        REMOVE_SETTINGS_PROJECT: ( options ) => options,
+
         SET_PROJECT_GIT: ( options ) => options,
 
         SET_ERROR: ( options ) => validate( "errorOptions", options ),
@@ -234,6 +238,12 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
     dispatch( actions.setProject( project ) );
     dispatch( actions.loadProjectFiles( projectDirectory ) );
     dispatch( actions.watchProjectFiles( projectDirectory ) );
+    // keep track of recent projects
+    dispatch( actions.addSettingsProject({
+      [ projectDirectory ]: project.name
+    }) );
+    dispatch( actions.saveSettings() );
+    
     project.lastOpenSuite && dispatch( await actions.openSuiteFile( project.lastOpenSuite ) );
   } catch ( err ) {
     log.warn( `Renderer process: actions.loadProject(${projectDirectory }): ${ err }` );
@@ -561,7 +571,6 @@ export const saveProject = debounce( async ( store, isTouch = false ) => {
   if ( !store.settings.projectDirectory ) {
     return;
   }
-  console.log("Save...");
   const ts = isTouch ? {} : { savedAt: dateToTs() };
   await writeProject( store.settings.projectDirectory,  {
     ...store.project,

@@ -30,6 +30,31 @@ export const reducer = handleActions(
         }});
     },
 
+    [ actions.addSettingsProject ]: ( state, { payload }) => {
+      if ( !payload ) {
+        return state;
+      }
+      return update( state, {
+        settings: {
+          projects: {
+            $merge: payload
+          }
+        }});
+    },
+
+    [ actions.removeSettingsProject ]: ( state, { payload }) => {
+      if ( !payload ) {
+        return state;
+      }
+      return update( state, {
+        settings: {
+          projects: {
+            $unset: [ payload ]
+            }
+          }
+        });
+    },
+
     [ actions.setProjectGit ]: ( state, { payload }) => {
       return update( state, {
         project: {
