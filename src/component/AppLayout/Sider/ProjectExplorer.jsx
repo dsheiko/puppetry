@@ -33,14 +33,24 @@ export class ProjectExplorer extends React.Component {
 
   onClick = ( e ) => {
     e.preventDefault();
-    //this.setState({ clicked: e.target.dataset.dir });
+    this.setState({ clicked: e.target.dataset.dir });
+  }
+
+  resetParentClicked = () => {
+    this.setState({ clicked: "" });
   }
 
   onRightClick = ( e ) => {
     const dir = e.target.dataset.dir,
-          { openSuiteFile, removeSuite } = this.props.action;
+          { projectDirectory } = this.props,
+          { loadProject, saveSettings, removeSettingsProject } = this.props.action;
 
     e.preventDefault();
+
+    if ( projectDirectory === dir ) {
+      return;
+    }
+
     this.setState({ clicked: dir });
 
     const menu = new Menu();
@@ -63,6 +73,7 @@ export class ProjectExplorer extends React.Component {
       }
     }) );
 
+
     menu.append( new MenuItem({
       label: "Delete from the list",
       click: async () => {
@@ -78,7 +89,12 @@ export class ProjectExplorer extends React.Component {
   onDblClick = async ( e ) => {
     e.preventDefault();
     const { loadProject, saveSettings } = this.props.action,
+          { projectDirectory } = this.props,
           dir = e.target.dataset.dir;
+
+    if ( projectDirectory === dir ) {
+      return;
+    }
 
     if ( this.props.suiteModified ) {
       await confirmUnsavedChanges({
@@ -108,19 +124,27 @@ export class ProjectExplorer extends React.Component {
 
               <div
                 key={ `d${inx}` }
-                className="project-navigator__li">
-                <span
+                className={ classNames({
+                  "project-navigator__selection": projectDirectory === entity.dir
+                })}
+                >
+                <div
+
                   data-dir={ entity.dir }
                   onClick={ this.onClick }
                   onDoubleClick={ this.onDblClick }
                   onContextMenu={ this.onRightClick }
                   className={ classNames({
-                  "is-clicked": this.state.clicked === entity.dir
+                    "project-navigator__li": true,
+                    "is-clicked": this.state.clicked === entity.dir
                     }) }>
                 <Icon type={ projectDirectory === entity.dir
-                ? "folder-open" : "folder" } /> { entity.name }</span>
+                ? "folder-open" : "folder" } /> { entity.name }
+                </div>
                 { projectDirectory === entity.dir && <FileList
-                  { ...this.props } /> }
+                  { ...this.props }
+                  parentCliked={ this.state.clicked }
+                  resetParentClicked={ this.resetParentClicked } /> }
               </div>
 
            )) }

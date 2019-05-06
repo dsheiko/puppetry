@@ -18,6 +18,9 @@ export class FileList extends React.Component {
       setSuite: PropTypes.func.isRequired
     }),
 
+    parentCliked: PropTypes.string.isRequired,
+    resetParentClicked: PropTypes.func.isRequired,
+
     files: PropTypes.arrayOf( PropTypes.string ).isRequired,
     projectDirectory: PropTypes.string.isRequired,
     projects: PropTypes.object.isRequired,
@@ -32,7 +35,8 @@ export class FileList extends React.Component {
 
   onClick = ( e ) => {
     e.preventDefault();
-    //this.setState({ clicked: e.target.dataset.id });
+    this.props.resetParentClicked();
+    this.setState({ clicked: e.target.dataset.id });
   }
 
   onDblClick = async ( e ) => {
@@ -55,6 +59,7 @@ export class FileList extends React.Component {
           { openSuiteFile, removeSuite } = this.props.action;
 
     e.preventDefault();
+    this.props.resetParentClicked();
     this.setState({ clicked: file });
 
     const menu = new Menu();
@@ -92,7 +97,7 @@ export class FileList extends React.Component {
   }
 
   render() {
-    const { projectDirectory, files, active } = this.props;
+    const { projectDirectory, files, active, parentCliked } = this.props;
     return (
       <ErrorBoundary>
       <ul>
@@ -105,7 +110,7 @@ export class FileList extends React.Component {
               className={ classNames({
                 "project-navigator__li": true,
                 "is-active": active === file,
-                "is-clicked": this.state.clicked ===  file
+                "is-clicked": parentCliked ==="" && this.state.clicked ===  file
               }) }>
               <Icon type="file" /> { file }
             </li>
