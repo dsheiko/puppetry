@@ -83,21 +83,7 @@ const DEFAULT_STATE = {
     groups: {},
     savedAt: 0,
     modified: false,
-    lastOpenSuite: "",
-
-    git: {
-      initialized: false,
-      commitedAt: 0,
-      hasRemote: false,
-      remoteRepository: "",
-      configUsername: "",
-      configEmail: "",
-      credentialsAuthMethod: "",
-      credentialsAcccessToken: "",
-      credentialsProvider: "",
-      credentialsUsername: "",
-      credentialsPassword: ""
-    }
+    lastOpenSuite: ""
   },
   // actual (Selected) suite
   suite: {
@@ -109,6 +95,20 @@ const DEFAULT_STATE = {
     filename: "",
     targets: {},
     groups: {}
+  },
+  
+  git: {
+    initialized: false,
+    commitedAt: 0,
+    hasRemote: false,
+    remoteRepository: "",
+    configUsername: "",
+    configEmail: "",
+    credentialsAuthMethod: "",
+    credentialsAcccessToken: "",
+    credentialsProvider: "",
+    credentialsUsername: "",
+    credentialsPassword: ""
   }
 };
 

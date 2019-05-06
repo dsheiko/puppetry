@@ -26,7 +26,7 @@ export class SettingsPanel extends React.Component {
   }
 
   render() {
-    const { action, project, projectDirectory } = this.props,
+    const { action, project, projectDirectory, git } = this.props,
           panes = project.appPanels.settings.panes;
 
     let activeKey = "git";
@@ -45,7 +45,7 @@ export class SettingsPanel extends React.Component {
             onChange={ this.onTabChange }
           >
             <TabPane tab="GIT" key="git">
-              <GitPane action={ action } git={ project.git } projectDirectory={ projectDirectory } />
+              <GitPane action={ action } git={ git } projectDirectory={ projectDirectory } />
             </TabPane>
 
           </Tabs>

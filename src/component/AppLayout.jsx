@@ -95,11 +95,12 @@ export class AppLayout extends React.Component {
                 suiteModified={ store.suite.modified }
                 readyToRunTests={ store.app.readyToRunTests }
                 gitDetachedHeadState={ store.app.gitDetachedHeadState }
+                git={ store.git }
                 project={ store.project } />
 
               <If exp={ store.app.project.files.length }>
                 <ProjectExplorer
-                  
+
                   projectDirectory={ store.settings.projectDirectory }
                   projects={ store.settings.projects }
                   suiteModified={ store.suite.modified }
@@ -207,14 +208,14 @@ export class AppLayout extends React.Component {
 
         <GitCommitModal
           isVisible={ store.app.gitCommitModal }
-          git={ store.project.git }
+          git={ store.git }
           projectDirectory={ projectDirectory }
           action={ action }
         />
 
         <GitSyncModal
           isVisible={ store.app.gitSyncModal }
-          git={ store.project.git }
+          git={ store.git }
           savedAt={ store.project.savedAt }
           projectDirectory={ projectDirectory }
           action={ action }
@@ -223,14 +224,14 @@ export class AppLayout extends React.Component {
         <GitCheckoutModal
           isVisible={ store.app.gitCheckoutModal }
           logs={ store.app.gitLogs }
-          git={ store.project.git }
+          git={ store.git }
           projectDirectory={ projectDirectory }
           action={ action }
         />
 
         <GitCloneModal
           isVisible={ store.app.gitCloneModal }
-          git={ store.project.git }
+          git={ store.git }
           projectDirectory={ projectDirectory }
           action={ action }
         />

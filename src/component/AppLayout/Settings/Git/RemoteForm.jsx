@@ -43,29 +43,29 @@ export class RemoteForm extends AbstractForm {
             `For the selected authentication method token field is required` );
         }
 
-        const { saveProjectGit }  = this.props.action;
+        const { saveGit }  = this.props.action;
 
-        saveProjectGit({ ...values, hasRemote: true });
+        saveGit({ ...values, hasRemote: true });
         this.props.form.resetFields();
-
-        ipcRenderer.send(
-          E_GIT_SET_REMOTE,
-          values.remoteRepository,
-          projectDirectory,
-          {
-            credentialsAuthMethod: git.credentialsAuthMethod,
-            credentialsUsername: values.credentialsUsername,
-            credentialsPassword: values.credentialsPassword,
-            credentialsAcccessToken: values.credentialsAcccessToken
-          }
-        );
+//
+//        ipcRenderer.send(
+//          E_GIT_SET_REMOTE,
+//          values.remoteRepository,
+//          projectDirectory,
+//          {
+//            credentialsAuthMethod: git.credentialsAuthMethod,
+//            credentialsUsername: values.credentialsUsername,
+//            credentialsPassword: values.credentialsPassword,
+//            credentialsAcccessToken: values.credentialsAcccessToken
+//          }
+//        );
       }
     });
   }
 
   onAuthMethodChange = ( e ) => {
-    const { setProjectGit }  = this.props.action;
-    setProjectGit({ credentialsAuthMethod: e.target.value });
+    const { setGit }  = this.props.action;
+    setGit({ credentialsAuthMethod: e.target.value });
   }
 
   render() {
@@ -214,7 +214,7 @@ export class RemoteForm extends AbstractForm {
             type="primary"
             htmlType="submit"
             disabled={ this.hasErrors( getFieldsError() ) }
-          >Set Remote Repository</Button>
+          >Save</Button>
 
         </FormItem>
       </Form>

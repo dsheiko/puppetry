@@ -3,10 +3,11 @@ import uniqid from "uniqid";
 import { createActions } from "redux-actions";
 import { validate, validatePlain } from "../service/validate";
 import { writeSuite, readSuite, removeSuite,
-  getProjectFiles, writeProject,
+  getProjectFiles, writeProject, writeGit,
   readProject, removeRuntimeTestPath,
   isRuntimeTestPathReady,
   copyProject,
+  readGit,
   isGitInitialized,
   normalizeFilename } from "../service/io";
 import { closeApp, dateToTs } from "service/utils";
@@ -32,7 +33,7 @@ const STORAGE_KEY_SETTINGS = "settings",
 
         REMOVE_SETTINGS_PROJECT: ( options ) => options,
 
-        SET_PROJECT_GIT: ( options ) => options,
+        SET_GIT: ( options ) => options,
 
         SET_ERROR: ( options ) => validate( "errorOptions", options ),
 
@@ -209,20 +210,35 @@ actions.loadSettings = () => ( dispatch, getState ) => {
   return settings;
 };
 
-// PROJECT
+// GIT
+
+actions.saveGit = ( options ) => async ( dispatch, getState ) => {
+  await dispatch( actions.setGit( options ) );
+  await saveGit( getState() );
+};
+
+actions.loadGit = ( directory = null ) => async ( dispatch, getState ) => {
+  const projectDirectory = directory || getState().settings.projectDirectory;
+  try {
+    const data = await readGit( projectDirectory );
+    dispatch( actions.setGit( data ) );
+  } catch ( err ) {
+    // user has not git settings
+  }
+};
 
 actions.checkGit = ( projectDirectory ) => async ( dispatch ) => {
   ipcRenderer.removeAllListeners( E_GIT_CURRENT_BRANCH_RESPONSE );
   ipcRenderer.on( E_GIT_CURRENT_BRANCH_RESPONSE, ( ev, branch ) => {
     if ( branch !== "master" ) {
-      console.log( branch );
       dispatch( actions.updateApp({ gitDetachedHeadState: true }) );
       mediator.emit( E_CHECKOUT_MASTER_OPEN, branch );
     }
   });
   ipcRenderer.send( E_GIT_CURRENT_BRANCH, projectDirectory );
-  dispatch( actions.setProjectGit({ initialized: isGitInitialized( projectDirectory ) }) );
 };
+
+// PROJECT
 
 actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
   const projectDirectory = directory || getState().settings.projectDirectory;
@@ -234,16 +250,21 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
     dispatch( actions.updateApp({ loading: true }) );
     project = await readProject( projectDirectory );
     ipcRenderer.send( E_PROJECT_LOADED, projectDirectory );
+
     directory && dispatch( actions.saveSettings({ projectDirectory }) );
     dispatch( actions.setProject( project ) );
+    dispatch( actions.loadGit( projectDirectory ) );
     dispatch( actions.loadProjectFiles( projectDirectory ) );
     dispatch( actions.watchProjectFiles( projectDirectory ) );
+
     // keep track of recent projects
     dispatch( actions.addSettingsProject({
       [ projectDirectory ]: project.name
     }) );
     dispatch( actions.saveSettings() );
-    
+
+    dispatch( actions.setGit({ initialized: isGitInitialized( projectDirectory ) }) );
+
     project.lastOpenSuite && dispatch( await actions.openSuiteFile( project.lastOpenSuite ) );
   } catch ( err ) {
     log.warn( `Renderer process: actions.loadProject(${projectDirectory }): ${ err }` );
@@ -270,16 +291,6 @@ actions.loadProjectFiles = ( directory = null ) => async ( dispatch, getState ) 
         files = await getProjectFiles( projectDirectory );
   ipcRenderer.send( E_SUITE_LIST_UPDATED, projectDirectory, store.suite.filename, files );
   dispatch( actions.updateApp({ project: { files }}) );
-};
-
-actions.saveProjectGit = ( options ) => async ( dispatch, getState ) => {
-  await dispatch( actions.setProjectGit( options ) );
-  await saveProject( getState() );
-};
-
-actions.touchProjectGit = ( options ) => async ( dispatch, getState ) => {
-  await dispatch( actions.setProjectGit( options ) );
-  await saveProject( getState(), true );
 };
 
 actions.saveProject = ({ projectDirectory, name }) => async ( dispatch, getState ) => {
@@ -566,6 +577,19 @@ actions.checkRuntimeTestDirReady = () => async ( dispatch ) => {
   }
   return dispatch( actions.updateApp({ readyToRunTests }) );
 };
+
+export const saveGit = debounce( async ( store, isTouch = false ) => {
+  if ( !store.settings.projectDirectory ) {
+    return;
+  }
+  const ts = isTouch ? {} : { savedAt: dateToTs() };
+  await writeGit( store.settings.projectDirectory,  {
+    ...store.git,
+    puppetry: version,
+    ...ts,
+    modified: false
+  });
+}, 100 );
 
 export const saveProject = debounce( async ( store, isTouch = false ) => {
   if ( !store.settings.projectDirectory ) {
