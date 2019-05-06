@@ -42,7 +42,7 @@ function getCredentialsPayload( credentials ) {
 }
 
 function wrap( res, method = "undefined" ) {
-  res && log.debug( `Main process: git-api.${ method }: ${ JSON.stringify( res ) }` );
+  res && "ok" in res && log.debug( `Main process: git-api.${ method }: ${ JSON.stringify( res.ok ) }` );
   return res;
 }
 

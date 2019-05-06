@@ -13,3 +13,4 @@
 - improve UI: added Insert action for data table records, which injects an new empty record next to the selected one set editing mode
 - improve UI: integration with GIT (local/remote)
 - improve UI: added copy/paste. Now one can copy into clipboard target/group/test/command in one suite/GIT version and paste on another
+- improve UI: Project Explorer gets support for multiple project

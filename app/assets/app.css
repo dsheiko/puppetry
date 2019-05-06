@@ -373,7 +373,7 @@ root > .ant-spin > * {
 
 .project-navigator {
   margin: 8px 0 0 0;
-  background: #002f5c;
+  background: #002549;
   opacity: 1;
   transition: opacity 300ms ease-in-out;
   will-change: opacity;
@@ -385,6 +385,10 @@ root > .ant-spin > * {
   flex: 1 1 auto;
   padding: 8px 0;
   max-width: 250px;
+}
+
+.project-navigator__selection {
+  background: #002f5c;
 }
 
 .project-navigator__nav  ul {
@@ -399,14 +403,8 @@ root > .ant-spin > * {
 .project-navigator__nav > .project-navigator__li {
   opacity: 0.6;
 }
-.project-navigator__li > span {
-  display: block;
-}
-.project-navigator__li > span:hover {
-  color: white;
-}
 
-li.project-navigator__li:hover {
+project-navigator__li:hover {
   color: white;
 }
 
@@ -423,8 +421,8 @@ li.project-navigator__li:hover {
   margin: 4px 0;
 }
 
-.project-navigator__li .project-navigator__li {
-  padding-left: 8px;
+li.project-navigator__li {
+  padding-left: 24px;
 }
 
 .project-navigator__li.is-active {

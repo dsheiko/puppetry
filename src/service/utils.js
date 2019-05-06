@@ -13,6 +13,23 @@ export const ruleValidateGenericString = ( rule, value, callback ) => {
   callback();
 };
 
+export function pipePush( arr, item ) {
+  arr.push( item );
+  return arr;
+}
+
+export function sortStrings( a, b ) {
+  const valA = a.toUpperCase(),
+        valB = b.toUpperCase();
+  if ( valA < valB ) {
+    return -1;
+  }
+  if ( valA > valB ) {
+    return 1;
+  }
+  return 0;
+}
+
 /**
  *
  * @param {Date} date
