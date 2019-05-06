@@ -125,7 +125,7 @@ module.exports = {
   },
 
   async sync( projectDirectory, credentials, username, email, remoteRepository ) {
-
+    let hasMergingConflicts = false;
     // just in case it isn't set uo
     await this.setRemote( remoteRepository, projectDirectory, credentials );
     await this.stashFiles( projectDirectory );
@@ -133,6 +133,7 @@ module.exports = {
       await this.pull( projectDirectory, credentials, remoteRepository );
     } catch ( err ) {
       log.debug( `Main process: git-api.sync (1) ${ err.message }` );
+      hasMergingConflicts = true;
       await this.syncOnConflict( projectDirectory, credentials, username, email, remoteRepository );
     }
     try {
@@ -142,7 +143,7 @@ module.exports = {
       log.debug( `Main process: git-api.sync (2) ${ err.message }` );
     }
     this.tmpDirObj.cleanup();
-
+    return hasMergingConflicts;
   },
 
   async syncOnConflict( projectDirectory, credentials, username, email, remoteRepository ) {

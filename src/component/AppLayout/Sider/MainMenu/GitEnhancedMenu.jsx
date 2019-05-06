@@ -14,7 +14,7 @@ export class GitEnhancedMenu extends React.Component {
     action:  PropTypes.shape({
       updateApp: PropTypes.func.isRequired,
       addAppTab: PropTypes.func.isRequired,
-      saveProjectGit: PropTypes.func.isRequired,
+      saveGit: PropTypes.func.isRequired,
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired
     }),
@@ -34,7 +34,7 @@ export class GitEnhancedMenu extends React.Component {
   }
 
   onFileGitCommitResponse = () => {
-    this.props.action.saveProjectGit({
+    this.props.action.saveGit({
       commitedAt: dateToTs()
     });
   }
@@ -54,8 +54,7 @@ export class GitEnhancedMenu extends React.Component {
   }
 
   onFileGitCommit = async () => {
-    const { project, gitDetachedHeadState } = this.props,
-          git = project.git;
+    const { project, gitDetachedHeadState, git } = this.props;
     if ( !git.initialized || gitDetachedHeadState ) {
       return;
     }
@@ -94,7 +93,7 @@ export class GitEnhancedMenu extends React.Component {
     }
 
     ipcRenderer.send( E_GIT_INIT, projectDirectory, git.configUsername, git.configEmail );
-    this.props.action.saveProjectGit({ initialized: true });
+    this.props.action.saveGit({ initialized: true });
   }
 
 }

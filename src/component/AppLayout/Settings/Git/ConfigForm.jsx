@@ -18,8 +18,8 @@ export class ConfigForm extends AbstractForm {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll( ( err, values ) => {
       if ( !err ) {
-        const { saveProjectGit }  = this.props.action;
-        saveProjectGit( values );
+        const { saveGit }  = this.props.action;
+        saveGit( values );
         this.props.form.resetFields();
         message.info( `Data has been successfully updated` );
       }

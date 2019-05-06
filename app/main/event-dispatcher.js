@@ -117,8 +117,11 @@ function throwIfErrors( errors ) {
 
 ipcMain.on( E_GIT_SYNC, async ( event, projectDirectory, credentials, username, email, url  ) => {
   try {
-    await gitApi.sync( projectDirectory, credentials, username, email, url );
-    event.sender.send( E_RENDERER_INFO, `Changes pulled from remote repository successfully` );
+    if ( !await gitApi.sync( projectDirectory, credentials, username, email, url ) ) {
+      event.sender.send( E_RENDERER_INFO, `Merging conflicts detected. `
+        + `Remote version history is fetched 'as-it-is' and the current version put on top of it` );
+    }
+    event.sender.send( E_RENDERER_INFO, `Changes synced with remote repository successfully` );
   } catch ( err ) {
     console.error( err.message, err );
     log.error( `Main process: event-dispatcher.E_GIT_SYNC: ${ err.message }` );

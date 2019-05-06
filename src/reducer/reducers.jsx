@@ -67,13 +67,12 @@ export const reducer = handleActions(
       });
     },
 
-    [ actions.setProjectGit ]: ( state, { payload }) => {
+    [ actions.setGit ]: ( state, { payload }) => {
       return update( state, {
-        project: {
-          git: {
-            $merge: payload
-          }
-        }});
+        git: {
+          $merge: payload
+        }
+      });
     },
 
 

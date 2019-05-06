@@ -62,6 +62,7 @@ export class TabGroup extends React.Component {
               <SettingsPanel
                 action={ action }
                 projectDirectory={ store.settings.projectDirectory }
+                git={ store.git }
                 project={ store.project }
               />
             </TabPane> )
