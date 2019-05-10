@@ -7,6 +7,8 @@ import If from "component/Global/If";
 import { normalizeFilename } from "service/io";
 import { ruleValidateGenericString } from "service/utils";
 import * as classes from "./classes";
+import { ipcRenderer } from "electron";
+import { E_DELEGATE_RECORDER_SESSION, E_OPEN_RECORDER_WINDOW } from "constant";
 
 /*eslint no-useless-escape: 0*/
 
@@ -32,6 +34,17 @@ export class NewSuiteModal extends AbstractForm {
   state = {
     displayFilename: ""
   };
+
+  componentDidMount() {
+    ipcRenderer.removeAllListeners( E_DELEGATE_RECORDER_SESSION );
+    ipcRenderer.on( E_DELEGATE_RECORDER_SESSION, ( ev, data) => {
+      console.log("TEST", data );
+    } );
+  }
+
+  onClickRecord = ( e ) => {
+    ipcRenderer.send( E_OPEN_RECORDER_WINDOW );
+  }
 
   onClickCancel = ( e ) => {
     e.preventDefault();
@@ -74,6 +87,12 @@ export class NewSuiteModal extends AbstractForm {
           closable
           onCancel={this.onClickCancel}
           footer={[
+            ( <Button
+              key="record"
+              icon="experiment"
+              onClick={this.onClickRecord}>
+              Record
+            </Button> ),
             ( <Button
               autoFocus={ true }
               className={ classes.BTN_OK }
