@@ -1,0 +1,246 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src *; img-src * data: https:; media-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'">
+  <title>Recorder</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1"
+  >
+  <link rel="shortcut icon" href="./assets/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="./assetsfavicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="./assets/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
+
+  <style>
+
+    @keyframes pulse {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .is-disabled {
+      opacity: .6;
+      pointer-events: none;
+    }
+
+    .icon {
+      display: inline-block;
+    }
+
+    .is-hidden {
+      display: none !important;
+    }
+
+    body {
+      background: #f0f2f5;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    }
+    svg {
+      fill: currentColor;
+    }
+
+    .toolbar {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      color: #314659;
+    }
+    .toolbar__url {
+      font-size: 16px;
+      line-height: 22px;
+      height: 22px;
+      border-radius: 4px;
+      background: white;
+      border: 1px solid #555;
+      padding: 4px 8px;
+      width: 100%;
+      color: #314659;
+    }
+    .toolbar__url:focus {
+      border: 1px solid #0069d9;
+      outline: none;
+    }
+
+    .select-placeholder {
+      color: #999;
+    }
+
+    .toolbar__select {
+      font-size: 16px;
+      line-height: 30px;
+      height: 32px;
+      width: 125px;
+      background: white;
+      border: 1px solid #555;
+      padding: 0 4px;
+      border-radius: 4px;
+      margin-left: 8px;
+    }
+
+    .toolbar__select:focus {
+      border: 1px solid #0069d9;
+      outline: none;
+    }
+
+    .toolbar__item {
+      margin-left: 8px;
+      color: #555;
+    }
+
+    .toolbar__item:visited, .toolbar__item:active {
+      color: #555;
+    }
+
+    .toolbar__item.icon {
+      width: 24px;
+      height: 24px;
+      transition: transform .3s ease-in-out;
+    }
+
+    .toolbar__item.icon:hover {
+      transform: scale(1.2);
+    }
+
+    .toolbar__item.icon svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .icon--recording {
+      animation: pulse 2s infinite;
+    }
+
+    webview {
+      width: 100%;
+      height: calc(100vh - 40px);
+    }
+
+    .info {
+      box-sizing: border-box;
+      font-size: 16px;
+      line-height: 18px;
+      color: rgba(0, 0, 0, 0.65);
+      position: relative;
+      height: calc(100vh - 40px);
+      background-color: #fff;
+      border: 0;
+      padding: 32px;
+    }
+
+
+    .info .icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .info a, .info a:visited, .info a:active {
+      color: #555;
+    }
+
+    .info ul {
+      padding-left: 16px;
+      margin: 0;
+      list-style-type: square;
+    }
+
+    .info h1 {
+      font-size: 20px;
+      line-height: 24px;
+      margin: 0 0 24px 0;
+    }
+    .info h2 {
+      font-size: 16px;
+      line-height: 18px;
+      margin: 16px 0;
+    }
+    .info p {
+      margin: 0;
+    }
+    .info p + p {
+      margin-top: 8px;
+    }
+
+
+
+  </style>
+</head>
+
+<body>
+
+  <div class="toolbar">
+    <input id="url"
+           type="url"
+           class="toolbar__url"
+           placeholder="Enter URL" />
+
+
+    <select id="select" class="toolbar__select is-hidden">
+      <option class="select-placeholder">Select device</option>
+      <option value="default">Apple MacBook Air 11-inch (1366x768)</option>
+    </select>
+
+
+    <a href="#" id="recording" class="toolbar__item icon icon--recording is-disabled" title="Pause recording">
+      <svg>
+        <circle cx="12" cy="12" r="12" fill="#ef4337" />
+      </svg>
+    </a>
+
+    <a href="#" id="pull" class="toolbar__item icon icon--ok is-disabled" title="Save recording session as a test suite">
+      <svg viewBox="64 64 896 896" class="" data-icon="check-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0 0 51.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"></path><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path></svg>
+    </a>
+
+  </div>
+
+  <webview class="is-hidden" nodeintegration preload="./recorder/webview/index.js"></webview>
+
+  <div id="info" class="info">
+
+  <h1>Welcome to Puppetry Recorder</h1>
+  <p>
+    Puppetry Recorder we use to record user interactions on the target web pages as a test suite.
+    To start you need to type in the toolbar input URL of a page to navigate and press Enter.
+    As pages loaded you can interact with them (click elements, type in inputs, move mouse cursor, resize window, scroll,
+    navigate pages  and so on).
+  </p>
+
+
+  <h2>Available tools</h2>
+  <ul>
+    <li>
+      "Enter URL" - navigate to the provided URL
+    </li>
+    <li>
+      "Select device" - resize window to match the selected device screen
+    </li>
+    <li>
+      <kbd>Ctrl-Shift-S</kbd> - add "make a screenshot" command to the log. Can be used to mark a particular step in your session
+    </li>
+    <li>
+      Recording <span class="icon"><svg><circle cx="8" cy="8" r="8" fill="#ef4337" /></svg></span> - stop/continue recording
+    </li>
+    <li>
+      OK <span class="icon"><svg viewBox="64 64 896 896" class="" data-icon="check-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0 0 51.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"></path><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path></svg></span>
+      - save recording as a test suite and return to Puppetry main window
+    </li>
+  </ul>
+
+  </div>
+
+  <script src="./recorder/renderer.js"></script>
+
+</body>
+
+</html>

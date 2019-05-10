@@ -46,7 +46,9 @@ exports.E_GIT_CURRENT_BRANCH_RESPONSE = "gitCurrentBranchResponse";
 
 exports.E_CHECKOUT_MASTER_OPEN = "checkoutMasterOpen";
 exports.E_CHECKOUT_MASTER_CLOSE = "checkoutMasterClose";
-
+exports.E_OPEN_RECORDER_WINDOW = "openRecorderWindow";
+exports.E_RECEIVE_RECORDER_SESSION = "receiveRecorderSession";
+exports.E_DELEGATE_RECORDER_SESSION = "delegateRecorderSession";
 
 exports.E_FILE_NAVIGATOR_UPDATED = "fileNavigatorUpdated";
 exports.E_WATCH_FILE_NAVIGATOR = "watchFileNavigator";

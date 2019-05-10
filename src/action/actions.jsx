@@ -615,6 +615,29 @@ actions.copyProjectTo = ( targetDirectory ) => async ( dispatch, getState ) => {
   await dispatch( actions.loadProject() );
 };
 
+actions.createSuiteByRecording = ({ targets, commands }) => ( dispatch, getState ) => {
+  const groupId = uniqid(),
+        testId = uniqid();
+  // Seed targets
+  Object.entries( targets ).forEach(([ target, selector ]) => {
+    dispatch( actions.addTarget({ target, selector }) );
+  });
+  dispatch( actions.addGroup({ title: "Recorded group" }, groupId ) );
+  dispatch( actions.addTest({ title: "Recorded test", groupId }, testId ) );
+  // Seed commands
+  commands.forEach(([ target, selector ]) => {
+    
+    dispatch( actions.addCommand({
+      target: "page",
+      method: "..",
+      params: {},
+      groupId,
+      testId
+    }) );
+  });
+
+};
+
 
 function noop() {
 
