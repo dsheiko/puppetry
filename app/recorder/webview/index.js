@@ -62,6 +62,10 @@
     }
   }
 
+  Recorder.onReset = ( e ) => {
+    log( getTargetVar( e.target ), "reset", {} );
+  };
+
   Recorder.onChangeFile = ( e ) => {
     log( getTargetVar( e.target ), "upload", { path: e.target.value } );
   };
@@ -83,13 +87,23 @@
   };
 
   function onDomModified() {
-    Array.from( document.querySelectorAll( "input, textarea, select" ) ).forEach( el => {
+    Array.from( document.querySelectorAll( "input, textarea" ) ).forEach( el => {
       on( el, "focus", Recorder.onFocusInput );
-      on( el, "input[type=checkbox]", Recorder.onChangeCheckbox );
-      on( el, "input[type=radio]", Recorder.onChangeCheckbox );
-      on( el, "input[type=file]", Recorder.onChangeFile );
       on( el, "input", Recorder.onInputInput );
-      on( el, "select", Recorder.onChangeSelect );
+      on( el, "reset", Recorder.onReset );
+    });
+    Array.from( document.querySelectorAll( "input[type=file]" ) ).forEach( el => {
+      on( el, "change", Recorder.onChangeFile );
+    });
+    Array.from( document.querySelectorAll( "input[type=checkbox], input[type=radio]" ) ).forEach( el => {
+      on( el, "change", Recorder.onChangeCheckbox );
+    });
+    Array.from( document.querySelectorAll( "select" ) ).forEach( el => {
+      on( el, "focus", Recorder.onFocusInput );
+      on( el, "change", Recorder.onChangeSelect );
+    });
+    Array.from( document.querySelectorAll( "form" ) ).forEach( el => {
+      on( el, "reset", Recorder.onReset );
     });
   }
 
