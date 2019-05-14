@@ -11,6 +11,7 @@ export class SettingsPanel extends React.Component {
   static propTypes = {
     project: PropTypes.object.isRequired,
     projectDirectory: PropTypes.string,
+    git: PropTypes.object.isRequired,
     action: PropTypes.shape({
       updateProjectPanes: PropTypes.func.isRequired,
       updateApp: PropTypes.func.isRequired
