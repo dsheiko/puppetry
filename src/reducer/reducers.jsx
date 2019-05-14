@@ -36,8 +36,9 @@ export const reducer = handleActions(
         return state;
       }
       //sort
-      const projects =
-        Object.entries( update( state.settings.projects, {
+      const projects = !Object.keys( state.settings.projects )
+        ? payload
+        : Object.entries( update( state.settings.projects, {
           $merge: { [ payload.dir ]: payload.name }
         }) )
           .sort( ( a, b ) => sortStrings( a[ 1 ], b[ 1 ]) )
