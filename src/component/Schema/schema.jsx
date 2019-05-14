@@ -62,7 +62,7 @@ const methodLables = {
     waitForSelector: "wait for selector",
     waitForNavigation: "wait for navigation",
     assertNodeCount: "assert count of elements",
-    assertScrollPage: "assert window scroll offset",
+    assertScroll: "assert window scroll offset",
     evaluate: "evaluate JavaScript in the page context",
     runjs: "run custom JavaScript in the suite",
     debug: "stop execution and call DevTools"

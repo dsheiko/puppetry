@@ -46,11 +46,10 @@ export class CommandRowLabel extends React.Component {
      case "runjs":
        return `(${ params.value.trim().substr( 0, 80 ) }...)`;
      case "setViewport":
-       return `(${ params.width }, ${ params.height })`;
+       return `(${ params.width }, ${ params.height },`
+       + ` x${ params.deviceScaleFactor || 1 }${ params.isLandscape ? ", landscape" : "" })`;
      case "waitFor":
        return `(${ params.value })`;
-     case "checkBox":
-       return `(checked: ${ params.checked ? "true" : "false" })`;
      case "waitForSelector":
        text = ( params.visible === "on" ? " is visible" : ( params.hidden === "on"  ? " is hidden" : "" ) );
        return `("${ params.value }"${ text })`;
@@ -80,6 +79,8 @@ export class CommandRowLabel extends React.Component {
        case "assertAttribute":
        case "toggleClass":
          return `("${ params.name }")`;
+       case "checkBox":
+        return `("${ params.checked ? "checked" : "unchecked" }")`;
        case "setAttribute":
          return `("${ params.name }", "${ params.value }")`;
        case "assertStyle":
