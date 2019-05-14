@@ -97,10 +97,10 @@ export class FileList extends React.Component {
   }
 
   render() {
-    const { projectDirectory, files, active, parentCliked } = this.props;
+    const { files, active, parentCliked } = this.props;
     return (
       <ErrorBoundary>
-      <ul>
+        <ul>
           { files.map( ( file, inx ) => (
             <li key={ `f${inx}` }
               onClick={ this.onClick }
@@ -115,7 +115,7 @@ export class FileList extends React.Component {
               <Icon type="file" /> { file }
             </li>
           ) ) }
-      </ul>
+        </ul>
       </ErrorBoundary>
     );
   }

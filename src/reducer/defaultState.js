@@ -96,7 +96,7 @@ const DEFAULT_STATE = {
     targets: {},
     groups: {}
   },
-  
+
   git: {
     initialized: false,
     commitedAt: 0,

@@ -6,6 +6,7 @@ import { assertTitle } from "./Params/Page/assertTitle";
 import { assertUrl } from "./Params/Page/assertUrl";
 import { emulate } from "./Params/Page/emulate";
 import { click as clickPage } from "./Params/Page/click";
+import { moveMouse } from "./Params/Page/moveMouse";
 import { tap as tapPage } from "./Params/Page/tap";
 import { goto } from "./Params/Page/goto";
 import { reload } from "./Params/Page/reload";
@@ -41,6 +42,7 @@ import { setAttribute } from "./Params/Element/setAttribute";
 import { tap as tapElement } from "./Params/Element/tap";
 import { scroll as scrollElement } from "./Params/Element/scroll";
 import { assertScroll as assertScrollElement } from "./Params/Element/assertScroll";
+import { checkBox }  from "./Params/Element/checkBox";
 
 import { tplQuery, tplSuite, tplGroup, tplTest } from "./Jest";
 
@@ -49,6 +51,7 @@ const methodLables = {
     emulate: "emulate device",
     setViewport: "set window size",
     click: "click mouse",
+    moveMouse: "move mouse",
     tapTouchscreen: "tap",
     press: "press a key",
     screenshot: "make screenshot",
@@ -68,6 +71,7 @@ const methodLables = {
     upload: "attach a file to file input",
     reset: "reset input or form",
     toggleClass: "toggle class",
+    checkBox: "change checkbox state",
     setAttribute: "set attribute",
     assertAttribute: "assert attribute",
     assertProperty: "assert property",
@@ -106,6 +110,7 @@ export const schema = {
     tap: tapElement,
     scroll: scrollElement,
     hover,
+    checkBox,
     toggleClass,
     setAttribute,
     assertAttribute,
@@ -125,6 +130,7 @@ export const schema = {
     goto,
     screenshot,
     click: clickPage,
+    moveMouse,
     tap: tapPage,
     press,
     scroll: scrollPage,

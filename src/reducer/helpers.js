@@ -9,7 +9,7 @@ function getTargetById( state, id ) {
 export function updateTagetsInSuite( prevState, nextState, targetId ) {
   const prevTarget = getTargetById( prevState, targetId ),
         nextTarget = getTargetById( nextState, targetId );
-      
+
   if ( !prevTarget || !nextTarget ) {
     return nextState;
   }

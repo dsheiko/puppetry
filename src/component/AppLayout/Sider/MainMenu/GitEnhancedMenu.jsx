@@ -18,6 +18,8 @@ export class GitEnhancedMenu extends React.Component {
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired
     }),
+    gitDetachedHeadState: PropTypes.func.isRequired,
+    git: PropTypes.object,
     project: PropTypes.object.isRequired,
     readyToRunTests: PropTypes.bool.isRequired,
     projectDirectory: PropTypes.string.isRequired,
@@ -54,7 +56,7 @@ export class GitEnhancedMenu extends React.Component {
   }
 
   onFileGitCommit = async () => {
-    const { project, gitDetachedHeadState, git } = this.props;
+    const { gitDetachedHeadState, git } = this.props;
     if ( !git.initialized || gitDetachedHeadState ) {
       return;
     }

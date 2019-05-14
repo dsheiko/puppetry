@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { remote } from "electron";
-import { confirmUnsavedChanges, confirmDeleteFile } from "service/smalltalk";
+import { confirmUnsavedChanges  } from "service/smalltalk";
 import classNames from "classnames";
 import { FileList } from "./ProjectExplorer/FileList";
 
@@ -13,8 +13,9 @@ export class ProjectExplorer extends React.Component {
 
   static propTypes = {
     action:  PropTypes.shape({
-      openSuiteFile: PropTypes.func.isRequired,
-      removeSuite: PropTypes.func.isRequired,
+      loadProject: PropTypes.func.isRequired,
+      saveSettings: PropTypes.func.isRequired,
+      removeSettingsProject: PropTypes.func.isRequired,
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired
     }),
@@ -107,11 +108,10 @@ export class ProjectExplorer extends React.Component {
   }
 
 
-
   render() {
-    const { projectDirectory, files, active, action } = this.props,
+    const { projectDirectory  } = this.props,
           projects = Object.entries( this.props.projects )
-            .map(([ dir, name ]) => ({ dir, name }));
+            .map( ([ dir, name ]) => ({ dir, name }) );
     return (
       <ErrorBoundary>
         <div id="cProjectNavigator" className="project-navigator">
@@ -127,9 +127,10 @@ export class ProjectExplorer extends React.Component {
                 className={ classNames({
                   "project-navigator__selection": projectDirectory === entity.dir
                 })}
-                >
+              >
                 <div
-
+                  role="button"
+                  tabIndex={0}
                   data-dir={ entity.dir }
                   onClick={ this.onClick }
                   onDoubleClick={ this.onDblClick }
@@ -137,9 +138,9 @@ export class ProjectExplorer extends React.Component {
                   className={ classNames({
                     "project-navigator__li": true,
                     "is-clicked": this.state.clicked === entity.dir
-                    }) }>
-                <Icon type={ projectDirectory === entity.dir
-                ? "folder-open" : "folder" } /> { entity.name }
+                  }) }>
+                  <Icon type={ projectDirectory === entity.dir
+                    ? "folder-open" : "folder" } /> { entity.name }
                 </div>
                 { projectDirectory === entity.dir && <FileList
                   { ...this.props }
@@ -147,7 +148,7 @@ export class ProjectExplorer extends React.Component {
                   resetParentClicked={ this.resetParentClicked } /> }
               </div>
 
-           )) }
+            ) ) }
           </nav>
 
         </div>

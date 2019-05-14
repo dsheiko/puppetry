@@ -1,10 +1,12 @@
 import React from "react";
-import { Table, Icon } from "antd";
+import { Table, Icon, Button } from "antd";
 import AbstractEditableTable from "./AbstractEditableTable";
 import { connectDnD } from "./DragableRow";
 import ErrorBoundary from "component/ErrorBoundary";
 import { TestTable } from "./GroupTable/TestTable";
 import { EditableCell } from "./EditableCell";
+import { ipcRenderer } from "electron";
+import { E_DELEGATE_RECORDER_SESSION, E_OPEN_RECORDER_WINDOW } from "constant";
 
 const recordPrefIcon = <Icon type="idcard" title="Group" />;
 
@@ -38,6 +40,18 @@ export class GroupTable extends AbstractEditableTable {
   fields = [ "title" ];
 
   model = "Group";
+
+  componentDidMount() {
+    ipcRenderer.removeAllListeners( E_DELEGATE_RECORDER_SESSION );
+    ipcRenderer.on( E_DELEGATE_RECORDER_SESSION, ( ev, data ) => {
+      this.props.action.createSuiteByRecording( data );
+    });
+  }
+
+  onClickRecord = ( e ) => {
+    e.preventDefault();
+    ipcRenderer.send( E_OPEN_RECORDER_WINDOW );
+  }
 
   onExpand = ( isExpanded, record ) => {
     const expanded = { ...this.props.expanded };
@@ -98,6 +112,11 @@ export class GroupTable extends AbstractEditableTable {
             pagination={false}
             onExpand={this.onExpand}
             expandedRowRender={ this.renderExpandedTable }
+            footer={() => ( <div className="ant-table-footer__toolbar">
+              <Button
+                icon="experiment" id="cGroupTableRecordBtn"
+                onClick={ this.onClickRecord }>Record</Button>
+            </div> )}
           />
         </ErrorBoundary>
       </div>

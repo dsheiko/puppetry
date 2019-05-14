@@ -48,7 +48,7 @@
       log( "page", "setViewport", { width: window.innerWidth, height: window.innerHeight } );
     }
     static onMouseMove( e ) {
-      log( "page", "runjs", { value: `await bs.page.mouse.move( ${ e.screenX }, ${ e.screenY } );` } );
+      log( "page", "moveMouse", { x: e.screenX, y: e.screenY } );
     }
     static onKeyUp( e ) {
       // Ctrl-Shift-S - make a screenshot
@@ -72,7 +72,7 @@
 
 
   Recorder.onChangeCheckbox = ( e ) => {
-    log( getTargetVar( e.target ), "setAttribute", { name: "checked", value: e.target.checked } );
+    log( getTargetVar( e.target ), "checkBox", { checked: e.target.checked } );
   };
 
   Recorder.onInputInput = debounce( ( e ) => {
@@ -84,6 +84,10 @@
 
   Recorder.onChangeSelect = ( e ) => {
     log( getTargetVar( e.target ), "select", { value: e.target.value } );
+  };
+
+  Recorder.onHover = ( e ) => {
+    log( getTargetVar( e.target ), "hover", {} );
   };
 
   function onDomModified() {
@@ -105,14 +109,15 @@
     Array.from( document.querySelectorAll( "form" ) ).forEach( el => {
       on( el, "reset", Recorder.onReset );
     });
+    Array.from( document.querySelectorAll( "a, button, *[role=button]" ) ).forEach( el => {
+      on( el, "mouseover", Recorder.onHover );
+    });
   }
 
   ipcRenderer.on( "dom-ready", () => {
     log( "page", "goto", { url: location.href, timeout: 30000, waitUntil: "load" } );
     on( document.body, "click", Recorder.onElClick );
     on( window, "keyup", Recorder.onKeyUp );
-
-    on( document, "mousemove", debounce( Recorder.onMouseMove, 200 ) );
     on ( window, "resize", debounce( Recorder.onWindowResize, 200 ) );
 
 

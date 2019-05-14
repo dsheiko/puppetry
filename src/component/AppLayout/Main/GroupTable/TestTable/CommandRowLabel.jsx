@@ -40,6 +40,7 @@ export class CommandRowLabel extends React.Component {
      case "screenshot":
        return `("${ params.name }")`;
      case "click":
+     case "moveMouse":
        return `(${ params.x }, ${ params.y })`;
      case "evaluate":
      case "runjs":
@@ -48,6 +49,8 @@ export class CommandRowLabel extends React.Component {
        return `(${ params.width }, ${ params.height })`;
      case "waitFor":
        return `(${ params.value })`;
+     case "checkBox":
+       return `(checked: ${ params.checked ? "true" : "false" })`;
      case "waitForSelector":
        text = ( params.visible === "on" ? " is visible" : ( params.hidden === "on"  ? " is hidden" : "" ) );
        return `("${ params.value }"${ text })`;

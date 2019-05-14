@@ -28,6 +28,7 @@ function loadUrl( url ) {
   webview.classList.remove( "is-hidden" );
   recordingBtn.classList.remove( "is-disabled" );
   okBtn.classList.remove( "is-disabled" );
+  toogleRecording( true );
 }
 
 

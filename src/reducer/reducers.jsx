@@ -2,7 +2,7 @@ import uniqid from "uniqid";
 import { handleActions } from "redux-actions";
 import actions from "../action/actions";
 import update from "immutability-helper";
-import { sortStrings, pipePush } from "service/utils";
+import { sortStrings } from "service/utils";
 import DEFAULT_STATE, {
   groupDefaultState,
   testDefaultState,
@@ -40,11 +40,11 @@ export const reducer = handleActions(
         Object.entries( update( state.settings.projects, {
           $merge: { [ payload.dir ]: payload.name }
         }) )
-        .sort(( a, b ) => sortStrings( a[ 1 ], b[ 1 ] ))
-        .reduce(( carry, [ key, value ]) => {
-          carry[ key ] = value;
-          return carry;
-        }, {} );
+          .sort( ( a, b ) => sortStrings( a[ 1 ], b[ 1 ]) )
+          .reduce( ( carry, [ key, value ]) => {
+            carry[ key ] = value;
+            return carry;
+          }, {});
 
       return update( state, {
         settings: {

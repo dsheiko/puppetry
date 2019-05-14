@@ -158,6 +158,7 @@ export class NewProjectModal extends AbstractForm {
 
             <FormItem  label="Suite title">
               { getFieldDecorator( "suiteTitle", {
+                initialValue: "",
                 rules: [{
                   required: true,
                   message: "Please enter suite title"

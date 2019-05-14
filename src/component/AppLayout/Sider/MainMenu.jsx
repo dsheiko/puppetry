@@ -225,7 +225,7 @@ export class MainMenu extends GitEnhancedMenu {
 
   render() {
     const hotkeys = Object.keys( this.hotkeyMap ).join( ", " ),
-          { projectDirectory, git, suiteFilename, readyToRunTests, files, project,
+          { projectDirectory, git, suiteFilename, readyToRunTests, files,
             gitDetachedHeadState } = this.props;
 
     return (
