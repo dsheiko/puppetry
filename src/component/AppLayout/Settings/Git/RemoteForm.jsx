@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
 import { ruleValidateGenericString } from "service/utils";
 import { Form, Radio, Select, Input, Button } from "antd";
-import { ipcRenderer } from "electron";
-import { E_GIT_SET_REMOTE } from "constant";
+
 const FormItem = Form.Item,
       RadioGroup = Radio.Group,
       Option = Select.Option,
@@ -27,7 +26,6 @@ export class RemoteForm extends AbstractForm {
   }
 
   onSubmit = ( e ) => {
-    const { git, projectDirectory } = this.props;
     e.preventDefault();
 
     this.props.form.validateFieldsAndScroll( ( err, values ) => {
@@ -47,18 +45,18 @@ export class RemoteForm extends AbstractForm {
 
         saveGit({ ...values, hasRemote: true });
         this.props.form.resetFields();
-//
-//        ipcRenderer.send(
-//          E_GIT_SET_REMOTE,
-//          values.remoteRepository,
-//          projectDirectory,
-//          {
-//            credentialsAuthMethod: git.credentialsAuthMethod,
-//            credentialsUsername: values.credentialsUsername,
-//            credentialsPassword: values.credentialsPassword,
-//            credentialsAcccessToken: values.credentialsAcccessToken
-//          }
-//        );
+        //
+        //        ipcRenderer.send(
+        //          E_GIT_SET_REMOTE,
+        //          values.remoteRepository,
+        //          projectDirectory,
+        //          {
+        //            credentialsAuthMethod: git.credentialsAuthMethod,
+        //            credentialsUsername: values.credentialsUsername,
+        //            credentialsPassword: values.credentialsPassword,
+        //            credentialsAcccessToken: values.credentialsAcccessToken
+        //          }
+        //        );
       }
     });
   }

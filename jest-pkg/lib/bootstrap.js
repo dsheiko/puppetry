@@ -27,7 +27,7 @@ async function queryXpath( selector ) {
  * @return {?ElementHandle}
  */
 async function query( selector, target ) {
-  const elh = ( selector.startsWith( "//" ) || selector.startsWith( "(.//" ) )
+  const elh = ( selector.startsWith( "/" ) || selector.startsWith( "(.//" ) )
     ? await queryXpath( selector ) : await bs.page.$( selector );
   if ( !elh ) {
     throw new Error( "Cannot find target " + target + " (" + selector + ")" );

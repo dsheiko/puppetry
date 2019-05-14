@@ -194,7 +194,6 @@ module.exports = function( mainWindow ) {
   });
 
   ipcMain.on( E_RECEIVE_RECORDER_SESSION, async ( event, targets, commands ) => {
-    console.log("send E_DELEGATE_RECORDER_SESSION", E_DELEGATE_RECORDER_SESSION);
     mainWindow.webContents.send( E_DELEGATE_RECORDER_SESSION, { targets, commands } );
   });
 

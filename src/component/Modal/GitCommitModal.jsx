@@ -83,6 +83,7 @@ export class GitCommitModal extends AbstractForm {
                 This message will help you to identify the commit in the version list."
               label="Commit description">
               { getFieldDecorator( "message", {
+                initialValue: "",
                 rules: [{
                   required: true,
                   message: "Please enter commit description"

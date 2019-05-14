@@ -7,8 +7,6 @@ import If from "component/Global/If";
 import { normalizeFilename } from "service/io";
 import { ruleValidateGenericString } from "service/utils";
 import * as classes from "./classes";
-import { ipcRenderer } from "electron";
-import { E_DELEGATE_RECORDER_SESSION, E_OPEN_RECORDER_WINDOW } from "constant";
 
 /*eslint no-useless-escape: 0*/
 
@@ -35,28 +33,21 @@ export class NewSuiteModal extends AbstractForm {
     displayFilename: ""
   };
 
-  componentDidMount() {
-    ipcRenderer.removeAllListeners( E_DELEGATE_RECORDER_SESSION );
-    ipcRenderer.on( E_DELEGATE_RECORDER_SESSION, ( ev, data) => {
-      console.log("TEST", data );
-    } );
-  }
-
-  onClickRecord = ( e ) => {
-    ipcRenderer.send( E_OPEN_RECORDER_WINDOW );
-  }
-
   onClickCancel = ( e ) => {
     e.preventDefault();
     this.props.action.updateApp({ newSuiteModal: false });
   }
 
   onClickOk = ( e ) => {
+    e.preventDefault();
+    this.createSuite();
+  }
+
+  createSuite = () => {
     const { createSuite, updateApp } = this.props.action,
           { validateFields } = this.props.form;
 
-    e.preventDefault();
-    validateFields( ( err, values ) => {
+    validateFields( async ( err, values ) => {
       if ( !values.filename ) {
         values.filename = normalizeSuiteName( values.title );
       }
@@ -64,7 +55,7 @@ export class NewSuiteModal extends AbstractForm {
       if ( err ) {
         return;
       }
-      createSuite( filename, title );
+      await createSuite( filename, title );
       updateApp({ newSuiteModal: false });
     });
   }
@@ -88,12 +79,6 @@ export class NewSuiteModal extends AbstractForm {
           onCancel={this.onClickCancel}
           footer={[
             ( <Button
-              key="record"
-              icon="experiment"
-              onClick={this.onClickRecord}>
-              Record
-            </Button> ),
-            ( <Button
               autoFocus={ true }
               className={ classes.BTN_OK }
               key="submit"
@@ -106,6 +91,7 @@ export class NewSuiteModal extends AbstractForm {
           <Form >
             <FormItem  label="Suite title">
               { getFieldDecorator( "title", {
+                initialValue: "",
                 rules: [{
                   required: true,
                   message: "Please enter suite title"
@@ -133,6 +119,7 @@ export class NewSuiteModal extends AbstractForm {
                   label={ <span>Suite filename <span className="is-optional">(without extension)</span></span> }
                 >
                   { getFieldDecorator( "filename", {
+                    initialValue: "",
                     rules: [
                       {
                         pattern: /^[0-9a-zA-Z_\-\.]{3,250}$/,
