@@ -1,4 +1,5 @@
-const puppeteer = require( "puppeteer" );
+const puppeteer = require( "puppeteer" ),
+      createTargetMethods = require( "./BrowserSession/targetMethods" );
 
 class BrowserSession {
 
@@ -35,7 +36,9 @@ class BrowserSession {
 
     this.browser = await puppeteer.launch( options  );
     this.page = await this.browser.newPage();
+    this.target = createTargetMethods( this.page );
   }
+
 
   /**
    * Close browser on teardown

@@ -148,6 +148,10 @@ export default class AbstractDnDTable extends React.Component {
     }
   }
 
+  /**
+   * @param {GroupEntity|TestEntity|CommandEntity|TargetEntity} record -
+   *  represents position after which we paste data from clipboard
+   */
   pasteClipboard = ( record ) => {
     if ( !this.validClipboard() ) {
       return;

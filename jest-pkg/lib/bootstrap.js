@@ -1,5 +1,3 @@
-require( "./extendPuppeteer" );
-
 const bs = require( "./BrowserSession" );
 
 const { makePng, setPngBasePath, png } = require( "./helpers" );
