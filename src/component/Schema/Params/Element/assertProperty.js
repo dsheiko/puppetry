@@ -4,7 +4,7 @@ import { AssertValue } from "../../Assert/AssertValue";
 
 export const assertProperty = {
   template: ( command ) => buildAssertionTpl(
-    `await ( await ${ command.target }() ).getProp( "${ command.params.name }" )`,
+    `await bs.target( await ${ command.target }() ).getProp( "${ command.params.name }" )`,
     command,
     `// Asserting that "${ command.params.name }" property's `
       + `value of ${ command.target } satisfies the given constraint`

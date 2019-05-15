@@ -464,6 +464,12 @@ actions.pasteCommand = ( payload, dest ) => async ( dispatch ) => {
   dispatch( actions.insertAdjacentCommand( merged, position ) );
 };
 
+
+
+/**
+ * @param {Object} payload - clipboard DTO
+ * @param {GroupEntity} dest
+ */
 actions.pasteTest = ( payload, dest ) => async ( dispatch ) => {
   const id = uniqid(),
         merged = { ...payload, groupId: dest.groupId },

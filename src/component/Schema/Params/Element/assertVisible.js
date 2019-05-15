@@ -3,7 +3,7 @@ import { AssertBoolean } from "../../Assert/AssertBoolean";
 
 export const assertVisible = {
   template: ( command ) => buildAssertionTpl(
-    `await ( await ${ command.target }() ).isVisible()`,
+    `await bs.target( await ${ command.target }() ).isVisible()`,
     command,
     `// Asserting that ${ command.target } element is visible`
   ),
