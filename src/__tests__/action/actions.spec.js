@@ -138,7 +138,7 @@ describe( "Actions", () => {
       }).toThrow( Exception );
     });
 
-     it( "validates updateTest (groupId is missing)", () => {
+    it( "validates updateTest (groupId is missing)", () => {
       expect( () => {
         actions.updateTest({ id: FIX_ID, title: FIX_TITLE });
       }).toThrow( Exception );

@@ -18,7 +18,7 @@ export function getTargetDataTable( targets ) {
 }
 
 export function getStructureDataTable( record ) {
-  const data = Object.values( record || {} ),
+  const data = Object.values( record || {}),
         id = uniqid();
 
   data.push({

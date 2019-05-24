@@ -78,7 +78,7 @@ describe( "Schema.target", () => {
 
     });
 
-     describe( "tap.template", () => {
+    describe( "tap.template", () => {
 
       it( "returns expected", () => {
         const code = schema.element.tap.template({
@@ -126,7 +126,7 @@ describe( "Schema.target", () => {
 
     });
 
-     describe( "setAttribute.template", () => {
+    describe( "setAttribute.template", () => {
 
       it( "returns expected", () => {
         const code = schema.element.setAttribute.template({

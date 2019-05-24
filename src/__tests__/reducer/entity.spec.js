@@ -27,15 +27,15 @@ const FIX_TARGET = "TARGET",
 
 function addTarget( state, target, selector ) {
   return reducer( state, {
-      type: actions.addTarget,
-      payload: { options: { target, selector } }
-    });
+    type: actions.addTarget,
+    payload: { options: { target, selector }}
+  });
 }
 function updateTarget( state, id, target, selector ) {
   return reducer( state, {
-      type: actions.updateTarget,
-      payload: { target, selector, id }
-    });
+    type: actions.updateTarget,
+    payload: { target, selector, id }
+  });
 }
 
 function getTarget( state, inx = 0 ) {
@@ -45,67 +45,54 @@ function getTarget( state, inx = 0 ) {
 
 function addGroup( state, title ) {
   return reducer( state, {
-      type: actions.addGroup,
-      payload: { options: { title } }
-    });
+    type: actions.addGroup,
+    payload: { options: { title }}
+  });
 }
 
 function insertAdjacentGroup( state, title, position ) {
   return reducer( state, {
-      type: actions.insertAdjacentGroup,
-      payload: {
-        options: { title },
-        position
-      }
-    });
+    type: actions.insertAdjacentGroup,
+    payload: {
+      options: { title },
+      position
+    }
+  });
 }
 
 function addTest( state, title, groupId ) {
   return reducer( state, {
-      type: actions.addTest,
-      payload: { options: { title, groupId } }
-    });
+    type: actions.addTest,
+    payload: { options: { title, groupId }}
+  });
 }
 
 function insertAdjacentTest( state, title, groupId, position ) {
   return reducer( state, {
-      type: actions.insertAdjacentTest,
-      payload: {
-        options: { title, groupId },
-        position
-      }
-    });
+    type: actions.insertAdjacentTest,
+    payload: {
+      options: { title, groupId },
+      position
+    }
+  });
 }
 
 function addCommand( state, method, groupId, testId ) {
   return reducer( state, {
-      type: actions.addCommand,
-      payload: { method, target: "page", groupId, testId }
-    });
+    type: actions.addCommand,
+    payload: { method, target: "page", groupId, testId }
+  });
 }
 
-function addSettingsProject( state, dir, name ) {
-  return reducer( state, {
-      type: actions.addSettingsProject,
-      payload: { dir, name }
-    });
-}
-
-function removeSettingsProject( state, dir ) {
-  return reducer( state, {
-      type: actions.removeSettingsProject,
-      payload: dir
-    });
-}
 
 function insertAdjacentCommand( state, method, groupId, testId, position ) {
   return reducer( state, {
-      type: actions.insertAdjacentCommand,
-      payload: {
-        options: { method, target: "page", groupId, testId },
-        position
-      }
-    });
+    type: actions.insertAdjacentCommand,
+    payload: {
+      options: { method, target: "page", groupId, testId },
+      position
+    }
+  });
 }
 
 function shiftTests( res ) {
@@ -119,69 +106,13 @@ function shiftCommands( res ) {
 }
 
 
-describe( "Reducers", () => {
-
-   describe( "*Settings", () => {
-
-    it( "adds a new project", () => {
-      let state = addSettingsProject( DEFAULT_STATE, FIX_DIR1, FIX_NAME1 );
-      const projects = state.settings.projects;
-      expect( projects[ FIX_DIR1 ] ).toBe( FIX_NAME1 );
-    });
-
-    it( "adds multiple projects and they get sorted", () => {
-      let state = addSettingsProject( DEFAULT_STATE, FIX_DIR1, FIX_NAME1 );
-      state = addSettingsProject( state, FIX_DIR3, FIX_NAME3 );
-      state = addSettingsProject( state, FIX_DIR2, FIX_NAME2 );
-      const projects = Object.entries( state.settings.projects );
-      expect( projects.length ).toBe( 3 );
-      expect( projects[ 0 ][ 0 ] ).toBe( FIX_DIR1 );
-      expect( projects[ 0 ][ 1 ] ).toBe( FIX_NAME1 );
-      expect( projects[ 1 ][ 0 ] ).toBe( FIX_DIR2 );
-      expect( projects[ 1 ][ 1 ] ).toBe( FIX_NAME2 );
-      expect( projects[ 2 ][ 0 ] ).toBe( FIX_DIR3 );
-      expect( projects[ 2 ][ 1 ] ).toBe( FIX_NAME3 );
-    });
-
-    it( "removes projects", () => {
-      let state = addSettingsProject( DEFAULT_STATE, FIX_DIR1, FIX_NAME1 );
-      state = addSettingsProject( state, FIX_DIR3, FIX_NAME3 );
-      state = addSettingsProject( state, FIX_DIR2, FIX_NAME2 );
-      state = removeSettingsProject( state, FIX_DIR1 );
-      const projects = Object.entries( state.settings.projects );
-      expect( projects.length ).toBe( 2 );
-      expect( projects[ 0 ][ 0 ] ).toBe( FIX_DIR2 );
-      expect( projects[ 0 ][ 1 ] ).toBe( FIX_NAME2 );
-      expect( projects[ 1 ][ 0 ] ).toBe( FIX_DIR3 );
-      expect( projects[ 1 ][ 1 ] ).toBe( FIX_NAME3 );
-    });
-
-    it( "overrides project with the same dir", () => {
-      let state = addSettingsProject( DEFAULT_STATE, FIX_DIR1, FIX_NAME1 );
-      state = addSettingsProject( state, FIX_DIR3, FIX_NAME3 );
-      state = addSettingsProject( state, FIX_DIR3, FIX_NAME2 );
-      const projects = Object.entries( state.settings.projects );
-      expect( projects.length ).toBe( 2 );
-      expect( projects[ 1 ][ 1 ] ).toBe( FIX_NAME2 );
-    });
-
-    it( "may have mutltiple projects with same names", () => {
-      let state = addSettingsProject( DEFAULT_STATE, FIX_DIR1, FIX_NAME1 );
-      state = addSettingsProject( state, FIX_DIR3, FIX_NAME1 );
-      state = addSettingsProject( state, FIX_DIR2, FIX_NAME1 );
-      const projects = Object.entries( state.settings.projects );
-      expect( projects.length ).toBe( 3 );
-      expect( projects[ 0 ][ 1 ] ).toBe( FIX_NAME1 );
-    });
-
-  });
-
+describe( "Reducer: entities", () => {
 
   describe( "*Target", () => {
 
     it( "adds a new target", () => {
-      const res = addTarget( DEFAULT_STATE, FIX_TARGET, FIX_SELECTOR );
-      const [ target ] = Object.values( res.suite.targets );
+      const res = addTarget( DEFAULT_STATE, FIX_TARGET, FIX_SELECTOR ),
+            [ target ] = Object.values( res.suite.targets );
       expect( target.target ).toBe( FIX_TARGET );
       expect( target.selector ).toBe( FIX_SELECTOR );
     });
@@ -267,7 +198,7 @@ describe( "Reducers", () => {
       expect( Object.values( tests ).length ).toBe( 3 );
     });
 
-     it( "insert adjacent test after", () => {
+    it( "insert adjacent test after", () => {
       let res = addGroup( DEFAULT_STATE, FIX_GROUP1 );
       const [ group ] = Object.values( res.suite.groups );
       res = addTest( res, FIX_TEST1, group.id );
@@ -281,7 +212,7 @@ describe( "Reducers", () => {
       expect( tests[ 1 ].title ).toBe( FIX_TEST4 );
     });
 
-     it( "insert adjacent test before", () => {
+    it( "insert adjacent test before", () => {
       let res = addGroup( DEFAULT_STATE, FIX_GROUP1 );
       const [ group ] = Object.values( res.suite.groups );
       res = addTest( res, FIX_TEST1, group.id );
@@ -297,11 +228,11 @@ describe( "Reducers", () => {
 
   });
 
-   describe( "*Command", () => {
+  describe( "*Command", () => {
 
     it( "adds a new command", () => {
-      let res = addGroup( DEFAULT_STATE, FIX_GROUP1 );
-      let [ group ] = Object.values( res.suite.groups );
+      let res = addGroup( DEFAULT_STATE, FIX_GROUP1 ),
+          [ group ] = Object.values( res.suite.groups );
       res = addTest( res, FIX_TEST1, group.id );
       [ group ] = Object.values( res.suite.groups );
       let [ test ] = Object.values( group.tests );
@@ -315,8 +246,8 @@ describe( "Reducers", () => {
     });
 
     it( "insert adjacent test after", () => {
-     let res = addGroup( DEFAULT_STATE, FIX_GROUP1 );
-      let [ group ] = Object.values( res.suite.groups );
+      let res = addGroup( DEFAULT_STATE, FIX_GROUP1 ),
+          [ group ] = Object.values( res.suite.groups );
       res = addTest( res, FIX_TEST1, group.id );
       [ group ] = Object.values( res.suite.groups );
       let [ test ] = Object.values( group.tests );
@@ -337,8 +268,8 @@ describe( "Reducers", () => {
     });
 
     it( "insert adjacent test before", () => {
-     let res = addGroup( DEFAULT_STATE, FIX_GROUP1 );
-      let [ group ] = Object.values( res.suite.groups );
+      let res = addGroup( DEFAULT_STATE, FIX_GROUP1 ),
+          [ group ] = Object.values( res.suite.groups );
       res = addTest( res, FIX_TEST1, group.id );
       [ group ] = Object.values( res.suite.groups );
       let [ test ] = Object.values( group.tests );
@@ -359,6 +290,5 @@ describe( "Reducers", () => {
     });
 
   });
-
-
 });
+

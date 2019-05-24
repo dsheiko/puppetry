@@ -80,7 +80,7 @@ export class CommandRowLabel extends React.Component {
        case "toggleClass":
          return `("${ params.name }")`;
        case "checkBox":
-        return `("${ params.checked ? "checked" : "unchecked" }")`;
+         return `("${ params.checked ? "checked" : "unchecked" }")`;
        case "setAttribute":
          return `("${ params.name }", "${ params.value }")`;
        case "assertStyle":

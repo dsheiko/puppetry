@@ -4,7 +4,7 @@ import ExpressionParser from "../../service/ExpressionParser";
 describe( "ExpressionParser", () => {
   let expParser;
 
-  beforeEach(() => {
+  beforeEach( () => {
     expParser = new ExpressionParser({
       foo: "FOO",
       bar: "BAR"

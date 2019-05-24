@@ -2,7 +2,7 @@ const DEFAULT_STATE = {
   // Settings stored in localStorage
   settings: {
     projectDirectory: "",
-    projects: {}, // [{ dir: name }]
+    projects: {}, // [{ dir, name }]
     exportDirectory: "",
     lastCheckedVersion: "",
     checkDate: ""
