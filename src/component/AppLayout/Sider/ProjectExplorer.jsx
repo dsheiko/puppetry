@@ -115,7 +115,7 @@ export class ProjectExplorer extends React.Component {
     return (
       <ErrorBoundary>
         <div id="cProjectNavigator" className="project-navigator">
-          <h2>Project
+          <h2>Projects
             <span className="project-navigator__add"></span>
           </h2>
 

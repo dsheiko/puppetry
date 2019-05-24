@@ -1,4 +1,4 @@
-import { findTargets, findTargetNodes } from "../service/suite";
+import { findTargets, findTargetNodes } from "../../service/suite";
 
 const FIX_SUITE = {
   "groups": {

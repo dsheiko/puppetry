@@ -1,7 +1,9 @@
 import log from "electron-log";
 import uniqid from "uniqid";
 import { createActions } from "redux-actions";
-import { validate, validatePlain } from "../service/validate";
+import { validate } from "bycontract";
+import * as I from "interface";
+
 import { writeSuite, readSuite, removeSuite,
   getProjectFiles, writeProject, writeGit,
   readProject, removeRuntimeTestPath,
@@ -21,6 +23,7 @@ import { getDateString, checkNewVersion } from "../service/http";
 import debounce from "lodash.debounce";
 import mediator from "service/mediator";
 
+
 const STORAGE_KEY_SETTINGS = "settings",
 
       version = remote ? remote.app.getVersion() : "0.1",
@@ -35,41 +38,41 @@ const STORAGE_KEY_SETTINGS = "settings",
 
         SET_GIT: ( options ) => options,
 
-        SET_ERROR: ( options ) => validate( "errorOptions", options ),
+        SET_ERROR: ( options ) => validate( options, I.ERROR_OPTIONS ),
 
         /**
          * @param {object} options = { loading, newProjectModal, testReportModal, project }
          * @returns {object}
          */
-        UPDATE_APP: ( options ) => validate( "updateAppOptions", options ),
+        UPDATE_APP: ( options ) => options,
 
-        ADD_APP_TAB: ( tabKey ) => validatePlain( "appTabKey", tabKey ),
+        ADD_APP_TAB: ( tabKey ) => validate( tabKey, "string" ),
 
-        REMOVE_APP_TAB: ( tabKey ) => validatePlain( "appTabKey", tabKey ),
+        REMOVE_APP_TAB: ( tabKey ) => validate( tabKey, "string" ),
 
-        SET_APP_TAB: ( tabKey ) => tabKey,
+        SET_APP_TAB: ( tabKey ) => validate( tabKey, "string" ),
 
         SET_PROJECT: ( options ) => options,
 
         UPDATE_PROJECT_PANES: ( panel, panes ) => ({ panel, panes }),
 
-        SET_SUITE: ( options ) => validate( "updateSuiteOptions", options ),
+        SET_SUITE: ( options ) => validate( options, I.UPDATE_SUITE_OPTIONS ),
 
-        RESET_SUITE: ( options ) => validate( "updateSuiteOptions", options ),
+        RESET_SUITE: ( options ) => validate( options, I.UPDATE_SUITE_OPTIONS ),
 
-        SWAP_TARGET: ( options ) => validate( "swapTargetOptions", options ),
+        SWAP_TARGET: ( options ) => validate( options, I.SWAP_BASE_OPTIONS ),
 
-        SWAP_COMMAND: ( options ) => validate( "swapCommandOptions", options ),
+        SWAP_COMMAND: ( options ) => validate( options, { ...I.SWAP_BASE_OPTIONS, ...I.COMMAND_REF } ),
 
-        SWAP_TEST: ( options ) => validate( "swapTestOptions", options ),
+        SWAP_TEST: ( options ) => validate( options, { ...I.SWAP_BASE_OPTIONS, ...I.TEST_REF } ),
 
-        SWAP_GROUP: ( options ) => validate( "swapGroupOptions", options ),
+        SWAP_GROUP: ( options ) => validate( options, I.SWAP_BASE_OPTIONS ),
 
         /**
          * @param {object} options = { title, editing }
          * @returns {object}
          */
-        UPDATE_SUITE: ( options ) => validate( "updateSuiteOptions", options ),
+        UPDATE_SUITE: ( options ) => validate( options, I.UPDATE_SUITE_OPTIONS ),
 
         CLEAR_TARGET: ( options ) => options,
 
@@ -79,8 +82,8 @@ const STORAGE_KEY_SETTINGS = "settings",
          * @returns {object}
          */
         ADD_TARGET: ( options, id = null ) => ({
-          options: validate( "addTargetOptions", options ),
-          id
+          options: validate( options, { ...I.ENTITY, ...I.TARGET } ),
+          id: validate( id, I.ID_REF )
         }),
         /**
          * @param {object} options = { title, editing }
@@ -97,20 +100,20 @@ const STORAGE_KEY_SETTINGS = "settings",
          * @param {object} options = { id, target, selector, editing }
          * @returns {object}
          */
-        UPDATE_TARGET: ( options ) => validate( "updateTargetOptions", options ),
+        UPDATE_TARGET: ( options ) => validate( options, { ...I.ENTITY, ...I.TARGET, ...I.UPDATE } ),
         /**
-         * @param {object} options = { id }
+         * @param {object} ref = { id }
          * @returns {object}
          */
-        REMOVE_TARGET: ( options ) => validate( "removeOptions", options ),
+        REMOVE_TARGET: ( ref ) => validate( ref, { ...I.UPDATE } ),
         /**
          * @param {object} options = { title, editing }
          * @param {object} [id] - injected id for new entity
          * @returns {object}
          */
         ADD_GROUP: ( options, id = null ) => ({
-          options: validate( "addGroupOptions", options ),
-          id
+          options: validate( options, { ...I.ENTITY, ...I.GROUP } ),
+          id: validate( id, I.ID_REF )
         }),
         /**
          * @param {object} options = { title, editing }
@@ -127,20 +130,20 @@ const STORAGE_KEY_SETTINGS = "settings",
          * @param {object} options = { id, title, editing }
          * @returns {object}
          */
-        UPDATE_GROUP: ( options ) => validate( "updateGroupOptions", options ),
+        UPDATE_GROUP: ( options ) => validate( options, { ...I.ENTITY, ...I.GROUP, ...I.UPDATE } ),
         /**
-         * @param {object} options = { id }
+         * @param {object} ref = { id }
          * @returns {object}
          */
-        REMOVE_GROUP: ( options ) => validate( "removeOptions", options ),
+        REMOVE_GROUP: ( ref ) => validate( ref, { ...I.UPDATE } ),
         /**
          * @param {object} options = { groupId, title, editing }
          * @param {object} [id] - injected id for new entity
          * @returns {object}
          */
         ADD_TEST: ( options, id = null ) =>  ({
-          options: validate( "addTestOptions", options ),
-          id
+          options: validate( options, { ...I.ENTITY, ...I.TEST } ),
+          id: validate( id, I.ID_REF )
         }),
         /**
          * @param {object} options = { title, editing }
@@ -157,17 +160,17 @@ const STORAGE_KEY_SETTINGS = "settings",
          * @param {object} options = { groupId, id, title, editing }
          * @returns {object}
          */
-        UPDATE_TEST: ( options ) => validate( "updateTestOptions", options ),
+        UPDATE_TEST: ( options ) => validate( options, { ...I.ENTITY, ...I.TEST, ...I.UPDATE } ),
         /**
-         * @param {object} options = { groupId, id }
+         * @param {object} ref = { groupId, id }
          * @returns {object}
          */
-        REMOVE_TEST: ( options ) => validate( "removeTestOptions", options ),
+        REMOVE_TEST: ( ref ) => validate( ref, { ...I.UPDATE, ...I.TEST_REF } ),
         /**
          * @param {object} options = { testId, groupId, target, method, editing }
          * @returns {object}
          */
-        ADD_COMMAND: ( options ) => validate( "addCommandOptions", options ),
+        ADD_COMMAND: ( options ) => validate( options, { ...I.ENTITY, ...I.COMMAND } ),
         /**
          * @param {object} options = { title, editing }
          * @param {object} position = { "after": ID }
@@ -181,12 +184,12 @@ const STORAGE_KEY_SETTINGS = "settings",
          * @param {object} options = { testId, groupId, id, target, method, editing }
          * @returns {object}
          */
-        UPDATE_COMMAND: ( options ) => validate( "updateCommandOptions", options ),
+        UPDATE_COMMAND: ( options ) => validate( options, { ...I.ENTITY, ...I.COMMAND, ...I.UPDATE } ),
         /**
-         * @param {object} options = { testId, groupId, id }
+         * @param {object} ref = { testId, groupId, id }
          * @returns {object}
          */
-        REMOVE_COMMAND: ( options ) => validate( "removeCommandOptions", options )
+        REMOVE_COMMAND: ( ref ) => validate( ref, { ...I.UPDATE, ...I.COMMAND_REF } )
       });
 
 /**
@@ -259,7 +262,8 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
 
     // keep track of recent projects
     dispatch( actions.addSettingsProject({
-      [ projectDirectory ]: project.name
+      dir: projectDirectory,
+      name: project.name
     }) );
     dispatch( actions.saveSettings() );
 

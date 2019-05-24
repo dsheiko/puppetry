@@ -1,4 +1,4 @@
-import ExpressionParser from "../service/ExpressionParser";
+import ExpressionParser from "../../service/ExpressionParser";
 
 
 describe( "ExpressionParser", () => {

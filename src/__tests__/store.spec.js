@@ -2,7 +2,6 @@
 import actions from "../action/actions";
 import DEFAULT_STATE from "../reducer/defaultState";
 import { reducer } from "../reducer/reducers";
-import { ValidationError } from "error";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import thunkMiddleware from "redux-thunk";

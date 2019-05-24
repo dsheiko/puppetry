@@ -1,6 +1,6 @@
-import { reducer } from "../reducer/reducers";
-import actions from "../action/actions";
-import DEFAULT_STATE from "../reducer/defaultState";
+import { reducer } from "../../reducer/reducers";
+import actions from "../../action/actions";
+import DEFAULT_STATE from "../../reducer/defaultState";
 
 const FIX_TARGET = "TARGET",
       FIX_SELECTOR = "SELECTOR",

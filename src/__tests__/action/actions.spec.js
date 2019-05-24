@@ -1,5 +1,5 @@
-import actions from "../action/actions";
-import { ValidationError } from "error";
+import actions from "../../action/actions";
+import { Exception } from "bycontract";
 
 const FIX_TITLE = "TITLE",
       FIX_ID = "_1";
@@ -16,7 +16,7 @@ describe( "Actions", () => {
     it( "validates updateSuite", () => {
       expect( () => {
         actions.updateSuite({ title: 10 });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
     });
 
   });
@@ -31,7 +31,7 @@ describe( "Actions", () => {
     it( "validates addTarget", () => {
       expect( () => {
         actions.addTarget({ target: 10 });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
     });
 
     it( "performs updateTarget", () => {
@@ -39,13 +39,16 @@ describe( "Actions", () => {
       expect( res.payload.target ).toEqual( FIX_TITLE );
     });
 
-    it( "validates updateTarget", () => {
+    it( "validates updateTarget (id missing)", () => {
       expect( () => {
         actions.updateTarget({ target: FIX_TITLE, selector: FIX_TITLE });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
+    });
+
+    it( "validates updateTarget (id not a string)", () => {
       expect( () => {
         actions.updateTarget({ id: 1, target: FIX_TITLE, selector: FIX_TITLE });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
     });
 
     it( "performs removeTarget", () => {
@@ -56,10 +59,10 @@ describe( "Actions", () => {
     it( "validates removeTarget", () => {
       expect( () => {
         actions.removeTarget({ target: FIX_TITLE, selector: FIX_TITLE });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
       expect( () => {
         actions.removeTarget({ id: 1 });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
     });
 
   });
@@ -75,7 +78,7 @@ describe( "Actions", () => {
     it( "validates addGroup", () => {
       expect( () => {
         actions.addGroup({ title: 10 });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
     });
 
     it( "performs updateGroup", () => {
@@ -86,10 +89,10 @@ describe( "Actions", () => {
     it( "validates updateGroup", () => {
       expect( () => {
         actions.updateGroup({ title: FIX_TITLE });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
       expect( () => {
         actions.updateGroup({ id: 1, title: FIX_TITLE });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
     });
 
     it( "performs removeGroup", () => {
@@ -97,13 +100,16 @@ describe( "Actions", () => {
       expect( res.payload.id ).toEqual( FIX_ID );
     });
 
-    it( "validates removeGroup", () => {
+    it( "validates removeGroup (id missing)", () => {
       expect( () => {
         actions.removeGroup({ title: FIX_TITLE });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
+    });
+
+    it( "validates removeGroup (id is not a string)", () => {
       expect( () => {
         actions.removeGroup({ id: 1 });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
     });
 
   });
@@ -118,7 +124,7 @@ describe( "Actions", () => {
     it( "validates addTest", () => {
       expect( () => {
         actions.addTest({ title: FIX_TITLE });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
     });
 
     it( "performs updateTest", () => {
@@ -126,13 +132,16 @@ describe( "Actions", () => {
       expect( res.payload.title ).toEqual( FIX_TITLE );
     });
 
-    it( "validates updateTest", () => {
+    it( "validates updateTest (id is missing)", () => {
       expect( () => {
         actions.updateTest({ title: FIX_TITLE });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
+    });
+
+     it( "validates updateTest (groupId is missing)", () => {
       expect( () => {
         actions.updateTest({ id: FIX_ID, title: FIX_TITLE });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
     });
 
     it( "performs removeTest", () => {
@@ -140,13 +149,16 @@ describe( "Actions", () => {
       expect( res.payload.id ).toEqual( FIX_ID );
     });
 
-    it( "validates removeTest", () => {
+    it( "validates removeTest (id is missing)", () => {
       expect( () => {
         actions.removeTest({ title: FIX_TITLE });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
+    });
+
+    it( "validates removeTest (groupId is missing)", () => {
       expect( () => {
         actions.removeTest({ id: FIX_ID });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
     });
 
   });
@@ -158,13 +170,16 @@ describe( "Actions", () => {
       expect( res.payload.title ).toEqual( FIX_TITLE );
     });
 
-    it( "validates addCommand", () => {
+    it( "validates addCommand (id is missing)", () => {
       expect( () => {
         actions.addCommand({ title: FIX_TITLE });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
+    });
+
+    it( "validates addCommand (testId is missing)", () => {
       expect( () => {
         actions.addCommand({ groupId: FIX_ID, title: FIX_TITLE });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
     });
 
     it( "performs updateCommand", () => {
@@ -175,13 +190,13 @@ describe( "Actions", () => {
     it( "validates updateCommand", () => {
       expect( () => {
         actions.updateCommand({ title: FIX_TITLE });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
       expect( () => {
         actions.updateCommand({ id: FIX_ID, title: FIX_TITLE });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
       expect( () => {
         actions.updateCommand({ id: FIX_ID, groupId: FIX_ID, title: FIX_TITLE });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
     });
 
     it( "performs removeCommand", () => {
@@ -192,13 +207,13 @@ describe( "Actions", () => {
     it( "validates removeCommand", () => {
       expect( () => {
         actions.removeCommand({ title: FIX_TITLE });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
       expect( () => {
         actions.removeCommand({ id: FIX_ID });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
       expect( () => {
         actions.removeCommand({ id: FIX_ID, groupId: FIX_ID });
-      }).toThrow( ValidationError );
+      }).toThrow( Exception );
     });
 
   });
