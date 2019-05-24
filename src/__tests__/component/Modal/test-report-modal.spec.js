@@ -1,4 +1,4 @@
-import { updateLauncherArgs } from "../component/Modal/TestReportModal";
+import { updateLauncherArgs } from "../../../component/Modal/TestReportModal";
 
 const FIX_SWITCHER1 = `--start-maximized`,
       FIX_SWITCHER2 = `--start-fullscreen`,

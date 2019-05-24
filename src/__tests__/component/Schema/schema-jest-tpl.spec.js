@@ -1,4 +1,4 @@
-import { tplGroup, tplTest, tplQuery, tplSuite } from "../component/Schema/Jest";
+import { tplGroup, tplTest, tplQuery, tplSuite } from "../../../component/Schema/Jest";
 
 
 describe( "Schema.Jest", () => {

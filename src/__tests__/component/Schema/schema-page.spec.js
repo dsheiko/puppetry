@@ -1,4 +1,4 @@
-import { schema } from "../component/Schema/schema";
+import { schema } from "../../../component/Schema/schema";
 
 const FIX_NAME = "FixName";
 

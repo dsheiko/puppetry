@@ -35,7 +35,7 @@ export const reducer = handleActions(
       if ( !payload ) {
         return state;
       }
-      
+
       //sort
       const projects = !Object.keys( state.settings.projects ).length
         ? payload
