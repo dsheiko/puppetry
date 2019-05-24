@@ -62,9 +62,9 @@ const STORAGE_KEY_SETTINGS = "settings",
 
         SWAP_TARGET: ( options ) => validate( options, I.SWAP_BASE_OPTIONS ),
 
-        SWAP_COMMAND: ( options ) => validate( options, { ...I.SWAP_BASE_OPTIONS, ...I.COMMAND_REF } ),
+        SWAP_COMMAND: ( options ) => validate( options, { ...I.SWAP_BASE_OPTIONS, ...I.COMMAND_REF }),
 
-        SWAP_TEST: ( options ) => validate( options, { ...I.SWAP_BASE_OPTIONS, ...I.TEST_REF } ),
+        SWAP_TEST: ( options ) => validate( options, { ...I.SWAP_BASE_OPTIONS, ...I.TEST_REF }),
 
         SWAP_GROUP: ( options ) => validate( options, I.SWAP_BASE_OPTIONS ),
 
@@ -82,7 +82,7 @@ const STORAGE_KEY_SETTINGS = "settings",
          * @returns {object}
          */
         ADD_TARGET: ( options, id = null ) => ({
-          options: validate( options, { ...I.ENTITY, ...I.TARGET } ),
+          options: validate( options, { ...I.ENTITY, ...I.TARGET }),
           id: validate( id, I.ID_REF )
         }),
         /**
@@ -100,19 +100,19 @@ const STORAGE_KEY_SETTINGS = "settings",
          * @param {object} options = { id, target, selector, editing }
          * @returns {object}
          */
-        UPDATE_TARGET: ( options ) => validate( options, { ...I.ENTITY, ...I.TARGET, ...I.UPDATE } ),
+        UPDATE_TARGET: ( options ) => validate( options, { ...I.ENTITY, ...I.TARGET, ...I.UPDATE }),
         /**
          * @param {object} ref = { id }
          * @returns {object}
          */
-        REMOVE_TARGET: ( ref ) => validate( ref, { ...I.UPDATE } ),
+        REMOVE_TARGET: ( ref ) => validate( ref, { ...I.UPDATE }),
         /**
          * @param {object} options = { title, editing }
          * @param {object} [id] - injected id for new entity
          * @returns {object}
          */
         ADD_GROUP: ( options, id = null ) => ({
-          options: validate( options, { ...I.ENTITY, ...I.GROUP } ),
+          options: validate( options, { ...I.ENTITY, ...I.GROUP }),
           id: validate( id, I.ID_REF )
         }),
         /**
@@ -130,19 +130,19 @@ const STORAGE_KEY_SETTINGS = "settings",
          * @param {object} options = { id, title, editing }
          * @returns {object}
          */
-        UPDATE_GROUP: ( options ) => validate( options, { ...I.ENTITY, ...I.GROUP, ...I.UPDATE } ),
+        UPDATE_GROUP: ( options ) => validate( options, { ...I.ENTITY, ...I.GROUP, ...I.UPDATE }),
         /**
          * @param {object} ref = { id }
          * @returns {object}
          */
-        REMOVE_GROUP: ( ref ) => validate( ref, { ...I.UPDATE } ),
+        REMOVE_GROUP: ( ref ) => validate( ref, { ...I.UPDATE }),
         /**
          * @param {object} options = { groupId, title, editing }
          * @param {object} [id] - injected id for new entity
          * @returns {object}
          */
         ADD_TEST: ( options, id = null ) =>  ({
-          options: validate( options, { ...I.ENTITY, ...I.TEST } ),
+          options: validate( options, { ...I.ENTITY, ...I.TEST }),
           id: validate( id, I.ID_REF )
         }),
         /**
@@ -160,17 +160,17 @@ const STORAGE_KEY_SETTINGS = "settings",
          * @param {object} options = { groupId, id, title, editing }
          * @returns {object}
          */
-        UPDATE_TEST: ( options ) => validate( options, { ...I.ENTITY, ...I.TEST, ...I.UPDATE } ),
+        UPDATE_TEST: ( options ) => validate( options, { ...I.ENTITY, ...I.TEST, ...I.UPDATE }),
         /**
          * @param {object} ref = { groupId, id }
          * @returns {object}
          */
-        REMOVE_TEST: ( ref ) => validate( ref, { ...I.UPDATE, ...I.TEST_REF } ),
+        REMOVE_TEST: ( ref ) => validate( ref, { ...I.UPDATE, ...I.TEST_REF }),
         /**
          * @param {object} options = { testId, groupId, target, method, editing }
          * @returns {object}
          */
-        ADD_COMMAND: ( options ) => validate( options, { ...I.ENTITY, ...I.COMMAND } ),
+        ADD_COMMAND: ( options ) => validate( options, { ...I.ENTITY, ...I.COMMAND }),
         /**
          * @param {object} options = { title, editing }
          * @param {object} position = { "after": ID }
@@ -184,12 +184,12 @@ const STORAGE_KEY_SETTINGS = "settings",
          * @param {object} options = { testId, groupId, id, target, method, editing }
          * @returns {object}
          */
-        UPDATE_COMMAND: ( options ) => validate( options, { ...I.ENTITY, ...I.COMMAND, ...I.UPDATE } ),
+        UPDATE_COMMAND: ( options ) => validate( options, { ...I.ENTITY, ...I.COMMAND, ...I.UPDATE }),
         /**
          * @param {object} ref = { testId, groupId, id }
          * @returns {object}
          */
-        REMOVE_COMMAND: ( ref ) => validate( ref, { ...I.UPDATE, ...I.COMMAND_REF } )
+        REMOVE_COMMAND: ( ref ) => validate( ref, { ...I.UPDATE, ...I.COMMAND_REF })
       });
 
 /**
@@ -199,25 +199,40 @@ const STORAGE_KEY_SETTINGS = "settings",
 // SETTINGS
 
 actions.saveSettings = ( payload ) => ( dispatch, getState ) => {
-  const settings = { ...getState().settings, ...payload };
-  localStorage.setItem( STORAGE_KEY_SETTINGS, JSON.stringify( settings ) );
-  dispatch( actions.setSettings( settings ) );
+  try {
+    const settings = { ...getState().settings, ...payload };
+    localStorage.setItem( STORAGE_KEY_SETTINGS, JSON.stringify( settings ) );
+    dispatch( actions.setSettings( settings ) );
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot save settings" );
+  }
+
 };
 
 actions.loadSettings = () => ( dispatch, getState ) => {
-  const saved = process.env.PUPPETRY_CLEAN_START
-          ? {}
-          : JSON.parse( localStorage.getItem( STORAGE_KEY_SETTINGS ) || "{}" ),
-        settings = { ...getState().settings, ...saved };
-  dispatch( actions.setSettings( settings ) );
-  return settings;
+  try {
+    const saved = process.env.PUPPETRY_CLEAN_START
+            ? {}
+            : JSON.parse( localStorage.getItem( STORAGE_KEY_SETTINGS ) || "{}" ),
+          settings = { ...getState().settings, ...saved };
+    dispatch( actions.setSettings( settings ) );
+    return settings;
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot load settings" );
+  }
+
 };
 
 // GIT
 
 actions.saveGit = ( options ) => async ( dispatch, getState ) => {
-  await dispatch( actions.setGit( options ) );
-  await saveGit( getState() );
+  try {
+    await dispatch( actions.setGit( options ) );
+    await saveGit( getState() );
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot save Git" );
+  }
+
 };
 
 actions.loadGit = ( directory = null ) => async ( dispatch, getState ) => {
@@ -290,11 +305,16 @@ actions.watchProjectFiles = ( directory = null ) => async ( dispatch, getState )
 };
 
 actions.loadProjectFiles = ( directory = null ) => async ( dispatch, getState ) => {
-  const store = getState(),
-        projectDirectory = directory || store.settings.projectDirectory,
-        files = await getProjectFiles( projectDirectory );
-  ipcRenderer.send( E_SUITE_LIST_UPDATED, projectDirectory, store.suite.filename, files );
-  dispatch( actions.updateApp({ project: { files }}) );
+  try {
+    const store = getState(),
+          projectDirectory = directory || store.settings.projectDirectory,
+          files = await getProjectFiles( projectDirectory );
+    ipcRenderer.send( E_SUITE_LIST_UPDATED, projectDirectory, store.suite.filename, files );
+    dispatch( actions.updateApp({ project: { files }}) );
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot load project files" );
+  }
+
 };
 
 actions.saveProject = ({ projectDirectory, name }) => async ( dispatch, getState ) => {
@@ -358,13 +378,18 @@ actions.createSuite = ( rawFilename, title ) => async ( dispatch, getState ) => 
 };
 
 actions.loadSuite = ( filename ) => async ( dispatch, getState ) => {
-  const store = getState(),
-        { projectDirectory } = store.settings,
-        suite = await readSuite( projectDirectory, filename );
-  dispatch( actions.setProject({ lastOpenSuite: filename }) );
-  dispatch( actions.resetSuite({ ...suite, loadedAt: dateToTs(), filename, modified: false }) );
-  ipcRenderer.send( E_SUITE_LOADED, projectDirectory, filename, store.app.project.files );
-  dispatch( actions.addAppTab( "suite" ) );
+  try {
+    const store = getState(),
+          { projectDirectory } = store.settings,
+          suite = await readSuite( projectDirectory, filename );
+    dispatch( actions.setProject({ lastOpenSuite: filename }) );
+    dispatch( actions.resetSuite({ ...suite, loadedAt: dateToTs(), filename, modified: false }) );
+    ipcRenderer.send( E_SUITE_LOADED, projectDirectory, filename, store.app.project.files );
+    dispatch( actions.addAppTab( "suite" ) );
+  } catch ( ex ) {
+    handleException( ex, dispatch, `Cannot load suite ${ filename }` );
+  }
+
 };
 
 actions.saveSuite = ( options = {}) => async ( dispatch, getState ) => {
@@ -418,24 +443,32 @@ actions.setLoadingFor = ( ms ) => async ( dispatch ) => {
 };
 
 actions.checkNewVersion = () => async ( dispatch, getState ) => {
-  const { settings } = getState(),
-        checkDate = getDateString();
-  // Only once a day
-  if ( settings.checkDate !== checkDate ) {
-    await checkNewVersion( settings.lastCheckedVersion );
+  try {
+    const { settings } = getState(),
+          checkDate = getDateString();
+    // Only once a day
+    if ( settings.checkDate !== checkDate ) {
+      await checkNewVersion( settings.lastCheckedVersion );
+    }
+    return dispatch( actions.saveSettings({ checkDate }) );
+  } catch ( ex ) {
+    console.error( ex );
   }
-  return dispatch( actions.saveSettings({ checkDate }) );
+
 };
 
 actions.closeApp = () => async ( dispatch, getState ) => {
-  const store = getState();
   try {
-    await saveProject( store );
-  } catch ( e ) {
-    noop( e );
+    const store = getState();
+    try {
+      await saveProject( store );
+    } catch ( e ) {
+      noop( e );
+    }
+    closeApp();
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot close app" );
   }
-  closeApp();
-
 };
 
 // MISC
@@ -445,29 +478,43 @@ actions.closeApp = () => async ( dispatch, getState ) => {
  * @returns {Function}
  */
 actions.resetCommandFailures = () => async ( dispatch, getState ) => {
-  const { groups } = getState().suite;
-  Object.values( groups ).forEach( ( group ) => {
-    Object.values( group.tests ).forEach( ( test ) => {
-      const matches = Object.values( test.commands ).filter( command => Boolean( command.failure ) );
-      matches.forEach( ({ id, testId, groupId }) => dispatch(
-        actions.updateCommand({ id, testId, groupId, failure: "" })
-      ) );
+  try {
+    const { groups } = getState().suite;
+    Object.values( groups ).forEach( ( group ) => {
+      Object.values( group.tests ).forEach( ( test ) => {
+        const matches = Object.values( test.commands ).filter( command => Boolean( command.failure ) );
+        matches.forEach( ({ id, testId, groupId }) => dispatch(
+          actions.updateCommand({ id, testId, groupId, failure: "" })
+        ) );
+      });
     });
-  });
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot reset command failuries" );
+  }
+
 };
 
 
 actions.pasteTarget = ( payload, dest ) => async ( dispatch ) => {
-  const position = { after: dest.id };
-  dispatch( actions.insertAdjacentTarget( payload, position ) );
+  try {
+    const position = { after: dest.id };
+    dispatch( actions.insertAdjacentTarget( payload, position ) );
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot paste target" );
+  }
+
 };
 
 actions.pasteCommand = ( payload, dest ) => async ( dispatch ) => {
-  const merged = { ...payload, testId: dest.testId, groupId: dest.groupId },
-        position = { after: dest.id };
-  dispatch( actions.insertAdjacentCommand( merged, position ) );
-};
+  try {
+    const merged = { ...payload, testId: dest.testId, groupId: dest.groupId },
+          position = { after: dest.id };
+    dispatch( actions.insertAdjacentCommand( merged, position ) );
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot paster command" );
+  }
 
+};
 
 
 /**
@@ -475,27 +522,37 @@ actions.pasteCommand = ( payload, dest ) => async ( dispatch ) => {
  * @param {GroupEntity} dest
  */
 actions.pasteTest = ( payload, dest ) => async ( dispatch ) => {
-  const id = uniqid(),
-        merged = { ...payload, groupId: dest.groupId },
-        position = { after: dest.id };
-  dispatch( actions.insertAdjacentTest( merged, position, id ) );
-  Object.values( payload.commands ).forEach( command => {
-    dispatch( actions.addCommand({ ...command, testId: id, groupId: merged.groupId }) );
-  });
+  try {
+    const id = uniqid(),
+          merged = { ...payload, groupId: dest.groupId },
+          position = { after: dest.id };
+    dispatch( actions.insertAdjacentTest( merged, position, id ) );
+    Object.values( payload.commands ).forEach( command => {
+      dispatch( actions.addCommand({ ...command, testId: id, groupId: merged.groupId }) );
+    });
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot paste test" );
+  }
+
 };
 
 actions.pasteGroup = ( payload, dest ) => async ( dispatch ) => {
-  const groupId = uniqid(),
-        merged = { ...payload },
-        position = { after: dest.id };
-  dispatch( actions.insertAdjacentGroup( merged, position, groupId ) );
-  Object.values( payload.tests ).forEach( test => {
-    const testId = uniqid();
-    dispatch( actions.addTest({ ...test, groupId: groupId }, testId ) );
-    Object.values( test.commands ).forEach( command => {
-      dispatch( actions.addCommand({ ...command, testId, groupId }) );
+  try {
+    const groupId = uniqid(),
+          merged = { ...payload },
+          position = { after: dest.id };
+    dispatch( actions.insertAdjacentGroup( merged, position, groupId ) );
+    Object.values( payload.tests ).forEach( test => {
+      const testId = uniqid();
+      dispatch( actions.addTest({ ...test, groupId: groupId }, testId ) );
+      Object.values( test.commands ).forEach( command => {
+        dispatch( actions.addCommand({ ...command, testId, groupId }) );
+      });
     });
-  });
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot paste group" );
+  }
+
 };
 
 /**
@@ -505,11 +562,16 @@ actions.pasteGroup = ( payload, dest ) => async ( dispatch ) => {
  * @returns {Function}
  */
 actions.cloneCommand = ( command, options = {}) => async ( dispatch, getState ) => {
-  const groups = getState().suite.groups,
-        source = groups[ command.groupId ].tests[ command.testId ].commands[ command.id ],
-        merged = { ...source, ...options },
-        position = { after: command.id };
-  dispatch( actions.insertAdjacentCommand( merged, position ) );
+  try {
+    const groups = getState().suite.groups,
+          source = groups[ command.groupId ].tests[ command.testId ].commands[ command.id ],
+          merged = { ...source, ...options },
+          position = { after: command.id };
+    dispatch( actions.insertAdjacentCommand( merged, position ) );
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot clone command" );
+  }
+
 };
 
 /**
@@ -519,15 +581,20 @@ actions.cloneCommand = ( command, options = {}) => async ( dispatch, getState ) 
  * @returns {Function}
  */
 actions.cloneTest = ( test, options = {}) => async ( dispatch, getState ) => {
-  const groups = getState().suite.groups,
-        source = groups[ test.groupId ].tests[ test.id ],
-        id = uniqid(),
-        merged = { ...source, ...options },
-        position = { after: test.id };
-  dispatch( actions.insertAdjacentTest( merged, position, id ) );
-  Object.values( source.commands ).forEach( command => {
-    dispatch( actions.addCommand({ ...command, testId: id, groupId: merged.groupId }) );
-  });
+  try {
+    const groups = getState().suite.groups,
+          source = groups[ test.groupId ].tests[ test.id ],
+          id = uniqid(),
+          merged = { ...source, ...options },
+          position = { after: test.id };
+    dispatch( actions.insertAdjacentTest( merged, position, id ) );
+    Object.values( source.commands ).forEach( command => {
+      dispatch( actions.addCommand({ ...command, testId: id, groupId: merged.groupId }) );
+    });
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot clone test" );
+  }
+
 };
 
 /**
@@ -537,15 +604,23 @@ actions.cloneTest = ( test, options = {}) => async ( dispatch, getState ) => {
  * @returns {Function}
  */
 actions.transferTest = ( test, options = {}) => async ( dispatch, getState ) => {
-  const groups = getState().suite.groups,
-        source = groups[ test.groupId ].tests[ test.id ],
-        id = uniqid(),
-        merged = { ...source, ...options };
-  dispatch( actions.addTest( merged, id ) );
-  Object.values( source.commands ).forEach( command => {
-    dispatch( actions.addCommand({ ...command, testId: id, groupId: options.groupId }) );
-  });
+  try {
+    const groups = getState().suite.groups,
+          source = groups[ test.groupId ].tests[ test.id ],
+          id = uniqid(),
+          merged = { ...source, ...options };
+
+    dispatch( actions.addTest( merged, id ) );
+
+    Object.values( source.commands ).forEach( command => {
+      dispatch( actions.addCommand({ ...command, testId: id, groupId: options.groupId }) );
+    });
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot transfer test" );
+  }
+
 };
+
 
 /**
  * Clone command within the same root
@@ -553,16 +628,21 @@ actions.transferTest = ( test, options = {}) => async ( dispatch, getState ) => 
  * @returns {Function}
  */
 actions.cloneGroup = ( group ) => async ( dispatch, getState ) => {
-  const suite = getState().suite,
-        source = suite.groups[ group.id ],
-        id = uniqid(),
-        merged = { ...source, id, key: id },
-        position = { after: group.id };
+  try {
+    const suite = getState().suite,
+          source = suite.groups[ group.id ],
+          id = uniqid(),
+          merged = { ...source, id, key: id },
+          position = { after: group.id };
 
-  dispatch( actions.insertAdjacentGroup( merged, position, id ) );
-  Object.values( source.tests ).forEach( test => {
-    dispatch( actions.transferTest( test, { groupId: id }) );
-  });
+    dispatch( actions.insertAdjacentGroup( merged, position, id ) );
+    Object.values( source.tests ).forEach( test => {
+      dispatch( actions.transferTest( test, { groupId: id }) );
+    });
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot clone group" );
+  }
+
 };
 
 /**
@@ -571,21 +651,31 @@ actions.cloneGroup = ( group ) => async ( dispatch, getState ) => {
  * @returns {Function}
  */
 actions.cloneTarget = ( target ) => async ( dispatch, getState ) => {
-  const suite = getState().suite,
-        source = suite.targets[ target.id ],
-        id = uniqid(),
-        merged = { ...source, id, key: id },
-        position = { after: target.id };
+  try {
+    const suite = getState().suite,
+          source = suite.targets[ target.id ],
+          id = uniqid(),
+          merged = { ...source, id, key: id },
+          position = { after: target.id };
 
-  dispatch( actions.insertAdjacentTarget( merged, position, id ) );
+    dispatch( actions.insertAdjacentTarget( merged, position, id ) );
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot clone target" );
+  }
+
 };
 
 actions.checkRuntimeTestDirReady = () => async ( dispatch ) => {
-  const readyToRunTests = await isRuntimeTestPathReady();
-  if ( !readyToRunTests ) {
-    removeRuntimeTestPath();
+  try {
+    const readyToRunTests = await isRuntimeTestPathReady();
+    if ( !readyToRunTests ) {
+      removeRuntimeTestPath();
+    }
+    return dispatch( actions.updateApp({ readyToRunTests }) );
+  } catch ( ex ) {
+    console.error( ex );
   }
-  return dispatch( actions.updateApp({ readyToRunTests }) );
+
 };
 
 export const saveGit = debounce( async ( store, isTouch = false ) => {
@@ -599,9 +689,11 @@ export const saveGit = debounce( async ( store, isTouch = false ) => {
     ...ts,
     modified: false
   });
+
 }, 100 );
 
 export const saveProject = debounce( async ( store, isTouch = false ) => {
+
   if ( !store.settings.projectDirectory ) {
     return;
   }
@@ -612,17 +704,23 @@ export const saveProject = debounce( async ( store, isTouch = false ) => {
     ...ts,
     modified: false
   });
+
 }, 100 );
 
 actions.copyProjectTo = ( targetDirectory ) => async ( dispatch, getState ) => {
-  const store = getState(),
-        sourceDirectory = store.settings.projectDirectory;
-  if ( !sourceDirectory ) {
-    return;
+  try {
+    const store = getState(),
+          sourceDirectory = store.settings.projectDirectory;
+    if ( !sourceDirectory ) {
+      return;
+    }
+    copyProject( sourceDirectory, targetDirectory );
+    await dispatch( actions.saveSettings({ projectDirectory: targetDirectory }) );
+    await dispatch( actions.loadProject() );
+  } catch ( ex ) {
+    handleException( ex, dispatch, `Cannot copy to ${ targetDirectory }` );
   }
-  copyProject( sourceDirectory, targetDirectory );
-  await dispatch( actions.saveSettings({ projectDirectory: targetDirectory }) );
-  await dispatch( actions.loadProject() );
+
 };
 
 actions.createSuiteByRecording = ({ targets, commands }) => ( dispatch ) => {
@@ -631,25 +729,29 @@ actions.createSuiteByRecording = ({ targets, commands }) => ( dispatch ) => {
 
   dispatch( actions.updateApp({ loading: true }) );
   setTimeout( () => {
-    // Seed targets
-    Object.entries( targets ).forEach( ([ target, selector ]) => {
-      dispatch( actions.addTarget({ target, selector }) );
-    });
-    dispatch( actions.addGroup({ title: "Recorded group" }, groupId ) );
-    dispatch( actions.addTest({ title: "Recorded test", groupId }, testId ) );
-    // Seed commands
-    commands.forEach( ({ method, target, params }) => {
+    try {
+      // Seed targets
+      Object.entries( targets ).forEach( ([ target, selector ]) => {
+        dispatch( actions.addTarget({ target, selector }) );
+      });
+      dispatch( actions.addGroup({ title: "Recorded group" }, groupId ) );
+      dispatch( actions.addTest({ title: "Recorded test", groupId }, testId ) );
+      // Seed commands
+      commands.forEach( ({ method, target, params }) => {
 
-      dispatch( actions.addCommand({
-        target,
-        method,
-        params,
-        groupId,
-        testId
-      }) );
-    });
+        dispatch( actions.addCommand({
+          target,
+          method,
+          params,
+          groupId,
+          testId
+        }) );
+      });
 
-    dispatch( actions.updateApp({ loading: false }) );
+      dispatch( actions.updateApp({ loading: false }) );
+    } catch ( ex ) {
+      handleException( ex, dispatch, "Cannot create suite by recording" );
+    }
 
   }, 100 );
 
@@ -658,7 +760,15 @@ actions.createSuiteByRecording = ({ targets, commands }) => ( dispatch ) => {
 
 
 function noop() {
+}
 
+function handleException( ex, dispatch, title = null ) {
+  console.error( ex );
+  dispatch( actions.setError({
+    visible: true,
+    message: title || "Internal error",
+    description: ex.message
+  }) );
 }
 
 export default actions;

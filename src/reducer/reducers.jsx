@@ -38,7 +38,7 @@ export const reducer = handleActions(
 
       //sort
       const projects = !Object.keys( state.settings.projects ).length
-        ? payload
+        ? { [ payload.dir ]: payload.name }
         : Object.entries( update( state.settings.projects, {
           $merge: { [ payload.dir ]: payload.name }
         }) )

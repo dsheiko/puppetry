@@ -59,12 +59,12 @@ export const TARGET = {
 
 export const GROUP = {
   title: "string=",
-  tests: "*="
+  tests: "object="
 };
 
 export const TEST = {
   title: "string=",
-  commands: "*=",
+  commands: "object=",
   ...TEST_REF
 };
 

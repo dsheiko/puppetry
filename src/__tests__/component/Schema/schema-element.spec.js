@@ -78,7 +78,7 @@ describe( "Schema.target", () => {
 
     });
 
-     describe( "tap.template", () => {
+    describe( "tap.template", () => {
 
       it( "returns expected", () => {
         const code = schema.element.tap.template({
@@ -108,7 +108,6 @@ describe( "Schema.target", () => {
       });
 
     });
-
 
 
     describe( "hover.template", () => {
@@ -144,7 +143,7 @@ describe( "Schema.target", () => {
 
     });
 
-     describe( "setAttribute.template", () => {
+    describe( "setAttribute.template", () => {
 
       it( "returns expected", () => {
         const code = schema.element.setAttribute.template({
@@ -371,7 +370,7 @@ describe( "Schema.target", () => {
 
     });
 
-     describe( "reset.template", () => {
+    describe( "reset.template", () => {
 
       it( "returns valid JavaScript", () => {
         const code = schema.element.reset.template({
@@ -385,23 +384,23 @@ describe( "Schema.target", () => {
     });
 
 
-//    describe( "assertScroll.template", () => {
-//
-//    it( "with assertion", () => {
-//      const code = schema.page.assertScroll.template({
-//        target: "page",
-//        assert: {
-//          assertion: "number",
-//          operator: "gt",
-//          value: 10
-//        },
-//        params: {
-//          direction: "horizontally"
-//        }
-//      });
-//      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
-//    });
-//  });
+    //    describe( "assertScroll.template", () => {
+    //
+    //    it( "with assertion", () => {
+    //      const code = schema.page.assertScroll.template({
+    //        target: "page",
+    //        assert: {
+    //          assertion: "number",
+    //          operator: "gt",
+    //          value: 10
+    //        },
+    //        params: {
+    //          direction: "horizontally"
+    //        }
+    //      });
+    //      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    //    });
+    //  });
 
 
   });

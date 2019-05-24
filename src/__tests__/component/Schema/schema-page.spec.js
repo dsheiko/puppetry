@@ -65,7 +65,6 @@ describe( "Schema.page (templates generate valid JavaScript)", () => {
   });
 
 
-
   describe( "assertTitle.template", () => {
 
     it( "with equals assertion", () => {
@@ -136,7 +135,7 @@ describe( "Schema.page (templates generate valid JavaScript)", () => {
 
   });
 
-   describe( "tap.template", () => {
+  describe( "tap.template", () => {
 
     it( "with coordinates", () => {
       const code = schema.page.tap.template({ target: "page", params: {
@@ -194,7 +193,7 @@ describe( "Schema.page (templates generate valid JavaScript)", () => {
 
     it( "without options", () => {
       const code = schema.page.waitForSelector.template({ target: "page", params: {
-          value: "div"
+        value: "div"
       }});
       expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
     });
@@ -305,7 +304,7 @@ describe( "Schema.page (templates generate valid JavaScript)", () => {
     });
   });
 
-   describe( "assertScroll.template", () => {
+  describe( "assertScroll.template", () => {
 
     it( "with assertion", () => {
       const code = schema.page.assertScroll.template({
