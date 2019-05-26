@@ -21,8 +21,9 @@
   "scripts": {
     "test": "jest --config=jest.cfg.unit.js",
     "test:e2e": "jest --config=jest.cfg.e2e.js --runInBand",
-    "build": "webpack --config webpack.config.js",
+    "build": "NODE_ENV=production && webpack --config webpack.config.js",
     "watch": "webpack --watch  --config webpack.config.js",
+    "build:dev": "NODE_ENV=development && webpack --config webpack.config.js",
     "pack": "electron-builder --dir",
     "dist:all": "build -mwl -c.mac.identity=null",
     "dist": "build --linux snap",
