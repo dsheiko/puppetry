@@ -18,7 +18,7 @@ export default class AbstractDnDTable extends React.Component {
       swapTest: PropTypes.func,
       swapGroup: PropTypes.func,
       swapCommand: PropTypes.func,
-      updateApp: PropTypes.func,
+      setApp: PropTypes.func,
       addTarget: PropTypes.func
     }),
     selector: PropTypes.object.isRequired,
@@ -158,7 +158,7 @@ export default class AbstractDnDTable extends React.Component {
     }
     const payload = clipboardReadObj(),
           update = this.props.action[ `paste${ payload.model }` ];
-    this.props.action.updateApp({ loading: true });
+    this.props.action.setApp({ loading: true });
     setTimeout( () => {
       // inject group/test/commands
       update( payload.data, record );
@@ -169,7 +169,7 @@ export default class AbstractDnDTable extends React.Component {
         }
         this.props.action.addTarget( target );
       });
-      this.props.action.updateApp({ loading: false });
+      this.props.action.setApp({ loading: false });
     }, 200 );
   }
 
@@ -203,12 +203,12 @@ export default class AbstractDnDTable extends React.Component {
 
   cloneRecord = ( record ) => {
     const update = this.props.action[ `clone${this.model}` ];
-    this.props.action.updateApp({ loading: true });
+    this.props.action.setApp({ loading: true });
     // give it a chance to render loading state
     setTimeout( () => {
       update( record );
       this.updateSuiteModified();
-      this.props.action.updateApp({ loading: false });
+      this.props.action.setApp({ loading: false });
     }, 200 );
   }
 

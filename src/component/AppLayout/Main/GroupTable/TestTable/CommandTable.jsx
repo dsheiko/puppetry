@@ -134,9 +134,9 @@ export class CommandTable extends AbstractDnDTable {
   }
 
   onEditCommand( record ) {
-    const { updateApp } = this.props.action;
+    const { setApp } = this.props.action;
 
-    updateApp({
+    setApp({
       commandModal: {
         isVisible: true,
         record,

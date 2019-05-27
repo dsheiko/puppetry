@@ -16,7 +16,7 @@ export class ExportProjectModal extends React.Component {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired,
+      setApp: PropTypes.func.isRequired,
       saveSettings: PropTypes.func.isRequired,
       setError: PropTypes.func.isRequired
     }),
@@ -60,7 +60,7 @@ export class ExportProjectModal extends React.Component {
 
   onClickCancel = ( e ) => {
     e.preventDefault();
-    this.props.action.updateApp({ exportProjectModal: false });
+    this.props.action.setApp({ exportProjectModal: false });
   }
 
   onClickOk = async ( e ) => {
@@ -88,7 +88,7 @@ export class ExportProjectModal extends React.Component {
         { runner: RUNNER_JEST }
       );
       message.info( `Project exported in ${ selectedDirectory }` );
-      this.props.action.updateApp({ exportProjectModal: false });
+      this.props.action.setApp({ exportProjectModal: false });
     } catch ( err ) {
       const message = err instanceof TestGeneratorError ? "Test parser error" : "Cannot export project";
       this.props.action.setError({

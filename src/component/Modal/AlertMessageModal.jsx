@@ -11,7 +11,7 @@ export class AlertMessageModal extends AbstractComponent {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired
+      setApp: PropTypes.func.isRequired
     }),
     isVisible: PropTypes.bool.isRequired
   }
@@ -39,7 +39,7 @@ export class AlertMessageModal extends AbstractComponent {
 
   close() {
     this.props.action.removeAppTab( "testReport" );
-    this.props.action.updateApp({ alert: { visible: false }});
+    this.props.action.setApp({ alert: { visible: false }});
   }
 
   onClickCancel = ( e ) => {

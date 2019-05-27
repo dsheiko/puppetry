@@ -15,7 +15,7 @@ export class GitCheckoutModal extends AbstractComponent {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired
+      setApp: PropTypes.func.isRequired
     }),
     logs: PropTypes.array.isRequired,
     git: PropTypes.object.isRequired,
@@ -56,17 +56,17 @@ export class GitCheckoutModal extends AbstractComponent {
 
   checkoutRecord( oid, comment ) {
     ipcRenderer.send( E_GIT_CHECKOUT, this.props.projectDirectory, oid, comment );
-    this.props.action.updateApp({ gitCheckoutModal: false });
+    this.props.action.setApp({ gitCheckoutModal: false });
   }
 
   onClickCancel = ( e ) => {
     e.preventDefault();
-    this.props.action.updateApp({ gitCheckoutModal: false });
+    this.props.action.setApp({ gitCheckoutModal: false });
   }
 
   onCheckoutResponse = ( ev, oid, comment = "" ) => {
     this.props.action.loadProject();
-    this.props.action.updateApp({ gitDetachedHeadState: true });
+    this.props.action.setApp({ gitDetachedHeadState: true });
     mediator.emit( E_CHECKOUT_MASTER_OPEN, comment );
   }
 

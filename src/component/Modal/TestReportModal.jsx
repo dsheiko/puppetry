@@ -29,7 +29,7 @@ export class TestReportModal extends AbstractComponent {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired,
+      setApp: PropTypes.func.isRequired,
       removeAppTab: PropTypes.func.isRequired,
       addAppTab: PropTypes.func.isRequired
     }),
@@ -99,7 +99,7 @@ export class TestReportModal extends AbstractComponent {
 
   onClickCancel = ( e ) => {
     e.preventDefault();
-    this.props.action.updateApp({ testReportModal: false });
+    this.props.action.setApp({ testReportModal: false });
   }
 
   onClickOk = async ( e ) => {
@@ -108,7 +108,7 @@ export class TestReportModal extends AbstractComponent {
           current = files.find( file => currentSuite === file ),
           checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
-    this.props.action.updateApp({
+    this.props.action.setApp({
       checkedList,
       testReportModal: false,
       headless: this.state.headless,

@@ -23,7 +23,7 @@ export class EditTargetsAsCsvModal extends AbstractForm {
   };
 
   close() {
-    this.props.action.updateApp({ editTargetsAsCsvModal: false });
+    this.props.action.setApp({ editTargetsAsCsvModal: false });
   }
 
   onClickCancel = ( e ) => {

@@ -57,7 +57,7 @@ export class TargetTable extends AbstractEditableTable {
 
   onShowEditTargetsAsCsv = ( e ) => {
     e.preventDefault();
-    this.props.action.updateApp({ editTargetsAsCsvModal: true });
+    this.props.action.setApp({ editTargetsAsCsvModal: true });
   }
 
   fields = [ "target", "selector" ];

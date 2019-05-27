@@ -16,7 +16,7 @@ export class SaveSuiteAsModal extends AbstractForm {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired,
+      setApp: PropTypes.func.isRequired,
       saveSuite: PropTypes.func.isRequired
     }),
     files: PropTypes.arrayOf( PropTypes.string ).isRequired,
@@ -26,12 +26,12 @@ export class SaveSuiteAsModal extends AbstractForm {
 
   onClickCancel = ( e ) => {
     e.preventDefault();
-    this.props.action.updateApp({ saveSuiteAsModal: false });
+    this.props.action.setApp({ saveSuiteAsModal: false });
   }
 
   onClickOk = ( e ) => {
     const { validateFields } = this.props.form,
-          { updateApp, saveSuite } = this.props.action;
+          { setApp, saveSuite } = this.props.action;
 
     e.preventDefault();
 
@@ -40,7 +40,7 @@ export class SaveSuiteAsModal extends AbstractForm {
       if ( err ) {
         return;
       }
-      updateApp({ saveSuiteAsModal: false });
+      setApp({ saveSuiteAsModal: false });
       saveSuite({ filename: `${filename}.json` });
     });
   }

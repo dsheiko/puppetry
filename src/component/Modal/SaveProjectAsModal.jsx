@@ -15,7 +15,7 @@ export class SaveProjectAsModal extends AbstractForm {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired,
+      setApp: PropTypes.func.isRequired,
       copyProjectTo: PropTypes.func.isRequired
     }),
     isVisible: PropTypes.bool.isRequired,
@@ -31,11 +31,11 @@ export class SaveProjectAsModal extends AbstractForm {
 
   onClickCancel = ( e ) => {
     e.preventDefault();
-    this.props.action.updateApp({ saveProjectAsModal: false });
+    this.props.action.setApp({ saveProjectAsModal: false });
   }
 
   onClickOk = async ( e ) => {
-    const { updateApp, copyProjectTo } = this.props.action,
+    const { setApp, copyProjectTo } = this.props.action,
           projectDirectory = this.state.selectedDirectory || this.props.projectDirectory;
 
     e.preventDefault();
@@ -43,7 +43,7 @@ export class SaveProjectAsModal extends AbstractForm {
       return;
     }
     await copyProjectTo( projectDirectory );
-    updateApp({ saveProjectAsModal: false });
+    setApp({ saveProjectAsModal: false });
   }
 
   isBrowseDirectoryValid() {

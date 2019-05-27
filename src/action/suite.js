@@ -19,17 +19,14 @@ import testActions from "./test";
 import commandActions from "./command";
 
 const actions = createActions({
-  SET_SUITE: ( options ) => validate( options, I.UPDATE_SUITE_OPTIONS ),
-
-  RESET_SUITE: ( options ) => validate( options, I.UPDATE_SUITE_OPTIONS ),
-
-  /**
-    * @param {object} options = { title, editing }
-    * @returns {object}
-    */
-  UPDATE_SUITE: ( options ) => validate( options, I.UPDATE_SUITE_OPTIONS )
-
+  SET_SUITE: ( options ) => validate( options, I.SUITE_OPTIONS ),
+  RESET_SUITE: ( options ) => validate( options, I.SUITE_OPTIONS )
 });
+
+actions.updateSuite = ( suite ) => ( dispatch, getState ) => {
+  dispatch( projectActions.setProject({ modified: true }));
+  dispatch( actions.setSuite( suite ) );
+};
 
 actions.removeSuite = ( filename ) => async ( dispatch, getState ) => {
   if ( !filename || typeof filename !== "string" ) {
@@ -109,7 +106,7 @@ actions.saveSuite = ( options = {}) => async ( dispatch, getState ) => {
 };
 
 actions.openSuiteFile = ( filename ) => ( dispatch ) => {
-  dispatch( appActions.updateApp({ loading: true }) );
+  dispatch( appActions.setApp({ loading: true }) );
   try {
     dispatch( actions.loadSuite( filename ) );
   } catch ( e ) {
@@ -120,7 +117,7 @@ actions.openSuiteFile = ( filename ) => ( dispatch ) => {
     }) );
     log.warn( `Renderer process: actions.openSuiteFile: ${ e }` );
   }
-  dispatch( appActions.updateApp({ loading: false }) );
+  dispatch( appActions.setApp({ loading: false }) );
 };
 
 
@@ -128,7 +125,7 @@ actions.createSuiteByRecording = ({ targets, commands }) => ( dispatch ) => {
   const groupId = uniqid(),
         testId = uniqid();
 
-  dispatch( appActions.updateApp({ loading: true }) );
+  dispatch( appActions.setApp({ loading: true }) );
   setTimeout( () => {
     try {
       // Seed targets
@@ -149,7 +146,7 @@ actions.createSuiteByRecording = ({ targets, commands }) => ( dispatch ) => {
         }) );
       });
 
-      dispatch( appActions.updateApp({ loading: false }) );
+      dispatch( appActions.setApp({ loading: false }) );
     } catch ( ex ) {
       handleException( ex, dispatch, "Cannot create suite by recording" );
     }

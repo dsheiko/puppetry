@@ -3,7 +3,8 @@ import { createActions } from "redux-actions";
 import { handleException, saveProject } from "./helpers";
 import debounce from "lodash.debounce";
 import { InvalidArgumentError } from "error";
-
+import { validate } from "bycontract";
+import * as I from "interface";
 import errorActions from "./error";
 import {
   getProjectFiles,
@@ -19,7 +20,7 @@ import gitActions from "./git";
 import suiteActions from "./suite";
 
 const actions = createActions({
-  SET_PROJECT: ( options ) => options,
+  SET_PROJECT: ( project ) => validate( project, I.PROJECT_OPTIONS ),
 
   UPDATE_PROJECT_PANES: ( panel, panes ) => ({ panel, panes })
 });
@@ -33,7 +34,7 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
     throw new InvalidArgumentError( "Empty project directory" );
   }
   try {
-    dispatch( appActions.updateApp({ loading: true }) );
+    dispatch( appActions.setApp({ loading: true }) );
     project = await readProject( projectDirectory );
     ipcRenderer.send( E_PROJECT_LOADED, projectDirectory );
 
@@ -56,7 +57,7 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
   } catch ( err ) {
     log.warn( `Renderer process: actions.loadProject(${projectDirectory }): ${ err }` );
   } finally {
-    dispatch( appActions.updateApp({ loading: false }) );
+    dispatch( appActions.setApp({ loading: false }) );
   }
 
   return project;
@@ -78,7 +79,7 @@ actions.loadProjectFiles = ( directory = null ) => async ( dispatch, getState ) 
           projectDirectory = directory || store.settings.projectDirectory,
           files = await getProjectFiles( projectDirectory );
     ipcRenderer.send( E_SUITE_LIST_UPDATED, projectDirectory, store.suite.filename, files );
-    dispatch( appActions.updateApp({ project: { files }}) );
+    dispatch( appActions.setApp({ project: { files }}) );
   } catch ( ex ) {
     handleException( ex, dispatch, "Cannot load project files" );
   }

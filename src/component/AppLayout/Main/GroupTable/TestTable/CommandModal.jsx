@@ -10,7 +10,7 @@ export class CommandModal extends React.Component {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired,
+      setApp: PropTypes.func.isRequired,
       removeCommand: PropTypes.func.isRequired,
       updateSuite: PropTypes.func.isRequired
     }),
@@ -34,9 +34,9 @@ export class CommandModal extends React.Component {
   }
 
   onCancel = ( record ) => {
-    const { updateApp, removeCommand, updateSuite } = this.props.action;
+    const { setApp, removeCommand, updateSuite } = this.props.action;
     this.setState({ submitted: false });
-    updateApp({
+    setApp({
       commandModal: {
         isVisible: false,
         record: null

@@ -15,7 +15,7 @@ export class Toolbar extends React.Component {
     action:  PropTypes.shape({
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired,
-      updateApp: PropTypes.func.isRequired,
+      setApp: PropTypes.func.isRequired,
       closeApp: PropTypes.func.isRequired
     }),
 
@@ -61,7 +61,7 @@ export class Toolbar extends React.Component {
   }
 
   onEditProject = () => {
-    this.props.action.updateApp({
+    this.props.action.setApp({
       editProjectModal: true
     });
   }

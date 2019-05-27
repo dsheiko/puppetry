@@ -1,9 +1,9 @@
 import update from "immutability-helper";
-import { findTargetNodes } from "../service/suite";
+import { findTargetNodes } from "service/suite";
 
 
 function getTargetById( state, id ) {
-  return state.suite.targets[ id ];
+  return state.targets[ id ];
 }
 
 export function updateTagetsInSuite( prevState, nextState, targetId ) {
@@ -20,7 +20,7 @@ export function updateTagetsInSuite( prevState, nextState, targetId ) {
     return nextState;
   }
 
-  const targets = findTargetNodes( nextState.suite, prevTargetName );
+  const targets = findTargetNodes( nextState, prevTargetName );
 
   if ( !targets.length ) {
     return nextState;
@@ -29,7 +29,7 @@ export function updateTagetsInSuite( prevState, nextState, targetId ) {
   let state = nextState;
   targets.forEach( target => {
     state = update( state, {
-      suite: {
+
         groups: {
           [ target.groupId ]: {
             tests: {
@@ -57,13 +57,13 @@ export function updateTagetsInSuite( prevState, nextState, targetId ) {
             }
           }
         }
-      }});
+      });
   });
   return state;
 }
 
 export function isTargetNotUnique( state, payload ) {
-  return Boolean( Object.values( state.suite.targets )
+  return Boolean( Object.values( state.targets )
     .filter( item => item.id !== payload.id )
     .find( item => item.target === payload.target ) );
 }
@@ -102,30 +102,30 @@ export function appendMapEntry( map, targetEntry ) {
 export function transferTest( state, sourceTest, targetTest ) {
 
   return update( state, {
-    suite: {
+
       groups: {
         // remove
         [ sourceTest.groupId ]: {
           tests: {
-            $set: removeMapEntry( state.suite.groups[ sourceTest.groupId ].tests, sourceTest.id )
+            $set: removeMapEntry( state.groups[ sourceTest.groupId ].tests, sourceTest.id )
           }
         },
         // add
         [ targetTest.groupId ]: {
           tests: {
-            $set: appendMapEntry( state.suite.groups[ targetTest.groupId ].tests, sourceTest )
+            $set: appendMapEntry( state.groups[ targetTest.groupId ].tests, sourceTest )
           }
         }
       }
-    }});
+    });
 }
 
 export function transferCommand( state, sourceCommand, targetCommand ) {
-  const sourceCommands = state.suite.groups[ sourceCommand.groupId ].tests[ sourceCommand.testId ].commands,
-        targetCommands = state.suite.groups[ targetCommand.groupId ].tests[ targetCommand.testId ].commands,
+  const sourceCommands = state.groups[ sourceCommand.groupId ].tests[ sourceCommand.testId ].commands,
+        targetCommands = state.groups[ targetCommand.groupId ].tests[ targetCommand.testId ].commands,
 
         temp = update( state, {
-          suite: {
+
             groups: {
               // remove
               [ sourceCommand.groupId ]: {
@@ -138,10 +138,10 @@ export function transferCommand( state, sourceCommand, targetCommand ) {
                 }
               }
             }
-          }});
+          });
 
   return update( temp, {
-    suite: {
+
       groups: {
         // add
         [ targetCommand.groupId ]: {
@@ -154,7 +154,7 @@ export function transferCommand( state, sourceCommand, targetCommand ) {
           }
         }
       }
-    }});
+    });
 }
 
 export const normalizeComplexPayload = ( payload ) => {

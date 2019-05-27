@@ -19,7 +19,7 @@ export class InstallRuntimeTestModal extends AbstractComponent {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired
+      setApp: PropTypes.func.isRequired
     }),
     isVisible: PropTypes.bool.isRequired
   }
@@ -52,7 +52,7 @@ export class InstallRuntimeTestModal extends AbstractComponent {
     if ( progress > 0 && !error ) {
       return;
     }
-    this.props.action.updateApp({ installRuntimeTestModal: false });
+    this.props.action.setApp({ installRuntimeTestModal: false });
     notification.open({
       message: "Dependencies not installed",
       description: "You still can manage your test project and export the tests."
@@ -70,7 +70,7 @@ export class InstallRuntimeTestModal extends AbstractComponent {
   onComplete = () => {
     try {
       lockRuntimeTestPath();
-      this.props.action.updateApp({
+      this.props.action.setApp({
         readyToRunTests: true,
         installRuntimeTestModal: false,
         testReportModal: true
@@ -124,7 +124,7 @@ export class InstallRuntimeTestModal extends AbstractComponent {
       });
       // clean up
       removeRuntimeTestPath();
-      this.props.action.updateApp({ readyToRunTests: false });
+      this.props.action.setApp({ readyToRunTests: false });
     });
 
     ipcRenderer.removeAllListeners( E_RUNTIME_TEST_MILESTONE );

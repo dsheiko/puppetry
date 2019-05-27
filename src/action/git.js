@@ -41,7 +41,7 @@ actions.checkGit = ( projectDirectory ) => async ( dispatch ) => {
   ipcRenderer.removeAllListeners( E_GIT_CURRENT_BRANCH_RESPONSE );
   ipcRenderer.on( E_GIT_CURRENT_BRANCH_RESPONSE, ( ev, branch ) => {
     if ( branch !== "master" ) {
-      dispatch( appActions.updateApp({ gitDetachedHeadState: true }) );
+      dispatch( appActions.setApp({ gitDetachedHeadState: true }) );
       mediator.emit( E_CHECKOUT_MASTER_OPEN, branch );
     }
   });
