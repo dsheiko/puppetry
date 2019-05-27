@@ -1,5 +1,6 @@
 import { createActions } from "redux-actions";
 import { validate } from "bycontract";
+import * as I from "interface";
 import log from "electron-log";
 import { saveProject } from "./helpers";
 import { closeApp } from "service/utils";
@@ -10,10 +11,10 @@ import settingsActions from "./settings";
 
 const actions = createActions({
   /**
-    * @param {object} options = { loading, newProjectModal, testReportModal, project }
+    * @param {object} options
     * @returns {object}
     */
-  UPDATE_APP: ( options ) => options,
+  SET_APP: ( options ) => validte( options, I.APP_OPTIONS ),
 
   ADD_APP_TAB: ( tabKey ) => validate( tabKey, "string" ),
 
@@ -25,9 +26,9 @@ const actions = createActions({
 // APP
 
 actions.setLoadingFor = ( ms ) => async ( dispatch ) => {
-  dispatch( actions.updateApp({ loading: true }) );
+  dispatch( actions.setApp({ loading: true }) );
   setTimeout( () => {
-    dispatch( actions.updateApp({ loading: false }) );
+    dispatch( actions.setApp({ loading: false }) );
   }, ms );
 };
 
@@ -63,7 +64,7 @@ actions.checkRuntimeTestDirReady = () => async ( dispatch ) => {
     if ( !readyToRunTests ) {
       removeRuntimeTestPath();
     }
-    return dispatch( actions.updateApp({ readyToRunTests }) );
+    return dispatch( actions.setApp({ readyToRunTests }) );
   } catch ( ex ) {
     console.error( ex );
   }

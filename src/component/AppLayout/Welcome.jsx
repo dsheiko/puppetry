@@ -9,7 +9,7 @@ export class Welcome extends AbstractComponent {
   static propTypes = {
     action: PropTypes.shape({
       loadProject: PropTypes.func.isRequired,
-      updateApp: PropTypes.func.isRequired
+      setApp: PropTypes.func.isRequired
     }),
     projectDirectory: PropTypes.string.isRequired
   }
@@ -22,7 +22,7 @@ export class Welcome extends AbstractComponent {
 
   onCreateProject = ( e ) => {
     e.preventDefault();
-    this.props.action.updateApp({ newProjectModal: true });
+    this.props.action.setApp({ newProjectModal: true });
   }
 
   render() {

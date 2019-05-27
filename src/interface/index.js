@@ -1,5 +1,11 @@
 import PropTypes from "prop-types";
 
+export * from "./settings";
+export * from "./git";
+export * from "./app";
+export * from "./project";
+export * from "./suite";
+
 export const suitePropTypes = PropTypes.shape({
   title: PropTypes.string.isRequired,
   timeout: PropTypes.number.isRequired,
@@ -13,20 +19,6 @@ export const suitePropTypes = PropTypes.shape({
 
 
 export const ID_REF = "string=";
-
-export const ERROR_OPTIONS = {
-  visible: "boolean",
-  message: "string",
-  description: "string="
-};
-
-
-export const UPDATE_SUITE_OPTIONS = {
-  title: "string=",
-  modified: "boolean=",
-  editing: "boolean="
-};
-
 
 export const SWAP_BASE_OPTIONS = {
   sourceInx: "number",

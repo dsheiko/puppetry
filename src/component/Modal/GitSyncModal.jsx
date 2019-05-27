@@ -18,7 +18,7 @@ export class GitSyncModal extends AbstractForm {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired
+      setApp: PropTypes.func.isRequired
     }),
     git: PropTypes.object.isRequired,
     projectDirectory: PropTypes.string,
@@ -26,7 +26,7 @@ export class GitSyncModal extends AbstractForm {
   }
 
   close() {
-    this.props.action.updateApp({ gitSyncModal: false });
+    this.props.action.setApp({ gitSyncModal: false });
   }
 
   onClickCancel = ( e ) => {
@@ -57,7 +57,7 @@ export class GitSyncModal extends AbstractForm {
   }
 
   onClickCommit= ( e ) => {
-    const { updateApp } = this.props.action,
+    const { setApp } = this.props.action,
           { git, projectDirectory } = this.props,
           { validateFields } = this.props.form;
 
@@ -78,7 +78,7 @@ export class GitSyncModal extends AbstractForm {
         git.configUsername,
         git.configEmail
       );
-      updateApp({ gitSyncModal: false });
+      setApp({ gitSyncModal: false });
     });
   }
 

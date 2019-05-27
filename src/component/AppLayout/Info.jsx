@@ -10,7 +10,7 @@ export class Info extends AbstractComponent {
 
   static propTypes = {
     action: PropTypes.shape({
-      updateApp: PropTypes.func.isRequired
+      setApp: PropTypes.func.isRequired
     })
   }
 
@@ -22,12 +22,12 @@ export class Info extends AbstractComponent {
 
   onCreate = ( e ) => {
     e.preventDefault();
-    this.props.action.updateApp({ newSuiteModal: true });
+    this.props.action.setApp({ newSuiteModal: true });
   }
 
   onOpen = ( e ) => {
     e.preventDefault();
-    this.props.action.updateApp({ openSuiteModal: true });
+    this.props.action.setApp({ openSuiteModal: true });
   }
 
 

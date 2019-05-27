@@ -22,7 +22,7 @@ export class NewSuiteModal extends AbstractForm {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired,
+      setApp: PropTypes.func.isRequired,
       createSuite: PropTypes.func.isRequired
     }),
 
@@ -35,7 +35,7 @@ export class NewSuiteModal extends AbstractForm {
 
   onClickCancel = ( e ) => {
     e.preventDefault();
-    this.props.action.updateApp({ newSuiteModal: false });
+    this.props.action.setApp({ newSuiteModal: false });
   }
 
   onClickOk = ( e ) => {
@@ -44,7 +44,7 @@ export class NewSuiteModal extends AbstractForm {
   }
 
   createSuite = () => {
-    const { createSuite, updateApp } = this.props.action,
+    const { createSuite, setApp } = this.props.action,
           { validateFields } = this.props.form;
 
     validateFields( async ( err, values ) => {
@@ -56,7 +56,7 @@ export class NewSuiteModal extends AbstractForm {
         return;
       }
       await createSuite( filename, title );
-      updateApp({ newSuiteModal: false });
+      setApp({ newSuiteModal: false });
     });
   }
 

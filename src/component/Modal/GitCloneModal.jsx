@@ -30,7 +30,7 @@ export class GitCloneModal extends AbstractForm {
   }
 
   close() {
-    this.props.action.updateApp({ gitCloneModal: false });
+    this.props.action.setApp({ gitCloneModal: false });
   }
 
   onClickCancel = ( e ) => {

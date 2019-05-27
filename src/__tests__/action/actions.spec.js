@@ -1,4 +1,4 @@
-import actions from "../../action/actions";
+import actions from "../../action";
 import { Exception } from "bycontract";
 
 const FIX_TITLE = "TITLE",
@@ -8,14 +8,15 @@ describe( "Actions", () => {
 
   describe( "*Suite", () => {
 
-    it( "performs updateSuite", () => {
-      const res = actions.updateSuite({ title: FIX_TITLE });
+    it( "performs setSuite", () => {
+      const res = actions.setSuite({ title: FIX_TITLE });
+
       expect( res.payload.title ).toEqual( FIX_TITLE );
     });
 
-    it( "validates updateSuite", () => {
+    it( "validates setSuite", () => {
       expect( () => {
-        actions.updateSuite({ title: 10 });
+        actions.setSuite({ title: 10 });
       }).toThrow( Exception );
     });
 

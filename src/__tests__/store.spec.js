@@ -1,7 +1,7 @@
 //import configureStore from "redux-mock-store";
-import actions from "../action/actions";
+import actions from "../action";
 import DEFAULT_STATE from "../reducer/defaultState";
-import { reducer } from "../reducer/reducers";
+import reducer from "../reducer";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import thunkMiddleware from "redux-thunk";

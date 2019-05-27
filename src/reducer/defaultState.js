@@ -1,8 +1,8 @@
-const DEFAULT_STATE = {
+export default {
   // Settings stored in localStorage
   settings: {
     projectDirectory: "",
-    projects: {}, // [{ dir, name }]
+    projects: {}, // { dir, name }
     exportDirectory: "",
     lastCheckedVersion: "",
     checkDate: ""
@@ -111,9 +111,6 @@ const DEFAULT_STATE = {
     credentialsPassword: ""
   }
 };
-
-export default DEFAULT_STATE;
-
 
 export const groupDefaultState = ( id ) => ({
   editing: false,

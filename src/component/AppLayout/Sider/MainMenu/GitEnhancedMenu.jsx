@@ -12,7 +12,7 @@ export class GitEnhancedMenu extends React.Component {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired,
+      setApp: PropTypes.func.isRequired,
       addAppTab: PropTypes.func.isRequired,
       saveGit: PropTypes.func.isRequired,
       saveSuite: PropTypes.func.isRequired,
@@ -32,7 +32,7 @@ export class GitEnhancedMenu extends React.Component {
   }
 
   onFileGitClone = () => {
-    this.props.action.updateApp({ gitCloneModal: true });
+    this.props.action.setApp({ gitCloneModal: true });
   }
 
   onFileGitCommitResponse = () => {
@@ -42,7 +42,7 @@ export class GitEnhancedMenu extends React.Component {
   }
 
   onFileGitCheckout = () => {
-    this.props.action.updateApp({ gitCheckoutModal: true });
+    this.props.action.setApp({ gitCheckoutModal: true });
     setTimeout( () => {
       ipcRenderer.send(
         E_GIT_LOG,
@@ -50,7 +50,7 @@ export class GitEnhancedMenu extends React.Component {
       );
       ipcRenderer.removeAllListeners( E_GIT_LOG_RESPONSE );
       ipcRenderer.on( E_GIT_LOG_RESPONSE, ( ev, logs ) => {
-        this.props.action.updateApp({ gitLogs: logs });
+        this.props.action.setApp({ gitLogs: logs });
       });
     }, 10 );
   }
@@ -66,7 +66,7 @@ export class GitEnhancedMenu extends React.Component {
         setSuite: this.props.action.setSuite
       });
     }
-    this.props.action.updateApp({ gitCommitModal: true });
+    this.props.action.setApp({ gitCommitModal: true });
   }
 
   onFileGitSync = async () => {
@@ -76,7 +76,7 @@ export class GitEnhancedMenu extends React.Component {
         setSuite: this.props.action.setSuite
       });
     }
-    this.props.action.updateApp({ gitSyncModal: true });
+    this.props.action.setApp({ gitSyncModal: true });
   }
 
   onFileGitInitialize = () => {

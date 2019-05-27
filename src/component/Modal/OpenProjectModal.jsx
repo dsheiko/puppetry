@@ -15,7 +15,7 @@ export class OpenProjectModal extends AbstractForm {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired,
+      setApp: PropTypes.func.isRequired,
       loadProject: PropTypes.func.isRequired,
       saveSettings: PropTypes.func.isRequired
     }),
@@ -33,11 +33,11 @@ export class OpenProjectModal extends AbstractForm {
 
   onClickCancel = ( e ) => {
     e.preventDefault();
-    this.props.action.updateApp({ openProjectModal: false });
+    this.props.action.setApp({ openProjectModal: false });
   }
 
   onClickOk = async ( e ) => {
-    const { updateApp, loadProject, saveSettings } = this.props.action,
+    const { setApp, loadProject, saveSettings } = this.props.action,
           projectDirectory = this.state.selectedDirectory || this.props.projectDirectory;
 
     e.preventDefault();
@@ -45,7 +45,7 @@ export class OpenProjectModal extends AbstractForm {
       return;
     }
     saveSettings({ projectDirectory });
-    updateApp({ openProjectModal: false });
+    setApp({ openProjectModal: false });
     await loadProject();
   }
 

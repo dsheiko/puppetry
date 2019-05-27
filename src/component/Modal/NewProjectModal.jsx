@@ -23,7 +23,7 @@ export class NewProjectModal extends AbstractForm {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired,
+      setApp: PropTypes.func.isRequired,
       saveSettings: PropTypes.func.isRequired,
       saveProject: PropTypes.func.isRequired
     }),
@@ -42,12 +42,12 @@ export class NewProjectModal extends AbstractForm {
 
   onClickCancel = ( e ) => {
     e.preventDefault();
-    this.props.action.updateApp({ newProjectModal: false });
+    this.props.action.setApp({ newProjectModal: false });
   }
 
   onClickOk = async ( e ) => {
     const { validateFields } = this.props.form,
-          { updateApp, saveSettings, saveProject, createSuite } = this.props.action,
+          { setApp, saveSettings, saveProject, createSuite } = this.props.action,
           projectDirectory = this.state.selectedDirectory || this.props.projectDirectory;
 
     e.preventDefault();
@@ -69,10 +69,10 @@ export class NewProjectModal extends AbstractForm {
       }
 
       saveSettings({ projectDirectory });
-      updateApp({ newProjectModal: false });
+      setApp({ newProjectModal: false });
       await saveProject({ projectDirectory, name });
       await createSuite( filename, suiteTitle );
-      updateApp({ newSuiteModal: false });
+      setApp({ newSuiteModal: false });
     });
   }
 

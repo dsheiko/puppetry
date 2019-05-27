@@ -15,15 +15,15 @@ export class Main extends React.Component {
     selector: PropTypes.object.isRequired,
     action: PropTypes.shape({
       updateProjectPanes: PropTypes.func.isRequired,
-      updateApp: PropTypes.func.isRequired
+      setApp: PropTypes.func.isRequired
     })
   }
 
   onTabChange = ( targetKey ) => {
-    this.props.action.updateApp({ loading: true });
+    this.props.action.setApp({ loading: true });
     setTimeout( () => {
       this.props.action.updateProjectPanes( "suite", [ targetKey ]);
-      this.props.action.updateApp({ loading: false });
+      this.props.action.setApp({ loading: false });
     }, 10 );
   }
 

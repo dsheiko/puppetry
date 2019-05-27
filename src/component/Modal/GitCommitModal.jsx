@@ -17,7 +17,7 @@ export class GitCommitModal extends AbstractForm {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired
+      setApp: PropTypes.func.isRequired
     }),
     git: PropTypes.object.isRequired,
     projectDirectory: PropTypes.string,
@@ -27,11 +27,11 @@ export class GitCommitModal extends AbstractForm {
 
   onClickCancel = ( e ) => {
     e.preventDefault();
-    this.props.action.updateApp({ gitCommitModal: false });
+    this.props.action.setApp({ gitCommitModal: false });
   }
 
   onClickOk = ( e ) => {
-    const { updateApp } = this.props.action,
+    const { setApp } = this.props.action,
           { git, projectDirectory } = this.props,
           { validateFields } = this.props.form;
 
@@ -48,7 +48,7 @@ export class GitCommitModal extends AbstractForm {
         git.configUsername,
         git.configEmail
       );
-      updateApp({ gitCommitModal: false });
+      setApp({ gitCommitModal: false });
     });
   }
 

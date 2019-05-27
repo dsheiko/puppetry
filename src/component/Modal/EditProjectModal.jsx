@@ -16,7 +16,7 @@ export class EditProjectModal extends AbstractForm {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired,
+      setApp: PropTypes.func.isRequired,
       saveProject: PropTypes.func.isRequired
     }),
     isVisible: PropTypes.bool.isRequired,
@@ -25,7 +25,7 @@ export class EditProjectModal extends AbstractForm {
   }
 
   close() {
-    this.props.action.updateApp({ editProjectModal: false });
+    this.props.action.setApp({ editProjectModal: false });
   }
 
   onClickCancel = ( e ) => {

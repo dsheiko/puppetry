@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { AppLayout } from "../component/AppLayout";
-import actions from "../action/actions";
+import actions from "../action";
 import * as selectors from "../selector/selectors";
 
 const GREETINGS = [ "Greetings",
@@ -48,7 +48,7 @@ export class App extends React.Component {
       loadProjectFiles: PropTypes.func.isRequired,
       checkRuntimeTestDirReady: PropTypes.func.isRequired,
       checkNewVersion: PropTypes.func.isRequired,
-      updateApp: PropTypes.func.isRequired,
+      setApp: PropTypes.func.isRequired,
       checkGit: PropTypes.func.isRequired
     }),
     store: PropTypes.object,
@@ -61,11 +61,11 @@ export class App extends React.Component {
             loadSettings,
             checkRuntimeTestDirReady,
             checkNewVersion,
-            updateApp
+            setApp
           } = this.props.action,
           settings = loadSettings();
 
-    updateApp({ greeting: GREETINGS[ Math.floor( Math.random() * GREETINGS.length ) ] });
+    setApp({ greeting: GREETINGS[ Math.floor( Math.random() * GREETINGS.length ) ] });
     checkRuntimeTestDirReady();
     checkNewVersion();
 

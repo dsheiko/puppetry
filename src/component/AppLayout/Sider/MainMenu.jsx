@@ -19,7 +19,7 @@ export class MainMenu extends GitEnhancedMenu {
 
   static propTypes = {
     action:  PropTypes.shape({
-      updateApp: PropTypes.func.isRequired,
+      setApp: PropTypes.func.isRequired,
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired,
       closeApp: PropTypes.func.isRequired,
@@ -83,7 +83,7 @@ export class MainMenu extends GitEnhancedMenu {
     if ( !projectDirectory ) {
       return;
     }
-    this.props.action.updateApp({ saveSuiteAsModal: true });
+    this.props.action.setApp({ saveSuiteAsModal: true });
   }
 
   onSaveProjectAs = () => {
@@ -91,7 +91,7 @@ export class MainMenu extends GitEnhancedMenu {
     if ( !projectDirectory ) {
       return;
     }
-    this.props.action.updateApp({ saveProjectAsModal: true });
+    this.props.action.setApp({ saveProjectAsModal: true });
   }
 
   onNewProject = async () => {
@@ -101,7 +101,7 @@ export class MainMenu extends GitEnhancedMenu {
         setSuite: this.props.action.setSuite
       });
     }
-    this.props.action.updateApp({ newProjectModal: true });
+    this.props.action.setApp({ newProjectModal: true });
   }
 
   onOpenProject = async () => {
@@ -111,7 +111,7 @@ export class MainMenu extends GitEnhancedMenu {
         setSuite: this.props.action.setSuite
       });
     }
-    this.props.action.updateApp({ openProjectModal: true });
+    this.props.action.setApp({ openProjectModal: true });
   }
 
   onOpenSuite = async () => {
@@ -125,7 +125,7 @@ export class MainMenu extends GitEnhancedMenu {
         setSuite: this.props.action.setSuite
       });
     }
-    this.props.action.updateApp({ openSuiteModal: true });
+    this.props.action.setApp({ openSuiteModal: true });
   }
 
   onNewSuite = async () => {
@@ -139,7 +139,7 @@ export class MainMenu extends GitEnhancedMenu {
         setSuite: this.props.action.setSuite
       });
     }
-    this.props.action.updateApp({ newSuiteModal: true });
+    this.props.action.setApp({ newSuiteModal: true });
   }
 
   onTestReport = async () => {
@@ -150,7 +150,7 @@ export class MainMenu extends GitEnhancedMenu {
       });
     }
     this.props.action.removeAppTab( "testReport" );
-    this.props.action.updateApp({ testReportModal: true });
+    this.props.action.setApp({ testReportModal: true });
   }
 
   onRuntimeTestInstall = () => {
@@ -158,7 +158,7 @@ export class MainMenu extends GitEnhancedMenu {
     if ( !projectDirectory ) {
       return;
     }
-    this.props.action.updateApp({ installRuntimeTestModal: true });
+    this.props.action.setApp({ installRuntimeTestModal: true });
   }
 
   onExit = async () => {
@@ -182,7 +182,7 @@ export class MainMenu extends GitEnhancedMenu {
         setSuite: this.props.action.setSuite
       });
     }
-    return this.props.action.updateApp({ exportProjectModal: true });
+    return this.props.action.setApp({ exportProjectModal: true });
   }
 
   onSettings = async () => {

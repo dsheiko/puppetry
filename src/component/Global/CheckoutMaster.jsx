@@ -17,7 +17,7 @@ export class CheckoutMaster extends AbstractComponent {
 
   onCheckoutResponse = () => {
     this.props.action.loadProject();
-    this.props.action.updateApp({ gitDetachedHeadState: false });
+    this.props.action.setApp({ gitDetachedHeadState: false });
     this.hide && this.hide();
     message.info( "You are back on the master branch" );
   }

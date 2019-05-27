@@ -11,7 +11,7 @@ import ErrorBoundary from "component/ErrorBoundary";
 import log from "electron-log";
 
 import { App } from "./container/App.jsx";
-import { reducer } from "./reducer/reducers";
+import reducer from "./reducer";
 
 process.on( "uncaughtException", ( err ) => {
   console.error( "uncaughtException", err );
