@@ -1,5 +1,6 @@
 const { join } = require( "path" ),
       pkg = require( "./package.json" ),
+      webpack = require( "webpack" ),
       CleanWebpackPlugin = require( "clean-webpack-plugin" ),
       SRC_FULL_PATH = join( __dirname, "./src/" ),
       MAIN_FULL_PATH = join( __dirname, "./app/" ),
@@ -70,5 +71,13 @@ module.exports = {
           }]
         }
 			]
-		}
+		},
+    optimization: {
+      minimizer: [
+          new webpack.NormalModuleReplacementPlugin(
+           /dist\/bycontract\.dev\.js/,
+           ".\/bycontract.prod.js"
+         )
+      ]
+   }
 };

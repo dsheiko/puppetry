@@ -1,4 +1,5 @@
 import settingsActions from "./settings";
+import errorActions from "./error";
 import appActions from "./app";
 import gitActions from "./git";
 import projectActions from "./project";
@@ -9,6 +10,7 @@ import testActions from "./test";
 import commandActions from "./command";
 
 const actions = {
+  ...errorActions,
   ...settingsActions,
   ...appActions,
   ...gitActions,

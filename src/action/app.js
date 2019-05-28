@@ -14,7 +14,7 @@ const actions = createActions({
     * @param {object} options
     * @returns {object}
     */
-  SET_APP: ( options ) => validte( options, I.APP_OPTIONS ),
+  SET_APP: ( options ) => validate( options, I.APP_OPTIONS ),
 
   ADD_APP_TAB: ( tabKey ) => validate( tabKey, "string" ),
 
