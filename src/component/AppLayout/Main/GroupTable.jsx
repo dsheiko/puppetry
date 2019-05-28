@@ -26,7 +26,7 @@ export class GroupTable extends AbstractEditableTable {
             onSubmit={ this.onSubmit }
             className="input--title"
             dataIndex="title"
-            placeholder="Describe a target or scenario you want to test"
+            placeholder="Enter a group name"
             liftFormStateUp={ this.liftFormStateUp }
             updateRecord={ this.updateRecord }
           />

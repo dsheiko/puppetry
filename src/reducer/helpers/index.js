@@ -68,20 +68,8 @@ export function isTargetNotUnique( state, payload ) {
     .find( item => item.target === payload.target ) );
 }
 
-export function getCommandsFlat( groups ) {
-  return Object.values( groups ).reduce( ( carry, group ) => {
-    const commands = Object.values( group.tests ).reduce( ( carry, test ) => {
-      return carry.concat( Object.values( test.commands ) );
-    }, []);
-    return carry.concat( commands );
-  }, []);
-}
 
-export function getTestsFlat( groups ) {
-  return Object.values( groups ).reduce( ( carry, group ) => {
-    return carry.concat( Object.values( group.tests ) );
-  }, []);
-}
+
 
 function arrayToMap( array ) {
 
@@ -99,63 +87,6 @@ export function appendMapEntry( map, targetEntry ) {
   return arrayToMap([ targetEntry, ...Object.values( map ) ]);
 }
 
-export function transferTest( state, sourceTest, targetTest ) {
-
-  return update( state, {
-
-      groups: {
-        // remove
-        [ sourceTest.groupId ]: {
-          tests: {
-            $set: removeMapEntry( state.groups[ sourceTest.groupId ].tests, sourceTest.id )
-          }
-        },
-        // add
-        [ targetTest.groupId ]: {
-          tests: {
-            $set: appendMapEntry( state.groups[ targetTest.groupId ].tests, sourceTest )
-          }
-        }
-      }
-    });
-}
-
-export function transferCommand( state, sourceCommand, targetCommand ) {
-  const sourceCommands = state.groups[ sourceCommand.groupId ].tests[ sourceCommand.testId ].commands,
-        targetCommands = state.groups[ targetCommand.groupId ].tests[ targetCommand.testId ].commands,
-
-        temp = update( state, {
-
-            groups: {
-              // remove
-              [ sourceCommand.groupId ]: {
-                tests: {
-                  [ sourceCommand.testId ]: {
-                    commands: {
-                      $set: removeMapEntry( sourceCommands, sourceCommand.id )
-                    }
-                  }
-                }
-              }
-            }
-          });
-
-  return update( temp, {
-
-      groups: {
-        // add
-        [ targetCommand.groupId ]: {
-          tests: {
-            [ targetCommand.testId ]: {
-              commands: {
-                $set: appendMapEntry( targetCommands, sourceCommand )
-              }
-            }
-          }
-        }
-      }
-    });
-}
 
 export const normalizeComplexPayload = ( payload ) => {
   if ( "id" in  payload.options ) {

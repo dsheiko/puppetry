@@ -25,7 +25,7 @@ export class TestTable extends AbstractEditableTable {
             className="input--title"
             record={ record }
             dataIndex="title"
-            placeholder="Describe assertions you want to perform"
+            placeholder="Enter a test name"
             liftFormStateUp={ this.liftFormStateUp }
             updateRecord={ this.updateRecord }
           />

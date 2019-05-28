@@ -2,6 +2,8 @@ import { createActions } from "redux-actions";
 import { validate } from "bycontract";
 import * as I from "interface";
 import { handleException } from "./helpers";
+import appActions from "./app";
+import { message } from "antd";
 
 const actions = createActions({
   /**
@@ -27,9 +29,42 @@ const actions = createActions({
     * @param {object} ref = { testId, groupId, id }
     * @returns {object}
     */
-  REMOVE_COMMAND: ( ref ) => validate( ref, { ...I.UPDATE, ...I.COMMAND_REF }),
-  SWAP_COMMAND: ( options ) => validate( options, { ...I.SWAP_BASE_OPTIONS, ...I.COMMAND_REF })
+  REMOVE_COMMAND: ( ref ) => validate( ref, { ...I.UPDATE, ...I.COMMAND_REF })
 });
+
+
+function getCommandsFlat( groups ) {
+  return Object.values( groups ).reduce( ( carry, group ) => {
+    const commands = Object.values( group.tests ).reduce( ( carry, test ) => {
+      return carry.concat( Object.values( test.commands ) );
+    }, []);
+    return carry.concat( commands );
+  }, []);
+}
+
+actions.swapCommand = ( payload ) => async ( dispatch, getState ) => {
+  const hideLoading = message.loading( "Moving record in progress..", 0 );
+  try {
+    const { sourceInx, targetInx, sourceId, targetId } = payload,
+          commands = getCommandsFlat( getState().suite.groups ),
+          sourceCommand = commands.find( command => command.id === sourceId ),
+          targetCommand = commands.find( command => command.id === targetId ),
+          pos = sourceInx >= targetInx ? "before" : "after",
+          merge = {
+            ...sourceCommand,
+            testId: targetCommand.testId,
+            groupId: targetCommand.groupId
+          };
+
+    dispatch( actions.removeCommand( sourceCommand ) );
+    dispatch( actions.insertAdjacentCommand( merge, { [ pos ]: targetId } ) );
+
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot swap command" );
+  }
+  hideLoading();
+
+};
 
 actions.pasteCommand = ( payload, dest ) => async ( dispatch ) => {
   try {
@@ -43,7 +78,6 @@ actions.pasteCommand = ( payload, dest ) => async ( dispatch ) => {
   } catch ( ex ) {
     handleException( ex, dispatch, "Cannot paste command" );
   }
-
 };
 
 
