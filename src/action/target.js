@@ -35,11 +35,23 @@ const actions = createActions({
     * @param {object} ref = { id }
     * @returns {object}
     */
-  REMOVE_TARGET: ( ref ) => validate( ref, { ...I.UPDATE }),
-
-  SWAP_TARGET: ( options ) => validate( options, I.SWAP_BASE_OPTIONS )
+  REMOVE_TARGET: ( ref ) => validate( ref, I.UPDATE )
 
 });
+
+
+actions.swapTarget = ( payload ) => async ( dispatch, getState ) => {
+  try {
+    const { sourceInx, targetInx, sourceId, targetId } = payload,
+          target = getState().suite.targets[ sourceId ],
+          pos = sourceInx >= targetInx ? "before" : "after";
+
+    dispatch( actions.removeTarget( { id: sourceId } ) );
+    dispatch( actions.insertAdjacentTarget( target, { [ pos ]: targetId } ) );
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot swap target" );
+  }
+};
 
 
 actions.pasteTarget = ( payload, dest ) => async ( dispatch ) => {

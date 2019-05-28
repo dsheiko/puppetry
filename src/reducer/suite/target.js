@@ -109,30 +109,7 @@ export default {
       }
      }),
 
-   /**
-   * Payload:
-   *  - sourceInx (0..N)
-   *  - targetInx (0..N)
-   *  - sourceId
-   *  - targetId
-   */
-   [ actions.swapTarget ]: ( state, { payload }) => {
-     const srcArr = Object.values( state.targets ),
-           source = { ...srcArr[ payload.sourceInx ] },
-           resArr = update( srcArr, {
-             $splice: [[ payload.sourceInx, 1 ], [ payload.targetInx, 0, source ]]
-           });
-
-     return update( state, {
-        targets: {
-          $set: resArr.reduce( ( carry, item ) => {
-            carry[ item.id ] = item;
-            return carry;
-          }, {})
-        }
-     });
-   },
-
+   
   /**
     * Update record
     * @param {object} state

@@ -4,6 +4,7 @@ import * as I from "interface";
 import { handleException } from "./helpers";
 import uniqid from "uniqid";
 import commandActions from "./command";
+import { message } from "antd";
 
 const actions = createActions({
   /**
@@ -35,11 +36,46 @@ const actions = createActions({
     * @param {object} ref = { groupId, id }
     * @returns {object}
     */
-  REMOVE_TEST: ( ref ) => validate( ref, { ...I.UPDATE, ...I.TEST_REF }),
+  REMOVE_TEST: ( ref ) => validate( ref, { ...I.UPDATE, ...I.TEST_REF })
 
-  SWAP_TEST: ( options ) => validate( options, { ...I.SWAP_BASE_OPTIONS, ...I.TEST_REF })
 });
 
+
+
+function getTestsFlat( groups ) {
+  return Object.values( groups ).reduce( ( carry, group ) => {
+    return carry.concat( Object.values( group.tests ) );
+  }, []);
+}
+
+actions.swapTest = ( payload ) => async ( dispatch, getState ) => {
+  const hideLoading = message.loading( "Moving record in progress..", 0 );
+  try {
+    const { sourceInx, targetInx, sourceId, targetId } = payload,
+          tests = getTestsFlat( getState().suite.groups ),
+          sourceTest = tests.find( test => test.id === sourceId ),
+          targetTest = tests.find( test => test.id === targetId ),
+          pos = sourceInx >= targetInx ? "before" : "after",
+          id = uniqid(),
+          merged = { ...sourceTest, groupId: targetTest.groupId };
+
+    dispatch( actions.removeTest( sourceTest ) );
+    dispatch( actions.insertAdjacentTest( merged, { [ pos ]: targetId }, id ) );
+
+    Object.values( sourceTest.commands ).forEach( command => {
+      dispatch( commandActions.addCommand({
+        ...command,
+        testId: id,
+        groupId: targetTest.groupId
+      }));
+    });
+
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot swap test" );
+  }
+  hideLoading();
+
+};
 
 /**
  * @param {Object} payload - clipboard DTO

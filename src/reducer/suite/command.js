@@ -118,40 +118,6 @@ export default {
       });
     },
 
-    [ actions.swapCommand ]: ( state, { payload }) => {
-      const srcArr = Object.values( state.groups[ payload.groupId ].tests[ payload.testId ].commands ),
-            source = { ...srcArr[ payload.sourceInx ] },
-            resArr = update( srcArr, {
-              $splice: [[ payload.sourceInx, 1 ], [ payload.targetInx, 0, source ]]
-            });
-
-
-      // Moving between tests/groups
-      if ( !srcArr.find( command => command.id === payload.sourceId ) ) {
-        const commands = getCommandsFlat( state.groups ),
-              sourceCommand = commands.find( command => command.id  === payload.sourceId ),
-              targetCommand = commands.find( command => command.id  === payload.targetId );
-        return transferCommand( state, sourceCommand, targetCommand );
-      }
-
-      return update( state, {
-
-          groups: {
-            [ payload.groupId ]: {
-              tests: {
-                [ payload.testId ]: {
-                  commands: {
-                    $set: resArr.reduce( ( carry, item ) => {
-                      carry[ item.id ] = item;
-                      return carry;
-                    }, {})
-                  }
-                }
-              }
-            }
-          }
-        });
-    },
 
     /**
      * Update record

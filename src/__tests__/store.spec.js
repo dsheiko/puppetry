@@ -191,9 +191,9 @@ describe( "Store", () => {
 
           store.dispatch( actions.swapTarget({
             sourceInx: 0,
-            sourceId: t1,
+            sourceId: t1.id,
             targetInx: 2,
-            targetId: t3
+            targetId: t3.id
           }));
 
           [ t1, t2, t3 ] = Object.values( store.getState().suite.targets );

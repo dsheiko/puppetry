@@ -106,37 +106,6 @@ export default {
       });
     },
 
-    [ actions.swapTest ]: ( state, { payload }) => {
-      const destGroupTests = Object.values( state.groups[ payload.groupId ].tests ),
-            sourceTest = { ...destGroupTests[ payload.sourceInx ] },
-            resArr = update( destGroupTests, {
-              $splice: [[ payload.sourceInx, 1 ], [ payload.targetInx, 0, sourceTest ]]
-            });
-
-      // Moving between groups
-      if ( !destGroupTests.find( test => test.id === payload.sourceId ) ) {
-        const tests = getTestsFlat( state.groups ),
-              srcTest = tests.find( test => test.id  === payload.sourceId ),
-              targetTest = tests.find( test => test.id  === payload.targetId );
-        return transferTest( state, srcTest, targetTest );
-      }
-
-      return update( state, {
-
-          groups: {
-            [ payload.groupId ]: {
-              tests: {
-                $set: resArr.reduce( ( carry, item ) => {
-                  carry[ item.id ] = item;
-                  return carry;
-                }, {})
-              }
-            }
-          }
-        });
-    },
-
-
     /**
      * Update record
      * @param {object} state

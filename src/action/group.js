@@ -5,6 +5,7 @@ import { handleException } from "./helpers";
 import uniqid from "uniqid";
 import testActions from "./test";
 import commandActions from "./command";
+import { message } from "antd";
 
 const actions = createActions({
   /**
@@ -32,15 +33,45 @@ const actions = createActions({
     * @returns {object}
     */
   UPDATE_GROUP: ( options ) => validate( options, { ...I.ENTITY, ...I.GROUP, ...I.UPDATE }),
+
   /**
-    * @param {object} ref = { id }
+    * @param {object} ref = { groupId, id }
     * @returns {object}
     */
   REMOVE_GROUP: ( ref ) => validate( ref, { ...I.UPDATE }),
 
+
   SWAP_GROUP: ( options ) => validate( options, I.SWAP_BASE_OPTIONS )
 });
 
+
+actions.swapGroup = ( payload ) => async ( dispatch, getState ) => {
+  const hideLoading = message.loading( "Moving record in progress..", 0 );
+  try {
+    const { sourceInx, targetInx, sourceId, targetId } = payload,
+          groups = Object.values( getState().suite.groups ),
+          sourceGroup = groups.find( group => group.id === sourceId ),
+          targetGroup = groups.find( group => group.id === targetId ),
+          pos = sourceInx >= targetInx ? "before" : "after",
+          groupId = uniqid();
+
+    dispatch( actions.removeGroup({ id: sourceGroup.id }) );
+    dispatch( actions.insertAdjacentGroup( sourceGroup, { [ pos ]: targetId }, groupId ) );
+
+    Object.values( sourceGroup.tests ).forEach( test => {
+      const testId = uniqid();
+      dispatch( testActions.addTest({ ...test, groupId }, testId ));
+      Object.values( test.commands ).forEach( command => {
+        dispatch( commandActions.addCommand({ ...command, testId, groupId }));
+      });
+    });
+
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot swap group" );
+  }
+  hideLoading();
+
+};
 
 actions.pasteGroup = ( payload, dest ) => async ( dispatch ) => {
   try {
