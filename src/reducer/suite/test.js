@@ -152,6 +152,9 @@ export default {
                 const tests = { ...ref },
                       id = payload.id;
                 tests[ id ] = { ...tests[ id ], ...payload, id, key: id };
+                if ( !tests[ id ].hasOwnProperty( "commands" ) ) {
+                  tests[ id ].commands = {};
+                }
                 return tests;
               }
             }

@@ -50,7 +50,12 @@ actions.pasteTest = ( payload, dest ) => async ( dispatch ) => {
     const id = uniqid(),
           merged = { ...payload, groupId: dest.groupId },
           position = { after: dest.id };
-    dispatch( actions.insertAdjacentTest( merged, position, id ) );
+
+    dispatch(
+      dest.hasOwnProperty( "id" )
+        ? actions.insertAdjacentTest( merged, position, id )
+        : actions.addTest( merged, id )
+    );
     Object.values( payload.commands ).forEach( command => {
       dispatch( commandActions.addCommand({ ...command, testId: id, groupId: merged.groupId }) );
     });

@@ -87,7 +87,7 @@ export class CommandTable extends AbstractDnDTable {
     menu.append( new MenuItem({
       label: "Paste",
       click: () => this.pasteClipboard( record ),
-      enabled: this.validClipboard()
+      enabled: this.validClipboard( record )
     }) );
 
     menu.append( new MenuItem({

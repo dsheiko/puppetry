@@ -27,8 +27,8 @@ const GREETINGS = [ "Greetings",
         store: state,
         selector: {
           getTargetDataTable: () => selectors.getTargetDataTable( state.suite.targets ),
-          getGroupDataTable: () => selectors.getStructureDataTable( state.suite.groups ),
-          getTestDataTable: ( group ) => selectors.getStructureDataTable( group.tests ),
+          getGroupDataTable: () => selectors.getStructureDataTable( state.suite.groups, "group" ),
+          getTestDataTable: ( group ) => selectors.getStructureDataTable( group.tests, "test" ),
           getSelectedTargets: ( selection ) => selectors.getSelectedTargets( selection, state.suite.targets ),
           hasTarget: ( target ) => selectors.hasTarget( target, state.suite.targets )
         }

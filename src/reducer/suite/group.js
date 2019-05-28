@@ -128,8 +128,10 @@ export default {
             $apply: ( ref ) => {
               const groups = { ...ref },
                     id = payload.id;
-
               groups[ id ] = { ...groups[ id ], ...payload, id, key: id };
+              if ( !groups[ id ].hasOwnProperty( "tests" ) ) {
+                groups[ id ].tests = {};
+              }
               return groups;
             }
           }

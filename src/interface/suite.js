@@ -1,7 +1,7 @@
 export const SUITE_OPTIONS = {
   title: "string=",
   timeout: "number=",
-  savedAt: "string=",
+  savedAt: "number=",
   loadedAt: "number=",
   modified: "boolean=",
   filename: "string=",
