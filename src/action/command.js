@@ -35,9 +35,13 @@ actions.pasteCommand = ( payload, dest ) => async ( dispatch ) => {
   try {
     const merged = { ...payload, testId: dest.testId, groupId: dest.groupId },
           position = { after: dest.id };
-    dispatch( actions.insertAdjacentCommand( merged, position ) );
+    dispatch(
+      dest.hasOwnProperty( "id" )
+        ? actions.insertAdjacentCommand( merged, position )
+        : actions.addCommand( merged )
+    );
   } catch ( ex ) {
-    handleException( ex, dispatch, "Cannot paster command" );
+    handleException( ex, dispatch, "Cannot paste command" );
   }
 
 };

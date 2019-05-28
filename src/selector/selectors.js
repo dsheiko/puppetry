@@ -1,7 +1,11 @@
 import uniqid from "uniqid";
 
+function setEntity( arr, entity ) {
+  return arr.map( record => ({ ...record, entity }) );
+}
+
 export function getTargetDataTable( targets ) {
-  const data = Object.values( targets ),
+  const data = setEntity( Object.values( targets ), "target" ),
         id = uniqid();
 
   data.push({
@@ -11,14 +15,15 @@ export function getTargetDataTable( targets ) {
     id,
     key: id,
     target: "",
-    selector: ""
+    selector: "",
+    entity: "target"
   });
 
   return data;
 }
 
-export function getStructureDataTable( record ) {
-  const data = Object.values( record || {}),
+export function getStructureDataTable( record, entity ) {
+  const data = setEntity( Object.values( record || {} ), entity ),
         id = uniqid();
 
   data.push({
@@ -27,7 +32,8 @@ export function getStructureDataTable( record ) {
     adding: true,
     id,
     key: id,
-    title: ""
+    title: "",
+    entity
   });
 
   return data;

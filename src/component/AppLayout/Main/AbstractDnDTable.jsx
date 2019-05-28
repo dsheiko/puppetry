@@ -83,7 +83,7 @@ export default class AbstractDnDTable extends React.Component {
     menu.append( new MenuItem({
       label: "Paste",
       click: () => this.pasteClipboard( record ),
-      enabled: this.validClipboard()
+      enabled: this.validClipboard( record )
     }) );
 
 
@@ -136,11 +136,15 @@ export default class AbstractDnDTable extends React.Component {
     this.updateRecord({ id: record.id, disabled: !record.disabled });
   }
 
-  validClipboard = () => {
+  validClipboard = ( record ) => {
     try {
       const payload = clipboardReadObj();
       return payload
-        && payload.model === this.model
+        && (
+          record.entity === payload.model.toLowerCase()
+          || record.entity === "group" && payload.model === "Test"
+          || record.entity === "test" && payload.model === "Command"
+        )
         && payload.app.name === APP_NAME
         && payload.app.version === APP_VERSION;
     } catch ( err ) {
@@ -153,15 +157,35 @@ export default class AbstractDnDTable extends React.Component {
    *  represents position after which we paste data from clipboard
    */
   pasteClipboard = ( record ) => {
-    if ( !this.validClipboard() ) {
+
+    if ( !this.validClipboard( record ) ) {
       return;
     }
     const payload = clipboardReadObj(),
           update = this.props.action[ `paste${ payload.model }` ];
+
     this.props.action.setApp({ loading: true });
+
     setTimeout( () => {
-      // inject group/test/commands
-      update( payload.data, record );
+
+      if ( record.entity === "group" && payload.model === "Test" ) {
+        update( payload.data, {
+          groupId: record.id
+        });
+      }
+
+      if ( record.entity === "test" && payload.model === "Command" ) {
+        update( payload.data, {
+          testId: record.id,
+          groupId: record.groupId
+        });
+      }
+
+      if ( record.entity === payload.model.toLowerCase() ) {
+        // inject group/test/commands
+        update( payload.data, record );
+      }
+
       // inject required targets
       Object.values( payload.targets ).forEach( target => {
         if ( this.props.selector.hasTarget( target.target ) ) {
@@ -169,6 +193,7 @@ export default class AbstractDnDTable extends React.Component {
         }
         this.props.action.addTarget( target );
       });
+
       this.props.action.setApp({ loading: false });
     }, 200 );
   }

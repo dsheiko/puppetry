@@ -47,7 +47,13 @@ actions.pasteGroup = ( payload, dest ) => async ( dispatch ) => {
     const groupId = uniqid(),
           merged = { ...payload },
           position = { after: dest.id };
-    dispatch( actions.insertAdjacentGroup( merged, position, groupId ) );
+
+    dispatch(
+      dest.hasOwnProperty( "id" )
+        ? actions.insertAdjacentGroup( merged, position, groupId )
+        : actions.addGroup( merged, groupId )
+    );
+
     Object.values( payload.tests ).forEach( test => {
       const testId = uniqid();
       dispatch( testActions.addTest({ ...test, groupId: groupId }, testId ) );

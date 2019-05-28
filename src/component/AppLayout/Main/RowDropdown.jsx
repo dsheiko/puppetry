@@ -24,7 +24,7 @@ class RowDropdownOverlay extends React.Component {
 
   render() {
     const { record, validClipboard, isNotTargetTable } = this.props,
-          isValidClipboard = validClipboard();
+          isValidClipboard = validClipboard( record );
 
     return (
       <Menu>
