@@ -19,10 +19,40 @@ import DEFAULT_STATE, {
   targetDefaultState
 } from "reducer/defaultState";
 
+/**
+ * @typedef {object} Position
+ * @property {string} [before] - reference id to inject before
+ * @property {string} [after] - reference id to inject after
+ */
+
+/**
+ * @typedef {object} EntityRef
+ * @property {string} id
+ * @property {string} groupId
+ * @property {string} testId
+ */
+
+/**
+ * @typedef {object} Entity - Contents of test
+ */
+
+/**
+ * Contents of test
+ * @typedef {object} Payload
+ * @property {Entity} options
+ * @property {string} [id] - when given it's used as id, otherwise a new id is generated
+ * @property {Position} [position]
+ */
+
 export default {
 
 
-
+    /**
+     * Add record
+     * @param {object} state
+     * @param {Payload} payload
+     * @returns {object}
+     */
     [ actions.addCommand ]: ( state, { payload }) => update( state, {
 
         groups: {
@@ -48,8 +78,12 @@ export default {
       }),
 
 
-    // insert after/before
-    // payload{ options, position }
+    /**
+     * Insert record before/after
+     * @param {object} state
+     * @param {Payload} payload
+     * @returns {object}
+     */
     [ actions.insertAdjacentCommand ]: ( state, { payload }) => {
       const { options, position } = normalizeComplexPayload( payload ),
             { commands }  = state.groups[ options.groupId ].tests[ options.testId ],
@@ -119,6 +153,12 @@ export default {
         });
     },
 
+    /**
+     * Update record
+     * @param {object} state
+     * @param {Entity} payload (EntityRef required)
+     * @returns {object}
+     */
     [ actions.updateCommand ]: ( state, { payload }) => update( state, {
 
         groups: {
@@ -139,6 +179,12 @@ export default {
         }
       }),
 
+    /**
+     * Remove record
+     * @param {object} state
+     * @param {EntityRef} payload
+     * @returns {object}
+     */
     [ actions.removeCommand ]: ( state, { payload }) => update( state, {
 
         groups: {
