@@ -81,14 +81,10 @@ export default {
     },
 
     groups: {},
-    snippets: {},
     savedAt: 0,
     modified: false,
     lastOpenSuite: ""
-
   },
-
-  snippets: {},
   // actual (Selected) suite
   suite: {
     title: null,

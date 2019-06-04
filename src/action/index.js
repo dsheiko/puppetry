@@ -9,9 +9,6 @@ import groupActions from "./group";
 import testActions from "./test";
 import commandActions from "./command";
 
-import snippetTestActions from "./stest";
-import snippetCommandActions from "./scommand";
-
 const actions = {
   ...errorActions,
   ...settingsActions,
@@ -22,9 +19,7 @@ const actions = {
   ...targetActions,
   ...groupActions,
   ...testActions,
-  ...commandActions,
-  ...snippetTestActions,
-  ...snippetCommandActions
+  ...commandActions
 };
 
 export default actions;

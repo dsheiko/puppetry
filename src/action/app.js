@@ -49,9 +49,8 @@ actions.checkNewVersion = () => async ( dispatch, getState ) => {
 
 actions.closeApp = () => async ( dispatch, getState ) => {
   const store = getState();
-  return;
   try {
-    await saveProject( store.project );
+    await saveProject( store );
   } catch ( ex ) {
     log( "Cannot close app " + ex.message );
   }

@@ -96,7 +96,7 @@ actions.saveProject = ({ projectDirectory, name }) => async ( dispatch, getState
     }
 
     await dispatch( actions.setProject({ projectDirectory, name }) );
-    await saveProject( getState().project );
+    await saveProject( getState() );
     await dispatch( actions.loadProjectFiles( projectDirectory ) );
     await dispatch( actions.watchProjectFiles( projectDirectory ) );
     await dispatch( appActions.removeAppTab( "suite" ) );
