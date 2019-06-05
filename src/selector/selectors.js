@@ -1,4 +1,5 @@
 import uniqid from "uniqid";
+import { SNIPPETS_GROUP_ID } from "constant";
 
 function setEntity( arr, entity ) {
   return arr.map( record => ({ ...record, entity }) );
@@ -63,4 +64,11 @@ export function getSelectedTargets( selection, targets ) {
       carry[ target.id ] = target;
       return carry;
     }, {});
+}
+
+
+export function getSnippets( snippets ) {
+  return snippets.groups && snippets.groups.hasOwnProperty( SNIPPETS_GROUP_ID )
+   ? snippets.groups[ SNIPPETS_GROUP_ID ].tests 
+   : [];
 }

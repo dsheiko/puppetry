@@ -216,6 +216,10 @@ export default class AbstractDnDTable extends React.Component {
   insertRecord = ( record ) => {
     const update = this.props.action[ `insertAdjacent${this.model}` ],
           node = { editing: true };
+    // When insert a snippet, we need the flag to know what editing window to open
+    if ( record.isRef ) {
+      node.isRef = true;
+    }
     if ( "groupId" in record ) {
       node.groupId = record.groupId;
     }

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ipcRenderer, shell } from "electron";
-import { E_RUN_TESTS } from "constant";
+import { E_RUN_TESTS, SNIPPETS_GROUP_ID } from "constant";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
@@ -64,7 +64,8 @@ export class TestReport extends AbstractComponent {
               {
                 headless: this.props.headless,
                 launcherArgs: this.props.launcherArgs
-              }
+              },
+              this.props.snippets
             ),
             res = ipcRenderer.sendSync( E_RUN_TESTS, this.runtimeTemp, specList );
 
@@ -93,9 +94,14 @@ export class TestReport extends AbstractComponent {
   async highlightErrorsInSuite() {
     try {
       const commands = await parseReportedFailures( this.reportedFailures );
-      commands.forEach( ({ id, groupId, testId, failure }) => this.props.action.updateCommand({
-        id, groupId, testId, failure
-      }) );
+      commands.forEach( ({ id, groupId, testId, failure }) => {
+        if ( groupId === SNIPPETS_GROUP_ID ) {
+          return this.props.action.updateCommandByRef( testId, failure );
+        }
+        this.props.action.updateCommand({
+          id, groupId, testId, failure
+        });
+      });
     } catch ( err ) {
       console.error( err );
     }

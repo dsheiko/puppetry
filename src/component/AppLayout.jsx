@@ -21,6 +21,7 @@ import { ExportProjectModal } from "./Modal/ExportProjectModal";
 import { OpenSuiteModal } from "./Modal/OpenSuiteModal";
 import { SaveProjectAsModal } from "./Modal/SaveProjectAsModal";
 import { CommandModal } from "./AppLayout/Main/GroupTable/TestTable/CommandModal";
+import { SnippetModal } from "./AppLayout/Main/GroupTable/TestTable/SnippetModal";
 import { InstallRuntimeTestModal } from "./Modal/InstallRuntimeTestModal";
 import { EditTargetsAsCsvModal } from "./Modal/EditTargetsAsCsvModal";
 import { GitCommitModal } from "./Modal/GitCommitModal";
@@ -54,7 +55,7 @@ export class AppLayout extends React.Component {
   render() {
     const { action, store, selector } = this.props,
           { projectDirectory, exportDirectory } = store.settings,
-          { commandModal, tabs } = store.app,
+          { commandModal, snippetModal, tabs } = store.app,
           tabsAnyTrue = Object.keys( tabs.available ).some( key => tabs.available[ key ]);
 
     return (
@@ -179,7 +180,8 @@ export class AppLayout extends React.Component {
           action={action}
           currentSuite={ store.suite.filename }
           files={ store.app.project.files }
-          isVisible={store.app.testReportModal} />
+          isVisible={store.app.testReportModal}
+          snippets={ store.snippets } />
 
         <ExportProjectModal action={action}
           currentSuite={ store.suite.filename }
@@ -187,6 +189,7 @@ export class AppLayout extends React.Component {
           exportDirectory={ exportDirectory }
           projectDirectory={ projectDirectory }
           targets={ store.suite.targets }
+          snippets={ store.snippets }
           isVisible={ store.app.exportProjectModal } />
 
         <CommandModal
@@ -195,6 +198,12 @@ export class AppLayout extends React.Component {
           targets={ commandModal.targets }
           action={ action }
           record={ commandModal.record } />
+
+        { snippetModal.isVisible && <SnippetModal
+          isVisible={ true }
+          record={ snippetModal.record }
+          snippets={ selector.getSnippets() }
+          action={ action } /> }
 
         <InstallRuntimeTestModal
           action={ action }
@@ -246,6 +255,9 @@ export class AppLayout extends React.Component {
           projectName={ store.project.name }
           projectDirectory={ projectDirectory }
           action={ action } />
+
+
+
 
       </ErrorBoundary>
     );

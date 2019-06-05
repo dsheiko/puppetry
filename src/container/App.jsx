@@ -30,7 +30,8 @@ const GREETINGS = [ "Greetings",
           getGroupDataTable: () => selectors.getStructureDataTable( state.suite.groups, "group" ),
           getTestDataTable: ( group ) => selectors.getStructureDataTable( group.tests, "test" ),
           getSelectedTargets: ( selection ) => selectors.getSelectedTargets( selection, state.suite.targets ),
-          hasTarget: ( target ) => selectors.hasTarget( target, state.suite.targets )
+          hasTarget: ( target ) => selectors.hasTarget( target, state.suite.targets ),
+          getSnippets: () => selectors.getSnippets( state.snippets )
         }
       }),
       // Mapping actions to the props
@@ -61,6 +62,7 @@ export class App extends React.Component {
             loadSettings,
             checkRuntimeTestDirReady,
             checkNewVersion,
+            loadSnippets,
             setApp
           } = this.props.action,
           settings = loadSettings();
@@ -75,6 +77,7 @@ export class App extends React.Component {
 
     try {
       await loadProject();
+      await loadSnippets();
       await checkGit( settings.projectDirectory );
     } catch ( e ) {
       log.warn( `Renderer process: App: ${ e }` );

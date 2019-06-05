@@ -6,7 +6,7 @@ import Hotkeys from "react-hot-keys";
 import ErrorBoundary from "component/ErrorBoundary";
 import { msgDataSaved } from "component/Global/Message";
 import { confirmUnsavedChanges } from "service/smalltalk";
-import { E_MENU_NEW_PROJECT, E_MENU_NEW_SUITE,
+import { E_MENU_NEW_PROJECT, E_MENU_NEW_SUITE, SNIPPETS_FILENAME,
   E_MENU_OPEN_PROJECT, E_MENU_SAVE_SUITE, E_MENU_SAVE_SUITE_AS,
   E_MENU_OPEN_SUITE, E_MENU_EXPORT_PROJECT, E_MENU_EXIT_APP,
   E_MENU_RUN, E_RENDERER_ERROR, E_RENDERER_INFO } from "constant";
@@ -185,6 +185,19 @@ export class MainMenu extends GitEnhancedMenu {
     return this.props.action.setApp({ exportProjectModal: true });
   }
 
+  onSnippets = async () => {
+    const { openSuiteFile, suiteModified, saveSuite, setSuite } = this.props.action;
+
+    if ( suiteModified ) {
+      await confirmUnsavedChanges({
+        saveSuite,
+        setSuite
+      });
+    }
+
+    openSuiteFile( SNIPPETS_FILENAME );
+  }
+
   onSettings = async () => {
     this.props.action.addAppTab( "settings" );
   }
@@ -295,7 +308,10 @@ export class MainMenu extends GitEnhancedMenu {
 
             </SubMenu>
 
-            <Menu.Item key="11" onClick={ this.onSettings } id="cMainMenuSettingsGit">
+            <Menu.Item key="15" onClick={ this.onSnippets } id="cMainMenuSnippets">
+              <span><Icon type="snippets" /><span>Snippets</span></span></Menu.Item>
+
+            <Menu.Item key="11" onClick={ this.onSettings } id="cMainMenuSettings">
               <span><Icon type="setting" /><span>Settings...</span></span></Menu.Item>
 
             <Menu.Item key="10"

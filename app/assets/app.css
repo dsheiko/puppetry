@@ -193,10 +193,13 @@ body {
 }
 
 .modal--instant .ant-modal-wrap .ant-modal {
-  width: 90%;
+  width: 520px;
   max-height: 90%;
   padding: 0;
   top: initial;
+}
+.modal--instant.modal--instant-command .ant-modal-wrap .ant-modal {
+  width: 90%;
 }
 .ant-modal-sentinel {
   width: 0;
@@ -862,4 +865,8 @@ td:hover .editable-cell-icon {
 .ant-dropdown-menu-item-disabled a {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.command--ref {
+  color: #1890ff;
 }

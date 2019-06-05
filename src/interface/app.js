@@ -39,7 +39,7 @@ export const APP_OPTIONS = {
   commandModal: "object=",
   tabs: "object=",
   checkedList: "array=",
-  headless: "booelan=",
+  headless: "boolean=",
   launcherArgs: "string=",
   // Dynamic info coming not from project file, but from file watcher
   project: "object="

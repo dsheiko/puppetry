@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Icon } from "antd";
+import classNames from "classnames";
 
 export class InstantModal extends React.Component {
 
@@ -8,7 +9,7 @@ export class InstantModal extends React.Component {
     id: PropTypes.string,
     visible: PropTypes.bool.isRequired,
     title: PropTypes.string.isRequired,
-    onOk: PropTypes.func.isRequired,
+    onOk: PropTypes.func,
     onCancel: PropTypes.func.isRequired,
     footer: PropTypes.array.isRequired,
     children: PropTypes.any
@@ -30,9 +31,14 @@ export class InstantModal extends React.Component {
   }
 
   render() {
-    const { title, visible, footer, onCancel, id } = this.props;
+    const { title, visible, footer, onCancel, id, className } = this.props;
 
-    return ( <div id={ id || "cInstantModal" } className={ ( ( visible ) ? "" : "is-hidden" ) + " modal--instant" }>
+    return ( <div id={ id || "cInstantModal" } className={ classNames({
+      "is-hidden": !visible,
+      "modal--instant": true,
+      [ className ]: true
+    })
+    }>
       <div className="ant-modal-mask" />
       <div tabIndex={-1} className="ant-modal-wrap " role="dialog" aria-labelledby={ this.id }>
         <div role="document" className="ant-modal">

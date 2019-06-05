@@ -11,6 +11,7 @@ class RowDropdownOverlay extends React.Component {
     isNotTargetTable: PropTypes.bool,
     toggleEnable: PropTypes.func,
     insertRecord: PropTypes.func,
+    insertSnippet: PropTypes.func,
     cloneRecord: PropTypes.func,
     copyClipboard: PropTypes.func,
     pasteClipboard: PropTypes.func,
@@ -23,7 +24,7 @@ class RowDropdownOverlay extends React.Component {
   }
 
   render() {
-    const { record, validClipboard, isNotTargetTable } = this.props,
+    const { record, validClipboard, isNotTargetTable, insertSnippet } = this.props,
           isValidClipboard = validClipboard( record );
 
     return (
@@ -36,6 +37,12 @@ class RowDropdownOverlay extends React.Component {
         <Menu.Item key="insert">
           <a role="menuitem" tabIndex={0}  onClick={ () => this.apply( "insertRecord", record ) }>Insert</a>
         </Menu.Item>
+
+        { insertSnippet && (<Menu.Item key="insertSnippet">
+          <a role="menuitem" tabIndex={0}
+            onClick={ () => this.apply( "insertSnippet", { ...record, isRef: true  } ) }>Insert Snippet</a>
+        </Menu.Item>)}
+
         <Menu.Item key="clone">
           <a role="menuitem" tabIndex={0}  onClick={ () => this.apply( "cloneRecord", record ) }>Clone</a>
         </Menu.Item>
