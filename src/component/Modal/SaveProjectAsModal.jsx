@@ -60,6 +60,17 @@ export class SaveProjectAsModal extends AbstractForm {
     this.setState({ selectedDirectory, locked: false });
   }
 
+  // Do not update until visible
+  shouldComponentUpdate( nextProps, nextState ) {
+    if ( this.props.isVisible !== nextProps.isVisible ) {
+      return true;
+    }
+    if ( !nextProps.isVisible ) {
+      return false;
+    }
+    return true;
+  }
+
 
   render() {
     const { isVisible } = this.props;

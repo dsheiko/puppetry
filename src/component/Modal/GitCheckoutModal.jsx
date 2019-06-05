@@ -75,6 +75,17 @@ export class GitCheckoutModal extends AbstractComponent {
     ipcRenderer.on( E_GIT_CHECKOUT_RESPONSE, this.onCheckoutResponse );
   }
 
+  // Do not update until visible
+  shouldComponentUpdate( nextProps, nextState ) {
+    if ( this.props.isVisible !== nextProps.isVisible ) {
+      return true;
+    }
+    if ( !nextProps.isVisible ) {
+      return false;
+    }
+    return true;
+  }
+
   render() {
     const { isVisible, logs } = this.props,
           rows = logs.map( row => ({ ...row, key: row.oid }) );

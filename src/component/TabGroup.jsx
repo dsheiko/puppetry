@@ -55,7 +55,8 @@ export class TabGroup extends React.Component {
               { store.suite.snippets && <Snippets action={ action } store={ store } selector={ selector } /> }
               { !store.suite.snippets && <Main action={ action } store={ store } selector={ selector } /> }
             </TabPane> ),
-            testReport: () => ( <TabPane tab="Test report" key="testReport" closable={ true }>
+            testReport: () => ( <TabPane tab="Test report"
+              key="testReport" closable={ true } className="report-panel-tab">
               <TestReport
                 action={ action }
                 targets={ store.suite.targets }

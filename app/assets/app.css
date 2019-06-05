@@ -866,7 +866,12 @@ td:hover .editable-cell-icon {
   opacity: 0.6;
   cursor: not-allowed;
 }
-
+/* in commands list highlight refs (sippets) */
 .command--ref {
   color: #1890ff;
+}
+/* when opening in TestReports error details the layout was broken */
+.report-panel-tab {
+  height: calc(100vh - 158px);
+  overflow-y: auto;
 }
