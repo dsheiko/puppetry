@@ -5,6 +5,25 @@ function setEntity( arr, entity ) {
   return arr.map( record => ({ ...record, entity }) );
 }
 
+export function getVariableDataTable( variables, env ) {
+  const matches = Object.values( variables ).filter( variable => variable.env === env ),
+        data = setEntity( matches, "variable" ),
+        id = uniqid();
+  data.push({
+    disabled: false,
+    editing: true,
+    adding: true,
+    id,
+    key: id,
+    name: "",
+    value: "",
+    env,
+    entity: "variable"
+  });
+
+  return data;
+}
+
 export function getTargetDataTable( targets ) {
   const data = setEntity( Object.values( targets ), "target" ),
         id = uniqid();
@@ -69,6 +88,6 @@ export function getSelectedTargets( selection, targets ) {
 
 export function getSnippets( snippets ) {
   return snippets.groups && snippets.groups.hasOwnProperty( SNIPPETS_GROUP_ID )
-   ? snippets.groups[ SNIPPETS_GROUP_ID ].tests 
+   ? snippets.groups[ SNIPPETS_GROUP_ID ].tests
    : [];
 }

@@ -88,7 +88,10 @@ export default {
     groups: {},
     savedAt: 0,
     modified: false,
-    lastOpenSuite: ""
+    lastOpenSuite: "",
+
+    variables: {},
+    environments: [ "test", "stage", "production" ]
   },
   // actual (Selected) suite
   suite: {
@@ -158,6 +161,17 @@ export const targetDefaultState = ( id ) => ({
   key: id,
   target: "",
   selector: "",
+  disabled: false,
+  adding: false
+});
+
+export const variableDefaultState = ( id ) => ({
+  editing: false,
+  id,
+  key: id,
+  name: "",
+  value: "",
+  env: "",
   disabled: false,
   adding: false
 });

@@ -49,6 +49,12 @@ export const TARGET = {
   selector: "string="
 };
 
+export const VARIABLE = {
+  name: "string=",
+  value: "string=",
+  env: "string="
+};
+
 export const GROUP = {
   title: "string=",
   tests: "object="

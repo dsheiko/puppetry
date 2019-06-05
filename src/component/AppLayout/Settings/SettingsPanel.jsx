@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Tabs } from "antd";
 import { GitPane } from "./Git/GitPane";
+import { VariablesPane } from "./Variables/VariablesPane";
 import ErrorBoundary from "component/ErrorBoundary";
 
 const TabPane = Tabs.TabPane;
@@ -30,7 +31,7 @@ export class SettingsPanel extends React.Component {
     const { action, project, projectDirectory, git } = this.props,
           panes = project.appPanels.settings.panes;
 
-    let activeKey = "git";
+    let activeKey = "variables";
     if ( panes.length ) {
       [ activeKey ] = panes;
     }
@@ -45,6 +46,10 @@ export class SettingsPanel extends React.Component {
             animated={ false }
             onChange={ this.onTabChange }
           >
+            <TabPane tab="Variables" key="variables">
+              <VariablesPane />
+            </TabPane>
+
             <TabPane tab="GIT" key="git">
               <GitPane action={ action } git={ git } projectDirectory={ projectDirectory } />
             </TabPane>

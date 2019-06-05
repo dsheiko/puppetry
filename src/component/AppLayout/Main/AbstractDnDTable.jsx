@@ -206,7 +206,7 @@ export default class AbstractDnDTable extends React.Component {
       },
       model: this.model,
       data: record,
-      targets: this.model === "Target"
+      targets: [ "Target", "Variable" ].includes( this.model )
         ? []
         : this.props.selector.getSelectedTargets( findTargets( record ) )
     };
@@ -242,7 +242,7 @@ export default class AbstractDnDTable extends React.Component {
   }
 
   /**
-   * Extending for pareants
+   * Extending for parents
    */
   extendActionOptions( options ) {
     if ( this.props.hasOwnProperty( "groupId" ) ){

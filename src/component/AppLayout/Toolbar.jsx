@@ -77,7 +77,9 @@ export class Toolbar extends React.Component {
             <If exp={ project.name }>
               <Icon type="project" />{ " " }
               Project: { " " }<span id="cToolbarProjectName">{ truncate( project.name, 80 ) }</span>
-              { " " }<a tabIndex={-3} role="button" onClick={ this.onEditProject }><Icon type="tool" /></a>
+              { " " }<a tabIndex={-3} role="button"
+              title="Edit project name"
+              onClick={ this.onEditProject }><Icon type="tool" /></a>
             </If>
           </div>
           <div>
