@@ -68,6 +68,12 @@ export function isTargetNotUnique( state, payload ) {
     .find( item => item.target === payload.target ) );
 }
 
+export function isVariableNotUnique( state, payload ) {
+  return Boolean( Object.values( state.variables )
+    .filter( item => item.id !== payload.id )
+    .find( item => item.name === payload.name ) );
+}
+
 
 
 

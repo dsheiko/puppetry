@@ -1,6 +1,7 @@
 
 const { join } = require( "path" ),
       shell = require( "shelljs" ),
+      fetch = require( "node-fetch" ),
       { dirname } = require( "path" );
 
 let PATH_SCREENSHOTS = join( __dirname, "/../", "/screenshots");
@@ -27,3 +28,4 @@ exports.makePng = ( ns ) => ( filePath, options = {} ) => {
 };
 
 exports.png = png;
+exports.fetch = fetch;

@@ -119,6 +119,7 @@ exports.installRuntimeTest = ( event, appInstallDirectory ) => {
     npm.commands.install( appInstallDirectory, [
       "cross-env@^5.2.0",
       "jest@^23.6.0",
+      "node-fetch@^2.6.0",
       "puppeteer@1.16.0",
       "shelljs@^0.8.2"
     ], ( err, data ) => {

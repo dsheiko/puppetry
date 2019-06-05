@@ -2,6 +2,7 @@ import { handleActions } from "redux-actions";
 import actions from "../action";
 import DEFAULT_STATE from "./defaultState";
 import update from "immutability-helper";
+import variable from "./project/variable";
 
 export default handleActions(
   {
@@ -28,7 +29,9 @@ export default handleActions(
             }
           }
         });
-    }
+    },
+
+    ...variable
   },
   DEFAULT_STATE.project
 );

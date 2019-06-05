@@ -9,6 +9,7 @@ import groupActions from "./group";
 import testActions from "./test";
 import commandActions from "./command";
 import snippetsActions from "./snippets";
+import variableActions from "./variable";
 
 const actions = {
   ...errorActions,
@@ -21,7 +22,8 @@ const actions = {
   ...groupActions,
   ...testActions,
   ...commandActions,
-  ...snippetsActions
+  ...snippetsActions,
+  ...variableActions
 };
 
 export default actions;
