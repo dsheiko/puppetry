@@ -129,17 +129,36 @@ export class CommandRowLabel extends React.Component {
      return CommandRowLabel.buildTargetAddon( record );
    }
 
-   render() {
+
+   renderRef() {
+     const { record, snippets } = this.props,
+            title = snippets.hasOwnProperty( record.ref ) ? snippets[ record.ref ].title : "reference not found";
+     return ( <div className="container--editable-cell command--ref">
+       <Icon
+          type="link"
+          title="Reference to a snippet" />
+       { title }
+     </div> );
+   }
+
+   renderCommand() {
      const { record } = this.props;
      return ( <div className="container--editable-cell">
        <Tooltip
          title={ record.failure }
          icon="exclamation-circle"
          pos="up" />
-       <Icon type={ record.target === "page" ? "file" : "scan" } />
+       <Icon
+          type={ record.target === "page" ? "file" : "scan" }
+          title={ record.target === "page" ? "Page method" : `${ record.target } target method` } />
        <span className="token--target">{ record.target }</span>.{ record.method }
        <span className="token--param">{ CommandRowLabel.buildAddon( record ) }</span>
 
      </div> );
+   }
+
+   render() {
+     const { record } = this.props;
+     return record.ref ? this.renderRef() : this.renderCommand();
    }
 }

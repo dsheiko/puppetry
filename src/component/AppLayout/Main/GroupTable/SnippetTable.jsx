@@ -6,16 +6,16 @@ import { EditableCell } from "../EditableCell";
 import ErrorBoundary from "component/ErrorBoundary";
 import { connectDnD } from "../DragableRow";
 
-const recordPrefIcon = <Icon type="bars" title="Test" />;
+const recordPrefIcon = <Icon type="snippets" title="Snippet" />;
 
 @connectDnD
-export class TestTable extends AbstractEditableTable {
+export class SnippetTable extends AbstractEditableTable {
 
   constructor( props ) {
     super( props );
     this.columns = [
       {
-        title: "Test",
+        title: "Snippet",
         dataIndex: "title",
 
         render: ( text, record ) => (
@@ -25,7 +25,7 @@ export class TestTable extends AbstractEditableTable {
             className="input--title"
             record={ record }
             dataIndex="title"
-            placeholder="Enter a test name"
+            placeholder="Enter a snippet name"
             liftFormStateUp={ this.liftFormStateUp }
             updateRecord={ this.updateRecord }
           />
@@ -58,11 +58,10 @@ export class TestTable extends AbstractEditableTable {
             : [],
           targets = this.props.targets;
     return ( <CommandTable commands={commands}
-      targets={ targets }
-      testId={ test.id }
+      targets={targets}
+      testId={test.id}
       selector={ this.props.selector }
-      groupId={ test.groupId }
-      action={ this.props.action } /> );
+      groupId={test.groupId} action={this.props.action} /> );
   }
 
   selectExpanded() {

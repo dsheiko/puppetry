@@ -1,19 +1,22 @@
 import log from "electron-log";
 import { join } from "path";
 import { TestGeneratorError } from "error";
-import { COMMAND_ID_COMMENT, RUNNER_PUPPETRY } from "constant";
+import { COMMAND_ID_COMMENT, RUNNER_PUPPETRY, SNIPPETS_GROUP_ID } from "constant";
 
 export default class TestGenerator {
 
-  constructor( suite, schema, targets, runner, projectDirectory ) {
+  constructor( suite, schema, targets, runner, projectDirectory, snippets ) {
     this.schema = schema;
     this.suite = { ...suite };
     this.projectDirectory = projectDirectory;
+    this.snippets = { targets: {}, groups: {}, ...snippets };
+
     this.runner = runner; // RUNNER_PUPPETRY when embedded
-    this.targets = Object.values( targets ).reduce( ( carry, entry ) => {
-      carry[ entry.target ] = entry.selector;
-      return carry;
-    }, {});
+    this.targets = Object.values({ ...snippets.targets, ...targets })
+      .reduce( ( carry, entry ) => {
+        carry[ entry.target ] = entry.selector;
+        return carry;
+      }, {});
   }
 
   parseTargets( targets ) {
@@ -22,13 +25,38 @@ export default class TestGenerator {
       .map( this.schema.jest.tplQuery ).join( "\n" );
   }
 
+  /**
+   * @param {string} ref
+   * @returns {string}
+   */
+  parseRef = ( ref ) => {
+    const groups = this.snippets.groups;
+    if ( !groups.hasOwnProperty( SNIPPETS_GROUP_ID ) ) {
+      return ``;
+    }
+    const tests = groups[ SNIPPETS_GROUP_ID ].tests;
+    if ( !tests.hasOwnProperty( ref ) ) {
+      return ``;
+    }
+    const test = tests[ ref ],
+          chunk = Object.values( test.commands )
+            .map( this.parseCommand ).join( "\n" );
+    return `      // SNIPPET ${ test.title }: START\n${ chunk }\n      // SNIPPET ${ test.title }: END\n`;
+  }
 
+   /**
+   * @param {Object} command
+   * @returns {string}
+   */
   parseCommand = ( command ) => {
-    const { target, method, params, assert } = command,
+    const { isRef, ref, target, method, params, assert } = command,
           src = target === "page" ? "page" : "element";
+    if ( isRef ) {
+      return this.parseRef( ref );
+    }
     try {
       if ( ! ( method in this.schema[ src ]) ) {
-        return [];
+        return ``;
       }
       const chunk = this.schema[ src ][ method ].template({
         target,

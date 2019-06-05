@@ -85,7 +85,8 @@ export class ExportProjectModal extends React.Component {
         projectDirectory,
         selectedDirectory,
         checkedList,
-        { runner: RUNNER_JEST }
+        { runner: RUNNER_JEST },
+        this.props.snippets
       );
       message.info( `Project exported in ${ selectedDirectory }` );
       this.props.action.setApp({ exportProjectModal: false });

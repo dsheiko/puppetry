@@ -65,6 +65,7 @@ export class CommandModal extends React.Component {
 
     return ( <ErrorBoundary>
       <InstantModal
+        className="modal--instant-command"
         visible={ isVisible }
         title="Title"
         id="cCommandModal"

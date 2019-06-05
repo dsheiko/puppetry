@@ -8,9 +8,21 @@ import { RowDropdown } from "component/AppLayout/Main/RowDropdown";
 import { confirmDeleteEntity } from "service/smalltalk";
 import { remote } from "electron";
 import classNames from "classnames";
+import { SNIPPETS_GROUP_ID } from "constant";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as selectors from "selector/selectors";
 
-const { Menu, MenuItem } = remote;
+const { Menu, MenuItem } = remote,
+      // Mapping state to the props
+      mapStateToProps = ( state ) => ({
+        snippets: selectors.getSnippets( state.snippets )
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = () => ({
+      });
 
+@connect( mapStateToProps, mapDispatchToProps )
 @connectDnD
 export class CommandTable extends AbstractDnDTable {
 
@@ -25,7 +37,7 @@ export class CommandTable extends AbstractDnDTable {
         title: "Comand",
         dataIndex: "target",
 
-        render: ( text, record ) => ( <CommandRowLabel record={ record } /> )
+        render: ( text, record ) => ( <CommandRowLabel record={ record } snippets={ props.snippets } /> )
       },
       this.getActionColumn()
     ];
@@ -67,6 +79,11 @@ export class CommandTable extends AbstractDnDTable {
     menu.append( new MenuItem({
       label: "Insert",
       click: () => this.insertRecord( record )
+    }) );
+
+    menu.append( new MenuItem({
+      label: "Insert Snippet",
+      click: () => this.insertRecord({ ...record, isRef: true  })
     }) );
 
     menu.append( new MenuItem({
@@ -128,13 +145,22 @@ export class CommandTable extends AbstractDnDTable {
   componentDidUpdate( prevProps ) {
     // Only when we add a new command to the list, so we can edit it in the modal
     if ( prevProps.commands.length !== this.props.commands.length ) {
-      const newlyAdded = this.props.commands.find( command => !command.target && !command.method );
+      const newlyAdded = this.props.commands.find( command => !command.target && !command.method && !command.ref );
       newlyAdded && this.onEditCommand( newlyAdded );
     }
   }
 
   onEditCommand( record ) {
     const { setApp } = this.props.action;
+    if ( record.ref || record.isRef ) {
+      setApp({
+        snippetModal: {
+          isVisible: true,
+          record
+        }
+      });
+      return;
+    }
 
     setApp({
       commandModal: {
@@ -144,7 +170,6 @@ export class CommandTable extends AbstractDnDTable {
         commands: this.props.commands
       }
     });
-
   }
 
   toggleEnable( record ) {
@@ -176,6 +201,7 @@ export class CommandTable extends AbstractDnDTable {
           isNotTargetTable={ true }
           toggleEnable={ this.toggleEnable }
           insertRecord={ this.insertRecord }
+          insertSnippet={ this.insertRecord }
           cloneRecord={ this.cloneRecord }
           copyClipboard={ this.copyClipboard }
           pasteClipboard={ this.pasteClipboard }
@@ -200,8 +226,26 @@ export class CommandTable extends AbstractDnDTable {
     return false;
   }
 
+  addSnippet = ( record ) => {
+    const { setApp } = this.props.action;
+    setApp({
+      snippetModal: {
+        isVisible: true,
+        record: {
+          groupId: this.props.groupId,
+          testId: this.props.testId
+        }
+      }
+    });
+  }
+
   render() {
-    const commands = this.props.commands.filter( command => command.target && command.method );
+    const { snippets } = this.props,
+          // When click Add record, it creates new temporary record, that shall not display, but
+          // still needed in the data
+          commands = this.props.commands
+            .filter( command => ( command.ref || ( command.target && command.method ) ) );
+
     return ( <ErrorBoundary>
       <Table
         className="draggable-table"
@@ -213,10 +257,18 @@ export class CommandTable extends AbstractDnDTable {
         dataSource={ commands }
         columns={ this.columns }
         pagination={ false }
-        footer={() => ( <Button
-          id="cCommandTableAddBtn"
-          onClick={ this.addRecord }><Icon type="plus" />Add a command</Button> )}
+        footer={() => ( <div className="ant-table-footer__toolbar">
+          <Button
+            id="cCommandTableAddBtn"
+            onClick={ this.addRecord }><Icon type="plus" />Add a command</Button>
+
+         { this.props.groupId !== SNIPPETS_GROUP_ID && Object.keys( snippets ).length && <Button
+            id="cCommandTableAddSnippetBtn"
+            type="dashed"
+            onClick={ this.addSnippet }><Icon type="plus" />Add a snippet</Button> }
+
+          </div> )}
       />
-    </ErrorBoundary> );
+    </ErrorBoundary> ); //groupId
   }
 }

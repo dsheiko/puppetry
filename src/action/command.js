@@ -42,6 +42,12 @@ function getCommandsFlat( groups ) {
   }, []);
 }
 
+actions.updateCommandByRef = ( ref, failure ) => async ( dispatch, getState ) => {
+  const commands = getCommandsFlat( getState().suite.groups ),
+        parentCommand = commands.find( command => command.ref === ref );
+  dispatch( actions.updateCommand({ ...parentCommand, failure }));
+};
+
 actions.swapCommand = ( payload ) => async ( dispatch, getState ) => {
   const hideLoading = message.loading( "Moving record in progress..", 0 );
   try {

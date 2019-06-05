@@ -10,13 +10,14 @@ import { dateToTs } from "service/utils";
 import errorActions from "./error";
 import { writeSuite, readSuite, removeSuite, normalizeFilename } from "../service/io";
 import { ipcRenderer } from "electron";
-import {  E_SUITE_LOADED } from "constant";
+import { E_SUITE_LOADED, SNIPPETS_FILENAME, SNIPPETS_GROUP_ID } from "constant";
 import projectActions from "./project";
 import appActions from "./app";
 import targetActions from "./target";
 import groupActions from "./group";
 import testActions from "./test";
 import commandActions from "./command";
+import snippetsActions from "./snippets";
 
 const actions = createActions({
   SET_SUITE: ( options ) => validate( options, I.SUITE_OPTIONS ),
@@ -64,14 +65,35 @@ actions.createSuite = ( rawFilename, title ) => async ( dispatch, getState ) => 
   }
 };
 
+function createSnippetsSuite( dispatch ) {
+  dispatch( groupActions.addGroup({ title: "Snippets" }, SNIPPETS_GROUP_ID ) );
+  dispatch( projectActions.setProject({
+      groups: {
+        [ SNIPPETS_GROUP_ID ]: {
+          key: SNIPPETS_GROUP_ID,
+          value: true,
+          tests: {}
+        }
+      }
+    }));
+}
+
 actions.loadSuite = ( filename ) => async ( dispatch, getState ) => {
   try {
     const store = getState(),
           { projectDirectory } = store.settings,
-          suite = await readSuite( projectDirectory, filename );
+          data = await readSuite( projectDirectory, filename ),
+          // in case of snippets
+          suite = data === null ? store.suite : data;
+
+    suite.snippets = ( filename === SNIPPETS_FILENAME );
+
     dispatch( projectActions.setProject({ lastOpenSuite: filename }) );
     dispatch( actions.resetSuite({ ...suite, loadedAt: dateToTs(), filename, modified: false }) );
     ipcRenderer.send( E_SUITE_LOADED, projectDirectory, filename, store.app.project.files );
+    if ( suite.snippets && !( SNIPPETS_GROUP_ID in suite.groups ) ) {
+      createSnippetsSuite( dispatch );
+    }
     dispatch( appActions.addAppTab( "suite" ) );
   } catch ( ex ) {
     handleException( ex, dispatch, `Cannot load suite ${ filename }` );
@@ -96,6 +118,14 @@ actions.saveSuite = ( options = {}) => async ( dispatch, getState ) => {
     await saveProject( store );
 
     dispatch( actions.updateSuite({ savedAt: dateToTs(), modified: false }) );
+
+    if ( store.suite.snippets ) {
+      await dispatch( snippetsActions.resetSnippets({
+        targets: store.suite.targets,
+        groups: store.suite.groups
+      }));
+    }
+
   } catch ( e ) {
     dispatch( errorActions.setError({
       visible: true,

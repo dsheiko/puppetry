@@ -48,6 +48,11 @@ export default {
       commands: {}
     },
 
+    snippetModal: {
+      isVisible: false,
+      record: null
+    },
+
     tabs: {
       available: {
         suite: false,
@@ -79,7 +84,7 @@ export default {
         panes: []
       }
     },
-
+    // state of data-tables
     groups: {},
     savedAt: 0,
     modified: false,
@@ -89,6 +94,7 @@ export default {
   suite: {
     title: null,
     timeout: 50000,
+    snippets: false,
     savedAt: null,
     loadedAt: null,
     modified: false,
@@ -109,7 +115,9 @@ export default {
     credentialsProvider: "",
     credentialsUsername: "",
     credentialsPassword: ""
-  }
+  },
+
+  snippets: {}
 };
 
 export const groupDefaultState = ( id ) => ({
@@ -139,7 +147,9 @@ export const commandDefaultState = ( id ) => ({
   assert: "",
   params: {},
   disabled: false,
-  failure: ""
+  failure: "",
+  ref: "", // keeps the extrnal reference e.g. to a snippet
+  isRef: false // indicates it's a ref (when new record created ref is empty and that's the only way to know)
 });
 
 export const targetDefaultState = ( id ) => ({

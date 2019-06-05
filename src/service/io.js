@@ -13,7 +13,8 @@ import {
   RUNTIME_TEST_DIRECTORY,
   DEMO_PROJECT_DIRECTORY,
   COMMAND_ID_COMMENT,
-  RUNNER_PUPPETRY
+  RUNNER_PUPPETRY,
+  SNIPPETS_FILENAME
 } from "constant";
 import findLogPath from "electron-log/lib/transports/file/find-log-path";
 
@@ -107,11 +108,13 @@ export function copyProject( srcDirectory, targetDirectory ) {
  * Export a single suite
  * @param {String} projectDirectory
  * @param {String} filename
+ * @param {String} runner
+ * @param {Object} snippets
  * @returns {String} - spec.js content
  */
-export async function exportSuite( projectDirectory, filename, runner ) {
+export async function exportSuite( projectDirectory, filename, runner, snippets ) {
   const suite = await readSuite( projectDirectory, filename ),
-        gen = new TestGenerator( suite, schema, suite.targets, runner, projectDirectory );
+        gen = new TestGenerator( suite, schema, suite.targets, runner, projectDirectory, snippets );
   return gen.generate();
 }
 
@@ -121,16 +124,16 @@ export async function exportSuite( projectDirectory, filename, runner ) {
  * @param {String} projectDirectory
  * @param {String} outputDirectory
  * @param {String[]} suiteFiles ["foo.json",..]
- *
- * @param {Object} headless
- * @param {String} launcherArgs
+ * @param {Object} puppeteerOptions
+ * @param {Object} snippets
  * @returns {String[]} - ["foo.spec.js",..]
  */
 export async function exportProject(
   projectDirectory,
   outputDirectory,
   suiteFiles,
-  { headless = true, launcherArgs = "", runner = RUNNER_PUPPETRY }
+  { headless = true, launcherArgs = "", runner = RUNNER_PUPPETRY },
+  snippets
 ) {
   const testDir = join( outputDirectory, "specs" ),
         specFiles = [],
@@ -146,7 +149,7 @@ export async function exportProject(
     shell.cp( "-RLf" , JEST_PKG + "/*", outputDirectory  );
 
     for ( const filename of suiteFiles ) {
-      let specContent = await exportSuite( projectDirectory, filename, runner );
+      let specContent = await exportSuite( projectDirectory, filename, runner, snippets );
       const specFilename = parse( filename ).name + ".spec.js",
             specPath = join( testDir, specFilename ),
             specHasDebugger = specContent.includes( " debugger;" );
@@ -225,6 +228,11 @@ export async function readSuite( directory, file ) {
   }
 
   const filePath = join( directory, file );
+  // in case of snippets
+  if ( file === SNIPPETS_FILENAME && !fs.existsSync( filePath ) ) {
+    return null;
+  }
+
   try {
     const text = await readFile( filePath, "utf8" );
     return parseJson( text, filePath );

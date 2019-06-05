@@ -12,7 +12,7 @@ import {
   copyProject,
   isGitInitialized  } from "../service/io";
 import { ipcRenderer } from "electron";
-import { E_FILE_NAVIGATOR_UPDATED, E_WATCH_FILE_NAVIGATOR,
+import { E_FILE_NAVIGATOR_UPDATED, E_WATCH_FILE_NAVIGATOR, SNIPPETS_FILENAME,
   E_PROJECT_LOADED, E_SUITE_LIST_UPDATED } from "constant";
 import settingsActions from "./settings";
 import appActions from "./app";
@@ -77,7 +77,9 @@ actions.loadProjectFiles = ( directory = null ) => async ( dispatch, getState ) 
   try {
     const store = getState(),
           projectDirectory = directory || store.settings.projectDirectory,
-          files = await getProjectFiles( projectDirectory );
+          files = ( await getProjectFiles( projectDirectory ) )
+            .filter( file => file !== SNIPPETS_FILENAME );
+
     ipcRenderer.send( E_SUITE_LIST_UPDATED, projectDirectory, store.suite.filename, files );
     dispatch( appActions.setApp({ project: { files }}) );
   } catch ( ex ) {
@@ -88,6 +90,7 @@ actions.loadProjectFiles = ( directory = null ) => async ( dispatch, getState ) 
 
 actions.saveProject = ({ projectDirectory, name }) => async ( dispatch, getState ) => {
   try {
+    const store = getState();
     if ( !name ) {
       throw new InvalidArgumentError( "Empty project name" );
     }
@@ -96,11 +99,11 @@ actions.saveProject = ({ projectDirectory, name }) => async ( dispatch, getState
     }
 
     await dispatch( actions.setProject({ projectDirectory, name }) );
-    await saveProject( getState() );
+    await saveProject( store );
     await dispatch( actions.loadProjectFiles( projectDirectory ) );
     await dispatch( actions.watchProjectFiles( projectDirectory ) );
     await dispatch( appActions.removeAppTab( "suite" ) );
-
+    
   } catch ( e ) {
     dispatch( errorActions.setError({
       visible: true,
