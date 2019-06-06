@@ -21,7 +21,8 @@ import suiteActions from "./suite";
 
 const actions = createActions({
   SET_PROJECT: ( project ) => validate( project, I.PROJECT_OPTIONS ),
-
+  ADD_ENV: ( env ) => env,
+  REMOVE_ENV: ( env ) => env,
   UPDATE_PROJECT_PANES: ( panel, panes ) => ({ panel, panes })
 });
 
@@ -88,9 +89,17 @@ actions.loadProjectFiles = ( directory = null ) => async ( dispatch, getState ) 
 
 };
 
-actions.saveProject = ({ projectDirectory, name }) => async ( dispatch, getState ) => {
+actions.saveProject = ({ projectDirectory, name } = {}) => async ( dispatch, getState ) => {
   try {
     const store = getState();
+
+    if ( !name ) {
+      name = store.project.name;
+    }
+    if ( !projectDirectory ) {
+      projectDirectory = store.settings.projectDirectory;
+    }
+
     if ( !name ) {
       throw new InvalidArgumentError( "Empty project name" );
     }
@@ -103,7 +112,7 @@ actions.saveProject = ({ projectDirectory, name }) => async ( dispatch, getState
     await dispatch( actions.loadProjectFiles( projectDirectory ) );
     await dispatch( actions.watchProjectFiles( projectDirectory ) );
     await dispatch( appActions.removeAppTab( "suite" ) );
-    
+
   } catch ( e ) {
     dispatch( errorActions.setError({
       visible: true,
