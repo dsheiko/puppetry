@@ -29,6 +29,7 @@ import { GitSyncModal } from "./Modal/GitSyncModal";
 import { GitCheckoutModal } from "./Modal/GitCheckoutModal";
 import { GitCloneModal } from "./Modal/GitCloneModal";
 import { EditProjectModal } from "./Modal/EditProjectModal";
+import { EditEnvironmentsModal } from "./Modal/EditEnvironmentsModal";
 
 import { TabGroup  } from "./TabGroup";
 import If from "component/Global/If";
@@ -256,7 +257,10 @@ export class AppLayout extends React.Component {
           projectDirectory={ projectDirectory }
           action={ action } />
 
-
+        <EditEnvironmentsModal
+          isVisible={ store.app.editEnvironmentsModal }
+          environments={ store.project.environments }
+          action={ action } />
 
 
       </ErrorBoundary>

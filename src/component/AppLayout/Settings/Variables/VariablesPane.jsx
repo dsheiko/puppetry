@@ -37,14 +37,15 @@ export class VariablesPane extends AbstractComponent {
 
   onEditEnv = ( e ) => {
     e.preventDefault();
+    this.props.action.setApp({ editEnvironmentsModal: true });
   }
 
   render() {
      const { project, selector } = this.props,
            [ firstEnv ] = project.environments,
            activeEnv = this.state.activeEnv || firstEnv,
-           variables = selector.getVariableDataTable( firstEnv );
-      
+           variables = selector.getVariableDataTable( activeEnv );
+
     return (
       <ErrorBoundary>
 

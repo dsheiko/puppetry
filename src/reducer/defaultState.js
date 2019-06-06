@@ -40,6 +40,7 @@ export default {
     gitSyncModal: false,
     gitCheckoutModal: false,
     gitCloneModal: false,
+    editEnvironmentsModal: false,
 
     commandModal: {
       isVisible: false,

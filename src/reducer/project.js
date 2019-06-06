@@ -16,6 +16,27 @@ export default handleActions(
         });
     },
 
+
+    [ actions.addEnv ]: ( state, { payload }) => {
+      if ( !payload ) {
+        return state;
+      }
+      return update( state, {
+        environments: {
+          $push: [ payload ]
+        }
+      });
+    },
+
+    [ actions.removeEnv ]: ( state, { payload }) => {
+      if ( !payload ) {
+        return state;
+      }
+      return update( state, {
+        environments: arr => arr.filter( item => item !== payload )
+      });
+    },
+
     [ actions.updateProjectPanes ]: ( state, { payload }) => {
       if ( !payload ) {
         return state;
