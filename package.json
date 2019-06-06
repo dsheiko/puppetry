@@ -1,7 +1,7 @@
 {
   "name": "puppetry",
   "description": "Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline",
-  "version": "2.0.0-aplha.2",
+  "version": "2.0.0-aplha.3",
   "author": "Dmitry Sheiko <me@dsheiko.com> (http://dsheiko.com)",
   "repository": {
     "type": "git",
