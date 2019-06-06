@@ -1,0 +1,19 @@
+{
+  "name": "email-interceptor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "demo.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "debug": "^4.1.1",
+    "express": "^4.16.4",
+    "imap": "^0.8.19"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "DEBUG=HTTP,ERROR,INFO node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
