@@ -182,7 +182,9 @@ export class AppLayout extends React.Component {
           currentSuite={ store.suite.filename }
           files={ store.app.project.files }
           isVisible={store.app.testReportModal}
-          snippets={ store.snippets } />
+          snippets={ store.snippets }
+          environment={ store.app.environment }
+          project={ store.project } />
 
         <ExportProjectModal action={action}
           currentSuite={ store.suite.filename }
@@ -191,6 +193,8 @@ export class AppLayout extends React.Component {
           projectDirectory={ projectDirectory }
           targets={ store.suite.targets }
           snippets={ store.snippets }
+          project={ store.project }
+          environment={ store.app.environment }
           isVisible={ store.app.exportProjectModal } />
 
         <CommandModal

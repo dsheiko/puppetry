@@ -2,17 +2,34 @@ import React from "react";
 import { SELECT, INPUT, INPUT_NUMBER } from "../../constants";
 import { isEveryValueMissing } from "service/utils";
 import Link from "component/Global/Link";
+import ExpressionParser from "service/ExpressionParser";
+
+/**
+ * @typedef {object} TemplatePayload
+ * @property {string} target
+ * @property {string} method
+ * @property {object} assert
+ * @property {object} params
+ * @property {string} targetSeletor
+ * @property {string} id - command id
+ */
 
 export const goto = {
-  template: ({ params }) => {
+  /**
+   * @param {TemplatePayload} payload
+   * @returns {String}
+   */
+  template: ({ params, id }) => {
     const { url, timeout, waitUntil } = params,
           options = {
             timeout, waitUntil
           },
+          parser = new ExpressionParser( id ),
+          urlString = parser.stringify( url ),
           optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
     return `
-      // Navigating to ${ JSON.stringify( url ) }
-      await bs.page.goto( ${ JSON.stringify( url ) }${ optArg });
+      // Navigating to ${ url }
+      await bs.page.goto( ${ urlString }${ optArg });
     `;
   },
 

@@ -5,12 +5,12 @@ import { COMMAND_ID_COMMENT, RUNNER_PUPPETRY, SNIPPETS_GROUP_ID } from "constant
 
 export default class TestGenerator {
 
-  constructor( suite, schema, targets, runner, projectDirectory, snippets ) {
+  constructor( suite, schema, targets, runner, projectDirectory, snippets, env ) {
     this.schema = schema;
     this.suite = { ...suite };
     this.projectDirectory = projectDirectory;
     this.snippets = { targets: {}, groups: {}, ...snippets };
-
+    this.env = env;
     this.runner = runner; // RUNNER_PUPPETRY when embedded
     this.targets = Object.values({ ...snippets.targets, ...targets })
       .reduce( ( carry, entry ) => {
@@ -63,7 +63,8 @@ export default class TestGenerator {
         assert,
         params,
         targetSeletor: this.targets[ target ],
-        method
+        method,
+        id: command.id
       });
       // Provide source code with markers
       return this.runner === RUNNER_PUPPETRY
@@ -111,11 +112,13 @@ export default class TestGenerator {
 
   generate() {
     try {
+
       return this.schema.jest.tplSuite({
         title: this.suite.title,
         targets: this.parseTargets( this.suite.targets ),
         suite: this.suite,
         runner: this.runner,
+        env: this.env,
         screenshotDirectory: join( this.projectDirectory, "screenshots" ),
         body: Object.values( this.suite.groups )
           .filter( group => group.disabled !== true )

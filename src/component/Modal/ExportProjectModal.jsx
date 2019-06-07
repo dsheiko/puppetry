@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Alert, Checkbox, Modal, Button, message } from "antd";
+import { Icon, Alert, Select, Checkbox, Modal, Button, message } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { exportProject, isDirEmpty } from "service/io";
 import BrowseDirectory from "component/Global/BrowseDirectory";
@@ -9,8 +9,10 @@ import If from "component/Global/If";
 import { TestGeneratorError } from "error";
 import { confirmExportProject } from "service/smalltalk";
 import * as classes from "./classes";
+import { getSelectedVariables, getActiveEnvironment} from "selector/selectors";
 
-const CheckboxGroup = Checkbox.Group;
+const CheckboxGroup = Checkbox.Group,
+      { Option } = Select;
 
 export class ExportProjectModal extends React.Component {
 
@@ -35,7 +37,8 @@ export class ExportProjectModal extends React.Component {
     checkedList: [],
     indeterminate: true,
     checkAll: false,
-    modified: false
+    modified: false,
+    activeEnv: ""
   }
 
   onChange = ( checkedList ) => {
@@ -46,6 +49,10 @@ export class ExportProjectModal extends React.Component {
       indeterminate: !!checkedList.length && ( checkedList.length < files.length ),
       checkAll: checkedList.length === files.length
     });
+  }
+
+  onEnvChange = ( activeEnv ) => {
+    this.props.action.updateApp({ environment: activeEnv });
   }
 
   onCheckAllChange = ( e ) => {
@@ -65,7 +72,8 @@ export class ExportProjectModal extends React.Component {
 
   onClickOk = async ( e ) => {
     const selectedDirectory = this.findSelectedDirectory(),
-          { projectDirectory, files, currentSuite } = this.props,
+          { projectDirectory, files, currentSuite, project, environment } = this.props,
+          activeEnv = getActiveEnvironment( project.environments, environment ),
           current = files.find( file => currentSuite === file ),
           checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
@@ -86,7 +94,11 @@ export class ExportProjectModal extends React.Component {
         selectedDirectory,
         checkedList,
         { runner: RUNNER_JEST },
-        this.props.snippets
+        this.props.snippets,
+        {
+          variables: getSelectedVariables( project.variables, activeEnv ),
+          environment: activeEnv
+        }
       );
       message.info( `Project exported in ${ selectedDirectory }` );
       this.props.action.setApp({ exportProjectModal: false });
@@ -132,7 +144,8 @@ export class ExportProjectModal extends React.Component {
   }
 
   render() {
-    const { isVisible, files, currentSuite } = this.props,
+    const { isVisible, files, currentSuite, project, environment } = this.props,
+          activeEnv = getActiveEnvironment( project.environments, environment ),
           current = files.find( file => currentSuite === file ),
           checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
@@ -166,6 +179,29 @@ export class ExportProjectModal extends React.Component {
         You just need to navigate into the directory,
         install dependencies (<code>npm install</code>) and run the tests (<code>npm test</code>).
           </p>
+
+
+         <div className="select-group-inline">
+          <span className="select-group-inline__label">
+            <Icon type="environment" title="Select a target environment" />
+          </span>
+          <Select
+            showSearch
+            style={{ width: 348 }}
+            placeholder="Select a environment"
+            optionFilterProp="children"
+            onChange={ this.onEnvChange }
+            defaultValue={ activeEnv }
+            filterOption={(input, option) =>
+              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+          >
+          { project.environments.map( env => (<Option value={ env } key={ env }>
+            { env }
+            </Option>)) }
+          </Select>
+          </div>
+
           <BrowseDirectory
             defaultDirectory={ this.props.exportDirectory }
             validateStatus={ this.state.browseDirectoryValidateStatus }

@@ -875,3 +875,20 @@ td:hover .editable-cell-icon {
   height: calc(100vh - 158px);
   overflow-y: auto;
 }
+
+.select-group-inline {
+  display: flex;
+  align-items: center;
+}
+.select-group-inline__label svg {
+  font-size: 18px;
+}
+
+.select-group-inline > a {
+  margin-left: 8px;
+}
+.select-group-inline__label {
+  color: rgba(0, 0, 0, 0.85);
+  font-size: 14px;
+  margin-right: 8px;
+}

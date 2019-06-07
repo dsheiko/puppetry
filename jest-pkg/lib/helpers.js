@@ -74,3 +74,4 @@ exports.makePng = ( ns ) => ( filePath, options = {} ) => {
 exports.png = png;
 exports.fetch = fetch;
 exports.pollForValue = pollForValue;
+
