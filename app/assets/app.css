@@ -919,3 +919,17 @@ td:hover .editable-cell-icon {
   color: rgba(0, 0, 0, 0.45);
   font-size: 16px;
 }
+
+.template-helper {
+  display: flex;
+  padding: 0 0 16px 0;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.45);
+}
+.template-helper > span {
+  flex: 0 0 auto;
+}
+.template-helper > .ant-select {
+  margin-left: 8px;
+  max-width: 200px;
+}

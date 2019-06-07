@@ -13,7 +13,7 @@ import Markdown from "component/Global/Markdown";
 import Link from "component/Global/Link";
 
 const FormItem = Form.Item,
-      Option = Select.Option,
+     { Option, OptGroup } = Select,
       RadioGroup = Radio.Group,
       Panel = Collapse.Panel,
       { TextArea } = Input,
@@ -62,19 +62,12 @@ export class ParamsFormBuilder extends React.Component {
           onSelect = ( value ) => {
             setFieldsValue({ [ field.name ]: value });
           },
-          inputStyle = field.inputStyle || {},
-          addonAfter = field.template ? (<div className="char-pad--left"
-    data-balloon="Parameter supports templating. Click here to find out more..."
-    data-balloon-length="large"
-    data-balloon-pos="top">
-            <Link to="https://docs.puppetry.app/template">
-            <Icon type="tags" />
-          </Link></div>) : null;
+          inputStyle = field.inputStyle || {};
     switch ( field.control ) {
       case INPUT:
         return ( <Input placeholder={ field.placeholder }
           style={ inputStyle }
-          addonAfter={ addonAfter }
+
           onKeyPress={ ( e ) => this.onKeyPress( e, onSubmit ) } /> );
       case INPUT_NUMBER:
         return ( <InputNumber
@@ -140,7 +133,7 @@ export class ParamsFormBuilder extends React.Component {
   }
 
 
-  renderField = ( field, inx ) => {
+  renderField = ( field, inx, section ) => {
      const { getFieldDecorator } = this.props.form,
           labelNode = field.tooltip ? getLabel( field.label, field.tooltip ) : field.label,
           initialValue = this.getInitialValue( field ),
@@ -167,16 +160,15 @@ export class ParamsFormBuilder extends React.Component {
       decoratorOptions.initialValue = true;
     }
 
-    const formItemLayout  = field.span ? {} : {
+    const formItemLayout = section.span ? {
       labelCol: {
-        xs: { span: 12 },
-        sm: { span: 4 }
+        span: section.span.label
       },
       wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 }
+        span: section.span.input
       }
-    };
+    } : {};
+
 
     return (<Col span={ field.span || 24 } key={ `field_${ inx }` }>
 
@@ -192,10 +184,21 @@ export class ParamsFormBuilder extends React.Component {
           onClick={ ( e ) => this.onClickSelectFile( e, field ) }>Select file</Button>
         }
       </FormItem>
+
+      { field.template && <div className="template-helper">
+      <span><Icon type="arrow-up" /> Insert template <Link to="https://docs.puppetry.app/template">expressions</Link></span>
+      <Select size="small">
+        <OptGroup label="Variables">
+          <Option key="1">FOO</Option>
+          <Option key="1">BAR</Option>
+        </OptGroup>
+      </Select>
+      </div> }
+
     </Col>);
   };
 
-  renderRow = ( row, inx ) => {
+  renderRow = ( row, inx, section ) => {
     validate( row, {
       description: "string=",
       fields: "array"
@@ -204,7 +207,7 @@ export class ParamsFormBuilder extends React.Component {
       { row.description ? <Markdown
         md={ row.description }
         className="command-row-description" /> : "" }
-      { row.fields.map( this.renderField ) }
+      { row.fields.map( ( field, inx ) => this.renderField( field, inx, section ) ) }
     </Row>);
   };
 
@@ -237,9 +240,9 @@ export class ParamsFormBuilder extends React.Component {
 
        { section.fields && section.fields
           .map( this.mapFieldsToRow )
-          .map( this.renderRow ) }
+          .map( ( row, inx ) => this.renderRow( row, inx, section ) ) }
 
-      { section.rows && section.rows.map( this.renderRow ) }
+      { section.rows && section.rows.map( ( row, inx ) => this.renderRow( row, inx, section ) ) }
       </fieldset> );
   }
 
