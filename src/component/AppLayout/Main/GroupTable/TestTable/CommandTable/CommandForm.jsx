@@ -178,10 +178,7 @@ export class CommandForm extends React.Component {
           </If>
 
           <If exp={ schema && schema.params.length }>
-            <fieldset className="command-form ">
-              <legend>
-                <span>Parameters</span>
-              </legend>
+            <div className="command-form ">
               <ErrorBoundary>
                 <ParamsFormBuilder
                   schema={ schema }
@@ -190,7 +187,7 @@ export class CommandForm extends React.Component {
                   onSubmit={ this.handleSubmit }
                   form={ this.props.form } />
               </ErrorBoundary>
-            </fieldset>
+            </div>
           </If>
 
           <If exp={ Assert }>

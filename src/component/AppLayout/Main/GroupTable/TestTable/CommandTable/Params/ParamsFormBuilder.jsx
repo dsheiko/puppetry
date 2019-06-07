@@ -1,13 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Input, InputNumber, Checkbox, Row, Col, Select, Button } from "antd";
+import If from "component/Global/If";
+import ErrorBoundary from "component/ErrorBoundary";
+import { Collapse, Form, Input, InputNumber, Checkbox, Row, Col, Select, Radio, Icon  } from "antd";
+import { validate } from "bycontract";
 import Tooltip from "component/Global/Tooltip";
-import { FILE, INPUT, INPUT_NUMBER, CHECKBOX, SELECT, TEXTAREA } from "component/Schema/constants";
+import { FILE, TEXTAREA, RADIO_GROUP, INPUT, INPUT_NUMBER, CHECKBOX, SELECT,
+  SEARCH_SELECT } from "component/Schema/constants";
 import { ipcRenderer } from "electron";
 import { E_BROWSE_FILE, E_FILE_SELECTED } from "constant";
+import Markdown from "component/Global/Markdown";
+import Link from "component/Global/Link";
+
 const FormItem = Form.Item,
       Option = Select.Option,
-
+      RadioGroup = Radio.Group,
+      Panel = Collapse.Panel,
+      { TextArea } = Input,
 
       getLabel = ( desc, tooltip ) => (
         <span>
@@ -27,17 +36,8 @@ export class ParamsFormBuilder extends React.Component {
       setFieldsValue: PropTypes.func.isRequired
     }),
 
-    onSubmit: PropTypes.func.isRequired,
     record: PropTypes.object.isRequired,
     schema: PropTypes.any
-  }
-
-  onKeyPress = ( e, cb ) => {
-    switch ( e.key ){
-    case "Enter":
-      cb( e );
-      return;
-    }
   }
 
   onClickSelectFile = ( e, item ) => {
@@ -56,122 +56,210 @@ export class ParamsFormBuilder extends React.Component {
     });
   }
 
-  renderControl = ( item ) => {
+  renderControl = ( field ) => {
     const { setFieldsValue } = this.props.form,
           { onSubmit } = this.props,
           onSelect = ( value ) => {
-            setFieldsValue({ [ item.name ]: value });
-          };
-    switch ( item.control ) {
-    case INPUT:
-      return ( <Input placeholder={ item.placeholder }
-        onKeyPress={ ( e ) => this.onKeyPress( e, onSubmit ) } /> );
-    case INPUT_NUMBER:
-      return ( <InputNumber
-        onKeyPress={ ( e ) => this.onKeyPress( e, onSubmit ) } /> );
-    case TEXTAREA:
-      return ( <Input.TextArea
-        placeholder={ item.placeholder }
-        rows={ 4 } /> );
-    case FILE:
-      return ( <Input onClick={ this.onClickSelectFile } disabled  /> );
-    case SELECT:
-      return ( <Select
-        showSearch
-        placeholder={ item.placeholder }
-        optionFilterProp="children"
-        onSelect={ onSelect }
-        filterOption={( input, option ) => option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0}
-      >
-        {
-          item.options.map( ( option, inx ) => {
-            return typeof option === "string"
-              ? ( <Option key={inx} value={ option }>{ option }</Option> )
-              : ( <Option key={inx} value={ option.value }>{ option.description }</Option> );
-          })
+            setFieldsValue({ [ field.name ]: value });
+          },
+          inputStyle = field.inputStyle || {},
+          addonAfter = field.template ? (<div className="char-pad--left"
+    data-balloon="Parameter supports templating. Click here to find out more..."
+    data-balloon-length="large"
+    data-balloon-pos="top">
+            <Link to="https://docs.puppetry.app/template">
+            <Icon type="tags" />
+          </Link></div>) : null;
+    switch ( field.control ) {
+      case INPUT:
+        return ( <Input placeholder={ field.placeholder }
+          style={ inputStyle }
+          addonAfter={ addonAfter }
+          onKeyPress={ ( e ) => this.onKeyPress( e, onSubmit ) } /> );
+      case INPUT_NUMBER:
+        return ( <InputNumber
+          style={ inputStyle }
+          onKeyPress={ ( e ) => this.onKeyPress( e, onSubmit ) } /> );
+      case TEXTAREA:
+        return ( <Input.TextArea
+          style={ inputStyle }
+          placeholder={ field.placeholder }
+          rows={ 4 } /> );
+      case FILE:
+        return ( <Input style={ inputStyle } onClick={ this.onClickSelectFile } disabled  /> );
+      case SELECT:
+        return ( <Select
+          showSearch
+          style={ inputStyle }
+          placeholder={ field.placeholder }
+          optionFilterProp="children"
+          onSelect={ onSelect }
+          filterOption={( input, option ) => option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0}
+        >
+          {
+            field.options.map( ( option, inx ) => {
+              return typeof option === "string"
+                ? ( <Option key={inx} value={ option }>{ option }</Option> )
+                : ( <Option key={inx} value={ option.value }>{ option.description }</Option> );
+            })
 
-        }
-      </Select> );
-    case CHECKBOX:
-      return ( <Checkbox>
-        { item.label }
-        { item.tooltip && ( <Tooltip
-          title={ item.tooltip }
-          icon="question-circle"
-        /> )}
+          }
+        </Select> );
+      case CHECKBOX:
+        return ( <Checkbox>
+          { field.label }
+          { field.tooltip && ( <Tooltip
+            title={ field.tooltip }
+            icon="question-circle"
+          /> )}
 
-      </Checkbox> );
-    default:
-      return null;
+        </Checkbox> );
+      case RADIO_GROUP:
+        return (<RadioGroup>
+          {
+            field.options.map( ( option, inx ) => {
+              return typeof option === "string"
+                ? ( <Radio key={inx} value={ option }>{ option }</Radio> )
+                : ( <Radio key={inx} value={ option.value }>{ option.description }</Radio> );
+            })
+          }
+        </RadioGroup>);
+      default:
+        return null;
     }
   }
 
-  getInitialValue( item ) {
+  getInitialValue( field ) {
     const { record } = this.props,
-          initialValue = item.control === CHECKBOX ? false : item.initialValue,
-          key = item.name.replace( /^params\./, "" );
+          initialValue = field.control === CHECKBOX ? false : field.initialValue,
+          key = field.name.replace( /^params\./, "" );
 
     return ( ( record.params && record.params.hasOwnProperty( key ) )
       ? record.params[ key ]
       : initialValue );
   }
 
-  renderFormItem = ( item, inx ) => {
-    const { getFieldDecorator } = this.props.form,
-          labelNode = item.tooltip ? getLabel( item.label, item.tooltip ) : item.label,
-          initialValue = this.getInitialValue( item ),
+
+  renderField = ( field, inx ) => {
+     const { getFieldDecorator } = this.props.form,
+          labelNode = field.tooltip ? getLabel( field.label, field.tooltip ) : field.label,
+          initialValue = this.getInitialValue( field ),
           decoratorOptions =  {
             initialValue,
-            rules: item.rules
+            rules: field.rules
           };
 
-    if ( item.control === CHECKBOX ) {
+    validate( field, {
+      span: "number=",
+      name: "string",
+      control: "string",
+      label: "string",
+      tooltip: "string=",
+      placeholder: "string=",
+      inputStyle: "object=",
+      textareaRows: "number=",
+      options: "array=",
+      rules: "array="
+    });
+
+    if ( field.control === CHECKBOX ) {
       decoratorOptions.valuePropName = ( initialValue ? "checked" : "data-ok" );
       decoratorOptions.initialValue = true;
     }
 
-    return (
+    const formItemLayout  = field.span ? {} : {
+      labelCol: {
+        xs: { span: 12 },
+        sm: { span: 4 }
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 16 }
+      }
+    };
+
+    return (<Col span={ field.span || 24 } key={ `field_${ inx }` }>
+
       <FormItem
-        label={ item.control !== CHECKBOX ? labelNode : "" }
-        key={ `item${inx}` }>
-        { getFieldDecorator( item.name, decoratorOptions )( this.renderControl( item ) ) }
-        { item.description ? <div className="command-opt-description">{ item.description }</div> : "" }
-        { item.control === FILE && <Button
-          onClick={ ( e ) => this.onClickSelectFile( e, item ) }>Select file</Button>
+        { ...formItemLayout }
+        label={ field.control !== CHECKBOX ? labelNode : "" }
+        key={ `field${inx}` }>
+        { getFieldDecorator( field.name, decoratorOptions )( this.renderControl( field ) ) }
+        { field.description ? <Markdown
+          md={ field.description }
+          className="command-row-description" />    : "" }
+        { field.control === FILE && <Button
+          onClick={ ( e ) => this.onClickSelectFile( e, field ) }>Select file</Button>
         }
-      </FormItem> );
-  }
+      </FormItem>
+    </Col>);
+  };
 
   renderRow = ( row, inx ) => {
+    validate( row, {
+      description: "string=",
+      fields: "array"
+    });
+    return (<Row gutter={16} key={ `row_${ inx }` } className="ant-form-inline edit-command-inline">
+      { row.description ? <Markdown
+        md={ row.description }
+        className="command-row-description" /> : "" }
+      { row.fields.map( this.renderField ) }
+    </Row>);
+  };
 
-    const rowNode = (
-      <Row gutter={24} key={ `row${inx}` } className={ row.inline ? "ant-form-inline edit-command-inline" : null }>
-        <Col span={ row.span || 24} >
-          { row.items.map( this.renderFormItem ) }
-        </Col>
-      </Row> );
+  mapFieldsToRow = ( field ) => ({
+    fields: [ field ]
+  });
 
-    return row.legend ? (
-      <fieldset className="command-form__fieldset"  key={ `fs${inx}` }>
-        <legend>
-          <span>{ row.legend }</span>
-          { row.tooltip && ( <Tooltip
-            title={ row.tooltip }
-            icon="question-circle"
-          /> )}
-        </legend>
-        { row.description && ( <p>{ row.description }</p> )}
-        { rowNode }
-      </fieldset> ) : rowNode;
+
+
+  renderSection = ( section, inx ) => {
+    validate( section, {
+      legend: "string=",
+      tooltip: "string=",
+      description: "string=",
+      fields: "array=",
+      rows: "array="
+    });
+
+    return (
+      <fieldset className="command-form__fieldset" key={ `section_${ inx }` }>
+      { !section.options && <legend>
+        <span>{ section.legend || "Parameters" }</span>
+        { section.tooltip && <Tooltip title={ section.tooltip } icon="question-circle" /> }
+      </legend> }
+      <If exp={ section.description }>
+        <Markdown
+        md={ section.description }
+        className="command-section-description" />
+      </If>
+
+       { section.fields && section.fields
+          .map( this.mapFieldsToRow )
+          .map( this.renderRow ) }
+
+      { section.rows && section.rows.map( this.renderRow ) }
+      </fieldset> );
   }
+
+  renderSectionWrapper = ( section, inx ) => {
+    return section.options
+      ? (<Collapse key={ `collapse_${ inx }` }>
+          <Panel key={ `panel_${ inx }` } header={ section.legend || "Options" } className="command-options-panel">
+            { this.renderSection( section, inx ) }
+          </Panel>
+        </Collapse>)
+      : this.renderSection( section, inx );
+  }
+
 
   render() {
     const { schema } = this.props;
-
     return (
-      <React.Fragment>
-        { schema.params.map( this.renderRow ) }
-      </React.Fragment>
+      <ErrorBoundary>
+        { schema.params.map( this.renderSectionWrapper ) }
+      </ErrorBoundary>
     );
   }
-}
+};

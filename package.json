@@ -54,6 +54,7 @@
     "jest-cli": "^23.6.0",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
+    "markdown-it": "^8.4.2",
     "npm": "^6.4.1",
     "prop-types": "^15.6.2",
     "react": "^16.6.0",

@@ -892,3 +892,30 @@ td:hover .editable-cell-icon {
   font-size: 14px;
   margin-right: 8px;
 }
+
+
+.markdown p:first-child {
+  margin-top: 0;
+}
+.markdown p:last-child {
+  margin-bottom: 0;
+}
+
+.command-section-description {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+.command-row-description {
+  font-size: 13px;
+  line-height: 18px;
+  padding: 8px 0 0 8px;
+}
+
+.command-description svg {
+  fill: var(--color-primary);
+}
+
+.command-options-panel .ant-collapse-header {
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 16px;
+}
