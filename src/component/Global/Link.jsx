@@ -10,9 +10,10 @@ export default class Link extends AbstractComponent {
     }
 
     render() {
-      const { to, children } = this.props;
+      const { to, children, title } = this.props;
       return <a onClick={ this.onExtClick }
         href={ to }
+        title={ title || "" }
         rel="noopener noreferrer">{ children }</a>;
     }
 }
