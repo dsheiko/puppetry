@@ -7,3 +7,5 @@ export const InvalidArgumentError = CustomError( "InvalidArgumentError", CaughtE
   message: "Invalid argument error" });
 export const TestGeneratorError = CustomError( "TestGeneratorError",
   CaughtException, { message: "Test generatorerror" });
+export const ExpressionParserException = CustomError( "ExpressionParserException", {
+  message: "Cannot parse this expresion" });

@@ -1,11 +1,29 @@
 import uniqid from "uniqid";
+import { validate } from "bycontract";
 import { SNIPPETS_GROUP_ID } from "constant";
 
 function setEntity( arr, entity ) {
   return arr.map( record => ({ ...record, entity }) );
 }
 
+export function getActiveEnvironment( environments, environment ) {
+  validate( arguments, [ "string[]", "string" ] );
+  const [ firstEnv ] = environments;
+  return environment || firstEnv;
+}
+
+export function getSelectedVariables( variables, env ) {
+  validate( arguments, [ "object", "string" ] );
+  return Object.values( variables )
+    .filter( variable => variable.env === env && !variable.disabled )
+    .reduce( ( carry, variable ) => ({
+      ...carry,
+      [ variable.name ]: variable.value
+    }), {});
+}
+
 export function getVariableDataTable( variables, env ) {
+  validate( arguments, [ "object", "string" ] );
   const matches = Object.values( variables ).filter( variable => variable.env === env ),
         data = setEntity( matches, "variable" ),
         id = uniqid();

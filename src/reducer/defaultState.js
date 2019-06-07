@@ -12,6 +12,9 @@ export default {
     greeting: "Hello!",
     loading: false,
     readyToRunTests: false,
+    // currently selected env
+    environment: "",
+
     alert: {
       visible: false,
       title: "Error",

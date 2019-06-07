@@ -71,3 +71,6 @@ exports.RUNNER_JEST = "RUNNER_JEST";
 
 exports.SNIPPETS_FILENAME = ".snippets.json";
 exports.SNIPPETS_GROUP_ID = "snippets";
+
+
+exports.INLINE_INPUT_STYLES = { width: 200 };

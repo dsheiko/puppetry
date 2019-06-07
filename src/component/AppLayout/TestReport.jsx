@@ -50,6 +50,7 @@ export class TestReport extends AbstractComponent {
   }
 
   run = async () => {
+    const { project } = this.props;
     this.props.action.saveSuite();
     this.props.action.resetCommandFailures();
     try {
@@ -65,7 +66,11 @@ export class TestReport extends AbstractComponent {
                 headless: this.props.headless,
                 launcherArgs: this.props.launcherArgs
               },
-              this.props.snippets
+              this.props.snippets,
+              {
+                variables: project.variables,
+                environments: project.environments
+              }
             ),
             res = ipcRenderer.sendSync( E_RUN_TESTS, this.runtimeTemp, specList );
 

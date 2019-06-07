@@ -1,74 +1,111 @@
 import { ExpressionParserException } from "error";
+import faker from "faker";
 
 function extractParams( func, directive ) {
   const body = directive.substr( func.length + 1 ).replace( /\)$/, "" );
   return JSON.parse( `[${ body }]` );
 }
 
-function createIife( code ) {
-  return `(() => { ${ code } })()`;
+const randomInt = ( max ) => Math.floor( Math.random() * Math.floor( max ) );
+
+function fake( path, locale ) {
+  const [ ns, method ] = path.split( "." );
+  faker.locale = locale;
+  return faker[ ns ][ method ]();
+}
+
+class NodeStorage {
+  data = new Map();
+  get = ( sid ) => this.data.has( sid ) ? parseInt( this.data.get( sid ), 10 ) : 0;
+  set = ( sid, val ) => this.data.set( sid, val );
+}
+
+class WebStorage {
+  get = ( sid ) => localStorage.hasItem( sid ) ? parseInt( localStorage.getItem( sid ), 10 ) : 0;
+  set = ( sid, val ) => localStorage.setItem( sid, val );
 }
 
 class Parsers {
 
-  constructor( vars ) {
-    this.vars = vars;
+  constructor( commandId ) {
+    this.commandId = commandId;
+    this.storage = typeof localStorage === "undefined" ? new NodeStorage : new WebStorage;
   }
 
   // {{ faker("address.streetSuffix", "en") }}
-  faker = ( directive ) => {
-    try {
-      const [ method, locale ] = extractParams( "faker", directive );
-      return createIife( `faker.locale = "${ locale }"; return faker.${ method }();` );
-    } catch ( err ) {
-      throw new ExpressionParserException( `Cannot parse directive ${ directive }` );
-    }
-  };
+  faker = ([ method, locale ]) => fake( method, locale || "en_GB" );
 
   // {{ random(["aa", "bb"]) }}
-  random= ( directive ) => {
-    try {
-      const [ json ] = extractParams( "random", directive );
-      return createIife( `const json = ${ JSON.stringify( json ) }; return json[ randomInt( json.length  ) ];` );
-    } catch ( err ) {
-      throw new ExpressionParserException( `Cannot parse directive ${ directive }` );
-    }
+  random = ([ json ]) => json[ randomInt( json.length  ) ];
+
+  // {{ counter() }}
+  counter = () => {
+    const sid = `counter_${ this.commandId }`,
+          val = this.storage.get( sid ) + 1;
+    this.storage.set( sid, val );
+    return `${ val }`;
   }
 
-  variable = ( key ) => {
-    if ( !( key in this.vars ) ) {
-      throw new ExpressionParserException( `Cannot find variable corresponding to key ${ key }` );
-    }
-    return this.vars[ key ];
+  // {{ iterate(["aa", "bb"]) }}
+  iterate = ([ json ]) => {
+    const sid = `iterate_${ this.commandId }`,
+          inx = this.storage.get( sid );
+    this.storage.set( sid, ( inx + 1 ) >= json.length ? 0 : inx + 1 );
+    return `${ json[ inx ] }`;
   }
+
+  // {{ env("SECRET") }}
+  env = ([ key ]) => `process.env.${ key }`;
+
+  // {{ FOO }}
+  variable = ( key ) => `ENV[ "${ key }" ]`;
 }
 
 export default class ExpressionParser {
 
-  constructor( vars ) {
-    this.parsers = new Parsers( vars );
+  constructor( commandId = "" ) {
+    this.parsers = new Parsers( commandId );
   }
 
-  parse( value ) {
-    const DIRECTIVE_RE = /\{\{(.+)\}\}/,
-          VARIABLE_RE = /^[a-zA-Z0-9_]+$/,
-          matches = value.match( DIRECTIVE_RE );
+  stringify( value ) {
+    const EXP_RE = /\{\{([^\}]+)\}\}/gm;
+    // no expression for sure
+    if ( !value.includes( "{{" ) ) {
+      return JSON.stringify( value );
+    }
+    const matches = value.match( EXP_RE );
+    if ( !matches ) {
+      return JSON.stringify( value );
+    }
+    matches
+      .forEach( exp => {
+        const chunk = this.parseExp( exp );
+        value = value.replace( exp, "${ " + chunk + " }" );
+      });
+    return `\`${ value }\``;
+  }
 
-    if ( matches === null ) {
-      return value;
+  parseExp( rawExp ) {
+    const VARIABLE_RE = /^[a-zA-Z0-9_\.]+$/,
+          // transform {{FOO}} to FOO
+          exp = rawExp.substr( 2 ).slice( 0, -2 ).trim();
+
+    if ( VARIABLE_RE.test( exp ) ) {
+      return this.parsers.variable( exp );
     }
 
-    const directive = matches[ 1 ].trim();
-    if ( VARIABLE_RE.test( directive ) ) {
-      return this.parsers.variable( directive );
-    }
-
+    // check if any of available methods matches the expresion
     const parser = Object.getOwnPropertyNames( this.parsers )
-      .find( ( available ) => directive.startsWith( available + "(" ) );
+      .find( ( available ) => exp.startsWith( available + "(" ) );
     if ( !parser ) {
-      throw new ExpressionParserException( `Cannot parse directive ${ directive }` );
+      throw new ExpressionParserException( `Cannot parse expression ${ exp }` );
     }
-    return this.parsers[ parser ]( directive );
+    try {
+      return this.parsers[ parser ]( extractParams( parser, exp ) );
+     } catch ( err ) {
+       console.log(err);
+      throw new ExpressionParserException( `Cannot parse directive ${ exp }` );
+    }
   }
 
   buildFakerDirective( method, locale ) {
