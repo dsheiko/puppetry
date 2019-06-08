@@ -43,7 +43,9 @@ export const goto = {
       fields: [
         {
           name: "params.url",
-          template: true,
+          template: {
+            marginLeft: 68
+          },
           control: INPUT,
           label: "URL",
           tooltip: `URL to navigate page to. The url should include scheme, e.g. https://.`,
@@ -56,7 +58,7 @@ export const goto = {
       ]
     },
     {
-      options: true,
+      collapsed: true,
       description: "",
       tooltip: "",
       span: { label: 4, input: 18 },
