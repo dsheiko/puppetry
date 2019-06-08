@@ -17,12 +17,13 @@ import {
   SNIPPETS_FILENAME
 } from "constant";
 import findLogPath from "electron-log/lib/transports/file/find-log-path";
+import writeFileAtomic from "write-file-atomic";
 
 const PROJECT_FILE_NAME = ".puppetryrc",
       PROJECT_FALLBAK_NAME = ".puppertyrc",
       GIT_FILE_NAME = ".puppetrygit",
       readFile = util.promisify( fs.readFile ),
-      writeFile = util.promisify( fs.writeFile ),
+      writeFile = ( file, content ) => writeFileAtomic( file, content ),
       unlink = util.promisify( fs.unlink ),
       readdir = util.promisify( fs.readdir ),
       lstat = util.promisify( fs.lstat ),
