@@ -11,6 +11,10 @@ import { ipcRenderer } from "electron";
 import { E_BROWSE_FILE, E_FILE_SELECTED } from "constant";
 import Markdown from "component/Global/Markdown";
 import Link from "component/Global/Link";
+import { TemplateHelper } from "./TemplateHelper";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { getSelectedVariables } from "selector/selectors";
 
 const FormItem = Form.Item,
      { Option, OptGroup } = Select,
@@ -26,8 +30,17 @@ const FormItem = Form.Item,
             icon="question-circle"
           />
         </span>
-      );
+      ),
 
+      mapStateToProps = ( state ) => ({
+        environments: state.project.environments,
+        variables: state.project.variables
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = () => ({
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 export class ParamsFormBuilder extends React.Component {
 
   static propTypes = {
@@ -53,6 +66,13 @@ export class ParamsFormBuilder extends React.Component {
       setFieldsValue({
         [ this.filepathName ]: selectedFile
       });
+    });
+  }
+
+  onTemplateHelperChange = ( name, val ) => {
+    const { setFieldsValue, getFieldValue } = this.props.form;
+    setFieldsValue({
+      [ name ]: getFieldValue( name ) + val
     });
   }
 
@@ -144,6 +164,7 @@ export class ParamsFormBuilder extends React.Component {
 
     validate( field, {
       span: "number=",
+      template: "object=",
       name: "string",
       control: "string",
       label: "string",
@@ -169,7 +190,6 @@ export class ParamsFormBuilder extends React.Component {
       }
     } : {};
 
-
     return (<Col span={ field.span || 24 } key={ `field_${ inx }` }>
 
       <FormItem
@@ -185,15 +205,12 @@ export class ParamsFormBuilder extends React.Component {
         }
       </FormItem>
 
-      { field.template && <div className="template-helper">
-      <span><Icon type="arrow-up" /> Insert template <Link to="https://docs.puppetry.app/template">expressions</Link></span>
-      <Select size="small">
-        <OptGroup label="Variables">
-          <Option key="1">FOO</Option>
-          <Option key="1">BAR</Option>
-        </OptGroup>
-      </Select>
-      </div> }
+      { field.hasOwnProperty( "template" ) && <TemplateHelper
+        field={ field }
+        onChange={ this.onTemplateHelperChange }
+        environments={ this.props.environments }
+        variables={ this.props.variables }
+        config={ field.template } /> }
 
     </Col>);
   };
@@ -223,12 +240,14 @@ export class ParamsFormBuilder extends React.Component {
       tooltip: "string=",
       description: "string=",
       fields: "array=",
-      rows: "array="
+      rows: "array=",
+      collapsed: "boolean=",
+      span: "object=" // label: X, input: X
     });
 
     return (
       <fieldset className="command-form__fieldset" key={ `section_${ inx }` }>
-      { !section.options && <legend>
+      { !section.collapsed && <legend>
         <span>{ section.legend || "Parameters" }</span>
         { section.tooltip && <Tooltip title={ section.tooltip } icon="question-circle" /> }
       </legend> }
@@ -247,9 +266,15 @@ export class ParamsFormBuilder extends React.Component {
   }
 
   renderSectionWrapper = ( section, inx ) => {
-    return section.options
-      ? (<Collapse key={ `collapse_${ inx }` }>
-          <Panel key={ `panel_${ inx }` } header={ section.legend || "Options" } className="command-options-panel">
+    const header = ( <span>{ section.legend || "Advanced Options" }</span> );
+    return section.collapsed
+      ? (<Collapse key={ `collapse_${ inx }` }
+          expandIcon={({ isActive }) => (<Icon
+          type="right-circle" rotate={isActive ? 90 : 0} />)}
+          >
+          <Panel key={ `panel_${ inx }` }
+
+          header={ header } className="command-options-panel">
             { this.renderSection( section, inx ) }
           </Panel>
         </Collapse>)
