@@ -72,6 +72,7 @@
     "simple-xpath-position": "^2.0.2",
     "tmp-promise": "^1.0.5",
     "uniqid": "^5.0.3",
+    "write-file-atomic": "^3.0.0",
     "xml2js": "^0.4.19"
   },
   "license": "(GPL-3.0 OR MIT)",
