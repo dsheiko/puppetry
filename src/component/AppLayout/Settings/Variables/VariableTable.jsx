@@ -79,6 +79,13 @@ export class VariableTable extends AbstractEditableTable {
     return false;
   }
 
+  updateSuiteModified() {
+    this.props.action.updateSuite({
+      modified: true
+    });
+    this.props.action.saveProject();
+  }
+
   render() {
     const data = this.props.variables;
 

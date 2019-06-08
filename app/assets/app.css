@@ -942,3 +942,8 @@ td:hover .editable-cell-icon {
   margin-left: 8px;
   max-width: 200px;
 }
+
+.template-helper > .ant-btn, .template-helper > .ant-input {
+  margin-left: 8px;
+  max-width: 200px;
+}
