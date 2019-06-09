@@ -19,7 +19,7 @@ export const setAttribute = {
       inline: false,
       legend: "",
       tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.name",
           control: INPUT,

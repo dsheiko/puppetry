@@ -16,10 +16,7 @@ export const assertScroll = {
   },
   params: [
     {
-      inline: true,
-      legend: "",
-      tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.direction",
           control: SELECT,

@@ -11,7 +11,7 @@ export const checkBox = {
       inline: false,
       legend: "",
       tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.checked",
           control: CHECKBOX,

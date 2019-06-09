@@ -1,9 +1,11 @@
 import { INPUT, INPUT_NUMBER, CHECKBOX } from "../../constants";
 import { isEveryValueMissing, isSomeValueMissing, ruleValidateGenericString } from "service/utils";
+import ExpressionParser from "service/ExpressionParser";
 
 export const screenshot = {
-  template: ({ params }) => {
+  template: ({ params, id }) => {
     const { name, fullPage, omitBackground, x, y, width, height } = params,
+          parser = new ExpressionParser( id ),
           clip = {
             x,
             y,
@@ -24,18 +26,19 @@ export const screenshot = {
     const optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
     return `
       // Taking screenshot of ${ isClipEmpty ? "the page" : "the specified region" }
-      await bs.page.screenshot( png( "${ name }"${ optArg }) );
+      await bs.page.screenshot( png( "${ parser.stringify( name ) }"${ optArg }) );
   `;
   },
   description: `Takes a screenshot of the page or a specified region.`,
   params: [
     {
-      inline: false,
+
       legend: "",
       tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.name",
+          template: true,
           control: INPUT,
           label: "Description",
           tooltip: `The description is a plain text, which will be normalized to screenshot file name.
@@ -75,10 +78,10 @@ export const screenshot = {
     },
 
     {
-      inline: true,
-      legend: "Clip (optional)",
+      collapsed: true,
+      span: { label: 4, input: 18 },
       tooltip: "An object which specifies clipping region of the page.",
-      items: [
+      fields: [
         {
           name: "params.x",
           control: INPUT_NUMBER,

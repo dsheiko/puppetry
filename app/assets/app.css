@@ -911,6 +911,10 @@ td:hover .editable-cell-icon {
   padding: 8px 0 0 8px;
 }
 
+.markdown.command-row-description {
+  padding: 0 0 16px 0;
+}
+
 .command-description svg {
   fill: var(--color-primary);
 }
@@ -936,14 +940,17 @@ td:hover .editable-cell-icon {
   color: rgba(0, 0, 0, 0.45);
 }
 .template-helper > span {
-  flex: 0 0 auto;
+  flex: 0 1 auto;
+  line-height: 1.4;
 }
 .template-helper > .ant-select {
   margin-left: 8px;
   max-width: 200px;
+  min-width: 80px;
 }
 
 .template-helper > .ant-btn, .template-helper > .ant-input {
   margin-left: 8px;
   max-width: 200px;
+  min-width: 80px;
 }

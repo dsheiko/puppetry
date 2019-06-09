@@ -8,10 +8,10 @@ export const setViewport = {
   description: `Defines browser viewport, where the viewport is the user's visible area of a web page`,
   params: [
     {
-      inline: true,
+
       legend: "",
       tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.width",
           control: INPUT_NUMBER,
@@ -37,11 +37,12 @@ export const setViewport = {
       ]
     },
 
+
     {
-      inline: true,
+      collapsed: true,
       legend: "",
       tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.deviceScaleFactor",
           control: INPUT_NUMBER,
@@ -50,15 +51,8 @@ export const setViewport = {
             + "for retina display the value is 2",
           placeholder: "",
           rules: []
-        }
-      ]
-    },
-
-    {
-      inline: false,
-      legend: "",
-      tooltip: "",
-      items: [
+        },
+        
         {
           name: "params.isMobile",
           label: "mobile device",

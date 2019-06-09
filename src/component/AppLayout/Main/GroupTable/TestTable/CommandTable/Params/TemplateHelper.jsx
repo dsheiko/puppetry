@@ -95,10 +95,9 @@ export class TemplateHelper extends React.Component {
    const { config, variables, environments } = this.props,
          { exp, iterateList, randomList, envName, fakerMethod } = this.state,
          activeEnv = getActiveEnvironment( environments, this.state.activeEnv ),
-         selStyle = { width: 160 },
-         wrapStyle = { marginLeft: config.marginLeft || 0 };
+         selStyle = { width: 160 };
 
-   return ( <div className="template-helper" style={ wrapStyle }>
+   return ( <div className="template-helper" >
       <span><Icon type="arrow-up" /> Here you can use <Link to="https://docs.puppetry.app/template">template expressions</Link></span>
 
       <Select

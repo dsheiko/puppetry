@@ -11,7 +11,7 @@ export const type = {
       inline: false,
       legend: "",
       tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.value",
           control: INPUT,

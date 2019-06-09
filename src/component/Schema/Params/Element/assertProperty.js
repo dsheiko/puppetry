@@ -20,7 +20,7 @@ export const assertProperty = {
       inline: false,
       legend: "",
       tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.name",
           control: INPUT,

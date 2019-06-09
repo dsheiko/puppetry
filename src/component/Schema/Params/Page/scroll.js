@@ -13,10 +13,10 @@ await bs.page.evaluate(( x, y ) => {
   description: `Scrolls the document in the window by the given amount`,
   params: [
     {
-      inline: true,
+
       legend: "",
       tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.x",
           control: INPUT_NUMBER,
