@@ -33,7 +33,7 @@ export const goto = {
     `;
   },
 
-  description: "Navigates to a given URL",
+  description: "Navigates to a given URL and waits until the page loaded",
 
   params: [
     {
@@ -43,9 +43,7 @@ export const goto = {
       fields: [
         {
           name: "params.url",
-          template: {
-            marginLeft: 68
-          },
+          template: true,
           control: INPUT,
           label: "URL",
           tooltip: `URL to navigate page to. The url should include scheme, e.g. https://.`,

@@ -164,7 +164,7 @@ export class ParamsFormBuilder extends React.Component {
 
     validate( field, {
       span: "number=",
-      template: "object=",
+      template: "boolean=",
       name: "string",
       control: "string",
       label: "string",
@@ -203,14 +203,15 @@ export class ParamsFormBuilder extends React.Component {
         { field.control === FILE && <Button
           onClick={ ( e ) => this.onClickSelectFile( e, field ) }>Select file</Button>
         }
-      </FormItem>
-
-      { field.hasOwnProperty( "template" ) && <TemplateHelper
+        { field.hasOwnProperty( "template" ) && <TemplateHelper
         field={ field }
         onChange={ this.onTemplateHelperChange }
         environments={ this.props.environments }
         variables={ this.props.variables }
         config={ field.template } /> }
+      </FormItem>
+
+
 
     </Col>);
   };

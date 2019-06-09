@@ -20,10 +20,9 @@ await bs.page.waitForSelector( "${params.value}"${ optArg } );` );
     + `[CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)`,
   params: [
     {
-      inline: true,
       legend: "",
       tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.value",
           control: INPUT,
@@ -38,11 +37,10 @@ await bs.page.waitForSelector( "${params.value}"${ optArg } );` );
       ]
     },
     {
-      inline: true,
-      legend: "Options",
-      span: 6,
+      collapsed: true,
       tooltip: "",
-      items: [
+      span: { label: 4, input: 18 },
+      fields: [
         {
           name: "params.visible",
           control: SELECT,

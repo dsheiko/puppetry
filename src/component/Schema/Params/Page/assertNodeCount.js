@@ -14,16 +14,12 @@ export const assertNodeCount = {
   description: `Asserts that number of elements matching a specified selector satisfies the given constraint`,
   params: [
     {
-      inline: true,
-      legend: "",
-      tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.selector",
           control: INPUT,
           label: "Selector",
-          tooltip: ``,
-          placeholder: "",
+          placeholder: "e.g div",
           rules: [{
             required: true,
             message: "Enter selector"

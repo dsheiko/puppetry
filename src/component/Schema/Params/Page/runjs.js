@@ -1,30 +1,26 @@
 import { TEXTAREA } from "../../constants";
 import { justify } from "service/assert";
+import ExpressionParser from "service/ExpressionParser";
 
 export const runjs = {
-  template: ({ params }) => {
-    const { value } = params;
+  template: ({ params, id }) => {
+    const { value } = params,
+          parser = new ExpressionParser( id );
     return justify( `
 // Run custom JavaScript in the test
-${ value }
+${ parser.stringify( value ) }
 ` );
   },
-  description: [
-    `Run custom JavaScript code in the test suite with use of Puppeteer API (https://pptr.dev).`,
-    `You can access in your code Puppeteer Browser instance as 'bs', Page instance as 'bs.page'.`,
-    `All the available methods asynchronous so you shall use them as 'await bs.page.goto( url );'`,
-    `Element handlers corresponding your defined targets you can reach like 'await TARGET_NAME()'.`,
-    `For example 'await ( await INPUT_FNAME() ).type( "Jon" );'`,
-    `Besides you can use Node.js modules. E.g. 'require( "http" ).request(..)'`,
-    `Jest API is also available, so you can go with 'describe()', 'test()', 'expect()' and so on`
-  ],
+  description:  `Run custom JavaScript code in the test suite with use of
+[Puppeteer API](https://pptr.dev)
+and [Puppetry API](https://docs.puppetry.app/command-api).
+`,
   params: [
     {
-      inline: true,
-      legend: "",
-      tooltip: "",
-      items: [
+
+      fields: [
         {
+          template: true,
           name: "params.value",
           control: TEXTAREA,
           label: "JavaScript code to run",

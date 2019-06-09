@@ -14,7 +14,7 @@ export const upload = {
 
     {
       inline: true,
-      items: [
+      fields: [
         {
           name: "params.path",
           control: FILE,

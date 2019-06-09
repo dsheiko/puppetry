@@ -11,7 +11,7 @@ export const select = {
       inline: false,
       legend: "",
       tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.value",
           control: INPUT,

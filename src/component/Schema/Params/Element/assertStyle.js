@@ -22,7 +22,7 @@ export const assertStyle = {
       inline: false,
       legend: "",
       tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.name",
           control: INPUT,

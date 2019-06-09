@@ -17,7 +17,7 @@ await bs.page.$eval( '${ command.targetSeletor }',  ( el, x, y ) => {
       inline: true,
       legend: "",
       tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.x",
           control: INPUT_NUMBER,

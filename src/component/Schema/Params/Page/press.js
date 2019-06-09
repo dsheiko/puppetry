@@ -48,9 +48,10 @@ ${ renderModifiers( "up" ) }` );
       inline: true,
       legend: "",
       tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.key",
+          inputStyle: { maxWidth: 160 },
           control: SELECT,
           label: "Main key to press",
           tooltip: ``,
@@ -66,14 +67,14 @@ ${ renderModifiers( "up" ) }` );
     },
 
     {
-      inline: true,
-      legend: "Options",
+      collapsed: true,
       description: WHAT_MODIFIER_IS,
       tooltip: "",
-      items: [
+      fields: [
 
         {
           name: "params.modifierKey1",
+          inputStyle: { maxWidth: 160 },
           control: SELECT,
           label: "Modifier Key 1",
           tooltip: ``,
@@ -84,6 +85,7 @@ ${ renderModifiers( "up" ) }` );
 
         {
           name: "params.modifierKey2",
+          inputStyle: { maxWidth: 160 },
           control: SELECT,
           label: "Modifier Key 2",
           tooltip: ``,
@@ -94,6 +96,7 @@ ${ renderModifiers( "up" ) }` );
 
         {
           name: "params.modifierKey3",
+          inputStyle: { maxWidth: 160 },
           control: SELECT,
           label: "Modifier Key 3",
           tooltip: ``,

@@ -17,7 +17,7 @@ export const emulate = {
       inline: false,
       legend: "",
       tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.device",
           control: SELECT,

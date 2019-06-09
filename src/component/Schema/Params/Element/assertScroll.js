@@ -20,7 +20,7 @@ offset on the target satisfies the given constraint`,
       inline: true,
       legend: "",
       tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.direction",
           control: SELECT,

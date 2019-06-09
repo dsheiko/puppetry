@@ -19,7 +19,7 @@ export const click = {
       inline: true,
       legend: "Options",
       tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.button",
           control: SELECT,

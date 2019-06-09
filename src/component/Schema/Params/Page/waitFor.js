@@ -11,7 +11,7 @@ export const waitFor = {
       inline: true,
       legend: "",
       tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.value",
           control: INPUT_NUMBER,

@@ -16,7 +16,7 @@ await bs.page.evaluate(() => {
       inline: true,
       legend: "",
       tooltip: "",
-      items: [
+      fields: [
         {
           name: "params.value",
           control: TEXTAREA,
