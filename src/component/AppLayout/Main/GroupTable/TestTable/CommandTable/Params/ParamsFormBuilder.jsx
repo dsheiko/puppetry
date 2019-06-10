@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import If from "component/Global/If";
 import ErrorBoundary from "component/ErrorBoundary";
-import { Collapse, Form, Input, InputNumber, Checkbox, Row, Col, Select, Radio, Icon  } from "antd";
+import { Collapse, Button, Form, Input, InputNumber, Checkbox, Row, Col, Select, Radio, Icon  } from "antd";
 import { validate } from "bycontract";
 import Tooltip from "component/Global/Tooltip";
 import { FILE, TEXTAREA, RADIO_GROUP, INPUT, INPUT_NUMBER, CHECKBOX, SELECT,
@@ -252,11 +252,11 @@ export class ParamsFormBuilder extends React.Component {
         <span>{ section.legend || "Parameters" }</span>
         { section.tooltip && <Tooltip title={ section.tooltip } icon="question-circle" /> }
       </legend> }
-      <If exp={ section.description }>
+      { section.description &&
         <Markdown
         md={ section.description }
         className="command-section-description" />
-      </If>
+      }
 
        { section.fields && section.fields
           .map( this.mapFieldsToRow )

@@ -14,14 +14,11 @@ export const click = {
   },
   description: `Emulates mouse click on the element`,
   params: [
-
     {
-      inline: true,
-      legend: "Options",
-      tooltip: "",
       fields: [
         {
           name: "params.button",
+          inputStyle: { maxWidth: 200 },
           control: SELECT,
           label: "Button",
           tooltip: "",
@@ -34,7 +31,15 @@ export const click = {
             required: true,
             message: "Select button"
           }]
-        },
+        }
+      ]
+    },
+
+    {
+      collapsed: true,
+      tooltip: "",
+      fields: [
+
         {
           name: "params.clickCount",
           control: INPUT_NUMBER,

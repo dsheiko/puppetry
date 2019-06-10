@@ -8,7 +8,7 @@ export const checkBox = {
   description: `Change checkbox/radio state`,
   params: [
     {
-      inline: false,
+      
       legend: "",
       tooltip: "",
       fields: [

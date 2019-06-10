@@ -13,10 +13,10 @@ export const setAttribute = {
   }, `
     + `"${ command.params.name }", "${ command.params.value }" );` ),
   description: `Sets the value of an [attribute](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute)`
-    + ` on {target} target`,
+    + ` on \`{target}\` target`,
   params: [
     {
-      inline: false,
+      
       legend: "",
       tooltip: "",
       fields: [

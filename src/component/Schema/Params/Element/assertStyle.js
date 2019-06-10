@@ -16,10 +16,10 @@ export const assertStyle = {
   },
   description: `Asserts that the computed style
   (https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle)
-  of {target} target matches the given value`,
+  of \`{target}\` target matches the given value`,
   params: [
     {
-      inline: false,
+      
       legend: "",
       tooltip: "",
       fields: [

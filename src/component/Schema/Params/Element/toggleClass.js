@@ -10,9 +10,10 @@ export const toggleClass = {
   description: `Toggles the specified class value (adds or removes)`,
   params: [
     {
-      inline: false,
+
       legend: "",
       tooltip: "",
+      span: { label: 4, input: 18 },
       fields: [
         {
           name: "params.name",
@@ -29,7 +30,8 @@ export const toggleClass = {
         {
           name: "params.toggle",
           control: SELECT,
-          label: "What do we do with the class?",
+          inputStyle: { maxWidth: 200 },
+          label: "Action",
           tooltip: "",
           placeholder: "",
           initialValue: "add",

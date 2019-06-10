@@ -10,7 +10,7 @@ export const assertPosition = {
     command,
     `// Asserting that the bounding box of the element satisfies the given constraint`
   ),
-  description: `Asserts {target} target's position relative to other given target`,
+  description: `Asserts \`{target}\` target's position relative to other given target`,
   assert: {
     node: AssertPosition
   },
