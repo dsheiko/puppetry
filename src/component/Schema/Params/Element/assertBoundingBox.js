@@ -9,7 +9,7 @@ export const assertBoundingBox = {
   ),
   description: `Asserts that the
   [bounding box](https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect)
-  (size and position) of {target} target satisfies the given constraint`,
+  (size and position) of \`{target}\` target satisfies the given constraint`,
 
   assert: {
     node: AssertBoundingBox

@@ -173,9 +173,9 @@ export class CommandForm extends React.Component {
 
           </Row>
 
-          <If exp={ schema && schema.description }>
+          { ( schema && schema.description ) ? (
             <Description schema={ schema } target={ target } />
-          </If>
+          ) : null }
 
           <If exp={ schema && schema.params.length }>
             <div className="command-form ">

@@ -17,20 +17,17 @@ export const assertAttribute = {
   },
   description: `Asserts that the
   specified [attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes)
-  of {target} target  satisfies the given constraint`,
+  of \`{target}\` target  satisfies the given constraint`,
   params: [
     {
-      inline: false,
-      legend: "",
-      tooltip: "",
+
       fields: [
         {
           name: "params.name",
           control: INPUT,
           label: "Attribute name",
-          help: ( <span>HTML attribute. E.g. for { `<a href="" data-foo=""></a>` } you can obtain href or data-foo.
-            { " " } <a onClick={ onExtClick } href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes">
-                See here for details</a></span> ),
+          description: `HTML attribute. E.g. for \`<a href="" data-foo=""></a>\`
+          you can obtain href or \`data-foo\`. [See here for details](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes)`,
           placeholder: "e.g. href",
           initialValue: "",
           rules: [{

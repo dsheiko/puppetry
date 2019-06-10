@@ -12,7 +12,7 @@ export class Description extends AbstractComponent {
 
   render() {
     const { schema, target } = this.props;
-    if ( !schema ) {
+    if ( !schema || !schema.description ) {
       return null;
     }
     return <Fragment>

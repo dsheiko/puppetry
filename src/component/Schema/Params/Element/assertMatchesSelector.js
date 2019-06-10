@@ -11,6 +11,6 @@ export const assertMatchesSelector = {
   assert: {
     node: AssertSelector
   },
-  description: `Asserts that {target} target matches a given selector or pseudo-selector`,
+  description: `Asserts that \`{target}\` target matches a given selector or pseudo-selector`,
   params: []
 };

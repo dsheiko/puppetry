@@ -29,7 +29,7 @@ export class AssertBoundingBox extends React.Component {
 
     return (
       <React.Fragment>
-        <Row gutter={24} className="is-invisible">
+        <Row className="is-invisible">
           <Col span={8} >
             <FormItem label="Result">
               { getFieldDecorator( "assert.assertion", {
@@ -43,7 +43,7 @@ export class AssertBoundingBox extends React.Component {
         </Row>
 
 
-        <Row gutter={24} className="ant-form-inline">
+        <Row className="ant-form-inline">
 
           <FormItem>
             <Input defaultValue="x is" readOnly  />
@@ -74,7 +74,7 @@ export class AssertBoundingBox extends React.Component {
 
         </Row>
 
-        <Row gutter={24} className="ant-form-inline">
+        <Row className="ant-form-inline">
 
           <FormItem>
             <Input defaultValue="y is" readOnly  />
@@ -105,7 +105,7 @@ export class AssertBoundingBox extends React.Component {
 
         </Row>
 
-        <Row gutter={24} className="ant-form-inline">
+        <Row className="ant-form-inline">
 
           <FormItem>
             <Input defaultValue="width is" readOnly  />
@@ -136,7 +136,7 @@ export class AssertBoundingBox extends React.Component {
 
         </Row>
 
-        <Row gutter={24} className="ant-form-inline">
+        <Row className="ant-form-inline">
 
           <FormItem>
             <Input defaultValue="height is" readOnly  />

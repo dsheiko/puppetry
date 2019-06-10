@@ -14,10 +14,10 @@ export const assertProperty = {
   },
   description: `Asserts that the
   specified [property](https://developer.mozilla.org/en-US/docs/Web/API/Element)
-  of {target} target  satisfies the given constraint`,
+  of \`{target}\` target  satisfies the given constraint`,
   params: [
     {
-      inline: false,
+      
       legend: "",
       tooltip: "",
       fields: [

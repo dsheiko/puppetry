@@ -14,11 +14,11 @@ export const assertContainsClass = {
   assert: {
     node: AssertTrue
   },
-  description: `Asserts that the specified class value exists in the element's
-(https://developer.mozilla.org/en-US/docs/Web/API/Element) class attribute.`,
+  description: `Asserts that the specified class value exists in the [element's
+ class attribute](https://developer.mozilla.org/en-US/docs/Web/API/Element).`,
   params: [
     {
-      inline: false,
+      
       legend: "",
       tooltip: "",
       fields: [
