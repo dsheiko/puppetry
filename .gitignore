@@ -8,6 +8,7 @@ yarn-debug.log*
 yarn-error.log*
 app/build
 dist
+storage
 tmp
 runtime-temp
 src/__e2e__/screenshots
