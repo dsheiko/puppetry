@@ -1,11 +1,11 @@
 import ExpressionParser from "../../service/ExpressionParser";
-
+const CID = "CID";
 
 describe( "ExpressionParser", () => {
   let expParser;
 
   beforeEach( () => {
-    expParser = new ExpressionParser();
+    expParser = new ExpressionParser( CID );
   });
 
   it( "parses {{variable}}", () => {
@@ -35,25 +35,19 @@ describe( "ExpressionParser", () => {
 
   it( "parses {{ random() }}", () => {
     const res = expParser.parseExp( `{{ random([ "a", "b", "c" ]) }}` );
-    expect( res ).toMatch( /(a|b|c)/ );
+    expect( res ).toBe( `util.exp.random( ["a","b","c"] )` );
   });
 
   it( "parses {{ counter() }}", () => {
     let res;
     res = expParser.parseExp( `{{ counter() }}` );
-    expect( res ).toBe( "1" );
-    res = expParser.parseExp( `{{ counter() }}` );
-    expect( res ).toBe( "2" );
+    expect( res ).toBe( `util.exp.counter( "CID" )` );
   });
 
   it( "parses {{ iterate() }}", () => {
     let res;
     res = expParser.parseExp( `{{ iterate(["a", "b"]) }}` );
-    expect( res ).toBe( "a" );
-    res = expParser.parseExp( `{{ iterate(["a", "b"]) }}` );
-    expect( res ).toBe( "b" );
-    res = expParser.parseExp( `{{ iterate(["a", "b"]) }}` );
-    expect( res ).toBe( "a" );
+    expect( res ).toBe( `util.exp.iterate( ["a","b"], "CID" )` );
   });
 
   it( "builds {{ faker() }}", () => {
@@ -64,13 +58,14 @@ describe( "ExpressionParser", () => {
   it( `parses {{ faker( "address.streetSuffix", "nb_NO" ) }}`, () => {
     const expr = expParser.buildFakerDirective( "address.streetSuffix", "nb_NO" ),
           res = expParser.parseExp( expr );
-    expect( typeof res ).toBe( "string" );
+    expect( res ).toBe( `util.exp.fake( "address.streetSuffix", "nb_NO" )` );
   });
 
   it( `parses {{ faker( "address.streetSuffix" ) }}`, () => {
-    const expr = expParser.buildFakerDirective( "address.streetSuffix", "nb_NO" ),
+    const expr = expParser.buildFakerDirective( "address.streetSuffix" ),
           res = expParser.parseExp( expr );
-    expect( typeof res ).toBe( "string" );
+          
+    expect( res ).toBe( `util.exp.fake( "address.streetSuffix", "en" )` );
   });
 
 });

@@ -76,6 +76,14 @@ export class ParamsFormBuilder extends React.Component {
     });
   }
 
+   onKeyPress = ( e, cb ) => {
+    switch ( e.key ){
+    case "Enter":
+      cb( e );
+      return;
+    }
+  }
+
   renderControl = ( field ) => {
     const { setFieldsValue } = this.props.form,
           { onSubmit } = this.props,

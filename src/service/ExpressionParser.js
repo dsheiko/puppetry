@@ -6,53 +6,30 @@ function extractParams( func, directive ) {
   return JSON.parse( `[${ body }]` );
 }
 
-const randomInt = ( max ) => Math.floor( Math.random() * Math.floor( max ) );
-
-function fake( path, locale ) {
-  const [ ns, method ] = path.split( "." );
-  faker.locale = locale;
-  return faker[ ns ][ method ]();
-}
-
-class NodeStorage {
-  data = new Map();
-  get = ( sid ) => this.data.has( sid ) ? parseInt( this.data.get( sid ), 10 ) : 0;
-  set = ( sid, val ) => this.data.set( sid, val );
-}
-
-class WebStorage {
-  get = ( sid ) => localStorage.hasItem( sid ) ? parseInt( localStorage.getItem( sid ), 10 ) : 0;
-  set = ( sid, val ) => localStorage.setItem( sid, val );
-}
+const jstr = ( val ) => JSON.stringify( val );
 
 class Parsers {
 
   constructor( commandId ) {
     this.commandId = commandId;
-    this.storage = typeof localStorage === "undefined" ? new NodeStorage : new WebStorage;
   }
 
   // {{ faker("address.streetSuffix", "en") }}
-  faker = ([ method, locale ]) => fake( method, locale || "en_GB" );
+  faker = ([ method, locale = "en" ]) =>
+    `util.exp.fake( ${ jstr( method ) }, ${ jstr( locale === "undefined" ? "en" : locale ) } )`;
 
   // {{ random(["aa", "bb"]) }}
-  random = ([ json ]) => json[ randomInt( json.length  ) ];
+  random = ([ json ]) => `util.exp.random( ${ jstr( json ) } )`;
 
   // {{ counter() }}
-  counter = () => {
-    const sid = `counter_${ this.commandId }`,
-          val = this.storage.get( sid ) + 1;
-    this.storage.set( sid, val );
-    return `${ val }`;
+  counter = function(){
+    return `util.exp.counter( ${ jstr( this.commandId) } )`;
   }
 
   // {{ iterate(["aa", "bb"]) }}
-  iterate = ([ json ]) => {
-    const sid = `iterate_${ this.commandId }`,
-          inx = this.storage.get( sid );
-    this.storage.set( sid, ( inx + 1 ) >= json.length ? 0 : inx + 1 );
-    return `${ json[ inx ] }`;
-  }
+  iterate = function([ json ]) {
+    return `util.exp.iterate( ${ jstr( json  ) }, ${ jstr( this.commandId) } )`;
+  };
 
   // {{ env("SECRET") }}
   env = ([ key ]) => `process.env.${ key }`;
@@ -98,13 +75,12 @@ export default class ExpressionParser {
     const parser = Object.getOwnPropertyNames( this.parsers )
       .find( ( available ) => exp.startsWith( available + "(" ) );
     if ( !parser ) {
-      throw new ExpressionParserException( `Cannot parse expression ${ exp }` );
+      throw new ExpressionParserException( `Cannot parse expression ${ exp }. Exprected syntax {{ method(..) }}` );
     }
     try {
       return this.parsers[ parser ]( extractParams( parser, exp ) );
      } catch ( err ) {
-       console.log(err);
-      throw new ExpressionParserException( `Cannot parse directive ${ exp }` );
+      throw new ExpressionParserException( `Cannot parse expression ${ exp }` );
     }
   }
 

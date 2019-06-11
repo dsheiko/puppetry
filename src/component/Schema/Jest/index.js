@@ -8,7 +8,7 @@ const NETWORK_TIMEOUT = 50000,
       };
 
 export const tplQuery = ({ target, selector }) => {
-  return `const ${target} = async () => query( ${ JSON.stringify( selector )}, `
+  return `const ${target} = async () => bs.query( ${ JSON.stringify( selector )}, `
     + `${ JSON.stringify( target )} );`;
 };
 
@@ -40,12 +40,12 @@ if ( !nVer || nVer[ 1 ] < 9 ) {
 ` : `` }
 
 const {
-        bs, png, query, setPngBasePath, fetch
+        bs, util, fetch, localStorage
       } = require( "../lib/bootstrap" )( ${ JSON.stringify( normalizeName( title ) ) } ),
       devices = require( "puppeteer/DeviceDescriptors" );
 
 ${ runner === RUNNER_PUPPETRY ? `
-setPngBasePath( ${ JSON.stringify( screenshotDirectory ) } );
+util.setPngBasePath( ${ JSON.stringify( screenshotDirectory ) } );
 ` : `` }
 
 jest.setTimeout( ${ suite.timeout || NETWORK_TIMEOUT} );

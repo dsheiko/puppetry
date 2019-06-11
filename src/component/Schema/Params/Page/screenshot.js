@@ -26,7 +26,7 @@ export const screenshot = {
     const optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
     return `
       // Taking screenshot of ${ isClipEmpty ? "the page" : "the specified region" }
-      await bs.page.screenshot( png( "${ parser.stringify( name ) }"${ optArg }) );
+      await bs.page.screenshot( util.png( "${ parser.stringify( name ) }"${ optArg }) );
   `;
   },
   description: `Takes a screenshot of the page or a specified region.`,
