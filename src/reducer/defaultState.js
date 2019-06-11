@@ -156,6 +156,7 @@ export const commandDefaultState = ( id ) => ({
   disabled: false,
   failure: "",
   variables: {},
+  expanded: false,
   ref: "", // keeps the extrnal reference e.g. to a snippet
   isRef: false // indicates it's a ref (when new record created ref is empty and that's the only way to know)
 });

@@ -50,7 +50,7 @@ export const goto = {
           placeholder: "e.g. https://www.google.com/",
           rules: [{
             required: true,
-            message: "Enter URL"
+            message: `Field is required.`
           }]
         }
       ]
@@ -70,7 +70,10 @@ export const goto = {
           tooltip: `Maximum navigation time in milliseconds (1sec = 1000ms), `
             + `defaults to 30 seconds, pass 0 to disable timeout.`,
           placeholder: "",
-          rules: []
+          rules: [{
+            required: true,
+            message: `Field is required.`
+          }]
         },
         {
           inputStyle: { maxWidth: 200 },
@@ -90,7 +93,7 @@ export const goto = {
           ],
           rules: [{
             required: true,
-            message: "Select event"
+            message: `Field is required.`
           }]
         }
       ]

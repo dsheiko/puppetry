@@ -30,6 +30,15 @@ export const screenshot = {
   `;
   },
   description: `Takes a screenshot of the page or a specified region.`,
+
+  validate: ( values ) => {
+    const { x, y, width, height } = values.params;
+    if ( !x && !y && !width && !height ) {
+      return null;
+    }
+    return "You have to provide either all clip parameters or none";
+  },
+
   params: [
     {
 

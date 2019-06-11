@@ -43,7 +43,8 @@ export class CommandForm extends React.Component {
      this.state = {
        target: "",
        method: "",
-       error: ""
+       error: "",
+       validationError: ""
      };
    }
 
@@ -55,11 +56,24 @@ export class CommandForm extends React.Component {
 
 
   handleSubmit = ( e = null ) => {
-    const { record, closeModal, resetSubmitted } = this.props;
+    const { record, closeModal, resetSubmitted } = this.props,
+          target = this.state.target || record.target,
+          method = this.state.method || record.method,
+          schema = getSchema( target, method );
+
     e && e.preventDefault();
     resetSubmitted();
+
     this.props.form.validateFieldsAndScroll( ( err, values ) => {
       if ( !err ) {
+
+        const validationError = schema.validate( values );
+        this.setState({ validationError: "" });
+        if ( validationError ) {
+          this.setState({ validationError });
+          return;
+        }
+
         this.updateSuiteModified();
         this.props.action[ record.id ? "updateCommand" : "addCommand" ]({
           id: record.id,
@@ -176,6 +190,14 @@ export class CommandForm extends React.Component {
           { ( schema && schema.description ) ? (
             <Description schema={ schema } target={ target } />
           ) : null }
+
+          <If exp={ this.state.validationError }>
+            <Alert
+              message="Error"
+              description={ this.state.validationError }
+              type="error"
+              closable />
+          </If>
 
           <If exp={ schema && schema.params.length }>
             <div className="command-form ">

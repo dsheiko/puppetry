@@ -20,7 +20,7 @@ export const setViewport = {
           placeholder: "",
           rules: [{
             required: true,
-            message: "Enter page width in pixels"
+            message: `Field is required.`
           }]
         },
         {
@@ -31,7 +31,7 @@ export const setViewport = {
           placeholder: "",
           rules: [{
             required: true,
-            message: "Enter page height in pixels"
+            message: `Field is required.`
           }]
         }
       ]
@@ -50,9 +50,13 @@ export const setViewport = {
           tooltip: "Device scale factor aka Device Pixel Ratio. By default is 1, maximum value 8. E.g. "
             + "for retina display the value is 2",
           placeholder: "",
-          rules: []
+          initialValue: 1,
+          rules: [{
+            required: true,
+            message: `Field is required.`
+          }]
         },
-        
+
         {
           name: "params.isMobile",
           label: "mobile device",

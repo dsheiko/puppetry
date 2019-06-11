@@ -378,5 +378,54 @@ describe( "Schema.page (templates generate valid JavaScript)", () => {
     });
   });
 
+  describe( "assertVar.template", () => {
+    it( "with code", () => {
+      const code = schema.page.assertVar.template({
+        target: "page",
+        params: {
+          name: "FOO"
+        },
+        assert: {
+          assertion: "equals",
+          value: "VALUE"
+        }
+      });
+      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    });
+  });
+
+  describe( "assertVar.template", () => {
+    it( "with code", () => {
+      const code = schema.page.assertVar.template({
+        target: "page",
+        params: {
+          name: "FOO"
+        },
+        assert: {
+          assertion: "equals",
+          value: "VALUE"
+        }
+      });
+      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    });
+  });
+
+  describe( "assignVarRemotely.template", () => {
+    it( "with code", () => {
+      const code = schema.page.assignVarRemotely.template({
+        target: "page",
+        params: {
+          name: "FOO",
+          url: "http://..",
+          interval: 1000,
+          timeout: 1000,
+          parserFn: `() => {}`,
+          requestFn: `() => {}`
+        }
+      });
+      expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
+    });
+  });
+
 
 });
