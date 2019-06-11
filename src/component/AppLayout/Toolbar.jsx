@@ -3,13 +3,14 @@ import PropTypes from "prop-types";
 import { remote } from "electron";
 import { Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
+import AbstractComponent from "component/AbstractComponent";
 import { confirmUnsavedChanges } from "service/smalltalk";
 import If from "component/Global/If";
 import { truncate } from "service/utils";
 
 const win = remote.getCurrentWindow();
 
-export class Toolbar extends React.Component {
+export class Toolbar extends AbstractComponent {
 
   static propTypes = {
     action:  PropTypes.shape({
@@ -83,6 +84,7 @@ export class Toolbar extends React.Component {
             </If>
           </div>
           <div>
+
             { isMaximized
               ? ( <a tabIndex={-2} role="button" className="layout-icon" onClick={this.onRestore}>
                 <Icon type="shrink" />
@@ -91,7 +93,10 @@ export class Toolbar extends React.Component {
                 <Icon type="arrows-alt" />
               </a> )
             }
-
+          <a tabIndex={-1} role="button" className="layout-icon" href="https://docs.puppetry.app"
+          onClick={ this.onExtClick }>
+            <Icon type="question-circle" />
+          </a>
             <a tabIndex={-3} role="button" className="layout-icon" onClick={this.onClose}>
               <Icon type="poweroff" />
             </a>
