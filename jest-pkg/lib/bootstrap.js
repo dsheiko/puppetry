@@ -1,6 +1,6 @@
 const bs = require( "./BrowserSession" );
 
-const { makePng, setPngBasePath, png } = require( "./helpers" );
+const { util, fetch, localStorage } = require( "./helpers" );
 
 /**
  * Extending Puppeteer
@@ -24,14 +24,15 @@ async function queryXpath( selector ) {
  * @param {String} target
  * @return {?ElementHandle}
  */
-async function query( selector, target ) {
+bs.query = async function ( selector, target ) {
   const elh = ( selector.startsWith( "/" ) || selector.startsWith( "(.//" ) )
     ? await queryXpath( selector ) : await bs.page.$( selector );
   if ( !elh ) {
     throw new Error( "Cannot find target " + target + " (" + selector + ")" );
   }
   return elh;
-}
+};
+
 
 /**
  * Extending JEST
@@ -213,10 +214,13 @@ expect.extend({
 
 });
 
-module.exports = ( ns = null ) => ({
-  bs,
-  png: ( ns ? makePng( ns ) : png ),
-  query,
-  makePng,
-  setPngBasePath
-});
+module.exports = ( ns ) => {
+  // create namespace-dependent image options creator
+  util.png = util.makePng( ns );
+  return {
+    bs,
+    util,
+    fetch,
+    localStorage
+  };
+};

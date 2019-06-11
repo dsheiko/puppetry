@@ -2,7 +2,10 @@
 const { join } = require( "path" ),
       shell = require( "shelljs" ),
       fetch = require( "node-fetch" ),
-      { dirname } = require( "path" );
+      { dirname } = require( "path" ),
+      { LocalStorage } = require( "node-localstorage" ),
+      faker = require( "faker" ),
+      localStorage = new LocalStorage( "./storage" );
 
 let PATH_SCREENSHOTS = join( __dirname, "/../", "/screenshots");
 
@@ -17,7 +20,24 @@ const png = ( filePath, options = {} ) => {
         const path = join( PATH_SCREENSHOTS, `${normalizedPath}.png` );
         shell.mkdir( "-p" , dirname( path ) );
         return { path, ...options };
-      };
+      },
+      /**
+       * @param {number} max
+       * @returns {number}
+       */
+      randomInt = ( max ) => Math.floor( Math.random() * Math.floor( max ) );
+
+/**
+ *
+ * @param {string} path
+ * @param {string} locale
+ * @returns {string}
+ */
+function fake( path, locale ) {
+  const [ ns, method ] = path.split( "." );
+  faker.locale = locale;
+  return faker[ ns ][ method ]();
+}
 
 /**
  * @typedef {object} PollParams
@@ -63,15 +83,53 @@ function pollForValue({ url, interval, timeout, parserFn, parserPayload = {}, re
   });
 }
 
-exports.setPngBasePath = ( path ) => {
-  PATH_SCREENSHOTS = path;
-};
 
-exports.makePng = ( ns ) => ( filePath, options = {} ) => {
-  return png( `${ns}/${filePath}`, options );
-};
 
-exports.png = png;
 exports.fetch = fetch;
-exports.pollForValue = pollForValue;
+
+exports.localStorage = localStorage;
+
+exports.util = {
+
+  setPngBasePath: ( path ) => {
+    PATH_SCREENSHOTS = path;
+  },
+
+  makePng: ( ns ) => ( filePath, options = {} ) => {
+    return png( `${ns}/${filePath}`, options );
+  },
+
+  pollForValue,
+
+  exp: {
+    fake,
+    /**
+     * @param {string[]} json
+     * @returns {string}
+     */
+    random: ( json ) => json[ randomInt( json.length  ) ],
+    /**
+     * @param {string[]} json
+     * @param {string} id
+     * @returns {string}
+     */
+    iterate: ( json, id ) => {
+      const sid = `iterate_${ id }`,
+            inx = parseInt( localStorage.getItem( sid ) || 0, 10 );
+      localStorage.setItem( sid, ( inx + 1 ) >= json.length ? 0 : inx + 1 );
+      return `${ json[ inx ] }`;
+    },
+    /**
+     * @param {string} id
+     * @returns {string}
+     */
+    counter: ( id ) => {
+       const sid = `counter_${ id }`,
+            val = parseInt( localStorage.getItem( sid ) || 0, 10 ) + 1;
+      localStorage.setItem( sid, val );
+      return `${ val }`;
+    }
+  }
+
+};
 

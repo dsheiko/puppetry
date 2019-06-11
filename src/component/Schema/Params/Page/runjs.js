@@ -26,7 +26,7 @@ and [Puppetry API](https://docs.puppetry.app/command-api).
           label: "JavaScript code to run",
           initialValue: "",
           placeholder: "await bs.page.goto('https://example.com');\n"
-            + "await bs.page.screenshot( png( \"we are here\" ) );",
+            + "await bs.page.screenshot( util.png( \"we are here\" ) );",
           rules: [{
             required: true,
             message: "Code is required"
