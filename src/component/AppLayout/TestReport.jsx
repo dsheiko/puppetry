@@ -11,6 +11,7 @@ import { Icon, Spin, Button, Collapse, notification } from "antd";
 import { join } from "path";
 import { TestGeneratorError } from "error";
 import Convert from "ansi-to-html";
+import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
 
 const Panel = Collapse.Panel,
       convert = new Convert();
@@ -50,7 +51,7 @@ export class TestReport extends AbstractComponent {
   }
 
   run = async () => {
-    const { project } = this.props;
+    const { project, environment } = this.props;
     this.props.action.saveSuite();
     this.props.action.resetCommandFailures();
     try {
@@ -58,7 +59,8 @@ export class TestReport extends AbstractComponent {
       this.reportedFailures = [];
       this.runtimeTemp = getRuntimeTestPath();
       this.setState({ loading: true });
-      const specList = await exportProject(
+      const activeEnv = getActiveEnvironment( project.environments, environment ),
+            specList = await exportProject(
               this.props.projectDirectory,
               this.runtimeTemp,
               this.props.checkedList,
@@ -68,12 +70,12 @@ export class TestReport extends AbstractComponent {
               },
               this.props.snippets,
               {
-                variables: project.variables,
-                environments: project.environments
+                variables: getSelectedVariables( project.variables, activeEnv ),
+                environment
               }
             ),
             res = ipcRenderer.sendSync( E_RUN_TESTS, this.runtimeTemp, specList );
-
+           
       this.setState({
         loading: false,
         report: res.report.results,

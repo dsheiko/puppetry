@@ -1,3 +1,5 @@
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 const Imap = require( "imap" ),
       express = require( "express" ),
       http = require( "http" ),

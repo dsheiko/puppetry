@@ -6,6 +6,7 @@ import ErrorBoundary from "component/ErrorBoundary";
 import AbstractComponent from "component/AbstractComponent";
 import If from "component/Global/If";
 import * as classes from "./classes";
+import { SelectEnv } from "component/Global/SelectEnv";
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -203,6 +204,10 @@ export class TestReportModal extends AbstractComponent {
                   placeholder="--start-maximized --ignore-certificate-errors" />
               </div> }
             </div>
+
+            <SelectEnv environments={ this.props.project.environments }
+            environment={ this.props.environment } action={ this.props.action } />
+
 
             <p>Please select suites to run:</p>
             <div className="bottom-line">

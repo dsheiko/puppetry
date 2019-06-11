@@ -42,6 +42,7 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+examples/email-interceptor/node_modules/
 
 # TypeScript v1 declaration files
 typings/

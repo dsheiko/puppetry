@@ -966,3 +966,8 @@ td:hover .editable-cell-icon {
 .command-form > .markdown.command-row-description {
   font-size: 14px;
 }
+
+/* Test Reports modal */
+.run-in-browser + .select-group-inline {
+  margin: 8px 0;
+}

@@ -76,8 +76,13 @@ export class App extends React.Component {
     }
 
     try {
-      await loadProject();
       await loadSnippets();
+    } catch ( e ) {
+      log.warn( `Renderer process: App: ${ e }` );
+    }
+
+    try {
+      await loadProject();
       await checkGit( settings.projectDirectory );
     } catch ( e ) {
       log.warn( `Renderer process: App: ${ e }` );
@@ -85,7 +90,6 @@ export class App extends React.Component {
     }
 
   }
-
 
   render() {
     const { action, store, selector } = this.props;
