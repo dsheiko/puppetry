@@ -27,9 +27,10 @@ export default class TestGenerator {
 
   /**
    * @param {string} ref
+   * @param {object} variables
    * @returns {string}
    */
-  parseRef = ( ref ) => {
+  parseRef = ( ref, variables ) => {
     const groups = this.snippets.groups;
     if ( !groups.hasOwnProperty( SNIPPETS_GROUP_ID ) ) {
       return ``;
@@ -39,9 +40,11 @@ export default class TestGenerator {
       return ``;
     }
     const test = tests[ ref ],
+          env = ( variables && Object.keys( variables ).length )
+              ? `      Object.assign( ENV, ${ JSON.stringify( variables ) } );\n` : ``,
           chunk = Object.values( test.commands )
             .map( this.parseCommand ).join( "\n" );
-    return `      // SNIPPET ${ test.title }: START\n${ chunk }\n      // SNIPPET ${ test.title }: END\n`;
+    return `      // SNIPPET ${ test.title }: START\n${ env }${ chunk }\n      // SNIPPET ${ test.title }: END\n`;
   }
 
    /**
@@ -49,10 +52,13 @@ export default class TestGenerator {
    * @returns {string}
    */
   parseCommand = ( command ) => {
-    const { isRef, ref, target, method, params, assert } = command,
+    const { isRef, ref, target, method, params, assert, variables, disabled } = command,
           src = target === "page" ? "page" : "element";
+    if ( disabled ) {
+      return ``;
+    }
     if ( isRef ) {
-      return this.parseRef( ref );
+      return this.parseRef( ref, variables );
     }
     try {
       if ( ! ( method in this.schema[ src ]) ) {

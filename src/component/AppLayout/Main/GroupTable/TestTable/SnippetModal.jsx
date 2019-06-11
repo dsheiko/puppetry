@@ -3,18 +3,23 @@ import PropTypes from "prop-types";
 import { InstantModal } from "component/Global/InstantModal";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractForm from "component/AbstractForm";
-import { Spin, Form, Modal, Button, Input, Select } from "antd";
+import { SnippetVariables } from "./SnippetVariables";
+import { Collapse, Table, Spin, Form, Modal, Button, Input, Select } from "antd";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
+      Panel = Collapse.Panel,
       Option = Select.Option;
 
 @connectForm
 export class SnippetModal extends AbstractForm {
 
+
   state = {
-    loading: false
+    loading: false,
+    variables: {}
   }
+
 
   onClickOk = async ( e ) => {
     const { validateFields } = this.props.form,
@@ -26,6 +31,9 @@ export class SnippetModal extends AbstractForm {
       if ( err ) {
         return;
       }
+
+      record.variables = this.state.variables;
+
       if ( record.id ) {
         action.updateCommand({ ...record, ref: values.snippet, isRef: true });
       } else {
@@ -42,6 +50,10 @@ export class SnippetModal extends AbstractForm {
         isVisible: false
       }
     });
+  }
+
+  onVariablesChanged = ( variables ) => {
+    this.setState({ variables });
   }
 
   onClickCancel = ( e ) => {
@@ -98,6 +110,7 @@ export class SnippetModal extends AbstractForm {
             </FormItem>
 
           </Form>
+          <SnippetVariables record={ record } onChanged={ this.onVariablesChanged } />
       </InstantModal>
     </ErrorBoundary> );
   }

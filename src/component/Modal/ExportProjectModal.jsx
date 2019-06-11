@@ -10,6 +10,7 @@ import { TestGeneratorError } from "error";
 import { confirmExportProject } from "service/smalltalk";
 import * as classes from "./classes";
 import { getSelectedVariables, getActiveEnvironment} from "selector/selectors";
+import { SelectEnv } from "component/Global/SelectEnv";
 
 const CheckboxGroup = Checkbox.Group,
       { Option } = Select;
@@ -37,8 +38,7 @@ export class ExportProjectModal extends React.Component {
     checkedList: [],
     indeterminate: true,
     checkAll: false,
-    modified: false,
-    activeEnv: ""
+    modified: false
   }
 
   onChange = ( checkedList ) => {
@@ -51,9 +51,7 @@ export class ExportProjectModal extends React.Component {
     });
   }
 
-  onEnvChange = ( activeEnv ) => {
-    this.props.action.updateApp({ environment: activeEnv });
-  }
+
 
   onCheckAllChange = ( e ) => {
     const { files } = this.props;
@@ -73,7 +71,6 @@ export class ExportProjectModal extends React.Component {
   onClickOk = async ( e ) => {
     const selectedDirectory = this.findSelectedDirectory(),
           { projectDirectory, files, currentSuite, project, environment } = this.props,
-          activeEnv = getActiveEnvironment( project.environments, environment ),
           current = files.find( file => currentSuite === file ),
           checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
@@ -86,32 +83,37 @@ export class ExportProjectModal extends React.Component {
       return;
     }
 
+
     this.setState({ locked: true });
-    this.props.action.saveSettings({ exportDirectory: selectedDirectory });
-    try {
-      await exportProject(
-        projectDirectory,
-        selectedDirectory,
-        checkedList,
-        { runner: RUNNER_JEST },
-        this.props.snippets,
-        {
-          variables: getSelectedVariables( project.variables, activeEnv ),
-          environment: activeEnv
-        }
-      );
-      message.info( `Project exported in ${ selectedDirectory }` );
-      this.props.action.setApp({ exportProjectModal: false });
-    } catch ( err ) {
-      const message = err instanceof TestGeneratorError ? "Test parser error" : "Cannot export project";
-      this.props.action.setError({
-        visible: true,
-        message,
-        description: err.message
-      });
-    } finally {
-      this.setState({ locked: false });
-    }
+    // give it time to update component state, before processing
+    setTimeout(async () => {
+      const activeEnv = getActiveEnvironment( project.environments, environment );
+      this.props.action.saveSettings({ exportDirectory: selectedDirectory });
+      try {
+        await exportProject(
+          projectDirectory,
+          selectedDirectory,
+          checkedList,
+          { runner: RUNNER_JEST },
+          this.props.snippets,
+          {
+            variables: getSelectedVariables( project.variables, activeEnv ),
+            environment
+          }
+        );
+        message.info( `Project exported in ${ selectedDirectory }` );
+        this.props.action.setApp({ exportProjectModal: false });
+      } catch ( err ) {
+        const message = err instanceof TestGeneratorError ? "Test parser error" : "Cannot export project";
+        this.props.action.setError({
+          visible: true,
+          message,
+          description: err.message
+        });
+      } finally {
+        this.setState({ locked: false });
+      }
+    }, 100 );
   }
 
   findSelectedDirectory() {
@@ -144,8 +146,7 @@ export class ExportProjectModal extends React.Component {
   }
 
   render() {
-    const { isVisible, files, currentSuite, project, environment } = this.props,
-          activeEnv = getActiveEnvironment( project.environments, environment ),
+    const { isVisible, files, currentSuite, project, environment, action } = this.props,
           current = files.find( file => currentSuite === file ),
           checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
@@ -168,7 +169,8 @@ export class ExportProjectModal extends React.Component {
               key="submit"
               type="primary"
               autoFocus={ true }
-              disabled={ this.state.locked || !checkedList.length || !this.findSelectedDirectory() }
+              disabled={ !checkedList.length || !this.findSelectedDirectory() }
+              loading={ this.state.locked }
               onClick={this.onClickOk}>
               Export
             </Button> )
@@ -180,27 +182,8 @@ export class ExportProjectModal extends React.Component {
         install dependencies (<code>npm install</code>) and run the tests (<code>npm test</code>).
           </p>
 
-
-         <div className="select-group-inline">
-          <span className="select-group-inline__label">
-            <Icon type="environment" title="Select a target environment" />
-          </span>
-          <Select
-            showSearch
-            style={{ width: 348 }}
-            placeholder="Select a environment"
-            optionFilterProp="children"
-            onChange={ this.onEnvChange }
-            defaultValue={ activeEnv }
-            filterOption={(input, option) =>
-              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          >
-          { project.environments.map( env => (<Option value={ env } key={ env }>
-            { env }
-            </Option>)) }
-          </Select>
-          </div>
+          <SelectEnv environments={ project.environments }
+            environment={ environment } action={ action } />
 
           <BrowseDirectory
             defaultDirectory={ this.props.exportDirectory }

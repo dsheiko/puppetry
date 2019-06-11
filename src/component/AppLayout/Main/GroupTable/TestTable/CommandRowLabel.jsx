@@ -21,6 +21,7 @@ export class CommandRowLabel extends React.Component {
      let text;
      switch ( method ) {
      case "goto":
+     case "assignVarRemotely":
        return `("${ params.url }")`;
      case "press":
        text = [ params.modifierKey1,
@@ -60,6 +61,7 @@ export class CommandRowLabel extends React.Component {
      case "assertContent":
      case "assertTitle":
      case "assertUrl":
+     case "assertVar":
        text = assert.value.length > 20 ? "..." : "";
        return assert.value ? `("${ assert.value.substr( 0, 20 ) + text }")` : "";
      case "assertScroll":
@@ -133,6 +135,7 @@ export class CommandRowLabel extends React.Component {
    renderRef() {
      const { record, snippets } = this.props,
             title = snippets.hasOwnProperty( record.ref ) ? snippets[ record.ref ].title : "reference not found";
+
      return ( <div className="container--editable-cell command--ref">
        <Icon
           type="link"

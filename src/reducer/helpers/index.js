@@ -71,10 +71,8 @@ export function isTargetNotUnique( state, payload ) {
 export function isVariableNotUnique( state, payload ) {
   return Boolean( Object.values( state.variables )
     .filter( item => item.id !== payload.id )
-    .find( item => item.name === payload.name ) );
+    .find( item => item.name === payload.name && item.env === payload.env ) );
 }
-
-
 
 
 function arrayToMap( array ) {

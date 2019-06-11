@@ -8,19 +8,19 @@ export const runjs = {
           parser = new ExpressionParser( id );
     return justify( `
 // Run custom JavaScript in the test
-${ parser.stringify( value ) }
+${ value }
 ` );
   },
   description:  `Run custom JavaScript code in the test suite with use of
-[Puppeteer API](https://pptr.dev)
-and [Puppetry API](https://docs.puppetry.app/command-api).
+[Puppeteer API](https://pptr.dev) and [Puppetry API](https://docs.puppetry.app/command-api).
+You can access [dynamic environment variables](https://docs.puppetry.app/template)
+via \`ENV\` map (e.g. \`ENV[VAR_NAME]\`)
 `,
   params: [
     {
 
       fields: [
         {
-          template: true,
           name: "params.value",
           control: TEXTAREA,
           label: "JavaScript code to run",

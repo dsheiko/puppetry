@@ -16,6 +16,8 @@ import { press } from "./Params/Page/press";
 import { evaluate } from "./Params/Page/evaluate";
 import { runjs } from "./Params/Page/runjs";
 import { debug } from "./Params/Page/debug";
+import { assignVarRemotely } from "./Params/Page/assignVarRemotely";
+import { assertVar } from "./Params/Page/assertVar";
 import { scroll as scrollPage } from "./Params/Page/scroll";
 import { assertScroll as assertScrollPage } from "./Params/Page/assertScroll";
 
@@ -61,8 +63,10 @@ const methodLables = {
     waitFor: "wait for timeout",
     waitForSelector: "wait for selector",
     waitForNavigation: "wait for navigation",
+    assignVarRemotely: "set template variable with webhook",
     assertNodeCount: "assert count of elements",
     assertScroll: "assert window scroll offset",
+    assertVar: "assert template variable value",
     evaluate: "evaluate JavaScript in the page context",
     runjs: "run custom JavaScript in the suite",
     debug: "stop execution and call DevTools"
@@ -141,11 +145,13 @@ export const schema = {
     evaluate,
     runjs,
     debug,
+    assignVarRemotely,
     assertTitle,
     assertUrl,
     assertContent,
     assertNodeCount,
-    assertScroll: assertScrollPage
+    assertScroll: assertScrollPage,
+    assertVar
   }
 };
 
