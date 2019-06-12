@@ -94,7 +94,7 @@ export class TemplateHelper extends React.Component {
 
    const { config, variables, environments } = this.props,
          { exp, iterateList, randomList, envName, fakerMethod } = this.state,
-         activeEnv = getActiveEnvironment( environments, this.state.activeEnv ),
+         [ activeEnv ] = environments,
          selStyle = { width: 160 };
 
    return ( <div className="template-helper" >
@@ -113,14 +113,14 @@ export class TemplateHelper extends React.Component {
           <Option key="6" value="faker">faker()</Option>
       </Select>
 
-      { exp === "variables" && <Select
+      { false && <Select
         placeholder="Select environment"
         size="small" style={ selStyle } onChange={ this.onEnvChange }>
         { environments.map(( key ) => (
           <Option key={ key } value={ key }>{ key }</Option>))}
       </Select> }
 
-      { ( exp === "variables" && this.state.activeEnv ) ? <Select
+      { ( exp === "variables" && activeEnv ) ? <Select
       placeholder="Select variable"
       size="small" style={ selStyle } onChange={ this.onVarChange }>
         { Object.keys( getSelectedVariables( variables, activeEnv ) ).map(( key ) => (

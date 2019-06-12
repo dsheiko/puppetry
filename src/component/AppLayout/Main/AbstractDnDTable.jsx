@@ -194,6 +194,7 @@ export default class AbstractDnDTable extends React.Component {
         this.props.action.addTarget( target );
       });
 
+      this.updateSuiteModified( record, "paste" );
       this.props.action.setApp({ loading: false });
     }, 200 );
   }
@@ -227,7 +228,7 @@ export default class AbstractDnDTable extends React.Component {
       node.testId = record.testId;
     }
     update( node, { "after": record.id });
-    this.updateSuiteModified();
+    this.updateSuiteModified( node, "insert" );
   }
 
   cloneRecord = ( record ) => {
@@ -236,7 +237,7 @@ export default class AbstractDnDTable extends React.Component {
     // give it a chance to render loading state
     setTimeout( () => {
       update( record );
-      this.updateSuiteModified();
+      this.updateSuiteModified( record, "clone" );
       this.props.action.setApp({ loading: false });
     }, 200 );
   }

@@ -23,10 +23,14 @@ export class EditableCell extends React.Component {
 
   getError( value, dataIndex ) {
     const reConst = /^[A-Z_\-0-9]+$/g;
+
     if ( !value.trim().length ) {
       return `Shall not be empty`;
     }
     if ( dataIndex ==="target" && !value.match( reConst ) ) {
+      return `Shall be in all upper case with underscore separators`;
+    }
+    if ( this.props.model === "Variable" && dataIndex ==="name"  && !value.match( reConst ) ) {
       return `Shall be in all upper case with underscore separators`;
     }
     return "";

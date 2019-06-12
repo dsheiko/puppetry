@@ -15,7 +15,7 @@ export class TestTable extends AbstractEditableTable {
     super( props );
     this.columns = [
       {
-        title: "Test",
+        title: "Test Case",
         dataIndex: "title",
 
         render: ( text, record ) => (
@@ -25,8 +25,9 @@ export class TestTable extends AbstractEditableTable {
             className="input--title"
             record={ record }
             dataIndex="title"
-            placeholder="Enter a test name"
+            placeholder="Enter a test case name"
             liftFormStateUp={ this.liftFormStateUp }
+            model={ this.model }
             updateRecord={ this.updateRecord }
           />
         )

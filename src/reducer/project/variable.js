@@ -1,7 +1,7 @@
 import uniqid from "uniqid";
 import actions from "action";
 import update from "immutability-helper";
-import {  
+import {
   isVariableNotUnique,
   normalizeComplexPayload,
   normalizePayload
@@ -129,11 +129,19 @@ export default {
    * @param {EntityRef} payload
    * @returns {object}
    */
-   [ actions.removeVariable ]: ( state, { payload }) => update( state, {
-       variables: {
-         $unset:[ payload.id ]
-       }
-     })
+   [ actions.removeVariable ]: ( state, { payload }) => {
+      const target = state.variables[ payload.id ];
+      return update( state, {
+        variables: {
+          $set: Object.values( state.variables )
+            .filter( v => v.name !== target.name )
+            .reduce(( carry, v ) => ({
+              ...carry,
+              [ v.id ]: v
+            }), {})
+        }
+      });
+    }
 
 
 }

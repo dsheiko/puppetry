@@ -25,6 +25,7 @@ export class VariableTable extends AbstractEditableTable {
             dataIndex="name"
             className="input--target"
             placeholder="Enter name"
+            model={ this.model }
             liftFormStateUp={ this.liftFormStateUp }
             updateRecord={ this.updateRecord }
           />
@@ -42,6 +43,7 @@ export class VariableTable extends AbstractEditableTable {
             className="input--selector"
             placeholder="Enter value"
             liftFormStateUp={ this.liftFormStateUp }
+            model={ this.model }
             updateRecord={ this.updateRecord }
           />
         )
@@ -79,7 +81,10 @@ export class VariableTable extends AbstractEditableTable {
     return false;
   }
 
-  updateSuiteModified() {
+  updateSuiteModified( record, action ) {
+    if ( [ "update" ].includes( action ) ) {
+      this.props.action.syncVariableStages( record );
+    }
     this.props.action.updateSuite({
       modified: true
     });

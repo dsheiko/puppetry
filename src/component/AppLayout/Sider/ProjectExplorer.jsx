@@ -79,6 +79,7 @@ export class ProjectExplorer extends React.Component {
       label: "Delete from the list",
       click: async () => {
         removeSettingsProject( dir );
+        setTimeout( saveSettings, 100 );
       }
     }) );
     menu.popup({

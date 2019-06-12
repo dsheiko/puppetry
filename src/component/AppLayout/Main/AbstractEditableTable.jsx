@@ -85,22 +85,25 @@ export default class AbstractEditableTable extends AbstractDnDTable {
   // CRUD methods
 
   updateRecord = ( options ) => {
-    const update = this.props.action[ `update${this.model}` ];
-    update( this.extendActionOptions( options  ) );
-    this.updateSuiteModified();
+    const update = this.props.action[ `update${this.model}` ],
+          payload = this.extendActionOptions( options  );
+    update( payload );
+    this.updateSuiteModified( payload, "update" );
   }
 
   removeRecord = ( id ) => {
-    const update = this.props.action[ `remove${this.model}` ];
-    update( this.extendActionOptions({ id }) );
-    this.updateSuiteModified();
+    const update = this.props.action[ `remove${this.model}` ],
+          payload = this.extendActionOptions({ id });
+    update( payload );
+    this.updateSuiteModified( payload, "remove" );
   }
 
 
   addRecord = () => {
-    const update = this.props.action[ `add${this.model}` ];
-    update( this.extendActionOptions({ title: "", editing: true }) );
-    this.updateSuiteModified();
+    const update = this.props.action[ `add${this.model}` ],
+          payload = this.extendActionOptions({ title: "", editing: true });
+    update( payload );
+    this.updateSuiteModified( payload, "add" );
   }
 
   updateSuiteModified() {
