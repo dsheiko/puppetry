@@ -70,7 +70,7 @@ export class SnippetModal extends AbstractForm {
     return ( <ErrorBoundary>
       <InstantModal
         visible={ isVisible }
-        title="Title"
+        title="Edit Reference"
         id="cCommandModal"
         onCancel={ this.onClickCancel }
         footer={[

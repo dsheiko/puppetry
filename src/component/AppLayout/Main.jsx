@@ -5,10 +5,11 @@ import { GroupTable  } from "./Main/GroupTable";
 import { SuiteForm  } from "./Main/SuiteForm";
 import { TargetTable  } from "./Main/TargetTable";
 import ErrorBoundary from "component/ErrorBoundary";
+import AbstractComponent from "component/AbstractComponent";
 
 const TabPane = Tabs.TabPane;
 
-export class Main extends React.Component {
+export class Main extends AbstractComponent {
 
   static propTypes = {
     store: PropTypes.object.isRequired,
@@ -49,13 +50,16 @@ export class Main extends React.Component {
             onChange={ this.onTabChange }
           >
             <TabPane tab={ targetsLabel } key="targets" id="cSuitePane">
-              <p>Target constants used to address an element on the page.
+              <p>Target constants are used to address an element on the page
+              { "" } <a href="https://docs.puppetry.app/targets" onClick={ this.onExtClick }>learn more</a>. { "" }
               One can use DevTools to inspect the DOM and copy selectors</p>
               <TargetTable action={action} targets={ selector.getTargetDataTable() } />
             </TabPane>
 
             <TabPane tab={ groupsLabel } key="groups">
-              <p>You can use drag&apos;n&apos;drop to re-arrange rows representing tests or test groups.</p>
+              <p>Groups are containers of test cases
+              { "" } <a href="https://docs.puppetry.app/groups" onClick={ this.onExtClick }>learn more</a>. { "" }
+              You can use drag&apos;n&apos;drop to re-arrange rows representing groups/test cases/test steps.</p>
               <GroupTable
                 action={ action }
                 selector={ selector }

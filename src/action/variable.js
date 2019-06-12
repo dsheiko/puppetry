@@ -39,6 +39,30 @@ const actions = createActions({
 
 });
 
+/**
+ * Reflect updated record on every env where it is missing
+ * @param {object} payload
+ */
+actions.syncVariableStages = ( payload ) => async ( dispatch, getState ) => {
+  try {
+    const { variables, environments } = getState().project;
+    environments
+      .filter( env => env !== payload.env )
+      .forEach( env => {
+          const match = Object.values( variables )
+            .find( v => v.env === env && v.name === payload.name );
+          if ( match ) {
+            return;
+          }
+          dispatch( actions.addVariable({ ...payload, env, id: undefined }) );
+      });
+
+  } catch ( ex ) {
+    handleException( ex, dispatch, "Cannot sync variable stages" );
+  }
+
+};
+
 
 actions.swapVariable = ( payload ) => async ( dispatch, getState ) => {
   try {

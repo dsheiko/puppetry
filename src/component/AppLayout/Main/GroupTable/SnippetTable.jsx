@@ -27,6 +27,7 @@ export class SnippetTable extends AbstractEditableTable {
             dataIndex="title"
             placeholder="Enter a snippet name"
             liftFormStateUp={ this.liftFormStateUp }
+            model={ this.model }
             updateRecord={ this.updateRecord }
           />
         )

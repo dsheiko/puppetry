@@ -67,11 +67,13 @@ export class CommandForm extends React.Component {
     this.props.form.validateFieldsAndScroll( ( err, values ) => {
       if ( !err ) {
 
-        const validationError = schema.validate( values );
-        this.setState({ validationError: "" });
-        if ( validationError ) {
-          this.setState({ validationError });
-          return;
+        if ( schema.hasOwnProperty( "validate" ) ) {
+          const validationError = schema.validate( values );
+          this.setState({ validationError: "" });
+          if ( validationError ) {
+            this.setState({ validationError });
+            return;
+          }
         }
 
         this.updateSuiteModified();

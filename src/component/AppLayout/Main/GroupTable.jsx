@@ -28,6 +28,7 @@ export class GroupTable extends AbstractEditableTable {
             dataIndex="title"
             placeholder="Enter a group name"
             liftFormStateUp={ this.liftFormStateUp }
+            model={ this.model }
             updateRecord={ this.updateRecord }
           />
         )
