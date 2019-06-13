@@ -125,6 +125,10 @@ app.get( API_VER + "/activation-link/:to", async ( req, res, next ) => {
     return next( new Error( `IMAP is not ready yet!` ) );
   }
 
+  if ( req.query.secret !== process.env.EID_SECRET ) {
+    return res.status( 403 ).send( "403 Forbidden" );
+  }
+
   try {
     const messages = await findLastUnseenMessagesFor( req.params.to ),
           links = messages.map( ( msg ) => {

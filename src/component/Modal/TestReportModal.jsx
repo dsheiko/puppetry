@@ -44,7 +44,7 @@ export class TestReportModal extends AbstractComponent {
     indeterminate: true,
     checkAll: false,
     modified: false,
-
+    loading: false,
     headless: true,
     launcherArgs: ""
   }
@@ -105,18 +105,24 @@ export class TestReportModal extends AbstractComponent {
 
   onClickOk = async ( e ) => {
     e.preventDefault();
-    const { files, currentSuite } = this.props,
-          current = files.find( file => currentSuite === file ),
-          checkedList = this.state.modified  ? this.state.checkedList : [ current ];
+    this.setState({ loading: true });
+    try {
+      const { files, currentSuite } = this.props,
+            current = files.find( file => currentSuite === file ),
+            checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
-    this.props.action.setApp({
-      checkedList,
-      testReportModal: false,
-      headless: this.state.headless,
-      launcherArgs: this.state.launcherArgs
-    });
-    this.props.action.removeAppTab( "testReport" );
-    this.props.action.addAppTab( "testReport" );
+      this.props.action.setApp({
+        checkedList,
+        testReportModal: false,
+        headless: this.state.headless,
+        launcherArgs: this.state.launcherArgs
+      });
+      this.props.action.removeAppTab( "testReport" );
+      this.props.action.addAppTab( "testReport" );
+    } catch ( err ) {
+
+    }
+    this.setState({ loading: false });
   }
 
   // Do not update until visible
@@ -156,6 +162,7 @@ export class TestReportModal extends AbstractComponent {
               type="primary"
               autoFocus={ true }
               disabled={ !checkedList.length }
+              loading={ this.state.loading }
               onClick={this.onClickOk}>
               Run
             </Button> )

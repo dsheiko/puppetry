@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
 import { ruleValidateGenericString } from "service/utils";
-import { Form, Icon, Input, InputNumber, Button } from "antd";
+import { message, Form, Icon, Input, InputNumber, Button } from "antd";
 const FormItem = Form.Item,
       connectForm = Form.create();
 
@@ -32,6 +32,7 @@ export class SuiteForm extends AbstractForm {
               { updateSuite }  = this.props.action;
 
         updateSuite({ title, timeout });
+        message.info( `Data has been successfully updated` );
         this.props.form.resetFields();
       }
     });

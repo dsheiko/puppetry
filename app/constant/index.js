@@ -1,3 +1,4 @@
+exports.E_RUN_REPORT = "runReport";
 exports.E_BROWSE_DIRECTORY = "browseDirectory";
 exports.E_DIRECTORY_SELECTED = "directorySelected";
 exports.E_BROWSE_FILE = "openSuite";

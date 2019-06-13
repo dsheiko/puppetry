@@ -51,8 +51,7 @@ export class Main extends AbstractComponent {
           >
             <TabPane tab={ targetsLabel } key="targets" id="cSuitePane">
               <p>Target constants are used to address an element on the page
-              { "" } <a href="https://docs.puppetry.app/targets" onClick={ this.onExtClick }>learn more</a>. { "" }
-              One can use DevTools to inspect the DOM and copy selectors</p>
+              { "" } <a href="https://docs.puppetry.app/targets" onClick={ this.onExtClick }>learn more</a>.</p>
               <TargetTable action={action} targets={ selector.getTargetDataTable() } />
             </TabPane>
 
