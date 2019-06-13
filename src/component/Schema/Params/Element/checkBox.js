@@ -2,13 +2,20 @@ import { justify } from "service/assert";
 import { CHECKBOX } from "../../constants";
 
 export const checkBox = {
-  template: ({ target, params }) => justify(
+  template: ({ params, targetSeletor }) => justify(
     `// Changing checkbox/radio state\n`
-    + `await ( await ${target}() ).type( "${params.value}" );` ),
-  description: `Change checkbox/radio state`,
+    + `await bs.page.$eval( '${ targetSeletor }',
+  ( el, value ) => {
+    if ( value === "false" ) {
+      return el.removeAttribute( "checked" );
+    }
+    el.setAttribute( "checked", value );
+    }, `
+    + `"${ params.checked }" );`),
+  description: `Toggle checkbox/radio state`,
   params: [
     {
-      
+
       legend: "",
       tooltip: "",
       fields: [
@@ -17,7 +24,7 @@ export const checkBox = {
           control: CHECKBOX,
           label: "Checked?",
           help: "",
-          initialValue: ""
+          initialValue: "false"
         }
       ]
     }

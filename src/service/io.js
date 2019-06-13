@@ -52,11 +52,18 @@ export function isGitInitialized( projectDirectory ) {
 export async function parseReportedFailures( reportedErrorPositions ) {
   const commands = [];
   for ( const [ file, errors ] of Object.entries( reportedErrorPositions ) ) {
-    const lines = ( await readFile( file, "utf8" ) ).split( "\n" ).map( line => line.trim() );
+    let fileContents = await readFile( file, "utf8" );
+    // when timeout qs file we get extrnal sources e.g. node_modules/jest-jasmine2/build/jasmine/Spec.js
+    if ( fileContents.indexOf( COMMAND_ID_COMMENT ) === -1 ) {
+      break;
+    }
+    const lines = fileContents.split( "\n" ).map( line => line.trim() );
+    // release memory
+    fileContents = null;
     for ( const error of errors ) {
       const match = findCommandIdInCode( lines, error.line - 1 ); // line 1 equals index 0
       if ( !match.startsWith( COMMAND_ID_COMMENT ) ) {
-        return;
+        break;
       }
       const idComment = match.substr( COMMAND_ID_COMMENT.length ),
             [ groupId, testId, id ] = idComment.split( ":" );

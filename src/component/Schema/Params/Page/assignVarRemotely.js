@@ -1,13 +1,14 @@
 import { buildAssertionTpl } from "service/assert";
-
+import ExpressionParser from "service/ExpressionParser";
 import { INPUT, INPUT_NUMBER, TEXTAREA } from "../../constants";
 
 export const assignVarRemotely = {
-  template: ({ params }) => {
+  template: ({ params, id }) => {
+    const parser = new ExpressionParser( id );
     return `
       // Assign template variable with a webhook
       ENV[ ${ JSON.stringify( params.name ) } ] = await util.pollForValue({
-        url: ${ JSON.stringify( params.url ) },
+        url: ${ parser.stringify( params.url ) },
         interval: ${ JSON.stringify( params.interval ) },
         timeout: ${ JSON.stringify( params.timeout ) },
         parserFn: ${ params.parserFn },
@@ -54,6 +55,7 @@ to retrieve a value from an [email sent by the application under test](https://d
           control: INPUT,
           label: "URL",
           description: `URL of a remote server REST API to request the desired value`,
+          template: true,
           rules: [{
             required: true,
             message: "This field is required"

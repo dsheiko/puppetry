@@ -75,7 +75,7 @@ export class TestReport extends AbstractComponent {
               }
             ),
             res = ipcRenderer.sendSync( E_RUN_TESTS, this.runtimeTemp, specList );
-           
+
       this.setState({
         loading: false,
         report: res.report.results,
@@ -116,7 +116,7 @@ export class TestReport extends AbstractComponent {
 
   componentDidMount() {
     // Give time to close the modal
-    setTimeout( () => this.run(), 200 );
+    setTimeout( () => this.run(), 400 );
   }
 
   /**

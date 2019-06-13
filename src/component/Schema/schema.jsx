@@ -17,6 +17,7 @@ import { evaluate } from "./Params/Page/evaluate";
 import { runjs } from "./Params/Page/runjs";
 import { debug } from "./Params/Page/debug";
 import { assignVarRemotely } from "./Params/Page/assignVarRemotely";
+import { assignVar } from "./Params/Page/assignVar";
 import { assertVar } from "./Params/Page/assertVar";
 import { scroll as scrollPage } from "./Params/Page/scroll";
 import { assertScroll as assertScrollPage } from "./Params/Page/assertScroll";
@@ -63,6 +64,7 @@ const methodLables = {
     waitFor: "wait for timeout",
     waitForSelector: "wait for selector",
     waitForNavigation: "wait for navigation",
+    assignVar: "set template variable dynamically",
     assignVarRemotely: "set template variable with webhook",
     assertNodeCount: "assert count of elements",
     assertScroll: "assert window scroll offset",
@@ -75,7 +77,7 @@ const methodLables = {
     upload: "attach a file to file input",
     reset: "reset input or form",
     toggleClass: "toggle class",
-    checkBox: "change checkbox state",
+    checkBox: "toggle checkbox/radio",
     setAttribute: "set attribute",
     assertAttribute: "assert attribute",
     assertProperty: "assert property",
@@ -145,6 +147,7 @@ export const schema = {
     evaluate,
     runjs,
     debug,
+    assignVar,
     assignVarRemotely,
     assertTitle,
     assertUrl,

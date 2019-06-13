@@ -21,8 +21,11 @@ export class CommandRowLabel extends React.Component {
      let text;
      switch ( method ) {
      case "goto":
+        return `(${ params.url }")`;
+     case "assignVar":
+        return `("${ params.name }", "${ params.value }")`;
      case "assignVarRemotely":
-       return `("${ params.url }")`;
+       return `("${ params.name }, ${ params.url }")`;
      case "press":
        text = [ params.modifierKey1,
          params.modifierKey2,
@@ -69,7 +72,7 @@ export class CommandRowLabel extends React.Component {
          ? `(scrollX ${ OPERATOR_MAP[ assert.operator ] }  ${ assert.value })`
          : `(scrollY ${ OPERATOR_MAP[ assert.operator ] }  ${ assert.value })`;
      default:
-       return "";
+       return "()";
      }
    }
 
@@ -117,7 +120,7 @@ export class CommandRowLabel extends React.Component {
            ? assert.position + " to" : assert.position;
          return `(${ target } is ${ text } ${ assert.target })`;
        default:
-         return "";
+         return "()";
        }
      } catch ( err ) {
        log.warn( `Renderer process: CommandRowLabel::buildTargetAddon: ${ err }` );
