@@ -20,7 +20,7 @@ export default class TestGenerator {
   }
 
   parseTargets( targets ) {
-    return Object.values( targets )
+    return Object.values({ ...this.snippets.targets, ...targets })
       .filter( ({ target, selector }) => Boolean( target ) && Boolean( selector ) )
       .map( this.schema.jest.tplQuery ).join( "\n" );
   }

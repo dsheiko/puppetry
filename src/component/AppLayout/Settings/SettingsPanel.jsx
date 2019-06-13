@@ -46,7 +46,7 @@ export class SettingsPanel extends React.Component {
             animated={ false }
             onChange={ this.onTabChange }
           >
-            <TabPane tab="Variables" key="variables">
+            <TabPane tab="Template Variables" key="variables">
               <VariablesPane />
             </TabPane>
 

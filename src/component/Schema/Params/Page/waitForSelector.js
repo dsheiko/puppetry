@@ -13,8 +13,8 @@ export const waitForSelector = {
           },
           optArg = isEveryValueMissing( options ) ? `` : `, ${ JSON.stringify( options ) }`;
     return justify( `
-// Waiting for an element matching ${params.value}
-await bs.page.waitForSelector( "${params.value}"${ optArg } );` );
+// Waiting for an element matching ${ params.value }
+await bs.page.waitForSelector( ${ JSON.stringify( params.value ) }${ optArg } );` );
   },
   description: `Waiting for an element matching a provided `
     + `[CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)`,
