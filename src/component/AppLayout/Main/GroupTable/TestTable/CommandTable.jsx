@@ -82,7 +82,7 @@ export class CommandTable extends AbstractDnDTable {
     }) );
 
     menu.append( new MenuItem({
-      label: "Insert Snippet",
+      label: "Insert Ref",
       click: () => this.insertRecord({ ...record, isRef: true  })
     }) );
 

@@ -39,6 +39,7 @@ export function updateTagetsInSuite( prevState, nextState, targetId ) {
                     $apply: ({ ...command }) => {
                       command.target = command.target === prevTargetName ? nextTargetName : command.target;
                       if ( "assert" in command
+                            && typeof command.assert === "object"
                             && "target" in command.assert
                             && command.assert.target === prevTargetName  ) {
                         return update( command, {
