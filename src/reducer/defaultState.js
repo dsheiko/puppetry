@@ -151,7 +151,7 @@ export const commandDefaultState = ( id ) => ({
   key: id,
   target: "",
   method: "",
-  assert: "",
+  assert: {},
   params: {},
   disabled: false,
   failure: "",
