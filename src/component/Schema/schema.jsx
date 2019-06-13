@@ -20,6 +20,7 @@ import { assignVarRemotely } from "./Params/Page/assignVarRemotely";
 import { assignVar } from "./Params/Page/assignVar";
 import { assertVar } from "./Params/Page/assertVar";
 import { scroll as scrollPage } from "./Params/Page/scroll";
+import { setCookie } from "./Params/Page/setCookie";
 import { assertScroll as assertScrollPage } from "./Params/Page/assertScroll";
 
 import { waitForNavigation } from "./Params/Page/waitForNavigation";
@@ -57,6 +58,7 @@ const methodLables = {
     moveMouse: "move mouse",
     tapTouchscreen: "tap",
     press: "press a key",
+    setCookie: "set page cookies",
     screenshot: "make screenshot",
     assertTitle: "assert page title",
     assertUrl: "assert page URL",
@@ -141,6 +143,7 @@ export const schema = {
     press,
     scroll: scrollPage,
     reload,
+    setCookie,
     waitFor,
     waitForSelector,
     waitForNavigation,

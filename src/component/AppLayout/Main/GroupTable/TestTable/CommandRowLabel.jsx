@@ -3,6 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Icon } from "antd";
 import Tooltip from "component/Global/Tooltip";
+import { truncate } from "service/utils";
 
 const OPERATOR_MAP = {
   gt: ">",
@@ -46,9 +47,11 @@ export class CommandRowLabel extends React.Component {
      case "click":
      case "moveMouse":
        return `(${ params.x }, ${ params.y })`;
+     case "setCookie":
+      return `(${ params.name }, ${ truncate( params.value, 20 ) })`;
      case "evaluate":
      case "runjs":
-       return `(${ params.value.trim().substr( 0, 80 ) }...)`;
+       return `(${ truncate( params.value, 80 ) })`;
      case "setViewport":
        return `(${ params.width }, ${ params.height },`
        + ` x${ params.deviceScaleFactor || 1 }${ params.isLandscape ? ", landscape" : "" })`;
@@ -65,8 +68,7 @@ export class CommandRowLabel extends React.Component {
      case "assertTitle":
      case "assertUrl":
      case "assertVar":
-       text = assert.value.length > 20 ? "..." : "";
-       return assert.value ? `("${ assert.value.substr( 0, 20 ) + text }")` : "";
+       return assert.value ? `("${ truncate( assert.value, 20 ) }")` : "";
      case "assertScroll":
        return params.direction === "horizontally"
          ? `(scrollX ${ OPERATOR_MAP[ assert.operator ] }  ${ assert.value })`
@@ -108,8 +110,7 @@ export class CommandRowLabel extends React.Component {
        case "assertMatchesSelector":
          return `("${ assert.value }")`;
        case "assertHtml":
-         text = assert.value.length > 20 ? "..." : "";
-         return assert.value ? `("${ assert.value.substr( 0, 20 ) + text }")` : "";
+         return assert.value ? `("${ truncate( assert.value, 20 ) }")` : "";
        case "assertBoundingBox":
          return `(x ${ OPERATOR_MAP[ assert.xOperator ] } ${ assert.xValue }, `
               + `y ${ OPERATOR_MAP[ assert.yOperator ] } ${ assert.yValue }, `
