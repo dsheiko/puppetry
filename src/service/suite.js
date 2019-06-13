@@ -49,9 +49,16 @@ export function findTargetNodes( record, target ) {
   if ( "commands" in record ) {
     return Object.values( record.commands )
       .filter( c => c.target === target
-        || ( "assert" in c && "target" in c.assert && c.assert.target === target ) )
+        || hasTargetInAssert( c, target ) )
       .reduce( ( carry, command ) => {
         return [ ...carry, getCommandCoors( command ) ];
       }, []);
   }
+}
+
+function hasTargetInAssert( command, target ) {
+  return "assert" in command
+    && typeof command.assert === "object"
+    && "target" in command.assert
+    && command.assert.target === target;
 }
