@@ -186,9 +186,9 @@ export class MainMenu extends GitEnhancedMenu {
   }
 
   onSnippets = async () => {
-    const { openSuiteFile, suiteModified, saveSuite, setSuite } = this.props.action;
+    const { openSuiteFile, saveSuite, setSuite } = this.props.action;
 
-    if ( suiteModified ) {
+    if ( this.props.suiteModified ) {
       await confirmUnsavedChanges({
         saveSuite,
         setSuite

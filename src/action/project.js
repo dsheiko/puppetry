@@ -89,16 +89,23 @@ actions.loadProjectFiles = ( directory = null ) => async ( dispatch, getState ) 
 
 };
 
-actions.saveProject = ({ projectDirectory, name } = {}) => async ( dispatch, getState ) => {
+actions.saveProject = () => async ( dispatch, getState ) => {
   try {
     const store = getState();
+    await saveProject( store );
+  } catch ( e ) {
+    dispatch( errorActions.setError({
+      visible: true,
+      message: "Cannot save project",
+      description: e.message
+    }) );
+  }
+};
 
-    if ( !name ) {
-      name = store.project.name;
-    }
-    if ( !projectDirectory ) {
-      projectDirectory = store.settings.projectDirectory;
-    }
+
+actions.updateProject = ({ projectDirectory, name } = {}) => async ( dispatch, getState ) => {
+  try {
+    const store = getState();
 
     if ( !name ) {
       throw new InvalidArgumentError( "Empty project name" );
@@ -111,12 +118,13 @@ actions.saveProject = ({ projectDirectory, name } = {}) => async ( dispatch, get
     await saveProject( store );
     await dispatch( actions.loadProjectFiles( projectDirectory ) );
     await dispatch( actions.watchProjectFiles( projectDirectory ) );
-    await dispatch( appActions.removeAppTab( "suite" ) );
+    // why?!
+    // await dispatch( appActions.removeAppTab( "suite" ) );
 
   } catch ( e ) {
     dispatch( errorActions.setError({
       visible: true,
-      message: "Cannot save project",
+      message: "Cannot update project",
       description: e.message
     }) );
   }

@@ -36,7 +36,7 @@ export class EditProjectModal extends AbstractForm {
   onClickOk = async ( e ) => {
     const { validateFields } = this.props.form,
           { projectDirectory } = this.props,
-          { saveProject, addSettingsProject, saveSettings } = this.props.action;
+          { updateProject, addSettingsProject, saveSettings } = this.props.action;
 
     e.preventDefault();
 
@@ -45,7 +45,7 @@ export class EditProjectModal extends AbstractForm {
       if ( err ) {
         return;
       }
-      await saveProject({ projectDirectory, name });
+      await updateProject({ projectDirectory, name });
       // recent projects
       await addSettingsProject({ dir: projectDirectory, name });
       await saveSettings();
