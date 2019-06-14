@@ -46,10 +46,6 @@ export class EditProjectModal extends AbstractForm {
         return;
       }
       await updateProject({ projectDirectory, name });
-      // recent projects
-      await addSettingsProject({ dir: projectDirectory, name });
-      await saveSettings();
-      this.close();
     });
   }
 

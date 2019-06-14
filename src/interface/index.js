@@ -32,7 +32,8 @@ export const UPDATE = {
 export const ENTITY = {
   editing: "boolean=",
   id: "string=",
-  disabled: "boolean="
+  disabled: "boolean=",
+  expanded: "boolean="
 };
 
 export const TEST_REF = {
@@ -68,6 +69,14 @@ export const TEST = {
 
 export const COMMAND = {
   title: "string=",
+  target: "string=",
+  method: "string=",
+  assert: "object=",
+  params: "object=",
+  failure: "string=",
+  variables: "object=",
+  ref: "string=",
+  isRef: "boolean=",
   ...COMMAND_REF
 };
 

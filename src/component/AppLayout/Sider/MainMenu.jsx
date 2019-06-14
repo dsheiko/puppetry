@@ -308,10 +308,10 @@ export class MainMenu extends GitEnhancedMenu {
 
             </SubMenu>
 
-            <Menu.Item key="15" onClick={ this.onSnippets } id="cMainMenuSnippets">
+            <Menu.Item key="15" disabled={ !projectDirectory } onClick={ this.onSnippets } id="cMainMenuSnippets">
               <span><Icon type="snippets" /><span>Snippets</span></span></Menu.Item>
 
-            <Menu.Item key="11" onClick={ this.onSettings } id="cMainMenuSettings">
+            <Menu.Item key="11" disabled={ !projectDirectory } onClick={ this.onSettings } id="cMainMenuSettings">
               <span><Icon type="setting" /><span>Settings...</span></span></Menu.Item>
 
             <Menu.Item key="10"
