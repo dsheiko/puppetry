@@ -673,6 +673,9 @@ margin: 16px 16px 16px 16px;
 .container--editable-cell .anticon:first-child {
   margin-right: 5px;
 }
+.container--editable-cell [data-balloon] + .anticon {
+  margin-right: 5px;
+}
 
 .editable-row .ant-form-explain {
   position: absolute;
