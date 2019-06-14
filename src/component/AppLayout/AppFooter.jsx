@@ -28,6 +28,10 @@ export class AppFooter extends AbstractComponent {
                 href="https://www.amazon.com/default/e/B0788FN46T/" target="_blank"><Icon type="amazon" /></a>
               <a onClick={ this.onExtClick }
                 rel="noopener noreferrer"
+                title="Puppetry channels on Slack" className="layout-icon"
+                href="https://puppetry-app.slack.com" target="_blank"><Icon type="slack" /></a>
+              <a onClick={ this.onExtClick }
+                rel="noopener noreferrer"
                 title="Contact me on Twitter" className="layout-icon"
                 href="https://twitter.com/sheiko" target="_blank"><Icon type="twitter" /></a>
               <a onClick={ this.onExtClick }
