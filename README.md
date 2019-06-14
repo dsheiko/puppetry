@@ -7,7 +7,7 @@
 </h1>
 
 [![Build Status](https://travis-ci.org/dsheiko/puppetry.png)](https://travis-ci.org/dsheiko/puppetry)
-[![Join the chat at https://gitter.im/dsheiko/puppetry](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dsheiko/puppetry?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[<img src="https://img.shields.io/badge/slack-puppetry.app-yellow.svg?logo=slack">](https://puppetry-app.slack.com)
 [![Total downloads](https://img.shields.io/github/downloads/dsheiko/puppetry/total.svg)](https://github.com/dsheiko/puppetry/releases)
 [![Latest download](https://img.shields.io/github/downloads/dsheiko/puppetry/v1.0.10/total.svg)](https://github.com/dsheiko/puppetry/releases/latest)
 

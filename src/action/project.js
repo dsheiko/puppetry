@@ -115,7 +115,16 @@ actions.updateProject = ({ projectDirectory, name } = {}) => async ( dispatch, g
     }
 
     await dispatch( actions.setProject({ projectDirectory, name }) );
-    await saveProject( store );
+
+    // keep track of recent projects
+    dispatch( settingsActions.addSettingsProject({
+      dir: projectDirectory,
+      name: name
+    }) );
+
+    settingsActions.saveSettings({ projectDirectory });
+
+    await saveProject( getState() );
     await dispatch( actions.loadProjectFiles( projectDirectory ) );
     await dispatch( actions.watchProjectFiles( projectDirectory ) );
     // why?!

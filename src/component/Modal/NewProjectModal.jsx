@@ -47,7 +47,7 @@ export class NewProjectModal extends AbstractForm {
 
   onClickOk = async ( e ) => {
     const { validateFields } = this.props.form,
-          { setApp, saveSettings, saveProject, createSuite } = this.props.action,
+          { setApp, saveSettings, updateProject, createSuite } = this.props.action,
           projectDirectory = this.state.selectedDirectory || this.props.projectDirectory;
 
     e.preventDefault();
@@ -68,9 +68,8 @@ export class NewProjectModal extends AbstractForm {
         return;
       }
 
-      saveSettings({ projectDirectory });
       setApp({ newProjectModal: false });
-      await saveProject({ projectDirectory, name });
+      await updateProject({ projectDirectory, name });
       await createSuite( filename, suiteTitle );
       setApp({ newSuiteModal: false });
     });
