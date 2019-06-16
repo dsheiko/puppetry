@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Form, Row, Col, Select, Input, InputNumber } from "antd";
+import { getAssertion } from "./helpers";
 
 const Option = Select.Option,
       FormItem = Form.Item;
@@ -25,9 +26,8 @@ export class AssertNumber extends React.Component {
   render () {
     const { getFieldDecorator } = this.props.form,
           { record } = this.props,
-          assert = typeof record.assert === "object" ? record.assert : {},
-          operator = assert.operator || "gt",
-          value = assert.value || "";
+          operator = getAssertion( record ).operator || "gt",
+          value = getAssertion( record ).value || "";
     return (
       <Row gutter={24}>
         <Col span={8} >

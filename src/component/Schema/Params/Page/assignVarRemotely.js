@@ -17,7 +17,7 @@ export const assignVarRemotely = {
       });`;
   },
   description: `Polls \`URL\` with a given intervals until a response satisfying \`parserFn\` function received
-or a specified timeout exeeded. It can be used, for example,
+or a specified timeout exceeded. It can be used, for example,
 to retrieve a value from an [email sent by the application under test](https://docs.puppetry.app/testing-emails)`,
 
   params: [

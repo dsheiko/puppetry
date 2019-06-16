@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Form,  Row, Col, Select, Input, InputNumber, Checkbox } from "antd";
 import If from "component/Global/If";
+import { getAssertion } from "./helpers";
+
 const Option = Select.Option,
       FormItem = Form.Item;
 
@@ -34,7 +36,7 @@ export class AssertValue extends React.Component {
   render () {
     const { getFieldDecorator } = this.props.form,
           { record } = this.props,
-          assertion = this.state.assertion || record.assert.assertion || "equals",
+          assertion = this.state.assertion || getAssertion( record ).assertion || "equals",
           type = this.state.type || record.assert.type || "string",
           value = record.assert.value || "";
     return (
