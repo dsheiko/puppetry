@@ -15,7 +15,7 @@ export const reload = {
       await bs.page.reload(${optArg});
     `;
   },
-  description: `Refereshes the page`,
+  description: `Refreshes the page`,
   params: [
     {
       collapsed: true,

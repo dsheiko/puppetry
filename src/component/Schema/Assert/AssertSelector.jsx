@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Form, Row, Col, Input } from "antd";
+import { getAssertion } from "./helpers";
 
 const FormItem = Form.Item;
 
@@ -24,7 +25,7 @@ export class AssertSelector extends React.Component {
   render () {
     const { getFieldDecorator } = this.props.form,
           { record } = this.props,
-          value = record.assert.value || "";
+          value = getAssertion( record ).value || "";
     return (
       <Row gutter={24}>
 

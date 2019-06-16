@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Form, Row, Col, Select, Input, InputNumber } from "antd";
+import { getAssertion } from "./helpers";
 
 const Option = Select.Option,
       FormItem = Form.Item;
@@ -25,7 +26,7 @@ export class AssertBoundingBox extends React.Component {
   render () {
     const { getFieldDecorator } = this.props.form,
           { record } = this.props,
-          { hOperator, hValue, wOperator, wValue, xOperator, xValue, yOperator, yValue } = record.assert;
+          { hOperator, hValue, wOperator, wValue, xOperator, xValue, yOperator, yValue } = getAssertion( record );
 
     return (
       <React.Fragment>

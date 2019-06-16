@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Form, Row, Col, Select, Input } from "antd";
+import { getAssertion } from "./helpers";
 
 const Option = Select.Option,
       FormItem = Form.Item;
@@ -26,7 +27,7 @@ export class AssertPosition extends React.Component {
     const { getFieldDecorator } = this.props.form,
           { record, targets } = this.props,
           filteredTargets = targets.map( data => data.target ),
-          { position, target } = record.assert;
+          { position, target } = getAssertion( record );
     return (
       <React.Fragment>
         <Row gutter={24} className="is-invisible">

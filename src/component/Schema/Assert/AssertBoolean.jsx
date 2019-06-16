@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Form, Row, Col, Input, Checkbox } from "antd";
+import { getAssertion } from "./helpers";
 
 const FormItem = Form.Item;
 
@@ -18,7 +19,8 @@ export class AssertBoolean extends React.Component {
   render () {
     const { getFieldDecorator } = this.props.form,
           { record } = this.props,
-          value = typeof record.assert.value === "undefined" ? true : Boolean( record.assert.value );
+          assert = getAssertion( record ),
+          value = typeof assert.value === "undefined" ? true : Boolean( assert.value );
 
     return (
       <Row gutter={24}>
