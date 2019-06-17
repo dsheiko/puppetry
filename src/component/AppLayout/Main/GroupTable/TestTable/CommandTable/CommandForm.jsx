@@ -122,6 +122,21 @@ export class CommandForm extends React.Component {
     }
   }
 
+  isSavedOne( record ) {
+    // not changed for another method
+    if ( this.state.target === "" && this.state.method === "" ) {
+      return true;
+    }
+    // returned back after jumping
+    if ( this.state.target && this.state.target !== record.target ) {
+      return false;
+    }
+    if ( this.state.method && this.state.method !== record.method ) {
+      return false;
+    }
+    return true;
+  }
+
   render() {
     const { getFieldDecorator, setFieldsValue } = this.props.form,
           { targets, record } = this.props,
@@ -129,7 +144,7 @@ export class CommandForm extends React.Component {
           method = this.state.method || record.method,
           schema = getSchema( target, method ),
           Assert = schema && schema.assert ? schema.assert.node : null,
-          safeRecord = ( this.state.target === record.target && this.state.method === record.method )
+          safeRecord = this.isSavedOne( record )
           ? {
             params: {},
             assert: {},
