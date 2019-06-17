@@ -78,15 +78,20 @@ export class App extends React.Component {
     try {
       await loadSnippets();
     } catch ( e ) {
-      log.warn( `Renderer process: App: ${ e }` );
+      log.warn( `Renderer process: App.loadSnippets ${ e }` );
     }
 
     try {
       await loadProject();
+    } catch ( e ) {
+      log.warn( `Renderer process: App.loadProject: ${ e }` );
+      console.warn( e );
+    }
+
+    try {
       await checkGit( settings.projectDirectory );
     } catch ( e ) {
-      log.warn( `Renderer process: App: ${ e }` );
-      console.warn( e );
+      log.warn( `Renderer process: App.checkGit: ${ e }` );
     }
 
   }
