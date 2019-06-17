@@ -12,7 +12,7 @@ export const checkBox = {
     el.setAttribute( "checked", value );
     }, `
     + `"${ params.checked }" );`),
-  description: `Toggle checkbox/radio state`,
+  description: `Toggles checkbox/radio state`,
   params: [
     {
 
