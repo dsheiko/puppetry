@@ -16,7 +16,7 @@ export const waitForSelector = {
 // Waiting for an element matching ${ params.value }
 await bs.page.waitForSelector( ${ JSON.stringify( params.value ) }${ optArg } );` );
   },
-  description: `Waiting for an element matching a provided `
+  description: `Waits for an element matching a provided `
     + `[CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)`,
   params: [
     {

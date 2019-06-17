@@ -28,7 +28,7 @@ export const setCookie = {
     `;
   },
 
-  description: "Set cookies on the page",
+  description: "Sets [cookies](https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie) on the page",
 
   params: [
     {
@@ -41,6 +41,7 @@ export const setCookie = {
           name: "params.name",
           template: true,
           control: INPUT,
+          inputStyle: { maxWidth: 200 },
           label: "Name",
           placeholder: "e.g. foo",
           rules: [{
@@ -64,6 +65,7 @@ export const setCookie = {
           template: true,
           control: INPUT,
           label: "Domain",
+          inputStyle: { maxWidth: 200 },
           rules: [{
             required: true,
             message: `Field is required.`
@@ -93,6 +95,7 @@ export const setCookie = {
         {
           name: "params.httpOnly",
           control: SELECT,
+          inputStyle: { maxWidth: 200 },
           label: "HTTP-only",
           initialValue: "",
           options: [ "", "true", "false" ]
@@ -100,6 +103,7 @@ export const setCookie = {
         {
           name: "params.secure",
           control: SELECT,
+          inputStyle: { maxWidth: 200 },
           label: "Secure",
           initialValue: "",
           options: [ "", "true", "false" ]
@@ -107,6 +111,7 @@ export const setCookie = {
         {
           name: "params.sameSite",
           control: SELECT,
+          inputStyle: { maxWidth: 200 },
           label: "Same site",
           initialValue: "",
           options: [ "", "Strict", "Lax" ]

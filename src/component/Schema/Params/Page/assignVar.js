@@ -10,7 +10,7 @@ export const assignVar = {
       // Assign template variable dynamically
       ENV[ ${ JSON.stringify( params.name ) } ] = ${ value };`;
   },
-  description: `Assign template variable dynamically`,
+  description: `Assigns template variable dynamically`,
 
   params: [
     {

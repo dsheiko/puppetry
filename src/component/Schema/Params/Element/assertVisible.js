@@ -10,7 +10,9 @@ export const assertVisible = {
   assert: {
     node: AssertBoolean
   },
-  description: `Tests whether this element is currently displayed`,
+  description: `Asserts that the element is currently visible in the current viewport
+([intersecting](https://pptr.dev/#?product=Puppeteer&version=v1.15.0&show=api-elementhandleisintersectingviewport),
+styles \`display\` is not \`none\`, \`visible\` is not \`hidden\`, \`opacity\` is not \`0\`)`,
   params: [
   ]
 };

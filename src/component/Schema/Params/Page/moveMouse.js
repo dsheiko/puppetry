@@ -8,7 +8,7 @@ export const moveMouse = {
       await bs.page.mouse.move( ${ x }, ${ y } );`;
   },
 
-  description: `Move mouse to given position`,
+  description: `Moves mouse to given position`,
 
   params: [
     {
