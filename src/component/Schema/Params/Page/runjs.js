@@ -11,7 +11,7 @@ export const runjs = {
 ${ value }
 ` );
   },
-  description:  `Run custom JavaScript code in the test suite with use of
+  description:  `Runs custom JavaScript code in the test suite with use of
 [Puppeteer API](https://pptr.dev) and [Puppetry API](https://docs.puppetry.app/command-api).
 You can access [dynamic environment variables](https://docs.puppetry.app/template)
 via \`ENV\` map (e.g. \`ENV[VAR_NAME]\`)

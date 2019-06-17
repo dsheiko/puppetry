@@ -38,10 +38,15 @@ module.exports = function( page ) {
        **/
       isVisible: async function(){
         const boundingBox = await elementHandle.boundingBox(),
-              handle = await page.evaluateHandle( ( el ) =>
+              isIntersectingViewport = await elementHandle.isIntersectingViewport(),
+              handleOpacity = await page.evaluateHandle( ( el ) =>
                 window.getComputedStyle( el, null ).getPropertyValue( "opacity" ), elementHandle ),
-              opacity = parseFloat( await handle.jsonValue() );
-        return ( opacity !== 0 && boundingBox !== null );
+              handleVisibility = await page.evaluateHandle( ( el ) =>
+                window.getComputedStyle( el, null ).getPropertyValue( "visibility" ), elementHandle ),
+              opacity = parseFloat( await handleOpacity.jsonValue() ),
+              visibility = await handleVisibility.jsonValue();
+
+        return ( boundingBox !== null && isIntersectingViewport && opacity !== 0 && visibility !=="hidden" );
       },
 
       /**

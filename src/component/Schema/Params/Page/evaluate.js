@@ -10,7 +10,7 @@ await bs.page.evaluate(() => {
   ${ value }
 });` );
   },
-  description: `Evaluate JavaScript code in the page context`,
+  description: `Evaluates JavaScript code in the page context`,
   params: [
     {
       inline: true,
