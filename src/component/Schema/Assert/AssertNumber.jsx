@@ -27,7 +27,7 @@ export class AssertNumber extends React.Component {
     const { getFieldDecorator } = this.props.form,
           { record } = this.props,
           operator = getAssertion( record ).operator || "gt",
-          value = getAssertion( record ).value || "";
+          value = getAssertion( record ).value || 0;
     return (
       <Row gutter={24}>
         <Col span={8} >

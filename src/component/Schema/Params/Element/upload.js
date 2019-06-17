@@ -9,7 +9,7 @@ export const upload = {
   },
   description: `Sets the value of a file input. Note that the target element must be INPUT of FILE type.
    It is also recommended to emulate click on the target (or clickable element calling the file browser)
-   before going with this command,`,
+   before going with this command.`,
   params: [
 
     {

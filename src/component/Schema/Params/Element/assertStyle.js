@@ -14,12 +14,12 @@ export const assertStyle = {
   assert: {
     node: AssertValue
   },
-  description: `Asserts that the computed style
-  (https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle)
+  description: `Asserts that the
+[computed style](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle)
   of \`{target}\` target matches the given value`,
   params: [
     {
-      
+
       legend: "",
       tooltip: "",
       fields: [

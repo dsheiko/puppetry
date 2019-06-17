@@ -129,10 +129,16 @@ export class CommandForm extends React.Component {
           method = this.state.method || record.method,
           schema = getSchema( target, method ),
           Assert = schema && schema.assert ? schema.assert.node : null,
-          safeRecord = {
+          safeRecord = ( this.state.target === record.target && this.state.method === record.method )
+          ? {
             params: {},
             assert: {},
             ...record
+          }
+          : {
+            ...record,
+            params: {},
+            assert: {}
           };
 
     return (
