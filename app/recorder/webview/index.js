@@ -81,7 +81,7 @@
       return;
     }
     log( getTargetVar( e.target ), "type", { value: e.target.value } );
-  }, 200 );
+  }, 400 );
 
   Recorder.onChangeSelect = ( e ) => {
     log( getTargetVar( e.target ), "select", { value: e.target.value } );
@@ -96,15 +96,19 @@
     ipcRenderer.sendToHost( "target", getQuery( e.target ) );
   };
 
-  function onDomModified() {
-
+  function updateElementHighlighter( color ) {
     document.body.insertAdjacentHTML( "beforeend", `
-    <style>
-      *:hover {
-        outline: 1px dotted blue;
-      }
-    </style>
-    ` );
+      <style id="puppetry-element-highlighter">
+        *:hover {
+          outline: 1px dotted ${ color || "blue" };
+        }
+      </style>
+      ` );
+  }
+
+  function onDomModified( options ) {
+
+    updateElementHighlighter( options.highlightColor );
 
     Array.from( document.querySelectorAll( "*" ) ).forEach( el => {
       on( el, "contextmenu", Recorder.onContextMenu );
@@ -133,13 +137,14 @@
 //    });
   }
 
-  ipcRenderer.on( "dom-ready", () => {
+
+  ipcRenderer.on( "dom-ready", ( ev, options ) => {
     log( "page", "goto", { url: location.href, timeout: 30000, waitUntil: "load" } );
     on( document.body, "click", Recorder.onElClick );
     on( window, "keyup", Recorder.onKeyUp );
     on ( window, "resize", debounce( Recorder.onWindowResize, 200 ) );
 
-    onDomModified();
+    onDomModified( options );
 
     try {
       observer && observer.disconnect();

@@ -7,6 +7,7 @@ const { remote, ipcRenderer } = require ( "electron" ),
       urlInput = find( "#url" ),
       emulateSelect = find( "#select" ),
       recordingBtn = find( "#recording" ),
+      colorSelect = find( "#color" ),
       info = find( "#info" ),
       TOOLBAR_HEIGHT = 40,
       STORAGE_URL = "recordLastUrl",
@@ -92,6 +93,9 @@ function applyPatchToGroups( clientGroups, patch ) {
 }
 
 webview.addEventListener( "ipc-message", e => {
+  if ( e.channel === "echo" ) {
+    return console.log( e.args );
+  }
   if ( e.channel === "target" ) {
     return registerTarget( e.args[ 0 ] );
   }
@@ -101,12 +105,16 @@ webview.addEventListener( "ipc-message", e => {
       remote.getCurrentWindow().close();
       return;
     }
-    const patch = findTargetPatch( e.args[ 0 ], namedTargets );
-
-    ipcRenderer.send( E_RECEIVE_RECORDER_SESSION,
-      applyPatchToTargets( e.args[ 0 ], patch ),
-      applyPatchToGroups( e.args[ 1 ], patch )
-    );
+    try {
+      const patch = findTargetPatch( e.args[ 0 ], namedTargets );
+      ipcRenderer.send( E_RECEIVE_RECORDER_SESSION,
+        Object.assign( applyPatchToTargets( e.args[ 0 ], patch ), namedTargets ),
+        applyPatchToGroups( e.args[ 1 ], patch )
+      );
+    } catch ( e ) {
+      console.error( e );
+      ipcRenderer.send( E_RECEIVE_RECORDER_SESSION, e.args[ 0 ], e.args[ 1 ] );
+    }
     remote.getCurrentWindow().close();
   }
 
@@ -114,7 +122,9 @@ webview.addEventListener( "ipc-message", e => {
 
 webview.addEventListener( "dom-ready", e => {
   // webview.openDevTools();
-  webview.send( "dom-ready" );
+  webview.send( "dom-ready", {
+    highlightColor: colorSelect.value
+  } );
 });
 
 const lastUrl = localStorage.getItem( STORAGE_URL );
