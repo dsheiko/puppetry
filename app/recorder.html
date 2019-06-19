@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src *; img-src * data: https:; media-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'">
-  <title>Recorder</title>
+  <title>Puppetry Suite Recorder</title>
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1"
@@ -15,6 +15,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="./assets/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
+  <script src="./vendor/smalltalk/smalltalk.min.js"></script>
 
   <style>
 
@@ -155,6 +156,10 @@
       list-style-type: square;
     }
 
+    .info ul li {
+      line-height: 26px;
+    }
+
     .info h1 {
       font-size: 20px;
       line-height: 24px;
@@ -171,6 +176,21 @@
     .info p + p {
       margin-top: 8px;
     }
+
+    kbd {
+      background-color: #eee;
+      border-radius: 3px;
+      border: 1px solid #b4b4b4;
+      box-shadow: 0 1px 1px rgba(0,0,0,.2), 0 2px 0 0 rgba(255,255,255,.7) inset;
+      color: #333;
+      display: inline-block;
+      font-family: consolas,"Liberation Mono",courier,monospace;
+      font-size: .85em;
+      font-weight: 700;
+      line-height: 1;
+      padding: 2px 4px;
+      white-space: nowrap;
+  }
 
 
 
@@ -211,8 +231,8 @@
   <h1>Welcome to Puppetry Recorder</h1>
   <p>
     Puppetry Recorder we use to record user interactions on the target web pages as a test suite.
-    To start you need to type in the toolbar input URL of a page to navigate and press Enter.
-    As pages loaded you can interact with them (click elements, type in inputs, move mouse cursor, resize window, scroll,
+    To start you need to type in the toolbar the URL of a page and press Enter.
+    As pages loaded you can interact with them (click elements, type in inputs, resize window, scroll,
     navigate pages  and so on).
   </p>
 
@@ -220,20 +240,29 @@
   <h2>Available tools</h2>
   <ul>
     <li>
-      Address bar - navigate to the provided URL
+      <b>Address bar</b> - navigate to the provided URL
     </li>
     <li>
-      "Select device" - resize window to match the selected device screen
+      <b>"Select device"</b> - resize window to match the selected device screen
+    </li>
+
+    <li>
+      <span class="icon"><svg><circle cx="8" cy="8" r="8" fill="#ef4337" /></svg></span> - stop/continue recording
     </li>
     <li>
-      <kbd>Ctrl-Shift-S</kbd> - add "make a screenshot" command to the log. Can be used to mark a particular step in your session
-    </li>
-    <li>
-      Recording <span class="icon"><svg><circle cx="8" cy="8" r="8" fill="#ef4337" /></svg></span> - stop/continue recording
-    </li>
-    <li>
-      OK <span class="icon"><svg viewBox="64 64 896 896" class="" data-icon="check-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0 0 51.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"></path><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path></svg></span>
+      <span class="icon"><svg viewBox="64 64 896 896" class="" data-icon="check-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0 0 51.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"></path><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path></svg></span>
       - save recording as a test suite and return to Puppetry main window
+    </li>
+    <li>
+      On the page:
+      <ul>
+        <li>
+        <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>S</kbd> - add "make a screenshot" command to the log. Can be used to mark a particular step in your session
+      </li>
+      <li>
+        <b>Right-Click</b> - register a hovered element as a target
+      </li>
+      </ul>
     </li>
   </ul>
 

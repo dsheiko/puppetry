@@ -9,12 +9,13 @@ const { remote, ipcRenderer } = require ( "electron" ),
       recordingBtn = find( "#recording" ),
       info = find( "#info" ),
       TOOLBAR_HEIGHT = 40,
-
+      STORAGE_URL = "recordLastUrl",
       options = devices.map( i =>  ({
         value: i.name,
         description: `${i.name} (${i.viewport.width}x${i.viewport.height})`
       }) );
 
+let namedTargets = {};
 
 function toogleRecording( toggle ) {
   recordingBtn.classList.toggle( "icon--recording", toggle );
@@ -23,6 +24,7 @@ function toogleRecording( toggle ) {
 }
 
 function loadUrl( url ) {
+  localStorage.setItem( STORAGE_URL, url );
   webview.src = url;
   info.classList.add( "is-hidden" );
   webview.classList.remove( "is-hidden" );
@@ -31,12 +33,83 @@ function loadUrl( url ) {
   toogleRecording( true );
 }
 
+function normalizeTargetName( str ) {
+  const reBody = /[^a-zA-Z0-9_]/g,
+        reFirst = /^\d/g;
+  return str
+    .replace( reBody, "_" )
+    .replace( reFirst, "_" )
+    .toUpperCase();
+}
+
+
+
+async function registerTarget( selector ) {
+  try {
+    const name = normalizeTargetName( await smalltalk.prompt( "Registering Target", "Target name", "" ) );
+    namedTargets[ name ] = selector;
+  } catch ( e ) {
+    // ignore
+  }
+}
+
+function findTargetPatch( clientTargets, namedTargets ) {
+  const namedArr = Object.entries( namedTargets );
+  return Object
+    .entries( clientTargets )
+    .reduce(( carry, pair ) => {
+
+    const match = namedArr.find( named => named[ 1 ] === pair[ 1 ] );
+    if ( match ) {
+    	carry.push([ pair[ 0 ], match[ 0 ]]);
+    }
+    return carry;
+  }, []);
+}
+
+function applyPatchToTargets( clientTargets, patch ) {
+  return Object
+    .entries( clientTargets )
+    .reduce(( carry, pair ) => {
+    	const match = patch.find( item => item[ 0 ] === pair[ 0 ] );
+    	if ( match ) {
+      	carry[ match[ 1 ] ] = pair[ 1 ];
+    		return carry;
+      }
+    	carry[ pair[ 0 ] ] = pair[ 1 ];
+    	return carry;
+  	}, {});
+}
+
+function applyPatchToGroups( clientGroups, patch ) {
+  return clientGroups.map( group => {
+    const match = patch.find( item => item[ 0 ] === group.target );
+    if ( match ) {
+      group.target = match[ 1 ];
+    }
+    return group;
+  });
+}
 
 webview.addEventListener( "ipc-message", e => {
-  if ( e.channel === "session" ) {
-    ipcRenderer.send( E_RECEIVE_RECORDER_SESSION, e.args[ 0 ], e.args[ 1 ] );
+  if ( e.channel === "target" ) {
+    return registerTarget( e.args[ 0 ] );
   }
-  remote.getCurrentWindow().close();
+  if ( e.channel === "session" ) {
+    if ( !Object.keys( namedTargets ).length ) {
+      ipcRenderer.send( E_RECEIVE_RECORDER_SESSION, e.args[ 0 ], e.args[ 1 ] );
+      remote.getCurrentWindow().close();
+      return;
+    }
+    const patch = findTargetPatch( e.args[ 0 ], namedTargets );
+
+    ipcRenderer.send( E_RECEIVE_RECORDER_SESSION,
+      applyPatchToTargets( e.args[ 0 ], patch ),
+      applyPatchToGroups( e.args[ 1 ], patch )
+    );
+    remote.getCurrentWindow().close();
+  }
+
 });
 
 webview.addEventListener( "dom-ready", e => {
@@ -44,6 +117,10 @@ webview.addEventListener( "dom-ready", e => {
   webview.send( "dom-ready" );
 });
 
+const lastUrl = localStorage.getItem( STORAGE_URL );
+if ( lastUrl ) {
+ urlInput.value = lastUrl;
+}
 
 okBtn.addEventListener( "click", ( e ) => {
   e.preventDefault();

@@ -2,7 +2,7 @@
 
   const { ipcRenderer } = require( "electron" ),
         debounce = require( "lodash.debounce" ),
-        { targets, getTargetVar } = require( "./service/target" ),
+        { targets, getTargetVar, getQuery } = require( "./service/target" ),
         commands = [];
 
   let recording = true, observer = null, screenshotCounter = 1;
@@ -14,6 +14,7 @@
   ipcRenderer.on( "recording", ( ev, toggle ) => {
     recording = toggle;
   });
+
 
   function on( el, ev, cb, useCapture = false ) {
     el.removeEventListener( ev, cb );
@@ -90,7 +91,25 @@
     log( getTargetVar( e.target ), "hover", {} );
   };
 
+  Recorder.onContextMenu = ( e ) => {
+    e.stopPropagation();
+    ipcRenderer.sendToHost( "target", getQuery( e.target ) );
+  };
+
   function onDomModified() {
+
+    document.body.insertAdjacentHTML( "beforeend", `
+    <style>
+      *:hover {
+        outline: 1px dotted blue;
+      }
+    </style>
+    ` );
+
+    Array.from( document.querySelectorAll( "*" ) ).forEach( el => {
+      on( el, "contextmenu", Recorder.onContextMenu );
+    });
+
     Array.from( document.querySelectorAll( "input, textarea" ) ).forEach( el => {
       on( el, "focus", Recorder.onFocusInput );
       on( el, "input", Recorder.onInputInput );
@@ -109,9 +128,9 @@
     Array.from( document.querySelectorAll( "form" ) ).forEach( el => {
       on( el, "reset", Recorder.onReset );
     });
-    Array.from( document.querySelectorAll( "a, button, *[role=button]" ) ).forEach( el => {
-      on( el, "mouseover", Recorder.onHover );
-    });
+//    Array.from( document.querySelectorAll( "a, button, *[role=button]" ) ).forEach( el => {
+//      on( el, "mouseover", Recorder.onHover );
+//    });
   }
 
   ipcRenderer.on( "dom-ready", () => {
@@ -119,7 +138,6 @@
     on( document.body, "click", Recorder.onElClick );
     on( window, "keyup", Recorder.onKeyUp );
     on ( window, "resize", debounce( Recorder.onWindowResize, 200 ) );
-
 
     onDomModified();
 
