@@ -78,6 +78,18 @@
       color: #999;
     }
 
+    .select {
+      font-size: 16px;
+      line-height: 22px;
+      height: 24px;
+
+      background: white;
+      border: 1px solid #555;
+      padding: 0 4px;
+      border-radius: 4px;
+      margin-left: 8px;
+    }
+
     .toolbar__select {
       font-size: 16px;
       line-height: 30px;
@@ -192,6 +204,55 @@
       white-space: nowrap;
   }
 
+  .btn {
+    line-height: 1.499;
+    position: relative;
+    display: inline-block;
+    font-weight: 400;
+    white-space: nowrap;
+    text-align: center;
+    background-image: none;
+    border: 1px solid transparent;
+    -webkit-box-shadow: 0 2px 0 rgba(0,0,0,0.015);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.015);
+    cursor: pointer;
+    -webkit-transition: all .3s cubic-bezier(.645, .045, .355, 1);
+    transition: all .3s cubic-bezier(.645, .045, .355, 1);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    height: 32px;
+    padding: 0 15px;
+    font-size: 14px;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #1890ff;
+    border-color: #1890ff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.12);
+    -webkit-box-shadow: 0 2px 0 rgba(0,0,0,0.045);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.045);
+
+  }
+
+  .btn:hover {
+    text-decoration: none;
+    color: #fff;
+    background-color: #40a9ff;
+    border-color: #40a9ff;
+  }
+
+  .btn:disabled {
+    color: rgba(0,0,0,0.25);
+    background-color: #f5f5f5;
+    border-color: #d9d9d9;
+    text-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
 
 
   </style>
@@ -212,15 +273,8 @@
     </select>
 
 
-    <a href="#" id="recording" class="toolbar__item icon is-disabled" title="Start recording">
-      <svg>
-        <circle cx="12" cy="12" r="12" fill="#ef4337" />
-      </svg>
-    </a>
+    <button id="okBtn" disabled class="toolbar__item btn">Create Suite</button>
 
-    <a href="#" id="pull" class="toolbar__item icon icon--ok is-disabled" title="Save recording session as a test suite">
-      <svg viewBox="64 64 896 896" class="" data-icon="check-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0 0 51.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"></path><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path></svg>
-    </a>
 
   </div>
 
@@ -243,15 +297,10 @@
       <b>Address bar</b> - navigate to the provided URL
     </li>
     <li>
-      <b>"Select device"</b> - resize window to match the selected device screen
-    </li>
-
-    <li>
-      <span class="icon"><svg><circle cx="8" cy="8" r="8" fill="#ef4337" /></svg></span> - stop/continue recording
+      <b>Select device</b> combobox - resize window to match the selected device screen
     </li>
     <li>
-      <span class="icon"><svg viewBox="64 64 896 896" class="" data-icon="check-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true"><path d="M699 353h-46.9c-10.2 0-19.9 4.9-25.9 13.3L469 584.3l-71.2-98.8c-6-8.3-15.6-13.3-25.9-13.3H325c-6.5 0-10.3 7.4-6.5 12.7l124.6 172.8a31.8 31.8 0 0 0 51.7 0l210.6-292c3.9-5.3.1-12.7-6.4-12.7z"></path><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path></svg></span>
-      - save recording as a test suite and return to Puppetry main window
+      <b>Create Suite</b> button - save recording as a test suite and return to Puppetry main window
     </li>
     <li>
       On the page:
@@ -268,7 +317,7 @@
   <br />
   <p>When moving mouse cursor on a loaded page the hovered elements are being highlighted.
     <br />Here you can pick an outline color most suiting to your test page design:
-    <select id="color" >
+    <select id="color" class="select">
       <option value="#f0f8ff">aliceblue</option>
 <option value="#faebd7">antiquewhite</option>
 <option value="#00ffff">aqua</option>

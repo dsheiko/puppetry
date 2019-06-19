@@ -2,18 +2,58 @@
 
   const { ipcRenderer } = require( "electron" ),
         debounce = require( "lodash.debounce" ),
-        { targets, getTargetVar, getQuery } = require( "./service/target" ),
-        commands = [];
+        xpath = require( "simple-xpath-position" ),
+        uniqid = require( "uniqid" );
 
   let recording = true, observer = null, screenshotCounter = 1;
-
-  ipcRenderer.on( "pull", () => {
-    ipcRenderer.sendToHost( "session",  targets, commands );
-  });
 
   ipcRenderer.on( "recording", ( ev, toggle ) => {
     recording = toggle;
   });
+
+  ipcRenderer.on( "goto", () => {
+    // cleanupSession();
+  });
+
+  function cleanupSession() {
+    document.cookie.split( ";" ).forEach( cookie => {
+        const eqPos = cookie.indexOf( "=" ),
+              name = eqPos > -1 ? cookie.substr( 0, eqPos ) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    });
+    localStorage.clear();
+  }
+
+  function getQuery( el ) {
+    if ( el.id && document.querySelectorAll( `#${ el.id }` ).length === 1 ) {
+      return `#${ el.id }`;
+    }
+    if ( el.name && document.querySelectorAll( `${ el.tagName }[name="${ el.name }"]` ).length === 1 ) {
+      return `${ el.tagName }[name="${ el.name }"]`;
+    }
+    return xpath.fromNode( el );
+  }
+
+  function getPid( el ) {
+    const pid = el.getAttribute( "puppetry-id" );
+    if ( pid ) {
+      return pid;
+    }
+    const id = uniqid();
+    el.setAttribute( "puppetry-id",  id );
+    return id;
+  }
+
+  function buildTargetRefObj( el ) {
+    return {
+      pid: getPid( el ),
+      query: getQuery( el ),
+      id: el.id,
+      tagName: el.tagName,
+      name: el.name,
+      className: el.className
+    };
+  }
 
 
   function on( el, ev, cb, useCapture = false ) {
@@ -25,25 +65,16 @@
     if ( !recording ) {
       return;
     }
-    const last = commands[ commands.length - 1 ];
-    // click normally accompanies focusm so no need to keep in the log
-    if ( method === "click" &&  last.method === "focus" && target === last.target ) {
-      commands.pop();
-    }
-    // repeating input, take only the last commmand as it will be used with el.type()
-    if ( method === "input" &&  last.method === method && target === last.target ) {
-      commands.pop();
-    }
-    commands.push({ target, method, params });
+    ipcRenderer.sendToHost( "log", { target, method, params } );
   }
 
   class Recorder {
     static onFocusInput( e ) {
-      log( getTargetVar( e.target ), "focus", {} );
+      log( buildTargetRefObj( e.target ), "focus", {} );
     }
 
     static onElClick( e ) {
-      log( getTargetVar( e.target ), "click", {} );
+      log( buildTargetRefObj( e.target ), "click", {} );
     }
     static onWindowResize() {
       log( "page", "setViewport", { width: window.innerWidth, height: window.innerHeight } );
@@ -64,31 +95,31 @@
   }
 
   Recorder.onReset = ( e ) => {
-    log( getTargetVar( e.target ), "reset", {} );
+    log( buildTargetRefObj( e.target ), "reset", {} );
   };
 
   Recorder.onChangeFile = ( e ) => {
-    log( getTargetVar( e.target ), "upload", { path: e.target.value } );
+    log( buildTargetRefObj( e.target ), "upload", { path: e.target.value } );
   };
 
 
   Recorder.onChangeCheckbox = ( e ) => {
-    log( getTargetVar( e.target ), "checkBox", { checked: e.target.checked } );
+    log( buildTargetRefObj( e.target ), "checkBox", { checked: e.target.checked } );
   };
 
   Recorder.onInputInput = debounce( ( e ) => {
     if ( e.target.type === "file" || e.target.type === "checkbox" || e.target.type === "radio" ) {
       return;
     }
-    log( getTargetVar( e.target ), "type", { value: e.target.value } );
+    log( buildTargetRefObj( e.target ), "type", { value: e.target.value } );
   }, 400 );
 
   Recorder.onChangeSelect = ( e ) => {
-    log( getTargetVar( e.target ), "select", { value: e.target.value } );
+    log( buildTargetRefObj( e.target ), "select", { value: e.target.value } );
   };
 
   Recorder.onHover = ( e ) => {
-    log( getTargetVar( e.target ), "hover", {} );
+    log( buildTargetRefObj( e.target ), "hover", {} );
   };
 
   Recorder.onContextMenu = ( e ) => {
@@ -115,7 +146,7 @@
     });
 
     Array.from( document.querySelectorAll( "input, textarea" ) ).forEach( el => {
-      on( el, "focus", Recorder.onFocusInput );
+      //on( el, "focus", Recorder.onFocusInput );
       on( el, "input", Recorder.onInputInput );
       on( el, "reset", Recorder.onReset );
     });
@@ -126,7 +157,7 @@
       on( el, "change", Recorder.onChangeCheckbox );
     });
     Array.from( document.querySelectorAll( "select" ) ).forEach( el => {
-      on( el, "focus", Recorder.onFocusInput );
+      //on( el, "focus", Recorder.onFocusInput );
       on( el, "change", Recorder.onChangeSelect );
     });
     Array.from( document.querySelectorAll( "form" ) ).forEach( el => {
@@ -139,7 +170,7 @@
 
 
   ipcRenderer.on( "dom-ready", ( ev, options ) => {
-    log( "page", "goto", { url: location.href, timeout: 30000, waitUntil: "load" } );
+    log( "page", "waitForNavigation", { timeout: 3000, waitUntil: "domcontentloaded" } );
     on( document.body, "click", Recorder.onElClick );
     on( window, "keyup", Recorder.onKeyUp );
     on ( window, "resize", debounce( Recorder.onWindowResize, 200 ) );

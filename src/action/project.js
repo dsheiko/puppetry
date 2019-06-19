@@ -54,11 +54,16 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
 
     dispatch( gitActions.setGit({ initialized: isGitInitialized( projectDirectory ) }) );
 
-    project.lastOpenSuite && dispatch( await suiteActions.openSuiteFile( project.lastOpenSuite ) );
   } catch ( err ) {
     log.warn( `Renderer process: actions.loadProject(${projectDirectory }): ${ err }` );
   } finally {
     dispatch( appActions.setApp({ loading: false }) );
+  }
+
+  try {
+    project.lastOpenSuite && dispatch( await suiteActions.openSuiteFile( project.lastOpenSuite ) );
+  } catch ( err ) {
+
   }
 
   return project;
