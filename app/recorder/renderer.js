@@ -1,12 +1,13 @@
 const { remote, ipcRenderer } = require ( "electron" ),
       { E_RECEIVE_RECORDER_SESSION } = require( "./constant" ),
       devices = require( "../src/vendor/puppeteer/DeviceDescriptors" ),
+      { registerElement, targets } = require( "./recorder/service/target" ),
       find = document.querySelector.bind( document ),
       webview = find( "webview" ),
-      okBtn = find( "#pull" ),
+      okBtn = find( "#okBtn" ),
       urlInput = find( "#url" ),
       emulateSelect = find( "#select" ),
-      recordingBtn = find( "#recording" ),
+
       colorSelect = find( "#color" ),
       info = find( "#info" ),
       TOOLBAR_HEIGHT = 40,
@@ -16,22 +17,21 @@ const { remote, ipcRenderer } = require ( "electron" ),
         description: `${i.name} (${i.viewport.width}x${i.viewport.height})`
       }) );
 
-let namedTargets = {};
+let commands = [], namedTargets = {};
 
-function toogleRecording( toggle ) {
-  recordingBtn.classList.toggle( "icon--recording", toggle );
-  recordingBtn.setAttribute( "title", toggle ? "Pause recording" : "Continue recording" );
-  webview.send( "recording", toggle );
-}
 
 function loadUrl( url ) {
   localStorage.setItem( STORAGE_URL, url );
   webview.src = url;
+  webview.send( "goto" );
   info.classList.add( "is-hidden" );
   webview.classList.remove( "is-hidden" );
-  recordingBtn.classList.remove( "is-disabled" );
-  okBtn.classList.remove( "is-disabled" );
-  toogleRecording( true );
+  okBtn.removeAttribute( "disabled" );
+  commands.push({
+    target: "page",
+    method: "goto",
+    params: { url, timeout: 30000, waitUntil: "load" }
+  });
 }
 
 function normalizeTargetName( str ) {
@@ -82,7 +82,7 @@ function applyPatchToTargets( clientTargets, patch ) {
   	}, {});
 }
 
-function applyPatchToGroups( clientGroups, patch ) {
+function applyPatchToCommands( clientGroups, patch ) {
   return clientGroups.map( group => {
     const match = patch.find( item => item[ 0 ] === group.target );
     if ( match ) {
@@ -92,30 +92,31 @@ function applyPatchToGroups( clientGroups, patch ) {
   });
 }
 
+function registerCommand({ target, method, params }) {
+  if ( target !== "page" ) {
+    target = registerElement( target );
+  }
+  const last = commands[ commands.length - 1 ];
+  // type normally accompanies with click
+  if ( method === "type" &&  last.method === "click" && target === last.target ) {
+    commands.pop();
+  }
+  // repeating input, take only the last commmand as it will be used with el.type()
+  if ( method === "type" && last.method === method && target === last.target ) {
+    commands.pop();
+  }
+  commands.push({ target, method, params });
+}
+
 webview.addEventListener( "ipc-message", e => {
-  if ( e.channel === "echo" ) {
-    return console.log( e.args );
+  if ( e.channel === "console" ) {
+    return console.log( targets );
+  }
+  if ( e.channel === "log" ) {
+    return registerCommand( e.args[ 0 ] );
   }
   if ( e.channel === "target" ) {
     return registerTarget( e.args[ 0 ] );
-  }
-  if ( e.channel === "session" ) {
-    if ( !Object.keys( namedTargets ).length ) {
-      ipcRenderer.send( E_RECEIVE_RECORDER_SESSION, e.args[ 0 ], e.args[ 1 ] );
-      remote.getCurrentWindow().close();
-      return;
-    }
-    try {
-      const patch = findTargetPatch( e.args[ 0 ], namedTargets );
-      ipcRenderer.send( E_RECEIVE_RECORDER_SESSION,
-        Object.assign( applyPatchToTargets( e.args[ 0 ], patch ), namedTargets ),
-        applyPatchToGroups( e.args[ 1 ], patch )
-      );
-    } catch ( e ) {
-      console.error( e );
-      ipcRenderer.send( E_RECEIVE_RECORDER_SESSION, e.args[ 0 ], e.args[ 1 ] );
-    }
-    remote.getCurrentWindow().close();
   }
 
 });
@@ -132,17 +133,25 @@ if ( lastUrl ) {
  urlInput.value = lastUrl;
 }
 
+// OK (Create Suite)
 okBtn.addEventListener( "click", ( e ) => {
+  let payload = [ targets, commands ];
   e.preventDefault();
-  toogleRecording( false );
-  webview.send( "pull" );
-}, false );
 
+  if ( Object.keys( namedTargets ).length ) {
+    try {
+      const patch = findTargetPatch( targets, namedTargets );
+      payload = [
+        Object.assign( applyPatchToTargets( targets, patch ), namedTargets ),
+        applyPatchToCommands( commands, patch )
+      ];
+    } catch ( e ) {
+      console.error( e );
+    }
+  }
+  ipcRenderer.send( E_RECEIVE_RECORDER_SESSION, payload[ 0 ], payload[ 1 ] );
+  remote.getCurrentWindow().close();
 
-recordingBtn.addEventListener( "click", ( e ) => {
-  e.preventDefault();
-  const toggle = recordingBtn.classList.contains( "icon--recording" );
-  toogleRecording( !toggle );
 }, false );
 
 

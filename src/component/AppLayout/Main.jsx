@@ -51,13 +51,13 @@ export class Main extends AbstractComponent {
           >
             <TabPane tab={ targetsLabel } key="targets" id="cSuitePane">
               <p>Target constants are used to address an element on the page
-              { "" } <a href="https://docs.puppetry.app/targets" onClick={ this.onExtClick }>learn more</a>.</p>
+              { "" } <a href="https://docs.puppetry.app/target" onClick={ this.onExtClick }>learn more</a>.</p>
               <TargetTable action={action} targets={ selector.getTargetDataTable() } />
             </TabPane>
 
             <TabPane tab={ groupsLabel } key="groups">
               <p>Groups are containers of test cases
-              { "" } <a href="https://docs.puppetry.app/groups" onClick={ this.onExtClick }>learn more</a>. { "" }
+              { "" } <a href="https://docs.puppetry.app/group" onClick={ this.onExtClick }>learn more</a>. { "" }
               You can use drag&apos;n&apos;drop to re-arrange rows representing groups/test cases/test steps.</p>
               <GroupTable
                 action={ action }

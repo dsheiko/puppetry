@@ -448,11 +448,19 @@ export function getRuntimeTestPathSafe() {
 
 export async function isRuntimeTestPathReady() {
   const lockFile = getLockRuntimeTestPath();
+
   try {
-    if ( ! ( await lstat( lockFile ) ).isFile() ) {
-      log.warn( `Renderer process: RuntimeTest not ready, reason: lock not found` );
+    if ( !( await lstat( getNodeModulesRuntimeTestPath() ) ).isDirectory() ) {
+      log.warn( `Renderer process: node_modules not found in RuntimeTest` );
       return false;
     }
+  } catch ( e ) {
+    log.warn( `Renderer process: node_modules not found ${ e }` );
+    return false;
+  }
+
+  try {
+    // User propably installed dependencies manually
     const lock = JSON.parse( await readFile( lockFile, "utf8" ) );
     if ( lock.version !== remote.app.getVersion() ) {
       log.warn( `Renderer process: RuntimeTest not ready, reason: version does not match` );
@@ -460,9 +468,12 @@ export async function isRuntimeTestPathReady() {
     }
     return true;
   } catch ( e ) {
-    log.warn( `Renderer process: RuntimeTest not ready, reason: could not lstat ${ e }` );
-    return false;
+    return true;
   }
+}
+
+function getNodeModulesRuntimeTestPath() {
+  return join( getRuntimeTestPath(), "node_modules" );
 }
 
 function getLockRuntimeTestPath() {
