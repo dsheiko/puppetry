@@ -36,6 +36,15 @@ function register( el, query ) {
   return v;
 }
 
+function registerTarget( name, selector ) {
+  if ( name in targets ) {
+    const count = Object.keys( targets ).filter( key => key.startsWith( name ) ).length;
+    name = `${ name }_${ count }`;
+  }
+  targets[ name ] = selector;
+  return name;
+}
+
 function getQuery( el ) {
   if ( el.id && document.querySelectorAll( `#${ el.id }` ).length === 1 ) {
     return `#${ el.id }`;
@@ -58,3 +67,4 @@ function getTargetVar( el ) {
 exports.clearTargets = clearTargets;
 exports.targets = targets;
 exports.getTargetVar = getTargetVar;
+exports.getQuery = getQuery;

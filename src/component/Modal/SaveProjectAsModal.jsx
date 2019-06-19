@@ -78,7 +78,7 @@ export class SaveProjectAsModal extends AbstractForm {
     return (
       <ErrorBoundary>
         <Modal
-          title="Open Project"
+          title="Save Project As..."
           visible={ isVisible }
           closable
           onCancel={this.onClickCancel}
