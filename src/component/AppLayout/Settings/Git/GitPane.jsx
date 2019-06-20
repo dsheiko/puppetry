@@ -4,6 +4,7 @@ import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import { ConfigForm } from "./ConfigForm";
 import { RemoteForm } from "./RemoteForm";
+import LearnMore from "component/Global/LearnMore";
 
 export class GitPane extends AbstractComponent {
 
@@ -21,7 +22,9 @@ export class GitPane extends AbstractComponent {
         versions.
         You can synchronize versions
         with a remote repository. You can also create
-        a new project our of a remotely stored version (<code>clone</code>).</p>
+        a new project our of a remotely stored version (<code>clone</code>).<br />
+        </p>
+        <p><LearnMore href="https://docs.puppetry.app/version-control"/></p>
         <ConfigForm { ...this.props } />
         <RemoteForm { ...this.props } />
       </ErrorBoundary>

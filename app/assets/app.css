@@ -974,3 +974,8 @@ td:hover .editable-cell-icon {
 .run-in-browser + .select-group-inline {
   margin: 8px 0;
 }
+
+.learn-more {
+  text-transform: uppercase;
+  font-size: .8em;
+}
