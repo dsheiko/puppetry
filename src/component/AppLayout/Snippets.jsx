@@ -6,10 +6,12 @@ import { SuiteForm  } from "./Main/SuiteForm";
 import { TargetTable  } from "./Main/TargetTable";
 import ErrorBoundary from "component/ErrorBoundary";
 import { SNIPPETS_GROUP_ID } from "constant";
+import AbstractForm from "component/AbstractForm";
+import LearnMore from "component/Global/LearnMore";
 
 const TabPane = Tabs.TabPane;
 
-export class Snippets extends React.Component {
+export class Snippets extends AbstractForm {
 
   static propTypes = {
     store: PropTypes.object.isRequired,
@@ -56,13 +58,16 @@ export class Snippets extends React.Component {
             onChange={ this.onTabChange }
           >
             <TabPane tab={ targetsLabel } key="targets" id="cSuitePane">
-              <p>Target constants used to address an element on the page.
-              One can use DevTools to inspect the DOM and copy selectors</p>
+              <p>Targets are identifiers associated with locators (CSS selector or XPath) that we can refer in the test cases.
+              </p>
+              <p><LearnMore href="https://docs.puppetry.app/target"/></p>
               <TargetTable action={action} targets={ selector.getTargetDataTable() } />
             </TabPane>
 
             <TabPane tab={ snippetsLabel } key="groups">
-              <p>Snippets are sequences of commands/asserts reusable across the project.</p>
+              <p>Snippets are reusable test cases in scope of project. So you can create a snippet and refer to it in your test suites.<br />
+        </p>
+        <p><LearnMore href="https://docs.puppetry.app/snippets" /></p>
 
               { tests && <SnippetTable
       expanded={ store.project.groups }

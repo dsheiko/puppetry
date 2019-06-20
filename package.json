@@ -4,7 +4,7 @@
   "version": "2.0.0",
   "author": "Dmitry Sheiko <me@dsheiko.com> (http://dsheiko.com)",
   "engines": {
-    "node" : ">=11.7.0"
+    "node": ">=11.7.0"
   },
   "repository": {
     "type": "git",

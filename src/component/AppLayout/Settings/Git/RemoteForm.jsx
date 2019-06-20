@@ -147,7 +147,7 @@ export class RemoteForm extends AbstractForm {
           )}
         </FormItem>
 
-        <FormItem  label="Authentication method">
+        <FormItem  label="Auth. method">
           { getFieldDecorator( "credentialsAuthMethod", {
             initialValue: git.credentialsAuthMethod
           })(

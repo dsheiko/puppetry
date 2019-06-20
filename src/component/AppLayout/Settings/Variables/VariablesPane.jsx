@@ -9,6 +9,7 @@ import { bindActionCreators } from "redux";
 import actions from "action";
 import * as selectors from "selector/selectors";
 import { INLINE_INPUT_STYLES } from "constant";
+import LearnMore from "component/Global/LearnMore";
 
 const { Option } = Select,
 
@@ -49,7 +50,11 @@ export class VariablesPane extends AbstractComponent {
 
     return (
       <ErrorBoundary>
-
+    <p>
+    Here we can define a set of environment dependent variables. For an instance, we can declare a separate target app URL for every environment (test.acme.com, stage.acme.com, www.acme.com). Before running/exporting test project we specify the desired environment and the corresponding template tags in test cases will be replaced with the value (URL) given for that environment.
+    </p>
+    <p><LearnMore href="https://docs.puppetry.app/template" /></p>
+    <br />
         <div className="select-group-inline">
           <span className="select-group-inline__label">
           <Icon type="environment" title="Select a target environment" />

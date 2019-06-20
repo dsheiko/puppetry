@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Tabs } from "antd";
+import { Tabs, Icon } from "antd";
 import { Main } from "./AppLayout/Main";
 import { Snippets } from "./AppLayout/Snippets";
 import { SettingsPanel } from "./AppLayout/Settings/SettingsPanel";
@@ -47,7 +47,8 @@ export class TabGroup extends React.Component {
           { suite } = store,
 
           suiteTabTitle = suite.filename
-           ? ( store.suite.snippets ? "Snippets" : suite.filename )
+           ? ( store.suite.snippets ? "Snippets"
+            : <span><Icon title={ "Suite: " + suite.title } type="container" />{ suite.filename }</span> )
            : "Loading..." ,
 
           panes = {

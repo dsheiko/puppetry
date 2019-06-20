@@ -1,4 +1,4 @@
-const { remote, ipcRenderer } = require ( "electron" ),
+const { remote, ipcRenderer, shell } = require ( "electron" ),
       { E_RECEIVE_RECORDER_SESSION } = require( "./constant" ),
       devices = require( "../src/vendor/puppeteer/DeviceDescriptors" ),
       { registerElement, targets } = require( "./recorder/service/target" ),
@@ -6,6 +6,7 @@ const { remote, ipcRenderer } = require ( "electron" ),
       webview = find( "webview" ),
       okBtn = find( "#okBtn" ),
       urlInput = find( "#url" ),
+      reportLink = find( "#report" ),
       emulateSelect = find( "#select" ),
 
       colorSelect = find( "#color" ),
@@ -132,6 +133,11 @@ const lastUrl = localStorage.getItem( STORAGE_URL );
 if ( lastUrl ) {
  urlInput.value = lastUrl;
 }
+
+reportLink.addEventListener( "click", ( e ) => {
+  e.preventDefault();
+  shell.openExternal( e.target.href );
+}, false );
 
 // OK (Create Suite)
 okBtn.addEventListener( "click", ( e ) => {

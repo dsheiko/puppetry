@@ -6,6 +6,7 @@ import { SuiteForm  } from "./Main/SuiteForm";
 import { TargetTable  } from "./Main/TargetTable";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractComponent from "component/AbstractComponent";
+import LearnMore from "component/Global/LearnMore";
 
 const TabPane = Tabs.TabPane;
 
@@ -32,7 +33,7 @@ export class Main extends AbstractComponent {
     const { action, store, selector } = this.props,
           panes = store.project.appPanels.suite.panes,
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
-          groupsLabel = ( <span><Icon type="audit" />Groups</span> );
+          groupsLabel = ( <span><Icon type="audit" />Test Cases</span> );
     let activeKey = "targets";
     if ( panes.length ) {
       [ activeKey ] = panes;
@@ -50,15 +51,19 @@ export class Main extends AbstractComponent {
             onChange={ this.onTabChange }
           >
             <TabPane tab={ targetsLabel } key="targets" id="cSuitePane">
-              <p>Target constants are used to address an element on the page
-              { "" } <a href="https://docs.puppetry.app/target" onClick={ this.onExtClick }>learn more</a>.</p>
+              <p>Targets are identifiers associated with locators (CSS selector or XPath) that we can refer in the test cases.
+             </p>
+              <p><LearnMore href="https://docs.puppetry.app/target" />
+              </p>
               <TargetTable action={action} targets={ selector.getTargetDataTable() } />
             </TabPane>
 
             <TabPane tab={ groupsLabel } key="groups">
-              <p>Groups are containers of test cases
-              { "" } <a href="https://docs.puppetry.app/group" onClick={ this.onExtClick }>learn more</a>. { "" }
-              You can use drag&apos;n&apos;drop to re-arrange rows representing groups/test cases/test steps.</p>
+            <p>Test case is a specification of { "" }<a href="https://docs.puppetry.app/test-step" onClick={ this.onExtClick }>commands, assertions and references</a> { "" }
+              to ensure that a targeted component of the test application acts as intended.
+              Tests cases are organised into logical { "" } <a href="https://docs.puppetry.app/group" onClick={ this.onExtClick }>groups</a> { "" }, representing test contexts.</p>
+
+              <p>You can use { "" } <a href="https://docs.puppetry.app/managing-assets#drag-and-drop" onClick={ this.onExtClick }>drag&apos;n&apos;drop</a> { "" } to re-arrange rows representing groups/test cases/test steps.</p>
               <GroupTable
                 action={ action }
                 selector={ selector }
