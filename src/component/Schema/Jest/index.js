@@ -19,7 +19,7 @@ function buildEnv( env ) {
   const body = Object.entries( env.variables )
     .map( ([ k, v ]) => `  "${ k }": "${ v }"` )
     .join( ",\n" );
-return `// Environment variables
+  return `// Environment variables
 const ENV = {
 ${ body }
 };`;

@@ -64,8 +64,8 @@ export class SnippetModal extends AbstractForm {
   render() {
 
     const { isVisible, snippets, record } = this.props,
-      { getFieldDecorator, getFieldsError } = this.props.form,
-      { loading } = this.state;
+          { getFieldDecorator, getFieldsError } = this.props.form,
+          { loading } = this.state;
 
     return ( <ErrorBoundary>
       <InstantModal
@@ -84,33 +84,33 @@ export class SnippetModal extends AbstractForm {
       >
         <Form>
 
-            <FormItem  label="Snippet">
-              { getFieldDecorator( "snippet", {
-                initialValue: ( record ? record.ref :  null ),
-                rules: [
-                  {
-                   required: true,
-                    message: "Please select a snippet"
-                  }
-                ]
-              })(
-                <Select
-                  showSearch
-                  placeholder="Select a snippet"
-                  filterOption={( input, option ) => (
-                     option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0 )
-                   }
-                  >
-                  {
-                    Object.values( snippets ).map( snippet => ( <Option key={ snippet.id }>
-                      { snippet.title }</Option> ) )
-                  }
-                </Select>
-              )}
-            </FormItem>
+          <FormItem  label="Snippet">
+            { getFieldDecorator( "snippet", {
+              initialValue: ( record ? record.ref :  null ),
+              rules: [
+                {
+                  required: true,
+                  message: "Please select a snippet"
+                }
+              ]
+            })(
+              <Select
+                showSearch
+                placeholder="Select a snippet"
+                filterOption={( input, option ) => (
+                  option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0 )
+                }
+              >
+                {
+                  Object.values( snippets ).map( snippet => ( <Option key={ snippet.id }>
+                    { snippet.title }</Option> ) )
+                }
+              </Select>
+            )}
+          </FormItem>
 
-          </Form>
-          <SnippetVariables record={ record } onChanged={ this.onVariablesChanged } />
+        </Form>
+        <SnippetVariables record={ record } onChanged={ this.onVariablesChanged } />
       </InstantModal>
     </ErrorBoundary> );
   }

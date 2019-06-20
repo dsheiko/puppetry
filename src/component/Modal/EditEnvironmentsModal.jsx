@@ -38,7 +38,7 @@ export class EditEnvironmentsModal extends AbstractForm {
         render: ( text, record ) => (
           <span>
             <Popconfirm title="Sure to delete?"
-            onConfirm={() => this.remove( record )}>
+              onConfirm={() => this.remove( record )}>
               <a className="link--action" tabIndex={-2} role="button">Delete</a>
             </Popconfirm>
           </span>
@@ -96,7 +96,7 @@ export class EditEnvironmentsModal extends AbstractForm {
   render() {
     const { isVisible, environments } = this.props,
           { getFieldDecorator, getFieldsError } = this.props.form,
-          data = environments.map( item => ({ name: item, key: item }));
+          data = environments.map( item => ({ name: item, key: item }) );
 
     return (
       <ErrorBoundary>
@@ -117,7 +117,7 @@ export class EditEnvironmentsModal extends AbstractForm {
             columns={ this.columns }
             dataSource={ data }
             pagination={{ pageSize: 4 }}
-            />
+          />
 
           <Form layout="inline">
 
@@ -130,14 +130,14 @@ export class EditEnvironmentsModal extends AbstractForm {
                   },
                   {
                     validator: ( rule, value, callback ) => {
-                        if ( value.length < 3 ) {
-                          return callback( "The value shall not be less than 3 characters" );
-                        }
-                        if ( value.length > 32 ) {
-                          return callback( "The value shall not be more than 32 characters" );
-                        }
-                        callback();
+                      if ( value.length < 3 ) {
+                        return callback( "The value shall not be less than 3 characters" );
                       }
+                      if ( value.length > 32 ) {
+                        return callback( "The value shall not be more than 32 characters" );
+                      }
+                      callback();
+                    }
                   },
                   {
                     validator: ( rule, value, callback ) => {

@@ -2,14 +2,7 @@ import uniqid from "uniqid";
 import actions from "action";
 import update from "immutability-helper";
 import {
-  updateTagetsInSuite,
-  getTestsFlat,
-  getCommandsFlat,
-  transferTest,
-  transferCommand,
-  isTargetNotUnique,
-  normalizeComplexPayload,
-  normalizePayload
+  normalizeComplexPayload
 } from "reducer/helpers";
 
 import DEFAULT_STATE, {
@@ -45,109 +38,109 @@ import DEFAULT_STATE, {
 
 export default {
 
-    /**
+  /**
      * Add record
      * @param {object} state
      * @param {Payload} payload
      * @returns {object}
      */
-    [ actions.addTest ]: ( state, { payload }) => {
-      const { options, id } = normalizeComplexPayload( payload ),
-            merge = {},
-            gid = id || uniqid();
+  [ actions.addTest ]: ( state, { payload }) => {
+    const { options, id } = normalizeComplexPayload( payload ),
+          merge = {},
+          gid = id || uniqid();
 
-      merge[ gid ] = { ...testDefaultState( gid ), ...options, commands: {}};
+    merge[ gid ] = { ...testDefaultState( gid ), ...options, commands: {}};
 
-      return update( state, {
+    return update( state, {
 
-          groups: {
-            [ options.groupId ]: {
-              tests: {
-                $merge: merge
-              }
-            }
+      groups: {
+        [ options.groupId ]: {
+          tests: {
+            $merge: merge
           }
-      });
-    },
+        }
+      }
+    });
+  },
 
-    /**
+  /**
      * Insert record before/after
      * @param {object} state
      * @param {Payload} payload
      * @returns {object}
      */
-    [ actions.insertAdjacentTest ]: ( state, { payload }) => {
-      const { options, position, id } = normalizeComplexPayload( payload ),
-            { tests }  = state.groups[ options.groupId ],
+  [ actions.insertAdjacentTest ]: ( state, { payload }) => {
+    const { options, position, id } = normalizeComplexPayload( payload ),
+          { tests }  = state.groups[ options.groupId ],
 
-            entities = Object.values( tests ).reduce( ( carry, test ) => {
-              if ( position.before && position.before === test.id ) {
-                const gid = id || uniqid();
-                carry[ gid ] = { ...testDefaultState( gid ), ...options, commands: {}};
-              }
-              carry[ test.id ] = test;
-              if ( position.after && position.after === test.id ) {
-                const gid = id || uniqid();
-                carry[ gid ] = { ...testDefaultState( gid ), ...options, commands: {}};
-              }
-              return carry;
-            }, {});
-
-      return update( state, {
-
-          groups: {
-            [ options.groupId ]: {
-              tests: {
-                $set: entities
-              }
+          entities = Object.values( tests ).reduce( ( carry, test ) => {
+            if ( position.before && position.before === test.id ) {
+              const gid = id || uniqid();
+              carry[ gid ] = { ...testDefaultState( gid ), ...options, commands: {}};
             }
+            carry[ test.id ] = test;
+            if ( position.after && position.after === test.id ) {
+              const gid = id || uniqid();
+              carry[ gid ] = { ...testDefaultState( gid ), ...options, commands: {}};
+            }
+            return carry;
+          }, {});
+
+    return update( state, {
+
+      groups: {
+        [ options.groupId ]: {
+          tests: {
+            $set: entities
           }
+        }
+      }
 
-      });
-    },
+    });
+  },
 
-    /**
+  /**
      * Update record
      * @param {object} state
      * @param {Entity} payload (EntityRef required)
      * @returns {object}
      */
-    [ actions.updateTest ]: ( state, { payload }) => update( state, {
+  [ actions.updateTest ]: ( state, { payload }) => update( state, {
 
-        groups: {
-          [ payload.groupId ]: {
-            tests: {
-              $apply: ( ref ) => {
-                const tests = { ...ref },
-                      id = payload.id;
-                tests[ id ] = { ...tests[ id ], ...payload, id, key: id };
-                if ( !tests[ id ].hasOwnProperty( "commands" ) ) {
-                  tests[ id ].commands = {};
-                }
-                return tests;
-              }
+    groups: {
+      [ payload.groupId ]: {
+        tests: {
+          $apply: ( ref ) => {
+            const tests = { ...ref },
+                  id = payload.id;
+            tests[ id ] = { ...tests[ id ], ...payload, id, key: id };
+            if ( !tests[ id ].hasOwnProperty( "commands" ) ) {
+              tests[ id ].commands = {};
             }
+            return tests;
           }
         }
-      }),
+      }
+    }
+  }),
 
-    /**
+  /**
      * Remove record
      * @param {object} state
      * @param {EntityRef} payload
      * @returns {object}
      */
-    [ actions.removeTest ]: ( state, { payload }) => update( state, {
+  [ actions.removeTest ]: ( state, { payload }) => update( state, {
 
-        groups: {
-          [ payload.groupId ]: {
-            tests: {
-              $unset:[ payload.id ]
-            }
-          }
+    groups: {
+      [ payload.groupId ]: {
+        tests: {
+          $unset:[ payload.id ]
         }
-      })
+      }
+    }
+  })
 
-}
+};
 
 

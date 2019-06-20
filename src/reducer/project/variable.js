@@ -3,8 +3,7 @@ import actions from "action";
 import update from "immutability-helper";
 import {
   isVariableNotUnique,
-  normalizeComplexPayload,
-  normalizePayload
+  normalizeComplexPayload
 } from "reducer/helpers";
 
 import DEFAULT_STATE, {
@@ -57,10 +56,10 @@ export default {
     merge[ gid ] = { ...variableDefaultState( gid ), ...options };
 
     return update( state, {
-        variables: {
-          $merge: merge
-        }
-      });
+      variables: {
+        $merge: merge
+      }
+    });
   },
 
   /**
@@ -69,35 +68,35 @@ export default {
    * @param {Payload} payload
    * @returns {object}
    */
-   [ actions.insertAdjacentVariable ]: ( state, { payload }) => {
-     const { options, position, id } = normalizeComplexPayload( payload ),
-           { variables }  = state;
+  [ actions.insertAdjacentVariable ]: ( state, { payload }) => {
+    const { options, position, id } = normalizeComplexPayload( payload ),
+          { variables }  = state,
 
-     const entities = Object.values( variables ).reduce( ( carry, target ) => {
-       if ( position.before && position.before === target.id ) {
-         const gid = id || uniqid();
-         carry[ gid ] = { ...variableDefaultState( gid ), ...options };
-       }
-       carry[ target.id ] = target;
-       if ( position.after && position.after === target.id ) {
-         const gid = id || uniqid();
-         carry[ gid ] = { ...variableDefaultState( gid ), ...options };
-       }
-       return carry;
-     }, {});
+          entities = Object.values( variables ).reduce( ( carry, target ) => {
+            if ( position.before && position.before === target.id ) {
+              const gid = id || uniqid();
+              carry[ gid ] = { ...variableDefaultState( gid ), ...options };
+            }
+            carry[ target.id ] = target;
+            if ( position.after && position.after === target.id ) {
+              const gid = id || uniqid();
+              carry[ gid ] = { ...variableDefaultState( gid ), ...options };
+            }
+            return carry;
+          }, {});
 
-     return update( state, {
-        variables: {
-          $set: entities
-        }
-     });
-   },
-
-   [ actions.clearVariable ]: ( state ) => update( state, {
+    return update( state, {
       variables: {
-        $set: {}
+        $set: entities
       }
-     }),
+    });
+  },
+
+  [ actions.clearVariable ]: ( state ) => update( state, {
+    variables: {
+      $set: {}
+    }
+  }),
 
 
   /**
@@ -106,22 +105,22 @@ export default {
     * @param {Entity} payload (EntityRef required)
     * @returns {object}
     */
-   [ actions.updateVariable ]: ( state, { payload }) => {
-     if ( isVariableNotUnique( state, payload ) ) {
-       payload.name += "_" + uniqid().toUpperCase();
-     }
-     return update( state, {
+  [ actions.updateVariable ]: ( state, { payload }) => {
+    if ( isVariableNotUnique( state, payload ) ) {
+      payload.name += "_" + uniqid().toUpperCase();
+    }
+    return update( state, {
 
-         variables: {
-           $apply: ( ref ) => {
-             const variables = { ...ref },
-                   id = payload.id;
-             variables[ id ] = { ...variables[ id ], ...payload, key: id };
-             return variables;
-           }
-         }
-       });
-   },
+      variables: {
+        $apply: ( ref ) => {
+          const variables = { ...ref },
+                id = payload.id;
+          variables[ id ] = { ...variables[ id ], ...payload, key: id };
+          return variables;
+        }
+      }
+    });
+  },
 
   /**
    * Remove record
@@ -129,21 +128,21 @@ export default {
    * @param {EntityRef} payload
    * @returns {object}
    */
-   [ actions.removeVariable ]: ( state, { payload }) => {
-      const target = state.variables[ payload.id ];
-      return update( state, {
-        variables: {
-          $set: Object.values( state.variables )
-            .filter( v => v.name !== target.name )
-            .reduce(( carry, v ) => ({
-              ...carry,
-              [ v.id ]: v
-            }), {})
-        }
-      });
-    }
+  [ actions.removeVariable ]: ( state, { payload }) => {
+    const target = state.variables[ payload.id ];
+    return update( state, {
+      variables: {
+        $set: Object.values( state.variables )
+          .filter( v => v.name !== target.name )
+          .reduce( ( carry, v ) => ({
+            ...carry,
+            [ v.id ]: v
+          }), {})
+      }
+    });
+  }
 
 
-}
+};
 
 

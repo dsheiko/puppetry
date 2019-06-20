@@ -5,7 +5,7 @@ export const type = {
   template: ({ target, params, id }) => {
     const parser = new ExpressionParser( id );
     return justify(
-    `// Emulating user input\n`
+      `// Emulating user input\n`
     + `await ( await ${target}() ).type( ${ parser.stringify( params.value ) } );` );
   },
   description: `Focuses the element, and then sends keyboard events for each character in the text`,

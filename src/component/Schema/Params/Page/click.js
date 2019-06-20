@@ -19,48 +19,48 @@ export const click = {
     {
 
 
-          fields: [
-            {
+      fields: [
+        {
 
-              name: "params.x",
-              control: INPUT_NUMBER,
-              label: "x (px)",
-              tooltip: "",
-              placeholder: "",
-              rules: [{
-                required: true,
-                message: "Enter cursor X coordinate in pixels"
-              }]
-            },
-            {
+          name: "params.x",
+          control: INPUT_NUMBER,
+          label: "x (px)",
+          tooltip: "",
+          placeholder: "",
+          rules: [{
+            required: true,
+            message: "Enter cursor X coordinate in pixels"
+          }]
+        },
+        {
 
-              name: "params.y",
-              control: INPUT_NUMBER,
-              label: "y (px)",
-              tooltip: "",
-              placeholder: "",
-              rules: [{
-                required: true,
-                message: "Enter cursor Y coordinate in pixels"
-              }]
-            },
-            {
-              inputStyle: { maxWidth: 100 },
-              name: "params.button",
-              control: SELECT,
-              label: "Button",
-              tooltip: "",
-              placeholder: "",
-              initialValue: "left",
-              options: [
-                "left", "right", "middle"
-              ],
-              rules: [{
-                required: true,
-                message: "Select button"
-              }]
-            }
-          ]
+          name: "params.y",
+          control: INPUT_NUMBER,
+          label: "y (px)",
+          tooltip: "",
+          placeholder: "",
+          rules: [{
+            required: true,
+            message: "Enter cursor Y coordinate in pixels"
+          }]
+        },
+        {
+          inputStyle: { maxWidth: 100 },
+          name: "params.button",
+          control: SELECT,
+          label: "Button",
+          tooltip: "",
+          placeholder: "",
+          initialValue: "left",
+          options: [
+            "left", "right", "middle"
+          ],
+          rules: [{
+            required: true,
+            message: "Select button"
+          }]
+        }
+      ]
 
 
     },

@@ -22,9 +22,9 @@ export class CommandRowLabel extends React.Component {
      let text;
      switch ( method ) {
      case "goto":
-        return `(${ params.url }")`;
+       return `(${ params.url }")`;
      case "assignVar":
-        return `("${ params.name }", "${ params.value }")`;
+       return `("${ params.name }", "${ params.value }")`;
      case "assignVarRemotely":
        return `("${ params.name }, ${ params.url }")`;
      case "press":
@@ -48,7 +48,7 @@ export class CommandRowLabel extends React.Component {
      case "moveMouse":
        return `(${ params.x }, ${ params.y })`;
      case "setCookie":
-      return `(${ params.name }, ${ truncate( params.value, 20 ) })`;
+       return `(${ params.name }, ${ truncate( params.value, 20 ) })`;
      case "evaluate":
      case "runjs":
        return `(${ truncate( params.value, 80 ) })`;
@@ -138,12 +138,12 @@ export class CommandRowLabel extends React.Component {
 
    renderRef() {
      const { record, snippets } = this.props,
-            title = snippets.hasOwnProperty( record.ref ) ? snippets[ record.ref ].title : "reference not found";
+           title = snippets.hasOwnProperty( record.ref ) ? snippets[ record.ref ].title : "reference not found";
 
      return ( <div className="container--editable-cell command--ref">
        <Icon
-          type="link"
-          title="Reference to a snippet" />
+         type="link"
+         title="Reference to a snippet" />
        { title }
      </div> );
    }
@@ -156,8 +156,8 @@ export class CommandRowLabel extends React.Component {
          icon="exclamation-circle"
          pos="up" />
        <Icon
-          type={ record.target === "page" ? "file" : "scan" }
-          title={ record.target === "page" ? "Page method" : `${ record.target } target method` } />
+         type={ record.target === "page" ? "file" : "scan" }
+         title={ record.target === "page" ? "Page method" : `${ record.target } target method` } />
        <span className="token--target">{ record.target }</span>.{ record.method }
        <span className="token--param">{ CommandRowLabel.buildAddon( record ) }</span>
 

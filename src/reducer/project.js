@@ -12,8 +12,8 @@ export default handleActions(
         return state;
       }
       return update( state, {
-          $merge: payload
-        });
+        $merge: payload
+      });
     },
 
 
@@ -42,14 +42,14 @@ export default handleActions(
         return state;
       }
       return update( state, {
-          appPanels: {
-            [ payload.panel ]: {
-              panes: {
-                $set: payload.panes
-              }
+        appPanels: {
+          [ payload.panel ]: {
+            panes: {
+              $set: payload.panes
             }
           }
-        });
+        }
+      });
     },
 
     ...variable

@@ -10,7 +10,7 @@ import command from "./suite/command";
 export default handleActions(
   {
 
-   [ actions.setSuite ]: ( state, { payload }) => update( state, {
+    [ actions.setSuite ]: ( state, { payload }) => update( state, {
       modified: {
         $set: true
       },

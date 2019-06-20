@@ -1,5 +1,5 @@
 export const PROJECT_OPTIONS = {
- name: "string=",
+  name: "string=",
   // consider the structure: [Suite panel]-> [Targets pane][Groups pane]...
   appPanels: "object=",
   groups: "object=",

@@ -15,13 +15,13 @@ export default handleActions(
       });
     },
 
-   [ actions.setError ]: ( state, { payload }) => {
+    [ actions.setError ]: ( state, { payload }) => {
       const inject = { title: "Error", type: "error", ...payload };
       return update( state, {
-          alert: {
-            $set: inject
-          }
-        });
+        alert: {
+          $set: inject
+        }
+      });
     },
 
     [ actions.addAppTab ]: ( state, { payload }) => {
@@ -30,17 +30,17 @@ export default handleActions(
       }
       return update( state, {
 
-          tabs: {
-            available: {
-              $merge: {
-                [ payload ]: true
-              }
-            },
-            active: {
-              $set: payload
+        tabs: {
+          available: {
+            $merge: {
+              [ payload ]: true
             }
+          },
+          active: {
+            $set: payload
           }
-        });
+        }
+      });
     },
 
     [ actions.setAppTab ]: ( state, { payload }) => {
@@ -49,12 +49,12 @@ export default handleActions(
       }
       return update( state, {
 
-          tabs: {
-            active: {
-              $set: payload
-            }
+        tabs: {
+          active: {
+            $set: payload
           }
-        });
+        }
+      });
     },
 
     [ actions.removeAppTab ]: ( state, { payload }) => {
@@ -62,27 +62,27 @@ export default handleActions(
         return state;
       }
       const tmp = update( state, {
-            tabs: {
-              available: {
-                $merge: {
-                  [ payload ]: false
+              tabs: {
+                available: {
+                  $merge: {
+                    [ payload ]: false
+                  }
                 }
               }
-            }
-          }),
-        { available } = tmp.tabs,
-        active = Object.keys( available )
-          .filter( key => available[ key ])
-          .pop();
+            }),
+            { available } = tmp.tabs,
+            active = Object.keys( available )
+              .filter( key => available[ key ])
+              .pop();
 
       return update( tmp, {
 
-          tabs: {
-            active: {
-              $set: active
-            }
+        tabs: {
+          active: {
+            $set: active
           }
-        });
+        }
+      });
     }
 
   },

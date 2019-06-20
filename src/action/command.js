@@ -45,7 +45,7 @@ function getCommandsFlat( groups ) {
 actions.updateCommandByRef = ( ref, failure ) => async ( dispatch, getState ) => {
   const commands = getCommandsFlat( getState().suite.groups ),
         parentCommand = commands.find( command => command.ref === ref );
-  dispatch( actions.updateCommand({ ...parentCommand, failure }));
+  dispatch( actions.updateCommand({ ...parentCommand, failure }) );
 };
 
 actions.swapCommand = ( payload ) => async ( dispatch, getState ) => {
@@ -63,7 +63,7 @@ actions.swapCommand = ( payload ) => async ( dispatch, getState ) => {
           };
 
     dispatch( actions.removeCommand( sourceCommand ) );
-    dispatch( actions.insertAdjacentCommand( merge, { [ pos ]: targetId } ) );
+    dispatch( actions.insertAdjacentCommand( merge, { [ pos ]: targetId }) );
 
   } catch ( ex ) {
     handleException( ex, dispatch, "Cannot swap command" );

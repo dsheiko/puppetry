@@ -60,9 +60,9 @@ actions.swapGroup = ( payload ) => async ( dispatch, getState ) => {
 
     Object.values( sourceGroup.tests ).forEach( test => {
       const testId = uniqid();
-      dispatch( testActions.addTest({ ...test, groupId }, testId ));
+      dispatch( testActions.addTest({ ...test, groupId }, testId ) );
       Object.values( test.commands ).forEach( command => {
-        dispatch( commandActions.addCommand({ ...command, testId, groupId }));
+        dispatch( commandActions.addCommand({ ...command, testId, groupId }) );
       });
     });
 

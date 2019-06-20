@@ -145,16 +145,16 @@ export class CommandForm extends React.Component {
           schema = getSchema( target, method ),
           Assert = schema && schema.assert ? schema.assert.node : null,
           safeRecord = this.isSavedOne( record )
-          ? {
-            params: {},
-            assert: {},
-            ...record
-          }
-          : {
-            ...record,
-            params: {},
-            assert: {}
-          };
+            ? {
+              params: {},
+              assert: {},
+              ...record
+            }
+            : {
+              ...record,
+              params: {},
+              assert: {}
+            };
 
     return (
       <ErrorBoundary>

@@ -18,7 +18,7 @@ export const assertContainsClass = {
  class attribute](https://developer.mozilla.org/en-US/docs/Web/API/Element).`,
   params: [
     {
-      
+
       legend: "",
       tooltip: "",
       fields: [

@@ -1,7 +1,4 @@
-import React from "react";
-import { SELECT, CHECKBOX, INPUT, INPUT_NUMBER } from "../../constants";
-import { isEveryValueMissing } from "service/utils";
-import Link from "component/Global/Link";
+import { SELECT, INPUT, INPUT_NUMBER } from "../../constants";
 import ExpressionParser from "service/ExpressionParser";
 
 export const setCookie = {

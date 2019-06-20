@@ -16,7 +16,7 @@ export class Description extends AbstractComponent {
       return null;
     }
     return <Fragment>
-    <Markdown
+      <Markdown
         md={ schema.description.replace( `{target}`, target ) }
         className="command-row-description" />
     </Fragment>;

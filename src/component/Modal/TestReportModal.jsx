@@ -213,7 +213,7 @@ export class TestReportModal extends AbstractComponent {
             </div>
 
             <SelectEnv environments={ this.props.project.environments }
-            environment={ this.props.environment } action={ this.props.action } />
+              environment={ this.props.environment } action={ this.props.action } />
 
 
             <p>Please select suites to run:</p>

@@ -21,7 +21,7 @@ actions.loadSnippets = () => async ( dispatch, getState ) => {
     dispatch( actions.resetSnippets({
       targets: suite.targets,
       groups: suite.groups
-    }));
+    }) );
   } catch ( ex ) {
     handleException( ex, dispatch, `Cannot load snippets` );
   }
