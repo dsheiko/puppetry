@@ -33,10 +33,10 @@ export default class Markdown extends AbstractComponent {
   render() {
     const { md, className } = this.props,
           html = md ? parser.render( md ) : "";
-    return (<div
+    return ( <div
       ref={ this.el }
       className={ `markdown ${ className }` }
-      dangerouslySetInnerHTML={{ __html: html }}></div>);
+      dangerouslySetInnerHTML={{ __html: html }}></div> );
   }
 
-};
+}

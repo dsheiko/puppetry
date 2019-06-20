@@ -47,9 +47,9 @@ export class TabGroup extends React.Component {
           { suite } = store,
 
           suiteTabTitle = suite.filename
-           ? ( store.suite.snippets ? "Snippets"
-            : <span><Icon title={ "Suite: " + suite.title } type="container" />{ suite.filename }</span> )
-           : "Loading..." ,
+            ? ( store.suite.snippets ? "Snippets"
+              : <span><Icon title={ "Suite: " + suite.title } type="container" />{ suite.filename }</span> )
+            : "Loading..." ,
 
           panes = {
             suite: () => ( <TabPane tab={ suiteTabTitle } key="suite" closable={ true }>
@@ -68,7 +68,7 @@ export class TabGroup extends React.Component {
                 environment={ store.app.environment }
                 project={ store.project }
                 snippets={ store.snippets }
-                />
+              />
             </TabPane> ),
             settings: () => ( <TabPane tab={ "Settings" } key="settings" closable={ true }>
               <SettingsPanel

@@ -17,7 +17,7 @@ import { bindActionCreators } from "redux";
 import { getSelectedVariables } from "selector/selectors";
 
 const FormItem = Form.Item,
-     { Option, OptGroup } = Select,
+      { Option, OptGroup } = Select,
       RadioGroup = Radio.Group,
       Panel = Collapse.Panel,
       { TextArea } = Input,
@@ -77,12 +77,12 @@ export class ParamsFormBuilder extends React.Component {
   }
 
    onKeyPress = ( e, cb ) => {
-    switch ( e.key ){
-    case "Enter":
-      cb( e );
-      return;
-    }
-  }
+     switch ( e.key ){
+     case "Enter":
+       cb( e );
+       return;
+     }
+   }
 
   renderControl = ( field ) => {
     const { setFieldsValue } = this.props.form,
@@ -92,61 +92,61 @@ export class ParamsFormBuilder extends React.Component {
           },
           inputStyle = field.inputStyle || {};
     switch ( field.control ) {
-      case INPUT:
-        return ( <Input placeholder={ field.placeholder }
-          style={ inputStyle }
+    case INPUT:
+      return ( <Input placeholder={ field.placeholder }
+        style={ inputStyle }
 
-          onKeyPress={ ( e ) => this.onKeyPress( e, onSubmit ) } /> );
-      case INPUT_NUMBER:
-        return ( <InputNumber
-          style={ inputStyle }
-          onKeyPress={ ( e ) => this.onKeyPress( e, onSubmit ) } /> );
-      case TEXTAREA:
-        return ( <Input.TextArea
-          style={ inputStyle }
-          placeholder={ field.placeholder }
-          rows={ 4 } /> );
-      case FILE:
-        return ( <Input style={ inputStyle } onClick={ this.onClickSelectFile } disabled  /> );
-      case SELECT:
-        return ( <Select
-          showSearch
-          style={ inputStyle }
-          placeholder={ field.placeholder }
-          optionFilterProp="children"
-          onSelect={ onSelect }
-          filterOption={( input, option ) => option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0}
-        >
-          {
-            field.options.map( ( option, inx ) => {
-              return typeof option === "string"
-                ? ( <Option key={inx} value={ option }>{ option }</Option> )
-                : ( <Option key={inx} value={ option.value }>{ option.description }</Option> );
-            })
+        onKeyPress={ ( e ) => this.onKeyPress( e, onSubmit ) } /> );
+    case INPUT_NUMBER:
+      return ( <InputNumber
+        style={ inputStyle }
+        onKeyPress={ ( e ) => this.onKeyPress( e, onSubmit ) } /> );
+    case TEXTAREA:
+      return ( <Input.TextArea
+        style={ inputStyle }
+        placeholder={ field.placeholder }
+        rows={ 4 } /> );
+    case FILE:
+      return ( <Input style={ inputStyle } onClick={ this.onClickSelectFile } disabled  /> );
+    case SELECT:
+      return ( <Select
+        showSearch
+        style={ inputStyle }
+        placeholder={ field.placeholder }
+        optionFilterProp="children"
+        onSelect={ onSelect }
+        filterOption={( input, option ) => option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0}
+      >
+        {
+          field.options.map( ( option, inx ) => {
+            return typeof option === "string"
+              ? ( <Option key={inx} value={ option }>{ option }</Option> )
+              : ( <Option key={inx} value={ option.value }>{ option.description }</Option> );
+          })
 
-          }
-        </Select> );
-      case CHECKBOX:
-        return ( <Checkbox>
-          { field.label }
-          { field.tooltip && ( <Tooltip
-            title={ field.tooltip }
-            icon="question-circle"
-          /> )}
+        }
+      </Select> );
+    case CHECKBOX:
+      return ( <Checkbox>
+        { field.label }
+        { field.tooltip && ( <Tooltip
+          title={ field.tooltip }
+          icon="question-circle"
+        /> )}
 
-        </Checkbox> );
-      case RADIO_GROUP:
-        return (<RadioGroup>
-          {
-            field.options.map( ( option, inx ) => {
-              return typeof option === "string"
-                ? ( <Radio key={inx} value={ option }>{ option }</Radio> )
-                : ( <Radio key={inx} value={ option.value }>{ option.description }</Radio> );
-            })
-          }
-        </RadioGroup>);
-      default:
-        return null;
+      </Checkbox> );
+    case RADIO_GROUP:
+      return ( <RadioGroup>
+        {
+          field.options.map( ( option, inx ) => {
+            return typeof option === "string"
+              ? ( <Radio key={inx} value={ option }>{ option }</Radio> )
+              : ( <Radio key={inx} value={ option.value }>{ option.description }</Radio> );
+          })
+        }
+      </RadioGroup> );
+    default:
+      return null;
     }
   }
 
@@ -162,7 +162,7 @@ export class ParamsFormBuilder extends React.Component {
 
 
   renderField = ( field, inx, section ) => {
-     const { getFieldDecorator } = this.props.form,
+    const { getFieldDecorator } = this.props.form,
           labelNode = field.tooltip ? getLabel( field.label, field.tooltip ) : field.label,
           initialValue = this.getInitialValue( field ),
           decoratorOptions =  {
@@ -198,7 +198,7 @@ export class ParamsFormBuilder extends React.Component {
       }
     } : {};
 
-    return (<Col span={ field.span || 24 } key={ `field_${ inx }` }>
+    return ( <Col span={ field.span || 24 } key={ `field_${ inx }` }>
 
       <FormItem
         { ...formItemLayout }
@@ -212,16 +212,15 @@ export class ParamsFormBuilder extends React.Component {
           onClick={ ( e ) => this.onClickSelectFile( e, field ) }>Select file</Button>
         }
         { field.hasOwnProperty( "template" ) && <TemplateHelper
-        field={ field }
-        onChange={ this.onTemplateHelperChange }
-        environments={ this.props.environments }
-        variables={ this.props.variables }
-        config={ field.template } /> }
+          field={ field }
+          onChange={ this.onTemplateHelperChange }
+          environments={ this.props.environments }
+          variables={ this.props.variables }
+          config={ field.template } /> }
       </FormItem>
 
 
-
-    </Col>);
+    </Col> );
   };
 
   renderRow = ( row, inx, section ) => {
@@ -229,18 +228,17 @@ export class ParamsFormBuilder extends React.Component {
       description: "string=",
       fields: "array"
     });
-    return (<Row gutter={16} key={ `row_${ inx }` } className="ant-form-inline edit-command-inline">
+    return ( <Row gutter={16} key={ `row_${ inx }` } className="ant-form-inline edit-command-inline">
       { row.description ? <Markdown
         md={ row.description }
         className="command-row-description" /> : "" }
       { row.fields.map( ( field, inx ) => this.renderField( field, inx, section ) ) }
-    </Row>);
+    </Row> );
   };
 
   mapFieldsToRow = ( field ) => ({
     fields: [ field ]
   });
-
 
 
   renderSection = ( section, inx ) => {
@@ -256,37 +254,37 @@ export class ParamsFormBuilder extends React.Component {
 
     return (
       <fieldset className="command-form__fieldset" key={ `section_${ inx }` }>
-      { !section.collapsed && <legend>
-        <span>{ section.legend || "Parameters" }</span>
-        { section.tooltip && <Tooltip title={ section.tooltip } icon="question-circle" /> }
-      </legend> }
-      { section.description &&
+        { !section.collapsed && <legend>
+          <span>{ section.legend || "Parameters" }</span>
+          { section.tooltip && <Tooltip title={ section.tooltip } icon="question-circle" /> }
+        </legend> }
+        { section.description &&
         <Markdown
-        md={ section.description }
-        className="command-section-description" />
-      }
+          md={ section.description }
+          className="command-section-description" />
+        }
 
-       { section.fields && section.fields
+        { section.fields && section.fields
           .map( this.mapFieldsToRow )
           .map( ( row, inx ) => this.renderRow( row, inx, section ) ) }
 
-      { section.rows && section.rows.map( ( row, inx ) => this.renderRow( row, inx, section ) ) }
+        { section.rows && section.rows.map( ( row, inx ) => this.renderRow( row, inx, section ) ) }
       </fieldset> );
   }
 
   renderSectionWrapper = ( section, inx ) => {
     const header = ( <span>{ section.legend || "Advanced Options" }</span> );
     return section.collapsed
-      ? (<Collapse key={ `collapse_${ inx }` }
-          expandIcon={({ isActive }) => (<Icon
-          type="right-circle" rotate={isActive ? 90 : 0} />)}
-          >
-          <Panel key={ `panel_${ inx }` }
+      ? ( <Collapse key={ `collapse_${ inx }` }
+        expandIcon={({ isActive }) => ( <Icon
+          type="right-circle" rotate={isActive ? 90 : 0} /> )}
+      >
+        <Panel key={ `panel_${ inx }` }
 
           header={ header } className="command-options-panel">
-            { this.renderSection( section, inx ) }
-          </Panel>
-        </Collapse>)
+          { this.renderSection( section, inx ) }
+        </Panel>
+      </Collapse> )
       : this.renderSection( section, inx );
   }
 
@@ -299,4 +297,4 @@ export class ParamsFormBuilder extends React.Component {
       </ErrorBoundary>
     );
   }
-};
+}

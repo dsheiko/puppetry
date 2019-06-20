@@ -6,7 +6,7 @@ import update from "immutability-helper";
 export default handleActions(
   {
 
-   [ actions.setSnippets ]: ( state, { payload }) => update( state, {
+    [ actions.setSnippets ]: ( state, { payload }) => update( state, {
       modified: {
         $set: true
       },

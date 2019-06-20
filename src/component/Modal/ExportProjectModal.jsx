@@ -9,7 +9,7 @@ import If from "component/Global/If";
 import { TestGeneratorError } from "error";
 import { confirmExportProject } from "service/smalltalk";
 import * as classes from "./classes";
-import { getSelectedVariables, getActiveEnvironment} from "selector/selectors";
+import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
 import { SelectEnv } from "component/Global/SelectEnv";
 
 const CheckboxGroup = Checkbox.Group,
@@ -52,7 +52,6 @@ export class ExportProjectModal extends React.Component {
   }
 
 
-
   onCheckAllChange = ( e ) => {
     const { files } = this.props;
     this.setState({
@@ -86,7 +85,7 @@ export class ExportProjectModal extends React.Component {
 
     this.setState({ locked: true });
     // give it time to update component state, before processing
-    setTimeout(async () => {
+    setTimeout( async () => {
       const activeEnv = getActiveEnvironment( project.environments, environment );
       this.props.action.saveSettings({ exportDirectory: selectedDirectory });
       try {

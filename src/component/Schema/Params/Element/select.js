@@ -8,7 +8,7 @@ export const select = {
   description: `Sets value on select element`,
   params: [
     {
-      
+
       legend: "",
       tooltip: "",
       fields: [

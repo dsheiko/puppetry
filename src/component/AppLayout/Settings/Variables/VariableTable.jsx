@@ -82,7 +82,7 @@ export class VariableTable extends AbstractEditableTable {
   }
 
   updateSuiteModified( record, action ) {
-    if ( [ "update" ].includes( action ) ) {
+    if ([ "update" ].includes( action ) ) {
       this.props.action.syncVariableStages( record );
     }
     this.props.action.updateSuite({

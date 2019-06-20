@@ -7,13 +7,13 @@ function setEntity( arr, entity ) {
 }
 
 export function getActiveEnvironment( environments, environment ) {
-  validate( arguments, [ "string[]", "string" ] );
+  validate( arguments, [ "string[]", "string" ]);
   const [ firstEnv ] = environments;
   return environment || firstEnv;
 }
 
 export function getSelectedVariables( variables, env ) {
-  validate( arguments, [ "object", "string" ] );
+  validate( arguments, [ "object", "string" ]);
   return Object.values( variables )
     .filter( variable => variable.env === env && !variable.disabled )
     .reduce( ( carry, variable ) => ({
@@ -23,7 +23,7 @@ export function getSelectedVariables( variables, env ) {
 }
 
 export function getVariableDataTable( variables, env ) {
-  validate( arguments, [ "object", "string" ] );
+  validate( arguments, [ "object", "string" ]);
   const matches = Object.values( variables ).filter( variable => variable.env === env ),
         data = setEntity( matches, "variable" ),
         id = uniqid();
@@ -61,7 +61,7 @@ export function getTargetDataTable( targets ) {
 }
 
 export function getStructureDataTable( record, entity ) {
-  const data = setEntity( Object.values( record || {} ), entity ),
+  const data = setEntity( Object.values( record || {}), entity ),
         id = uniqid();
 
   data.push({
@@ -106,6 +106,6 @@ export function getSelectedTargets( selection, targets ) {
 
 export function getSnippets( snippets ) {
   return snippets.groups && snippets.groups.hasOwnProperty( SNIPPETS_GROUP_ID )
-   ? snippets.groups[ SNIPPETS_GROUP_ID ].tests
-   : [];
+    ? snippets.groups[ SNIPPETS_GROUP_ID ].tests
+    : [];
 }

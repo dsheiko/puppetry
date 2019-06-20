@@ -16,7 +16,7 @@ export const setAttribute = {
     + ` on \`{target}\` target`,
   params: [
     {
-      
+
       legend: "",
       tooltip: "",
       fields: [

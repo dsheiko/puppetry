@@ -3,13 +3,8 @@ import actions from "action";
 import update from "immutability-helper";
 import {
   updateTagetsInSuite,
-  getTestsFlat,
-  getCommandsFlat,
-  transferTest,
-  transferCommand,
   isTargetNotUnique,
-  normalizeComplexPayload,
-  normalizePayload
+  normalizeComplexPayload
 } from "reducer/helpers";
 
 import DEFAULT_STATE, {
@@ -63,10 +58,10 @@ export default {
     merge[ gid ] = { ...targetDefaultState( gid ), ...options };
 
     return update( state, {
-        targets: {
-          $merge: merge
-        }
-      });
+      targets: {
+        $merge: merge
+      }
+    });
   },
 
   /**
@@ -75,65 +70,65 @@ export default {
    * @param {Payload} payload
    * @returns {object}
    */
-   [ actions.insertAdjacentTarget ]: ( state, { payload }) => {
-     const { options, position, id } = normalizeComplexPayload( payload ),
-           { targets }  = state;
+  [ actions.insertAdjacentTarget ]: ( state, { payload }) => {
+    const { options, position, id } = normalizeComplexPayload( payload ),
+          { targets }  = state;
 
-     if ( options.target && isTargetNotUnique( state, options ) ) {
-       options.target += "_" + uniqid().toUpperCase();
-     }
+    if ( options.target && isTargetNotUnique( state, options ) ) {
+      options.target += "_" + uniqid().toUpperCase();
+    }
 
-     const entities = Object.values( targets ).reduce( ( carry, target ) => {
-       if ( position.before && position.before === target.id ) {
-         const gid = id || uniqid();
-         carry[ gid ] = { ...targetDefaultState( gid ), ...options };
-       }
-       carry[ target.id ] = target;
-       if ( position.after && position.after === target.id ) {
-         const gid = id || uniqid();
-         carry[ gid ] = { ...targetDefaultState( gid ), ...options };
-       }
-       return carry;
-     }, {});
-
-     return update( state, {
-        targets: {
-          $set: entities
-        }
-     });
-   },
-
-   [ actions.clearTarget ]: ( state ) => update( state, {
-      targets: {
-        $set: {}
+    const entities = Object.values( targets ).reduce( ( carry, target ) => {
+      if ( position.before && position.before === target.id ) {
+        const gid = id || uniqid();
+        carry[ gid ] = { ...targetDefaultState( gid ), ...options };
       }
-     }),
+      carry[ target.id ] = target;
+      if ( position.after && position.after === target.id ) {
+        const gid = id || uniqid();
+        carry[ gid ] = { ...targetDefaultState( gid ), ...options };
+      }
+      return carry;
+    }, {});
 
-   
+    return update( state, {
+      targets: {
+        $set: entities
+      }
+    });
+  },
+
+  [ actions.clearTarget ]: ( state ) => update( state, {
+    targets: {
+      $set: {}
+    }
+  }),
+
+
   /**
     * Update record
     * @param {object} state
     * @param {Entity} payload (EntityRef required)
     * @returns {object}
     */
-   [ actions.updateTarget ]: ( state, { payload }) => {
-     if ( isTargetNotUnique( state, payload ) ) {
-       payload.target += "_" + uniqid().toUpperCase();
-     }
-     const newState = update( state, {
+  [ actions.updateTarget ]: ( state, { payload }) => {
+    if ( isTargetNotUnique( state, payload ) ) {
+      payload.target += "_" + uniqid().toUpperCase();
+    }
+    const newState = update( state, {
 
-         targets: {
-           $apply: ( ref ) => {
-             const targets = { ...ref },
-                   id = payload.id;
-             targets[ id ] = { ...targets[ id ], ...payload, key: id };
-             return targets;
-           }
-         }
-       });
+      targets: {
+        $apply: ( ref ) => {
+          const targets = { ...ref },
+                id = payload.id;
+          targets[ id ] = { ...targets[ id ], ...payload, key: id };
+          return targets;
+        }
+      }
+    });
 
-     return updateTagetsInSuite( state, newState, payload.id );
-   },
+    return updateTagetsInSuite( state, newState, payload.id );
+  },
 
   /**
    * Remove record
@@ -141,13 +136,13 @@ export default {
    * @param {EntityRef} payload
    * @returns {object}
    */
-   [ actions.removeTarget ]: ( state, { payload }) => update( state, {
-       targets: {
-         $unset:[ payload.id ]
-       }
-     })
+  [ actions.removeTarget ]: ( state, { payload }) => update( state, {
+    targets: {
+      $unset:[ payload.id ]
+    }
+  })
 
 
-}
+};
 
 

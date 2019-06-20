@@ -1,11 +1,9 @@
 import { TEXTAREA } from "../../constants";
 import { justify } from "service/assert";
-import ExpressionParser from "service/ExpressionParser";
 
 export const runjs = {
   template: ({ params, id }) => {
-    const { value } = params,
-          parser = new ExpressionParser( id );
+    const { value } = params;
     return justify( `
 // Run custom JavaScript in the test
 ${ value }

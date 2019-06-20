@@ -13,13 +13,13 @@ const FormItem = Form.Item,
 
 @connectForm
 export class SnippetVariables extends AbstractForm {
-   constructor( props ) {
+  constructor( props ) {
     super( props );
 
     this.state = {
-      variables: Object.entries( props.record.variables || [] ).map(([ name, value ]) => ({
+      variables: Object.entries( props.record.variables || []).map( ([ name, value ]) => ({
         name, value, editing: false, key: name
-      }))
+      }) )
     };
 
     this.columns = [
@@ -44,14 +44,14 @@ export class SnippetVariables extends AbstractForm {
   onRemoveVariable = ( e, record ) => {
     e.preventDefault();
     this.setState({
-      variables: this.state.variables.filter(( item ) => item.name !== record.name )
+      variables: this.state.variables.filter( ( item ) => item.name !== record.name )
     });
   }
 
   onAddVariable = ( e ) => {
     const { validateFields, resetFields } = this.props.form;
     e.preventDefault();
-    validateFields(( err, values ) => {
+    validateFields( ( err, values ) => {
       const { name, value } = values;
       if ( !name || !value ) {
         return;
@@ -64,7 +64,7 @@ export class SnippetVariables extends AbstractForm {
             variables = [ ...this.state.variables, record ];
 
       // State variables to record variables
-      this.props.onChanged( variables.reduce(( carry, item ) => ({
+      this.props.onChanged( variables.reduce( ( carry, item ) => ({
         ...carry,
         [ item.name ]: item.value
       }), {}) );
@@ -79,68 +79,68 @@ export class SnippetVariables extends AbstractForm {
   render() {
 
     const { record } = this.props,
-      { getFieldDecorator, getFieldsError } = this.props.form,
-      { variables } = this.state;
+          { getFieldDecorator, getFieldsError } = this.props.form,
+          { variables } = this.state;
 
     return ( <ErrorBoundary>
 
-        <Collapse>
-          <Panel header="Local Template Variables (optional)" key="1">
+      <Collapse>
+        <Panel header="Local Template Variables (optional)" key="1">
           <p>You can assign variables that will be available as
             { "" }<a href="https://docs.puppetry.app/template" onClick={ this.onExtClick }>
-            { "" } template expressions</a>{ "" } in the snippet</p>
-           <Form>
-           <Row gutter={4}>
-           <Col span={10}>
-              <Form.Item >
-                { getFieldDecorator( "name", {
-                  rules: [
-                    {
-                      required: true,
-                      message: `Field is required.`
-                    },
-                    {
-                      validator: ( rule, value, callback ) => {
-                        const reConst = /^[A-Z_\-0-9]+$/g;
-                        if ( !value ) {
-                          callback( `Field is required.` );
-                        }
-                        if ( !value.match( reConst ) ) {
-                          callback( `Shall be in all upper case with underscore separators` );
-                        }
-                        if ( this.state.variables.find( item => item.name === value ) ) {
-                          callback( `Variable already exists` );
-                        }
+              { "" } template expressions</a>{ "" } in the snippet</p>
+          <Form>
+            <Row gutter={4}>
+              <Col span={10}>
+                <Form.Item >
+                  { getFieldDecorator( "name", {
+                    rules: [
+                      {
+                        required: true,
+                        message: `Field is required.`
+                      },
+                      {
+                        validator: ( rule, value, callback ) => {
+                          const reConst = /^[A-Z_\-0-9]+$/g;
+                          if ( !value ) {
+                            callback( `Field is required.` );
+                          }
+                          if ( !value.match( reConst ) ) {
+                            callback( `Shall be in all upper case with underscore separators` );
+                          }
+                          if ( this.state.variables.find( item => item.name === value ) ) {
+                            callback( `Variable already exists` );
+                          }
 
-                        callback();
+                          callback();
+                        }
                       }
-                    }
-                  ]
-                })(<Input placeholder="Variable name" onPressEnter={ this.onAddVariable } />)}
-              </Form.Item>
-            </Col>
-            <Col span={10}>
-              <Form.Item >
-                { getFieldDecorator( "value", {
-                  rules: [
-                    {
-                      required: true,
-                      message: `Field is required.`
-                    }
-                  ]
-                })(<Input placeholder="Variable value" onPressEnter={ this.onAddVariable } />)}
-              </Form.Item>
-            </Col>
-            <Col span={4}>
-              <Form.Item >
-                <Button onClick={ this.onAddVariable }>Add</Button>
-              </Form.Item>
-            </Col>
+                    ]
+                  })( <Input placeholder="Variable name" onPressEnter={ this.onAddVariable } /> )}
+                </Form.Item>
+              </Col>
+              <Col span={10}>
+                <Form.Item >
+                  { getFieldDecorator( "value", {
+                    rules: [
+                      {
+                        required: true,
+                        message: `Field is required.`
+                      }
+                    ]
+                  })( <Input placeholder="Variable value" onPressEnter={ this.onAddVariable } /> )}
+                </Form.Item>
+              </Col>
+              <Col span={4}>
+                <Form.Item >
+                  <Button onClick={ this.onAddVariable }>Add</Button>
+                </Form.Item>
+              </Col>
             </Row>
             <Table columns={ this.columns } dataSource={ variables } pagination={{ pageSize: 3 }} />
-            </Form>
-          </Panel>
-        </Collapse>
+          </Form>
+        </Panel>
+      </Collapse>
 
 
     </ErrorBoundary> );

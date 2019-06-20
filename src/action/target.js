@@ -46,8 +46,8 @@ actions.swapTarget = ( payload ) => async ( dispatch, getState ) => {
           target = getState().suite.targets[ sourceId ],
           pos = sourceInx >= targetInx ? "before" : "after";
 
-    dispatch( actions.removeTarget( { id: sourceId } ) );
-    dispatch( actions.insertAdjacentTarget( target, { [ pos ]: targetId } ) );
+    dispatch( actions.removeTarget({ id: sourceId }) );
+    dispatch( actions.insertAdjacentTarget( target, { [ pos ]: targetId }) );
   } catch ( ex ) {
     handleException( ex, dispatch, "Cannot swap target" );
   }

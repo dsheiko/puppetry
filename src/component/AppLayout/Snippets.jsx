@@ -66,16 +66,16 @@ export class Snippets extends AbstractForm {
 
             <TabPane tab={ snippetsLabel } key="groups">
               <p>Snippets are reusable test cases in scope of project. So you can create a snippet and refer to it in your test suites.<br />
-        </p>
-        <p><LearnMore href="https://docs.puppetry.app/snippets" /></p>
+              </p>
+              <p><LearnMore href="https://docs.puppetry.app/snippets" /></p>
 
               { tests && <SnippetTable
-      expanded={ store.project.groups }
-      targets={ targets }
-      tests={ tests }
-      groupId={ SNIPPETS_GROUP_ID }
-      selector={ selector }
-      action={ action } /> }
+                expanded={ store.project.groups }
+                targets={ targets }
+                tests={ tests }
+                groupId={ SNIPPETS_GROUP_ID }
+                selector={ selector }
+                action={ action } /> }
 
             </TabPane>
 

@@ -52,14 +52,14 @@ export class Main extends AbstractComponent {
           >
             <TabPane tab={ targetsLabel } key="targets" id="cSuitePane">
               <p>Targets are identifiers associated with locators (CSS selector or XPath) that we can refer in the test cases.
-             </p>
+              </p>
               <p><LearnMore href="https://docs.puppetry.app/target" />
               </p>
               <TargetTable action={action} targets={ selector.getTargetDataTable() } />
             </TabPane>
 
             <TabPane tab={ groupsLabel } key="groups">
-            <p>Test case is a specification of { "" }<a href="https://docs.puppetry.app/test-step" onClick={ this.onExtClick }>commands, assertions and references</a> { "" }
+              <p>Test case is a specification of { "" }<a href="https://docs.puppetry.app/test-step" onClick={ this.onExtClick }>commands, assertions and references</a> { "" }
               to ensure that a targeted component of the test application acts as intended.
               Tests cases are organised into logical { "" } <a href="https://docs.puppetry.app/group" onClick={ this.onExtClick }>groups</a> { "" }, representing test contexts.</p>
 

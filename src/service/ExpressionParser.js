@@ -1,5 +1,5 @@
 import { ExpressionParserException } from "error";
-import faker from "faker";
+/*eslint no-useless-escape: 0*/
 
 function extractParams( func, directive ) {
   const body = directive.substr( func.length + 1 ).replace( /\)$/, "" );
@@ -23,12 +23,12 @@ class Parsers {
 
   // {{ counter() }}
   counter = function(){
-    return `util.exp.counter( ${ jstr( this.commandId) } )`;
+    return `util.exp.counter( ${ jstr( this.commandId ) } )`;
   }
 
   // {{ iterate(["aa", "bb"]) }}
   iterate = function([ json ]) {
-    return `util.exp.iterate( ${ jstr( json  ) }, ${ jstr( this.commandId) } )`;
+    return `util.exp.iterate( ${ jstr( json  ) }, ${ jstr( this.commandId ) } )`;
   };
 
   // {{ env("SECRET") }}
@@ -79,7 +79,7 @@ export default class ExpressionParser {
     }
     try {
       return this.parsers[ parser ]( extractParams( parser, exp ) );
-     } catch ( err ) {
+    } catch ( err ) {
       throw new ExpressionParserException( `Cannot parse expression ${ exp }` );
     }
   }

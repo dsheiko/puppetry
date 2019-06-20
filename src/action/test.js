@@ -41,7 +41,6 @@ const actions = createActions({
 });
 
 
-
 function getTestsFlat( groups ) {
   return Object.values( groups ).reduce( ( carry, group ) => {
     return carry.concat( Object.values( group.tests ) );
@@ -67,7 +66,7 @@ actions.swapTest = ( payload ) => async ( dispatch, getState ) => {
         ...command,
         testId: id,
         groupId: targetTest.groupId
-      }));
+      }) );
     });
 
   } catch ( ex ) {

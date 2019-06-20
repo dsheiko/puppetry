@@ -49,12 +49,12 @@ actions.syncVariableStages = ( payload ) => async ( dispatch, getState ) => {
     environments
       .filter( env => env !== payload.env )
       .forEach( env => {
-          const match = Object.values( variables )
-            .find( v => v.env === env && v.name === payload.name );
-          if ( match ) {
-            return;
-          }
-          dispatch( actions.addVariable({ ...payload, env, id: undefined }) );
+        const match = Object.values( variables )
+          .find( v => v.env === env && v.name === payload.name );
+        if ( match ) {
+          return;
+        }
+        dispatch( actions.addVariable({ ...payload, env, id: undefined }) );
       });
 
   } catch ( ex ) {
@@ -70,8 +70,8 @@ actions.swapVariable = ( payload ) => async ( dispatch, getState ) => {
           variable = getState().project.variables[ sourceId ],
           pos = sourceInx >= targetInx ? "before" : "after";
 
-    dispatch( actions.removeVariable( { id: sourceId } ) );
-    dispatch( actions.insertAdjacentVariable( variable, { [ pos ]: targetId } ) );
+    dispatch( actions.removeVariable({ id: sourceId }) );
+    dispatch( actions.insertAdjacentVariable( variable, { [ pos ]: targetId }) );
   } catch ( ex ) {
     handleException( ex, dispatch, "Cannot swap variable" );
   }

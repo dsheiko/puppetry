@@ -17,7 +17,7 @@ export const assertProperty = {
   of \`{target}\` target  satisfies the given constraint`,
   params: [
     {
-      
+
       legend: "",
       tooltip: "",
       fields: [

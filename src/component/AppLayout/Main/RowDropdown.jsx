@@ -38,10 +38,10 @@ class RowDropdownOverlay extends React.Component {
           <a role="menuitem" tabIndex={0}  onClick={ () => this.apply( "insertRecord", record ) }>Insert</a>
         </Menu.Item>
 
-        { insertSnippet && (<Menu.Item key="insertSnippet">
+        { insertSnippet && ( <Menu.Item key="insertSnippet">
           <a role="menuitem" tabIndex={0}
-            onClick={ () => this.apply( "insertSnippet", { ...record, isRef: true  } ) }>Insert Ref</a>
-        </Menu.Item>)}
+            onClick={ () => this.apply( "insertSnippet", { ...record, isRef: true  }) }>Insert Ref</a>
+        </Menu.Item> )}
 
         <Menu.Item key="clone">
           <a role="menuitem" tabIndex={0}  onClick={ () => this.apply( "cloneRecord", record ) }>Clone</a>

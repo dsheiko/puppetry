@@ -8,7 +8,7 @@ export default handleActions(
   {
     [ actions.setSettings ]: ( state, { payload }) => {
       return update( state, {
-          $set: payload
+        $set: payload
       });
     },
 

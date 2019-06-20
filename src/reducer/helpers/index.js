@@ -30,35 +30,35 @@ export function updateTagetsInSuite( prevState, nextState, targetId ) {
   targets.forEach( target => {
     state = update( state, {
 
-        groups: {
-          [ target.groupId ]: {
-            tests: {
-              [ target.testId ]: {
-                commands: {
-                  [ target.id ]: {
-                    $apply: ({ ...command }) => {
-                      command.target = command.target === prevTargetName ? nextTargetName : command.target;
-                      if ( "assert" in command
+      groups: {
+        [ target.groupId ]: {
+          tests: {
+            [ target.testId ]: {
+              commands: {
+                [ target.id ]: {
+                  $apply: ({ ...command }) => {
+                    command.target = command.target === prevTargetName ? nextTargetName : command.target;
+                    if ( "assert" in command
                             && typeof command.assert === "object"
                             && "target" in command.assert
                             && command.assert.target === prevTargetName  ) {
-                        return update( command, {
-                          assert: {
-                            target: {
-                              $set: nextTargetName
-                            }
+                      return update( command, {
+                        assert: {
+                          target: {
+                            $set: nextTargetName
                           }
-                        });
-                      }
-                      return command;
+                        }
+                      });
                     }
+                    return command;
                   }
                 }
               }
             }
           }
         }
-      });
+      }
+    });
   });
   return state;
 }

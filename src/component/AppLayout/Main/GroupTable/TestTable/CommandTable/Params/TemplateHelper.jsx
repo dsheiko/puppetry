@@ -92,12 +92,12 @@ export class TemplateHelper extends React.Component {
 
   render() {
 
-   const { config, variables, environments } = this.props,
-         { exp, iterateList, randomList, envName, fakerMethod } = this.state,
-         [ activeEnv ] = environments,
-         selStyle = { width: 160 };
+    const { config, variables, environments } = this.props,
+          { exp, iterateList, randomList, envName, fakerMethod } = this.state,
+          [ activeEnv ] = environments,
+          selStyle = { width: 160 };
 
-   return ( <div className="template-helper" >
+    return ( <div className="template-helper" >
       <span><Icon type="arrow-up" /> Here you can use <Link to="https://docs.puppetry.app/template">template expressions</Link></span>
 
       <Select
@@ -105,26 +105,26 @@ export class TemplateHelper extends React.Component {
         value={ exp }
         size="small" style={ selStyle } onChange={ this.onExpChange }>
 
-          <Option key="1" value="variables">Variables</Option>
-          <Option key="2" value="env">env()</Option>
-          <Option key="3" value="counter">counter()</Option>
-          <Option key="4" value="iterate">iterate()</Option>
-          <Option key="5" value="random">random()</Option>
-          <Option key="6" value="faker">faker()</Option>
+        <Option key="1" value="variables">Variables</Option>
+        <Option key="2" value="env">env()</Option>
+        <Option key="3" value="counter">counter()</Option>
+        <Option key="4" value="iterate">iterate()</Option>
+        <Option key="5" value="random">random()</Option>
+        <Option key="6" value="faker">faker()</Option>
       </Select>
 
       { false && <Select
         placeholder="Select environment"
         size="small" style={ selStyle } onChange={ this.onEnvChange }>
-        { environments.map(( key ) => (
-          <Option key={ key } value={ key }>{ key }</Option>))}
+        { environments.map( ( key ) => (
+          <Option key={ key } value={ key }>{ key }</Option> ) )}
       </Select> }
 
       { ( exp === "variables" && activeEnv ) ? <Select
-      placeholder="Select variable"
-      size="small" style={ selStyle } onChange={ this.onVarChange }>
-        { Object.keys( getSelectedVariables( variables, activeEnv ) ).map(( key ) => (
-          <Option key={ key } value={ key }>{ key }</Option>))}
+        placeholder="Select variable"
+        size="small" style={ selStyle } onChange={ this.onVarChange }>
+        { Object.keys( getSelectedVariables( variables, activeEnv ) ).map( ( key ) => (
+          <Option key={ key } value={ key }>{ key }</Option> ) )}
       </Select> : null }
 
       { exp === "iterate" && <Select
@@ -162,23 +162,23 @@ export class TemplateHelper extends React.Component {
       { exp === "faker" && <Select
         placeholder="Select method"
         size="small" style={ selStyle } onChange={ this.onFakerMethodChange }>
-        { Object.entries( FAKER_METHODS ).map(([ label, options ]) => (
+        { Object.entries( FAKER_METHODS ).map( ([ label, options ]) => (
           <OptGroup label={ label } key={ label }>
-          { options.map( ( desc, inx ) => (<Option
-          key={ inx } value={ `${ label }.${ desc }` }>{ desc }</Option>)) }
+            { options.map( ( desc, inx ) => ( <Option
+              key={ inx } value={ `${ label }.${ desc }` }>{ desc }</Option> ) ) }
           </OptGroup>
-          ))}
+        ) )}
       </Select> }
 
       { ( exp === "faker" && fakerMethod ) ? <Select
         placeholder="Select locale"
         size="small" style={ selStyle } onChange={ this.onFakerClick }>
-        { FAKER_LOCALES.map(( key ) => (
-          <Option key={ key } value={ key }>{ key }</Option>))}
+        { FAKER_LOCALES.map( ( key ) => (
+          <Option key={ key } value={ key }>{ key }</Option> ) )}
       </Select> : null }
 
 
-      </div> );
- }
+    </div> );
+  }
 
 }

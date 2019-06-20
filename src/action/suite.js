@@ -25,7 +25,7 @@ const actions = createActions({
 });
 
 actions.updateSuite = ( suite ) => ( dispatch, getState ) => {
-  dispatch( projectActions.setProject({ modified: true }));
+  dispatch( projectActions.setProject({ modified: true }) );
   dispatch( actions.setSuite( suite ) );
 };
 
@@ -68,14 +68,14 @@ actions.createSuite = ( rawFilename, title ) => async ( dispatch, getState ) => 
 function createSnippetsSuite( dispatch ) {
   dispatch( groupActions.addGroup({ title: "Snippets" }, SNIPPETS_GROUP_ID ) );
   dispatch( projectActions.setProject({
-      groups: {
-        [ SNIPPETS_GROUP_ID ]: {
-          key: SNIPPETS_GROUP_ID,
-          value: true,
-          tests: {}
-        }
+    groups: {
+      [ SNIPPETS_GROUP_ID ]: {
+        key: SNIPPETS_GROUP_ID,
+        value: true,
+        tests: {}
       }
-    }));
+    }
+  }) );
 }
 
 actions.loadSuite = ( filename ) => async ( dispatch, getState ) => {
@@ -123,7 +123,7 @@ actions.saveSuite = ( options = {}) => async ( dispatch, getState ) => {
       await dispatch( snippetsActions.resetSnippets({
         targets: store.suite.targets,
         groups: store.suite.groups
-      }));
+      }) );
     }
 
   } catch ( e ) {

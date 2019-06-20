@@ -41,13 +41,13 @@ export default class TestGenerator {
     }
     const test = tests[ ref ],
           env = ( variables && Object.keys( variables ).length )
-              ? `      Object.assign( ENV, ${ JSON.stringify( variables ) } );\n` : ``,
+            ? `      Object.assign( ENV, ${ JSON.stringify( variables ) } );\n` : ``,
           chunk = Object.values( test.commands )
             .map( this.parseCommand ).join( "\n" );
     return `      // SNIPPET ${ test.title }: START\n${ env }${ chunk }\n      // SNIPPET ${ test.title }: END\n`;
   }
 
-   /**
+  /**
    * @param {Object} command
    * @returns {string}
    */
