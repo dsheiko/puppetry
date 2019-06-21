@@ -37,6 +37,10 @@
     "publish:snapcraft": "snapcraft push dist/puppetry-linux-v$npm_package_version-amd64.snap --release stable"
   },
   "dependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/runtime": "^7.1.2",
+
+    "babel-core": "^7.0.0-bridge.0",
     "ansi-to-html": "^0.6.10",
     "antd": "^3.19.2",
     "balloon-css": "^0.5.0",
@@ -77,9 +81,7 @@
   },
   "license": "(GPL-3.0 OR MIT)",
   "devDependencies": {
-    "@babel/core": "^7.1.2",
-    "@babel/runtime": "^7.1.2",
-    "babel-core": "^7.0.0-bridge.0",
+
     "babel-jest": "^23.6.0",
     "@babel/cli": "^7.1.2",
     "@babel/node": "^7.0.0",

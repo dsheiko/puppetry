@@ -5,7 +5,7 @@ const { join } = require( "path" ),
       { dirname } = require( "path" ),
       { LocalStorage } = require( "node-localstorage" ),
       faker = require( "faker" ),
-      localStorage = new LocalStorage( "./storage" );
+      localStorage = new LocalStorage( join( __dirname, "/../", "/storage" ) );
 
 let PATH_SCREENSHOTS = join( __dirname, "/../", "/screenshots");
 
