@@ -11,6 +11,7 @@ dist
 storage
 tmp
 runtime-temp
+screenshots/*.*
 src/__e2e__/screenshots
 
 # Runtime data
