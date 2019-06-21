@@ -40,6 +40,9 @@ Namely you can do the following:
 - to manage your test structure in BDD style ( project, suite, test group, test )
 - to manage browser methods and assertions
 
+## Documentation
+- [Puppetry 2.0 documentation](https://docs.puppetry.app/)
+
 ## Download
 
 You can download latest installers for your platform [from the releases page](https://github.com/dsheiko/puppetry/releases)
