@@ -278,24 +278,23 @@ export class MainMenu extends GitEnhancedMenu {
               <SubMenu
                 key="git"
                 id="cMainMenuFileGit"
-                disabled={ !suiteFilename }
                 title={<span><Icon type="branches" /><span>Git</span></span>}
               >
-                <Menu.Item key="git1" disabled={ git.initialized }
+                <Menu.Item key="git1" disabled={ !suiteFilename || git.initialized }
                   onClick={ this.onFileGitInitialize } id="cMainMenuFileGitInit">
                   Initialize</Menu.Item>
-                <Menu.Item key="git2" disabled={ !git.initialized || !git.hasRemote }
+                <Menu.Item key="git2" disabled={ !git.hasRemote }
                   onClick={ this.onFileGitClone } id="cMainMenuFileGitClone">
                   Clone...</Menu.Item>
 
-                <Menu.Item key="git3" disabled={ !git.initialized || gitDetachedHeadState }
+                <Menu.Item key="git3" disabled={ !suiteFilename || !git.initialized || gitDetachedHeadState }
                   onClick={ this.onFileGitCheckout } id="cMainMenuFileGitCheckout">
                   Checkout...</Menu.Item>
 
-                <Menu.Item key="git5" disabled={ !git.initialized || gitDetachedHeadState }
+                <Menu.Item key="git5" disabled={ !suiteFilename || !git.initialized || gitDetachedHeadState }
                   onClick={ this.onFileGitCommit }
                   id="cMainMenuFileGitCommit">Commit...{ " " }<kbd>{ ostr( "Ctrl-Shift-S" ) }</kbd></Menu.Item>
-                <Menu.Item key="git6" disabled={ !git.initialized || !git.hasRemote || gitDetachedHeadState }
+                <Menu.Item key="git6" disabled={ !suiteFilename || !git.initialized || !git.hasRemote || gitDetachedHeadState }
                   onClick={ this.onFileGitSync } id="cMainMenuFileGitPull">
                   Sync with remote...</Menu.Item>
 
@@ -311,7 +310,7 @@ export class MainMenu extends GitEnhancedMenu {
             <Menu.Item key="15" disabled={ !projectDirectory } onClick={ this.onSnippets } id="cMainMenuSnippets">
               <span><Icon type="snippets" /><span>Snippets</span></span></Menu.Item>
 
-            <Menu.Item key="11" disabled={ !projectDirectory } onClick={ this.onSettings } id="cMainMenuSettings">
+            <Menu.Item key="11" onClick={ this.onSettings } id="cMainMenuSettings">
               <span><Icon type="setting" /><span>Settings...</span></span></Menu.Item>
 
             <Menu.Item key="10"

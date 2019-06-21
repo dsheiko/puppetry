@@ -45,18 +45,6 @@ export class RemoteForm extends AbstractForm {
 
         saveGit({ ...values, hasRemote: true });
         this.props.form.resetFields();
-        //
-        //        ipcRenderer.send(
-        //          E_GIT_SET_REMOTE,
-        //          values.remoteRepository,
-        //          projectDirectory,
-        //          {
-        //            credentialsAuthMethod: git.credentialsAuthMethod,
-        //            credentialsUsername: values.credentialsUsername,
-        //            credentialsPassword: values.credentialsPassword,
-        //            credentialsAcccessToken: values.credentialsAcccessToken
-        //          }
-        //        );
       }
     });
   }

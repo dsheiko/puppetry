@@ -6,6 +6,8 @@ import { bindActionCreators } from "redux";
 import { AppLayout } from "../component/AppLayout";
 import actions from "../action";
 import * as selectors from "../selector/selectors";
+import { E_GIT_SYNC_RESPONSE } from "constant";
+import { ipcRenderer } from "electron";
 
 const GREETINGS = [ "Greetings",
         "Hi there",
@@ -57,6 +59,11 @@ export class App extends React.Component {
     selector: PropTypes.object
   }
 
+  onSyncResponse = () => {
+     this.props.action.loadProject();
+     this.props.action.setApp({ loading: false });
+  }
+
   async componentDidMount() {
     const { loadProject,
             checkGit,
@@ -64,13 +71,21 @@ export class App extends React.Component {
             checkRuntimeTestDirReady,
             checkNewVersion,
             loadSnippets,
-            setApp
+            setApp,
+            loadGit
           } = this.props.action,
           settings = loadSettings();
+
+
+  ipcRenderer.removeAllListeners( E_GIT_SYNC_RESPONSE );
+    ipcRenderer.once( E_GIT_SYNC_RESPONSE, this.onSyncResponse );
 
     setApp({ greeting: GREETINGS[ Math.floor( Math.random() * GREETINGS.length ) ] });
     checkRuntimeTestDirReady();
     checkNewVersion();
+
+    // from storage
+    loadGit();
 
     if ( !settings.projectDirectory ) {
       return;

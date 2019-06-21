@@ -40,13 +40,16 @@ export class GitSyncModal extends AbstractForm {
 
   sync() {
     const { git } = this.props;
-    ipcRenderer.send( E_GIT_SYNC, this.props.projectDirectory, {
-      credentialsAuthMethod: git.credentialsAuthMethod,
-      credentialsUsername: git.credentialsUsername,
-      credentialsPassword: git.credentialsPassword,
-      credentialsAcccessToken: git.credentialsAcccessToken
-    }, git.configUsername, git.configEmail, git.remoteRepository );
-    this.close();
+    this.props.action.setApp({ loading: true });
+    setTimeout(() => {
+      ipcRenderer.send( E_GIT_SYNC, this.props.projectDirectory, {
+        credentialsAuthMethod: git.credentialsAuthMethod,
+        credentialsUsername: git.credentialsUsername,
+        credentialsPassword: git.credentialsPassword,
+        credentialsAcccessToken: git.credentialsAcccessToken
+      }, git.configUsername, git.configEmail, git.remoteRepository );
+      this.close();
+    }, 200 );
   }
 
   onCommitResponse = () => {
@@ -70,6 +73,7 @@ export class GitSyncModal extends AbstractForm {
 
       ipcRenderer.removeAllListeners( E_GIT_COMMIT_RESPONSE );
       ipcRenderer.once( E_GIT_COMMIT_RESPONSE, this.onCommitResponse );
+
 
       ipcRenderer.send(
         E_GIT_COMMIT,

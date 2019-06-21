@@ -49,6 +49,19 @@ export class ProjectExplorer extends React.Component {
     e.preventDefault();
 
     if ( projectDirectory === dir ) {
+      const menu = new Menu();
+      menu.append( new MenuItem({
+        label: "Delete from the list",
+        click: async () => {
+          removeSettingsProject( dir );
+          localStorage.setItem( "settings", "{}" );
+          saveSettings({ projectDirectory: "" });
+        }
+      }) );
+      menu.popup({
+        x: e.x,
+        y: e.y
+      });
       return;
     }
 
@@ -113,6 +126,10 @@ export class ProjectExplorer extends React.Component {
     const { projectDirectory  } = this.props,
           projects = Object.entries( this.props.projects )
             .map( ([ dir, name ]) => ({ dir, name }) );
+
+    if ( !projects.length ) {
+      return <div></div>;
+    }
     return (
       <ErrorBoundary>
         <div id="cProjectNavigator" className="project-navigator">
