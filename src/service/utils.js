@@ -4,8 +4,8 @@ export const isEveryValueMissing = ( obj ) => Object.values( obj ).every( val =>
 export const isSomeValueMissing = ( obj ) => Object.values( obj ).some( val => typeof val === "undefined" );
 
 export const ruleValidateGenericString = ( rule, value, callback ) => {
-  if ( value.length < 6 ) {
-    return callback( "The value shall not be less than 6 characters" );
+  if ( value.length < 3 ) {
+    return callback( "The value shall not be less than 3 characters" );
   }
   if ( value.length > 250 ) {
     return callback( "The value shall not be more than 250 characters" );

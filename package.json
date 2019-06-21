@@ -28,6 +28,7 @@
     "dist:all": "build -mwl -c.mac.identity=null",
     "dist": "build --linux snap",
     "start": "cross-env ELECTRON_ENV=dev electron .",
+    "start:prod": "cross-env ELECTRON_ENV=production electron .",
     "start:clean": "cross-env ELECTRON_ENV=dev PUPPETRY_CLEAN_START=true electron .",
     "lint": "eslint --ext=js,jsx ./src",
     "lint:fix": "eslint --ext=js,jsx --fix ./src",

@@ -1,4 +1,6 @@
 import log from "electron-log";
+import fs from "fs";
+import { join } from "path";
 import { createActions } from "redux-actions";
 import { handleException, saveProject } from "./helpers";
 import debounce from "lodash.debounce";
@@ -44,8 +46,8 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
     directory && dispatch( settingsActions.saveSettings({ projectDirectory }) );
     dispatch( actions.setProject( project ) );
     dispatch( gitActions.loadGit( projectDirectory ) );
-    dispatch( actions.loadProjectFiles( projectDirectory ) );
-    dispatch( actions.watchProjectFiles( projectDirectory ) );
+    await dispatch( actions.loadProjectFiles( projectDirectory ) );
+    await dispatch( actions.watchProjectFiles( projectDirectory ) );
 
     // keep track of recent projects
     dispatch( settingsActions.addSettingsProject({
@@ -62,10 +64,15 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
     dispatch( appActions.setApp({ loading: false }) );
   }
 
-  try {
-    project.lastOpenSuite && dispatch( await suiteActions.openSuiteFile( project.lastOpenSuite ) );
-  } catch ( err ) {
-
+  if ( project.lastOpenSuite && fs.existsSync( join( projectDirectory, project.lastOpenSuite ) )) {
+    await dispatch( suiteActions.openSuiteFile( project.lastOpenSuite, { silent: true  }) );
+  } else {
+    const files = getState().app.project.files;
+    log.warn( `Last open suite is unreachable, so lt's try loading the first available` );
+    if ( !files.length ) {
+      return project;
+    }
+    await dispatch( suiteActions.openSuiteFile( files[ 0 ], { silent: true  }) );
   }
 
   return project;
@@ -110,7 +117,7 @@ actions.saveProject = () => async ( dispatch, getState ) => {
 };
 
 
-actions.updateProject = ({ projectDirectory, name } = {}) => async ( dispatch, getState ) => {
+actions.updateProject = ({ projectDirectory, name } = {}) => async ( dispatch ) => {
   try {
     if ( !name ) {
       throw new InvalidArgumentError( "Empty project name" );
@@ -120,16 +127,13 @@ actions.updateProject = ({ projectDirectory, name } = {}) => async ( dispatch, g
     }
 
     await dispatch( actions.setProject({ projectDirectory, name }) );
-
     // keep track of recent projects
     dispatch( settingsActions.addSettingsProject({
       dir: projectDirectory,
       name: name
     }) );
-
-    settingsActions.saveSettings({ projectDirectory });
-
-    await saveProject( getState() );
+    dispatch( settingsActions.saveSettings({ projectDirectory }) );
+    await dispatch( actions.saveProject() );
     await dispatch( actions.loadProjectFiles( projectDirectory ) );
     await dispatch( actions.watchProjectFiles( projectDirectory ) );
     // why?!
