@@ -1,6 +1,4 @@
-import React from "react";
 import { INPUT } from "../../constants";
-import { onExtClick } from "service/utils";
 import { buildAssertionTpl } from "service/assert";
 import { AssertValue } from "../../Assert/AssertValue";
 
@@ -27,7 +25,8 @@ export const assertAttribute = {
           control: INPUT,
           label: "Attribute name",
           description: `HTML attribute. E.g. for \`<a href="" data-foo=""></a>\`
-          you can obtain href or \`data-foo\`. [See here for details](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes)`,
+          you can obtain href or \`data-foo\`.
+[See here for details](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes)`,
           placeholder: "e.g. href",
           initialValue: "",
           rules: [{

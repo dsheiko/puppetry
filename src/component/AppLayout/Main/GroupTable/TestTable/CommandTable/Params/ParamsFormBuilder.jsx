@@ -1,26 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import If from "component/Global/If";
 import ErrorBoundary from "component/ErrorBoundary";
 import { Collapse, Button, Form, Input, InputNumber, Checkbox, Row, Col, Select, Radio, Icon  } from "antd";
 import { validate } from "bycontract";
 import Tooltip from "component/Global/Tooltip";
-import { FILE, TEXTAREA, RADIO_GROUP, INPUT, INPUT_NUMBER, CHECKBOX, SELECT,
-  SEARCH_SELECT } from "component/Schema/constants";
+import { FILE, TEXTAREA, RADIO_GROUP, INPUT, INPUT_NUMBER, CHECKBOX, SELECT } from "component/Schema/constants";
 import { ipcRenderer } from "electron";
 import { E_BROWSE_FILE, E_FILE_SELECTED } from "constant";
 import Markdown from "component/Global/Markdown";
-import Link from "component/Global/Link";
 import { TemplateHelper } from "./TemplateHelper";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { getSelectedVariables } from "selector/selectors";
+
 
 const FormItem = Form.Item,
-      { Option, OptGroup } = Select,
+      { Option } = Select,
       RadioGroup = Radio.Group,
       Panel = Collapse.Panel,
-      { TextArea } = Input,
 
       getLabel = ( desc, tooltip ) => (
         <span>
@@ -46,11 +41,14 @@ export class ParamsFormBuilder extends React.Component {
   static propTypes = {
     form: PropTypes.shape({
       getFieldDecorator: PropTypes.func.isRequired,
-      setFieldsValue: PropTypes.func.isRequired
+      setFieldsValue: PropTypes.func.isRequired,
+      getFieldValue: PropTypes.func.isRequired
     }),
-
+    onSubmit: PropTypes.func.isRequired,
     record: PropTypes.object.isRequired,
-    schema: PropTypes.any
+    schema: PropTypes.any,
+    environments: PropTypes.any,
+    variables: PropTypes.any
   }
 
   onClickSelectFile = ( e, item ) => {

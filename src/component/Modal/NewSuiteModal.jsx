@@ -65,7 +65,7 @@ export class NewSuiteModal extends AbstractForm {
   }
 
   // Do not update until visible
-  shouldComponentUpdate( nextProps, nextState ) {
+  shouldComponentUpdate( nextProps ) {
     if ( this.props.isVisible !== nextProps.isVisible ) {
       return true;
     }

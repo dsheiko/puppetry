@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Tabs, Icon } from "antd";
 import { SnippetTable } from "./Main/GroupTable/SnippetTable";
-import { SuiteForm  } from "./Main/SuiteForm";
 import { TargetTable  } from "./Main/TargetTable";
 import ErrorBoundary from "component/ErrorBoundary";
 import { SNIPPETS_GROUP_ID } from "constant";
@@ -58,14 +57,16 @@ export class Snippets extends AbstractForm {
             onChange={ this.onTabChange }
           >
             <TabPane tab={ targetsLabel } key="targets" id="cSuitePane">
-              <p>Targets are identifiers associated with locators (CSS selector or XPath) that we can refer in the test cases.
+              <p>Targets are identifiers associated with locators
+              (CSS selector or XPath) that we can refer in the test cases.
               </p>
               <p><LearnMore href="https://docs.puppetry.app/target"/></p>
               <TargetTable action={action} targets={ selector.getTargetDataTable() } />
             </TabPane>
 
             <TabPane tab={ snippetsLabel } key="groups">
-              <p>Snippets are reusable test cases in scope of project. So you can create a snippet and refer to it in your test suites.<br />
+              <p>Snippets are reusable test cases in scope of project. So you can
+              create a snippet and refer to it in your test suites.<br />
               </p>
               <p><LearnMore href="https://docs.puppetry.app/snippets" /></p>
 

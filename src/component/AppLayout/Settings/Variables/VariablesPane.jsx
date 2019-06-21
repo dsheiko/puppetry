@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import { VariableTable } from "./VariableTable";
@@ -44,14 +43,16 @@ export class VariablesPane extends AbstractComponent {
 
   render() {
     const { project, selector } = this.props,
-          [ firstEnv ] = project.environments,
           activeEnv = selectors.getActiveEnvironment( project.environments, this.state.activeEnv ),
           variables = selector.getVariableDataTable( activeEnv );
 
     return (
       <ErrorBoundary>
         <p>
-    Here we can define a set of environment dependent variables. For an instance, we can declare a separate target app URL for every environment (test.acme.com, stage.acme.com, www.acme.com). Before running/exporting test project we specify the desired environment and the corresponding template tags in test cases will be replaced with the value (URL) given for that environment.
+    Here we can define a set of environment dependent variables. For an instance, we can declare a separate
+    target app URL for every environment (test.acme.com, stage.acme.com, www.acme.com).
+    Before running/exporting test project we specify the desired environment and the corresponding template
+    tags in test cases will be replaced with the value (URL) given for that environment.
         </p>
         <p><LearnMore href="https://docs.puppetry.app/template" /></p>
         <br />

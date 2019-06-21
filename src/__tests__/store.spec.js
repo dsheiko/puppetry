@@ -35,8 +35,10 @@ const FIX = createConstants([
   "METHOD1",
   "METHOD2",
   "METHOD3",
-  "METHOD4",
+  "METHOD4"
 ]);
+
+FIX.PARAMS = { value: "VALUE " };
 
 const storeEnhancer = compose(
         applyMiddleware(
@@ -300,7 +302,7 @@ describe( "Store", () => {
           groupId: group.id,
           target: FIX.TARGET2,
           method: FIX.METHOD2,
-          params: "params",
+          params: FIX.PARAMS,
           editing: true,
           disabled: true
         }));
@@ -309,7 +311,7 @@ describe( "Store", () => {
 
        expect( command.target ).toBe( FIX.TARGET2 );
        expect( command.method ).toBe( FIX.METHOD2 );
-       expect( command.params ).toBe( "params" );
+       expect( command.params.value ).toBe( FIX.PARAMS.value );
        expect( command.editing ).toBe( true );
        expect( command.disabled ).toBe( true );
    });

@@ -1,15 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { InstantModal } from "component/Global/InstantModal";
+
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractForm from "component/AbstractForm";
-import { Row, Col, Collapse, Table, Spin, Form, Modal, Button, Input, Select } from "antd";
+import { Row, Col, Collapse, Table, Form, Button, Input } from "antd";
 
-const FormItem = Form.Item,
-      connectForm = Form.create(),
-      Panel = Collapse.Panel,
-      Option = Select.Option,
-      LAST_RECORD = { name: "", value: "", editing: true, key: "editing" };
+const connectForm = Form.create(),
+      Panel = Collapse.Panel;
 
 @connectForm
 export class SnippetVariables extends AbstractForm {
@@ -36,7 +32,8 @@ export class SnippetVariables extends AbstractForm {
       {
         title: "Action",
         key: "action",
-        render: ( text, record ) => ( <a onClick={( e ) => this.onRemoveVariable( e, record ) }>Delete</a> )
+        render: ( text, record ) => (
+          <a role="button"  tabIndex={-1} onClick={( e ) => this.onRemoveVariable( e, record ) }>Delete</a> )
       }
     ];
   }
@@ -77,9 +74,7 @@ export class SnippetVariables extends AbstractForm {
   }
 
   render() {
-
-    const { record } = this.props,
-          { getFieldDecorator, getFieldsError } = this.props.form,
+    const { getFieldDecorator } = this.props.form,
           { variables } = this.state;
 
     return ( <ErrorBoundary>

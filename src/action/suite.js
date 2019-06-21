@@ -24,7 +24,7 @@ const actions = createActions({
   RESET_SUITE: ( options ) => validate( options, I.SUITE_OPTIONS )
 });
 
-actions.updateSuite = ( suite ) => ( dispatch, getState ) => {
+actions.updateSuite = ( suite ) => ( dispatch ) => {
   dispatch( projectActions.setProject({ modified: true }) );
   dispatch( actions.setSuite( suite ) );
 };

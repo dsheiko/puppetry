@@ -2,7 +2,6 @@ import { createActions } from "redux-actions";
 import { validate } from "bycontract";
 import * as I from "interface";
 import { handleException } from "./helpers";
-import appActions from "./app";
 import { message } from "antd";
 
 const actions = createActions({

@@ -51,7 +51,8 @@ export class Main extends AbstractComponent {
             onChange={ this.onTabChange }
           >
             <TabPane tab={ targetsLabel } key="targets" id="cSuitePane">
-              <p>Targets are identifiers associated with locators (CSS selector or XPath) that we can refer in the test cases.
+              <p>Targets are identifiers associated with locators (CSS selector or XPath)
+              that we can refer in the test cases.
               </p>
               <p><LearnMore href="https://docs.puppetry.app/target" />
               </p>
@@ -59,11 +60,15 @@ export class Main extends AbstractComponent {
             </TabPane>
 
             <TabPane tab={ groupsLabel } key="groups">
-              <p>Test case is a specification of { "" }<a href="https://docs.puppetry.app/test-step" onClick={ this.onExtClick }>commands, assertions and references</a> { "" }
+              <p>Test case is a specification of { "" }<a href="https://docs.puppetry.app/test-step"
+                onClick={ this.onExtClick }>commands, assertions and references</a> { "" }
               to ensure that a targeted component of the test application acts as intended.
-              Tests cases are organised into logical { "" } <a href="https://docs.puppetry.app/group" onClick={ this.onExtClick }>groups</a> { "" }, representing test contexts.</p>
+              Tests cases are organised into logical { "" } <a href="https://docs.puppetry.app/group"
+                onClick={ this.onExtClick }>groups</a> { "" }, representing test contexts.</p>
 
-              <p>You can use { "" } <a href="https://docs.puppetry.app/managing-assets#drag-and-drop" onClick={ this.onExtClick }>drag&apos;n&apos;drop</a> { "" } to re-arrange rows representing groups/test cases/test steps.</p>
+              <p>You can use { "" } <a href="https://docs.puppetry.app/managing-assets#drag-and-drop"
+                onClick={ this.onExtClick }>drag&apos;n&apos;drop</a> { "" } to re-arrange
+              rows representing groups/test cases/test steps.</p>
               <GroupTable
                 action={ action }
                 selector={ selector }

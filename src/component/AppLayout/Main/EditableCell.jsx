@@ -13,7 +13,8 @@ export class EditableCell extends React.Component {
     record: PropTypes.object.isRequired,
     liftFormStateUp: PropTypes.func.isRequired,
     updateRecord: PropTypes.func.isRequired,
-    prefixIcon: PropTypes.any
+    prefixIcon: PropTypes.any,
+    model: PropTypes.string
   }
 
   state = {

@@ -10,7 +10,7 @@ import { remote } from "electron";
 import classNames from "classnames";
 import { SNIPPETS_GROUP_ID } from "constant";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+
 import * as selectors from "selector/selectors";
 
 const { Menu, MenuItem } = remote,
@@ -226,7 +226,7 @@ export class CommandTable extends AbstractDnDTable {
     return false;
   }
 
-  addSnippet = ( record ) => {
+  addSnippet = () => {
     const { setApp } = this.props.action;
     setApp({
       snippetModal: {

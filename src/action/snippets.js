@@ -1,4 +1,4 @@
-import log from "electron-log";
+import { handleException } from "./helpers";
 import { createActions } from "redux-actions";
 import { readSuite } from "../service/io";
 import { SNIPPETS_FILENAME } from "constant";

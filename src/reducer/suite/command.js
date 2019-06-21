@@ -2,22 +2,11 @@ import uniqid from "uniqid";
 import actions from "action";
 import update from "immutability-helper";
 import {
-  updateTagetsInSuite,
-  getTestsFlat,
-  getCommandsFlat,
-  transferTest,
-  transferCommand,
-  isTargetNotUnique,
   normalizeComplexPayload,
   normalizePayload
 } from "reducer/helpers";
 
-import DEFAULT_STATE, {
-  groupDefaultState,
-  testDefaultState,
-  commandDefaultState,
-  targetDefaultState
-} from "reducer/defaultState";
+import { commandDefaultState } from "reducer/defaultState";
 
 /**
  * @typedef {object} Position

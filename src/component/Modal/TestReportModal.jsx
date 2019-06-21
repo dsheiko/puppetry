@@ -8,6 +8,8 @@ import If from "component/Global/If";
 import * as classes from "./classes";
 import { SelectEnv } from "component/Global/SelectEnv";
 
+/*eslint no-empty: 0*/
+
 const CheckboxGroup = Checkbox.Group;
 
 /**
@@ -120,13 +122,12 @@ export class TestReportModal extends AbstractComponent {
       this.props.action.removeAppTab( "testReport" );
       this.props.action.addAppTab( "testReport" );
     } catch ( err ) {
-
     }
     this.setState({ loading: false });
   }
 
   // Do not update until visible
-  shouldComponentUpdate( nextProps, nextState ) {
+  shouldComponentUpdate( nextProps ) {
     if ( this.props.isVisible !== nextProps.isVisible ) {
       return true;
     }

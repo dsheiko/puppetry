@@ -12,6 +12,7 @@ export const assertMatchesSelector = {
     node: AssertSelector
   },
   description: `Asserts that \`{target}\`
-    target [matches a given selector or pseudo-selector](https://developer.mozilla.org/en-US/docs/Web/API/Element/matches)`,
+    target [matches a given selector or pseudo-selector]`
+  + `(https://developer.mozilla.org/en-US/docs/Web/API/Element/matches)`,
   params: []
 };

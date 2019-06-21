@@ -1,12 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
-import { Form, Modal, Button, Input, Table, Divider, Icon, Popconfirm } from "antd";
+import { Form, Modal, Button, Input, Table, Icon, Popconfirm } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import * as classes from "./classes";
-import { getAppInstallPath } from "service/io";
-import { ruleValidateGenericString } from "service/utils";
-import { confirmDeleteEntity } from "service/smalltalk";
 
 const FormItem = Form.Item,
       connectForm = Form.create();
@@ -66,7 +63,6 @@ export class EditEnvironmentsModal extends AbstractForm {
 
   onClickOk = async ( e ) => {
     const { validateFields, resetFields } = this.props.form,
-          { projectDirectory } = this.props,
           { addEnv, saveProject } = this.props.action;
 
     e.preventDefault();
@@ -83,7 +79,7 @@ export class EditEnvironmentsModal extends AbstractForm {
   }
 
   // Do not update until visible
-  shouldComponentUpdate( nextProps, nextState ) {
+  shouldComponentUpdate( nextProps ) {
     if ( this.props.isVisible !== nextProps.isVisible ) {
       return true;
     }
@@ -95,7 +91,7 @@ export class EditEnvironmentsModal extends AbstractForm {
 
   render() {
     const { isVisible, environments } = this.props,
-          { getFieldDecorator, getFieldsError } = this.props.form,
+          { getFieldDecorator } = this.props.form,
           data = environments.map( item => ({ name: item, key: item }) );
 
     return (
