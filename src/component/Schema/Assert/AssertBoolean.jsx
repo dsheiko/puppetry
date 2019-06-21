@@ -21,7 +21,7 @@ export class AssertBoolean extends React.Component {
           { record } = this.props,
           assert = getAssertion( record ),
           value = typeof assert.value === "undefined" ? true : Boolean( assert.value );
-    console.log({ assert });
+    
     return (
       <Row gutter={24}>
 

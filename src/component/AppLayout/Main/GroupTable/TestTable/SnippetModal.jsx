@@ -21,7 +21,7 @@ export class SnippetModal extends AbstractForm {
 
   onClickOk = async ( e ) => {
     const { validateFields } = this.props.form,
-          { action, record } = this.props;
+          { action, record, snippets } = this.props;
     e.preventDefault();
 
     validateFields( async ( err, values ) => {
@@ -29,12 +29,14 @@ export class SnippetModal extends AbstractForm {
         return;
       }
 
+      const match = Object.values( snippets ).find( s => s.id === values.snippet );
+      
       record.variables = this.state.variables;
 
       if ( record.id ) {
-        action.updateCommand({ ...record, ref: values.snippet, isRef: true });
+        action.updateCommand({ ...record, ref: values.snippet, isRef: true, refName: match.title });
       } else {
-        action.addCommand({ ...record, ref: values.snippet, isRef: true });
+        action.addCommand({ ...record, ref: values.snippet, isRef: true, refName: match.title });
       }
       this.close();
     });

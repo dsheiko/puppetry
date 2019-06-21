@@ -78,7 +78,7 @@ function createSnippetsSuite( dispatch ) {
   }) );
 }
 
-actions.loadSuite = ( filename ) => async ( dispatch, getState ) => {
+actions.loadSuite = ( filename, options = { silent: false } ) => async ( dispatch, getState ) => {
   try {
     const store = getState(),
           { projectDirectory } = store.settings,
@@ -96,7 +96,7 @@ actions.loadSuite = ( filename ) => async ( dispatch, getState ) => {
     }
     dispatch( appActions.addAppTab( "suite" ) );
   } catch ( ex ) {
-    handleException( ex, dispatch, `Cannot load suite ${ filename }` );
+    !options.silent && handleException( ex, dispatch, `Cannot load suite ${ filename }` );
   }
 
 };
@@ -135,18 +135,9 @@ actions.saveSuite = ( options = {}) => async ( dispatch, getState ) => {
   }
 };
 
-actions.openSuiteFile = ( filename ) => ( dispatch ) => {
+actions.openSuiteFile = ( filename, options = { silent: false }) => ( dispatch ) => {
   dispatch( appActions.setApp({ loading: true }) );
-  try {
-    dispatch( actions.loadSuite( filename ) );
-  } catch ( e ) {
-    dispatch( errorActions.setError({
-      visible: true,
-      message: "Cannot open file",
-      description: e.message
-    }) );
-    log.warn( `Renderer process: actions.openSuiteFile: ${ e }` );
-  }
+  dispatch( actions.loadSuite( filename, options ) );
   dispatch( appActions.setApp({ loading: false }) );
 };
 
