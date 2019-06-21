@@ -1,6 +1,5 @@
-import { buildAssertionTpl } from "service/assert";
 import ExpressionParser from "service/ExpressionParser";
-import { INPUT, INPUT_NUMBER, TEXTAREA } from "../../constants";
+import { INPUT } from "../../constants";
 
 export const assignVar = {
   template: ({ params, id }) => {

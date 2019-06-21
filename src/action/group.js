@@ -51,7 +51,6 @@ actions.swapGroup = ( payload ) => async ( dispatch, getState ) => {
     const { sourceInx, targetInx, sourceId, targetId } = payload,
           groups = Object.values( getState().suite.groups ),
           sourceGroup = groups.find( group => group.id === sourceId ),
-          targetGroup = groups.find( group => group.id === targetId ),
           pos = sourceInx >= targetInx ? "before" : "after",
           groupId = uniqid();
 

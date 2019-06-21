@@ -2,13 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Icon, Select, Button, Input } from "antd";
 import Link from "component/Global/Link";
-import faker from "faker";
+
 import { FAKER_METHODS, FAKER_LOCALES } from "./constants";
-import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
+import { getSelectedVariables } from "selector/selectors";
 
 const { Option, OptGroup } = Select;
 
 export class TemplateHelper extends React.Component {
+
+
+  static propTypes = {
+    onChange: PropTypes.func.isRequired,
+    field: PropTypes.any,
+    config: PropTypes.any,
+    variables: PropTypes.any,
+    environments: PropTypes.any
+  }
 
   state = {
     exp: "",
@@ -55,13 +64,13 @@ export class TemplateHelper extends React.Component {
     this.setState({ iterateList: vals });
   }
 
-  onIterateClick = ( vals ) => {
+  onIterateClick = () => {
     this.props.onChange( this.props.field.name,
       `{{ iterate( ${ JSON.stringify( this.state.iterateList ) } ) }}` );
     this.reset();
   }
 
-  onCounterClick = ( vals ) => {
+  onCounterClick = () => {
     this.props.onChange( this.props.field.name,
       `{{ counter() }}` );
     this.reset();
@@ -71,7 +80,7 @@ export class TemplateHelper extends React.Component {
     this.setState({ randomList: vals });
   }
 
-  onRandomClick = ( vals ) => {
+  onRandomClick = () => {
     this.props.onChange( this.props.field.name,
       `{{ random( ${ JSON.stringify( this.state.randomList ) } ) }}` );
     this.reset();
@@ -92,13 +101,14 @@ export class TemplateHelper extends React.Component {
 
   render() {
 
-    const { config, variables, environments } = this.props,
+    const { variables, environments } = this.props,
           { exp, iterateList, randomList, envName, fakerMethod } = this.state,
           [ activeEnv ] = environments,
           selStyle = { width: 160 };
 
     return ( <div className="template-helper" >
-      <span><Icon type="arrow-up" /> Here you can use <Link to="https://docs.puppetry.app/template">template expressions</Link></span>
+      <span><Icon type="arrow-up" /> Here you can use
+        <Link to="https://docs.puppetry.app/template">template expressions</Link></span>
 
       <Select
         placeholder="Select expression"

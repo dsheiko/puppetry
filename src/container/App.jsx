@@ -50,7 +50,8 @@ export class App extends React.Component {
       checkRuntimeTestDirReady: PropTypes.func.isRequired,
       checkNewVersion: PropTypes.func.isRequired,
       setApp: PropTypes.func.isRequired,
-      checkGit: PropTypes.func.isRequired
+      checkGit: PropTypes.func.isRequired,
+      loadSnippets: PropTypes.func.isRequired
     }),
     store: PropTypes.object,
     selector: PropTypes.object

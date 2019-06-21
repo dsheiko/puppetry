@@ -36,7 +36,7 @@ export class EditProjectModal extends AbstractForm {
   onClickOk = async ( e ) => {
     const { validateFields } = this.props.form,
           { projectDirectory } = this.props,
-          { updateProject, addSettingsProject, saveSettings } = this.props.action;
+          { updateProject } = this.props.action;
 
     e.preventDefault();
 
@@ -50,7 +50,7 @@ export class EditProjectModal extends AbstractForm {
   }
 
   // Do not update until visible
-  shouldComponentUpdate( nextProps, nextState ) {
+  shouldComponentUpdate( nextProps ) {
     if ( this.props.isVisible !== nextProps.isVisible ) {
       return true;
     }

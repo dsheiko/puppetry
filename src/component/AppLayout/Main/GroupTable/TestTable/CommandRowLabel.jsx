@@ -14,7 +14,8 @@ const OPERATOR_MAP = {
 export class CommandRowLabel extends React.Component {
 
    static propTypes = {
-     record: PropTypes.object.isRequired
+     record: PropTypes.object.isRequired,
+     snippets: PropTypes.any
    }
 
 

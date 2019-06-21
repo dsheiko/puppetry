@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Icon, Alert, Select, Checkbox, Modal, Button, message } from "antd";
+import { Alert, Checkbox, Modal, Button, message } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { exportProject, isDirEmpty } from "service/io";
 import BrowseDirectory from "component/Global/BrowseDirectory";
@@ -12,8 +12,7 @@ import * as classes from "./classes";
 import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
 import { SelectEnv } from "component/Global/SelectEnv";
 
-const CheckboxGroup = Checkbox.Group,
-      { Option } = Select;
+const CheckboxGroup = Checkbox.Group;
 
 export class ExportProjectModal extends React.Component {
 
@@ -28,7 +27,10 @@ export class ExportProjectModal extends React.Component {
     currentSuite: PropTypes.string.isRequired,
     exportDirectory: PropTypes.string.isRequired,
     projectDirectory: PropTypes.string.isRequired,
-    files: PropTypes.arrayOf( PropTypes.string ).isRequired
+    files: PropTypes.arrayOf( PropTypes.string ).isRequired,
+    snippets: PropTypes.any,
+    project: PropTypes.any,
+    environment: PropTypes.any
   }
 
   state = {
@@ -134,7 +136,7 @@ export class ExportProjectModal extends React.Component {
   }
 
   // Do not update until visible
-  shouldComponentUpdate( nextProps, nextState ) {
+  shouldComponentUpdate( nextProps ) {
     if ( this.props.isVisible !== nextProps.isVisible ) {
       return true;
     }

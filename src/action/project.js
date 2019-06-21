@@ -19,6 +19,8 @@ import appActions from "./app";
 import gitActions from "./git";
 import suiteActions from "./suite";
 
+/*eslint no-empty: 0*/
+
 const actions = createActions({
   SET_PROJECT: ( project ) => validate( project, I.PROJECT_OPTIONS ),
   ADD_ENV: ( env ) => env,
@@ -110,8 +112,6 @@ actions.saveProject = () => async ( dispatch, getState ) => {
 
 actions.updateProject = ({ projectDirectory, name } = {}) => async ( dispatch, getState ) => {
   try {
-    const store = getState();
-
     if ( !name ) {
       throw new InvalidArgumentError( "Empty project name" );
     }

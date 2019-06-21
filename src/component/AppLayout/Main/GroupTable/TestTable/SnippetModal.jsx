@@ -1,14 +1,12 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { InstantModal } from "component/Global/InstantModal";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractForm from "component/AbstractForm";
 import { SnippetVariables } from "./SnippetVariables";
-import { Collapse, Table, Spin, Form, Modal, Button, Input, Select } from "antd";
+import { Form, Button, Select } from "antd";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
-      Panel = Collapse.Panel,
       Option = Select.Option;
 
 @connectForm
@@ -27,7 +25,6 @@ export class SnippetModal extends AbstractForm {
     e.preventDefault();
 
     validateFields( async ( err, values ) => {
-      const { name } = values;
       if ( err ) {
         return;
       }
@@ -64,7 +61,7 @@ export class SnippetModal extends AbstractForm {
   render() {
 
     const { isVisible, snippets, record } = this.props,
-          { getFieldDecorator, getFieldsError } = this.props.form,
+          { getFieldDecorator } = this.props.form,
           { loading } = this.state;
 
     return ( <ErrorBoundary>

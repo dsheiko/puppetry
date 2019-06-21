@@ -50,7 +50,9 @@ export const waitForNavigation = {
           description: `Where events can be either:
 - **[load](https://developer.mozilla.org/en-US/docs/Web/Events/load)** - fires when a`
           + ` resource and its dependent resources have finished loading.
-- **[domcontentloaded](https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded)**  ` + `- fires when the initial HTML document has been  completely loaded and parsed, without waiting for stylesheets, images, and subframes to finish loading.
+- **[domcontentloaded](https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded)**  `
+          + `- fires when the initial HTML document has been  completely loaded and parsed, `
+          + `without waiting for stylesheets, images, and subframes to finish loading.
 - **networkidle0** - fires when there are no more than 0 network connections for at least 500 ms.
 - **networkidle2** - fires when there are no more than 2 network connections for at least 500 ms.`
         }

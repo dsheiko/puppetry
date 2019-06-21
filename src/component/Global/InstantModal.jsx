@@ -12,6 +12,7 @@ export class InstantModal extends React.Component {
     onOk: PropTypes.func,
     onCancel: PropTypes.func.isRequired,
     footer: PropTypes.array.isRequired,
+    className: PropTypes.string,
     children: PropTypes.any
   }
 

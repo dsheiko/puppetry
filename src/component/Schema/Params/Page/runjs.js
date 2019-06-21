@@ -2,7 +2,7 @@ import { TEXTAREA } from "../../constants";
 import { justify } from "service/assert";
 
 export const runjs = {
-  template: ({ params, id }) => {
+  template: ({ params }) => {
     const { value } = params;
     return justify( `
 // Run custom JavaScript in the test

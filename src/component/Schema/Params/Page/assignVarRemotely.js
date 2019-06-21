@@ -1,4 +1,3 @@
-import { buildAssertionTpl } from "service/assert";
 import ExpressionParser from "service/ExpressionParser";
 import { INPUT, INPUT_NUMBER, TEXTAREA } from "../../constants";
 

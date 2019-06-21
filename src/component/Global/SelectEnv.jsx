@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AbstractComponent from "component/AbstractComponent";
-import { Icon, Alert, Select, Checkbox, Modal, Button, message } from "antd";
-import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
+import { Icon, Select  } from "antd";
+import { getActiveEnvironment } from "selector/selectors";
 
 const { Option } = Select;
 

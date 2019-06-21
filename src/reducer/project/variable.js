@@ -6,12 +6,7 @@ import {
   normalizeComplexPayload
 } from "reducer/helpers";
 
-import DEFAULT_STATE, {
-  groupDefaultState,
-  testDefaultState,
-  commandDefaultState,
-  variableDefaultState
-} from "reducer/defaultState";
+import { variableDefaultState } from "reducer/defaultState";
 
 
 /**
