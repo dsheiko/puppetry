@@ -3,7 +3,7 @@ const { ipcMain, dialog, remote, BrowserWindow, rendererWindow } = require( "ele
         E_TEST_REPORTED, E_WATCH_FILE_NAVIGATOR, E_BROWSE_FILE, E_FILE_SELECTED,
         E_INSTALL_RUNTIME_TEST, E_SHOW_CONFIRM_DIALOG, E_CONFIRM_DIALOG_VALUE,
         E_GIT_INIT, E_GIT_COMMIT, E_GIT_SET_REMOTE, E_RENDERER_ERROR, E_RENDERER_INFO,
-        E_GIT_PUSH, E_GIT_SYNC, E_GIT_LOG, E_GIT_LOG_RESPONSE,
+        E_GIT_PUSH, E_GIT_SYNC, E_GIT_SYNC_RESPONSE, E_GIT_LOG, E_GIT_LOG_RESPONSE,
         E_GIT_CHECKOUT, E_GIT_CHECKOUT_RESPONSE,
         E_GIT_CHECKOUT_M, E_GIT_CHECKOUT_M_RESPONSE,
         E_GIT_REVERT, E_GIT_REVERT_RESPONSE,
@@ -138,6 +138,7 @@ module.exports = function( mainWindow ) {
           + `Remote version history is fetched 'as-it-is' and the current version put on top of it` );
       }
       event.sender.send( E_RENDERER_INFO, `Changes synced with remote repository successfully` );
+      event.sender.send( E_GIT_SYNC_RESPONSE );
     } catch ( err ) {
       console.error( err.message, err );
       log.error( `Main process: event-dispatcher.E_GIT_SYNC: ${ err.message }` );

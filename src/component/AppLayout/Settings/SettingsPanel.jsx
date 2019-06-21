@@ -31,7 +31,7 @@ export class SettingsPanel extends React.Component {
     const { action, project, projectDirectory, git } = this.props,
           panes = project.appPanels.settings.panes;
 
-    let activeKey = "variables";
+    let activeKey = projectDirectory ? "variables" : "git";
     if ( panes.length ) {
       [ activeKey ] = panes;
     }
@@ -46,9 +46,9 @@ export class SettingsPanel extends React.Component {
             animated={ false }
             onChange={ this.onTabChange }
           >
-            <TabPane tab="Template Variables" key="variables">
+            { projectDirectory && <TabPane tab="Template Variables" key="variables">
               <VariablesPane />
-            </TabPane>
+            </TabPane> }
 
             <TabPane tab="GIT" key="git">
               <GitPane action={ action } git={ git } projectDirectory={ projectDirectory } />

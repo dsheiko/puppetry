@@ -20,7 +20,8 @@ const actions = createActions({
 actions.saveGit = ( options ) => async ( dispatch, getState ) => {
   try {
     await dispatch( actions.setGit( options ) );
-    await saveGit( getState() );
+    const store = getState();
+    await saveGit( store );
   } catch ( ex ) {
     handleException( ex, dispatch, "Cannot save Git" );
   }
@@ -28,7 +29,15 @@ actions.saveGit = ( options ) => async ( dispatch, getState ) => {
 };
 
 actions.loadGit = ( directory = null ) => async ( dispatch, getState ) => {
-  const projectDirectory = directory || getState().settings.projectDirectory;
+  const projectDirectory = directory || getState().settings.projectDirectory,
+        lastSaveGitCfg = localStorage.getItem( "git" );
+  // Backup git config for non open project
+  if ( lastSaveGitCfg ) {
+    dispatch( actions.setGit( JSON.parse( lastSaveGitCfg ) ) );
+  }
+  if ( !directory ) {
+    return;
+  }
   try {
     const data = await readGit( projectDirectory );
     dispatch( actions.setGit( data ) );
@@ -50,16 +59,19 @@ actions.checkGit = ( projectDirectory ) => async ( dispatch ) => {
 
 
 export const saveGit = debounce( async ( store, isTouch = false ) => {
+  const ts = isTouch ? {} : { savedAt: dateToTs() },
+        data = {
+          ...store.git,
+          puppetry: version,
+          ...ts,
+          modified: false
+        };
+
+  localStorage.setItem( "git", JSON.stringify( data ) );
   if ( !store.settings.projectDirectory ) {
     return;
   }
-  const ts = isTouch ? {} : { savedAt: dateToTs() };
-  await writeGit( store.settings.projectDirectory,  {
-    ...store.git,
-    puppetry: version,
-    ...ts,
-    modified: false
-  });
+  await writeGit( store.settings.projectDirectory, data );
 
 }, 100 );
 
