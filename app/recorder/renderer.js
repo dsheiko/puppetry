@@ -1,6 +1,6 @@
 const { remote, ipcRenderer, shell } = require ( "electron" ),
       { E_RECEIVE_RECORDER_SESSION } = require( "./constant" ),
-      devices = require( "../src/vendor/puppeteer/DeviceDescriptors" ),
+      devices = require( "./recorder/puppeteer/DeviceDescriptors" ),
       { registerElement, targets } = require( "./recorder/service/target" ),
       find = document.querySelector.bind( document ),
       webview = find( "webview" ),
