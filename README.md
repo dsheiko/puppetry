@@ -10,6 +10,7 @@
 [<img src="https://img.shields.io/badge/slack-puppetry.app-yellow.svg?logo=slack">](https://puppetry-app.slack.com)
 [![Total downloads](https://img.shields.io/github/downloads/dsheiko/puppetry/total.svg)](https://github.com/dsheiko/puppetry/releases)
 [![Latest download](https://img.shields.io/github/downloads/dsheiko/puppetry/v1.0.10/total.svg)](https://github.com/dsheiko/puppetry/releases/latest)
+[![Latest download](https://img.shields.io/github/downloads/dsheiko/puppetry/v2.0.0-RC.1/total.svg)](https://github.com/dsheiko/puppetry/releases/tag/v2.0.0-RC.1)
 
 
 <h3 align="center">CODELESS END-TO-END AUTOMATED TESTING</h3>
