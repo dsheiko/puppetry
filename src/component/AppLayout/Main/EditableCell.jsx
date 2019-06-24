@@ -47,8 +47,12 @@ export class EditableCell extends React.Component {
           };
 
     this.setState( state );
+    // probably doesn't make sense to lift up anything but value
+    // actually event better get it via get value trick...
+    // but ew use REdux to change record.validationError whhat refered in add/sae button state.
     liftFormStateUp( dataIndex, state, record.id );
   }
+
 
   onKeyPress = ( e, record ) => {
     switch ( e.key ){
@@ -63,7 +67,11 @@ export class EditableCell extends React.Component {
    */
   componentDidMount() {
     const { dataIndex, record, liftFormStateUp } = this.props;
-    liftFormStateUp( dataIndex, { value: record[ dataIndex ], error: "", pristine: true }, record.id );
+    liftFormStateUp( dataIndex, {
+      value: record[ dataIndex ],
+      error: this.getError( record[ dataIndex ], dataIndex ),
+      pristine: true
+    }, record.id );
   }
 
   render() {

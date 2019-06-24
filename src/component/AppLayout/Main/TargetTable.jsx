@@ -41,7 +41,7 @@ export class TargetTable extends AbstractEditableTable {
             onSubmit={ this.onSubmit }
             dataIndex="selector"
             className="input--selector"
-            placeholder="Enter selector"
+            placeholder="Enter CSS selector or xPath"
             liftFormStateUp={ this.liftFormStateUp }
             model={ this.model }
             updateRecord={ this.updateRecord }
