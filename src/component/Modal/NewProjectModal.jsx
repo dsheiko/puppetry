@@ -172,6 +172,12 @@ export class NewProjectModal extends AbstractForm {
                 rules: [{
                   required: true,
                   message: "Please enter suite title"
+                },
+                {
+                  validator: ruleValidateGenericString
+                },
+                {
+                  transform: ( value ) => value.trim()
                 }]
               })(
                 <Input onChange={ this.onNameChange } placeholder="e.g. Main page"

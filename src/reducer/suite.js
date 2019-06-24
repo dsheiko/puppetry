@@ -18,7 +18,7 @@ export default handleActions(
     }),
 
     [ actions.resetSuite ]: ( state, { payload = {} }) => {
-      Object.keys( payload )
+      return Object.keys( payload )
       ? update( state, { $set: payload })
       : DEFAULT_STATE.suite;
     },

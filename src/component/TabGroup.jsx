@@ -47,7 +47,8 @@ export class TabGroup extends React.Component {
           { suite } = store,
 
           suiteTabTitle = suite.filename
-            ? ( store.suite.snippets ? "Snippets"
+            ? ( store.suite.snippets
+              ? "Snippets"
               : <span><Icon title={ "Suite: " + suite.title } type="container" />{ suite.filename }</span> )
             : "Loading..." ,
 
