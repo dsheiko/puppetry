@@ -27,8 +27,8 @@ export class ProjectExplorer extends React.Component {
     projectDirectory: PropTypes.string.isRequired,
     projects: PropTypes.object.isRequired,
 
-    active: PropTypes.string.isRequired,
-    suiteModified: PropTypes.bool.isRequired
+    active: PropTypes.string,
+    suiteModified: PropTypes.bool
   }
 
   state = {
@@ -47,7 +47,16 @@ export class ProjectExplorer extends React.Component {
   onRightClick = ( e ) => {
     const dir = e.target.dataset.dir,
           { projectDirectory } = this.props,
-          { loadProject, saveSettings, removeSettingsProject, removeAppTab, resetSuite, resetProject } = this.props.action;
+          { loadProject, saveSettings, removeSettingsProject, removeAppTab, resetSuite, resetProject } = this.props.action,
+
+          removeTheLastProject = () => {
+            removeSettingsProject( dir );
+            localStorage.setItem( "settings", "{}" );
+            removeAppTab( "suite" );
+            resetSuite();
+            resetProject();
+            saveSettings({ projectDirectory: "" });
+          };
 
     e.preventDefault();
 
@@ -56,13 +65,26 @@ export class ProjectExplorer extends React.Component {
       menu.append( new MenuItem({
         label: "Delete from the list",
         click: async () => {
+
+          if ( this.props.suiteModified ) {
+            await confirmUnsavedChanges({
+              saveSuite: this.props.action.saveSuite,
+              setSuite: this.props.action.setSuite
+            });
+          }
+
+          // If current project the only one, clean start
+          const dirs = Object.keys( this.props.projects );
+          if ( dirs.length < 2 ) {
+            return removeTheLastProject();
+          }
+          // If more than one project than jump to it and remove last open
+          const otherDir = dirs.find( d => d !== dir );
           removeSettingsProject( dir );
-          localStorage.setItem( "settings", "{}" );
-          removeAppTab( "suite" );
-          resetSuite();
-          resetProject();
-          saveSettings({ projectDirectory: "" });
+          saveSettings({ projectDirectory: otherDir });
+          loadProject();
         }
+
       }) );
       menu.popup({
         x: e.x,

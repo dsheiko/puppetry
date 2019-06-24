@@ -60,7 +60,29 @@ Click edit link next to project title in the toolbar
 ### G4.1 Modal window
 - G4.1.1 User cannot proceed with empty project name
 - G4.1.2 Project location is shown
-- G4.1.2 app data directory is shown
-- G4.1.2 click on cancel closes window
-- G4.1.2 click on X closes window
-- G4.1.2 click on save updates project name
+- G4.1.3 app data directory is shown
+- G4.1.4 click on cancel closes window
+- G4.1.5 click on X closes window
+- G4.1.6 click on save updates project name
+
+
+
+
+# Project Explorer
+
+## X1 Overview
+Open at least 2 projects
+
+## X1.1 Projects
+- X1.1.1 - all recently open projects available
+- X1.1.2 - single click on project changes focus
+- X1.1.3 - double click on project opens the project and it's first suite (unless the stored one in web-storage exists)
+- X1.1.4 - right click shows up context menu
+- X1.1.5 - context menu shows `OPEN` when target project isn't active one
+- X1.1.6 - context menu `OPEN` opens a project
+- X1.1.7 - context menu shows `Remove from the list`
+
+## X1.2 Context menu `Remove from the list`
+- X1.2.1 - when more than one project in the list, focused not active one - simply removes it from the list
+- X1.2.2 - when more than one project in the list, focused active one - removes it and opens the next one
+- X1.2.3 - when the only project in the list - loads clean state

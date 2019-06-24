@@ -27,9 +27,9 @@ export class MainMenu extends GitEnhancedMenu {
     }),
     files: PropTypes.array.isRequired,
     readyToRunTests: PropTypes.bool.isRequired,
-    projectDirectory: PropTypes.string.isRequired,
-    suiteFilename: PropTypes.string.isRequired,
-    suiteModified: PropTypes.bool.isRequired
+    projectDirectory: PropTypes.string,
+    suiteFilename: PropTypes.string,
+    suiteModified: PropTypes.bool
   }
 
 
