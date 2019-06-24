@@ -1,4 +1,3 @@
-import log from "electron-log";
 import { createActions } from "redux-actions";
 import { validate } from "bycontract";
 import * as I from "interface";
@@ -78,7 +77,7 @@ function createSnippetsSuite( dispatch ) {
   }) );
 }
 
-actions.loadSuite = ( filename, options = { silent: false } ) => async ( dispatch, getState ) => {
+actions.loadSuite = ( filename, options = { silent: false }) => async ( dispatch, getState ) => {
   try {
     const store = getState(),
           { projectDirectory } = store.settings,

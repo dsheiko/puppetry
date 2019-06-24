@@ -140,8 +140,8 @@ export class CommandRowLabel extends React.Component {
    renderRef() {
      const { record, snippets } = this.props,
            title = snippets.hasOwnProperty( record.ref )
-              ? snippets[ record.ref ].title
-              : ( record.refName || "reference not found" );
+             ? snippets[ record.ref ].title
+             : ( record.refName || "reference not found" );
 
      return ( <div className="container--editable-cell command--ref">
        <Icon

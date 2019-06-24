@@ -13,9 +13,13 @@ import log from "electron-log";
 import { App } from "./container/App.jsx";
 import reducer from "./reducer";
 
+window.onerror = ( err, url, lineNumber ) => {
+  log.error( `Renderer process: Caught exception: ${err} in ${ url }: ${ lineNumber }` );
+};
+
 process.on( "uncaughtException", ( err ) => {
   console.error( "uncaughtException", err );
-  log.warn( `Renderer process: Caught exception: ${err}` );
+  log.error( `Renderer process: Caught exception: ${err}` );
 });
 
 // Store enhancement

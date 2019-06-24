@@ -30,7 +30,7 @@ export class SnippetModal extends AbstractForm {
       }
 
       const match = Object.values( snippets ).find( s => s.id === values.snippet );
-      
+
       record.variables = this.state.variables;
 
       if ( record.id ) {

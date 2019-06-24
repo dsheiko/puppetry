@@ -1,4 +1,5 @@
 const { remote, ipcRenderer, shell } = require ( "electron" ),
+      log = require( "electron-log" ),
       { E_RECEIVE_RECORDER_SESSION } = require( "./constant" ),
       devices = require( "./recorder/puppeteer/DeviceDescriptors" ),
       { registerElement, targets } = require( "./recorder/service/target" ),
@@ -31,7 +32,7 @@ function loadUrl( url ) {
   commands.push({
     target: "page",
     method: "goto",
-    params: { url, timeout: 30000, waitUntil: "load" }
+    params: { url, timeout: 30000, waitUntil: "domcontentloaded" }
   });
 }
 
@@ -56,24 +57,30 @@ async function registerTarget( selector ) {
 }
 
 function findTargetPatch( clientTargets, namedTargets ) {
-  const namedArr = Object.entries( namedTargets );
-  return Object
-    .entries( clientTargets )
-    .reduce(( carry, pair ) => {
+  try {
+    const namedArr = Object.entries( namedTargets );
+    return Object
+      .entries( clientTargets )
+      .reduce(( carry, pair ) => {
 
-    const match = namedArr.find( named => named[ 1 ] === pair[ 1 ] );
-    if ( match ) {
-    	carry.push([ pair[ 0 ], match[ 0 ]]);
-    }
-    return carry;
-  }, []);
+        const match = namedArr.find( named => named[ 1 ] === pair[ 1 ] );
+      if ( match ) {
+        carry.push([ pair[ 0 ], match[ 0 ]]);
+      }
+      return carry;
+    }, []);
+  } catch ( e ) {
+    log.warn( `renderer.js process: findTargetPatch(): ${ e }` );
+  }
+
 }
 
 function applyPatchToTargets( clientTargets, patch ) {
-  return Object
-    .entries( clientTargets )
-    .reduce(( carry, pair ) => {
-    	const match = patch.find( item => item[ 0 ] === pair[ 0 ] );
+  try {
+    return Object
+      .entries( clientTargets )
+      .reduce(( carry, pair ) => {
+        const match = patch.find( item => item[ 0 ] === pair[ 0 ] );
     	if ( match ) {
       	carry[ match[ 1 ] ] = pair[ 1 ];
     		return carry;
@@ -81,32 +88,51 @@ function applyPatchToTargets( clientTargets, patch ) {
     	carry[ pair[ 0 ] ] = pair[ 1 ];
     	return carry;
   	}, {});
+  } catch ( e ) {
+    log.warn( `renderer.js process: applyPatchToTargets(): ${ e }` );
+  }
+
 }
 
 function applyPatchToCommands( clientGroups, patch ) {
-  return clientGroups.map( group => {
-    const match = patch.find( item => item[ 0 ] === group.target );
-    if ( match ) {
-      group.target = match[ 1 ];
-    }
-    return group;
-  });
+  try {
+    return clientGroups.map( group => {
+      const match = patch.find( item => item[ 0 ] === group.target );
+      if ( match ) {
+        group.target = match[ 1 ];
+      }
+      return group;
+    });
+  } catch ( e ) {
+    log.warn( `renderer.js process: applyPatchToCommands(): ${ e }` );
+  }
+
 }
 
 function registerCommand({ target, method, params }) {
-  if ( target !== "page" ) {
-    target = registerElement( target );
+  try {
+    if ( target !== "page" ) {
+      target = registerElement( target );
+    }
+    const last = commands[ commands.length - 1 ];
+    // type normally accompanies with click
+    if ( method === "type" &&  last.method === "click" && target === last.target ) {
+      commands.pop();
+    }
+    // repeating input, take only the last commmand as it will be used with el.type()
+    if ( method === "type" && last.method === method && target === last.target ) {
+      commands.pop();
+    }
+    //
+    if ( method === "waitForNavigation" && last.method === "goto" && target === last.target ) {
+      return;
+    }
+
+    commands.push({ target, method, params });
+  } catch ( e ) {
+    log.warn( `renderer.js process: registerCommand(): ${ e }` );
   }
-  const last = commands[ commands.length - 1 ];
-  // type normally accompanies with click
-  if ( method === "type" &&  last.method === "click" && target === last.target ) {
-    commands.pop();
-  }
-  // repeating input, take only the last commmand as it will be used with el.type()
-  if ( method === "type" && last.method === method && target === last.target ) {
-    commands.pop();
-  }
-  commands.push({ target, method, params });
+
 }
 
 webview.addEventListener( "ipc-message", e => {
@@ -141,23 +167,31 @@ reportLink.addEventListener( "click", ( e ) => {
 
 // OK (Create Suite)
 okBtn.addEventListener( "click", ( e ) => {
-  let payload = [ targets, commands ];
   e.preventDefault();
-
-  if ( Object.keys( namedTargets ).length ) {
+  okBtn.setAttribute( "disabled", true );
+  setTimeout(() => {
     try {
-      const patch = findTargetPatch( targets, namedTargets );
-      payload = [
-        Object.assign( applyPatchToTargets( targets, patch ), namedTargets ),
-        applyPatchToCommands( commands, patch )
-      ];
-    } catch ( e ) {
-      console.error( e );
-    }
-  }
-  ipcRenderer.send( E_RECEIVE_RECORDER_SESSION, payload[ 0 ], payload[ 1 ] );
-  remote.getCurrentWindow().close();
+      let payload = [ targets, commands ];
 
+
+      if ( Object.keys( namedTargets ).length ) {
+        try {
+          const patch = findTargetPatch( targets, namedTargets );
+          payload = [
+            Object.assign( applyPatchToTargets( targets, patch ), namedTargets ),
+            applyPatchToCommands( commands, patch )
+          ];
+        } catch ( e ) {
+          console.error( e );
+        }
+      }
+      ipcRenderer.send( E_RECEIVE_RECORDER_SESSION, payload[ 0 ], payload[ 1 ] );
+      remote.getCurrentWindow().close();
+    } catch ( e ) {
+      log.warn( `renderer.js process: OK btn listener: ${ e }` );
+    }
+  }, 200 );
+ 
 }, false );
 
 
@@ -179,18 +213,23 @@ options.forEach( data => {
 emulateSelect.classList.remove( "is-hidden" );
 
 emulateSelect.addEventListener( "input", ( e ) => {
-  const val = e.target.value;
-  e.preventDefault();
-  if ( val === "default" ) {
-    remote.getCurrentWindow().setSize( 1366, 768 + TOOLBAR_HEIGHT );
-    return;
-  }
-  const match = devices.find( data => data.name === val );
-  if ( match ) {
-    remote.getCurrentWindow().setSize(
-      match.viewport.width,
+  try {
+    const val = e.target.value;
+    e.preventDefault();
+    if ( val === "default" ) {
+      remote.getCurrentWindow().setSize( 1366, 768 + TOOLBAR_HEIGHT );
+      return;
+    }
+    const match = devices.find( data => data.name === val );
+    if ( match ) {
+      remote.getCurrentWindow().setSize(
+        match.viewport.width,
       match.viewport.height + TOOLBAR_HEIGHT
-    );
-    return;
+        );
+      return;
+    }
+  } catch ( e ) {
+    log.warn( `renderer.js process: on viewport change: ${ e }` );
   }
+
 }, false );
