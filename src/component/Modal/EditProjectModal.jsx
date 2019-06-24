@@ -46,6 +46,7 @@ export class EditProjectModal extends AbstractForm {
         return;
       }
       await updateProject({ projectDirectory, name });
+      this.close();
     });
   }
 
