@@ -20,7 +20,7 @@ import snippetsActions from "./snippets";
 
 const actions = createActions({
   SET_SUITE: ( options ) => validate( options, I.SUITE_OPTIONS ),
-  RESET_SUITE: ( options ) => validate( options, I.SUITE_OPTIONS )
+  RESET_SUITE: ( options ) => options
 });
 
 actions.updateSuite = ( suite ) => ( dispatch ) => {

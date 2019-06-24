@@ -18,7 +18,9 @@ export class ProjectExplorer extends React.Component {
       removeSettingsProject: PropTypes.func.isRequired,
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired,
-      removeAppTab: PropTypes.func.isRequired
+      removeAppTab: PropTypes.func.isRequired,
+      resetSuite: PropTypes.func.isRequired,
+      resetProject: PropTypes.func.isRequired
     }),
 
     files: PropTypes.arrayOf( PropTypes.string ).isRequired,
@@ -45,7 +47,7 @@ export class ProjectExplorer extends React.Component {
   onRightClick = ( e ) => {
     const dir = e.target.dataset.dir,
           { projectDirectory } = this.props,
-          { loadProject, saveSettings, removeSettingsProject, removeAppTab } = this.props.action;
+          { loadProject, saveSettings, removeSettingsProject, removeAppTab, resetSuite, resetProject } = this.props.action;
 
     e.preventDefault();
 
@@ -57,6 +59,8 @@ export class ProjectExplorer extends React.Component {
           removeSettingsProject( dir );
           localStorage.setItem( "settings", "{}" );
           removeAppTab( "suite" );
+          resetSuite();
+          resetProject();
           saveSettings({ projectDirectory: "" });
         }
       }) );

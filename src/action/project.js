@@ -25,6 +25,7 @@ import suiteActions from "./suite";
 
 const actions = createActions({
   SET_PROJECT: ( project ) => validate( project, I.PROJECT_OPTIONS ),
+  RESET_PROJECT: () => {},
   ADD_ENV: ( env ) => env,
   REMOVE_ENV: ( env ) => env,
   UPDATE_PROJECT_PANES: ( panel, panes ) => ({ panel, panes })

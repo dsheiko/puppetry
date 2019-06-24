@@ -17,6 +17,11 @@ export default handleActions(
     },
 
 
+    [ actions.resetProject ]: ( state ) => update( state, {
+      $set: DEFAULT_STATE.project
+    }),
+
+
     [ actions.addEnv ]: ( state, { payload }) => {
       if ( !payload ) {
         return state;
