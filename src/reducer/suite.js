@@ -17,9 +17,11 @@ export default handleActions(
       $merge: payload
     }),
 
-    [ actions.resetSuite ]: ( state, { payload }) => update( state, {
-      $set: payload
-    }),
+    [ actions.resetSuite ]: ( state, { payload = {} }) => {
+      Object.keys( payload )
+      ? update( state, { $set: payload })
+      : DEFAULT_STATE.suite;
+    },
 
     ...target,
     ...group,
