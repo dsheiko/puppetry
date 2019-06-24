@@ -22,7 +22,7 @@ export const assertNodeCount = {
           placeholder: "e.g div",
           rules: [{
             required: true,
-            message: "Enter selector"
+            message: "Enter CSS selector"
           }]
         }
       ]
