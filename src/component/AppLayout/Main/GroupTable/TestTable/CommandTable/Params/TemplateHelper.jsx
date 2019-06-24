@@ -107,7 +107,7 @@ export class TemplateHelper extends React.Component {
           selStyle = { width: 160 };
 
     return ( <div className="template-helper" >
-      <span><Icon type="arrow-up" /> Here you can use
+      <span><Icon type="arrow-up" /> Here you can use{ " " }
         <Link to="https://docs.puppetry.app/template">template expressions</Link></span>
 
       <Select

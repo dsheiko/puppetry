@@ -41,7 +41,7 @@ export class GitSyncModal extends AbstractForm {
   sync() {
     const { git } = this.props;
     this.props.action.setApp({ loading: true });
-    setTimeout(() => {
+    setTimeout( () => {
       ipcRenderer.send( E_GIT_SYNC, this.props.projectDirectory, {
         credentialsAuthMethod: git.credentialsAuthMethod,
         credentialsUsername: git.credentialsUsername,

@@ -64,7 +64,7 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
     dispatch( appActions.setApp({ loading: false }) );
   }
 
-  if ( project.lastOpenSuite && fs.existsSync( join( projectDirectory, project.lastOpenSuite ) )) {
+  if ( project.lastOpenSuite && fs.existsSync( join( projectDirectory, project.lastOpenSuite ) ) ) {
     await dispatch( suiteActions.openSuiteFile( project.lastOpenSuite, { silent: true  }) );
   } else {
     const files = getState().app.project.files;

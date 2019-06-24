@@ -294,7 +294,8 @@ export class MainMenu extends GitEnhancedMenu {
                 <Menu.Item key="git5" disabled={ !suiteFilename || !git.initialized || gitDetachedHeadState }
                   onClick={ this.onFileGitCommit }
                   id="cMainMenuFileGitCommit">Commit...{ " " }<kbd>{ ostr( "Ctrl-Shift-S" ) }</kbd></Menu.Item>
-                <Menu.Item key="git6" disabled={ !suiteFilename || !git.initialized || !git.hasRemote || gitDetachedHeadState }
+                <Menu.Item key="git6"
+                  disabled={ !suiteFilename || !git.initialized || !git.hasRemote || gitDetachedHeadState }
                   onClick={ this.onFileGitSync } id="cMainMenuFileGitPull">
                   Sync with remote...</Menu.Item>
 

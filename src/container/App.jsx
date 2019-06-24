@@ -53,6 +53,7 @@ export class App extends React.Component {
       checkNewVersion: PropTypes.func.isRequired,
       setApp: PropTypes.func.isRequired,
       checkGit: PropTypes.func.isRequired,
+      loadGit: PropTypes.func,
       loadSnippets: PropTypes.func.isRequired
     }),
     store: PropTypes.object,
@@ -60,8 +61,8 @@ export class App extends React.Component {
   }
 
   onSyncResponse = () => {
-     this.props.action.loadProject();
-     this.props.action.setApp({ loading: false });
+    this.props.action.loadProject();
+    this.props.action.setApp({ loading: false });
   }
 
   async componentDidMount() {
@@ -77,7 +78,7 @@ export class App extends React.Component {
           settings = loadSettings();
 
 
-  ipcRenderer.removeAllListeners( E_GIT_SYNC_RESPONSE );
+    ipcRenderer.removeAllListeners( E_GIT_SYNC_RESPONSE );
     ipcRenderer.once( E_GIT_SYNC_RESPONSE, this.onSyncResponse );
 
     setApp({ greeting: GREETINGS[ Math.floor( Math.random() * GREETINGS.length ) ] });
