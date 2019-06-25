@@ -479,3 +479,73 @@ Click on File / Create suite or Ctrl-N
 ## SS1.12 Copy/paste from expandable menu
 - SS1.12.1 - user can copy a focused record
 - SS1.12.2 - user can paste copied  record after a focused one
+
+## SS1.13 Insert from expandable menu
+- SS1.13.1 - user can insert a record after a focused one
+
+## SS1.14 Insert from context menu
+- SS1.14.1 - user can insert a record after a focused one
+
+
+# Settings / Template Variables
+
+## SEV1 Template Variable Table
+
+## SEV1.1 Add
+- SEV1.1.1 - user cannot proceed with invalid name (shall be uppercase, underscore)
+- SEV1.1.2 - user cannot proceed with empty name
+- SEV1.1.3 - if user provides an existing variable name, it changes for unique name on submit
+- SEV1.1.4 - user can submit by press ENTER
+
+## SEV1.2 Edit
+- SEV1.2.1 - user cannot proceed with invalid target name (shall be uppercase, underscore)
+- SEV1.2.2 - user cannot proceed with empty locator
+- SEV1.2.3 - if user provides an existing target name, it changes for unique name on submit
+- SEV1.2.4 - user can submit by press ENTER
+- SEV1.2.5 - user can edit from context menu
+
+## SEV1.3 Edit as CSV
+- SEV1.3.1 - user can change locators
+- SEV1.3.2 - user can change targets
+- SEV1.3.3 - user can change order of pairs
+- SEV1.3.4 - user can proceed with empty value
+
+
+## SEV1.4 Remove from actions
+- SEV1.4.1 - on removing confirmation shown
+- SEV1.4.2 - user can remove record
+
+## SEV1.5 Remove from context menu
+- SEV1.5.1 - on removing confirmation shown
+- SEV1.5.2 - user can remove record
+
+## SEV1.6 Move (Drag'n'Drop)
+- SEV1.6.1 - user can move record up
+- SEV1.6.2 - user can move record down
+
+## SEV1.7 Insert from expandable menu
+- SEV1.7.1 - user can insert a record after a focused one
+
+## SEV1.8 Insert from context menu
+- SEV1.8.1 - user can insert a record after a focused one
+
+## SEV1.9 Clone from expandable menu
+- SEV1.9.1 - user can clone a focused record
+
+## SEV1.10 Clone from context menu
+- SEV1.10.1 - user can clone a focused record
+
+## SEV1.11 Copy/paste from context menu
+- SEV1.11.1 - user can copy a focused record
+- SEV1.11.2 - user can paste copied  record after a focused one
+
+## SEV1.12 Copy/paste from expandable menu
+- SEV1.12.1 - user can copy a focused record
+- SEV1.12.2 - user can paste copied  record after a focused one
+
+
+
+## SEV1.1 Change environment
+
+## SEV1.1 Change environment
+- SEV1.1.1 - user cannot proceed with non-existing target
