@@ -13,6 +13,11 @@ export default class AbstractEditableTable extends AbstractDnDTable {
     }
   }
 
+  constructor( props ) {
+    super( props );
+    this.fieldRefs = {};
+  }
+
   static propTypes = {
     action: PropTypes.shape({
       updateSuite: PropTypes.func.isRequired,
@@ -33,28 +38,11 @@ export default class AbstractEditableTable extends AbstractDnDTable {
     groupId: PropTypes.string
   }
 
-
-  /**
-   * Binding typing events to Redux store
-   */
-  liftFormStateUp = ( dataIndex, state, id ) => {
-
-    this.setState( prevState => {
-      if ( !prevState.fieldState.hasOwnProperty( id ) ) {
-        prevState.fieldState[ id ] = {};
-      }
-      prevState.fieldState[ id ][ dataIndex ] = state;
-      return prevState;
-    });
-  }
-
-
-  hasErrors( id ) {
-    if ( !this.state.fieldState.hasOwnProperty( id ) ) {
-      return false;
-    }
-    const values = Object.values( this.state.fieldState[ id ]);
-    return values.some( state => !state.pristine && !!state.error );
+  registerRef( id, field ) {
+    const payload = id in this.fieldRefs ? this.fieldRefs[ id ] : {};
+    payload[ field ] = React.createRef();
+    this.fieldRefs[ id ] = payload;
+    return this.fieldRefs[ id ][ field ];
   }
 
   toggleEdit = ( id, editing ) => {
@@ -71,14 +59,30 @@ export default class AbstractEditableTable extends AbstractDnDTable {
     }
   }
 
-  onSubmit = ( id ) => {
-    const form = this.state.fieldState[ id ],
-          options = this.fields.reduce( ( carry, field ) => {
-            carry[ field ] = form[ field ].value;
-            return carry;
-          }, { id, editing: false });
-    document.body.classList.toggle( "disable-dnd", false );
-    this.updateRecord( options );
+  onSubmit = async ( id ) => {
+    try {
+      const res = await Promise.all( Object.entries( this.fieldRefs[ id ] ).map(([ key, ref ]) => {
+              return new Promise(( resolve, reject ) => {
+                ref.current.validateFields( [ key ], ( err, values ) => {
+                  if ( err ) {
+                    return reject( err );
+                  }
+                  resolve( values );
+                });
+              })
+            })),
+            options = res.reduce(( carry, obj ) => ({
+                ...carry,
+                ...obj,
+                id,
+                editing: false
+            }), {});
+
+      document.body.classList.toggle( "disable-dnd", false );
+      this.updateRecord( options );
+    } catch ( e ) {
+      console.warn( `Input rejected due to a validation error ${ JSON.stringify( e ) }`, e );
+    }
   }
 
 
@@ -87,6 +91,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
   updateRecord = ( options ) => {
     const update = this.props.action[ `update${this.model}` ],
           payload = this.extendActionOptions( options  );
+
     update( payload );
     this.updateSuiteModified( payload, "update" );
   }
@@ -129,7 +134,6 @@ export default class AbstractEditableTable extends AbstractDnDTable {
               type="primary"
               size="small"
               className={ `btn--submit-editable model--${ this.model }` }
-              disabled={ this.hasErrors( record.id ) }
               onClick={( () => this.onSubmit( record.id ) )}
             >Add</Button>
           </span> );
@@ -142,7 +146,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
               type="primary"
               size="small"
               className={ `btn--submit-editable model--${ this.model }` }
-              disabled={ this.hasErrors( record.id ) }
+
               onClick={( () => this.onSubmit( record.id ) )}
             >Save</Button>
 

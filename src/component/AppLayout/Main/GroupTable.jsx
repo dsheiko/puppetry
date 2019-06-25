@@ -19,19 +19,22 @@ export class GroupTable extends AbstractEditableTable {
       {
         title: "Group",
         dataIndex: "title",
-        render: ( text, record ) => (
-          <EditableCell
-            prefixIcon={ recordPrefIcon }
-            record={ record }
-            onSubmit={ this.onSubmit }
-            className="input--title"
-            dataIndex="title"
-            placeholder="Enter a group name"
-            liftFormStateUp={ this.liftFormStateUp }
-            model={ this.model }
-            updateRecord={ this.updateRecord }
-          />
-        )
+        render: ( text, record ) => {
+          const ref = this.registerRef( record.id, "title" );
+          return (
+            <EditableCell
+              ref={ ref }
+              prefixIcon={ recordPrefIcon }
+              record={ record }
+              onSubmit={ this.onSubmit }
+              className="input--title"
+              dataIndex="title"
+              placeholder="Enter a group name"
+              model={ this.model }
+              updateRecord={ this.updateRecord }
+            />
+          );
+        }
       },
       this.getActionColumn()
     ];

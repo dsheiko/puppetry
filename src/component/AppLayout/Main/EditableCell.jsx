@@ -1,8 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Form, Input } from "antd";
-const FormItem = Form.Item;
+import { ruleValidateNotEmptyString, ruleValidateVariable } from "service/utils";
+const FormItem = Form.Item,
+      connectForm = Form.create();
 
+@connectForm
 export class EditableCell extends React.Component {
 
   static propTypes = {
@@ -11,7 +14,6 @@ export class EditableCell extends React.Component {
     placeholder: PropTypes.string.isRequired,
     className: PropTypes.string,
     record: PropTypes.object.isRequired,
-    liftFormStateUp: PropTypes.func.isRequired,
     updateRecord: PropTypes.func.isRequired,
     prefixIcon: PropTypes.any,
     model: PropTypes.string
@@ -20,37 +22,6 @@ export class EditableCell extends React.Component {
   state = {
     value: "",
     error: ""
-  }
-
-  getError( value, dataIndex ) {
-    const reConst = /^[A-Z_\-0-9]+$/g;
-
-    if ( !value.trim().length ) {
-      return `Shall not be empty`;
-    }
-    if ( dataIndex ==="target" && !value.match( reConst ) ) {
-      return `Shall be in all upper case with underscore separators`;
-    }
-    if ( this.props.model === "Variable" && dataIndex ==="name"  && !value.match( reConst ) ) {
-      return `Shall be in all upper case with underscore separators`;
-    }
-    return "";
-  }
-
-  onChange = ( e ) => {
-    const { dataIndex, record, liftFormStateUp } = this.props,
-          value = e.target.value,
-          state = {
-            value,
-            error: this.getError( value, dataIndex ),
-            pristine: false
-          };
-
-    this.setState( state );
-    // probably doesn't make sense to lift up anything but value
-    // actually event better get it via get value trick...
-    // but ew use REdux to change record.validationError whhat refered in add/sae button state.
-    liftFormStateUp( dataIndex, state, record.id );
   }
 
 
@@ -62,22 +33,11 @@ export class EditableCell extends React.Component {
     }
   }
 
-  /**
-   * Lift state even before first input
-   */
-  componentDidMount() {
-    const { dataIndex, record, liftFormStateUp } = this.props;
-    liftFormStateUp( dataIndex, {
-      value: record[ dataIndex ],
-      error: this.getError( record[ dataIndex ], dataIndex ),
-      pristine: true
-    }, record.id );
-  }
 
   render() {
     const { placeholder, dataIndex, record, prefixIcon, className } = this.props,
+          { getFieldDecorator, getFieldsError } = this.props.form,
           { editing } = record,
-          error = this.state.error,
           value = this.props.record[ dataIndex ];
 
     return (
@@ -86,18 +46,30 @@ export class EditableCell extends React.Component {
           editing ? (
             <Form className="cell-form">
               <FormItem
-                validateStatus={ error ? "error" : "success" }
-                help={ error }
               >
+
+              { getFieldDecorator( dataIndex, {
+                initialValue: value,
+                rules: [
+                {
+                  validator: ( dataIndex === "target" || ( this.props.model === "Variable" && dataIndex === "name" ) )
+                    ? ruleValidateVariable : ruleValidateNotEmptyString
+                },
+                {
+                  transform: ( value ) => value.trim()
+                }
+                ]
+              })(
                 <Input
                   prefix={ prefixIcon || null }
-                  defaultValue={value}
                   className={ className || null }
-                  onChange={ this.onChange }
+
                   onKeyPress={ ( e ) => this.onKeyPress( e, record ) }
                   placeholder={placeholder}
                   tabIndex={ dataIndex === "select" ? 2 : 1 }
                 />
+              )}
+
               </FormItem>
             </Form>
           ) : (

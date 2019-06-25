@@ -10,33 +10,43 @@ export class TargetTable extends AbstractEditableTable {
 
   static displayName = "TargetTable";
 
+
+
   constructor( props ) {
     super( props );
+
+    this.fields = [ "target",  "selector" ];
+    this.model = "Target";
 
     this.columns = [
       {
         title: "Target",
         dataIndex: "target",
         width: "30%",
-        render: ( text, record ) => (
-          <EditableCell
-            record={ record }
-            onSubmit={ this.onSubmit }
-            dataIndex="target"
-            className="input--target"
-            placeholder="Enter target name"
-            liftFormStateUp={ this.liftFormStateUp }
-            model={ this.model }
-            updateRecord={ this.updateRecord }
-          />
-        )
+        render: ( text, record ) => {
+          const ref = this.registerRef( record.id, "target" );
+          return (<EditableCell
+              ref={ ref }
+              record={ record }
+              onSubmit={ this.onSubmit }
+              dataIndex="target"
+              className="input--target"
+              placeholder="Enter target name"
+              liftFormStateUp={ this.liftFormStateUp }
+              model={ this.model }
+              updateRecord={ this.updateRecord }
+            />
+          );
+        }
       },
       {
         title: "Selector",
         dataIndex: "selector",
         width: "calc(70% - 160px)",
-        render: ( text, record ) => (
-          <EditableCell
+        render: ( text, record ) => {
+          const ref = this.registerRef( record.id, "selector" );
+          return ( <EditableCell
+            ref={ ref }
             record={ record }
             onSubmit={ this.onSubmit }
             dataIndex="selector"
@@ -46,7 +56,8 @@ export class TargetTable extends AbstractEditableTable {
             model={ this.model }
             updateRecord={ this.updateRecord }
           />
-        )
+          );
+        }
       },
       this.getActionColumn()
     ];
@@ -61,10 +72,6 @@ export class TargetTable extends AbstractEditableTable {
     e.preventDefault();
     this.props.action.setApp({ editTargetsAsCsvModal: true });
   }
-
-  fields = [ "target", "selector" ];
-
-  model = "Target";
 
   shouldComponentUpdate( nextProps ) {
     if ( this.props.targets !== nextProps.targets ) {

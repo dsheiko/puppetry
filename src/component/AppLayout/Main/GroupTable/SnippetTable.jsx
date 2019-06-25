@@ -18,19 +18,22 @@ export class SnippetTable extends AbstractEditableTable {
         title: "Snippet",
         dataIndex: "title",
 
-        render: ( text, record ) => (
-          <EditableCell
-            prefixIcon={ recordPrefIcon }
-            onSubmit={ this.onSubmit }
-            className="input--title"
-            record={ record }
-            dataIndex="title"
-            placeholder="Enter a snippet name"
-            liftFormStateUp={ this.liftFormStateUp }
-            model={ this.model }
-            updateRecord={ this.updateRecord }
-          />
-        )
+        render: ( text, record ) => {
+          const ref = this.registerRef( record.id, "title" );
+          return (
+            <EditableCell
+              ref={ ref }
+              prefixIcon={ recordPrefIcon }
+              onSubmit={ this.onSubmit }
+              className="input--title"
+              record={ record }
+              dataIndex="title"
+              placeholder="Enter a snippet name"
+              model={ this.model }
+              updateRecord={ this.updateRecord }
+            />
+          );
+        }
       },
       this.getActionColumn()
     ];
