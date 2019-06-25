@@ -21,15 +21,15 @@ export class VariableTable extends AbstractEditableTable {
         render: ( text, record ) => {
           const ref = this.registerRef( record.id, "name" );
           return ( <EditableCell
-              ref={ ref }
-              record={ record }
-              onSubmit={ this.onSubmit }
-              dataIndex="name"
-              className="input--target"
-              placeholder="Enter name"
-              model={ this.model }
-              updateRecord={ this.updateRecord }
-            />
+            ref={ ref }
+            record={ record }
+            onSubmit={ this.onSubmit }
+            dataIndex="name"
+            className="input--target"
+            placeholder="Enter name"
+            model={ this.model }
+            updateRecord={ this.updateRecord }
+          />
           );
         }
       },

@@ -72,17 +72,17 @@ export default {
     }
 
     const entities = Object.values( variables ).reduce( ( carry, variable ) => {
-            if ( position.before && position.before === variable.id ) {
-              const gid = id || uniqid();
-              carry[ gid ] = { ...variableDefaultState( gid ), ...options };
-            }
-            carry[ variable.id ] = variable;
-            if ( position.after && position.after === variable.id ) {
-              const gid = id || uniqid();
-              carry[ gid ] = { ...variableDefaultState( gid ), ...options };
-            }
-            return carry;
-          }, {});
+      if ( position.before && position.before === variable.id ) {
+        const gid = id || uniqid();
+        carry[ gid ] = { ...variableDefaultState( gid ), ...options };
+      }
+      carry[ variable.id ] = variable;
+      if ( position.after && position.after === variable.id ) {
+        const gid = id || uniqid();
+        carry[ gid ] = { ...variableDefaultState( gid ), ...options };
+      }
+      return carry;
+    }, {});
 
     return update( state, {
       variables: {

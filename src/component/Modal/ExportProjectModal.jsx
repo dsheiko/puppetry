@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Alert, Checkbox, Modal, Button, message } from "antd";
+import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import { exportProject, isDirEmpty } from "service/io";
 import BrowseDirectory from "component/Global/BrowseDirectory";
@@ -14,7 +15,7 @@ import { SelectEnv } from "component/Global/SelectEnv";
 
 const CheckboxGroup = Checkbox.Group;
 
-export class ExportProjectModal extends React.Component {
+export class ExportProjectModal  extends AbstractComponent {
 
   static propTypes = {
     action:  PropTypes.shape({
@@ -178,7 +179,9 @@ export class ExportProjectModal extends React.Component {
           ]}
         >
           <p>
-        As you press &quot;Export&quot; Puppetry generates a Jest project in the provided location.
+        As you press &quot;Export&quot; Puppetry generates a
+            { " " }<a onClick={ this.onExtClick } href="https://jestjs.io/">Jest project</a>{ " " }
+         in the provided location.
         You just need to navigate into the directory,
         install dependencies (<code>npm install</code>) and run the tests (<code>npm test</code>).
           </p>

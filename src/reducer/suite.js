@@ -17,7 +17,7 @@ export default handleActions(
       $merge: payload
     }),
 
-    [ actions.resetSuite ]: ( state, { payload = {} }) => {
+    [ actions.resetSuite ]: ( state, { payload = {}}) => {
       return Object.keys( payload ).length
         ? update( state, { $set: payload })
         : update( state, { $set: DEFAULT_STATE.suite });
