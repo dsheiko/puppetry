@@ -493,22 +493,16 @@ Click on File / Create suite or Ctrl-N
 
 ## SEV1.1 Add
 - SEV1.1.1 - user cannot proceed with invalid name (shall be uppercase, underscore)
-- SEV1.1.2 - user cannot proceed with empty name
+- SEV1.1.2 - user cannot proceed with empty value
 - SEV1.1.3 - if user provides an existing variable name, it changes for unique name on submit
 - SEV1.1.4 - user can submit by press ENTER
 
 ## SEV1.2 Edit
-- SEV1.2.1 - user cannot proceed with invalid target name (shall be uppercase, underscore)
-- SEV1.2.2 - user cannot proceed with empty locator
-- SEV1.2.3 - if user provides an existing target name, it changes for unique name on submit
+- SEV1.2.1 - user cannot proceed with invalid name (shall be uppercase, underscore)
+- SEV1.2.2 - user cannot proceed with empty value
+- SEV1.2.3 - if user provides an existing variable name, it changes for unique name on submit
 - SEV1.2.4 - user can submit by press ENTER
 - SEV1.2.5 - user can edit from context menu
-
-## SEV1.3 Edit as CSV
-- SEV1.3.1 - user can change locators
-- SEV1.3.2 - user can change targets
-- SEV1.3.3 - user can change order of pairs
-- SEV1.3.4 - user can proceed with empty value
 
 
 ## SEV1.4 Remove from actions
