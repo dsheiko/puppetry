@@ -18,20 +18,22 @@ export class TestTable extends AbstractEditableTable {
         title: "Test Case",
         dataIndex: "title",
 
-        render: ( text, record ) => (
-          <EditableCell
-            prefixIcon={ recordPrefIcon }
-            onSubmit={ this.onSubmit }
-            className="input--title"
-            record={ record }
-            dataIndex="title"
-            placeholder="Enter a test case name"
-            liftFormStateUp={ this.liftFormStateUp }
-            model={ this.model }
-            updateRecord={ this.updateRecord }
-          />
-        )
-      },
+        render: ( text, record ) => {
+          const ref = this.registerRef( record.id, "title" );
+          return (
+            <EditableCell
+              ref={ ref }
+              prefixIcon={ recordPrefIcon }
+              onSubmit={ this.onSubmit }
+              className="input--title"
+              record={ record }
+              dataIndex="title"
+              placeholder="Enter a test case name"
+              model={ this.model }
+              updateRecord={ this.updateRecord }
+            />
+          );
+      }},
       this.getActionColumn()
     ];
 

@@ -3,6 +3,27 @@ import { remote, shell } from "electron";
 export const isEveryValueMissing = ( obj ) => Object.values( obj ).every( val => typeof val === "undefined" );
 export const isSomeValueMissing = ( obj ) => Object.values( obj ).some( val => typeof val === "undefined" );
 
+
+export const ruleValidateVariable = ( rule, value, callback ) => {
+  const reConst = /^[A-Z_\-0-9]+$/g;
+  value = value.trim();
+  if ( !value.length ) {
+    return callback( "The value shall not be empty" );
+  }
+  if ( !value.match( reConst ) ) {
+    return callback( "Shall be in all upper case with underscore separators" );
+  }
+  callback();
+};
+
+export const ruleValidateNotEmptyString = ( rule, value, callback ) => {
+  value = value.trim();
+  if ( !value.length ) {
+    return callback( "The value shall not be empty" );
+  }
+  callback();
+};
+
 export const ruleValidateGenericString = ( rule, value, callback ) => {
   value = value.trim();
   if ( value.length < 3 ) {
