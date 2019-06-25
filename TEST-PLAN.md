@@ -496,6 +496,7 @@ Click on File / Create suite or Ctrl-N
 - SEV1.1.2 - user cannot proceed with empty value
 - SEV1.1.3 - if user provides an existing variable name, it changes for unique name on submit
 - SEV1.1.4 - user can submit by press ENTER
+- SEV1.1.5 - variable added in one env, appears in all others
 
 ## SEV1.2 Edit
 - SEV1.2.1 - user cannot proceed with invalid name (shall be uppercase, underscore)
@@ -503,6 +504,7 @@ Click on File / Create suite or Ctrl-N
 - SEV1.2.3 - if user provides an existing variable name, it changes for unique name on submit
 - SEV1.2.4 - user can submit by press ENTER
 - SEV1.2.5 - user can edit from context menu
+- SEV1.2.6 - variable value changed in one env, doen't affect variable values in others
 
 
 ## SEV1.4 Remove from actions
@@ -538,8 +540,16 @@ Click on File / Create suite or Ctrl-N
 - SEV1.12.2 - user can paste copied  record after a focused one
 
 
+## SEV2 Environments
 
-## SEV1.1 Change environment
+## SEV2.1 Change environment
+- SEV2.1.1 - user changes env, and the tables updates showing variables values corresponding to the selected env
 
-## SEV1.1 Change environment
-- SEV1.1.1 - user cannot proceed with non-existing target
+## SEV2.2 Edit environments
+- SEV2.2.1 - click in Edit link and edit modal shows up
+- SEV2.2.2 - modal closes on click X
+- SEV2.2.3 - modal closes on click Close
+- SEV2.2.4 - user cannot proceed with empty env name
+- SEV2.2.5 - user can add env
+- SEV2.2.6 - user can remove env
+- SEV2.2.7 - user can navigate table via pagination
