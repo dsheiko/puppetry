@@ -86,6 +86,9 @@ export class FileList extends React.Component {
       click: async () => {
         const sure = await confirmDeleteFile( file );
         if ( sure ) {
+          if ( file === this.props.active ) {
+            this.props.action.removeAppTab( "suite" );
+          }
           removeSuite( file );
         }
       }
