@@ -65,7 +65,7 @@ export class SnippetModal extends AbstractForm {
     const { isVisible, snippets, record } = this.props,
           { getFieldDecorator } = this.props.form,
           { loading } = this.state;
-
+        
     return ( <ErrorBoundary>
       <InstantModal
         visible={ isVisible }

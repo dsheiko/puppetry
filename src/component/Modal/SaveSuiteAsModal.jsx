@@ -72,7 +72,7 @@ export class SaveSuiteAsModal extends AbstractForm {
     return (
       <ErrorBoundary>
         <Modal
-          title="Save Suite"
+          title="Save Suite As"
           visible={ isVisible }
           closable
           onCancel={ this.onClickCancel }

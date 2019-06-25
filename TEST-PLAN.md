@@ -169,9 +169,217 @@ Open `Snippets` in the main menu
 - B2.12.1 - user can copy a focused record
 - B2.12.2 - user can paste copied  record after a focused one
 
+## B3 Snippets
+
+## B3.1 Add
+- B3.1.1 - user cannot proceed with empty title
+- B3.1.2 - after creation suite is expanded
+- B3.1.3 - user can submit by press ENTER
+
+## B3.2 Edit
+- B3.2.1 - user cannot proceed with empty title
+- B3.2.2 - user can submit by press ENTER
+- B3.2.3 - user can edit from context menu
+
+
+## B3.4 Remove from actions
+- B3.4.1 - on removing confirmation shown
+- B3.4.2 - user can remove record
+
+## B3.5 Remove from context menu
+- B3.5.1 - on removing confirmation shown
+- B3.5.2 - user can remove record
+
+## B3.6 Move (Drag'n'Drop)
+- B3.6.1 - user can move record up
+- B3.6.2 - user can move record down
+
+## B3.7 Insert from expandable menu
+- B3.7.1 - user can insert a record after a focused one
+
+## B3.8 Insert from context menu
+- B3.8.1 - user can insert a record after a focused one
+
+## B3.9 Clone from expandable menu
+- B3.9.1 - user can clone a focused record
+
+## B3.10 Clone from context menu
+- B3.10.1 - user can clone a focused record
+
+## B3.11 Copy/paste from context menu
+- B3.11.1 - user can copy a focused record
+- B3.11.2 - user can paste copied  record after a focused one
+
+## B3.12 Copy/paste from expandable menu
+- B3.12.1 - user can copy a focused record
+- B3.12.2 - user can paste copied  record after a focused one
+
 
 
 # Suite
 
-## S1 Overview
-Open at least 2 projects
+## S1 Open suite from Project Explorer
+User double click on on a suite file
+- P1.1 Suite is loaded
+
+## S2 Open suite from main menu
+click on File / Open Suite
+- P1.1 Suite is loaded
+
+### S2.1 Modal window
+- S2.1.1 Title: Open Suite
+- S2.1.2 User can select a suite from the list
+- S2.1.3 click on X closes window
+- S2.1.4 click on suite loads a suite
+
+
+## S3 Save Suite
+open a suite
+
+### S3.1 By main menu
+click on File / Save Suite
+
+- S3.1.1 modify test cases, save suite, reload page, suite shall stay changed
+
+### S3.2 By hotkey
+press Ctrl-S
+
+- S3.2.1 modify test cases, save suite, reload page, suite shall stay changed
+
+## S4 Save Suite as ...
+
+### S4.1 Modal window
+- S2.1.1 Title: Open Suite As
+- S2.1.2 User cannot proceed with empty suite filename
+- S2.1.3 click on Close closes window
+- S2.1.4 click on X closes window
+- S2.1.5 click Save creates a new suite file (visible in Project Explorer)
+
+## S5 Create suite
+Click on File / Create suite or Ctrl-N
+
+### S5.1 Modal window
+- S5.1.1 Title: New Suite
+- S5.1.2 User cannot proceed with empty suite title
+- S5.1.3 User cannot proceed with invalid  suite filename
+- S5.1.4 click on Close closes window
+- S5.1.5 click on X closes window
+- S5.1.6 click Save creates a new suite file (visible in Project Explorer)
+
+## S6 Overview
+- S6.1 Suite panel tab contains suite file name
+- S6.1 Suite panel tab provided with an icon, which has tooltip with suite title
+- S6.1 Suite panel has panes: Targets, Test Cases. Options
+
+
+# Suite Options
+
+## SO1 Options Pane
+
+- ST1.1 - user cannot proceed with empty suite title
+- ST1.2 - user cannot proceed with empty or string for timeout
+- ST1.3 - on click Save changed saved
+
+# Suite Targets
+
+## ST1 Targets Pane
+
+## ST1.1 Add
+- ST1.1.1 - user cannot proceed with invalid target name (shall be uppercase, underscore)
+- ST1.1.2 - user cannot proceed with empty locator
+- ST1.1.3 - if user provides an existing target name, it changes for unique name on submit
+- ST1.1.4 - user can submit by press ENTER
+
+## ST1.2 Edit
+- ST1.2.1 - user cannot proceed with invalid target name (shall be uppercase, underscore)
+- ST1.2.2 - user cannot proceed with empty locator
+- ST1.2.3 - if user provides an existing target name, it changes for unique name on submit
+- ST1.2.4 - user can submit by press ENTER
+- ST1.2.5 - user can edit from context menu
+
+## ST1.3 Edit as CSV
+- ST1.3.1 - user can change locators
+- ST1.3.2 - user can change targets
+- ST1.3.3 - user can change order of pairs
+- ST1.3.4 - user can proceed with empty value
+
+
+## ST1.4 Remove from actions
+- ST1.4.1 - on removing confirmation shown
+- ST1.4.2 - user can remove record
+
+## ST1.5 Remove from context menu
+- ST1.5.1 - on removing confirmation shown
+- ST1.5.2 - user can remove record
+
+## ST1.6 Move (Drag'n'Drop)
+- ST1.6.1 - user can move record up
+- ST1.6.2 - user can move record down
+
+## ST1.7 Insert from expandable menu
+- ST1.7.1 - user can insert a record after a focused one
+
+## ST1.8 Insert from context menu
+- ST1.8.1 - user can insert a record after a focused one
+
+## ST1.9 Clone from expandable menu
+- ST1.9.1 - user can clone a focused record
+
+## ST1.10 Clone from context menu
+- ST1.10.1 - user can clone a focused record
+
+## ST1.11 Copy/paste from context menu
+- ST1.11.1 - user can copy a focused record
+- ST1.11.2 - user can paste copied  record after a focused one
+
+## ST1.12 Copy/paste from expandable menu
+- ST1.12.1 - user can copy a focused record
+- ST1.12.2 - user can paste copied  record after a focused one
+
+
+# Suite Groups
+
+## SG1 Groups Table
+
+## SG1.1 Add
+- SG1.1.1 - user cannot proceed with empty title
+- SG1.1.2 - after creation suite is expanded
+- SG1.1.3 - user can submit by press ENTER
+
+## SG1.2 Edit
+- SG1.2.1 - user cannot proceed with empty title
+- SG1.2.2 - user can submit by press ENTER
+- SG1.2.3 - user can edit from context menu
+
+
+## SG1.4 Remove from actions
+- SG1.4.1 - on removing confirmation shown
+- SG1.4.2 - user can remove record
+
+## SG1.5 Remove from context menu
+- SG1.5.1 - on removing confirmation shown
+- SG1.5.2 - user can remove record
+
+## SG1.6 Move (Drag'n'Drop)
+- SG1.6.1 - user can move record up
+- SG1.6.2 - user can move record down
+
+## SG1.7 Insert from expandable menu
+- SG1.7.1 - user can insert a record after a focused one
+
+## SG1.8 Insert from context menu
+- SG1.8.1 - user can insert a record after a focused one
+
+## SG1.9 Clone from expandable menu
+- SG1.9.1 - user can clone a focused record
+
+## SG1.10 Clone from context menu
+- SG1.10.1 - user can clone a focused record
+
+## SG1.11 Copy/paste from context menu
+- SG1.11.1 - user can copy a focused record
+- SG1.11.2 - user can paste copied  record after a focused one
+
+## SG1.12 Copy/paste from expandable menu
+- SG1.12.1 - user can copy a focused record
+- SG1.12.2 - user can paste copied  record after a focused one
