@@ -45,6 +45,7 @@ export class CommandRowLabel extends React.Component {
        return `("${ params.selector }")`;
      case "screenshot":
        return `("${ params.name }")`;
+     case "tap":
      case "click":
      case "moveMouse":
        return `(${ params.x }, ${ params.y })`;

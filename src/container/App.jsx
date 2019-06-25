@@ -92,11 +92,7 @@ export class App extends React.Component {
       return;
     }
 
-    try {
-      await loadSnippets();
-    } catch ( e ) {
-      log.warn( `Renderer process: App.loadSnippets ${ e }` );
-    }
+   
 
     try {
       await loadProject();

@@ -343,7 +343,7 @@ Click on File / Create suite or Ctrl-N
 
 ## SG1.1 Add
 - SG1.1.1 - user cannot proceed with empty title
-- SG1.1.2 - after creation suite is expanded
+- SG1.1.2 - after creation group is expanded
 - SG1.1.3 - user can submit by press ENTER
 
 ## SG1.2 Edit
@@ -383,3 +383,99 @@ Click on File / Create suite or Ctrl-N
 ## SG1.12 Copy/paste from expandable menu
 - SG1.12.1 - user can copy a focused record
 - SG1.12.2 - user can paste copied  record after a focused one
+
+
+# Suite Test Cases
+
+## SC1 Test Case Table
+
+## SC1.1 Add
+- SC1.1.1 - user cannot proceed with empty title
+- SC1.1.2 - after creation test case is expanded
+- SC1.1.3 - user can submit by press ENTER
+
+## SC1.2 Edit
+- SC1.2.1 - user cannot proceed with empty title
+- SC1.2.2 - user can submit by press ENTER
+- SC1.2.3 - user can edit from context menu
+
+
+## SC1.4 Remove from actions
+- SC1.4.1 - on removing confirmation shown
+- SC1.4.2 - user can remove record
+
+## SC1.5 Remove from context menu
+- SC1.5.1 - on removing confirmation shown
+- SC1.5.2 - user can remove record
+
+## SC1.6 Move (Drag'n'Drop)
+- SC1.6.1 - user can move record up
+- SC1.6.2 - user can move record down
+
+## SC1.7 Insert from expandable menu
+- SC1.7.1 - user can insert a record after a focused one
+
+## SC1.8 Insert from context menu
+- SC1.8.1 - user can insert a record after a focused one
+
+## SC1.9 Clone from expandable menu
+- SC1.9.1 - user can clone a focused record
+
+## SC1.10 Clone from context menu
+- SC1.10.1 - user can clone a focused record
+
+## SC1.11 Copy/paste from context menu
+- SC1.11.1 - user can copy a focused record
+- SC1.11.2 - user can paste copied  record after a focused one
+
+## SC1.12 Copy/paste from expandable menu
+- SC1.12.1 - user can copy a focused record
+- SC1.12.2 - user can paste copied  record after a focused one
+
+
+# Suite Test Steps
+
+## SS1 Test Step Table
+
+## SS1.1 Add
+- SS1.1.1 - user cannot proceed with non-existing target
+- SS1.1.2 - user cannot proceed with non-existing method
+- SS1.1.3 - modal closes on Cancel
+- SS1.1.4 - modal closes on X
+
+## SS1.2 Edit
+- SS1.2.1 - user cannot proceed with non-existing target
+- SS1.2.2 - user cannot proceed with non-existing method
+
+
+## SS1.4 Remove from actions
+- SS1.4.1 - on removing confirmation shown
+- SS1.4.2 - user can remove record
+
+## SS1.5 Remove from context menu
+- SS1.5.1 - on removing confirmation shown
+- SS1.5.2 - user can remove record
+
+## SS1.6 Move (Drag'n'Drop)
+- SS1.6.1 - user can move record up
+- SS1.6.2 - user can move record down
+
+## SS1.7 Insert from expandable menu
+- SS1.7.1 - user can insert a record after a focused one
+
+## SS1.8 Insert from context menu
+- SS1.8.1 - user can insert a record after a focused one
+
+## SS1.9 Clone from expandable menu
+- SS1.9.1 - user can clone a focused record
+
+## SS1.10 Clone from context menu
+- SS1.10.1 - user can clone a focused record
+
+## SS1.11 Copy/paste from context menu
+- SS1.11.1 - user can copy a focused record
+- SS1.11.2 - user can paste copied  record after a focused one
+
+## SS1.12 Copy/paste from expandable menu
+- SS1.12.1 - user can copy a focused record
+- SS1.12.2 - user can paste copied  record after a focused one
