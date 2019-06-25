@@ -65,15 +65,19 @@ export default {
    */
   [ actions.insertAdjacentVariable ]: ( state, { payload }) => {
     const { options, position, id } = normalizeComplexPayload( payload ),
-          { variables }  = state,
+          { variables }  = state;
 
-          entities = Object.values( variables ).reduce( ( carry, target ) => {
-            if ( position.before && position.before === target.id ) {
+    if ( options.name && isVariableNotUnique( state, options ) ) {
+      options.name += "_" + uniqid().toUpperCase();
+    }
+
+    const entities = Object.values( variables ).reduce( ( carry, variable ) => {
+            if ( position.before && position.before === variable.id ) {
               const gid = id || uniqid();
               carry[ gid ] = { ...variableDefaultState( gid ), ...options };
             }
-            carry[ target.id ] = target;
-            if ( position.after && position.after === target.id ) {
+            carry[ variable.id ] = variable;
+            if ( position.after && position.after === variable.id ) {
               const gid = id || uniqid();
               carry[ gid ] = { ...variableDefaultState( gid ), ...options };
             }

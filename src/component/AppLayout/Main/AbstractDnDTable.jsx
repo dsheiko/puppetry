@@ -227,6 +227,9 @@ export default class AbstractDnDTable extends React.Component {
     if ( "testId" in record ) {
       node.testId = record.testId;
     }
+    if ( "env" in record ) {
+      node.env = record.env;
+    }
     update( node, { "after": record.id });
     this.updateSuiteModified( node, "insert" );
   }
