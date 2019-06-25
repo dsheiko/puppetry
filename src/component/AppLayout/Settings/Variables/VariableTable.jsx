@@ -37,18 +37,22 @@ export class VariableTable extends AbstractEditableTable {
         title: "Value",
         dataIndex: "value",
         width: "calc(70% - 160px)",
-        render: ( text, record ) => (
-          <EditableCell
-            record={ record }
-            onSubmit={ this.onSubmit }
-            dataIndex="value"
-            className="input--selector"
-            placeholder="Enter value"
-            liftFormStateUp={ this.liftFormStateUp }
-            model={ this.model }
-            updateRecord={ this.updateRecord }
-          />
-        )
+        render: ( text, record ) => {
+          const ref = this.registerRef( record.id, "value" );
+          return (
+            <EditableCell
+              ref={ ref }
+              record={ record }
+              onSubmit={ this.onSubmit }
+              dataIndex="value"
+              className="input--selector"
+              placeholder="Enter value"
+              liftFormStateUp={ this.liftFormStateUp }
+              model={ this.model }
+              updateRecord={ this.updateRecord }
+            />
+          );
+        }
       },
       this.getActionColumn()
     ];
