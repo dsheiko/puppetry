@@ -116,9 +116,58 @@ Open `Snippets` in the main menu
 - B1.1.1 - adds tab Snippets
 
 ## B2 Targets
+
 ## B2.1 Add
 - B2.1.1 - user cannot proceed with invalid target name (shall be uppercase, underscore)
-- B2.1.2 - user cannot proceed with empty slector
+- B2.1.2 - user cannot proceed with empty locator
+- B2.1.3 - if user provides an existing target name, it changes for unique name on submit
+- B2.1.4 - user can submit by press ENTER
+
+## B2.2 Edit
+- B2.2.1 - user cannot proceed with invalid target name (shall be uppercase, underscore)
+- B2.2.2 - user cannot proceed with empty locator
+- B2.2.3 - if user provides an existing target name, it changes for unique name on submit
+- B2.2.4 - user can submit by press ENTER
+- B2.2.5 - user can edit from context menu
+
+## B2.3 Edit as CSV
+- B2.3.1 - user can change locators
+- B2.3.2 - user can change targets
+- B2.3.3 - user can change order of pairs
+- B2.3.4 - user can proceed with empty value
+
+
+## B2.4 Remove from actions
+- B2.4.1 - on removing confirmation shown
+- B2.4.2 - user can remove record
+
+## B2.5 Remove from context menu
+- B2.5.1 - on removing confirmation shown
+- B2.5.2 - user can remove record
+
+## B2.6 Move (Drag'n'Drop)
+- B2.6.1 - user can move record up
+- B2.6.2 - user can move record down
+
+## B2.7 Insert from expandable menu
+- B2.7.1 - user can insert a record after a focused one
+
+## B2.8 Insert from context menu
+- B2.8.1 - user can insert a record after a focused one
+
+## B2.9 Clone from expandable menu
+- B2.9.1 - user can clone a focused record
+
+## B2.10 Clone from context menu
+- B2.10.1 - user can clone a focused record
+
+## B2.11 Copy/paste from context menu
+- B2.11.1 - user can copy a focused record
+- B2.11.2 - user can paste copied  record after a focused one
+
+## B2.12 Copy/paste from expandable menu
+- B2.12.1 - user can copy a focused record
+- B2.12.2 - user can paste copied  record after a focused one
 
 
 
