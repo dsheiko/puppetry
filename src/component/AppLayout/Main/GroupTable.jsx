@@ -110,7 +110,7 @@ export class GroupTable extends AbstractEditableTable {
             onRow={this.onRow}
             rowClassName={ this.onRowClassName }
             showHeader={false}
-            defaultExpandedRowKeys={ expanded }
+            expandedRowKeys={ expanded }
             dataSource={ groups }
             columns={this.columns}
             pagination={false}
