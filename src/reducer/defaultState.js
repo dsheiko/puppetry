@@ -133,7 +133,9 @@ export const groupDefaultState = ( id ) => ({
   key: id,
   title: "",
   tests: {},
-  disabled: false
+  disabled: false,
+  expanded: false,
+  adding: false
 });
 
 export const testDefaultState = ( id ) => ({
@@ -142,7 +144,9 @@ export const testDefaultState = ( id ) => ({
   key: id,
   title: "",
   commands: {},
-  disabled: false
+  disabled: false,
+  expanded: false,
+  adding: false
 });
 
 export const commandDefaultState = ( id ) => ({

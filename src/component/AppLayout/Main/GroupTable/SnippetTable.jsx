@@ -94,7 +94,7 @@ export class SnippetTable extends AbstractEditableTable {
           onRow={this.onRow}
           rowClassName={ this.onRowClassName }
           expandedRowRender={ this.renderExpandedTable }
-          defaultExpandedRowKeys={ expanded }
+          expandedRowKeys={ expanded }
           showHeader={ false }
           dataSource={ tests }
           columns={ this.columns }

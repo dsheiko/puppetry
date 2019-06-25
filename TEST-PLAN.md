@@ -111,7 +111,16 @@ Open at least 2 projects
 
 # Snippets
 Open `Snippets` in the main menu
-## B1 Overview
+
+## B1 App panel
+- B1.1.1 - adds tab Snippets
+
+## B2 Targets
+## B2.1 Add
+- B2.1.1 - user cannot proceed with invalid target name (shall be uppercase, underscore)
+- B2.1.2 - user cannot proceed with empty slector
+
+
 
 # Suite
 

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import log from "electron-log";
 import { Button, Popconfirm, Divider } from "antd";
 import AbstractDnDTable from "./AbstractDnDTable";
 import { RowDropdown } from "./RowDropdown";
@@ -59,9 +60,10 @@ export default class AbstractEditableTable extends AbstractDnDTable {
     }
   }
 
-  onSubmit = async ( id ) => {
+  onSubmit = async ( record ) => {
     try {
-      const res = await Promise.all( Object.entries( this.fieldRefs[ id ] ).map(([ key, ref ]) => {
+      const id = record.id,
+            res = await Promise.all( Object.entries( this.fieldRefs[ id ] ).map(([ key, ref ]) => {
               return new Promise(( resolve, reject ) => {
                 ref.current.validateFields( [ key ], ( err, values ) => {
                   if ( err ) {
@@ -77,10 +79,15 @@ export default class AbstractEditableTable extends AbstractDnDTable {
                 id,
                 editing: false
             }), {});
-
       document.body.classList.toggle( "disable-dnd", false );
       this.updateRecord( options );
+      if ( record.adding && this.onExpand ) {
+        this.onExpand( true, this.extendActionOptions( record ) );
+      }
     } catch ( e ) {
+      if ( e instanceof Error ) {
+        return log.error( `Renderer process: ${ this.constructor.displayName }.onSubmit(): ${ e }` );
+      }
       console.warn( `Input rejected due to a validation error ${ JSON.stringify( e ) }`, e );
     }
   }
@@ -90,7 +97,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
 
   updateRecord = ( options ) => {
     const update = this.props.action[ `update${this.model}` ],
-          payload = this.extendActionOptions( options  );
+          payload = this.extendActionOptions( options );
 
     update( payload );
     this.updateSuiteModified( payload, "update" );
@@ -134,7 +141,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
               type="primary"
               size="small"
               className={ `btn--submit-editable model--${ this.model }` }
-              onClick={( () => this.onSubmit( record.id ) )}
+              onClick={( () => this.onSubmit( record ) )}
             >Add</Button>
           </span> );
         }
@@ -147,7 +154,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
               size="small"
               className={ `btn--submit-editable model--${ this.model }` }
 
-              onClick={( () => this.onSubmit( record.id ) )}
+              onClick={( () => this.onSubmit( record ) )}
             >Save</Button>
 
             <Divider type="vertical" />

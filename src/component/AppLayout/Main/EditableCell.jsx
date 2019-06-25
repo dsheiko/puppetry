@@ -28,7 +28,7 @@ export class EditableCell extends React.Component {
   onKeyPress = ( e, record ) => {
     switch ( e.key ){
     case "Enter":
-      this.props.onSubmit && this.props.onSubmit( record.id );
+      this.props.onSubmit && this.props.onSubmit( record );
       return;
     }
   }
