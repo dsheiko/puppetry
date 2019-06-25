@@ -20,6 +20,7 @@ import settingsActions from "./settings";
 import appActions from "./app";
 import gitActions from "./git";
 import suiteActions from "./suite";
+import snippetsActions from "./snippets";
 
 /*eslint no-empty: 0*/
 
@@ -39,6 +40,13 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
   if ( !projectDirectory ) {
     throw new InvalidArgumentError( "Empty project directory" );
   }
+
+  try {
+    await dispatch( snippetsActions.loadSnippets() );
+  } catch ( e ) {
+    log.warn( `Renderer process: App.loadSnippets ${ e }` );
+  }
+
   try {
     dispatch( appActions.setApp({ loading: true }) );
     project = await readProject( projectDirectory );

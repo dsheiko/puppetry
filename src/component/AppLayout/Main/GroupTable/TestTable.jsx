@@ -45,7 +45,6 @@ export class TestTable extends AbstractEditableTable {
 
   onExpand = ( isExpanded, record ) => {
     const expanded = { ...this.props.expanded };
-    console.log(">>", expanded, record );
     expanded[ record.groupId ].tests[ record.id ] = {
       key: record.key,
       value: isExpanded
