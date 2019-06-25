@@ -27,10 +27,11 @@ Puppetry is an open-source desktop application that gives non-developers the abi
 - Features Headless Chrome ([Puppeteer](https://pptr.dev)) and [Jest](https://jestjs.io/)
 - Tests can run within the application as well as to be [exported e.g. for CI-server](https://docs.puppetry.app/exporting-tests-for-ci)
 
-Since [ver. 2.0](https://github.com/dsheiko/puppetry/releases/tag/v2.0.0-RC.1))
+Since [ver. 2.0](https://github.com/dsheiko/puppetry/releases/tag/v2.0.0-RC.1)
 - [Version control available (GIT integration)](https://docs.puppetry.app/version-control)
 - [Staging, template variables and expressions](https://docs.puppetry.app/template)
 - [Reusable and configurable test scenarios](https://docs.puppetry.app/snippets)
+- [Built-in automation recorder](https://docs.puppetry.app/suite#recording-suite-showcase)
 - [Testing user flows with confirmation by email](https://docs.puppetry.app/testing-emails)
 
 # Welcome Puppetry
@@ -46,8 +47,6 @@ Namely you can do the following:
 - to manage your test structure in BDD style ( project, suite, test group, test )
 - to manage browser methods and assertions
 
-## Documentation
-- [Puppetry 2.0 documentation](https://docs.puppetry.app/)
 
 ## Download
 
