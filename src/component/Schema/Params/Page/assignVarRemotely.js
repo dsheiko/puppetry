@@ -12,7 +12,9 @@ export const assignVarRemotely = {
         timeout: ${ JSON.stringify( params.timeout ) },
         parserFn: ${ params.parserFn },
         requestFn: ${ params.requestFn || "null" },
-        parserPayload: {}
+        parserPayload: {
+          sentAt: Date.now()
+        }
       });`;
   },
   description: `Polls \`URL\` with a given intervals until a response satisfying \`parserFn\` function received
