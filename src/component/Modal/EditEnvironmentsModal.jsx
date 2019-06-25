@@ -121,11 +121,8 @@ export class EditEnvironmentsModal extends AbstractForm {
               { getFieldDecorator( "name", {
                 rules: [
                   {
-                    required: true,
-                    message: "Please provide environmennt name"
-                  },
-                  {
                     validator: ( rule, value, callback ) => {
+                      value = value ? value.trim() : "";
                       if ( value.length < 3 ) {
                         return callback( "The value shall not be less than 3 characters" );
                       }
@@ -141,7 +138,7 @@ export class EditEnvironmentsModal extends AbstractForm {
                     }
                   },
                   {
-                    transform: ( value ) => value.trim()
+                    transform: ( value ) => value ? value.trim() : ""
                   }
                 ]
               })(
