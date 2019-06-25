@@ -63,6 +63,9 @@ export class EditTargetsAsCsvModal extends AbstractForm {
 
   // Do not update until visible
   shouldComponentUpdate( nextProps ) {
+    if ( this.props.targets !== nextProps.targets ) {
+      return true;
+    }
     if ( this.props.isVisible !== nextProps.isVisible ) {
       return true;
     }
