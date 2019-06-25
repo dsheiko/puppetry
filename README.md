@@ -23,10 +23,15 @@ Puppetry is an open-source desktop application that gives non-developers the abi
 
 
 # Key Features
-
 - Can be used by QA engineers with no programming background
-- Features Headless Chrome (Puppeteer) and Jest
-- Generated tests can be run within the application as well as exported e.g. for CI-server
+- Features Headless Chrome ([Puppeteer](https://pptr.dev)) and [Jest](https://jestjs.io/)
+- Tests can run within the application as well as to be [exported e.g. for CI-server](https://docs.puppetry.app/exporting-tests-for-ci)
+
+Since [ver. 2.0](https://github.com/dsheiko/puppetry/releases/tag/v2.0.0-RC.1))
+- [Version control available (GIT integration)](https://docs.puppetry.app/version-control)
+- [Staging, template variables and expressions](https://docs.puppetry.app/template)
+- [Reusable and configurable test scenarios](https://docs.puppetry.app/snippets)
+- [Testing user flows with confirmation by email](https://docs.puppetry.app/testing-emails)
 
 # Welcome Puppetry
 E2E testing for the Web in a nutshell is about locating a target, applying a browser method on it,
