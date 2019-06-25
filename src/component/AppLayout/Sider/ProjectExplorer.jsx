@@ -47,7 +47,8 @@ export class ProjectExplorer extends React.Component {
   onRightClick = ( e ) => {
     const dir = e.target.dataset.dir,
           { projectDirectory } = this.props,
-          { loadProject, saveSettings, removeSettingsProject, removeAppTab, resetSuite, resetProject } = this.props.action,
+          { loadProject,
+            saveSettings, removeSettingsProject, removeAppTab, resetSuite, resetProject } = this.props.action,
 
           removeTheLastProject = () => {
             removeSettingsProject( dir );

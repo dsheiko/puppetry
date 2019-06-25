@@ -16,7 +16,8 @@ export class EditableCell extends React.Component {
     record: PropTypes.object.isRequired,
     updateRecord: PropTypes.func.isRequired,
     prefixIcon: PropTypes.any,
-    model: PropTypes.string
+    model: PropTypes.string,
+    form: PropTypes.any
   }
 
   state = {
@@ -36,7 +37,7 @@ export class EditableCell extends React.Component {
 
   render() {
     const { placeholder, dataIndex, record, prefixIcon, className } = this.props,
-          { getFieldDecorator, getFieldsError } = this.props.form,
+          { getFieldDecorator } = this.props.form,
           { editing } = record,
           value = this.props.record[ dataIndex ];
 
@@ -48,27 +49,28 @@ export class EditableCell extends React.Component {
               <FormItem
               >
 
-              { getFieldDecorator( dataIndex, {
-                initialValue: value,
-                rules: [
-                {
-                  validator: ( dataIndex === "target" || ( this.props.model === "Variable" && dataIndex === "name" ) )
-                    ? ruleValidateVariable : ruleValidateNotEmptyString
-                },
-                {
-                  transform: ( value ) => value.trim()
-                }
-                ]
-              })(
-                <Input
-                  prefix={ prefixIcon || null }
-                  className={ className || null }
+                { getFieldDecorator( dataIndex, {
+                  initialValue: value,
+                  rules: [
+                    {
+                      validator: ( dataIndex === "target"
+                        || ( this.props.model === "Variable" && dataIndex === "name" ) )
+                        ? ruleValidateVariable : ruleValidateNotEmptyString
+                    },
+                    {
+                      transform: ( value ) => value.trim()
+                    }
+                  ]
+                })(
+                  <Input
+                    prefix={ prefixIcon || null }
+                    className={ className || null }
 
-                  onKeyPress={ ( e ) => this.onKeyPress( e, record ) }
-                  placeholder={placeholder}
-                  tabIndex={ dataIndex === "select" ? 2 : 1 }
-                />
-              )}
+                    onKeyPress={ ( e ) => this.onKeyPress( e, record ) }
+                    placeholder={placeholder}
+                    tabIndex={ dataIndex === "select" ? 2 : 1 }
+                  />
+                )}
 
               </FormItem>
             </Form>

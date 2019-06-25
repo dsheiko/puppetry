@@ -71,7 +71,6 @@ export class App extends React.Component {
             loadSettings,
             checkRuntimeTestDirReady,
             checkNewVersion,
-            loadSnippets,
             setApp,
             loadGit
           } = this.props.action,
@@ -92,7 +91,6 @@ export class App extends React.Component {
       return;
     }
 
-   
 
     try {
       await loadProject();

@@ -63,21 +63,21 @@ export default class AbstractEditableTable extends AbstractDnDTable {
   onSubmit = async ( record ) => {
     try {
       const id = record.id,
-            res = await Promise.all( Object.entries( this.fieldRefs[ id ] ).map(([ key, ref ]) => {
-              return new Promise(( resolve, reject ) => {
-                ref.current.validateFields( [ key ], ( err, values ) => {
+            res = await Promise.all( Object.entries( this.fieldRefs[ id ]).map( ([ key, ref ]) => {
+              return new Promise( ( resolve, reject ) => {
+                ref.current.validateFields([ key ], ( err, values ) => {
                   if ( err ) {
                     return reject( err );
                   }
                   resolve( values );
                 });
-              })
-            })),
-            options = res.reduce(( carry, obj ) => ({
-                ...carry,
-                ...obj,
-                id,
-                editing: false
+              });
+            }) ),
+            options = res.reduce( ( carry, obj ) => ({
+              ...carry,
+              ...obj,
+              id,
+              editing: false
             }), {});
       document.body.classList.toggle( "disable-dnd", false );
       this.updateRecord( options );

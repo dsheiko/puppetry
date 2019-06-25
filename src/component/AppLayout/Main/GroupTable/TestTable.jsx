@@ -33,7 +33,7 @@ export class TestTable extends AbstractEditableTable {
               updateRecord={ this.updateRecord }
             />
           );
-      }},
+        } },
       this.getActionColumn()
     ];
 

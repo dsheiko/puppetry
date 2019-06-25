@@ -10,12 +10,13 @@
 [<img src="https://img.shields.io/badge/slack-puppetry.app-yellow.svg?logo=slack">](https://puppetry-app.slack.com)
 [![Total downloads](https://img.shields.io/github/downloads/dsheiko/puppetry/total.svg)](https://github.com/dsheiko/puppetry/releases)
 [![Latest download](https://img.shields.io/github/downloads/dsheiko/puppetry/v1.0.10/total.svg)](https://github.com/dsheiko/puppetry/releases/latest)
+[![Latest download](https://img.shields.io/github/downloads/dsheiko/puppetry/v2.0.0-RC.1/total.svg)](https://github.com/dsheiko/puppetry/releases/tag/v2.0.0-RC.1)
 
 <h3 align="center">CODELESS END-TO-END AUTOMATED TESTING</h3>
 
 Puppetry is an open-source desktop application that gives non-developers the ability to create, manage, and integrate automated tests for Web
 
-![Puppetry - v1.0.0](https://github.com/dsheiko/puppetry/raw/master/docs/wiki/puppetry-welcome.png)
+![Puppetry 2](https://github.com/dsheiko/puppetry/raw/master/docs/wiki/puppetry-welcome.png)
 
 [:tv: Watch introduction video](https://www.youtube.com/watch?v=4DLnak6qU68  "Introduction to Puppetry")
 
@@ -23,8 +24,13 @@ Puppetry is an open-source desktop application that gives non-developers the abi
 # Key Features
 
 - Can be used by QA engineers with no programming background
-- Features Headless Chrome (Puppeteer) and Jest
-- Generated tests can be run within the application as well as exported e.g. for CI-server
+- Features Headless Chrome ([Puppeteer](https://pptr.dev)) and [Jest](https://jestjs.io/)
+- Tests can run within the application as well as to be [exported e.g. for CI-server](https://docs.puppetry.app/exporting-tests-for-ci)
+- [Version control (GIT integration)](https://docs.puppetry.app/version-control)
+- [Staging, template variables and expressions](https://docs.puppetry.app/template)
+- [Reusable and configurable test scenarios](https://docs.puppetry.app/snippets)
+- [Built-in automation recorder](https://docs.puppetry.app/suite#recording-suite-showcase)
+- [Testing user flows with confirmation by email](https://docs.puppetry.app/testing-emails)
 
 # Welcome Puppetry
 E2E testing for the Web in a nutshell is about locating a target, applying a browser method on it,

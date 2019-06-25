@@ -64,7 +64,7 @@ export class Main extends AbstractComponent {
                 onClick={ this.onExtClick }>commands, assertions and references</a> { "" }
               to ensure that a targeted component of the test application acts as intended.
               Tests cases are organised into logical { "" } <a href="https://docs.puppetry.app/group"
-                onClick={ this.onExtClick }>groups</a> { "" }, representing test contexts.</p>
+                onClick={ this.onExtClick }>groups</a>, representing test contexts.</p>
 
               <p>You can use { "" } <a href="https://docs.puppetry.app/managing-assets#drag-and-drop"
                 onClick={ this.onExtClick }>drag&apos;n&apos;drop</a> { "" } to re-arrange

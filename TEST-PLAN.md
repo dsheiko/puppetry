@@ -553,3 +553,42 @@ Click on File / Create suite or Ctrl-N
 - SEV2.2.5 - user can add env
 - SEV2.2.6 - user can remove env
 - SEV2.2.7 - user can navigate table via pagination
+
+# Settings / Git
+
+## SEG1 Git Config
+
+- SEG1.1 - user cannot proceed with empty full name
+- SEG1.2 - user cannot proceed with empty email
+
+## SEG2 Git Remote Repository
+
+- SEG1.1 - user cannot proceed with empty repo location
+- SEG1.2 - user cannot proceed with empty username
+
+# Run
+
+## R1 Run tests
+
+### R1.1 Modal window
+
+- R1.1.1 User cannot proceed with no suites selected
+- R1.1.2 User can run several suites in a row
+- R1.1.3 User can choose env
+- R1.1.4 User can toggle the switch for run in browser
+- R1.1.5 User can provide chromium options
+- R1.1.6 "List of available options" shows up in external browser
+- R1.1.7 Checkbox maximized contributes in the options line
+- R1.1.8 Checkbox fullscreen contributes in the options line
+- R1.1.9 Modal can be closed
+
+# Export project for CI
+
+## E1 Export
+
+### E1.1 Modal window
+
+- E1.1.1 User cannot proceed with no location selected
+- E1.1.2 User can run several suites in a row
+- E1.1.3 User can choose env
+- E1.1.4 Modal can be closed

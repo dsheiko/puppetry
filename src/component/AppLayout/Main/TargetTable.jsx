@@ -11,7 +11,6 @@ export class TargetTable extends AbstractEditableTable {
   static displayName = "TargetTable";
 
 
-
   constructor( props ) {
     super( props );
 
@@ -25,17 +24,17 @@ export class TargetTable extends AbstractEditableTable {
         width: "30%",
         render: ( text, record ) => {
           const ref = this.registerRef( record.id, "target" );
-          return (<EditableCell
-              ref={ ref }
-              record={ record }
-              onSubmit={ this.onSubmit }
-              dataIndex="target"
-              className="input--target"
-              placeholder="Enter target name"
-              liftFormStateUp={ this.liftFormStateUp }
-              model={ this.model }
-              updateRecord={ this.updateRecord }
-            />
+          return ( <EditableCell
+            ref={ ref }
+            record={ record }
+            onSubmit={ this.onSubmit }
+            dataIndex="target"
+            className="input--target"
+            placeholder="Enter target name"
+            liftFormStateUp={ this.liftFormStateUp }
+            model={ this.model }
+            updateRecord={ this.updateRecord }
+          />
           );
         }
       },
