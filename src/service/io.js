@@ -7,6 +7,7 @@ import { remote } from "electron";
 import log from "electron-log";
 import TestGenerator from "service/TestGenerator";
 import { schema } from "component/Schema/schema";
+import writeFileAtomic from "write-file-atomic";
 import {
   PUPPETRY_LOCK_FILE,
   JEST_PKG_DIRECTORY,
@@ -22,7 +23,15 @@ const PROJECT_FILE_NAME = ".puppetryrc",
       PROJECT_FALLBAK_NAME = ".puppertyrc",
       GIT_FILE_NAME = ".puppetrygit",
       readFile = util.promisify( fs.readFile ),
-      writeFile = util.promisify( fs.writeFile ),
+      //writeFile = util.promisify( fs.writeFile ),
+      writeFile = ( filename, data ) => new Promise(( resolve, reject ) => {
+        writeFileAtomic( filename, data, ( err ) => {
+          if ( err ) {
+            return reject( err );
+          }
+          resolve();
+        });
+      }),
       unlink = util.promisify( fs.unlink ),
       readdir = util.promisify( fs.readdir ),
       lstat = util.promisify( fs.lstat ),
