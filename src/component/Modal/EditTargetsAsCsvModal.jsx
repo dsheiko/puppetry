@@ -77,7 +77,7 @@ export class EditTargetsAsCsvModal extends AbstractForm {
 
   render() {
     const { isVisible, targets } = this.props,
-          initialValue = Object.values( targets )
+          initialValue = !targets ? [] : Object.values( targets )
             .map( row => `${ row.target },${ row.selector }` ).join( "\n" ),
           { getFieldDecorator, getFieldsError } = this.props.form;
 

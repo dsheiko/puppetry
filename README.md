@@ -30,7 +30,7 @@ Puppetry is an open-source desktop application that gives non-developers the abi
 - [Staging, template variables and expressions](https://docs.puppetry.app/template)
 - [Reusable and configurable test scenarios](https://docs.puppetry.app/snippets)
 - [Built-in automation recorder](https://docs.puppetry.app/suite#recording-suite-showcase)
-- [Testing user flows with confirmation by email](https://docs.puppetry.app/testing-emails)
+- [Testing flows with transactional emails](https://docs.puppetry.app/testing-emails)
 
 # Welcome Puppetry
 E2E testing for the Web in a nutshell is about locating a target, applying a browser method on it,

@@ -43,7 +43,7 @@ export function getVariableDataTable( variables, env ) {
 }
 
 export function getTargetDataTable( targets ) {
-  const data = setEntity( Object.values( targets ), "target" ),
+  const data = setEntity(( !targets ? [] : Object.values( targets ) ), "target" ),
         id = uniqid();
 
   data.push({

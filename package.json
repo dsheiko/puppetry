@@ -39,9 +39,9 @@
   "dependencies": {
     "@babel/core": "^7.1.2",
     "@babel/runtime": "^7.1.2",
-    "babel-core": "^7.0.0-bridge.0",
     "ansi-to-html": "^0.6.10",
     "antd": "^3.19.2",
+    "babel-core": "^7.0.0-bridge.0",
     "balloon-css": "^0.5.0",
     "bycontract": "^2.0.1",
     "chokidar": "^2.0.4",
@@ -76,6 +76,7 @@
     "simple-xpath-position": "^2.0.2",
     "tmp-promise": "^1.0.5",
     "uniqid": "^5.0.3",
+    "write-file-atomic": "^2.4.3",
     "xml2js": "^0.4.19"
   },
   "license": "(GPL-3.0 OR MIT)",
