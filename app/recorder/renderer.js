@@ -9,6 +9,7 @@ const { remote, ipcRenderer, shell } = require ( "electron" ),
       urlInput = find( "#url" ),
       reportLink = find( "#report" ),
       emulateSelect = find( "#select" ),
+      notifyEl = find( "#notify" ),
 
       colorSelect = find( "#color" ),
       info = find( "#info" ),
@@ -21,6 +22,11 @@ const { remote, ipcRenderer, shell } = require ( "electron" ),
 
 let commands = [], namedTargets = {};
 
+function notify( txt ) {
+  notifyEl.innerHTML = txt;
+  notifyEl.classList.toggle( "has-go", true );
+  setTimeout( () => notifyEl.classList.toggle( "has-go", false ), 1000 );
+}
 
 function loadUrl( url ) {
   localStorage.setItem( STORAGE_URL, url );
@@ -44,8 +50,6 @@ function normalizeTargetName( str ) {
     .replace( reFirst, "_" )
     .toUpperCase();
 }
-
-
 
 async function registerTarget( selector ) {
   try {
@@ -145,6 +149,9 @@ webview.addEventListener( "ipc-message", e => {
   if ( e.channel === "target" ) {
     return registerTarget( e.args[ 0 ] );
   }
+   if ( e.channel === "screenshot" ) {
+    return notify( "Screenshot saved" );
+  }
 
 });
 
@@ -191,7 +198,7 @@ okBtn.addEventListener( "click", ( e ) => {
       log.warn( `renderer.js process: OK btn listener: ${ e }` );
     }
   }, 200 );
- 
+
 }, false );
 
 
