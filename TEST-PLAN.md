@@ -601,27 +601,53 @@ Click on File / Create suite or Ctrl-N
 ## SPM1.1 - user can fill out the form and submit, a record appears in the list
 
 - SPM1.1.1 page.emulate
-- SPM1.1.1 page.setViewport
-- SPM1.1.1 page.goto
-- SPM1.1.1 page.screenshot
-- SPM1.1.1 page.click
-- SPM1.1.1 page.moveMouse
-- SPM1.1.1 page.tap
-- SPM1.1.1 page.press
-- SPM1.1.1 page.scroll
-- SPM1.1.1 page.reload
-- SPM1.1.1 page.setCookie
-- SPM1.1.1 page.waitFor
-- SPM1.1.1 page.waitForSelector
-- SPM1.1.1 page.waitForNavigation
-- SPM1.1.1 page.evaluate
-- SPM1.1.1 page.runjs
-- SPM1.1.1 page.debug
-- SPM1.1.1 page.assignVar
-- SPM1.1.1 page.assignVarRemotely
-- SPM1.1.1 page.assertTitle,
-- SPM1.1.1 page.assertUrl,
-- SPM1.1.1 page.assertContent,
-- SPM1.1.1 page.assertNodeCount,
-- SPM1.1.1 page.assertScroll: assertScrollPage,
-- SPM1.1.1 page.assertVar
+- SPM1.1.2 page.setViewport
+- SPM1.1.3 page.goto
+- SPM1.1.4 page.screenshot
+- SPM1.1.5 page.click
+- SPM1.1.6 page.moveMouse
+- SPM1.1.7 page.tap
+- SPM1.1.8 page.press
+- SPM1.1.9 page.scroll
+- SPM1.1.10 page.reload
+- SPM1.1.11 page.setCookie
+- SPM1.1.12 page.waitFor
+- SPM1.1.13 page.waitForSelector
+- SPM1.1.14 page.waitForNavigation
+- SPM1.1.15 page.evaluate
+- SPM1.1.16 page.runjs
+- SPM1.1.17 page.debug
+- SPM1.1.18 page.assignVar
+- SPM1.1.19 page.assignVarRemotely
+- SPM1.1.20 page.assertTitle
+- SPM1.1.21 page.assertUrl
+- SPM1.1.22 page.assertContent
+- SPM1.1.23 page.assertNodeCount
+- SPM1.1.24 page.assertScroll
+- SPM1.1.25 page.assertVar
+
+## SPM2 Page Methods
+
+## SPM2.1 - user can fill out the form and submit, a record appears in the list
+- SPM2.1.1 target.type
+- SPM2.1.2 target.select
+- SPM2.1.3 target.focus
+- SPM2.1.4 target.click
+- SPM2.1.5 target.reset
+- SPM2.1.6 target.upload
+- SPM2.1.7 target.tap
+- SPM2.1.8 target.scroll
+- SPM2.1.9 target.hover
+- SPM2.1.10 target.checkBox
+- SPM2.1.11 target.toggleClass,
+- SPM2.1.12 target.setAttribute
+- SPM2.1.13 target.assertAttribute
+- SPM2.1.14 target.assertProperty
+- SPM2.1.15 target.assertVisible
+- SPM2.1.16 target.assertHtml
+- SPM2.1.17 target.assertBoundingBox
+- SPM2.1.18 target.assertPosition
+- SPM2.1.19 target.assertStyle
+- SPM2.1.20 target.assertMatchesSelector
+- SPM2.1.21 target.assertContainsClass
+- SPM2.1.22 target.assertScroll
