@@ -10,6 +10,12 @@ const OPERATOR_MAP = {
   lt: "<"
 };
 
+function renderClick( params, pref = "" ) {
+  const text = ( params.button ? `${ params.button  } button` : "" )
+   + `${ parseInt( params.clickCount, 10 ) === 2 ? ", double click" : "" }`;
+  return text ? pref + text : "";
+}
+
 
 export class CommandRowLabel extends React.Component {
 
@@ -48,9 +54,8 @@ export class CommandRowLabel extends React.Component {
      case "tap":
      case "moveMouse":
        return `(x: ${ params.x }, y: ${ params.y })`;
-      case "click":
-        return `(x: ${ params.x }, y: ${ params.y }, `
-          + `${ params.button } button${ parseInt( params.clickCount, 10 ) === 2 ? ", double click" : "" })`;
+     case "click":
+       return `(x: ${ params.x }, y: ${ params.y }${ renderClick( params, ", " ) })`;
      case "setCookie":
        return `(${ params.name }, "${ truncate( params.value, 60 ) }")`;
      case "evaluate":
@@ -82,16 +87,16 @@ export class CommandRowLabel extends React.Component {
      }
    }
 
-   static buildTargetAddon({ assert, method, params, target }) {
+   static buildTargetAddon({ assert, method, params }) {
      try {
        let text;
        switch ( method ) {
 
        case "click":
-        return `(${ params.button } button${ parseInt( params.clickCount, 10 ) === 2 ? ", double click" : "" })`;
+         return `(${ renderClick( params ) })`;
        case "assertProperty":
        case "assertAttribute":
-        return `(${ params.name } ${ assert.assertion } \`${ truncate( assert.value, 60 ) }\`)`;
+         return `(${ params.name } ${ assert.assertion } \`${ truncate( assert.value, 60 ) }\`)`;
        case "toggleClass":
          return `(${ params.toggle } \`${ params.name }\`)`;
        case "checkBox":

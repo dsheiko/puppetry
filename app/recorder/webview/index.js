@@ -1,6 +1,6 @@
 (function(){
   const log = require( "electron-log" );
-  
+
   try {
     const { ipcRenderer } = require( "electron" ),
     debounce = require( "lodash.debounce" ),
@@ -75,7 +75,14 @@
       }
 
       static onElClick( e ) {
-        log( buildTargetRefObj( e.target ), "click", {} );
+        if ( e.ctrlKey && e.shiftKey ) {
+          return Recorder.onContextMenu( e );
+        }
+
+        if ( [ "INPUT", "SELECT", "TEXTAREA" ].indexOf( e.target.tagName ) !== -1 ) {
+          return false;
+        }
+        log( buildTargetRefObj( e.target ), "click", { button: "left" } );
       }
       static onWindowResize() {
         log( "page", "setViewport", { width: window.innerWidth, height: window.innerHeight } );
@@ -87,10 +94,11 @@
         // Ctrl-Shift-S - make a screenshot
         if ( e.which === 83 && e.ctrlKey && e.shiftKey ) {
           log( "page", "screenshot", {
-            name: `screenshot${ screenshotCounter++ }`,
+            name: `Screenshot ${ ( new Date() ).toISOString() }`,
             fullPage: false,
             omitBackground: false
           });
+          ipcRenderer.sendToHost( "screenshot" );
         }
       }
     }
@@ -138,35 +146,28 @@
       ` );
     }
 
-    function onDomModified( options ) {
+    function onDomModified( el ) {
 
-      updateElementHighlighter( options.highlightColor );
+//      Array.from( document.body.querySelectorAll(
+//        "*:not(br):not(script):not(noscript):not(area):not(audio):not(track):not(map)" ) ).forEach( el => {
+//        on( el, "contextmenu", Recorder.onContextMenu );
+//      });
 
-      Array.from( document.querySelectorAll( "*" ) ).forEach( el => {
-        on( el, "contextmenu", Recorder.onContextMenu );
-      });
-
-      Array.from( document.querySelectorAll( "input, textarea" ) ).forEach( el => {
-        //on( el, "focus", Recorder.onFocusInput );
+      Array.from( el.querySelectorAll( "input, textarea" ) ).forEach( el => {
         on( el, "input", Recorder.onInputInput );
-        on( el, "reset", Recorder.onReset );
       });
-      Array.from( document.querySelectorAll( "input[type=file]" ) ).forEach( el => {
+      Array.from( el.querySelectorAll( "input[type=file]" ) ).forEach( el => {
         on( el, "change", Recorder.onChangeFile );
       });
-      Array.from( document.querySelectorAll( "input[type=checkbox], input[type=radio]" ) ).forEach( el => {
+      Array.from( el.querySelectorAll( "input[type=checkbox], input[type=radio]" ) ).forEach( el => {
         on( el, "change", Recorder.onChangeCheckbox );
       });
-      Array.from( document.querySelectorAll( "select" ) ).forEach( el => {
-        //on( el, "focus", Recorder.onFocusInput );
+      Array.from( el.querySelectorAll( "select" ) ).forEach( el => {
         on( el, "change", Recorder.onChangeSelect );
       });
-      Array.from( document.querySelectorAll( "form" ) ).forEach( el => {
+      Array.from( el.querySelectorAll( "form" ) ).forEach( el => {
         on( el, "reset", Recorder.onReset );
       });
-      //    Array.from( document.querySelectorAll( "a, button, *[role=button]" ) ).forEach( el => {
-      //      on( el, "mouseover", Recorder.onHover );
-      //    });
     }
 
 
@@ -176,11 +177,22 @@
       on( window, "keyup", Recorder.onKeyUp );
       on ( window, "resize", debounce( Recorder.onWindowResize, 200 ) );
 
-      onDomModified( options );
+      updateElementHighlighter( options.highlightColor );
+      onDomModified( document.body, options );
+
+      let guard = 0;
 
       try {
         observer && observer.disconnect();
-        observer = new MutationObserver( onDomModified );
+        observer = new MutationObserver(( mutationList ) => {
+          if ( mutationList.some( mutation => mutation.type === "childList" && mutation.addedNodes.length ) ) {
+            guard++;
+            if ( guard > 100 ) {
+              observer.close();
+            }
+            onDomModified( document.body );
+          }
+        });
         observer.observe( document.body, { attributes: false, childList: true, subtree: true });
       } catch ( err ) {
         log.warn( `webview/index.js process: observer ${ err }` );

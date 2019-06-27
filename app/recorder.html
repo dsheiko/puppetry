@@ -253,6 +253,37 @@
     box-shadow: none;
   }
 
+  @keyframes slideDown {
+    from {
+      transform: translateY(-40px);
+    }
+
+    to {
+      transform: translateY(0px);
+    }
+  }
+
+  .notify {
+    position: fixed;
+    top: 0;
+    width: 200px;
+    left: 50%;
+    transform: translateX(-100px) translateY(-40px);
+    padding: 8px;
+    margin: 8px;
+    z-index: 99999;
+    border: 1px solid #CCC;
+    background: #EEE;
+    border-radius: 4px;
+    display: none;
+    text-align: center;
+   /* box-shadow: 4px 4px 3px rgba(0,0,0, 50%); */
+  }
+
+  .has-go {
+    display: block;
+    animation: slideDown 500ms forwards;
+  }
 
 
   </style>
@@ -260,6 +291,7 @@
 
 <body>
 
+  <div class="notify" id="notify" >Screenshot saved</div>
   <div class="toolbar">
     <input id="url"
            type="url"
@@ -309,7 +341,7 @@
         <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>S</kbd> - add "make a screenshot" command to the log. Can be used to mark a particular step in your session
       </li>
       <li>
-        <b>Right-Click</b> - register a hovered element as a target
+        <kbd>Ctrl</kbd> <kbd>Shift</kbd> <b>click</b> - register a hovered element as a target
       </li>
       </ul>
     </li>
