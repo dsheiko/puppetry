@@ -25,9 +25,9 @@ export class CommandRowLabel extends React.Component {
      case "goto":
        return `(${ params.url }")`;
      case "assignVar":
-       return `("${ params.name }", "${ params.value }")`;
+       return `(${ params.name }, ${ params.value })`;
      case "assignVarRemotely":
-       return `("${ params.name }, ${ params.url }")`;
+       return `(${ params.name }, ${ params.url })`;
      case "press":
        text = [ params.modifierKey1,
          params.modifierKey2,

@@ -592,3 +592,36 @@ Click on File / Create suite or Ctrl-N
 - E1.1.2 User can run several suites in a row
 - E1.1.3 User can choose env
 - E1.1.4 Modal can be closed
+
+
+# Suite Page Methods
+
+## SPM1 Page Methods
+
+## SPM1.1 - user can fill out the form and submit, a record appears in the list
+
+- SPM1.1.1 page.emulate
+- SPM1.1.1 page.setViewport
+- SPM1.1.1 page.goto
+- SPM1.1.1 page.screenshot
+- SPM1.1.1 page.click
+- SPM1.1.1 page.moveMouse
+- SPM1.1.1 page.tap
+- SPM1.1.1 page.press
+- SPM1.1.1 page.scroll
+- SPM1.1.1 page.reload
+- SPM1.1.1 page.setCookie
+- SPM1.1.1 page.waitFor
+- SPM1.1.1 page.waitForSelector
+- SPM1.1.1 page.waitForNavigation
+- SPM1.1.1 page.evaluate
+- SPM1.1.1 page.runjs
+- SPM1.1.1 page.debug
+- SPM1.1.1 page.assignVar
+- SPM1.1.1 page.assignVarRemotely
+- SPM1.1.1 page.assertTitle,
+- SPM1.1.1 page.assertUrl,
+- SPM1.1.1 page.assertContent,
+- SPM1.1.1 page.assertNodeCount,
+- SPM1.1.1 page.assertScroll: assertScrollPage,
+- SPM1.1.1 page.assertVar

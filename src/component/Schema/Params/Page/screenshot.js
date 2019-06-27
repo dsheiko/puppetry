@@ -2,6 +2,23 @@ import { INPUT, INPUT_NUMBER, CHECKBOX } from "../../constants";
 import { isEveryValueMissing, isSomeValueMissing, ruleValidateGenericString } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
 
+let counterCache = new Set(), counter = 0;
+/**
+ * the logic is that complex because
+ * ParamsFormBuilder re-renders with onChange event and simple counter
+ * would iterate every time
+ * @param {string} id
+ * @returns {Number}
+ */
+function getCounter( id ) {
+  if ( counterCache.has( id ) ) {
+    return counter;
+  }
+  counterCache.add( id );
+  counter++;
+  return counter;
+}
+
 export const screenshot = {
   template: ({ params, id }) => {
     const { name, fullPage, omitBackground, x, y, width, height } = params,
@@ -53,7 +70,7 @@ export const screenshot = {
           tooltip: `The description is a plain text, which will be normalized to screenshot file name.
               Slashes can be used to set file location: 'foo/bar/baz'.`,
           placeholder: "e.g. The form is just submitted",
-          initialValue: "",
+          initialValue: ( record ) => `Screenshot ${ getCounter( record.id ) || "" }`,
           rules: [{
             required: true,
             message: "Screenshot description required"
