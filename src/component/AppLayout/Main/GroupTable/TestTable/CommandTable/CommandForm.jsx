@@ -76,7 +76,6 @@ export class CommandForm extends React.Component {
           }
         }
 
-        this.updateSuiteModified();
         this.props.action[ record.id ? "updateCommand" : "addCommand" ]({
           id: record.id,
           testId: record.testId,
@@ -86,6 +85,9 @@ export class CommandForm extends React.Component {
           params: values.params,
           assert: values.assert
         });
+
+        this.updateSuiteModified();
+
         closeModal();
       }
     });

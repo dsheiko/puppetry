@@ -24,7 +24,7 @@ const PROJECT_FILE_NAME = ".puppetryrc",
       GIT_FILE_NAME = ".puppetrygit",
       readFile = util.promisify( fs.readFile ),
       //writeFile = util.promisify( fs.writeFile ),
-      writeFile = ( filename, data ) => new Promise(( resolve, reject ) => {
+      writeFile = ( filename, data ) => new Promise( ( resolve, reject ) => {
         writeFileAtomic( filename, data, ( err ) => {
           if ( err ) {
             return reject( err );

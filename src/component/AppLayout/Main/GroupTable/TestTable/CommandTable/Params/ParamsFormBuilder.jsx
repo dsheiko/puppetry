@@ -11,6 +11,13 @@ import Markdown from "component/Global/Markdown";
 import { TemplateHelper } from "./TemplateHelper";
 import { connect } from "react-redux";
 
+function result( obj, prop, record ) {
+  if ( typeof obj[ prop ] === "function" ) {
+    return obj[ prop ]( record );
+  }
+  return obj[ prop ];
+}
+
 
 const FormItem = Form.Item,
       { Option } = Select,
@@ -148,14 +155,22 @@ export class ParamsFormBuilder extends React.Component {
     }
   }
 
+  /**
+   * Initial value is the one used when noe saved in the record
+   * @param {Object} field
+   * @returns {String}
+   */
   getInitialValue( field ) {
     const { record } = this.props,
-          initialValue = field.control === CHECKBOX ? false : field.initialValue,
           key = field.name.replace( /^params\./, "" );
 
     return ( ( record.params && record.params.hasOwnProperty( key ) )
       ? record.params[ key ]
-      : initialValue );
+      : ( field.control === CHECKBOX
+        // unlikely we need to specify default value for checkbox
+        ? false
+        : result( field, "initialValue", record ) )
+    );
   }
 
 
@@ -184,7 +199,7 @@ export class ParamsFormBuilder extends React.Component {
 
     if ( field.control === CHECKBOX ) {
       decoratorOptions.valuePropName = ( initialValue ? "checked" : "data-ok" );
-      decoratorOptions.initialValue = true;
+      decoratorOptions.initialValue = initialValue;
     }
 
     const formItemLayout = section.span ? {
