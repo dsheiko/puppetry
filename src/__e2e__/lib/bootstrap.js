@@ -69,6 +69,12 @@ class Ctx {
     }, selector, attr, value );
   }
 
+  async setValue( selector, value ) {
+    await this.app.client.execute( ( selector, value ) => {
+      document.querySelector( selector ).value = value;
+    }, selector, value );
+  }
+
   async expectMenuItemsAvailable( spec ) {
     const keys = Object.keys( spec );
     for ( const selector of keys ) {
@@ -85,6 +91,12 @@ class Ctx {
     }, selector, className ) ).value;
   }
 
+  async getTagName( selector ) {
+    return ( await this.app.client.execute( ( selector ) => {
+      return document.querySelector( selector ).tagName;
+    }, selector ) ).value;
+  }
+
   async boundaryError() {
     return await this.app.client.isExisting( ".critical-error" );
   }
@@ -94,6 +106,9 @@ class Ctx {
     logs.forEach( log => {
       if ( log.level === "SEVERE" ) {
         console.error( "console.error", log.message );
+        if ( log.message.includes( "MaxListenersExceededWarning:" ) ) {
+          return;
+        }
         expect( log.level ).not.toEqual( "SEVERE" );
       }
     });

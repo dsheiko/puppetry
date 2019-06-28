@@ -33,6 +33,12 @@ export const goto = {
 
   description: "Navigates to a given URL and waits until the page loaded",
 
+  test: {
+    "params": {
+        "url": "https://www.google.com"
+      }
+  },
+
   params: [
     {
       legend: "",

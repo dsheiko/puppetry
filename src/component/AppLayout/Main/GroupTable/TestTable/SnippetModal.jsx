@@ -73,9 +73,12 @@ export class SnippetModal extends AbstractForm {
         id="cCommandModal"
         onCancel={ this.onClickCancel }
         footer={[
-          <Button key="back" onClick={ this.onClickCancel }>Cancel</Button>,
+          <Button key="back"
+            className="btn--modal-snippet-cancel"
+            onClick={ this.onClickCancel }>Cancel</Button>,
           <Button key="submit" type="primary"
             loading={ loading }
+            className="btn--modal-snippet-ok"
             onClick={ this.onClickOk }>
               Save
           </Button>

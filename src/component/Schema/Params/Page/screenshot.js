@@ -56,6 +56,12 @@ export const screenshot = {
     return "You have to provide either all clip parameters or none";
   },
 
+  test: {
+    "params": {
+        "name": "Screenshot"
+      }
+  },
+
   params: [
     {
 

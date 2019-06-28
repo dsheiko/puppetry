@@ -72,8 +72,11 @@ export class CommandModal extends React.Component {
         onOk={this.onOK}
         onCancel={this.onCancel}
         footer={[
-          <Button key="back" onClick={() => this.onCancel( record )}>Cancel</Button>,
+          <Button key="back"
+            className="btn--modal-command-cancel"
+            onClick={() => this.onCancel( record )}>Cancel</Button>,
           <Button key="submit" type="primary"
+            className="btn--modal-command-ok"
             loading={ loading }
             onClick={this.onOK}>
               Save

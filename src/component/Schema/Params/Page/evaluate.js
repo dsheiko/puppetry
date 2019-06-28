@@ -10,6 +10,13 @@ await bs.page.evaluate(() => {
   ${ value }
 });` );
   },
+
+  test: {
+    "params": {
+        "value": "FOO"
+      }
+  },
+
   description: `Evaluates JavaScript code in the page context`,
   params: [
     {

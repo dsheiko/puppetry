@@ -23,7 +23,8 @@ actions.loadSnippets = () => async ( dispatch, getState ) => {
       groups: suite.groups
     }) );
   } catch ( ex ) {
-    handleException( ex, dispatch, `Cannot load snippets` );
+    // That's fine, older project do not have this file
+    // handleException( ex, dispatch, `Cannot load snippets` );
   }
 
 };
