@@ -41,43 +41,11 @@ describe( "Main Navigation", () => {
 
   });
 
-  describe( "When suite is open", () => {
-
-    test( "check items availability", async () => {
-      await ctx.client.click( "#cWelcomeDemoProjectBtn" );
-      await ctx.client.pause( 800 );
-      // update component
-      await ctx.client.moveToObject( "#cMainMenuFile" );
-
-      await ctx.expectMenuItemsAvailable({
-        "#cMainMenuNewProject": true,
-        "#cMainMenuNewSuite": true,
-        "#cMainMenuOpenProject": true,
-        "#cMainMenuSaveSuite": true,
-        "#cMainMenuSaveAsSuite": true,
-        "#cMainMenuOpenSuite": true,
-        "#cMainMenuExportProject": true,
-        "#cMainMenuRun": true
-      });
-
-    });
-
-  });
-
-// Obsolete case since  1.0.7
-//  describe( "When empty project is open", () => {
+//  describe( "When suite is open", () => {
 //
 //    test( "check items availability", async () => {
-//      await ctx.client.click( "#cWelcomeNewProjectBtn" );
-//      await ctx.client.pause( 200 );
-//      // create a new project
-//      ctx.createTmpDir( "new-project" );
-//      await ctx.client.setValue( `${ S.MODAL_NEW_PROJECT } #name`, "Test Project" );
-//      await ctx.client.setValue( `${ S.MODAL_NEW_PROJECT } #suiteTitle`, "Test Suite" );
-//      ctx.app.webContents.send( "directorySelected", ctx.getTmpDir( "new-project" ) );
-//      await ctx.client.pause( 100 );
-//      await ctx.client.click( `${ S.MODAL_NEW_PROJECT } ${ S.MODAL_OK_BTN }` );
-//      await ctx.client.pause( 400 );
+//      await ctx.client.click( "#cWelcomeDemoProjectBtn" );
+//      await ctx.client.pause( 800 );
 //      // update component
 //      await ctx.client.moveToObject( "#cMainMenuFile" );
 //
@@ -85,9 +53,9 @@ describe( "Main Navigation", () => {
 //        "#cMainMenuNewProject": true,
 //        "#cMainMenuNewSuite": true,
 //        "#cMainMenuOpenProject": true,
-//        "#cMainMenuSaveSuite": false,
-//        "#cMainMenuSaveAsSuite": false,
-//        "#cMainMenuOpenSuite": false,
+//        "#cMainMenuSaveSuite": true,
+//        "#cMainMenuSaveAsSuite": true,
+//        "#cMainMenuOpenSuite": true,
 //        "#cMainMenuExportProject": true,
 //        "#cMainMenuRun": true
 //      });
@@ -95,7 +63,5 @@ describe( "Main Navigation", () => {
 //    });
 //
 //  });
-
-
 
 });

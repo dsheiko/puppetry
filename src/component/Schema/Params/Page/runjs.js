@@ -9,6 +9,13 @@ export const runjs = {
 ${ value }
 ` );
   },
+
+  test: {
+    "params": {
+        "value": "VALUE"
+      }
+  },
+
   description:  `Runs custom JavaScript code in the test suite with use of
 [Puppeteer API](https://pptr.dev) and [Puppetry API](https://docs.puppetry.app/command-api).
 You can access [dynamic environment variables](https://docs.puppetry.app/template)

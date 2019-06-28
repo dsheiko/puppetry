@@ -152,8 +152,8 @@ actions.createSuiteByRecording = ({ targets, commands }) => ( dispatch ) => {
       Object.entries( targets ).forEach( ([ target, selector ]) => {
         dispatch( targetActions.addTarget({ target, selector }) );
       });
-      dispatch( groupActions.addGroup({ title: "Recorded group" }, groupId ) );
-      dispatch( testActions.addTest({ title: "Recorded test", groupId }, testId ) );
+      dispatch( groupActions.addGroup({ title: "Recorded session" }, groupId ) );
+      dispatch( testActions.addTest({ title: "Recorded test case", groupId }, testId ) );
       // Seed commands
       commands.forEach( ({ method, target, params }) => {
 

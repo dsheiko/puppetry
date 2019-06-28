@@ -13,12 +13,21 @@ const { ipcMain, dialog, remote, BrowserWindow, rendererWindow } = require( "ele
         E_RECEIVE_RECORDER_SESSION, E_DELEGATE_RECORDER_SESSION
       } = require( "../constant" ),
       watchFiles = require( "./file-watcher" ),
+      electron = require( "electron" ),
       log = require( "electron-log" ),
       { installRuntimeTest } = require( "./install-runtime-test" ),
       runTests = require( "./test-runner" ),
       path = require( "path" ),
       url = require( "url" ),
       gitApi = require( "./git-api" );
+
+function findExternalDisplay() {
+  const displays = electron.screen.getAllDisplays();
+  return displays.find( ( display ) => {
+    return display.bounds.x !== 0 || display.bounds.y !== 0;
+  });
+}
+
 
 module.exports = function( mainWindow ) {
 
@@ -35,16 +44,28 @@ module.exports = function( mainWindow ) {
 
   ipcMain.on( E_OPEN_RECORDER_WINDOW, async ( event ) => {
 
+    const externalDisplay = findExternalDisplay(),
+          icon = path.join( __dirname, "..", "assets/512x512.png" ),
+          APP_WIN_WIDTH = 1366,
+          APP_WIN_HEIGHT = 768,
+          position = externalDisplay
+              ? {
+                x: externalDisplay.bounds.x + Math.ceil( ( externalDisplay.bounds.width - APP_WIN_WIDTH ) / 2 ) ,
+                y: externalDisplay.bounds.y + Math.ceil( ( externalDisplay.bounds.height - APP_WIN_HEIGHT ) / 2 )
+              }
+              : {};
+
     // Create the browser window.
-    const recorderWindow = new BrowserWindow({
-      width: 1366,
-      height: 768,
+    const recorderWindow = new BrowserWindow(Object.assign({
+      width: APP_WIN_WIDTH,
+      height: APP_WIN_HEIGHT,
       minWidth: 320,
       minHeight: 200,
       frame: true,
       devTools: process.env.ELECTRON_ENV === "dev",
-      title: "Puppetry Recorder"
-    });
+      title: "Puppetry Recorder",
+      icon
+    }, position ));
 
     // and load the index.html of the app.
     recorderWindow.loadURL( url.format({

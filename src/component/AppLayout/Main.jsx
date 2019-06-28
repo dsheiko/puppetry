@@ -45,12 +45,13 @@ export class Main extends AbstractComponent {
 
 
           <Tabs
+            className="tabgroup-suite"
             activeKey={ activeKey }
             hideAdd={ true }
             animated={ false }
             onChange={ this.onTabChange }
           >
-            <TabPane tab={ targetsLabel } key="targets" id="cSuitePane">
+            <TabPane tab={ targetsLabel } key="targets">
               <p>Targets are identifiers associated with locators (CSS selector or XPath)
               that we can refer in the test cases.
               </p>
