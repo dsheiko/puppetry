@@ -35,7 +35,8 @@ class BrowserSession {
     }
 
     this.browser = await puppeteer.launch( options  );
-    this.page = await this.browser.newPage();
+    this.context = await this.browser.createIncognitoBrowserContext();
+    this.page = await this.context.newPage();
     this.target = createTargetMethods( this.page );
   }
 

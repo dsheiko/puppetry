@@ -148,10 +148,10 @@
 
     function onDomModified( el ) {
 
-//      Array.from( document.body.querySelectorAll(
-//        "*:not(br):not(script):not(noscript):not(area):not(audio):not(track):not(map)" ) ).forEach( el => {
-//        on( el, "contextmenu", Recorder.onContextMenu );
-//      });
+      Array.from( document.body.querySelectorAll(
+        "*:not(br):not(script):not(noscript):not(area):not(audio):not(track):not(map)" ) ).forEach( el => {
+        on( el, "contextmenu", Recorder.onContextMenu );
+      });
 
       Array.from( el.querySelectorAll( "input, textarea" ) ).forEach( el => {
         on( el, "input", Recorder.onInputInput );
