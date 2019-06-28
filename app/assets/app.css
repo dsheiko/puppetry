@@ -979,3 +979,8 @@ td:hover .editable-cell-icon {
   text-transform: uppercase;
   font-size: .8em;
 }
+
+.container--editable-cell {
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
