@@ -118,7 +118,7 @@ export class GroupTable extends AbstractEditableTable {
             expandedRowRender={ this.renderExpandedTable }
             footer={() => ( <div className="ant-table-footer__toolbar">
               <Button
-                icon="experiment" id="cGroupTableRecordBtn"
+                icon="camera" id="cGroupTableRecordBtn"
                 onClick={ this.onClickRecord }>Record</Button>
             </div> )}
           />
