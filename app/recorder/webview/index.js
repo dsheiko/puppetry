@@ -79,9 +79,16 @@
           return Recorder.onContextMenu( e );
         }
 
-        if ( [ "INPUT", "SELECT", "TEXTAREA" ].indexOf( e.target.tagName ) !== -1 ) {
+        if ( e.target.matches( "input" )
+          && !e.target.matches( "input[type=checkbox]" )
+          && !e.target.matches( "input[type=radio]" )) {
           return false;
         }
+
+        if ( [ "SELECT", "TEXTAREA" ].indexOf( e.target.tagName ) !== -1 ) {
+          return false;
+        }
+
         log( buildTargetRefObj( e.target ), "click", { button: "left" } );
       }
       static onWindowResize() {
@@ -91,6 +98,14 @@
         log( "page", "moveMouse", { x: e.screenX, y: e.screenY } );
       }
       static onKeyUp( e ) {
+        if ( e.which === 13 ) {
+          log( "page", "press", {
+            key: "Enter",
+            modifierKey1: "",
+            modifierKey2: "",
+            modifierKey3: ""
+          });
+        }
         // Ctrl-Shift-S - make a screenshot
         if ( e.which === 83 && e.ctrlKey && e.shiftKey ) {
           log( "page", "screenshot", {

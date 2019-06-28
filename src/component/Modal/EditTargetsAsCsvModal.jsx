@@ -101,7 +101,7 @@ export class EditTargetsAsCsvModal extends AbstractForm {
             </Button> ) ]}
         >
 
-          <Form>
+          { isVisible && <Form>
             <FormItem  label="Targets">
               { getFieldDecorator( "csv", {
                 initialValue,
@@ -113,7 +113,7 @@ export class EditTargetsAsCsvModal extends AbstractForm {
                 <TextArea autosize={{ minRows: 8, maxRows: 12 }} />
               )}
             </FormItem>
-          </Form>
+          </Form> }
 
         </Modal>
       </ErrorBoundary>
