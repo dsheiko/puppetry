@@ -13,8 +13,8 @@ await bs.page.evaluate(() => {
 
   test: {
     "params": {
-        "value": "FOO"
-      }
+      "value": "FOO"
+    }
   },
 
   description: `Evaluates JavaScript code in the page context`,

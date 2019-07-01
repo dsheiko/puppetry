@@ -35,8 +35,8 @@ export const goto = {
 
   test: {
     "params": {
-        "url": "https://www.google.com"
-      }
+      "url": "https://www.google.com"
+    }
   },
 
   params: [

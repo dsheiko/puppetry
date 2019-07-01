@@ -53,6 +53,11 @@
 	}
 
 
+body > section {
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
 body {
   background-color: #002f5c;
   color: white;
@@ -60,6 +65,7 @@ body {
   margin: 0;
   padding: 0
 }
+
 
 .navbar {
   display: flex;
@@ -93,11 +99,24 @@ body {
     align-items: center;
   }
 
-  .navbar__menu > * {
+  .navbar__menu_github {
+    display: flex;
+  }
+
+  .navbar__menu_puppetry {
+    display: flex;
+  }
+
+
+  .navbar__menu_github > * {
     margin-left: 8px;
   }
 
-  .navbar__menu > .btn {
+  .navbar__menu_puppetry > .btn {
+    margin-left: 8px;
+  }
+
+  .navbar__menu_puppetry > .btn:first-child {
     margin-left: 24px;
   }
 
@@ -113,8 +132,8 @@ body {
     margin: 16px 0;
   }
 
-  .banner .banner__btns .btn:first-child {
-    margin-right: 16px;
+  .banner .banner__btns .btn + .btn {
+    margin-left: 16px;
   }
 
   .banner h1 {
@@ -134,7 +153,7 @@ body {
   .banner__img {
     margin: 32px 0;
     display: block;
-    max-width: 600px;
+    max-width: 624px;
     box-shadow: 4px 4px 8px 0px rgba( 0,0,0,0.4 );
     border-radius: 4px;
   }
@@ -151,6 +170,29 @@ body {
   }
 }
 
+@media screen and (max-width: 420px) {
+  .navbar__logo {
+    display: none;
+  }
+  .navbar, .navbar__menu {
+    flex-direction: column;
+  }
+  .navbar__menu, .navbar__menu_github, .navbar__menu_puppetry {
+    margin-top: 8px;
+  }
+  .banner h1 {
+
+  }
+  .banner__img, .feature__img {
+    max-width: calc(100vw - 32px) !important;
+  }
+  .footer {
+    flex-direction: column;
+  }
+  .footer__links {
+    margin-top: 16px;
+  }
+}
 
   .hero-grid h3 {
     font-size: 24px;
