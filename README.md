@@ -15,9 +15,9 @@
 
 Puppetry is an open-source desktop application that gives non-developers the ability to create, manage, and integrate automated tests for Web
 
-![Puppetry 2](https://github.com/dsheiko/puppetry/raw/master/docs/wiki/puppetry-welcome.png)
+![Puppetry 2](https://github.com/dsheiko/puppetry/blob/master/docs/assets/img/puppetry-welcome.png)
 
-[:tv: Watch introduction video](https://www.youtube.com/watch?v=4DLnak6qU68  "Introduction to Puppetry")
+[:tv: Watch introduction video](https://vimeo.com/345458272  "Introduction to Puppetry 2")
 
 
 # Key Features
@@ -40,7 +40,7 @@ or attribute has a specified value, or element's position and size match the pro
 
 Puppetry offers you an easy-to-use UI where you choose browser methods and assertions from a predefined list, with predefined settings, guided by extensive tips.
 Namely you can do the following:
-- to declare element targets as pairs `variable = locator`, where locator can be either CSS selector or Xpath. When using Chrome DevTool [you just right-click on a target element and copy selector or XPath](https://www.youtube.com/watch?v=du2Jnm-TzJc)
+- to declare element targets as pairs `variable = locator`, where locator can be either CSS selector or Xpath. When using Chrome DevTool you just right-click on a target element and copy selector or XPath
 - to manage your test structure in BDD style ( project, suite, test group, test )
 - to manage browser methods and assertions
 
