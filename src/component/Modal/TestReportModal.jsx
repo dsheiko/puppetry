@@ -139,9 +139,10 @@ export class TestReportModal extends AbstractComponent {
 
   render() {
     const { isVisible, files, currentSuite } = this.props,
-          current = files.find( file => currentSuite === file ),
+          currentFile = files.find( file => currentSuite === file ),
+          current = currentFile || files[ 0 ],
           checkedList = this.state.modified  ? this.state.checkedList : [ current ];
-
+        
     return (
       <ErrorBoundary>
         <Modal
