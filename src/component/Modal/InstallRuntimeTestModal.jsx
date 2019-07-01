@@ -185,7 +185,7 @@ export class InstallRuntimeTestModal extends AbstractComponent {
     return (
       <ErrorBoundary>
         <Modal
-          title="Mising NPM Dependencies"
+          title="Missing NPM Dependencies"
           visible={ isVisible }
           closable={ Boolean( progress === 0 || error ) }
           onCancel={this.onClickCancel}
