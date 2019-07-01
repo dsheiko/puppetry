@@ -55,11 +55,11 @@ ${ buildEnv( env ) }
 ${ targets }
 
 describe( ${ JSON.stringify( title ) }, async () => {
-  beforeEach(async () => {
+  beforeAll(async () => {
     await bs.setup();
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     await bs.teardown();
   });
 
