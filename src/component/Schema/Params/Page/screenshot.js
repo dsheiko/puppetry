@@ -58,8 +58,8 @@ export const screenshot = {
 
   test: {
     "params": {
-        "name": "Screenshot"
-      }
+      "name": "Screenshot"
+    }
   },
 
   params: [

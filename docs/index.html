@@ -73,17 +73,23 @@
           <div class="navbar__logo">
             <img class="navbar__img"  src="./assets/img/puppetry.svg" alt="Puppetry logo" />
             <div class="navbar__title">
-              Puppetry v.1.0
+              Puppetry v2
             </div>
           </div>
           <div class="navbar__menu">
+            <div  class="navbar__menu_github">
             <a class="github-button" href="https://github.com/dsheiko/puppetry/fork" data-icon="octicon-repo-forked" data-size="large" aria-label="Fork Puppetry.app on GitHub">Fork</a>
             <a class="github-button" href="https://github.com/dsheiko/puppetry" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star Puppetry.app on GitHub">Star</a>
+            </div>
+            <div  class="navbar__menu_puppetry">
+
 
             <a  href="https://github.com/dsheiko/puppetry/releases" target="_blank" class="btn btn--secondary btn--md"
                 title="Download Puppetry"
                 aria-label="Download Puppetry" role="button">Download</a>
+            </div>
           </div>
+
 
 
 
@@ -92,13 +98,16 @@
         <div
           class="banner" >
           <h1>Welcome to Puppetry</h1>
-          <img class="banner__img"  src="./assets/img/puppetry-welcome.png" alt="Puppetry is an open-source desktop application that gives non-developers the ability to create, manage, and integrate automated tests for Web" />
+          <img class="banner__img"  src="./assets/img/puppetry-welcome.png?v2" alt="Puppetry is an open-source desktop application that gives non-developers the ability to create, manage, and integrate automated tests for Web" />
           <h2>CODELESS END-TO-END AUTOMATED TESTING</h2>
           <div class="banner__btns">
-          <a href="https://www.youtube.com/watch?v=4DLnak6qU68"
+          <a href="https://youtu.be/xrtC2ucgP9o"
              title="Watch video"
               aria-label="Watch video"
              target="_blank" class="btn btn--secondary btn--md" role="button">Watch video</a>
+          <a  href="https://docs.puppetry.app" target="_blank" class="btn btn--secondary btn--md"
+                title="Puppetry Documentation"
+                aria-label="Puppetry Documentation" role="button">Read docs</a>
           <a  href="https://github.com/dsheiko/puppetry/releases"
               title="Download Puppetry"
               aria-label="Download Puppetry"
@@ -116,7 +125,7 @@
           <div class="hero-card">
             <img class="hero-card__icon" src="./assets/img/round-developer_board-24px.svg" alt="Ready for Continuous Integration" />
             <h3>Ready for Continuous Integration</h3>
-            <p>Puppetry can export the tests into a Jest.js project.
+            <p>Puppetry can <a target="_blank" href="https://docs.puppetry.app/exporting-tests-for-ci">export the tests</a> into a Jest.js project.
               Thus they can be run in the command-line, e.g. in CI/CD pipeline.</p>
           </div>
           <div class="hero-card">
@@ -124,10 +133,34 @@
             <h3>Standing on the shoulders of giants</h3>
             <p>Puppetry is built on top of <a href="https://pptr.dev/"
               rel="noopener noreferrer" target="_blank">Puppeteer (headless Chrome API)</a> by Google and
-              <a href="https://pptr.dev/"
+              <a href="https://jestjs.io/"
                  rel="noopener noreferrer" target="_blank">Jest testing framework</a> by Facebook</p>
           </div>
         </div>
+
+
+        <div class="hero-grid">
+          <div class="hero-card">
+            <img class="hero-card__icon" src="./assets/img/baseline-video-cam-24px.svg?12" alt="Automation recording" />
+            <h3>Automation recording</h3>
+            <p>Puppetry can <a target="_blank" href="https://docs.puppetry.app/suite#record-suite">record your interactions with the application</a>
+              under test and converts them into a test suite.
+            </p>
+          </div>
+          <div class="hero-card">
+            <img class="hero-card__icon" src="./assets/img/baseline-developer_mode-24px.svg" alt="Template expressions" />
+            <h3>Template expressions</h3>
+            <p>With Puppetry you can use <a target="_blank" href="https://docs.puppetry.app/template">template tags</a> to refer variables defined per environment (test, stage, production).
+              Moreover, you can apply template functions to build a value, e.g. by using
+              <a target="_blank" href="https://github.com/marak/Faker.js">Faker.js methods</a></p>
+          </div>
+          <div class="hero-card">
+            <img class="hero-card__icon" src="./assets/img/baseline-extension-24px.svg" alt="Reusable and configurable test scenarios" />
+            <h3>Reusable and configurable test scenarios</h3>
+            <p>Puppetry allows creating <a target="_blank" href="https://docs.puppetry.app/snippets">test scenarios and referring them from test cases</a>.  When referring test scenarios we can provide an execution context.</p>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -138,7 +171,7 @@
         <div class="feature feature--left">
 
           <div>
-            <img class="feature__img" src="./assets/img/screen-manage-structure.png" alt="Manage your test structure"  />
+            <img class="feature__img" src="./assets/img/screen-manage-structure.png?v2" alt="Manage your test structure"  />
           </div>
           <div>
             <h3>Manage your test structure</h3>
@@ -159,13 +192,13 @@
             </p>
           </div>
           <div>
-            <img class="feature__img" src="./assets/img/screen-add-target.png" alt="Locate and define element target"  />
+            <img class="feature__img" src="./assets/img/screen-add-target.png?v2" alt="Locate and define element target"  />
           </div>
         </div>
 
          <div class="feature feature--left">
           <div>
-            <img class="feature__img" src="./assets/img/screen-select-target.png" alt="Select a target"  />
+            <img class="feature__img" src="./assets/img/screen-select-target.png?v2" alt="Select a target"  />
           </div>
           <div>
             <h3>Select a target</h3>
@@ -183,13 +216,13 @@
             <p>Underlying form dynamically adapts to actual target/method combination. So when select both we get method parameters (mandatory and optional)</p>
           </div>
           <div>
-            <img class="feature__img" src="./assets/img/screen-perform-method.png" alt="Select a method"  />
+            <img class="feature__img" src="./assets/img/screen-perform-method.png?v2" alt="Select a method"  />
           </div>
         </div>
 
         <div class="feature feature--left">
           <div>
-            <img class="feature__img" src="./assets/img/screen-assert.png" alt="Make an assertion"  />
+            <img class="feature__img" src="./assets/img/screen-assert.png?v2" alt="Make an assertion"  />
           </div>
           <div>
             <h3>Make an assertion</h3>
@@ -203,7 +236,7 @@
             <p>As we press F6 Puppetry generates Jest project and runs internally the tests. </p>
           </div>
           <div>
-            <img class="feature__img" src="./assets/img/screen-test-resutls.png" alt="Get test report"  />
+            <img class="feature__img" src="./assets/img/screen-test-resutls.png?v2" alt="Get test report"  />
           </div>
         </div>
 
@@ -218,7 +251,7 @@
         <div class="feature feature--left">
 
           <div>
-            <img class="feature__img" src="./assets/img/screen-cli.png" alt=".."  />
+            <img class="feature__img" src="./assets/img/screen-cli.png?v2" alt="Export project for CI"  />
           </div>
           <div>
             <h3>Export your tests</h3>
@@ -237,7 +270,7 @@
             <p>Puppetry generates the tests as readable / maintainable JavaScript specs. So developers can easily read them and modify.</p>
           </div>
           <div>
-            <img class="feature__img" src="./assets/img/screen-code.png" alt=".."  />
+            <img class="feature__img" src="./assets/img/screen-code.png?v2" alt="Generated test code"  />
           </div>
         </div>
 
@@ -254,7 +287,7 @@
 
         <div class="footer">
           <div class="footer__copyright">
-            © 2018 MIT License. Created by  <a href="http://dsheiko.com" target="_blank">Dmitry Sheiko</a>
+            © <span id="cYear">2019</span> MIT License. Created by  <a href="http://dsheiko.com" target="_blank">Dmitry Sheiko</a>
           </div>
           <div class="footer__links">
 
@@ -287,6 +320,9 @@
 
     </section>
 
+    <script>
+      document.querySelector( "#cYear" ).innerHTML = ( new Date() ).getFullYear();
+    </script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?"></script>
 

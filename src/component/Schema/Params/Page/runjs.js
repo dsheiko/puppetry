@@ -12,8 +12,8 @@ ${ value }
 
   test: {
     "params": {
-        "value": "VALUE"
-      }
+      "value": "VALUE"
+    }
   },
 
   description:  `Runs custom JavaScript code in the test suite with use of
