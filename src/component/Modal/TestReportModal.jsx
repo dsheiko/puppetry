@@ -142,7 +142,7 @@ export class TestReportModal extends AbstractComponent {
           currentFile = files.find( file => currentSuite === file ),
           current = currentFile || files[ 0 ],
           checkedList = this.state.modified  ? this.state.checkedList : [ current ];
-        
+
     return (
       <ErrorBoundary>
         <Modal
