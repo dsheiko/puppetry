@@ -1,0 +1,1130 @@
+{
+  "title": "All available methods",
+  "timeout": 50000,
+  "savedAt": 1561637426,
+  "loadedAt": 1561643196,
+  "modified": true,
+  "filename": "all-methods.json",
+  "targets": {
+    "3rmjvnyp6iv": {
+      "editing": false,
+      "id": "3rmjvnyp6iv",
+      "key": "3rmjvnyp6iv",
+      "target": "EMAIL_INPUT",
+      "selector": "input[name=email]",
+      "disabled": false,
+      "adding": false
+    },
+    "3rmjvnyp6iw": {
+      "editing": false,
+      "id": "3rmjvnyp6iw",
+      "key": "3rmjvnyp6iw",
+      "target": "VAT_INPUT",
+      "selector": "input[name=vatId]",
+      "disabled": false,
+      "adding": false
+    },
+    "3rmjvnyp6ix": {
+      "editing": false,
+      "id": "3rmjvnyp6ix",
+      "key": "3rmjvnyp6ix",
+      "target": "FNAME_INPUT",
+      "selector": "//*[@id=\"firstNameInput\"]",
+      "disabled": false,
+      "adding": false
+    },
+    "3rmjvnyp6iy": {
+      "editing": false,
+      "id": "3rmjvnyp6iy",
+      "key": "3rmjvnyp6iy",
+      "target": "DAY_SELECT",
+      "selector": "[name=day]",
+      "disabled": false,
+      "adding": false
+    },
+    "3rmjvnyp6iz": {
+      "editing": false,
+      "id": "3rmjvnyp6iz",
+      "key": "3rmjvnyp6iz",
+      "target": "MONTH_SELECT",
+      "selector": "[name=month]",
+      "disabled": false,
+      "adding": false
+    },
+    "3rmjvnyp6j0": {
+      "editing": false,
+      "id": "3rmjvnyp6j0",
+      "key": "3rmjvnyp6j0",
+      "target": "SUBMIT_BTN",
+      "selector": "button[type=submit]",
+      "disabled": false,
+      "adding": false
+    },
+    "3rmjvnyp6j1": {
+      "editing": false,
+      "id": "3rmjvnyp6j1",
+      "key": "3rmjvnyp6j1",
+      "target": "INPUT_CHECKBOX",
+      "selector": "#exampleCheck1",
+      "disabled": false,
+      "adding": false
+    },
+    "3rmjvnyp6j2": {
+      "editing": false,
+      "id": "3rmjvnyp6j2",
+      "key": "3rmjvnyp6j2",
+      "target": "INPUT_RADIO",
+      "selector": "#exampleCheck1",
+      "disabled": false,
+      "adding": false
+    },
+    "3rmjvnyp6j3": {
+      "editing": false,
+      "id": "3rmjvnyp6j3",
+      "key": "3rmjvnyp6j3",
+      "target": "INPUT_FILE",
+      "selector": "#fileInput",
+      "disabled": false,
+      "adding": false
+    },
+    "3zvjvnyqjp4": {
+      "id": "3zvjvnyqjp4",
+      "editing": false,
+      "target": "FORM",
+      "selector": "#myform",
+      "key": "3zvjvnyqjp4"
+    }
+  },
+  "groups": {
+    "_2": {
+      "editing": false,
+      "id": "_2",
+      "key": "_2",
+      "title": "Crash test",
+      "tests": {
+        "3j3jvnxjknu": {
+          "editing": false,
+          "id": "3j3jvnxjknu",
+          "key": "3j3jvnxjknu",
+          "title": "page methods",
+          "commands": {
+            "2bwjxefkjwy": {
+              "editing": true,
+              "id": "2bwjxefkjwy",
+              "key": "2bwjxefkjwy",
+              "target": "page",
+              "method": "goto",
+              "params": {
+                "url": "https://dsheiko.github.io/react-html5-form/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "2bwjxefledm": {
+              "editing": true,
+              "id": "2bwjxefledm",
+              "key": "2bwjxefledm",
+              "target": "page",
+              "method": "emulate",
+              "params": {
+                "device": "Galaxy Note 3 landscape"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "2bwjxehyk2r": {
+              "editing": false,
+              "id": "2bwjxehyk2r",
+              "key": "2bwjxehyk2r",
+              "target": "page",
+              "method": "setViewport",
+              "params": {
+                "width": 1440,
+                "height": 900,
+                "deviceScaleFactor": 2,
+                "isMobile": true,
+                "hasTouch": true,
+                "isLandscape": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "eewjxeihan2": {
+              "editing": true,
+              "id": "eewjxeihan2",
+              "key": "eewjxeihan2",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "Screenshot 1",
+                "fullPage": true,
+                "omitBackground": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "2bwjxehzu94": {
+              "editing": false,
+              "id": "2bwjxehzu94",
+              "key": "2bwjxehzu94",
+              "target": "page",
+              "method": "click",
+              "params": {
+                "x": 1,
+                "y": 1,
+                "button": "left",
+                "clickCount": 2,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "2bwjxei0rep": {
+              "editing": false,
+              "id": "2bwjxei0rep",
+              "key": "2bwjxei0rep",
+              "target": "page",
+              "method": "moveMouse",
+              "params": {
+                "x": 100,
+                "y": 100
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "2bwjxei1b5j": {
+              "editing": false,
+              "id": "2bwjxei1b5j",
+              "key": "2bwjxei1b5j",
+              "target": "page",
+              "method": "tap",
+              "params": {
+                "x": 100,
+                "y": 100
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "2bwjxei1wzj": {
+              "editing": false,
+              "id": "2bwjxei1wzj",
+              "key": "2bwjxei1wzj",
+              "target": "page",
+              "method": "press",
+              "params": {
+                "key": "p",
+                "modifierKey1": "Alt",
+                "modifierKey2": "Control",
+                "modifierKey3": "Shift"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "2bwjxei3hue": {
+              "editing": false,
+              "id": "2bwjxei3hue",
+              "key": "2bwjxei3hue",
+              "target": "page",
+              "method": "scroll",
+              "params": {
+                "x": 100,
+                "y": 100
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "2bwjxei3vik": {
+              "editing": false,
+              "id": "2bwjxei3vik",
+              "key": "2bwjxei3vik",
+              "target": "page",
+              "method": "reload",
+              "params": {
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "2bwjxei49i5": {
+              "editing": false,
+              "id": "2bwjxei49i5",
+              "key": "2bwjxei49i5",
+              "target": "page",
+              "method": "setCookie",
+              "params": {
+                "name": "foo",
+                "value": "go{{ counter() }}_{{ faker( \"hacker.verb\", \"de\" ) }} lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
+                "domain": "dsheiko.github.io",
+                "path": "react-html5-form",
+                "httpOnly": "true",
+                "secure": "",
+                "sameSite": ""
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "2bwjxei7i8v": {
+              "editing": false,
+              "id": "2bwjxei7i8v",
+              "key": "2bwjxei7i8v",
+              "target": "page",
+              "method": "waitFor",
+              "params": {
+                "value": 200
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "2bwjxei7stt": {
+              "editing": false,
+              "id": "2bwjxei7stt",
+              "key": "2bwjxei7stt",
+              "target": "page",
+              "method": "waitForSelector",
+              "params": {
+                "value": "body",
+                "visible": "off",
+                "hidden": "off",
+                "timeout": 30000
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "2bwjxei833l": {
+              "editing": false,
+              "id": "2bwjxei833l",
+              "key": "2bwjxei833l",
+              "target": "page",
+              "method": "waitForNavigation",
+              "params": {
+                "timeout": 30000,
+                "waitUntil": "domcontentloaded"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "2bwjxei8ovm": {
+              "editing": false,
+              "id": "2bwjxei8ovm",
+              "key": "2bwjxei8ovm",
+              "target": "page",
+              "method": "evaluate",
+              "params": {
+                "value": "document.body.classList.add(\"foo\");"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "2bwjxei9hfq": {
+              "editing": false,
+              "id": "2bwjxei9hfq",
+              "key": "2bwjxei9hfq",
+              "target": "page",
+              "method": "runjs",
+              "params": {
+                "value": "console.log(\"HEY!!!!!\");"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "2bwjxeiacfi": {
+              "editing": false,
+              "id": "2bwjxeiacfi",
+              "key": "2bwjxeiacfi",
+              "target": "page",
+              "method": "debug",
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "2bwjxeias3b": {
+              "editing": false,
+              "id": "2bwjxeias3b",
+              "key": "2bwjxeias3b",
+              "target": "page",
+              "method": "assignVar",
+              "params": {
+                "name": "FOO",
+                "value": "var_{{ counter() }}"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "2bwjxeiblvz": {
+              "editing": false,
+              "id": "2bwjxeiblvz",
+              "key": "2bwjxeiblvz",
+              "target": "page",
+              "method": "assignVarRemotely",
+              "params": {
+                "name": "BAR",
+                "url": "https://dsheiko.github.io/react-html5-form/",
+                "interval": 1000,
+                "timeout": 60000,
+                "parserFn": "( val ) => {\n  return val;\n}",
+                "requestFn": "async ( url ) => {\n  return Promise.resolve( true );\n}"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "eewjxeiz9sn": {
+              "editing": false,
+              "id": "eewjxeiz9sn",
+              "key": "eewjxeiz9sn",
+              "target": "page",
+              "method": "assertTitle",
+              "assert": {
+                "assertion": "equals",
+                "type": "string",
+                "value": "React-html5-form Demo"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "eewjxej3rqs": {
+              "editing": false,
+              "id": "eewjxej3rqs",
+              "key": "eewjxej3rqs",
+              "target": "page",
+              "method": "assertUrl",
+              "assert": {
+                "assertion": "equals",
+                "type": "string",
+                "value": "https://dsheiko.github.io/react-html5-form/"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "eewjxej41jm": {
+              "editing": false,
+              "id": "eewjxej41jm",
+              "key": "eewjxej41jm",
+              "target": "page",
+              "method": "assertContent",
+              "assert": {
+                "assertion": "contains",
+                "type": "string",
+                "value": "body"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "eewjxej4mcw": {
+              "editing": false,
+              "id": "eewjxej4mcw",
+              "key": "eewjxej4mcw",
+              "target": "page",
+              "method": "assertNodeCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "gt",
+                "value": 1
+              },
+              "params": {
+                "selector": "div"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "eewjxelk5cx": {
+              "editing": false,
+              "id": "eewjxelk5cx",
+              "key": "eewjxelk5cx",
+              "target": "page",
+              "method": "assertScroll",
+              "assert": {
+                "assertion": "number",
+                "operator": "lt",
+                "value": 999
+              },
+              "params": {
+                "direction": "horizontally"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            },
+            "eewjxelkqp0": {
+              "editing": false,
+              "id": "eewjxelkqp0",
+              "key": "eewjxelkqp0",
+              "target": "page",
+              "method": "assertVar",
+              "assert": {
+                "assertion": "contains",
+                "type": "string",
+                "value": "var"
+              },
+              "params": {
+                "name": "FOO"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "3j3jvnxjknu"
+            }
+          },
+          "disabled": false,
+          "groupId": "_2"
+        },
+        "fjsjxemjh6m": {
+          "title": "Target methods",
+          "id": "fjsjxemjh6m",
+          "editing": false,
+          "groupId": "_2",
+          "key": "fjsjxemjh6m",
+          "commands": {
+            "fjsjxemk146": {
+              "editing": false,
+              "id": "fjsjxemk146",
+              "key": "fjsjxemk146",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "https://dsheiko.github.io/react-html5-form/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m",
+              "entity": "command"
+            },
+            "fjsjxemk561": {
+              "editing": false,
+              "id": "fjsjxemk561",
+              "key": "fjsjxemk561",
+              "target": "EMAIL_INPUT",
+              "method": "type",
+              "params": {
+                "value": "{{ faker( \"address.city\", \"en\" ) }}"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxemrkgz": {
+              "editing": false,
+              "id": "fjsjxemrkgz",
+              "key": "fjsjxemrkgz",
+              "target": "MONTH_SELECT",
+              "method": "select",
+              "params": {
+                "value": "foo"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxems5i9": {
+              "editing": false,
+              "id": "fjsjxems5i9",
+              "key": "fjsjxems5i9",
+              "target": "EMAIL_INPUT",
+              "method": "focus",
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxemse10": {
+              "editing": false,
+              "id": "fjsjxemse10",
+              "key": "fjsjxemse10",
+              "target": "SUBMIT_BTN",
+              "method": "click",
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxemss88": {
+              "editing": false,
+              "id": "fjsjxemss88",
+              "key": "fjsjxemss88",
+              "target": "EMAIL_INPUT",
+              "method": "reset",
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxemt350": {
+              "editing": false,
+              "id": "fjsjxemt350",
+              "key": "fjsjxemt350",
+              "target": "INPUT_FILE",
+              "method": "upload",
+              "params": {
+                "path": "D:\\UPLOAD\\dev.log"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxemtv77": {
+              "editing": false,
+              "id": "fjsjxemtv77",
+              "key": "fjsjxemtv77",
+              "target": "EMAIL_INPUT",
+              "method": "tap",
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxemu2a5": {
+              "editing": false,
+              "id": "fjsjxemu2a5",
+              "key": "fjsjxemu2a5",
+              "target": "FORM",
+              "method": "scroll",
+              "params": {
+                "x": 10,
+                "y": 10
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxemugbw": {
+              "editing": false,
+              "id": "fjsjxemugbw",
+              "key": "fjsjxemugbw",
+              "target": "EMAIL_INPUT",
+              "method": "hover",
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxemut5d": {
+              "editing": false,
+              "id": "fjsjxemut5d",
+              "key": "fjsjxemut5d",
+              "target": "INPUT_CHECKBOX",
+              "method": "checkBox",
+              "params": {
+                "checked": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxemv41r": {
+              "editing": false,
+              "id": "fjsjxemv41r",
+              "key": "fjsjxemv41r",
+              "target": "EMAIL_INPUT",
+              "method": "toggleClass",
+              "params": {
+                "name": ".has-error",
+                "toggle": "add"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxemvm8t": {
+              "editing": false,
+              "id": "fjsjxemvm8t",
+              "key": "fjsjxemvm8t",
+              "target": "EMAIL_INPUT",
+              "method": "setAttribute",
+              "params": {
+                "name": "data-cool",
+                "value": "value"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxemwmtd": {
+              "editing": false,
+              "id": "fjsjxemwmtd",
+              "key": "fjsjxemwmtd",
+              "target": "EMAIL_INPUT",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "equals",
+                "type": "string",
+                "value": "value"
+              },
+              "params": {
+                "name": "data-cool"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxemxfzq": {
+              "editing": false,
+              "id": "fjsjxemxfzq",
+              "key": "fjsjxemxfzq",
+              "target": "EMAIL_INPUT",
+              "method": "assertProperty",
+              "assert": {
+                "assertion": "equals",
+                "type": "string",
+                "value": "value"
+              },
+              "params": {
+                "name": "value"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxemxwjr": {
+              "editing": false,
+              "id": "fjsjxemxwjr",
+              "key": "fjsjxemxwjr",
+              "target": "EMAIL_INPUT",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "boolean",
+                "value": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxemy97h": {
+              "editing": false,
+              "id": "fjsjxemy97h",
+              "key": "fjsjxemy97h",
+              "target": "FORM",
+              "method": "assertHtml",
+              "assert": {
+                "assertion": "contains",
+                "type": "string",
+                "value": "div"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxemyon5": {
+              "editing": false,
+              "id": "fjsjxemyon5",
+              "key": "fjsjxemyon5",
+              "target": "FORM",
+              "method": "assertBoundingBox",
+              "assert": {
+                "assertion": "boundingBox",
+                "xOperator": "gt",
+                "xValue": 1,
+                "yOperator": "gt",
+                "yValue": 1,
+                "wOperator": "gt",
+                "wValue": 1,
+                "hOperator": "gt",
+                "hValue": 1
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxemzfxo": {
+              "editing": false,
+              "id": "fjsjxemzfxo",
+              "key": "fjsjxemzfxo",
+              "target": "EMAIL_INPUT",
+              "method": "assertPosition",
+              "assert": {
+                "assertion": "position",
+                "position": "above",
+                "target": "VAT_INPUT"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxen02pd": {
+              "editing": false,
+              "id": "fjsjxen02pd",
+              "key": "fjsjxen02pd",
+              "target": "EMAIL_INPUT",
+              "method": "assertStyle",
+              "assert": {
+                "assertion": "equals",
+                "type": "string",
+                "value": "block"
+              },
+              "params": {
+                "name": "display"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxen0ruw": {
+              "editing": false,
+              "id": "fjsjxen0ruw",
+              "key": "fjsjxen0ruw",
+              "target": "EMAIL_INPUT",
+              "method": "assertMatchesSelector",
+              "assert": {
+                "assertion": "selector",
+                "value": ":invalid"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxen17us": {
+              "editing": false,
+              "id": "fjsjxen17us",
+              "key": "fjsjxen17us",
+              "target": "EMAIL_INPUT",
+              "method": "assertContainsClass",
+              "assert": {
+                "assertion": "boolean",
+                "value": true
+              },
+              "params": {
+                "name": ".has-error"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            },
+            "fjsjxen1n4u": {
+              "editing": false,
+              "id": "fjsjxen1n4u",
+              "key": "fjsjxen1n4u",
+              "target": "EMAIL_INPUT",
+              "method": "assertScroll",
+              "assert": {
+                "operator": "gt",
+                "assertion": "number",
+                "value": 10
+              },
+              "params": {
+                "direction": "horizontally"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "_2",
+              "testId": "fjsjxemjh6m"
+            }
+          }
+        }
+      }
+    }
+  },
+  "puppetry": "2.0.0-RC.1",
+  "snippets": false
+}
