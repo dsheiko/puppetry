@@ -75,7 +75,7 @@ export default class ExpressionParser {
     const parser = Object.getOwnPropertyNames( this.parsers )
       .find( ( available ) => exp.startsWith( available + "(" ) );
     if ( !parser ) {
-      throw new ExpressionParserException( `Cannot parse expression ${ exp }. Exprected syntax {{ method(..) }}` );
+      throw new ExpressionParserException( `Cannot parse expression ${ exp }. Expected syntax {{ method(..) }}` );
     }
     try {
       return this.parsers[ parser ]( extractParams( parser, exp ) );

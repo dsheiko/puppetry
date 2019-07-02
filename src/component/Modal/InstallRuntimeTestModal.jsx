@@ -56,7 +56,7 @@ export class InstallRuntimeTestModal extends AbstractComponent {
     notification.open({
       message: "Dependencies not installed",
       description: "You still can manage your test project and export the tests."
-        + " The mssing dependencies can be installed anytime later."
+        + " The missing dependencies can be installed anytime later."
     });
   }
 
@@ -209,7 +209,7 @@ export class InstallRuntimeTestModal extends AbstractComponent {
           </p>
           <If exp={ error }>
             <div data-show="true" className="ant-alert ant-alert-error ant-alert-with-description ant-alert-no-icon">
-              <div className="ant-alert-message">Cannot install the depndencies</div>
+              <div className="ant-alert-message">Cannot install the dependencies</div>
               <div className="ant-alert-description">
               Unfortunately the application failed to install the required dependencies by
               using NPM programmatically.

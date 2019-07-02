@@ -157,7 +157,7 @@ export class GitSyncModal extends AbstractForm {
                   transform: ( value ) => value.trim()
                 }]
               })(
-                <Input onChange={ this.onNameChange } placeholder="e.g. Add page.screenshot in form submittion group"
+                <Input onChange={ this.onNameChange } placeholder="e.g. Add page.screenshot in form submission group"
                   onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
               )}
             </FormItem>

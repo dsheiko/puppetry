@@ -34,7 +34,7 @@ export class CommandTable extends AbstractDnDTable {
     super( props );
     this.columns = [
       {
-        title: "Comand",
+        title: "Command",
         dataIndex: "target",
 
         render: ( text, record ) => ( <CommandRowLabel record={ record } snippets={ props.snippets } /> )

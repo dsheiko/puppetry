@@ -77,7 +77,7 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
     await dispatch( suiteActions.openSuiteFile( project.lastOpenSuite, { silent: true  }) );
   } else {
     const files = getState().app.project.files;
-    log.warn( `Last open suite is unreachable, so lt's try loading the first available` );
+    log.warn( `Last open suite is unreachable, so let's try loading the first available` );
     if ( !files.length ) {
       return project;
     }
