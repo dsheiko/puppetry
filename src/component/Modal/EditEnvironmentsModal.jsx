@@ -97,7 +97,7 @@ export class EditEnvironmentsModal extends AbstractForm {
     return (
       <ErrorBoundary>
         <Modal
-          title="Edit Environmments"
+          title="Edit Environments"
           visible={ isVisible }
           closable
           onCancel={this.onClickCancel}
