@@ -153,10 +153,16 @@ export class MainMenu extends GitEnhancedMenu {
     this.props.action.setApp({ testReportModal: true });
   }
 
-  onRuntimeTestInstall = () => {
+  onRuntimeTestInstall = async () => {
     const { projectDirectory } = this.props;
     if ( !projectDirectory ) {
       return;
+    }
+    if ( this.props.suiteModified ) {
+      await confirmUnsavedChanges({
+        saveSuite: this.props.action.saveSuite,
+        setSuite: this.props.action.setSuite
+      });
     }
     this.props.action.setApp({ installRuntimeTestModal: true });
   }

@@ -145,6 +145,8 @@ actions.createSuiteByRecording = ({ targets, commands }) => ( dispatch ) => {
   const groupId = uniqid(),
         testId = uniqid();
 
+  dispatch( actions.updateSuite({ modified: true }) );
+
   dispatch( appActions.setApp({ loading: true }) );
   setTimeout( () => {
     try {
