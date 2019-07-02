@@ -1,0 +1,75 @@
+{
+  "name": "E2E testing showcase",
+  "panels": [
+    "groups"
+  ],
+  "groups": {
+    "_1": {
+      "key": 0,
+      "value": true,
+      "tests": {
+        "_1_2": {
+          "key": 1,
+          "value": true
+        },
+        "_1_3": {
+          "key": 2,
+          "value": false
+        },
+        "olhjnyhr4zd": {
+          "key": "olhjnyhr4zd",
+          "value": true
+        }
+      }
+    },
+    "_2": {
+      "key": 1,
+      "value": true,
+      "tests": {
+        "_2_1": {
+          "key": 0,
+          "value": false
+        },
+        "_2_2": {
+          "key": 1,
+          "value": false
+        },
+        "olhjnyhrjcg": {
+          "key": "olhjnyhrjcg",
+          "value": true
+        },
+        "olhjnyhro5a": {
+          "key": "olhjnyhro5a",
+          "value": true
+        }
+      }
+    },
+    "1u2jnyned4o": {
+      "key": "1u2jnyned4o",
+      "value": true,
+      "tests": {
+        "1u2jnynetdn": {
+          "key": "1u2jnynetdn",
+          "value": true
+        }
+      }
+    },
+    "36ijnyo161a": {
+      "key": "36ijnyo161a",
+      "value": true,
+      "tests": {
+        "36ijnyo1oho": {
+          "key": "36ijnyo1oho",
+          "value": true
+        },
+        "36ijnyo2e41": {
+          "key": "36ijnyo2e41",
+          "value": true
+        }
+      }
+    }
+  },
+  "modified": false,
+  "lastOpenSuite": "react-html5-form-RWD.json",
+  "puppetry": "1.0.0"
+}
