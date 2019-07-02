@@ -46,7 +46,7 @@ export class GitSyncModal extends AbstractForm {
         credentialsAuthMethod: git.credentialsAuthMethod,
         credentialsUsername: git.credentialsUsername,
         credentialsPassword: git.credentialsPassword,
-        credentialsAcccessToken: git.credentialsAcccessToken
+        credentialsAccessToken: git.credentialsAccessToken
       }, git.configUsername, git.configEmail, git.remoteRepository );
       this.close();
     }, 200 );

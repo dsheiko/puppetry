@@ -36,8 +36,8 @@ export class RemoteForm extends AbstractForm {
             `For the selected authentication method password field is required` );
         }
 
-        if ( values.credentialsAuthMethod === "accessToken" && !values.credentialsAcccessToken.trim() ) {
-          return this.setFieldInvalid( "credentialsAcccessToken",
+        if ( values.credentialsAuthMethod === "accessToken" && !values.credentialsAccessToken.trim() ) {
+          return this.setFieldInvalid( "credentialsAccessToken",
             `For the selected authentication method token field is required` );
         }
 
@@ -165,8 +165,8 @@ export class RemoteForm extends AbstractForm {
         { git.credentialsAuthMethod === "accessToken" && <React.Fragment>
 
           <FormItem  label="Access Token">
-            { getFieldDecorator( "credentialsAcccessToken", {
-              initialValue: git.credentialsAcccessToken,
+            { getFieldDecorator( "credentialsAccessToken", {
+              initialValue: git.credentialsAccessToken,
               rules: [
                 {
                   transform: ( value ) => value.trim()

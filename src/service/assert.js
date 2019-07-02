@@ -5,7 +5,7 @@ export function buildAssertionTpl( commandCall, command, comment ) {
     const cbBody = createCbBody( command );
     return justify( `${ comment }\nresult = ${ commandCall };` ) + ` ${ cbBody }`;
   } catch ( err ) {
-    console.warn( "buildAssertionTpl error:", err, { commandCall, command, comment });
+    console.warn( "Renderer process: buildAssertionTpl error:", err, { commandCall, command, comment });
     throw err;
   }
 }

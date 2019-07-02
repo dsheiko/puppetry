@@ -118,7 +118,7 @@ export default {
     configUsername: "",
     configEmail: "",
     credentialsAuthMethod: "",
-    credentialsAcccessToken: "",
+    credentialsAccessToken: "",
     credentialsProvider: "",
     credentialsUsername: "",
     credentialsPassword: ""

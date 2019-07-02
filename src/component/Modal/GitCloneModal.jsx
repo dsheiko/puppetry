@@ -61,7 +61,7 @@ export class GitCloneModal extends AbstractForm {
         credentialsAuthMethod: git.credentialsAuthMethod,
         credentialsUsername: git.credentialsUsername,
         credentialsPassword: git.credentialsPassword,
-        credentialsAcccessToken: git.credentialsAcccessToken
+        credentialsAccessToken: git.credentialsAccessToken
       }
     );
 
