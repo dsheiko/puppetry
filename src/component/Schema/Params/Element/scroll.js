@@ -23,7 +23,7 @@ await bs.page.$eval( '${ command.targetSeletor }',  ( el, x, y ) => {
           control: INPUT_NUMBER,
           label: "horizontally (px)",
           initialValue: 0,
-          tooltip: `Set the number of pixes that an element's content is scrolled horizontally`,
+          tooltip: `Set the number of pixels that an element's content is scrolled horizontally`,
           placeholder: "e.g. 0",
           rules: [{
             required: true,
@@ -35,7 +35,7 @@ await bs.page.$eval( '${ command.targetSeletor }',  ( el, x, y ) => {
           control: INPUT_NUMBER,
           label: "vertically (px)",
           initialValue: 0,
-          tooltip: `Set the number of pixes that an element's content is scrolled vertically`,
+          tooltip: `Set the number of pixels that an element's content is scrolled vertically`,
           placeholder: "e.g. 0",
           rules: [{
             required: true,

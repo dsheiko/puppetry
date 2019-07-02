@@ -1,6 +1,6 @@
 import CustomError from "custom-error-instance" ;
 export const CaughtException = CustomError( "CaughtException", {
-  message: "An exception we can safelly show to the user" });
+  message: "An exception we can safely show to the user" });
 export const IoError = CustomError( "IoError", CaughtException, { message: "IO error" });
 export const RuntimeError = CustomError( "RuntimeError", CaughtException, { message: "Runtime error" });
 export const InvalidArgumentError = CustomError( "InvalidArgumentError", CaughtException, {
@@ -8,4 +8,4 @@ export const InvalidArgumentError = CustomError( "InvalidArgumentError", CaughtE
 export const TestGeneratorError = CustomError( "TestGeneratorError",
   CaughtException, { message: "Test generatorerror" });
 export const ExpressionParserException = CustomError( "ExpressionParserException", {
-  message: "Cannot parse this expresion" });
+  message: "Cannot parse this expression" });

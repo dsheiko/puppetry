@@ -178,7 +178,7 @@ export class TestReportModal extends AbstractComponent {
                   <Switch checkedChildren="On" unCheckedChildren="Off" onChange={ this.onSwitchChange } />
                   { " " } run in browser <Tooltip
                     title={ "By default the tests are running in headless mode (faster). "
-                    + "But you can switch for browser mode and see what is really hapenning on the page" }
+                    + "But you can switch for browser mode and see what is really happening on the page" }
                     icon="question-circle"
                   />
                 </div>

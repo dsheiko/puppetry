@@ -1,0 +1,1061 @@
+
+> puppetry@2.0.0 lint /home/sheiko/Sites/os/puppetry
+> eslint --ext=js,jsx ./src
+
+
+/home/sheiko/Sites/os/puppetry/src/action/app.js
+  1:31  warning  You have a misspelled word: redux on String       spellcheck/spell-checker
+  2:26  warning  You have a misspelled word: bycontract on String  spellcheck/spell-checker
+  9:48  warning  You have a misspelled word: http on String        spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/action/command.js
+    1:31  warning  You have a misspelled word: redux on String       spellcheck/spell-checker
+    2:26  warning  You have a misspelled word: bycontract on String  spellcheck/spell-checker
+    5:25  warning  You have a misspelled word: antd on String        spellcheck/spell-checker
+  124:36  warning  You have a misspelled word: failuries on String   spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/action/error.js
+  1:31  warning  You have a misspelled word: redux on String       spellcheck/spell-checker
+  2:26  warning  You have a misspelled word: bycontract on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/action/git.js
+  1:31  warning  You have a misspelled word: redux on String     spellcheck/spell-checker
+  6:22  warning  You have a misspelled word: lodash on String    spellcheck/spell-checker
+  6:22  warning  You have a misspelled word: debounce on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/action/group.js
+  1:31  warning  You have a misspelled word: redux on String       spellcheck/spell-checker
+  2:26  warning  You have a misspelled word: bycontract on String  spellcheck/spell-checker
+  5:20  warning  You have a misspelled word: uniqid on String      spellcheck/spell-checker
+  8:25  warning  You have a misspelled word: antd on String        spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/action/helpers/index.js
+  3:22  warning  You have a misspelled word: lodash on String    spellcheck/spell-checker
+  3:22  warning  You have a misspelled word: debounce on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/action/project.js
+   4:31  warning  You have a misspelled word: redux on String       spellcheck/spell-checker
+   6:22  warning  You have a misspelled word: lodash on String      spellcheck/spell-checker
+   6:22  warning  You have a misspelled word: debounce on String    spellcheck/spell-checker
+   8:26  warning  You have a misspelled word: bycontract on String  spellcheck/spell-checker
+  80:15  warning  You have a misspelled word: lt's on Template      spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/action/settings.js
+  1:31  warning  You have a misspelled word: redux on String       spellcheck/spell-checker
+  3:48  warning  You have a misspelled word: http on String        spellcheck/spell-checker
+  4:26  warning  You have a misspelled word: bycontract on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/action/snippets.js
+  1:31  warning  You have a misspelled word: redux on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/action/suite.js
+    1:31  warning  You have a misspelled word: redux on String       spellcheck/spell-checker
+    2:26  warning  You have a misspelled word: bycontract on String  spellcheck/spell-checker
+    5:20  warning  You have a misspelled word: uniqid on String      spellcheck/spell-checker
+   33:37  warning  You have a misspelled word: Filename on String    spellcheck/spell-checker
+   43:37  warning  You have a misspelled word: Filename on String    spellcheck/spell-checker
+  109:39  warning  You have a misspelled word: filename on String    spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/action/target.js
+  1:31  warning  You have a misspelled word: redux on String       spellcheck/spell-checker
+  2:26  warning  You have a misspelled word: bycontract on String  spellcheck/spell-checker
+  5:20  warning  You have a misspelled word: uniqid on String      spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/action/test.js
+  1:31  warning  You have a misspelled word: redux on String       spellcheck/spell-checker
+  2:26  warning  You have a misspelled word: bycontract on String  spellcheck/spell-checker
+  5:20  warning  You have a misspelled word: uniqid on String      spellcheck/spell-checker
+  7:25  warning  You have a misspelled word: antd on String        spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/action/variable.js
+  1:31  warning  You have a misspelled word: redux on String       spellcheck/spell-checker
+  2:26  warning  You have a misspelled word: bycontract on String  spellcheck/spell-checker
+  5:20  warning  You have a misspelled word: uniqid on String      spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AbstractComponent.jsx
+  4:30  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout.jsx
+   4:25  warning  You have a misspelled word: classnames on String  spellcheck/spell-checker
+   5:31  warning  You have a misspelled word: antd on String        spellcheck/spell-checker
+   9:26  warning  You have a misspelled word: Sider on String       spellcheck/spell-checker
+  10:34  warning  You have a misspelled word: Sider on String       spellcheck/spell-checker
+  26:39  warning  You have a misspelled word: Csv on String         spellcheck/spell-checker
+  81:28  warning  You have a misspelled word: svg on String         spellcheck/spell-checker
+  84:28  warning  You have a misspelled word: svg on String         spellcheck/spell-checker
+  86:27  warning  You have a misspelled word: ver on String         spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/AppFooter.jsx
+   2:40  warning  You have a misspelled word: antd on String        spellcheck/spell-checker
+  19:31  warning  You have a misspelled word: http on String        spellcheck/spell-checker
+  19:31  warning  You have a misspelled word: dsheiko on String     spellcheck/spell-checker
+  21:21  warning  You have a misspelled word: noopener on String    spellcheck/spell-checker
+  21:21  warning  You have a misspelled word: noreferrer on String  spellcheck/spell-checker
+  22:33  warning  You have a misspelled word: Dmitry on String      spellcheck/spell-checker
+  22:33  warning  You have a misspelled word: Sheiko on String      spellcheck/spell-checker
+  26:21  warning  You have a misspelled word: noopener on String    spellcheck/spell-checker
+  26:21  warning  You have a misspelled word: noreferrer on String  spellcheck/spell-checker
+  28:22  warning  You have a misspelled word: https on String       spellcheck/spell-checker
+  28:22  warning  You have a misspelled word: www on String         spellcheck/spell-checker
+  30:21  warning  You have a misspelled word: noopener on String    spellcheck/spell-checker
+  30:21  warning  You have a misspelled word: noreferrer on String  spellcheck/spell-checker
+  32:22  warning  You have a misspelled word: https on String       spellcheck/spell-checker
+  34:21  warning  You have a misspelled word: noopener on String    spellcheck/spell-checker
+  34:21  warning  You have a misspelled word: noreferrer on String  spellcheck/spell-checker
+  36:22  warning  You have a misspelled word: https on String       spellcheck/spell-checker
+  36:22  warning  You have a misspelled word: sheiko on String      spellcheck/spell-checker
+  38:21  warning  You have a misspelled word: noopener on String    spellcheck/spell-checker
+  38:21  warning  You have a misspelled word: noreferrer on String  spellcheck/spell-checker
+  39:23  warning  You have a misspelled word: Github on String      spellcheck/spell-checker
+  40:22  warning  You have a misspelled word: https on String       spellcheck/spell-checker
+  40:22  warning  You have a misspelled word: github on String      spellcheck/spell-checker
+  40:22  warning  You have a misspelled word: dsheiko on String     spellcheck/spell-checker
+  40:87  warning  You have a misspelled word: github on String      spellcheck/spell-checker
+  42:21  warning  You have a misspelled word: noopener on String    spellcheck/spell-checker
+  42:21  warning  You have a misspelled word: noreferrer on String  spellcheck/spell-checker
+  44:46  warning  You have a misspelled word: https on String       spellcheck/spell-checker
+  44:46  warning  You have a misspelled word: github on String      spellcheck/spell-checker
+  44:46  warning  You have a misspelled word: dsheiko on String     spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Info.jsx
+   3:41  warning  You have a misspelled word: antd on String        spellcheck/spell-checker
+  61:32  warning  You have a misspelled word: Btn on String         spellcheck/spell-checker
+  63:32  warning  You have a misspelled word: Btn on String         spellcheck/spell-checker
+  69:32  warning  You have a misspelled word: Btn on String         spellcheck/spell-checker
+  74:63  warning  You have a misspelled word: Btn on String         spellcheck/spell-checker
+  88:18  warning  You have a misspelled word: https on String       spellcheck/spell-checker
+  88:18  warning  You have a misspelled word: github on String      spellcheck/spell-checker
+  88:18  warning  You have a misspelled word: dsheiko on String     spellcheck/spell-checker
+  89:17  warning  You have a misspelled word: noopener on String    spellcheck/spell-checker
+  89:17  warning  You have a misspelled word: noreferrer on String  spellcheck/spell-checker
+  89:39  warning  You have a misspelled word: github on String      spellcheck/spell-checker
+  89:39  warning  You have a misspelled word: dsheiko on String     spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main.jsx
+   3:28  warning  You have a misspelled word: antd on String       spellcheck/spell-checker
+  48:23  warning  You have a misspelled word: tabgroup on String   spellcheck/spell-checker
+  58:34  warning  You have a misspelled word: https on String      spellcheck/spell-checker
+  64:64  warning  You have a misspelled word: https on String      spellcheck/spell-checker
+  65:91  warning  You have a misspelled word: organised on String  spellcheck/spell-checker
+  67:69  warning  You have a misspelled word: https on String      spellcheck/spell-checker
+  70:45  warning  You have a misspelled word: https on String      spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/AbstractDnDTable.jsx
+    3:24  warning  You have a misspelled word: classnames on String  spellcheck/spell-checker
+    4:29  warning  You have a misspelled word: Dragable on String    spellcheck/spell-checker
+    5:37  warning  You have a misspelled word: smalltalk on String   spellcheck/spell-checker
+    7:34  warning  You have a misspelled word: copypaste on String   spellcheck/spell-checker
+  110:9   warning  You have a misspelled word: dnd on String         spellcheck/spell-checker
+  116:7   warning  You have a misspelled word: dnd on String         spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/AbstractEditableTable.jsx
+    4:45  warning  You have a misspelled word: antd on String      spellcheck/spell-checker
+    6:29  warning  You have a misspelled word: Dropdown on String  spellcheck/spell-checker
+   51:37  warning  You have a misspelled word: dnd on String       spellcheck/spell-checker
+   82:39  warning  You have a misspelled word: dnd on String       spellcheck/spell-checker
+  143:27  warning  You have a misspelled word: btn on Template     spellcheck/spell-checker
+  155:27  warning  You have a misspelled word: btn on Template     spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/DragableRow.jsx
+   2:57  warning  You have a misspelled word: dnd on String      spellcheck/spell-checker
+   3:26  warning  You have a misspelled word: dnd on String      spellcheck/spell-checker
+   3:26  warning  You have a misspelled word: html5 on String    spellcheck/spell-checker
+   3:26  warning  You have a misspelled word: backend on String  spellcheck/spell-checker
+  56:40  warning  You have a misspelled word: dnd on String      spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/EditableCell.jsx
+  3:29  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/GroupTable.jsx
+    2:37  warning  You have a misspelled word: antd on String       spellcheck/spell-checker
+    4:28  warning  You have a misspelled word: Dragable on String   spellcheck/spell-checker
+   11:35  warning  You have a misspelled word: idcard on String     spellcheck/spell-checker
+  108:23  warning  You have a misspelled word: draggable on String  spellcheck/spell-checker
+  121:34  warning  You have a misspelled word: Btn on String        spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/GroupTable/SnippetTable.jsx
+   2:29  warning  You have a misspelled word: antd on String       spellcheck/spell-checker
+   7:28  warning  You have a misspelled word: Dragable on String   spellcheck/spell-checker
+  91:21  warning  You have a misspelled word: draggable on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/GroupTable/TestTable.jsx
+   2:29  warning  You have a misspelled word: antd on String       spellcheck/spell-checker
+   7:28  warning  You have a misspelled word: Dragable on String   spellcheck/spell-checker
+  91:21  warning  You have a misspelled word: draggable on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/GroupTable/TestTable/CommandModal.jsx
+   3:30  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+  76:23  warning  You have a misspelled word: btn on String   spellcheck/spell-checker
+  79:23  warning  You have a misspelled word: btn on String   spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/GroupTable/TestTable/CommandRowLabel.jsx
+    4:22  warning  You have a misspelled word: antd on String      spellcheck/spell-checker
+    5:21  warning  You have a misspelled word: Tooltip on String   spellcheck/spell-checker
+   31:11  warning  You have a misspelled word: goto on String      spellcheck/spell-checker
+   62:11  warning  You have a misspelled word: runjs on String     spellcheck/spell-checker
+   64:11  warning  You have a misspelled word: Viewport on String  spellcheck/spell-checker
+  126:13  warning  You have a misspelled word: Html on String      spellcheck/spell-checker
+  141:18  warning  You have a misspelled word: Addon on Template   spellcheck/spell-checker
+  178:24  warning  You have a misspelled word: param on String     spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/GroupTable/TestTable/CommandTable.jsx
+    2:58  warning  You have a misspelled word: antd on String        spellcheck/spell-checker
+    4:28  warning  You have a misspelled word: Dragable on String    spellcheck/spell-checker
+    7:29  warning  You have a misspelled word: Dropdown on String    spellcheck/spell-checker
+    8:37  warning  You have a misspelled word: smalltalk on String   spellcheck/spell-checker
+   10:24  warning  You have a misspelled word: classnames on String  spellcheck/spell-checker
+   12:25  warning  You have a misspelled word: redux on String       spellcheck/spell-checker
+   37:16  warning  You have a misspelled word: Comand on String      spellcheck/spell-checker
+  251:19  warning  You have a misspelled word: draggable on String   spellcheck/spell-checker
+  262:16  warning  You have a misspelled word: Btn on String         spellcheck/spell-checker
+  266:16  warning  You have a misspelled word: Btn on String         spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/GroupTable/TestTable/CommandTable/CommandForm.jsx
+    3:39  warning  You have a misspelled word: antd on String         spellcheck/spell-checker
+    7:35  warning  You have a misspelled word: Params on String       spellcheck/spell-checker
+    7:35  warning  You have a misspelled word: Params on String       spellcheck/spell-checker
+   10:29  warning  You have a misspelled word: Params on String       spellcheck/spell-checker
+   16:43  warning  You have a misspelled word: Viewport on String     spellcheck/spell-checker
+   16:58  warning  You have a misspelled word: goto on String         spellcheck/spell-checker
+  106:16  warning  You have a misspelled word: goto on Template       spellcheck/spell-checker
+  107:13  warning  You have a misspelled word: prepended on Template  spellcheck/spell-checker
+  107:13  warning  You have a misspelled word: Viewport on Template   spellcheck/spell-checker
+  117:70  warning  You have a misspelled word: goto on String         spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/GroupTable/TestTable/CommandTable/ElementMethodSelect.jsx
+  2:24  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/GroupTable/TestTable/CommandTable/PageMethodSelect.jsx
+  3:24  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/GroupTable/TestTable/CommandTable/Params/constants.js
+   72:5  warning  You have a misspelled word: iban on String     spellcheck/spell-checker
+   73:5  warning  You have a misspelled word: bic on String      spellcheck/spell-checker
+   81:5  warning  You have a misspelled word: ingverb on String  spellcheck/spell-checker
+   96:5  warning  You have a misspelled word: ipv6 on String     spellcheck/spell-checker
+  103:3  warning  You have a misspelled word: lorem on String    spellcheck/spell-checker
+  138:5  warning  You have a misspelled word: uuid on String     spellcheck/spell-checker
+  157:5  warning  You have a misspelled word: semver on String   spellcheck/spell-checker
+  188:3  warning  You have a misspelled word: nep on String      spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/GroupTable/TestTable/CommandTable/Params/ParamsFormBuilder.jsx
+    4:102  warning  You have a misspelled word: antd on String        spellcheck/spell-checker
+    5:26   warning  You have a misspelled word: bycontract on String  spellcheck/spell-checker
+    6:21   warning  You have a misspelled word: Tooltip on String     spellcheck/spell-checker
+   12:25   warning  You have a misspelled word: redux on String       spellcheck/spell-checker
+  269:27   warning  You have a misspelled word: fieldset on String    spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/GroupTable/TestTable/CommandTable/Params/TemplateHelper.jsx
+    3:45  warning  You have a misspelled word: antd on String   spellcheck/spell-checker
+  111:18  warning  You have a misspelled word: https on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/GroupTable/TestTable/CommandTable/TargetMethodSelect.jsx
+  2:24  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/GroupTable/TestTable/CommandTable/TargetSelect.jsx
+  3:30  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/GroupTable/TestTable/SnippetModal.jsx
+   6:38  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+  77:23  warning  You have a misspelled word: btn on String   spellcheck/spell-checker
+  81:23  warning  You have a misspelled word: btn on String   spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/GroupTable/TestTable/SnippetVariables.jsx
+   5:64  warning  You have a misspelled word: antd on String   spellcheck/spell-checker
+  85:27  warning  You have a misspelled word: https on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/RowDropdown.jsx
+   3:38  warning  You have a misspelled word: antd on String      spellcheck/spell-checker
+  33:19  warning  You have a misspelled word: menuitem on String  spellcheck/spell-checker
+  38:19  warning  You have a misspelled word: menuitem on String  spellcheck/spell-checker
+  42:19  warning  You have a misspelled word: menuitem on String  spellcheck/spell-checker
+  47:19  warning  You have a misspelled word: menuitem on String  spellcheck/spell-checker
+  53:19  warning  You have a misspelled word: menuitem on String  spellcheck/spell-checker
+  57:19  warning  You have a misspelled word: menuitem on String  spellcheck/spell-checker
+  93:20  warning  You have a misspelled word: dropdown on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/SuiteForm.jsx
+   5:65  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+  86:16  warning  You have a misspelled word: Btn on String   spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Main/TargetTable.jsx
+    2:37  warning  You have a misspelled word: antd on String       spellcheck/spell-checker
+    5:28  warning  You have a misspelled word: Dragable on String   spellcheck/spell-checker
+   44:16  warning  You have a misspelled word: calc on String       spellcheck/spell-checker
+   44:16  warning  You have a misspelled word: 160px on String      spellcheck/spell-checker
+   90:23  warning  You have a misspelled word: draggable on String  spellcheck/spell-checker
+  100:40  warning  You have a misspelled word: Csv on String        spellcheck/spell-checker
+  100:40  warning  You have a misspelled word: Btn on String        spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Settings/Git/ConfigForm.jsx
+   5:46  warning  You have a misspelled word: antd on String       spellcheck/spell-checker
+  34:16  warning  You have a misspelled word: Gitconfig on String  spellcheck/spell-checker
+  79:27  warning  You have a misspelled word: jon on String        spellcheck/spell-checker
+  87:16  warning  You have a misspelled word: Btn on String        spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Settings/Git/GitPane.jsx
+  19:25  warning  You have a misspelled word: https on String  spellcheck/spell-checker
+  19:25  warning  You have a misspelled word: scm on String    spellcheck/spell-checker
+  27:28  warning  You have a misspelled word: https on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Settings/Git/RemoteForm.jsx
+    5:52  warning  You have a misspelled word: antd on String       spellcheck/spell-checker
+   40:40  warning  You have a misspelled word: Acccess on String    spellcheck/spell-checker
+   67:17  warning  You have a misspelled word: https on String      spellcheck/spell-checker
+   67:17  warning  You have a misspelled word: github on String     spellcheck/spell-checker
+   67:67  warning  You have a misspelled word: github on String     spellcheck/spell-checker
+   68:24  warning  You have a misspelled word: https on String      spellcheck/spell-checker
+   68:24  warning  You have a misspelled word: bitbucket on String  spellcheck/spell-checker
+   68:85  warning  You have a misspelled word: bitbucket on String  spellcheck/spell-checker
+   69:24  warning  You have a misspelled word: https on String      spellcheck/spell-checker
+   69:24  warning  You have a misspelled word: gitlab on String     spellcheck/spell-checker
+   69:80  warning  You have a misspelled word: gitlab on String     spellcheck/spell-checker
+   71:23  warning  You have a misspelled word: https on String      spellcheck/spell-checker
+   71:23  warning  You have a misspelled word: gitlab on String     spellcheck/spell-checker
+   71:87  warning  You have a misspelled word: Gitlab on String     spellcheck/spell-checker
+   93:27  warning  You have a misspelled word: https on String      spellcheck/spell-checker
+   93:27  warning  You have a misspelled word: github on String     spellcheck/spell-checker
+   93:27  warning  You have a misspelled word: dsheiko on String    spellcheck/spell-checker
+  108:29  warning  You have a misspelled word: gitlab on String     spellcheck/spell-checker
+  108:38  warning  You have a misspelled word: Gitlab on String     spellcheck/spell-checker
+  109:29  warning  You have a misspelled word: bitbucket on String  spellcheck/spell-checker
+  109:41  warning  You have a misspelled word: Bitbacket on String  spellcheck/spell-checker
+  110:29  warning  You have a misspelled word: github on String     spellcheck/spell-checker
+  110:39  warning  You have a misspelled word: Github on String     spellcheck/spell-checker
+  133:27  warning  You have a misspelled word: jon on String        spellcheck/spell-checker
+  138:26  warning  You have a misspelled word: Auth on String       spellcheck/spell-checker
+  139:32  warning  You have a misspelled word: Auth on String       spellcheck/spell-checker
+  168:34  warning  You have a misspelled word: Acccess on String    spellcheck/spell-checker
+  182:14  warning  You have a misspelled word: Bitbucket on String  spellcheck/spell-checker
+  187:21  warning  You have a misspelled word: https on String      spellcheck/spell-checker
+  187:21  warning  You have a misspelled word: github on String     spellcheck/spell-checker
+  189:21  warning  You have a misspelled word: https on String      spellcheck/spell-checker
+  189:21  warning  You have a misspelled word: atlassian on String  spellcheck/spell-checker
+  189:21  warning  You have a misspelled word: bitbucket on String  spellcheck/spell-checker
+  189:21  warning  You have a misspelled word: html on String       spellcheck/spell-checker
+  190:43  warning  You have a misspelled word: Bitbucket on String  spellcheck/spell-checker
+  191:21  warning  You have a misspelled word: https on String      spellcheck/spell-checker
+  191:21  warning  You have a misspelled word: gitlab on String     spellcheck/spell-checker
+  191:21  warning  You have a misspelled word: html on String       spellcheck/spell-checker
+  199:16  warning  You have a misspelled word: Btn on String        spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Settings/SettingsPanel.jsx
+  3:22  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Settings/Variables/VariablesPane.jsx
+   5:30  warning  You have a misspelled word: antd on String   spellcheck/spell-checker
+   6:25  warning  You have a misspelled word: redux on String  spellcheck/spell-checker
+   7:36  warning  You have a misspelled word: redux on String  spellcheck/spell-checker
+  51:12  warning  You have a misspelled word: www on String    spellcheck/spell-checker
+  57:28  warning  You have a misspelled word: https on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Settings/Variables/VariableTable.jsx
+    2:24  warning  You have a misspelled word: antd on String       spellcheck/spell-checker
+    5:28  warning  You have a misspelled word: Dragable on String   spellcheck/spell-checker
+   39:16  warning  You have a misspelled word: calc on String       spellcheck/spell-checker
+   39:16  warning  You have a misspelled word: 160px on String      spellcheck/spell-checker
+  108:23  warning  You have a misspelled word: draggable on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Sider/MainMenu.jsx
+    3:37  warning  You have a misspelled word: antd on String       spellcheck/spell-checker
+    8:39  warning  You have a misspelled word: smalltalk on String  spellcheck/spell-checker
+   37:5   warning  You have a misspelled word: ctrl on String       spellcheck/spell-checker
+   40:5   warning  You have a misspelled word: ctrl on String       spellcheck/spell-checker
+   43:5   warning  You have a misspelled word: ctrl on String       spellcheck/spell-checker
+   46:5   warning  You have a misspelled word: ctrl on String       spellcheck/spell-checker
+   49:5   warning  You have a misspelled word: ctrl on String       spellcheck/spell-checker
+   52:5   warning  You have a misspelled word: ctrl on String       spellcheck/spell-checker
+  268:52  warning  You have a misspelled word: Ctrl on String       spellcheck/spell-checker
+  274:50  warning  You have a misspelled word: Ctrl on String       spellcheck/spell-checker
+  276:53  warning  You have a misspelled word: Ctrl on String       spellcheck/spell-checker
+  280:48  warning  You have a misspelled word: Ctrl on String       spellcheck/spell-checker
+  302:76  warning  You have a misspelled word: Ctrl on String       spellcheck/spell-checker
+  312:62  warning  You have a misspelled word: Ctrl on String       spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Sider/MainMenu/GitEnhancedMenu.jsx
+  3:25  warning  You have a misspelled word: antd on String       spellcheck/spell-checker
+  5:39  warning  You have a misspelled word: smalltalk on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Sider/MainMenu/helpers.js
+  1:43  warning  You have a misspelled word: darwin on String  spellcheck/spell-checker
+  6:23  warning  You have a misspelled word: Ctrl on String    spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Sider/ProjectExplorer.jsx
+    3:22  warning  You have a misspelled word: antd on String        spellcheck/spell-checker
+    6:40  warning  You have a misspelled word: smalltalk on String   spellcheck/spell-checker
+    7:24  warning  You have a misspelled word: classnames on String  spellcheck/spell-checker
+  169:26  warning  You have a misspelled word: nav on String         spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Sider/ProjectExplorer/FileList.jsx
+  3:22  warning  You have a misspelled word: antd on String        spellcheck/spell-checker
+  6:58  warning  You have a misspelled word: smalltalk on String   spellcheck/spell-checker
+  7:24  warning  You have a misspelled word: classnames on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Snippets.jsx
+   3:28  warning  You have a misspelled word: antd on String   spellcheck/spell-checker
+  63:34  warning  You have a misspelled word: https on String  spellcheck/spell-checker
+  71:34  warning  You have a misspelled word: https on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/TestReport.jsx
+   10:60  warning  You have a misspelled word: antd on String    spellcheck/spell-checker
+   13:21  warning  You have a misspelled word: ansi on String    spellcheck/spell-checker
+   13:21  warning  You have a misspelled word: html on String    spellcheck/spell-checker
+  244:58  warning  You have a misspelled word: eb2f96 on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Toolbar.jsx
+    4:22  warning  You have a misspelled word: antd on String        spellcheck/spell-checker
+    7:39  warning  You have a misspelled word: smalltalk on String   spellcheck/spell-checker
+   37:13  warning  You have a misspelled word: unmaximize on String  spellcheck/spell-checker
+   96:73  warning  You have a misspelled word: https on String       spellcheck/spell-checker
+  101:26  warning  You have a misspelled word: poweroff on String    spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/AppLayout/Welcome.jsx
+   3:24  warning  You have a misspelled word: antd on String        spellcheck/spell-checker
+  32:12  warning  You have a misspelled word: scriptless on String  spellcheck/spell-checker
+  35:30  warning  You have a misspelled word: Btn on String         spellcheck/spell-checker
+  37:30  warning  You have a misspelled word: Btn on String         spellcheck/spell-checker
+  43:18  warning  You have a misspelled word: https on String       spellcheck/spell-checker
+  43:18  warning  You have a misspelled word: wikipedia on String   spellcheck/spell-checker
+  43:87  warning  You have a misspelled word: goto on String        spellcheck/spell-checker
+  57:78  warning  You have a misspelled word: Xpath on String       spellcheck/spell-checker
+  57:78  warning  You have a misspelled word: Dev on String         spellcheck/spell-checker
+  59:57  warning  You have a misspelled word: https on String       spellcheck/spell-checker
+  59:57  warning  You have a misspelled word: www on String         spellcheck/spell-checker
+  59:57  warning  You have a misspelled word: youtube on String     spellcheck/spell-checker
+  59:57  warning  You have a misspelled word: du2 on String         spellcheck/spell-checker
+  59:57  warning  You have a misspelled word: Jnm on String         spellcheck/spell-checker
+  68:18  warning  You have a misspelled word: https on String       spellcheck/spell-checker
+  68:18  warning  You have a misspelled word: github on String      spellcheck/spell-checker
+  68:18  warning  You have a misspelled word: dsheiko on String     spellcheck/spell-checker
+  69:17  warning  You have a misspelled word: noopener on String    spellcheck/spell-checker
+  69:17  warning  You have a misspelled word: noreferrer on String  spellcheck/spell-checker
+  69:39  warning  You have a misspelled word: github on String      spellcheck/spell-checker
+  69:39  warning  You have a misspelled word: dsheiko on String     spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/ErrorBoundary.jsx
+   5:22  warning  You have a misspelled word: antd on String      spellcheck/spell-checker
+  53:13  warning  You have a misspelled word: Opps on String      spellcheck/spell-checker
+  55:47  warning  You have a misspelled word: https on String     spellcheck/spell-checker
+  55:47  warning  You have a misspelled word: github on String    spellcheck/spell-checker
+  55:47  warning  You have a misspelled word: dsheiko on String   spellcheck/spell-checker
+  57:26  warning  You have a misspelled word: errorlog on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Global/BrowseDirectory.jsx
+   4:37  warning  You have a misspelled word: antd on String      spellcheck/spell-checker
+  56:24  warning  You have a misspelled word: fieldset on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Global/BrowseFile.jsx
+   4:37  warning  You have a misspelled word: antd on String      spellcheck/spell-checker
+  43:24  warning  You have a misspelled word: fieldset on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Global/CheckoutMaster.jsx
+   6:39  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+  47:26  warning  You have a misspelled word: api on String   spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Global/InstantModal.jsx
+  3:22  warning  You have a misspelled word: antd on String        spellcheck/spell-checker
+  4:24  warning  You have a misspelled word: classnames on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Global/Link.jsx
+  17:13  warning  You have a misspelled word: noopener on String    spellcheck/spell-checker
+  17:13  warning  You have a misspelled word: noreferrer on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Global/Message.js
+  1:25  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Global/SelectEnv.jsx
+  4:31  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Global/Tooltip.jsx
+   3:23  warning  You have a misspelled word: antd on String    spellcheck/spell-checker
+  11:25  warning  You have a misspelled word: xlarge on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Modal/AlertMessageModal.jsx
+   4:44  warning  You have a misspelled word: antd on String     spellcheck/spell-checker
+  34:25  warning  You have a misspelled word: https on String    spellcheck/spell-checker
+  34:25  warning  You have a misspelled word: github on String   spellcheck/spell-checker
+  34:25  warning  You have a misspelled word: dsheiko on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Modal/classes.js
+  1:14  warning  You have a misspelled word: btn on Template  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Modal/EditEnvironmentsModal.jsx
+    4:69  warning  You have a misspelled word: antd on String           spellcheck/spell-checker
+  100:17  warning  You have a misspelled word: Environmments on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Modal/EditProjectModal.jsx
+  4:44  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Modal/EditTargetsAsCsvModal.jsx
+    4:44  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+  106:36  warning  You have a misspelled word: csv on String   spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Modal/ExportProjectModal.jsx
+    3:57  warning  You have a misspelled word: antd on String       spellcheck/spell-checker
+   11:38  warning  You have a misspelled word: smalltalk on String  spellcheck/spell-checker
+  163:21  warning  You have a misspelled word: checkbox on String   spellcheck/spell-checker
+  183:56  warning  You have a misspelled word: https on String      spellcheck/spell-checker
+  183:56  warning  You have a misspelled word: jestjs on String     spellcheck/spell-checker
+  186:37  warning  You have a misspelled word: npm on String        spellcheck/spell-checker
+  186:82  warning  You have a misspelled word: npm on String        spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Modal/GitCheckoutModal.jsx
+    4:43  warning  You have a misspelled word: antd on String       spellcheck/spell-checker
+   30:12  warning  You have a misspelled word: timestamp on String  spellcheck/spell-checker
+  102:17  warning  You have a misspelled word: 80vw on String       spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Modal/GitCloneModal.jsx
+  4:37  warning  You have a misspelled word: antd on String       spellcheck/spell-checker
+  9:38  warning  You have a misspelled word: smalltalk on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Modal/GitCommitModal.jsx
+    4:44  warning  You have a misspelled word: antd on String        spellcheck/spell-checker
+  106:67  warning  You have a misspelled word: submittion on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Modal/GitSyncModal.jsx
+    4:45  warning  You have a misspelled word: antd on String        spellcheck/spell-checker
+  133:14  warning  You have a misspelled word: Gitlab on String      spellcheck/spell-checker
+  133:14  warning  You have a misspelled word: Bitbucket on String   spellcheck/spell-checker
+  133:14  warning  You have a misspelled word: Github on String      spellcheck/spell-checker
+  141:24  warning  You have a misspelled word: https on String       spellcheck/spell-checker
+  141:24  warning  You have a misspelled word: gitlab on String      spellcheck/spell-checker
+  141:24  warning  You have a misspelled word: html on String        spellcheck/spell-checker
+  142:41  warning  You have a misspelled word: Gitlab on String      spellcheck/spell-checker
+  160:67  warning  You have a misspelled word: submittion on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Modal/InstallRuntimeTestModal.jsx
+    3:62  warning  You have a misspelled word: antd on String              spellcheck/spell-checker
+   59:11  warning  You have a misspelled word: mssing on String            spellcheck/spell-checker
+   96:25  warning  You have a misspelled word: https on String             spellcheck/spell-checker
+   96:25  warning  You have a misspelled word: github on String            spellcheck/spell-checker
+   96:25  warning  You have a misspelled word: dsheiko on String           spellcheck/spell-checker
+  193:21  warning  You have a misspelled word: checkbox on String          spellcheck/spell-checker
+  198:48  warning  You have a misspelled word: https on String             spellcheck/spell-checker
+  198:48  warning  You have a misspelled word: pptr on String              spellcheck/spell-checker
+  198:48  warning  You have a misspelled word: dev on String               spellcheck/spell-checker
+  198:71  warning  You have a misspelled word: nofollow on String          spellcheck/spell-checker
+  199:59  warning  You have a misspelled word: https on String             spellcheck/spell-checker
+  199:59  warning  You have a misspelled word: jestjs on String            spellcheck/spell-checker
+  199:84  warning  You have a misspelled word: nofollow on String          spellcheck/spell-checker
+  202:61  warning  You have a misspelled word: https on String             spellcheck/spell-checker
+  202:61  warning  You have a misspelled word: www on String               spellcheck/spell-checker
+  202:61  warning  You have a misspelled word: npmjs on String             spellcheck/spell-checker
+  202:89  warning  You have a misspelled word: nofollow on String          spellcheck/spell-checker
+  212:50  warning  You have a misspelled word: depndencies on String       spellcheck/spell-checker
+  213:54  warning  You have a misspelled word: programmatically on String  spellcheck/spell-checker
+  218:23  warning  You have a misspelled word: npm on String               spellcheck/spell-checker
+  219:56  warning  You have a misspelled word: https on String             spellcheck/spell-checker
+  219:56  warning  You have a misspelled word: www on String               spellcheck/spell-checker
+  219:56  warning  You have a misspelled word: npmjs on String             spellcheck/spell-checker
+  219:56  warning  You have a misspelled word: npm on String               spellcheck/spell-checker
+  220:72  warning  You have a misspelled word: npm on String               spellcheck/spell-checker
+  227:41  warning  You have a misspelled word: npm on String               spellcheck/spell-checker
+  227:68  warning  You have a misspelled word: npm on String               spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Modal/NewProjectModal.jsx
+    4:44  warning  You have a misspelled word: antd on String       spellcheck/spell-checker
+   10:38  warning  You have a misspelled word: smalltalk on String  spellcheck/spell-checker
+  190:18  warning  You have a misspelled word: filename on String   spellcheck/spell-checker
+  191:23  warning  You have a misspelled word: Filename on String   spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Modal/NewSuiteModal.jsx
+    4:64  warning  You have a misspelled word: antd on String      spellcheck/spell-checker
+  124:25  warning  You have a misspelled word: Filename on String  spellcheck/spell-checker
+  128:29  warning  You have a misspelled word: filename on String  spellcheck/spell-checker
+  130:33  warning  You have a misspelled word: filename on String  spellcheck/spell-checker
+  132:40  warning  You have a misspelled word: filename on String  spellcheck/spell-checker
+  137:34  warning  You have a misspelled word: filename on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Modal/OpenProjectModal.jsx
+  4:37  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Modal/OpenSuiteModal.jsx
+  4:36  warning  You have a misspelled word: antd on String       spellcheck/spell-checker
+  7:39  warning  You have a misspelled word: smalltalk on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Modal/SaveProjectAsModal.jsx
+  4:37  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Modal/SaveSuiteAsModal.jsx
+    4:45  warning  You have a misspelled word: antd on String      spellcheck/spell-checker
+   96:30  warning  You have a misspelled word: filename on String  spellcheck/spell-checker
+   97:36  warning  You have a misspelled word: filename on String  spellcheck/spell-checker
+  102:30  warning  You have a misspelled word: filename on String  spellcheck/spell-checker
+  106:30  warning  You have a misspelled word: filename on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Modal/TestReportModal.jsx
+    3:63  warning  You have a misspelled word: antd on String          spellcheck/spell-checker
+    4:21  warning  You have a misspelled word: Tooltip on String       spellcheck/spell-checker
+   93:66  warning  You have a misspelled word: fullscreen on Template  spellcheck/spell-checker
+  154:21  warning  You have a misspelled word: checkbox on String      spellcheck/spell-checker
+  181:23  warning  You have a misspelled word: hapenning on String     spellcheck/spell-checker
+  194:20  warning  You have a misspelled word: fullscreen on String    spellcheck/spell-checker
+  206:28  warning  You have a misspelled word: http on String          spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Assert/AssertBoolean.jsx
+  3:49  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Assert/AssertBoundingBox.jsx
+  3:60  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Assert/AssertNumber.jsx
+  3:60  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Assert/AssertPosition.jsx
+  3:47  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Assert/AssertSelector.jsx
+  3:39  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Assert/AssertTrue.jsx
+  3:49  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Assert/AssertValue.jsx
+  3:71  warning  You have a misspelled word: antd on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Jest/index.js
+  11:10  warning  You have a misspelled word: const on Template    spellcheck/spell-checker
+  11:25  warning  You have a misspelled word: async on Template    spellcheck/spell-checker
+  22:10  warning  You have a misspelled word: const on Template    spellcheck/spell-checker
+  28:96  warning  You have a misspelled word: https on Template    spellcheck/spell-checker
+  28:96  warning  You have a misspelled word: github on Template   spellcheck/spell-checker
+  28:96  warning  You have a misspelled word: dsheiko on Template  spellcheck/spell-checker
+  35:33  warning  You have a misspelled word: Ver on Template      spellcheck/spell-checker
+  35:33  warning  You have a misspelled word: Ver on Template      spellcheck/spell-checker
+  35:33  warning  You have a misspelled word: Ver on Template      spellcheck/spell-checker
+  40:8   warning  You have a misspelled word: const on Template    spellcheck/spell-checker
+  47:33  warning  You have a misspelled word: Png on Template      spellcheck/spell-checker
+  57:38  warning  You have a misspelled word: async on Template    spellcheck/spell-checker
+  57:38  warning  You have a misspelled word: async on Template    spellcheck/spell-checker
+  57:38  warning  You have a misspelled word: async on Template    spellcheck/spell-checker
+  72:40  warning  You have a misspelled word: async on Template    spellcheck/spell-checker
+  78:38  warning  You have a misspelled word: async on Template    spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Element/assertAttribute.js
+  16:16  warning  You have a misspelled word: https on Template     spellcheck/spell-checker
+  16:16  warning  You have a misspelled word: mozilla on Template   spellcheck/spell-checker
+  24:17  warning  You have a misspelled word: params on String      spellcheck/spell-checker
+  27:24  warning  You have a misspelled word: href on Template      spellcheck/spell-checker
+  27:24  warning  You have a misspelled word: href on Template      spellcheck/spell-checker
+  27:24  warning  You have a misspelled word: https on Template     spellcheck/spell-checker
+  27:24  warning  You have a misspelled word: mozilla on Template   spellcheck/spell-checker
+  30:24  warning  You have a misspelled word: href on String        spellcheck/spell-checker
+  34:22  warning  You have a misspelled word: Attributre on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Element/assertBoundingBox.js
+  10:16  warning  You have a misspelled word: https on Template    spellcheck/spell-checker
+  10:16  warning  You have a misspelled word: mozilla on Template  spellcheck/spell-checker
+  10:16  warning  You have a misspelled word: Rect on Template     spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Element/assertContainsClass.js
+  17:16  warning  You have a misspelled word: https on Template    spellcheck/spell-checker
+  17:16  warning  You have a misspelled word: mozilla on Template  spellcheck/spell-checker
+  26:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Element/assertMatchesSelector.js
+  16:5  warning  You have a misspelled word: https on Template    spellcheck/spell-checker
+  16:5  warning  You have a misspelled word: mozilla on Template  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Element/assertProperty.js
+  15:16  warning  You have a misspelled word: https on Template    spellcheck/spell-checker
+  15:16  warning  You have a misspelled word: mozilla on Template  spellcheck/spell-checker
+  25:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Element/assertScroll.js
+  13:16  warning  You have a misspelled word: https on Template    spellcheck/spell-checker
+  13:16  warning  You have a misspelled word: mozilla on Template  spellcheck/spell-checker
+  25:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Element/assertStyle.js
+  17:16  warning  You have a misspelled word: https on Template    spellcheck/spell-checker
+  17:16  warning  You have a misspelled word: mozilla on Template  spellcheck/spell-checker
+  27:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+  42:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Element/assertVisible.js
+  13:16  warning  You have a misspelled word: viewport on Template                             spellcheck/spell-checker
+  13:16  warning  You have a misspelled word: https on Template                                spellcheck/spell-checker
+  13:16  warning  You have a misspelled word: pptr on Template                                 spellcheck/spell-checker
+  13:16  warning  You have a misspelled word: dev on Template                                  spellcheck/spell-checker
+  13:16  warning  You have a misspelled word: api on Template                                  spellcheck/spell-checker
+  13:16  warning  You have a misspelled word: elementhandleisintersectingviewport on Template  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Element/checkBox.js
+   6:5   warning  You have a misspelled word: checkbox on Template  spellcheck/spell-checker
+  15:16  warning  You have a misspelled word: checkbox on Template  spellcheck/spell-checker
+  23:17  warning  You have a misspelled word: params on String      spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Element/click.js
+  20:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+  44:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+  53:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+  57:20  warning  You have a misspelled word: mousedown on String  spellcheck/spell-checker
+  58:15  warning  You have a misspelled word: mouseup on String    spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Element/scroll.js
+  22:17  warning  You have a misspelled word: params on String   spellcheck/spell-checker
+  26:20  warning  You have a misspelled word: pixes on Template  spellcheck/spell-checker
+  34:17  warning  You have a misspelled word: params on String   spellcheck/spell-checker
+  38:20  warning  You have a misspelled word: pixes on Template  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Element/select.js
+  16:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Element/setAttribute.js
+  15:16  warning  You have a misspelled word: https on Template    spellcheck/spell-checker
+  15:16  warning  You have a misspelled word: mozilla on Template  spellcheck/spell-checker
+  24:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+  36:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Element/toggleClass.js
+  19:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+  31:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Element/type.js
+  19:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Element/upload.js
+  19:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/assertNodeCount.js
+  19:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/assertScroll.js
+  12:16  warning  You have a misspelled word: https on Template    spellcheck/spell-checker
+  12:16  warning  You have a misspelled word: mozilla on Template  spellcheck/spell-checker
+  21:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/assertVar.js
+  22:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/assignVar.js
+  22:17  warning  You have a misspelled word: params on String   spellcheck/spell-checker
+  45:17  warning  You have a misspelled word: params on String   spellcheck/spell-checker
+  48:24  warning  You have a misspelled word: https on Template  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/assignVarRemotely.js
+    7:12  warning  You have a misspelled word: webhook on Template  spellcheck/spell-checker
+   20:16  warning  You have a misspelled word: https on Template    spellcheck/spell-checker
+   32:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+   55:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+   66:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+   76:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+   86:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+   89:24  warning  You have a misspelled word: thruthy on Template  spellcheck/spell-checker
+  101:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+  104:24  warning  You have a misspelled word: https on Template    spellcheck/spell-checker
+  104:24  warning  You have a misspelled word: www on Template      spellcheck/spell-checker
+  104:24  warning  You have a misspelled word: npmjs on Template    spellcheck/spell-checker
+  104:24  warning  You have a misspelled word: https on Template    spellcheck/spell-checker
+  107:24  warning  You have a misspelled word: async on Template    spellcheck/spell-checker
+  107:24  warning  You have a misspelled word: const on Template    spellcheck/spell-checker
+  107:24  warning  You have a misspelled word: rsp on Template      spellcheck/spell-checker
+  107:24  warning  You have a misspelled word: rsp on Template      spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/click.js
+  25:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+  37:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+  49:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+  71:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+  80:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+  84:20  warning  You have a misspelled word: mousedown on String  spellcheck/spell-checker
+  85:15  warning  You have a misspelled word: mouseup on String    spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/debug.js
+  11:16  warning  You have a misspelled word: https on Template       spellcheck/spell-checker
+  11:16  warning  You have a misspelled word: mozilla on Template     spellcheck/spell-checker
+  11:16  warning  You have a misspelled word: breakpoint on Template  spellcheck/spell-checker
+  11:16  warning  You have a misspelled word: Dev on Template         spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/emulate.js
+  22:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/evaluate.js
+  15:5   warning  You have a misspelled word: params on String  spellcheck/spell-checker
+  28:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/goto.jsx
+  29:31  warning  You have a misspelled word: goto on Template              spellcheck/spell-checker
+  37:5   warning  You have a misspelled word: params on String              spellcheck/spell-checker
+  38:14  warning  You have a misspelled word: https on String               spellcheck/spell-checker
+  38:14  warning  You have a misspelled word: www on String                 spellcheck/spell-checker
+  49:17  warning  You have a misspelled word: params on String              spellcheck/spell-checker
+  53:20  warning  You have a misspelled word: https on Template             spellcheck/spell-checker
+  54:24  warning  You have a misspelled word: https on String               spellcheck/spell-checker
+  54:24  warning  You have a misspelled word: www on String                 spellcheck/spell-checker
+  70:17  warning  You have a misspelled word: params on String              spellcheck/spell-checker
+  84:17  warning  You have a misspelled word: params on String              spellcheck/spell-checker
+  89:24  warning  You have a misspelled word: https on Template             spellcheck/spell-checker
+  89:24  warning  You have a misspelled word: mozilla on Template           spellcheck/spell-checker
+  91:13  warning  You have a misspelled word: domcontentloaded on Template  spellcheck/spell-checker
+  91:13  warning  You have a misspelled word: https on Template             spellcheck/spell-checker
+  91:13  warning  You have a misspelled word: mozilla on Template           spellcheck/spell-checker
+  94:13  warning  You have a misspelled word: stylesheets on Template       spellcheck/spell-checker
+  94:13  warning  You have a misspelled word: subframes on Template         spellcheck/spell-checker
+  94:13  warning  You have a misspelled word: networkidle0 on Template      spellcheck/spell-checker
+  94:13  warning  You have a misspelled word: networkidle2 on Template      spellcheck/spell-checker
+  99:21  warning  You have a misspelled word: domcontentloaded on String    spellcheck/spell-checker
+  99:41  warning  You have a misspelled word: networkidle0 on String        spellcheck/spell-checker
+  99:57  warning  You have a misspelled word: networkidle2 on String        spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/moveMouse.js
+  20:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+  31:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/press.js
+  26:15  warning  You have a misspelled word: Ctrl on Template  spellcheck/spell-checker
+  53:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+  76:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+  87:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+  98:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/reload.js
+  11:12  warning  You have a misspelled word: Referesh on Template          spellcheck/spell-checker
+  24:17  warning  You have a misspelled word: params on String              spellcheck/spell-checker
+  35:17  warning  You have a misspelled word: params on String              spellcheck/spell-checker
+  43:21  warning  You have a misspelled word: domcontentloaded on String    spellcheck/spell-checker
+  43:41  warning  You have a misspelled word: networkidle0 on String        spellcheck/spell-checker
+  43:57  warning  You have a misspelled word: networkidle2 on String        spellcheck/spell-checker
+  49:24  warning  You have a misspelled word: https on Template             spellcheck/spell-checker
+  49:24  warning  You have a misspelled word: mozilla on Template           spellcheck/spell-checker
+  51:13  warning  You have a misspelled word: domcontentloaded on Template  spellcheck/spell-checker
+  51:13  warning  You have a misspelled word: https on Template             spellcheck/spell-checker
+  51:13  warning  You have a misspelled word: mozilla on Template           spellcheck/spell-checker
+  54:13  warning  You have a misspelled word: stylesheets on Template       spellcheck/spell-checker
+  54:13  warning  You have a misspelled word: subframes on Template         spellcheck/spell-checker
+  54:13  warning  You have a misspelled word: networkidle0 on Template      spellcheck/spell-checker
+  54:13  warning  You have a misspelled word: networkidle2 on Template      spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/runjs.js
+  14:5   warning  You have a misspelled word: params on String   spellcheck/spell-checker
+  19:17  warning  You have a misspelled word: https on Template  spellcheck/spell-checker
+  19:17  warning  You have a misspelled word: pptr on Template   spellcheck/spell-checker
+  19:17  warning  You have a misspelled word: dev on Template    spellcheck/spell-checker
+  19:17  warning  You have a misspelled word: https on Template  spellcheck/spell-checker
+  19:17  warning  You have a misspelled word: api on Template    spellcheck/spell-checker
+  19:17  warning  You have a misspelled word: https on Template  spellcheck/spell-checker
+  29:17  warning  You have a misspelled word: params on String   spellcheck/spell-checker
+  33:24  warning  You have a misspelled word: goto on String     spellcheck/spell-checker
+  33:24  warning  You have a misspelled word: 'https on String   spellcheck/spell-checker
+  34:15  warning  You have a misspelled word: png on String      spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/screenshot.js
+   45:84  warning  You have a misspelled word: png on Template         spellcheck/spell-checker
+   60:5   warning  You have a misspelled word: params on String        spellcheck/spell-checker
+   72:17  warning  You have a misspelled word: params on String        spellcheck/spell-checker
+   76:20  warning  You have a misspelled word: baz' on Template        spellcheck/spell-checker
+   92:17  warning  You have a misspelled word: params on String        spellcheck/spell-checker
+   93:18  warning  You have a misspelled word: fullpage on String      spellcheck/spell-checker
+   95:20  warning  You have a misspelled word: scrollable on Template  spellcheck/spell-checker
+  101:17  warning  You have a misspelled word: params on String        spellcheck/spell-checker
+  118:17  warning  You have a misspelled word: params on String        spellcheck/spell-checker
+  126:17  warning  You have a misspelled word: params on String        spellcheck/spell-checker
+  134:17  warning  You have a misspelled word: params on String        spellcheck/spell-checker
+  142:17  warning  You have a misspelled word: params on String        spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/scroll.js
+  21:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+  33:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/setCookie.jsx
+   20:44  warning  You have a misspelled word: http on Template   spellcheck/spell-checker
+   28:16  warning  You have a misspelled word: https on String    spellcheck/spell-checker
+   28:16  warning  You have a misspelled word: mozilla on String  spellcheck/spell-checker
+   38:17  warning  You have a misspelled word: params on String   spellcheck/spell-checker
+   50:17  warning  You have a misspelled word: params on String   spellcheck/spell-checker
+   61:17  warning  You have a misspelled word: params on String   spellcheck/spell-checker
+   82:17  warning  You have a misspelled word: params on String   spellcheck/spell-checker
+   87:17  warning  You have a misspelled word: params on String   spellcheck/spell-checker
+   93:17  warning  You have a misspelled word: params on String   spellcheck/spell-checker
+   93:17  warning  You have a misspelled word: http on String     spellcheck/spell-checker
+  101:17  warning  You have a misspelled word: params on String   spellcheck/spell-checker
+  109:17  warning  You have a misspelled word: params on String   spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/setViewport.js
+   4:29  warning  You have a misspelled word: viewport on Template  spellcheck/spell-checker
+   4:29  warning  You have a misspelled word: Viewport on Template  spellcheck/spell-checker
+   8:16  warning  You have a misspelled word: viewport on Template  spellcheck/spell-checker
+   8:16  warning  You have a misspelled word: viewport on Template  spellcheck/spell-checker
+  16:17  warning  You have a misspelled word: params on String      spellcheck/spell-checker
+  27:17  warning  You have a misspelled word: params on String      spellcheck/spell-checker
+  47:17  warning  You have a misspelled word: params on String      spellcheck/spell-checker
+  61:17  warning  You have a misspelled word: params on String      spellcheck/spell-checker
+  70:17  warning  You have a misspelled word: params on String      spellcheck/spell-checker
+  73:20  warning  You have a misspelled word: viewport on String    spellcheck/spell-checker
+  79:17  warning  You have a misspelled word: params on String      spellcheck/spell-checker
+  82:20  warning  You have a misspelled word: viewport on String    spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/tap.js
+  20:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+  31:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/waitFor.js
+  16:17  warning  You have a misspelled word: params on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/waitForNavigation.jsx
+  27:17  warning  You have a misspelled word: params on String              spellcheck/spell-checker
+  37:17  warning  You have a misspelled word: params on String              spellcheck/spell-checker
+  44:21  warning  You have a misspelled word: domcontentloaded on String    spellcheck/spell-checker
+  44:41  warning  You have a misspelled word: networkidle0 on String        spellcheck/spell-checker
+  44:57  warning  You have a misspelled word: networkidle2 on String        spellcheck/spell-checker
+  50:24  warning  You have a misspelled word: https on Template             spellcheck/spell-checker
+  50:24  warning  You have a misspelled word: mozilla on Template           spellcheck/spell-checker
+  52:13  warning  You have a misspelled word: domcontentloaded on Template  spellcheck/spell-checker
+  52:13  warning  You have a misspelled word: https on Template             spellcheck/spell-checker
+  52:13  warning  You have a misspelled word: mozilla on Template           spellcheck/spell-checker
+  55:13  warning  You have a misspelled word: stylesheets on Template       spellcheck/spell-checker
+  55:13  warning  You have a misspelled word: subframes on Template         spellcheck/spell-checker
+  55:13  warning  You have a misspelled word: networkidle0 on Template      spellcheck/spell-checker
+  55:13  warning  You have a misspelled word: networkidle2 on Template      spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/Params/Page/waitForSelector.js
+  20:7   warning  You have a misspelled word: https on Template    spellcheck/spell-checker
+  20:7   warning  You have a misspelled word: mozilla on Template  spellcheck/spell-checker
+  27:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+  45:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+  57:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+  69:17  warning  You have a misspelled word: params on String     spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/Schema/schema.jsx
+   2:28  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+   3:29  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+   3:29  warning  You have a misspelled word: Viewport on String  spellcheck/spell-checker
+   4:31  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+   5:29  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+   6:27  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+   7:25  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+   8:36  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+   9:27  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  10:32  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  11:22  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  11:22  warning  You have a misspelled word: goto on String      spellcheck/spell-checker
+  12:24  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  13:25  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  14:33  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  15:23  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  16:26  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  17:23  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  17:23  warning  You have a misspelled word: runjs on String     spellcheck/spell-checker
+  18:23  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  19:35  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  20:27  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  21:27  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  22:38  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  23:27  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  24:50  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  26:35  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  27:33  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  28:32  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  29:33  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  30:31  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  31:22  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  32:24  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  33:28  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  33:28  warning  You have a misspelled word: Html on String      spellcheck/spell-checker
+  34:23  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  35:23  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  36:23  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  37:23  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  38:24  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  39:35  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  40:32  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  41:29  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  42:39  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  43:29  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  44:37  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  45:30  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  46:35  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  47:41  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  48:53  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  49:27  warning  You have a misspelled word: Params on String    spellcheck/spell-checker
+  70:24  warning  You have a misspelled word: webhook on String   spellcheck/spell-checker
+  76:12  warning  You have a misspelled word: Dev on String       spellcheck/spell-checker
+  82:15  warning  You have a misspelled word: checkbox on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/component/TabGroup.jsx
+  3:28  warning  You have a misspelled word: antd on String       spellcheck/spell-checker
+  9:39  warning  You have a misspelled word: smalltalk on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/container/App.jsx
+  4:25  warning  You have a misspelled word: redux on String  spellcheck/spell-checker
+  5:36  warning  You have a misspelled word: redux on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/error/index.js
+   3:12  warning  You have a misspelled word: safelly on String         spellcheck/spell-checker
+   9:31  warning  You have a misspelled word: generatorerror on String  spellcheck/spell-checker
+  11:12  warning  You have a misspelled word: expresion on String       spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/index.jsx
+   1:8   warning  You have a misspelled word: antd on String      spellcheck/spell-checker
+   1:8   warning  You have a misspelled word: antd on String      spellcheck/spell-checker
+   4:24  warning  You have a misspelled word: dom on String       spellcheck/spell-checker
+   5:55  warning  You have a misspelled word: redux on String     spellcheck/spell-checker
+   6:26  warning  You have a misspelled word: redux on String     spellcheck/spell-checker
+   7:29  warning  You have a misspelled word: redux on String     spellcheck/spell-checker
+   8:31  warning  You have a misspelled word: redux on String     spellcheck/spell-checker
+   9:37  warning  You have a misspelled word: redux on String     spellcheck/spell-checker
+   9:37  warning  You have a misspelled word: devtools on String  spellcheck/spell-checker
+  13:21  warning  You have a misspelled word: jsx on String       spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/reducer/app.js
+  1:31  warning  You have a misspelled word: redux on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/reducer/git.js
+  1:31  warning  You have a misspelled word: redux on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/reducer/index.js
+  1:33  warning  You have a misspelled word: redux on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/reducer/project.js
+  1:31  warning  You have a misspelled word: redux on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/reducer/project/variable.js
+  1:20  warning  You have a misspelled word: uniqid on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/reducer/settings.js
+  1:31  warning  You have a misspelled word: redux on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/reducer/snippets.js
+  1:31  warning  You have a misspelled word: redux on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/reducer/suite.js
+  1:31  warning  You have a misspelled word: redux on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/reducer/suite/command.js
+  1:20  warning  You have a misspelled word: uniqid on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/reducer/suite/group.js
+  1:20  warning  You have a misspelled word: uniqid on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/reducer/suite/target.js
+  1:20  warning  You have a misspelled word: uniqid on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/reducer/suite/test.js
+  1:20  warning  You have a misspelled word: uniqid on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/selector/selectors.js
+  1:20  warning  You have a misspelled word: uniqid on String      spellcheck/spell-checker
+  2:26  warning  You have a misspelled word: bycontract on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/service/assert.js
+  8:19  warning  You have a misspelled word: Tpl on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/service/copypaste.js
+  2:22  warning  You have a misspelled word: lodash on String  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/service/ExpressionParser.js
+  78:76  warning  You have a misspelled word: Exprected on Template  spellcheck/spell-checker
+
+/home/sheiko/Sites/os/puppetry/src/service/http.js
+   2:30  warning  You have a misspelled word: antd on String               spellcheck/spell-checker
+   3:20  warning  You have a misspelled word: semver on String             spellcheck/spell-checker
+  20:30  warning  You have a misspelled word: https on String              spellcheck/spell-checker
+  20:30  warning  You have a misspelled word: githubusercontent on String  spellcheck/spell-checker
+  20:30  warning  You have a misspelled word: dsheiko on String            spellcheck/spell-checker
+  29:11  warning  You have a misspelled word: https on Template            spellcheck/spell-checker
+  29:11  warning  You have a misspelled word: github on Template           spellcheck/spell-checker
+  29:11  warning  You have a misspelled word: dsheiko on Template          spellcheck/spell-checker
+  32:15  warning  You have a misspelled word: http on Template             spellcheck/spell-checker
+
+✖ 752 problems (0 errors, 752 warnings)
+

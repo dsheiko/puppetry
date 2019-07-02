@@ -31,7 +31,7 @@ export const assertAttribute = {
           initialValue: "",
           rules: [{
             required: true,
-            message: "Attributre name required"
+            message: "Attribute name required"
           },
           {
             transform: ( value ) => value.trim()
