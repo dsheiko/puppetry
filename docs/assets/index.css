@@ -138,6 +138,7 @@ body {
     line-height: 72px;
     font-weight: 400;
     margin-top: 32px;
+    text-align: center;
   }
 
   .banner h2 {
@@ -145,6 +146,7 @@ body {
     line-height: 40px;
     font-weight: 300;
     opacity: 0.7;
+    text-align: center;
   }
 
   .banner__img {
@@ -193,9 +195,43 @@ img.lazyload:not([src]) {
   .navbar__menu, .navbar__menu_github, .navbar__menu_puppetry {
     margin-top: 8px;
   }
-  .banner h1 {
 
+  .navbar__menu_puppetry > .btn {
+    width: calc(100vw - 32px) !important;
   }
+
+  .banner h1 {
+    font-size: 40px;
+    line-height: 48px;
+    margin-top: 32px;
+  }
+
+
+
+  .hero-card > h3 {
+    height: auto !important;
+  }
+
+  .banner .banner__btns {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
+  .banner .banner__btns .btn {
+    display: block;
+    width: 120px;
+  }
+
+  .banner .banner__btns .btn + .btn {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+
+  .feature__ic {
+    text-align: center;
+  }
+
   .banner__img, .feature__img {
     width: calc(100vw - 32px) !important;
     height: auto;
