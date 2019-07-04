@@ -1,9 +1,5 @@
 /* Reset */
 
-* {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
 
 	html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
 		margin: 0;
@@ -20,6 +16,10 @@
 
 	body {
 		line-height: 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: none;
 	}
 
 	ol, ul {
@@ -40,9 +40,6 @@
 		border-spacing: 0;
 	}
 
-	body {
-		-webkit-text-size-adjust: none;
-	}
 
 /* Box Model */
 
@@ -61,7 +58,7 @@ body > section {
 body {
   background-color: #002f5c;
   color: white;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', Camphor, Open Sans, Segoe UI, sans-serif;
   margin: 0;
   padding: 0
 }
@@ -153,7 +150,8 @@ body {
   .banner__img {
     margin: 32px 0;
     display: block;
-    max-width: 624px;
+    width: 620px;
+    height: 384px;
     box-shadow: 4px 4px 8px 0px rgba( 0,0,0,0.4 );
     border-radius: 4px;
   }
@@ -164,13 +162,28 @@ body {
   align-items: flex-start;
 }
 
+img.lazyload:not([src]) {
+	visibility: hidden;
+}
+
+.blur-up {
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+  transition: filter 400ms, -webkit-filter 400ms;
+}
+
+.blur-up.lazyloaded {
+  -webkit-filter: blur(0);
+  filter: blur(0);
+}
+
 @media screen and (max-width: 992px) {
   .hero-grid {
     flex-flow: column nowrap;
   }
 }
 
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 620px) {
   .navbar__logo {
     display: none;
   }
@@ -184,7 +197,8 @@ body {
 
   }
   .banner__img, .feature__img {
-    max-width: calc(100vw - 32px) !important;
+    width: calc(100vw - 32px) !important;
+    height: auto;
   }
   .footer {
     flex-direction: column;

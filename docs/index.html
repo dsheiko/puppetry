@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
     <link href="./assets/index.css" rel="stylesheet" type="text/css">
 
 
@@ -37,6 +37,9 @@
 
     <link rel="canonical" href="https://puppetry.app">
 
+    <link rel="preconnect" href="https://www.google-analytics.com">
+    <link rel="preconnect" href="https://api.github.com">
+
     <script type="application/ld+json">
       {
         "@context": "http://schema.org/",
@@ -61,6 +64,21 @@
       gtag('js', new Date());
 
       gtag('config', 'UA-129292661-1');
+    </script>
+
+
+    <script type="text/javascript">
+      WebFontConfig = {
+        google: { families: [ "Roboto" ] }
+      };
+      (function() {
+        var wf = document.createElement( "script" );
+        wf.src = "https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js";
+        wf.type = "text/javascript";
+        wf.async = "true";
+        var s = document.getElementsByTagName( "script" )[ 0 ];
+        s.parentNode.insertBefore( wf, s );
+      })();
     </script>
 
 
@@ -99,7 +117,16 @@
           class="banner" >
           <h1>Welcome to Puppetry</h1>
 
-          <img class="banner__img"  src="./assets/img/puppetry-welcome.png?v2" alt="Puppetry is an open-source desktop application that gives non-developers the ability to create, manage, and integrate automated tests for Web" />
+          <img
+              class="banner__img lazyload blur-up"
+              alt="Puppetry is an open-source desktop application that gives non-developers the ability to create, manage, and integrate automated tests for Web"
+              src="./assets/img/puppetry-welcome.png?v2"
+              srcset="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTg1Ij48ZGVmcy8+PHBhdGggZmlsbD0iI2I4YzBjNyIgZD0iTTAgMGgzMDB2MTg1SDB6Ii8+PGcgZmlsbC1vcGFjaXR5PSIuNSI+PHBhdGggZD0iTTY1LTE4LjJ2MjIxLjVMLTE4LjIgNzUuNnoiLz48cGF0aCBmaWxsPSIjMDAwMDE2IiBkPSJNLTE4LjIgMTc4LjdsOTguNSAyNC42TDExLTE4LjJ6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTY3LjQtMTguMmwyNTAuOCA5MS40TDY4LjYgMjAzLjN6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI5My42IDE3Ny41Vi0xOC4yTDYwLjQgMTc2LjR6Ii8+PHBhdGggZmlsbD0iIzAwMDIzNyIgZD0iTTY1IDE4Mi4yTC0xOC4yIDQuMWw4NC40IDMuNXoiLz48cGF0aCBkPSJNMjk0LjcgMTUuOGwyMy41IDczLjgtMjIuMyA4NS42eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik02OS43IDE3NEw2Ni4yIDE3IDI5NiAxOC4yeiIvPjxwYXRoIGZpbGw9IiMwMDIwNGEiIGQ9Ik02Ni4yLjZMNjQgMTgyLjJsLTgyLTguMnoiLz48cGF0aCBmaWxsPSIjMjAyMzBjIiBkPSJNMTU2LjQgMTc4LjdoMTYxLjhMMjM1IDIwMy4zeiIvPjxwYXRoIGZpbGw9IiM1NjU3NDYiIGQ9Ik05MC44IDIwMy4zbC01MC40LTI1LjggMTQzIDIuNHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTE2LjYgMTc3LjVsMTcwLTExLjcgMS4xLTE1N3oiLz48cGF0aCBmaWxsPSIjMGE3MWMzIiBkPSJNMTEuMSA4MS40bC03IDI1LjggNjMuMy0xMi45eiIvPjxwYXRoIGZpbGw9IiMwMDBhMTYiIGQ9Ik02NSA4OC41bC0xLTcyLjdMMi45IDI0eiIvPjxwYXRoIGZpbGw9IiNmZWZkZmQiIGQ9Ik0xNDAgNy42bDEzNi0xLjIgMTguNyAxNjQuMXoiLz48cGF0aCBmaWxsPSIjYzJiNmE3IiBkPSJNNTIuMS0xOC4yTDEzOSA1LjNILTE4eiIvPjxwYXRoIGZpbGw9IiMwMDE3M2IiIGQ9Ik0xLjggODguNWw2MC45IDkwLjItNTUtMS4yeiIvPjwvZz48L3N2Zz4="
+              data-srcset="./assets/img/puppetry-welcome-620.png 1x,
+                           ./assets/img/puppetry-welcome.png?v2 2x"
+              data-sizes="auto"
+              />
+
           <h2>CODELESS END-TO-END AUTOMATED TESTING</h2>
           <div class="banner__btns">
           <a href="https://www.youtube.com/watch?v=xrtC2ucgP9o"
@@ -172,7 +199,11 @@
         <div class="feature feature--left">
 
           <div>
-            <img class="feature__img" src="./assets/img/screen-manage-structure.png?v2" alt="Manage your test structure"  />
+            <img
+                class="feature__img lazyload blur-up"
+                data-sizes="auto"
+                src="./assets/img/screen-manage-structure.png?v2"
+                alt="Manage your test structure"  />
           </div>
           <div>
             <h3>Manage your test structure</h3>
@@ -193,13 +224,19 @@
             </p>
           </div>
           <div>
-            <img class="feature__img" src="./assets/img/screen-add-target.png?v2" alt="Locate and define element target"  />
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./assets/img/screen-add-target.png?v2" alt="Locate and define element target"  />
           </div>
         </div>
 
          <div class="feature feature--left">
           <div>
-            <img class="feature__img" src="./assets/img/screen-select-target.png?v2" alt="Select a target"  />
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./assets/img/screen-select-target.png?v2" alt="Select a target"  />
           </div>
           <div>
             <h3>Select a target</h3>
@@ -217,13 +254,19 @@
             <p>Underlying form dynamically adapts to actual target/method combination. So when select both we get method parameters (mandatory and optional)</p>
           </div>
           <div>
-            <img class="feature__img" src="./assets/img/screen-perform-method.png?v2" alt="Select a method"  />
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./assets/img/screen-perform-method.png?v2" alt="Select a method"  />
           </div>
         </div>
 
         <div class="feature feature--left">
           <div>
-            <img class="feature__img" src="./assets/img/screen-assert.png?v2" alt="Make an assertion"  />
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./assets/img/screen-assert.png?v2" alt="Make an assertion"  />
           </div>
           <div>
             <h3>Make an assertion</h3>
@@ -237,7 +280,10 @@
             <p>As we press F6 Puppetry generates Jest project and runs internally the tests. </p>
           </div>
           <div>
-            <img class="feature__img" src="./assets/img/screen-test-resutls.png?v2" alt="Get test report"  />
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./assets/img/screen-test-resutls.png?v2" alt="Get test report"  />
           </div>
         </div>
 
@@ -252,7 +298,10 @@
         <div class="feature feature--left">
 
           <div>
-            <img class="feature__img" src="./assets/img/screen-cli.png?v2" alt="Export project for CI"  />
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./assets/img/screen-cli.png?v2" alt="Export project for CI"  />
           </div>
           <div>
             <h3>Export your tests</h3>
@@ -271,7 +320,10 @@
             <p>Puppetry generates the tests as readable / maintainable JavaScript specs. So developers can easily read them and modify.</p>
           </div>
           <div>
-            <img class="feature__img" src="./assets/img/screen-code.png?v2" alt="Generated test code"  />
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./assets/img/screen-code.png?v2" alt="Generated test code"  />
           </div>
         </div>
 
@@ -325,7 +377,9 @@
       document.querySelector( "#cYear" ).innerHTML = ( new Date() ).getFullYear();
     </script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?"></script>
+    <script async defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?"></script>
+    <script src="js/ls.rias.min.js"></script>
+    <script src="js/lazysizes.min.js"></script>
 
   </body>
 </html>
