@@ -185,7 +185,7 @@ img.lazyload:not([src]) {
   }
 }
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 652px) {
   .navbar__logo {
     display: none;
   }
