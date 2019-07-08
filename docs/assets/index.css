@@ -192,12 +192,13 @@ img.lazyload:not([src]) {
   .navbar, .navbar__menu {
     flex-direction: column;
   }
-  .navbar__menu, .navbar__menu_github, .navbar__menu_puppetry {
+  .navbar__menu, .navbar__menu_github {
     margin-top: 8px;
   }
 
-  .navbar__menu_puppetry > .btn {
-    width: calc(100vw - 32px) !important;
+  .navbar__menu_puppetry  {
+    display: none;
+    /* width: calc(100vw - 32px) !important; */
   }
 
   .banner h1 {
