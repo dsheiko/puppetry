@@ -183,21 +183,21 @@ expect.extend({
     let pass;
     switch ( position ) {
       case "above":
-        pass = a.y + a.height < b.y;
+        pass = a.y + a.height <= b.y;
         if ( !pass ) {
           return expectReturn( pass, `[${ source }] expected ${ target } (y=${ a.y }, height=${ a.height }) `
             + `is above ${ counterpart } (y=${ b.y })` );
         }
         break;
       case "below":
-        pass = a.y > b.y + b.height;
+        pass = a.y >= b.y + b.height;
         if ( !pass ) {
           return expectReturn( pass, `[${ source }] expected ${ target } (y=${ a.y }) is below ${ counterpart } `
             + `(y=${ b.y }, height=${ b.height }) ` );
         }
         break;
       case "left":
-        pass = a.x + a.width < b.x;
+        pass = a.x + a.width <= b.x;
         if ( !pass ) {
           return expectReturn( pass, `[${ source }] expected ${ target } `
             + `(x=${ a.x }, width=${ a.width }) `
@@ -205,7 +205,7 @@ expect.extend({
         }
         break;
       case "right":
-        pass = a.x > b.x + b.width;
+        pass = a.x >= b.x + b.width;
         if ( !pass ) {
           return expectReturn( pass, `[${ source }] expected ${ target } (x=${ a.x }) is right to ${ counterpart } `
             + `(x=${ b.x }, width=${ b.width })` );

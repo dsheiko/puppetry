@@ -5,6 +5,7 @@
 - fix: clean up suite's screenshots before running the suite
 - fix: leave the editing mode (in a row) by pressing Esc
 - fix: when creating a new project, reset project object in the state, rather then merge
+- fix: target.assertPosition correctly asserts on bordering elements
 
 ### Features
 - improve UI: add target.screenshot

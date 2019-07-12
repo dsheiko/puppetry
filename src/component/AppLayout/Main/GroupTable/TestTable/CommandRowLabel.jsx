@@ -106,6 +106,8 @@ export class CommandRowLabel extends React.Component {
          return `(${ params.name }, \`${ params.value }\`)`;
        case "assertNodeCount":
         return `(count(\`${ params.selector }\`) ${ OPERATOR_MAP[ assert.operator ] } ${ assert.value })`;
+       case "assertTextCount":
+        return `(count(\`${ params.text }\`) ${ OPERATOR_MAP[ assert.operator ] } ${ assert.value })`; 
        case "assertStyle":
          return `(${ params.name + ( params.pseudo || "" ) } `
           + `${ assert.assertion } \`${ truncate( assert.value, 60 ) }\`)`;

@@ -49,6 +49,8 @@ import { scroll as scrollElement } from "./Params/Element/scroll";
 import { assertScroll as assertScrollElement } from "./Params/Element/assertScroll";
 import { checkBox }  from "./Params/Element/checkBox";
 import { assertNodeCount as assertNodeCountElement } from "./Params/Element/assertNodeCount";
+import { assertTextCount as assertTextCountElement } from "./Params/Element/assertTextCount";
+
 
 import { tplQuery, tplSuite, tplGroup, tplTest } from "./Jest";
 
@@ -93,6 +95,7 @@ const methodLables = {
     assertStyle: "assert style",
     assertMatchesSelector: "assert it matches selector",
     assertNodeCount: "assert count of child elements",
+    assertTextCount: "assert count of elements with text",
     assertContainsClass: "assert it contains class",
     assertScroll: "assert scroll offset"
   }
@@ -135,6 +138,7 @@ export const schema = {
     assertStyle,
     assertMatchesSelector,
     assertNodeCount: assertNodeCountElement,
+    assertTextCount: assertTextCountElement,
     assertContainsClass,
     assertScroll: assertScrollElement
   },
