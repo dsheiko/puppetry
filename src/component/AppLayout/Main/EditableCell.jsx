@@ -25,15 +25,21 @@ export class EditableCell extends React.Component {
     error: ""
   }
 
-
   onKeyPress = ( e, record ) => {
     switch ( e.key ){
-    case "Enter":
-      this.props.onSubmit && this.props.onSubmit( record );
-      return;
+      case "Enter":
+        this.props.onSubmit && this.props.onSubmit( record );
+        return;
     }
   }
 
+  onKeyDown = ( e, record ) => {
+    switch ( e.key ) {
+      case "Escape":
+        this.props.updateRecord && this.props.updateRecord({ id: record.id, editing: false });
+        return;
+    }
+  }
 
   render() {
     const { placeholder, dataIndex, record, prefixIcon, className } = this.props,
@@ -65,8 +71,8 @@ export class EditableCell extends React.Component {
                   <Input
                     prefix={ prefixIcon || null }
                     className={ className || null }
-
                     onKeyPress={ ( e ) => this.onKeyPress( e, record ) }
+                    onKeyDown={ ( e ) => this.onKeyDown( e, record ) }
                     placeholder={placeholder}
                     tabIndex={ dataIndex === "select" ? 2 : 1 }
                   />
