@@ -219,7 +219,7 @@ expect.extend({
 
 module.exports = ( ns ) => {
   // create namespace-dependent image options creator
-  util.png = util.makePng( ns );
+  util.setSuiteName( ns );
   return {
     bs,
     util,

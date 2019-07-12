@@ -7,20 +7,27 @@ const { join } = require( "path" ),
       faker = require( "faker" ),
       localStorage = new LocalStorage( join( __dirname, "/../", "/storage" ) );
 
-let PATH_SCREENSHOTS = join( __dirname, "/../", "/screenshots");
+let PATH_SCREENSHOTS = join( __dirname, "/../", "/screenshots"),
+    SUITE_NAME = "";
 
     /**
      * @see https://pptr.dev/#?product=Puppeteer&version=v1.5.0&show=api-class-page
-     * @param {string} ns
      * @param {string} filePath
      * @param {Object} [options]
      * @returns {Object}
      */
-const getPng = ( ns, filePath, options = {} ) => {
+const png = ( filePath, options = {} ) => {
         const normalizedPath = filePath.replace( /[^a-zA-Z\d\-\_]/g, "-" );
-        const path = join( PATH_SCREENSHOTS, ns, `${normalizedPath}.png` );
+        const path = join( PATH_SCREENSHOTS, SUITE_NAME, `${normalizedPath}.png` );
         shell.mkdir( "-p" , dirname( path ) );
         return { path, ...options };
+      },
+      /**
+       * Removes outdated suite screenshots on the beggining of test
+       */
+      cleanupScreenshotsDir = () => {
+        const path = join( PATH_SCREENSHOTS, SUITE_NAME );
+        shell.rm( "-rf" , path );
       },
       /**
        * @param {number} max
@@ -92,15 +99,19 @@ exports.localStorage = localStorage;
 
 exports.util = {
 
+  png,
+
   setPngBasePath: ( path ) => {
     PATH_SCREENSHOTS = path;
   },
 
-  makePng: ( ns ) => ( filePath, options = {} ) => {
-    return getPng( ns, filePath, options );
+  setSuiteName: ( name ) => {
+    SUITE_NAME = name;
   },
 
   pollForValue,
+
+  cleanupScreenshotsDir,
 
   exp: {
     fake,

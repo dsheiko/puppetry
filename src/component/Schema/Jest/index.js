@@ -50,6 +50,8 @@ util.setPngBasePath( ${ JSON.stringify( screenshotDirectory ) } );
 
 jest.setTimeout( ${ suite.timeout || NETWORK_TIMEOUT} );
 
+util.cleanupScreenshotsDir();
+
 ${ buildEnv( env ) }
 
 ${ targets }
