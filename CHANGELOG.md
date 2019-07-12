@@ -3,7 +3,8 @@
 ### Bug fixes
 - fix: screenshot now accepts slashes in name
 - fix: clean up suite's screenshots before running the suite
-- fix: leave the editing mode (in a row) by pressing Esc 
+- fix: leave the editing mode (in a row) by pressing Esc
+- fix: when creating a new project, reset project object in the state, rather then merge
 
 ### Features
 - improve UI: add target.screenshot

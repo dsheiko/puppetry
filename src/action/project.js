@@ -26,7 +26,7 @@ import snippetsActions from "./snippets";
 
 const actions = createActions({
   SET_PROJECT: ( project ) => validate( project, I.PROJECT_OPTIONS ),
-  RESET_PROJECT: () => {},
+  RESET_PROJECT: ( project = null ) => project,
   ADD_ENV: ( env ) => env,
   REMOVE_ENV: ( env ) => env,
   UPDATE_PROJECT_PANES: ( panel, panes ) => ({ panel, panes })
@@ -53,7 +53,7 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
     ipcRenderer.send( E_PROJECT_LOADED, projectDirectory );
 
     directory && dispatch( settingsActions.saveSettings({ projectDirectory }) );
-    dispatch( actions.setProject( project ) );
+    dispatch( actions.resetProject( project ) );
     dispatch( gitActions.loadGit( projectDirectory ) );
     await dispatch( actions.loadProjectFiles( projectDirectory ) );
     await dispatch( actions.watchProjectFiles( projectDirectory ) );
@@ -126,7 +126,7 @@ actions.saveProject = () => async ( dispatch, getState ) => {
 };
 
 
-actions.updateProject = ({ projectDirectory, name } = {}) => async ( dispatch ) => {
+actions.updateProject = ({ projectDirectory, name } = {}, reset = false) => async ( dispatch ) => {
   try {
     if ( !name ) {
       throw new InvalidArgumentError( "Empty project name" );
@@ -134,8 +134,11 @@ actions.updateProject = ({ projectDirectory, name } = {}) => async ( dispatch ) 
     if ( !projectDirectory ) {
       throw new InvalidArgumentError( "Empty project directory" );
     }
-
-    await dispatch( actions.setProject({ projectDirectory, name }) );
+    if ( reset ) {
+      await dispatch( actions.resetProject({ projectDirectory, name }) );
+    } else {
+      await dispatch( actions.setProject({ projectDirectory, name }) );
+    }
     // keep track of recent projects
     dispatch( settingsActions.addSettingsProject({
       dir: projectDirectory,
