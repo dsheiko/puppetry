@@ -10,6 +10,7 @@
 ### Features
 - improve UI: add target.screenshot
 - improve UI: add target.assertNodeCount
+- improve UI: add target.assertTextCount
 
 # Puppetry 2.0.0
 

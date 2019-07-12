@@ -37,7 +37,7 @@ function getCredentialsPayload( credentials ) {
   }
   return {
     username: credentials.credentialsUsername,
-    token: credentials.credentialsAcccessToken
+    token: credentials.credentialsAccessToken
   };
 }
 
@@ -45,8 +45,6 @@ function wrap( res, method = "undefined" ) {
   res && "ok" in res && log.debug( `Main process: git-api.${ method }: ${ JSON.stringify( res.ok ) }` );
   return res;
 }
-
-
 
 
 module.exports = {
