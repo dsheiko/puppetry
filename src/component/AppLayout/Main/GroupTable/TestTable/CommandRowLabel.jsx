@@ -7,7 +7,8 @@ import { truncate } from "service/utils";
 
 const OPERATOR_MAP = {
   gt: ">",
-  lt: "<"
+  lt: "<",
+  eq: "="
 };
 
 function renderClick( params, pref = "" ) {
@@ -87,7 +88,7 @@ export class CommandRowLabel extends React.Component {
      }
    }
 
-   static buildTargetAddon({ assert, method, params }) {
+   static buildTargetAddon({ assert, method, params, target }) {
      try {
        let text;
        switch ( method ) {
@@ -103,11 +104,15 @@ export class CommandRowLabel extends React.Component {
          return `("${ params.checked ? "checked" : "unchecked" }")`;
        case "setAttribute":
          return `(${ params.name }, \`${ params.value }\`)`;
+       case "assertNodeCount":
+        return `(count(\`${ params.selector }\`) ${ OPERATOR_MAP[ assert.operator ] } ${ assert.value })`;
        case "assertStyle":
          return `(${ params.name + ( params.pseudo || "" ) } `
           + `${ assert.assertion } \`${ truncate( assert.value, 60 ) }\`)`;
        case "assertContainsClass":
          return `(${ assert.value ? "" : "NOT " }\`${ params.name }\`)`;
+       case "screenshot":
+         return `(\`${ truncate( params.name, 80 ) }\`)`;
        case "scroll":
          return `(h: ${ params.x }, v: ${ params.y })`;
        case "select":

@@ -1,5 +1,5 @@
 import React from "react";
-import { screenshot } from "./Params/Page/screenshot";
+import { screenshot as screenshotPage } from "./Params/Page/screenshot";
 import { setViewport } from "./Params/Page/setViewport";
 import { assertContent } from "./Params/Page/assertContent";
 import { assertTitle } from "./Params/Page/assertTitle";
@@ -22,9 +22,10 @@ import { assertVar } from "./Params/Page/assertVar";
 import { scroll as scrollPage } from "./Params/Page/scroll";
 import { setCookie } from "./Params/Page/setCookie";
 import { assertScroll as assertScrollPage } from "./Params/Page/assertScroll";
-
 import { waitForNavigation } from "./Params/Page/waitForNavigation";
-import { assertNodeCount } from "./Params/Page/assertNodeCount";
+import { assertNodeCount as assertNodeCountPage } from "./Params/Page/assertNodeCount";
+
+import { screenshot as screenshotElement } from "./Params/Element/screenshot";
 import { assertProperty } from "./Params/Element/assertProperty";
 import { assertAttribute } from "./Params/Element/assertAttribute";
 import { assertVisible } from "./Params/Element/assertVisible";
@@ -47,6 +48,7 @@ import { tap as tapElement } from "./Params/Element/tap";
 import { scroll as scrollElement } from "./Params/Element/scroll";
 import { assertScroll as assertScrollElement } from "./Params/Element/assertScroll";
 import { checkBox }  from "./Params/Element/checkBox";
+import { assertNodeCount as assertNodeCountElement } from "./Params/Element/assertNodeCount";
 
 import { tplQuery, tplSuite, tplGroup, tplTest } from "./Jest";
 
@@ -80,6 +82,7 @@ const methodLables = {
     reset: "reset input or form",
     toggleClass: "toggle class",
     checkBox: "toggle checkbox/radio",
+    screenshot: "make screenshot",
     setAttribute: "set attribute",
     assertAttribute: "assert attribute",
     assertProperty: "assert property",
@@ -89,6 +92,7 @@ const methodLables = {
     assertPosition: "assert relative position",
     assertStyle: "assert style",
     assertMatchesSelector: "assert it matches selector",
+    assertNodeCount: "assert count of child elements",
     assertContainsClass: "assert it contains class",
     assertScroll: "assert scroll offset"
   }
@@ -121,6 +125,7 @@ export const schema = {
     checkBox,
     toggleClass,
     setAttribute,
+    screenshot: screenshotElement,
     assertAttribute,
     assertProperty,
     assertVisible,
@@ -129,6 +134,7 @@ export const schema = {
     assertPosition,
     assertStyle,
     assertMatchesSelector,
+    assertNodeCount: assertNodeCountElement,
     assertContainsClass,
     assertScroll: assertScrollElement
   },
@@ -136,7 +142,7 @@ export const schema = {
     emulate,
     setViewport,
     goto,
-    screenshot,
+    screenshot: screenshotPage,
     click: clickPage,
     moveMouse,
     tap: tapPage,
@@ -155,7 +161,7 @@ export const schema = {
     assertTitle,
     assertUrl,
     assertContent,
-    assertNodeCount,
+    assertNodeCount: assertNodeCountPage,
     assertScroll: assertScrollPage,
     assertVar
   }

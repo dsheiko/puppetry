@@ -39,7 +39,8 @@ bs.query = async function ( selector, target ) {
  */
 const OPERATOR_MAP = {
   gt: ">",
-  lt: "<"
+  lt: "<",
+  eq: "="
 };
 
 /**
@@ -126,7 +127,9 @@ expect.extend({
   toPassCondition( rawReceived, operator, rawValue, source ) {
     const received = parseInt( rawReceived, 10 ),
           value = parseInt( rawValue, 10 ),
-          pass = operator === "gt" ? received > value : received < value;
+          pass = operator === "eq"
+            ? received === value
+            : ( operator === "gt" ? received > value : received < value );
 
     return expectReturn( pass,
       `[${ source }] expected ${ received } ${ OPERATOR_MAP[ operator ] } ${ value }` );

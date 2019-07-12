@@ -11,13 +11,14 @@ let PATH_SCREENSHOTS = join( __dirname, "/../", "/screenshots");
 
     /**
      * @see https://pptr.dev/#?product=Puppeteer&version=v1.5.0&show=api-class-page
+     * @param {string} ns
      * @param {string} filePath
      * @param {Object} [options]
      * @returns {Object}
      */
-const png = ( filePath, options = {} ) => {
-        const normalizedPath = filePath.replace( /[^a-zA-Z\d\-\_\\\/]/g, "-" );
-        const path = join( PATH_SCREENSHOTS, `${normalizedPath}.png` );
+const getPng = ( ns, filePath, options = {} ) => {
+        const normalizedPath = filePath.replace( /[^a-zA-Z\d\-\_]/g, "-" );
+        const path = join( PATH_SCREENSHOTS, ns, `${normalizedPath}.png` );
         shell.mkdir( "-p" , dirname( path ) );
         return { path, ...options };
       },
@@ -96,7 +97,7 @@ exports.util = {
   },
 
   makePng: ( ns ) => ( filePath, options = {} ) => {
-    return png( `${ns}/${filePath}`, options );
+    return getPng( ns, filePath, options );
   },
 
   pollForValue,

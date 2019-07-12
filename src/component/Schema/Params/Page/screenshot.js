@@ -76,7 +76,7 @@ export const screenshot = {
           tooltip: `The description is a plain text, which will be normalized to screenshot file name.
               Slashes can be used to set file location: 'foo/bar/baz'.`,
           placeholder: "e.g. The form is just submitted",
-          initialValue: ( record ) => `Screenshot ${ getCounter( record.id ) || "" }`,
+          initialValue: ( record ) => `Page ${ getCounter( record.id ) || "" }`,
           rules: [{
             required: true,
             message: "Screenshot description required"

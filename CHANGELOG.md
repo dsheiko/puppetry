@@ -1,3 +1,12 @@
+# Puppetry 2.0.1
+
+### Bug fixes
+- fix: screenshot now accepts slashes in name
+
+### Features
+- improve UI: add target.screenshot
+- improve UI: add target.assertNodeCount
+
 # Puppetry 2.0.0
 
 ### Bug fixes

@@ -4,14 +4,14 @@ import { AssertNumber } from "../../Assert/AssertNumber";
 
 export const assertNodeCount = {
   template: ( command ) => buildAssertionTpl(
-    `( await bs.page.$$(${ JSON.stringify( command.params.selector ) }) ).length`,
+    `( await ( await ${ command.target }() ).$$(${ JSON.stringify( command.params.selector ) }) ).length`,
     command,
-    `// Asserting that number of elements matching "${ command.params.selector }" satisfies the given constraint`
+    `// Asserting that number of child elements matching "${ command.params.selector }" satisfies the given constraint`
   ),
   assert: {
     node: AssertNumber
   },
-  description: `Asserts that number of elements matching a specified selector satisfies the given constraint`,
+  description: `Asserts that number of child elements matching a specified selector satisfies the given constraint`,
   params: [
     {
       fields: [
