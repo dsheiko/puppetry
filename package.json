@@ -1,7 +1,7 @@
 {
   "name": "puppetry",
   "description": "Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": "Dmitry Sheiko <me@dsheiko.com> (http://dsheiko.com)",
   "engines": {
     "node": ">=11.7.0"
@@ -20,7 +20,7 @@
   "main": "./app/main.js",
   "scripts": {
     "test": "jest --config=jest.cfg.unit.js",
-    "test:e2e": "jest --config=jest.cfg.e2e.js --runInBand",
+    "test:e2e": "jest --config=jest.cfg.e2e.js --runInBand -u",
     "build": "cross-env NODE_ENV=production && webpack --config webpack.config.js",
     "watch": "webpack --watch  --config webpack.config.js",
     "build:dev": "cross-env NODE_ENV=development && webpack --config webpack.config.js",

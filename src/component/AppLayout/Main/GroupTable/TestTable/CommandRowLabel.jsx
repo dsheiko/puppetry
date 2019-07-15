@@ -88,7 +88,7 @@ export class CommandRowLabel extends React.Component {
      }
    }
 
-   static buildTargetAddon({ assert, method, params, target }) {
+   static buildTargetAddon({ assert, method, params }) {
      try {
        let text;
        switch ( method ) {
@@ -105,14 +105,14 @@ export class CommandRowLabel extends React.Component {
        case "setAttribute":
          return `(${ params.name }, \`${ params.value }\`)`;
        case "assertNodeCount":
-        return `(count(\`${ params.selector }\`) ${ OPERATOR_MAP[ assert.operator ] } ${ assert.value })`;
+         return `(count(\`${ params.selector }\`) ${ OPERATOR_MAP[ assert.operator ] } ${ assert.value })`;
        case "assertTextCount":
-        return `(count(\`${ params.text }\`) ${ OPERATOR_MAP[ assert.operator ] } ${ assert.value })`; 
+         return `(count(\`${ params.text }\`) ${ OPERATOR_MAP[ assert.operator ] } ${ assert.value })`;
        case "assertStyle":
          return `(${ params.name + ( params.pseudo || "" ) } `
           + `${ assert.assertion } \`${ truncate( assert.value, 60 ) }\`)`;
        case "assertContainsClass":
-         return `(${ assert.value ? "" : "NOT " }\`${ params.name }\`)`;
+         return `(\`${ params.name }\`, ${ assert.value ? "true": "false" })`;
        case "screenshot":
          return `(\`${ truncate( params.name, 80 ) }\`)`;
        case "scroll":

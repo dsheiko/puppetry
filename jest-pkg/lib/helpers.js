@@ -27,7 +27,11 @@ const png = ( filePath, options = {} ) => {
        */
       cleanupScreenshotsDir = () => {
         const path = join( PATH_SCREENSHOTS, SUITE_NAME );
-        shell.rm( "-rf" , path );
+        try {
+          shell.rm( "-rf" , path );
+        } catch ( e ) {
+          // ignore
+        }
       },
       /**
        * @param {number} max

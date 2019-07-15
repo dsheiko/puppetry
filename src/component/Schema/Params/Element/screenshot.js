@@ -1,5 +1,5 @@
-import { INPUT, INPUT_NUMBER, CHECKBOX } from "../../constants";
-import { isEveryValueMissing, isSomeValueMissing, ruleValidateGenericString } from "service/utils";
+import { INPUT, CHECKBOX } from "../../constants";
+import { isEveryValueMissing, ruleValidateGenericString } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
 
 let counterCache = new Set(), counter = 0;
@@ -26,9 +26,9 @@ export const screenshot = {
           baseOptions = {
             omitBackground
           },
-          options = baseOptions;
+          options = baseOptions,
 
-    const optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
+          optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
     return `
       // Taking screenshot of ${ target } element
       await ( await ${ target }() ).screenshot( util.png( ${ parser.stringify( name ) }${ optArg }) );

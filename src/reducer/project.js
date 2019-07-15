@@ -17,7 +17,7 @@ export default handleActions(
     },
 
 
-    [ actions.resetProject ]: ( state, { payload } ) => {
+    [ actions.resetProject ]: ( state, { payload }) => {
       if ( !payload ) {
         return update( state, {
           $set: DEFAULT_STATE.project

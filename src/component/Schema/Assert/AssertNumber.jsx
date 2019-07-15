@@ -26,7 +26,7 @@ export class AssertNumber extends React.Component {
   render () {
     const { getFieldDecorator } = this.props.form,
           { record } = this.props,
-          operator = getAssertion( record ).operator || "gt",
+          operator = getAssertion( record ).operator || "eq",
           value = getAssertion( record ).value || 0;
     return (
       <Row gutter={24}>
@@ -49,9 +49,9 @@ export class AssertNumber extends React.Component {
                 required: true
               }]
             })( <Select >
+              <Option value="eq">=</Option>
               <Option value="gt">&gt;</Option>
               <Option value="lt">&lt;</Option>
-              <Option value="eq">=</Option>
             </Select> ) }
           </FormItem>
         </Col>

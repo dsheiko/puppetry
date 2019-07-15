@@ -1,6 +1,6 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
-import { AssertTrue } from "../../Assert/AssertTrue";
+import { AssertBoolean } from "../../Assert/AssertBoolean";
 
 export const assertContainsClass = {
   template: ( command ) => buildAssertionTpl(
@@ -12,7 +12,7 @@ export const assertContainsClass = {
       + `value exists in ${ command.target } class attribute`
   ),
   assert: {
-    node: AssertTrue
+    node: AssertBoolean
   },
   description: `Asserts that the specified class value exists in the [element's
  class attribute](https://developer.mozilla.org/en-US/docs/Web/API/Element).`,

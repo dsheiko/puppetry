@@ -50,6 +50,9 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
   try {
     dispatch( appActions.setApp({ loading: true }) );
     project = await readProject( projectDirectory );
+    if ( typeof project === "undefined" ) {
+      return {};
+    }
     ipcRenderer.send( E_PROJECT_LOADED, projectDirectory );
 
     directory && dispatch( settingsActions.saveSettings({ projectDirectory }) );
@@ -126,7 +129,7 @@ actions.saveProject = () => async ( dispatch, getState ) => {
 };
 
 
-actions.updateProject = ({ projectDirectory, name } = {}, reset = false) => async ( dispatch ) => {
+actions.updateProject = ({ projectDirectory, name } = {}, reset = false ) => async ( dispatch ) => {
   try {
     if ( !name ) {
       throw new InvalidArgumentError( "Empty project name" );

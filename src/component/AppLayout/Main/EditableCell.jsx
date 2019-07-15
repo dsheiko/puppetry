@@ -27,17 +27,17 @@ export class EditableCell extends React.Component {
 
   onKeyPress = ( e, record ) => {
     switch ( e.key ){
-      case "Enter":
-        this.props.onSubmit && this.props.onSubmit( record );
-        return;
+    case "Enter":
+      this.props.onSubmit && this.props.onSubmit( record );
+      return;
     }
   }
 
   onKeyDown = ( e, record ) => {
     switch ( e.key ) {
-      case "Escape":
-        this.props.updateRecord && this.props.updateRecord({ id: record.id, editing: false });
-        return;
+    case "Escape":
+      this.props.updateRecord && this.props.updateRecord({ id: record.id, editing: false });
+      return;
     }
   }
 

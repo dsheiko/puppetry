@@ -12,6 +12,7 @@ import { join } from "path";
 import { TestGeneratorError } from "error";
 import Convert from "ansi-to-html";
 import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
+import path from "path";
 
 const Panel = Collapse.Panel,
       convert = new Convert();
@@ -167,12 +168,19 @@ export class TestReport extends AbstractComponent {
   }
 
   getDetails( testResults ) {
+    // report.results.testResults
     return testResults.reduce( ( payload, entry ) => {
+      // testResultItem: { console, failureMessage, leaks, numFailingTests, numPassingTests, numPendingTests,
+      //  perfStats, skipped, snapshot, sourceMaps, testFilePath, testResults }
       const carry = entry.testResults.reduce( ( carry, test ) => {
-        const [ suite, describe ] = test.ancestorTitles;
-        carry[ suite ] = suite in carry ? carry[ suite ] : {};
-        carry[ suite ][ describe ] = describe in carry[ suite ] ? carry[ suite ][ describe ] : [];
-        carry[ suite ][ describe ].push({
+        // test: { ancestorTitles, duration, failureMessages, fullName, location, numPassingAsserts, status, title }
+        const [ suite, describe ] = test.ancestorTitles,
+              suiteId = `${ suite } (${ path.parse( entry.testFilePath ).base })`;
+
+        carry[ suiteId ] = suiteId in carry ? carry[ suiteId ] : {};
+        carry[ suiteId ][ describe ] = describe in carry[ suiteId ] ? carry[ suiteId ][ describe ] : [];
+        carry[ suiteId ][ describe ].push({
+          suite,
           duration: test.duration,
           failureMessages: this.normalizeFailureMessages( test.failureMessages ),
           location: test.location,

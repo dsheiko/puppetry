@@ -43,7 +43,7 @@ describe( "New Project", () => {
 
   test( "app lands on New Suite page", async () => {
     await ctx.client.click( `${ S.MODAL_NEW_PROJECT } ${ S.MODAL_OK_BTN }` );
-    await ctx.client.pause( 600 );
+    await ctx.client.pause( 1200 );
     expect( await ctx.client.isExisting( S.PANEL_SUITE_TABGROUP ) ).toBeTruthy();
     await ctx.screenshot( "newly-created-suite" );
   });

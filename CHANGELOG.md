@@ -6,6 +6,8 @@
 - fix: leave the editing mode (in a row) by pressing Esc
 - fix: when creating a new project, reset project object in the state, rather then merge
 - fix: target.assertPosition correctly asserts on bordering elements
+- fix: target.assertContainsClass can used to ensure target doesn't contain a class
+- fix: Test report of multiple suite with the same suite titles
 
 ### Features
 - improve UI: add target.screenshot
