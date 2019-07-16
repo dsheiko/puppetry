@@ -228,10 +228,11 @@ export class TestReportModal extends AbstractComponent {
                   Check all
               </Checkbox>
             </div>
-
-            <CheckboxGroup options={ files }
-              value={ checkedList }
-              onChange={ this.onChange } />
+            <div className={ files.length >= 8 ? "is-checkbox-group-scrollable" : ""}>
+              <CheckboxGroup options={ files }
+                value={ checkedList }
+                onChange={ this.onChange } />
+            </div>
 
           </If>
           <If exp={ !files.length }>

@@ -986,3 +986,9 @@ td:hover .editable-cell-icon {
   word-break: break-all;
   overflow-wrap: break-word;
 }
+
+.is-checkbox-group-scrollable .ant-checkbox-group {
+  height: calc(100vh - 467px);
+  width: 100%;
+  overflow-y: auto;
+}
