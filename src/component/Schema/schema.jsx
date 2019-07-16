@@ -54,57 +54,11 @@ import { assertTextCount as assertTextCountElement } from "./Params/Element/asse
 
 import { tplQuery, tplSuite, tplGroup, tplTest } from "./Jest";
 
-const methodLables = {
-  page: {
-    emulate: "emulate device",
-    setViewport: "set window size",
-    click: "click mouse",
-    moveMouse: "move mouse",
-    tapTouchscreen: "tap",
-    press: "press a key",
-    setCookie: "set page cookies",
-    screenshot: "make screenshot",
-    assertTitle: "assert page title",
-    assertUrl: "assert page URL",
-    assertContent: "assert page HTML",
-    waitFor: "wait for timeout",
-    waitForSelector: "wait for selector",
-    waitForNavigation: "wait for navigation",
-    assignVar: "set template variable dynamically",
-    assignVarRemotely: "set template variable with webhook",
-    assertNodeCount: "assert count of elements",
-    assertScroll: "assert window scroll offset",
-    assertVar: "assert template variable value",
-    evaluate: "evaluate JavaScript in the page context",
-    runjs: "run custom JavaScript in the suite",
-    debug: "stop execution and call DevTools"
-  },
-  element: {
-    upload: "attach a file to file input",
-    reset: "reset input or form",
-    toggleClass: "toggle class",
-    checkBox: "toggle checkbox/radio",
-    screenshot: "make screenshot",
-    setAttribute: "set attribute",
-    assertAttribute: "assert attribute",
-    assertProperty: "assert property",
-    assertVisible: "assert it is visible",
-    assertHtml: "assert HTML",
-    assertBoundingBox: "assert size/position",
-    assertPosition: "assert relative position",
-    assertStyle: "assert style",
-    assertMatchesSelector: "assert it matches selector",
-    assertNodeCount: "assert count of child elements",
-    assertTextCount: "assert count of elements with text",
-    assertContainsClass: "assert it contains class",
-    assertScroll: "assert scroll offset"
-  }
-};
-
 export function displayMethod( target, method ) {
-  return method in methodLables[ target ]
+  const mSchema = getSchema( target, method );
+  return mSchema.commonly
     ? ( <span className="method-title" data-keyword={ method }>{
-      methodLables[ target ][ method ] + " " } <i>({ method })</i></span> )
+      mSchema.commonly + " " } <i>({ method })</i></span> )
     : method;
 }
 

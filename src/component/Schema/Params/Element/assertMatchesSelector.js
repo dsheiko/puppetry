@@ -8,6 +8,10 @@ export const assertMatchesSelector = {
     command,
     `// Asserting that ${ command.target } matches "${ command.assert.value }" selector or pseudo-selector`
   ),
+
+  toLabel: ({ assert }) => `(\`${ assert.value }\`)`,
+  commonly: "assert it matches selector",
+
   assert: {
     node: AssertSelector
   },

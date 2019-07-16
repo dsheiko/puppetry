@@ -1,6 +1,7 @@
 import { INPUT, CHECKBOX } from "../../constants";
 import { isEveryValueMissing, ruleValidateGenericString } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
+import { truncate } from "service/utils";
 
 let counterCache = new Set(), counter = 0;
 /**
@@ -34,6 +35,11 @@ export const screenshot = {
       await ( await ${ target }() ).screenshot( util.png( ${ parser.stringify( name ) }${ optArg }) );
   `;
   },
+
+  toLabel: ({ params }) => `(\`${ truncate( params.name, 80 ) }\`)`,
+  toText: ({ params }) => `(\`${ params.name }\`)`,
+  commonly: "make screenshot",
+
   description: `Takes a screenshot of the target element.`,
 
   test: {

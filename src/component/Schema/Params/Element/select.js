@@ -1,10 +1,17 @@
 import { justify } from "service/assert";
 import { INPUT } from "../../constants";
+import { truncate } from "service/utils";
 
 export const select = {
   template: ({ params, targetSeletor }) => justify(
     `// Emulating select\n`
     + `await bs.page.select( "${ targetSeletor }", "${ params.value }" );` ),
+
+  toLabel: ({ params }) => `(\`${ truncate( params.value, 80 ) }\`)`,
+  toText: ({ params }) => `(\`${ params.value }\`)`,
+  commonly: "",
+
+
   description: `Sets value on select element`,
   params: [
     {

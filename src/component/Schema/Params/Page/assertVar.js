@@ -1,6 +1,7 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertValue } from "../../Assert/AssertValue";
 import { INPUT } from "../../constants";
+import { truncate } from "service/utils";
 
 export const assertVar = {
   template: ( command ) => buildAssertionTpl(
@@ -8,6 +9,11 @@ export const assertVar = {
     command,
     `// Asserting that variable associated with a given name satisfies the given constraint`
   ),
+
+  toLabel: ({ assert }) => `(${ assert.assertion } \`${ truncate( assert.value, 60 ) }\`)`,
+  toText: ({ assert }) => `(${ assert.assertion } \`${  assert.value, 60 }\`)`,
+  commonly: "assert template variable value",
+
   description: `Asserts that variable associated with a given name satisfies the given constraint`,
   assert: {
     node: AssertValue

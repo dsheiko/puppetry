@@ -22,19 +22,6 @@ import findLogPath from "electron-log/lib/transports/file/find-log-path";
 const PROJECT_FILE_NAME = ".puppetryrc",
       PROJECT_FALLBAK_NAME = ".puppertyrc",
       GIT_FILE_NAME = ".puppetrygit",
-      readFile = util.promisify( fs.readFile ),
-      //writeFile = util.promisify( fs.writeFile ),
-      writeFile = ( filename, data ) => new Promise( ( resolve, reject ) => {
-        writeFileAtomic( filename, data, ( err ) => {
-          if ( err ) {
-            return reject( err );
-          }
-          resolve();
-        });
-      }),
-      unlink = util.promisify( fs.unlink ),
-      readdir = util.promisify( fs.readdir ),
-      lstat = util.promisify( fs.lstat ),
       cache = {},
       EXPORT_ASSETS = [
         "specs",
@@ -43,8 +30,22 @@ const PROJECT_FILE_NAME = ".puppetryrc",
         "package.json",
         "README.md"
       ];
+export const readFile = util.promisify( fs.readFile );
+//writeFile = util.promisify( fs.writeFile ),
+export const writeFile = ( filename, data ) => new Promise( ( resolve, reject ) => {
+  writeFileAtomic( filename, data, ( err ) => {
+    if ( err ) {
+      return reject( err );
+    }
+    resolve();
+  });
+});
+export const unlink = util.promisify( fs.unlink );
+export const readdir = util.promisify( fs.readdir );
+export const lstat = util.promisify( fs.lstat );
 
 shell.config.fatal = true;
+
 
 function findCommandIdInCode( lines, pos ) {
   while ( pos >= 0 && !lines[ pos ].startsWith( COMMAND_ID_COMMENT ) ) {

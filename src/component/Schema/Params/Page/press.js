@@ -41,6 +41,18 @@ await bs.page.keyboard.press( "${ key }" );
 ${ renderModifiers( "up" ) }` );
   },
 
+  toLabel: ({ params }) => {
+    const text = [ params.modifierKey1,
+      params.modifierKey2,
+      params.modifierKey3,
+      params.key ]
+      .filter( key => Boolean( key ) )
+      .map( key => `${ key }` )
+      .join( "+" );
+    return `(${ text })`;
+  },
+  commonly: "press a key",
+
   description: `Emulates pressing on a key, optionally with modifiers such as ⇧, ⌥, alt, control, ⌘`,
 
   params: [

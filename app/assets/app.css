@@ -1001,7 +1001,7 @@ td:hover .editable-cell-icon {
 }
 
 .is-checkbox-group-scrollable-export .ant-checkbox-group {
-  height: calc(100vh - 367px);
+  height: calc(100vh - 614px);
   width: 100%;
   overflow-y: auto;
 }
@@ -1021,4 +1021,8 @@ td:hover .editable-cell-icon {
 .ant-layout-sider .project-navigator__nav::-webkit-scrollbar-thumb
 {
 	background: #0064c2;
+}
+
+.export-desc {
+  margin: 8px 0 16px 0;
 }

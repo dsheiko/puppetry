@@ -4,6 +4,18 @@ export const isEveryValueMissing = ( obj ) => Object.values( obj ).every( val =>
 export const isSomeValueMissing = ( obj ) => Object.values( obj ).some( val => typeof val === "undefined" );
 
 
+export const OPERATOR_MAP = {
+  gt: ">",
+  lt: "<",
+  eq: "="
+};
+
+export function renderClick( params, pref = "" ) {
+  const text = ( params.button ? `${ params.button  } button` : "" )
+   + `${ parseInt( params.clickCount, 10 ) === 2 ? ", double click" : "" }`;
+  return text ? pref + text : "";
+}
+
 export const ruleValidateVariable = ( rule, value, callback ) => {
   const reConst = /^[A-Z_\-0-9]+$/g;
   value = value.trim();

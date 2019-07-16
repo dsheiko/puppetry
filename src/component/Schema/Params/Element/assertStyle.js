@@ -1,6 +1,7 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
 import { AssertValue } from "../../Assert/AssertValue";
+import { truncate } from "service/utils";
 
 export const assertStyle = {
   template: ( command ) => buildAssertionTpl(
@@ -11,6 +12,17 @@ export const assertStyle = {
     `// Asserting that "${ command.params.name }" CSS property's `
       + `value of ${ command.target } satisfies the given constraint`
   ),
+
+  toLabel: ({ params, assert }) => {
+    return `(${ params.name + ( params.pseudo || "" ) } `
+          + `${ assert.assertion } \`${ truncate( assert.value, 60 ) }\`)`;
+  },
+  toText: ({ params, assert }) => {
+    return `(${ params.name + ( params.pseudo || "" ) } `
+          + `${ assert.assertion } \`${ assert.value }\`)`;
+  },
+  commonly: "assert style",
+
   assert: {
     node: AssertValue
   },

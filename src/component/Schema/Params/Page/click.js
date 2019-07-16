@@ -1,5 +1,6 @@
 import { INPUT_NUMBER, SELECT } from "../../constants";
 import { isEveryValueMissing } from "service/utils";
+import { renderClick } from "service/utils";
 
 export const click = {
   template: ({ params }) => {
@@ -12,6 +13,9 @@ export const click = {
       // Emulating mouse click at x=${ x }, y=${ y }
       await bs.page.mouse.click( ${ x }, ${ y }${ optArg });`;
   },
+
+  toLabel: ({ params }) => `(x: ${ params.x }, y: ${ params.y }${ renderClick( params, ", " ) })`,
+  commonly: "click mouse",
 
   description: `Emulates mouse click according to given options`,
 

@@ -10,6 +10,11 @@ await bs.page.evaluate(( x, y ) => {
   window.scrollBy( x, y );
 }, ${ parseInt( x, 10 ) }, ${ parseInt( y, 10 ) });` );
   },
+
+  toLabel: ({ params }) => `(x: ${ params.x }, y: ${ params.y })`,
+  commonly: "",
+
+
   description: `Scrolls the document in the window by the given amount`,
   params: [
     {

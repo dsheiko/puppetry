@@ -19,6 +19,11 @@ export const waitForNavigation = {
     `;
   },
 
+  toLabel: ({ params }) => {
+    return params.waitUntil ? `(\`${ params.waitUntil }\`)` : `(${ params.timeout }ms)`;
+  },
+  commonly: "wait for navigation",
+
   description: `Waits until a given event before proceeding to the next command`,
 
   params: [

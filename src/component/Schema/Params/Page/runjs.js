@@ -1,5 +1,6 @@
 import { TEXTAREA } from "../../constants";
 import { justify } from "service/assert";
+import { truncate } from "service/utils";
 
 export const runjs = {
   template: ({ params }) => {
@@ -9,6 +10,10 @@ export const runjs = {
 ${ value }
 ` );
   },
+
+  toLabel: ({ params }) => `(\`${ truncate( params.value, 80 ) }\`)`,
+  toText: ({ params }) => `(\`${ params.value }\`)`,
+  commonly: "run custom JavaScript in the suite",
 
   test: {
     "params": {

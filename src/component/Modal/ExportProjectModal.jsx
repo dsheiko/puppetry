@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Alert, Checkbox, Modal, Button, Select, message } from "antd";
+import { Alert, Checkbox, Modal, Button, Select, Icon, message } from "antd";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import { exportProject, isDirEmpty } from "service/io";
@@ -9,6 +9,8 @@ import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, RUNNER_JEST } from "constant";
 import If from "component/Global/If";
 import { TestGeneratorError } from "error";
 import { confirmExportProject } from "service/smalltalk";
+import JsonConvertor from "service/Export/JsonConvertor";
+import TextConvertor from "service/Export/TextConvertor";
 import * as classes from "./classes";
 import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
 import { SelectEnv } from "component/Global/SelectEnv";
@@ -42,7 +44,8 @@ export class ExportProjectModal  extends AbstractComponent {
     checkedList: [],
     indeterminate: true,
     checkAll: false,
-    modified: false
+    modified: false,
+    format: "jest"
   }
 
   onChange = ( checkedList ) => {
@@ -91,20 +94,42 @@ export class ExportProjectModal  extends AbstractComponent {
     // give it time to update component state, before processing
     setTimeout( async () => {
       const activeEnv = getActiveEnvironment( project.environments, environment );
+
       this.props.action.saveSettings({ exportDirectory: selectedDirectory });
       try {
-        await exportProject(
-          projectDirectory,
-          selectedDirectory,
-          checkedList,
-          { runner: RUNNER_JEST },
-          this.props.snippets,
-          {
+        let options, convertor;
+        switch ( this.state.format ) {
+        case "text":
+        case "json":
+          options = {
+            projectDirectory,
+            selectedDirectory,
+            checkedList,
+            project,
+            snippets: this.props.snippets,
             variables: getSelectedVariables( project.variables, activeEnv ),
-            environment
-          }
-        );
-        message.info( `Project exported in ${ selectedDirectory }` );
+            environment: activeEnv
+          };
+          convertor = this.state.format === "json" ? new JsonConvertor( options ) : new TextConvertor( options );
+          convertor.convert();
+          break;
+
+        default:
+          await exportProject(
+            projectDirectory,
+            selectedDirectory,
+            checkedList,
+            { runner: RUNNER_JEST },
+            this.props.snippets,
+            {
+              variables: getSelectedVariables( project.variables, activeEnv ),
+              environment: activeEnv
+            }
+          );
+          message.info( `Project exported in ${ selectedDirectory }` );
+          break;
+        }
+
         this.props.action.setApp({ exportProjectModal: false });
       } catch ( err ) {
         const message = err instanceof TestGeneratorError ? "Test parser error" : "Cannot export project";
@@ -148,8 +173,13 @@ export class ExportProjectModal  extends AbstractComponent {
     return true;
   }
 
+  onChangeFormat = ( format ) => {
+    this.setState({ format });
+  }
+
   render() {
     const { isVisible, files, currentSuite, project, environment, action } = this.props,
+          { format } = this.state,
           current = files.find( file => currentSuite === file ),
           checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
@@ -180,29 +210,43 @@ export class ExportProjectModal  extends AbstractComponent {
           ]}
         >
 
-          <Select
-          showSearch
-          style={{ width: 348 }}
-          placeholder="Select a environment"
-          optionFilterProp="children"
-          onChange={ () => {} }
-          defaultValue="jest"
-          filterOption={( input, option ) =>
-            option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0
-          }
-        >
-          <Option value="jest" key="jest">as CI</Option>
-          <Option value="text" key="text">as text</Option>
-          <Option value="json" key="json">as JSON</Option>
-        </Select>
+          <div className="select-group-inline">
+            <span className="select-group-inline__label">
+              <Icon type="file-unknown" title="Select an output format" />
+            </span>
+            <Select
+              showSearch
+              style={{ width: 348 }}
+              placeholder="Select an output format"
+              optionFilterProp="children"
+              onChange={ this.onChangeFormat }
+              defaultValue="jest"
+              filterOption={( input, option ) =>
+                option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0
+              }
+            >
+              <Option value="jest" key="jest">Jest.js project (CI-friendly)</Option>
+              <Option value="text" key="text">text scenarios</Option>
+              <Option value="json" key="json">JSON</Option>
+            </Select>
+          </div>
 
-          <p>
-        As you press &quot;Export&quot; Puppetry generates a
+          { format === "jest" && <p className="export-desc">
+            As you press &quot;Export&quot; Puppetry generates a
             { " " }<a onClick={ this.onExtClick } href="https://jestjs.io/">Jest project</a>{ " " }
-         in the provided location.
-        You just need to navigate into the directory,
-        install dependencies (<code>npm install</code>) and run the tests (<code>npm test</code>).
-          </p>
+             in the provided location.
+            You just need to navigate into the directory,
+            install dependencies (<code>npm install</code>) and run the tests (<code>npm test</code>).
+          </p> }
+
+          { format === "text" && <p className="export-desc">
+            By pressing &quot;Export&quot; Puppetry generates a text file with project contents
+            in human-readable form
+          </p> }
+
+          { format === "json" && <p className="export-desc">
+            By pressing &quot;Export&quot; Puppetry converts project in a single JSON file
+          </p> }
 
           <SelectEnv environments={ project.environments }
             environment={ environment } action={ action } />

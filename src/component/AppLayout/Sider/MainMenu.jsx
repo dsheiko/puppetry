@@ -309,7 +309,7 @@ export class MainMenu extends GitEnhancedMenu {
 
               <Menu.Item key="7" disabled={ !projectDirectory } id="cMainMenuExportProject"
                 onClick={ this.onExportProject }>
-                Export Project for CI... { " " }<kbd>{ ostr( "Ctrl-Shift-E" ) }</kbd></Menu.Item>
+                Export Project as... { " " }<kbd>{ ostr( "Ctrl-Shift-E" ) }</kbd></Menu.Item>
               <Menu.Item key="8">Exit</Menu.Item>
 
             </SubMenu>

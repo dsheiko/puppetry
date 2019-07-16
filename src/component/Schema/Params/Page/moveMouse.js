@@ -8,6 +8,9 @@ export const moveMouse = {
       await bs.page.mouse.move( ${ x }, ${ y } );`;
   },
 
+  toLabel: ({ params }) => `(x: ${ params.x }, y: ${ params.y })`,
+  commonly: "move mouse",
+
   description: `Moves mouse to given position`,
 
   params: [

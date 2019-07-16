@@ -5,6 +5,10 @@ export const waitFor = {
       // Waiting for ${params.value} ms
       await bs.page.waitFor( ${params.value} );
   `,
+
+  toLabel: ({ params }) => `(${ params.value }ms)`,
+  commonly: "wait for timeout",
+
   description: `Waits for a given time before proceeding to the next command`,
   params: [
     {

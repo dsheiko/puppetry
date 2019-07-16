@@ -13,6 +13,10 @@ export const reload = {
       await bs.page.reload(${optArg});
     `;
   },
+
+  toLabel: () => ``,
+  commonly: "",
+
   description: `Refreshes the page`,
   params: [
     {

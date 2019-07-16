@@ -11,6 +11,10 @@ await bs.page.$eval( '${ command.targetSeletor }',  ( el, x, y ) => {
   el.scrollLeft = y;
 }, ${ parseInt( x, 10 ) }, ${ parseInt( y, 10 ) } );` );
   },
+
+  toLabel: ({ params }) => `(h: ${ params.x }, v: ${ params.y })`,
+  commonly: "",
+
   description: `Sets the number of pixels that an element's content is scrolled horizontally/vertically.`,
   params: [
     {

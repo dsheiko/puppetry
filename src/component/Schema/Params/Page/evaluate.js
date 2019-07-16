@@ -1,5 +1,6 @@
 import { TEXTAREA } from "../../constants";
 import { justify } from "service/assert";
+import { truncate } from "service/utils";
 
 export const evaluate = {
   template: ({ params }) => {
@@ -10,6 +11,11 @@ await bs.page.evaluate(() => {
   ${ value }
 });` );
   },
+
+  toLabel: ({ params }) => `(\`${ truncate( params.value, 80 ) }\`)`,
+  toText: ({ params }) => `(\`${ params.value }\`)`,
+  commonly: "evaluate JavaScript in the page context",
+
 
   test: {
     "params": {

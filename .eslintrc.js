@@ -249,7 +249,8 @@ module.exports = {
              "fullpage",
              "scrollable",
              "baz'",
-             "failuries"
+             "failuries",
+             "desc"
            ],
            "skipIfMatch": [
                "https?://[^s]*",

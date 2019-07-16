@@ -7,6 +7,10 @@ export const assertVisible = {
     command,
     `// Asserting that ${ command.target } element is visible`
   ),
+
+  toLabel: ({ assert }) => `(${ assert.value ? "true" : "false" })`,
+  commonly: "assert it is visible",
+
   assert: {
     node: AssertBoolean
   },

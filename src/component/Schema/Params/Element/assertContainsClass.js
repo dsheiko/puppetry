@@ -11,6 +11,10 @@ export const assertContainsClass = {
     `// Asserting that "${ command.params.name }" CSS class `
       + `value exists in ${ command.target } class attribute`
   ),
+
+  toLabel: ({ params, assert }) => `(\`${ params.name }\`, ${ assert.value ? "true": "false" })`,
+  commonly: "assert it contains class",
+
   assert: {
     node: AssertBoolean
   },

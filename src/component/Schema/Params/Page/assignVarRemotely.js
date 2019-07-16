@@ -1,5 +1,6 @@
 import ExpressionParser from "service/ExpressionParser";
 import { INPUT, INPUT_NUMBER, TEXTAREA } from "../../constants";
+import { truncate } from "service/utils";
 
 export const assignVarRemotely = {
   template: ({ params, id }) => {
@@ -17,6 +18,11 @@ export const assignVarRemotely = {
         }
       });`;
   },
+
+  toLabel: ({ params }) => `(${ params.name }, \`${ truncate( params.url, 60 ) }\`)`,
+  toText: ({ params }) => `(${ params.name }, \`${  params.url }\`)`,
+  commonly: "set template variable with webhook",
+
   description: `Polls \`URL\` with a given intervals until a response satisfying \`parserFn\` function received
 or a specified timeout exceeded. It can be used, for example,
 to retrieve a value from an [email sent by the application under test](https://docs.puppetry.app/testing-emails)`,

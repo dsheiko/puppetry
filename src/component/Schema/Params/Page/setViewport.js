@@ -5,6 +5,11 @@ export const setViewport = {
       // Defining browser viewport
       await bs.page.setViewport( ${ JSON.stringify( params ) } );
   `,
+
+  toLabel: ({ params }) => `(${ params.width }, ${ params.height },`
+       + ` x${ params.deviceScaleFactor || 1 }${ params.isLandscape ? ", landscape" : "" })`,
+  commonly: "set window size",
+
   description: `Defines browser viewport, where the viewport is the user's visible area of a web page`,
   params: [
     {

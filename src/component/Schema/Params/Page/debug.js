@@ -8,6 +8,10 @@ await bs.page.evaluate(() => {
   debugger;
 });` );
   },
+
+  toLabel: () => ``,
+  commonly: "stop execution and call DevTools",
+
   description: `Stops execution of JavaScript, and calls (if available) the
 [debugging function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger).
 During test scenarios may happen many things - DOM changes, pages load. It makes hard to figure out why some test

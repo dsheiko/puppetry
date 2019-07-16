@@ -1,4 +1,5 @@
 import { justify } from "service/assert";
+
 export const reset = {
   template: ({ targetSeletor }) => justify(
     `// Reset the input or form\n`
@@ -11,6 +12,8 @@ export const reset = {
     el.value = "";
   }
 })` ),
+  toLabel: () => ``,
+  commonly: "reset input or form",
   description: `Resets the input or form element`,
   params: []
 };

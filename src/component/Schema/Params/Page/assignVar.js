@@ -1,5 +1,6 @@
 import ExpressionParser from "service/ExpressionParser";
 import { INPUT } from "../../constants";
+import { truncate } from "service/utils";
 
 export const assignVar = {
   template: ({ params, id }) => {
@@ -9,6 +10,11 @@ export const assignVar = {
       // Assign template variable dynamically
       ENV[ ${ JSON.stringify( params.name ) } ] = ${ value };`;
   },
+
+  toLabel: ({ params }) => `(${ params.name }, \`${ truncate( params.value, 60 ) }\`)`,
+  toText: ({ params }) => `(${ params.name }, \`${ params.value }\`)`,
+  commonly: "set template variable dynamically",
+
   description: `Assigns template variable dynamically`,
 
   params: [

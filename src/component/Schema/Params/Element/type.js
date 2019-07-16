@@ -1,6 +1,8 @@
 import { justify } from "service/assert";
 import { INPUT } from "../../constants";
 import ExpressionParser from "service/ExpressionParser";
+import { truncate } from "service/utils";
+
 export const type = {
   template: ({ target, params, id }) => {
     const parser = new ExpressionParser( id );
@@ -8,6 +10,11 @@ export const type = {
       `// Emulating user input\n`
     + `await ( await ${target}() ).type( ${ parser.stringify( params.value ) } );` );
   },
+
+  toLabel: ({ params }) => `(\`${ truncate( params.value, 80 ) }\`)`,
+  toText: ({ params }) => `(\`${ params.value }\`)`,
+  commonly: "",
+
   description: `Focuses the element, and then sends keyboard events for each character in the text`,
   params: [
     {

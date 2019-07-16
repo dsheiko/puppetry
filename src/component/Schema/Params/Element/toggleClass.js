@@ -7,6 +7,10 @@ export const toggleClass = {
     + `await bs.page.$eval( '${ command.targetSeletor }',
   ( el, className, toggle ) => el.classList.toggle( className, toggle ), `
     + `"${ command.params.name }", ${ command.params.toggle ? "true" : "false" } )` ),
+
+  toLabel: ({ params }) => `(${ params.toggle } \`${ params.name }\`)`,
+  commonly: "toggle class",
+
   description: `Toggles the specified class value (adds or removes)`,
   params: [
     {

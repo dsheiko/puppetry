@@ -1,6 +1,7 @@
 import { INPUT, INPUT_NUMBER, CHECKBOX } from "../../constants";
 import { isEveryValueMissing, isSomeValueMissing, ruleValidateGenericString } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
+import { truncate } from "service/utils";
 
 let counterCache = new Set(), counter = 0;
 /**
@@ -46,6 +47,12 @@ export const screenshot = {
       await bs.page.screenshot( util.png( ${ parser.stringify( name ) }${ optArg }) );
   `;
   },
+
+  toLabel: ({ params }) => `(\`${ truncate( params.name, 80 ) }\`)`,
+  toText: ({ params }) => `(\`${ params.name }\`)`,
+  commonly: "make screenshot",
+
+
   description: `Takes a screenshot of the page or a specified region.`,
 
   validate: ( values ) => {

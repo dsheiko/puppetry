@@ -1,6 +1,7 @@
 import { SELECT, INPUT, INPUT_NUMBER } from "../../constants";
 import { isEveryValueMissing } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
+import { truncate } from "service/utils";
 
 /**
  * @typedef {object} TemplatePayload
@@ -32,6 +33,10 @@ export const goto = {
   },
 
   description: "Navigates to a given URL and waits until the page loaded",
+
+  toLabel: ({ params }) => `(\`${ truncate( params.url, 80 ) }\`)`,
+  toText: ({ params }) => `(\`${ params.url }\`)`,
+  commonly: "load URL",
 
   test: {
     "params": {
