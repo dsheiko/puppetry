@@ -1,3 +1,8 @@
+# Puppetry 2.0.2
+
+### Bug fixes
+- fix: CSS in Project Explorer for the scrollbar when too many items
+
 # Puppetry 2.0.1
 
 ### Bug fixes

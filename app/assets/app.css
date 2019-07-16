@@ -381,13 +381,15 @@ root > .ant-spin > * {
   transition: opacity 300ms ease-in-out;
   will-change: opacity;
   color: rgba(255, 255, 255, 0.65);
-  display: flex;
-  flex-flow: column nowrap;
+  /*display: flex;
+  flex-flow: column nowrap;*/
 }
 .project-navigator__nav {
-  flex: 1 1 auto;
+  /*flex: 1 1 auto;*/
   padding: 8px 0;
   max-width: 250px;
+  height: calc(100vh - 364px);
+  overflow-y: auto;
 }
 
 .project-navigator__selection {
