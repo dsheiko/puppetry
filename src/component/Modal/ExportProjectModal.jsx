@@ -207,7 +207,7 @@ export class ExportProjectModal  extends AbstractComponent {
               </Checkbox>
             </div>
 
-            <div className={ files.length >= 8 ? "is-checkbox-group-scrollable" : ""}>
+            <div className={ files.length >= 8 ? "is-checkbox-group-scrollable-export" : ""}>
               <CheckboxGroup options={ files }
                 value={ checkedList }
                 onChange={ this.onChange } />

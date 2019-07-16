@@ -386,10 +386,17 @@ root > .ant-spin > * {
 }
 .project-navigator__nav {
   /*flex: 1 1 auto;*/
-  padding: 8px 0;
+  padding: 0;
   max-width: 250px;
   height: calc(100vh - 364px);
   overflow-y: auto;
+}
+
+.project-navigator__nav:first-child {
+  padding-top: 8px;
+}
+.project-navigator__nav:last-child {
+  padding-bottom: 8px;
 }
 
 .project-navigator__selection {
@@ -991,4 +998,27 @@ td:hover .editable-cell-icon {
   height: calc(100vh - 467px);
   width: 100%;
   overflow-y: auto;
+}
+
+.is-checkbox-group-scrollable-export .ant-checkbox-group {
+  height: calc(100vh - 367px);
+  width: 100%;
+  overflow-y: auto;
+}
+
+.ant-layout-sider .project-navigator__nav::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #c5e3ff;
+}
+
+.ant-layout-sider .project-navigator__nav::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #001529;
+}
+
+.ant-layout-sider .project-navigator__nav::-webkit-scrollbar-thumb
+{
+	background: #0064c2;
 }
