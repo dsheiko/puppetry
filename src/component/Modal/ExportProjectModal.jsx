@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Alert, Checkbox, Modal, Button, message } from "antd";
+import { Alert, Checkbox, Modal, Button, Select, message } from "antd";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import { exportProject, isDirEmpty } from "service/io";
@@ -13,7 +13,8 @@ import * as classes from "./classes";
 import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
 import { SelectEnv } from "component/Global/SelectEnv";
 
-const CheckboxGroup = Checkbox.Group;
+const CheckboxGroup = Checkbox.Group,
+      { Option } = Select;
 
 export class ExportProjectModal  extends AbstractComponent {
 
@@ -178,6 +179,23 @@ export class ExportProjectModal  extends AbstractComponent {
             </Button> )
           ]}
         >
+
+          <Select
+          showSearch
+          style={{ width: 348 }}
+          placeholder="Select a environment"
+          optionFilterProp="children"
+          onChange={ () => {} }
+          defaultValue="jest"
+          filterOption={( input, option ) =>
+            option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0
+          }
+        >
+          <Option value="jest" key="jest">as CI</Option>
+          <Option value="text" key="text">as text</Option>
+          <Option value="json" key="json">as JSON</Option>
+        </Select>
+
           <p>
         As you press &quot;Export&quot; Puppetry generates a
             { " " }<a onClick={ this.onExtClick } href="https://jestjs.io/">Jest project</a>{ " " }

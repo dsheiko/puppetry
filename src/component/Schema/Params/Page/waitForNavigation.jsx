@@ -11,7 +11,11 @@ export const waitForNavigation = {
           optArg = isEveryValueMissing( options ) ? `` : ` ${ JSON.stringify( options ) } `;
     return `
       // Waiting for the given event
-      await bs.page.waitForNavigation(${optArg});
+      try {
+        await bs.page.waitForNavigation(${optArg});
+      } catch ( e ) {
+        // if timeout, try to proceed anyways
+      }
     `;
   },
 
