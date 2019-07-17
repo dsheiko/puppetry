@@ -12,7 +12,7 @@ import { confirmExportProject } from "service/smalltalk";
 import JsonConvertor from "service/Export/JsonConvertor";
 import TextConvertor from "service/Export/TextConvertor";
 import * as classes from "./classes";
-import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
+import { getSnippets, getSelectedVariables, getActiveEnvironment } from "selector/selectors";
 import { SelectEnv } from "component/Global/SelectEnv";
 
 const CheckboxGroup = Checkbox.Group,
@@ -106,7 +106,7 @@ export class ExportProjectModal  extends AbstractComponent {
             selectedDirectory,
             checkedList,
             project,
-            snippets: this.props.snippets,
+            snippets: getSnippets( this.props.snippets ),
             variables: getSelectedVariables( project.variables, activeEnv ),
             environment: activeEnv
           };
@@ -226,7 +226,7 @@ export class ExportProjectModal  extends AbstractComponent {
               }
             >
               <Option value="jest" key="jest">Jest.js project (CI-friendly)</Option>
-              <Option value="text" key="text">text scenarios</Option>
+              <Option value="text" key="text">printable text</Option>
               <Option value="json" key="json">JSON</Option>
             </Select>
           </div>

@@ -16,28 +16,52 @@ export default class JsonConvertor {
     }) );
   }
 
-  static groupsToJSON( groups ) {
-    return Object.values( groups ).map( item => ({
-      title: item.title,
-      tests: Object.values( item.tests ).map( test => ({
-        title: test.title,
-        commands: Object.values( test.commands ).map( command => ({
-          target: command.target,
-          method: command.method,
-          params: command.params,
-          assert: command.assert,
-          ref: command.ref,
-          variables: command.variables
-        }) )
-      }) )
-    }) );
+  static commandToJson( command ) {
+    return ({
+        target: command.target,
+        method: command.method,
+        params: command.params,
+        assert: command.assert
+      });
   }
 
-  convertSnippets() {
-    this.output.snippets = {
-      targets: JsonConvertor.targetsToJSON( this.input.snippets.targets ),
-      groups: JsonConvertor.groupsToJSON( this.input.snippets.groups )
+  static snippetCommandsToJson = ( test ) => Object.values( test.commands )
+    .filter( command => !command.disabled )
+    .map( command => {
+      return JsonConvertor.commandToJson( command );  })
+
+  testToJson = ( test ) => {
+    let variables = {};
+    const commands = Object.values( test.commands )
+      .filter( command => !command.disabled )
+      .reduce(( carry, command ) => {
+        if ( command.isRef ) {
+          if ( !( command.ref in this.input.snippets ) ) {
+            return carry;
+          }
+          variables = command.variables;
+          const commands = JsonConvertor.snippetCommandsToJson( this.input.snippets[ command.ref ] );
+          return carry.concat( commands );
+        }
+        carry.push( JsonConvertor.commandToJson( command ) );
+        return carry;
+      }, []);
+    return {
+      title: test.title,
+      variables,
+      commands
     };
+  }
+
+  groupsToJSON = ( groups ) => {
+    return Object.values( groups )
+      .filter( item => !item.disabled )
+      .map( item => ({
+        title: item.title,
+        tests: Object.values( item.tests )
+          .filter( test => !test.disabled )
+          .map( this.testToJson )
+      }) );
   }
 
   convertSuite( suite ) {
@@ -46,7 +70,7 @@ export default class JsonConvertor {
       timeout: suite.timeout,
       filename: suite.filename,
       targets: JsonConvertor.targetsToJSON( suite.targets ),
-      groups: JsonConvertor.groupsToJSON( suite.groups )
+      groups: this.groupsToJSON( suite.groups )
     });
   }
 
@@ -58,7 +82,7 @@ export default class JsonConvertor {
       environment: this.input.environment,
       variables: this.input.variables
     };
-    this.convertSnippets();
+
     this.output.suites = [];
     for ( const file of this.input.checkedList ) {
       const json = JSON.parse( await readFile( join( this.input.projectDirectory, file ), "utf8" ) );

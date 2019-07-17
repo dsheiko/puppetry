@@ -1,77 +1,106 @@
 import { join } from "path";
 import { message } from "antd";
 import { writeFile, readFile } from "../io";
-
 import { getSchema } from "component/Schema/schema";
+
+const INDENT = "   ";
 
 export default class TextConvertor {
 
   constructor( input ) {
     this.input = input;
-    this.output = {};
+    this.output = "";
   }
 
-  static targetsToJSON( targets ) {
-    return Object.values( targets ).map( item => ({
-      target: item.target,
-      selector: item.selector
-    }) );
+  printLocalVariables = ( variables ) => {
+    this.print( `local variables:`, 3 );
+    Object.entries( variables ).forEach( pair => {
+      this.print( `${ pair[ 0 ] } = ${ pair[ 1 ] }`, 4 );
+    });
   }
 
-  static groupsToJSON( groups ) {
-    return Object.values( groups ).map( item => ({
-      title: item.title,
-      tests: Object.values( item.tests ).map( test => ({
-        title: test.title,
-        commands: Object.values( test.commands ).map( command => ({
-          target: command.target,
-          method: command.method,
-          params: command.params,
-          assert: command.assert,
-          ref: command.ref,
-          variables: command.variables
-        }) )
-      }) )
-    }) );
+  printTest = ( test, variables = {} ) => {
+    if ( test.groupId !== "snippets" ) {
+      this.print( `\n` );
+      this.print( `test: ${ test.title }`, 2 );
+    }
+
+    if ( variables && Object.keys( variables ).length ) {
+      this.printLocalVariables( variables );
+    }
+
+    Object.values( test.commands )
+      .filter( command => !command.disabled )
+      .forEach( command => {
+        if ( command.isRef ) {
+          if ( !( command.ref in this.input.snippets ) ) {
+            return ;
+          }
+          return this.printTest( this.input.snippets[ command.ref ], command.variables );
+        }
+        return this.printCommand( command );
+      });
+
+
+
   }
 
-  convertSnippets() {
-    this.output.snippets = {
-      targets: JsonConvertor.targetsToJSON( this.input.snippets.targets ),
-      groups: JsonConvertor.groupsToJSON( this.input.snippets.groups )
-    };
+  printCommand = ( command ) => {
+    const schema = getSchema( command.target, command.method ),
+          toText = typeof schema.toText === "function" ? schema.toText : schema.toLabel;
+    this.print( `${ command.target }.${ command.method }`
+    + `${ toText( command ) }`, 3 );
   }
 
   convertSuite( suite ) {
-    this.output.suites.push({
-      title: suite.title,
-      timeout: suite.timeout,
-      filename: suite.filename,
-      targets: JsonConvertor.targetsToJSON( suite.targets ),
-      groups: JsonConvertor.groupsToJSON( suite.groups )
+
+    this.print( `\n${ suite.title }` );
+    this.print( `filename: ${ suite.filename }`, 1 );
+    this.print( `timeout: ${ suite.timeout }\n`, 1 );
+
+    this.print( `targets:`, 1 );
+
+    const targets = { ...this.input.snippets.targets, ...suite.targets };
+    Object.values( targets ).forEach( item => {
+      this.print( `${ item.target } = ${ item.selector }`, 2 );
+    });
+
+    this.print( `\n` );
+
+    Object.values( suite.groups )
+      .filter( group => !group.disabled )
+      .forEach( group => {
+        this.print( `describe: ${ group.title }`, 1 );
+        Object.values( group.tests )
+          .filter( test => !test.disabled )
+          .forEach( this.printTest );
+      });
+  }
+
+  print( text, level = 0 ) {
+    const indentStr = INDENT.repeat( level );
+    text.split( "\n" ).forEach( chunk => {
+      this.output += indentStr + chunk + "\n";
     });
   }
 
   async convert() {
-    this.output = {
-      apiVersion: "1.0.0",
-      puppetryVersion: this.input.project.puppetry,
-      project: this.input.project.name,
-      environment: this.input.environment,
-      variables: this.input.variables
-    };
 
-    const s = getSchema( "page", "goto" );
-    console.log( s.toText({ params: { url: "google.com" }}) );
-    //    this.convertSnippets();
-    //    this.output.suites = [];
-    //    for ( const file of this.input.checkedList ) {
-    //      const json = JSON.parse( await readFile( join( this.input.projectDirectory, file ), "utf8" ) );
-    //      this.convertSuite( json );
-    //    }
-    //    const outputFile = join( this.input.selectedDirectory, "puppetry-export.json" );
-    //    await writeFile( outputFile, JSON.stringify( this.output, null, 2 ) );
-    //    message.info( `Project exported as ${ outputFile }` );
+    this.print( this.input.project.name );
+    this.print( `environment: ${ this.input.environment }\n`);
+    this.print( `template variables:`);
+    Object.entries( this.input.variables ).forEach( pair => {
+      this.print( `${ pair[ 0 ] } = ${ pair[ 1 ] }`, 1 );
+    });
+
+    for ( const file of this.input.checkedList ) {
+      const json = JSON.parse( await readFile( join( this.input.projectDirectory, file ), "utf8" ) );
+      this.convertSuite( json );
+    }
+
+    const outputFile = join( this.input.selectedDirectory, "puppetry-export.txt" );
+    await writeFile( outputFile, this.output );
+    message.info( `Project exported as ${ outputFile }` );
 
   }
 
