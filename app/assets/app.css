@@ -1009,16 +1009,18 @@ td:hover .editable-cell-icon {
 .ant-layout-sider .project-navigator__nav::-webkit-scrollbar-track
 {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	background-color: #c5e3ff;
+	background-color: #d8e1e9;
 }
 
 .ant-layout-sider .project-navigator__nav::-webkit-scrollbar
 {
 	width: 12px;
-	background-color: #001529;
+	background-color: #d8e1e9;
 }
 
 .ant-layout-sider .project-navigator__nav::-webkit-scrollbar-thumb
 {
-	background: #0064c2;
+	background: #879fb6;
+  width: 10px;
+  border: 1px solid #bdc4cb;
 }
