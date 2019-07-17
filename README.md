@@ -60,7 +60,7 @@ Current only the following OS are supported:
 - get acquainted with guides
   - [the great document](https://github.com/firstcontributions/first-contributions) about first contributions
   - [Dev-Notes](https://github.com/dsheiko/puppetry/wiki/Dev-Notes), e.g. on how to add a browser method/assertion
-- examine the [Backlog](https://github.com/dsheiko/puppetry/wiki/Backlog), suggest new features
+- examine the [Backlog](https://github.com/dsheiko/puppetry/projects), suggest new features
 - look into existing Issues, come up with a fix (`master` branch)
 - implement new features (`dev` branch)
 
