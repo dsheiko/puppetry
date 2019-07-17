@@ -225,7 +225,7 @@ export class ExportProjectModal  extends AbstractComponent {
                 option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0
               }
             >
-              <Option value="jest" key="jest">Jest.js project (CI-friendly)</Option>
+              <Option value="jest" key="jest">Jest/Puppeteer project (CI-friendly)</Option>
               <Option value="text" key="text">printable text</Option>
               <Option value="json" key="json">JSON</Option>
             </Select>

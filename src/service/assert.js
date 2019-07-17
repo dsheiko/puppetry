@@ -1,4 +1,5 @@
 import { RuntimeError } from "error";
+import ExpressionParser from "service/ExpressionParser";
 
 export function buildAssertionTpl( commandCall, command, comment ) {
   try {
@@ -19,9 +20,17 @@ export function justify( text ) {
   return ( "\n" + text ).split( "\n" ).map( line => "      " + line ).join( "\n" );
 }
 
-function createCbBody({ assert, target, method }) {
+function parseTpl( value, id ) {
+  const parser = new ExpressionParser( id );
+  return parser.stringify( value );
+}
+
+function createCbBody({ assert, target, method, id }) {
   const { assertion, value, operator, position, ...options } = assert,
         source = `${ target }.${ method }`;
+
+
+
   switch ( assertion ) {
   case "selector":
     return justify( `expect( result ).toBeOk( "${ source }" );` );
@@ -30,8 +39,14 @@ function createCbBody({ assert, target, method }) {
   case "number":
     return justify( `expect( result ).toPassCondition( "${ operator }", ${ value }, "${ source }" );` );
   case "contains":
+    if ( typeof options.type !== "undefined" && options.type === "string" ) {
+      return justify( `expect( result ).toIncludeSubstring( ${ parseTpl( value, id ) }, "${ source }" );` );
+    }
     return justify( `expect( result ).toIncludeSubstring( "${ value }", "${ source }" );` );
   case "equals":
+    if ( typeof options.type !== "undefined" && options.type === "string" ) {
+      return justify( `expect( result ).toBeEqual( ${ parseTpl( value, id ) }, "${ source }" );` );
+    }
     return justify( `expect( result ).toBeEqual( ${ JSON.stringify( value ) }, "${ source }" );` );
   case "position":
     return justify( `expect( result ).toMatchPosition`

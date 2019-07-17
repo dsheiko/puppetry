@@ -1,7 +1,12 @@
-# Puppetry 2.0.2
+# Puppetry 2.1.0
 
 ### Bug fixes
 - fix: CSS in Project Explorer for the scrollbar when too many items
+
+### Features
+- improvement: add export format: printable test
+- improvement: add export format: JSON
+- improvement: add template expressions htmlOf, attributeOf, propertyOf
 
 # Puppetry 2.0.1
 

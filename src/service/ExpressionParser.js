@@ -31,6 +31,15 @@ class Parsers {
     return `util.exp.iterate( ${ jstr( json  ) }, ${ jstr( this.commandId ) } )`;
   };
 
+  // {{ htmlOf("FOO") }}
+  htmlOf = ([ target ]) => `await bs.target( await ${ target }() ).getProp( "innerHTML" )`;
+
+  // {{ attributeOf("FOO", "href") }}
+  attributeOf = ([ target, attr ]) => `await bs.target( await ${ target }() ).getAttr( ${ JSON.stringify( attr ) } )`;
+
+  // {{ propertyOf("FOO", "checked") }}
+  propertyOf = ([ target, prop ]) => `await bs.target( await ${ target }() ).getProp( ${ JSON.stringify( prop ) } )`;
+
   // {{ env("SECRET") }}
   env = ([ key ]) => `process.env.${ key }`;
 

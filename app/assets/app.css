@@ -1028,3 +1028,8 @@ td:hover .editable-cell-icon {
 .export-desc {
   margin: 8px 0 16px 0;
 }
+
+.under-field-decription {
+  margin-top: -24px;
+  margin-bottom: -2px;
+}

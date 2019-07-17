@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import { Form,  Row, Col, Select, Input, InputNumber, Checkbox } from "antd";
 import If from "component/Global/If";
 import { getAssertion } from "./helpers";
+import AbstractComponent from "component/AbstractComponent";
 
 const Option = Select.Option,
       FormItem = Form.Item;
 
-export class AssertValue extends React.Component {
+export class AssertValue extends AbstractComponent {
 
   state = {
     assertion: "",
@@ -86,6 +87,10 @@ export class AssertValue extends React.Component {
                 <Input />
               ) }
             </FormItem>
+            { type === "string" && <div className="under-field-decription">You can use
+              { "" } <a onClick={ this.onExtClick } href="https://docs.puppetry.app/template">
+              template expressions</a>
+            </div> }
           </Col>
         </If>
 
@@ -109,6 +114,10 @@ export class AssertValue extends React.Component {
                   this.renderValueInput( type )
                 ) }
               </FormItem>
+              { type === "string" && <div className="under-field-decription">You can use
+                { "" } <a onClick={ this.onExtClick } href="https://docs.puppetry.app/template">
+                template expressions</a>
+            </div> }
             </If>
           </Col>
         </If>
