@@ -63,7 +63,10 @@ export default class AbstractEditableTable extends AbstractDnDTable {
   onSubmit = async ( record ) => {
     try {
       const id = record.id,
-            res = await Promise.all( Object.entries( this.fieldRefs[ id ]).map( ([ key, ref ]) => {
+            res = await Promise.all(
+              Object.entries( this.fieldRefs[ id ])
+                .filter( ( pair ) => pair[ 1 ].current !== null )
+                .map( ([ key, ref ]) => {
               return new Promise( ( resolve, reject ) => {
                 ref.current.validateFields([ key ], ( err, values ) => {
                   if ( err ) {

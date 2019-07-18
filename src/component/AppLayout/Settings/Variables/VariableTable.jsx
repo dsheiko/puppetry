@@ -42,8 +42,9 @@ export class VariableTable extends AbstractEditableTable {
         width: "calc(70% - 160px)",
         render: ( text, record ) => {
           const ref = this.registerRef( record.id, "value" ),
-                refHidden = this.registerRef( record.id, "hidden" ),
+                refHidden = record.adding ? this.registerRef( record.id, "hidden" ) : React.createRef(),
                 type = this.determineType( record );
+
           return (<span>
             <EditableCell
               ref={ ref }
@@ -56,17 +57,17 @@ export class VariableTable extends AbstractEditableTable {
               model={ this.model }
               updateRecord={ this.updateRecord }
             />
-            <EditableCheckbox
-              ref={ refHidden }
-              record={ record }
-              onSubmit={ this.onSubmit }
-              liftStateUp={ this.liftStateUp }
-              dataIndex="hidden"
-              className="input--selector"
-              placeholder="hidden"
-              model={ this.model }
-              updateRecord={ this.updateRecord }
-            />
+            { record.adding && <EditableCheckbox
+                ref={ refHidden }
+                record={ record }
+                onSubmit={ this.onSubmit }
+                liftStateUp={ this.liftStateUp }
+                dataIndex="hidden"
+                className="input--selector"
+                placeholder="hidden"
+                model={ this.model }
+                updateRecord={ this.updateRecord }
+              /> }
             </span>
           );
         }
