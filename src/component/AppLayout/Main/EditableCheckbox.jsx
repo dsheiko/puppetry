@@ -38,6 +38,7 @@ export class EditableCheckbox extends AbstractComponent {
           { getFieldDecorator } = this.props.form,
           { editing } = record,
           value = this.props.record[ dataIndex ];
+
     return (
       <div className="editable-cell">
         {
@@ -45,7 +46,7 @@ export class EditableCheckbox extends AbstractComponent {
             <Form className="cell-form">
              <FormItem>
                 { getFieldDecorator( dataIndex, {
-                  initialValue: false,
+                  initialValue: value,
                   valuePropName: ( value ? "checked" : "data-ok" )
                 })(
                   <Checkbox
