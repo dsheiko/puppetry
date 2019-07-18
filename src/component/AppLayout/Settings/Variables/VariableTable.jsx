@@ -2,6 +2,7 @@ import React from "react";
 import { Table  } from "antd";
 import AbstractEditableTable from "component/AppLayout/Main/AbstractEditableTable";
 import { EditableCell } from "component/AppLayout/Main/EditableCell";
+import { EditableCheckbox } from "component/AppLayout/Main/EditableCheckbox";
 import { connectDnD } from "component/AppLayout/Main/DragableRow";
 import ErrorBoundary from "component/ErrorBoundary";
 
@@ -12,6 +13,8 @@ export class VariableTable extends AbstractEditableTable {
 
   constructor( props ) {
     super( props );
+
+    this.state = { ...this.state, hide: {} };
 
     this.columns = [
       {
@@ -38,25 +41,55 @@ export class VariableTable extends AbstractEditableTable {
         dataIndex: "value",
         width: "calc(70% - 160px)",
         render: ( text, record ) => {
-          const ref = this.registerRef( record.id, "value" );
-          return (
+          const ref = this.registerRef( record.id, "value" ),
+                refHidden = this.registerRef( record.id, "hidden" ),
+                type = this.determineType( record );
+          return (<span>
             <EditableCell
               ref={ ref }
+              type={ type }
               record={ record }
               onSubmit={ this.onSubmit }
               dataIndex="value"
               className="input--selector"
               placeholder="Enter value"
-              liftFormStateUp={ this.liftFormStateUp }
               model={ this.model }
               updateRecord={ this.updateRecord }
             />
+            <EditableCheckbox
+              ref={ refHidden }
+              record={ record }
+              onSubmit={ this.onSubmit }
+              liftStateUp={ this.liftStateUp }
+              dataIndex="hidden"
+              className="input--selector"
+              placeholder="hidden"
+              model={ this.model }
+              updateRecord={ this.updateRecord }
+            />
+            </span>
           );
         }
       },
       this.getActionColumn()
     ];
 
+  }
+
+  determineType = ( record ) => {
+    if ( this.state.hide.id && this.state.hide.id === record.id ) {
+      return this.state.hide.hidden ? "password" : "text";
+    }
+    return record.hidden ? "password" : "text";
+  }
+
+  liftStateUp = ({ record, hidden }) => {
+    this.setState({
+      hide: {
+        id: record.id,
+        hidden
+      }
+    });
   }
 
   onRowClassName = ( record ) => {
@@ -76,11 +109,14 @@ export class VariableTable extends AbstractEditableTable {
     return options;
   }
 
-  fields = [ "name", "value" ];
+  fields = [ "name", "value", "hidden" ];
 
   model = "Variable";
 
-  shouldComponentUpdate( nextProps ) {
+  shouldComponentUpdate( nextProps, nextState ) {
+    if ( this.state.hide !== nextState.hide ) {
+      return true;
+    }
     if ( this.props.variables !== nextProps.variables ) {
       return true;
     }
@@ -99,7 +135,6 @@ export class VariableTable extends AbstractEditableTable {
 
   render() {
     const data = this.props.variables;
-
     return (
       <div className="box-margin-vertical">
         <ErrorBoundary>

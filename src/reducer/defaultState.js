@@ -184,5 +184,6 @@ export const variableDefaultState = ( id ) => ({
   value: "",
   env: "",
   disabled: false,
-  adding: false
+  adding: false,
+  hidden: false
 });

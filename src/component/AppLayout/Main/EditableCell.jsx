@@ -17,6 +17,7 @@ export class EditableCell extends React.Component {
     updateRecord: PropTypes.func.isRequired,
     prefixIcon: PropTypes.any,
     model: PropTypes.string,
+    type: PropTypes.string,
     form: PropTypes.any
   }
 
@@ -41,10 +42,18 @@ export class EditableCell extends React.Component {
     }
   }
 
+  normalizeValue( value, type ) {
+    if ( !value ) {
+      return "";
+    }
+    return type === "password" ? value.replace( /./g, "*" ) : value;
+  }
+
   render() {
-    const { placeholder, dataIndex, record, prefixIcon, className } = this.props,
+    const { placeholder, dataIndex, record, prefixIcon, className, type } = this.props,
           { getFieldDecorator } = this.props.form,
           { editing } = record,
+          inputOtherProps = type ? { type } : {},
           value = this.props.record[ dataIndex ];
 
     return (
@@ -52,9 +61,7 @@ export class EditableCell extends React.Component {
         {
           editing ? (
             <Form className="cell-form">
-              <FormItem
-              >
-
+              <FormItem>
                 { getFieldDecorator( dataIndex, {
                   initialValue: value,
                   rules: [
@@ -69,6 +76,7 @@ export class EditableCell extends React.Component {
                   ]
                 })(
                   <Input
+                    { ...inputOtherProps }
                     prefix={ prefixIcon || null }
                     className={ className || null }
                     onKeyPress={ ( e ) => this.onKeyPress( e, record ) }
@@ -83,7 +91,7 @@ export class EditableCell extends React.Component {
           ) : (
             <div className="container--editable-cell">
               { prefixIcon || null }
-              { value || " " }
+              { this.normalizeValue( value, type ) }
             </div>
           )
         }

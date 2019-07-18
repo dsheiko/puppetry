@@ -1033,3 +1033,12 @@ td:hover .editable-cell-icon {
   margin-top: -24px;
   margin-bottom: -2px;
 }
+
+/* variables have many editable fields stacked vertically, so we need to align by first line */
+.ant-table-row.model--variable > td {
+  vertical-align: top;
+}
+
+.ant-table-row.model--variable > td .table-actions {
+  margin-top: 8px;
+}

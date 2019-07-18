@@ -31,7 +31,6 @@ export class TargetTable extends AbstractEditableTable {
             dataIndex="target"
             className="input--target"
             placeholder="Enter target name"
-            liftFormStateUp={ this.liftFormStateUp }
             model={ this.model }
             updateRecord={ this.updateRecord }
           />
@@ -51,7 +50,6 @@ export class TargetTable extends AbstractEditableTable {
             dataIndex="selector"
             className="input--selector"
             placeholder="Enter CSS selector or xPath"
-            liftFormStateUp={ this.liftFormStateUp }
             model={ this.model }
             updateRecord={ this.updateRecord }
           />
