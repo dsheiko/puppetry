@@ -13,7 +13,7 @@
 
 <h3 align="center">CODELESS END-TO-END AUTOMATED TESTING</h3>
 
-Puppetry is an open-source desktop application that gives non-developers the ability to create, manage, and integrate automated tests for Web
+Puppetry is an open-source cross-platform desktop application that gives non-developers the ability to create, manage, and integrate automated tests for Web
 
 ![Puppetry 2](https://github.com/dsheiko/puppetry/blob/master/docs/assets/img/puppetry-welcome.png)
 
@@ -32,17 +32,14 @@ Puppetry is an open-source desktop application that gives non-developers the abi
 - [Testing flows with transactional emails](https://docs.puppetry.app/testing-emails)
 
 # Welcome Puppetry
-E2E testing for the Web in a nutshell is about locating a target, applying a browser method on it,
-asserting the new page (DOM) state. Where target can be either a [HTML element](https://en.wikipedia.org/wiki/HTML_element)
-or the entire page. Page methods can be such as "goto to a URL", "make a screenshot".
-For an element - `click`, `focus`, `type a text` and so on. As for assertions we can check for example that element's property
-or attribute has a specified value, or element's position and size match the provided criteria.
-
 Puppetry offers you an easy-to-use UI where you choose browser methods and assertions from a predefined list, with predefined settings, guided by extensive tips.
 Namely you can do the following:
-- to declare element targets as pairs `variable = locator`, where locator can be either CSS selector or Xpath. When using Chrome DevTool you just right-click on a target element and copy selector or XPath
-- to manage your test structure in BDD style ( project, suite, test group, test )
-- to manage browser methods and assertions
+- record user flow
+- declare element targets as pairs `variable = locator`, where locator can be either CSS selector or Xpath. 
+- manage your test structure in BDD style (project, suite, test context, test case)
+- manage page/element methods and assertions
+- run the tests
+- export the project as Jest/Puppeteer bundle ready to run in CLI (e.g. by a continuous integration server)
 
 ## Download
 
@@ -54,13 +51,17 @@ Current only the following OS are supported:
 -   Ubuntu 14.04 and greater (64 bit)
 -   MacOS X 10.10 (Yosemite) and greater (64 bit)
 
+## Feedback
+- [Discussions/FAQ/Chat](https://puppetry-app.slack.com)
+- [Feature requests](https://github.com/dsheiko/puppetry/issues)
+- [Problem reports](https://github.com/dsheiko/puppetry/issues)
 
 ## Contributing
 
 - get acquainted with guides
   - [the great document](https://github.com/firstcontributions/first-contributions) about first contributions
   - [Dev-Notes](https://github.com/dsheiko/puppetry/wiki/Dev-Notes), e.g. on how to add a browser method/assertion
-- examine the [Backlog](https://github.com/dsheiko/puppetry/wiki/Backlog), suggest new features
+- examine the [Backlog](https://github.com/dsheiko/puppetry/projects), suggest new features
 - look into existing Issues, come up with a fix (`master` branch)
 - implement new features (`dev` branch)
 
