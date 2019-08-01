@@ -3,6 +3,9 @@
 ### Bug fixes
 - fix: CSS in Project Explorer for the scrollbar when too many items
 
+### Features
+- improve UI: add icon DevTools in the Suite recorder
+
 # Puppetry 2.0.1
 
 ### Bug fixes

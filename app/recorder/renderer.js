@@ -10,6 +10,7 @@ const { remote, ipcRenderer, shell } = require ( "electron" ),
       reportLink = find( "#report" ),
       emulateSelect = find( "#select" ),
       notifyEl = find( "#notify" ),
+      toobarBtn = find( "#devtools" ),
 
       colorSelect = find( "#color" ),
       info = find( "#info" ),
@@ -155,8 +156,13 @@ webview.addEventListener( "ipc-message", e => {
 
 });
 
+webview.addEventListener( "new-window", async ( e ) => {
+  // page.openWindow based on e.options, e.url
+})
+
 webview.addEventListener( "dom-ready", e => {
   // webview.openDevTools();
+  toobarBtn.classList.remove( "is-disabled" );
   webview.send( "dom-ready", {
     highlightColor: colorSelect.value
   } );
@@ -170,6 +176,12 @@ if ( lastUrl ) {
 reportLink.addEventListener( "click", ( e ) => {
   e.preventDefault();
   shell.openExternal( e.target.href );
+}, false );
+
+
+toobarBtn.addEventListener( "click", e => {
+  e.preventDefault();
+  webview.openDevTools();
 }, false );
 
 // OK (Create Suite)
