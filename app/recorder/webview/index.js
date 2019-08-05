@@ -1,11 +1,18 @@
+// solving https://github.com/dsheiko/puppetry/issues/33
+// @see https://stackoverflow.com/questions/32621988/electron-jquery-is-not-defined
+window.nodeRequire = require;
+delete window.require;
+delete window.exports;
+delete window.module;
+
 (function(){
-  const log = require( "electron-log" );
+  const log = window.nodeRequire( "electron-log" );
 
   try {
-    const { ipcRenderer } = require( "electron" ),
-    debounce = require( "lodash.debounce" ),
-    xpath = require( "simple-xpath-position" ),
-    uniqid = require( "uniqid" );
+    const { ipcRenderer } = window.nodeRequire( "electron" ),
+    debounce = window.nodeRequire( "lodash.debounce" ),
+    xpath = window.nodeRequire( "simple-xpath-position" ),
+    uniqid = window.nodeRequire( "uniqid" );
 
     let recording = true, observer = null, screenshotCounter = 1;
 

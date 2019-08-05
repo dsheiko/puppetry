@@ -1,7 +1,7 @@
 {
   "name": "puppetry",
   "description": "Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "author": "Dmitry Sheiko <me@dsheiko.com> (http://dsheiko.com)",
   "engines": {
     "node": ">=11.7.0"

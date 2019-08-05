@@ -1,3 +1,8 @@
+# Puppetry 2.0.3
+
+### Bug fixes
+- fix: issue #33, jQuery is not loaded in Recorder, because node integration enabled and it atries to resolve modules as RequireJS
+
 # Puppetry 2.0.2
 
 ### Bug fixes
