@@ -7,6 +7,7 @@
 </h1>
 
 [![Build Status](https://travis-ci.org/dsheiko/puppetry.png)](https://travis-ci.org/dsheiko/puppetry)
+[![Gitter chat](https://badges.gitter.im/dsheiko/gitter.png)](https://gitter.im/dsheiko/puppetry)
 [<img src="https://img.shields.io/badge/slack-puppetry.app-yellow.svg?logo=slack">](https://puppetry-app.slack.com)
 [![Total downloads](https://img.shields.io/github/downloads/dsheiko/puppetry/total.svg)](https://github.com/dsheiko/puppetry/releases)
 [![Latest download](https://img.shields.io/github/downloads/dsheiko/puppetry/v2.0.2/total.svg)](https://github.com/dsheiko/puppetry/releases/latest)
@@ -52,7 +53,8 @@ Current only the following OS are supported:
 -   MacOS X 10.10 (Yosemite) and greater (64 bit)
 
 ## Feedback
-- [Discussions/FAQ/Chat](https://puppetry-app.slack.com)
+
+- [Discussions/FAQ/Chat](https://gitter.im/dsheiko/puppetry)
 - [Feature requests](https://github.com/dsheiko/puppetry/issues)
 - [Problem reports](https://github.com/dsheiko/puppetry/issues)
 
