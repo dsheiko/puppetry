@@ -36,7 +36,7 @@ Puppetry is an open-source cross-platform desktop application that gives non-dev
 Puppetry offers you an easy-to-use UI where you choose browser methods and assertions from a predefined list, with predefined settings, guided by extensive tips.
 Namely you can do the following:
 - record user flow
-- declare element targets as pairs `variable = locator`, where locator can be either CSS selector or Xpath. 
+- declare element targets as pairs `variable = locator`, where locator can be either CSS selector or Xpath.
 - manage your test structure in BDD style (project, suite, test context, test case)
 - manage page/element methods and assertions
 - run the tests
@@ -54,7 +54,8 @@ Current only the following OS are supported:
 
 ## Feedback
 
-- [Discussions/FAQ/Chat](https://gitter.im/dsheiko/puppetry)
+- [Join Puppetry on Slack](http://puppetry.dsheiko.com)
+- [Chat](https://gitter.im/dsheiko/puppetry)
 - [Feature requests](https://github.com/dsheiko/puppetry/issues)
 - [Problem reports](https://github.com/dsheiko/puppetry/issues)
 
