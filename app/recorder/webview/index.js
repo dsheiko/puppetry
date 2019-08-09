@@ -87,9 +87,22 @@ delete window.module;
         }
 
         if ( e.target.matches( "input" )
+          && !e.target.matches( "input[type=submit]" )
+          && !e.target.matches( "input[type=button]" )
           && !e.target.matches( "input[type=checkbox]" )
           && !e.target.matches( "input[type=radio]" )) {
           return false;
+        }
+
+        if ( e.target.matches( "input" )
+          && ( e.target.matches( "input[type=checkbox]" )
+          || e.target.matches( "input[type=radio]" ) )
+          && e.target.id
+          && e.target.parentNode.tagName === "LABEL"
+          && e.target.parentNode.getAttribute( "for" ) === e.target.id
+          ) {
+          // let's propogate for label
+          e.stopPropagation();
         }
 
         if ( [ "SELECT", "TEXTAREA" ].indexOf( e.target.tagName ) !== -1 ) {
@@ -133,10 +146,10 @@ delete window.module;
       log( buildTargetRefObj( e.target ), "upload", { path: e.target.value } );
     };
 
-
-    Recorder.onChangeCheckbox = ( e ) => {
-      log( buildTargetRefObj( e.target ), "checkBox", { checked: e.target.checked } );
-    };
+// When clicked on LABEL it gets here and negates the state
+//    Recorder.onChangeCheckbox = ( e ) => {
+//      log( buildTargetRefObj( e.target ), "checkBox", { checked: e.target.checked } );
+//    };
 
     Recorder.onInputInput = debounce( ( e ) => {
       if ( e.target.type === "file" || e.target.type === "checkbox" || e.target.type === "radio" ) {

@@ -2,6 +2,10 @@
 
 ### Bug fixes
 - fix: issue #33, jQuery is not loaded in Recorder, because node integration enabled and it atries to resolve modules as RequireJS
+- fix: issue #34, Recorder wasn't capturing click event on INPUT[type=submit], duplicated state change on CHECKBOX
+
+### Features
+- improve UI: Recorder provided with log console
 
 # Puppetry 2.0.2
 
