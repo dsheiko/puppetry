@@ -7,6 +7,7 @@
 </h1>
 
 [![Build Status](https://travis-ci.org/dsheiko/puppetry.png)](https://travis-ci.org/dsheiko/puppetry)
+[![Gitter chat](https://badges.gitter.im/dsheiko/gitter.png)](https://gitter.im/dsheiko/puppetry)
 [<img src="https://img.shields.io/badge/slack-puppetry.app-yellow.svg?logo=slack">](https://puppetry-app.slack.com)
 [![Total downloads](https://img.shields.io/github/downloads/dsheiko/puppetry/total.svg)](https://github.com/dsheiko/puppetry/releases)
 [![Latest download](https://img.shields.io/github/downloads/dsheiko/puppetry/v2.0.2/total.svg)](https://github.com/dsheiko/puppetry/releases/latest)
@@ -35,7 +36,7 @@ Puppetry is an open-source cross-platform desktop application that gives non-dev
 Puppetry offers you an easy-to-use UI where you choose browser methods and assertions from a predefined list, with predefined settings, guided by extensive tips.
 Namely you can do the following:
 - record user flow
-- declare element targets as pairs `variable = locator`, where locator can be either CSS selector or Xpath. 
+- declare element targets as pairs `variable = locator`, where locator can be either CSS selector or Xpath.
 - manage your test structure in BDD style (project, suite, test context, test case)
 - manage page/element methods and assertions
 - run the tests
@@ -52,7 +53,9 @@ Current only the following OS are supported:
 -   MacOS X 10.10 (Yosemite) and greater (64 bit)
 
 ## Feedback
-- [Discussions/FAQ/Chat](https://puppetry-app.slack.com)
+
+- [Join Puppetry on Slack](http://puppetry.dsheiko.com) :coffee:
+- [Chat](https://gitter.im/dsheiko/puppetry)
 - [Feature requests](https://github.com/dsheiko/puppetry/issues)
 - [Problem reports](https://github.com/dsheiko/puppetry/issues)
 
