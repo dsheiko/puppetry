@@ -72,6 +72,11 @@ export default class TestGenerator {
         method,
         id: command.id
       });
+      // TRACE MODE
+//        + ( target === "page" ? `` : `\n      // Tracing... \n      `
+//        + `await bs.screenshotTarget( async () => await ${ target }(), "${ target }", "${ command.id }" );` );
+
+
       // Provide source code with markers
       return this.runner === RUNNER_PUPPETRY
         ? `${ COMMAND_ID_COMMENT }${ command.groupId }:${ command.testId }:${ command.id }\n${ chunk }`

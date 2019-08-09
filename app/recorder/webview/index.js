@@ -1,11 +1,18 @@
+// solving https://github.com/dsheiko/puppetry/issues/33
+// @see https://stackoverflow.com/questions/32621988/electron-jquery-is-not-defined
+window.nodeRequire = require;
+delete window.require;
+delete window.exports;
+delete window.module;
+
 (function(){
-  const log = require( "electron-log" );
+  const log = window.nodeRequire( "electron-log" );
 
   try {
-    const { ipcRenderer } = require( "electron" ),
-    debounce = require( "lodash.debounce" ),
-    xpath = require( "simple-xpath-position" ),
-    uniqid = require( "uniqid" );
+    const { ipcRenderer } = window.nodeRequire( "electron" ),
+    debounce = window.nodeRequire( "lodash.debounce" ),
+    xpath = window.nodeRequire( "simple-xpath-position" ),
+    uniqid = window.nodeRequire( "uniqid" );
 
     let recording = true, observer = null, screenshotCounter = 1;
 
@@ -80,9 +87,22 @@
         }
 
         if ( e.target.matches( "input" )
+          && !e.target.matches( "input[type=submit]" )
+          && !e.target.matches( "input[type=button]" )
           && !e.target.matches( "input[type=checkbox]" )
           && !e.target.matches( "input[type=radio]" )) {
           return false;
+        }
+
+        if ( e.target.matches( "input" )
+          && ( e.target.matches( "input[type=checkbox]" )
+          || e.target.matches( "input[type=radio]" ) )
+          && e.target.id
+          && e.target.parentNode.tagName === "LABEL"
+          && e.target.parentNode.getAttribute( "for" ) === e.target.id
+          ) {
+          // let's propogate for label
+          e.stopPropagation();
         }
 
         if ( [ "SELECT", "TEXTAREA" ].indexOf( e.target.tagName ) !== -1 ) {
@@ -126,10 +146,10 @@
       log( buildTargetRefObj( e.target ), "upload", { path: e.target.value } );
     };
 
-
-    Recorder.onChangeCheckbox = ( e ) => {
-      log( buildTargetRefObj( e.target ), "checkBox", { checked: e.target.checked } );
-    };
+// When clicked on LABEL it gets here and negates the state
+//    Recorder.onChangeCheckbox = ( e ) => {
+//      log( buildTargetRefObj( e.target ), "checkBox", { checked: e.target.checked } );
+//    };
 
     Recorder.onInputInput = debounce( ( e ) => {
       if ( e.target.type === "file" || e.target.type === "checkbox" || e.target.type === "radio" ) {

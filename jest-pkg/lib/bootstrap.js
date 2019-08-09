@@ -33,6 +33,42 @@ bs.query = async function ( selector, target ) {
   return elh;
 };
 
+bs.screenshotTarget = async ( elementHandleCb, targetName, stepId )  => {
+  try {
+    const elementHandle = await elementHandleCb(),
+          boundingBox = await elementHandle.boundingBox();
+    await bs.page.evaluate( ( box, targetName ) => {
+      const styles = [
+        `position: absolute`,
+        `z-index: 99998`,
+        `left: ${ box.x }px`,
+        `top: ${ box.y }px`,
+        `width: ${ box.width }px`,
+        `height: ${ box.height }px`,
+        "overflow: hidden",
+        "border: 1px dashed red",
+        "outline: 1px dashed red",
+        "color: red",
+        "font-size: 14px",
+        "text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF"
+      ];
+      document.body.insertAdjacentHTML( "beforeend", `<div id="__puppetry-highlight-target" `
+        + `style="${ styles.join( "; " ) };">&nbsp;${ targetName }</div>` );
+      return Promise.resolve();
+    }, boundingBox, targetName );
+
+    await bs.page.screenshot( util.png( `__${ stepId }` ) );
+
+    await bs.page.evaluate( () => {
+      var el = document.querySelector( "#__puppetry-highlight-target" );
+      el.parentNode.removeChild( el );
+      return Promise.resolve();
+    });
+  } catch ( e ) {
+    // ignore
+  }
+};
+
 
 /**
  * Extending JEST

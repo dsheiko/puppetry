@@ -24,9 +24,32 @@ function makeVar( elRefObj ) {
   }
 }
 
+/**
+ * @typedef RefObj
+ * @property {?string} id
+ * @property {?string} name
+ * @property {?string} className
+ * @property {string} tagName
+ * @property {string} pid  - generated id
+ * @property {string} query
+ */
+
+/**
+ * @typedef TargetDto
+ * @property {string} name
+ * @property {boolean} isNew
+ */
+
+/**
+ * @param {RefObj} elRefObj
+ * @returns {TargetDto}
+ */
 function registerElement( elRefObj ) {
   if ( cache.has( elRefObj.pid ) ) {
-    return cache.get( elRefObj.pid );
+    return {
+      name: cache.get( elRefObj.pid ),
+      isNew: false
+    };
   }
   let v = makeVar( elRefObj );
   if ( v in targets ) {
@@ -35,10 +58,14 @@ function registerElement( elRefObj ) {
   }
   targets[ v ] = elRefObj.query;
   cache.set( elRefObj.pid, v );
-  return v;
+  return {
+    name: v,
+    isNew: true
+  };
 }
 
 
 exports.clearTargets = clearTargets;
 exports.targets = targets;
 exports.registerElement = registerElement;
+exports.makeVar = makeVar;

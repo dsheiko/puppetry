@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
+  <url>
+    <loc>https://puppetry.app/index.html</loc>
+    <lastmod>2019-08-05</lastmod>
+  </url>
+
+<url>
+  <loc>https://docs.puppetry.app/</loc>
+  <lastmod>2019-08-05T08:01:50+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/getting-started</loc>
+  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/managing-assets</loc>
+  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/project</loc>
+  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/suite</loc>
+  <lastmod>2019-08-05T03:58:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/group</loc>
+  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/target</loc>
+  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/test-case</loc>
+  <lastmod>2019-08-05T03:40:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/test-step</loc>
+  <lastmod>2019-08-04T10:00:19+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/snippets</loc>
+  <lastmod>2019-08-05T03:58:20+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/running-tests</loc>
+  <lastmod>2019-08-05T06:48:59+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/exporting-tests-for-ci</loc>
+  <lastmod>2019-08-05T03:38:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/template</loc>
+  <lastmod>2019-08-05T03:39:40+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/version-control</loc>
+  <lastmod>2019-08-05T01:08:14+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/testing-emails</loc>
+  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/testing-forms-with-captcha</loc>
+  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/command-api</loc>
+  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/examples</loc>
+  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/test-step/commands</loc>
+  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/test-step/page-assertions</loc>
+  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/test-step/target-commands</loc>
+  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/test-step/target-assertions</loc>
+  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/running-tests/troubleshooting</loc>
+  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/testing-emails/example-with-restmail.net</loc>
+  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/testing-emails/example-with-.../</loc>
+  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/testing-emails/example-with-imap-bridge</loc>
+  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://docs.puppetry.app/testing-emails/example-with-google-api</loc>
+  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+
+
+</urlset>

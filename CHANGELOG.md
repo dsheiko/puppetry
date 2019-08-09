@@ -1,12 +1,26 @@
 # Puppetry 2.1.0
 
-### Bug fixes
-- fix: CSS in Project Explorer for the scrollbar when too many items
-
 ### Features
 - improvement: add export format: printable test
 - improvement: add export format: JSON
 - improvement: add template expressions htmlOf, attributeOf, propertyOf
+
+# Puppetry 2.0.3
+
+### Bug fixes
+- fix: issue #33, jQuery is not loaded in Recorder, because node integration enabled and it atries to resolve modules as RequireJS
+- fix: issue #34, Recorder wasn't capturing click event on INPUT[type=submit], duplicated state change on CHECKBOX
+
+### Features
+- improve UI: Recorder provided with log console
+
+# Puppetry 2.0.2
+
+### Bug fixes
+- fix: CSS in Project Explorer for the scrollbar when too many items
+
+### Features
+- improve UI: add icon DevTools in the Suite recorder
 
 # Puppetry 2.0.1
 

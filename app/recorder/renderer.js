@@ -10,6 +10,8 @@ const { remote, ipcRenderer, shell } = require ( "electron" ),
       reportLink = find( "#report" ),
       emulateSelect = find( "#select" ),
       notifyEl = find( "#notify" ),
+      logEl = find( "#log" ),
+      toobarBtn = find( "#devtools" ),
 
       colorSelect = find( "#color" ),
       info = find( "#info" ),
@@ -55,6 +57,7 @@ async function registerTarget( selector ) {
   try {
     const name = normalizeTargetName( await smalltalk.prompt( "Registering Target", "Target name", "" ) );
     namedTargets[ name ] = selector;
+    printLog( `define <b>${ name }</b> = <i>${ selector }</i>` );
   } catch ( e ) {
     // ignore
   }
@@ -116,7 +119,9 @@ function applyPatchToCommands( clientGroups, patch ) {
 function registerCommand({ target, method, params }) {
   try {
     if ( target !== "page" ) {
-      target = registerElement( target );
+      const { name, isNew } = registerElement( target );
+      target = name;
+      ( name in targets && isNew ) && printLog( `define <b>${ target }</b> = <i>${ targets[ name ] }</i>` );
     }
     const last = commands[ commands.length - 1 ];
     // type normally accompanies with click
@@ -133,10 +138,18 @@ function registerCommand({ target, method, params }) {
     }
 
     commands.push({ target, method, params });
+    printLog( `<b>${ target }</b>.${ method }(<i>${ JSON.stringify( params ) }</i>)` );
   } catch ( e ) {
     log.warn( `renderer.js process: registerCommand(): ${ e }` );
   }
 
+}
+
+function printLog( line )
+{
+    const log = logEl.innerHTML;
+    logEl.innerHTML = log + ( log.trim() ? `<br />` : `` ) + line;
+    logEl.scroll( 0, logEl.scrollTop + 24 );
 }
 
 webview.addEventListener( "ipc-message", e => {
@@ -155,8 +168,14 @@ webview.addEventListener( "ipc-message", e => {
 
 });
 
+webview.addEventListener( "new-window", async ( e ) => {
+  // page.openWindow based on e.options, e.url
+});
+
 webview.addEventListener( "dom-ready", e => {
   // webview.openDevTools();
+  toobarBtn.classList.remove( "is-disabled" );
+  logEl.parentNode.classList.remove( "is-hidden" );
   webview.send( "dom-ready", {
     highlightColor: colorSelect.value
   } );
@@ -170,6 +189,12 @@ if ( lastUrl ) {
 reportLink.addEventListener( "click", ( e ) => {
   e.preventDefault();
   shell.openExternal( e.target.href );
+}, false );
+
+
+toobarBtn.addEventListener( "click", e => {
+  e.preventDefault();
+  webview.openDevTools();
 }, false );
 
 // OK (Create Suite)
