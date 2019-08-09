@@ -19,6 +19,12 @@
 
   <style>
 
+    * {
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
     @keyframes pulse {
       0% {
         opacity: 1;
@@ -60,8 +66,8 @@
     }
     .toolbar__url {
       font-size: 16px;
-      line-height: 22px;
-      height: 22px;
+      line-height: 32px;
+      height: 32px;
       border-radius: 4px;
       background: white;
       border: 1px solid #555;
@@ -143,7 +149,8 @@
 
     webview {
       width: 100%;
-      height: calc(100vh - 40px);
+      /* 40px + 24px of log */
+      height: calc(100vh - 68px);
     }
 
     .info {
@@ -291,6 +298,45 @@
     animation: slideDown 500ms forwards;
   }
 
+  .log {
+    height: 24px;
+    margin: 0 8px 4px 8px;
+    width: calc(100% - 16px);
+    position: relative;
+  }
+
+  .log__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 24px;
+    line-height: 24px;
+    padding: 0 4px;
+    font-size: 12px;
+    background: #EEE;
+    border: 1px solid #CCC;
+    color: #444;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-family: monospace;
+    white-space: pre;
+    z-index: 99999;
+  }
+
+  .log__content:hover {
+    height: 124px;
+  }
+
+  .log i {
+    font-style: normal;
+    color: #a67f59;
+  }
+  .log b {
+    font-weight: normal;
+    color: #1890ff;
+  }
+
 
   </style>
 </head>
@@ -317,7 +363,9 @@
 
 
   </div>
-
+  <div class="log is-hidden">
+    <div class="log__content" id="log"></div>
+  </div>
   <webview class="is-hidden" nodeintegration allowpopups preload="./recorder/webview/index.js"></webview>
 
   <div id="info" class="info">
