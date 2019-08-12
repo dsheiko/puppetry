@@ -1,3 +1,8 @@
+# Puppetry 2.0.4
+
+### Bug fixes
+- fix: issue #35, Puppetry was wrongly merging targets of the suite and snippets
+
 # Puppetry 2.0.3
 
 ### Bug fixes
