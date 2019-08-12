@@ -195,6 +195,7 @@ export class AppLayout extends React.Component {
           snippets={ store.snippets }
           project={ store.project }
           environment={ store.app.environment }
+          readyToRunTests={ store.app.readyToRunTests }
           isVisible={ store.app.exportProjectModal } />
 
         <CommandModal

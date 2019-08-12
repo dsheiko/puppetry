@@ -52,7 +52,8 @@ export class TestReport extends AbstractComponent {
   }
 
   run = async () => {
-    const { project, environment } = this.props;
+    const { project, environment } = this.props,
+          options = this.props.options || {};
     this.props.action.saveSuite();
     this.props.action.resetCommandFailures();
     try {
@@ -67,7 +68,8 @@ export class TestReport extends AbstractComponent {
               this.props.checkedList,
               {
                 headless: this.props.headless,
-                launcherArgs: this.props.launcherArgs
+                launcherArgs: this.props.launcherArgs,
+                ...options
               },
               this.props.snippets,
               {

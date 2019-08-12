@@ -129,9 +129,9 @@ export function copyProject( srcDirectory, targetDirectory ) {
  * @param {Object} snippets
  * @returns {String} - spec.js content
  */
-export async function exportSuite( projectDirectory, filename, runner, snippets, env ) {
+export async function exportSuite( projectDirectory, filename, runner, snippets, env, options ) {
   const suite = await readSuite( projectDirectory, filename ),
-        gen = new TestGenerator( suite, schema, suite.targets, runner, projectDirectory, snippets, env );
+        gen = new TestGenerator( suite, schema, suite.targets, runner, projectDirectory, snippets, env, options );
   return gen.generate();
 }
 
@@ -149,7 +149,7 @@ export async function exportProject(
   projectDirectory,
   outputDirectory,
   suiteFiles,
-  { headless = true, launcherArgs = "", runner = RUNNER_PUPPETRY },
+  { headless = true, launcherArgs = "", runner = RUNNER_PUPPETRY, trace = false },
   snippets,
   env
 ) {
@@ -167,7 +167,7 @@ export async function exportProject(
     shell.cp( "-RLf" , JEST_PKG + "/*", outputDirectory  );
 
     for ( const filename of suiteFiles ) {
-      let specContent = await exportSuite( projectDirectory, filename, runner, snippets, env );
+      let specContent = await exportSuite( projectDirectory, filename, runner, snippets, env, { trace } );
       const specFilename = parse( filename ).name + ".spec.js",
             specPath = join( testDir, specFilename ),
             specHasDebugger = specContent.includes( " debugger;" );
@@ -248,6 +248,7 @@ export async function readSuite( directory, file ) {
   const filePath = join( directory, file );
   // in case of snippets
   if ( file === SNIPPETS_FILENAME && !fs.existsSync( filePath ) ) {
+    log.warn( `Suite file ${filePath} not found.` );
     return null;
   }
 

@@ -18,9 +18,18 @@ let PATH_SCREENSHOTS = join( __dirname, "/../", "/screenshots"),
      */
 const png = ( filePath, options = {} ) => {
         const normalizedPath = filePath.replace( /[^a-zA-Z\d\-\_]/g, "-" );
-        const path = join( PATH_SCREENSHOTS, SUITE_NAME, `${normalizedPath}.png` );
+        const path = join( PATH_SCREENSHOTS, SUITE_NAME, `${ normalizedPath }.png` );
         shell.mkdir( "-p" , dirname( path ) );
         return { path, ...options };
+      },
+      /**
+       * @param {string} fileName
+       * @returns {Object}
+       */
+      tracePng = ( fileName ) => {
+        const path = join( PATH_SCREENSHOTS, "trace", `${ fileName }.png` );
+        shell.mkdir( "-p" , dirname( path ) );
+        return { path };
       },
       /**
        * Removes outdated suite screenshots on the beggining of test
@@ -104,6 +113,8 @@ exports.localStorage = localStorage;
 exports.util = {
 
   png,
+
+  tracePng,
 
   setPngBasePath: ( path ) => {
     PATH_SCREENSHOTS = path;

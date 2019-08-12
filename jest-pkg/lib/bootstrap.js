@@ -1,6 +1,5 @@
-const bs = require( "./BrowserSession" );
-
-const { util, fetch, localStorage } = require( "./helpers" );
+const bs = require( "./BrowserSession" ),
+      { util, fetch, localStorage } = require( "./helpers" );
 
 /**
  * Extending Puppeteer
@@ -33,11 +32,13 @@ bs.query = async function ( selector, target ) {
   return elh;
 };
 
-bs.screenshotTarget = async ( elementHandleCb, targetName, stepId )  => {
-  try {
+createTargetHighlight = async ( elementHandleCb, targetName, fgColor = "red" ) => {
     const elementHandle = await elementHandleCb(),
           boundingBox = await elementHandle.boundingBox();
-    await bs.page.evaluate( ( box, targetName ) => {
+    if ( !boundingBox ) {
+      return;
+    }
+    await bs.page.evaluate( ( box, targetName, fgColor ) => {
       const styles = [
         `position: absolute`,
         `z-index: 99998`,
@@ -46,22 +47,31 @@ bs.screenshotTarget = async ( elementHandleCb, targetName, stepId )  => {
         `width: ${ box.width }px`,
         `height: ${ box.height }px`,
         "overflow: hidden",
-        "border: 1px dashed red",
-        "outline: 1px dashed red",
-        "color: red",
+        `border: 1px dashed ${ fgColor }`,
+        `outline: 1px dashed white`,
+        `color: ${ fgColor }`,
         "font-size: 14px",
         "text-shadow: -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px 1px 0 #FFF"
       ];
-      document.body.insertAdjacentHTML( "beforeend", `<div id="__puppetry-highlight-target" `
+      document.body.insertAdjacentHTML( "beforeend", `<div data-puppetry="__puppetry-highlight-target" `
         + `style="${ styles.join( "; " ) };">&nbsp;${ targetName }</div>` );
       return Promise.resolve();
-    }, boundingBox, targetName );
+    }, boundingBox, targetName, fgColor );
+};
 
-    await bs.page.screenshot( util.png( `__${ stepId }` ) );
+bs.tracePage = async ( stepId )  => {
+  await bs.page.screenshot( util.tracePng( `${ stepId }` ) );
+};
 
+bs.traceTarget = async ( stepId, targetMap  )  => {
+  try {
+    for ( let pair of Object.entries( targetMap ) ) {
+      await createTargetHighlight( pair[ 1 ], pair[ 0 ] );
+    }
+    await bs.page.screenshot( util.tracePng( `${ stepId }` ) );
     await bs.page.evaluate( () => {
-      var el = document.querySelector( "#__puppetry-highlight-target" );
-      el.parentNode.removeChild( el );
+      Array.from( document.querySelectorAll( "[data-puppetry=__puppetry-highlight-target]" ) )
+        .forEach( el => el.parentNode.removeChild( el ) );
       return Promise.resolve();
     });
   } catch ( e ) {

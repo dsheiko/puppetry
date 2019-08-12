@@ -48,12 +48,19 @@ export class TestReportModal extends AbstractComponent {
     modified: false,
     loading: false,
     headless: true,
-    launcherArgs: ""
+    launcherArgs: "",
+    trace: false
   }
 
   constructor( props ) {
     super( props );
     this.inputLauncherArgsRef = React.createRef();
+  }
+
+  onChangeCheckbox = ( checked, field ) => {
+    this.setState({
+      [ field ]: checked
+    });
   }
 
   onChange = ( checkedList ) => {
@@ -117,8 +124,11 @@ export class TestReportModal extends AbstractComponent {
         checkedList,
         testReportModal: false,
         headless: this.state.headless,
-        launcherArgs: this.state.launcherArgs
+        launcherArgs: this.state.launcherArgs,
+        trace: this.state.trace
       });
+
+
       this.props.action.removeAppTab( "testReport" );
       this.props.action.addAppTab( "testReport" );
     } catch ( err ) {
@@ -216,6 +226,12 @@ export class TestReportModal extends AbstractComponent {
 
             <SelectEnv environments={ this.props.project.environments }
               environment={ this.props.environment } action={ this.props.action } />
+
+            <div className="test-options">
+            <Checkbox onChange={ e  => this.onChangeCheckbox( e.target.checked, "trace" ) } >
+              trace mode
+            </Checkbox>
+            </div>
 
 
             <p>Please select suites to run:</p>

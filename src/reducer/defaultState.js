@@ -69,6 +69,7 @@ export default {
     checkedList: [],
     headless: true,
     launcherArgs: "",
+    pdf: false,
 
     // Dynamic info coming not from project file, but from file watcher
     project: {

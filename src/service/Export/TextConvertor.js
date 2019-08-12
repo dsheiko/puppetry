@@ -7,9 +7,12 @@ const INDENT = "   ";
 
 export default class TextConvertor {
 
-  constructor( input ) {
+  constructor( input, onCommand = null ) {
     this.input = input;
     this.output = "";
+    this.onCommand = onCommand;
+    // map [ group_test_num ] = command_num
+    this.commandRecLabels = {};
   }
 
   printLocalVariables = ( variables ) => {
@@ -19,10 +22,11 @@ export default class TextConvertor {
     });
   }
 
-  printTest = ( test, variables = {} ) => {
+  printTest = ( test, tInx, gInx, variables = {} ) => {
+    const groupTestRecLabel = `${ gInx + 1 }.${ tInx + 1 }.`;
     if ( test.groupId !== "snippets" ) {
       this.print( `\n` );
-      this.print( `test: ${ test.title }`, 2 );
+      this.print( `${ groupTestRecLabel } test: ${ test.title }`, 2 );
     }
 
     if ( variables && Object.keys( variables ).length ) {
@@ -36,19 +40,28 @@ export default class TextConvertor {
           if ( !( command.ref in this.input.snippets ) ) {
             return ;
           }
-          return this.printTest( this.input.snippets[ command.ref ], command.variables );
+          return this.printTest( this.input.snippets[ command.ref ], tInx, gInx, command.variables );
         }
-        return this.printCommand( command );
+        return this.printCommand( command, groupTestRecLabel );
       });
 
 
 
   }
 
-  printCommand = ( command ) => {
+  printCommand = ( command, groupTestRecLabel ) => {
+
+    this.commandRecLabels[ groupTestRecLabel ] = groupTestRecLabel in this.commandRecLabels
+      ? this.commandRecLabels[ groupTestRecLabel ] + 1
+      : 1;
+
     const schema = getSchema( command.target, command.method ),
-          toText = typeof schema.toText === "function" ? schema.toText : schema.toLabel;
-    this.print( `${ command.target }.${ command.method }`
+          toText = typeof schema.toText === "function" ? schema.toText : schema.toLabel,
+          recordLabel = `${ groupTestRecLabel }${ this.commandRecLabels[ groupTestRecLabel ] }.`;
+
+    this.onCommand && this.onCommand( command, recordLabel );
+    
+    this.print( `${ recordLabel } ${ command.target }.${ command.method }`
     + `${ toText( command ) }`, 3 );
   }
 
@@ -69,11 +82,11 @@ export default class TextConvertor {
 
     Object.values( suite.groups )
       .filter( group => !group.disabled )
-      .forEach( group => {
-        this.print( `describe: ${ group.title }`, 1 );
+      .forEach( ( group, gInx ) => {
+        this.print( `${ gInx + 1 }. describe: ${ group.title }`, 1 );
         Object.values( group.tests )
           .filter( test => !test.disabled )
-          .forEach( this.printTest );
+          .forEach( ( test, tInx ) => this.printTest( test, tInx, gInx ) );
       });
   }
 

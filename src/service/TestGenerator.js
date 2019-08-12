@@ -5,12 +5,13 @@ import { COMMAND_ID_COMMENT, RUNNER_PUPPETRY, SNIPPETS_GROUP_ID } from "constant
 
 export default class TestGenerator {
 
-  constructor( suite, schema, targets, runner, projectDirectory, snippets, env ) {
+  constructor( suite, schema, targets, runner, projectDirectory, snippets, env, options ) {
     this.schema = schema;
     this.suite = { ...suite };
     this.projectDirectory = projectDirectory;
     this.snippets = { targets: {}, groups: {}, ...snippets };
     this.env = env;
+    this.options = options;
     this.runner = runner; // RUNNER_PUPPETRY when embedded
     this.targets = Object.values({ ...snippets.targets, ...targets })
       .reduce( ( carry, entry ) => {
@@ -20,7 +21,11 @@ export default class TestGenerator {
   }
 
   parseTargets( targets ) {
-    return Object.values({ ...this.snippets.targets, ...targets })
+    const snippetTargets = Object.values( this.snippets.targets )
+            .filter( entity => !( entity.id in targets ) ),
+          targetArr = Object.values( targets );
+
+    return [ ...snippetTargets, ...targetArr ]
       .filter( ({ target, selector }) => Boolean( target ) && Boolean( selector ) )
       .map( this.schema.jest.tplQuery ).join( "\n" );
   }
@@ -47,6 +52,16 @@ export default class TestGenerator {
     return `      // SNIPPET ${ test.title }: START\n${ env }${ chunk }\n      // SNIPPET ${ test.title }: END\n`;
   }
 
+
+  static getTraceTpl( target, command ) {
+    const tplProp =  ( t ) => `"${ t }": async () => await ${ t }()`,
+          secTarget = ( command.assert && command.assert.target ) ? ", " + tplProp( command.assert.target ) : ``;
+
+    return `\n      // Tracing... \n` + ( target === "page"
+        ? `      await bs.tracePage( "${ command.id }" );`
+        : `      await bs.traceTarget( "${ command.id }", { ${ tplProp( target )  + secTarget } });` );
+  }
+
   /**
    * @param {Object} command
    * @returns {string}
@@ -64,22 +79,20 @@ export default class TestGenerator {
       if ( ! ( method in this.schema[ src ]) ) {
         return ``;
       }
-      const chunk = this.schema[ src ][ method ].template({
-        target,
-        assert,
-        params,
-        targetSeletor: this.targets[ target ],
-        method,
-        id: command.id
-      });
-      // TRACE MODE
-//        + ( target === "page" ? `` : `\n      // Tracing... \n      `
-//        + `await bs.screenshotTarget( async () => await ${ target }(), "${ target }", "${ command.id }" );` );
 
+      const traceCode = this.options.trace ?  TestGenerator.getTraceTpl( target, command ) : ``,
+            chunk = this.schema[ src ][ method ].template({
+              target,
+              assert,
+              params,
+              targetSeletor: this.targets[ target ],
+              method,
+              id: command.id
+            }) + traceCode;
 
       // Provide source code with markers
       return this.runner === RUNNER_PUPPETRY
-        ? `${ COMMAND_ID_COMMENT }${ command.groupId }:${ command.testId }:${ command.id }\n${ chunk }`
+        ? `      ${ COMMAND_ID_COMMENT }${ command.groupId }:${ command.testId }:${ command.id }\n${ chunk }`
         : chunk;
     } catch ( err ) {
       console.warn( "parseCommand error:", err, command );

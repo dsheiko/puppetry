@@ -1,19 +1,19 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Alert, Checkbox, Modal, Button, Select, Icon, message } from "antd";
+import { Alert, Checkbox, Modal, Button, Select, Icon, message, notification, Spin } from "antd";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
-import { exportProject, isDirEmpty } from "service/io";
+import { exportProject, isDirEmpty, getRuntimeTestPath } from "service/io";
+
 import BrowseDirectory from "component/Global/BrowseDirectory";
-import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, RUNNER_JEST } from "constant";
+import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, RUNNER_JEST, E_RUN_TESTS } from "constant";
 import If from "component/Global/If";
 import { TestGeneratorError } from "error";
 import { confirmExportProject } from "service/smalltalk";
-import JsonConvertor from "service/Export/JsonConvertor";
-import TextConvertor from "service/Export/TextConvertor";
 import * as classes from "./classes";
 import { getSnippets, getSelectedVariables, getActiveEnvironment } from "selector/selectors";
 import { SelectEnv } from "component/Global/SelectEnv";
+import exportPrintableText from "./Export/PrintableText";
 
 const CheckboxGroup = Checkbox.Group,
       { Option } = Select;
@@ -34,6 +34,8 @@ export class ExportProjectModal  extends AbstractComponent {
     files: PropTypes.arrayOf( PropTypes.string ).isRequired,
     snippets: PropTypes.any,
     project: PropTypes.any,
+    // needed for export printable text
+    readyToRunTests: PropTypes.bool.isRequired,
     environment: PropTypes.any
   }
 
@@ -45,7 +47,8 @@ export class ExportProjectModal  extends AbstractComponent {
     indeterminate: true,
     checkAll: false,
     modified: false,
-    format: "jest"
+    format: "jest",
+    loading: false
   }
 
   onChange = ( checkedList ) => {
@@ -90,47 +93,59 @@ export class ExportProjectModal  extends AbstractComponent {
     }
 
 
-    this.setState({ locked: true });
+    this.setState({ locked: true, loading: true });
     // give it time to update component state, before processing
     setTimeout( async () => {
-      const activeEnv = getActiveEnvironment( project.environments, environment );
+      const activeEnv = getActiveEnvironment( project.environments, environment ),
+            envDto = {
+              variables: getSelectedVariables( project.variables, activeEnv ),
+              environment: activeEnv
+            };
 
       this.props.action.saveSettings({ exportDirectory: selectedDirectory });
       try {
         let options, convertor;
         switch ( this.state.format ) {
-        case "text":
-        case "json":
-          options = {
-            projectDirectory,
-            selectedDirectory,
-            checkedList,
-            project,
-            snippets: getSnippets( this.props.snippets ),
-            variables: getSelectedVariables( project.variables, activeEnv ),
-            environment: activeEnv
-          };
-          convertor = this.state.format === "json" ? new JsonConvertor( options ) : new TextConvertor( options );
-          convertor.convert();
-          break;
+          case "text":
 
-        default:
-          await exportProject(
-            projectDirectory,
-            selectedDirectory,
-            checkedList,
-            { runner: RUNNER_JEST },
-            this.props.snippets,
-            {
-              variables: getSelectedVariables( project.variables, activeEnv ),
-              environment: activeEnv
+            if ( !this.props.readyToRunTests ) {
+              notification.open({
+                message: "Dependencies not installed",
+                description: "Please, run the tests (F6) "
+                  + " to install dependencies."
+              });
+              this.setState({ loading: false, locked: false });
+              return;
             }
-          );
-          message.info( `Project exported in ${ selectedDirectory }` );
-          break;
+
+            await exportPrintableText({
+              projectDirectory,
+              selectedDirectory,
+              checkedList,
+              project,
+              snippets: this.props.snippets,
+              envDto
+            });
+
+            break;
+
+          default:
+            await exportProject(
+              projectDirectory,
+              selectedDirectory,
+              checkedList,
+              { runner: RUNNER_JEST },
+              this.props.snippets,
+              envDto
+            );
+            message.info( `Project exported in ${ selectedDirectory }` );
+            break;
         }
 
+
         this.props.action.setApp({ exportProjectModal: false });
+
+
       } catch ( err ) {
         const message = err instanceof TestGeneratorError ? "Test parser error" : "Cannot export project";
         this.props.action.setError({
@@ -139,7 +154,7 @@ export class ExportProjectModal  extends AbstractComponent {
           description: err.message
         });
       } finally {
-        this.setState({ locked: false });
+        this.setState({ loading: false, locked: false });
       }
     }, 100 );
   }
@@ -210,6 +225,7 @@ export class ExportProjectModal  extends AbstractComponent {
           ]}
         >
 
+       <Spin tip="Exporting project..." spinning={ this.state.loading }>
           <div className="select-group-inline">
             <span className="select-group-inline__label">
               <Icon type="file-unknown" title="Select an output format" />
@@ -227,7 +243,6 @@ export class ExportProjectModal  extends AbstractComponent {
             >
               <Option value="jest" key="jest">Jest/Puppeteer project (CI-friendly)</Option>
               <Option value="text" key="text">printable text</Option>
-              <Option value="json" key="json">JSON</Option>
             </Select>
           </div>
 
@@ -248,37 +263,39 @@ export class ExportProjectModal  extends AbstractComponent {
             By pressing &quot;Export&quot; Puppetry converts project in a single JSON file
           </p> }
 
-          <SelectEnv environments={ project.environments }
-            environment={ environment } action={ action } />
+            <SelectEnv environments={ project.environments }
+              environment={ environment } action={ action } />
 
-          <BrowseDirectory
-            defaultDirectory={ this.props.exportDirectory }
-            validateStatus={ this.state.browseDirectoryValidateStatus }
-            getSelectedDirectory={ this.getSelectedDirectory }
-            label="Select a directory to export" />
+            <BrowseDirectory
+              defaultDirectory={ this.props.exportDirectory }
+              validateStatus={ this.state.browseDirectoryValidateStatus }
+              getSelectedDirectory={ this.getSelectedDirectory }
+              label="Select a directory to export" />
 
-          <If exp={ files.length }>
-            <p>Please select suites to export:</p>
-            <div className="bottom-line">
-              <Checkbox
-                indeterminate={ this.state.indeterminate }
-                onChange={ this.onCheckAllChange }
-                checked={ this.state.checkAll }
-              >
-                  Check all
-              </Checkbox>
-            </div>
+            <If exp={ files.length }>
+              <p>Please select suites to export:</p>
+              <div className="bottom-line">
+                <Checkbox
+                  indeterminate={ this.state.indeterminate }
+                  onChange={ this.onCheckAllChange }
+                  checked={ this.state.checkAll }
+                >
+                    Check all
+                </Checkbox>
+              </div>
 
-            <div className={ files.length >= 8 ? "is-checkbox-group-scrollable-export" : ""}>
-              <CheckboxGroup options={ files }
-                value={ checkedList }
-                onChange={ this.onChange } />
-            </div>
+              <div className={ files.length >= 8 ? "is-checkbox-group-scrollable-export" : ""}>
+                <CheckboxGroup options={ files }
+                  value={ checkedList }
+                  onChange={ this.onChange } />
+              </div>
 
-          </If>
-          <If exp={ !files.length }>
-            <Alert message="No suites available in the project" type="error" />
-          </If>
+            </If>
+            <If exp={ !files.length }>
+              <Alert message="No suites available in the project" type="error" />
+            </If>
+
+          </Spin>
 
         </Modal>
       </ErrorBoundary>

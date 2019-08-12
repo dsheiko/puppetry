@@ -1042,3 +1042,7 @@ td:hover .editable-cell-icon {
 .ant-table-row.model--variable > td .table-actions {
   margin-top: 8px;
 }
+
+.test-options {
+  margin: 16px 0;
+}
