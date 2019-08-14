@@ -60,7 +60,7 @@ export default class TextConvertor {
           recordLabel = `${ groupTestRecLabel }${ this.commandRecLabels[ groupTestRecLabel ] }.`;
 
     this.onCommand && this.onCommand( command, recordLabel );
-    
+
     this.print( `${ recordLabel } ${ command.target }.${ command.method }`
     + `${ toText( command ) }`, 3 );
   }

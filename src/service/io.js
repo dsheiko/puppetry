@@ -165,6 +165,7 @@ export async function exportProject(
     shell.mkdir( "-p" , join( outputDirectory, "screenshots" ) );
     shell.chmod( "-R", "+w", outputDirectory );
     shell.cp( "-RLf" , JEST_PKG + "/*", outputDirectory  );
+    shell.mkdir( "-p" , join( outputDirectory, "specs" ) );
 
     for ( const filename of suiteFiles ) {
       let specContent = await exportSuite( projectDirectory, filename, runner, snippets, env, { trace } );

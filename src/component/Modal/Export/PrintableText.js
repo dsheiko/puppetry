@@ -1,4 +1,4 @@
-import { exportProject, isDirEmpty, getRuntimeTestPath, readdir } from "service/io";
+import { exportProject, isDirEmpty, getRuntimeTestPath, readdir, writeFile } from "service/io";
 import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, RUNNER_JEST, RUNNER_PUPPETRY, E_RUN_TESTS } from "constant";
 import { ipcRenderer } from "electron";
 import TextConvertor from "service/Export/TextConvertor";
@@ -22,13 +22,15 @@ export default async function exportPrintableText({
             { runner: RUNNER_PUPPETRY, trace: true },
             snippets,
             envDto
-          );
-
-  ipcRenderer.sendSync( E_RUN_TESTS, runtimeTemp, specList );
+          ),
+          report = ipcRenderer.sendSync( E_RUN_TESTS, runtimeTemp, specList );
 
   try {
-    shell.rm( join( selectedDirectory, `*` ) );
+    shell.rm( "-rf", selectedDirectory );
+    shell.mkdir( "-p", selectedDirectory );
+    await writeFile( join( selectedDirectory, "jest-output.json" ), JSON.stringify( report, null, 2 ) );
   } catch ( e ) {
+    console.warn( "Renderer process: exportPrintableText()", e );
     // ignore
   }
 
