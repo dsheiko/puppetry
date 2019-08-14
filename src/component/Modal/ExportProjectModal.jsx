@@ -72,8 +72,8 @@ export class ExportProjectModal  extends AbstractComponent {
 
   onClickOk = async ( e ) => {
     const selectedDirectory = this.findSelectedDirectory(),
-          { projectDirectory, files, currentSuite, project, environment } = this.props,
-          current = files.find( file => currentSuite === file ),
+          { projectDirectory, project, environment } = this.props,
+          current = this.getCurrentFile(),
           checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
     e.preventDefault();
@@ -147,9 +147,15 @@ export class ExportProjectModal  extends AbstractComponent {
     return true;
   }
 
+  getCurrentFile() {
+    const { files, currentSuite } = this.props,
+          currentFile = files.find( file => currentSuite === file );
+    return currentFile || files[ 0 ];
+  }
+
   render() {
-    const { isVisible, files, currentSuite, project, environment, action } = this.props,
-          current = files.find( file => currentSuite === file ),
+    const { isVisible, files, project, environment, action } = this.props,
+          current = this.getCurrentFile(),
           checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
     return (

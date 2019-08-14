@@ -109,8 +109,7 @@ export class TestReportModal extends AbstractComponent {
     e.preventDefault();
     this.setState({ loading: true });
     try {
-      const { files, currentSuite } = this.props,
-            current = files.find( file => currentSuite === file ),
+      const current = this.getCurrentFile(),
             checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
       this.props.action.setApp({
@@ -137,10 +136,15 @@ export class TestReportModal extends AbstractComponent {
     return true;
   }
 
+  getCurrentFile() {
+    const { files, currentSuite } = this.props,
+          currentFile = files.find( file => currentSuite === file );
+    return currentFile || files[ 0 ];
+  }
+
   render() {
-    const { isVisible, files, currentSuite } = this.props,
-          currentFile = files.find( file => currentSuite === file ),
-          current = currentFile || files[ 0 ],
+    const { isVisible, files } = this.props,
+          current = this.getCurrentFile(),
           checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
     return (

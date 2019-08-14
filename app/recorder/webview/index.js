@@ -105,6 +105,12 @@ delete window.module;
           e.stopPropagation();
         }
 
+        const styles = window.getComputedStyle( e.target );
+        if ( styles.getPropertyValue( "visibility" ) === "hidden"
+          || styles.getPropertyValue( "display" ) === "none" ) {
+          return false;
+        }
+
         if ( [ "SELECT", "TEXTAREA" ].indexOf( e.target.tagName ) !== -1 ) {
           return false;
         }
