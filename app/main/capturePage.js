@@ -17,7 +17,7 @@ module.exports = function( win ) {
             filename = `screenshot-${ ts }.png`;
       fs.writeFileSync(
         join( __dirname, "..", "..", "screenshots", filename ), img.toPNG() );
-        win.webContents.send( E_RENDERER_INFO, `New screenshot ${ filename } added to ./dist` );
+        win.webContents.send( E_RENDERER_INFO, `New screenshot ${ filename } added to ./screenshots` );
     });
   });
 

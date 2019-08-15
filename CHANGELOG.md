@@ -7,6 +7,9 @@
 - fix: Snippets have independent targets
 - fix: When Snippets panel open, it could not figure out the current suite and failed to run/export tests
 
+### Features
+- improve: Project explorer gets extra controls (add project, new project, new suite, save suite as)
+
 # Puppetry 2.0.3
 
 ### Bug fixes
