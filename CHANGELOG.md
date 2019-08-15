@@ -1,3 +1,15 @@
+# Puppetry 2.0.4
+
+### Bug fixes
+- fix: issue #35, Puppetry was wrongly merging targets of the suite and snippets
+- fix: Recorder should not capture click event on elements with computed style display: none, visibility: hidden
+- fix: Recorder cleans up the suite before saving recording session
+- fix: Snippets have independent targets
+- fix: When Snippets panel open, it could not figure out the current suite and failed to run/export tests
+
+### Features
+- improve: Project explorer gets extra controls (add project, new project, new suite, save suite as)
+
 # Puppetry 2.0.3
 
 ### Bug fixes

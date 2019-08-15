@@ -247,6 +247,7 @@ export async function readSuite( directory, file ) {
   const filePath = join( directory, file );
   // in case of snippets
   if ( file === SNIPPETS_FILENAME && !fs.existsSync( filePath ) ) {
+    log.warn( `Suite file ${filePath} not found.` );
     return null;
   }
 

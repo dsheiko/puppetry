@@ -6,6 +6,7 @@ import ErrorBoundary from "component/ErrorBoundary";
 import { TestTable } from "./GroupTable/TestTable";
 import { EditableCell } from "./EditableCell";
 import { ipcRenderer } from "electron";
+import { confirmRecording } from "service/smalltalk";
 import { E_DELEGATE_RECORDER_SESSION, E_OPEN_RECORDER_WINDOW } from "constant";
 
 const recordPrefIcon = <Icon type="idcard" title="Group" />;
@@ -52,9 +53,20 @@ export class GroupTable extends AbstractEditableTable {
     });
   }
 
-  onClickRecord = ( e ) => {
+  onClickRecord = async ( e ) => {
     e.preventDefault();
-    ipcRenderer.send( E_OPEN_RECORDER_WINDOW );
+    const { groups, targets } = this.props,
+          normGroups = Array.isArray( groups ) ? groups : [];
+
+    if ( !normGroups.filter( group => !group.adding ).length
+          && !Object.keys( targets ).length ) {
+      ipcRenderer.send( E_OPEN_RECORDER_WINDOW );
+      return;
+    }
+
+    if ( await confirmRecording() ) {
+      ipcRenderer.send( E_OPEN_RECORDER_WINDOW );
+    }
   }
 
   onExpand = ( isExpanded, record ) => {

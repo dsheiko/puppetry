@@ -3,6 +3,23 @@ import { msgDataSaved } from "component/Global/Message";
 function noop() {
 }
 
+export async function confirmRecording() {
+  try {
+    await smalltalk
+      .confirm( "Confirm Suite Cleanup",
+        "By recording the current content of your suite will be removed. Are you sure you want to proceed?" , {
+          buttons: {
+            ok: "Yes",
+            cancel: "No"
+          }
+        });
+    return true;
+  } catch ( e ) {
+    noop( e );
+    return false;
+  }
+}
+
 export async function confirmUnsavedChanges({ saveSuite, setSuite }) {
   try {
     await smalltalk

@@ -83,7 +83,9 @@ actions.loadSuite = ( filename, options = { silent: false }) => async ( dispatch
           { projectDirectory } = store.settings,
           data = await readSuite( projectDirectory, filename ),
           // in case of snippets
-          suite = data === null ? store.suite : data;
+          suite = data === null
+            ? { ...DEFAULT_STATE.suite, filename }
+            : data;
 
     suite.snippets = ( filename === SNIPPETS_FILENAME );
 
@@ -145,7 +147,12 @@ actions.createSuiteByRecording = ({ targets, commands }) => ( dispatch ) => {
   const groupId = uniqid(),
         testId = uniqid();
 
-  dispatch( actions.updateSuite({ modified: true }) );
+  // fully reset suite after recording session
+  dispatch( actions.updateSuite({
+    modified: true,
+    targets: {},
+    groups: {}
+  }) );
 
   dispatch( appActions.setApp({ loading: true }) );
   setTimeout( () => {
