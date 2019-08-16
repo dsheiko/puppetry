@@ -52,6 +52,9 @@ function createWindow() {
 
   // Create the browser window.
   mainWindow = new BrowserWindow( Object.assign({
+    webPreferences: {
+        nodeIntegration: true
+    },
     width: APP_WIN_WIDTH,
     height: APP_WIN_HEIGHT, // 768
     minWidth: 960,

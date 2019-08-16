@@ -1,7 +1,7 @@
 {
   "name": "puppetry",
   "description": "Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline",
-  "version": "2.1.0-beta.1",
+  "version": "2.1.0-beta.2",
   "author": "Dmitry Sheiko <me@dsheiko.com> (http://dsheiko.com)",
   "engines": {
     "node": ">=11.7.0"
@@ -51,8 +51,8 @@
     "classnames": "^2.2.6",
     "cross-env": "^5.2.0",
     "custom-error-instance": "^2.1.1",
-    "electron-context-menu": "^0.10.0",
-    "electron-log": "^2.2.17",
+    "electron-context-menu": "^0.10.1",
+    "electron-log": "^3.0.7",
     "faker": "^4.1.0",
     "hotkeys-js": "^3.3.8",
     "immutability-helper": "^2.8.1",
@@ -105,9 +105,9 @@
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
-    "electron": "^3.0.5",
+    "electron": "^6.0.2",
     "electron-builder": "^20.44.4",
-    "electron-debug": "^2.0.0",
+    "electron-debug": "^3.0.1",
     "electron-devtools-installer": "^2.2.4",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",

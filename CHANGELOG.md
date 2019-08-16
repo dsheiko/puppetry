@@ -4,6 +4,8 @@
 - improvement: add export format: printable test
 - improvement: add export format: JSON
 - improvement: add template expressions htmlOf, attributeOf, propertyOf
+- improvement: migrated to Electron 6
+- improvement: migrated to Puppeteer 1.19
 
 # Puppetry 2.0.4
 

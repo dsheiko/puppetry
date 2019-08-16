@@ -17,7 +17,7 @@ import {
   RUNNER_PUPPETRY,
   SNIPPETS_FILENAME
 } from "constant";
-import findLogPath from "electron-log/lib/transports/file/find-log-path";
+import findLogPath from "electron-log/lib/transports/file/findLogPath";
 
 const PROJECT_FILE_NAME = ".puppetryrc",
       PROJECT_FALLBAK_NAME = ".puppertyrc",

@@ -201,6 +201,7 @@ export class ExportProjectModal  extends AbstractComponent {
 
   render() {
     const { isVisible, files, project, environment, action } = this.props,
+          { format } = this.state,
           current = this.getCurrentFile(),
           checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
