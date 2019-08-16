@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ipcRenderer, shell } from "electron";
-import { E_RUN_TESTS, SNIPPETS_GROUP_ID } from "constant";
+import { E_RUN_TESTS, SNIPPETS_GROUP_ID, DIR_SCREENSHOTS } from "constant";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
@@ -12,7 +12,9 @@ import { join } from "path";
 import { TestGeneratorError } from "error";
 import Convert from "ansi-to-html";
 import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
+import { ReportBody } from "./TestReport/ReportBody";
 import path from "path";
+import { readdir } from "service/io";
 
 const Panel = Collapse.Panel,
       convert = new Convert();
@@ -44,7 +46,7 @@ export class TestReport extends AbstractComponent {
   }
 
   onOpenDirectory = () => {
-    shell.openItem( join( this.props.projectDirectory, "screenshots" ) );
+    shell.openItem( join( this.props.projectDirectory, DIR_SCREENSHOTS ) );
     notification.open({
       message: "Opening system file manager",
       description: "The requested directory will open in the default file manager in a few seconds"
@@ -196,8 +198,10 @@ export class TestReport extends AbstractComponent {
     }, {});
   }
 
+
   render() {
     const { report, loading, ok, stdErr, details } = this.state;
+
 
     if ( report !== {} && !report ) {
       this.props.action.setError({
@@ -215,13 +219,7 @@ export class TestReport extends AbstractComponent {
       <If exp={ ok && !loading }>
         <div id="cTestReport">
 
-          <p>
-            <Button
-              onClick={ this.onOpenDirectory }
-              type="primary"
-              icon="folder-open">Open directory with generated screenshots</Button>
-          </p>
-
+       
           <div>{ report.success
             ? ( <div className="tr-badge is-ok">PASSED</div> )
             : ( <div className="tr-badge is-fail">FAILED</div> ) }</div>
@@ -233,40 +231,7 @@ export class TestReport extends AbstractComponent {
             </Panel>
           </Collapse> }
 
-          <div className="bottom-line">
-            { Object.keys( details ).map( suiteKey => ( <div key={ `k${ counter++ }` } className="test-report__suite">
-              { suiteKey }
-              {  Object.keys( details[ suiteKey ]).map( describeKey => ( <div
-                key={ `k${ counter++ }` }
-                className="test-report__describe">
-                { describeKey }
-                { details[ suiteKey ][ describeKey ].map( spec => ( <div
-                  key={ `k${ counter++ }` }
-                  className="test-report__it">
-                  <If exp={ spec.status === "passed" }>
-                    <Icon
-                      className="test-report__ok"
-                      type="check" theme="outlined" fill="#52c41a" width="16" height="16" />
-                  </If>
-                  <If exp={ spec.status !== "passed" }>
-                    <Icon
-                      className="test-report__fail"
-                      type="close" theme="outlined" fill="#eb2f96" width="16" height="16" />
-                  </If>
-                  { " " }<span className="test-report__it__title">{ spec.title }
-                    { " " }({ millisecondsToStr( spec.duration ) })
-                  </span>
-
-                  <If exp={ spec.status !== "passed" && spec.failureMessages }>
-                    <div  className="test-report__it__exception">{ spec.failureMessages }</div>
-                  </If>
-
-
-                </div> ) ) }
-              </div> ) ) }
-            </div> ) ) }
-          </div>
-
+          <ReportBody details={ details } projectDirectory={ this.props.projectDirectory } action={ this.props.action } />
 
           <dl className="tr-row">
             <dt>Test Suites</dt>

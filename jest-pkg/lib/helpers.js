@@ -5,20 +5,22 @@ const { join } = require( "path" ),
       { dirname } = require( "path" ),
       { LocalStorage } = require( "node-localstorage" ),
       faker = require( "faker" ),
-      localStorage = new LocalStorage( join( __dirname, "/../", "/storage" ) );
+      localStorage = new LocalStorage( join( __dirname, "/../", "/storage" ) ),
+      DIR_SCREENSHOTS_TRACE = ".trace";
 
 let PATH_SCREENSHOTS = join( __dirname, "/../", "/screenshots"),
     SUITE_NAME = "";
 
     /**
      * @see https://pptr.dev/#?product=Puppeteer&version=v1.5.0&show=api-class-page
+     * * @param {string} testId
      * @param {string} filePath
      * @param {Object} [options]
      * @returns {Object}
      */
-const png = ( filePath, options = {} ) => {
+const png = ( testId, filePath, options = {} ) => {
         const normalizedPath = filePath.replace( /[^a-zA-Z\d\-\_]/g, "-" );
-        const path = join( PATH_SCREENSHOTS, SUITE_NAME, `${ normalizedPath }.png` );
+        const path = join( PATH_SCREENSHOTS, testId, `${ normalizedPath }.png` );
         shell.mkdir( "-p" , dirname( path ) );
         return { path, ...options };
       },
@@ -27,7 +29,7 @@ const png = ( filePath, options = {} ) => {
        * @returns {Object}
        */
       tracePng = ( fileName ) => {
-        const path = join( PATH_SCREENSHOTS, "trace", `${ fileName }.png` );
+        const path = join( PATH_SCREENSHOTS, DIR_SCREENSHOTS_TRACE, `${ fileName }.png` );
         shell.mkdir( "-p" , dirname( path ) );
         return { path };
       },

@@ -44,6 +44,12 @@ export default {
     gitCheckoutModal: false,
     gitCloneModal: false,
     editEnvironmentsModal: false,
+    appLightbox: false,
+
+    lightbox: {
+      index: 0,
+      images: []
+    },
 
     commandModal: {
       isVisible: false,

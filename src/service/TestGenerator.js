@@ -87,7 +87,8 @@ export default class TestGenerator {
               params,
               targetSeletor: this.targets[ target ],
               method,
-              id: command.id
+              id: command.id,
+              testId: command.testId
             }) + traceCode;
 
       // Provide source code with markers
@@ -112,7 +113,7 @@ export default class TestGenerator {
       .map( this.parseCommand )
       .join( "\n" );
     return this.schema.jest.tplTest({
-      title: test.title,
+      title: `${test.title} {${test.id}}`,
       body
     });
   }

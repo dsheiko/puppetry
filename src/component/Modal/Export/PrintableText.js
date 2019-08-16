@@ -1,5 +1,5 @@
 import { exportProject, isDirEmpty, getRuntimeTestPath, readdir, writeFile } from "service/io";
-import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, RUNNER_JEST, RUNNER_PUPPETRY, E_RUN_TESTS } from "constant";
+import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, RUNNER_JEST, RUNNER_PUPPETRY, E_RUN_TESTS, DIR_SCREENSHOTS_TRACE } from "constant";
 import { ipcRenderer } from "electron";
 import TextConvertor from "service/Export/TextConvertor";
 import { join } from "path";
@@ -42,7 +42,7 @@ export default async function exportPrintableText({
           snippets,
           ...envDto
         },
-        screenshotSrcPath = join( projectDirectory, "screenshots", "trace" ),
+        screenshotSrcPath = join( projectDirectory, "screenshots", DIR_SCREENSHOTS_TRACE ),
         screenshots = ( await readdir( screenshotSrcPath ) )
           .map( filename => filename.replace( /\.png$/, "" ) ),
         convertor = new TextConvertor( options, ( command, recordLabel ) => {

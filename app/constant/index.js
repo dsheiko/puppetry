@@ -74,5 +74,8 @@ exports.RUNNER_JEST = "RUNNER_JEST";
 exports.SNIPPETS_FILENAME = ".snippets.json";
 exports.SNIPPETS_GROUP_ID = "snippets";
 
+exports.DIR_SCREENSHOTS_TRACE = ".trace";
+exports.DIR_SCREENSHOTS = "screenshots";
 
 exports.INLINE_INPUT_STYLES = { width: 200 };
+

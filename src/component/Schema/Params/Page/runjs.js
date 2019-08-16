@@ -35,8 +35,7 @@ via \`ENV\` map (e.g. \`ENV[VAR_NAME]\`)
           control: TEXTAREA,
           label: "JavaScript code to run",
           initialValue: "",
-          placeholder: "await bs.page.goto('https://example.com');\n"
-            + "await bs.page.screenshot( util.png( \"we are here\" ) );",
+          placeholder: "await bs.page.goto('https://example.com');",
           rules: [{
             required: true,
             message: "Code is required"

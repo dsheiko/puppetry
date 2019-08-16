@@ -24,6 +24,42 @@ export default handleActions(
       });
     },
 
+     [ actions.setLightboxIndex ]: ( state, { payload }) => {
+      if ( !payload ) {
+        return state;
+      }
+      return update( state, {
+        lightbox: {
+          index: {
+            $set: payload
+          }
+        }
+      });
+    },
+
+    [ actions.addLightboxImages ]: ( state, { payload }) => {
+      if ( !payload ) {
+        return state;
+      }
+      return update( state, {
+        lightbox: {
+          images: {
+            $apply: ( images ) => images.concat( payload )
+          }
+        }
+      });
+    },
+
+    [ actions.cleanLightbox ]: ( state, { payload }) => {
+      return update( state, {
+        lightbox: {
+          images: {
+            $set: []
+          }
+        }
+      });
+    },
+
     [ actions.addAppTab ]: ( state, { payload }) => {
       if ( !payload ) {
         return state;

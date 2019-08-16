@@ -30,6 +30,7 @@ import { GitCheckoutModal } from "./Modal/GitCheckoutModal";
 import { GitCloneModal } from "./Modal/GitCloneModal";
 import { EditProjectModal } from "./Modal/EditProjectModal";
 import { EditEnvironmentsModal } from "./Modal/EditEnvironmentsModal";
+import { AppLightbox } from "./Modal/AppLightbox";
 
 import { TabGroup  } from "./TabGroup";
 import If from "component/Global/If";
@@ -267,6 +268,10 @@ export class AppLayout extends React.Component {
           environments={ store.project.environments }
           action={ action } />
 
+        <AppLightbox
+          isVisible={ store.app.appLightbox }
+          data={ store.app.lightbox }
+          action={ action } />
 
       </ErrorBoundary>
     );

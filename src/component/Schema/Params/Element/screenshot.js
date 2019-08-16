@@ -21,7 +21,7 @@ function getCounter( id ) {
 }
 
 export const screenshot = {
-  template: ({ target, params, id }) => {
+  template: ({ target, params, id, testId }) => {
     const { name, omitBackground } = params,
           parser = new ExpressionParser( id ),
           baseOptions = {
@@ -32,7 +32,7 @@ export const screenshot = {
           optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
     return `
       // Taking screenshot of ${ target } element
-      await ( await ${ target }() ).screenshot( util.png( ${ parser.stringify( name ) }${ optArg }) );
+      await ( await ${ target }() ).screenshot( util.png( ${ JSON.stringify( testId ) }, ${ parser.stringify( name ) }${ optArg }) );
   `;
   },
 

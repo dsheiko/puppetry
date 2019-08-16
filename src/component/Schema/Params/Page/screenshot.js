@@ -21,7 +21,7 @@ function getCounter( id ) {
 }
 
 export const screenshot = {
-  template: ({ params, id }) => {
+  template: ({ params, id, testId }) => {
     const { name, fullPage, omitBackground, x, y, width, height } = params,
           parser = new ExpressionParser( id ),
           clip = {
@@ -44,7 +44,7 @@ export const screenshot = {
     const optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
     return `
       // Taking screenshot of ${ isClipEmpty ? "the page" : "the specified region" }
-      await bs.page.screenshot( util.png( ${ parser.stringify( name ) }${ optArg }) );
+      await bs.page.screenshot( util.png( ${ JSON.stringify( testId ) }, ${ parser.stringify( name ) }${ optArg }) );
   `;
   },
 

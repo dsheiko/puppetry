@@ -1054,3 +1054,37 @@ td:hover .editable-cell-icon {
 .test-options {
   margin: 16px 0;
 }
+
+.screenshot-thumb-container {
+  display: flex;
+  flex-direction: row;
+  flex-flow: row wrap;
+  margin: -4px;
+  padding: 8px 0;
+}
+.screenshot-thumb-container > figure {
+  margin: 4px;
+  width: 224px;
+  height: 126px;
+  background-color: #f0f2f5;
+  overflow: hidden;
+  outline: 1px solid #98a6ba;
+}
+
+.screenshot-thumb-container > figure:hover {
+  outline: 1px solid #00529e;
+}
+
+.screenshot-thumb {
+  /* maintain 16:9 aspect ratio */
+  /* https://calculateaspectratio.com/ */
+  width: 224px;
+  height: 126px;
+  object-fit: contain;
+  transition: transform .3s ease-in-out;
+  cursor: pointer;
+}
+
+.screenshot-thumb:hover {
+  transform: scale( 1.2 );
+}
