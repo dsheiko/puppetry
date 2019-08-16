@@ -16,7 +16,8 @@ export class FileList extends React.Component {
       removeSuite: PropTypes.func.isRequired,
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired,
-      removeAppTab: PropTypes.func.isRequired
+      removeAppTab: PropTypes.func.isRequired,
+      setApp: PropTypes.func.isRequired
     }),
 
     parentCliked: PropTypes.string.isRequired,
@@ -83,6 +84,11 @@ export class FileList extends React.Component {
     }) );
 
     menu.append( new MenuItem({
+      label: "Save as...",
+      click: this.onSaveSuiteAs
+    }) );
+
+    menu.append( new MenuItem({
       label: "Delete",
       click: async () => {
         const sure = await confirmDeleteFile( file );
@@ -98,6 +104,14 @@ export class FileList extends React.Component {
       x: e.x,
       y: e.y
     });
+  }
+
+  onSaveSuiteAs = () => {
+    const { projectDirectory } = this.props;
+    if ( !projectDirectory ) {
+      return;
+    }
+    this.props.action.setApp({ saveSuiteAsModal: true });
   }
 
   render() {

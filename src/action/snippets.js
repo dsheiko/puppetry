@@ -1,6 +1,7 @@
 import { createActions } from "redux-actions";
 import { readSuite } from "../service/io";
 import { SNIPPETS_FILENAME } from "constant";
+import DEFAULT_STATE from "reducer/defaultState";
 
 const actions = createActions({
   SET_SNIPPETS: ( options ) => options,
@@ -14,7 +15,9 @@ actions.loadSnippets = () => async ( dispatch, getState ) => {
           { projectDirectory } = store.settings,
           data = await readSuite( projectDirectory, SNIPPETS_FILENAME ),
           // in case of snippets
-          suite = data === null ? store.suite : data;
+          suite = data === null
+            ? { ...DEFAULT_STATE.suite, filename: SNIPPETS_FILENAME }
+            : data;
 
     suite.snippets = true;
     dispatch( actions.resetSnippets({

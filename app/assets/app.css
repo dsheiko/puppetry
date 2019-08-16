@@ -457,6 +457,14 @@ li.project-navigator__li {
   top: 8px;
   color: rgba(255, 255, 255, 0.65);
 }
+.project-navigator__open {
+  position: absolute;
+  display: block;
+  right: 34px;
+  top: 8px;
+  color: rgba(255, 255, 255, 0.65);
+}
+.project-navigator__open:hover,
 .project-navigator__add:hover {
   color: white;
 }
