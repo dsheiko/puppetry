@@ -11,6 +11,7 @@ export default {
   app: {
     greeting: "Hello!",
     loading: false,
+    updateSnapshot: false,
     readyToRunTests: false,
     // currently selected env
     environment: "",

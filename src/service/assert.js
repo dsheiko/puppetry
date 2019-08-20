@@ -28,34 +28,34 @@ function parseTpl( value, id ) {
 function createCbBody({ assert, target, method, id }) {
   const { assertion, value, operator, position, ...options } = assert,
         source = `${ target }.${ method }`;
-
-
-
+  
   switch ( assertion ) {
-  case "selector":
-    return justify( `expect( result ).toBeOk( "${ source }" );` );
-  case "boolean":
-    return justify( `expect( result )${ value ? "" : ".not" }.toBeOk( "${ source }" );` );
-  case "number":
-    return justify( `expect( result ).toPassCondition( "${ operator }", ${ value }, "${ source }" );` );
-  case "contains":
-    if ( typeof options.type !== "undefined" && options.type === "string" ) {
-      return justify( `expect( result ).toIncludeSubstring( ${ parseTpl( value, id ) }, "${ source }" );` );
-    }
-    return justify( `expect( result ).toIncludeSubstring( "${ value }", "${ source }" );` );
-  case "equals":
-    if ( typeof options.type !== "undefined" && options.type === "string" ) {
-      return justify( `expect( result ).toBeEqual( ${ parseTpl( value, id ) }, "${ source }" );` );
-    }
-    return justify( `expect( result ).toBeEqual( ${ JSON.stringify( value ) }, "${ source }" );` );
-  case "position":
-    return justify( `expect( result ).toMatchPosition`
-        + `( "${ position }", "${ target }", "${ options.target }", "${ source }" );` );
-  case "boundingBox":
-    return justify( `expect( result )`
-        + `.toMatchBoundingBoxSnapshot( ${ JSON.stringify( options, null, "  " ) }, "${ source }" );` );
-  default:
-    throw RuntimeError( `Invalid assertion '${ assertion }'` );
+    case "screenshot":
+      return justify( `expect( result ).toMatchScreenshot( ${ options.mismatchTolerance }, "${ source }" );` );
+    case "selector":
+      return justify( `expect( result ).toBeOk( "${ source }" );` );
+    case "boolean":
+      return justify( `expect( result )${ value ? "" : ".not" }.toBeOk( "${ source }" );` );
+    case "number":
+      return justify( `expect( result ).toPassCondition( "${ operator }", ${ value }, "${ source }" );` );
+    case "contains":
+      if ( typeof options.type !== "undefined" && options.type === "string" ) {
+        return justify( `expect( result ).toIncludeSubstring( ${ parseTpl( value, id ) }, "${ source }" );` );
+      }
+      return justify( `expect( result ).toIncludeSubstring( "${ value }", "${ source }" );` );
+    case "equals":
+      if ( typeof options.type !== "undefined" && options.type === "string" ) {
+        return justify( `expect( result ).toBeEqual( ${ parseTpl( value, id ) }, "${ source }" );` );
+      }
+      return justify( `expect( result ).toBeEqual( ${ JSON.stringify( value ) }, "${ source }" );` );
+    case "position":
+      return justify( `expect( result ).toMatchPosition`
+          + `( "${ position }", "${ target }", "${ options.target }", "${ source }" );` );
+    case "boundingBox":
+      return justify( `expect( result )`
+          + `.toMatchBoundingBoxSnapshot( ${ JSON.stringify( options, null, "  " ) }, "${ source }" );` );
+    default:
+      throw RuntimeError( `Invalid assertion '${ assertion }'` );
   }
 
 }

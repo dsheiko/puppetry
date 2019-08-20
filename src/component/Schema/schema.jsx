@@ -24,6 +24,7 @@ import { setCookie } from "./Params/Page/setCookie";
 import { assertScroll as assertScrollPage } from "./Params/Page/assertScroll";
 import { waitForNavigation } from "./Params/Page/waitForNavigation";
 import { assertNodeCount as assertNodeCountPage } from "./Params/Page/assertNodeCount";
+import { assertScreenshot as assertScreenshotPage } from "./Params/Page/assertScreenshot";
 
 import { screenshot as screenshotElement } from "./Params/Element/screenshot";
 import { assertProperty } from "./Params/Element/assertProperty";
@@ -121,7 +122,8 @@ export const schema = {
     assertContent,
     assertNodeCount: assertNodeCountPage,
     assertScroll: assertScrollPage,
-    assertVar
+    assertVar,
+    assertScreenshot: assertScreenshotPage
   }
 };
 

@@ -149,7 +149,7 @@ export async function exportProject(
   projectDirectory,
   outputDirectory,
   suiteFiles,
-  { headless = true, launcherArgs = "", runner = RUNNER_PUPPETRY, trace = false },
+  { headless = true, launcherArgs = "", runner = RUNNER_PUPPETRY, ...options },
   snippets,
   env
 ) {
@@ -162,13 +162,21 @@ export async function exportProject(
   try {
     removeExport( outputDirectory );
     shell.mkdir( "-p" , testDir );
+
+    if ( options.updateSnapshot ) {
+      shell.rm( "-rf" , join( outputDirectory, "compare" ) );
+    }
+    
     shell.mkdir( "-p" , join( outputDirectory, "screenshots" ) );
+    shell.mkdir( "-p" , join( outputDirectory, "compare" ) );
     shell.chmod( "-R", "+w", outputDirectory );
     shell.cp( "-RLf" , JEST_PKG + "/*", outputDirectory  );
     shell.mkdir( "-p" , join( outputDirectory, "specs" ) );
 
+
+
     for ( const filename of suiteFiles ) {
-      let specContent = await exportSuite( projectDirectory, filename, runner, snippets, env, { trace } );
+      let specContent = await exportSuite( projectDirectory, filename, runner, snippets, env, options );
       const specFilename = parse( filename ).name + ".spec.js",
             specPath = join( testDir, specFilename ),
             specHasDebugger = specContent.includes( " debugger;" );

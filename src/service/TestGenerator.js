@@ -144,7 +144,7 @@ export default class TestGenerator {
         suite: this.suite,
         runner: this.runner,
         env: this.env,
-        screenshotDirectory: join( this.projectDirectory, "screenshots" ),
+        projectDirectory: this.projectDirectory,
         body: Object.values( this.suite.groups )
           .filter( group => group.disabled !== true )
           .map( this.parseGroup )

@@ -9,6 +9,7 @@ const { join } = require( "path" ),
       DIR_SCREENSHOTS_TRACE = ".trace";
 
 let PATH_SCREENSHOTS = join( __dirname, "/../", "/screenshots"),
+    PATH_COMPARE = join( __dirname, "/../", "/compare"),
     SUITE_NAME = "";
 
     /**
@@ -33,6 +34,15 @@ const png = ( testId, filePath, options = {} ) => {
         shell.mkdir( "-p" , dirname( path ) );
         return { path };
       },
+
+      initCompareDirs = () => {
+        [ "expected", "actual", "diff" ].forEach(( stage ) => {
+          shell.mkdir( "-p" , join( PATH_COMPARE, stage ) );
+        });
+      },
+
+      getComparePath = ( stage, testId ) => join( PATH_COMPARE, stage, `${ testId }.png` ),
+
       /**
        * Removes outdated suite screenshots on the beggining of test
        */
@@ -118,8 +128,13 @@ exports.util = {
 
   tracePng,
 
-  setPngBasePath: ( path ) => {
-    PATH_SCREENSHOTS = path;
+  getComparePath,
+
+  initCompareDirs,
+
+  setProjectDirectory: ( projectDirectory ) => {
+    PATH_SCREENSHOTS = join( projectDirectory, "/screenshots");
+    PATH_COMPARE = join( projectDirectory, "/compare");
   },
 
   setSuiteName: ( name ) => {

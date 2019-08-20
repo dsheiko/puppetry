@@ -49,7 +49,7 @@ export class TestReportModal extends AbstractComponent {
     loading: false,
     headless: true,
     launcherArgs: "",
-    trace: false
+    updateSnapshot: false
   }
 
   constructor( props ) {
@@ -124,7 +124,7 @@ export class TestReportModal extends AbstractComponent {
         testReportModal: false,
         headless: this.state.headless,
         launcherArgs: this.state.launcherArgs,
-        trace: this.state.trace
+        updateSnapshot: this.state.updateSnapshot
       });
 
 
@@ -232,8 +232,12 @@ export class TestReportModal extends AbstractComponent {
               environment={ this.props.environment } action={ this.props.action } />
 
             <div className="test-options">
-            <Checkbox onChange={ e  => this.onChangeCheckbox( e.target.checked, "trace" ) } >
-              trace mode
+            <Checkbox onChange={ e  => this.onChangeCheckbox( e.target.checked, "updateSnapshot" ) } >
+              update comparison images <Tooltip
+                    title={ "For CSS regression testing use this option to force Puppetry "
+                      + "re-creating snapshots (screenshots representing proper states of the targets)" }
+                    icon="info-circle"
+                  />
             </Checkbox>
             </div>
 

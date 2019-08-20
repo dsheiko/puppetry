@@ -1,6 +1,9 @@
 const bs = require( "./BrowserSession" ),
       { util, fetch, localStorage } = require( "./helpers" );
 
+// Include resamble.js
+require( "./bootstrap/compare" )( bs, util );
+
 /**
  * Extending Puppeteer
  */
@@ -146,6 +149,21 @@ expect.extend({
     return expectReturn( pass,
       `[${ source }] expected ${ JSON.stringify( received ) } to equal ${ JSON.stringify( value ) }`,
       `[${ source }] expected ${ JSON.stringify( received ) } not to equal ${ JSON.stringify( value ) }` );
+  },
+
+   /**
+   * Assert value is truthy
+   * @param {Boolean} received
+   * @param {*} mismatchTolerance
+   * @param {String} source
+   * @returns {Object}
+   */
+  toMatchScreenshot( received, mismatchTolerance, source ) {
+    const pass = Number( received ) <= Number( mismatchTolerance );
+    return expectReturn( pass,
+      `[${ source }] expected ${ JSON.stringify( received ) } to satisfy mismatch tolerance of ${ mismatchTolerance }`,
+      `[${ source }] expected ${ JSON.stringify( received ) } `
+        + `to notsatisfy mismatch tolerance of ${ mismatchTolerance }` );
   },
 
   /**

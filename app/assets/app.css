@@ -1088,3 +1088,7 @@ td:hover .editable-cell-icon {
 .screenshot-thumb:hover {
   transform: scale( 1.2 );
 }
+/* When Assert fomr below the collapsable (Advanced options) we need an indent */
+.command-form > .ant-collapse {
+  margin-bottom: 16px;
+}

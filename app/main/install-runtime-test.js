@@ -123,7 +123,8 @@ exports.installRuntimeTest = ( event, appInstallDirectory ) => {
       "faker@^4.1.0",
       "node-localstorage@^1.3.1",
       "puppeteer@1.19.0",
-      "shelljs@^0.8.2"
+      "shelljs@^0.8.2",
+      "resemblejs@^3.2.0"
     ], ( err, data ) => {
       if ( err ) {
         log.error( `Main process: NPM(2): ${err}` );
