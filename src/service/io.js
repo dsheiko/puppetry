@@ -25,7 +25,6 @@ const PROJECT_FILE_NAME = ".puppetryrc",
       cache = {},
       EXPORT_ASSETS = [
         "specs",
-        "screenshots",
         "lib",
         "package.json",
         "README.md"
@@ -163,12 +162,15 @@ export async function exportProject(
     removeExport( outputDirectory );
     shell.mkdir( "-p" , testDir );
 
+    shell.rm( "-rf" , join( projectDirectory, "screenshots" ) );
+
     if ( options.updateSnapshot ) {
-      shell.rm( "-rf" , join( outputDirectory, "compare" ) );
+      shell.rm( "-rf" , join( projectDirectory, "snapshots" ) );
     }
-    
-    shell.mkdir( "-p" , join( outputDirectory, "screenshots" ) );
-    shell.mkdir( "-p" , join( outputDirectory, "compare" ) );
+
+    shell.mkdir( "-p" , join( projectDirectory, "screenshots" ) );
+    shell.mkdir( "-p" , join( projectDirectory, "snapshots" ) );
+
     shell.chmod( "-R", "+w", outputDirectory );
     shell.cp( "-RLf" , JEST_PKG + "/*", outputDirectory  );
     shell.mkdir( "-p" , join( outputDirectory, "specs" ) );

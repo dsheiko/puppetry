@@ -2,7 +2,11 @@ const bs = require( "./BrowserSession" ),
       { util, fetch, localStorage } = require( "./helpers" );
 
 // Include resamble.js
-require( "./bootstrap/compare" )( bs, util );
+require( "./bootstrap/cssRegression" )( bs, util );
+
+
+
+
 
 /**
  * Extending Puppeteer
@@ -159,11 +163,11 @@ expect.extend({
    * @returns {Object}
    */
   toMatchScreenshot( received, mismatchTolerance, source ) {
-    const pass = Number( received ) <= Number( mismatchTolerance );
+    const pass = Number( received ) === 0;
     return expectReturn( pass,
       `[${ source }] expected ${ JSON.stringify( received ) } to satisfy mismatch tolerance of ${ mismatchTolerance }`,
       `[${ source }] expected ${ JSON.stringify( received ) } `
-        + `to notsatisfy mismatch tolerance of ${ mismatchTolerance }` );
+        + `not to satisfy mismatch tolerance of ${ mismatchTolerance }` );
   },
 
   /**

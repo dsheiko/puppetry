@@ -4,8 +4,13 @@
 - improvement: add export format: printable test
 - improvement: add export format: JSON
 - improvement: add template expressions htmlOf, attributeOf, propertyOf
-- improvement: migrated to Electron 6
-- improvement: migrated to Puppeteer 1.19
+- improvement: new Test report UI with screenshot thumbnails and lightbox
+
+### Updates
+
+- improvement: updated to Electron 6
+- improvement: updated to Puppeteer 1.19
+- improvement: updated to Jest 24.9
 
 # Puppetry 2.0.4
 

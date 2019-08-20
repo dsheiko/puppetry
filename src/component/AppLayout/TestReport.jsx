@@ -28,6 +28,7 @@ export class TestReport extends AbstractComponent {
     projectDirectory: PropTypes.string.isRequired,
     checkedList: PropTypes.arrayOf( PropTypes.string ).isRequired,
     targets: PropTypes.any,
+    selector: PropTypes.any,
     action: PropTypes.shape({
       setError: PropTypes.func.isRequired,
       removeAppTab: PropTypes.func.isRequired,
@@ -219,7 +220,7 @@ export class TestReport extends AbstractComponent {
       <If exp={ ok && !loading }>
         <div id="cTestReport">
 
-       
+
           <div>{ report.success
             ? ( <div className="tr-badge is-ok">PASSED</div> )
             : ( <div className="tr-badge is-fail">FAILED</div> ) }</div>
@@ -231,7 +232,11 @@ export class TestReport extends AbstractComponent {
             </Panel>
           </Collapse> }
 
-          <ReportBody details={ details } projectDirectory={ this.props.projectDirectory } action={ this.props.action } />
+          <ReportBody details={ details }
+            projectDirectory={ this.props.projectDirectory }
+            selector={ this.props.selector }
+            action={ this.props.action } />
+
 
           <dl className="tr-row">
             <dt>Test Suites</dt>

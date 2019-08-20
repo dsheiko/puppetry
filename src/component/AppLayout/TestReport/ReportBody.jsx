@@ -56,16 +56,24 @@ export class ReportBody extends AbstractComponent {
     return join( this.props.projectDirectory, DIR_SCREENSHOTS, id );
   }
 
+
   async componentDidMount() {
-    const { details, screenshotDirs } = this.props;
+    const { details, screenshotDirs, selector } = this.props;
     let screenshotInx = 0;
     this.props.action.cleanLightbox();
+
+//    console.log( 1, selector.findTestCaseByCommandId( "nmajnyew656" ) );
+//    const fls = await readdir( join( this.props.projectDirectory, "snapshots", "actual" ) );
+//    console.log(fls);
+
+
     for ( let suiteKey of Object.keys( details ) ) {
       for ( let describeKey of Object.keys( details[ suiteKey ]) ) {
         for ( let inx in details[ suiteKey ][ describeKey ] ) {
           const spec = details[ suiteKey ][ describeKey ][ inx ],
                 { title, id } = this.parseTile( spec.title ),
                 screenshotDir = this.getScreenshotDir( id ),
+                // Screenshots per test case
                 screenshotFiles = fs.existsSync( screenshotDir )
                   ?  await readdir( screenshotDir )
                   : [],
@@ -86,6 +94,7 @@ export class ReportBody extends AbstractComponent {
         }
       }
     }
+    console.log(details);
     this.setState({ details });
   }
 

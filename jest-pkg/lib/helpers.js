@@ -9,7 +9,7 @@ const { join } = require( "path" ),
       DIR_SCREENSHOTS_TRACE = ".trace";
 
 let PATH_SCREENSHOTS = join( __dirname, "/../", "/screenshots"),
-    PATH_COMPARE = join( __dirname, "/../", "/compare"),
+    PATH_COMPARE = join( __dirname, "/../", "/snapshots"),
     SUITE_NAME = "";
 
     /**
@@ -134,7 +134,7 @@ exports.util = {
 
   setProjectDirectory: ( projectDirectory ) => {
     PATH_SCREENSHOTS = join( projectDirectory, "/screenshots");
-    PATH_COMPARE = join( projectDirectory, "/compare");
+    PATH_COMPARE = join( projectDirectory, "/snapshots");
   },
 
   setSuiteName: ( name ) => {

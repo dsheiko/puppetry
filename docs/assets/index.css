@@ -459,3 +459,7 @@ img.lazyload:not([src]) {
     text-overflow: ellipsis;
     position: relative;
 }
+
+h1 {
+  font-size: 10px !important;
+}

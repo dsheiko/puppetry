@@ -70,6 +70,7 @@ export class TabGroup extends React.Component {
                 options={ { updateSnapshot: store.app.updateSnapshot } }
                 project={ store.project }
                 snippets={ store.snippets }
+                selector={ selector }
               />
             </TabPane> ),
             settings: () => ( <TabPane tab={ "Settings" } key="settings" closable={ true }>
