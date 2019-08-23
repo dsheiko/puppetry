@@ -1,27 +1,11 @@
 import { INPUT, INPUT_NUMBER, CHECKBOX } from "../../constants";
-import { isEveryValueMissing, isSomeValueMissing, ruleValidateGenericString } from "service/utils";
+import { isEveryValueNull, isSomeValueNull, ruleValidateGenericString } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
 import { truncate } from "service/utils";
-
-let counterCache = new Set(), counter = 0;
-/**
- * the logic is that complex because
- * ParamsFormBuilder re-renders with onChange event and simple counter
- * would iterate every time
- * @param {string} id
- * @returns {Number}
- */
-function getCounter( id ) {
-  if ( counterCache.has( id ) ) {
-    return counter;
-  }
-  counterCache.add( id );
-  counter++;
-  return counter;
-}
+import { getCounter } from "service/screenshotCounter";
 
 export const screenshot = {
-  template: ({ params, id, testId }) => {
+  template: ({ params, id }) => {
     const { name, fullPage, omitBackground, x, y, width, height } = params,
           parser = new ExpressionParser( id ),
           clip = {
@@ -34,17 +18,17 @@ export const screenshot = {
             fullPage,
             omitBackground
           },
-          isClipEmpty = isEveryValueMissing( clip ),
+          isClipEmpty = isEveryValueNull( clip ),
           options = isClipEmpty ? baseOptions : { ...baseOptions, clip };
 
-    if ( !isClipEmpty && isSomeValueMissing( clip ) ) {
+    if ( !isClipEmpty && isSomeValueNull( clip ) ) {
       throw new Error( "You have to provide either all clip parameters or none" );
     }
 
-    const optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
+    const optArg = isEveryValueNull( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
     return `
       // Taking screenshot of ${ isClipEmpty ? "the page" : "the specified region" }
-      await bs.page.screenshot( util.png( ${ JSON.stringify( testId ) }, ${ parser.stringify( name ) }${ optArg }) );
+      await bs.page.screenshot( util.png( ${ JSON.stringify( id ) }, ${ parser.stringify( name ) }${ optArg }) );
   `;
   },
 
@@ -57,10 +41,13 @@ export const screenshot = {
 
   validate: ( values ) => {
     const { x, y, width, height } = values.params;
-    if ( !x && !y && !width && !height ) {
-      return null;
+    if ( x !== null || y !== null || width !== null || height !== null ) {
+      if ( x === null || y === null || width === null || height === null ) {
+        return "You have to provide either all clip parameters or none";
+      }
     }
-    return "You have to provide either all clip parameters or none";
+
+    return null;
   },
 
   test: {
@@ -125,33 +112,25 @@ export const screenshot = {
           name: "params.x",
           control: INPUT_NUMBER,
           label: "x (px)",
-          tooltip: "",
-          placeholder: "",
-          rules: []
+          initialValue: null
         },
         {
           name: "params.y",
           control: INPUT_NUMBER,
           label: "y (px)",
-          tooltip: "",
-          placeholder: "",
-          rules: []
+          initialValue: null
         },
         {
           name: "params.width",
           control: INPUT_NUMBER,
           label: "width (px)",
-          tooltip: "",
-          placeholder: "",
-          rules: []
+          initialValue: null
         },
         {
           name: "params.height",
           control: INPUT_NUMBER,
           label: "height (px)",
-          tooltip: "",
-          placeholder: "",
-          rules: []
+          initialValue: null
         }
 
       ]

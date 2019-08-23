@@ -945,9 +945,7 @@ td:hover .editable-cell-icon {
   display: flex;
   align-items: center;
 }
-.command-options-panel .ant-collapse-header .anticon-right-circle {
-    margin-top: 5px !important;
-}
+
 .command-options-panel .ant-collapse-header svg {
   width: 18px;
   height: 18px;
@@ -1055,24 +1053,57 @@ td:hover .editable-cell-icon {
   margin: 16px 0;
 }
 
-.screenshot-thumb-container {
+.thumb-container {
   display: flex;
   flex-direction: row;
   flex-flow: row wrap;
   margin: -4px;
   padding: 8px 0;
 }
-.screenshot-thumb-container > figure {
+
+
+.snapshot-thumb-container > div {
   margin: 4px;
+  width: 224px;
+  text-align: center;
+}
+
+.screenshot-thumb-container figure {
+  margin: 4px;
+}
+
+.thumb-container figure {
   width: 224px;
   height: 126px;
   background-color: #f0f2f5;
   overflow: hidden;
   outline: 1px solid #98a6ba;
+  position: relative;
 }
 
-.screenshot-thumb-container > figure:hover {
+.screenshot-thumb__title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 8px;
+  width: 100%;
+  transition: bottom .3s ease-in-out;
+  background: rgba(255, 255, 255, 0.65);
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.thumb-container figure:hover {
   outline: 1px solid #00529e;
+}
+
+.thumb-container figure:hover .screenshot-thumb__title  {
+  bottom: -24px;
 }
 
 .screenshot-thumb {

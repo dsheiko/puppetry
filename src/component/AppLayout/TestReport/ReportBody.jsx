@@ -3,14 +3,17 @@ import PropTypes from "prop-types";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
-import { DIR_SCREENSHOTS } from "constant";
+import { DIR_SCREENSHOTS, DIR_SNAPSHOTS } from "constant";
 import { millisecondsToStr } from "service/utils";
 import { Icon } from "antd";
 import { readdir } from "service/io";
-import { join } from "path";
+import { join, basename } from "path";
 import fs from "fs";
+import recursive from "recursive-readdir";
+import { Thumbnail } from "./Thumbnail";
 
-let counter = 0;
+let counter = 0,
+    screenshotInx = 0;
 
 export class ReportBody extends AbstractComponent {
 
@@ -47,54 +50,125 @@ export class ReportBody extends AbstractComponent {
     const re = /^(.*) \{(.*)\}$/,
           res = rawTitle.match( re );
     if ( res === null ) {
-      return { title: rawTitle, id: "" };
+      return { title: rawTitle, testId: "" };
     }
-    return { title: res[ 1 ], id: res[ 2 ] };
+    return { title: res[ 1 ], testId: res[ 2 ] };
   }
 
-  getScreenshotDir( id ) {
-    return join( this.props.projectDirectory, DIR_SCREENSHOTS, id );
+  /**
+   * Find all screenshots belonging to a given test case
+   * @param {string} testId
+   * @returns {Array}
+   */
+  getScreenshotsByTest( testId ) {
+    const { selector } = this.props,
+          commands = selector.findCommandsByTestId( testId );
+
+    return Object.values( commands )
+      .filter( command => ( command.method === "screenshot" && command.id in this.screenhotMap ) )
+      .map( command => ({
+        src: this.screenhotMap[ command.id ],
+        title: command.params.name,
+        inx: screenshotInx++
+      }));
+  }
+
+  /**
+   * Read screenshot dir recursevly and create map id => src
+   * @returns {Object} - { id => src, .. }
+   */
+  async getScreenshoptMap() {
+    const SCREENSHOT_PATH = join( this.props.projectDirectory, DIR_SCREENSHOTS ),
+          files = await recursive( SCREENSHOT_PATH );
+
+    return files.reduce(( carry, filepath ) => {
+        const filename = basename( filepath ),
+              [ id ] = filename.split( "." );
+        carry[ id ] = filepath;
+        return carry;
+      }, {});
+  }
+
+
+   getSnapshotsByTest( testId ) {
+    const { selector } = this.props,
+          commands = selector.findCommandsByTestId( testId );
+
+    return Object.values( commands )
+      .filter( command => ( command.method === "assertScreenshot" && command.id in this.snapshotMap ) )
+      .map( command => ({
+        expected: {
+          src: this.snapshotMap[ command.id ].expected,
+          title: command.params.name,
+          inx: screenshotInx++
+        },
+        actual: {
+          src: this.snapshotMap[ command.id ].actual,
+          title: command.params.name,
+          inx: screenshotInx++
+        },
+        diff: {
+          src: this.snapshotMap[ command.id ].diff,
+          title: command.params.name,
+          inx: screenshotInx++
+        }
+      }));
+  }
+
+  async getSnapshotMap() {
+    const EXPECTED_PATH = join( this.props.projectDirectory, DIR_SNAPSHOTS, "expected" ),
+          ACTUAL_PATH = join( this.props.projectDirectory, DIR_SNAPSHOTS, "actual" ),
+          DIFF_PATH = join( this.props.projectDirectory, DIR_SNAPSHOTS, "diff" ),
+          files = await readdir( EXPECTED_PATH );
+
+    return files.reduce(( carry, expectedFilename ) => {
+      const [ id ] = expectedFilename.split( "." ),
+            actual = join( ACTUAL_PATH, expectedFilename ),
+            diff = join( DIFF_PATH, expectedFilename ),
+            expected = join( EXPECTED_PATH, expectedFilename );
+
+      if ( fs.existsSync( actual ) && fs.existsSync( diff ) ) {
+        this.props.action.addLightboxImages([ expected, actual, diff ]);
+        carry[ id ] = {
+          expected,
+          actual,
+          diff
+        };
+      }
+      return carry;
+    }, {});
   }
 
 
   async componentDidMount() {
     const { details, screenshotDirs, selector } = this.props;
-    let screenshotInx = 0;
+    this.screenhotMap = await this.getScreenshoptMap();
+    this.snapshotMap = await this.getSnapshotMap();
+
     this.props.action.cleanLightbox();
 
-//    console.log( 1, selector.findTestCaseByCommandId( "nmajnyew656" ) );
-//    const fls = await readdir( join( this.props.projectDirectory, "snapshots", "actual" ) );
-//    console.log(fls);
-
-
+    // extend details with screenshots bopund to lightbox
     for ( let suiteKey of Object.keys( details ) ) {
       for ( let describeKey of Object.keys( details[ suiteKey ]) ) {
         for ( let inx in details[ suiteKey ][ describeKey ] ) {
           const spec = details[ suiteKey ][ describeKey ][ inx ],
-                { title, id } = this.parseTile( spec.title ),
-                screenshotDir = this.getScreenshotDir( id ),
-                // Screenshots per test case
-                screenshotFiles = fs.existsSync( screenshotDir )
-                  ?  await readdir( screenshotDir )
-                  : [],
-                screenshots = screenshotFiles.map( file => ({
-                  src: join( screenshotDir, file ) ,
-                  file,
-                  inx: screenshotInx++
-                }));
+                { title, testId } = this.parseTile( spec.title ),
+                screenshots = this.getScreenshotsByTest( testId ),
+                snapshots = spec.status === "passed" ? [] : this.getSnapshotsByTest( testId );
 
-
-          screenshots && this.props.action.addLightboxImages( screenshots );
+          screenshots && this.props.action.addLightboxImages( screenshots.map( item => item.src ) );
 
           Object.assign( details[ suiteKey ][ describeKey ][ inx ], {
               title,
-              id,
-              screenshots
+              testId,
+              screenshots,
+              snapshots
           });
         }
       }
     }
-    console.log(details);
+
+
     this.setState({ details });
   }
 
@@ -104,7 +178,7 @@ export class ReportBody extends AbstractComponent {
   }
 
   renderLine( spec ) {
-    const screenshotDir = this.getScreenshotDir( spec.id );
+
     return ( <div
       key={ `k${ counter++ }` }
       className="test-report__it">
@@ -126,17 +200,28 @@ export class ReportBody extends AbstractComponent {
         <div  className="test-report__it__exception">{ spec.failureMessages }</div>
       </If>
 
-      <If exp={ spec.screenshots }>
-      <div className="screenshot-thumb-container">
-      { spec.screenshots.map( ( item, inx ) => ( <figure key={ inx } >
-        <img
-          onClick={ ( e ) => this.onClickImg( e, item.inx ) }
-          src={ item.src } className="screenshot-thumb"
-          title={ item.file }
-          alt={ item.file } />
-        </figure> ) ) }
-      </div>
-      </If>
+      { spec.screenshots && <div className="thumb-container screenshot-thumb-container">
+        { spec.screenshots.map( ( item, inx ) => ( <Thumbnail
+          key={ inx } item={ item } onClickImg={ this.onClickImg } /> ) ) }
+        </div>
+      }
+
+
+      { spec.snapshots && spec.snapshots.map( ( item, inx ) => ( <div
+        key={ inx } className="thumb-container snapshot-thumb-container">
+        <div>
+          <h4>Expected</h4>
+          <Thumbnail item={ item.expected } onClickImg={ this.onClickImg } />
+        </div>
+        <div>
+          <h4>Actual</h4>
+          <Thumbnail item={ item.actual } onClickImg={ this.onClickImg } />
+        </div>
+        <div>
+          <h4>Diff</h4>
+          <Thumbnail item={ item.diff } onClickImg={ this.onClickImg } />
+        </div>
+      </div> ) ) }
 
 
     </div> );

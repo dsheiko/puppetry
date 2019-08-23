@@ -2,6 +2,8 @@ import { remote, shell } from "electron";
 
 export const isEveryValueMissing = ( obj ) => Object.values( obj ).every( val => typeof val === "undefined" );
 export const isSomeValueMissing = ( obj ) => Object.values( obj ).some( val => typeof val === "undefined" );
+export const isEveryValueNull = ( obj ) => Object.values( obj ).every( val => val === null );
+export const isSomeValueNull = ( obj ) => Object.values( obj ).some( val => val === null );
 
 
 export const OPERATOR_MAP = {

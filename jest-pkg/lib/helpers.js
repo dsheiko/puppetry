@@ -14,14 +14,16 @@ let PATH_SCREENSHOTS = join( __dirname, "/../", "/screenshots"),
 
     /**
      * @see https://pptr.dev/#?product=Puppeteer&version=v1.5.0&show=api-class-page
-     * * @param {string} testId
-     * @param {string} filePath
+     * @param {string} id
+     * @param {string} screenshotTitle
      * @param {Object} [options]
      * @returns {Object}
      */
-const png = ( testId, filePath, options = {} ) => {
-        const normalizedPath = filePath.replace( /[^a-zA-Z\d\-\_]/g, "-" );
-        const path = join( PATH_SCREENSHOTS, testId, `${ normalizedPath }.png` );
+const png = ( id, screenshotTitle, options = {} ) => {
+        const FILENAME_RE = /[^a-zA-Z\d\-\_]/g,
+              normalizedTitle = screenshotTitle.replace( FILENAME_RE, "-" ),
+              normalizedSuiteTitle = SUITE_NAME.replace( FILENAME_RE, "-" ),
+              path = join( PATH_SCREENSHOTS, normalizedSuiteTitle, `${ id }.${ normalizedTitle }.png` );
         shell.mkdir( "-p" , dirname( path ) );
         return { path, ...options };
       },
@@ -43,17 +45,7 @@ const png = ( testId, filePath, options = {} ) => {
 
       getComparePath = ( stage, testId ) => join( PATH_COMPARE, stage, `${ testId }.png` ),
 
-      /**
-       * Removes outdated suite screenshots on the beggining of test
-       */
-      cleanupScreenshotsDir = () => {
-        const path = join( PATH_SCREENSHOTS, SUITE_NAME );
-        try {
-          shell.rm( "-rf" , path );
-        } catch ( e ) {
-          // ignore
-        }
-      },
+
       /**
        * @param {number} max
        * @returns {number}
@@ -142,8 +134,6 @@ exports.util = {
   },
 
   pollForValue,
-
-  cleanupScreenshotsDir,
 
   exp: {
     fake,

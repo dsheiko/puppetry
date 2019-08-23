@@ -10,20 +10,20 @@ const pixelmatch = require( "pixelmatch" ),
  */
 module.exports = function( bs, util ) {
 
-    bs.assertScreenshot = async ( testId, opts ) => {
+    bs.assertScreenshot = async ( filename, screenshotOpts, pixelmatchOpts ) => {
 
-      const expectedPath = util.getComparePath( "expected", testId ),
-            actualPath = util.getComparePath( "actual", testId ),
-            diffPath = util.getComparePath( "diff", testId );
+      const expectedPath = util.getComparePath( "expected", filename ),
+            actualPath = util.getComparePath( "actual", filename ),
+            diffPath = util.getComparePath( "diff", filename );
 
       util.initCompareDirs();
 
       if ( !fs.existsSync( expectedPath ) ) {
-        await bs.page.screenshot({ path: expectedPath });
+        await bs.page.screenshot({ path: expectedPath, ...screenshotOpts });
         return 0;
       }
 
-      await bs.page.screenshot({ path: actualPath });
+      await bs.page.screenshot({ path: actualPath, ...screenshotOpts });
 
       const expectedImg = PNG.sync.read( fs.readFileSync( expectedPath ) );
             actualImg = PNG.sync.read( fs.readFileSync( actualPath ) ),
@@ -31,12 +31,11 @@ module.exports = function( bs, util ) {
             diffImg = new PNG({ width, height }),
 
             res = pixelmatch( expectedImg.data, actualImg.data, diffImg.data, width, height, {
-              threshold: opts.threshold,
-              diffColor: opts.diffColor,
-              aaColor: opts.aaColor,
-              includeAA: opts.includeAA
+              threshold: pixelmatchOpts.threshold,
+              diffColor: pixelmatchOpts.diffColor,
+              aaColor: pixelmatchOpts.aaColor,
+              includeAA: pixelmatchOpts.includeAA
             });
-
 
       // alternative
       // diffImg.pack().pipe( fs.createWriteStream( diffPath ) );

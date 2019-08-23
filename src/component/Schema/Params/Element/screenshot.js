@@ -2,26 +2,10 @@ import { INPUT, CHECKBOX } from "../../constants";
 import { isEveryValueMissing, ruleValidateGenericString } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
 import { truncate } from "service/utils";
-
-let counterCache = new Set(), counter = 0;
-/**
- * the logic is that complex because
- * ParamsFormBuilder re-renders with onChange event and simple counter
- * would iterate every time
- * @param {string} id
- * @returns {Number}
- */
-function getCounter( id ) {
-  if ( counterCache.has( id ) ) {
-    return counter;
-  }
-  counterCache.add( id );
-  counter++;
-  return counter;
-}
+import { getCounter } from "service/screenshotCounter";
 
 export const screenshot = {
-  template: ({ target, params, id, testId }) => {
+  template: ({ target, params, id }) => {
     const { name, omitBackground } = params,
           parser = new ExpressionParser( id ),
           baseOptions = {
@@ -32,7 +16,7 @@ export const screenshot = {
           optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
     return `
       // Taking screenshot of ${ target } element
-      await ( await ${ target }() ).screenshot( util.png( ${ JSON.stringify( testId ) }, ${ parser.stringify( name ) }${ optArg }) );
+      await ( await ${ target }() ).screenshot( util.png( ${ JSON.stringify( id ) }, ${ parser.stringify( name ) }${ optArg }) );
   `;
   },
 

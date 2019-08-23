@@ -50,7 +50,6 @@ util.setProjectDirectory( ${ JSON.stringify( projectDirectory ) } );
 
 jest.setTimeout( ${ suite.timeout || NETWORK_TIMEOUT} );
 
-util.cleanupScreenshotsDir();
 
 ${ buildEnv( env ) }
 

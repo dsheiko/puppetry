@@ -6,16 +6,16 @@ function setEntity( arr, entity ) {
   return arr.map( record => ({ ...record, entity }) );
 }
 
-export function findTestCaseByCommandId( commandId, groups ) {
-  let match = null;
-  Object.values( groups ).forEach( group =>  {
-    const test = Object.values( group.tests ).find( test => commandId in test.commands );
-    if ( test ) {
-      match = test;
+export function findCommandsByTestId( testId, groups ) {
+  const values = Object.values( groups );
+  for ( let group of values ) {
+    if ( testId in group.tests ) {
+      return group.tests[ testId ].commands;
     }
-  } );
-  return match;
+  }
+  return null;
 }
+
 
 export function getActiveEnvironment( environments, environment ) {
   validate( arguments, [ "string[]", "string" ]);
