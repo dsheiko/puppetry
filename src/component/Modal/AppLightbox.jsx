@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Carousel, { Modal, ModalGateway } from 'react-images';
+import Carousel, { Modal, ModalGateway } from "react-images";
+import ErrorBoundary from "component/ErrorBoundary";
 
 export class AppLightbox extends React.Component {
 
@@ -22,6 +23,9 @@ export class AppLightbox extends React.Component {
 
   // Do not update until visible
   shouldComponentUpdate( nextProps ) {
+    if ( this.props.data !== nextProps.data ) {
+      return true;
+    }
     if ( this.props.isVisible !== nextProps.isVisible ) {
       return true;
     }
@@ -34,13 +38,14 @@ export class AppLightbox extends React.Component {
   render() {
     const { photoIndex } = this.state,
           { isVisible, data } = this.props;
+        console.log("Data", data);
         
-    return ( <ModalGateway>
+    return ( <ErrorBoundary><ModalGateway>
         { isVisible !== false ? (
           <Modal onClose={ this.onClose }>
-            <Carousel views={ data.images } currentIndex={ isVisible } />
+            <Carousel views={ data.images } currentIndex={ data.index } />
           </Modal>
         ) : null}
-      </ModalGateway> );
+      </ModalGateway></ErrorBoundary> );
   }
 }

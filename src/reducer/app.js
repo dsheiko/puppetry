@@ -25,9 +25,6 @@ export default handleActions(
     },
 
      [ actions.setLightboxIndex ]: ( state, { payload }) => {
-      if ( !payload ) {
-        return state;
-      }
       return update( state, {
         lightbox: {
           index: {

@@ -1061,6 +1061,10 @@ td:hover .editable-cell-icon {
   padding: 8px 0;
 }
 
+.thumb-container h4 {
+  font-weight: 600;
+}
+
 
 .snapshot-thumb-container > div {
   margin: 4px;

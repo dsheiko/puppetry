@@ -165,8 +165,8 @@ expect.extend({
   toMatchScreenshot( received, mismatchTolerance, source ) {
     const pass = Number( received ) === 0;
     return expectReturn( pass,
-      `[${ source }] expected ${ JSON.stringify( received ) } to satisfy mismatch tolerance of ${ mismatchTolerance }`,
-      `[${ source }] expected ${ JSON.stringify( received ) } `
+      `[${ source }] expected to satisfy mismatch tolerance of ${ mismatchTolerance }`,
+      `[${ source }] expected `
         + `not to satisfy mismatch tolerance of ${ mismatchTolerance }` );
   },
 

@@ -36,13 +36,19 @@ const png = ( id, screenshotTitle, options = {} ) => {
         shell.mkdir( "-p" , dirname( path ) );
         return { path };
       },
-
+      /**
+       * Create all of comparing dirs when non existing
+       */
       initCompareDirs = () => {
         [ "expected", "actual", "diff" ].forEach(( stage ) => {
           shell.mkdir( "-p" , join( PATH_COMPARE, stage ) );
         });
       },
-
+      /**
+       * @param {string} stage
+       * @param {string} testId
+       * @returns {string}
+       */
       getComparePath = ( stage, testId ) => join( PATH_COMPARE, stage, `${ testId }.png` ),
 
 

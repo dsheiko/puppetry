@@ -6,14 +6,23 @@ export class Thumbnail extends AbstractComponent {
 
   static propTypes = {
     item: PropTypes.object.isRequired,
-    onClickImg: PropTypes.func.isRequired
+    action: PropTypes.shape({
+      setApp: PropTypes.func.isRequired,
+      setLightboxIndex: PropTypes.func.isRequired
+    })
+  }
+
+  onClickImg = ( e, inx ) => {
+    e.preventDefault();
+    this.props.action.setLightboxIndex( inx );
+    this.props.action.setApp({ appLightbox: true });
   }
 
   render() {
     const { item, onClickImg } = this.props;
     return <figure>
         <img
-          onClick={ ( e ) => onClickImg( e, item.inx ) }
+          onClick={ ( e ) => this.onClickImg( e, item.inx ) }
           src={ item.src } className="screenshot-thumb"
           title={ item.title }
           alt={ item.title } />

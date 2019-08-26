@@ -19,7 +19,8 @@ export class ReportBody extends AbstractComponent {
 
   static propTypes = {
     action: PropTypes.shape({
-      setApp: PropTypes.func.isRequired
+      setApp: PropTypes.func.isRequired,
+      setLightboxIndex: PropTypes.func.isRequired
     }),
     details: PropTypes.object.isRequired,
     projectDirectory: PropTypes.string.isRequired
@@ -55,22 +56,31 @@ export class ReportBody extends AbstractComponent {
     return { title: res[ 1 ], testId: res[ 2 ] };
   }
 
+  stripTpl( str ) {
+    return str.replace( /\{\{.+\}\}/, "" );
+  }
+
   /**
    * Find all screenshots belonging to a given test case
    * @param {string} testId
    * @returns {Array}
    */
   getScreenshotsByTest( testId ) {
-    const { selector } = this.props,
+    const { selector, action } = this.props,
           commands = selector.findCommandsByTestId( testId );
 
     return Object.values( commands )
       .filter( command => ( command.method === "screenshot" && command.id in this.screenhotMap ) )
-      .map( command => ({
-        src: this.screenhotMap[ command.id ],
-        title: command.params.name,
-        inx: screenshotInx++
-      }));
+      .map( command => {
+        const src = this.screenhotMap[ command.id ],
+              caption = this.stripTpl( command.params.name );
+        action.addLightboxImages([{ src, caption }]);
+        return {
+          src,
+          title: caption,
+          inx: screenshotInx++
+        };
+      });
   }
 
   /**
@@ -91,28 +101,37 @@ export class ReportBody extends AbstractComponent {
 
 
    getSnapshotsByTest( testId ) {
-    const { selector } = this.props,
+    const { selector, action } = this.props,
           commands = selector.findCommandsByTestId( testId );
 
     return Object.values( commands )
       .filter( command => ( command.method === "assertScreenshot" && command.id in this.snapshotMap ) )
-      .map( command => ({
-        expected: {
-          src: this.snapshotMap[ command.id ].expected,
-          title: command.params.name,
-          inx: screenshotInx++
-        },
-        actual: {
-          src: this.snapshotMap[ command.id ].actual,
-          title: command.params.name,
-          inx: screenshotInx++
-        },
-        diff: {
-          src: this.snapshotMap[ command.id ].diff,
-          title: command.params.name,
-          inx: screenshotInx++
-        }
-      }));
+      .map( command => {
+        const dto = this.snapshotMap[ command.id ],
+              caption = this.stripTpl( command.params.name );
+        action.addLightboxImages([
+          { src: dto.expected, caption },
+          { src: dto.actual, caption },
+          { src: dto.diff, caption }
+        ]);
+        return {
+          expected: {
+            src: dto.expected,
+            title: caption,
+            inx: screenshotInx++
+          },
+          actual: {
+            src: dto.actual,
+            title: caption,
+            inx: screenshotInx++
+          },
+          diff: {
+            src: dto.diff,
+            title: caption,
+            inx: screenshotInx++
+          }
+        };
+      });
   }
 
   async getSnapshotMap() {
@@ -128,7 +147,6 @@ export class ReportBody extends AbstractComponent {
             expected = join( EXPECTED_PATH, expectedFilename );
 
       if ( fs.existsSync( actual ) && fs.existsSync( diff ) ) {
-        this.props.action.addLightboxImages([ expected, actual, diff ]);
         carry[ id ] = {
           expected,
           actual,
@@ -142,10 +160,12 @@ export class ReportBody extends AbstractComponent {
 
   async componentDidMount() {
     const { details, screenshotDirs, selector } = this.props;
+
+    this.props.action.cleanLightbox();
+
     this.screenhotMap = await this.getScreenshoptMap();
     this.snapshotMap = await this.getSnapshotMap();
 
-    this.props.action.cleanLightbox();
 
     // extend details with screenshots bopund to lightbox
     for ( let suiteKey of Object.keys( details ) ) {
@@ -155,8 +175,6 @@ export class ReportBody extends AbstractComponent {
                 { title, testId } = this.parseTile( spec.title ),
                 screenshots = this.getScreenshotsByTest( testId ),
                 snapshots = spec.status === "passed" ? [] : this.getSnapshotsByTest( testId );
-
-          screenshots && this.props.action.addLightboxImages( screenshots.map( item => item.src ) );
 
           Object.assign( details[ suiteKey ][ describeKey ][ inx ], {
               title,
@@ -170,11 +188,6 @@ export class ReportBody extends AbstractComponent {
 
 
     this.setState({ details });
-  }
-
-  onClickImg = ( e, inx ) => {
-    e.preventDefault();
-    this.props.action.setApp({ appLightbox: inx });
   }
 
   renderLine( spec ) {
@@ -202,7 +215,7 @@ export class ReportBody extends AbstractComponent {
 
       { spec.screenshots && <div className="thumb-container screenshot-thumb-container">
         { spec.screenshots.map( ( item, inx ) => ( <Thumbnail
-          key={ inx } item={ item } onClickImg={ this.onClickImg } /> ) ) }
+          key={ inx } item={ item } action={ this.props.action } /> ) ) }
         </div>
       }
 
@@ -211,15 +224,15 @@ export class ReportBody extends AbstractComponent {
         key={ inx } className="thumb-container snapshot-thumb-container">
         <div>
           <h4>Expected</h4>
-          <Thumbnail item={ item.expected } onClickImg={ this.onClickImg } />
+          <Thumbnail item={ item.expected }  action={ this.props.action } />
         </div>
         <div>
           <h4>Actual</h4>
-          <Thumbnail item={ item.actual } onClickImg={ this.onClickImg } />
+          <Thumbnail item={ item.actual }  action={ this.props.action } />
         </div>
         <div>
           <h4>Diff</h4>
-          <Thumbnail item={ item.diff } onClickImg={ this.onClickImg } />
+          <Thumbnail item={ item.diff }  action={ this.props.action } />
         </div>
       </div> ) ) }
 

@@ -15,7 +15,9 @@ import {
   DEMO_PROJECT_DIRECTORY,
   COMMAND_ID_COMMENT,
   RUNNER_PUPPETRY,
-  SNIPPETS_FILENAME
+  SNIPPETS_FILENAME,
+  DIR_SCREENSHOTS,
+  DIR_SNAPSHOTS
 } from "constant";
 import findLogPath from "electron-log/lib/transports/file/findLogPath";
 
@@ -162,14 +164,14 @@ export async function exportProject(
     removeExport( outputDirectory );
     shell.mkdir( "-p" , testDir );
 
-    shell.rm( "-rf" , join( projectDirectory, "screenshots" ) );
+    shell.rm( "-rf" , join( projectDirectory, DIR_SCREENSHOTS ) );
 
     if ( options.updateSnapshot ) {
-      shell.rm( "-rf" , join( projectDirectory, "snapshots" ) );
+      shell.rm( "-rf" , join( projectDirectory, DIR_SNAPSHOTS ) );
     }
 
-    shell.mkdir( "-p" , join( projectDirectory, "screenshots" ) );
-    shell.mkdir( "-p" , join( projectDirectory, "snapshots" ) );
+    shell.mkdir( "-p" , join( projectDirectory, DIR_SCREENSHOTS ) );
+    shell.mkdir( "-p" , join( projectDirectory, DIR_SNAPSHOTS ) );
 
     shell.chmod( "-R", "+w", outputDirectory );
     shell.cp( "-RLf" , JEST_PKG + "/*", outputDirectory  );
