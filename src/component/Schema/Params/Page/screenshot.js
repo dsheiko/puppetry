@@ -1,5 +1,5 @@
 import { INPUT, INPUT_NUMBER, CHECKBOX } from "../../constants";
-import { isEveryValueNull, isSomeValueNull, ruleValidateGenericString } from "service/utils";
+import { isEveryValueFalsy, isSomeValueNull, ruleValidateGenericString } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
 import { truncate } from "service/utils";
 import { getCounter } from "service/screenshotCounter";
@@ -18,14 +18,14 @@ export const screenshot = {
             fullPage,
             omitBackground
           },
-          isClipEmpty = isEveryValueNull( clip ),
+          isClipEmpty = isEveryValueFalsy( clip ),
           options = isClipEmpty ? baseOptions : { ...baseOptions, clip };
 
     if ( !isClipEmpty && isSomeValueNull( clip ) ) {
       throw new Error( "You have to provide either all clip parameters or none" );
     }
 
-    const optArg = isEveryValueNull( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
+    const optArg = isEveryValueFalsy( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
     return `
       // Taking screenshot of ${ isClipEmpty ? "the page" : "the specified region" }
       await bs.page.screenshot( util.png( ${ JSON.stringify( id ) }, ${ parser.stringify( name ) }${ optArg }) );

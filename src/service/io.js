@@ -180,7 +180,8 @@ export async function exportProject(
 
 
     for ( const filename of suiteFiles ) {
-      let specContent = await exportSuite( projectDirectory, filename, runner, snippets, env, options );
+      let specContent = await exportSuite( projectDirectory, filename, runner, snippets, env,
+        { ...options, outputDirectory });
       const specFilename = parse( filename ).name + ".spec.js",
             specPath = join( testDir, specFilename ),
             specHasDebugger = specContent.includes( " debugger;" );

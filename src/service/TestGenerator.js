@@ -145,6 +145,7 @@ export default class TestGenerator {
         runner: this.runner,
         env: this.env,
         projectDirectory: this.projectDirectory,
+        outputDirectory: this.options.outputDirectory,
         body: Object.values( this.suite.groups )
           .filter( group => group.disabled !== true )
           .map( this.parseGroup )

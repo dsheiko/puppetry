@@ -4,6 +4,7 @@ export const isEveryValueMissing = ( obj ) => Object.values( obj ).every( val =>
 export const isSomeValueMissing = ( obj ) => Object.values( obj ).some( val => typeof val === "undefined" );
 export const isEveryValueNull = ( obj ) => Object.values( obj ).every( val => val === null );
 export const isSomeValueNull = ( obj ) => Object.values( obj ).some( val => val === null );
+export const isEveryValueFalsy = ( obj ) => Object.values( obj ).every( val => !val );
 
 
 export const OPERATOR_MAP = {

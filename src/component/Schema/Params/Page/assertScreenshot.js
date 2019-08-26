@@ -1,6 +1,6 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertScreenshot } from "../../Assert/AssertScreenshot";
-import { isEveryValueNull, isSomeValueNull, ruleValidateGenericString } from "service/utils";
+import { isEveryValueFalsy, isSomeValueNull, ruleValidateGenericString } from "service/utils";
 import { truncate } from "service/utils";
 import { getCounter } from "service/screenshotCounter";
 import ExpressionParser from "service/ExpressionParser";
@@ -21,7 +21,7 @@ export const assertScreenshot = {
             fullPage,
             omitBackground
           },
-          isClipEmpty = isEveryValueNull( clip ),
+          isClipEmpty = isEveryValueFalsy( clip ),
           screenshotOptions = isClipEmpty ? baseOptions : { ...baseOptions, clip },
           pixelmatchOptions = {
               includeAA: command.params.includeAA,
