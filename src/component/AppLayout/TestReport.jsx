@@ -56,6 +56,7 @@ export class TestReport extends AbstractComponent {
 
   run = async () => {
     const { project, environment } = this.props,
+          // options from Report modal like interactiveMode, updateSnapshot
           options = this.props.options || {};
     this.props.action.saveSuite();
     this.props.action.resetCommandFailures();
@@ -70,7 +71,7 @@ export class TestReport extends AbstractComponent {
               this.runtimeTemp,
               this.props.checkedList,
               {
-                headless: this.props.headless,
+                headless: ( options.interactiveMode ? false : this.props.headless ),
                 launcherArgs: this.props.launcherArgs,
                 ...options
               },

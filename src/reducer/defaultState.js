@@ -13,6 +13,7 @@ export default {
     loading: false,
     updateSnapshot: false,
     readyToRunTests: false,
+    interactiveMode: false,
     // currently selected env
     environment: "",
 

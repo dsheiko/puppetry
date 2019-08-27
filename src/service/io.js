@@ -130,9 +130,19 @@ export function copyProject( srcDirectory, targetDirectory ) {
  * @param {Object} snippets
  * @returns {String} - spec.js content
  */
-export async function exportSuite( projectDirectory, filename, runner, snippets, env, options ) {
+export async function exportSuite({ projectDirectory, outputDirectory, filename, runner, snippets, env, options }) {
   const suite = await readSuite( projectDirectory, filename ),
-        gen = new TestGenerator( suite, schema, suite.targets, runner, projectDirectory, snippets, env, options );
+        gen = new TestGenerator({
+          suite,
+          schema,
+          targets: suite.targets,
+          runner,
+          projectDirectory,
+          outputDirectory,
+          snippets,
+          env,
+          options
+        });
   return gen.generate();
 }
 
@@ -180,8 +190,15 @@ export async function exportProject(
 
 
     for ( const filename of suiteFiles ) {
-      let specContent = await exportSuite( projectDirectory, filename, runner, snippets, env,
-        { ...options, outputDirectory });
+      let specContent = await exportSuite({
+                          projectDirectory,
+                          outputDirectory,
+                          filename,
+                          runner,
+                          snippets,
+                          env,
+                          options
+                        });
       const specFilename = parse( filename ).name + ".spec.js",
             specPath = join( testDir, specFilename ),
             specHasDebugger = specContent.includes( " debugger;" );

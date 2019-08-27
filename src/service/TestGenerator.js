@@ -3,12 +3,20 @@ import { join } from "path";
 import { TestGeneratorError } from "error";
 import { COMMAND_ID_COMMENT, RUNNER_PUPPETRY, SNIPPETS_GROUP_ID } from "constant";
 
+const INTERATIVE_TIMEOUT = 900000, // 15 min
+      INTERACTIVE_ILLEGAL_METHODS = [ "setViewport" ];
+
 export default class TestGenerator {
 
-  constructor( suite, schema, targets, runner, projectDirectory, snippets, env, options ) {
+  constructor({ suite, schema, targets, runner, projectDirectory, outputDirectory, snippets, env, options }) {
+    // collect here information for interactive mode
+    this.interactive = {
+      sids: []
+    };
     this.schema = schema;
     this.suite = { ...suite };
     this.projectDirectory = projectDirectory;
+    this.outputDirectory = outputDirectory;
     this.snippets = { targets: {}, groups: {}, ...snippets };
     this.env = env;
     this.options = options;
@@ -52,6 +60,15 @@ export default class TestGenerator {
     return `      // SNIPPET ${ test.title }: START\n${ env }${ chunk }\n      // SNIPPET ${ test.title }: END\n`;
   }
 
+  getInteractiveModeTpl( command ) {
+    if ( INTERACTIVE_ILLEGAL_METHODS.includes( command.method ) ) {
+      return ``;
+    }
+    this.interactive.sids.push( command.id );
+    // filter by method
+    return `    await bs.page.waitForSelector(\`body[data-puppetry-sid="${ command.id }`
+      + `"]\`, { timeout: ${ INTERATIVE_TIMEOUT } });`
+  }
 
   static getTraceTpl( target, command ) {
     const tplProp =  ( t ) => `"${ t }": async () => await ${ t }()`,
@@ -80,7 +97,8 @@ export default class TestGenerator {
         return ``;
       }
 
-      const traceCode = this.options.trace ?  TestGenerator.getTraceTpl( target, command ) : ``,
+      const traceCode = this.options.trace ? TestGenerator.getTraceTpl( target, command ) : ``,
+            interactiveModeCode = this.options.interactiveMode ? this.getInteractiveModeTpl( command ) : ``,
             chunk = this.schema[ src ][ method ].template({
               target,
               assert,
@@ -89,7 +107,7 @@ export default class TestGenerator {
               method,
               id: command.id,
               testId: command.testId
-            }) + traceCode;
+            }) + traceCode + interactiveModeCode;
 
       // Provide source code with markers
       return this.runner === RUNNER_PUPPETRY
@@ -144,8 +162,10 @@ export default class TestGenerator {
         suite: this.suite,
         runner: this.runner,
         env: this.env,
+        options: this.options,
         projectDirectory: this.projectDirectory,
-        outputDirectory: this.options.outputDirectory,
+        outputDirectory: this.outputDirectory,
+        interactive: this.interactive,
         body: Object.values( this.suite.groups )
           .filter( group => group.disabled !== true )
           .map( this.parseGroup )

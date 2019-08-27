@@ -49,7 +49,8 @@ export class TestReportModal extends AbstractComponent {
     loading: false,
     headless: true,
     launcherArgs: "",
-    updateSnapshot: false
+    updateSnapshot: false,
+    interactiveMode: false
   }
 
   constructor( props ) {
@@ -124,7 +125,8 @@ export class TestReportModal extends AbstractComponent {
         testReportModal: false,
         headless: this.state.headless,
         launcherArgs: this.state.launcherArgs,
-        updateSnapshot: this.state.updateSnapshot
+        updateSnapshot: this.state.updateSnapshot,
+        interactiveMode: this.state.interactiveMode
       });
 
 
@@ -235,7 +237,13 @@ export class TestReportModal extends AbstractComponent {
             <Checkbox onChange={ e  => this.onChangeCheckbox( e.target.checked, "updateSnapshot" ) } >
               update comparison images <Tooltip
                     title={ "For CSS regression testing use this option to force Puppetry "
-                      + "re-creating snapshots (screenshots representing proper states of the targets)" }
+                      + "updating snapshots (screenshots representing proper states of the targets)" }
+                    icon="info-circle"
+                  />
+            </Checkbox>
+            <Checkbox onChange={ e  => this.onChangeCheckbox( e.target.checked, "interactiveMode" ) } >
+              interactive mode <Tooltip
+                    title={ "This mode allows you to control testing flow" }
                     icon="info-circle"
                   />
             </Checkbox>
