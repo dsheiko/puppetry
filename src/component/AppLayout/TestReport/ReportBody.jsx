@@ -88,15 +88,20 @@ export class ReportBody extends AbstractComponent {
    * @returns {Object} - { id => src, .. }
    */
   async getScreenshoptMap() {
-    const SCREENSHOT_PATH = join( this.props.projectDirectory, DIR_SCREENSHOTS ),
-          files = await recursive( SCREENSHOT_PATH );
+    try {
+      const SCREENSHOT_PATH = join( this.props.projectDirectory, DIR_SCREENSHOTS ),
+            files = await recursive( SCREENSHOT_PATH );
 
-    return files.reduce(( carry, filepath ) => {
-        const filename = basename( filepath ),
-              [ id ] = filename.split( "." );
-        carry[ id ] = filepath;
-        return carry;
-      }, {});
+      return files.reduce(( carry, filepath ) => {
+          const filename = basename( filepath ),
+                [ id ] = filename.split( "." );
+          carry[ id ] = filepath;
+          return carry;
+        }, {});
+    } catch ( e ) {
+      // e.g. screenshot directories not found
+      return {};
+    }
   }
 
 
@@ -135,26 +140,31 @@ export class ReportBody extends AbstractComponent {
   }
 
   async getSnapshotMap() {
-    const EXPECTED_PATH = join( this.props.projectDirectory, DIR_SNAPSHOTS, "expected" ),
-          ACTUAL_PATH = join( this.props.projectDirectory, DIR_SNAPSHOTS, "actual" ),
-          DIFF_PATH = join( this.props.projectDirectory, DIR_SNAPSHOTS, "diff" ),
-          files = await readdir( EXPECTED_PATH );
+    try {
+      const EXPECTED_PATH = join( this.props.projectDirectory, DIR_SNAPSHOTS, "expected" ),
+            ACTUAL_PATH = join( this.props.projectDirectory, DIR_SNAPSHOTS, "actual" ),
+            DIFF_PATH = join( this.props.projectDirectory, DIR_SNAPSHOTS, "diff" ),
+            files = await readdir( EXPECTED_PATH );
 
-    return files.reduce(( carry, expectedFilename ) => {
-      const [ id ] = expectedFilename.split( "." ),
-            actual = join( ACTUAL_PATH, expectedFilename ),
-            diff = join( DIFF_PATH, expectedFilename ),
-            expected = join( EXPECTED_PATH, expectedFilename );
+      return files.reduce(( carry, expectedFilename ) => {
+        const [ id ] = expectedFilename.split( "." ),
+              actual = join( ACTUAL_PATH, expectedFilename ),
+              diff = join( DIFF_PATH, expectedFilename ),
+              expected = join( EXPECTED_PATH, expectedFilename );
 
-      if ( fs.existsSync( actual ) && fs.existsSync( diff ) ) {
-        carry[ id ] = {
-          expected,
-          actual,
-          diff
-        };
-      }
-      return carry;
-    }, {});
+        if ( fs.existsSync( actual ) && fs.existsSync( diff ) ) {
+          carry[ id ] = {
+            expected,
+            actual,
+            diff
+          };
+        }
+        return carry;
+      }, {});
+    } catch ( e ) {
+      // e.g. snapshot directories not found
+      return {};
+    }
   }
 
 

@@ -38,7 +38,6 @@ export class AppLightbox extends React.Component {
   render() {
     const { photoIndex } = this.state,
           { isVisible, data } = this.props;
-        console.log("Data", data);
         
     return ( <ErrorBoundary><ModalGateway>
         { isVisible !== false ? (

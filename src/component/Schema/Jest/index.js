@@ -1,5 +1,5 @@
 import { RUNNER_PUPPETRY } from "constant";
-
+import { renderSuiteHtml } from "./interactive-mode";
 import fs from "fs";
 import { join } from "path";
 
@@ -33,6 +33,8 @@ const ENV = {
 ${ body }
 };`;
 }
+
+
 
 export const tplSuite = ({
   title, body, targets, suite, runner, projectDirectory, outputDirectory, env, options, interactive
@@ -72,7 +74,9 @@ describe( ${ JSON.stringify( title ) }, async () => {
     ${ options.interactiveMode ? `
     bs.page.on( "load", async () => {
       await bs.page.addStyleTag({ content: \`${ readInteractAsset( outputDirectory, "toolbox.css" ) }\`});
-      await bs.page.addScriptTag({ content: \`const data = ${ JSON.stringify( interactive, null, 2 ) };
+      await bs.page.addScriptTag({ content: \`
+        const data = ${ JSON.stringify( interactive )  };
+        const suiteHtml = ${ JSON.stringify( renderSuiteHtml( suite ) ) };
         ${ readInteractAsset( outputDirectory, "toolbox.js" ) }\`});
     });
     ` : `` }

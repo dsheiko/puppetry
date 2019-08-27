@@ -66,7 +66,7 @@ export default class TestGenerator {
     }
     this.interactive.sids.push( command.id );
     // filter by method
-    return `    await bs.page.waitForSelector(\`body[data-puppetry-sid="${ command.id }`
+    return `    await bs.page.waitForSelector(\`body[data-puppetry-next="${ command.id }`
       + `"]\`, { timeout: ${ INTERATIVE_TIMEOUT } });`
   }
 
