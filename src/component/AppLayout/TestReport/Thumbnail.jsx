@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AbstractComponent from "component/AbstractComponent";
+import { shell } from "electron";
+import { notification } from "antd";
 
 export class Thumbnail extends AbstractComponent {
 
@@ -10,6 +12,15 @@ export class Thumbnail extends AbstractComponent {
       setApp: PropTypes.func.isRequired,
       setLightboxIndex: PropTypes.func.isRequired
     })
+  }
+
+  onDownload= ( e, file ) => {
+    e.preventDefault();
+    shell.openItem( file );
+    notification.open({
+      message: "Opening external file",
+      description: "The requested file will open in a few seconds"
+    });
   }
 
   onClickImg = ( e, inx ) => {
@@ -24,9 +35,10 @@ export class Thumbnail extends AbstractComponent {
         <img
           onClick={ ( e ) => this.onClickImg( e, item.inx ) }
           src={ item.src } className="screenshot-thumb"
-          title={ item.title }
-          alt={ item.title } />
-        <span className="screenshot-thumb__title">{ item.title }</span>
+          title={ item.caption }
+          alt={ item.caption } />
+        <span className="screenshot-thumb__caption">{ item.caption }</span>
+        <a onClick={ ( e ) => this.onDownload( e, item.src ) } className="screenshot-thumb__download">Download</a>
       </figure>;
   }
 

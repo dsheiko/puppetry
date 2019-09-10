@@ -74,10 +74,10 @@ export class ReportBody extends AbstractComponent {
       .map( command => {
         const src = this.screenhotMap[ command.id ],
               caption = this.stripTpl( command.params.name );
-        action.addLightboxImages([{ src, caption }]);
+
         return {
           src,
-          title: caption,
+          caption,
           inx: screenshotInx++
         };
       });
@@ -114,25 +114,21 @@ export class ReportBody extends AbstractComponent {
       .map( command => {
         const dto = this.snapshotMap[ command.id ],
               caption = this.stripTpl( command.params.name );
-        action.addLightboxImages([
-          { src: dto.expected, caption },
-          { src: dto.actual, caption },
-          { src: dto.diff, caption }
-        ]);
+
         return {
           expected: {
             src: dto.expected,
-            title: caption,
+            caption,
             inx: screenshotInx++
           },
           actual: {
             src: dto.actual,
-            title: caption,
+            caption,
             inx: screenshotInx++
           },
           diff: {
             src: dto.diff,
-            title: caption,
+            caption,
             inx: screenshotInx++
           }
         };
@@ -195,9 +191,26 @@ export class ReportBody extends AbstractComponent {
         }
       }
     }
-
-
+    this.pupulateLightbox( details );
     this.setState({ details });
+  }
+
+  pupulateLightbox( details ) {
+    let images = [];
+    for ( let suiteKey of Object.keys( details ) ) {
+      for ( let describeKey of Object.keys( details[ suiteKey ]) ) {
+        for ( let inx in details[ suiteKey ][ describeKey ] ) {
+          const { screenshots, snapshots } = details[ suiteKey ][ describeKey ][ inx ];
+          images = images.concat( screenshots );
+          snapshots.forEach( snapshot => {
+            images.push( snapshot.expected );
+            images.push( snapshot.actual );
+            images.push( snapshot.diff );
+          });
+        }
+      }
+    }
+    this.props.action.setLightboxImages( images );
   }
 
   renderLine( spec ) {

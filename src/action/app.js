@@ -22,7 +22,7 @@ const actions = createActions({
 
   SET_APP_TAB: ( tabKey ) => validate( tabKey, "string" ),
 
-  ADD_LIGHTBOX_IMAGES: ( images ) => validate( images, "object[]" ),
+  SET_LIGHTBOX_IMAGES: ( images ) => validate( images, "object[]" ),
 
   SET_LIGHTBOX_INDEX: ( index ) => validate( index, "number" ),
 

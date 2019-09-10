@@ -1085,10 +1085,8 @@ td:hover .editable-cell-icon {
   position: relative;
 }
 
-.screenshot-thumb__title {
+.screenshot-thumb__download, .screenshot-thumb__caption {
   position: absolute;
-  bottom: 0;
-  left: 0;
   height: 24px;
   line-height: 24px;
   text-align: center;
@@ -1097,17 +1095,31 @@ td:hover .editable-cell-icon {
   white-space: nowrap;
   padding: 0 8px;
   width: 100%;
-  transition: bottom .3s ease-in-out;
+  transition: bottom .3s ease-in-out, top .3s ease-in-out;
   background: rgba(255, 255, 255, 0.65);
   color: rgba(0, 0, 0, 0.65);
+}
+
+.screenshot-thumb__caption {
+  bottom: 0;
+  left: 0;
+}
+
+.screenshot-thumb__download {
+  top: -24px;
+  left: 0;
 }
 
 .thumb-container figure:hover {
   outline: 1px solid #00529e;
 }
 
-.thumb-container figure:hover .screenshot-thumb__title  {
+.thumb-container figure:hover .screenshot-thumb__caption  {
   bottom: -24px;
+}
+
+.thumb-container figure:hover .screenshot-thumb__download  {
+  top: 0;
 }
 
 .screenshot-thumb {

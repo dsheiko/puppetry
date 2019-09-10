@@ -34,14 +34,14 @@ export default handleActions(
       });
     },
 
-    [ actions.addLightboxImages ]: ( state, { payload }) => {
+    [ actions.setLightboxImages ]: ( state, { payload }) => {
       if ( !payload ) {
         return state;
       }
       return update( state, {
         lightbox: {
           images: {
-            $apply: ( images ) => images.concat( payload )
+            $set: payload
           }
         }
       });
