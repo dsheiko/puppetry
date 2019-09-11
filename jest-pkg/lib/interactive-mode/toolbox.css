@@ -17,7 +17,12 @@
         height: 32px;
         display: flex;
         flex-flow: row nowrap;
-        justify-content: flex-end;
+        justify-content: space-between;
+      }
+
+      .__PUPPETRY_header > div {
+        line-height: 32px;
+        font-size: 16px;
       }
 
       .__PUPPETRY_btn {

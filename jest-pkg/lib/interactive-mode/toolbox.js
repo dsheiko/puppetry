@@ -3,11 +3,9 @@
       document.documentElement.innerHTML += "<body></body>";
     }
 
-    console.log( suiteHtml );
-
     document.body.insertAdjacentHTML( "beforebegin",
       '<div class="__PUPPETRY_toolbox">'
-      + '<div class="__PUPPETRY_header"><button id="__PUPPETRY_next" class="__PUPPETRY_btn">Next</button></div>'
+      + '<div class="__PUPPETRY_header"><div>Puppetry</div><button id="__PUPPETRY_next" class="__PUPPETRY_btn">Next</button></div>'
       + '<div class="__PUPPETRY_suite"><ul>' + suiteHtml + '</ul></div>'
       + '</div>' );
 
@@ -21,14 +19,17 @@
             li.scrollIntoView();
           };
 
-    let counter = 0;
 
     NEXT_BTN.addEventListener( "click", ( e ) => {
       e.preventDefault();
       e.stopPropagation();
-      const nextId = data.sids[ counter++ ];
+      const nextId = data.sids[ stepIndex++ ];
+      if ( typeof nextId === "undefined" ) {
+        return;
+      }
       document.body.dataset.puppetryNext = nextId;
-      updateView( data.sids[ counter ] );
+      window.setPuppetryStepIndex( stepIndex );
+      updateView( data.sids[ stepIndex ] );
     }, false );
 
-    updateView(data.sids[ 0 ]);
+    updateView( data.sids[ stepIndex ] );

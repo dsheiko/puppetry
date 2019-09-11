@@ -72,10 +72,16 @@ describe( ${ JSON.stringify( title ) }, async () => {
   beforeAll(async () => {
     await bs.setup();
     ${ options.interactiveMode ? `
+    let stepIndex = 0;
+    await bs.page.exposeFunction('setPuppetryStepIndex', index => {
+      stepIndex = index;
+    });
+
     bs.page.on( "load", async () => {
       await bs.page.addStyleTag({ content: \`${ readInteractAsset( outputDirectory, "toolbox.css" ) }\`});
       await bs.page.addScriptTag({ content: \`
         const data = ${ JSON.stringify( interactive )  };
+        let stepIndex = \${ stepIndex };
         const suiteHtml = ${ JSON.stringify( renderSuiteHtml( suite ) ) };
         ${ readInteractAsset( outputDirectory, "toolbox.js" ) }\`});
     });

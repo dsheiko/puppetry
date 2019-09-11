@@ -72,7 +72,7 @@ export async function parseReportedFailures( reportedErrorPositions ) {
     fileContents = null;
     for ( const error of errors ) {
       const match = findCommandIdInCode( lines, error.line - 1 ); // line 1 equals index 0
-      if ( !match.startsWith( COMMAND_ID_COMMENT ) ) {
+      if ( !match || !match.startsWith( COMMAND_ID_COMMENT ) ) {
         break;
       }
       const idComment = match.substr( COMMAND_ID_COMMENT.length ),
