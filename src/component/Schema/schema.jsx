@@ -29,6 +29,8 @@ import { waitForRequest } from "./Params/Page/waitForRequest";
 import { waitForResponse } from "./Params/Page/waitForResponse";
 import { waitForFileChooser } from "./Params/Page/waitForFileChooser";
 import { assertConsoleMessage } from "./Params/Page/assertConsoleMessage";
+import { assertDialog } from "./Params/Page/assertDialog";
+import { handleDialog } from "./Params/Page/handleDialog";
 
 
 
@@ -124,6 +126,7 @@ export const schema = {
     evaluate,
     runjs,
     debug,
+    handleDialog,
     assignVar,
     assignVarRemotely,
     assertTitle,
@@ -133,7 +136,8 @@ export const schema = {
     assertScroll: assertScrollPage,
     assertVar,
     assertScreenshot: assertScreenshotPage,
-    assertConsoleMessage
+    assertConsoleMessage,
+    assertDialog
   }
 };
 

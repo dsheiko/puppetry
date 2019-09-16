@@ -13,7 +13,7 @@ import ErrorBoundary from "component/ErrorBoundary";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
-      TEST_LEADING_METHODS = [ "emulate", "setViewport", "goto" ];
+      TEST_LEADING_METHODS = [ "emulate", "setViewport", "handleDialog", "goto" ];
 
 @connectForm
 export class CommandForm extends React.Component {

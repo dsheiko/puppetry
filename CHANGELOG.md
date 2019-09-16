@@ -11,6 +11,8 @@
 - improvement: add page.waitForResponse
 - improvement: add page.waitForFileChooser
 - improvement: add page.assertConsoleMessage
+- improvement: add page.assertDialog
+- improvement: add page.handleDialog
 
 ### Updates
 

@@ -7,6 +7,9 @@ export function buildAssertionTpl( commandCall, command, comment ) {
     if ( command.method === "assertConsoleMessage" ) {
       return templateConsoleMessageAssertion( cbBody, command.assert, comment );
     }
+    if ( command.method === "assertDialog" ) {
+      return templateDialogAssertion( cbBody, command.assert, command.params, comment );
+    }
     return justify( `${ comment }\nresult = ${ commandCall };` ) + ` ${ cbBody }`;
   } catch ( err ) {
     console.warn( "Renderer process: buildAssertionTpl error:", err, { commandCall, command, comment });
@@ -19,13 +22,22 @@ function templateConsoleMessageAssertion( cbBody, assert, comment ) {
 ${ comment }
 consoleLog.forEach( msg => {
   let result = msg.text();
-  if ( msg.type() === "any" || msg.type() === "${ assert.type }" ) {${ cbBody }
+  if ( "${ assert.type }" === "any" || msg.type() === "${ assert.type }" ) {${ cbBody }
   }
 });
   `);
 }
 
-
+function templateDialogAssertion( cbBody, assert, params, comment ) {
+  return justify(`
+${ comment }
+dialogLog.forEach( msg => {
+  let result = msg;
+  if ( "${ assert.type }" === "any" || msg.type() === "${ assert.type }" ) {${ cbBody }
+  }
+});
+  `);
+}
 
 /**
  *

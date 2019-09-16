@@ -63,7 +63,8 @@ util.setProjectDirectory( ${ JSON.stringify( projectDirectory ) } );
 
 jest.setTimeout( ${ options.interactiveMode ? INTERACTIVE_MODE_TIMEOUT : ( suite.timeout || NETWORK_TIMEOUT ) } );
 
-const consoleLog = [];
+const consoleLog = [],
+      dialogLog = [];
 
 ${ buildEnv( env ) }
 
@@ -74,6 +75,7 @@ describe( ${ JSON.stringify( title ) }, async () => {
     await bs.setup();
 
     bs.page.on( "console", ( msg ) => consoleLog.push( msg ) );
+    bs.page.on( "dialog", ( dialog ) => dialogLog.push( dialog.message() ) );
 
     ${ options.interactiveMode ? `
     let stepIndex = 0;

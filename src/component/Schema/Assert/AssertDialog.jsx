@@ -8,7 +8,7 @@ import AbstractComponent from "component/AbstractComponent";
 const Option = Select.Option,
       FormItem = Form.Item;
 
-export class AssertConsoleMessage extends AbstractComponent {
+export class AssertDialog extends AbstractComponent {
 
   state = {
     assertion: "",
@@ -51,18 +51,10 @@ export class AssertConsoleMessage extends AbstractComponent {
                 }]
               })( <Select >
               <Option value="any">any</Option>
-              <Option value="log">log</Option>
-              <Option value="debug">debug</Option>
-              <Option value="info">info</Option>
-              <Option value="error">error</Option>
-              <Option value="warning">warning</Option>
-              <Option value="dir">dir</Option>
-              <Option value="dirxml">dirxml</Option>
-              <Option value="table">table</Option>
-              <Option value="trace">trace</Option>
-              <Option value="time">time</Option>
-              <Option value="assert">assert</Option>
-              <Option value="count">count</Option>
+              <Option value="alert">alert</Option>
+              <Option value="beforeunload">beforeunload</Option>
+              <Option value="confirm">confirm</Option>
+              <Option value="prompt">prompt</Option>
             </Select> ) }
             </FormItem>
           </Col>
@@ -78,8 +70,8 @@ export class AssertConsoleMessage extends AbstractComponent {
               }]
             })( <Select
               onSelect={ this.onSelectAssertion }>
-              <Option value="not.equals">equals</Option>
-              <Option value="not.contains">contains</Option>
+              <Option value="equals">equals</Option>
+              <Option value="contains">contains</Option>
             </Select> ) }
           </FormItem>
         </Col>
