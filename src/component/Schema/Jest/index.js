@@ -63,6 +63,7 @@ util.setProjectDirectory( ${ JSON.stringify( projectDirectory ) } );
 
 jest.setTimeout( ${ options.interactiveMode ? INTERACTIVE_MODE_TIMEOUT : ( suite.timeout || NETWORK_TIMEOUT ) } );
 
+const consoleLog = [];
 
 ${ buildEnv( env ) }
 
@@ -71,6 +72,9 @@ ${ targets }
 describe( ${ JSON.stringify( title ) }, async () => {
   beforeAll(async () => {
     await bs.setup();
+
+    bs.page.on( "console", ( msg ) => consoleLog.push( msg ) );
+
     ${ options.interactiveMode ? `
     let stepIndex = 0;
     await bs.page.exposeFunction('setPuppetryStepIndex', index => {

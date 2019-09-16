@@ -27,6 +27,10 @@ import { assertNodeCount as assertNodeCountPage } from "./Params/Page/assertNode
 import { assertScreenshot as assertScreenshotPage } from "./Params/Page/assertScreenshot";
 import { waitForRequest } from "./Params/Page/waitForRequest";
 import { waitForResponse } from "./Params/Page/waitForResponse";
+import { waitForFileChooser } from "./Params/Page/waitForFileChooser";
+import { assertConsoleMessage } from "./Params/Page/assertConsoleMessage";
+
+
 
 import { screenshot as screenshotElement } from "./Params/Element/screenshot";
 import { assertProperty } from "./Params/Element/assertProperty";
@@ -116,6 +120,7 @@ export const schema = {
     waitForNavigation,
     waitForResponse,
     waitForRequest,
+    waitForFileChooser,
     evaluate,
     runjs,
     debug,
@@ -127,7 +132,8 @@ export const schema = {
     assertNodeCount: assertNodeCountPage,
     assertScroll: assertScrollPage,
     assertVar,
-    assertScreenshot: assertScreenshotPage
+    assertScreenshot: assertScreenshotPage,
+    assertConsoleMessage
   }
 };
 

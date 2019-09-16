@@ -9,6 +9,8 @@
 - improvement: new interactive mode
 - improvement: add page.waitForRequest
 - improvement: add page.waitForResponse
+- improvement: add page.waitForFileChooser
+- improvement: add page.assertConsoleMessage
 
 ### Updates
 

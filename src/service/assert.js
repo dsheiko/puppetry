@@ -4,12 +4,28 @@ import ExpressionParser from "service/ExpressionParser";
 export function buildAssertionTpl( commandCall, command, comment ) {
   try {
     const cbBody = createCbBody( command );
+    if ( command.method === "assertConsoleMessage" ) {
+      return templateConsoleMessageAssertion( cbBody, command.assert, comment );
+    }
     return justify( `${ comment }\nresult = ${ commandCall };` ) + ` ${ cbBody }`;
   } catch ( err ) {
     console.warn( "Renderer process: buildAssertionTpl error:", err, { commandCall, command, comment });
     throw err;
   }
 }
+
+function templateConsoleMessageAssertion( cbBody, assert, comment ) {
+  return justify(`
+${ comment }
+consoleLog.forEach( msg => {
+  let result = msg.text();
+  if ( msg.type() === "any" || msg.type() === "${ assert.type }" ) {${ cbBody }
+  }
+});
+  `);
+}
+
+
 
 /**
  *
@@ -20,7 +36,10 @@ export function justify( text ) {
   return ( "\n" + text ).split( "\n" ).map( line => "      " + line ).join( "\n" );
 }
 
-function parseTpl( value, id ) {
+function parseTpl( value, id, type = "string" ) {
+  if ( typeof type === "undefined" || type !== "string" ) {
+     return JSON.stringify( value );
+  }
   const parser = new ExpressionParser( id );
   return parser.stringify( value );
 }
@@ -28,7 +47,7 @@ function parseTpl( value, id ) {
 function createCbBody({ assert, target, method, id }) {
   const { assertion, value, operator, position, ...options } = assert,
         source = `${ target }.${ method }`;
-  
+
   switch ( assertion ) {
     case "screenshot":
       return justify( `expect( result ).toMatchScreenshot( ${ options.mismatchTolerance }, "${ source }" );` );
@@ -38,16 +57,19 @@ function createCbBody({ assert, target, method, id }) {
       return justify( `expect( result )${ value ? "" : ".not" }.toBeOk( "${ source }" );` );
     case "number":
       return justify( `expect( result ).toPassCondition( "${ operator }", ${ value }, "${ source }" );` );
+
     case "contains":
-      if ( typeof options.type !== "undefined" && options.type === "string" ) {
-        return justify( `expect( result ).toIncludeSubstring( ${ parseTpl( value, id ) }, "${ source }" );` );
-      }
-      return justify( `expect( result ).toIncludeSubstring( "${ value }", "${ source }" );` );
+      return justify( `expect( result ).toIncludeSubstring( ${ parseTpl( value, id, options.type ) }`
+        + `, "${ source }" );` );
     case "equals":
-      if ( typeof options.type !== "undefined" && options.type === "string" ) {
-        return justify( `expect( result ).toBeEqual( ${ parseTpl( value, id ) }, "${ source }" );` );
-      }
-      return justify( `expect( result ).toBeEqual( ${ JSON.stringify( value ) }, "${ source }" );` );
+      return justify( `expect( result ).toBeEqual( ${ parseTpl( value, id, options.type ) }, "${ source }" );` );
+
+   case "not.contains":
+      return justify( `expect( result ).not.toIncludeSubstring( ${ parseTpl( value, id, options.type ) }`
+        + `, "${ source }" );` );
+    case "not.equals":
+      return justify( `expect( result ).not.toBeEqual( ${ parseTpl( value, id, options.type ) }, "${ source }" );` );
+
     case "position":
       return justify( `expect( result ).toMatchPosition`
           + `( "${ position }", "${ target }", "${ options.target }", "${ source }" );` );
