@@ -11,7 +11,8 @@ export default class TestGenerator {
   constructor({ suite, schema, targets, runner, projectDirectory, outputDirectory, snippets, env, options }) {
     // collect here information for interactive mode
     this.interactive = {
-      sids: []
+      sids: [],
+      targets: {}
     };
     this.schema = schema;
     this.suite = { ...suite };
@@ -66,7 +67,7 @@ export default class TestGenerator {
     }
     this.interactive.sids.push( command.id );
     // filter by method
-    return `\n    await bs.page.waitForSelector(\`body[data-puppetry-next="${ command.id }`
+    return `\n      await bs.page.waitForSelector(\`body[data-puppetry-next="${ command.id }`
       + `"]\`, { timeout: ${ INTERATIVE_TIMEOUT } });`
   }
 
@@ -109,6 +110,10 @@ export default class TestGenerator {
               testId: command.testId
             }) + traceCode + interactiveModeCode;
 
+      // we need targets to highlight in interactive mode
+      if ( target !== "page" ) {
+        this.interactive.targets[ command.id ] = [{  target, selector: this.targets[ target ] }];
+      }
       // Provide source code with markers
       return this.runner === RUNNER_PUPPETRY
         ? `      ${ COMMAND_ID_COMMENT }${ command.groupId }:${ command.testId }:${ command.id }\n${ chunk }`

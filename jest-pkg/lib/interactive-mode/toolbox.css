@@ -18,6 +18,7 @@
         display: flex;
         flex-flow: row nowrap;
         justify-content: space-between;
+        cursor: move;
       }
 
       .__PUPPETRY_header > div {
@@ -110,4 +111,9 @@
       .__PUPPETRY_ACTIVE > span {
         background-color: #0fa573;
         color: white;
+      }
+
+      .__PUPPETRY_nJNTY4bY_target {
+        border: 1px dashed red !important;
+        outline: 1px dashed white !important;
       }

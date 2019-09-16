@@ -37,6 +37,8 @@ class BrowserSession {
     this.browser = await puppeteer.launch( options  );
     this.context = await this.browser.createIncognitoBrowserContext();
     this.page = await this.context.newPage();
+    // launches 2 windows (one regular and one incognito)
+    // but seems like cannot be fixed https://github.com/GoogleChrome/puppeteer/issues/4400
     this.target = createTargetMethods( this.page );
   }
 
