@@ -5,6 +5,10 @@
 - improvement: add export format: JSON
 - improvement: add template expressions htmlOf, attributeOf, propertyOf
 - improvement: new Test report UI with screenshot thumbnails and lightbox
+- improvement: new CSS regression testing
+- improvement: new interactive mode
+- improvement: add page.waitForRequest
+- improvement: add page.waitForResponse
 
 ### Updates
 

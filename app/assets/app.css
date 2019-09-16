@@ -403,10 +403,8 @@ root > .ant-spin > * {
   background: #002f5c;
 }
 
-.project-navigator__nav  ul {
+.project-navigator__nav ul {
   height: 100%;
-  max-height: calc(100vh - 324px);
-  overflow: auto;
   list-style-type: none;
   margin: 0;
   padding: 0;

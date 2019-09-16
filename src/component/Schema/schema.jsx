@@ -25,6 +25,8 @@ import { assertScroll as assertScrollPage } from "./Params/Page/assertScroll";
 import { waitForNavigation } from "./Params/Page/waitForNavigation";
 import { assertNodeCount as assertNodeCountPage } from "./Params/Page/assertNodeCount";
 import { assertScreenshot as assertScreenshotPage } from "./Params/Page/assertScreenshot";
+import { waitForRequest } from "./Params/Page/waitForRequest";
+import { waitForResponse } from "./Params/Page/waitForResponse";
 
 import { screenshot as screenshotElement } from "./Params/Element/screenshot";
 import { assertProperty } from "./Params/Element/assertProperty";
@@ -112,6 +114,8 @@ export const schema = {
     waitFor,
     waitForSelector,
     waitForNavigation,
+    waitForResponse,
+    waitForRequest,
     evaluate,
     runjs,
     debug,
