@@ -184,6 +184,36 @@ expect.extend({
       `[${ source }] expected "${received}" not to contain "${substring}"` );
   },
 
+ /**
+   * Assert that at least one element of passed array includes substring
+   * @param {String} received
+   * @param {String} substring
+   * @param {String} source
+   * @returns {Object}
+   */
+  toHaveString( received, substring, source ) {
+    const pass = received.some( string => string === substring ),
+          receivedPrint = `[${ received.join(",").substr( 0, 128 ) }..]`;
+    return expectReturn( pass,
+      `[${ source }] expected "${ receivedPrint }" to have "${substring}"`,
+      `[${ source }] expected "${ receivedPrint }" not to have "${substring}"` );
+  },
+
+   /**
+   * Assert that at least one element of passed array includes substring
+   * @param {String} received
+   * @param {String} substring
+   * @param {String} source
+   * @returns {Object}
+   */
+  toHaveSubstring( received, substring, source ) {
+    const pass = received.some( string => string.includes( substring ) ),
+          receivedPrint = `[${ received.join(",").substr( 0, 128 ) }..]`;
+    return expectReturn( pass,
+      `[${ source }] expected "${ receivedPrint }" to contain "${substring}"`,
+      `[${ source }] expected "${ receivedPrint }" not to contain "${substring}"` );
+  },
+
   /**
    * Asser condition
    * @param {Number} rawReceived

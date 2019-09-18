@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form,  Row, Col, Select, Input } from "antd";
+import { Form,  Row, Col, Select, Input, Checkbox } from "antd";
 import If from "component/Global/If";
 import { getAssertion } from "./helpers";
 import AbstractComponent from "component/AbstractComponent";
@@ -37,13 +37,30 @@ export class AssertConsoleMessage extends AbstractComponent {
   render () {
     const { getFieldDecorator } = this.props.form,
           { record } = this.props,
-          assertion = this.state.assertion || getAssertion( record ).assertion || "equals",
+          assertion = this.state.assertion || getAssertion( record ).assertion || "haveString",
+          not = getAssertion( record ).not || "true",
           type = this.state.type || record.assert.type || "any",
           value = record.assert.value || "";
+
     return (<React.Fragment>
+
+
+    <span className="assert-there-were"><span>Assert there</span><FormItem>
+     { getFieldDecorator( "assert.not", {
+                initialValue: not,
+                rules: [{
+                  required: true
+                }]
+              })( <Select>
+              <Option value="false">were</Option>
+              <Option value="true">were NO</Option>
+      </Select> ) }
+      </FormItem>
+      <span>messages sent to the console like the following</span></span>
+
       <Row gutter={24} >
           <Col span={8} >
-            <FormItem label="Message Type">
+            <FormItem label="Message type">
               { getFieldDecorator( "assert.type", {
                 initialValue: type,
                 rules: [{
@@ -67,10 +84,11 @@ export class AssertConsoleMessage extends AbstractComponent {
             </FormItem>
           </Col>
       </Row>
+
       <Row gutter={24}>
 
         <Col span={8} >
-          <FormItem label="Message">
+          <FormItem label="Message text">
             { getFieldDecorator( "assert.assertion", {
               initialValue: assertion,
               rules: [{
@@ -78,9 +96,9 @@ export class AssertConsoleMessage extends AbstractComponent {
               }]
             })( <Select
               onSelect={ this.onSelectAssertion }>
-              <Option value="not.equals">equals</Option>
-              <Option value="not.contains">contains</Option>
-            </Select> ) }
+              <Option value="haveString">equals</Option>
+              <Option value="haveSubstring">contains</Option>
+            </Select>  )}
           </FormItem>
         </Col>
 

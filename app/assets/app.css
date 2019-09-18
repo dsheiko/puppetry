@@ -1137,3 +1137,25 @@ td:hover .editable-cell-icon {
 .command-form > .ant-collapse {
   margin-bottom: 16px;
 }
+
+
+.assert-there-were {
+  display: flex;
+  align-items: center;
+}
+
+.assert-there-were > span:first-child {
+  margin-right: 8px;
+}
+.assert-there-were > span:last-child {
+  margin-left: 8px;
+}
+
+.assert-there-were .ant-row.ant-form-item {
+  display: inline-block;
+  margin: 0;
+}
+
+.assert-there-were .ant-select.ant-select-enabled {
+  width: 110px;
+}

@@ -37,13 +37,28 @@ export class AssertDialog extends AbstractComponent {
   render () {
     const { getFieldDecorator } = this.props.form,
           { record } = this.props,
-          assertion = this.state.assertion || getAssertion( record ).assertion || "equals",
+          assertion = this.state.assertion || getAssertion( record ).assertion || "haveString",
+          not = getAssertion( record ).not || "false",
           type = this.state.type || record.assert.type || "any",
           value = record.assert.value || "";
     return (<React.Fragment>
+
+    <span className="assert-there-were"><span>Assert there</span><FormItem>
+     { getFieldDecorator( "assert.not", {
+                initialValue: not,
+                rules: [{
+                  required: true
+                }]
+              })( <Select>
+              <Option value="false">were</Option>
+              <Option value="true">were NO</Option>
+      </Select> ) }
+      </FormItem>
+      <span>dialogs called like the following</span></span>
+
       <Row gutter={24} >
           <Col span={8} >
-            <FormItem label="Message Type">
+            <FormItem label="Dialog type">
               { getFieldDecorator( "assert.type", {
                 initialValue: type,
                 rules: [{
@@ -62,7 +77,7 @@ export class AssertDialog extends AbstractComponent {
       <Row gutter={24}>
 
         <Col span={8} >
-          <FormItem label="Message">
+          <FormItem label="Dialog message">
             { getFieldDecorator( "assert.assertion", {
               initialValue: assertion,
               rules: [{
@@ -70,8 +85,8 @@ export class AssertDialog extends AbstractComponent {
               }]
             })( <Select
               onSelect={ this.onSelectAssertion }>
-              <Option value="equals">equals</Option>
-              <Option value="contains">contains</Option>
+              <Option value="haveString">equals</Option>
+              <Option value="haveSubstring">contains</Option>
             </Select> ) }
           </FormItem>
         </Col>

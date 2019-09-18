@@ -30,7 +30,7 @@ export const handleDialog = {
 
   description: `Dismiss or accept dialog (alert, beforeunload, confirm or prompt) when it invokes
 
-**NOTE**: the assertion must be defined before the expected dialog event`,
+**NOTE**: the step must be defined before the expected dialog event`,
   commonly: "dismiss/accept dialog",
 
   toLabel: ({ params }) => `(${ getOptionsString( params ) })`,

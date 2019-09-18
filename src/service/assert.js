@@ -31,6 +31,8 @@ consoleLog.forEach( msg => {
 function templateDialogAssertion( cbBody, assert, params, comment ) {
   return justify(`
 ${ comment }
+toHaveSubstring
+
 dialogLog.forEach( msg => {
   let result = msg;
   if ( "${ assert.type }" === "any" || msg.type() === "${ assert.type }" ) {${ cbBody }
@@ -56,8 +58,13 @@ function parseTpl( value, id, type = "string" ) {
   return parser.stringify( value );
 }
 
+function negate( not ) {
+  // can be boolean, but now we have in AssertConsoleMessage "true"/"false"
+  return ( not === "false" || !not ) ? `` : `.not`;
+}
+
 function createCbBody({ assert, target, method, id }) {
-  const { assertion, value, operator, position, ...options } = assert,
+  const { assertion, value, operator, position, not, ...options } = assert,
         source = `${ target }.${ method }`;
 
   switch ( assertion ) {
@@ -76,11 +83,12 @@ function createCbBody({ assert, target, method, id }) {
     case "equals":
       return justify( `expect( result ).toBeEqual( ${ parseTpl( value, id, options.type ) }, "${ source }" );` );
 
-   case "not.contains":
-      return justify( `expect( result ).not.toIncludeSubstring( ${ parseTpl( value, id, options.type ) }`
+    case "haveString":
+      return justify( `expect( result )${ negate( not ) }.toHaveString( ${ parseTpl( value, id, options.type ) }`
         + `, "${ source }" );` );
-    case "not.equals":
-      return justify( `expect( result ).not.toBeEqual( ${ parseTpl( value, id, options.type ) }, "${ source }" );` );
+    case "haveSubstring":
+      return justify( `expect( result )${ negate( not ) }.toHaveString( ${ parseTpl( value, id, options.type ) }`
+        + `, "${ source }" );` );
 
     case "position":
       return justify( `expect( result ).toMatchPosition`
