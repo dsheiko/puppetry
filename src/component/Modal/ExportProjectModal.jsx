@@ -249,7 +249,7 @@ export class ExportProjectModal  extends AbstractComponent {
               }
             >
               <Option value="jest" key="jest">Jest/Puppeteer project (CI-friendly)</Option>
-              <Option value="text" key="text">printable text</Option>
+              <Option value="text" key="text">human readable report</Option>
             </Select>
           </div>
 

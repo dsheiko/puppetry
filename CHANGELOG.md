@@ -1,8 +1,7 @@
-# Puppetry 2.1.0
+# Puppetry 3.0.0
 
 ### Features
-- improvement: add export format: printable test
-- improvement: add export format: JSON
+- improvement: add export format: human readable report
 - improvement: add template expressions htmlOf, attributeOf, propertyOf
 - improvement: new Test report UI with screenshot thumbnails and lightbox
 - improvement: new CSS regression testing
