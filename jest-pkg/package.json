@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env NODE_ENV=test jest",
+    "test:firefox": "cross-env NODE_ENV=test PUPPETRY_DRIVER=firefox jest",
     "test:debug": "cross-env PUPPETEER_RUN_IN_BROWSER=true jest --detectOpenHandles"
   },
   "keywords": [],
@@ -25,6 +26,7 @@
     "node-fetch": "^2.6.0",
     "node-localstorage": "^1.3.1",
     "puppeteer": "^1.19.0",
+    "puppeteer-firefox": "*",
     "shelljs": "^0.8.2",
     "pixelmatch": "^5.0.2",
     "pngjs": "^3.4.0"

@@ -9,6 +9,7 @@ After running the tests `npm test`, you can find the generated screenshots in th
 
 ## Available Automation Commands
 - `npm test` - run tests in command-line
+- `npm run test:firefox` - run tests in command-line with [puppeteer-firefox](https://www.npmjs.com/package/puppeteer-firefox)
 - `npm run test:debug` - run tests in command-line and in browser
 
 
