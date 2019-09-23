@@ -80,8 +80,13 @@ function createCbBody({ assert, target, method, id }) {
     case "contains":
       return justify( `expect( result ).toIncludeSubstring( ${ parseTpl( value, id, options.type ) }`
         + `, "${ source }" );` );
+    case "!contains":
+      return justify( `expect( result ).not.toIncludeSubstring( ${ parseTpl( value, id, options.type ) }`
+        + `, "${ source }" );` );
     case "equals":
       return justify( `expect( result ).toBeEqual( ${ parseTpl( value, id, options.type ) }, "${ source }" );` );
+    case "!equals":
+      return justify( `expect( result ).not.toBeEqual( ${ parseTpl( value, id, options.type ) }, "${ source }" );` );
 
     case "haveString":
       return justify( `expect( result )${ negate( not ) }.toHaveString( ${ parseTpl( value, id, options.type ) }`

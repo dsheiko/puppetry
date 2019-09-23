@@ -13,6 +13,18 @@ export const OPERATOR_MAP = {
   eq: "="
 };
 
+
+export function normalizeAssertionVerb( verb ) {
+  switch( verb ) {
+    case "!equals":
+      return "does not equal";
+    case "!contains":
+      return "does not contain";
+    default:
+      return verb;
+  }
+}
+
 export function renderClick( params, pref = "" ) {
   const text = ( params.button ? `${ params.button  } button` : "" )
    + `${ parseInt( params.clickCount, 10 ) === 2 ? ", double click" : "" }`;

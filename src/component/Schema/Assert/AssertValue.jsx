@@ -36,7 +36,8 @@ export class AssertValue extends AbstractComponent {
 
   render () {
     const { getFieldDecorator } = this.props.form,
-          { record } = this.props,
+          { record, options } = this.props,
+          hasBoolean = !!( options && options.boolean ),
           assertion = this.state.assertion || getAssertion( record ).assertion || "equals",
           type = this.state.type || record.assert.type || "string",
           value = record.assert.value || "";
@@ -44,7 +45,7 @@ export class AssertValue extends AbstractComponent {
       <Row gutter={24}>
 
         <Col span={8} >
-          <FormItem label="Result">
+          <FormItem label="Expected result">
             { getFieldDecorator( "assert.assertion", {
               initialValue: assertion,
               rules: [{
@@ -54,13 +55,15 @@ export class AssertValue extends AbstractComponent {
               onSelect={ this.onSelectAssertion }>
               <Option value="equals">equals</Option>
               <Option value="contains">contains</Option>
+              <Option value="!equals">does not equal</Option>
+              <Option value="!contains">does not contain</Option>
             </Select> ) }
           </FormItem>
         </Col>
 
-        <If exp={ assertion === "equals" }>
+        <If exp={ ( hasBoolean && ( assertion === "equals" || assertion === "!equals" ) ) }>
           <Col span={4} >
-            <FormItem label="type">
+            <FormItem label="Type">
               { getFieldDecorator( "assert.type", {
                 initialValue: type,
                 rules: [{
@@ -68,14 +71,13 @@ export class AssertValue extends AbstractComponent {
                 }]
               })( <Select onSelect={ this.onSelectType }>
                 <Option value="string">string</Option>
-                <Option value="number">number</Option>
                 <Option value="boolean">boolean</Option>
               </Select> ) }
             </FormItem>
           </Col>
         </If>
 
-        <If exp={ assertion === "contains" }>
+        <If exp={ ( assertion === "contains" || assertion === "!contains" ) }>
           <Col span={12} >
             <FormItem label="Value">
               { getFieldDecorator( "assert.value", {
@@ -94,8 +96,9 @@ export class AssertValue extends AbstractComponent {
           </Col>
         </If>
 
-        <If exp={ ( assertion === "equals" && !!type ) }>
+        <If exp={ ( ( assertion === "equals" || assertion === "!equals" ) && !!type ) }>
           <Col span={12} >
+
             <If exp={ type === "boolean" }>
               <FormItem label="Value">
                 { getFieldDecorator( "assert.value", {
@@ -106,6 +109,7 @@ export class AssertValue extends AbstractComponent {
                 ) }
               </FormItem>
             </If>
+
             <If exp={ type !== "boolean" }>
               <FormItem label="Value">
                 { getFieldDecorator( "assert.value", {
@@ -119,6 +123,7 @@ export class AssertValue extends AbstractComponent {
                 template expressions</a>
             </div> }
             </If>
+
           </Col>
         </If>
 

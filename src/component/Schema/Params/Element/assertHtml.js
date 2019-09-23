@@ -1,6 +1,6 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertValue } from "../../Assert/AssertValue";
-import { truncate } from "service/utils";
+import { truncate, normalizeAssertionVerb } from "service/utils";
 export const assertHtml = {
   template: ( command ) => buildAssertionTpl(
     `await bs.target( await ${ command.target }() ).getProp( "innerHTML" )`,
@@ -9,10 +9,11 @@ export const assertHtml = {
   ),
 
   toLabel: ({ assert }) => {
-    return assert.value ? `(${ assert.assertion } \`${ truncate( assert.value, 80 ) }\`)` : "";
+    return assert.value ? `(${ normalizeAssertionVerb( assert.assertion ) } \`${ truncate( assert.value, 80 ) }\`)`
+      : "";
   },
   toText: ({ assert }) => {
-    return assert.value ? `(${ assert.assertion } \`${ assert.value }\`)` : "";
+    return assert.value ? `(${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\`)` : "";
   },
   commonly: "assert HTML",
 

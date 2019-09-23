@@ -31,7 +31,7 @@ export class AssertNumber extends React.Component {
     return (
       <Row gutter={24}>
         <Col span={8} >
-          <FormItem label="Result">
+          <FormItem label="Expected result">
             { getFieldDecorator( "assert.assertion", {
               initialValue: "number",
               rules: [{

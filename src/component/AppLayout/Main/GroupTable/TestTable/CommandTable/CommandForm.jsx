@@ -146,6 +146,7 @@ export class CommandForm extends React.Component {
           method = this.state.method || record.method,
           schema = getSchema( target, method ),
           Assert = schema && schema.assert ? schema.assert.node : null,
+          assertOptions = schema && schema.assert ? schema.assert.options : null,
           safeRecord = this.isSavedOne( record )
             ? {
               params: {},
@@ -245,6 +246,7 @@ export class CommandForm extends React.Component {
               <ErrorBoundary>
                 { Assert ? <Assert
                   targets={ targets }
+                  options={ assertOptions }
                   form={ this.props.form }
                   record={ safeRecord } /> : null }
               </ErrorBoundary>

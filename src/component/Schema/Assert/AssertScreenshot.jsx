@@ -38,7 +38,7 @@ export class AssertScreenshot extends React.Component {
         </Col>
 
         <Col span={4} >
-          <FormItem label="Mismatch tolerance ratio (0..1)">
+          <FormItem label="Expected mismatch tolerance ratio (0..1)">
             { getFieldDecorator( "assert.mismatchTolerance", {
               initialValue: value,
               rules: [{

@@ -32,7 +32,7 @@ export class AssertBoundingBox extends React.Component {
       <React.Fragment>
         <Row className="is-invisible">
           <Col span={8} >
-            <FormItem label="Result">
+            <FormItem label="Expected result">
               { getFieldDecorator( "assert.assertion", {
                 initialValue: "boundingBox",
                 rules: [{

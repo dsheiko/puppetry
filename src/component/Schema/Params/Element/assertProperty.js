@@ -1,7 +1,7 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
 import { AssertValue } from "../../Assert/AssertValue";
-import { truncate } from "service/utils";
+import { truncate, normalizeAssertionVerb } from "service/utils";
 
 export const assertProperty = {
   template: ( command ) => buildAssertionTpl(
@@ -11,12 +11,17 @@ export const assertProperty = {
       + `value of ${ command.target } satisfies the given constraint`
   ),
 
-  toLabel: ({ params, assert }) => `(${ params.name } ${ assert.assertion } \`${ truncate( assert.value, 60 ) }\`)`,
-  toText: ({ params, assert }) => `(${ params.name } ${ assert.assertion } \`${ assert.value }\`)`,
+  toLabel: ({ params, assert }) => `(\`${ params.name }\``
+    + ` ${ normalizeAssertionVerb( assert.assertion ) } \`${ truncate( assert.value, 60 ) }\`)`,
+  toText: ({ params, assert }) => `(\`${ params.name }\``
+    + ` ${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\`)`,
   commonly: "assert property",
 
   assert: {
-    node: AssertValue
+    node: AssertValue,
+    options: {
+      boolean: true
+    }
   },
   description: `Asserts that the
   specified [property](https://developer.mozilla.org/en-US/docs/Web/API/Element)

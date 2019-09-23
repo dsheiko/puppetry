@@ -12,6 +12,8 @@
 - improvement: add page.assertConsoleMessage
 - improvement: add page.assertDialog
 - improvement: add page.handleDialog
+- improvement: all assertions accept the opposite assumptions (equal/not equal, contain/ doesn't contain)
+- improvement: mixed type assertion simplified - one can assert only for string value. Exceptions are assertProperty/Attribute where additionally one can assert for boolean
 
 ### Updates
 

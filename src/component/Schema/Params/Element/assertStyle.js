@@ -1,7 +1,7 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
 import { AssertValue } from "../../Assert/AssertValue";
-import { truncate } from "service/utils";
+import { truncate, normalizeAssertionVerb } from "service/utils";
 
 export const assertStyle = {
   template: ( command ) => buildAssertionTpl(
@@ -15,11 +15,11 @@ export const assertStyle = {
 
   toLabel: ({ params, assert }) => {
     return `(${ params.name + ( params.pseudo || "" ) } `
-          + `${ assert.assertion } \`${ truncate( assert.value, 60 ) }\`)`;
+          + `${ normalizeAssertionVerb( assert.assertion ) } \`${ truncate( assert.value, 60 ) }\`)`;
   },
   toText: ({ params, assert }) => {
     return `(${ params.name + ( params.pseudo || "" ) } `
-          + `${ assert.assertion } \`${ assert.value }\`)`;
+          + `${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\`)`;
   },
   commonly: "assert style",
 

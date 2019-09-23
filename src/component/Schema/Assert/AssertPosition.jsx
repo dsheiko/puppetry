@@ -32,7 +32,7 @@ export class AssertPosition extends React.Component {
       <React.Fragment>
         <Row gutter={24} className="is-invisible">
           <Col span={8} >
-            <FormItem label="Result">
+            <FormItem label="Expected result">
               { getFieldDecorator( "assert.assertion", {
                 initialValue: "position",
                 rules: [{
