@@ -15,6 +15,7 @@
 - improvement: all assertions accept the opposite assumptions (equal/not equal, contain/ doesn't contain)
 - improvement: mixed type assertion simplified - one can assert only for string value. Exceptions are assertProperty/Attribute where additionally one can assert for boolean
 - improvement: Jest/Puppeteer project (export) has option to run in Firefox ([custom build](https://www.npmjs.com/package/puppeteer-firefox))
+- improvement: test steps and refs now support comments
 
 ### Updates
 

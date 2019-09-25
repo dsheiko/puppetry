@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Row, Col, Alert } from "antd";
+import { Form, Row, Col, Alert, Input } from "antd";
 import { TargetSelect } from "./TargetSelect";
 import { ElementMethodSelect } from "./ElementMethodSelect";
 import { PageMethodSelect } from "./PageMethodSelect";
@@ -76,6 +76,14 @@ export class CommandForm extends React.Component {
           }
         }
 
+//        if ( values.assert.hasOwnProperty( "enabled" ) ) {
+//          Object.entries( values.assert.enabled ).forEach(([ key, value ]) => {
+//            console.log("sss", values.assert);
+//          });
+//          delete values.assert.enabled;
+//        }
+
+
         this.props.action[ record.id ? "updateCommand" : "addCommand" ]({
           id: record.id,
           testId: record.testId,
@@ -83,7 +91,8 @@ export class CommandForm extends React.Component {
           target: values.target,
           method: values.method,
           params: values.params,
-          assert: values.assert
+          assert: values.assert,
+          comment: values.comment
         });
 
         this.updateSuiteModified();
@@ -137,6 +146,16 @@ export class CommandForm extends React.Component {
       return false;
     }
     return true;
+  }
+
+  renderCommentField( record ) {
+    const { getFieldDecorator } = this.props.form;
+    return ( <FormItem>
+        { getFieldDecorator( "comment", {
+          initialValue: record.comment
+        } )( <Input placeholder="Explain your intent"
+          onKeyPress={ ( e ) => this.onKeyPress( e, this.handleSubmit ) } /> ) }
+      </FormItem> );
   }
 
   render() {
@@ -252,6 +271,13 @@ export class CommandForm extends React.Component {
               </ErrorBoundary>
             </fieldset>
           </If>
+
+          {  schema && <fieldset className="command-form__fieldset">
+          <legend>Comment</legend>
+          { this.renderCommentField( record ) }
+          </fieldset> }
+
+
         </Form>
       </ErrorBoundary>
     );

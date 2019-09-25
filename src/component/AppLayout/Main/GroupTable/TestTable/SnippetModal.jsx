@@ -3,7 +3,7 @@ import { InstantModal } from "component/Global/InstantModal";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractForm from "component/AbstractForm";
 import { SnippetVariables } from "./SnippetVariables";
-import { Form, Button, Select } from "antd";
+import { Form, Button, Select, Input, Icon } from "antd";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
@@ -34,9 +34,13 @@ export class SnippetModal extends AbstractForm {
       record.variables = this.state.variables;
 
       if ( record.id ) {
-        action.updateCommand({ ...record, ref: values.snippet, isRef: true, refName: match.title });
+        action.updateCommand({
+          ...record, ref: values.snippet, comment: values.comment, isRef: true, refName: match.title
+        });
       } else {
-        action.addCommand({ ...record, ref: values.snippet, isRef: true, refName: match.title });
+        action.addCommand({
+          ...record, ref: values.snippet, comment: values.comment, isRef: true, refName: match.title
+        });
       }
       this.close();
     });
@@ -64,7 +68,8 @@ export class SnippetModal extends AbstractForm {
 
     const { isVisible, snippets, record } = this.props,
           { getFieldDecorator } = this.props.form,
-          { loading } = this.state;
+          { loading } = this.state,
+          Addon = <Icon type="message" title="Comment" />;
 
     return ( <ErrorBoundary>
       <InstantModal
@@ -111,8 +116,18 @@ export class SnippetModal extends AbstractForm {
             )}
           </FormItem>
 
+
+
         </Form>
         <SnippetVariables record={ record } onChanged={ this.onVariablesChanged } />
+
+         <FormItem label="Comment">
+          { getFieldDecorator( "comment", {
+            initialValue: ( record ? record.comment :  null )
+          })(
+            <Input placeholder="Explain your intent" onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
+          )}
+        </FormItem>
       </InstantModal>
     </ErrorBoundary> );
   }

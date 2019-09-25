@@ -127,6 +127,13 @@ function expectReturn( pass, errorMsg, vsMsg = null ) {
   };
 }
 
+function isEnabled( assert, key ) {
+  if ( !assert.hasOwnProperty( "_enabled" ) ) {
+    return true;
+  }
+  return assert.enabled[ key ];
+}
+
 expect.extend({
   /**
    * Assert value is truthy
@@ -246,21 +253,24 @@ expect.extend({
           w = compare( received.width, snapshot.wOperator, parseInt( snapshot.wValue, 10 ) ),
           h = compare( received.height, snapshot.hOperator, parseInt( snapshot.hValue, 10 ) );
 
-    if ( !x ) {
+
+    if ( isEnabled( snapshot, "xValue" ) && !x ) {
       return expectReturn( x,
         `[${ source }] expected for box.x: ${received.x} ${OPERATOR_MAP[snapshot.xOperator]} ${snapshot.xValue}` );
     }
-    if ( !y ) {
+    if ( isEnabled( snapshot, "yValue" ) && !y ) {
       return expectReturn( y,
         `[${ source }] expected for box.y: ${received.y} ${OPERATOR_MAP[snapshot.yOperator]} ${snapshot.yValue}` );
     }
-    if ( !w ) {
+    if ( isEnabled( snapshot, "wValue" ) &&!w ) {
       return expectReturn( w,
-        `[${ source }] expected for box.width: ${received.width} ${OPERATOR_MAP[snapshot.wOperator]} ${snapshot.wValue}` );
+        `[${ source }] expected for box.width: `
+          + `${received.width} ${OPERATOR_MAP[snapshot.wOperator]} ${snapshot.wValue}` );
     }
-    if ( !h ) {
+    if ( isEnabled( snapshot, "hValue" ) && !h ) {
       return expectReturn( h,
-        `[${ source }] expected for box.height: ${received.height} ${OPERATOR_MAP[snapshot.hOperator]} ${snapshot.hValue}` );
+        `[${ source }] expected for box.height: ${received.height}`
+          + ` ${OPERATOR_MAP[snapshot.hOperator]} ${snapshot.hValue}` );
     }
     return expectReturn( true, `` );
   },

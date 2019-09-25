@@ -31,6 +31,7 @@ import { waitForFileChooser } from "./Params/Page/waitForFileChooser";
 import { assertConsoleMessage } from "./Params/Page/assertConsoleMessage";
 import { assertDialog } from "./Params/Page/assertDialog";
 import { handleDialog } from "./Params/Page/handleDialog";
+import { assertPerfomanceAssetWeight } from "./Params/Page/assertPerfomanceAssetWeight";
 
 
 
@@ -137,7 +138,8 @@ export const schema = {
     assertVar,
     assertScreenshot: assertScreenshotPage,
     assertConsoleMessage,
-    assertDialog
+    assertDialog,
+    assertPerfomanceAssetWeight
   }
 };
 

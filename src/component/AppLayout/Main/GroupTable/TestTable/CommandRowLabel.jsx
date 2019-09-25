@@ -29,11 +29,15 @@ export class CommandRowLabel extends React.Component {
              ? snippets[ record.ref ].title
              : ( record.refName || "reference not found" );
 
-     return ( <div className="container--editable-cell command--ref">
+     return ( <div className="container--editable-cell">
+       <span className="command--ref">
        <Icon
          type="link"
          title="Reference to a snippet" />
-       { title }
+         { title }
+       </span>
+       { record.comment && <i className="is-optional">
+         <br /><Icon type="message" title="Comment" />{ " " } { record.comment }</i> }
      </div> );
    }
 
@@ -49,7 +53,8 @@ export class CommandRowLabel extends React.Component {
          title={ record.target === "page" ? "Page method" : `${ record.target } target method` } />
        <span className="token--target">{ record.target }</span>.{ record.method }
        <span className="token--param">{ CommandRowLabel.buildAddon( record ) }</span>
-
+       { record.comment && <i className="is-optional">
+        <br /><Icon type="message" title="Comment" />{ " " } { record.comment }</i> }
      </div> );
    }
 

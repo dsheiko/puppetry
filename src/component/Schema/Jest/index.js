@@ -63,8 +63,10 @@ util.setProjectDirectory( ${ JSON.stringify( projectDirectory ) } );
 
 jest.setTimeout( ${ options.interactiveMode ? INTERACTIVE_MODE_TIMEOUT : ( suite.timeout || NETWORK_TIMEOUT ) } );
 
-const consoleLog = [],
-      dialogLog = [];
+const consoleLog = [], // assetConsoleMessage
+      dialogLog = [], // assertDialog
+      responses = {}, // assert preformance budget
+      resources = [];
 
 ${ buildEnv( env ) }
 
@@ -76,6 +78,31 @@ describe( ${ JSON.stringify( title ) }, async () => {
 
     bs.page.on( "console", ( msg ) => consoleLog.push( msg ) );
     bs.page.on( "dialog", ( dialog ) => dialogLog.push( dialog.message() ) );
+
+    try {
+      const session = await bs.page.target().createCDPSession();
+
+      // map responses
+      session.on( "Network.responseReceived", ( e ) => {
+        responses[ e.requestId ] = event.response;
+      });
+      // collect response details
+      session.on( "Network.dataReceived", ( e ) => {
+        const { url, mimeType } = responses[ e.requestId ];
+        if ( url.startsWith( "data:" ) ) {
+          return;
+        }
+        resources.push({
+          url,
+          mimeType,
+          length: event.encodedDataLength
+        });
+      });
+
+      await session.send( "Network.enable" );
+    } catch( e ) {
+      console.warn( e );
+    }
 
     ${ options.interactiveMode ? `
     let stepIndex = 0;

@@ -1159,3 +1159,41 @@ td:hover .editable-cell-icon {
 .assert-there-were .ant-select.ant-select-enabled {
   width: 110px;
 }
+
+.assert-perf-table {
+  margin-left: 8px;
+}
+.assert-perf-table td {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.assert-perf-table td .ant-row.ant-form-item {
+  margin: 0;
+  padding: 0;
+}
+
+.assert-perf-table thead td {
+  font-weight: bold;
+}
+
+.assert-perf-table .assert-perf-size {
+  width: 100px;
+}
+
+.assert-perf-table .assert-perf-size .ant-form-explain {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 300px;
+  z-index: 1000;
+}
+
+.assert-row-disabled > *:not(:first-child) {
+  opacity: 0.6;
+}
+
+
+.ant-form-item-label > label:not(.ant-form-item-required) {
+  opacity: 0.7;
+}
