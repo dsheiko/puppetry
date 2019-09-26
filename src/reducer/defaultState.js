@@ -102,6 +102,7 @@ export default {
     savedAt: 0,
     modified: false,
     lastOpenSuite: "",
+    autosave: true,
 
     variables: {},
     environments: [ "test", "stage", "production" ]

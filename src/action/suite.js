@@ -17,15 +17,35 @@ import groupActions from "./group";
 import testActions from "./test";
 import commandActions from "./command";
 import snippetsActions from "./snippets";
+import { message } from "antd";
+
 
 const actions = createActions({
-  SET_SUITE: ( options ) => validate( options, I.SUITE_OPTIONS ),
-  RESET_SUITE: ( options ) => options
-});
+        SET_SUITE: ( options ) => validate( options, I.SUITE_OPTIONS ),
+        RESET_SUITE: ( options ) => options
+      });
 
-actions.updateSuite = ( suite ) => ( dispatch ) => {
+let autosaveTimeout;
+
+actions.updateSuite = ( suite ) => ( dispatch, getState ) => {
+
+  const store = getState(),
+        autosaveSuite = () => {
+          autosaveTimeout = null;
+          dispatch( actions.setSuite({ savedAt: dateToTs(), modified: false }) );
+          dispatch( actions.saveSuite( {}, true ) );
+          message.destroy();
+          message.info( `Data saved!` );
+        };
+
   dispatch( projectActions.setProject({ modified: true }) );
   dispatch( actions.setSuite( suite ) );
+
+  if ( store.project.autosave && store.settings.projectDirectory && store.suite.filename ) {
+    clearTimeout( autosaveTimeout );
+    autosaveTimeout = setTimeout( autosaveSuite, 1500 );
+  }
+
 };
 
 actions.removeSuite = ( filename ) => async ( dispatch, getState ) => {
@@ -102,7 +122,8 @@ actions.loadSuite = ( filename, options = { silent: false }) => async ( dispatch
 
 };
 
-actions.saveSuite = ( options = {}) => async ( dispatch, getState ) => {
+actions.saveSuite = ( options = {}, autosave = false ) => async ( dispatch, getState ) => {
+  console.log("save suite!!!");
   const store = getState(),
         { projectDirectory } = store.settings,
         { filename } = { ...store.suite, ...options };
@@ -118,7 +139,9 @@ actions.saveSuite = ( options = {}) => async ( dispatch, getState ) => {
 
     await saveProject( store );
 
-    dispatch( actions.updateSuite({ savedAt: dateToTs(), modified: false }) );
+    if ( !autosave ) {
+      dispatch( actions.updateSuite({ savedAt: dateToTs(), modified: false }) );
+    }
 
     if ( store.suite.snippets ) {
       await dispatch( snippetsActions.resetSnippets({

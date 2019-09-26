@@ -32,7 +32,7 @@ export class EditTargetsAsCsvModal extends AbstractForm {
   }
 
   onClickOk = ( e ) => {
-    const { clearTarget, addTarget } = this.props.action,
+    const { clearTarget, addTarget, updateSuite } = this.props.action,
           { validateFields } = this.props.form;
 
     e.preventDefault();
@@ -56,6 +56,9 @@ export class EditTargetsAsCsvModal extends AbstractForm {
       clearTarget();
       data.forEach( chunk => {
         addTarget( chunk );
+      });
+      updateSuite({
+        modified: true
       });
       this.close();
     });
@@ -104,11 +107,7 @@ export class EditTargetsAsCsvModal extends AbstractForm {
           { isVisible && <Form>
             <FormItem  label="Targets">
               { getFieldDecorator( "csv", {
-                initialValue,
-                rules: [{
-                  required: true,
-                  message: "Please enter export table"
-                }]
+                initialValue
               })(
                 <TextArea autosize={{ minRows: 8, maxRows: 12 }} />
               )}
