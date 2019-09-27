@@ -116,18 +116,19 @@ export class SnippetModal extends AbstractForm {
             )}
           </FormItem>
 
-
+          <FormItem label="Add a comment" className="label-optional">
+            { getFieldDecorator( "comment", {
+              initialValue: ( record ? record.comment :  null )
+            })(
+              <Input placeholder="Explain your intent" onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
+            )}
+          </FormItem>
 
         </Form>
+
         <SnippetVariables record={ record } onChanged={ this.onVariablesChanged } />
 
-         <FormItem label="Comment">
-          { getFieldDecorator( "comment", {
-            initialValue: ( record ? record.comment :  null )
-          })(
-            <Input placeholder="Explain your intent" onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
-          )}
-        </FormItem>
+
       </InstantModal>
     </ErrorBoundary> );
   }

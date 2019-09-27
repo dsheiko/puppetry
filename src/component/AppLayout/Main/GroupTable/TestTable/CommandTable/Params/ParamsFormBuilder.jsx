@@ -241,7 +241,7 @@ export class ParamsFormBuilder extends React.Component {
       description: "string=",
       fields: "array"
     });
-    return ( <Row gutter={16} key={ `row_${ inx }` } className="ant-form-inline edit-command-inline">
+    return ( <Row gutter={16} key={ `row_${ inx }` } className={ section.span ? "ant-form-inline edit-command-inline" : "" }>
       { row.description ? <Markdown
         md={ row.description }
         className="command-row-description" /> : "" }
@@ -267,8 +267,8 @@ export class ParamsFormBuilder extends React.Component {
 
     return (
       <fieldset className="command-form__fieldset" key={ `section_${ inx }` }>
-        { !section.collapsed && <legend>
-          <span>{ section.legend || "Parameters" }</span>
+        { ( !section.collapsed && section.legend ) && <legend>
+          <span>{ section.legend || "" }</span>
           { section.tooltip && <Tooltip title={ section.tooltip } icon="question-circle" /> }
         </legend> }
         { section.description &&
@@ -289,8 +289,8 @@ export class ParamsFormBuilder extends React.Component {
     const header = ( <span>{ section.legend || "Advanced Options" }</span> );
     return section.collapsed
       ? ( <Collapse key={ `collapse_${ inx }` }
-        expandIcon={({ isActive }) => ( <Icon
-          type="right-circle" rotate={isActive ? 90 : 0} /> )}
+          expandIcon={({ isActive }) => ( <Icon
+          type="right" rotate={isActive ? 90 : 0} /> )}
       >
         <Panel key={ `panel_${ inx }` }
 

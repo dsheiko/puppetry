@@ -923,10 +923,12 @@ td:hover .editable-cell-icon {
   margin-top: 0;
   margin-bottom: 1em;
 }
+
 .command-row-description {
   font-size: 13px;
   line-height: 18px;
   padding: 8px 0 0 8px;
+  font-style: italic;
 }
 
 .markdown.command-row-description {
@@ -945,8 +947,8 @@ td:hover .editable-cell-icon {
 }
 
 .command-options-panel .ant-collapse-header svg {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
 }
 
 .template-helper {
@@ -1193,7 +1195,32 @@ td:hover .editable-cell-icon {
   opacity: 0.6;
 }
 
-
+/*
 .ant-form-item-label > label:not(.ant-form-item-required) {
   opacity: 0.7;
+}*/
+
+.label-optional .ant-form-item-label label {
+
+}
+.label-optional .ant-form-item-label::after {
+  content: "(optional)";
+  opacity: 0.7;
+  margin-left: -4px;
+  font-size: .9em;
+  font-style: italic;
+}
+
+/* Label close to*/
+.ant-form-item-label {
+  height: 32px;
+  vertical-align: bottom;
+}
+/* but when inline shold be balanced with sibling input */
+.ant-form-inline .ant-form-item-label {
+  vertical-align: middle;
+}
+/* 24px margin form item too much */
+.ant-form-item {
+  margin-bottom: 8px !important;
 }
