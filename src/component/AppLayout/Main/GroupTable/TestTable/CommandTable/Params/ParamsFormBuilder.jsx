@@ -290,7 +290,7 @@ export class ParamsFormBuilder extends React.Component {
     return section.collapsed
       ? ( <Collapse key={ `collapse_${ inx }` }
         expandIcon={({ isActive }) => ( <Icon
-          type="right-circle" rotate={isActive ? 90 : 0} /> )}
+          type="right" rotate={isActive ? 90 : 0} /> )}
       >
         <Panel key={ `panel_${ inx }` }
 
