@@ -150,7 +150,7 @@ export class CommandForm extends React.Component {
 
   renderCommentField( record ) {
     const { getFieldDecorator } = this.props.form;
-    return ( <FormItem label="Add a comment" className="label-optional">
+    return ( <FormItem>
         { getFieldDecorator( "comment", {
           initialValue: record.comment
         } )( <Input placeholder="Explain your intent"
@@ -188,7 +188,7 @@ export class CommandForm extends React.Component {
               type="warning"
               closable />
           </If>
-          <Row gutter={24}  className="target-method-selector-box">
+          <Row gutter={24}>
             <Col xl={8} lg={12} md={24}>
               <FormItem label="Target"
                 help={ targets.length ? null: "Consider adding test targets in the suite" }>
@@ -244,10 +244,6 @@ export class CommandForm extends React.Component {
               closable />
           </If>
 
-          {  schema && <fieldset className="command-form__fieldset">
-          { this.renderCommentField( record ) }
-          </fieldset> }
-
           <If exp={ schema && schema.params.length }>
             <div className="command-form ">
               <ErrorBoundary>
@@ -276,7 +272,10 @@ export class CommandForm extends React.Component {
             </fieldset>
           </If>
 
-
+          {  schema && <fieldset className="command-form__fieldset">
+          <legend>Comment</legend>
+          { this.renderCommentField( record ) }
+          </fieldset> }
 
 
         </Form>
