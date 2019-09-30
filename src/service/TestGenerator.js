@@ -98,6 +98,10 @@ export default class TestGenerator {
         return ``;
       }
 
+      if ( src === "page" && method.startsWith( "assertPerfomanceAsset" ) ) {
+        this.options.requireInterceptTraffic = true;
+      }
+
       const traceCode = this.options.trace ? TestGenerator.getTraceTpl( target, command ) : ``,
             interactiveModeCode = this.options.interactiveMode ? this.getInteractiveModeTpl( command ) : ``,
             chunk = this.schema[ src ][ method ].template({

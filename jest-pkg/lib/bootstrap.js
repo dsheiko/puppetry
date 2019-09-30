@@ -24,15 +24,43 @@ async function queryXpath( selector ) {
 }
 
 /**
- * Query for ElementHandle by selector or XPath
+ * Query for ElementHandle by CSS selector
  *
  * @param {String} selector
  * @param {String} target
  * @return {?ElementHandle}
  */
-bs.query = async function ( selector, target ) {
-  const elh = ( selector.startsWith( "/" ) || selector.startsWith( "(.//" ) )
-    ? await queryXpath( selector ) : await bs.page.$( selector );
+bs.findHandleByCss = async function ( selector, target ) {
+  const elh = await bs.page.$( selector );
+  if ( !elh ) {
+    throw new Error( "Cannot find target " + target + " (CSS: " + selector + ")" );
+  }
+  return elh;
+};
+
+/**
+ * Query for ElementHandle by XPath
+ *
+ * @param {String} selector
+ * @param {String} target
+ * @return {?ElementHandle}
+ */
+bs.findHandleByXpath = async function ( selector, target ) {
+  const elh = await queryXpath( selector );
+  if ( !elh ) {
+    throw new Error( "Cannot find target " + target + " (XPath: " + selector + ")" );
+  }
+  return elh;
+};
+
+/**
+ *
+ * @param {String} selector
+ * @param {String} target
+ * @return {?ElementHandle}
+ */
+bs.findHandleBySelectorChain = async function ( selector, target ) {
+  const elh = await bs.page.evaluateHandle( selector );
   if ( !elh ) {
     throw new Error( "Cannot find target " + target + " (" + selector + ")" );
   }

@@ -32,7 +32,7 @@ export function renderClick( params, pref = "" ) {
 }
 
 export const ruleValidateVariable = ( rule, value, callback ) => {
-  const reConst = /^[A-Z_\-0-9]+$/g;
+  const reConst = /^[A-Z_0-9]+$/g;
   value = value.trim();
   if ( !value.length ) {
     return callback( "The value shall not be empty" );

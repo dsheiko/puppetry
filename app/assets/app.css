@@ -646,9 +646,10 @@ margin-bottom: 0;
 }
 
 .ant-form.cell-form .ant-form-explain {
-position: absolute;
-padding: 6px;
-background-color: rgba(255, 255, 255, .8);
+  position: absolute;
+  padding: 2px 12px;
+  background-color: white;
+  width: 100%;
 }
 
 .ant-form.suite-form {

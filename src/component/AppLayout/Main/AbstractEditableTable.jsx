@@ -60,6 +60,10 @@ export default class AbstractEditableTable extends AbstractDnDTable {
     }
   }
 
+  validateField() {
+    return true;
+  }
+
   onSubmit = async ( record ) => {
     try {
       const id = record.id,
@@ -71,6 +75,9 @@ export default class AbstractEditableTable extends AbstractDnDTable {
                 ref.current.validateFields([ key ], ( err, values ) => {
                   if ( err ) {
                     return reject( err );
+                  }
+                  if ( !this.validateFormField( key, values[ key ], ref.current ) ) {
+                    return reject( "Invalid syntax" );
                   }
                   resolve( values );
                 });

@@ -81,3 +81,7 @@ exports.DIR_SNAPSHOTS = "snapshots";
 
 exports.INLINE_INPUT_STYLES = { width: 200 };
 
+exports.SELECTOR_CHAIN_DELIMITER = ">>";
+
+exports.SELECTOR_CSS = 1;
+exports.SELECTOR_XPATH = 2;

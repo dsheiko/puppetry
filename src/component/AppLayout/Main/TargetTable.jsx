@@ -3,6 +3,7 @@ import { Table, Icon, Button } from "antd";
 import AbstractEditableTable from "./AbstractEditableTable";
 import { EditableCell } from "./EditableCell";
 import { connectDnD } from "./DragableRow";
+import { validateSelector } from "service/selector";
 import ErrorBoundary from "component/ErrorBoundary";
 
 @connectDnD
@@ -60,6 +61,32 @@ export class TargetTable extends AbstractEditableTable {
     ];
 
   }
+
+  /**
+   * Check selector on submit
+   * @param {String} key
+   * @param {String} value
+   * @param {Form} form
+   * @returns {Boolean}
+   */
+  validateFormField( key, value, form ) {
+    if ( key !== "selector" ) {
+      return true;
+    }
+    try {
+      validateSelector( value );
+    } catch ( e ) {
+      form.setFields({
+        selector: {
+          value,
+          errors: [ e ]
+        }
+      });
+      return false;
+    }
+    return true;
+  }
+
 
   onRowClassName = ( record ) => {
     return "model--target " + this.buildRowClassName( record );

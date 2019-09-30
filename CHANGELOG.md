@@ -17,6 +17,7 @@
 - improvement: Jest/Puppeteer project (export) has option to run in Firefox ([custom build](https://www.npmjs.com/package/puppeteer-firefox))
 - improvement: test steps and refs now support comments
 - improvement: add suite autosave option
+- improvement: support Shadow DOM querying
 
 ### Updates
 

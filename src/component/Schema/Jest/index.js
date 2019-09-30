@@ -1,4 +1,5 @@
-import { RUNNER_PUPPETRY } from "constant";
+import { RUNNER_PUPPETRY, SELECTOR_CHAIN_DELIMITER, SELECTOR_CSS } from "constant";
+import { validateSimpleSelector } from "service/selector";
 import { renderSuiteHtml } from "./interactive-mode";
 import fs from "fs";
 import { join } from "path";
@@ -15,9 +16,27 @@ const NETWORK_TIMEOUT = 50000,
         join( outputDirectory, "lib", "interactive-mode", file ), "utf8"
       );
 
+/**
+ * Build selector for ShadowDOM
+ * e.g. `document.querySelector( ".foo" ).shadowRoot.querySelector( ".bar" )`
+ * @param {String} selectorChain
+ * @returns {String}
+ */
+function buildShadowDomQuery( selectorChain ) {
+  return "document" + ( selectorChain
+    .split( SELECTOR_CHAIN_DELIMITER )
+    .map( ( sel ) => `.querySelector("${ sel }")` )
+    .join( `.shadowRoot` ) );
+}
 
 export const tplQuery = ({ target, selector }) => {
-  return `const ${target} = async () => bs.query( ${ JSON.stringify( selector )}, `
+  // in case of chain for shadow DOM
+  if ( selector.includes( SELECTOR_CHAIN_DELIMITER ) ) {
+    return `const ${ target } = async () => bs.findHandleBySelectorChain( \`${ buildShadowDomQuery( selector ) }\`, `
+      + `${ JSON.stringify( target )} )`;
+  }
+  const func = validateSimpleSelector( selector ) === SELECTOR_CSS ? "findHandleByCss" : "findHandleByXpath";
+  return `const ${ target } = async () => bs.${ func }( ${ JSON.stringify( selector )}, `
     + `${ JSON.stringify( target )} );`;
 };
 
@@ -68,6 +87,31 @@ const consoleLog = [], // assetConsoleMessage
       responses = {}, // assert preformance budget
       resources = [];
 
+${ options.requireInterceptTraffic ? `
+async function interceptTraffic( page ) {
+  const session = await page.target().createCDPSession();
+  await session.send( "Network.enable" );
+
+  // map responses
+  session.on( "Network.responseReceived", ({ requestId, response, type }) => {
+    responses[ requestId ] = { ...response, type };
+  });
+  // collect response details
+  session.on( "Network.dataReceived", ({ requestId, encodedDataLength }) => {
+    const { url, mimeType } = responses[ requestId ];
+    if ( url.startsWith( "data:" ) ) {
+      return;
+    }
+    resources.push({
+      url,
+      mimeType,
+      length: encodedDataLength
+    });
+  });
+}
+` : ``
+}
+
 ${ buildEnv( env ) }
 
 ${ targets }
@@ -79,30 +123,7 @@ describe( ${ JSON.stringify( title ) }, async () => {
     bs.page.on( "console", ( msg ) => consoleLog.push( msg ) );
     bs.page.on( "dialog", ( dialog ) => dialogLog.push( dialog.message() ) );
 
-    try {
-      const session = await bs.page.target().createCDPSession();
-
-      // map responses
-      session.on( "Network.responseReceived", ( e ) => {
-        responses[ e.requestId ] = event.response;
-      });
-      // collect response details
-      session.on( "Network.dataReceived", ( e ) => {
-        const { url, mimeType } = responses[ e.requestId ];
-        if ( url.startsWith( "data:" ) ) {
-          return;
-        }
-        resources.push({
-          url,
-          mimeType,
-          length: event.encodedDataLength
-        });
-      });
-
-      await session.send( "Network.enable" );
-    } catch( e ) {
-      console.warn( e );
-    }
+    typeof interceptTraffic === "function" && await interceptTraffic( bs.page );
 
     ${ options.interactiveMode ? `
     let stepIndex = 0;
