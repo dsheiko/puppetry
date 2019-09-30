@@ -60,7 +60,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
     }
   }
 
-  validateField() {
+  validateFormField() {
     return true;
   }
 
