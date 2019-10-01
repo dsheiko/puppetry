@@ -1,18 +1,18 @@
 import { RuntimeError } from "error";
 import ExpressionParser from "service/ExpressionParser";
 
-export function buildAssertionTpl( commandCall, command, comment ) {
+export function buildAssertionTpl( assertionCall, command, preCode ) {
   try {
     const cbBody = createCbBody( command );
     if ( command.method === "assertConsoleMessage" ) {
-      return templateConsoleMessageAssertion( cbBody, command.assert, comment );
+      return templateConsoleMessageAssertion( cbBody, command.assert, preCode );
     }
     if ( command.method === "assertDialog" ) {
-      return templateDialogAssertion( cbBody, command.assert, command.params, comment );
+      return templateDialogAssertion( cbBody, command.assert, command.params, preCode );
     }
-    return justify( `${ comment }\nresult = ${ commandCall };` ) + ` ${ cbBody }`;
+    return justify( `${ preCode }\nresult = ${ assertionCall };` ) + ` ${ cbBody }`;
   } catch ( err ) {
-    console.warn( "Renderer process: buildAssertionTpl error:", err, { commandCall, command, comment });
+    console.warn( "Renderer process: buildAssertionTpl error:", err, { assertionCall, command, preCode });
     throw err;
   }
 }
@@ -39,6 +39,24 @@ dialogLog.forEach( msg => {
   }
 });
   `);
+}
+
+/**
+ * Some assertions allow you to enable/disable params
+ * In such case options._enabled map has information about what of params are enabled
+ * { key1: boolean }
+ *
+ * @param {Object} options
+ * @returns {Object}
+ */
+function getEnabledOptions( options ) {
+  return Object.entries( options._enabled )
+    .filter( pair => Boolean( pair[ 1 ] ) )
+    .reduce(( carry, pair ) => {
+      const key = pair[ 0 ];
+      carry[ key ] = options[ key ];
+      return carry;
+    }, {});
 }
 
 /**
@@ -101,6 +119,18 @@ function createCbBody({ assert, target, method, id }) {
     case "boundingBox":
       return justify( `expect( result )`
           + `.toMatchBoundingBoxSnapshot( ${ JSON.stringify( options, null, "  " ) }, "${ source }" );` );
+
+    case "assertAssetWeight":
+      const data = getEnabledOptions( options );
+      return Object.entries( data ).reduce(( carry, pair ) => {
+        const type = JSON.stringify( pair[ 0 ] ),
+              rawVal = parseInt( pair[ 1 ], 10 ),
+              val = ( rawVal === NaN ? 0 : rawVal );
+        carry += justify( `expect( result ).toMatchAssetWeight( `
+          + `${ type }, ${ ( val * 1000 ) }, "${ source }" ); ` );
+        return carry;
+      }, "" );
+
     default:
       throw RuntimeError( `Invalid assertion '${ assertion }'` );
   }

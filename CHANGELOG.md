@@ -18,6 +18,7 @@
 - improvement: test steps and refs now support comments
 - improvement: add suite autosave option
 - improvement: support Shadow DOM querying
+- improvement: add page.assertPerfomanceAssetWeight
 
 ### Updates
 

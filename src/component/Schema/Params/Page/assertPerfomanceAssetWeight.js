@@ -11,19 +11,20 @@ export const assertPerfomanceAssetWeight = {
           urlString = parser.stringify( url );
 
     return buildAssertionTpl(
-      `await bs.page.goto( ${ urlString }, { "waitUntil":"networkidle0" });
-      ...`,
+      `bs.performance.resources`,
       command,
-      `// Asserting that page URL satisfies the given constraint`
+      `// Asserting that total weight of assets satisfies the given budget\n`
+      + `bs.performance.reset();\n`
+      + `await bs.page.goto( ${ urlString }, { "waitUntil":"networkidle0" });`
     );
   },
 
   toLabel: ({ params }) => `(\`${ truncate( params.url, 80 ) }\`)`,
   toText: ({ params }) => `(\`${ params.url }\`)`,
 
-  commonly: "assert weight of assets (JavaScript, CSS, images, fonts)",
+  commonly: "assert weight of assets (JavaScript, CSS, images, fonts, XHR)",
 
-  description: `Asserts that the page URL satisfies the given constraint`,
+  description: `Asserts that total weight of assets satisfies the given budget`,
   assert: {
     node: AssertAssertWeight
   },

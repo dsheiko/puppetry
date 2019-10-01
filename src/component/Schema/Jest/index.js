@@ -33,7 +33,7 @@ export const tplQuery = ({ target, selector }) => {
   // in case of chain for shadow DOM
   if ( selector.includes( SELECTOR_CHAIN_DELIMITER ) ) {
     return `const ${ target } = async () => bs.findHandleBySelectorChain( \`${ buildShadowDomQuery( selector ) }\`, `
-      + `${ JSON.stringify( target )} )`;
+      + `${ JSON.stringify( target )} );`;
   }
   const func = validateSimpleSelector( selector ) === SELECTOR_CSS ? "findHandleByCss" : "findHandleByXpath";
   return `const ${ target } = async () => bs.${ func }( ${ JSON.stringify( selector )}, `
@@ -83,34 +83,7 @@ util.setProjectDirectory( ${ JSON.stringify( projectDirectory ) } );
 jest.setTimeout( ${ options.interactiveMode ? INTERACTIVE_MODE_TIMEOUT : ( suite.timeout || NETWORK_TIMEOUT ) } );
 
 const consoleLog = [], // assetConsoleMessage
-      dialogLog = [], // assertDialog
-      responses = {}, // assert preformance budget
-      resources = [];
-
-${ options.requireInterceptTraffic ? `
-async function interceptTraffic( page ) {
-  const session = await page.target().createCDPSession();
-  await session.send( "Network.enable" );
-
-  // map responses
-  session.on( "Network.responseReceived", ({ requestId, response, type }) => {
-    responses[ requestId ] = { ...response, type };
-  });
-  // collect response details
-  session.on( "Network.dataReceived", ({ requestId, encodedDataLength }) => {
-    const { url, mimeType } = responses[ requestId ];
-    if ( url.startsWith( "data:" ) ) {
-      return;
-    }
-    resources.push({
-      url,
-      mimeType,
-      length: encodedDataLength
-    });
-  });
-}
-` : ``
-}
+      dialogLog = []; // assertDialog;
 
 ${ buildEnv( env ) }
 
@@ -123,7 +96,7 @@ describe( ${ JSON.stringify( title ) }, async () => {
     bs.page.on( "console", ( msg ) => consoleLog.push( msg ) );
     bs.page.on( "dialog", ( dialog ) => dialogLog.push( dialog.message() ) );
 
-    typeof interceptTraffic === "function" && await interceptTraffic( bs.page );
+    ${ options.requireInterceptTraffic ? `bs.performance.watchTraffic();` : `` }
 
     ${ options.interactiveMode ? `
     let stepIndex = 0;

@@ -5,8 +5,12 @@ import { getAssertion } from "./helpers";
 
 const FormItem = Form.Item,
       ASSETS = [
-        { name: "JavaScript", key: "js" },
-        { name: "CSS", key: "css" }
+        { name: "JavaScript", key: "script" },
+        { name: "CSS", key: "stylesheet" },
+        { name: "Images", key: "image" },
+        { name: "Media", key: "media" },
+        { name: "Fonts", key: "font" },
+        { name: "XHR/fetch", key: "xhr" }
       ];
 
 export class AssertAssertWeight extends React.Component {
@@ -21,7 +25,7 @@ export class AssertAssertWeight extends React.Component {
   }
 
   state = {
-    disabled: {}
+    enabled: {}
   }
 
   onSelectAssertion = ( value ) => {
@@ -30,57 +34,37 @@ export class AssertAssertWeight extends React.Component {
   }
 
   onSwitchChange = ( checked, assetType ) => {
+    const { getFieldValue } = this.props.form,
+          enabled = getFieldValue( "assert._enabled" );
+    enabled[ assetType ] = checked;
     this.setState({
-      disabled: {
-        [ assetType ]: !checked
-      }
+      enabled
     });
   }
-//
-//  getDisabled( data ) {
-//    const disabled = {};
-//    // If the sate changed
-//    if ( this.state.disabledUpdated ) {
-//      console.log("#1");
-//      return this.state.disabled;
-//    }
-//    if ( data.hasOwnProperty( "_enabled" ) ) {
-//      console.log("#2");
-//      return data._enabled;
-//    }
-//    console.log("#3");
-//    return ASSETS.reduce(( carry, asset ) => {
-//      carry[ asset.key ] = asset.key in data ? !parseInt( data[ asset.key ], 10 ) : true;
-//      return carry;
-//    }, {});
-//  }
 
   componentDidMount() {
     const data = getAssertion( this.props.record );
-    console.log({data});
     if ( data.hasOwnProperty( "_enabled" ) ) {
-      console.log("#1");
-      const disabled = ASSETS.reduce(( carry, asset ) => {
-        carry[ asset.key ] = !data._enabled[ asset.key ];
-        return carry;
-      }, {} );
-      this.setState({ disabled });
+      this.setState({ enabled: data._enabled });
+      return;
     }
-    console.log("#2");
-    const disabled = ASSETS.reduce(( carry, asset ) => {
-      carry[ asset.key ] = asset.key in data ? !parseInt( data[ asset.key ], 10 ) : true;
-      return carry;
-    }, {} );
-    this.setState({ disabled });
   }
 
+  static normalizeEnabled( data ) {
+    ASSETS.forEach( asset => {
+      if ( typeof data._enabled[ asset.key ] === "undefined" ) {
+        data._enabled[ asset.key ] = false;
+      }
+    });
+    return data;
+  }
 
   render () {
     const { getFieldDecorator } = this.props.form,
           { record, targets } = this.props,
-          data = getAssertion( record ),
-          disabled = this.state.disabled;
-        console.log(">", disabled);
+          data = AssertAssertWeight.normalizeEnabled( getAssertion( record ) ),
+          enabled = this.state.enabled;
+
     return (
       <React.Fragment>
         <div className="is-invisible">
@@ -93,19 +77,21 @@ export class AssertAssertWeight extends React.Component {
 
         <h3>Quantity-based metrics based on asset weight</h3>
         <div>Assert the total (encoded) size of a type of assets doesn't exeed a given value (in KB)</div>
+        <div>Assets loaded from the cache have 0 size</div>
 
         <Row gutter={24} className="ant-form-inline">
         <table className="assert-perf-table">
 
           <tbody>
-          { ASSETS.map( asset => (<tr key={ asset.key } className={ disabled[ asset.key ] ? "assert-row-disabled" : "" }>
+          { ASSETS.map( asset => (<tr key={ asset.key } className={ enabled[ asset.key ] ? "" : "assert-row-disabled" }>
               <td>
-              { disabled[ asset.key ] ? "true" : "false"}
                 <FormItem>
                   <FormItem className="assert-perf-size">
                     { getFieldDecorator( `assert._enabled.${ asset.key }`, {
-
-                    })( <Switch defaultChecked={ !disabled[ asset.key ] } onChange={ ( checked ) => this.onSwitchChange( checked, asset.key  ) } /> )
+                      initialValue: data._enabled[ asset.key ],
+                      valuePropName: ( data._enabled[ asset.key ] ? "checked" : "data-ok" )
+                    })( <Switch
+                      onChange={ ( checked ) => this.onSwitchChange( checked, asset.key  ) } /> )
                     }
                   </FormItem>
 
@@ -120,20 +106,20 @@ export class AssertAssertWeight extends React.Component {
               <td>
                 <FormItem className="assert-perf-size">
                   { getFieldDecorator( `assert.${ asset.key }`, {
+                    initialValue: data[ asset.key ],
                     rules: [
                      {
                        validator: ( rule, value, callback ) => {
-                       const re = /^\d+$/;
-                       console.log(">--", { value, disabled, key: asset.key} );
-                        if ( disabled[ asset.key ] )  {
-                          return callback();
-                        }
-                        value = value ? value.trim() : "";
-                        if ( !re.test( value ) ) {
-                          return callback( "Value is not a number" );
-                        }
-                        callback();
-                      }
+                          const re = /^\d+$/;
+                           if ( !enabled[ asset.key ] )  {
+                             return callback();
+                           }
+                           value = value ? value.trim() : "";
+                           if ( !re.test( value ) ) {
+                             return callback( "Value is not a number" );
+                           }
+                           callback();
+                       }
                      }
                   ]
                   })( <Input  addonAfter="KB" /> )

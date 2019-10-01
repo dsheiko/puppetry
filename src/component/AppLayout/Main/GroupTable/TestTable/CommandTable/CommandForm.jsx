@@ -13,7 +13,7 @@ import ErrorBoundary from "component/ErrorBoundary";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
-      TEST_LEADING_METHODS = [ "emulate", "setViewport", "handleDialog", "goto" ];
+      TEST_LEADING_METHODS = [ "emulate", "setViewport", "handleDialog", "goto", "assertPerfomanceAssetWeight" ];
 
 @connectForm
 export class CommandForm extends React.Component {
@@ -83,6 +83,8 @@ export class CommandForm extends React.Component {
 //          delete values.assert.enabled;
 //        }
 
+          console.log("saved", values.assert);
+
 
         this.props.action[ record.id ? "updateCommand" : "addCommand" ]({
           id: record.id,
@@ -109,6 +111,14 @@ export class CommandForm extends React.Component {
   }
 
   changeMethod = ( method ) => {
+    if ( method === "assertPerfomanceAssetWeight" && this.props.commands.length > 1 ) {
+      return this.setState({
+        method,
+        error: `When asserting performance budget with page.assertPerfomanceAssetWeight,`
+          + ` make sure it is the only step per test case`
+      });
+    }
+
     if ( !TEST_LEADING_METHODS.includes( method ) && !this.checkTestHasGoto() ) {
       return this.setState({
         method,
