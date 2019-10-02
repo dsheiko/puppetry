@@ -60,7 +60,7 @@ export class CommandForm extends React.Component {
           target = this.state.target || record.target,
           method = this.state.method || record.method,
           schema = getSchema( target, method );
-
+          console.log(">>>", record);
     e && e.preventDefault();
     resetSubmitted();
 

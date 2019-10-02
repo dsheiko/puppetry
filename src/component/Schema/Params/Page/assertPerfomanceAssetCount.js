@@ -1,9 +1,8 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
-import { AssertAssertWeight } from "../../Assert/AssertAssertWeight";
+import { AssertAssertCount } from "../../Assert/AssertAssertCount";
 import ExpressionParser from "service/ExpressionParser";
 import { truncate, normalizeAssertionVerb } from "service/utils";
-
 
 function typesToString( assert ) {
   return Object.keys( assert._enabled )
@@ -11,7 +10,7 @@ function typesToString( assert ) {
     .map( ( el ) => `\`${ el }\`` ).join( ", " );
 }
 
-export const assertPerfomanceAssetWeight = {
+export const assertPerfomanceAssetCount = {
   template: ( command ) => {
     const { url, timeout, waitUntil } = command.params,
           parser = new ExpressionParser( command.id ),
@@ -20,7 +19,7 @@ export const assertPerfomanceAssetWeight = {
     return buildAssertionTpl(
       `bs.performance.resources`,
       command,
-      `// Asserting that total weight of assets satisfies the given budget\n`
+      `// Asserting that total number of assets satisfies the given budget\n`
       + `bs.performance.reset();\n`
       + `await bs.page.goto( ${ urlString }, { "waitUntil":"networkidle0" });`
     );
@@ -29,12 +28,12 @@ export const assertPerfomanceAssetWeight = {
   toLabel: ({ params, assert }) => `(\`${ truncate( params.url, 80 ) }\` for ${ typesToString( assert ) })`,
   toText: ({ params, assert }) => `(\`${ params.url }\` for ${ typesToString( assert ) })`,
 
-  commonly: "assert weight of assets",
+  commonly: "assert count of assets",
 
-  description: `Asserts that total weight of assets `
-  + `(JavaScript, CSS, images, media, fonts, XHR) on the page satisfies the given budget`,
+  description: `Asserts that total number of requested assets `
+    + `(JavaScript, CSS, images, media, fonts, XHR) on the page satisfies the given budget`,
   assert: {
-    node: AssertAssertWeight
+    node: AssertAssertCount
   },
   params: [
 

@@ -231,6 +231,21 @@ expect.extend({
   },
 
   /**
+   *
+   * @param {Object} resources [{ url, type, length},..]
+   * @param {String} type
+   * @param {Number} val
+   * @param {String} source
+   * @returns {Object}
+   */
+  toMatchAssetCount( resources, type, val, source ) {
+      const assets = resources.filter( res => res.type.toLowerCase() === type.toLowerCase() );
+      return expectReturn( assets.length <= val, `[${ source }] expected `
+        + `total number of ${ type } assets to be under`
+        + ` ${ val }, but found ${ assets.length  }` );
+  },
+
+  /**
    * Assert position
    *
    * @param {Object} received

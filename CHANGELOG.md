@@ -19,6 +19,7 @@
 - improvement: add suite autosave option
 - improvement: support Shadow DOM querying
 - improvement: add page.assertPerfomanceAssetWeight
+- improvement: add page.assertPerfomanceAssetCount
 - improvement: extend page.setViewport with list of predefined resolutions
 - improvement: polish UX for every test step form
 

@@ -121,19 +121,25 @@ function createCbBody({ assert, target, method, id }) {
           + `.toMatchBoundingBoxSnapshot( ${ JSON.stringify( options, null, "  " ) }, "${ source }" );` );
 
     case "assertAssetWeight":
-      const data = getEnabledOptions( options );
-      return Object.entries( data ).reduce(( carry, pair ) => {
-        const type = JSON.stringify( pair[ 0 ] ),
-              rawVal = parseInt( pair[ 1 ], 10 ),
-              val = ( rawVal === NaN ? 0 : rawVal );
-        carry += justify( `expect( result ).toMatchAssetWeight( `
-          + `${ type }, ${ ( val * 1000 ) }, "${ source }" ); ` );
-        return carry;
-      }, "" );
+      return resolveAssetAssertion( "toMatchAssetWeight", options, source );
+    case "assertAssetCount":
+      return resolveAssetAssertion( "toMatchAssetCount", options, source );
 
     default:
       throw RuntimeError( `Invalid assertion '${ assertion }'` );
   }
 
+}
+
+function resolveAssetAssertion( assertionMethod, options, source ) {
+  const data = getEnabledOptions( options );
+  return Object.entries( data ).reduce(( carry, pair ) => {
+    const type = JSON.stringify( pair[ 0 ] ),
+          rawVal = parseInt( pair[ 1 ], 10 ),
+          val = ( rawVal === NaN ? 0 : rawVal );
+    carry += justify( `expect( result ).${ assertionMethod }( `
+      + `${ type }, ${ ( val * 1000 ) }, "${ source }" ); ` );
+    return carry;
+  }, "" );
 }
 
