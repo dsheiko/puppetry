@@ -16,7 +16,10 @@ export const assertTextCount = {
   commonly: "assert count of elements with text",
 
   assert: {
-    node: AssertNumber
+    node: AssertNumber,
+    options: {
+      resultLabel: "Number is"
+    }
   },
   description: `Asserts that number of child elements containing a specified text satisfies the given constraint`,
   params: [

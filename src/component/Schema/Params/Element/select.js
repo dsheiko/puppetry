@@ -22,7 +22,7 @@ export const select = {
         {
           name: "params.value",
           control: INPUT,
-          label: "Text of an option value to look for",
+          label: "Option value",
           help: "",
           placeholder: "e.g. foo",
           initialValue: "",

@@ -44,7 +44,6 @@ await bs.page.waitForRequest( ${ urlString }${ optArg } );` );
     {
       collapsed: true,
       tooltip: "",
-      span: { label: 4, input: 18 },
       fields: [
         {
           name: "params.timeout",

@@ -6,7 +6,7 @@ import { validate } from "bycontract";
 import Tooltip from "component/Global/Tooltip";
 import { FILE, TEXTAREA, RADIO_GROUP, INPUT, INPUT_NUMBER, CHECKBOX, SELECT } from "component/Schema/constants";
 import { ipcRenderer } from "electron";
-import { E_BROWSE_FILE, E_FILE_SELECTED } from "constant";
+import { E_BROWSE_FILE, E_FILE_SELECTED, FIELDSET_DEFAULT_LAYOUT, FIELDSET_DEFAULT_CHECKBOX_LAYOUT } from "constant";
 import Markdown from "component/Global/Markdown";
 import { TemplateHelper } from "./TemplateHelper";
 import { connect } from "react-redux";
@@ -30,6 +30,7 @@ const FormItem = Form.Item,
           <Tooltip
             title={ tooltip }
             icon="question-circle"
+            pos="up-left"
           />
         </span>
       ),
@@ -117,6 +118,7 @@ export class ParamsFormBuilder extends React.Component {
       return ( <Select
         showSearch
         style={ inputStyle }
+        onChange={ ( value ) => ( field.onChange ? field.onChange( value, this.props.form ) : () => {} ) }
         placeholder={ field.placeholder }
         optionFilterProp="children"
         onSelect={ onSelect }
@@ -137,6 +139,7 @@ export class ParamsFormBuilder extends React.Component {
         { field.tooltip && ( <Tooltip
           title={ field.tooltip }
           icon="question-circle"
+          pos="up-left"
         /> )}
 
       </Checkbox> );
@@ -209,13 +212,13 @@ export class ParamsFormBuilder extends React.Component {
       wrapperCol: {
         span: section.span.input
       }
-    } : {};
+    } : ( field.control === CHECKBOX ? FIELDSET_DEFAULT_CHECKBOX_LAYOUT : FIELDSET_DEFAULT_LAYOUT );
 
-    return ( <Col span={ field.span || 24 } key={ `field_${ inx }` }>
-
-      <FormItem
+    return (  <FormItem
         { ...formItemLayout }
+        className="ant-form-item--layout"
         label={ field.control !== CHECKBOX ? labelNode : "" }
+
         key={ `field${inx}` }>
         { getFieldDecorator( field.name, decoratorOptions )( this.renderControl( field ) ) }
         { field.description ? <Markdown
@@ -230,10 +233,7 @@ export class ParamsFormBuilder extends React.Component {
           environments={ this.props.environments }
           variables={ this.props.variables }
           config={ field.template } /> }
-      </FormItem>
-
-
-    </Col> );
+      </FormItem>  );
   };
 
   renderRow = ( row, inx, section ) => {
@@ -241,12 +241,12 @@ export class ParamsFormBuilder extends React.Component {
       description: "string=",
       fields: "array"
     });
-    return ( <Row gutter={16} key={ `row_${ inx }` } className="ant-form-inline edit-command-inline">
+    return ( <div key={ inx } className="command-form__noncollapsed">
       { row.description ? <Markdown
         md={ row.description }
         className="command-row-description" /> : "" }
       { row.fields.map( ( field, inx ) => this.renderField( field, inx, section ) ) }
-    </Row> );
+    </div> );
   };
 
   mapFieldsToRow = ( field ) => ({
@@ -269,7 +269,7 @@ export class ParamsFormBuilder extends React.Component {
       <fieldset className="command-form__fieldset" key={ `section_${ inx }` }>
         { !section.collapsed && <legend>
           <span>{ section.legend || "Parameters" }</span>
-          { section.tooltip && <Tooltip title={ section.tooltip } icon="question-circle" /> }
+          { section.tooltip && <Tooltip title={ section.tooltip } icon="question-circle" pos="up-left" /> }
         </legend> }
         { section.description &&
         <Markdown

@@ -952,7 +952,7 @@ td:hover .editable-cell-icon {
 
 .template-helper {
   display: flex;
-  padding: 0 0 16px 0;
+  padding: 0;
   align-items: center;
   color: rgba(0, 0, 0, 0.45);
 }
@@ -1199,14 +1199,40 @@ td:hover .editable-cell-icon {
   opacity: 0.7;
 }
 
+/*
+case: label [input] [input]
+use it when we want label be aligned with following inline inputs
+*/
 .ant-row.ant-form-item.ant-form-item--like-input {
   display: inline-block;
-  width: 64px;
+  width: 100%;
   height: 32px;
   line-height: 40px;
   text-align: right;
 }
 
+.ant-row.ant-form-item.ant-form-item--like-input.is-short {
+  width: 64px;
+}
+
+.ant-form-item--like-input.is-vertical {
+  margin-top: 40px;
+}
+
+
 .command-form .ant-alert {
   margin-bottom: 16px;
+}
+
+.ant-form-item--layout .ant-form-item-label {
+  text-align: left;
+}
+/*
+align with collapsed (Advanced options))
+*/
+.command-form__noncollapsed {
+  padding: 0 18px;
+}
+.ant-collapse-content .command-form__noncollapsed {
+  padding: 0;
 }

@@ -11,7 +11,7 @@
 - improvement: add page.waitForFileChooser
 - improvement: add page.assertConsoleMessage
 - improvement: add page.assertDialog
-- improvement: add page.handleDialog
+- improvement: add page.closeDialog
 - improvement: all assertions accept the opposite assumptions (equal/not equal, contain/ doesn't contain)
 - improvement: mixed type assertion simplified - one can assert only for string value. Exceptions are assertProperty/Attribute where additionally one can assert for boolean
 - improvement: Jest/Puppeteer project (export) has option to run in Firefox ([custom build](https://www.npmjs.com/package/puppeteer-firefox))
@@ -19,6 +19,8 @@
 - improvement: add suite autosave option
 - improvement: support Shadow DOM querying
 - improvement: add page.assertPerfomanceAssetWeight
+- improvement: extend page.setViewport with list of predefined resolutions
+- improvement: polish UX for every test step form
 
 ### Updates
 

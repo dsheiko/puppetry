@@ -56,13 +56,16 @@ export default class TextConvertor {
       : 1;
 
     const schema = getSchema( command.target, command.method ),
-          toText = typeof schema.toText === "function" ? schema.toText : schema.toLabel,
-          recordLabel = `${ groupTestRecLabel }${ this.commandRecLabels[ groupTestRecLabel ] }.`;
+          toText = typeof schema.toText === "function"
+            ? schema.toText
+            : ( typeof schema.toLabel === "function" ? schema.toLabel : "" ),
+          recordLabel = `${ groupTestRecLabel }${ this.commandRecLabels[ groupTestRecLabel ] }.`,
+          addOn = toText( command ) || "()";
 
     this.onCommand && this.onCommand( command, recordLabel );
 
     this.print( `${ recordLabel } ${ command.target }.${ command.method }`
-    + `${ toText( command ) }`, 3 );
+    + `${ addOn }`, 3 );
   }
 
   convertSuite( suite ) {

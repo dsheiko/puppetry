@@ -5,13 +5,14 @@ import { CHECKBOX, INPUT, SELECT } from "../../constants";
 
 function getOptionsString( params ) {
   const options = [];
-  params.dismiss && options.push( "`dismiss`" );
-  params.accept && options.push( "`accept`" );
-  return options.join( ", " );
+  options.push( params.action );
+  options.push( `\`${ params.type }\`` );
+  options.push( `with \`${ truncate( params.substring, 60 ) }\`` );
+  return options.join( " " );
 }
 
 
-export const handleDialog = {
+export const closeDialog = {
 
   template: ({ params }) => `
       // Handle dialog
@@ -23,8 +24,8 @@ export const handleDialog = {
         if ( !result.includes( ${ JSON.stringify( params.substring ) } ) ) {
           return;
         }
-        ${ params.dismiss ? `await dialog.dismiss();` : `` }
-        ${ params.accept ? `await dialog.accept(${ JSON.stringify( params.promptText || "" ) });` : `` }
+        ${ params.action === "dismiss" ? `await dialog.dismiss();` : `` }
+        ${ params.action === "accept" ? `await dialog.accept(${ JSON.stringify( params.promptText || "" ) });` : `` }
       });
   `,
 
@@ -42,7 +43,6 @@ export const handleDialog = {
       inline: true,
       legend: "",
       tooltip: "",
-      span: { label: 4, input: 18 },
       fields: [
 
         {
@@ -77,25 +77,28 @@ export const handleDialog = {
         },
 
         {
-          name: "params.dismiss",
-          control: CHECKBOX,
-          label: "Shall we dismiss the dialog?",
-          tooltip: "",
-          placeholder: ""
+          name: "params.action",
+          inputStyle: { maxWidth: 200 },
+          control: SELECT,
+          label: "Action",
+          placeholder: "",
+          initialValue: "accept",
+          options: [
+            { value: "dismiss", description: "dismiss/close" },
+            { value: "accept", description: "accept" }
+          ],
+          rules: [{
+            required: true,
+            message: `Field is required.`
+          }]
         },
-        {
-          name: "params.accept",
-          control: CHECKBOX,
-          label: "Shall we accept the dialog?",
-          tooltip: "Does not cause any effects if the dialog's type is not prompt.",
-          placeholder: ""
-        },
+
         {
           name: "params.promptText",
           control: INPUT,
-          label: "A text to enter in prompt",
+          label: "Prompt text",
           tooltip: "Does not cause any effects if the dialog's type is not prompt.",
-          placeholder: ""
+          placeholder: "(optional)"
         }
       ]
     }

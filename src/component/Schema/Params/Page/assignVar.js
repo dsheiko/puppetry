@@ -22,7 +22,6 @@ export const assignVar = {
       legend: "",
       description: "",
       tooltip: "",
-      span: { label: 4, input: 18 },
       fields: [
         {
           name: "params.name",

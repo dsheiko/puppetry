@@ -120,7 +120,6 @@ export const assertScreenshot = {
     },
 
     {
-      span: { label: 4, input: 18 },
       description: "",
       tooltip: "",
       collapsed: true,

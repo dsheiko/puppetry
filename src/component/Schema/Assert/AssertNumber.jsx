@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Form, Row, Col, Select, Input, InputNumber } from "antd";
 import { getAssertion } from "./helpers";
+import { propVal } from "service/utils";
 
 const Option = Select.Option,
       FormItem = Form.Item;
@@ -25,13 +26,17 @@ export class AssertNumber extends React.Component {
 
   render () {
     const { getFieldDecorator } = this.props.form,
-          { record } = this.props,
+          { record, options } = this.props,
           operator = getAssertion( record ).operator || "eq",
-          value = getAssertion( record ).value || 0;
+          value = getAssertion( record ).value || 0,
+          resultLabel = propVal( options, "resultLabel", "Result is" );
     return (
       <Row gutter={24}>
-        <Col span={8} >
-          <FormItem label="Expected result">
+        <Col span={2} >
+          <div className="ant-row ant-form-item ant-form-item--like-input">
+          { resultLabel }
+          </div>
+          <FormItem label="Result" className="is-hidden">
             { getFieldDecorator( "assert.assertion", {
               initialValue: "number",
               rules: [{
@@ -42,7 +47,7 @@ export class AssertNumber extends React.Component {
         </Col>
 
         <Col span={4} >
-          <FormItem label="is">
+          <FormItem>
             { getFieldDecorator( "assert.operator", {
               initialValue: operator,
               rules: [{
@@ -57,7 +62,7 @@ export class AssertNumber extends React.Component {
         </Col>
 
         <Col span={12} >
-          <FormItem label="Value">
+          <FormItem>
             { getFieldDecorator( "assert.value", {
               initialValue: value,
               rules: [{

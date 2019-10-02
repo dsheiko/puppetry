@@ -14,6 +14,13 @@ export const OPERATOR_MAP = {
 };
 
 
+export function propVal( obj, key, defaultVal = null ) {
+  if ( typeof obj !== "object" ) {
+    return defaultVal;
+  }
+  return key in obj ? obj[ key ]: defaultVal;
+}
+
 export function normalizeAssertionVerb( verb ) {
   switch( verb ) {
     case "!equals":

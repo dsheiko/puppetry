@@ -3,7 +3,6 @@ import { AssertBoundingBox } from "../../Assert/AssertBoundingBox";
 import { OPERATOR_MAP } from "service/utils";
 
 function paramToLabel( param, operator, value ) {
-  console.log(param, operator, value);
   if ( !operator || operator === "any"  ) {
     return ``;
   }

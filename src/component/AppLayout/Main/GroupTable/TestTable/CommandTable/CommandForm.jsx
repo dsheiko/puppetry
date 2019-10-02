@@ -9,11 +9,11 @@ import If from "component/Global/If";
 import { getSchema } from "component/Schema/schema";
 import { Description } from "component/Schema/Params/Description";
 import ErrorBoundary from "component/ErrorBoundary";
-
+import { FIELDSET_DEFAULT_LAYOUT } from "constant";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
-      TEST_LEADING_METHODS = [ "emulate", "setViewport", "handleDialog", "goto", "assertPerfomanceAssetWeight" ];
+      TEST_LEADING_METHODS = [ "emulate", "setViewport", "closeDialog", "goto", "assertPerfomanceAssetWeight" ];
 
 @connectForm
 export class CommandForm extends React.Component {
@@ -76,16 +76,6 @@ export class CommandForm extends React.Component {
           }
         }
 
-//        if ( values.assert.hasOwnProperty( "enabled" ) ) {
-//          Object.entries( values.assert.enabled ).forEach(([ key, value ]) => {
-//            console.log("sss", values.assert);
-//          });
-//          delete values.assert.enabled;
-//        }
-
-          console.log("saved", values.assert);
-
-
         this.props.action[ record.id ? "updateCommand" : "addCommand" ]({
           id: record.id,
           testId: record.testId,
@@ -111,15 +101,17 @@ export class CommandForm extends React.Component {
   }
 
   changeMethod = ( method ) => {
-    if ( method === "assertPerfomanceAssetWeight" && this.props.commands.length > 1 ) {
+    const hasGoto = this.checkTestHasGoto();
+
+    if ( this.checkTestHasAssertPerfomanceAssetWeight() && hasGoto ) {
       return this.setState({
         method,
-        error: `When asserting performance budget with page.assertPerfomanceAssetWeight,`
-          + ` make sure it is the only step per test case`
+        error: `When asserting total weight of loaded assets, for clear results, `
+          + ` have in a test case no other requests, but page.assertPerfomanceAssetWeight`
       });
     }
 
-    if ( !TEST_LEADING_METHODS.includes( method ) && !this.checkTestHasGoto() ) {
+    if ( !TEST_LEADING_METHODS.includes( method ) && !hasGoto ) {
       return this.setState({
         method,
         error: `You shall start the test with page.goto. `
@@ -130,6 +122,10 @@ export class CommandForm extends React.Component {
       method,
       error: ""
     });
+  }
+
+  checkTestHasAssertPerfomanceAssetWeight = () => {
+    return this.props.commands.find( command => ( command.method === "assertPerfomanceAssetWeight" ) );
   }
 
   checkTestHasGoto = () => {
@@ -160,12 +156,12 @@ export class CommandForm extends React.Component {
 
   renderCommentField( record ) {
     const { getFieldDecorator } = this.props.form;
-    return ( <FormItem>
+    return ( <div  className="command-form__noncollapsed"><FormItem { ...FIELDSET_DEFAULT_LAYOUT } label="Comment" className="ant-form-item--layout">
         { getFieldDecorator( "comment", {
           initialValue: record.comment
-        } )( <Input placeholder="Explain your intent"
+        } )( <Input placeholder="(optional)"
           onKeyPress={ ( e ) => this.onKeyPress( e, this.handleSubmit ) } /> ) }
-      </FormItem> );
+        </FormItem></div>);
   }
 
   render() {
@@ -199,8 +195,7 @@ export class CommandForm extends React.Component {
           </If>
           <Row gutter={24}>
             <Col xl={8} lg={12} md={24}>
-              <FormItem label="Target"
-                help={ targets.length ? null: "Consider adding test targets in the suite" }>
+              <FormItem label="Target">
                 {getFieldDecorator( "target", {
                   initialValue: record.target,
                   rules: [{
@@ -226,15 +221,18 @@ export class CommandForm extends React.Component {
                     message: "Please select method"
                   }]
                 })(
-                  target === "page"
-                    ? <PageMethodSelect
-                      initialValue={ record.method }
-                      changeMethod={ this.changeMethod }
-                      setFieldsValue={ setFieldsValue } />
-                    : <ElementMethodSelect
-                      initialValue={ record.method }
-                      changeMethod={ this.changeMethod }
-                      setFieldsValue={ setFieldsValue } />
+                  !target ? <Input disabled />
+                    : (
+                    target === "page"
+                      ? <PageMethodSelect
+                        initialValue={ record.method }
+                        changeMethod={ this.changeMethod }
+                        setFieldsValue={ setFieldsValue } />
+                      : <ElementMethodSelect
+                        initialValue={ record.method }
+                        changeMethod={ this.changeMethod }
+                        setFieldsValue={ setFieldsValue } />
+                    )
                 )}
               </FormItem>
             </Col>
@@ -244,6 +242,8 @@ export class CommandForm extends React.Component {
           { ( schema && schema.description ) ? (
             <Description schema={ schema } target={ target } />
           ) : null }
+
+          { schema && this.renderCommentField( record ) }
 
           <If exp={ this.state.validationError }>
             <Alert
@@ -279,11 +279,6 @@ export class CommandForm extends React.Component {
               </ErrorBoundary>
             </fieldset>
           </If>
-
-          {  schema && <fieldset className="command-form__fieldset">
-          <legend>Comment</legend>
-          { this.renderCommentField( record ) }
-          </fieldset> }
 
 
         </Form>

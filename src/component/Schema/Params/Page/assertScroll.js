@@ -21,7 +21,10 @@ export const assertScroll = {
   description: `Asserts that [window scroll](https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll)
  offset satisfies the given constraint`,
   assert: {
-    node: AssertNumber
+    node: AssertNumber,
+    options: {
+      resultLabel: "Offset is"
+    }
   },
   params: [
     {

@@ -26,7 +26,7 @@ export const checkBox = {
         {
           name: "params.checked",
           control: CHECKBOX,
-          label: "Checked?",
+          label: "is checked",
           help: "",
           initialValue: "false"
         }

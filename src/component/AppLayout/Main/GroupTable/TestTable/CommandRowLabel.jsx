@@ -15,8 +15,9 @@ export class CommandRowLabel extends React.Component {
 
    static buildAddon( record ) {
      try {
-       const schema = getSchema( record.target === "page" ? "page" : "target", record.method );
-       return typeof schema.toLabel === "function" ? schema.toLabel( record ) : "";
+       const schema = getSchema( record.target === "page" ? "page" : "target", record.method ),
+             res = typeof schema.toLabel === "function" ? schema.toLabel( record ) : "";
+       return res || "()";
      } catch ( err ) {
        log.warn( `Renderer process: CommandRowLabel::buildTargetAddon: ${ err }` );
      }

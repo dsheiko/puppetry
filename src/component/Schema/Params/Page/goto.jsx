@@ -66,7 +66,6 @@ export const goto = {
     },
     {
       collapsed: true,
-      span: { label: 4, input: 18 },
       description: "",
       tooltip: "",
 

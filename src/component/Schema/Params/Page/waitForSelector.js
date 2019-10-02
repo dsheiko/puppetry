@@ -46,11 +46,11 @@ await bs.page.waitForSelector( ${ JSON.stringify( params.value ) }${ optArg } );
     {
       collapsed: true,
       tooltip: "",
-      span: { label: 4, input: 18 },
       fields: [
         {
           name: "params.visible",
           control: SELECT,
+          inputStyle: { maxWidth: 88 },
           label: "Visible",
           tooltip: `wait for element to be present in DOM and to be visible, `
             + `i.e. to not have display: none or visibility: hidden`,
@@ -63,6 +63,7 @@ await bs.page.waitForSelector( ${ JSON.stringify( params.value ) }${ optArg } );
         {
           name: "params.hidden",
           control: SELECT,
+          inputStyle: { maxWidth: 88 },
           label: "Hidden",
           tooltip: `wait for element to not be found in the DOM or to be hidden, `
             + `i.e. have display: none or visibility: hidden`,

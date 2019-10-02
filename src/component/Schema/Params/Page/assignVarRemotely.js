@@ -32,7 +32,6 @@ to retrieve a value from an [email sent by the application under test](https://d
       legend: "",
       description: "",
       tooltip: "",
-      span: { label: 4, input: 18 },
       fields: [
         {
           name: "params.name",

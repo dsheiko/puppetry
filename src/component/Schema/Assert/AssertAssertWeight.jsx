@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Form, Row, Col, Switch, Input, InputNumber, Checkbox } from "antd";
 import { getAssertion } from "./helpers";
+import { propVal } from "service/utils";
 
 const FormItem = Form.Item,
       ASSETS = [
@@ -48,9 +49,18 @@ export class AssertAssertWeight extends React.Component {
       this.setState({ enabled: data._enabled });
       return;
     }
+    this.setState({
+      enabled: ASSETS.reduce( ( carry, asset ) => {
+        carry[ asset.key ] = false;
+        return carry;
+      }, {})
+    });
   }
 
   static normalizeEnabled( data ) {
+    if ( !data._enabled ) {
+      return data;
+    }
     ASSETS.forEach( asset => {
       if ( typeof data._enabled[ asset.key ] === "undefined" ) {
         data._enabled[ asset.key ] = false;
@@ -64,7 +74,7 @@ export class AssertAssertWeight extends React.Component {
           { record, targets } = this.props,
           data = AssertAssertWeight.normalizeEnabled( getAssertion( record ) ),
           enabled = this.state.enabled;
-
+        
     return (
       <React.Fragment>
         <div className="is-invisible">
@@ -83,13 +93,14 @@ export class AssertAssertWeight extends React.Component {
         <table className="assert-perf-table">
 
           <tbody>
-          { ASSETS.map( asset => (<tr key={ asset.key } className={ enabled[ asset.key ] ? "" : "assert-row-disabled" }>
+          { ASSETS.map( asset => (<tr key={ asset.key }
+          className={ propVal( enabled, asset.key, false ) ? "" : "assert-row-disabled" }>
               <td>
                 <FormItem>
                   <FormItem className="assert-perf-size">
                     { getFieldDecorator( `assert._enabled.${ asset.key }`, {
-                      initialValue: data._enabled[ asset.key ],
-                      valuePropName: ( data._enabled[ asset.key ] ? "checked" : "data-ok" )
+                      initialValue: propVal( data._enabled, asset.key, false ),
+                      valuePropName: ( propVal( data._enabled, asset.key, false ) ? "checked" : "data-ok" )
                     })( <Switch
                       onChange={ ( checked ) => this.onSwitchChange( checked, asset.key  ) } /> )
                     }

@@ -33,7 +33,7 @@ await bs.page.evaluate(() => {
         {
           name: "params.value",
           control: TEXTAREA,
-          label: "JavaScript code to inject",
+          label: "JavaScript",
           initialValue: "",
           placeholder: `document.body.classList.add( "foo" );`,
           rules: [{

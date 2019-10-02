@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Form, Row, Col, Input, Checkbox } from "antd";
 import { getAssertion } from "./helpers";
+import { propVal } from "service/utils";
 
 const FormItem = Form.Item;
 
@@ -18,9 +19,10 @@ export class AssertBoolean extends React.Component {
 
   render () {
     const { getFieldDecorator } = this.props.form,
-          { record } = this.props,
+          { record, options } = this.props,
           assert = getAssertion( record ),
-          value = typeof assert.value === "undefined" ? true : Boolean( assert.value );
+          value = typeof assert.value === "undefined" ? true : Boolean( assert.value ),
+          textNode = propVal( options, "textNode", "is true" );
 
     return (
       <Row gutter={24}>
@@ -34,12 +36,12 @@ export class AssertBoolean extends React.Component {
         </Col>
 
         <Col>
-          <FormItem label="Expected result">
+          <FormItem label="Result">
             { getFieldDecorator( "assert.value", {
               initialValue: true,
               valuePropName: ( value ? "checked" : "data-ok" )
             })(
-              <Checkbox>is true</Checkbox>
+              <Checkbox>{ textNode }</Checkbox>
             ) }
           </FormItem>
         </Col>

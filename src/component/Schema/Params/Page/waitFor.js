@@ -19,7 +19,7 @@ export const waitFor = {
         {
           name: "params.value",
           control: INPUT_NUMBER,
-          label: "Timeout to wait for (ms)",
+          label: "Timeout (ms)",
           tooltip: "",
           placeholder: "",
           rules: [{

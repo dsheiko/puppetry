@@ -55,23 +55,20 @@ export class AssertBoundingBox extends React.Component {
 
     return (
       <React.Fragment>
-        <Row className="is-invisible">
-          <Col span={8} >
-            <FormItem label="Expected result">
-              { getFieldDecorator( "assert.assertion", {
-                initialValue: "boundingBox",
-                rules: [{
-                  required: true
-                }]
-              })( <Input readOnly /> ) }
-            </FormItem>
-          </Col>
-        </Row>
+        <FormItem label="Result" classdName="is-hidden">
+          { getFieldDecorator( "assert.assertion", {
+            initialValue: "boundingBox",
+            rules: [{
+              required: true
+            }]
+          })( <Input readOnly /> ) }
+        </FormItem>
+
 
 
         <Row className="ant-form-inline">
 
-          <div className="ant-row ant-form-item ant-form-item--like-input">
+          <div className="ant-row ant-form-item ant-form-item--like-input is-short">
             <b>x</b> is
           </div>
 
@@ -103,7 +100,7 @@ export class AssertBoundingBox extends React.Component {
 
         <Row className="ant-form-inline">
 
-          <div className="ant-row ant-form-item ant-form-item--like-input">
+          <div className="ant-row ant-form-item ant-form-item--like-input is-short">
             <b>y</b> is
           </div>
 
@@ -134,7 +131,7 @@ export class AssertBoundingBox extends React.Component {
 
         <Row className="ant-form-inline">
 
-          <div className="ant-row ant-form-item ant-form-item--like-input">
+          <div className="ant-row ant-form-item ant-form-item--like-input is-short">
             <b>width</b> is
           </div>
 
@@ -165,7 +162,7 @@ export class AssertBoundingBox extends React.Component {
 
         <Row className="ant-form-inline">
 
-          <div className="ant-row ant-form-item ant-form-item--like-input">
+          <div className="ant-row ant-form-item ant-form-item--like-input is-short">
             <b>height</b> is
           </div>
 

@@ -17,7 +17,6 @@ export const toggleClass = {
 
       legend: "",
       tooltip: "",
-      span: { label: 4, input: 18 },
       fields: [
         {
           name: "params.name",

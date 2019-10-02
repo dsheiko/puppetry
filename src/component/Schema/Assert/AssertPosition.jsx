@@ -32,7 +32,7 @@ export class AssertPosition extends React.Component {
       <React.Fragment>
         <Row gutter={24} className="is-invisible">
           <Col span={8} >
-            <FormItem label="Expected result">
+            <FormItem label="Result">
               { getFieldDecorator( "assert.assertion", {
                 initialValue: "position",
                 rules: [{
@@ -46,9 +46,10 @@ export class AssertPosition extends React.Component {
 
         <Row gutter={24} className="ant-form-inline">
 
-          <FormItem>
-            <Input defaultValue="Element is" readOnly  />
-          </FormItem>
+
+          <div className="ant-row ant-form-item ant-form-item--like-input is-short">
+            Target is
+          </div>
 
           <FormItem>
             { getFieldDecorator( "assert.position", {

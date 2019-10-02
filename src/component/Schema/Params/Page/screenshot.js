@@ -105,7 +105,6 @@ export const screenshot = {
 
     {
       collapsed: true,
-      span: { label: 4, input: 18 },
       tooltip: "An object which specifies clipping region of the page.",
       fields: [
         {

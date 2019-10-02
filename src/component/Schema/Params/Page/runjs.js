@@ -33,7 +33,7 @@ via \`ENV\` map (e.g. \`ENV[VAR_NAME]\`)
         {
           name: "params.value",
           control: TEXTAREA,
-          label: "JavaScript code to run",
+          label: "JavaScript",
           initialValue: "",
           placeholder: "await bs.page.goto('https://example.com');",
           rules: [{

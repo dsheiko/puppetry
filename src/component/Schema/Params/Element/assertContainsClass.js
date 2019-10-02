@@ -16,7 +16,10 @@ export const assertContainsClass = {
   commonly: "assert it contains class",
 
   assert: {
-    node: AssertBoolean
+    node: AssertBoolean,
+    options: {
+      textNode: "contains class"
+    }
   },
   description: `Asserts that the specified class value exists in the [element's
  class attribute](https://developer.mozilla.org/en-US/docs/Web/API/Element).`,

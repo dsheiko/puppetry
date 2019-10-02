@@ -15,7 +15,10 @@ export const assertNodeCount = {
   commonly: "assert count of child elements",
 
   assert: {
-    node: AssertNumber
+    node: AssertNumber,
+    options: {
+      resultLabel: "Number is"
+    }
   },
   description: `Asserts that number of child elements matching a specified selector satisfies the given constraint`,
   params: [

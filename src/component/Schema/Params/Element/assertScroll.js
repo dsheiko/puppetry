@@ -22,7 +22,10 @@ export const assertScroll = {
   description: `Asserts that [scroll](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTop)
 offset on the target satisfies the given constraint`,
   assert: {
-    node: AssertNumber
+    node: AssertNumber,
+    options: {
+      resultLabel: "Offset is"
+    }
   },
   params: [
     {

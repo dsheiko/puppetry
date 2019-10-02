@@ -30,7 +30,7 @@ import { waitForResponse } from "./Params/Page/waitForResponse";
 import { waitForFileChooser } from "./Params/Page/waitForFileChooser";
 import { assertConsoleMessage } from "./Params/Page/assertConsoleMessage";
 import { assertDialog } from "./Params/Page/assertDialog";
-import { handleDialog } from "./Params/Page/handleDialog";
+import { closeDialog } from "./Params/Page/closeDialog";
 import { assertPerfomanceAssetWeight } from "./Params/Page/assertPerfomanceAssetWeight";
 
 
@@ -127,7 +127,7 @@ export const schema = {
     evaluate,
     runjs,
     debug,
-    handleDialog,
+    closeDialog,
     assignVar,
     assignVarRemotely,
     assertTitle,

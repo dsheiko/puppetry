@@ -85,3 +85,19 @@ exports.SELECTOR_CHAIN_DELIMITER = ">>";
 
 exports.SELECTOR_CSS = 1;
 exports.SELECTOR_XPATH = 2;
+
+exports.FIELDSET_DEFAULT_LAYOUT = {
+  labelCol: {
+    span: 3
+  },
+  wrapperCol: {
+    span: 21
+  }
+};
+
+exports.FIELDSET_DEFAULT_CHECKBOX_LAYOUT = {
+  wrapperCol: {
+    span: 21,
+    offset: 3
+  }
+};

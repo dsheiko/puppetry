@@ -45,7 +45,7 @@ export class AssertValue extends AbstractComponent {
       <Row gutter={24}>
 
         <Col span={8} >
-          <FormItem label="Expected result">
+          <FormItem label="Result">
             { getFieldDecorator( "assert.assertion", {
               initialValue: assertion,
               rules: [{
