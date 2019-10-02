@@ -193,7 +193,6 @@ export class CommandForm extends React.Component {
         <Form onSubmit={this.handleSubmit} className="command-form" id="cCommandForm">
           <If exp={ this.state.error }>
             <Alert
-              message="Notice"
               description={ this.state.error }
               type="warning"
               closable />
@@ -248,7 +247,6 @@ export class CommandForm extends React.Component {
 
           <If exp={ this.state.validationError }>
             <Alert
-              message="Error"
               description={ this.state.validationError }
               type="error"
               closable />

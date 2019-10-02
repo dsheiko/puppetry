@@ -1198,3 +1198,15 @@ td:hover .editable-cell-icon {
 .ant-form-item-label > label:not(.ant-form-item-required) {
   opacity: 0.7;
 }
+
+.ant-row.ant-form-item.ant-form-item--like-input {
+  display: inline-block;
+  width: 64px;
+  height: 32px;
+  line-height: 40px;
+  text-align: right;
+}
+
+.command-form .ant-alert {
+  margin-bottom: 16px;
+}
