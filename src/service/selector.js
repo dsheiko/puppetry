@@ -6,28 +6,15 @@ export function validateSelector( rawSelectorChain ) {
   if ( !selectorChain ) {
     throw new SelectorParserException( "Selector cannot be empty" );
   }
-
-  if ( !selectorChain.includes( SELECTOR_CHAIN_DELIMITER ) ) {
-    // Not a chain
-    return validateSimpleSelector( selectorChain );
-  }
-
-  selectorChain
-    .split( SELECTOR_CHAIN_DELIMITER )
-    .forEach(( sel ) => {
-      if ( !validateCss( sel ) ) {
-        throw new SelectorParserException( `Shadow DOM query must consist of valid CSS selectors` );
-      }
-    });
+  return validateSimpleSelector( selectorChain );
 }
-
 
 export function validateSimpleSelector( selector ) {
   const isCssValid = validateCss( selector ),
         isXpathValid = validateXpath( selector );
 
   if ( !isCssValid && !isXpathValid ) {
-    throw new SelectorParserException( `The value is neither a valid CSS nor XPath` );
+    throw new SelectorParserException( `The value "${ selector }" is neither a valid CSS nor XPath` );
   }
 
   return isCssValid ? SELECTOR_CSS : SELECTOR_XPATH;
@@ -55,4 +42,12 @@ function validateXpath( selector ) {
   return true;
 }
 
-
+export function mapSelectors( targetArr ) {
+  return targetArr.map( target => ({
+      target: target.target,
+      selector: target.selector,
+      ref: target.ref,
+      parentType: target.parentType,
+      css: validateSimpleSelector( target.selector ) === SELECTOR_CSS
+  }));
+}

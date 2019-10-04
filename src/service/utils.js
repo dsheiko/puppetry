@@ -14,6 +14,14 @@ export const OPERATOR_MAP = {
 };
 
 
+export function enableSelectSearch() {
+  return {
+    showSearch: true,
+    optionFilterProp: "children",
+    filterOption: ( input, option ) => option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0
+  };
+}
+
 export function propVal( obj, key, defaultVal = null ) {
   if ( typeof obj !== "object" ) {
     return defaultVal;

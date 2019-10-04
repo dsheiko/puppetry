@@ -101,6 +101,25 @@ export default {
 
 
   /**
+    * Update record without saving
+    * @param {object} state
+    * @param {Entity} payload (EntityRef required)
+    * @returns {object}
+    */
+  [ actions.setTarget ]: ( state, { payload }) => {
+    return update( state, {
+      targets: {
+        $apply: ( ref ) => {
+          const targets = { ...ref },
+                id = payload.id;
+          targets[ id ] = { ...targets[ id ], ...payload, key: id };
+          return targets;
+        }
+      }
+    });
+  },
+
+  /**
     * Update record
     * @param {object} state
     * @param {Entity} payload (EntityRef required)

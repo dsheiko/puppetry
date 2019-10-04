@@ -1,7 +1,8 @@
 import React from "react";
 import { Table, Icon, Button } from "antd";
 import AbstractEditableTable from "./AbstractEditableTable";
-import { EditableCell } from "./EditableCell";
+import { TargetSelectorCell } from "./EditableCell/TargetSelectorCell";
+import { TargetVariableCell } from "./EditableCell/TargetVariableCell";
 import { connectDnD } from "./DragableRow";
 import { validateSelector } from "service/selector";
 import ErrorBoundary from "component/ErrorBoundary";
@@ -16,6 +17,7 @@ export class TargetTable extends AbstractEditableTable {
     super( props );
 
     this.fields = [ "target",  "selector" ];
+    this.extraFields = { "selector": [ "parentType", "ref" ] };
     this.model = "Target";
 
     this.columns = [
@@ -25,13 +27,14 @@ export class TargetTable extends AbstractEditableTable {
         width: "30%",
         render: ( text, record ) => {
           const ref = this.registerRef( record.id, "target" );
-          return ( <EditableCell
+          return ( <TargetVariableCell
             ref={ ref }
             record={ record }
             onSubmit={ this.onSubmit }
             dataIndex="target"
             className="input--target"
             placeholder="Enter target name"
+
             model={ this.model }
             updateRecord={ this.updateRecord }
           />
@@ -44,7 +47,7 @@ export class TargetTable extends AbstractEditableTable {
         width: "calc(70% - 160px)",
         render: ( text, record ) => {
           const ref = this.registerRef( record.id, "selector" );
-          return ( <EditableCell
+          return ( <TargetSelectorCell
             ref={ ref }
             record={ record }
             onSubmit={ this.onSubmit }
@@ -53,6 +56,7 @@ export class TargetTable extends AbstractEditableTable {
             placeholder="Enter CSS selector or xPath"
             model={ this.model }
             updateRecord={ this.updateRecord }
+            targets={ this.props.targets }
           />
           );
         }

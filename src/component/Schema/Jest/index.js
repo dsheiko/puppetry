@@ -1,6 +1,7 @@
 import { RUNNER_PUPPETRY, SELECTOR_CHAIN_DELIMITER, SELECTOR_CSS } from "constant";
 import { validateSimpleSelector } from "service/selector";
 import { renderSuiteHtml } from "./interactive-mode";
+import { TestGeneratorError } from "error";
 import fs from "fs";
 import { join } from "path";
 
@@ -16,28 +17,32 @@ const NETWORK_TIMEOUT = 50000,
         join( outputDirectory, "lib", "interactive-mode", file ), "utf8"
       );
 
-/**
- * Build selector for ShadowDOM
- * e.g. `document.querySelector( ".foo" ).shadowRoot.querySelector( ".bar" )`
- * @param {String} selectorChain
- * @returns {String}
- */
-function buildShadowDomQuery( selectorChain ) {
-  return "document" + ( selectorChain
-    .split( SELECTOR_CHAIN_DELIMITER )
-    .map( ( sel ) => `.querySelector("${ sel }")` )
-    .join( `.shadowRoot` ) );
+export function buildShadowDomQuery( targetChain ) {
+  const code = targetChain.reduce(( carry, target, inx ) => {
+    if ( !target.css ) {
+      throw new TestGeneratorError( `Shadow DOM queries currently support only CSS selectors` );
+    }
+    if ( inx === 0 ) {
+      return `document.querySelector( "${ target.selector }" )`;
+    }
+    return `${ carry }.shadowRoot.querySelector( "${ target.selector }" )`;
+  }, "" );
+  return `await bs.page.evaluateHandle('${ code }')`;
 }
 
-export const tplQuery = ({ target, selector }) => {
-  // in case of chain for shadow DOM
-  if ( selector.includes( SELECTOR_CHAIN_DELIMITER ) ) {
-    return `const ${ target } = async () => bs.findHandleBySelectorChain( \`${ buildShadowDomQuery( selector ) }\`, `
-      + `${ JSON.stringify( target )} );`;
-  }
-  const func = validateSimpleSelector( selector ) === SELECTOR_CSS ? "findHandleByCss" : "findHandleByXpath";
-  return `const ${ target } = async () => bs.${ func }( ${ JSON.stringify( selector )}, `
-    + `${ JSON.stringify( target )} );`;
+export const tplQuery = ( targetChain ) => {
+    const target = targetChain[ targetChain.length - 1 ],
+          str = JSON.stringify.bind( JSON );
+          
+    let fnBody = ( target.parentType === "shadowHost"
+      ? buildShadowDomQuery( targetChain )
+      : ( targetChain.length === 1
+        ? `await bs.query( ${ str( target.selector ) }, ${ str( target.css ) }, ${ str( target.target ) } )`
+        : `await bs.queryChain( ${ str( targetChain )}, ${ str( target ) } )` )
+    );
+
+    return `const ${ target.target } = async () => ${ fnBody };`;
+
 };
 
 function buildEnv( env ) {

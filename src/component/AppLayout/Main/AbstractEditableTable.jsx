@@ -4,6 +4,7 @@ import log from "electron-log";
 import { Button, Popconfirm, Divider } from "antd";
 import AbstractDnDTable from "./AbstractDnDTable";
 import { RowDropdown } from "./RowDropdown";
+import { propVal } from "service/utils";
 
 export default class AbstractEditableTable extends AbstractDnDTable {
 
@@ -46,6 +47,8 @@ export default class AbstractEditableTable extends AbstractDnDTable {
     return this.fieldRefs[ id ][ field ];
   }
 
+  extraFields = [];
+
   toggleEdit = ( id, editing ) => {
     const update = this.props.action[ `update${this.model}` ];
     document.body.classList.toggle( "disable-dnd", editing );
@@ -71,18 +74,19 @@ export default class AbstractEditableTable extends AbstractDnDTable {
               Object.entries( this.fieldRefs[ id ])
                 .filter( ( pair ) => pair[ 1 ].current !== null )
                 .map( ([ key, ref ]) => {
-              return new Promise( ( resolve, reject ) => {
-                ref.current.validateFields([ key ], ( err, values ) => {
-                  if ( err ) {
-                    return reject( err );
-                  }
-                  if ( !this.validateFormField( key, values[ key ], ref.current ) ) {
-                    return reject( "Invalid syntax" );
-                  }
-                  resolve( values );
-                });
-              });
-            }) ),
+                  return new Promise( ( resolve, reject ) => {
+                    const fields = [ key ].concat( propVal( this.extraFields, key, [] ) );
+                    ref.current.validateFields( fields, ( err, values ) => {
+                      if ( err ) {
+                        return reject( err );
+                      }
+                      if ( !this.validateFormField( key, values[ key ], ref.current ) ) {
+                        return reject( "Invalid syntax" );
+                      }
+                      resolve( values );
+                    });
+                  });
+                }) ),
             options = res.reduce( ( carry, obj ) => ({
               ...carry,
               ...obj,
@@ -108,7 +112,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
   updateRecord = ( options ) => {
     const update = this.props.action[ `update${this.model}` ],
           payload = this.extendActionOptions( options );
-
+          
     update( payload );
     this.updateSuiteModified( payload, "update" );
   }

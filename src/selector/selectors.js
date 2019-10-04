@@ -53,6 +53,37 @@ export function getVariableDataTable( variables, env ) {
   return data;
 }
 
+
+export function getActiveTargets( targets ) {
+  return Object.values( targets )
+    .filter( target => ( !target.disabled && target.target ) );
+}
+
+
+function getTarget( variable, targets ) {
+  return Object.values( targets )
+    .find( item => variable === item.target );
+}
+
+const getTargetChainRecursive = function( target, targets ) {
+  const chain = [ target ];
+  chainLen++;
+  if ( chainLen > 10 ) {
+    throw new Error( `Too many chains, it looks like a loop` );
+  }
+  if ( !target.ref ) {
+    return chain;
+  }
+  const ref = getTarget( target.ref, targets );
+  return chain.concat( getTargetChainRecursive( ref, targets ) );
+};
+
+let chainLen;
+export function getTargetChain( target, targets ) {
+  chainLen = 0;
+  return getTargetChainRecursive( target, targets ).reverse();
+}
+
 export function getTargetDataTable( targets ) {
   const data = setEntity( ( !targets ? [] : Object.values( targets ) ), "target" ),
         id = uniqid();
@@ -90,13 +121,12 @@ export function getStructureDataTable( record, entity ) {
 
 /**
  *
- * @param {String} target
+ * @param {String} variable
  * @param {Object} targets
  * @returns {Boolean}
  */
-export function hasTarget( target, targets ) {
-  return Boolean( Object.values( targets )
-    .find( item => target === item.target ) );
+export function hasTarget( variable, targets ) {
+  return Boolean( getTarget( variable, targets ) );
 }
 
 /**

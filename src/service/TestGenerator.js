@@ -2,13 +2,18 @@ import log from "electron-log";
 import { join } from "path";
 import { TestGeneratorError } from "error";
 import { COMMAND_ID_COMMENT, RUNNER_PUPPETRY, SNIPPETS_GROUP_ID } from "constant";
+import { getTargetChain, getActiveTargets } from "selector/selectors";
+import { mapSelectors } from "service/selector";
 
 const INTERATIVE_TIMEOUT = 900000, // 15 min
       INTERACTIVE_ILLEGAL_METHODS = [ "setViewport" ];
 
 export default class TestGenerator {
-
+  /**
+   * {Object} targets
+   */
   constructor({ suite, schema, targets, runner, projectDirectory, outputDirectory, snippets, env, options }) {
+
     // collect here information for interactive mode
     this.interactive = {
       sids: [],
@@ -27,16 +32,20 @@ export default class TestGenerator {
         carry[ entry.target ] = entry.selector;
         return carry;
       }, {});
+
   }
 
+  /**
+   * Targets to JavaScript string
+   * @param {Object} name
+   * @returns {String}
+   */
   parseTargets( targets ) {
-    const snippetTargets = Object.values( this.snippets.targets )
-            .filter( entity => !( entity.id in targets ) ),
-          targetArr = Object.values( targets );
-
-    return [ ...snippetTargets, ...targetArr ]
+    const allTargets = mapSelectors( getActiveTargets( Object.values({ ...this.snippets.targets, ...targets }) ) );
+    return allTargets
       .filter( ({ target, selector }) => Boolean( target ) && Boolean( selector ) )
-      .map( this.schema.jest.tplQuery ).join( "\n" );
+      .map( target => this.schema.jest.tplQuery( getTargetChain( target, allTargets ) ) )
+      .join( "\n" );
   }
 
   /**
@@ -164,7 +173,6 @@ export default class TestGenerator {
 
   generate() {
     try {
-
       return this.schema.jest.tplSuite({
         title: this.suite.title,
         targets: this.parseTargets( this.suite.targets ),

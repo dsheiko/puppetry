@@ -17,11 +17,15 @@
 - improvement: Jest/Puppeteer project (export) has option to run in Firefox ([custom build](https://www.npmjs.com/package/puppeteer-firefox))
 - improvement: test steps and refs now support comments
 - improvement: add suite autosave option
-- improvement: support Shadow DOM querying
 - improvement: add page.assertPerfomanceAssetWeight
 - improvement: add page.assertPerfomanceAssetCount
 - improvement: extend page.setViewport with list of predefined resolutions
 - improvement: polish UX for every test step form
+- improvement: support for target chaining
+  - querying within other element
+  - querying in Shadow DOM
+  - querying in iframe 
+
 
 ### Updates
 

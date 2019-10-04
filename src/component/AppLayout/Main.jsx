@@ -55,12 +55,7 @@ export class Main extends AbstractComponent {
               <p>Targets are identifiers associated with locators (CSS selector or XPath)
               that we can refer in the test cases.
               </p>
-              <p><a
-                onClick={ this.onExtClick }
-                href="https://developers.google.com/web/fundamentals/web-components/shadowdom">
-                Shadow DOM</a> can be accessed by using the following syntax
-                <code>.shadow-host-selector { " >> "} .hosting-element-selector</code>
-              </p>
+      
               <p><LearnMore href="https://docs.puppetry.app/target" />
               </p>
               <TargetTable action={action} targets={ selector.getTargetDataTable() } />

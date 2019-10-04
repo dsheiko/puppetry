@@ -183,7 +183,9 @@ export const targetDefaultState = ( id ) => ({
   target: "",
   selector: "",
   disabled: false,
-  adding: false
+  adding: false,
+  parentType: "",
+  ref: ""
 });
 
 export const variableDefaultState = ( id ) => ({

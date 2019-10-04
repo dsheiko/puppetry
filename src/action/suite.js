@@ -123,7 +123,6 @@ actions.loadSuite = ( filename, options = { silent: false }) => async ( dispatch
 };
 
 actions.saveSuite = ( options = {}, autosave = false ) => async ( dispatch, getState ) => {
-  console.log("save suite!!!");
   const store = getState(),
         { projectDirectory } = store.settings,
         { filename } = { ...store.suite, ...options };

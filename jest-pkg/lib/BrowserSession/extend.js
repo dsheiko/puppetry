@@ -8,46 +8,65 @@
 module.exports = function( bs, util ) {
 
   const RES_TYPES = [ "Stylesheet", "Image", "Media", "Font", "Script", "XHR", "Fetch" ];
+
   /**
-   * Evaluate the XPath expression and return the first ElementHandle
-   *
+   * @typedef {Target}
+   * @param {String} target
    * @param {String} selector
-   * @return {?ElementHandle}
+   * @param {Boolean} css
+   * @param {String} ref
+   * @param {String} parentType
    */
-  async function queryXpath( selector ) {
-    const [ elh ] = await bs.page.$x( selector );
+
+  /**
+   *
+   * @param {Target} target
+   * @param {ElementHandle} pelh
+   * @returns {?ElementHandle}
+   */
+  async function query( target, pelh = bs.page ) {
+    if ( target.parentType === "iframe" ) {
+      pelh = pelh.contentFrame;
+    }
+    const elh = target.css ? await pelh.$( target.selector ) : await queryXpath( target.selector, pelh );
+    if ( !elh ) {
+      throw new Error( `Cannot find target ${ target.target } `
+        + `(${ target.css ? "CSS": "XPath" }: ${ target.selector })` );
+    }
     return elh;
   }
 
-  /**
-   * Query for ElementHandle by CSS selector
+  bs.query = async ( selector, css, target ) => {
+    return await query({ target, selector, css });
+  };
+
+   /**
+   * Evaluate the XPath expression and return the first ElementHandle
    *
    * @param {String} selector
-   * @param {String} target
+   * @param {ElementHandle} pelh
    * @return {?ElementHandle}
    */
-  bs.findHandleByCss = async function ( selector, target ) {
-    const elh = await bs.page.$( selector );
-    if ( !elh ) {
-      throw new Error( "Cannot find target " + target + " (CSS: " + selector + ")" );
+  async function queryXpath( selector, pelh = bs.page ) {
+    const [ elh ] = await pelh.$x( selector );
+    return elh;
+  }
+
+
+  /**
+   *
+   * @param {Target[]} targetChain
+   * @returns {?ElementHandle}
+   */
+  bs.queryChain = async ( targetChain ) => {
+    const target = targetChain.shift();
+    let elh = await query( target );
+    for ( let item of targetChain )  {
+      elh = await query( item, elh );
     }
     return elh;
   };
 
-  /**
-   * Query for ElementHandle by XPath
-   *
-   * @param {String} selector
-   * @param {String} target
-   * @return {?ElementHandle}
-   */
-  bs.findHandleByXpath = async function ( selector, target ) {
-    const elh = await queryXpath( selector );
-    if ( !elh ) {
-      throw new Error( "Cannot find target " + target + " (XPath: " + selector + ")" );
-    }
-    return elh;
-  };
 
   /**
    *
