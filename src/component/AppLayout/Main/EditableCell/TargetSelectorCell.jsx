@@ -82,7 +82,7 @@ export class TargetSelectorCell extends AbstractEditableCell {
                     initialValue: ( record.ref || "" )
                   })(
                     <Select onChange={ this.onChangeType } { ...enableSelectSearch() }>
-                      <Option key="0" value="">no parent target</Option>
+                      <Option key="0" value="">document</Option>
                       { activeTargets.map( target => ( <Option
                         key={ target.target }
                         value={ target.target }>

@@ -15,8 +15,9 @@ class BrowserSession {
 
   /**
    * Obtain browser and page object on bootstrap
+   * @param {Object} setupOptions
    */
-  async setup() {
+  async setup( setupOptions ) {
     // when called like PUPPETEER_RUN_IN_BROWSER=true jest open in a browser
     const options = process.env.PUPPETEER_RUN_IN_BROWSER
       ? {
@@ -35,8 +36,12 @@ class BrowserSession {
     }
 
     this.browser = await puppeteer.launch( options  );
-    this.context = await this.browser.createIncognitoBrowserContext();
-    this.page = await this.context.newPage();
+    if ( setupOptions.incognito ) {
+      this.context = await this.browser.createIncognitoBrowserContext();
+      this.page = await this.context.newPage();
+    } else {
+      this.page = await this.browser.newPage();
+    }
     // launches 2 windows (one regular and one incognito)
     // but seems like cannot be fixed https://github.com/GoogleChrome/puppeteer/issues/4400
     this.target = createTargetMethods( this.page );

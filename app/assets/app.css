@@ -1245,15 +1245,25 @@ align with collapsed (Advanced options))
   vertical-align: top;
 }
 
-.ant-table-tbody summary:focus {
+summary:focus {
   outline: 0;
 }
-.ant-table-tbody summary {
+summary {
   cursor: pointer;
   color: #1890ff;
 }
-.ant-table-tbody summary:hover {
+summary:hover {
   color: #40a9ff;
+}
+
+.ant-modal-body details {
+  margin-bottom: 8px;
+}
+.ant-modal-body details > div {
+  padding: 16px 0 8px 0;
+}
+.test-options-wrapper {
+  margin-top: 16px;
 }
 
 .target-ref {
@@ -1273,4 +1283,12 @@ align with collapsed (Advanced options))
 
 .target-options_desc {
   font-size: 12px;
+}
+
+.chromium-checkbox-group .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+  
+}
+.modal-suites-checkbox-group {
+  max-height: 140px;
+  overflow-y: auto;
 }

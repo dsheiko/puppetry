@@ -33,7 +33,7 @@ export function buildShadowDomQuery( targetChain ) {
 export const tplQuery = ( targetChain ) => {
     const target = targetChain[ targetChain.length - 1 ],
           str = JSON.stringify.bind( JSON );
-          
+
     let fnBody = ( target.parentType === "shadowHost"
       ? buildShadowDomQuery( targetChain )
       : ( targetChain.length === 1
@@ -58,7 +58,9 @@ ${ body }
 };`;
 }
 
-
+function getSetupOptions( options ) {
+  return JSON.stringify({ incognito: options.incognito || false });
+}
 
 export const tplSuite = ({
   title, body, targets, suite, runner, projectDirectory, outputDirectory, env, options, interactive
@@ -96,7 +98,7 @@ ${ targets }
 
 describe( ${ JSON.stringify( title ) }, async () => {
   beforeAll(async () => {
-    await bs.setup();
+    await bs.setup(${ getSetupOptions( options ) });
 
     bs.page.on( "console", ( msg ) => consoleLog.push( msg ) );
     bs.page.on( "dialog", ( dialog ) => dialogLog.push( dialog.message() ) );

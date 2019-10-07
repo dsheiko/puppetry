@@ -1,16 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Alert, Checkbox, Modal, Button, Switch, Input } from "antd";
+import { Alert, Checkbox, Modal, Button, Switch, Input, Tabs } from "antd";
 import Tooltip from "component/Global/Tooltip";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractComponent from "component/AbstractComponent";
+import { BrowserOptions } from "./TestReportModal/BrowserOptions";
 import If from "component/Global/If";
 import * as classes from "./classes";
 import { SelectEnv } from "component/Global/SelectEnv";
 
 /*eslint no-empty: 0*/
 
-const CheckboxGroup = Checkbox.Group;
+const CheckboxGroup = Checkbox.Group,
+      { TabPane } = Tabs;
 
 /**
  * Adds/removes args in the launcher args string
@@ -47,15 +49,14 @@ export class TestReportModal extends AbstractComponent {
     checkAll: false,
     modified: false,
     loading: false,
-    headless: true,
-    launcherArgs: "",
+    browserOptions: false,
     updateSnapshot: false,
     interactiveMode: false
   }
 
   constructor( props ) {
     super( props );
-    this.inputLauncherArgsRef = React.createRef();
+    this.refBrowserOptions = React.createRef();
   }
 
   onChangeCheckbox = ( checked, field ) => {
@@ -84,30 +85,6 @@ export class TestReportModal extends AbstractComponent {
     });
   }
 
-  onSwitchChange = ( checked ) => {
-    this.setState({
-      headless: !checked
-    });
-  }
-
-  onCheckMaximize = ( e ) => {
-    this.setState({
-      launcherArgs: updateLauncherArgs( this.state.launcherArgs, `--start-maximized`, e.target.checked )
-    });
-  }
-
-  onCheckFullscreen = ( e ) => {
-    this.setState({
-      launcherArgs: updateLauncherArgs( this.state.launcherArgs, `--start-fullscreen`, e.target.checked )
-    });
-  }
-
-  onChangeLauncherArgs = ( e ) => {
-    this.setState({
-      launcherArgs: e.target.value
-    });
-  }
-
   onClickCancel = ( e ) => {
     e.preventDefault();
     this.props.action.setApp({ testReportModal: false });
@@ -118,13 +95,15 @@ export class TestReportModal extends AbstractComponent {
     this.setState({ loading: true });
     try {
       const current = this.getCurrentFile(),
+            browserOptions = this.refBrowserOptions.current,
             checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
       this.props.action.setApp({
         checkedList,
         testReportModal: false,
-        headless: this.state.headless,
-        launcherArgs: this.state.launcherArgs,
+        headless: browserOptions.state.headless,
+        incognito: browserOptions.state.incognito,
+        launcherArgs: browserOptions.state.launcherArgs,
         updateSnapshot: this.state.updateSnapshot,
         interactiveMode: this.state.interactiveMode
       });
@@ -156,6 +135,7 @@ export class TestReportModal extends AbstractComponent {
 
   render() {
     const { isVisible, files } = this.props,
+          { browserOptions } = this.state,
           current = this.getCurrentFile(),
           checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
@@ -188,66 +168,37 @@ export class TestReportModal extends AbstractComponent {
         >
 
           <If exp={ files.length }>
-            <div className="bottom-line run-in-browser">
-              <div className="run-in-browser__layout">
-                <div>
-                  <Switch checkedChildren="On" unCheckedChildren="Off" onChange={ this.onSwitchChange } />
-                  { " " } run in browser <Tooltip
-                    title={ "By default the tests are running in headless mode (faster). "
-                    + "But you can switch for browser mode and see what is really happening on the page" }
-                    icon="question-circle"
-                  />
-                </div>
-                { !this.state.headless && <div>
-                  { " " } <Checkbox
-                    onChange={ this.onCheckMaximize }
-                  >
-                    maximized
-                  </Checkbox>
 
-                  { " " } <Checkbox
-                    onChange={ this.onCheckFullscreen }
-                  >
-                    fullscreen
-                  </Checkbox>
-                </div> }
+            <Tabs
+              className="tabgroup-test-reports"
+              hideAdd={ true }
+              animated={ false }
+              >
+
+            <TabPane tab="General" key="1">
+
+
+              <SelectEnv theme="test-reports" environments={ this.props.project.environments }
+                environment={ this.props.environment } action={ this.props.action } />
+
+              <div className="test-options">
+
+                <Checkbox onChange={ e  => this.onChangeCheckbox( e.target.checked, "interactiveMode" ) } >
+                  interactive mode<Tooltip
+                        title={ "This mode allows you to control testing flow" }
+                        icon="info-circle"
+                      />
+                </Checkbox>
+
+                <Checkbox onChange={ e  => this.onChangeCheckbox( e.target.checked, "updateSnapshot" ) } >
+                  update comparison images<Tooltip
+                        title={ "For CSS regression testing use this option to force Puppetry "
+                          + "updating snapshots (screenshots representing proper states of the targets)" }
+                        icon="info-circle"
+                      />
+                </Checkbox>
 
               </div>
-              { !this.state.headless && <div>
-                <div className="ant-form-item-label">
-                  <label htmlFor="target" title="Additional arguments">
-                  Additional arguments to pass to the browser{ " " }
-                    <a
-                      onClick={ this.onExtClick }
-                      href="http://peter.sh/experiments/chromium-command-line-switches/">
-                      (list of available options)</a></label>
-                </div>
-                <Input
-                  onChange={ this.onChangeLauncherArgs }
-                  ref={ this.inputLauncherArgsRef }
-                  value={ this.state.launcherArgs }
-                  placeholder="--start-maximized --ignore-certificate-errors" />
-              </div> }
-            </div>
-
-            <SelectEnv environments={ this.props.project.environments }
-              environment={ this.props.environment } action={ this.props.action } />
-
-            <div className="test-options">
-            <Checkbox onChange={ e  => this.onChangeCheckbox( e.target.checked, "updateSnapshot" ) } >
-              update comparison images <Tooltip
-                    title={ "For CSS regression testing use this option to force Puppetry "
-                      + "updating snapshots (screenshots representing proper states of the targets)" }
-                    icon="info-circle"
-                  />
-            </Checkbox>
-            <Checkbox onChange={ e  => this.onChangeCheckbox( e.target.checked, "interactiveMode" ) } >
-              interactive mode <Tooltip
-                    title={ "This mode allows you to control testing flow" }
-                    icon="info-circle"
-                  />
-            </Checkbox>
-            </div>
 
 
             <p>Please select suites to run:</p>
@@ -260,11 +211,23 @@ export class TestReportModal extends AbstractComponent {
                   Check all
               </Checkbox>
             </div>
-            <div className={ files.length >= 8 ? "is-checkbox-group-scrollable" : ""}>
+            <div
+              className={ "modal-suites-checkbox-group"
+                + ( files.length >= 8 ? "is-checkbox-group-scrollable" : "" ) }>
               <CheckboxGroup options={ files }
                 value={ checkedList }
                 onChange={ this.onChange } />
             </div>
+
+
+            </TabPane>
+
+            <TabPane tab="Browser options" key="2">
+              <BrowserOptions ref={ this.refBrowserOptions }  />
+            </TabPane>
+
+            </Tabs>
+
 
           </If>
           <If exp={ !files.length }>

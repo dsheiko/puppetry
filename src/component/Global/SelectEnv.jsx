@@ -11,7 +11,8 @@ export class SelectEnv extends AbstractComponent {
     static propTypes = {
       action: PropTypes.any,
       environment: PropTypes.string,
-      environments: PropTypes.any
+      environments: PropTypes.any,
+      theme: PropTypes.string
     }
 
     onEnvChange = ( activeEnv ) => {
@@ -19,16 +20,19 @@ export class SelectEnv extends AbstractComponent {
     }
 
     render() {
-      const { environments, environment } = this.props,
+      const { environments, environment, theme } = this.props,
             activeEnv = getActiveEnvironment( environments, environment );
 
       return ( <div className="select-group-inline">
-        <span className="select-group-inline__label">
+        { theme !== "test-reports" && ( <span className="select-group-inline__label">
           <Icon type="environment" title="Select a target environment" />
-        </span>
+        </span> ) }
+      { theme === "test-reports" && ( <span className="select-group-inline__label">
+          Environment:
+        </span> ) }
         <Select
           showSearch
-          style={{ width: 348 }}
+          style={{ width: ( theme === "test-reports" ? 282 : 348 ) }}
           placeholder="Select a environment"
           optionFilterProp="children"
           onChange={ this.onEnvChange }

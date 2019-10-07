@@ -21,10 +21,11 @@
 - improvement: add page.assertPerfomanceAssetCount
 - improvement: extend page.setViewport with list of predefined resolutions
 - improvement: polish UX for every test step form
+- improvement: support Chrome Extensions
 - improvement: support for target chaining
   - querying within other element
   - querying in Shadow DOM
-  - querying in iframe 
+  - querying in iframe
 
 
 ### Updates
