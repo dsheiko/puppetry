@@ -20,15 +20,14 @@ const { TextArea } = Input;
  * @returns {String}
  */
 export function updateLauncherArgs( launcherArgs, value, toggle ) {
-  console.log("!0", launcherArgs);
   const args = launcherArgs.split( " " )
     .filter( arg => arg.trim().length )
     .filter( arg => !arg.startsWith( value ) );
-  console.log("!1", args );
+
   if ( toggle ) {
     args.push( value );
   }
-  console.log("!2", args.join( " " ) );
+  
   return args.join( " " );
 }
 

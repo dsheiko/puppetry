@@ -35,17 +35,24 @@ export class AppLightbox extends React.Component {
     return true;
   }
 
+  /**
+   * Get index safely
+   * @param {Object[]} data
+   * @returns {Number}
+   */
+  getCurrentIndex( data ) {
+    return data.index in data.images ? data.index : 0;
+  }
+
   render() {
     const { photoIndex } = this.state,
           { isVisible, data } = this.props;
-        console.log("lightbox", data);
+        
     return ( <ErrorBoundary>
       <ModalGateway>
         { isVisible !== false ? (
           <Modal onClose={ this.onClose }>
-            <ErrorBoundary>
-              <Carousel views={ data.images } currentIndex={ data.index } />
-            </ErrorBoundary>
+              <Carousel views={ data.images } currentIndex={ this.getCurrentIndex( data ) } />
           </Modal>
         ) : null}
       </ModalGateway>

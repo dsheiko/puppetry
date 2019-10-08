@@ -48,7 +48,7 @@ export default class ErrorBoundary extends React.Component {
   render() {
     if ( this.state.hasError ) {
       // You can render any custom fallback UI
-      return ( <div className="critical-error">
+      return ( <div className={ "critical-error " + ( this.props.className || "" ) }>
         <h2><Icon type="frown-o" /></h2>
         <h1>Opps! Something went wrong.</h1>
         <p>Please report the issue on { " " }

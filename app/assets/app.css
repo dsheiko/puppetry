@@ -11,11 +11,15 @@
 }
 
 .ant-table-row.is-right-clicked {
-  background: #f0f2f5;
+  background: var(--layout-background);
 }
 
 body .smalltalk {
   z-index: 1500;
+}
+
+.is-white {
+  background: var(--layout-background);
 }
 
 .info .ant-row {
@@ -164,7 +168,7 @@ a > .anticon {
 }
 
 body {
-  background-color: #f0f2f5;
+  background-color: var(--layout-background);
 }
 
 .is-hidden {
@@ -253,6 +257,8 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
+  padding: 16px;
+  border-radius: 8px;
 }
 .critical-error > * {
   flex: 0 0 auto;
@@ -1082,7 +1088,7 @@ table > .ant-table-tbody > tr.ant-table-row.disable-expand:hover > td {
 .thumb-container figure {
   width: 224px;
   height: 126px;
-  background-color: #f0f2f5;
+  background-color: var(--layout-background);
   overflow: hidden;
   outline: 1px solid #98a6ba;
   position: relative;
