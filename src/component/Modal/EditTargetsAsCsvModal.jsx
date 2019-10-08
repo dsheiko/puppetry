@@ -11,6 +11,12 @@ const FormItem = Form.Item,
       connectForm = Form.create(),
       { TextArea } = Input;
 
+function targetToCsvLine( row ) {
+  return `${ row.target },${ row.selector }`
+   + ( row.ref ? `,${ row.ref }` : `` )
+   + ( row.parentType ? `,${ row.parentType }` : `` );
+}
+
 @connectForm
 export class EditTargetsAsCsvModal extends AbstractForm {
 
@@ -44,12 +50,13 @@ export class EditTargetsAsCsvModal extends AbstractForm {
         .filter( line => line.trim() )
         .map( line => {
           const chunks = line.split( "," ),
-                target = chunks.shift(),
-                selector = chunks.join( "," );
+                [ target, selector, ref, parentType ] = chunks;
 
           return {
             target,
-            selector
+            selector,
+            ref,
+            parentType
           };
         });
 
@@ -81,7 +88,7 @@ export class EditTargetsAsCsvModal extends AbstractForm {
   render() {
     const { isVisible, targets } = this.props,
           initialValue = !targets ? [] : Object.values( targets )
-            .map( row => `${ row.target },${ row.selector }` ).join( "\n" ),
+            .map( targetToCsvLine ).join( "\n" ),
           { getFieldDecorator, getFieldsError } = this.props.form;
 
     return (
@@ -105,11 +112,16 @@ export class EditTargetsAsCsvModal extends AbstractForm {
         >
 
           { isVisible && <Form>
+            <div className="markdown">
+              Here you can edit targets in CSV (comma-separated values) format.
+              Please, define lines representing simple targets as <code>TARGET,SELECTOR</code>
+              and chained targets as <code>TARGET,SELECTOR,PARENT_TARGET,PARENT_TYPE</code>
+            </div>
             <FormItem  label="Targets">
               { getFieldDecorator( "csv", {
                 initialValue
               })(
-                <TextArea autosize={{ minRows: 8, maxRows: 12 }} />
+                <TextArea rows="8" />
               )}
             </FormItem>
           </Form> }
