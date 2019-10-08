@@ -105,7 +105,7 @@ export class BrowserOptions extends AbstractComponent {
 
     return (
       <ErrorBoundary>
-          <div>
+
             <div className="run-in-browser__layout">
               <div>
                 <Switch
@@ -132,9 +132,7 @@ export class BrowserOptions extends AbstractComponent {
             </div>
 
 
-            <div>
-              <br />
-
+            <div className="browser-options-layout">
               <div>
 
                 { " " } <Checkbox
@@ -163,7 +161,6 @@ export class BrowserOptions extends AbstractComponent {
                 onChange={ this.onChangeLauncherArgs }
                 ref={ this.inputLauncherArgsRef }
                 value={ this.state.launcherArgs }
-                autosize={{ minRows: 3, maxRows: 5 }}
                 placeholder="--start-maximized --ignore-certificate-errors" />
 
 
@@ -175,7 +172,7 @@ export class BrowserOptions extends AbstractComponent {
               label="Chrome extension location (optional)" />
 
             </div>
-          </div>
+
 
       </ErrorBoundary>
     );

@@ -1281,12 +1281,17 @@ summary:hover {
   opacity: 0.7;
 }
 
+
+.browser-options-layout {
+  padding-top: 16px;
+}
+
 .target-options_desc {
   font-size: 12px;
 }
 
 .chromium-checkbox-group .ant-checkbox-wrapper + .ant-checkbox-wrapper {
-  
+
 }
 .modal-suites-checkbox-group {
   max-height: 140px;

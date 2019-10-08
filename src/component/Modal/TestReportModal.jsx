@@ -90,20 +90,29 @@ export class TestReportModal extends AbstractComponent {
     this.props.action.setApp({ testReportModal: false });
   }
 
+  getBrowserOptions() {
+    return this.refBrowserOptions.current ? this.refBrowserOptions.current.state : {
+      headless: true,
+      incognito:true,
+      launcherArgs: ""
+    };
+  }
+
   onClickOk = async ( e ) => {
     e.preventDefault();
+
     this.setState({ loading: true });
     try {
       const current = this.getCurrentFile(),
-            browserOptions = this.refBrowserOptions.current,
+            browserOptions = this.getBrowserOptions(),
             checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
       this.props.action.setApp({
         checkedList,
         testReportModal: false,
-        headless: browserOptions.state.headless,
-        incognito: browserOptions.state.incognito,
-        launcherArgs: browserOptions.state.launcherArgs,
+        headless: ( this.state.interactiveMode === true ? false : browserOptions.headless ),
+        incognito: browserOptions.incognito,
+        launcherArgs: browserOptions.launcherArgs,
         updateSnapshot: this.state.updateSnapshot,
         interactiveMode: this.state.interactiveMode
       });
@@ -112,6 +121,7 @@ export class TestReportModal extends AbstractComponent {
       this.props.action.removeAppTab( "testReport" );
       this.props.action.addAppTab( "testReport" );
     } catch ( err ) {
+      console.error( "TestReportModal", err );
     }
     this.setState({ loading: false });
   }
