@@ -22,6 +22,8 @@
 - improvement: extend page.setViewport with list of predefined resolutions
 - improvement: polish UX for every test step form
 - improvement: support Chrome Extensions
+- improvement: add ignoreHTTPSErrors launcher option
+- improvement: support to test Google Analytics tracking (pageview, event, social)
 - improvement: support for target chaining
   - querying within other element
   - querying in Shadow DOM

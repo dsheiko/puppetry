@@ -1303,3 +1303,8 @@ summary:hover {
   max-height: 140px;
   overflow-y: auto;
 }
+
+
+.ant-table-tbody > tr.ant-table-expanded-row[data-row-key]:hover > td {
+  background: none;
+}

@@ -1,4 +1,4 @@
-
+const UaBeacon = require( "./GaTracking/UaBeacon" );
 /**
  * Extending Puppeteer
  *
@@ -134,6 +134,13 @@ module.exports = function( bs, util ) {
     } catch ( e ) {
       // ignore
     }
+  };
+
+  bs.getGaTracking = ()  => {
+    return bs.performance.resources
+      .filter( req => UaBeacon.validateUrl( req.url ) )
+      .map( req => new UaBeacon( req.url ) )
+      .map( beacon => beacon.toJSON() );
   };
 
   // assert preformance budget

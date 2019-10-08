@@ -7,6 +7,26 @@ const OPERATOR_MAP = {
   eq: "="
 };
 
+
+function valsToString( vals ) {
+  return vals
+    .filter( val => !!val )
+    .map( val => `"${ val }"` ).join( ", " );
+}
+
+
+function filterGaBeacons( beacons, props, assert ) {
+  const activeProps = props.filter( prop => assert[ `${ prop }Assertion`] !== "any" );
+  return beacons.filter( beacon => {
+    return activeProps.every( prop => {
+      return assert[ `${ prop }Assertion`] === "contains"
+       ? beacon[ prop ].includes( assert[ `${ prop }Value`] )
+       : beacon[ prop ] === assert[ `${ prop }Value`];
+    });
+  });
+}
+
+
 /**
  *
  * @param {Number} num
@@ -243,6 +263,46 @@ expect.extend({
       return expectReturn( assets.length <= val, `[${ source }] expected `
         + `total number of ${ type } assets to be under`
         + ` ${ val }, but found ${ assets.length  }` );
+  },
+
+  /**
+   *
+   * @param {Object} beacons [{ url, type },..]
+   * @param {Object} assert
+   * @param {String} source
+   * @returns {Object}
+   */
+  toMatchGaTracking( beacons, assert, source ) {
+      try {
+      const found = beacons.filter( res => res.type === assert.action );
+      let matches, args;
+      switch( assert.action ) {
+        case "event":
+          matches = filterGaBeacons( found, [ "category", "action", "label", "value" ], assert );
+          args = valsToString([
+            assert.action,
+            assert.categoryValue,
+            assert.actionValue,
+            assert.labelValue,
+            assert.valueValue
+          ]);
+          return expectReturn( !!matches.length, `[${ source }] expected ga(${ args }) on the page, but not found` );
+        case "social":
+          matches = filterGaBeacons( found, [ "network", "action", "target" ], assert );
+          args = valsToString([
+            assert.action,
+            assert.networkValue,
+            assert.actionValue,
+            assert.targetValue
+          ]);
+          return expectReturn( !!matches.length, `[${ source }] expected ga(${ args }) on the page, but not found` );
+        default:
+          return expectReturn( !!found.length,
+            `[${ source }] expected ga("send", "pageview") on the page, but not found` );
+      }
+    } catch ( err ) {
+      console.error( err );
+    }
   },
 
   /**

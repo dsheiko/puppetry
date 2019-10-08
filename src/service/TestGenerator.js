@@ -110,6 +110,9 @@ export default class TestGenerator {
       if ( src === "page" && method.startsWith( "assertPerfomanceAsset" ) ) {
         this.options.requireInterceptTraffic = true;
       }
+      if ( src === "page" && method.startsWith( "assertGaTracking" ) ) {
+        this.options.requireInterceptTraffic = true;
+      }
 
       const traceCode = this.options.trace ? TestGenerator.getTraceTpl( target, command ) : ``,
             interactiveModeCode = this.options.interactiveMode ? this.getInteractiveModeTpl( command ) : ``,

@@ -94,6 +94,7 @@ export class TestReportModal extends AbstractComponent {
     return this.refBrowserOptions.current ? this.refBrowserOptions.current.state : {
       headless: true,
       incognito:true,
+      ignoreHTTPSErrors: false,
       launcherArgs: ""
     };
   }
@@ -106,12 +107,13 @@ export class TestReportModal extends AbstractComponent {
       const current = this.getCurrentFile(),
             browserOptions = this.getBrowserOptions(),
             checkedList = this.state.modified  ? this.state.checkedList : [ current ];
-
+            
       this.props.action.setApp({
         checkedList,
         testReportModal: false,
         headless: ( this.state.interactiveMode === true ? false : browserOptions.headless ),
         incognito: browserOptions.incognito,
+        ignoreHTTPSErrors: browserOptions.ignoreHTTPSErrors,
         launcherArgs: browserOptions.launcherArgs,
         updateSnapshot: this.state.updateSnapshot,
         interactiveMode: this.state.interactiveMode

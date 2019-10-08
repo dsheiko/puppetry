@@ -31,6 +31,8 @@ class BrowserSession {
       },
     launcherArgs = process.env.PUPPETEER_LAUNCHER_ARGS;
 
+    options.ignoreHTTPSErrors = setupOptions.ignoreHTTPSErrors || false;
+
     if ( launcherArgs ) {
       options.args = launcherArgs.split( " " );
     }

@@ -69,7 +69,9 @@ export class TabGroup extends React.Component {
                 environment={ store.app.environment }
                 options={{
                   updateSnapshot: store.app.updateSnapshot,
-                  interactiveMode: store.app.interactiveMode
+                  interactiveMode: store.app.interactiveMode,
+                  incognito: store.app.incognito,
+                  ignoreHTTPSErrors: store.app.ignoreHTTPSErrors
                 }}
                 project={ store.project }
                 snippets={ store.snippets }

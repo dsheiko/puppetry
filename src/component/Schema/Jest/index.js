@@ -59,7 +59,10 @@ ${ body }
 }
 
 function getSetupOptions( options ) {
-  return JSON.stringify({ incognito: options.incognito || false });
+  return JSON.stringify({
+    incognito: options.incognito || false,
+    ignoreHTTPSErrors: options.ignoreHTTPSErrors || false
+  });
 }
 
 export const tplSuite = ({

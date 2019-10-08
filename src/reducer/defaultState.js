@@ -11,9 +11,9 @@ export default {
   app: {
     greeting: "Hello!",
     loading: false,
-    updateSnapshot: false,
+
     readyToRunTests: false,
-    interactiveMode: false,
+    
     // currently selected env
     environment: "",
 
@@ -76,8 +76,11 @@ export default {
 
     checkedList: [],
     headless: true,
+    incognito: true,
+    ignoreHTTPSErrors: false,
     launcherArgs: "",
-    pdf: false,
+    updateSnapshot: false,
+    interactiveMode: false,
 
     // Dynamic info coming not from project file, but from file watcher
     project: {

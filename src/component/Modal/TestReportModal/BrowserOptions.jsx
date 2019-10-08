@@ -27,7 +27,7 @@ export function updateLauncherArgs( launcherArgs, value, toggle ) {
   if ( toggle ) {
     args.push( value );
   }
-  
+
   return args.join( " " );
 }
 
@@ -43,6 +43,7 @@ export class BrowserOptions extends AbstractComponent {
     headless: true,
     incognito: true,
     launcherArgs: "",
+    ignoreHTTPSErrors: false,
     browseDirectoryValidateStatus: "",
     browseDirectoryValidateMessage: ""
   }
@@ -73,6 +74,13 @@ export class BrowserOptions extends AbstractComponent {
   onCheckFullscreen = ( e ) => {
     this.setState({
       launcherArgs: updateLauncherArgs( this.state.launcherArgs, `--start-fullscreen`, e.target.checked )
+    });
+  }
+
+  onCheckIgnoreHttps = ( e ) => {
+    this.setState({
+      ignoreHTTPSErrors: e.target.checked,
+      launcherArgs: updateLauncherArgs( this.state.launcherArgs, `--ignore-certificate-errors`, e.target.checked )
     });
   }
 
@@ -144,6 +152,12 @@ export class BrowserOptions extends AbstractComponent {
                   onChange={ this.onCheckFullscreen }
                 >
                   fullscreen
+                </Checkbox>
+
+                { " " } <Checkbox
+                  onChange={ this.onCheckIgnoreHttps }
+                >
+                  ignore HTTPS errors
                 </Checkbox>
               </div>
 

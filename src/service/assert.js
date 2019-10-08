@@ -84,7 +84,7 @@ function negate( not ) {
 function createCbBody({ assert, target, method, id }) {
   const { assertion, value, operator, position, not, ...options } = assert,
         source = `${ target }.${ method }`;
-
+      
   switch ( assertion ) {
     case "screenshot":
       return justify( `expect( result ).toMatchScreenshot( ${ options.mismatchTolerance }, "${ source }" );` );
@@ -124,7 +124,9 @@ function createCbBody({ assert, target, method, id }) {
       return resolveAssetAssertion( "toMatchAssetWeight", options, source );
     case "assertAssetCount":
       return resolveAssetAssertion( "toMatchAssetCount", options, source );
-
+    case "assertGaTracking":
+      return justify( `expect( result )`
+          + `.toMatchGaTracking( ${ JSON.stringify( options, null, "  " ) }, "${ source }" );` );
     default:
       throw RuntimeError( `Invalid assertion '${ assertion }'` );
   }
