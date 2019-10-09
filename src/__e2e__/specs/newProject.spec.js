@@ -71,12 +71,12 @@ describe( "New Project", () => {
   });
 
   test( "add a target", async() => {
-    await ctx.client.pause( 200 );
+    await ctx.client.pause( 500 );
     expect( await ctx.client.isExisting( "#cTargetTable .input--target > input" ) ).toBeTruthy();
     expect( await ctx.client.isExisting( "#cTargetTable .input--selector > input" ) ).toBeTruthy();
     await ctx.client.setValue( "#cTargetTable .input--target > input", FIX_TARGET );
     await ctx.client.setValue( "#cTargetTable .input--selector > input", ".foo" );
-    await ctx.client.pause( 200 );
+    await ctx.client.pause( 500 );
     await ctx.client.click( `#cTargetTable ${ S.EDITABLE_ROW_SUBMIT_BTN }` );
     expect( await ctx.boundaryError() ).toBeFalsy();
     await ctx.screenshot( "new-target" );
@@ -92,18 +92,20 @@ describe( "New Project", () => {
   test( "add a group", async() => {
     expect( await ctx.client.isExisting( "#cGroupTable .input--title > input" ) ).toBeTruthy();
     await ctx.client.setValue( "#cGroupTable .input--title > input", "Test group" );
-    await ctx.client.pause( 200 );
+    await ctx.screenshot( "new-group-before-save1" );
+    await ctx.client.pause( 500 );
+    await ctx.screenshot( "new-group-before-save2" );
     await ctx.client.click( `#cGroupTable ${ S.EDITABLE_ROW_SUBMIT_BTN }` );
     expect( await ctx.boundaryError() ).toBeFalsy();
-    await ctx.screenshot( "new-suite" );
+    await ctx.screenshot( "new-group" );
   });
 
 
   test( "add a test", async() => {
-    await ctx.client.pause( 200 );
+    await ctx.client.pause( 500 );
     expect( await ctx.client.isExisting( "#cTestTable .input--title > input" ) ).toBeTruthy();
     await ctx.client.setValue( "#cTestTable .input--title > input", "Test" );
-    await ctx.client.pause( 200 );
+    await ctx.client.pause( 500 );
     await ctx.client.click( `#cTestTable ${ S.EDITABLE_ROW_SUBMIT_BTN }` );
     expect( await ctx.boundaryError() ).toBeFalsy();
     await ctx.screenshot( "new-test" );
@@ -116,20 +118,20 @@ describe( "New Project", () => {
     test( `add a test step page.${ method } `, async() => {
       // ADD COMMAND
       await ctx.client.click( `#cCommandTableAddBtn` );
-      await ctx.client.pause( 200 );
+      await ctx.client.pause( 500 );
       // SELECT PAGE
       await ctx.select( "#cCommandForm .select--target", "page" );
-      await ctx.client.pause( 200 );
+      await ctx.client.pause( 500 );
       // SELECT METHOD
       await ctx.select( "#cCommandForm .select--page-method", method );
-      await ctx.client.pause( 200 );
+      await ctx.client.pause( 500 );
 
       expect( await ctx.boundaryError() ).toBeFalsy();
 
       // EXPAND OPTIONS if any
       if (  await ctx.client.isExisting( S.TEST_STEP_COLLAPSABLE_ITEM ) ) {
         await ctx.client.click( S.TEST_STEP_COLLAPSABLE_ITEM );
-        await ctx.client.pause( 200 );
+        await ctx.client.pause( 500 );
       }
 
       await ctx.screenshot( `new-command--select-${ method }` );
@@ -137,7 +139,7 @@ describe( "New Project", () => {
       if ( !config.test ) {
         // CLOSE MODAL
         await ctx.client.click( `#cCommandModal .btn--modal-command-cancel` );
-        await ctx.client.pause( 200 );
+        await ctx.client.pause( 500 );
         return;
       }
       // FILL OUT THE FORM
@@ -148,7 +150,7 @@ describe( "New Project", () => {
       // CLICK SAVE
       await ctx.client.click( `#cCommandModal .btn--modal-command-ok` );
 
-      await ctx.client.pause( 200 );
+      await ctx.client.pause( 500 );
       await ctx.screenshot( `new-command--added-${ method }` );
 
     });
@@ -160,18 +162,19 @@ describe( "New Project", () => {
   test( `select target: ${ FIX_TARGET }`, async() => {
     // ADD COMMAND
     await ctx.client.click( `#cCommandTableAddBtn` );
-    await ctx.client.pause( 200 );
+    await ctx.client.pause( 500 );
     // SELECT TARGET
     await ctx.select( "#cCommandForm .select--target", FIX_TARGET );
-    await ctx.client.pause( 200 );
+    await ctx.client.pause( 500 );
     expect( await ctx.boundaryError() ).toBeFalsy();
+    await ctx.screenshot( "select target" );
   });
 
   Object.keys( schema.element ).forEach( method => {
     // SELECT METHOD
     test( `select element method: ${ method }`, async() => {
       await ctx.select( "#cCommandForm .select--element-method", method );
-      await ctx.client.pause( 200 );
+      await ctx.client.pause( 500 );
       expect( await ctx.boundaryError() ).toBeFalsy();
       await ctx.screenshot( `new-command--select-${ method }` );
     });

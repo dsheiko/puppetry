@@ -1,11 +1,11 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
 import { AssertValue } from "../../Assert/AssertValue";
-import { truncate, normalizeAssertionVerb } from "service/utils";
+import { truncate, normalizeAssertionVerb, renderTarget } from "service/utils";
 
 export const assertProperty = {
   template: ( command ) => buildAssertionTpl(
-    `await bs.target( await ${ command.target }() ).getProp( "${ command.params.name }" )`,
+    `await bs.target( ${ renderTarget( command.target ) } ).getProp( "${ command.params.name }" )`,
     command,
     `// Asserting that "${ command.params.name }" property's `
       + `value of ${ command.target } satisfies the given constraint`

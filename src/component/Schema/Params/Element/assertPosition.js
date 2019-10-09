@@ -1,11 +1,12 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertPosition } from "../../Assert/AssertPosition";
+import { renderTarget } from "service/utils";
 
 export const assertPosition = {
   template: ( command ) => buildAssertionTpl(
     `{
-        target: await ( await ${ command.target }() ).boundingBox(),
-        counterpart: await ( await ${ command.assert.target }() ).boundingBox()
+        target: await ( ${ renderTarget( command.target ) } ).boundingBox(),
+        counterpart: await ( ${ renderTarget( command.assert.target ) } ).boundingBox()
       }`,
     command,
     `// Asserting that the bounding box of the element satisfies the given constraint`

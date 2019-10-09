@@ -1277,7 +1277,7 @@ summary:hover {
 .test-options-wrapper {
   margin-top: 16px;
 }
-
+.label-variable, 
 .target-ref {
   color: #e65100;
 }

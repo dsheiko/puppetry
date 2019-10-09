@@ -1,9 +1,10 @@
 import { justify } from "service/assert";
+import { renderTarget } from "service/utils";
 
 export const focus = {
   template: ({ target }) => justify(
     `// Focusing the element\n`
-    + `await ( await ${target}() ).focus();` ),
+    + `await ( ${ renderTarget( target ) } ).focus();` ),
 
   toLabel: () => ``,
   commonly: "",

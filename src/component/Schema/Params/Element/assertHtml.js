@@ -1,9 +1,9 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertValue } from "../../Assert/AssertValue";
-import { truncate, normalizeAssertionVerb } from "service/utils";
+import { truncate, normalizeAssertionVerb, renderTarget } from "service/utils";
 export const assertHtml = {
   template: ( command ) => buildAssertionTpl(
-    `await bs.target( await ${ command.target }() ).getProp( "innerHTML" )`,
+    `await bs.target( ${ renderTarget( command.target ) } ).getProp( "innerHTML" )`,
     command,
     `// Asserting that HTML content of the focused element satisfies the given constraint`
   ),

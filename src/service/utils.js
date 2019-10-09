@@ -13,6 +13,9 @@ export const OPERATOR_MAP = {
   eq: "="
 };
 
+export function renderTarget( targetName ) {
+  return `await targets[ "${ targetName }" ]()`;
+}
 
 export function enableSelectSearch() {
   return {

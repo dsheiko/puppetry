@@ -1,11 +1,11 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
 import { AssertNumber } from "../../Assert/AssertNumber";
-import { OPERATOR_MAP } from "service/utils";
+import { OPERATOR_MAP, command } from "service/utils";
 
 export const assertTextCount = {
   template: ( command ) => buildAssertionTpl(
-    `( await ( await ${ command.target }() )`
+    `( await ( ${ renderTarget( command.target ) } )`
     + `.$x( \`//*[contains(text(), ${ JSON.stringify( command.params.text ) })]\`) ).length`,
     command,
     `// Asserting that number of child elements containing a specified text satisfies the given constraint`

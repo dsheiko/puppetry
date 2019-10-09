@@ -39,6 +39,8 @@ export const goto = {
   toText: ({ params }) => `(\`${ params.url }\`)`,
   commonly: "visit page",
 
+  toGherkin: ({ params }) => `Visit \`${ params.url }\``,
+
   test: {
     "params": {
       "url": "https://www.google.com"

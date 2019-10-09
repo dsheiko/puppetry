@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Icon } from "antd";
 import Tooltip from "component/Global/Tooltip";
 import { getSchema } from "component/Schema/schema";
-
+import { truncate } from "service/utils";
 
 export class CommandRowLabel extends React.Component {
 
@@ -22,6 +22,20 @@ export class CommandRowLabel extends React.Component {
        log.warn( `Renderer process: CommandRowLabel::buildTargetAddon: ${ err }` );
      }
    }
+
+   static highlightText( text ) {
+      if ( !text.includes( "`" ) ) {
+        return <span>{ text }</span>;
+      }
+      const chunks = text.split( "`" );
+      return chunks.map( ( chunk, inx ) => {
+        const isVar = inx % 2;
+
+        return <span key={ inx } className={ isVar ? "label-variable" : "" }>
+          { isVar ? `"${ truncate( chunk, 80 ) }"` : chunk }
+        </span>;
+      });
+    }
 
 
    renderRef() {
@@ -43,17 +57,22 @@ export class CommandRowLabel extends React.Component {
    }
 
    renderCommand() {
-     const { record } = this.props;
+     const { record } = this.props,
+           schema = getSchema( record.target === "page" ? "page" : "target", record.method );
      return ( <div className="container--editable-cell">
        <Tooltip
          title={ record.failure }
          icon="exclamation-circle"
          pos="up" />
+
+    { typeof schema.toGherkinQ === "function" && CommandRowLabel.highlightText( schema.toGherkin( record ) ) }
+    { typeof schema.toGherkinQ !== "function" && <React.Fragment>
        <Icon
          type={ record.target === "page" ? "file" : "scan" }
          title={ record.target === "page" ? "Page method" : `${ record.target } target method` } />
        <span className="token--target">{ record.target }</span>.{ record.method }
        <span className="token--param">{ CommandRowLabel.buildAddon( record ) }</span>
+       </React.Fragment> }
        { record.comment && <i className="is-optional">
         <br /><Icon type="message" title="Comment" />{ " " } { record.comment }</i> }
      </div> );

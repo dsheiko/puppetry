@@ -1,9 +1,10 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertBoolean } from "../../Assert/AssertBoolean";
+import { renderTarget } from "service/utils";
 
 export const assertVisible = {
   template: ( command ) => buildAssertionTpl(
-    `await bs.target( await ${ command.target }() ).isVisible()`,
+    `await bs.target( ${ renderTarget( command.target ) } ).isVisible()`,
     command,
     `// Asserting that ${ command.target } element is visible`
   ),

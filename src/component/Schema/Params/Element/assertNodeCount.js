@@ -1,11 +1,11 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
 import { AssertNumber } from "../../Assert/AssertNumber";
-import { OPERATOR_MAP } from "service/utils";
+import { OPERATOR_MAP, renderTarget } from "service/utils";
 
 export const assertNodeCount = {
   template: ( command ) => buildAssertionTpl(
-    `( await ( await ${ command.target }() ).$$(${ JSON.stringify( command.params.selector ) }) ).length`,
+    `( await ( ${ renderTarget( command.target ) } ).$$(${ JSON.stringify( command.params.selector ) }) ).length`,
     command,
     `// Asserting that number of child elements matching "${ command.params.selector }" satisfies the given constraint`
   ),

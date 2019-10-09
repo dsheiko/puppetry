@@ -1,11 +1,11 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
 import { AssertValue } from "../../Assert/AssertValue";
-import { truncate, normalizeAssertionVerb } from "service/utils";
+import { truncate, normalizeAssertionVerb, renderTarget } from "service/utils";
 
 export const assertAttribute = {
   template: ( command ) => buildAssertionTpl(
-    `await bs.target( await ${ command.target }() ).getAttr( "${ command.params.name }" )`,
+    `await bs.target( ${ renderTarget( command.target ) } ).getAttr( "${ command.params.name }" )`,
     command,
     `// Asserting that "${ command.params.name }" `
       + `attribute's value of ${ command.target } satisfies the given constraint`
@@ -15,6 +15,10 @@ export const assertAttribute = {
     + ` ${ normalizeAssertionVerb( assert.assertion ) } \`${ truncate( assert.value, 60 ) }\`)`,
   toText: ({ params, assert }) => `(\`${ params.name }\``
     + ` ${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\`)`,
+
+  toGherkin: ({ target, params, assert }) => `Assert attribute \`${ params.name }\` of \`${ target }\`
+    ${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\``,
+
   commonly: "assert attribute",
 
 

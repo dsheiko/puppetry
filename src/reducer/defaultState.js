@@ -13,7 +13,7 @@ export default {
     loading: false,
 
     readyToRunTests: false,
-    
+
     // currently selected env
     environment: "",
 
@@ -105,7 +105,7 @@ export default {
     savedAt: 0,
     modified: false,
     lastOpenSuite: "",
-    autosave: true,
+    autosave: false,
 
     variables: {},
     environments: [ "test", "stage", "production" ]

@@ -35,7 +35,7 @@ export const screenshot = {
   toLabel: ({ params }) => `(\`${ truncate( params.name, 80 ) }\`)`,
   toText: ({ params }) => `(\`${ params.name }\`)`,
   commonly: "make screenshot",
-
+  toGherkin: ({ params }) => `Take screenshot \`${ params.name }\` of the open page`,
 
   description: `Takes a screenshot of the page or a specified region.`,
 

@@ -1,6 +1,6 @@
 import { INPUT_NUMBER, SELECT } from "../../constants";
 import { isEveryValueMissing } from "service/utils";
-import { renderClick } from "service/utils";
+import { renderClick, renderTarget } from "service/utils";
 
 export const click = {
   template: ({ target, params }) => {
@@ -11,11 +11,12 @@ export const click = {
           optArg = isEveryValueMissing( options ) ? ` ` : ` ${ JSON.stringify( options ) } `;
     return `
       // Emulating mouse click
-      await ( await ${target}() ).click(${optArg});`;
+      await ( ${ renderTarget( target ) } ).click(${optArg});`;
   },
 
   toLabel: ({ params }) => `(${ renderClick( params ) })`,
   commonly: "",
+  toGherkin: ({ target, params }) => `Click on \`${ target }\``,
 
   description: `Emulates mouse click on the element`,
   params: [

@@ -9,6 +9,7 @@ export const select = {
 
   toLabel: ({ params }) => `(\`${ truncate( params.value, 80 ) }\`)`,
   toText: ({ params }) => `(\`${ params.value }\`)`,
+  toGherkin: ({ target, params }) => `Select \`${ params.value }\` in \`${ target }\``,
   commonly: "",
 
 

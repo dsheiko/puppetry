@@ -12,6 +12,9 @@ export const assertMatchesSelector = {
   toLabel: ({ assert }) => `(\`${ assert.value }\`)`,
   commonly: "assert it matches selector",
 
+  toGherkin: ({ target, params, assert }) => `Assert element \`${ target }\`
+  matches selector \`${ assert.value }\``,
+
   assert: {
     node: AssertSelector
   },

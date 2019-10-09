@@ -1,6 +1,6 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertBoundingBox } from "../../Assert/AssertBoundingBox";
-import { OPERATOR_MAP } from "service/utils";
+import { OPERATOR_MAP, renderTarget } from "service/utils";
 
 function paramToLabel( param, operator, value ) {
   if ( !operator || operator === "any"  ) {
@@ -11,7 +11,7 @@ function paramToLabel( param, operator, value ) {
 
 export const assertBoundingBox = {
   template: ( command ) => buildAssertionTpl(
-    `await ( await ${ command.target }() ).boundingBox()`,
+    `await ( ${ renderTarget( command.target ) } ).boundingBox()`,
     command,
     `// Asserting that the bounding box of the element satisfies the given constraint`
   ),

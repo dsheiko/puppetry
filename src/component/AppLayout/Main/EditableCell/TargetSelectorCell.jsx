@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Input, Select, Icon } from "antd";
+import { Form, Input, Select, Icon, Alert } from "antd";
 import { AbstractEditableCell } from "./AbstractEditableCell";
 import Tooltip from "component/Global/Tooltip";
 import { ruleValidateNotEmptyString, ruleValidateVariable } from "service/utils";

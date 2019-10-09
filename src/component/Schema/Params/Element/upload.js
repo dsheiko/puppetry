@@ -1,12 +1,12 @@
 import { FILE } from "../../constants";
-import { truncate } from "service/utils";
+import { truncate, renderTarget } from "service/utils";
 
 export const upload = {
   template: ({ target, params }) => {
     const { path } = params;
     return `
       // Upload input[type=file]
-      await ( await ${ target }() ).uploadFile( "${ path }" );`;
+      await ( ${ renderTarget( target ) } ).uploadFile( "${ path }" );`;
   },
 
   toLabel: ({ params }) => `(\`${ truncate( params.path, 80 ) }\`)`,

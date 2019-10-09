@@ -1,7 +1,7 @@
 import { INPUT, CHECKBOX } from "../../constants";
 import { isEveryValueMissing, ruleValidateGenericString } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
-import { truncate } from "service/utils";
+import { truncate, renderTarget } from "service/utils";
 import { getCounter } from "service/screenshotCounter";
 
 export const screenshot = {
@@ -16,13 +16,15 @@ export const screenshot = {
           optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
     return `
       // Taking screenshot of ${ target } element
-      await ( await ${ target }() ).screenshot( util.png( ${ JSON.stringify( id ) }, ${ parser.stringify( name ) }${ optArg }) );
+      await ( ${ renderTarget( target ) } ).screenshot( util.png( ${ JSON.stringify( id ) }, ${ parser.stringify( name ) }${ optArg }) );
   `;
   },
 
   toLabel: ({ params }) => `(\`${ truncate( params.name, 80 ) }\`)`,
   toText: ({ params }) => `(\`${ params.name }\`)`,
   commonly: "make screenshot",
+
+  toGherkin: ({ target, params }) => `Take screenshot \`${ params.name }\` of \`${ target }\``,
 
   description: `Takes a screenshot of the target element.`,
 
