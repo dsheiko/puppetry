@@ -33,6 +33,7 @@ import { assertDialog } from "./Params/Page/assertDialog";
 import { closeDialog } from "./Params/Page/closeDialog";
 import { assertPerfomanceAssetWeight } from "./Params/Page/assertPerfomanceAssetWeight";
 import { assertPerfomanceAssetCount } from "./Params/Page/assertPerfomanceAssetCount";
+import { assertPerfomanceTiming } from "./Params/Page/assertPerfomanceTiming";
 import { assertGaTracking } from "./Params/Page/assertGaTracking";
 
 import { screenshot as screenshotElement } from "./Params/Element/screenshot";
@@ -141,6 +142,7 @@ export const schema = {
     assertDialog,
     assertPerfomanceAssetWeight,
     assertPerfomanceAssetCount,
+    assertPerfomanceTiming,
     assertGaTracking
   }
 };

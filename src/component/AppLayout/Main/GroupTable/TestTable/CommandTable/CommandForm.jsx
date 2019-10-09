@@ -13,6 +13,7 @@ import { FIELDSET_DEFAULT_LAYOUT } from "constant";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
+      { TextArea } = Input,
       TEST_LEADING_METHODS = [ "emulate", "setViewport", "closeDialog", "goto", "assertPerfomanceAssetWeight" ];
 
 @connectForm
@@ -156,12 +157,18 @@ export class CommandForm extends React.Component {
 
   renderCommentField( record ) {
     const { getFieldDecorator } = this.props.form;
-    return ( <div  className="command-form__noncollapsed"><FormItem { ...FIELDSET_DEFAULT_LAYOUT } label="Comment" className="ant-form-item--layout">
+    return ( <details>
+              <summary>Comment</summary>
+              <div  className="command-form__noncollapsed">
+              <FormItem className="ant-form-item--layout">
         { getFieldDecorator( "comment", {
           initialValue: record.comment
-        } )( <Input placeholder="(optional)"
+        } )( <TextArea placeholder="Here you can describe your intent"
+          rows={ 2 }
           onKeyPress={ ( e ) => this.onKeyPress( e, this.handleSubmit ) } /> ) }
-        </FormItem></div>);
+        </FormItem>
+        </div>
+        </details> );
   }
 
   render() {

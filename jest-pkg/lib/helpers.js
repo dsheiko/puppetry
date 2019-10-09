@@ -42,7 +42,7 @@ const png = ( id, screenshotTitle, options = {} ) => {
 
 
       performanceResourcesToTable = ( resources ) => {
-        const arr = resources.map( r => ([ r.url, r.type, stringifyFileSize( r.length ) ]));
+        const arr = resources.map( r => ([ r.url, r.type, bytesToString( r.length ) ]));
         return tabel([
           [ "URL", "Type", "Size" ],
           ...arr
@@ -90,13 +90,22 @@ const png = ( id, screenshotTitle, options = {} ) => {
       randomInt = ( max ) => Math.floor( Math.random() * Math.floor( max ) );
 
 
-
-function stringifyFileSize( size ) {
+/**
+ *
+ * @param {Number} size
+ * @returns {Number}
+ */
+function bytesToString( size ) {
+  const neg = size < 0;
   if ( !size ) {
     return size;
   }
+  if ( neg ) {
+      size = -size;
+  }
   const i = Math.floor( Math.log( size ) / Math.log( 1024 ) );
-  return ( size / Math.pow( 1024, i ) ).toFixed( 2 ) * 1 + [ "B", "kB", "MB", "GB", "TB" ][ i ];
+  return ( neg ? "-" : "" ) + ( size / Math.pow( 1024, i ) )
+    .toFixed( 2 ) * 1 + [ "B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" ][ i ];
 };
 
 /**
@@ -170,6 +179,8 @@ exports.util = {
   getComparePath,
 
   initCompareDirs,
+
+  bytesToString,
 
   saveResourceReport,
 

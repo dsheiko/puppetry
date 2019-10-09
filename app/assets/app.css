@@ -1314,3 +1314,12 @@ summary:hover {
 .ant-table-tbody > tr.ant-table-expanded-row[data-row-key]:hover > td {
   background: none;
 }
+
+.perf-switch {
+  width: 48px;
+}
+
+.ant-modal-body details > div.command-form__noncollapsed {
+  margin-top: 8px;
+  padding: 0 18px;
+}

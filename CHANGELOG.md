@@ -19,6 +19,7 @@
 - improvement: add suite autosave option
 - improvement: add page.assertPerfomanceAssetWeight
 - improvement: add page.assertPerfomanceAssetCount
+- improvement: add page.assertPerfomanceTiming (page loading, redirection, network latency, processing)
 - improvement: extend page.setViewport with list of predefined resolutions
 - improvement: polish UX for every test step form
 - improvement: support Chrome Extensions

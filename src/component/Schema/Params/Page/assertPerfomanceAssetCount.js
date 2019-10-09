@@ -1,14 +1,8 @@
 import { INPUT } from "../../constants";
-import { buildAssertionTpl } from "service/assert";
+import { buildAssertionTpl, stringifyTypes } from "service/assert";
 import { AssertAssertCount } from "../../Assert/AssertAssertCount";
 import ExpressionParser from "service/ExpressionParser";
 import { truncate, normalizeAssertionVerb } from "service/utils";
-
-function typesToString( assert ) {
-  return Object.keys( assert._enabled )
-    .filter( ( key ) => assert._enabled[ key ] )
-    .map( ( el ) => `\`${ el }\`` ).join( ", " );
-}
 
 export const assertPerfomanceAssetCount = {
   template: ( command ) => {
@@ -20,8 +14,8 @@ export const assertPerfomanceAssetCount = {
     );
   },
 
-  toLabel: ({ params, assert }) => `(${ typesToString( assert ) })`,
-  toText: ({ params, assert }) => `(${ typesToString( assert ) })`,
+  toLabel: ({ params, assert }) => `(${ stringifyTypes( assert ) })`,
+  toText: ({ params, assert }) => `(${ stringifyTypes( assert ) })`,
 
   commonly: "assert count of assets",
 

@@ -17,6 +17,12 @@ export function buildAssertionTpl( assertionCall, command, preCode ) {
   }
 }
 
+export function stringifyTypes( types ) {
+  return Object.keys( types._enabled )
+    .filter( ( key ) => types._enabled[ key ] )
+    .map( ( el ) => `\`${ el }\`` ).join( ", " );
+}
+
 function templateConsoleMessageAssertion( cbBody, assert, comment ) {
   return justify(`
 ${ comment }
@@ -84,7 +90,7 @@ function negate( not ) {
 function createCbBody({ assert, target, method, id }) {
   const { assertion, value, operator, position, not, ...options } = assert,
         source = `${ target }.${ method }`;
-      
+
   switch ( assertion ) {
     case "screenshot":
       return justify( `expect( result ).toMatchScreenshot( ${ options.mismatchTolerance }, "${ source }" );` );
@@ -120,6 +126,8 @@ function createCbBody({ assert, target, method, id }) {
       return justify( `expect( result )`
           + `.toMatchBoundingBoxSnapshot( ${ JSON.stringify( options, null, "  " ) }, "${ source }" );` );
 
+    case "assertPerfomanceTiming":
+      return resolveTimingAssertion( options, source );
     case "assertAssetWeight":
       return resolveAssetAssertion( "toMatchAssetWeight", options, source );
     case "assertAssetCount":
@@ -133,14 +141,26 @@ function createCbBody({ assert, target, method, id }) {
 
 }
 
-function resolveAssetAssertion( assertionMethod, options, source ) {
+function resolveTimingAssertion( options, source ) {
   const data = getEnabledOptions( options );
   return Object.entries( data ).reduce(( carry, pair ) => {
     const type = JSON.stringify( pair[ 0 ] ),
           rawVal = parseInt( pair[ 1 ], 10 ),
           val = ( rawVal === NaN ? 0 : rawVal );
+    carry += justify( `expect( result ).toMatchTiming( `
+      + `${ type }, ${ val }, "${ source }" ); ` );
+    return carry;
+  }, "" );
+}
+
+function resolveAssetAssertion( assertionMethod, options, source ) {
+  const data = getEnabledOptions( options );
+  return Object.entries( data ).reduce(( carry, pair ) => {
+    const type = JSON.stringify( pair[ 0 ] ),
+          rawVal = parseInt( pair[ 1 ], 10 ),
+          val = ( rawVal === NaN ? 0 : rawVal ) * ( assertionMethod === "toMatchAssetCount" ? 1 : 1000 );
     carry += justify( `expect( result ).${ assertionMethod }( `
-      + `${ type }, ${ ( val * 1000 ) }, "${ source }" ); ` );
+      + `${ type }, ${ val }, "${ source }" ); ` );
     return carry;
   }, "" );
 }

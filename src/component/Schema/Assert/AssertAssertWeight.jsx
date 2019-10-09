@@ -87,7 +87,7 @@ export class AssertAssertWeight extends React.Component {
 
         <h3>Quantity-based metrics based on asset weight</h3>
         <div>Assert the total (encoded) size of a type of assets doesn't exeed a given value (in KB)</div>
-        
+
         <Row gutter={24} className="ant-form-inline">
         <table className="assert-perf-table">
 
@@ -96,7 +96,7 @@ export class AssertAssertWeight extends React.Component {
           className={ propVal( enabled, asset.key, false ) ? "" : "assert-row-disabled" }>
               <td>
                 <FormItem>
-                  <FormItem className="assert-perf-size">
+                  <FormItem className="perf-switch">
                     { getFieldDecorator( `assert._enabled.${ asset.key }`, {
                       initialValue: propVal( data._enabled, asset.key, false ),
                       valuePropName: ( propVal( data._enabled, asset.key, false ) ? "checked" : "data-ok" )
@@ -132,7 +132,7 @@ export class AssertAssertWeight extends React.Component {
                        }
                      }
                   ]
-                  })( <Input  addonAfter="KB" /> )
+                  })( <Input addonAfter="kB" /> )
                   }
                 </FormItem>
             </td>
