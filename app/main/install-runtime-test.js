@@ -125,7 +125,8 @@ exports.installRuntimeTest = ( event, appInstallDirectory ) => {
       "puppeteer@1.19.0",
       "shelljs@^0.8.2",
       "pixelmatch@^5.0.2",
-      "pngjs@^3.4.0"
+      "pngjs@^3.4.0",
+      "text-table@^0.2.0"
     ], ( err, data ) => {
       if ( err ) {
         log.error( `Main process: NPM(2): ${err}` );

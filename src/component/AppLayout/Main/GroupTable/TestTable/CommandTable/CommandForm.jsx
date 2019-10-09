@@ -60,7 +60,7 @@ export class CommandForm extends React.Component {
           target = this.state.target || record.target,
           method = this.state.method || record.method,
           schema = getSchema( target, method );
-          
+
     e && e.preventDefault();
     resetSubmitted();
 
@@ -103,13 +103,13 @@ export class CommandForm extends React.Component {
   changeMethod = ( method ) => {
     const hasGoto = this.checkTestHasGoto();
 
-    if ( this.checkTestHasAssertPerfomanceAssetWeight() && hasGoto ) {
-      return this.setState({
-        method,
-        error: `When asserting total weight of loaded assets, for clear results, `
-          + ` have in a test case no other requests, but page.assertPerfomanceAssetWeight`
-      });
-    }
+//    if ( this.checkTestHasAssertPerfomanceAssetWeight() && hasGoto ) {
+//      return this.setState({
+//        method,
+//        error: `When asserting total weight of loaded assets, for clear results, `
+//          + ` have in a test case no other requests, but page.assertPerfomanceAssetWeight`
+//      });
+//    }
 
     if ( !TEST_LEADING_METHODS.includes( method ) && !hasGoto ) {
       return this.setState({
@@ -252,7 +252,7 @@ export class CommandForm extends React.Component {
               closable />
           </If>
 
-          <If exp={ schema && schema.params.length }>
+          <If exp={ schema && schema.params && schema.params.length }>
             <div className="command-form ">
               <ErrorBoundary>
                 <ParamsFormBuilder

@@ -168,8 +168,13 @@ module.exports = function( bs, util ) {
         }
         bs.performance.responses[ requestId ] = { ...response, type };
       });
+
+//      session.on( "Network.loadingFinished", ({ requestId, encodedDataLength }) => {
+//        console.log("Loading finished", requestId, encodedDataLength);
+//      });
+
       // collect response details
-      session.on( "Network.dataReceived", ({ requestId, encodedDataLength }) => {
+      session.on( "Network.loadingFinished", ({ requestId, encodedDataLength }) => {
         if ( !bs.performance.responses.hasOwnProperty( requestId ) ) {
           return;
         }

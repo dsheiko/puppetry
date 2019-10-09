@@ -25,7 +25,6 @@ export const assertGaTracking = {
       `bs.getGaTracking()`,
       command,
       `// Asserting GA tracking\n`
-      +`await bs.page.waitFor( () => typeof window.ga == "function" );\n`
     );
   },
 

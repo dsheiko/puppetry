@@ -3,14 +3,16 @@ import PropTypes from "prop-types";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
-import { DIR_SCREENSHOTS, DIR_SNAPSHOTS } from "constant";
+import { DIR_SCREENSHOTS, DIR_SNAPSHOTS, DIR_REPORTS } from "constant";
 import { millisecondsToStr } from "service/utils";
-import { Icon } from "antd";
+import { Icon, notification } from "antd";
 import { readdir } from "service/io";
 import { join, basename } from "path";
 import fs from "fs";
 import recursive from "recursive-readdir";
 import { Thumbnail } from "./Thumbnail";
+import { shell } from "electron";
+
 
 let counter = 0,
     screenshotInx = 0;
@@ -60,6 +62,15 @@ export class ReportBody extends AbstractComponent {
     return str.replace( /\{\{.+\}\}/, "" );
   }
 
+  onDownload = ( e, file ) => {
+    e.preventDefault();
+    shell.openItem( file );
+    notification.open({
+      message: "Opening external file",
+      description: "The requested file will open in a few seconds"
+    });
+  }
+
   /**
    * Find all screenshots belonging to a given test case
    * @param {string} testId
@@ -84,13 +95,14 @@ export class ReportBody extends AbstractComponent {
   }
 
   /**
-   * Read screenshot dir recursevly and create map id => src
+   * Read screenshot/reports dir recursevly and create map id => src
+   * @param {String} dir
    * @returns {Object} - { id => src, .. }
    */
-  async getScreenshoptMap() {
+  async getAssetMap( dir ) {
     try {
-      const SCREENSHOT_PATH = join( this.props.projectDirectory, DIR_SCREENSHOTS ),
-            files = await recursive( SCREENSHOT_PATH );
+      const dirPath = join( this.props.projectDirectory, dir ),
+            files = await recursive( dirPath );
 
       return files.reduce(( carry, filepath ) => {
           const filename = basename( filepath ),
@@ -99,11 +111,18 @@ export class ReportBody extends AbstractComponent {
           return carry;
         }, {});
     } catch ( e ) {
-      // e.g. screenshot directories not found
+      // e.g. nothing found
       return {};
     }
   }
 
+   getReportsByTest( testId ) {
+     const { selector, action } = this.props,
+          commands = selector.findCommandsByTestId( testId );
+    return Object.values( commands )
+      .filter( command => ( command.method === "assertPerfomanceAssetWeight" && command.id in this.reportMap ) )
+      .map( command => this.reportMap[ command.id ]);
+   }
 
    getSnapshotsByTest( testId ) {
     const { selector, action } = this.props,
@@ -169,7 +188,9 @@ export class ReportBody extends AbstractComponent {
 
     this.props.action.cleanLightbox();
 
-    this.screenhotMap = await this.getScreenshoptMap();
+    this.screenhotMap = await this.getAssetMap( DIR_SCREENSHOTS );
+    this.reportMap = await this.getAssetMap( DIR_REPORTS );
+
     this.snapshotMap = await this.getSnapshotMap();
 
 
@@ -180,13 +201,15 @@ export class ReportBody extends AbstractComponent {
           const spec = details[ suiteKey ][ describeKey ][ inx ],
                 { title, testId } = this.parseTile( spec.title ),
                 screenshots = this.getScreenshotsByTest( testId ),
-                snapshots = spec.status === "passed" ? [] : this.getSnapshotsByTest( testId );
+                snapshots = spec.status === "passed" ? [] : this.getSnapshotsByTest( testId ),
+                reports = this.getReportsByTest( testId );
 
           Object.assign( details[ suiteKey ][ describeKey ][ inx ], {
               title,
               testId,
               screenshots,
-              snapshots
+              snapshots,
+              reports
           });
         }
       }
@@ -235,6 +258,13 @@ export class ReportBody extends AbstractComponent {
       <If exp={ spec.status !== "passed" && spec.failureMessages }>
         <div  className="test-report__it__exception">{ spec.failureMessages }</div>
       </If>
+
+      { spec.reports && <div className="thumb-container screenshot-thumb-container">
+        { spec.reports.map( ( reportPath, inx ) => ( <a
+        onClick={ ( e ) => this.onDownload( e, reportPath ) }
+        key={ inx }>download performance report</a> ) ) }
+        </div>
+      }
 
       { spec.screenshots && <div className="thumb-container screenshot-thumb-container">
         { spec.screenshots.map( ( item, inx ) => ( <Thumbnail

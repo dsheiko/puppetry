@@ -78,6 +78,7 @@ exports.SNIPPETS_GROUP_ID = "snippets";
 exports.DIR_SCREENSHOTS_TRACE = ".trace";
 exports.DIR_SCREENSHOTS = "screenshots";
 exports.DIR_SNAPSHOTS = "snapshots";
+exports.DIR_REPORTS = "reports";
 
 exports.INLINE_INPUT_STYLES = { width: 200 };
 

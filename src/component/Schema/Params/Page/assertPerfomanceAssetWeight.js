@@ -13,50 +13,27 @@ function typesToString( assert ) {
 
 export const assertPerfomanceAssetWeight = {
   template: ( command ) => {
-    const { url, timeout, waitUntil } = command.params,
-          parser = new ExpressionParser( command.id ),
-          urlString = parser.stringify( url );
-
     return buildAssertionTpl(
       `bs.performance.resources`,
       command,
       `// Asserting that total weight of assets satisfies the given budget\n`
-      + `bs.performance.reset();\n`
-      + `await bs.page.goto( ${ urlString }, { "waitUntil":"networkidle0" });`
+      + `util.saveResourceReport( "${ command.id }", bs.performance.resources )\n`
     );
   },
 
-  toLabel: ({ params, assert }) => `(\`${ truncate( params.url, 80 ) }\` for ${ typesToString( assert ) })`,
-  toText: ({ params, assert }) => `(\`${ params.url }\` for ${ typesToString( assert ) })`,
+  toLabel: ({ params, assert }) => `(${ typesToString( assert ) })`,
+  toText: ({ params, assert }) => `(${ typesToString( assert ) })`,
 
   commonly: "assert weight of assets",
 
-  description: `Asserts that total weight of assets `
-  + `(JavaScript, CSS, images, media, fonts, XHR) on the page satisfies the given budget`,
+  description: `Asserts that total weight of assets
+  (JavaScript, CSS, images, media, fonts, XHR) on the page satisfies the given budget.
+
+   This assertion makes Puppetry to intercept HTTP requests. It compares the given limits to the encoded length
+   of the requests. Note that the request length is considered \`0\` when request loaded from cache.
+   So it makes sense to place this step next to the very first \`page.goto\` in the test suite.
+  `,
   assert: {
     node: AssertAssertWeight
-  },
-  params: [
-
-    {
-      legend: "",
-      description: "",
-      tooltip: "",
-      fields: [
-        {
-          name: "params.url",
-          template: true,
-          control: INPUT,
-          label: "URL",
-          tooltip: `URL to navigate page to. The url should include scheme, e.g. https://.`,
-          placeholder: "e.g. https://www.google.com/",
-          rules: [{
-            required: true,
-            message: `Field is required.`
-          }]
-        }
-      ]
-    }
-
-  ]
+  }
 };

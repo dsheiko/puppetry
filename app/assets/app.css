@@ -1062,9 +1062,15 @@ table > .ant-table-tbody > tr.ant-table-row.disable-expand:hover > td {
   margin: 16px 0;
 }
 
+.report-container {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: -4px;
+  padding: 8px 0;
+}
+
 .thumb-container {
   display: flex;
-  flex-direction: row;
   flex-flow: row wrap;
   margin: -4px;
   padding: 8px 0;

@@ -74,7 +74,7 @@ export class AssertAssertWeight extends React.Component {
           { record, targets } = this.props,
           data = AssertAssertWeight.normalizeEnabled( getAssertion( record ) ),
           enabled = this.state.enabled;
-        
+
     return (
       <React.Fragment>
         <div className="is-invisible">
@@ -87,8 +87,7 @@ export class AssertAssertWeight extends React.Component {
 
         <h3>Quantity-based metrics based on asset weight</h3>
         <div>Assert the total (encoded) size of a type of assets doesn't exeed a given value (in KB)</div>
-        <div>Assets loaded from the cache have 0 size</div>
-
+        
         <Row gutter={24} className="ant-form-inline">
         <table className="assert-perf-table">
 

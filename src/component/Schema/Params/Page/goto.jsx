@@ -28,6 +28,7 @@ export const goto = {
           optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
     return `
       // Navigating to ${ url }
+      bs.performance.reset();
       await bs.page.goto( ${ urlString }${ optArg });
     `;
   },
@@ -36,7 +37,7 @@ export const goto = {
 
   toLabel: ({ params }) => `(\`${ truncate( params.url, 80 ) }\`)`,
   toText: ({ params }) => `(\`${ params.url }\`)`,
-  commonly: "load URL",
+  commonly: "visit page",
 
   test: {
     "params": {

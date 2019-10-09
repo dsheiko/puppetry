@@ -1,7 +1,9 @@
 
 const { join } = require( "path" ),
+      fs = require( "fs" ),
       shell = require( "shelljs" ),
       fetch = require( "node-fetch" ),
+      tabel = require( "text-table" ),
       { dirname } = require( "path" ),
       { LocalStorage } = require( "node-localstorage" ),
       faker = require( "faker" ),
@@ -9,6 +11,7 @@ const { join } = require( "path" ),
       DIR_SCREENSHOTS_TRACE = ".trace";
 
 let PATH_SCREENSHOTS = join( __dirname, "/../", "/screenshots"),
+    PATH_REPORTS = join( __dirname, "/../", "/reports"),
     PATH_COMPARE = join( __dirname, "/../", "/snapshots"),
     SUITE_NAME = "";
 
@@ -36,6 +39,34 @@ const png = ( id, screenshotTitle, options = {} ) => {
         shell.mkdir( "-p" , dirname( path ) );
         return { path };
       },
+
+
+      performanceResourcesToTable = ( resources ) => {
+        const arr = resources.map( r => ([ r.url, r.type, stringifyFileSize( r.length ) ]));
+        return tabel([
+          [ "URL", "Type", "Size" ],
+          ...arr
+        ]);
+      },
+
+      saveResourceReport = ( id, resources ) => {
+        saveReport( id, "resources.txt", performanceResourcesToTable( resources ) );
+      },
+
+      /**
+       * @param {string} id
+       * @param {string} filename
+       * @param {string} contents
+       */
+      saveReport = ( id, filename, contents ) => {
+        const FILENAME_RE = /[^a-zA-Z\d\-\_]/g,
+              normalizedTitle = filename.replace( FILENAME_RE, "-" ),
+              normalizedSuiteTitle = SUITE_NAME.replace( FILENAME_RE, "-" ),
+              path = join( PATH_REPORTS, normalizedSuiteTitle, `${ id }.${ normalizedTitle }` );
+        shell.mkdir( "-p" , dirname( path ) );
+        return fs.writeFileSync( path, contents, "utf8" );
+      },
+
       /**
        * Create all of comparing dirs when non existing
        */
@@ -57,6 +88,16 @@ const png = ( id, screenshotTitle, options = {} ) => {
        * @returns {number}
        */
       randomInt = ( max ) => Math.floor( Math.random() * Math.floor( max ) );
+
+
+
+function stringifyFileSize( size ) {
+  if ( !size ) {
+    return size;
+  }
+  const i = Math.floor( Math.log( size ) / Math.log( 1024 ) );
+  return ( size / Math.pow( 1024, i ) ).toFixed( 2 ) * 1 + [ "B", "kB", "MB", "GB", "TB" ][ i ];
+};
 
 /**
  *
@@ -130,9 +171,12 @@ exports.util = {
 
   initCompareDirs,
 
+  saveResourceReport,
+
   setProjectDirectory: ( projectDirectory ) => {
     PATH_SCREENSHOTS = join( projectDirectory, "/screenshots");
     PATH_COMPARE = join( projectDirectory, "/snapshots");
+    PATH_REPORTS = join( projectDirectory, "/reports");
   },
 
   setSuiteName: ( name ) => {
