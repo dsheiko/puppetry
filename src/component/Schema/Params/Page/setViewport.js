@@ -3,7 +3,14 @@ import { INPUT_NUMBER, CHECKBOX, SELECT } from "../../constants";
 export const setViewport = {
   template: ({ params }) => `
       // Defining browser viewport
-      await bs.page.setViewport( ${ JSON.stringify( params ) } );
+      await bs.page.setViewport({
+        width: ${ params.width },
+        height: ${ params.height },
+        deviceScaleFactor: ${ params.deviceScaleFactor },
+        isMobile: ${ params.isMobile ? "true" : "false" },
+        hasTouch: ${ params.hasTouch ? "true" : "false" },
+        isLandscape: ${ params.isLandscape ? "true" : "false" }
+      });
   `,
 
   toLabel: ({ params }) => `(\`${ params.width }x${ params.height }\`,`

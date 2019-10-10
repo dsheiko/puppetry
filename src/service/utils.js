@@ -35,7 +35,7 @@ export function result( obj, key, defaultVal = null ) {
   if ( typeof obj !== "object" ) {
     return defaultVal;
   }
-  return key in obj ? obj[ key ]: defaultVal;
+  return ( key in obj && typeof obj[ key ] !== "undefined" ) ? obj[ key ] : defaultVal;
 }
 
 export function normalizeAssertionVerb( verb ) {

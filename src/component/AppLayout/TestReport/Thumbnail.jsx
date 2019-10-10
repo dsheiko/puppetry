@@ -25,7 +25,7 @@ export class Thumbnail extends AbstractComponent {
     return <figure>
         <img
           onClick={ ( e ) => this.onClickImg( e, item.inx ) }
-          src={ item.src } className="screenshot-thumb"
+          src={ `${ item.src }?${ Date.now() }`  } className="screenshot-thumb"
           title={ item.caption }
           alt={ item.caption } />
         <span className="screenshot-thumb__caption">{ item.caption }</span>

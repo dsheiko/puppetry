@@ -1,6 +1,7 @@
 
 const { join } = require( "path" ),
       fs = require( "fs" ),
+      os = require( "os" ),
       shell = require( "shelljs" ),
       fetch = require( "node-fetch" ),
       tabel = require( "text-table" ),
@@ -38,6 +39,12 @@ const png = ( id, screenshotTitle, options = {} ) => {
         const path = join( PATH_SCREENSHOTS, DIR_SCREENSHOTS_TRACE, `${ fileName }.png` );
         shell.mkdir( "-p" , dirname( path ) );
         return { path };
+      },
+
+      generateTmpUploadFile = ( name, size ) => {
+        const path = join( os.tmpdir(), name );
+        fs.writeFileSync( path, new Buffer( size * 1024 ) );
+        return path;
       },
 
 
@@ -193,6 +200,8 @@ exports.util = {
   setSuiteName: ( name ) => {
     SUITE_NAME = name;
   },
+
+  generateTmpUploadFile,
 
   pollForValue,
 
