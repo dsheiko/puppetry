@@ -14,15 +14,6 @@ export class Thumbnail extends AbstractComponent {
     })
   }
 
-  onDownload= ( e, file ) => {
-    e.preventDefault();
-    shell.openItem( file );
-    notification.open({
-      message: "Opening external file",
-      description: "The requested file will open in a few seconds"
-    });
-  }
-
   onClickImg = ( e, inx ) => {
     e.preventDefault();
     this.props.action.setLightboxIndex( inx );
@@ -38,7 +29,7 @@ export class Thumbnail extends AbstractComponent {
           title={ item.caption }
           alt={ item.caption } />
         <span className="screenshot-thumb__caption">{ item.caption }</span>
-        <a onClick={ ( e ) => this.onDownload( e, item.src ) } className="screenshot-thumb__download">Download</a>
+        <a onClick={ ( e ) => this.download( item.src, e ) } className="screenshot-thumb__download">Download</a>
       </figure>;
   }
 

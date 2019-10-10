@@ -19,24 +19,19 @@ class BrowserSession {
    */
   async setup( setupOptions ) {
     // when called like PUPPETEER_RUN_IN_BROWSER=true jest open in a browser
-    const options = process.env.PUPPETEER_RUN_IN_BROWSER
-      ? {
-          headless: false,
-          slowMo: 40,
-          devtools: Boolean( process.env.PUPPETEER_DEVTOOLS )
-        }
-      : {
-        headless: true,
-        devtools: false
-      },
-    launcherArgs = process.env.PUPPETEER_LAUNCHER_ARGS;
+    const launcherArgs = process.env.PUPPETEER_LAUNCHER_ARGS
+      ? process.env.PUPPETEER_LAUNCHER_ARGS : setupOptions.launcherArgs,
+          options = {
+            headless: ( setupOptions.hasOwnProperty( "headless" )
+              ? setupOptions.headless : !process.env.PUPPETEER_RUN_IN_BROWSER ),
+            devtools: Boolean( process.env.PUPPETEER_DEVTOOLS || setupOptions.devtools ),
+            ignoreHTTPSErrors: setupOptions.ignoreHTTPSErrors || false,
+            args: launcherArgs.split( " " )
+          };
 
-    options.ignoreHTTPSErrors = setupOptions.ignoreHTTPSErrors || false;
-
-    if ( launcherArgs ) {
-      options.args = launcherArgs.split( " " );
+    if ( options.headless ) {
+      options.slowMo = 30;
     }
-
     this.browser = await puppeteer.launch( options  );
     if ( setupOptions.incognito ) {
       this.context = await this.browser.createIncognitoBrowserContext();

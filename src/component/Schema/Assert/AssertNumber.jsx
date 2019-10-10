@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Form, Row, Col, Select, Input, InputNumber } from "antd";
 import { getAssertion } from "./helpers";
-import { propVal } from "service/utils";
+import { result } from "service/utils";
 
 const Option = Select.Option,
       FormItem = Form.Item;
@@ -29,7 +29,7 @@ export class AssertNumber extends React.Component {
           { record, options } = this.props,
           operator = getAssertion( record ).operator || "eq",
           value = getAssertion( record ).value || 0,
-          resultLabel = propVal( options, "resultLabel", "Result is" );
+          resultLabel = result( options, "resultLabel", "Result is" );
     return (
       <Row gutter={24}>
         <Col span={2} >

@@ -44,6 +44,7 @@ export class BrowserOptions extends AbstractComponent {
     incognito: true,
     launcherArgs: "",
     ignoreHTTPSErrors: false,
+    devtools: false,
     browseDirectoryValidateStatus: "",
     browseDirectoryValidateMessage: ""
   }
@@ -84,12 +85,6 @@ export class BrowserOptions extends AbstractComponent {
     });
   }
 
-  onCheckIncognito = ( e ) => {
-    this.setState({
-      incognito: e.target.checked
-    });
-  }
-
   onChangeLauncherArgs = ( e ) => {
     this.setState({
       launcherArgs: e.target.value
@@ -127,10 +122,16 @@ export class BrowserOptions extends AbstractComponent {
                 />
               </div>
               <div className="chromium-checkbox-group">
+                { " " } <Checkbox
+                  checked={ this.state.devtool }
+                  onChange={ e => this.onChangeCheckbox( e.target.checked, "devtool" ) }
+                >
+                  DevTools
+                </Checkbox>
 
                 { " " } <Checkbox
                   checked={ this.state.incognito }
-                  onChange={ this.onCheckIncognito }
+                  onChange={ e => this.onChangeCheckbox( e.target.checked, "incognito" ) }
                 >
                   incognito window
                 </Checkbox>

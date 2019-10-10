@@ -31,7 +31,7 @@ export function enableSelectSearch() {
   };
 }
 
-export function propVal( obj, key, defaultVal = null ) {
+export function result( obj, key, defaultVal = null ) {
   if ( typeof obj !== "object" ) {
     return defaultVal;
   }

@@ -4,7 +4,7 @@ import log from "electron-log";
 import { Button, Popconfirm, Divider } from "antd";
 import AbstractDnDTable from "./AbstractDnDTable";
 import { RowDropdown } from "./RowDropdown";
-import { propVal } from "service/utils";
+import { result } from "service/utils";
 
 export default class AbstractEditableTable extends AbstractDnDTable {
 
@@ -75,7 +75,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
                 .filter( ( pair ) => pair[ 1 ].current !== null )
                 .map( ([ key, ref ]) => {
                   return new Promise( ( resolve, reject ) => {
-                    const fields = [ key ].concat( propVal( this.extraFields, key, [] ) );
+                    const fields = [ key ].concat( result( this.extraFields, key, [] ) );
                     ref.current.validateFields( fields, ( err, values ) => {
                       if ( err ) {
                         return reject( err );
@@ -112,7 +112,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
   updateRecord = ( options ) => {
     const update = this.props.action[ `update${this.model}` ],
           payload = this.extendActionOptions( options );
-          
+
     update( payload );
     this.updateSuiteModified( payload, "update" );
   }

@@ -160,7 +160,7 @@ export async function exportProject(
   projectDirectory,
   outputDirectory,
   suiteFiles,
-  { headless = true, launcherArgs = "", runner = RUNNER_PUPPETRY, ...options },
+  { runner = RUNNER_PUPPETRY, ...options },
   snippets,
   env
 ) {
@@ -187,8 +187,6 @@ export async function exportProject(
     shell.cp( "-RLf" , JEST_PKG + "/*", outputDirectory  );
     shell.mkdir( "-p" , join( outputDirectory, "specs" ) );
 
-
-
     for ( const filename of suiteFiles ) {
       let specContent = await exportSuite({
                           projectDirectory,
@@ -199,30 +197,14 @@ export async function exportProject(
                           env,
                           options
                         });
+
       const specFilename = parse( filename ).name + ".spec.js",
-            specPath = join( testDir, specFilename ),
-            specHasDebugger = specContent.includes( " debugger;" );
-      // When contians debugger; let's rise timeout to 30 min
-      if ( !headless && specHasDebugger ) {
-        specContent = specContent
-          .replace( /jest\.setTimeout\(\s*(\d+)\s*\);/g, "jest.setTimeout( 1800000 );" );
-      }
-      hasDebugger = hasDebugger || specHasDebugger;
+            specPath = join( testDir, specFilename );
+
       await writeFile( specPath, specContent, "utf8" );
       specFiles.push( specFilename );
     }
 
-    if ( !headless ) {
-      const browserSession = join( outputDirectory, "lib/BrowserSession.js" );
-      let text = await readFile( browserSession, "utf8" );
-      // in case  debugger; we need DevTools enabled
-      if ( hasDebugger ) {
-        text = text.replace( "process.env.PUPPETEER_DEVTOOLS", "true" );
-      }
-      text = text.replace( "process.env.PUPPETEER_RUN_IN_BROWSER", "true" );
-      text = text.replace( /process\.env\.PUPPETEER_LAUNCHER_ARGS/g, JSON.stringify( launcherArgs ) );
-      await writeFile( browserSession, text, "utf8" );
-    }
 
     return specFiles;
   } catch ( e ) {

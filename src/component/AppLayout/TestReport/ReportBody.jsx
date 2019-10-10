@@ -62,15 +62,6 @@ export class ReportBody extends AbstractComponent {
     return str.replace( /\{\{.+\}\}/, "" );
   }
 
-  onDownload = ( e, file ) => {
-    e.preventDefault();
-    shell.openItem( file );
-    notification.open({
-      message: "Opening external file",
-      description: "The requested file will open in a few seconds"
-    });
-  }
-
   /**
    * Find all screenshots belonging to a given test case
    * @param {string} testId
@@ -261,7 +252,7 @@ export class ReportBody extends AbstractComponent {
 
       { spec.reports && <div className="thumb-container screenshot-thumb-container">
         { spec.reports.map( ( reportPath, inx ) => ( <a
-        onClick={ ( e ) => this.onDownload( e, reportPath ) }
+        onClick={ ( e ) => this.download( reportPath, e ) }
         key={ inx }>download performance report</a> ) ) }
         </div>
       }

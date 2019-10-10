@@ -106,7 +106,11 @@ export default class TestGenerator {
       if ( ! ( method in this.schema[ src ]) ) {
         return ``;
       }
-
+      if ( src === "page" && method.startsWith( "debug" ) ) {
+        this.options.headless = false;
+        this.options.devtools = true;
+        this.options.jestTimeout = 1800000;
+      }
       if ( src === "page" && method.startsWith( "assertPerfomanceAsset" ) ) {
         this.options.requireInterceptTraffic = true;
       }
@@ -176,9 +180,15 @@ export default class TestGenerator {
 
   generate() {
     try {
+      const targets = this.parseTargets( this.suite.targets ),
+            body = Object.values( this.suite.groups )
+              .filter( group => group.disabled !== true )
+              .map( this.parseGroup )
+              .join( "\n" );
+
       return this.schema.jest.tplSuite({
         title: this.suite.title,
-        targets: this.parseTargets( this.suite.targets ),
+        targets,
         suite: this.suite,
         runner: this.runner,
         env: this.env,
@@ -186,10 +196,7 @@ export default class TestGenerator {
         projectDirectory: this.projectDirectory,
         outputDirectory: this.outputDirectory,
         interactive: this.interactive,
-        body: Object.values( this.suite.groups )
-          .filter( group => group.disabled !== true )
-          .map( this.parseGroup )
-          .join( "\n" )
+        body
       });
     } catch ( err ) {
       console.warn( "generate error:", err );

@@ -123,7 +123,7 @@ export default class TextConvertor {
     const outputFile = join( this.input.selectedDirectory, "puppetry-export.txt" );
     await writeFile( outputFile, this.output );
     message.info( `Project exported as ${ outputFile }` );
-
+    return outputFile;
   }
 
 }

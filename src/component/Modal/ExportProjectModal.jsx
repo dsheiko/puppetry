@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Alert, Checkbox, Modal, Button, Select, Icon, message, notification, Spin } from "antd";
+import { Alert, Checkbox, Modal, Button, Select, Icon, message, notification, Spin, Tabs } from "antd";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import { exportProject, isDirEmpty, getRuntimeTestPath } from "service/io";
-
+import tmp from "tmp-promise";
 import BrowseDirectory from "component/Global/BrowseDirectory";
 import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, RUNNER_JEST, E_RUN_TESTS } from "constant";
 import If from "component/Global/If";
@@ -13,9 +13,13 @@ import { confirmExportProject } from "service/smalltalk";
 import * as classes from "./classes";
 import { getSnippets, getSelectedVariables, getActiveEnvironment } from "selector/selectors";
 import { SelectEnv } from "component/Global/SelectEnv";
-import exportPrintableText from "./Export/PrintableText";
+import exportPrintableText from "./ExportProjectModal/PrintableText";
+import { TestSpecificationPane } from "./ExportProjectModal/TestSpecificationPane";
+import { JestPane } from "./ExportProjectModal/JestPane";
+import { BrowserOptions } from "./TestReportModal/BrowserOptions";
 
 const CheckboxGroup = Checkbox.Group,
+  { TabPane } = Tabs,
       { Option } = Select;
 
 export class ExportProjectModal  extends AbstractComponent {
@@ -49,6 +53,22 @@ export class ExportProjectModal  extends AbstractComponent {
     modified: false,
     format: "jest",
     loading: false
+  }
+
+  constructor( props ) {
+    super( props );
+    this.refBrowserOptions = React.createRef();
+    this.refTestSpecificationPane = React.createRef();
+  }
+
+  getBrowserOptions() {
+    return this.refBrowserOptions.current ? this.refBrowserOptions.current.state : {
+      headless: true,
+      incognito:true,
+      ignoreHTTPSErrors: false,
+      launcherArgs: "",
+      devtools: false
+    };
   }
 
   onChange = ( checkedList ) => {
@@ -100,6 +120,14 @@ export class ExportProjectModal  extends AbstractComponent {
             envDto = {
               variables: getSelectedVariables( project.variables, activeEnv ),
               environment: activeEnv
+            },
+            browserOptions = this.getBrowserOptions(),
+            launcherOptions = {
+              headless: browserOptions.headless,
+              incognito: browserOptions.incognito,
+              ignoreHTTPSErrors: browserOptions.ignoreHTTPSErrors,
+              launcherArgs: browserOptions.launcherArgs,
+              devtools: browserOptions.devtools
             };
 
       this.props.action.saveSettings({ exportDirectory: selectedDirectory });
@@ -118,14 +146,19 @@ export class ExportProjectModal  extends AbstractComponent {
               return;
             }
 
-            await exportPrintableText({
+            const filename = await exportPrintableText({
               projectDirectory,
               selectedDirectory,
               checkedList,
+              launcherOptions,
               project,
               snippets: this.props.snippets,
-              envDto
+              envDto,
+              runSpecTests: this.refTestSpecificationPane.current
+                ? this.refTestSpecificationPane.current.state.runSpecTests : false
             });
+
+            this.download( filename );
 
             break;
 
@@ -134,7 +167,7 @@ export class ExportProjectModal  extends AbstractComponent {
               projectDirectory,
               selectedDirectory,
               checkedList,
-              { runner: RUNNER_JEST },
+              { runner: RUNNER_JEST, ...launcherOptions },
               this.props.snippets,
               envDto
             );
@@ -192,7 +225,6 @@ export class ExportProjectModal  extends AbstractComponent {
     this.setState({ format });
   }
 
-
   getCurrentFile() {
     const { files, currentSuite } = this.props,
           currentFile = files.find( file => currentSuite === file );
@@ -213,7 +245,7 @@ export class ExportProjectModal  extends AbstractComponent {
           closable
           onCancel={ this.onClickCancel }
           onOk={this.onClickOk}
-          className="checkbox-group--vertical"
+          className="export-project-modal checkbox-group--vertical"
 
           footer={[
             ( <Button
@@ -233,6 +265,16 @@ export class ExportProjectModal  extends AbstractComponent {
         >
 
        <Spin tip="Exporting project..." spinning={ this.state.loading }>
+
+
+        <Tabs
+              className="tabgroup-test-reports"
+              hideAdd={ true }
+              animated={ false }
+              >
+
+            <TabPane tab="General" key="1">
+
           <div className="select-group-inline">
             <span className="select-group-inline__label">
               <Icon type="file-unknown" title="Select an output format" />
@@ -249,32 +291,19 @@ export class ExportProjectModal  extends AbstractComponent {
               }
             >
               <Option value="jest" key="jest">Jest/Puppeteer project (CI-friendly)</Option>
-              <Option value="text" key="text">human readable report</Option>
+              <Option value="text" key="text">test specification</Option>
             </Select>
           </div>
 
-          { format === "jest" && <p className="export-desc">
-            As you press &quot;Export&quot; Puppetry generates a
-            { " " }<a onClick={ this.onExtClick } href="https://jestjs.io/">Jest project</a>{ " " }
-             in the provided location.
-            You just need to navigate into the directory,
-            install dependencies (<code>npm install</code>) and run the tests (<code>npm test</code>).
-          </p> }
+          { format === "jest" && <JestPane /> }
 
-          { format === "text" && <p className="export-desc">
-            By pressing &quot;Export&quot; Puppetry generates a text file with project contents
-            in human-readable form
-          </p> }
+          { format === "text" && <TestSpecificationPane ref={ this.refTestSpecificationPane } /> }
 
-          { format === "json" && <p className="export-desc">
-            By pressing &quot;Export&quot; Puppetry converts project in a single JSON file
-          </p> }
-
-            <SelectEnv environments={ project.environments }
+            <SelectEnv theme="test-reports" environments={ project.environments }
               environment={ environment } action={ action } />
 
             <BrowseDirectory
-              defaultDirectory={ this.props.exportDirectory }
+              defaultDirectory={ ( this.props.exportDirectory || tmp.dirSync().name ) }
               validateStatus={ this.state.browseDirectoryValidateStatus }
               getSelectedDirectory={ this.getSelectedDirectory }
               label="Select a directory to export" />
@@ -301,6 +330,12 @@ export class ExportProjectModal  extends AbstractComponent {
             <If exp={ !files.length }>
               <Alert message="No suites available in the project" type="error" />
             </If>
+
+          </TabPane>
+          <TabPane tab="Browser options" key="2">
+            <BrowserOptions ref={ this.refBrowserOptions }  />
+          </TabPane>
+      </Tabs>
 
           </Spin>
 

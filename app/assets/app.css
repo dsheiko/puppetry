@@ -1277,7 +1277,7 @@ summary:hover {
 .test-options-wrapper {
   margin-top: 16px;
 }
-.label-variable, 
+.label-variable,
 .target-ref {
   color: #e65100;
 }
@@ -1322,4 +1322,13 @@ summary:hover {
 .ant-modal-body details > div.command-form__noncollapsed {
   margin-top: 8px;
   padding: 0 18px;
+}
+
+.ant-modal-body .ant-tabs.ant-tabs-top {
+  margin-top: -16px;
+}
+
+.export-project-modal .ant-modal-body {
+  max-height: calc(100vh - 260px);
+  overflow-y: auto;
 }

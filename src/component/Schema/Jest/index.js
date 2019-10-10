@@ -1,5 +1,6 @@
 import { RUNNER_PUPPETRY, SELECTOR_CHAIN_DELIMITER, SELECTOR_CSS } from "constant";
 import { validateSimpleSelector } from "service/selector";
+import { result } from "service/utils";
 import { renderSuiteHtml } from "./interactive-mode";
 import { TestGeneratorError } from "error";
 import fs from "fs";
@@ -60,8 +61,11 @@ ${ body }
 
 function getSetupOptions( options ) {
   return JSON.stringify({
-    incognito: options.incognito || false,
-    ignoreHTTPSErrors: options.ignoreHTTPSErrors || false
+    incognito: result( options, "incognito", false ),
+    ignoreHTTPSErrors: result( options, "ignoreHTTPSErrors", false ),
+    headless: result( options, "headless", true ),
+    launcherArgs: result( options, "launcherArgs", "" ),
+    devtools: result( options, "devtools", false )
   });
 }
 
@@ -90,7 +94,12 @@ ${ runner === RUNNER_PUPPETRY ? `
 util.setProjectDirectory( ${ JSON.stringify( projectDirectory ) } );
 ` : `` }
 
-jest.setTimeout( ${ options.interactiveMode ? INTERACTIVE_MODE_TIMEOUT : ( suite.timeout || NETWORK_TIMEOUT ) } );
+jest.setTimeout( ${  result( options, "jestTimeout", 0 )
+  ? options.jestTimeout
+  : ( options.interactiveMode
+    ? INTERACTIVE_MODE_TIMEOUT
+    : ( suite.timeout || NETWORK_TIMEOUT ) )
+} );
 
 const targets = {},
       consoleLog = [], // assetConsoleMessage

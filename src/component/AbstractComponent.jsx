@@ -12,6 +12,15 @@ export default class AbstractComponent extends React.Component {
     })
   }
 
+  download = ( file, e = null ) => {
+    e && e.preventDefault();
+    shell.openItem( file );
+    notification.open({
+      message: "Opening external file",
+      description: "The requested file will open in a few seconds"
+    });
+  }
+
   onExtClick = ( e ) => {
     e.preventDefault();
     const el = e.target.tagName === "A" ? e.target : e.target.parentNode;

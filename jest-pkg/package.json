@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest",
-    "test:firefox": "cross-env NODE_ENV=test PUPPETRY_DRIVER=firefox jest",
+    "test": "jest",
+    "test:firefox": "cross-env PUPPETRY_DRIVER=firefox jest",
     "test:debug": "cross-env PUPPETEER_RUN_IN_BROWSER=true jest --detectOpenHandles"
   },
   "keywords": [],

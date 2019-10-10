@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Form, Row, Col, Switch, Input, InputNumber, Checkbox } from "antd";
 import { getAssertion } from "./helpers";
-import { propVal } from "service/utils";
+import { result } from "service/utils";
 
 const FormItem = Form.Item,
       ASSETS = [
@@ -93,13 +93,13 @@ export class AssertAssertWeight extends React.Component {
 
           <tbody>
           { ASSETS.map( asset => (<tr key={ asset.key }
-          className={ propVal( enabled, asset.key, false ) ? "" : "assert-row-disabled" }>
+          className={ result( enabled, asset.key, false ) ? "" : "assert-row-disabled" }>
               <td>
                 <FormItem>
                   <FormItem className="perf-switch">
                     { getFieldDecorator( `assert._enabled.${ asset.key }`, {
-                      initialValue: propVal( data._enabled, asset.key, false ),
-                      valuePropName: ( propVal( data._enabled, asset.key, false ) ? "checked" : "data-ok" )
+                      initialValue: result( data._enabled, asset.key, false ),
+                      valuePropName: ( result( data._enabled, asset.key, false ) ? "checked" : "data-ok" )
                     })( <Switch
                       onChange={ ( checked ) => this.onSwitchChange( checked, asset.key  ) } /> )
                     }
