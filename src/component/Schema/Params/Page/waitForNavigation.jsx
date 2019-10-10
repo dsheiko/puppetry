@@ -20,8 +20,10 @@ export const waitForNavigation = {
   },
 
   toLabel: ({ params }) => {
-    return params.waitUntil ? `(\`${ params.waitUntil }\`)` : `(${ params.timeout }ms)`;
+    return `(\`${ params.waitUntil }\` with timeout \`${ params.timeout }ms\`)`;
   },
+  toGherkin: ({ params }) => `Wait until \`${ params.waitUntil }\` navigation event
+    with timeout \`${ params.timeout }ms\``,
   commonly: "wait for navigation",
 
   description: `Waits until a given event before proceeding to the next command`,

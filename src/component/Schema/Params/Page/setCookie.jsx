@@ -26,8 +26,9 @@ export const setCookie = {
     `;
   },
 
-  toLabel: ({ params }) => `(\`${ params.name }\`, \`${ truncate( params.value, 60 ) }\`)`,
-  toText: ({ params }) => `(\`${ params.name }\`, \`${ params.value }\`)`,
+
+  toLabel: ({ params }) => `(\`${ params.name }\`, \`${ params.value }\`)`,
+  toGherkin: ({ params }) => `Set page cookie \`${ params.name }\` = \`${ params.value }\``,
   commonly: "set page cookies",
 
   description: "Sets [cookies](https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie) on the page",

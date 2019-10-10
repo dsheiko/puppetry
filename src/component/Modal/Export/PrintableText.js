@@ -14,25 +14,25 @@ export default async function exportPrintableText({
   envDto
 }) {
 
-  const runtimeTemp = getRuntimeTestPath(),
-        specList = await exportProject(
-            projectDirectory,
-            runtimeTemp,
-            checkedList,
-            { runner: RUNNER_PUPPETRY, trace: true },
-            snippets,
-            envDto
-          ),
-          report = ipcRenderer.sendSync( E_RUN_TESTS, runtimeTemp, specList );
-
-  try {
-    shell.rm( "-rf", selectedDirectory );
-    shell.mkdir( "-p", selectedDirectory );
-    await writeFile( join( selectedDirectory, "jest-output.json" ), JSON.stringify( report, null, 2 ) );
-  } catch ( e ) {
-    console.warn( "Renderer process: exportPrintableText()", e );
-    // ignore
-  }
+//  const runtimeTemp = getRuntimeTestPath(),
+//        specList = await exportProject(
+//            projectDirectory,
+//            runtimeTemp,
+//            checkedList,
+//            { runner: RUNNER_PUPPETRY, trace: true },
+//            snippets,
+//            envDto
+//          ),
+//          report = ipcRenderer.sendSync( E_RUN_TESTS, runtimeTemp, specList );
+//
+//  try {
+//    shell.rm( "-rf", selectedDirectory );
+//    shell.mkdir( "-p", selectedDirectory );
+//    await writeFile( join( selectedDirectory, "jest-output.json" ), JSON.stringify( report, null, 2 ) );
+//  } catch ( e ) {
+//    console.warn( "Renderer process: exportPrintableText()", e );
+//    // ignore
+//  }
 
   const options = {
           projectDirectory,
@@ -46,14 +46,15 @@ export default async function exportPrintableText({
         screenshots = ( await readdir( screenshotSrcPath ) )
           .map( filename => filename.replace( /\.png$/, "" ) ),
         convertor = new TextConvertor( options, ( command, recordLabel ) => {
+          console.log("..", command);
           const match = screenshots.find( item => item === command.id );
           if ( !match ) {
             return;
           }
-          shell.cp(
-            join( screenshotSrcPath, `${ match }.png` ),
-            join( selectedDirectory, `${ recordLabel }-screenshot.png` )
-          );
+//          shell.cp(
+//            join( screenshotSrcPath, `${ match }.png` ),
+//            join( selectedDirectory, `${ recordLabel }-screenshot.png` )
+//          );
         });
 
   convertor.convert();

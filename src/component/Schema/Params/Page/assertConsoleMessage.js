@@ -2,21 +2,11 @@ import { buildAssertionTpl } from "service/assert";
 import { AssertConsoleMessage } from "../../Assert/AssertConsoleMessage";
 import { truncate } from "service/utils";
 
-const MAP_ASSERTION = {
-  "true": {
-    haveString: "does not have",
-    haveSubstring: "does not contain"
-  },
-  "false": {
-    haveString: "has",
-    haveSubstring: "contains"
-  }
-};
 
-function render({ not, assertion, type }) {
-  const key = [ "true", "false" ].includes( not ) ? not : "false";
-  return `\`${ type }\`, ` + MAP_ASSERTION[ key ][ assertion ];
+function renderBoolean( not ) {
+  return [ "true", "false" ].includes( not ) ? not : "false";
 }
+
 export const assertConsoleMessage = {
 
   template: ( command ) => buildAssertionTpl(
@@ -27,8 +17,10 @@ export const assertConsoleMessage = {
   description: `Assert console message`,
   commonly: "assert console message",
 
-  toLabel: ({ assert }) => `(${ render( assert ) } \`${ truncate( assert.value, 60 ) }\`)`,
-  toText: ({ assert }) => `(${ render( assert ) } \`${ assert.value }\`)`,
+  toLabel: ({ assert }) => `(${ renderBoolean( assert.not ) ? "none" : "any" } of type \`${ assert.type }\` with \`${ assert.value }\`)`,
+
+  toGherkin: ({ params, assert }) => `Assert that there were
+    sent to the console ${ renderBoolean( assert.not ) ? "no" : "any" } messages of type \`${ assert.type }\` with \`${ assert.value }\``,
 
   assert: {
     node: AssertConsoleMessage

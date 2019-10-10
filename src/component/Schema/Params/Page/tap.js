@@ -8,7 +8,8 @@ export const tap = {
       await bs.page.touchscreen.tap( ${ x }, ${ y });`;
   },
 
-  toLabel: ({ params }) => `(x: ${ params.x }, y: ${ params.y })`,
+  toLabel: ({ params }) => `(x: \`${ params.x }px\`, y: \`${ params.y }px\`)`,
+  toGherkin: ({ params }) => `Tap at x = \`${ params.x }px\`, y = \`${ params.y }px\``,
   commonly: "",
 
   description: `Emulates tap according to given options`,

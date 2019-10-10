@@ -17,10 +17,10 @@ export function buildAssertionTpl( assertionCall, command, preCode ) {
   }
 }
 
-export function stringifyTypes( types ) {
+export function stringifyTypes( types, unit = "kB", op = "<" ) {
   return Object.keys( types._enabled )
     .filter( ( key ) => types._enabled[ key ] )
-    .map( ( el ) => `\`${ el }\`` ).join( ", " );
+    .map( ( el ) => `\`${ el }\` ${ op } \`${ types[ el ] }${ unit }\`` ).join( ", " );
 }
 
 function templateConsoleMessageAssertion( cbBody, assert, comment ) {

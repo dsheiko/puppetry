@@ -16,7 +16,8 @@ export const click = {
 
   toLabel: ({ params }) => `(${ renderClick( params ) })`,
   commonly: "",
-  toGherkin: ({ target, params }) => `Click on \`${ target }\``,
+  toGherkin: ({ target, params }) => `${ parseInt( params.clickCount, 10 ) === 2
+    ? "Double-click" : "Click" } on \`${ target }\``,
 
   description: `Emulates mouse click on the element`,
   params: [

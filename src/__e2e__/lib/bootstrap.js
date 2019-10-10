@@ -15,6 +15,10 @@ shell.config.fatal = true;
 
 shell.mkdir( "-p" , SCREENSHOT_PATH );
 
+function sprintfCount( num ) {
+  return String( num + 100000 ).substr( 1 );
+}
+
 class Ctx {
 
   constructor() {
@@ -48,7 +52,7 @@ class Ctx {
     const dir = join( SCREENSHOT_PATH, this.ns ),
           buf = await this.app.browserWindow.capturePage();
     shell.mkdir( "-p" , dir );
-    fs.writeFileSync( join( dir, `${ this.counter++ }--${ name }.png` ), buf );
+    fs.writeFileSync( join( dir, `${ sprintfCount( this.counter++ ) }--${ name }.png` ), buf );
   }
 
   async waitUntilLayoutUpdates() {

@@ -1,6 +1,6 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertDialog } from "../../Assert/AssertDialog";
-import { truncate } from "service/utils";
+import { truncate, ucfisrt } from "service/utils";
 import { CHECKBOX, INPUT, SELECT } from "../../constants";
 
 function getOptionsString( params ) {
@@ -35,8 +35,8 @@ export const closeDialog = {
   commonly: "dismiss/accept dialog",
 
   toLabel: ({ params }) => `(${ getOptionsString( params ) })`,
-  toText: ({ params }) => `(${ getOptionsString( params ) })`,
-
+  toGherkin: ({ params }) => `${ ucfisrt( params.action ) } dialog
+    of type \`${ params.type }\` with with \`${ params.substring }\``,
 
   params: [
     {

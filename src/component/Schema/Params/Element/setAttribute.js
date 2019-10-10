@@ -13,7 +13,9 @@ export const setAttribute = {
   }, `
     + `"${ command.params.name }", "${ command.params.value }" );` ),
 
-  toLabel: ({ params }) => `(${ params.name }, \`${ params.value }\`)`,
+  toLabel: ({ params }) => `(\`${ params.name }\`, \`${ params.value }\`)`,
+  toGherkin: ({ target, params }) => `Set value \`${ params.value }\`
+  of attribute \`${ params.name }\` on \`${ target }\``,
   commonly: "set attribute",
 
   description: `Sets the value of an [attribute](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute)`

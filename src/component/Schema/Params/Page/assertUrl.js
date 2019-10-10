@@ -9,8 +9,11 @@ export const assertUrl = {
     `// Asserting that page URL satisfies the given constraint`
   ),
 
-  toLabel: ({ assert }) => `(${ normalizeAssertionVerb( assert.assertion ) } \`${ truncate( assert.value, 60 ) }\`)`,
-  toText: ({ assert }) => `(${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value, 60 }\`)`,
+
+  toLabel: ({ assert }) => `(${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value }\`)`,
+  toGherkin: ({ params, assert }) => `Assert that
+    page URL ${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value }\``,
+
   commonly: "assert page URL",
 
   description: `Asserts that the page URL satisfies the given constraint`,

@@ -11,8 +11,10 @@ export const assignVar = {
       ENV[ ${ JSON.stringify( params.name ) } ] = ${ value };`;
   },
 
-  toLabel: ({ params }) => `(${ params.name }, \`${ truncate( params.value, 60 ) }\`)`,
-  toText: ({ params }) => `(${ params.name }, \`${ params.value }\`)`,
+
+  toLabel: ({ params }) => `(\`${ params.name }\`, \`${ params.value }\`)`,
+  toGherkin: ({ params }) => `Set value \`${ params.value }\` to template variable ${ params.name }`,
+
   commonly: "set template variable dynamically",
 
   description: `Assigns template variable dynamically`,

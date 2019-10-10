@@ -20,8 +20,7 @@ export const screenshot = {
   `;
   },
 
-  toLabel: ({ params }) => `(\`${ truncate( params.name, 80 ) }\`)`,
-  toText: ({ params }) => `(\`${ params.name }\`)`,
+  toLabel: ({ params }) => `(\`${ params.name }\`)`,
   commonly: "make screenshot",
 
   toGherkin: ({ target, params }) => `Take screenshot \`${ params.name }\` of \`${ target }\``,

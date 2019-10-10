@@ -13,6 +13,12 @@ export const OPERATOR_MAP = {
   eq: "="
 };
 
+export const HAS_OPERATOR_MAP = {
+  gt: "more than",
+  lt: "less than",
+  eq: ""
+};
+
 export function renderTarget( targetName ) {
   return `await targets[ "${ targetName }" ]()`;
 }
@@ -44,8 +50,8 @@ export function normalizeAssertionVerb( verb ) {
 }
 
 export function renderClick( params, pref = "" ) {
-  const text = ( params.button ? `${ params.button  } button` : "" )
-   + `${ parseInt( params.clickCount, 10 ) === 2 ? ", double click" : "" }`;
+  const text = ( params.button ? `\`${ params.button  } button\`` : "" )
+   + `${ parseInt( params.clickCount, 10 ) === 2 ? ", `double click`" : "" }`;
   return text ? pref + text : "";
 }
 
@@ -151,4 +157,11 @@ export function millisecondsToStr( milliseconds ) {
 export function truncate( str, limit ) {
   str = ( "" + str ).trim();
   return ( str.length > limit ) ? str.substr( 0, limit - 3 ) + "..." : str;
+}
+
+  export function ucfisrt( s ) {
+  if ( typeof s !== "string" ) {
+    return "";
+  }
+  return s.charAt( 0 ).toUpperCase() + s.slice( 1 );
 }

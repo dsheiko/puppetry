@@ -12,11 +12,9 @@ export const assertAttribute = {
   ),
 
   toLabel: ({ params, assert }) => `(\`${ params.name }\``
-    + ` ${ normalizeAssertionVerb( assert.assertion ) } \`${ truncate( assert.value, 60 ) }\`)`,
-  toText: ({ params, assert }) => `(\`${ params.name }\``
     + ` ${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\`)`,
 
-  toGherkin: ({ target, params, assert }) => `Assert attribute \`${ params.name }\` of \`${ target }\`
+  toGherkin: ({ target, params, assert }) => `Assert that attribute \`${ params.name }\` of \`${ target }\`
     ${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\``,
 
   commonly: "assert attribute",

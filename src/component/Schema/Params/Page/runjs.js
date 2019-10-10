@@ -2,6 +2,11 @@ import { TEXTAREA } from "../../constants";
 import { justify } from "service/assert";
 import { truncate } from "service/utils";
 
+
+function sanitize( val ) {
+  return truncate( val.replace( /\"/m, "" ), 60 );
+}
+
 export const runjs = {
   template: ({ params }) => {
     const { value } = params;
@@ -11,8 +16,10 @@ ${ value }
 ` );
   },
 
-  toLabel: ({ params }) => `(\`${ truncate( params.value, 80 ) }\`)`,
-  toText: ({ params }) => `(\`${ params.value }\`)`,
+
+  toLabel: ({ params }) => `(\`${ sanitize( params.value ) }\`)`,
+  toGherkin: ({ params }) => `Run JavaScript: \`${ sanitize( params.value ) }\``,
+
   commonly: "run custom JavaScript in the suite",
 
   test: {

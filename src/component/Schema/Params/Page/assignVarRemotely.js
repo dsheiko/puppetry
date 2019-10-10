@@ -19,8 +19,9 @@ export const assignVarRemotely = {
       });`;
   },
 
-  toLabel: ({ params }) => `(${ params.name }, \`${ truncate( params.url, 60 ) }\`)`,
-  toText: ({ params }) => `(${ params.name }, \`${  params.url }\`)`,
+
+  toLabel: ({ params }) => `(\`${ params.name }\` with \`${  params.url }\`)`,
+  toGherkin: ({ params }) => `Set template variable \`${ params.name }\` with webhook \`${  params.url }\``,
   commonly: "set template variable with webhook",
 
   description: `Polls \`URL\` with a given intervals until a response satisfying \`parserFn\` function received

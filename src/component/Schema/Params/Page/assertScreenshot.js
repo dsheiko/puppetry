@@ -36,12 +36,14 @@ export const assertScreenshot = {
     return buildAssertionTpl(
       `await bs.assertScreenshot( ${ paramName }, ${ paramScreenshotOpts }, ${ paramPixelmatchOpts } )`,
       command,
-      `// Asserts that screenshot of the page matches earlier made one`
+      `// Asserts that screenshot of the page matches already approved one`
     );
   },
 
-  toLabel: ({ params }) => `(\`${ truncate( params.name, 80 ) }\`)`,
-  toText: ({ params }) => `(\`${ params.name }\`)`,
+  toLabel: ({ params }) => `(\`${ params.name }\`)`,
+  toGherkin: ({ params, assert }) => `Asserts that screenshot \`${ params.name }\`
+    of the page matches already approved one`,
+
   commonly: "assert page screenshot",
 
 

@@ -1,7 +1,7 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
 import { AssertNumber } from "../../Assert/AssertNumber";
-import { OPERATOR_MAP, renderTarget } from "service/utils";
+import { HAS_OPERATOR_MAP, renderTarget } from "service/utils";
 
 export const assertNodeCount = {
   template: ( command ) => buildAssertionTpl(
@@ -11,7 +11,11 @@ export const assertNodeCount = {
   ),
 
   toLabel: ({ params, assert }) =>
-    `(count(\`${ params.selector }\`) ${ OPERATOR_MAP[ assert.operator ] } ${ assert.value })`,
+    `(has ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value } \` elements matching \`${ params.selector }\`)`,
+
+  toGherkin: ({ target, params, assert }) => `Assert that element \`${ target }\`
+    has ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }\` nested elements matching \`${ params.selector }\``,
+
   commonly: "assert count of child elements",
 
   assert: {

@@ -16,9 +16,10 @@ export const waitForFileChooser = {
   },
 
   toLabel: ({ params }) => {
-    return `(${ params.timeout }ms)`;
+    return `(with timeout \`${ params.timeout }ms\`)`;
   },
-  commonly: "wait for file chooser",
+  toGherkin: ({ params }) => `Wait for the file chooser with timeout \`${ params.timeout }ms\``,
+  commonly: "wait for the file chooser",
 
 
   params: [

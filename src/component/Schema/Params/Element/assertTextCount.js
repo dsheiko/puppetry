@@ -1,7 +1,7 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
 import { AssertNumber } from "../../Assert/AssertNumber";
-import { OPERATOR_MAP, command } from "service/utils";
+import { HAS_OPERATOR_MAP, renderTarget } from "service/utils";
 
 export const assertTextCount = {
   template: ( command ) => buildAssertionTpl(
@@ -12,7 +12,11 @@ export const assertTextCount = {
   ),
 
   toLabel: ({ params, assert }) =>
-    `(count(\`${ params.text }\`) ${ OPERATOR_MAP[ assert.operator ] } ${ assert.value })`,
+    `(has ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }\` child elements with \`${ params.text }\`)`,
+
+  toGherkin: ({ target, params, assert }) => `Assert that element \`${ target }\` has
+   ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }\` child elements containing \`${ params.text }\``,
+
   commonly: "assert count of elements with text",
 
   assert: {

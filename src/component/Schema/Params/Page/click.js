@@ -14,7 +14,9 @@ export const click = {
       await bs.page.mouse.click( ${ x }, ${ y }${ optArg });`;
   },
 
-  toLabel: ({ params }) => `(x: ${ params.x }, y: ${ params.y }${ renderClick( params, ", " ) })`,
+  toLabel: ({ params }) => `(x: \`${ params.x }px\`, y: \`${ params.y }px\`${ renderClick( params, ", " ) })`,
+  toGherkin: ({ params }) => `Emulate mouse click at
+    x = \`${ params.x }px\` and y = \`${ params.y }px\`${ renderClick( params, ", " ) }`,
   commonly: "click mouse",
 
   description: `Emulates mouse click according to given options`,

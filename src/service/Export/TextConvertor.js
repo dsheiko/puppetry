@@ -5,6 +5,12 @@ import { getSchema } from "component/Schema/schema";
 
 const INDENT = "   ";
 
+function printGherkin( txt ) {
+  return txt.replace( /\n/gm, "" )
+    .replace( /\s+/gm, ` ` )
+    .replace( /\`/gm, `"` );
+}
+
 export default class TextConvertor {
 
   constructor( input, onCommand = null ) {
@@ -56,16 +62,16 @@ export default class TextConvertor {
       : 1;
 
     const schema = getSchema( command.target, command.method ),
-          toText = typeof schema.toText === "function"
-            ? schema.toText
-            : ( typeof schema.toLabel === "function" ? schema.toLabel : "" ),
-          recordLabel = `${ groupTestRecLabel }${ this.commandRecLabels[ groupTestRecLabel ] }.`,
-          addOn = toText( command ) || "()";
+          recordLabel = `${ groupTestRecLabel }${ this.commandRecLabels[ groupTestRecLabel ] }.`;
 
     this.onCommand && this.onCommand( command, recordLabel );
 
-    this.print( `${ recordLabel } ${ command.target }.${ command.method }`
-    + `${ addOn }`, 3 );
+    if ( typeof schema.toGherkin === "function" ) {
+      this.print( `${ recordLabel } ${ printGherkin( schema.toGherkin( command ) ) }`, 3 );
+      return;
+    }
+    const addOn = typeof schema.toLabel === "function" ? schema.toLabel( command ) : "()";
+    this.print( `${ recordLabel } ${ command.target }.${ command.method }${ addOn }`, 3 );
   }
 
   convertSuite( suite ) {

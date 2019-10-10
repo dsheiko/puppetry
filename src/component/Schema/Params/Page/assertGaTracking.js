@@ -33,7 +33,9 @@ export const assertGaTracking = {
   commonly: "assert GA tracking",
 
   toLabel: ({ assert }) => `(${ render( assert ) })`,
-  toText: ({ assert }) => `(${ render( assert ) } )`,
+
+  toGherkin: ({ params, assert }) => `Assert that method
+    ga(${ render( assert ) }) was called on the page`,
 
   assert: {
     node: AssertGaTrackingBeacon

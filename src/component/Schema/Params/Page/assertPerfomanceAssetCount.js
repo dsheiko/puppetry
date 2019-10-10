@@ -14,8 +14,11 @@ export const assertPerfomanceAssetCount = {
     );
   },
 
-  toLabel: ({ params, assert }) => `(${ stringifyTypes( assert ) })`,
-  toText: ({ params, assert }) => `(${ stringifyTypes( assert ) })`,
+
+  toLabel: ({ params, assert }) => `(${ stringifyTypes( assert, "kB" ) })`,
+
+  toGherkin: ({ params, assert }) => `Assert that the total amount of assets
+    requested by the page satisfies the budget: ${ stringifyTypes( assert, "kB" ) }`,
 
   commonly: "assert count of assets",
 

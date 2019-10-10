@@ -13,6 +13,7 @@ export const reset = {
   }
 })` ),
   toLabel: () => ``,
+  toGherkin: ({ target, params }) => `Reset form/input \`${ target }\``,
   commonly: "reset input or form",
   description: `Resets the input or form element`,
   params: []

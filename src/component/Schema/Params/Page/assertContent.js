@@ -11,8 +11,10 @@ export const assertContent = {
   description: `Asserts that the page content (HTML) satisfies the given constraint`,
   commonly: "assert page HTML",
 
-  toLabel: ({ assert }) => `(${ normalizeAssertionVerb( assert.assertion ) } \`${ truncate( assert.value, 60 ) }\`)`,
-  toText: ({ assert }) => `(${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\`)`,
+  toLabel: ({ assert }) => `(${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\`)`,
+
+  toGherkin: ({ params, assert }) => `Assert that page
+  content ${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\``,
 
   assert: {
     node: AssertValue

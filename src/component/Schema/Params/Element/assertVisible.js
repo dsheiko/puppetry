@@ -9,7 +9,11 @@ export const assertVisible = {
     `// Asserting that ${ command.target } element is visible`
   ),
 
-  toLabel: ({ assert }) => `(${ assert.value ? "true" : "false" })`,
+  toLabel: ({ assert }) => `(\`${ assert.value ? "visible" : "not visible" }\`)`,
+
+  toGherkin: ({ target, params, assert }) => `Assert that element \`${ target }\`
+    is \`${ assert.value ? "visible" : "not visible" }\` on the page`,
+
   commonly: "assert it is visible",
 
   assert: {

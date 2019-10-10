@@ -15,12 +15,14 @@ export const assertStyle = {
 
   toLabel: ({ params, assert }) => {
     return `(${ params.name + ( params.pseudo || "" ) } `
-          + `${ normalizeAssertionVerb( assert.assertion ) } \`${ truncate( assert.value, 60 ) }\`)`;
-  },
-  toText: ({ params, assert }) => {
-    return `(${ params.name + ( params.pseudo || "" ) } `
           + `${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\`)`;
   },
+
+  toGherkin: ({ target, params, assert }) => `Assert that
+  \`${ params.name + ( params.pseudo || "" ) }\`
+    computed style property of  \`${ target }\`
+    ${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\``,
+    
   commonly: "assert style",
 
   assert: {

@@ -10,8 +10,10 @@ export const assertVar = {
     `// Asserting that variable associated with a given name satisfies the given constraint`
   ),
 
-  toLabel: ({ assert }) => `(${ normalizeAssertionVerb( assert.assertion ) } \`${ truncate( assert.value, 60 ) }\`)`,
-  toText: ({ assert }) => `(${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value, 60 }\`)`,
+  toLabel: ({ params, assert }) => `(\`${ params.name }\` ${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value }\`)`,
+  toGherkin: ({ params, assert }) => `Assert that template variable \`${ params.name }\`
+   ${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value }\``,
+
   commonly: "assert template variable value",
 
   description: `Asserts that variable associated with a given name satisfies the given constraint`,

@@ -21,6 +21,10 @@ await bs.page.waitForResponse( ${ urlString }${ optArg } );` );
   toLabel: ({ params }) => {
     return `(\`${ params.value }\`)`;
   },
+
+  toGherkin: ({ params }) => `Wait for response \`${ params.value }\`
+    with timeout \`${ params.timeout }ms\``,
+
   commonly: "wait for response",
 
   params: [

@@ -9,8 +9,9 @@ export const upload = {
       await ( ${ renderTarget( target ) } ).uploadFile( "${ path }" );`;
   },
 
-  toLabel: ({ params }) => `(\`${ truncate( params.path, 80 ) }\`)`,
-  toText: ({ params }) => `(\`${ params.path }\`)`,
+  toLabel: ({ params }) => `(\`${ params.path }\`)`,
+  toGherkin: ({ target, params }) => `Attach file \`${ params.path }\` to file input \`${ target }\``,
+
   commonly: "attach a file to file input",
 
   description: `Sets the value of a file input. Note that the target element must be INPUT of FILE type.

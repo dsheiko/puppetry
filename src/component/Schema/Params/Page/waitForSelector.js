@@ -3,6 +3,10 @@ import { isEveryValueMissing } from "service/utils";
 import { justify } from "service/assert";
 import { TXT_PARAM_IS_REQUIRED } from "constant";
 
+function renderState( params ) {
+  return ( params.visible === "on" ? " is visible" : ( params.hidden === "on"  ? " is hidden" : "" ) );
+}
+
 export const waitForSelector = {
   template: ({ params }) => {
     const { timeout, visible, hidden } = params,
@@ -18,9 +22,12 @@ await bs.page.waitForSelector( ${ JSON.stringify( params.value ) }${ optArg } );
   },
 
   toLabel: ({ params }) => {
-    const text = ( params.visible === "on" ? " is visible" : ( params.hidden === "on"  ? " is hidden" : "" ) );
-    return `(\`${ params.value }\`${ text })`;
+    return `(\`${ params.value }\` ${ renderState( params ) })`;
   },
+
+  toGherkin: ({ params }) => `Wait until element \`${ params.value }\`
+     ${ renderState( params ) } with timeout \`${ params.timeout }ms\``,
+
   commonly: "wait for selector",
 
   description: `Waits for an element matching a provided `

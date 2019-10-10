@@ -11,8 +11,7 @@ export const type = {
     + `await ( ${ renderTarget( target ) } ).type( ${ parser.stringify( params.value ) } );` );
   },
 
-  toLabel: ({ params }) => `(\`${ truncate( params.value, 80 ) }\`)`,
-  toText: ({ params }) => `(\`${ params.value }\`)`,
+  toLabel: ({ params }) => `(\`${ params.value }\`)`,
   toGherkin: ({ target, params }) => `Type \`${ params.value }\` into \`${ target }\``,
   commonly: "",
 

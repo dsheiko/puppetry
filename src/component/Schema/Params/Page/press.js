@@ -27,6 +27,16 @@ const keyNames = Object.keys( USKeyboardLayout ),
 
       modifierPress = ( key, action ) => key ? `await bs.page.keyboard.${ action }( "${ key }" );` + "\n" : "";
 
+function getKeyName( params ) {
+  return [ params.modifierKey1,
+      params.modifierKey2,
+      params.modifierKey3,
+      params.key ]
+      .filter( key => Boolean( key ) )
+      .map( key => `${ key }` )
+      .join( "+" );
+}
+
 export const press = {
   template: ({ params }) => {
     const { key, modifierKey1, modifierKey2, modifierKey3 } = params,
@@ -42,15 +52,12 @@ ${ renderModifiers( "up" ) }` );
   },
 
   toLabel: ({ params }) => {
-    const text = [ params.modifierKey1,
-      params.modifierKey2,
-      params.modifierKey3,
-      params.key ]
-      .filter( key => Boolean( key ) )
-      .map( key => `${ key }` )
-      .join( "+" );
-    return `(${ text })`;
+    return `(\`${ getKeyName( params ) }\`)`;
   },
+
+  toGherkin: ({ params }) => `Emulate pressing key \`${ getKeyName( params ) }\``,
+
+
   commonly: "press a key",
 
   description: `Emulates pressing on a key, optionally with modifiers such as ⇧, ⌥, alt, control, ⌘`,

@@ -15,7 +15,8 @@ export const assertPerfomanceAssetWeight = {
   },
 
   toLabel: ({ params, assert }) => `(${ stringifyTypes( assert ) })`,
-  toText: ({ params, assert }) => `(${ stringifyTypes( assert ) })`,
+  toGherkin: ({ params, assert }) => `Assert that the total weight of assets
+    requested by the page satisfies the budget: ${ stringifyTypes( assert, "kB" ) }`,
 
   commonly: "assert weight of assets",
 

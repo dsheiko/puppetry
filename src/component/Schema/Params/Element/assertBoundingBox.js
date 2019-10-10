@@ -6,7 +6,16 @@ function paramToLabel( param, operator, value ) {
   if ( !operator || operator === "any"  ) {
     return ``;
   }
-  return `${ param } ${ OPERATOR_MAP[ operator ] } ${ value }`;
+  return `${ param } ${ OPERATOR_MAP[ operator ] } \`${ value }px\``;
+}
+
+function assertsToLabel( assert ) {
+  const labels = [];
+    labels.push( paramToLabel( "x", assert.xOperator, assert.xValue ) );
+    labels.push( paramToLabel( "y", assert.yOperator, assert.yValue ) );
+    labels.push( paramToLabel( "w", assert.wOperator, assert.wValue ) );
+    labels.push( paramToLabel( "h", assert.hOperator, assert.hValue ) );
+  return `${ labels.filter(( val ) => val.length ).join( ", " ) }`;
 }
 
 export const assertBoundingBox = {
@@ -17,13 +26,12 @@ export const assertBoundingBox = {
   ),
 
   toLabel: ({ assert }) => {
-    const labels = [];
-    labels.push( paramToLabel( "x", assert.xOperator, assert.xValue ) );
-    labels.push( paramToLabel( "y", assert.yOperator, assert.yValue ) );
-    labels.push( paramToLabel( "w", assert.wOperator, assert.wValue ) );
-    labels.push( paramToLabel( "h", assert.hOperator, assert.hValue ) );
-    return `(${ labels.filter(( val ) => val.length ).join( ", " ) })`;
+    return `(${ assertsToLabel( assert ) })`;
   },
+
+  toGherkin: ({ target, params, assert }) => `Assert that size and position of \`${ target }\`
+    comply ${ assertsToLabel( assert ) }`,
+
   commonly: "assert size/position",
 
   validate: ( values ) => {

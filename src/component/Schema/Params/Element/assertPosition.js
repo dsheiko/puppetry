@@ -2,6 +2,12 @@ import { buildAssertionTpl } from "service/assert";
 import { AssertPosition } from "../../Assert/AssertPosition";
 import { renderTarget } from "service/utils";
 
+function assertToLabel( assert ) {
+  const text = [ "left", "right" ].includes( assert.position )
+      ? assert.position + " to" : assert.position;
+  return `${ text } \`${ assert.target }\``;
+}
+
 export const assertPosition = {
   template: ( command ) => buildAssertionTpl(
     `{
@@ -12,11 +18,11 @@ export const assertPosition = {
     `// Asserting that the bounding box of the element satisfies the given constraint`
   ),
 
-  toLabel: ({ assert }) => {
-    const text = [ "left", "right" ].includes( assert.position )
-      ? assert.position + " to" : assert.position;
-    return `(is ${ text } ${ assert.target })`;
-  },
+  toLabel: ({ assert }) => `(is ${ assertToLabel( assert ) })`,
+
+  toGherkin: ({ target, params, assert }) => `Assert that element \`${ target }\`
+    is located ${ assertToLabel( assert ) }`,
+
   commonly: "assert relative position",
 
 

@@ -6,6 +6,7 @@ export const tap = {
     `// Tap the element\n`
     + `await ( ${ renderTarget( target ) } ).tap();` ),
   toLabel: () => ``,
+  toGherkin: ({ target, params }) => `Tap \`${ target }\``,
   commonly: "",
   description: `Taps the element`,
   params: []

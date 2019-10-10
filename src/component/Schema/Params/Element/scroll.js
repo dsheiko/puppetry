@@ -12,7 +12,9 @@ await bs.page.$eval( '${ command.targetSeletor }',  ( el, x, y ) => {
 }, ${ parseInt( x, 10 ) }, ${ parseInt( y, 10 ) } );` );
   },
 
-  toLabel: ({ params }) => `(h: ${ params.x }, v: ${ params.y })`,
+  toLabel: ({ params }) => `(x: \`${ params.x }px\`, y: \`${ params.y }px\`)`,
+  toGherkin: ({ target, params }) => `Scroll \`${ target }\`
+    by \`${ params.x }px\` horizontally and \`${ params.y }px\` vertically`,
   commonly: "",
 
   description: `Sets the number of pixels that an element's content is scrolled horizontally/vertically.`,
