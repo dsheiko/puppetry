@@ -53,7 +53,7 @@ export class AssertNumber extends React.Component {
               rules: [{
                 required: true
               }]
-            })( <Select >
+            })( <Select showSearch optionFilterProp="children" >
               <Option value="eq">=</Option>
               <Option value="gt">&gt;</Option>
               <Option value="lt">&lt;</Option>

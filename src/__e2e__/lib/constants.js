@@ -8,4 +8,5 @@ exports.EDITABLE_ROW_SUBMIT_BTN = `.table-actions .btn--submit-editable`;
 exports.EDITABLE_ROW_EXPAND_ICON = `.ant-table-row-expand-icon.ant-table-row-collapsed`; // ant-table-row-expand-icon ant-table-row-expanded
 exports.MENU_ITEM_DISABLED_CLS = "ant-menu-item-disabled";
 exports.PANEL_SUITE_TABGROUP = ".ant-tabs.tabgroup-suite";
-exports.TEST_STEP_COLLAPSABLE_ITEM = "#cCommandModal .ant-collapse-item.command-options-panel";
+exports.TEST_STEP_COLLAPSABLE_ITEM = "#cCommandModal .ant-collapse-item > .ant-collapse-header";
+exports.TEST_STEP_MODAL_OK = "#cCommandModal .btn--modal-command-ok";

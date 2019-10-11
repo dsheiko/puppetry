@@ -51,7 +51,8 @@ export class AssertConsoleMessage extends AbstractComponent {
                 rules: [{
                   required: true
                 }]
-              })( <Select>
+              })( <Select showSearch
+                optionFilterProp="children">
               <Option value="false">were</Option>
               <Option value="true">were NO</Option>
       </Select> ) }
@@ -66,7 +67,8 @@ export class AssertConsoleMessage extends AbstractComponent {
                 rules: [{
                   required: true
                 }]
-              })( <Select >
+              })( <Select showSearch
+                optionFilterProp="children">
               <Option value="any">any</Option>
               <Option value="log">log</Option>
               <Option value="debug">debug</Option>
@@ -95,7 +97,9 @@ export class AssertConsoleMessage extends AbstractComponent {
                 required: true
               }]
             })( <Select
-              onSelect={ this.onSelectAssertion }>
+                showSearch
+                optionFilterProp="children"
+                onSelect={ this.onSelectAssertion }>
               <Option value="haveString">equals</Option>
               <Option value="haveSubstring">contains</Option>
             </Select>  )}

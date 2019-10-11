@@ -190,6 +190,23 @@ export const assertScreenshot = {
 
   ],
 
+  testTypes: {
+    "assert": {
+      "mismatchTolerance": "INPUT"
+    },
+    "params": {
+      "name": "INPUT",
+      "fullPage": "CHECKBOX",
+      "omitBackground": "CHECKBOX",
+      "x": "INPUT_NUMBER",
+      "y": "INPUT_NUMBER",
+      "width": "INPUT_NUMBER",
+      "height": "INPUT_NUMBER",
+      "includeAA": "CHECKBOX",
+      "diffColor": "INPUT",
+      "aaColor": "INPUT"
+    }
+  },
   test: [
     {
       valid: true,
@@ -199,8 +216,8 @@ export const assertScreenshot = {
       },
       "params": {
         "name": "Page 1",
-        "fullPage": false,
-        "omitBackground": false,
+        "fullPage": true,
+        "omitBackground": true,
         "x": null,
         "y": null,
         "width": null,

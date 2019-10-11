@@ -57,7 +57,7 @@ export class AssertPosition extends React.Component {
               rules: [{
                 required: true
               }]
-            })( <Select >
+            })( <Select showSearch optionFilterProp="children" >
               <Option value="above">above</Option>
               <Option value="left">left to</Option>
               <Option value="right">right to</Option>
@@ -71,7 +71,7 @@ export class AssertPosition extends React.Component {
               rules: [{
                 required: true
               }]
-            })( <Select >
+            })( <Select showSearch optionFilterProp="children" >
               { filteredTargets.map( ( t, inx ) => (
                 <Option value={ t } key={ inx }>{ t }</Option>
               ) )}

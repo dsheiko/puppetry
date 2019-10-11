@@ -94,14 +94,21 @@ await bs.page.waitForSelector( ${ JSON.stringify( params.value ) }${ optArg } );
       ]
     }
   ],
-
+  testTypes: {
+      "params": {
+        "value": "INPUT",
+        "visible": "SELECT",
+        "hidden": "SELECT",
+        "timeout": "INPUT_NUMBER"
+      }
+  },
   test: [
     {
       valid: true,
       "params": {
         "value": ".foo",
         "visible": "off",
-        "hidden": "off",
+        "hidden": "on",
         "timeout": 30000
       }
     }

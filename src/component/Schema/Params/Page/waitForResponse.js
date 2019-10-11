@@ -63,7 +63,12 @@ await bs.page.waitForResponse( ${ urlString }${ optArg } );` );
       ]
     }
   ],
-
+  testTypes: {
+    "params": {
+      "value": "INPUT",
+      "timeout": "INPUT_NUMBER"
+    }
+  },
   test: [
     {
       valid: true,

@@ -69,7 +69,7 @@ export class AssertValue extends AbstractComponent {
                 rules: [{
                   required: true
                 }]
-              })( <Select onSelect={ this.onSelectType }>
+              })( <Select showSearch optionFilterProp="children" onSelect={ this.onSelectType }>
                 <Option value="string">string</Option>
                 <Option value="boolean">boolean</Option>
               </Select> ) }

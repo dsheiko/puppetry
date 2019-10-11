@@ -78,7 +78,7 @@ export class AssertBoundingBox extends React.Component {
               rules: [{
                 required: true
               }]
-            })( <Select style={{ width: 64 }} onChange={ ( e ) =>  this.onSwitchChange( e, "x" ) }>
+            })( <Select showSearch optionFilterProp="children" style={{ width: 64 }} onChange={ ( e ) =>  this.onSwitchChange( e, "x" ) }>
               <Option value="any">any</Option>
               <Option value="gt">&gt;</Option>
               <Option value="lt">&lt;</Option>
@@ -110,7 +110,7 @@ export class AssertBoundingBox extends React.Component {
               rules: [{
                 required: true
               }]
-            })( <Select style={{ width: 64 }} onChange={ ( e ) =>  this.onSwitchChange( e, "y" ) }>
+            })( <Select showSearch optionFilterProp="children" style={{ width: 64 }} onChange={ ( e ) =>  this.onSwitchChange( e, "y" ) }>
               <Option value="any">any</Option>
               <Option value="gt">&gt;</Option>
               <Option value="lt">&lt;</Option>
@@ -141,7 +141,7 @@ export class AssertBoundingBox extends React.Component {
               rules: [{
                 required: true
               }]
-            })( <Select style={{ width: 64 }} onChange={ ( e ) =>  this.onSwitchChange( e, "w" ) }>
+            })( <Select showSearch optionFilterProp="children" style={{ width: 64 }} onChange={ ( e ) =>  this.onSwitchChange( e, "w" ) }>
               <Option value="any">any</Option>
               <Option value="gt">&gt;</Option>
               <Option value="lt">&lt;</Option>
@@ -172,7 +172,7 @@ export class AssertBoundingBox extends React.Component {
               rules: [{
                 required: true
               }]
-            })( <Select style={{ width: 64 }} onChange={ ( e ) =>  this.onSwitchChange( e, "h" ) }>
+            })( <Select showSearch optionFilterProp="children" style={{ width: 64 }} onChange={ ( e ) =>  this.onSwitchChange( e, "h" ) }>
               <Option value="any">any</Option>
               <Option value="gt">&gt;</Option>
               <Option value="lt">&lt;</Option>

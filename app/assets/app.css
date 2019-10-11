@@ -1332,3 +1332,7 @@ summary:hover {
   max-height: calc(100vh - 260px);
   overflow-y: auto;
 }
+
+.ant-form-item {
+  margin-bottom: 16px;
+}

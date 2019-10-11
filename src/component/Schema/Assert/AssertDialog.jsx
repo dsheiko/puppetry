@@ -64,7 +64,7 @@ export class AssertDialog extends AbstractComponent {
                 rules: [{
                   required: true
                 }]
-              })( <Select >
+              })( <Select showSearch optionFilterProp="children">
               <Option value="any">any</Option>
               <Option value="alert">alert</Option>
               <Option value="beforeunload">beforeunload</Option>

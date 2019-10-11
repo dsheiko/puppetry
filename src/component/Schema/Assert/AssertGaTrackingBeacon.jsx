@@ -141,7 +141,7 @@ export class AssertGaTrackingBeacon extends AbstractComponent {
               rules: [{
                 required: true
               }]
-          })( <Select onSelect={ val => this.onSelectAssertion( val, `${ item.key }Assertion` ) }>
+          })( <Select showSearch optionFilterProp="children" onSelect={ val => this.onSelectAssertion( val, `${ item.key }Assertion` ) }>
               <Option value="any">any</Option>
               <Option value="equals">equals</Option>
               <Option value="contains">contains</Option>
@@ -183,7 +183,7 @@ export class AssertGaTrackingBeacon extends AbstractComponent {
               rules: [{
                 required: true
               }]
-          })( <Select onSelect={ val => this.onSelectAssertion( val, `${ item.key }Assertion` ) }>
+          })( <Select showSearch optionFilterProp="children" onSelect={ val => this.onSelectAssertion( val, `${ item.key }Assertion` ) }>
               <Option value="any">any</Option>
               <Option value="equals">equals</Option>
               <Option value="contains">contains</Option>
