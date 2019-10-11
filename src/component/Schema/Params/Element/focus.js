@@ -11,5 +11,11 @@ export const focus = {
   commonly: "",
 
   description: `Focuses the element`,
-  params: []
+  params: [],
+
+  test: [
+    {
+      valid: true
+    }
+  ]
 };

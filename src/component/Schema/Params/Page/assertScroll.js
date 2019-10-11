@@ -46,5 +46,19 @@ export const assertScroll = {
 
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "number",
+        "operator": "gt",
+        "value": -1
+      },
+      "params": {
+        "direction": "horizontally"
+      }
+    }
   ]
 };

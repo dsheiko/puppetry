@@ -102,6 +102,17 @@ export const closeDialog = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "substring": "some",
+        "type": "any",
+        "action": "accept"
+      }
+    }
   ]
 };
 

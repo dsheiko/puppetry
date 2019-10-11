@@ -29,5 +29,27 @@ export const assertPerfomanceAssetWeight = {
   `,
   assert: {
     node: AssertAssertWeight
-  }
+  },
+
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "assertAssetWeight",
+        "_enabled": {
+          "script": true,
+          "stylesheet": false,
+          "image": false,
+          "media": false,
+          "font": false,
+          "xhr": false
+        },
+        "script": "11"
+      },
+      "params": {
+        "url": "https://puppetry.app"
+      }
+    }
+  ]
 };

@@ -49,12 +49,6 @@ export const screenshot = {
     return null;
   },
 
-  test: {
-    "params": {
-      "name": "Screenshot"
-    }
-  },
-
   params: [
     {
 
@@ -134,5 +128,20 @@ export const screenshot = {
       ]
     }
 
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "name": "Page 1",
+        "fullPage": false,
+        "omitBackground": false,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null
+      }
+    }
   ]
 };

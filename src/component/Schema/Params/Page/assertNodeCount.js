@@ -25,6 +25,7 @@ export const assertNodeCount = {
     }
   },
   description: `Asserts that number of elements matching a specified selector satisfies the given constraint`,
+
   params: [
     {
       fields: [
@@ -40,5 +41,20 @@ export const assertNodeCount = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "number",
+        "operator": "eq",
+        "value": 0
+      },
+      "params": {
+        "selector": ".foo"
+      }
+    }
   ]
+
 };

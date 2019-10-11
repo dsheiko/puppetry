@@ -50,5 +50,19 @@ offset on the target satisfies the given constraint`,
 
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "number",
+        "operator": "eq",
+        "value": 2
+      },
+      "params": {
+        "direction": "horizontally"
+      }
+    }
   ]
 };

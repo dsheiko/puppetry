@@ -50,5 +50,15 @@ await bs.page.evaluate(( x, y ) => {
 
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "x": 1,
+        "y": 1
+      }
+    }
   ]
 };

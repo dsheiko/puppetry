@@ -70,5 +70,16 @@ export const click = {
       ]
     }
 
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "button": "left",
+        "clickCount": 1,
+        "delay": 0
+      }
+    }
   ]
 };

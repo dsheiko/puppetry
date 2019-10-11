@@ -21,5 +21,16 @@ export const assertContent = {
   },
   params: [
 
+  ],
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "!equals",
+        "type": "string",
+        "value": "AAA"
+      }
+    }
   ]
 };

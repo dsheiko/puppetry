@@ -87,7 +87,7 @@ export class AssertPerfomanceMetrics extends React.Component {
         </div>
 
         <h3>Milestone timings based on the user-experience loading a page</h3>
-        <div>Assert the time of a page loading stage doesn't exeed a given limit</div>
+        <div>Assert the time (microseconds) of a page loading stage doesn't exeed a given limit</div>
 
 
         <Row gutter={24} className="ant-form-inline">
@@ -138,7 +138,7 @@ export class AssertPerfomanceMetrics extends React.Component {
                        }
                      }
                   ]
-                  })( <Input addonAfter="ms" /> )
+                  })( <Input addonAfter="μs" /> )
                   }
                 </FormItem>
             </td>

@@ -20,5 +20,11 @@ assertions fail in some particular moment.  You can use this tool to set a break
 soon as it reaches this point. So you will be able to examine the page state with DevTools.
 
 NOTE: This command makes sense only if you set Puppetry to run tests in browser (F6)`,
-  params: []
+  params: [],
+
+  test: [
+    {
+      valid: true
+    }
+  ]
 };

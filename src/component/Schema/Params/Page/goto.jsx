@@ -40,12 +40,6 @@ export const goto = {
 
   toGherkin: ({ params }) => `Visit \`${ params.url }\``,
 
-  test: {
-    "params": {
-      "url": "https://www.google.com"
-    }
-  },
-
   params: [
     {
       legend: "",
@@ -110,6 +104,17 @@ export const goto = {
           }]
         }
       ]
+    }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "url": "http://todomvc.com/examples/react/#/",
+        "timeout": 30000,
+        "waitUntil": "load"
+      }
     }
   ]
 };

@@ -50,5 +50,19 @@ export const assertVar = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+       "assert": {
+          "assertion": "equals",
+          "type": "string",
+          "value": "foo"
+        },
+        "params": {
+          "name": "FOO"
+        }
+    }
   ]
 };

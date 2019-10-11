@@ -267,10 +267,9 @@ module.exports = function( expect, util ) {
           actual = metrics.loadEventEnd - metrics.navigationStart;
           break;
       }
-      const ms = Math.ceil( actual / 1000 );
-      return expectReturn( ms < val, `[${ source }] expected `
+      return expectReturn( actual < val, `[${ source }] expected `
         + `the ${ type } time to be under`
-        + ` ${ val }ms, but found ${ ms }ms` );
+        + ` ${ val }μs, but found ${ actual }μs` );
     },
 
 

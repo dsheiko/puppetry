@@ -63,5 +63,15 @@ pass 0 to disable timeout.`,
 
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "timeout": 30000,
+        "waitUntil": "load"
+      }
+    }
   ]
 };

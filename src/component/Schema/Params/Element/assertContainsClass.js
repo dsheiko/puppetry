@@ -50,5 +50,18 @@ export const assertContainsClass = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "boolean",
+        "value": true
+      },
+      "params": {
+        "name": ".foo"
+      }
+    }
   ]
 };

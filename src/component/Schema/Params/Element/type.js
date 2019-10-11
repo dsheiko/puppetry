@@ -37,5 +37,14 @@ export const type = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "value": "val"
+      }
+    }
   ]
 };

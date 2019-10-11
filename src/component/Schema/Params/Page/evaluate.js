@@ -20,13 +20,6 @@ await bs.page.evaluate(() => {
   toGherkin: ({ params }) => `Evaluate JavaScript in the page context: \`${ sanitize( params.value ) }\``,
   commonly: "evaluate JavaScript in the page context",
 
-
-  test: {
-    "params": {
-      "value": "FOO"
-    }
-  },
-
   description: `Evaluates JavaScript code in the page context`,
   params: [
     {
@@ -47,6 +40,15 @@ await bs.page.evaluate(() => {
         }
 
       ]
+    }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "value": "console.log(1);"
+      }
     }
   ]
 };

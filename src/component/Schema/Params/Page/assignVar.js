@@ -60,5 +60,15 @@ export const assignVar = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "name": "FOO",
+        "value": "foo"
+      }
+    }
   ]
 };

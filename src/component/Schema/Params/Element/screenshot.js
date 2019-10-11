@@ -27,11 +27,6 @@ export const screenshot = {
 
   description: `Takes a screenshot of the target element.`,
 
-  test: {
-    "params": {
-      "name": "Screenshot"
-    }
-  },
 
   params: [
     {
@@ -71,5 +66,15 @@ export const screenshot = {
       ]
     }
 
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "name": "Element 1",
+        "omitBackground": false
+      }
+    }
   ]
 };

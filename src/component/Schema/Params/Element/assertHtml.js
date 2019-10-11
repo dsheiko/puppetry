@@ -24,5 +24,16 @@ export const assertHtml = {
   },
   params: [
 
+  ],
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "!equals",
+        "type": "string",
+        "value": "aaa"
+      }
+    }
   ]
 };

@@ -22,5 +22,16 @@ export const assertUrl = {
   },
   params: [
 
+  ],
+
+  test: [
+    {
+      valid: true,
+     "assert": {
+        "assertion": "!equals",
+        "type": "string",
+        "value": "aaa"
+      }
+    }
   ]
 };

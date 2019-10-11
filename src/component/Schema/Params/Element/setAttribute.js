@@ -47,5 +47,15 @@ export const setAttribute = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "name": "checked",
+        "value": "true"
+      }
+    }
   ]
 };

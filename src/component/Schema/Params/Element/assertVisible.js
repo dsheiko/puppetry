@@ -26,5 +26,15 @@ export const assertVisible = {
 ([intersecting](https://pptr.dev/#?product=Puppeteer&version=v1.15.0&show=api-elementhandleisintersectingviewport),
 styles \`display\` is not \`none\`, \`visible\` is not \`hidden\`, \`opacity\` is not \`0\`)`,
   params: [
+  ],
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "boolean",
+        "value": true
+      }
+    }
   ]
 };

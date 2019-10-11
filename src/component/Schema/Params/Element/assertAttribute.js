@@ -52,5 +52,19 @@ export const assertAttribute = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "!equals",
+        "type": "string",
+        "value": "sss"
+      },
+      "params": {
+        "name": "href"
+      }
+    }
   ]
 };

@@ -22,12 +22,6 @@ ${ value }
 
   commonly: "run custom JavaScript in the suite",
 
-  test: {
-    "params": {
-      "value": "VALUE"
-    }
-  },
-
   description:  `Runs custom JavaScript code in the test suite with use of
 [Puppeteer API](https://pptr.dev) and [Puppetry API](https://docs.puppetry.app/command-api).
 You can access [dynamic environment variables](https://docs.puppetry.app/template)
@@ -50,6 +44,15 @@ via \`ENV\` map (e.g. \`ENV[VAR_NAME]\`)
         }
 
       ]
+    }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "value": "console.log(1);"
+      }
     }
   ]
 };

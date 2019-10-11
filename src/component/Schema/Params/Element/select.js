@@ -33,5 +33,14 @@ export const select = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "value": "aaa"
+      }
+    }
   ]
 };

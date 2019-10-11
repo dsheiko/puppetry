@@ -45,5 +45,15 @@ export const tap = {
       ]
     }
 
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "x": 1,
+        "y": 1
+      }
+    }
   ]
 };

@@ -13,7 +13,7 @@ function render({ action, categoryValue, actionValue, labelValue, valueValue, ne
       return renderVals([ action, categoryValue, actionValue, labelValue ]);
     case "social":
       return renderVals([ action, networkValue, actionValue, targetValue ]);
-    case "default":
+    default:
       return renderVals([ action ]);
   }
 }
@@ -41,6 +41,44 @@ export const assertGaTracking = {
     node: AssertGaTrackingBeacon
   },
   params: [
+  ],
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "assertGaTracking",
+        "action": "pageview"
+      }
+    },
+    {
+      valid: true,
+      "assert": {
+        "assertion": "assertGaTracking",
+        "action": "event",
+        "categoryAssertion": "contains",
+        "actionAssertion": "equals",
+        "labelAssertion": "equals",
+        "valueAssertion": "equals",
+        "categoryValue": "FOO",
+        "actionValue": "BAR",
+        "labelValue": "BAZ",
+        "valueValue": "QUIX"
+      }
+    },
+    {
+      valid: true,
+      "assert": {
+        "assertion": "assertGaTracking",
+        "action": "social",
+        "networkAssertion": "equals",
+        "targetAssertion": "equals",
+        "networkValue": "FOO",
+        "targetValue": "BAZ",
+        "actionAssertion": "equals",
+        "actionValue": "BAR"
+      }
+    }
   ]
 };
 

@@ -40,5 +40,19 @@ export const assertNodeCount = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "number",
+        "operator": "gt",
+        "value": 0
+      },
+      "params": {
+        "selector": "div"
+      }
+    }
   ]
 };

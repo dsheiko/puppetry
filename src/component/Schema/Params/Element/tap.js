@@ -9,5 +9,11 @@ export const tap = {
   toGherkin: ({ target, params }) => `Tap \`${ target }\``,
   commonly: "",
   description: `Taps the element`,
-  params: []
+  params: [],
+
+  test: [
+    {
+      valid: true
+    }
+  ]
 };

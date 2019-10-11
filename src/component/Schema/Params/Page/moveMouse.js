@@ -44,5 +44,15 @@ export const moveMouse = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "x": 1,
+        "y": 1
+      }
+    }
   ]
 };

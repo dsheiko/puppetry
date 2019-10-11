@@ -51,5 +51,19 @@ export const assertBoundingBox = {
   },
   params: [
 
+  ],
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "boundingBox",
+        "xOperator": "gt",
+        "yOperator": "any",
+        "wOperator": "any",
+        "hOperator": "any",
+        "xValue": 1
+      }
+    }
   ]
 };

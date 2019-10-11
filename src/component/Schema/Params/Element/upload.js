@@ -80,5 +80,14 @@ export const upload = {
       ]
     }
 
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "path": "/home/sheiko/Pictures/Screenshot from 2019-07-03 11-33-56.png"
+      }
+    }
   ]
 };

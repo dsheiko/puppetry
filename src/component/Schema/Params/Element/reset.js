@@ -16,5 +16,11 @@ export const reset = {
   toGherkin: ({ target, params }) => `Reset form/input \`${ target }\``,
   commonly: "reset input or form",
   description: `Resets the input or form element`,
-  params: []
+  params: [],
+
+  test: [
+    {
+      valid: true
+    }
+  ]
 };

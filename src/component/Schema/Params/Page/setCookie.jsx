@@ -119,5 +119,19 @@ export const setCookie = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "name": "aaa",
+        "value": "aaa",
+        "domain": "domain",
+        "httpOnly": "",
+        "secure": "",
+        "sameSite": ""
+      }
+    }
   ]
 };

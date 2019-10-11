@@ -9,5 +9,11 @@ export const hover = {
   toGherkin: ({ target, params }) => `Hover \`${ target }\``,
   commonly: "",
   description: `Scrolls element into view if needed, and then hovers over the center of the element`,
-  params: []
+  params: [],
+
+  test: [
+    {
+      valid: true
+    }
+  ]
 };

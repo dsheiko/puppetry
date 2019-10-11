@@ -26,5 +26,27 @@ export const assertPerfomanceAssetCount = {
     + `(JavaScript, CSS, images, media, fonts, XHR) on the page satisfies the given budget`,
   assert: {
     node: AssertAssertCount
-  }
+  },
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "assertAssetCount",
+        "_enabled": {
+          "script": true,
+          "stylesheet": false,
+          "image": true,
+          "media": false,
+          "font": false,
+          "xhr": false
+        },
+        "script": "22",
+        "image": "2"
+      },
+      "params": {
+        "url": "asdasd"
+      }
+    }
+  ]
 };

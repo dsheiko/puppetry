@@ -136,5 +136,19 @@ export const setViewport = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "width": 1920,
+        "height": 1080,
+        "deviceScaleFactor": 1,
+        "isMobile": false,
+        "hasTouch": false,
+        "isLandscape": false
+      }
+    }
   ]
 };

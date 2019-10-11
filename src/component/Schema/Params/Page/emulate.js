@@ -37,5 +37,14 @@ export const emulate = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "device": "Blackberry PlayBook landscape"
+      }
+    }
   ]
 };

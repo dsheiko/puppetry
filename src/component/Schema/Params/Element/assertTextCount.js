@@ -41,5 +41,19 @@ export const assertTextCount = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "number",
+        "operator": "eq",
+        "value": 0
+      },
+      "params": {
+        "text": "ssss"
+      }
+    }
   ]
 };

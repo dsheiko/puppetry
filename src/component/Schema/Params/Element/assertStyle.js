@@ -22,7 +22,7 @@ export const assertStyle = {
   \`${ params.name + ( params.pseudo || "" ) }\`
     computed style property of  \`${ target }\`
     ${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\``,
-    
+
   commonly: "assert style",
 
   assert: {
@@ -60,6 +60,20 @@ export const assertStyle = {
           placeholder: "e.g. :before"
         }
       ]
+    }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "equals",
+        "type": "string",
+        "value": "1px"
+      },
+      "params": {
+        "name": "border"
+      }
     }
   ]
 };

@@ -39,5 +39,14 @@ export const waitForFileChooser = {
 
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "timeout": 30000
+      }
+    }
   ]
 };

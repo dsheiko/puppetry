@@ -34,5 +34,14 @@ export const checkBox = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "checked": true
+      }
+    }
   ]
 };

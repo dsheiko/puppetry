@@ -118,5 +118,18 @@ or extend it e.g. into [a chain of requests](https://docs.puppetry.app/testing-e
 
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "name": "FAR",
+        "url": "http://puppetry.app",
+        "interval": 1000,
+        "timeout": 60000,
+        "parserFn": "( json ) => {\n  return json ? json.value : null;\n}"
+      }
+    }
   ]
 };

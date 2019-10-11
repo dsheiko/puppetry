@@ -188,5 +188,28 @@ export const assertScreenshot = {
       ]
     }
 
+  ],
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "screenshot",
+        "mismatchTolerance": "0.2"
+      },
+      "params": {
+        "name": "Page 1",
+        "fullPage": false,
+        "omitBackground": false,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null,
+        "includeAA": false,
+        "diffColor": "#FF0000",
+        "aaColor": "#FFFF00"
+      }
+    }
   ]
+
 };

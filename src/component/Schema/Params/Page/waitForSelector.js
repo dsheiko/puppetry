@@ -93,5 +93,17 @@ await bs.page.waitForSelector( ${ JSON.stringify( params.value ) }${ optArg } );
 
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "value": ".foo",
+        "visible": "off",
+        "hidden": "off",
+        "timeout": 30000
+      }
+    }
   ]
 };

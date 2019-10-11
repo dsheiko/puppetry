@@ -51,5 +51,19 @@ export const assertProperty = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "!equals",
+        "type": "string",
+        "value": "aaa"
+      },
+      "params": {
+        "name": "checked"
+      }
+    }
   ]
 };

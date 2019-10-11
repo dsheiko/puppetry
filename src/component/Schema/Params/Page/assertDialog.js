@@ -29,6 +29,27 @@ export const assertDialog = {
     node: AssertDialog
   },
   params: [
+  ],
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "not": "false",
+        "type": "any",
+        "assertion": "haveString",
+        "value": "foo"
+      }
+    },
+    {
+      valid: true,
+      "assert": {
+        "not": "true",
+        "type": "alert",
+        "assertion": "haveSubstring",
+        "value": "bar"
+      }
+    }
   ]
 };
 

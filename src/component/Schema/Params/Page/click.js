@@ -94,5 +94,18 @@ export const click = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "x": 1,
+        "y": 1,
+        "button": "left",
+        "clickCount": 1,
+        "delay": 0
+      }
+    }
   ]
 };

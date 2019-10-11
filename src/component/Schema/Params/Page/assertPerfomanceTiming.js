@@ -30,6 +30,25 @@ export const assertPerfomanceTiming = {
     node: AssertPerfomanceMetrics
   },
   params: [
+  ],
+
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "assertPerfomanceTiming",
+        "_enabled": {
+          "loading": true,
+          "redirection": false,
+          "network": true,
+          "processing": true
+        },
+        "loading": "4",
+        "network": "1",
+        "processing": "2"
+      }
+    }
   ]
 };
 

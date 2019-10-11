@@ -46,5 +46,15 @@ export const toggleClass = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "name": ".foo",
+        "toggle": "add"
+      }
+    }
   ]
 };

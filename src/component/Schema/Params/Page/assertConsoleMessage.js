@@ -27,7 +27,29 @@ export const assertConsoleMessage = {
   },
   params: [
 
+  ],
+
+  test: [
+    {
+      valid: true,
+      assert: {
+        not: "true",
+        type: "any",
+        assertion: "haveString",
+        value: "foo"
+      }
+    },
+    {
+      valid: true,
+      "assert": {
+        "not": "false",
+        "type": "debug",
+        "assertion": "haveSubstring",
+        "value": "foo"
+      }
+    }
   ]
+  
 };
 
 

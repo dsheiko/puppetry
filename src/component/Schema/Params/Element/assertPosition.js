@@ -32,5 +32,16 @@ export const assertPosition = {
   },
   params: [
 
+  ],
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "position",
+        "position": "above",
+        "target": "TODO_INPUT"
+      }
+    }
   ]
 };

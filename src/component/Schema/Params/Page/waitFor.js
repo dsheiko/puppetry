@@ -30,5 +30,14 @@ export const waitFor = {
         }
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "value": 1
+      }
+    }
   ]
 };

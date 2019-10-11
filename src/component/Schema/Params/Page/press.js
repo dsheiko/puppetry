@@ -128,5 +128,17 @@ ${ renderModifiers( "up" ) }` );
     }
 
 
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "key": "NumpadEnter",
+        "modifierKey1": "",
+        "modifierKey2": "",
+        "modifierKey3": ""
+      }
+    }
   ]
 };

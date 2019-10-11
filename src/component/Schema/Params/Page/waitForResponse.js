@@ -62,5 +62,15 @@ await bs.page.waitForResponse( ${ urlString }${ optArg } );` );
 
       ]
     }
+  ],
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "value": "https://google.com",
+        "timeout": 30000
+      }
+    }
   ]
 };
