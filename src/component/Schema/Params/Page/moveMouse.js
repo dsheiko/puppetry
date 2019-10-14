@@ -46,6 +46,13 @@ export const moveMouse = {
     }
   ],
 
+  testTypes: {
+    "params": {
+      "x": "INPUT_NUMBER",
+      "y": "INPUT_NUMBER"
+    }
+  },
+
   test: [
     {
       valid: true,

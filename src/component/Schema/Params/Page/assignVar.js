@@ -62,6 +62,13 @@ export const assignVar = {
     }
   ],
 
+  testTypes: {
+    "params": {
+      "name": "INPUT",
+      "value": "INPUT"
+    }
+  },
+
   test: [
     {
       valid: true,

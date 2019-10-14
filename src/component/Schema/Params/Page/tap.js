@@ -47,6 +47,13 @@ export const tap = {
 
   ],
 
+  testTypes: {
+      "params": {
+        "x": "INPUT_NUMBER",
+        "y": "INPUT_NUMBER"
+      }
+  },
+
   test: [
     {
       valid: true,

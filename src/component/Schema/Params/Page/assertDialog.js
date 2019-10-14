@@ -31,6 +31,15 @@ export const assertDialog = {
   params: [
   ],
 
+  testTypes: {
+    "assert": {
+      "not": "SELECT",
+      "type": "SELECT",
+      "assertion": "SELECT",
+      "value": "INPUT"
+    }
+  },
+
   test: [
     {
       valid: true,

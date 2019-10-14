@@ -104,13 +104,23 @@ export const closeDialog = {
     }
   ],
 
+  testTypes: {
+      "params": {
+        "substring": "INPUT",
+        "type": "SELECT",
+        "action": "SELECT",
+        "promptText": "INPUT"
+      }
+  },
+
   test: [
     {
       valid: true,
       "params": {
         "substring": "some",
-        "type": "any",
-        "action": "accept"
+        "type": "prompt",
+        "action": "accept",
+        "promptText": "Lorem ipsum"
       }
     }
   ]

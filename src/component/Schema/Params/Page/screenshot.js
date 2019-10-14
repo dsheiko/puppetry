@@ -78,7 +78,7 @@ export const screenshot = {
         {
           name: "params.fullPage",
           label: "fullpage",
-          control: CHECKBOX ,
+          control: CHECKBOX,
           tooltip: `When true, takes a screenshot of the full scrollable page.`,
           initialValue: false,
           placeholder: "",
@@ -87,7 +87,7 @@ export const screenshot = {
         {
           name: "params.omitBackground",
           label: "omit background",
-          control: CHECKBOX ,
+          control: CHECKBOX,
           tooltip: `Hides default white background and allows capturing screenshots with transparency.`,
           initialValue: false,
           placeholder: "",
@@ -129,6 +129,18 @@ export const screenshot = {
     }
 
   ],
+
+  testTypes: {
+      "params": {
+        "name": "INPUT",
+        "fullPage": "CHECKBOX",
+        "omitBackground": "CHECKBOX",
+        "x": "INPUT_NUMBER",
+        "y": "INPUT_NUMBER",
+        "width": "INPUT_NUMBER",
+        "height": "INPUT_NUMBER"
+      }
+  },
 
   test: [
     {

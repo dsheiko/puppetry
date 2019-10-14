@@ -24,6 +24,13 @@ export const assertUrl = {
 
   ],
 
+  testTypes: {
+    "assert": {
+      "assertion": "SELECT",
+      "value": "INPUT"
+    }
+  },
+
   test: [
     {
       valid: true,

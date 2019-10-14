@@ -130,6 +130,15 @@ ${ renderModifiers( "up" ) }` );
 
   ],
 
+  testTypes: {
+    "params": {
+      "key": "SELECT",
+      "modifierKey1": "SELECT",
+      "modifierKey2": "SELECT",
+      "modifierKey3": "SELECT"
+    }
+  },
+
   test: [
     {
       valid: true,

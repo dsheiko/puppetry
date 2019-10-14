@@ -120,6 +120,16 @@ or extend it e.g. into [a chain of requests](https://docs.puppetry.app/testing-e
     }
   ],
 
+  testTypes: {
+    "params": {
+      "name": "INPUT",
+      "url": "INPUT",
+      "interval": "INPUT_NUMBER",
+      "timeout": "INPUT_NUMBER",
+      "parserFn": "INPUT"
+    }
+  },
+
   test: [
     {
       valid: true,

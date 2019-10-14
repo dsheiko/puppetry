@@ -43,6 +43,20 @@ export const assertGaTracking = {
   params: [
   ],
 
+  testTypes: {
+    "assert": {
+      "action": "SELECT"
+//      "categoryAssertion": "SELECT",
+//      "actionAssertion": "SELECT",
+//      "labelAssertion": "SELECT",
+//      "valueAssertion": "SELECT",
+//      "categoryValue": "INPUT",
+//      "actionValue": "INPUT",
+//      "labelValue": "INPUT",
+//      "valueValue": "INPUT"
+    }
+  },
+
   test: [
     {
       valid: true,

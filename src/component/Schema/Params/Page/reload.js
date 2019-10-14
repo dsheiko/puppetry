@@ -65,6 +65,13 @@ pass 0 to disable timeout.`,
     }
   ],
 
+  testTypes: {
+    "params": {
+      "timeout": "INPUT_NUMBER",
+      "waitUntil": "SELECT"
+    }
+  },
+
   test: [
     {
       valid: true,

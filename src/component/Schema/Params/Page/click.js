@@ -96,6 +96,16 @@ export const click = {
     }
   ],
 
+  testTypes: {
+    "params": {
+      "x": "INPUT_NUMBER",
+      "y": "INPUT_NUMBER",
+      "button": "SELECT",
+      "clickCount": "INPUT_NUMBER",
+      "delay": "INPUT_NUMBER"
+    }
+  },
+
   test: [
     {
       valid: true,

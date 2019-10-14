@@ -138,6 +138,17 @@ export const setViewport = {
     }
   ],
 
+  testTypes: {
+      "params": {
+        "width": "INPUT_NUMBER",
+        "height": "INPUT_NUMBER",
+        "deviceScaleFactor": "INPUT_NUMBER",
+        "isMobile": "CHECKBOX",
+        "hasTouch": "CHECKBOX",
+        "isLandscape": "CHECKBOX"
+      }
+  },
+
   test: [
     {
       valid: true,

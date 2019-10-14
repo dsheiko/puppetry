@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Form, Row, Col, Alert, Input } from "antd";
+import { ipcRenderer } from "electron";
 import { TargetSelect } from "./TargetSelect";
 import { ElementMethodSelect } from "./ElementMethodSelect";
 import { PageMethodSelect } from "./PageMethodSelect";
@@ -9,7 +10,7 @@ import If from "component/Global/If";
 import { getSchema } from "component/Schema/schema";
 import { Description } from "component/Schema/Params/Description";
 import ErrorBoundary from "component/ErrorBoundary";
-import { FIELDSET_DEFAULT_LAYOUT } from "constant";
+import { E_RESET_FORM, FIELDSET_DEFAULT_LAYOUT } from "constant";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
@@ -132,6 +133,12 @@ export class CommandForm extends React.Component {
   checkTestHasGoto = () => {
     return this.props.commands.find( command => ( command.method === "goto" ) );
   }
+
+//  componentDidMount() {
+//    ipcRenderer.on( E_RESET_FORM, ( ...args ) => {
+//      this.props.form.resetFields( args[ 1 ] );
+//    });
+//  }
 
 
   componentDidUpdate( prevProps ) {

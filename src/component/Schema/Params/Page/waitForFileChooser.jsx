@@ -41,6 +41,12 @@ export const waitForFileChooser = {
     }
   ],
 
+  testTypes: {
+      "params": {
+        "timeout": "INPUT_NUMBER"
+      }
+  },
+
   test: [
     {
       valid: true,

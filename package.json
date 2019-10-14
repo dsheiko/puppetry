@@ -20,7 +20,7 @@
   "main": "./app/main.js",
   "scripts": {
     "test": "jest --config=jest.cfg.unit.js",
-    "test:e2e": "jest --config=jest.cfg.e2e.js --runInBand -u",
+    "test:e2e": "rm -rf ./src/__e2e__/screenshots/* && jest --config=jest.cfg.e2e.js --runInBand -u",
     "build": "cross-env NODE_ENV=production && webpack --config webpack.config.js",
     "watch": "webpack --watch  --config webpack.config.js",
     "build:dev": "cross-env NODE_ENV=development && webpack --config webpack.config.js",

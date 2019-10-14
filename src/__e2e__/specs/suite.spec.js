@@ -1,5 +1,5 @@
 // @see https://webdriver.io/docs/api.html
-// @see http://electronjs.org/docs
+// @see https://github.com/electron-userland/spectron
 const { Ctx } = require( "../lib/bootstrap" ),
       S = require( "../lib/constants" ),
       { validate } = require( "bycontract" ),
@@ -19,19 +19,26 @@ async function setActionInputValue( id, value, input ) {
   if ( value === null ) {
     return;
   }
-  if ( !await ctx.client.isExisting( selector ) ) {
-    console.error( `setActionInputValue: Selector ${ selector } not found` );
-    return;
-  }
 
-  switch ( input ) {
-    case "INPUT":
-    case "INPUT_NUMBER":
-      return await ctx.type( selector, value );
-    case "SELECT":
-      return await ctx.select( selector, value );
-    case "CHECKBOX":
-      return await ctx.toggleCheckbox( selector, value );
+  await ctx.client.waitForExist( selector );
+  try {
+    switch ( input ) {
+      case "INPUT":
+      case "INPUT_NUMBER":
+        return await ctx.client.setValue( selector, value );
+      case "SELECT":
+        return await ctx.select( selector, value );
+      case "CHECKBOX":
+        return await ctx.toggleCheckbox( selector, value );
+      case "SWITCH":
+        await ctx.click( selector );
+        // needs time to finish transaction
+        return await ctx.client.pause( 300 );
+      case "default":
+        console.error( new Error( `Invalid input type "${ input }" in "${ selector }"` ) );
+    }
+  } catch ( e ) {
+    throw new Error( `exception for ${ id }(${ input }): ${ e.message }` );
   }
 }
 
@@ -41,12 +48,27 @@ async function fillActionInput( spec, fixture, type ) {
   }
   for ( const pair of Object.entries( fixture[ type ] ) ) {
     const [ method, val ] = pair;
+    if ( method === "_enabled" ) {
+      let [ eKey ] = Object.keys( val );
+      await setActionInputValue( `${ type }.${ method }.${ eKey }`, true, "SWITCH" );
+      continue;
+    }
     if ( typeof spec[ type ][ method ] !== "undefined" ) {
-      setActionInputValue( `${ type }.${ method }`, val, spec[ type ][ method ] );
+      await setActionInputValue( `${ type }.${ method }`, val, spec[ type ][ method ] );
     }
   }
 }
 
+function getFieldlistToReset( spec ) {
+  return [ "params", "assert" ].reduce(( carry, type ) => {
+    if ( typeof spec[ type ] === "undefined" ) {
+      return carry;
+    }
+    return carry.concat( Object.keys( spec[ type ] )
+      .filter( method => method !== "_enabled" )
+      .map( method => `${ type }.${ method }` ) );
+  }, [] );
+}
 
 describe( "New Project", () => {
 
@@ -67,10 +89,8 @@ describe( "New Project", () => {
   test( "app opens New Project modal", async () => {
     expect( await ctx.client.isExisting( "#cWelcome" ) ).toBeTruthy();
     await ctx.client.click( "#cWelcomeNewProjectBtn" );
-    await ctx.client.pause( 300 );
+    await ctx.client.waitForExist( S.MODAL_NEW_PROJECT );
     await ctx.screenshot( "new-project-modal-opened" );
-    // New Project modal opens
-    expect( await ctx.client.isExisting( S.MODAL_NEW_PROJECT ) ).toBeTruthy();
   });
 
   test( "app populates New Project modal", async () => {
@@ -84,15 +104,14 @@ describe( "New Project", () => {
 
   test( "app lands on New Suite page", async () => {
     await ctx.client.click( `${ S.MODAL_NEW_PROJECT } ${ S.MODAL_OK_BTN }` );
-    await ctx.client.pause( 1200 );
-    expect( await ctx.client.isExisting( S.PANEL_SUITE_TABGROUP ) ).toBeTruthy();
+    await ctx.client.waitForExist( S.PANEL_SUITE_TABGROUP );
     await ctx.screenshot( "newly-created-suite" );
   });
 
 //  test( "go tab OPTIONS", async() => {
 //    await ctx.client.click( `${ S.PANEL_SUITE_TABGROUP } .ant-tabs-tab:nth-child(3)` );
-//    await ctx.client.pause( 300 );
-//    expect( await ctx.client.isExisting( `#cSuiteForm #title` ) ).toBeTruthy();
+//    await ctx.client.waitForExist( `#cSuiteForm #title` );
+//    // expect( await ctx.client.isExisting( `#cSuiteForm #title` ) ).toBeTruthy();
 //  });
 //
 //  test( "change suite options", async() => {
@@ -106,18 +125,17 @@ describe( "New Project", () => {
 //
 //  test( "go tab TARGETS", async() => {
 //    await ctx.client.click( `${ S.PANEL_SUITE_TABGROUP } .ant-tabs-tab:nth-child(1)` );
-//    await ctx.client.pause( 500 );
+//    await ctx.client.waitForExist( `#cTargetTable .input--target` );
 //    expect( await ctx.boundaryError() ).toBeFalsy();
 //    await ctx.screenshot( "goto-tab--targets" );
 //  });
 //
 //  test( "add a target", async() => {
-//    await ctx.client.pause( 500 );
 //    expect( await ctx.client.isExisting( "#cTargetTable .input--target > input" ) ).toBeTruthy();
 //    expect( await ctx.client.isExisting( "#cTargetTable .input--selector > input" ) ).toBeTruthy();
 //    await ctx.client.setValue( "#cTargetTable .input--target > input", FIX_TARGET );
 //    await ctx.client.setValue( "#cTargetTable .input--selector > input", ".foo" );
-//    await ctx.client.pause( 500 );
+
 //    await ctx.client.click( `#cTargetTable ${ S.EDITABLE_ROW_SUBMIT_BTN }` );
 //    expect( await ctx.boundaryError() ).toBeFalsy();
 //    await ctx.screenshot( "new-target" );
@@ -125,37 +143,35 @@ describe( "New Project", () => {
 
   test( "go tab GROUPS", async() => {
     await ctx.client.click( `${ S.PANEL_SUITE_TABGROUP } .ant-tabs-tab:nth-child(2)` );
-    await ctx.client.pause( 500 );
+    await ctx.client.waitForExist( "#cGroupTable .input--title > input" );
     expect( await ctx.boundaryError() ).toBeFalsy();
     await ctx.screenshot( "goto-tab--groups" );
   });
 
   test( "add a group", async() => {
-    expect( await ctx.client.isExisting( "#cGroupTable .input--title > input" ) ).toBeTruthy();
     await ctx.client.setValue( "#cGroupTable .input--title > input", "Test group" );
-    await ctx.screenshot( "new-group-before-save1" );
-    await ctx.client.pause( 500 );
-    await ctx.screenshot( "new-group-before-save2" );
     await ctx.client.click( `#cGroupTable ${ S.EDITABLE_ROW_SUBMIT_BTN }` );
-    expect( await ctx.boundaryError() ).toBeFalsy();
+    await ctx.client.waitForExist( "#cTestTable .input--title > input" );
     await ctx.screenshot( "new-group" );
   });
 
 
   test( "add a test", async() => {
-    await ctx.client.pause( 500 );
-    expect( await ctx.client.isExisting( "#cTestTable .input--title > input" ) ).toBeTruthy();
     await ctx.client.setValue( "#cTestTable .input--title > input", "Test" );
-    await ctx.client.pause( 500 );
     await ctx.client.click( `#cTestTable ${ S.EDITABLE_ROW_SUBMIT_BTN }` );
+    await ctx.client.pause( 300 );
     expect( await ctx.boundaryError() ).toBeFalsy();
     await ctx.screenshot( "new-test" );
   });
 
-  for (const scope of [ "page", "element" ] ) {
+  for (const scope of [ "page"/*, "element" */] ) {
     for (const sPair of Object.entries( schema[ scope ] ) ) {
 
       const [ method, config ] = sPair;
+
+//      if ( method !== "assertUrl" ) {
+//        continue;
+//      }
 
       if ( typeof config.testTypes === "undefined" ) {
         continue;
@@ -168,50 +184,75 @@ describe( "New Project", () => {
       test( `add a test step ${ scope }.${ method } `, async() => {
 
         // ADD COMMAND
-        await ctx.client.click( `#cCommandTableAddBtn` );
-        await ctx.client.pause( 500 );
-        // SELECT PAGE
+        await ctx.click( `#cCommandTableAddBtn` );
+        await ctx.client.waitForExist( "#cCommandForm .select--target" );
+        // SELECT PAGE/TARGET
         await ctx.select( "#cCommandForm .select--target", scope );
-        await ctx.client.pause( 500 );
+        // METHOD selector is disabled (input:disabled) until any value in TARGET selector picked
+        await ctx.client.waitForExist( "#cCommandForm .select--page-method.ant-select-enabled" );
+
         // SELECT METHOD
         await ctx.select( "#cCommandForm .select--page-method", method );
-        await ctx.client.pause( 500 );
+        // As soon as any value in METHOD selector picked we get description and .command-form sections into the view
+        await ctx.client.waitForExist( "#cCommandForm .command-form" );
+
 
         expect( await ctx.boundaryError() ).toBeFalsy();
 
         // EXPAND OPTIONS if any
         if (  await ctx.client.isExisting( S.TEST_STEP_COLLAPSABLE_ITEM ) ) {
           await ctx.click( S.TEST_STEP_COLLAPSABLE_ITEM );
-          await ctx.client.pause( 500 );
+          await ctx.client.waitForExist( S.TEST_STEP_COLLAPSABLE_EXPANDED );
         }
 
-        await ctx.screenshot( `command--select-${ method }` );
+
 
         if ( typeof config.testTypes === "undefined" ) {
+          await ctx.screenshot( `command--${ method }--empty` );
           // CLOSE MODAL
-          await ctx.client.click( `#cCommandModal .btn--modal-command-cancel` );
-          await ctx.client.pause( 500 );
+          await ctx.click( `#cCommandModal .btn--modal-command-cancel` );
+          await ctx.client.pause( 300 );
           return;
         }
 
+
+
+        // RESET the form
+//        const resetFields = getFieldlistToReset( config.testTypes, config.test );
+//        resetFields && ctx.app.webContents.send( "resetFormEvent", resetFields );
+//        await ctx.client.pause( 300 );
+
         // FILL OUT THE FORM
-        for ( const fixture of config.test ) {
-          fillActionInput( config.testTypes, fixture, "params" );
-          fillActionInput( config.testTypes, fixture, "assert" );
-        }
+
+          for ( const fixture of config.test ) {
+            try {
+              await fillActionInput( config.testTypes, fixture, "params" );
+              await fillActionInput( config.testTypes, fixture, "assert" );
+            } catch ( ex ) {
+              console.warn( `Exception at ${ scope }.${ method }: ${ ex.message }` );
+            }
+          }
+
+
+        //await ctx.client.pause( 200 );
+        await ctx.screenshot( `command--${ method }--filled` );
 
         // CLICK SAVE
-        await ctx.client.pause( 500 );
-        await ctx.screenshot( `BEFORE` );
-        await ctx.client.click( S.TEST_STEP_MODAL_OK );
-        await ctx.client.pause( 500 );
-        await ctx.screenshot( `command--added-${ method }` );
+        await ctx.click( S.TEST_STEP_MODAL_OK );
+
+        ctx.client && expect( await ctx.client.isExisting( `#cCommandModal .ant-form-item-control.has-error` ) )
+          .not.toBeOk( `Errored form fields for ${ scope }.${ method }` );
+
+        await this.app.client.pause( 300 );
 
       });
 
     }
   }
 
+  test( `Command listing populated`, async() => {
+    await ctx.screenshot( `command-listing--added` );
+  });
 
 
 //  test( `select target: ${ FIX_TARGET }`, async() => {

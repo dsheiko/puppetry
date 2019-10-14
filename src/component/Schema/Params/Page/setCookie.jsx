@@ -121,6 +121,19 @@ export const setCookie = {
     }
   ],
 
+  testTypes: {
+      "params": {
+        "name": "INPUT",
+        "value": "INPUT",
+        "domain": "INPUT",
+        "path": "INPUT",
+        "expires": "INPUT",
+        "httpOnly": "SELECT",
+        "secure": "SELECT",
+        "sameSite": "SELECT"
+      }
+  },
+
   test: [
     {
       valid: true,
@@ -128,9 +141,11 @@ export const setCookie = {
         "name": "aaa",
         "value": "aaa",
         "domain": "domain",
-        "httpOnly": "",
-        "secure": "",
-        "sameSite": ""
+        "path": "/path/",
+        "expires": 111111111,
+        "httpOnly": "true",
+        "secure": "true",
+        "sameSite": "Lax"
       }
     }
   ]

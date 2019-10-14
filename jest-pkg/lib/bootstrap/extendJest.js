@@ -75,8 +75,8 @@ module.exports = function( expect, util ) {
     toBeOk( received, source ) {
       const pass = Boolean( received );
       return expectReturn( pass,
-        `[${ source }] expected ${ JSON.stringify( received ) } to be truthy`,
-        `[${ source }] expected ${ JSON.stringify( received ) } to be falsy` );
+        `[${ source }] expected to be truthy`,
+        `[${ source }] expected to be falsy` );
     },
 
     /**

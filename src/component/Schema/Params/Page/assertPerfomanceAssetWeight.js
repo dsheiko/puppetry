@@ -31,6 +31,12 @@ export const assertPerfomanceAssetWeight = {
     node: AssertAssertWeight
   },
 
+  testTypes: {
+      "assert": {
+        "_enabled.script": "SWITCH",
+        "script": "INPUT_NUMBER"
+      }
+  },
 
   test: [
     {

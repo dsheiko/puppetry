@@ -116,16 +116,16 @@ class Ctx {
     }, selector );
   }
 
-  async type( selector, value ) {
-      // reset the input, because despite docs https://webdriver.io/docs/api/element/setValue.html
-      // .client.setValue works like addValue
-      await this.app.client.execute( ( selector ) => {
-        const el = document.querySelector( selector );
-        // When it's INPUT_NUMBER reset is 0
-        el.setAttribute( "value", el.classList.contains( "ant-input-number-input" ) ? 0 : "" );
-      }, selector );
-      return await this.app.client.setValue( selector, value );
-  }
+//  async type( selector, value ) {
+//      // reset the input, because despite docs https://webdriver.io/docs/api/element/setValue.html
+//      // .client.setValue works like addValue
+//      await this.app.client.execute( ( selector ) => {
+//        const el = document.querySelector( selector );
+//        // When it's INPUT_NUMBER reset is 0
+//        el.setAttribute( "value", el.classList.contains( "ant-input-number-input" ) ? 0 : "" );
+//      }, selector );
+//      return await this.app.client.setValue( selector, value );
+//  }
 
   /**
    * Emulate change select value for Ant.Design select
@@ -139,28 +139,45 @@ class Ctx {
     // 3) find list if options (dropdown menu items)
     // 4) find one matching given value
     // 5) click on it
-    await this.app.client.execute( ( selector, value ) => {
-      const el = document.querySelector( selector ),
-            oValue = value.trim();
-      el.scrollIntoView();
-      el.click();
-      const hash = el.querySelector( "[aria-controls]" ).getAttribute( "aria-controls" ),
-            list = Array.from( document.querySelectorAll( `[id="${ hash }"] .ant-select-dropdown-menu-item` ) ),
-            optionSpan = list.find( el => {
-              const span = el.querySelector( "span" );
-              // Target/Method selectors have ReactElements inside options
-              if ( span ) {
-                return span.dataset.keyword.trim() === oValue;
-              }
-              return el.textContent.trim() === oValue;
-            });
+    const debug = await this.app.client.execute( ( selector, value ) => {
+      try {
+        const el = document.querySelector( selector ),
+              oValue = value.trim();
+        el.scrollIntoView();
+        el.click();
+        const hash = el.querySelector( "[aria-controls]" ).getAttribute( "aria-controls" ),
+              list = Array.from( document.querySelectorAll( `[id="${ hash }"] .ant-select-dropdown-menu-item` ) ),
+              optionNode = list.find( el => {
+                const span = el.querySelector( "span" );
+                // Target/Method selectors have ReactElements inside options
+                if ( span ) {
+                  return span.dataset.keyword.trim() === oValue;
+                }
+                return el.textContent.trim() === oValue;
+              });
 
-      optionSpan && optionSpan.click();
-      return [ hash, optionSpan, list.map( el => el.tagName ) ];
+        optionNode && optionNode.click();
+        return { hash, optionNode, value, options: list.map( el => el.tagName ) };
+      } catch ( e ) {
+        return { exception: e };
+      }
+
     }, selector, value );
-    await this.app.client.pause( 100 );
+
+    await this.app.client.pause( 200 );
   }
 
+  // Well the problem is user
+//  async select( selector, value ) {
+//    await this.app.client.execute( ( selector ) => {
+//      document.querySelector( selector ).scrollIntoView();
+//    }, selector );
+//    await this.app.client.click( `${ selector } .ant-select-selection--single` );
+//    await this.app.client.pause( 100 );
+//    await this.app.client.setValue( `${ selector } input.ant-select-search__field`, value );
+//    await this.app.client.keys([ "Enter" ]);
+//    await this.app.client.pause( 100 );
+//  }
 
   async expectMenuItemsAvailable( spec ) {
     const keys = Object.keys( spec );
@@ -265,8 +282,8 @@ expect.extend({
   toBeOk( received, source ) {
     const pass = Boolean( received );
     return expectReturn( pass,
-      `[${ source }] expected ${ JSON.stringify( received ) } to be truthy`,
-      `[${ source }] expected ${ JSON.stringify( received ) } to be falsy` );
+      `[${ source }] expected to be available`,
+      `[${ source }] expected to be not available` );
   },
 
   /**
@@ -282,6 +299,7 @@ expect.extend({
       `[${ source }] expected ${ JSON.stringify( received ) } to equal ${ JSON.stringify( value ) }`,
       `[${ source }] expected ${ JSON.stringify( received ) } not to equal ${ JSON.stringify( value ) }` );
   }
+
 });
 
 exports.Ctx = Ctx;

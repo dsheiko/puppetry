@@ -48,6 +48,16 @@ export const assertScroll = {
     }
   ],
 
+  testTypes: {
+    "assert": {
+      "operator": "SELECT",
+      "value": "INPUT_NUMBER"
+    },
+    "params": {
+      "direction": "SELECT"
+    }
+  },
+
   test: [
     {
       valid: true,

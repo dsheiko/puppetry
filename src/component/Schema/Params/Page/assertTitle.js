@@ -23,6 +23,13 @@ export const assertTitle = {
 
   ],
 
+  testTypes: {
+    "assert": {
+      "assertion": "SELECT",
+      "value": "INPUT"
+    }
+  },
+
   test: [
     {
       valid: true,

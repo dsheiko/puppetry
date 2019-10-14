@@ -32,6 +32,12 @@ export const waitFor = {
     }
   ],
 
+  testTypes: {
+      "params": {
+        "value": "INPUT"
+      }
+  },
+
   test: [
     {
       valid: true,

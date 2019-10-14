@@ -107,6 +107,14 @@ export const goto = {
     }
   ],
 
+  testTypes: {
+    "params": {
+      "url": "INPUT",
+      "timeout": "INPUT_NUMBER",
+      "waitUntil": "SELECT"
+    }
+  },
+
   test: [
     {
       valid: true,

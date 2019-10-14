@@ -28,6 +28,13 @@ export const assertPerfomanceAssetCount = {
     node: AssertAssertCount
   },
 
+  testTypes: {
+    "assert": {
+      "_enabled.script": "SWITCH",
+      "script": "INPUT_NUMBER"
+    }
+  },
+
   test: [
     {
       valid: true,
@@ -43,9 +50,6 @@ export const assertPerfomanceAssetCount = {
         },
         "script": "22",
         "image": "2"
-      },
-      "params": {
-        "url": "asdasd"
       }
     }
   ]

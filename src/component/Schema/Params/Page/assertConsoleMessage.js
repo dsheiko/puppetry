@@ -29,6 +29,15 @@ export const assertConsoleMessage = {
 
   ],
 
+  testTypes: {
+    "assert": {
+      "not": "SELECT",
+      "type": "SELECT",
+      "assertion": "SELECT",
+      "value": "INPUT"
+    }
+  },
+
   test: [
     {
       valid: true,
@@ -49,7 +58,7 @@ export const assertConsoleMessage = {
       }
     }
   ]
-  
+
 };
 
 

@@ -43,6 +43,12 @@ await bs.page.evaluate(() => {
     }
   ],
 
+  testTypes: {
+      "params": {
+        "value": "INPUT"
+      }
+  },
+
   test: [
     {
       valid: true,

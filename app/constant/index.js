@@ -1,3 +1,4 @@
+exports.E_RESET_FORM = "resetFormEvent";
 exports.E_RUN_REPORT = "runReport";
 exports.E_BROWSE_DIRECTORY = "browseDirectory";
 exports.E_DIRECTORY_SELECTED = "directorySelected";

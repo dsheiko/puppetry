@@ -47,6 +47,12 @@ via \`ENV\` map (e.g. \`ENV[VAR_NAME]\`)
     }
   ],
 
+  testTypes: {
+      "params": {
+        "value": "INPUT"
+      }
+  },
+
   test: [
     {
       valid: true,

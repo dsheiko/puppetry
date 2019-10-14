@@ -32,6 +32,13 @@ export const assertPerfomanceTiming = {
   params: [
   ],
 
+  testTypes: {
+    "assert": {
+      "assertion": "assertAssetCount",
+      "_enabled.network": "SWITCH",
+      "network": "INPUT_NUMBER"
+    }
+  },
 
   test: [
     {
