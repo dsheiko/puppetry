@@ -240,10 +240,10 @@ describe( "New Project", () => {
         // CLICK SAVE
         await ctx.click( S.TEST_STEP_MODAL_OK );
 
-        ctx.client && expect( await ctx.client.isExisting( `#cCommandModal .ant-form-item-control.has-error` ) )
+        expect( await ctx.client.isExisting( `#cCommandModal .ant-form-item-control.has-error` ) )
           .not.toBeOk( `Errored form fields for ${ scope }.${ method }` );
 
-        await this.app.client.pause( 300 );
+        await ctx.client.pause( 300 );
 
       });
 
