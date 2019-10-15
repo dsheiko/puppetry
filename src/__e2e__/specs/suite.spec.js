@@ -42,19 +42,35 @@ async function setActionInputValue( id, value, input ) {
   }
 }
 
-async function fillActionInput( spec, fixture, type ) {
-  if ( typeof fixture[ type ] === "undefined" || typeof spec[ type ] === "undefined" ) {
+async function fillEnabled( enabledKey, testTypes, localTest ) {
+  const [ enabled, param ] = enabledKey.split( "." );
+  await setActionInputValue( `assert._enabled.${ param }`, true, "SWITCH" );
+  await setActionInputValue( `assert.${ param }`, localTest[ param ], testTypes[ param ] );
+}
+
+/**
+ *
+ * @param {Object} testTypes
+ * @param {Object} testFix
+ * @param {String} scope - "params" | "assert"
+ */
+async function fillActionInput( testTypes, testFix, scope ) {
+  if ( typeof testFix[ scope ] === "undefined" || typeof testTypes[ scope ] === "undefined" ) {
     return;
   }
-  for ( const pair of Object.entries( fixture[ type ] ) ) {
-    const [ method, val ] = pair;
-    if ( method === "_enabled" ) {
-      let [ eKey ] = Object.keys( val );
-      await setActionInputValue( `${ type }.${ method }.${ eKey }`, true, "SWITCH" );
-      continue;
+  const pairs = Object.entries( testFix[ scope ] );
+
+  if ( "assert" in testTypes && "assert" in testFix ) {
+    const enabledKey = Object.keys( testTypes.assert ).find( key => key.startsWith( "_enabled" ) );
+    if ( enabledKey ) {
+      return await fillEnabled( enabledKey, testTypes.assert, testFix.assert );
     }
-    if ( typeof spec[ type ][ method ] !== "undefined" ) {
-      await setActionInputValue( `${ type }.${ method }`, val, spec[ type ][ method ] );
+
+  }
+  for ( const pair of pairs ) {
+    const [ method, val ] = pair;
+    if ( typeof testTypes[ scope ][ method ] !== "undefined" ) {
+      await setActionInputValue( `${ scope }.${ method }`, val, testTypes[ scope ][ method ] );
     }
   }
 }
@@ -169,7 +185,7 @@ describe( "New Project", () => {
 
       const [ method, config ] = sPair;
 
-//      if ( method !== "assertUrl" ) {
+//      if ( method !== "assertPerfomanceTiming" ) {
 //        continue;
 //      }
 
@@ -214,7 +230,6 @@ describe( "New Project", () => {
           await ctx.client.pause( 300 );
           return;
         }
-
 
 
         // RESET the form
