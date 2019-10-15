@@ -69,6 +69,14 @@ function getSetupOptions( options ) {
   });
 }
 
+/**
+ * \" breaks JavaScript for injecting
+ * @param {String} data
+ * @returns {String}
+ */
+function stringifyData( data ) {
+  return ( JSON.stringify( data, null, 2 ) ).replace( /\\\"/gm, "'" );
+}
 export const tplSuite = ({
   title, body, targets, suite, runner, projectDirectory, outputDirectory, env, options, interactive
 }) => `
@@ -127,10 +135,11 @@ describe( ${ JSON.stringify( title ) }, async () => {
     bs.page.on( "load", async () => {
       await bs.page.addStyleTag({ content: \`${ readInteractAsset( outputDirectory, "toolbox.css" ) }\`});
       await bs.page.addScriptTag({ content: \`
-        const data = ${ JSON.stringify( interactive )  };
-        let stepIndex = \${ stepIndex };
+        const data = ${ stringifyData( interactive )  };
+        let stepIndex = \${ ( stepIndex ? parseInt( stepIndex, 10 ) : 0 )  };
         const suiteHtml = ${ JSON.stringify( renderSuiteHtml( suite ) ) };
-        ${ readInteractAsset( outputDirectory, "toolbox.js" ) }\`});
+        ${ readInteractAsset( outputDirectory, "toolbox.js" ) }
+        \`});
     });
     ` : `` }
   });
