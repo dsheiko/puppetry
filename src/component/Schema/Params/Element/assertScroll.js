@@ -52,6 +52,16 @@ offset on the target satisfies the given constraint`,
     }
   ],
 
+  testTypes: {
+    "assert": {
+      "operator": "SELECT",
+      "value": "INPUT_NUMBER"
+    },
+    "params": {
+      "direction": "SELECT"
+    }
+  },
+
   test: [
     {
       valid: true,

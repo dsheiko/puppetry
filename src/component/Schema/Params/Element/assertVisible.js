@@ -28,6 +28,12 @@ styles \`display\` is not \`none\`, \`visible\` is not \`hidden\`, \`opacity\` i
   params: [
   ],
 
+  testTypes: {
+    "assert": {
+      "value": "CHECKBOX"
+    }
+  },
+
   test: [
     {
       valid: true,

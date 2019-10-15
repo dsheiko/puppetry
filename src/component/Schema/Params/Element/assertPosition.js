@@ -34,6 +34,13 @@ export const assertPosition = {
 
   ],
 
+  testTypes: {
+    "assert": {
+      "position": "SELECT",
+      "target": "SELECT"
+    }
+  },
+
   test: [
     {
       valid: true,

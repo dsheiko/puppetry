@@ -42,6 +42,16 @@ export const assertNodeCount = {
     }
   ],
 
+  testTypes: {
+    "assert": {
+      "operator": "SELECT",
+      "value": "INPUT_NUMBER"
+    },
+    "params": {
+      "selector": "INPUT"
+    }
+  },
+
   test: [
     {
       valid: true,

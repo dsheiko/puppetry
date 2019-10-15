@@ -43,6 +43,17 @@ export const assertTextCount = {
     }
   ],
 
+  testTypes: {
+    "assert": {
+      "assertion": "SELECT",
+      "operator": "SELECT",
+      "value": "INPUT_NUMBER"
+    },
+    "params": {
+      "text": "INPUT"
+    }
+  },
+
   test: [
     {
       valid: true,

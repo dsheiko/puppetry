@@ -52,6 +52,15 @@ export const assertContainsClass = {
     }
   ],
 
+  testTypes: {
+    "assert": {
+        "value": "CHECKBOX"
+      },
+      "params": {
+        "name": "INPUT"
+      }
+  },
+
   test: [
     {
       valid: true,

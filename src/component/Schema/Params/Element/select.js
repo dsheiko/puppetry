@@ -34,10 +34,10 @@ export const select = {
       ]
     }
   ],
-  
+
   testTypes: {
     "params": {
-      "name": "INPUT"
+      "value": "INPUT"
     }
   },
 

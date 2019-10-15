@@ -23,6 +23,12 @@ export const assertMatchesSelector = {
   + `(https://developer.mozilla.org/en-US/docs/Web/API/Element/matches)`,
   params: [],
 
+  testTypes: {
+    "assert": {
+        "value": "INPUT"
+      }
+  },
+
   test: [
     {
       valid: true,

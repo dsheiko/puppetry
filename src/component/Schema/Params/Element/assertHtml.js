@@ -26,6 +26,13 @@ export const assertHtml = {
 
   ],
 
+  testTypes: {
+    "assert": {
+        "assertion": "SELECT",
+        "value": "INPUT"
+      }
+  },
+
   test: [
     {
       valid: true,

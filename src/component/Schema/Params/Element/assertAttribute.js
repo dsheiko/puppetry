@@ -54,6 +54,16 @@ export const assertAttribute = {
     }
   ],
 
+  testTypes: {
+    "assert": {
+        "assertion": "SELECT",
+        "value": "INPUT"
+      },
+      "params": {
+        "name": "INPUT"
+      }
+  },
+
   test: [
     {
       valid: true,

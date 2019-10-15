@@ -139,23 +139,22 @@ describe( "New Project", () => {
 //    await ctx.screenshot( "suite-form-modified" );
 //  });
 //
-//  test( "go tab TARGETS", async() => {
-//    await ctx.client.click( `${ S.PANEL_SUITE_TABGROUP } .ant-tabs-tab:nth-child(1)` );
-//    await ctx.client.waitForExist( `#cTargetTable .input--target` );
-//    expect( await ctx.boundaryError() ).toBeFalsy();
-//    await ctx.screenshot( "goto-tab--targets" );
-//  });
-//
-//  test( "add a target", async() => {
-//    expect( await ctx.client.isExisting( "#cTargetTable .input--target > input" ) ).toBeTruthy();
-//    expect( await ctx.client.isExisting( "#cTargetTable .input--selector > input" ) ).toBeTruthy();
-//    await ctx.client.setValue( "#cTargetTable .input--target > input", FIX_TARGET );
-//    await ctx.client.setValue( "#cTargetTable .input--selector > input", ".foo" );
+  test( "go tab TARGETS", async() => {
+    await ctx.client.click( `${ S.PANEL_SUITE_TABGROUP } .ant-tabs-tab:nth-child(1)` );
+    await ctx.client.waitForExist( `#cTargetTable .input--target` );
+    expect( await ctx.boundaryError() ).toBeFalsy();
+    await ctx.screenshot( "goto-tab--targets" );
+  });
 
-//    await ctx.client.click( `#cTargetTable ${ S.EDITABLE_ROW_SUBMIT_BTN }` );
-//    expect( await ctx.boundaryError() ).toBeFalsy();
-//    await ctx.screenshot( "new-target" );
-//  });
+  test( "add a target", async() => {
+    expect( await ctx.client.isExisting( "#cTargetTable .input--target > input" ) ).toBeTruthy();
+    expect( await ctx.client.isExisting( "#cTargetTable .input--selector > input" ) ).toBeTruthy();
+    await ctx.client.setValue( "#cTargetTable .input--target > input", FIX_TARGET );
+    await ctx.client.setValue( "#cTargetTable .input--selector > input", ".foo" );
+    await ctx.client.click( `#cTargetTable ${ S.EDITABLE_ROW_SUBMIT_BTN }` );
+    expect( await ctx.boundaryError() ).toBeFalsy();
+    await ctx.screenshot( "new-target" );
+  });
 
   test( "go tab GROUPS", async() => {
     await ctx.client.click( `${ S.PANEL_SUITE_TABGROUP } .ant-tabs-tab:nth-child(2)` );
@@ -180,12 +179,12 @@ describe( "New Project", () => {
     await ctx.screenshot( "new-test" );
   });
 
-  for (const scope of [ /* "page", */ "element" ] ) {
+  for (const scope of [ "page", "element" ] ) {
     for (const sPair of Object.entries( schema[ scope ] ) ) {
 
       const [ method, config ] = sPair;
 
-//      if ( method !== "assertPerfomanceTiming" ) {
+//      if ( method !== "assertNodeCount" ) {
 //        continue;
 //      }
 
@@ -198,17 +197,20 @@ describe( "New Project", () => {
       }
 
       test( `add a test step ${ scope }.${ method } `, async() => {
+        const METHOD_SELECTOR = scope === "page"
+          ? `.select--page-method`
+          : `.select--element-method`;
 
         // ADD COMMAND
         await ctx.click( `#cCommandTableAddBtn` );
         await ctx.client.waitForExist( "#cCommandForm .select--target" );
         // SELECT PAGE/TARGET
-        await ctx.select( "#cCommandForm .select--target", scope );
+        await ctx.select( "#cCommandForm .select--target", scope === "page" ? "page" : FIX_TARGET );
         // METHOD selector is disabled (input:disabled) until any value in TARGET selector picked
-        await ctx.client.waitForExist( "#cCommandForm .select--page-method.ant-select-enabled" );
+        await ctx.client.waitForExist( `#cCommandForm ${ METHOD_SELECTOR }.ant-select-enabled` );
 
         // SELECT METHOD
-        await ctx.select( "#cCommandForm .select--page-method", method );
+        await ctx.select( `#cCommandForm ${ METHOD_SELECTOR }`, method );
         // As soon as any value in METHOD selector picked we get description and .command-form sections into the view
         await ctx.client.waitForExist( "#cCommandForm .command-form" );
 
@@ -220,8 +222,6 @@ describe( "New Project", () => {
           await ctx.click( S.TEST_STEP_COLLAPSABLE_ITEM );
           await ctx.client.waitForExist( S.TEST_STEP_COLLAPSABLE_EXPANDED );
         }
-
-
 
         if ( typeof config.testTypes === "undefined" ) {
           await ctx.screenshot( `command--${ method }--empty` );

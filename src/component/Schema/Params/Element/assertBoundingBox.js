@@ -53,6 +53,13 @@ export const assertBoundingBox = {
 
   ],
 
+  testTypes: {
+    "assert": {
+        "xOperator": "SELECT",
+        "xValue": "INPUT_NUMBER"
+      }
+  },
+
   test: [
     {
       valid: true,
