@@ -34,6 +34,12 @@ export const select = {
       ]
     }
   ],
+  
+  testTypes: {
+    "params": {
+      "name": "INPUT"
+    }
+  },
 
   test: [
     {

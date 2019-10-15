@@ -68,6 +68,13 @@ export const screenshot = {
 
   ],
 
+  testTypes: {
+    "params": {
+      "name": "INPUT",
+      "omitBackground": "CHECKBOX"
+    }
+  },
+
   test: [
     {
       valid: true,

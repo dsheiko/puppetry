@@ -180,7 +180,7 @@ describe( "New Project", () => {
     await ctx.screenshot( "new-test" );
   });
 
-  for (const scope of [ "page"/*, "element" */] ) {
+  for (const scope of [ /* "page", */ "element" ] ) {
     for (const sPair of Object.entries( schema[ scope ] ) ) {
 
       const [ method, config ] = sPair;

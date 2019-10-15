@@ -53,6 +53,13 @@ await bs.page.$eval( '${ command.targetSeletor }',  ( el, x, y ) => {
     }
   ],
 
+  testTypes: {
+    "params": {
+      "x": "INPUT_NUMBER",
+      "y": "INPUT_NUMBER"
+    }
+  },
+
   test: [
     {
       valid: true,

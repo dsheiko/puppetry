@@ -17,7 +17,7 @@ export const reset = {
   commonly: "reset input or form",
   description: `Resets the input or form element`,
   params: [],
-
+ 
   test: [
     {
       valid: true

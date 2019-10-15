@@ -39,6 +39,12 @@ export const type = {
     }
   ],
 
+  testTypes: {
+    "params": {
+      "value": "INPUT"
+    }
+  },
+
   test: [
     {
       valid: true,

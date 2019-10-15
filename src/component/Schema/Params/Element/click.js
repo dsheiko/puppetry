@@ -72,6 +72,14 @@ export const click = {
 
   ],
 
+  testTypes: {
+    "params": {
+      "button": "SELECT",
+        "clickCount": "INPUT_NUMBER",
+        "delay": "INPUT_NUMBER"
+    }
+  },
+
   test: [
     {
       valid: true,

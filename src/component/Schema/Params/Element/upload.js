@@ -82,6 +82,12 @@ export const upload = {
 
   ],
 
+   testTypes: {
+    "params": {
+      "path": "INPUT"
+    }
+  },
+
   test: [
     {
       valid: true,

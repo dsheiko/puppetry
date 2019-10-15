@@ -49,6 +49,13 @@ export const setAttribute = {
     }
   ],
 
+  testTypes: {
+    "params": {
+      "name": "INPUT",
+      "value": "INPUT"
+    }
+  },
+
   test: [
     {
       valid: true,
