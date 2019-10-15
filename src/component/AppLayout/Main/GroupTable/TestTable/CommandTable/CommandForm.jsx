@@ -50,10 +50,20 @@ export class CommandForm extends React.Component {
      };
    }
 
+   resetState() {
+     this.setState({
+       target: "",
+       method: "",
+       error: "",
+       validationError: ""
+     });
+   }
+
    updateSuiteModified() {
      this.props.action.updateSuite({
        modified: true
      });
+     this.props.action.autosaveSuite();
    }
 
 
@@ -89,8 +99,9 @@ export class CommandForm extends React.Component {
           comment: values.comment
         });
 
+console.log("are here?");
         this.updateSuiteModified();
-
+        this.resetState();
         closeModal();
       }
     });

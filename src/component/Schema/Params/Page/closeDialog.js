@@ -48,7 +48,7 @@ export const closeDialog = {
         {
           name: "params.substring",
           control: INPUT,
-          label: "Message contains",
+          label: "Message has",
           placeholder: "",
           rules: [{
             required: true,
@@ -96,7 +96,7 @@ export const closeDialog = {
         {
           name: "params.promptText",
           control: INPUT,
-          label: "Prompt text",
+          label: "Prompt text has",
           tooltip: "Does not cause any effects if the dialog's type is not prompt.",
           placeholder: "(optional)"
         }

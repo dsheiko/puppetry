@@ -162,9 +162,9 @@ export const assertScreenshot = {
         {
           name: "params.diffColor",
           control: INPUT,
-          label: "Diff color (HEX)",
+          label: "Diff color",
           initialValue: "#FF0000",
-          tooltip: `The color of differing pixels in the diff output`,
+          tooltip: `The color (HEX) of differing pixels in the diff output`,
           placeholder: "",
           rules: [{
             required: true,
@@ -175,9 +175,9 @@ export const assertScreenshot = {
         {
           name: "params.aaColor",
           control: INPUT,
-          label: "Anti-alias color (HEX)",
+          label: "Anti-alias",
           initialValue: "#FFFF00",
-          tooltip: `The color of anti-aliased pixels in the diff output`,
+          tooltip: `The color (HEX) of anti-aliased pixels in the diff output`,
           placeholder: "",
           rules: [{
             required: true,

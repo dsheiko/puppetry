@@ -50,6 +50,7 @@ export class CommandTable extends AbstractDnDTable {
     this.props.action.updateSuite({
       modified: true
     });
+    this.props.action.autosaveSuite();
   }
 
   onContextMenu = ( e, record  ) => {

@@ -46,7 +46,7 @@ export const waitForNavigation = {
         {
           name: "params.waitUntil",
           control: SELECT,
-          label: "Wait until event",
+          label: "Wait till event",
           tooltip: `Waits for a specified event before continue`,
           placeholder: "",
           initialValue: "load",

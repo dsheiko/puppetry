@@ -83,7 +83,7 @@ export const goto = {
           inputStyle: { maxWidth: 200 },
           name: "params.waitUntil",
           control: SELECT,
-          label: "Wait until event",
+          label: "Wait till event",
           tooltip: `Waits for a specified event before continue`,
           placeholder: "",
           description: `Where events can be either:

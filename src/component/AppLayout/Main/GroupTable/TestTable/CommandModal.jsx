@@ -34,7 +34,7 @@ export class CommandModal extends React.Component {
   }
 
   onCancel = ( record ) => {
-    const { setApp, removeCommand, updateSuite } = this.props.action;
+    const { setApp, removeCommand } = this.props.action;
     this.setState({ submitted: false });
     setApp({
       commandModal: {
@@ -46,7 +46,6 @@ export class CommandModal extends React.Component {
     // an empty record is added to the list, we have to remove it
     if ( record && !record.target ) {
       removeCommand( record );
-      updateSuite({ modified: true });
     }
   }
 
@@ -70,7 +69,7 @@ export class CommandModal extends React.Component {
         title="Edit Command/Assertion"
         id="cCommandModal"
         onOk={this.onOK}
-        onCancel={this.onCancel}
+        onCancel={() => this.onCancel( record )}
         footer={[
           <Button key="back"
             className="btn--modal-command-cancel"

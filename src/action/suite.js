@@ -27,19 +27,23 @@ const actions = createActions({
 
 let autosaveTimeout;
 
-actions.updateSuite = ( suite ) => ( dispatch, getState ) => {
+
+actions.updateSuite = ( suite ) => ( dispatch ) => {
+  dispatch( projectActions.setProject({ modified: true }) );
+  dispatch( actions.setSuite( suite ) );
+};
+
+actions.autosaveSuite = () => ( dispatch, getState ) => {
 
   const store = getState(),
         autosaveSuite = () => {
           autosaveTimeout = null;
           dispatch( actions.setSuite({ savedAt: dateToTs(), modified: false }) );
           dispatch( actions.saveSuite( {}, true ) );
+          saveProject( store );
           message.destroy();
           message.info( `Data saved!` );
         };
-
-  dispatch( projectActions.setProject({ modified: true }) );
-  dispatch( actions.setSuite( suite ) );
 
   if ( store.project.autosave && store.settings.projectDirectory && store.suite.filename ) {
     clearTimeout( autosaveTimeout );
@@ -97,6 +101,22 @@ function createSnippetsSuite( dispatch ) {
   }) );
 }
 
+function normalizeSuite( suite ) {
+  Object.entries( suite.groups ).forEach( gPairs => {
+    const [ gid, group ] = gPairs;
+    Object.entries( group.tests ).forEach( tPairs => {
+      const [ tid, test ] = tPairs;
+      Object.entries( test.commands ).forEach( cPairs => {
+        const [ cid, command ] = cPairs;
+        if ( !command.target && !command.method && !command.ref ) {
+          delete suite.groups[ gid ].tests[ tid ].commands[ cid ];
+        }
+      });
+    });
+  });
+  return suite;
+}
+
 actions.loadSuite = ( filename, options = { silent: false }) => async ( dispatch, getState ) => {
   try {
     const store = getState(),
@@ -105,7 +125,7 @@ actions.loadSuite = ( filename, options = { silent: false }) => async ( dispatch
           // in case of snippets
           suite = data === null
             ? { ...DEFAULT_STATE.suite, filename }
-            : data;
+            : normalizeSuite( data );
 
     suite.snippets = ( filename === SNIPPETS_FILENAME );
 
@@ -116,6 +136,9 @@ actions.loadSuite = ( filename, options = { silent: false }) => async ( dispatch
       createSnippetsSuite( dispatch );
     }
     dispatch( appActions.addAppTab( "suite" ) );
+    if ( store.project.autosave && store.settings.projectDirectory ) {
+      saveProject( store );
+    }
   } catch ( ex ) {
     !options.silent && handleException( ex, dispatch, `Cannot load suite ${ filename }` );
   }
