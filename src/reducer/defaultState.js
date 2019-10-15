@@ -5,7 +5,9 @@ export default {
     projects: {}, // { dir, name }
     exportDirectory: "",
     lastCheckedVersion: "",
-    checkDate: ""
+    checkDate: "",
+    autosave: true,
+    testCaseStyle: "gherkin"
   },
   // Runtime state
   app: {
@@ -69,6 +71,8 @@ export default {
       available: {
         suite: false,
         testReport: false,
+        projectVariables: false,
+        projectGit: false,
         settings: false
       },
       active: "suite"
@@ -105,7 +109,6 @@ export default {
     savedAt: 0,
     modified: false,
     lastOpenSuite: "",
-    autosave: true,
 
     variables: {},
     environments: [ "test", "stage", "production" ]

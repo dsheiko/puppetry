@@ -5,7 +5,7 @@ import { version, handleException, saveProject } from "./helpers";
 import uniqid from "uniqid";
 import DEFAULT_STATE from "reducer/defaultState";
 import { InvalidArgumentError } from "error";
-import { dateToTs } from "service/utils";
+import { dateToTs, result } from "service/utils";
 import errorActions from "./error";
 import { writeSuite, readSuite, removeSuite, normalizeFilename } from "../service/io";
 import { ipcRenderer } from "electron";
@@ -18,6 +18,7 @@ import testActions from "./test";
 import commandActions from "./command";
 import snippetsActions from "./snippets";
 import { message } from "antd";
+
 
 
 const actions = createActions({
@@ -45,7 +46,7 @@ actions.autosaveSuite = () => ( dispatch, getState ) => {
           message.info( `Data saved!` );
         };
 
-  if ( store.project.autosave && store.settings.projectDirectory && store.suite.filename ) {
+  if ( result( store.settings, "autosave", true ) && store.settings.projectDirectory && store.suite.filename ) {
     clearTimeout( autosaveTimeout );
     autosaveTimeout = setTimeout( autosaveSuite, 1500 );
   }
@@ -136,7 +137,7 @@ actions.loadSuite = ( filename, options = { silent: false }) => async ( dispatch
       createSnippetsSuite( dispatch );
     }
     dispatch( appActions.addAppTab( "suite" ) );
-    if ( store.project.autosave && store.settings.projectDirectory ) {
+    if ( result( store.settings, "autosave", true ) && store.settings.projectDirectory ) {
       saveProject( store );
     }
   } catch ( ex ) {

@@ -10,7 +10,7 @@ import If from "component/Global/If";
 import { getSchema } from "component/Schema/schema";
 import { Description } from "component/Schema/Params/Description";
 import ErrorBoundary from "component/ErrorBoundary";
-import { E_RESET_FORM, FIELDSET_DEFAULT_LAYOUT } from "constant";
+import { FIELDSET_DEFAULT_LAYOUT } from "constant";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
@@ -99,7 +99,6 @@ export class CommandForm extends React.Component {
           comment: values.comment
         });
 
-console.log("are here?");
         this.updateSuiteModified();
         this.resetState();
         closeModal();

@@ -4,8 +4,18 @@ import PropTypes from "prop-types";
 import { Icon } from "antd";
 import Tooltip from "component/Global/Tooltip";
 import { getSchema } from "component/Schema/schema";
-import { truncate } from "service/utils";
+import { truncate, result } from "service/utils";
+import { connect } from "react-redux";
 
+      // Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        settings: state.settings
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = () => ({
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 export class CommandRowLabel extends React.Component {
 
    static propTypes = {
@@ -56,17 +66,26 @@ export class CommandRowLabel extends React.Component {
      </div> );
    }
 
+  shouldComponentUpdate( nextProps ) {
+    if ( this.props.record !== nextProps.record || this.props.settings !== nextProps.settings ) {
+      return true;
+    }
+    return false;
+  }
+
    renderCommand() {
-     const { record } = this.props,
+     const { record, settings } = this.props,
+           testCaseStyle = result( settings, "testCaseStyle", "gherkin" ),
            schema = getSchema( record.target === "page" ? "page" : "target", record.method );
+
      return ( <div className="container--editable-cell">
        <Tooltip
          title={ record.failure }
          icon="exclamation-circle"
          pos="up" />
 
-    { typeof schema.toGherkinQ === "function" && CommandRowLabel.highlightText( schema.toGherkin( record ) ) }
-    { typeof schema.toGherkinQ !== "function" && <React.Fragment>
+    { testCaseStyle === "gherkin" && CommandRowLabel.highlightText( schema.toGherkin( record ) ) }
+    { testCaseStyle !== "gherkin" && <React.Fragment>
        <Icon
          type={ record.target === "page" ? "file" : "scan" }
          title={ record.target === "page" ? "Page method" : `${ record.target } target method` } />

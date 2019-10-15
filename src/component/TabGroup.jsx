@@ -4,6 +4,8 @@ import { Tabs, Icon } from "antd";
 import { Main } from "./AppLayout/Main";
 import { Snippets } from "./AppLayout/Snippets";
 import { SettingsPanel } from "./AppLayout/Settings/SettingsPanel";
+import { VariablesPane } from "./AppLayout/Project/Variables/VariablesPane";
+import { GitPane } from "./AppLayout/Project/Git/GitPane";
 import { TestReport } from "./AppLayout/TestReport";
 import ErrorBoundary from "component/ErrorBoundary";
 import { confirmUnsavedChanges } from "service/smalltalk";
@@ -53,10 +55,12 @@ export class TabGroup extends React.Component {
             : "Loading..." ,
 
           panes = {
+
             suite: () => ( <TabPane tab={ suiteTabTitle } key="suite" closable={ true }>
               { store.suite.snippets && <Snippets action={ action } store={ store } selector={ selector } /> }
               { !store.suite.snippets && <Main action={ action } store={ store } selector={ selector } /> }
             </TabPane> ),
+
             testReport: () => ( <TabPane tab="Test report"
               key="testReport" closable={ true } className="report-panel-tab">
               <TestReport
@@ -78,11 +82,21 @@ export class TabGroup extends React.Component {
                 selector={ selector }
               />
             </TabPane> ),
+
+            projectVariables: () => ( <TabPane tab={ "Variables" } key="projectVariables" closable={ true }>
+              <div className="tabpane-frame"><VariablesPane /></div>
+            </TabPane> ),
+
+            projectGit: () => ( <TabPane tab={ "GIT" } key="projectGit" closable={ true }>
+              <div className="tabpane-frame">
+                <GitPane action={ action } git={ store.git } projectDirectory={ store.settings.projectDirectory } />
+              </div>
+            </TabPane> ),
+
             settings: () => ( <TabPane tab={ "Settings" } key="settings" closable={ true }>
               <SettingsPanel
                 action={ action }
-                projectDirectory={ store.settings.projectDirectory }
-                git={ store.git }
+                settings={ store.settings }
                 project={ store.project }
               />
             </TabPane> )

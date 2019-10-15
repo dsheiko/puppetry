@@ -1,8 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Tabs } from "antd";
-import { GitPane } from "./Git/GitPane";
-import { VariablesPane } from "./Variables/VariablesPane";
+import { GeneralPane } from "./General/GeneralPane";
 import ErrorBoundary from "component/ErrorBoundary";
 
 const TabPane = Tabs.TabPane;
@@ -11,8 +10,7 @@ export class SettingsPanel extends React.Component {
 
   static propTypes = {
     project: PropTypes.object.isRequired,
-    projectDirectory: PropTypes.string,
-    git: PropTypes.object.isRequired,
+    settings: PropTypes.object,
     action: PropTypes.shape({
       updateProjectPanes: PropTypes.func.isRequired,
       setApp: PropTypes.func.isRequired
@@ -28,10 +26,10 @@ export class SettingsPanel extends React.Component {
   }
 
   render() {
-    const { action, project, projectDirectory, git } = this.props,
+    const { action, project, settings } = this.props,
           panes = project.appPanels.settings.panes;
 
-    let activeKey = projectDirectory ? "variables" : "git";
+    let activeKey = "general";
     if ( panes.length ) {
       [ activeKey ] = panes;
     }
@@ -46,12 +44,11 @@ export class SettingsPanel extends React.Component {
             animated={ false }
             onChange={ this.onTabChange }
           >
-            { projectDirectory && <TabPane tab="Template Variables" key="variables">
-              <VariablesPane />
-            </TabPane> }
 
-            <TabPane tab="GIT" key="git">
-              <GitPane action={ action } git={ git } projectDirectory={ projectDirectory } />
+            <TabPane tab="General" key="general">
+              <div className="subtabpane-frame">
+                <GeneralPane action={ action } settings={ settings } />
+              </div>
             </TabPane>
 
           </Tabs>

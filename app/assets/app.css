@@ -1336,3 +1336,20 @@ summary:hover {
 .ant-form-item {
   margin-bottom: 16px;
 }
+
+/* For tabbed pages like Variables/Git the content needs to stay inside the frame */
+.tabpane-frame {
+  height: calc(100vh - 186px);
+  overflow-y: auto;
+  padding-right: 16px;
+}
+/* Settings */
+.subtabpane-frame {
+  height: calc(100vh - 268px);
+  overflow-y: auto;
+  padding-right: 16px;
+}
+
+.ant-col-21.form-buttons {
+  text-align: right;
+}

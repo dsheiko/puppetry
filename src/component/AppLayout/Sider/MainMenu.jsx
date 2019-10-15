@@ -204,8 +204,8 @@ export class MainMenu extends GitEnhancedMenu {
     openSuiteFile( SNIPPETS_FILENAME );
   }
 
-  onSettings = async () => {
-    this.props.action.addAppTab( "settings" );
+  openTab = async ( tabKey ) => {
+    this.props.action.addAppTab( tabKey );
   }
 
   onRendererInfo( ev, msg ) {
@@ -314,11 +314,33 @@ export class MainMenu extends GitEnhancedMenu {
 
             </SubMenu>
 
-            <Menu.Item key="15" disabled={ !projectDirectory } onClick={ this.onSnippets } id="cMainMenuSnippets">
-              <span><Icon type="snippets" /><span>Snippets</span></span></Menu.Item>
 
-            <Menu.Item key="11" onClick={ this.onSettings } id="cMainMenuSettings">
-              <span><Icon type="setting" /><span>Settings...</span></span></Menu.Item>
+            <SubMenu
+              key="project"
+              id="cMainMenuFile"
+              disabled={ !projectDirectory }
+              title={<span><Icon type="project" /><span>Project</span></span>}
+            >
+
+              <Menu.Item key="101" onClick={ this.onSnippets } id="cMainMenuProjectSnippets">
+                Snippets
+              </Menu.Item>
+
+              <Menu.Item key="102"
+                onClick={ e => this.openTab( "projectVariables" ) } id="cMainMenuProjectVariables">
+                Variables
+              </Menu.Item>
+
+              <Menu.Item key="103"
+                onClick={ e => this.openTab( "projectGit" ) } id="cMainMenuProjectGit">
+                GIT
+              </Menu.Item>
+
+            </SubMenu>
+
+
+            <Menu.Item key="11" onClick={ e => this.openTab( "settings" ) } id="cMainMenuSettings">
+              <span><Icon type="setting" /><span>Settings</span></span></Menu.Item>
 
             <Menu.Item key="10"
               id="cMainMenuRun"
