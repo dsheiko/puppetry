@@ -27,7 +27,7 @@ await bs.page.$eval( '${ command.targetSeletor }',  ( el, x, y ) => {
         {
           name: "params.x",
           control: INPUT_NUMBER,
-          label: "horizontally (px)",
+          label: "horizont. (px)",
           initialValue: 0,
           tooltip: `Set the number of pixels that an element's content is scrolled horizontally`,
           placeholder: "e.g. 0",
