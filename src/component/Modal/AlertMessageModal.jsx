@@ -6,6 +6,7 @@ import ErrorBoundary from "component/ErrorBoundary";
 import { shell, remote } from "electron";
 import { getLogPath } from "service/io";
 import * as classes from "./classes";
+import { MODAL_DEFAULT_PROPS } from "constant";
 
 export class AlertMessageModal extends AbstractComponent {
 
@@ -74,6 +75,7 @@ export class AlertMessageModal extends AbstractComponent {
           visible={ isVisible }
           closable
           onCancel={this.onClickCancel}
+          { ...MODAL_DEFAULT_PROPS }
           footer={[
             ( <Button
               key="reload"

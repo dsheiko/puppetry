@@ -58,7 +58,9 @@ export class TabGroup extends React.Component {
 
             suite: () => ( <TabPane tab={ suiteTabTitle } key="suite" closable={ true }>
               { store.suite.snippets && <Snippets action={ action } store={ store } selector={ selector } /> }
-              { !store.suite.snippets && <Main action={ action } store={ store } selector={ selector } /> }
+              { !store.suite.snippets && <Main
+                action={ action }
+                selector={ selector } /> }
             </TabPane> ),
 
             testReport: () => ( <TabPane tab="Test report"

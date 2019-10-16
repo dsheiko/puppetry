@@ -4,7 +4,7 @@ import AbstractComponent from "component/AbstractComponent";
 import { Modal, Button, Table, Tag } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { ipcRenderer } from "electron";
-import { E_GIT_CHECKOUT, E_GIT_CHECKOUT_RESPONSE, E_CHECKOUT_MASTER_OPEN } from "constant";
+import { E_GIT_CHECKOUT, E_GIT_CHECKOUT_RESPONSE, E_CHECKOUT_MASTER_OPEN, MODAL_DEFAULT_PROPS } from "constant";
 import * as classes from "./classes";
 import { tsToDateString } from "service/utils";
 import mediator from "service/mediator";
@@ -100,6 +100,7 @@ export class GitCheckoutModal extends AbstractComponent {
           onCancel={ this.onClickCancel }
           bodyStyle={{ "overflow": "auto" }}
           width="80vw"
+          { ...MODAL_DEFAULT_PROPS }
           footer={[
             ( <Button
               autoFocus={ true }

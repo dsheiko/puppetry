@@ -16,7 +16,8 @@ import * as selectors from "selector/selectors";
 const { Menu, MenuItem } = remote,
       // Mapping state to the props
       mapStateToProps = ( state ) => ({
-        snippets: selectors.getSnippets( state.snippets )
+        snippets: state.snippets,
+        cleanSnippets: selectors.getSnippets( state.snippets )
       }),
       // Mapping actions to the props
       mapDispatchToProps = () => ({
@@ -37,7 +38,7 @@ export class CommandTable extends AbstractDnDTable {
         title: "Command",
         dataIndex: "target",
 
-        render: ( text, record ) => ( <CommandRowLabel record={ record } snippets={ props.snippets } /> )
+        render: ( text, record ) => ( <CommandRowLabel record={ record } snippets={ props.cleanSnippets } /> )
       },
       this.getActionColumn()
     ];
@@ -220,8 +221,14 @@ export class CommandTable extends AbstractDnDTable {
     }) + ` ` + this.buildRowClassName( record );
   }
 
+
   shouldComponentUpdate( nextProps ) {
-    if ( this.props.commands !== nextProps.commands ) {
+    if ( this.props.commands !== nextProps.commands
+          || this.props.groupId !== nextProps.groupId
+          || this.props.testId !== nextProps.testId
+          || this.props.snippets !== nextProps.snippets
+          || this.props.targets !== nextProps.targets
+        ) {
       return true;
     }
     return false;
@@ -241,7 +248,7 @@ export class CommandTable extends AbstractDnDTable {
   }
 
   render() {
-    const { snippets } = this.props,
+    const { cleanSnippets } = this.props,
           // When click Add record, it creates new temporary record, that shall not display, but
           // still needed in the data
           commands = this.props.commands
@@ -263,7 +270,7 @@ export class CommandTable extends AbstractDnDTable {
             id="cCommandTableAddBtn"
             onClick={ this.addRecord }><Icon type="plus" />Add a command/assertion</Button>
 
-          { ( this.props.groupId !== SNIPPETS_GROUP_ID && Object.keys( snippets ).length ) ? <Button
+          { ( this.props.groupId !== SNIPPETS_GROUP_ID && Object.keys( cleanSnippets ).length ) ? <Button
             id="cCommandTableAddSnippetBtn"
             type="dashed"
             onClick={ this.addSnippet }><Icon type="plus" />Add a reference</Button> :  null }

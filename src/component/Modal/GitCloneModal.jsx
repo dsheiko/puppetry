@@ -9,7 +9,7 @@ import { isDirEmpty } from "service/io";
 import { confirmCreateProject } from "service/smalltalk";
 import { ipcRenderer } from "electron";
 import * as classes from "./classes";
-import { E_GIT_CLONE, E_GIT_CLONE_RESPONSE } from "constant";
+import { MODAL_DEFAULT_PROPS, E_GIT_CLONE, E_GIT_CLONE_RESPONSE } from "constant";
 
 export class GitCloneModal extends AbstractForm {
 
@@ -115,6 +115,7 @@ export class GitCloneModal extends AbstractForm {
           closable
           onCancel={this.onClickCancel}
           onOk={this.onClickOk}
+          { ...MODAL_DEFAULT_PROPS }
           footer={[
             ( <Button
               key="back"

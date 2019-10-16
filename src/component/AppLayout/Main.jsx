@@ -7,14 +7,33 @@ import { TargetTable  } from "./Main/TargetTable";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractComponent from "component/AbstractComponent";
 import LearnMore from "component/Global/LearnMore";
+import { connect } from "react-redux";
 
-const TabPane = Tabs.TabPane;
+      // Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        panes: state.project.appPanels.suite.panes,
+        expandedGroups: state.project.groups,
+        groups: state.suite.groups,
+        targets: state.suite.targets,
+        title: state.suite.title,
+        timeout: state.suite.timeout
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = () => ({
+      }),
+      TabPane = Tabs.TabPane;
 
+@connect( mapStateToProps, mapDispatchToProps )
 export class Main extends AbstractComponent {
 
   static propTypes = {
-    store: PropTypes.object.isRequired,
     selector: PropTypes.object.isRequired,
+    expandedGroups: PropTypes.object,
+    groups: PropTypes.object,
+    targets: PropTypes.object,
+    timout: PropTypes.number,
+    title: PropTypes.string,
+    panes: PropTypes.array,
     action: PropTypes.shape({
       updateProjectPanes: PropTypes.func.isRequired,
       setApp: PropTypes.func.isRequired
@@ -29,9 +48,28 @@ export class Main extends AbstractComponent {
     }, 10 );
   }
 
+  shouldComponentUpdate( nextProps ) {
+
+    if ( this.props.groups !== nextProps.groups
+      || this.props.panes !== nextProps.panes
+      || this.props.expandedGroups !== nextProps.expandedGroups
+      || this.props.targets !== nextProps.targets
+      || this.props.title !== nextProps.title
+      || this.props.timeout !== nextProps.timeout ) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
-    const { action, store, selector } = this.props,
-          panes = store.project.appPanels.suite.panes,
+    const { action,
+            selector,
+            panes,
+            expandedGroups,
+            targets,
+            title,
+            timeout
+          } = this.props,
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
           groupsLabel = ( <span><Icon type="audit" />Test Cases</span> );
     let activeKey = "targets";
@@ -55,7 +93,7 @@ export class Main extends AbstractComponent {
               <p>Targets are identifiers associated with locators (CSS selector or XPath)
               that we can refer in the test cases.
               </p>
-      
+
               <p><LearnMore href="https://docs.puppetry.app/target" />
               </p>
               <TargetTable action={action} targets={ selector.getTargetDataTable() } />
@@ -74,13 +112,13 @@ export class Main extends AbstractComponent {
               <GroupTable
                 action={ action }
                 selector={ selector }
-                expanded={ store.project.groups }
+                expanded={ expandedGroups }
                 groups={ selector.getGroupDataTable() }
-                targets={ store.suite.targets } />
+                targets={ targets } />
             </TabPane>
 
             <TabPane tab={ "Options" } key="options">
-              <SuiteForm  action={action} title={ store.suite.title } timeout={ store.suite.timeout } />
+              <SuiteForm  action={ action } title={ title } timeout={ timeout } />
             </TabPane>
 
           </Tabs>

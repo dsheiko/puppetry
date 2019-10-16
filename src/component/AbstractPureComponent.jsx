@@ -4,14 +4,14 @@ import { shell } from "electron";
 import { notification } from "antd";
 
 
-export default class AbstractComponent extends React.Component {
+export default class AbstractPureComponent extends React.PureComponent {
 
   static propTypes = {
     action:  PropTypes.shape({
       setLoadingFor: PropTypes.func
     })
   }
-  
+
   download = ( file, e = null ) => {
     e && e.preventDefault();
     shell.openItem( file );

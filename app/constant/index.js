@@ -103,3 +103,11 @@ exports.FIELDSET_DEFAULT_CHECKBOX_LAYOUT = {
     offset: 3
   }
 };
+
+
+exports.MODAL_DEFAULT_PROPS = {
+  transitionName: "none",
+  maskTransitionName: "none",
+  forceRender: true,
+  confirmLoading: false
+};

@@ -4,6 +4,7 @@ import AbstractForm from "component/AbstractForm";
 import { Form, Modal, Button, Input, Table, Icon, Popconfirm } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import * as classes from "./classes";
+import { MODAL_DEFAULT_PROPS } from "constant";
 
 const FormItem = Form.Item,
       connectForm = Form.create();
@@ -100,6 +101,7 @@ export class EditEnvironmentsModal extends AbstractForm {
           title="Edit Environments"
           visible={ isVisible }
           closable
+          { ...MODAL_DEFAULT_PROPS }
           onCancel={this.onClickCancel}
           footer={[
             ( <Button

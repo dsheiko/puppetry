@@ -8,7 +8,7 @@ import { E_GIT_INIT,
   E_GIT_LOG, E_GIT_LOG_RESPONSE, E_GIT_COMMIT_RESPONSE } from "constant";
 
 
-export class GitEnhancedMenu extends React.Component {
+export class GitEnhancedMenu extends React.PureComponent {
 
   static propTypes = {
     action:  PropTypes.shape({

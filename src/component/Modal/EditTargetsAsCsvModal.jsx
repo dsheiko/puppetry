@@ -4,6 +4,7 @@ import AbstractForm from "component/AbstractForm";
 import { Form, Modal, Button, Input } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import * as classes from "./classes";
+import { MODAL_DEFAULT_PROPS } from "constant";
 
 /*eslint no-useless-escape: 0*/
 
@@ -99,6 +100,7 @@ export class EditTargetsAsCsvModal extends AbstractForm {
           className="c-new-suite-modal"
           disabled={ this.hasErrors( getFieldsError() )  }
           closable
+          { ...MODAL_DEFAULT_PROPS }
           onCancel={this.onClickCancel}
           footer={[
             ( <Button

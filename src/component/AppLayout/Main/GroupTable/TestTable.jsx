@@ -85,6 +85,7 @@ export class TestTable extends AbstractEditableTable {
   render() {
     const { tests } = this.props,
           expanded = this.selectExpanded();
+
     return (
       <ErrorBoundary>
         <Table

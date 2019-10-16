@@ -98,6 +98,7 @@ export class GroupTable extends AbstractEditableTable {
   }
 
   shouldComponentUpdate( nextProps ) {
+
     if ( this.props.groups !== nextProps.groups
       || this.props.expanded !== nextProps.expanded
       || this.props.targets !== nextProps.targets ) {

@@ -8,6 +8,7 @@ import { BrowserOptions } from "./TestReportModal/BrowserOptions";
 import If from "component/Global/If";
 import * as classes from "./classes";
 import { SelectEnv } from "component/Global/SelectEnv";
+import { MODAL_DEFAULT_PROPS } from "constant";
 
 /*eslint no-empty: 0*/
 
@@ -161,13 +162,15 @@ export class TestReportModal extends AbstractComponent {
           closable
           onCancel={this.onClickCancel}
           onOk={this.onClickOk}
+          { ...MODAL_DEFAULT_PROPS }
+
           className="checkbox-group--vertical"
 
           footer={[
             ( <Button
               className={ classes.BTN_CANCEL }
               key="back"
-              onClick={this.onClickCancel}>Cancel</Button> ),
+              onClick={ this.onClickCancel }>Cancel</Button> ),
             ( <Button
               className={ classes.BTN_OK }
               key="submit"

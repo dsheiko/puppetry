@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { remote } from "electron";
 import classNames  from "classnames";
-import {  Spin, Layout } from "antd";
+import { Spin, Layout } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { CheckoutMaster } from "component/Global/CheckoutMaster";
 import { Toolbar } from "./AppLayout/Toolbar";
@@ -92,30 +92,30 @@ export class AppLayout extends React.Component {
 
               <MainMenu
                 action={ action }
-                files={ store.app.project.files }
-                projectDirectory={ projectDirectory }
-                suiteFilename={ store.suite.filename }
-                suiteModified={ store.suite.modified }
-                readyToRunTests={ store.app.readyToRunTests }
-                gitDetachedHeadState={ store.app.gitDetachedHeadState }
-                git={ store.git }
-                project={ store.project } />
+                isProjectEmpty={ !store.app.project.files.length }
+                isSuiteOpen={ !!store.suite.filename }
+                isProjectOpen={ !!projectDirectory }
+                suiteModified={ !!store.suite.modified }
+                readyToRunTests={ !!store.app.readyToRunTests }
+                gitDetachedHeadState={ !!store.app.gitDetachedHeadState }
+                isGitInitialized={ !!store.git.initialized }
+                hasGitRemote={ !!store.git.hasRemote }
+                />
 
               <If exp={ store.app.project.files.length }>
                 <ProjectExplorer
-
                   projectDirectory={ store.settings.projectDirectory }
                   projects={ store.settings.projects }
                   suiteModified={ store.suite.modified }
                   files={ store.app.project.files }
                   active={ store.suite.filename }
-                  action={action} />
+                  action={ action } />
               </If>
 
 
             </Sider>
             <Layout>
-              <Toolbar project={ store.project } suiteModified={ store.suite.modified } action={ action } />
+              <Toolbar projectName={ store.project.name } suiteModified={ store.suite.modified } action={ action } />
 
               <div className="layout-content">
 

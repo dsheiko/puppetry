@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 
       // Mapping state to the props
 const mapStateToProps = ( state ) => ({
-        settings: state.settings
+        testCaseStyle: state.settings.testCaseStyle
       }),
       // Mapping actions to the props
       mapDispatchToProps = () => ({
@@ -67,15 +67,18 @@ export class CommandRowLabel extends React.Component {
    }
 
   shouldComponentUpdate( nextProps ) {
-    if ( this.props.record !== nextProps.record || this.props.settings !== nextProps.settings ) {
+    if ( !this.props.record ) {
+      return false;
+    }
+    if ( this.props.record.id !== nextProps.record.id  || this.props.testCaseStyle !== nextProps.testCaseStyle ) {
       return true;
     }
     return false;
   }
 
    renderCommand() {
-     const { record, settings } = this.props,
-           testCaseStyle = result( settings, "testCaseStyle", "gherkin" ),
+     const { record, testCaseStyle } = this.props,
+           testStyle = testCaseStyle || "gherkin",
            schema = getSchema( record.target === "page" ? "page" : "target", record.method );
 
      return ( <div className="container--editable-cell">
@@ -84,8 +87,8 @@ export class CommandRowLabel extends React.Component {
          icon="exclamation-circle"
          pos="up" />
 
-    { testCaseStyle === "gherkin" && CommandRowLabel.highlightText( schema.toGherkin( record ) ) }
-    { testCaseStyle !== "gherkin" && <React.Fragment>
+    { testStyle === "gherkin" && CommandRowLabel.highlightText( schema.toGherkin( record ) ) }
+    { testStyle !== "gherkin" && <React.Fragment>
        <Icon
          type={ record.target === "page" ? "file" : "scan" }
          title={ record.target === "page" ? "Page method" : `${ record.target } target method` } />

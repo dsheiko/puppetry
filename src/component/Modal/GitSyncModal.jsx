@@ -4,7 +4,7 @@ import AbstractForm from "component/AbstractForm";
 import { Form, Modal, Button, Input  } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { ipcRenderer } from "electron";
-import { E_GIT_COMMIT, E_GIT_SYNC, E_GIT_COMMIT_RESPONSE } from "constant";
+import { E_GIT_COMMIT, E_GIT_SYNC, E_GIT_COMMIT_RESPONSE, MODAL_DEFAULT_PROPS } from "constant";
 import { dateToTs } from "service/utils";
 import * as classes from "./classes";
 
@@ -128,6 +128,7 @@ export class GitSyncModal extends AbstractForm {
           disabled={ this.hasErrors( getFieldsError() )  }
           closable
           onCancel={this.onClickCancel}
+          { ...MODAL_DEFAULT_PROPS }
           footer={[ actionComponent ]}
         >
           <p>

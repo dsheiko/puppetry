@@ -31,11 +31,36 @@ export function enableSelectSearch() {
   };
 }
 
+/**
+ * Underscore: return object prop value or a given default one if not defined
+ * @param {Object} obj
+ * @param {String} key
+ * @param {*} defaultVal
+ * @returns {*}
+ */
 export function result( obj, key, defaultVal = null ) {
   if ( typeof obj !== "object" ) {
     return defaultVal;
   }
   return ( key in obj && typeof obj[ key ] !== "undefined" ) ? obj[ key ] : defaultVal;
+}
+
+/**
+ *
+ * @param {Object} obj
+ * @param {String[]} keys
+ * @returns {Object}
+ */
+export function filterObject( obj, keys ) {
+  if ( typeof obj !== "object" ) {
+    return {};
+  }
+  return keys.reduce(( carry, key ) => {
+    if ( key in obj && typeof obj[ key ] !== "undefined" ) {
+      carry[ key ] = obj[ key ];
+    }
+    return carry;
+  }, {});
 }
 
 export function normalizeAssertionVerb( verb ) {

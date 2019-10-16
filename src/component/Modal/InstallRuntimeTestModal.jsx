@@ -7,7 +7,7 @@ import { ipcRenderer, shell } from "electron";
 import AbstractComponent from "component/AbstractComponent";
 import * as classes from "./classes";
 import { E_RUNTIME_TEST_PROGRESS, E_RUNTIME_TEST_MILESTONE,
-  E_RUNTIME_TEST_ERROR, E_INSTALL_RUNTIME_TEST } from "constant";
+  E_RUNTIME_TEST_ERROR, E_INSTALL_RUNTIME_TEST, MODAL_DEFAULT_PROPS } from "constant";
 import { lockRuntimeTestPath, removeRuntimeTestPath, getRuntimeTestPath,
   initRuntimeTestPath, getLogPath, getRuntimeTestPathSafe } from "service/io";
 
@@ -191,6 +191,7 @@ export class InstallRuntimeTestModal extends AbstractComponent {
           onCancel={this.onClickCancel}
           onOk={this.onClickOk}
           className="checkbox-group--vertical"
+          { ...MODAL_DEFAULT_PROPS }
           footer={ buttons }
         >
 

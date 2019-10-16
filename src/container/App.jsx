@@ -8,6 +8,8 @@ import actions from "../action";
 import * as selectors from "../selector/selectors";
 import { E_GIT_SYNC_RESPONSE } from "constant";
 import { ipcRenderer } from "electron";
+import { Spin } from "antd";
+import debounce from "lodash.debounce";
 
 const GREETINGS = [ "Greetings",
         "Hi there",
@@ -67,6 +69,11 @@ export class App extends React.Component {
     this.props.action.setApp({ loading: false });
   }
 
+  state = {
+    loaded: false,
+    loadingProject: false
+  }
+
   async componentDidMount() {
     const { loadProject,
             checkGit,
@@ -90,9 +97,11 @@ export class App extends React.Component {
     loadGit();
 
     if ( !settings.projectDirectory ) {
+      this.setState({ loaded: true });
       return;
     }
 
+    this.setState({ loadingProject: true });
 
     try {
       await loadProject();
@@ -107,12 +116,22 @@ export class App extends React.Component {
       log.warn( `Renderer process: App.checkGit: ${ e }` );
     }
 
+    this.setState({ loaded: true });
   }
 
   render() {
-    const { action, store, selector } = this.props;
-    return (
-      <AppLayout action={ action } store={ store } selector={ selector } />
-    );
+    const { action, store, selector } = this.props,
+          { loaded, loadingProject } = this.state,
+          tip = loadingProject ? `Loading recent project...` : `Loading...`;
+    return ( <React.Fragment>
+      { !loaded && ( <div className="ant-spin ant-spin-lg ant-spin-spinning">
+        <img width="100" height="100" src="./assets/puppetry.svg" alt="Puppetry" />
+        <h1>Puppetry</h1>
+        <span>
+          <img width="32" height="32" src="./assets/loading.svg" alt="Loading..." />
+        </span>
+      </div> ) }
+      { loaded && <AppLayout action={ action } store={ store } selector={ selector } /> }
+    </React.Fragment> );
   }
 }

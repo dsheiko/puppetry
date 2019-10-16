@@ -5,7 +5,7 @@ import { Form, Modal, Input, Button } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
 import BrowseDirectory from "component/Global/BrowseDirectory";
-import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS } from "constant";
+import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, MODAL_DEFAULT_PROPS } from "constant";
 import { isDirEmpty } from "service/io";
 import { confirmCreateProject } from "service/smalltalk";
 import { normalizeFilename } from "service/io";
@@ -119,6 +119,7 @@ export class NewProjectModal extends AbstractForm {
           closable
           onCancel={this.onClickCancel}
           onOk={this.onClickOk}
+          { ...MODAL_DEFAULT_PROPS }
           footer={[
             ( <Button
               key="back"

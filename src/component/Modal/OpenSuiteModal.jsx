@@ -5,6 +5,7 @@ import { Modal, Menu, Alert } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
 import { confirmUnsavedChanges } from "service/smalltalk";
+import { MODAL_DEFAULT_PROPS } from "constant";
 
 
 export class OpenSuiteModal extends AbstractForm {
@@ -59,6 +60,7 @@ export class OpenSuiteModal extends AbstractForm {
           visible={ isVisible }
           closable
           onCancel={this.onClickCancel}
+          { ...MODAL_DEFAULT_PROPS }
           footer={ null }
         >
 

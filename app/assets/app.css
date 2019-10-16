@@ -362,23 +362,6 @@ nav >  ul, nav >  ul ol {
   flex: 1 1 auto;
 }
 
-root > .ant-spin {
-  position: fixed;
-  display: flex;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  background: var(--layout-background);
-}
-
-root > .ant-spin > * {
-  flex: 0 0 auto;
-}
-
 
 .project-navigator {
   margin: 8px 0 0 0;
@@ -1352,4 +1335,10 @@ summary:hover {
 
 .ant-col-21.form-buttons {
   text-align: right;
+}
+
+/* Disable modal animation to improve performance */
+.ant-modal-mask *,
+.ant-modal-wrap * {
+    animation: 0s !important;
 }

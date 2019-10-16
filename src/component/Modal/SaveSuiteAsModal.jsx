@@ -5,6 +5,7 @@ import { Form, Modal,  Input, Button } from "antd";
 import { getBasename } from "service/io";
 import ErrorBoundary from "component/ErrorBoundary";
 import * as classes from "./classes";
+import { MODAL_DEFAULT_PROPS } from "constant";
 
 /*eslint no-useless-escape: 0*/
 
@@ -76,6 +77,7 @@ export class SaveSuiteAsModal extends AbstractForm {
           visible={ isVisible }
           closable
           onCancel={ this.onClickCancel }
+          { ...MODAL_DEFAULT_PROPS }
           footer={[
             ( <Button
               className={ classes.BTN_CANCEL }

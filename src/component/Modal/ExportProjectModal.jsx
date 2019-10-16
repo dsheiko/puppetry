@@ -6,7 +6,7 @@ import ErrorBoundary from "component/ErrorBoundary";
 import { exportProject, isDirEmpty, getRuntimeTestPath } from "service/io";
 import tmp from "tmp-promise";
 import BrowseDirectory from "component/Global/BrowseDirectory";
-import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, RUNNER_JEST, E_RUN_TESTS } from "constant";
+import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, RUNNER_JEST, E_RUN_TESTS, MODAL_DEFAULT_PROPS } from "constant";
 import If from "component/Global/If";
 import { TestGeneratorError } from "error";
 import { confirmExportProject } from "service/smalltalk";
@@ -246,7 +246,7 @@ export class ExportProjectModal  extends AbstractComponent {
           onCancel={ this.onClickCancel }
           onOk={this.onClickOk}
           className="export-project-modal checkbox-group--vertical"
-
+          { ...MODAL_DEFAULT_PROPS }
           footer={[
             ( <Button
               className={ classes.BTN_CANCEL }

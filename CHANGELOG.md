@@ -29,7 +29,7 @@
   - querying within other element
   - querying in Shadow DOM
   - querying in iframe
-
+- improvement: fix UI rendering performance
 
 ### Updates
 

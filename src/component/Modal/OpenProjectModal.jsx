@@ -5,7 +5,7 @@ import { Form, Modal, Button } from "antd";
 import BrowseDirectory from "component/Global/BrowseDirectory";
 import ErrorBoundary from "component/ErrorBoundary";
 import { isProject } from "service/io";
-import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS } from "constant";
+import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, MODAL_DEFAULT_PROPS } from "constant";
 import * as classes from "./classes";
 
 const connectForm = Form.create();
@@ -85,7 +85,7 @@ export class OpenProjectModal extends AbstractForm {
   render() {
     const { isVisible } = this.props,
           { getFieldsError } = this.props.form;
-
+        
     return (
       <ErrorBoundary>
         <Modal
@@ -94,6 +94,7 @@ export class OpenProjectModal extends AbstractForm {
           closable
           onCancel={this.onClickCancel}
           onOk={this.onClickOk}
+          { ...MODAL_DEFAULT_PROPS }
           footer={[
             ( <Button
               className={ classes.BTN_CANCEL }

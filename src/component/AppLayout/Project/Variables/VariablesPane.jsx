@@ -14,7 +14,7 @@ const { Option } = Select,
 
       // Mapping state to the props
       mapStateToProps = ( state ) => ({
-        project: state.project,
+        environments: state.project.environments,
         selector: {
           getVariableDataTable: ( env ) => selectors.getVariableDataTable( state.project.variables, env )
         }
@@ -42,10 +42,10 @@ export class VariablesPane extends AbstractComponent {
   }
 
   render() {
-    const { project, selector } = this.props,
-          activeEnv = selectors.getActiveEnvironment( project.environments, this.state.activeEnv ),
+    const { environments, selector } = this.props,
+          activeEnv = selectors.getActiveEnvironment( environments, this.state.activeEnv ),
           variables = selector.getVariableDataTable( activeEnv );
-
+        
     return (
       <ErrorBoundary>
         <p>
@@ -71,7 +71,7 @@ export class VariablesPane extends AbstractComponent {
               option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0
             }
           >
-            { project.environments.map( env => ( <Option value={ env } key={ env }>
+            { environments.map( env => ( <Option value={ env } key={ env }>
               { env }
             </Option> ) ) }
           </Select>
