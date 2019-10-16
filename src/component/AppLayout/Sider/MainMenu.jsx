@@ -327,9 +327,14 @@ export class MainMenu extends GitEnhancedMenu {
                 Snippets
               </Menu.Item>
 
+              <Menu.Item key="104"
+                onClick={ e => this.openTab( "projectTargets" ) } id="cMainMenuProjectTargets">
+                Shared targets
+              </Menu.Item>
+
               <Menu.Item key="102"
                 onClick={ e => this.openTab( "projectVariables" ) } id="cMainMenuProjectVariables">
-                Variables
+                Template variables
               </Menu.Item>
 
               <Menu.Item key="103"

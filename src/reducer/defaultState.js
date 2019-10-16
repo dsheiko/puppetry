@@ -73,6 +73,7 @@ export default {
         testReport: false,
         projectVariables: false,
         projectGit: false,
+        projectTargets: false,
         settings: false
       },
       active: "suite"
@@ -111,6 +112,7 @@ export default {
     lastOpenSuite: "",
 
     variables: {},
+    targets: {},
     environments: [ "test", "stage", "production" ]
   },
   // actual (Selected) suite

@@ -1,7 +1,7 @@
 import React from "react";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
-import { VariableTable } from "./VariableTable";
+import { TargetTable } from "component/AppLayout/Main/TargetTable";
 import { Select, Icon } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -17,7 +17,7 @@ const { Option } = Select,
       mapStateToProps = ( state ) => ({
         environments: state.project.environments,
         selector: {
-          getVariableDataTable: ( env ) => selectors.getVariableDataTable( state.project.variables, env )
+          getTargetDataTable: () => selectors.getTargetDataTable( state.suite.targets )
         }
       }),
       // Mapping actions to the props
@@ -27,25 +27,10 @@ const { Option } = Select,
 
 
 @connect( mapStateToProps, mapDispatchToProps )
-export class VariablesPane extends AbstractComponent {
-
-  state = {
-    activeEnv: ""
-  }
-
-  onEnvChange = ( activeEnv ) => {
-    this.setState({ activeEnv });
-  }
-
-  onEditEnv = ( e ) => {
-    e.preventDefault();
-    this.props.action.setApp({ editEnvironmentsModal: true });
-  }
+export class TargetsPane extends AbstractComponent {
 
   render() {
-    const { environments, selector } = this.props,
-          activeEnv = selectors.getActiveEnvironment( environments, this.state.activeEnv ),
-          variables = selector.getVariableDataTable( activeEnv );
+    const { action, selector } = this.props;
 
     return (
       <ErrorBoundary>
@@ -57,28 +42,7 @@ export class VariablesPane extends AbstractComponent {
         </p>
         <p><LearnMore href="https://docs.puppetry.app/template" /></p>
         <br />
-        <div className="select-group-inline">
-          <span className="select-group-inline__label">
-            Environment
-          </span>
-          <Select
-            { ...SELECT_SEARCH_PROPS }
-            style={ INLINE_INPUT_STYLES }
-            placeholder="Select a environment"
-            onChange={ this.onEnvChange }
-            defaultValue={ activeEnv }
-          >
-            { environments.map( env => ( <Option value={ env } key={ env }>
-              { env }
-            </Option> ) ) }
-          </Select>
-          <a tabIndex={-3} role="button"
-            onClick={ this.onEditEnv } title="Edit list of available environments">Edit</a>
-        </div>
-
-        <VariableTable variables={ variables }
-          env={ activeEnv }
-          action={ this.props.action } />
+       <TargetTable model="SharedTarget" action={ action } targets={ selector.getTargetDataTable() } />
 
       </ErrorBoundary>
     );

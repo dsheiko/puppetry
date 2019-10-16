@@ -6,6 +6,7 @@ import { Snippets } from "./AppLayout/Snippets";
 import { SettingsPanel } from "./AppLayout/Settings/SettingsPanel";
 import { VariablesPane } from "./AppLayout/Project/Variables/VariablesPane";
 import { GitPane } from "./AppLayout/Project/Git/GitPane";
+import { TargetsPane } from "./AppLayout/Project/Targets/TargetsPane";
 import { TestReport } from "./AppLayout/TestReport";
 import ErrorBoundary from "component/ErrorBoundary";
 import { confirmUnsavedChanges } from "service/smalltalk";
@@ -85,8 +86,14 @@ export class TabGroup extends React.Component {
               />
             </TabPane> ),
 
-            projectVariables: () => ( <TabPane tab={ "Variables" } key="projectVariables" closable={ true }>
+            projectVariables: () => ( <TabPane tab={ "Template variables" } key="projectVariables" closable={ true }>
               <div className="tabpane-frame"><VariablesPane /></div>
+            </TabPane> ),
+
+            projectTargets: () => ( <TabPane tab={ "Shared targets" } key="projectTargets" closable={ true }>
+              <div className="tabpane-frame">
+                <TargetsPane action={ action }  />
+              </div>
             </TabPane> ),
 
             projectGit: () => ( <TabPane tab={ "GIT" } key="projectGit" closable={ true }>

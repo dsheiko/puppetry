@@ -17,6 +17,7 @@ import exportPrintableText from "./ExportProjectModal/PrintableText";
 import { TestSpecificationPane } from "./ExportProjectModal/TestSpecificationPane";
 import { JestPane } from "./ExportProjectModal/JestPane";
 import { BrowserOptions } from "./TestReportModal/BrowserOptions";
+import { SELECT_SEARCH_PROPS } from "service/utils";
 
 const CheckboxGroup = Checkbox.Group,
   { TabPane } = Tabs,
@@ -280,15 +281,11 @@ export class ExportProjectModal  extends AbstractComponent {
               <Icon type="file-unknown" title="Select an output format" />
             </span>
             <Select
-              showSearch
+              { ...SELECT_SEARCH_PROPS }
               style={{ width: 348 }}
               placeholder="Select an output format"
-              optionFilterProp="children"
               onChange={ this.onChangeFormat }
               defaultValue="jest"
-              filterOption={( input, option ) =>
-                option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0
-              }
             >
               <Option value="jest" key="jest">Jest/Puppeteer project (CI-friendly)</Option>
               <Option value="text" key="text">test specification</Option>

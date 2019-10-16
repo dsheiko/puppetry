@@ -23,13 +23,11 @@ export function renderTarget( targetName ) {
   return `await targets[ "${ targetName }" ]()`;
 }
 
-export function enableSelectSearch() {
-  return {
-    showSearch: true,
-    optionFilterProp: "children",
-    filterOption: ( input, option ) => option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0
-  };
-}
+export const SELECT_SEARCH_PROPS = {
+  showSearch: true,
+  optionFilterProp: "children",
+  filterOption: ( input, option ) => option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0
+};
 
 /**
  * Underscore: return object prop value or a given default one if not defined

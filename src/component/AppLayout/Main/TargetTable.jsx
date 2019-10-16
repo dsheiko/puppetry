@@ -18,7 +18,8 @@ export class TargetTable extends AbstractEditableTable {
 
     this.fields = [ "target",  "selector" ];
     this.extraFields = { "selector": [ "parentType", "ref" ] };
-    this.model = "Target";
+    this.model = props.model || "Target";
+
 
     this.columns = [
       {

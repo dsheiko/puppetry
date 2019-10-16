@@ -4,6 +4,7 @@ import ErrorBoundary from "component/ErrorBoundary";
 import AbstractForm from "component/AbstractForm";
 import { SnippetVariables } from "./SnippetVariables";
 import { Form, Button, Select, Input, Icon } from "antd";
+import { SELECT_SEARCH_PROPS } from "service/utils";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
@@ -102,11 +103,8 @@ export class SnippetModal extends AbstractForm {
               ]
             })(
               <Select
-                showSearch
                 placeholder="Select a snippet"
-                filterOption={( input, option ) => (
-                  option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0 )
-                }
+                { ...SELECT_SEARCH_PROPS }
               >
                 {
                   Object.values( snippets ).map( snippet => ( <Option key={ snippet.id }>

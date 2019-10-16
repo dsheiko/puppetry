@@ -10,6 +10,7 @@ import { E_BROWSE_FILE, E_FILE_SELECTED, FIELDSET_DEFAULT_LAYOUT, FIELDSET_DEFAU
 import Markdown from "component/Global/Markdown";
 import { TemplateHelper } from "./TemplateHelper";
 import { connect } from "react-redux";
+import { SELECT_SEARCH_PROPS } from "service/utils";
 
 function result( obj, prop, record ) {
   if ( typeof obj[ prop ] === "function" ) {
@@ -116,13 +117,11 @@ export class ParamsFormBuilder extends React.Component {
       return ( <Input style={ inputStyle } onClick={ this.onClickSelectFile } disabled  /> );
     case SELECT:
       return ( <Select
-        showSearch
+        { ...SELECT_SEARCH_PROPS }
         style={ inputStyle }
         onChange={ ( value ) => ( field.onChange ? field.onChange( value, this.props.form ) : () => {} ) }
         placeholder={ field.placeholder }
-        optionFilterProp="children"
         onSelect={ onSelect }
-        filterOption={( input, option ) => option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0}
       >
         {
           field.options.map( ( option, inx ) => {

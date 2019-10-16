@@ -5,7 +5,7 @@ import { AbstractEditableCell } from "./AbstractEditableCell";
 import Tooltip from "component/Global/Tooltip";
 import { ruleValidateNotEmptyString, ruleValidateVariable } from "service/utils";
 import { getActiveTargets } from "selector/selectors";
-import { enableSelectSearch } from "service/utils";
+import { SELECT_SEARCH_PROPS } from "service/utils";
 
 const FormItem = Form.Item,
       { Option } = Select,
@@ -81,7 +81,7 @@ export class TargetSelectorCell extends AbstractEditableCell {
                   { getFieldDecorator( "ref", {
                     initialValue: ( record.ref || "" )
                   })(
-                    <Select onChange={ this.onChangeType } { ...enableSelectSearch() }>
+                    <Select onChange={ this.onChangeType } { ...SELECT_SEARCH_PROPS }>
                       <Option key="0" value="">document</Option>
                       { activeTargets.map( target => ( <Option
                         key={ target.target }
@@ -96,7 +96,7 @@ export class TargetSelectorCell extends AbstractEditableCell {
                   { getFieldDecorator( "parentType", {
                     initialValue: ( record.parentType || "" )
                   })(
-                    <Select { ...enableSelectSearch() }>
+                    <Select { ...SELECT_SEARCH_PROPS }>
                       <Option key="0" value="">generic element</Option>
                       <Option key="1" value="shadowHost">shadow host</Option>
                       <Option key="2" value="iframe">inline frame</Option>
