@@ -61,6 +61,11 @@ export class Main extends AbstractComponent {
     return false;
   }
 
+  openTab = async ( tabKey, e = null ) => {
+    e && e.preventDefault();
+    this.props.action.addAppTab( tabKey );
+  }
+
   render() {
     const { action,
             selector,
@@ -104,11 +109,14 @@ export class Main extends AbstractComponent {
                 onClick={ this.onExtClick }>commands, assertions and references</a> { "" }
               to ensure that a targeted component of the test application acts as intended.
               Tests cases are organized into logical { "" } <a href="https://docs.puppetry.app/group"
-                onClick={ this.onExtClick }>groups</a>, representing test contexts.</p>
+                onClick={ this.onExtClick }>groups</a>, representing test contexts.
 
-              <p>You can use { "" } <a href="https://docs.puppetry.app/managing-assets#drag-and-drop"
-                onClick={ this.onExtClick }>drag&apos;n&apos;drop</a> { "" } to re-arrange
-              rows representing groups/test cases/test steps.</p>
+              </p>
+
+              <p>
+              You can change test case representation style in
+                { " " }<a onClick={ ( e ) => this.openTab( "settings", e ) }>settings</a>.
+              </p>
               <GroupTable
                 action={ action }
                 selector={ selector }
@@ -117,7 +125,7 @@ export class Main extends AbstractComponent {
                 targets={ targets } />
             </TabPane>
 
-            <TabPane tab={ "Options" } key="options">
+            <TabPane tab={ "Suite options" } key="options">
               <SuiteForm  action={ action } title={ title } timeout={ timeout } />
             </TabPane>
 

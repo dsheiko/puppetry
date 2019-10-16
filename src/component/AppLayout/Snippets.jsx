@@ -7,13 +7,29 @@ import ErrorBoundary from "component/ErrorBoundary";
 import { SNIPPETS_GROUP_ID } from "constant";
 import AbstractForm from "component/AbstractForm";
 import LearnMore from "component/Global/LearnMore";
+import { connect } from "react-redux";
 
-const TabPane = Tabs.TabPane;
+      // Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        panes: state.project.appPanels.suite.panes,
+        expandedGroups: state.project.groups,
+        groups: state.suite.groups,
+        targets: state.suite.targets
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = () => ({
+      }),
 
+      TabPane = Tabs.TabPane;
+
+@connect( mapStateToProps, mapDispatchToProps )
 export class Snippets extends AbstractForm {
 
   static propTypes = {
-    store: PropTypes.object.isRequired,
+    expandedGroups: PropTypes.object,
+    groups: PropTypes.object,
+    targets: PropTypes.object,
+    panes: PropTypes.array,
     selector: PropTypes.object.isRequired,
     action: PropTypes.shape({
       updateProjectPanes: PropTypes.func.isRequired,
@@ -29,16 +45,35 @@ export class Snippets extends AbstractForm {
     }, 10 );
   }
 
+   shouldComponentUpdate( nextProps ) {
+
+    if ( this.props.groups !== nextProps.groups
+      || this.props.panes !== nextProps.panes
+      || this.props.expandedGroups !== nextProps.expandedGroups
+      || this.props.targets !== nextProps.targets
+      || this.props.title !== nextProps.title
+      || this.props.timeout !== nextProps.timeout ) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
-    const { action, store, selector } = this.props,
-          panes = store.project.appPanels.suite.panes,
+    const { action,
+            selector,
+            panes,
+            groups,
+            expandedGroups,
+            targets,
+            title,
+            timeout
+          } = this.props,
+
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
           snippetsLabel = ( <span><Icon type="audit" />Snippets</span> ),
-          group = store.suite.groups.hasOwnProperty( SNIPPETS_GROUP_ID )
-            ? store.suite.groups[ SNIPPETS_GROUP_ID ] : null,
+          group = groups.hasOwnProperty( SNIPPETS_GROUP_ID )? groups[ SNIPPETS_GROUP_ID ] : null,
           tests = group ? selector.getTestDataTable( group ) : [],
-          targets = Object.values( store.suite.targets );
-
+          targetValues = Object.values( targets );
 
     let activeKey = "targets";
     if ( panes.length ) {
@@ -60,7 +95,7 @@ export class Snippets extends AbstractForm {
               <p>Targets are identifiers associated with locators
               (CSS selector or XPath) that we can refer in the test cases.
               </p>
-  
+
               <p><LearnMore href="https://docs.puppetry.app/target"/></p>
               <TargetTable action={action} targets={ selector.getTargetDataTable() } />
             </TabPane>
@@ -72,8 +107,8 @@ export class Snippets extends AbstractForm {
               <p><LearnMore href="https://docs.puppetry.app/snippets" /></p>
 
               { tests && <SnippetTable
-                expanded={ store.project.groups }
-                targets={ targets }
+                expanded={ expandedGroups }
+                targets={ targetValues }
                 tests={ tests }
                 groupId={ SNIPPETS_GROUP_ID }
                 selector={ selector }

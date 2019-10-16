@@ -102,16 +102,13 @@ export class AppLayout extends React.Component {
                 hasGitRemote={ !!store.git.hasRemote }
                 />
 
-              <If exp={ store.app.project.files.length }>
-                <ProjectExplorer
+              { store.app.project.files.length && <ProjectExplorer
                   projectDirectory={ store.settings.projectDirectory }
                   projects={ store.settings.projects }
                   suiteModified={ store.suite.modified }
                   files={ store.app.project.files }
                   active={ store.suite.filename }
-                  action={ action } />
-              </If>
-
+                  action={ action } /> }
 
             </Sider>
             <Layout>
