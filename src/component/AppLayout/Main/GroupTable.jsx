@@ -79,6 +79,7 @@ export class GroupTable extends AbstractEditableTable {
     this.props.action.setProject({
       groups: expanded
     });
+    this.props.action.autosaveProject();
   }
 
   renderExpandedTable = ( group ) => {

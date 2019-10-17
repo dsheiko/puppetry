@@ -26,7 +26,7 @@ export class OpenSuiteModal extends AbstractForm {
   }
 
   onClick = async ( file ) => {
-    const { openSuiteFile } = this.props.action;
+    const { openSuiteFile, autosaveProject } = this.props.action;
 
     if ( this.props.suiteModified ) {
       await confirmUnsavedChanges({
@@ -36,6 +36,7 @@ export class OpenSuiteModal extends AbstractForm {
     }
 
     openSuiteFile( file );
+    autosaveProject();
     this.props.action.setApp({ openSuiteModal: false });
   }
 

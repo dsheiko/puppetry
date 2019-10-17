@@ -193,7 +193,7 @@ export class MainMenu extends GitEnhancedMenu {
   }
 
   onSnippets = async () => {
-    const { openSuiteFile, saveSuite, setSuite } = this.props.action;
+    const { openSuiteFile, saveSuite, setSuite, autosaveProject } = this.props.action;
 
     if ( this.props.suiteModified ) {
       await confirmUnsavedChanges({
@@ -203,6 +203,7 @@ export class MainMenu extends GitEnhancedMenu {
     }
 
     openSuiteFile( SNIPPETS_FILENAME );
+    autosaveProject();
   }
 
   openTab = async ( tabKey ) => {

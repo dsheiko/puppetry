@@ -137,9 +137,6 @@ actions.loadSuite = ( filename, options = { silent: false }) => async ( dispatch
       createSnippetsSuite( dispatch );
     }
     dispatch( appActions.addAppTab( "suite" ) );
-    if ( result( store.settings, "autosave", true ) && store.settings.projectDirectory ) {
-      saveProject( store );
-    }
   } catch ( ex ) {
     !options.silent && handleException( ex, dispatch, `Cannot load suite ${ filename }` );
   }

@@ -43,7 +43,7 @@ export class FileList extends React.Component {
 
   onDblClick = async ( e ) => {
     e.preventDefault();
-    const { openSuiteFile } = this.props.action,
+    const { openSuiteFile, autosaveProject } = this.props.action,
           file = e.target.dataset.id;
 
     if ( this.props.suiteModified ) {
@@ -54,6 +54,7 @@ export class FileList extends React.Component {
     }
 
     openSuiteFile( file );
+    autosaveProject();
   }
 
   onRightClick = ( e ) => {

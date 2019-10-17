@@ -53,6 +53,7 @@ export class SnippetTable extends AbstractEditableTable {
     this.props.action.setProject({
       groups: expanded
     });
+    this.props.action.autosaveProject();
   }
 
   renderExpandedTable = ( test ) => {
