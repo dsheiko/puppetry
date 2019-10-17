@@ -56,6 +56,7 @@ Current only the following OS are supported:
 
 - [Join Puppetry on Slack](http://puppetry.dsheiko.com) :coffee:
 - [Chat](https://gitter.im/dsheiko/puppetry)
+- [Facebook](https://www.facebook.com/pg/puppetry.testing/)
 - [Feature requests](https://github.com/dsheiko/puppetry/issues)
 - [Problem reports](https://github.com/dsheiko/puppetry/issues)
 
