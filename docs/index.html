@@ -39,6 +39,7 @@
 
     <link rel="preconnect" href="https://www.google-analytics.com">
     <link rel="preconnect" href="https://api.github.com">
+    <link rel="preconnect" href="https://connect.facebook.net">
 
     <script type="application/ld+json">
       {
@@ -91,11 +92,20 @@
           <div class="navbar__logo">
             <img class="navbar__img"  src="./assets/img/puppetry.svg" alt="Puppetry logo" />
             <div class="navbar__title">
-              Puppetry v2
+              Puppetry 
             </div>
           </div>
           <div class="navbar__menu">
             <div  class="navbar__menu_github">
+
+            <div class="fb-like github-button"
+                 data-href="https://www.facebook.com/puppetry.testing/"
+                 data-width="" data-layout="button_count"
+                 data-action="like"
+                 data-size="large"
+                 data-show-faces="false"
+                 data-share="false"></div>
+
             <a class="github-button" href="https://github.com/dsheiko/puppetry/fork" data-icon="octicon-repo-forked" data-size="large" aria-label="Fork Puppetry.app on GitHub">Fork</a>
             <a class="github-button" href="https://github.com/dsheiko/puppetry" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star Puppetry.app on GitHub">Star</a>
             </div>
@@ -373,13 +383,16 @@
 
     </section>
 
+    <div id="fb-root"></div>
     <script>
       document.querySelector( "#cYear" ).innerHTML = ( new Date() ).getFullYear();
     </script>
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <script async defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v4.0&appId=227086787320417&autoLogAppEvents=1"></script>
     <script src="js/ls.rias.min.js"></script>
     <script src="js/lazysizes.min.js"></script>
+
 
   </body>
 </html>
