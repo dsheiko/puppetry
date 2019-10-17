@@ -34,7 +34,7 @@ module.exports = function( page ) {
 
       /**
        * Check if element is visible in the DOM
-       * @returns {Promise<Boolean>}
+       * @returns {Promise<Object>}
        **/
       isVisible: async function(){
         const boundingBox = await elementHandle.boundingBox(),
@@ -46,7 +46,12 @@ module.exports = function( page ) {
               opacity = parseFloat( await handleOpacity.jsonValue() ),
               visibility = await handleVisibility.jsonValue();
 
-        return ( boundingBox !== null && isIntersectingViewport && opacity !== 0 && visibility !=="hidden" );
+        return {
+          isDisplayed: boundingBox !== null,
+          isVisible: visibility !=="hidden",
+          isOpaque: opacity !== 0,
+          isIntersecting: isIntersectingViewport
+        };
       },
 
       /**

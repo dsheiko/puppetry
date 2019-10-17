@@ -24,6 +24,7 @@ export default async function exportPrintableText({
               checkedList,
               { runner: RUNNER_PUPPETRY, trace: true, ...launcherOptions },
               snippets,
+              project.targets,
               envDto
             ),
             report = ipcRenderer.sendSync( E_RUN_TESTS, runtimeTemp, specList );

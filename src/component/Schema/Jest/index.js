@@ -42,7 +42,7 @@ export const tplQuery = ( targetChain ) => {
         : `await bs.queryChain( ${ str( targetChain )}, ${ str( target ) } )` )
     );
 
-    return `targets[ "${ target.target }" ] = async () => ${ fnBody };`;
+    return `bs.TARGETS[ "${ target.target }" ] = async () => ${ fnBody };`;
 
 };
 
@@ -109,9 +109,10 @@ jest.setTimeout( ${  result( options, "jestTimeout", 0 )
     : ( suite.timeout || NETWORK_TIMEOUT ) )
 } );
 
-const targets = {},
-      consoleLog = [], // assetConsoleMessage
+const consoleLog = [], // assetConsoleMessage
       dialogLog = []; // assertDialog;
+
+bs.TARGETS = {};
 
 ${ buildEnv( env ) }
 

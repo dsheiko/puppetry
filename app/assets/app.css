@@ -1235,10 +1235,17 @@ align with collapsed (Advanced options))
 .ant-collapse-content .command-form__noncollapsed {
   padding: 0;
 }
-
+/*
+model target rows have options and therefore cannot be centered
+*/
 .ant-table-tbody > tr.model--target > td {
   vertical-align: top;
 }
+
+.ant-table-tbody > tr.model--target > td .table-actions {
+  margin-top: 8px;
+}
+
 
 summary:focus {
   outline: 0;
@@ -1341,4 +1348,22 @@ summary:hover {
 .ant-modal-mask *,
 .ant-modal-wrap * {
     animation: 0s !important;
+}
+
+.ant-layout-footer .text-align-left {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.ant-layout-footer .text-align-right {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+/* Form item with checkbox look too spacy */
+.ant-form-item.is-shrinked {
+  margin: 0;
 }

@@ -20,7 +20,7 @@ export const HAS_OPERATOR_MAP = {
 };
 
 export function renderTarget( targetName ) {
-  return `await targets[ "${ targetName }" ]()`;
+  return `await bs.getTarget( "${ targetName }" )`;
 }
 
 export const SELECT_SEARCH_PROPS = {

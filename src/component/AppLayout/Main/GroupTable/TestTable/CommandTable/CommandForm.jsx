@@ -229,7 +229,6 @@ export class CommandForm extends React.Component {
                 })(
                   <TargetSelect
                     setFieldsValue={ setFieldsValue }
-                    targets={ targets }
                     initialValue={ record.target }
                     changeTarget={ this.changeTarget } />
                 )}

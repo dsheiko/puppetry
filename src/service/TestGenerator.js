@@ -12,7 +12,9 @@ export default class TestGenerator {
   /**
    * {Object} targets
    */
-  constructor({ suite, schema, targets, runner, projectDirectory, outputDirectory, snippets, env, options }) {
+  constructor({
+    suite, schema, targets, runner, projectDirectory, outputDirectory, snippets, sharedTargets, env, options
+  }) {
 
     // collect here information for interactive mode
     this.interactive = {
@@ -27,8 +29,9 @@ export default class TestGenerator {
     this.env = env;
     this.options = options;
     this.runner = runner; // RUNNER_PUPPETRY when embedded
-    this.targets = Object.values({ ...snippets.targets, ...targets })
-      .reduce( ( carry, entry ) => {
+
+    this.allTargets = Object.values({ ...sharedTargets, ...snippets.targets, ...targets });
+    this.targets = this.allTargets.reduce( ( carry, entry ) => {
         carry[ entry.target ] = entry.selector;
         return carry;
       }, {});
@@ -40,8 +43,8 @@ export default class TestGenerator {
    * @param {Object} name
    * @returns {String}
    */
-  parseTargets( targets ) {
-    const allTargets = mapSelectors( getActiveTargets( Object.values({ ...this.snippets.targets, ...targets }) ) );
+  parseTargets() {
+    const allTargets = mapSelectors( getActiveTargets( this.allTargets ) );
     return allTargets
       .filter( ({ target, selector }) => Boolean( target ) && Boolean( selector ) )
       .map( target => this.schema.jest.tplQuery( getTargetChain( target, allTargets ) ) )
@@ -180,7 +183,7 @@ export default class TestGenerator {
 
   generate() {
     try {
-      const targets = this.parseTargets( this.suite.targets ),
+      const targets = this.parseTargets(),
             body = Object.values( this.suite.groups )
               .filter( group => group.disabled !== true )
               .map( this.parseGroup )

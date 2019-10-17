@@ -62,7 +62,7 @@ export class GeneralPane extends AbstractComponent {
               filterOption={( input, option ) => option.props.children.toLowerCase()
                 .indexOf( input.toLowerCase() ) >= 0}
             >
-              <Option key={ 1 } value="informative">Informative</Option>
+              <Option key={ 1 } value="declarative">Declarative</Option>
               <Option key={ 2 } value="gherkin">Gherkin</Option>
             </Select>
           )}

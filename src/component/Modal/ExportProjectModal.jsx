@@ -170,6 +170,7 @@ export class ExportProjectModal  extends AbstractComponent {
               checkedList,
               { runner: RUNNER_JEST, ...launcherOptions },
               this.props.snippets,
+              project.targets,
               envDto
             );
             message.info( `Project exported in ${ selectedDirectory }` );

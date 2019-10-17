@@ -17,7 +17,7 @@ const { Option } = Select,
       mapStateToProps = ( state ) => ({
         environments: state.project.environments,
         selector: {
-          getTargetDataTable: () => selectors.getTargetDataTable( state.suite.targets )
+          getTargetDataTable: () => selectors.getTargetDataTable( state.project.targets )
         }
       }),
       // Mapping actions to the props
@@ -34,13 +34,12 @@ export class TargetsPane extends AbstractComponent {
 
     return (
       <ErrorBoundary>
-        <p>
-    Here we can define a set of environment dependent variables. For an instance, we can declare a separate
-    target app URL for every environment (test.acme.com, stage.acme.com, www.acme.com).
-    Before running/exporting test project we specify the desired environment and the corresponding template
-    tags in test cases will be replaced with the value (URL) given for that environment.
+        <p>Targets are identifiers associated with locators (CSS selector or XPath)
+           that we can refer in the test cases. Shared targets are accessable in all suites of the open project.
         </p>
-        <p><LearnMore href="https://docs.puppetry.app/template" /></p>
+
+        <p><LearnMore href="https://docs.puppetry.app/target" />
+        </p>
         <br />
        <TargetTable model="SharedTarget" action={ action } targets={ selector.getTargetDataTable() } />
 

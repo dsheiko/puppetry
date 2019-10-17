@@ -7,7 +7,7 @@ function buildAddon( record ) {
           val = typeof schema.toLabel === "function" ? schema.toLabel( record ) : "";
     return val.replace( /`/g, " " ).replace( /\"/g, "" );
   } catch ( err ) {
-    log.warn( `Renderer process: CommandRowLabel::buildTargetAddon: ${ err }` );
+    console.warn( `Renderer process: CommandRowLabel::buildTargetAddon: ${ err }` );
   }
 }
 

@@ -76,6 +76,7 @@ export class TestReport extends AbstractComponent {
                 ...options
               },
               this.props.snippets,
+              project.targets,
               {
                 variables: getSelectedVariables( project.variables, activeEnv ),
                 environment

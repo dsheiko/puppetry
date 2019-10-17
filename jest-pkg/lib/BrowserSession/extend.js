@@ -52,6 +52,15 @@ module.exports = function( bs, util ) {
     return elh;
   }
 
+  bs.TARGETS = {};
+
+  bs.getTarget = async( name )  => {
+    if ( typeof bs.TARGETS[ name ] !== "function" ) {
+      throw Error( `Target "${ name }" is not defined` );
+    }
+    return await bs.TARGETS[ name ]();
+  };
+
 
   /**
    *

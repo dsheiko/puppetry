@@ -8,6 +8,11 @@ module.exports = function( expect, util ) {
     eq: "="
   };
 
+  function visibleObjToString( obj ) {
+    return `${ obj.isDisplayed ? "" : "NOT " }displayed, ${ obj.isVisible ? "" : "NOT " }visible,`
+    + ` ${ obj.isOpaque ? "" : "NOT " } opaque, ${ obj.isIntersecting ? "" : "NOT " }within the viewport`;
+  }
+
 
   function valsToString( vals ) {
     return vals
@@ -240,6 +245,29 @@ module.exports = function( expect, util ) {
         return expectReturn( assets.length <= val, `[${ source }] expected `
           + `total number of ${ type } assets to be under`
           + ` ${ val }, but found ${ assets.length  }` );
+    },
+
+    /**
+     *
+     * @param {Object} actual
+     * @param {Object} expected
+     * @param {String} source
+     * @returns {Object}
+     */
+    toBeVisible( actual, expected, source ) {
+        const pass = typeof expected.value !== "undefined"
+        // support Puppetry@<3.0.0
+        ? ( actual.isDisplayed === expected.value
+          && actual.isVisible === expected.value
+          && actual.isOpaque === expected.value
+          && actual.isIntersecting === expected.value )
+        : ( actual.isDisplayed === expected.isDisplayed
+          && actual.isVisible === expected.isVisible
+          && actual.isOpaque === expected.isOpaque
+          && actual.isIntersecting === expected.isIntersecting );
+
+        return expectReturn( pass, `[${ source }] expected the target element to be `
+          + `${ visibleObjToString( expected ) }, but it is ${ visibleObjToString( actual ) }` );
     },
 
 

@@ -128,9 +128,19 @@ export function copyProject( srcDirectory, targetDirectory ) {
  * @param {String} filename
  * @param {String} runner
  * @param {Object} snippets
+ * @param {Object} sharedTargets
  * @returns {String} - spec.js content
  */
-export async function exportSuite({ projectDirectory, outputDirectory, filename, runner, snippets, env, options }) {
+export async function exportSuite({
+    projectDirectory,
+    outputDirectory,
+    filename,
+    runner,
+    snippets,
+    sharedTargets,
+    env,
+    options
+  }) {
   const suite = await readSuite( projectDirectory, filename ),
         gen = new TestGenerator({
           suite,
@@ -140,6 +150,7 @@ export async function exportSuite({ projectDirectory, outputDirectory, filename,
           projectDirectory,
           outputDirectory,
           snippets,
+          sharedTargets,
           env,
           options
         });
@@ -154,6 +165,8 @@ export async function exportSuite({ projectDirectory, outputDirectory, filename,
  * @param {String[]} suiteFiles ["foo.json",..]
  * @param {Object} puppeteerOptions
  * @param {Object} snippets
+ * @param {Object} sharedTargets
+ * @param {Object} env
  * @returns {String[]} - ["foo.spec.js",..]
  */
 export async function exportProject(
@@ -162,6 +175,7 @@ export async function exportProject(
   suiteFiles,
   { runner = RUNNER_PUPPETRY, ...options },
   snippets,
+  sharedTargets,
   env
 ) {
   const testDir = join( outputDirectory, "specs" ),
@@ -194,6 +208,7 @@ export async function exportProject(
                           filename,
                           runner,
                           snippets,
+                          sharedTargets,
                           env,
                           options
                         });

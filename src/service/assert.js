@@ -92,6 +92,8 @@ function createCbBody({ assert, target, method, id }) {
         source = `${ target }.${ method }`;
 
   switch ( assertion ) {
+    case "visible":
+      return justify( `expect( result ).toBeVisible( ${ JSON.stringify( assert ) }, "${ source }" );` );
     case "screenshot":
       return justify( `expect( result ).toMatchScreenshot( ${ options.mismatchTolerance }, "${ source }" );` );
     case "selector":
