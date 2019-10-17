@@ -184,8 +184,11 @@ actions.saveSuite = ( options = {}, autosave = false ) => async ( dispatch, getS
 
 actions.openSuiteFile = ( filename, options = { silent: false }) => ( dispatch ) => {
   dispatch( appActions.setApp({ loading: true }) );
-  dispatch( actions.loadSuite( filename, options ) );
-  dispatch( appActions.setApp({ loading: false }) );
+  setTimeout( async () => {
+    await dispatch( actions.loadSuite( filename, options ) );
+    dispatch( appActions.setApp({ loading: false }) );
+  }, 50 );
+
 };
 
 
