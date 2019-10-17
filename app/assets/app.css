@@ -1367,3 +1367,7 @@ summary:hover {
 .ant-form-item.is-shrinked {
   margin: 0;
 }
+
+.snippets-table .ant-table-expanded-row td {
+  padding-right: 0;
+}

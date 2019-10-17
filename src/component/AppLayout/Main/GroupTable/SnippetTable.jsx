@@ -89,7 +89,7 @@ export class SnippetTable extends AbstractEditableTable {
     return (
       <ErrorBoundary>
         <Table
-          className="draggable-table"
+          className="draggable-table snippets-table"
           id="cTestTable"
           components={this.components}
           onRow={this.onRow}
