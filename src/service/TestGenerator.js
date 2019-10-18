@@ -121,6 +121,16 @@ export default class TestGenerator {
         this.options.requireInterceptTraffic = true;
       }
 
+      if ( target !== "page" && typeof this.targets[ target ] === "undefined" ) {
+       throw new TestGeneratorError( `Action cannot find "${ target }" target.`
+          + ` Please check your targets` );
+      }
+      if ( target !== "page"
+        && typeof assert.target !== "undefined" && this.targets[ assert.target ] === "undefined" ) {
+       throw new TestGeneratorError( `Action assert on "${ assert.target }" target, but cannot find it.`
+          + ` Please check your targets` );
+      }
+
       const traceCode = this.options.trace ? TestGenerator.getTraceTpl( target, command ) : ``,
             interactiveModeCode = this.options.interactiveMode ? this.getInteractiveModeTpl( command ) : ``,
             chunk = this.schema[ src ][ method ].template({
@@ -144,7 +154,7 @@ export default class TestGenerator {
     } catch ( err ) {
       console.warn( "parseCommand error:", err, command );
       log.warn( `Renderer process: TestGenerator.parseCommand: ${ err }` );
-      throw new TestGeneratorError( `${ err.message } in ${ target }.${ method }` );
+      throw new TestGeneratorError( `${ target }.${ method }(): ${ err.message }` );
     }
   }
 
