@@ -47,6 +47,9 @@ export const lstat = util.promisify( fs.lstat );
 
 shell.config.fatal = true;
 
+export function mkdir( dir ) {
+  shell.mkdir( "-p" , dir );
+}
 
 function findCommandIdInCode( lines, pos ) {
   while ( pos >= 0 && !lines[ pos ].startsWith( COMMAND_ID_COMMENT ) ) {
