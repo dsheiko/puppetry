@@ -992,6 +992,10 @@ table > .ant-table-tbody > tr.ant-table-row.disable-expand:hover > td {
   overflow-wrap: break-word;
 }
 
+.gherkin {
+  word-break: normal;
+}
+
 .is-checkbox-group-scrollable .ant-checkbox-group {
   height: calc(100vh - 467px);
   width: 100%;

@@ -87,7 +87,9 @@ export class CommandRowLabel extends React.Component {
          icon="exclamation-circle"
          pos="up" />
 
-    { testStyle === "gherkin" && CommandRowLabel.highlightText( schema.toGherkin( record ) ) }
+    { testStyle === "gherkin" && <div className="gherkin">
+      { CommandRowLabel.highlightText( schema.toGherkin( record ) ) }
+      </div> }
     { testStyle !== "gherkin" && <React.Fragment>
        <Icon
          type={ record.target === "page" ? "file" : "scan" }

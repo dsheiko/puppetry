@@ -4,7 +4,7 @@ const { join } = require( "path" ),
       os = require( "os" ),
       shell = require( "shelljs" ),
       fetch = require( "node-fetch" ),
-      tabel = require( "text-table" ),
+      table = require( "text-table" ),
       { dirname } = require( "path" ),
       { LocalStorage } = require( "node-localstorage" ),
       faker = require( "faker" ),
@@ -49,8 +49,8 @@ const png = ( id, screenshotTitle, options = {} ) => {
 
 
       performanceResourcesToTable = ( resources ) => {
-        const arr = resources.map( r => ([ r.url, r.type, bytesToString( r.length ) ]));
-        return tabel([
+        const arr = resources.map( r => ([ truncate( r.url, 90 ), r.type, bytesToString( r.length ) ]));
+        return table([
           [ "URL", "Type", "Size" ],
           ...arr
         ]);
@@ -96,6 +96,17 @@ const png = ( id, screenshotTitle, options = {} ) => {
        */
       randomInt = ( max ) => Math.floor( Math.random() * Math.floor( max ) );
 
+
+/**
+ *
+ * @param {String} str
+ * @param {Number} limit
+ * @returns {String}
+ */
+function truncate( str, limit ) {
+  str = ( "" + str ).trim();
+  return ( str.length > limit ) ? str.substr( 0, limit - 3 ) + "..." : str;
+}
 
 /**
  *

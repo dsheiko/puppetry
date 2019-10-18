@@ -22,9 +22,9 @@ export const assertPerfomanceTiming = {
     under a provided budget`,
   commonly: "assert perfomance timing",
 
-  toLabel: ({ assert }) => `(${ stringifyTypes( assert ) })`,
+  toLabel: ({ assert }) => `(${ stringifyTypes( assert, "μs" ) })`,
   toGherkin: ({ params, assert }) => `Assert that the page loading
-    timings satisfy the budget: ${ stringifyTypes( assert, "kB" ) }`,
+    timings satisfy the budget: ${ stringifyTypes( assert, "μs" ) }`,
 
   assert: {
     node: AssertPerfomanceMetrics

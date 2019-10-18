@@ -203,7 +203,13 @@ export class TestReport extends AbstractComponent {
 
 
   render() {
-    const { report, loading, ok, stdErr, details } = this.state;
+    const { report, loading, ok, stdErr, details } = this.state,
+          printableStdErr = convert.toHtml( stdErr )
+            .replace( /\n/mg, "" )
+            .replace( /<br\s*\/>+/mg, "\n" )
+            .replace( /\s[AD]\s/mg, "" )
+            .replace( /\n+/mg, "<br />" )
+            .replace( /color\:#FFF/mg, "color:rgba(0,0,0,0.65)" );
 
 
     if ( report !== {} && !report ) {
@@ -213,7 +219,6 @@ export class TestReport extends AbstractComponent {
         description: "Jest testing framework could not run the tests"
       });
     }
-
     return ( <ErrorBoundary>
       <If exp={ loading }>
         <Spin spinning={ loading } tip="Tests are running.."><br /><br /><br /><br /><br /></Spin>
@@ -230,7 +235,7 @@ export class TestReport extends AbstractComponent {
 
           { ( stdErr && !report.success ) && <Collapse>
             <Panel header="Error details" key="1">
-              <p dangerouslySetInnerHTML={{ __html: convert.toHtml( stdErr ) }}></p>
+              <p dangerouslySetInnerHTML={{ __html: printableStdErr }}></p>
             </Panel>
           </Collapse> }
 
