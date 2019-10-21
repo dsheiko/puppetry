@@ -102,11 +102,22 @@ export class TargetTable extends AbstractEditableTable {
     this.props.action.setApp({ editTargetsAsCsvModal: true });
   }
 
-  shouldComponentUpdate( nextProps ) {
+  shouldComponentUpdate( nextProps, nextState ) {
+    if ( this.state !== nextState ) {
+      return true;
+    }
     if ( this.props.targets !== nextProps.targets ) {
       return true;
     }
     return false;
+  }
+
+  /**
+   * Override the abstract method to provide record array for Drag&Drop selected rows
+   * @returns {Array}
+   */
+  getRecords() {
+    return this.props.targets;
   }
 
   render() {

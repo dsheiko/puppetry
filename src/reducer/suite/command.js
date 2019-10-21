@@ -42,50 +42,52 @@ export default {
      * @param {Payload} payload
      * @returns {object}
      */
-  [ actions.addCommand ]: ( state, { payload }) => update( state, {
-
-    groups: {
-      [ payload.groupId ]: {
-        tests: {
-          [ payload.testId ]: {
-            commands: {
-              $apply: ( ref ) => {
-                const commands = { ...ref },
-                      id = uniqid(),
-                      defaultState = commandDefaultState( id );
-                commands[ id ] = {
-                  ...defaultState,
-                  ...normalizePayload( payload )
-                };
-                return commands;
+  [ actions.addCommand ]: ( state, { payload }) => {
+      const { options, id } = normalizeComplexPayload( payload );
+      return update( state, {
+        groups: {
+          [ options.groupId ]: {
+            tests: {
+              [ options.testId ]: {
+                commands: {
+                  $apply: ( ref ) => {
+                    const commands = { ...ref },
+                          id = id || uniqid(),
+                          defaultState = commandDefaultState( id );
+                    commands[ id ] = {
+                      ...defaultState,
+                      ...normalizePayload( options )
+                    };
+                    return commands;
+                  }
+                }
               }
             }
           }
         }
-      }
-    }
-  }),
+      });
+  },
 
 
   /**
      * Insert record before/after
      * @param {object} state
-     * @param {Payload} payload
+     * @param {Payload} payload - { record, position }
      * @returns {object}
      */
   [ actions.insertAdjacentCommand ]: ( state, { payload }) => {
-    const { options, position } = normalizeComplexPayload( payload ),
+    const { options, position, id } = normalizeComplexPayload( payload ),
           { commands }  = state.groups[ options.groupId ].tests[ options.testId ],
 
           entities = Object.values( commands ).reduce( ( carry, command ) => {
             if ( position.before && position.before === command.id ) {
-              const id = uniqid();
-              carry[ id ] = { ...commandDefaultState( id ), ...options };
+              const uid = id || uniqid();
+              carry[ uid ] = { ...commandDefaultState( uid ), ...options };
             }
             carry[ command.id ] = command;
             if ( position.after && position.after === command.id ) {
-              const id = uniqid();
-              carry[ id ] = { ...commandDefaultState( id ), ...options };
+              const uid = id || uniqid();
+              carry[ uid ] = { ...commandDefaultState( uid ), ...options };
             }
             return carry;
           }, {});

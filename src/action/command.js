@@ -5,19 +5,26 @@ import { handleException } from "./helpers";
 import { message } from "antd";
 
 const actions = createActions({
+
   /**
-    * @param {object} options = { testId, groupId, target, method, editing }
+    * @param {object} options = { target, selector, editing }
+    * @param {object} [id] - injected id for new entity
     * @returns {object}
     */
-  ADD_COMMAND: ( options ) => validate( options, { ...I.ENTITY, ...I.COMMAND }),
+  ADD_COMMAND: ( options, id = null ) => ({
+    options: validate( options, { ...I.ENTITY, ...I.TARGET }),
+    id: validate( id, I.ID_REF )
+  }),
   /**
     * @param {object} options = { title, editing }
     * @param {object} position = { "after": ID }
+    * @param {object} [id] - injected id for new entity
     * @returns {object}
     */
-  INSERT_ADJACENT_COMMAND: ( options, position ) => ({
+  INSERT_ADJACENT_COMMAND: ( options, position, id = null ) => ({
     position,
-    options
+    options,
+    id
   }),
   /**
     * @param {object} options = { testId, groupId, id, target, method, editing }
@@ -71,14 +78,14 @@ actions.swapCommand = ( payload ) => async ( dispatch, getState ) => {
 
 };
 
-actions.pasteCommand = ( payload, dest ) => async ( dispatch ) => {
+actions.pasteCommand = ( payload, dest, id ) => async ( dispatch ) => {
   try {
     const merged = { ...payload, testId: dest.testId, groupId: dest.groupId },
           position = { after: dest.id };
     dispatch(
       dest.hasOwnProperty( "id" )
-        ? actions.insertAdjacentCommand( merged, position )
-        : actions.addCommand( merged )
+        ? actions.insertAdjacentCommand( merged, { ...position }, id )
+        : actions.addCommand( merged, id )
     );
   } catch ( ex ) {
     handleException( ex, dispatch, "Cannot paste command" );

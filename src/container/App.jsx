@@ -33,7 +33,8 @@ const GREETINGS = [ "Greetings",
           getTargetDataTable: () => selectors.getTargetDataTable( state.suite.targets ),
           getGroupDataTable: () => selectors.getStructureDataTable( state.suite.groups, "group" ),
           getTestDataTable: ( group ) => selectors.getStructureDataTable( group.tests, "test" ),
-          getSelectedTargets: ( selection ) => selectors.getSelectedTargets( selection, state.suite.targets ),
+          getSelectedTargets: ( selection ) => selectors.getSelectedTargets(
+            selection, Object.assign( {}, state.project.targets, state.suite.targets ) ),
           hasTarget: ( target ) => selectors.hasTarget( target, state.suite.targets ),
           findCommandsByTestId:
             ( testId ) => selectors.findCommandsByTestId( testId, state.suite.groups ),

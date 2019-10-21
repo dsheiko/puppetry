@@ -1,4 +1,8 @@
-
+/**
+ *
+ * @param {Object} record
+ * @returns {Object[]}
+ */
 export function findTargets( record ) {
   // group
   if ( "tests" in record ) {

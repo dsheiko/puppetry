@@ -720,11 +720,19 @@ td:hover .editable-cell-icon {
   background: none;
 }
 
-.ant-table-tbody > tr:not(.disable-expand):hover > td {
+/* remove highlighting on hover*/
+.layout .ant-table-thead > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
+.layout .ant-table-tbody > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
+.layout .ant-table-thead > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
+.layout .ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td {
+  background: none;
+}
+
+.layout .ant-table.ant-table-default .ant-table-tbody > tr.ant-table-row.is-row-selected > td {
   background: #e6f7ff;
 }
 
-table > .ant-table-tbody > tr.ant-table-row.disable-expand:hover > td {
+.layout .ant-table.ant-table-default .ant-table-tbody > tr.ant-table-row.is-row-selected > td .ant-table.ant-table-default .ant-table-tbody > tr.ant-table-row.is-row-selected > td {
   background: none;
 }
 

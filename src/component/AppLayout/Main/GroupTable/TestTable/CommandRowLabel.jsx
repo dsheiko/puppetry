@@ -67,10 +67,21 @@ export class CommandRowLabel extends React.Component {
    }
 
   shouldComponentUpdate( nextProps ) {
+    const prev = this.props.record,
+          next = nextProps.record;
     if ( !this.props.record ) {
       return false;
     }
-    if ( this.props.record.id !== nextProps.record.id  || this.props.testCaseStyle !== nextProps.testCaseStyle ) {
+    if ( prev.id !== next.id
+          || prev.failure !== next.failure
+          || prev.isRef !== next.isRef
+          || prev.method !== next.method
+          || prev.target !== next.target
+          || prev.params !== next.params
+          || prev.assert !== next.assert
+          || prev.ref !== next.ref
+          || prev.refName !== next.refName
+          || this.props.testCaseStyle !== nextProps.testCaseStyle ) {
       return true;
     }
     return false;
@@ -80,7 +91,7 @@ export class CommandRowLabel extends React.Component {
      const { record, testCaseStyle } = this.props,
            testStyle = testCaseStyle || "gherkin",
            schema = getSchema( record.target === "page" ? "page" : "target", record.method );
-
+         
      return ( <div className="container--editable-cell">
        <Tooltip
          title={ record.failure }

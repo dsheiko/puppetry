@@ -53,6 +53,14 @@ export class GroupTable extends AbstractEditableTable {
     });
   }
 
+  /**
+   * Override the abstract method to provide record array for Drag&Drop selected rows
+   * @returns {Array}
+   */
+  getRecords() {
+    return this.props.groups || [];
+  }
+
   onClickRecord = async ( e ) => {
     e.preventDefault();
     const { groups, targets } = this.props,
@@ -98,8 +106,10 @@ export class GroupTable extends AbstractEditableTable {
     return `model--group${ record.disabled ? " row-disabled" : "" } ` + this.buildRowClassName( record );
   }
 
-  shouldComponentUpdate( nextProps ) {
-
+  shouldComponentUpdate( nextProps, nextState ) {
+    if ( this.state !== nextState ) {
+      return true;
+    }
     if ( this.props.groups !== nextProps.groups
       || this.props.expanded !== nextProps.expanded
       || this.props.targets !== nextProps.targets ) {

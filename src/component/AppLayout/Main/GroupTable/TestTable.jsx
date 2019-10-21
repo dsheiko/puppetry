@@ -83,6 +83,14 @@ export class TestTable extends AbstractEditableTable {
     return `model--test${ record.disabled ? " row-disabled" : "" } ` + this.buildRowClassName( record );
   }
 
+  /**
+   * Override the abstract method to provide record array for Drag&Drop selected rows
+   * @returns {Array}
+   */
+  getRecords() {
+    return this.props.tests || [];
+  }
+
   render() {
     const { tests } = this.props,
           expanded = this.selectExpanded();

@@ -5,7 +5,9 @@ import { DragableRow } from "./DragableRow";
 import { confirmDeleteEntity } from "service/smalltalk";
 import { findTargets } from "service/suite";
 import { clipboardReadObj } from "service/copypaste";
+import uniqid from "uniqid";
 import { remote, clipboard } from "electron";
+
 
 const { Menu, MenuItem } = remote,
       APP_NAME = remote.app.getName(),
@@ -105,16 +107,19 @@ export default class AbstractDnDTable extends React.Component {
   }
 
   buildRowClassName( record ) {
+    const selected = typeof this.state.selected === "undefined" ? new Set() : this.state.selected;
     if ( !this.state || !this.state.contextMenuAnchor ) {
       return classNames({
         "disable-dnd": record.adding,
-        "disable-expand": record.adding
+        "disable-expand": record.adding,
+        "is-row-selected": selected.has( record.id )
       });
     }
     return classNames({
       "is-right-clicked": this.state.contextMenuAnchor === record.id,
       "disable-dnd": record.adding,
-      "disable-expand": record.adding
+      "disable-expand": record.adding,
+      "is-row-selected": selected.has( record.id )
     });
   }
 
@@ -125,8 +130,31 @@ export default class AbstractDnDTable extends React.Component {
   onRow = ( record, index ) => ({
     index,
     moveRow: this.moveRow,
-    onContextMenu: ( e ) => this.onContextMenu( e, record )
+    onContextMenu: ( e ) => this.onContextMenu( e, record ),
+    onClick: ( e ) => this.onClickRow( e, record )
   });
+
+
+  resetSelected() {
+    this.setState({ selected: new Set() });
+  }
+  /**
+   * Register highlihted rows in the state
+   */
+  onClickRow = ( e, record ) => {
+    e.preventDefault();
+    this.setState(( state ) => {
+      if ( typeof state.selected === "undefined" ) {
+        state.selected = new Set();
+      }
+      if ( state.selected.has( record.id ) ) {
+        state.selected.delete( record.id )
+      } else {
+        state.selected.add( record.id )
+      }
+      return state;
+    });
+  }
 
   onEdit = ( record ) => {
     this.toggleEdit( record.id, true );
@@ -153,6 +181,24 @@ export default class AbstractDnDTable extends React.Component {
   }
 
   /**
+   * Helper to paste a set of records
+   */
+  static pasteRecords( update, records, dest ) {
+    let destRec = dest;
+    records.forEach( record  => {
+      const id = uniqid();
+      update( record, destRec, id );
+      destRec = { id, testId: dest.testId, groupId: dest.groupId };
+      if ( typeof dest.testId === "undefined" ) {
+        delete destRec.testId;
+      }
+      if ( typeof dest.groupId === "undefined" ) {
+        delete destRec.groupId;
+      }
+    });
+  }
+
+  /**
    * @param {GroupEntity|TestEntity|CommandEntity|TargetEntity} record -
    *  represents position after which we paste data from clipboard
    */
@@ -162,20 +208,23 @@ export default class AbstractDnDTable extends React.Component {
       return;
     }
     const payload = clipboardReadObj(),
-          update = this.props.action[ `paste${ payload.model }` ];
+          pasteMethod = `paste${ payload.model }`,
+          update = this.props.action[ pasteMethod ],
+          records = Array.isArray( payload.data ) ? payload.data : [ payload.data ];
+
 
     this.props.action.setApp({ loading: true });
 
     setTimeout( () => {
 
       if ( record.entity === "group" && payload.model === "Test" ) {
-        update( payload.data, {
+        AbstractDnDTable.pasteRecords( update, records, {
           groupId: record.id
         });
       }
 
       if ( record.entity === "test" && payload.model === "Command" ) {
-        update( payload.data, {
+        AbstractDnDTable.pasteRecords( update, records, {
           testId: record.id,
           groupId: record.groupId
         });
@@ -183,8 +232,9 @@ export default class AbstractDnDTable extends React.Component {
 
       if ( record.entity === payload.model.toLowerCase() ) {
         // inject group/test/commands
-        update( payload.data, record );
+        AbstractDnDTable.pasteRecords( update, records, record );
       }
+
 
       // inject required targets
       Object.values( payload.targets ).forEach( target => {
@@ -194,26 +244,60 @@ export default class AbstractDnDTable extends React.Component {
         this.props.action.addTarget( target );
       });
 
+      this.resetSelected();
       this.updateSuiteModified( record, "paste" );
+      this.props.action.autosaveSuite();
       this.props.action.setApp({ loading: false });
     }, 200 );
   }
 
+  /**
+   * Return array of record by selected of if none by hovered one
+   * @param {Object} record
+   * @returns {Object[]}
+   */
+  getSelectedRecords( record ) {
+    if ( typeof this.getRecords === "function" && this.state.selected && this.state.selected.size ) {
+      return this.getRecords().filter( record => this.state.selected.has( record.id ) );
+    }
+    return [ record ];
+  }
+
+  /**
+   * Extract key-value from targets
+   */
+  static findTargets( records ) {
+    return Array.from( records.reduce(( carry, record ) => {
+      carry.add( findTargets( record ) );
+      return carry;
+    }, new Set() ) );
+  }
+
+  /**
+   * Copy into clipboard
+   */
   copyClipboard = ( record ) => {
-    const payload = {
-      app: {
-        name: APP_NAME,
-        version: APP_VERSION
-      },
-      model: this.model,
-      data: record,
-      targets: [ "Target", "Variable" ].includes( this.model )
-        ? []
-        : this.props.selector.getSelectedTargets( findTargets( record ) )
-    };
+    const records = this.getSelectedRecords( record ),
+          payload = {
+            app: {
+              name: APP_NAME,
+              version: APP_VERSION
+            },
+            model: this.model,
+            data: records,
+            targets: [ "Target", "Variable" ].includes( this.model )
+              ? []
+              // We attach targets referenced from copied records
+              : this.props.selector.getSelectedTargets( AbstractDnDTable.findTargets( records ) )
+          };
+
+    this.resetSelected();
     clipboard.writeText( JSON.stringify( payload, null, 2 ) );
   }
 
+  /**
+   * Insert from clipboard
+   */
   insertRecord = ( record ) => {
     const update = this.props.action[ `insertAdjacent${this.model}` ],
           node = { editing: true };

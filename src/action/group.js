@@ -72,9 +72,9 @@ actions.swapGroup = ( payload ) => async ( dispatch, getState ) => {
 
 };
 
-actions.pasteGroup = ( payload, dest ) => async ( dispatch ) => {
+actions.pasteGroup = ( payload, dest, uid ) => async ( dispatch ) => {
   try {
-    const groupId = uniqid(),
+    const groupId = uid || uniqid(),
           merged = { ...payload },
           position = { after: dest.id };
 

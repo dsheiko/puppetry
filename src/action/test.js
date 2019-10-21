@@ -79,10 +79,11 @@ actions.swapTest = ( payload ) => async ( dispatch, getState ) => {
 /**
  * @param {Object} payload - clipboard DTO
  * @param {GroupEntity} dest
+ * @param {String} [uid]
  */
-actions.pasteTest = ( payload, dest ) => async ( dispatch ) => {
+actions.pasteTest = ( payload, dest, uid ) => async ( dispatch ) => {
   try {
-    const id = uniqid(),
+    const id = uid || uniqid(),
           merged = { ...payload, groupId: dest.groupId },
           position = { after: dest.id };
 

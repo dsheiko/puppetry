@@ -222,7 +222,10 @@ export class CommandTable extends AbstractDnDTable {
   }
 
 
-  shouldComponentUpdate( nextProps ) {
+  shouldComponentUpdate( nextProps, nextState ) {
+    if ( this.state !== nextState ) {
+      return true;
+    }
     if ( this.props.commands !== nextProps.commands
           || this.props.groupId !== nextProps.groupId
           || this.props.testId !== nextProps.testId
@@ -245,6 +248,14 @@ export class CommandTable extends AbstractDnDTable {
         }
       }
     });
+  }
+
+  /**
+   * Override the abstract method to provide record array for Drag&Drop selected rows
+   * @returns {Array}
+   */
+  getRecords() {
+    return this.props.commands || [];
   }
 
   render() {

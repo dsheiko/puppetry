@@ -59,10 +59,10 @@ actions.swapSharedTarget = ( payload ) => async ( dispatch, getState ) => {
 };
 
 
-actions.pasteSharedTarget = ( payload, dest ) => async ( dispatch ) => {
+actions.pasteSharedTarget = ( payload, dest, uid ) => async ( dispatch ) => {
   try {
     const position = { after: dest.id };
-    dispatch( actions.insertAdjacentSharedTarget( payload, position ) );
+    dispatch( actions.insertAdjacentSharedTarget( payload, position, uid ) );
   } catch ( ex ) {
     handleException( ex, dispatch, "Cannot paste target" );
   }
