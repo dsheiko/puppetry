@@ -1,6 +1,38 @@
 import { msgDataSaved } from "component/Global/Message";
+const buttons = {
+        ok: "Yes",
+        cancel: "No"
+      };
 
 function noop() {
+}
+
+export async function confirmRemove( count ) {
+  try {
+    await smalltalk
+      .confirm( "Confirm removing",
+        `Do you want to remove ${ count } records?` , {
+          buttons
+        });
+    return true;
+  } catch ( e ) {
+    noop( e );
+    return false;
+  }
+}
+
+export async function confirmClone( count ) {
+  try {
+    await smalltalk
+      .confirm( "Confirm cloning",
+        `Do you want to clone ${ count } records?` , {
+          buttons
+        });
+    return true;
+  } catch ( e ) {
+    noop( e );
+    return false;
+  }
 }
 
 export async function confirmRecording() {
@@ -8,10 +40,7 @@ export async function confirmRecording() {
     await smalltalk
       .confirm( "Confirm Suite Cleanup",
         "By recording the current content of your suite will be removed. Are you sure you want to proceed?" , {
-          buttons: {
-            ok: "Yes",
-            cancel: "No"
-          }
+          buttons
         });
     return true;
   } catch ( e ) {
@@ -43,10 +72,7 @@ export async function confirmDeleteFile( selectedFile = "" ) {
   try {
     await smalltalk
       .confirm( "Confirm Delete", `Are you sure you want to delete ${ selectedFile } suite file?` , {
-        buttons: {
-          ok: "Yes",
-          cancel: "No"
-        }
+        buttons
       });
     return true;
   } catch ( e ) {
@@ -59,10 +85,7 @@ export async function confirmDeleteEntity( entity = "" ) {
   try {
     await smalltalk
       .confirm( "Confirm Delete", `Are you sure you want to delete ${ entity }?` , {
-        buttons: {
-          ok: "Yes",
-          cancel: "No"
-        }
+        buttons
       });
     return true;
   } catch ( e ) {
@@ -77,10 +100,7 @@ export async function confirmCreateProject() {
       .confirm( "Confirm Create",
         `The target directory is not empty. Are you sure you want to `
       + `create project there?` , {
-          buttons: {
-            ok: "Yes",
-            cancel: "No"
-          }
+          buttons
         });
     return true;
   } catch ( e ) {
@@ -96,10 +116,7 @@ export async function confirmExportProject() {
       .confirm( "Confirm Export",
         `The target directory is not empty. Are you sure you want to `
       + `export project there?` , {
-          buttons: {
-            ok: "Yes",
-            cancel: "No"
-          }
+          buttons
         });
     return true;
   } catch ( e ) {

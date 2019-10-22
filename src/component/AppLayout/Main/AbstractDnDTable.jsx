@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { DragableRow } from "./DragableRow";
-import { confirmDeleteEntity } from "service/smalltalk";
+import { confirmRemove, confirmClone } from "service/smalltalk";
 import { findTargets } from "service/suite";
 import { clipboardReadObj } from "service/copypaste";
 import uniqid from "uniqid";
@@ -54,10 +54,10 @@ export default class AbstractDnDTable extends React.Component {
       menu.append( new MenuItem(
         record.disabled ? {
           label: "Enable",
-          click: () => this.updateRecord({ id: record.id, disabled: false })
+          click: () => this.toggleVisibility( record, false )
         } : {
           label: "Disable",
-          click: () => this.updateRecord({ id: record.id, disabled: true })
+          click: () => this.toggleVisibility( record, true )
         }
       ) );
     }
@@ -95,9 +95,7 @@ export default class AbstractDnDTable extends React.Component {
 
     menu.append( new MenuItem({
       label: "Delete",
-      click: async () => {
-        await confirmDeleteEntity( "command" ) && this.removeRecord( record.id );
-      }
+      click: () => this.removeRecords( record )
     }) );
 
     menu.popup({
@@ -246,7 +244,6 @@ export default class AbstractDnDTable extends React.Component {
 
       this.resetSelected();
       this.updateSuiteModified( record, "paste" );
-      this.props.action.autosaveSuite();
       this.props.action.setApp({ loading: false });
     }, 200 );
   }
@@ -318,13 +315,52 @@ export default class AbstractDnDTable extends React.Component {
     this.updateSuiteModified( node, "insert" );
   }
 
-  cloneRecord = ( record ) => {
-    const update = this.props.action[ `clone${this.model}` ];
+  cloneRecord = async ( record ) => {
+    const update = this.props.action[ `clone${this.model}` ],
+          records = this.getSelectedRecords( record );
+    if ( records.length > 1 && !( await confirmClone( records.length ) ) ) {
+      return;
+    }
     this.props.action.setApp({ loading: true });
     // give it a chance to render loading state
-    setTimeout( () => {
-      update( record );
+    setTimeout( async () => {
+      for ( const record of records ) {
+        await update( record );
+      }
       this.updateSuiteModified( record, "clone" );
+      this.props.action.setApp({ loading: false });
+    }, 200 );
+  }
+
+  removeRecords = async ( record ) => {
+    const update = this.props.action[ `remove${this.model}` ],
+          records = this.getSelectedRecords( record );
+
+    if ( records.length > 1 && !( await confirmRemove( records.length ) ) ) {
+      return;
+    }
+    this.props.action.setApp({ loading: true });
+    // give it a chance to render loading state
+    setTimeout( async () => {
+      for ( const record of records ) {
+        await update(this.extendActionOptions( record ) );
+      }
+      this.updateSuiteModified( record, "remove" );
+      this.props.action.setApp({ loading: false });
+    }, 200 );
+  }
+
+  toggleVisibility = async ( record, disabled ) => {
+    const update = this.props.action[ `update${this.model}` ],
+          records = this.getSelectedRecords( record );
+
+    this.props.action.setApp({ loading: true });
+    // give it a chance to render loading state
+    setTimeout(() => {
+      for ( const record of records ) {
+        update( this.extendActionOptions({ id: record.id, disabled }) );
+      }
+      this.updateSuiteModified( record, "update" );
       this.props.action.setApp({ loading: false });
     }, 200 );
   }

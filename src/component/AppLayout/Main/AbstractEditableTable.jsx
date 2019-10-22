@@ -136,6 +136,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
     this.props.action.updateSuite({
       modified: true
     });
+    typeof this.resetSelected === "function" && this.resetSelected();
     this.props.action.autosaveSuite();
   }
 

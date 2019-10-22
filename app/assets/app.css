@@ -3,6 +3,9 @@
   --color-ok: #52c41a;
   --color-fail: red;
   --color-primary: #40a9ff;
+  /* Background color disabled record */
+  --color-bg-disabled: #fff3e0;
+  --color-bg-selected: #e6f7ff;
   --rhythm: 8px;
 }
 
@@ -720,21 +723,36 @@ td:hover .editable-cell-icon {
   background: none;
 }
 
+.row-disabled > td {
+  color: rgba(0,0,0, .5);
+  background-color: var(--color-bg-disabled);
+}
 /* remove highlighting on hover*/
-.layout .ant-table-thead > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
-.layout .ant-table-tbody > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
-.layout .ant-table-thead > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td,
-.layout .ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected) > td {
+.layout .ant-table-thead > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected):not(is-row-selected) > td,
+.layout .ant-table-tbody > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected):not(is-row-selected) > td,
+.layout .ant-table-thead > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected):not(is-row-selected) > td,
+.layout .ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected):not(is-row-selected) > td {
   background: none;
 }
 
-.layout .ant-table.ant-table-default .ant-table-tbody > tr.ant-table-row.is-row-selected > td {
-  background: #e6f7ff;
+.layout .ant-table-thead > tr.row-disabled.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected):not(is-row-selected) > td,
+.layout .ant-table-tbody > tr.row-disabled.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected):not(is-row-selected) > td,
+.layout .ant-table-thead > tr.row-disabled:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected):not(is-row-selected) > td,
+.layout .ant-table-tbody > tr.row-disabled:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected):not(is-row-selected) > td {
+  background-color: var(--color-bg-disabled);
+}
+
+.layout .ant-table.ant-table-default .ant-table-tbody > tr.ant-table-row.is-row-selected > td,
+.layout .ant-table.ant-table-default .ant-table-tbody > tr.ant-table-row.is-row-selected:hover > td{
+  background: var(--color-bg-selected);
 }
 
 .layout .ant-table.ant-table-default .ant-table-tbody > tr.ant-table-row.is-row-selected > td .ant-table.ant-table-default .ant-table-tbody > tr.ant-table-row.is-row-selected > td {
   background: none;
 }
+
+
+
 
 .btn--save {
   margin-right: 8px;
@@ -758,13 +776,8 @@ td:hover .editable-cell-icon {
   line-height: 21px;
 }
 
-.row-disabled > td {
-  color: rgba(0,0,0, .5);
-  background-color: #fff3e0;
-}
-.row-disabled:hover > td {
-  background-color: #fee0b0 !important;
-}
+
+
 
 .row-failure .table-actions-cell,
 .row-disabled .table-actions-cell {

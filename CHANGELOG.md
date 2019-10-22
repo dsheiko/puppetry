@@ -31,6 +31,7 @@
   - querying in Shadow DOM
   - querying in iframe
 - improvement: fix UI rendering performance
+- improvement: add support for record operations (copy/paste, clone, delete, enable/disable) on selections
 
 ### Updates
 

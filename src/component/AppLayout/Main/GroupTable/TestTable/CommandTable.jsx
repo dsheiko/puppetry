@@ -52,6 +52,7 @@ export class CommandTable extends AbstractDnDTable {
       modified: true
     });
     this.props.action.autosaveSuite();
+    this.resetSelected();
   }
 
   onContextMenu = ( e, record  ) => {
@@ -70,11 +71,11 @@ export class CommandTable extends AbstractDnDTable {
 
     menu.append( new MenuItem(
       record.disabled ? {
-        label: "Enable",
-        click: () => this.updateRecord({ id: record.id, disabled: false })
+          label: "Enable",
+          click: () => this.toggleVisibility( record, false )
       } : {
         label: "Disable",
-        click: () => this.updateRecord({ id: record.id, disabled: true })
+        click: () => this.toggleVisibility( record, true )
       }
     ) );
 
@@ -115,9 +116,7 @@ export class CommandTable extends AbstractDnDTable {
 
     menu.append( new MenuItem({
       label: "Delete",
-      click: async () => {
-        await confirmDeleteEntity( "command" ) && this.removeRecord( record.id );
-      }
+      click: () => this.removeRecords( record )
     }) );
 
     menu.popup({
@@ -154,6 +153,7 @@ export class CommandTable extends AbstractDnDTable {
 
   onEditCommand( record ) {
     const { setApp } = this.props.action;
+    this.resetSelected();
     if ( record.ref || record.isRef ) {
       setApp({
         snippetModal: {
