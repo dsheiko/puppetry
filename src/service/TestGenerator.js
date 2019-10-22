@@ -4,6 +4,7 @@ import { TestGeneratorError } from "error";
 import { COMMAND_ID_COMMENT, RUNNER_PUPPETRY, SNIPPETS_GROUP_ID } from "constant";
 import { getTargetChain, getActiveTargets } from "selector/selectors";
 import { mapSelectors } from "service/selector";
+import { renderTarget } from "service/utils";
 
 const INTERATIVE_TIMEOUT = 900000, // 15 min
       INTERACTIVE_ILLEGAL_METHODS = [ "setViewport" ];
@@ -84,12 +85,12 @@ export default class TestGenerator {
   }
 
   static getTraceTpl( target, command ) {
-    const tplProp =  ( t ) => `"${ t }": async () => await ${ t }()`,
+    const tplProp =  ( t ) => `"${ t }": async () => ${ renderTarget( t ) }`,
           secTarget = ( command.assert && command.assert.target ) ? ", " + tplProp( command.assert.target ) : ``;
 
     return `\n      // Tracing... \n` + ( target === "page"
         ? `      await bs.tracePage( "${ command.id }" );`
-        : `      await bs.traceTarget( "${ command.id }", { ${ tplProp( target )  + secTarget } });` );
+        : `      await bs.traceTarget( "${ command.id }", { ${ tplProp( target ) + secTarget } });` );
   }
 
   /**
@@ -125,7 +126,7 @@ export default class TestGenerator {
        throw new TestGeneratorError( `Action cannot find "${ target }" target.`
           + ` Please check your targets` );
       }
-      if ( target !== "page"
+      if ( target !== "page" && assert
         && typeof assert.target !== "undefined" && this.targets[ assert.target ] === "undefined" ) {
        throw new TestGeneratorError( `Action assert on "${ assert.target }" target, but cannot find it.`
           + ` Please check your targets` );

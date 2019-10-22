@@ -98,7 +98,7 @@ module.exports = function( bs, util ) {
    * @param {String} fgColor
    * @returns {void}
    */
-  createTargetHighlight = async ( elementHandleCb, targetName, fgColor = "red" ) => {
+  async function createTargetHighlight( elementHandleCb, targetName, fgColor = "red" ) {
       const elementHandle = await elementHandleCb(),
             boundingBox = await elementHandle.boundingBox();
       if ( !boundingBox ) {
@@ -121,6 +121,7 @@ module.exports = function( bs, util ) {
         ];
         document.body.insertAdjacentHTML( "beforeend", `<div data-puppetry="__puppetry-highlight-target" `
           + `style="${ styles.join( "; " ) };">&nbsp;${ targetName }</div>` );
+
         return Promise.resolve();
       }, boundingBox, targetName, fgColor );
   };
@@ -141,6 +142,7 @@ module.exports = function( bs, util ) {
         return Promise.resolve();
       });
     } catch ( e ) {
+      console.error( e );
       // ignore
     }
   };
