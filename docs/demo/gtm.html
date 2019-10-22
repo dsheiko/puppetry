@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GTM demo</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <ul>
+      <li>
+        <h4>Tracking common user interactions</h4>
+        <ul>
+          <li><a href="#" id="linkEvent">Event Measurement</a></li>
+          <li><a><strike>Social Interactions</strike></a></li>
+          <li><a href="#" id="linkScreen">App / Screen Measurement</a></li>
+          <li><a href="#" id="linkTimings">User Timings</a></li>
+          <li><a href="#" id="linkExceptions">Exceptions Tracking</a></li>
+        </ul>
+      </li>
+      <li>
+        <h4>Ecommerce plugin</h4>
+        <ul>
+          <li><a href="#" id="linkEcImpression">Measuring a Product Impression</a></li>
+          <li><a href="#" id="linkEcClick">Measuring a Product Click</a></li>
+          <li><a href="#" id="linkEcDetails">Measuring a Product Details View</a></li>
+          <li><a href="#" id="linkEcAddCart">Measuring an Addition to Cart</a></li>
+          <li><a href="#" id="linkEcRemoveCart">Measuring a Removal from Cart</a></li>
+          <li><a href="#" id="linkEcCheckoutPayment">Measuring Checkout Process (Payment)</a></li>
+          <li><a href="#" id="linkEcCheckoutShipping">Measuring Checkout Process (Shipping)</a></li>
+          <li><a href="#" id="linkEcTransaction">Measuring a Transaction</a></li>
+          <li><a href="#" id="linkEcRefund">Measuring a Refund</a></li>
+          <li><a href="#" id="linkEcPartialRefund">Measuring a Partial Refund</a></li>
+          <li><a href="#" id="linkEcPromoImpression">Measure Promotion Impressions</a></li>
+          <li><a href="#" id="linkEcPromoClick">Measure Promotion Clicks</a></li>
+
+        </ul>
+      </li>
+    </ul>
+
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129292661-3"></script>
+
+    <script type="text/javascript">
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "UA-129292661-3", { "anonymize_ip": true, "link_attribution": true });
+
+
+  document.addEventListener( "DOMContentLoaded", function() {
+    function listen( sel, ev, handler ) {
+      document.querySelector( sel ).addEventListener( ev, function( e ){
+        e.preventDefault();
+        handler( e );
+      }, false );
+    }
+    var fixProduct = {
+      "id": "P12345",
+      "name": "Android Warhol T-Shirt",
+      "list_name": "Search Results",
+      "brand": "Google",
+      "category": "Apparel/T-Shirts",
+      "variant": "Black",
+      "list_position": 1,
+      "quantity": 2,
+      "price": "2.0"
+    };
+    listen( "#linkEvent", "click", function(){
+      gtag("event", "play", {
+        "event_category": "Videos",
+        "event_label": "Fall Campaign"
+      });
+    });
+
+
+    listen( "#linkScreen", "click", function(){
+      gtag("event", "screen_view", {
+        "app_name": "Puppetry",
+        "screen_name" : "Home"
+      });
+    });
+
+
+    listen( "#linkTimings", "click", function(){
+      gtag("event", "timing_complete", {
+        "name": "load",
+        "value": 3549,
+        "event_category": "JS Dependencies",
+        "event_label": "JS Dependencies"
+      });
+    });
+
+
+    listen( "#linkExceptions", "click", function(){
+      gtag("event", "exception", {
+        "description": "emo exception thrown",
+        "fatal": false  // set to true if the exception is fatal
+      });
+    });
+
+    listen( "#linkEcImpression", "click", function(){
+      gtag("event", "view_item_list", {
+        "items": [
+          {
+            "id": "P12345",
+            "name": "Android Warhol T-Shirt",
+            "list_name": "Search Results",
+            "brand": "Google",
+            "category": "Apparel/T-Shirts",
+            "variant": "Black",
+            "list_position": 1,
+            "quantity": 2,
+            "price": 2
+          },
+          {
+            "id": "P67890",
+            "name": "Flame challenge TShirt",
+            "list_name": "Search Results",
+            "brand": "MyBrand",
+            "category": "Apparel/T-Shirts",
+            "variant": "Red",
+            "list_position": 2,
+            "quantity": 1,
+            "price": 3
+          }
+        ]
+      });
+    });
+
+    listen( "#linkEcClick", "click", function(){
+       gtag("event", "select_content", {
+          "content_type": "product",
+          "items": [
+            {
+              "id": "P12345",
+              "name": "Android Warhol T-Shirt",
+              "list_name": "Search Results",
+              "brand": "Google",
+              "category": "Apparel/T-Shirts",
+              "variant": "Black",
+              "list_position": 1,
+              "quantity": 2,
+              "price": 2
+            }
+          ]
+        });
+
+    });
+
+
+    listen( "#linkEcDetails", "click", function(){
+       gtag("event", "view_item", {
+        "items": [
+          {
+            "id": "P12345",
+            "name": "Android Warhol T-Shirt",
+            "list_name": "Search Results",
+            "brand": "Google",
+            "category": "Apparel/T-Shirts",
+            "variant": "Black",
+            "list_position": 1,
+            "quantity": 2,
+            "price": "2.0"
+          }
+        ]
+      });
+
+    });
+
+    listen( "#linkEcAddCart", "click", function(){
+      gtag("event", "add_to_cart", {
+        "items": [
+          fixProduct
+        ]
+      });
+    });
+
+    listen( "#linkEcRemoveCart", "click", function(){
+      gtag("event", "remove_from_cart", {
+        "items": [
+          fixProduct
+        ]
+      });
+    });
+
+    listen( "#linkEcCheckoutPayment", "click", function(){
+      gtag("event", "begin_checkout", {
+        "items": [
+          fixProduct
+        ],
+        "coupon": ""
+      });
+    });
+
+    listen( "#linkEcCheckoutShipping", "click", function(){
+      gtag("event", "checkout_progress", {
+        "items": [
+          fixProduct
+        ],
+        "coupon": "SUMMER_DISCOUNT"
+      });
+    });
+
+    listen( "#linkEcTransaction", "click", function(){
+      gtag("event", "purchase", {
+        "transaction_id": "24.031608523954162",
+        "affiliation": "Google online store",
+        "value": 23.07,
+        "currency": "EUR",
+        "tax": 1.24,
+        "shipping": 0,
+        "items": [
+          fixProduct
+        ]
+      });
+    });
+
+    listen( "#linkEcRefund", "click", function(){
+      gtag("event", "refund", { "transaction_id": "24.031608523954162" });
+    });
+
+    listen( "#linkEcPartialRefund", "click", function(){
+      gtag("event", "refund", {
+        "transaction_id": "24.031608523954162",
+        "affiliation": "Google online store",
+        "value": 23.07,
+        "currency": "USD",
+        "tax": 1.24,
+        "shipping": 0,
+        "items": [
+          fixProduct
+        ]
+      });
+    });
+
+
+    listen( "#linkEcPromoClick", "click", function(){
+      gtag("event", "select_content", {
+        "promotions": [
+          {
+            "id": "abc123",
+            "name": "summer_promo"
+          }
+        ]
+      });
+    });
+
+    listen( "#linkEcPromoImpression", "click", function(){
+      gtag("event", "view_promotion", {
+        "promotions": [
+          {
+            "id": "abc123",
+            "name": "summer_promo"
+          },
+          {
+            "id": "xyz987",
+            "name": "spring savings"
+          }
+        ]
+      });
+    });
+
+
+
+  });
+
+    </script>
+  </body>
+</html>
