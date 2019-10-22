@@ -69,7 +69,8 @@
     listen( "#linkEvent", "click", function(){
       gtag("event", "play", {
         "event_category": "Videos",
-        "event_label": "Fall Campaign"
+        "event_label": "Fall Campaign",
+        "event_value": "fall.mp4"
       });
     });
 
@@ -87,14 +88,14 @@
         "name": "load",
         "value": 3549,
         "event_category": "JS Dependencies",
-        "event_label": "JS Dependencies"
+        "event_label": "Label"
       });
     });
 
 
     listen( "#linkExceptions", "click", function(){
       gtag("event", "exception", {
-        "description": "emo exception thrown",
+        "description": "Demo exception thrown",
         "fatal": false  // set to true if the exception is fatal
       });
     });
@@ -111,7 +112,7 @@
             "variant": "Black",
             "list_position": 1,
             "quantity": 2,
-            "price": 2
+            "price": 30
           },
           {
             "id": "P67890",
@@ -122,7 +123,7 @@
             "variant": "Red",
             "list_position": 2,
             "quantity": 1,
-            "price": 3
+            "price": 40
           }
         ]
       });

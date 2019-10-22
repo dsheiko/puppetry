@@ -1,5 +1,4 @@
 const url = require( "url" ),
-      RE_PARAMS = /[?&]([a-z][a-z0-9]*)=([^&]*)/g,
       BEACON_HOSTS = [
         "www.google-analytics.com",
         "ssl.google-analytics.com",
@@ -7,26 +6,16 @@ const url = require( "url" ),
       ];
 
 /**
- *
- * @param {RegExp} re
- * @param {Object} data
- * @returns {Object}
- */
-function parseDataToObject( re, data ) {
-    let keyValue, obj = {};
-    while (( keyValue = re.exec( data ) ) ) {
-      obj[ keyValue[ 1 ] ] = decodeURIComponent( keyValue[ 2 ] );
-    }
-    return obj;
-}
-
-/**
  * Inspired by https://github.com/keithclark/gadebugger/blob/master/src/core/uaBeacon.js
  */
 class UaBeacon {
 
   constructor( uri ) {
-    this.params = parseDataToObject( RE_PARAMS, uri );
+    this.params = {};
+    ( new URL( uri ) ).searchParams.forEach(( val, name ) => {
+      this.params[ name ] = val;
+    });
+    console.log("params", this.params, this.params.t);
   }
 
   static validateUrl( uri ) {
@@ -38,10 +27,18 @@ class UaBeacon {
 
   toJSON() {
     const type = this.type(),
-          methods = [ "event", "transaction", "item", "social" ];
+          methods = [ "event", "social", "screenview", "timing", "exception" ];
     return {
       type,
-      data: methods.includes( type ) ? this[ type ]() : {}
+      data: methods.includes( type ) ? this[ type ]() : {},
+      ec: {
+        impressions: this.ecImpressions(),
+        action: {
+          name: this.params.pa,
+          data: this.actionFieldObject()
+        },
+        products: typeof this.params.pr1id !== "undefined" ? this.ecProducts() : []
+      }
     };
   }
 
@@ -71,41 +68,93 @@ class UaBeacon {
     };
   }
 
-  campaignData() {
-    if ( !this.params.cn && !this.params.cs && !this.params.cm ) {
-      return null;
+  screenview() {
+    return {
+        screenName: this.params.cd,
+        appName: this.params.an
+    };
+  }
+
+  timing() {
+    return {
+        name: this.params.utv,
+        value: this.params.utt,
+        category: this.params.utc
+    };
+  }
+
+  exception() {
+    return {
+        description: this.params.exd,
+        fatal: this.params.exf === "1"
+    };
+  }
+
+  static getIndices( params, re ) {
+    const indices = {};
+    Object.keys( params )
+      .filter( key => key.match( re ) )
+      .forEach(( key ) => {
+        const chunks = key.match( re );
+        indices[ chunks[ 1 ] ] = true;
+      });
+    return indices;
+  }
+
+  ecImpressions() {
+    if ( typeof this.params.il1pi1id === "undefined" ) {
+      return [];
     }
+    const indices = UaBeacon.getIndices( this.params, /^il1pi(\d+)/ );
+    return Object.keys( indices ).map(( inx ) => this.impressionFieldObject( inx ));
+  }
+
+  ecProducts() {
+    const indices = UaBeacon.getIndices( this.params, /^pr(\d+)/ );
+    return Object.keys( indices ).map(( inx ) => this.productFieldObject( inx ));
+  }
+
+  impressionFieldObject( inx ) {
     return {
-        name: this.params.cn,
-        source: this.params.cs,
-        medium: this.params.cm,
-        content: this.params.cc,
-        term: this.params.ck
+      list: this.params[ `il1nm` ],
+      id: this.params[ `il1pi${ inx }id` ],
+      name: this.params[ `il1pi${ inx }nm` ],
+      category: this.params[ `il1pi${ inx }ca` ],
+      brand: this.params[ `il1pi${ inx }br` ],
+      variant: this.params[ `il1pi${ inx }va` ],
+      listPosition: this.params[ `il1pi${ inx }ps` ],
+      price: this.params[ `il1pi${ inx }pr` ]
     };
   }
 
-  transaction() {
+  productFieldObject( inx ) {
     return {
-        id: parseInt( this.params.ti, 10 ),
-        affiliation: this.params.ta,
-        revenue: parseFloat( this.params.tr ) || 0,
-        shipping: parseFloat( this.params.ts ) || 0,
-        tax: parseFloat( this.params.tt ) || 0,
-        currency: this.params.cu
+      id: this.params[ `pr${ inx }id` ],
+      name: this.params[ `pr${ inx }nm` ],
+      category: this.params[ `pr${ inx }ca` ],
+      brand: this.params[ `pr${ inx }br` ],
+      variant: this.params[ `pr${ inx }va` ],
+      listPosition: this.params[ `pr${ inx }ps` ],
+      price: this.params[ `pr${ inx }pr` ],
+      quantity: this.params[ `pr${ inx }qt` ],
+      coupon: this.params[ `pr${ inx }cc` ]
     };
   }
 
-  item() {
+  actionFieldObject() {
     return {
-        transactionId: parseInt( this.params.ti, 10 ),
-        sku: this.params.ic,
-        name: this.params.in,
-        category: this.params.iv,
-        price: parseFloat( this.params.ip ),
-        quantity: parseInt( this.params.iq, 10 ),
-        currency: this.params.cu
+      id: this.params.ti,
+      affiliation: this.params.ta,
+      revenue: this.params.tr,
+      tax: this.params.tt,
+      shipping: this.params.ts,
+      coupon: this.params.tcc,
+      list: this.params.pal,
+      step: this.params.cos,
+      option: this.params.col
     };
   }
+
 }
 
 module.exports = UaBeacon;
