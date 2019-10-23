@@ -29,6 +29,7 @@
           <li><a href="#" id="linkEcCheckoutShipping">Measuring Checkout Process (Shipping)</a></li>
           <li><a href="#" id="linkEcTransaction">Measuring a Transaction</a></li>
           <li><a href="#" id="linkEcRefund">Measuring a Refund</a></li>
+          <li><a href="#" id="linkEcAddPromo">Measuring Internal Promotions</a></li>
         </ul>
       </li>
     </ul>
@@ -208,6 +209,17 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
           "id": "T12345"
       });
       ga("send", "event", "Ecommerce", "refund", "Android Warhol T-Shirt");
+    });
+
+    listen( "#linkEcAddPromo", "click", function(){
+      ga('ec:addPromo', {               // Promo details provided in a promoFieldObject.
+        'id': 'PROMO_1234',             // Promotion ID. Required (string).
+        'name': 'Summer Sale',          // Promotion name (string).
+        'creative': 'summer_banner2',   // Creative (string).
+        'position': 'banner_slot1'      // Position  (string).
+      });
+      ga('ec:setAction', 'promo_click');
+      ga("send", "event", "Ecommerce", "add promo", "Summer Sale");
     });
 
 

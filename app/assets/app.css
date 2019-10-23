@@ -1396,3 +1396,7 @@ summary:hover {
 .snippets-table .ant-table-expanded-row td {
   padding-right: 0;
 }
+
+.narrow-row .ant-row.ant-form-item {
+  margin-bottom: 8px;
+}

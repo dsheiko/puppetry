@@ -1,4 +1,4 @@
-const UaBeacon = require( "./GaTracking/UaBeacon" );
+const UaBeacon = require( "../GaTracking/UaBeacon" );
 /**
  * Extending Puppeteer
  *

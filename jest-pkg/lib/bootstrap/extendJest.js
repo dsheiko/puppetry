@@ -1,3 +1,5 @@
+const { assertionMap, filterGaBeacons, valsToString } = require( "../GaTracking/helpers" );
+
 module.exports = function( expect, util ) {
   /**
    * Extending JEST
@@ -13,24 +15,6 @@ module.exports = function( expect, util ) {
     + ` ${ obj.isOpaque ? "" : "NOT " } opaque, ${ obj.isIntersecting ? "" : "NOT " }within the viewport`;
   }
 
-
-  function valsToString( vals ) {
-    return vals
-      .filter( val => !!val )
-      .map( val => `"${ val }"` ).join( ", " );
-  }
-
-
-  function filterGaBeacons( beacons, props, assert ) {
-    const activeProps = props.filter( prop => assert[ `${ prop }Assertion`] !== "any" );
-    return beacons.filter( beacon => {
-      return activeProps.every( prop => {
-        return assert[ `${ prop }Assertion`] === "contains"
-         ? beacon[ prop ].includes( assert[ `${ prop }Value`] )
-         : beacon[ prop ] === assert[ `${ prop }Value`];
-      });
-    });
-  }
 
   /**
    *
@@ -303,39 +287,43 @@ module.exports = function( expect, util ) {
 
     /**
      *
-     * @param {Object} beacons [{ url, type },..]
+     * @param {UaBeacon[]} beacons [{ type, data, ec },..]
      * @param {Object} assert
      * @param {String} source
      * @returns {Object}
      */
     toMatchGaTracking( beacons, assert, source ) {
         try {
-        const found = beacons.filter( res => res.type === assert.action );
-        let matches, args;
-        switch( assert.action ) {
-          case "event":
-            matches = filterGaBeacons( found, [ "category", "action", "label", "value" ], assert );
-            args = valsToString([
-              assert.action,
-              assert.categoryValue,
-              assert.actionValue,
-              assert.labelValue,
-              assert.valueValue
-            ]);
-            return expectReturn( !!matches.length, `[${ source }] expected ga(${ args }) on the page, but not found` );
-          case "social":
-            matches = filterGaBeacons( found, [ "network", "action", "target" ], assert );
-            args = valsToString([
-              assert.action,
-              assert.networkValue,
-              assert.actionValue,
-              assert.targetValue
-            ]);
-            return expectReturn( !!matches.length, `[${ source }] expected ga(${ args }) on the page, but not found` );
-          default:
-            return expectReturn( !!found.length,
-              `[${ source }] expected ga("send", "pageview") on the page, but not found` );
-        }
+          const GA = "Google Analytics";
+          let matches, found;
+          switch( assert.action ) {
+            case "pageview":
+              return expectReturn( !!found.length,
+                `[${ source }] expected to send "pageview" data to ${ GA }, but it is not sent` );
+            case "event":
+            case "social":
+            case "screen":
+            case "timing":
+            case "exception":
+              found = beacons.filter( res => res.type === assert.action );
+              matches = filterGaBeacons( found, assert );
+              return expectReturn( !!matches.length, `[${ source }] expected to send "${ assert.action }" data `
+                + `(${ valsToString( assert ) }) to ${ GA }, but it is not sent` );
+
+            case "ecProductImpression":
+              found = beacons.filter( beacon => beacon.ec.impressions.length );
+              matches = filterGaBeacons( found, assert );
+              //@TODO validat3e required!!!
+              return expectReturn( !!matches.length, `[${ source }] expected to send "EC: Product Impression" data `
+                + `(${ valsToString( assert ) }) to ${ GA }, but it is not sent` );
+
+            case "ecProductClick":
+              found = beacons.filter( beacon => beacon.ec.action.name === "click" );
+              matches = filterGaBeacons( found, assert );
+              return expectReturn( !!found.length,
+                `[${ source }] expected to send "EC: Product Click" data to ${ GA }, but it is not sent` );
+
+          }
       } catch ( err ) {
         console.error( err );
       }

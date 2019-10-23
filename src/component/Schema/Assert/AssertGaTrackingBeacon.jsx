@@ -1,46 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form,  Row, Col, Select, Input } from "antd";
+import { Form,  Row, Col, Select, Input, InputNumber, Checkbox } from "antd";
 import If from "component/Global/If";
 import { getAssertion } from "./helpers";
 import AbstractComponent from "component/AbstractComponent";
+import Tooltip from "component/Global/Tooltip";
+import LearnMore from "component/Global/LearnMore";
+import LABELS from "./gaSchema";
 
-const Option = Select.Option,
+const { Option, OptGroup } = Select,
       FormItem = Form.Item,
 
-      EVENT_LABELS = [
-          {
-            label: "Category",
-            key: "category"
-          },
-          {
-            label: "Action",
-            key: "action"
-          },
-          {
-            label: "Label",
-            key: "label"
-          },
-          {
-            label: "Value",
-            key: "value"
-          }
-      ],
-
-      SOCIAL_LABELS = [
-          {
-            label: "Network",
-            key: "network"
-          },
-          {
-            label: "Action",
-            key: "action"
-          },
-          {
-            label: "Target",
-            key: "target"
-          }
-      ];
+      getLabel = ( desc, tooltip ) => (
+      <span>
+        { desc }
+        <Tooltip
+          title={ tooltip }
+          icon="question-circle"
+          pos="up-left"
+        />
+      </span>
+    );
 
 export class AssertGaTrackingBeacon extends AbstractComponent {
 
@@ -92,16 +72,16 @@ export class AssertGaTrackingBeacon extends AbstractComponent {
           </FormItem>
       </div>
 
-      <Row gutter={24}>
+      <Row gutter={24} className="narrow-row">
 
         <Col span={3} >
 
           <div className="ant-row ant-form-item ant-form-item--like-input">
-            Assert
+            Measurement
           </div>
         </Col>
 
-        <Col span={4} >
+        <Col span={6} >
           <FormItem>
             { getFieldDecorator( `assert.action`, {
               initialValue: action,
@@ -110,31 +90,60 @@ export class AssertGaTrackingBeacon extends AbstractComponent {
               }]
             })( <Select
               onSelect={ this.onSelectAction }>
-              <Option value="pageview">Page view</Option>
-              <Option value="event">Event</Option>
-              <Option value="social">Social Interaction</Option>
+              <OptGroup label="Common">
+                <Option value="pageview">Page view</Option>
+                <Option value="event">Event</Option>
+                <Option value="social">Social Interaction</Option>
+                <Option value="screen">App / Screen</Option>
+                <Option value="timing">User Timings</Option>
+                <Option value="exception">Exception</Option>
+              </OptGroup>
+              <OptGroup label="Ecommerce Plugin">
+                <Option value="ecProductImpression">Product Impression</Option>
+                <Option value="ecProductClick">Product Click</Option>
+                <Option value="ecProductDetails">Product Details View</Option>
+                <Option value="ecAddToCart">Addition to Cart</Option>
+                <Option value="ecRemoveFromCart">Removal from Cart</Option>
+
+
+              </OptGroup>
+
             </Select> ) }
           </FormItem>
         </Col>
 
         <Col span={3} >
-
-          <div className="ant-row ant-form-item ant-form-item--like-input"  style={{ textAlign: "left" }}>
-            is tracked
-          </div>
         </Col>
     </Row>
 
-
-    { action === "event" ? EVENT_LABELS.map( item => (<Row gutter={24} key={ item.key }>
+    { action in LABELS ? <div>
+        <Row gutter={24}>
+          <Col span={3} >
+          </Col>
+          <Col span={21} >
+          <p>{ LABELS[ action ].description } <nobr><a href={ LABELS[ action ].link }
+          onClick={ this.onExtClick }>Learn more...</a></nobr>
+          </p>
+          </Col>
+        </Row>
+        {  LABELS[ action ].fields.map( item => (<Row gutter={24} key={ item.key }>
 
         <Col span={3} >
           <div className="ant-row ant-form-item ant-form-item--like-input">
-            { item.label }
+            { item.tooltip ? getLabel( item.label, item.tooltip ) : item.label }
           </div>
         </Col>
 
-        <Col span={4} >
+        { item.input === "CHECKBOX" && <Col span={4} ><FormItem>
+            { getFieldDecorator( `assert.${ item.key }Value`, {
+              initialValue: true,
+              valuePropName: ( data[ `${ item.key }Value` ] ? "checked" : "data-ok" )
+            })(
+              <Checkbox></Checkbox>
+            ) }
+          </FormItem></Col>  }
+
+        { item.input !== "CHECKBOX" && <Col span={4} >
           <FormItem>
             { getFieldDecorator( `assert.${ item.key }Assertion`, {
               initialValue: data[ `${ item.key }Assertion` ] || "any",
@@ -144,13 +153,12 @@ export class AssertGaTrackingBeacon extends AbstractComponent {
           })( <Select showSearch optionFilterProp="children" onSelect={ val => this.onSelectAssertion( val, `${ item.key }Assertion` ) }>
               <Option value="any">any</Option>
               <Option value="equals">equals</Option>
-              <Option value="contains">contains</Option>
+              { item.input !== "NUMBER" ? <Option value="contains">contains</Option> : null }
             </Select> ) }
           </FormItem>
-        </Col>
+        </Col> }
 
-
-        <Col span={12} >
+        { item.input !== "CHECKBOX" && <Col span={12} >
           { this.getAssertion( data, item.key ) !== "any" && <FormItem>
             { getFieldDecorator( `assert.${ item.key }Value`, {
               initialValue: data[ `${ item.key }Value` ] || "",
@@ -158,54 +166,13 @@ export class AssertGaTrackingBeacon extends AbstractComponent {
                 required: true
               }]
             })(
-              <Input />
+              item.input === "NUMBER" ? <InputNumber /> : <Input />
             ) }
           </FormItem> }
-        </Col>
+        </Col> }
 
-      </Row> )) : null }
-
-
-
-
-    { action === "social" ? SOCIAL_LABELS.map( item => (<Row gutter={24} key={ item.key }>
-
-        <Col span={3} >
-          <div className="ant-row ant-form-item ant-form-item--like-input">
-            { item.label }
-          </div>
-        </Col>
-
-        <Col span={4} >
-          <FormItem>
-            { getFieldDecorator( `assert.${ item.key }Assertion`, {
-              initialValue: data[ `${ item.key }Assertion` ] || "any",
-              rules: [{
-                required: true
-              }]
-          })( <Select showSearch optionFilterProp="children" onSelect={ val => this.onSelectAssertion( val, `${ item.key }Assertion` ) }>
-              <Option value="any">any</Option>
-              <Option value="equals">equals</Option>
-              <Option value="contains">contains</Option>
-            </Select> ) }
-          </FormItem>
-        </Col>
-
-
-        <Col span={12} >
-          { this.getAssertion( data, item.key ) !== "any" && <FormItem>
-            { getFieldDecorator( `assert.${ item.key }Value`, {
-              initialValue: data[ `${ item.key }Value` ] || "",
-              rules: [{
-                required: true
-              }]
-            })(
-              <Input />
-            ) }
-          </FormItem> }
-        </Col>
-
-      </Row> )) : null }
+      </Row> ))
+    }</div> : null }
 
       </React.Fragment>);
   }

@@ -143,5 +143,14 @@ describe( "Analytics.js", () => {
     expect( ec[ 0 ].name ).toBe( "Android Warhol T-Shirt" );
   });
 
+  it( "resolves EC:Measuring Internal Promotions", () => {
+    const b = getBeacon( `v=1&_v=j79d&aip=1&a=882509165&t=event&cu=EUR&_s=2&dl=http%3A%2F%2F127.0.0.1%2Fdemo%2Fanalytics.html&ul=en-us&de=UTF-8&dt=analytics.js%20demo&sd=24-bit&sr=1920x1080&vp=1335x436&je=0&ec=Ecommerce&ea=add%20promo&el=Summer%20Sale&an=Puppetry&_u=SCCAiEIpB~&jid=&gjid=&cid=314438285.1558702157&tid=UA-129292661-3&_gid=1383428716.1571729438&promoa=click&promo1id=PROMO_1234&promo1nm=Summer%20Sale&promo1cr=summer_banner2&promo1ps=banner_slot1&z=222505769` ),
+
+    ec = b.ec.promotions;
+    expect( b.data.action ).toBe( "add promo" );
+    expect( ec.length ).toBe( 1 );
+    expect( ec[ 0 ].id ).toBe( "PROMO_1234" );
+  });
+
 
 });

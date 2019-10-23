@@ -15,7 +15,6 @@ class UaBeacon {
     ( new URL( uri ) ).searchParams.forEach(( val, name ) => {
       this.params[ name ] = val;
     });
-    console.log("params", this.params, this.params.t);
   }
 
   static validateUrl( uri ) {
@@ -33,6 +32,8 @@ class UaBeacon {
       data: methods.includes( type ) ? this[ type ]() : {},
       ec: {
         impressions: this.ecImpressions(),
+        promotions: this.ecPromotions(),
+        currency: this.params.cu,
         action: {
           name: this.params.pa,
           data: this.actionFieldObject()
@@ -112,6 +113,21 @@ class UaBeacon {
   ecProducts() {
     const indices = UaBeacon.getIndices( this.params, /^pr(\d+)/ );
     return Object.keys( indices ).map(( inx ) => this.productFieldObject( inx ));
+  }
+
+  ecPromotions() {
+    if ( typeof this.params.promo1id === "undefined" ) {
+      return [];
+    }
+    const indices = UaBeacon.getIndices( this.params, /^promo(\d+)/ );
+    return Object.keys( indices ).map(( inx ) => this.promotionFieldObject( inx ));
+  }
+
+  promotionFieldObject( inx ) {
+    return {
+      id: this.params[ `promo${ inx }id` ],
+      name: this.params[ `promo${ inx }nm` ]
+    };
   }
 
   impressionFieldObject( inx ) {

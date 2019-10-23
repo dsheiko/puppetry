@@ -235,33 +235,28 @@
       });
     });
 
-
-    listen( "#linkEcPromoClick", "click", function(){
-      gtag("event", "select_content", {
-        "promotions": [
-          {
-            "id": "abc123",
-            "name": "summer_promo"
-          }
-        ]
-      });
-    });
+    var promotion = {               // Promo details provided in a promoFieldObject.
+      "id": "PROMO_1234",             // Promotion ID. Required (string).
+      "name": "Summer Sale",          // Promotion name (string).
+      "creative": "summer_banner2",   // Creative (string).
+      "position": "banner_slot1"      // Position  (string).
+    };
 
     listen( "#linkEcPromoImpression", "click", function(){
       gtag("event", "view_promotion", {
         "promotions": [
-          {
-            "id": "abc123",
-            "name": "summer_promo"
-          },
-          {
-            "id": "xyz987",
-            "name": "spring savings"
-          }
+          promotion
         ]
       });
     });
 
+    listen( "#linkEcPromoClick", "click", function(){
+      gtag("event", "select_content", {
+        "promotions": [
+          promotion
+        ]
+      });
+    });
 
 
   });

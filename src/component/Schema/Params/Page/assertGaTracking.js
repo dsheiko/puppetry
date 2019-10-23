@@ -2,20 +2,40 @@ import { buildAssertionTpl } from "service/assert";
 import { AssertGaTrackingBeacon } from "../../Assert/AssertGaTrackingBeacon";
 import { truncate } from "service/utils";
 import { CHECKBOX, INPUT } from "../../constants";
+import GS_SCHEMA from "component/Schema/Assert/gaSchema";
 
 function renderVals( arr ) {
   return arr.map( val => `\`${ val }\`` ).join( ", " );
 }
 
-function render({ action, categoryValue, actionValue, labelValue, valueValue, networkValue, targetValue }) {
-  switch ( action ) {
-    case "event":
-      return renderVals([ action, categoryValue, actionValue, labelValue ]);
-    case "social":
-      return renderVals([ action, networkValue, actionValue, targetValue ]);
-    default:
-      return renderVals([ action ]);
+function renderLabel({ action }) {
+ if ( typeof GS_SCHEMA[ action ] !== "undefined" && GS_SCHEMA[ action ].label ) {
+  return GS_SCHEMA[ action ].label;
+ }
+ return action;
+}
+
+function renderParams({ action, ...a }, prefix = "" ) {
+  const params = GS_SCHEMA[ action ].fields.map( field => {
+    const val = a[ `${ field.key }Value` ],
+          opa = a[ `${ field.key }Assertion` ];
+
+    switch( opa ) {
+      case "equals":
+        return `${ field.key } \`${ val }\``;
+      case "contains":
+        return `${ field.key } \`..${ val }..\``;
+      case "any":
+        return ``;
+      default:
+        return `${ field.key } \`${ val ? "true" : "false" }\``;
+    }
+  }).filter( val => val.length );
+
+  if ( !params.length ) {
+    return "";
   }
+  return `${ prefix } ${ params.join( ", " ) }`;
 }
 
 export const assertGaTracking = {
@@ -28,14 +48,17 @@ export const assertGaTracking = {
     );
   },
 
-  description: `Asserts a given action is tracked by
-[Google Analytics](https://developers.google.com/analytics/devguides/collection/analyticsjs).`,
+  description: `Asserts a given action was sent to
+Google Analytics with
+[analytics.js](https://developers.google.com/analytics/devguides/collection/analyticsjs)
+or [gtag.js](https://developers.google.com/analytics/devguides/collection/gtagjs).
+We also assert that sent payloads are valid according to the Google API`,
   commonly: "assert GA tracking",
 
-  toLabel: ({ assert }) => `(${ render( assert ) })`,
+  toLabel: ({ assert }) => `(\`${ renderLabel( assert ) }\` ${ renderParams( assert, "with" ) })`,
 
-  toGherkin: ({ params, assert }) => `Assert that method
-    ga(${ render( assert ) }) was called on the page`,
+  toGherkin: ({ params, assert }) => `Assert that
+    \`${ renderLabel( assert ) }\` data were to Google Analytics ${ renderParams( assert, "with" ) }`,
 
   assert: {
     node: AssertGaTrackingBeacon
