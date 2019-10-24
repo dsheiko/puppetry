@@ -94,7 +94,7 @@ export class AssertGaTrackingBeacon extends AbstractComponent {
                 <Option value="pageview">Page view</Option>
                 <Option value="event">Event</Option>
                 <Option value="social">Social Interaction</Option>
-                <Option value="screen">App / Screen</Option>
+                <Option value="screenview">App / Screen</Option>
                 <Option value="timing">User Timings</Option>
                 <Option value="exception">Exception</Option>
               </OptGroup>

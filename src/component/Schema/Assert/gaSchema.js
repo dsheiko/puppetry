@@ -69,7 +69,7 @@ export default {
       }
   ]
   },
-  screen: {
+  screenview: {
     label: "App / Screen",
     description: `Measuring screen views allows you to see which content is being viewed most by your users,
       and how are they are navigating between different pieces of content.`,
@@ -111,7 +111,7 @@ export default {
     fields: [
       {
         label: "Variable",
-        key: "var",
+        key: "name",
         tooltip: "A string to identify the variable being recorded"
       },
       {
@@ -364,7 +364,7 @@ export default {
     label: "EC: Adding an Item",
     description: `Measuring a Transaction.`,
     link: "https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce",
-    
+
     fields: [
       {
         label: "ID",

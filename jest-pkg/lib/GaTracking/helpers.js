@@ -29,7 +29,7 @@ function validate( data, fieldLenMap, scope ) {
       throw new Error( `Value of "${ field }" field in ${ scope } must be a number. `
         + `See https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference` );
     }
-    
+
     if ( "maxLen" in spec && data[ field ] && data[ field ].length > spec.maxLen ) {
       throw new Error( `Value of "${ field }" field in ${ scope } must have size < ${ spec.maxLen } bytes. `
         + `See https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference` );
@@ -54,7 +54,6 @@ const assertionMap = {
     params: ["network","action","target"],
     data: ( b ) => b.data,
     predicate: ( b ) => {
-      console.log("validate");
       validate( b.data, {
         network: { maxLen: 50 },
         action: { maxLen: 50 },
@@ -62,7 +61,7 @@ const assertionMap = {
       }, "Social Interactions" );
     }
   },
-  screen: {
+  screenview: {
     params: ["screenName","appName","appId","appVersion","appInstallerId"],
     data: ( b ) => b.data,
     predicate: ( b ) => {
