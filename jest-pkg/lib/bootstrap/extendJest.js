@@ -1,4 +1,4 @@
-const { assertionMap, filterGaBeacons, valsToString } = require( "../GaTracking/helpers" );
+const { assertionMap, filterGaBeacons, validateGaBeacons, valsToString } = require( "../GaTracking/helpers" );
 
 module.exports = function( expect, util ) {
   /**
@@ -298,6 +298,7 @@ module.exports = function( expect, util ) {
           let matches, found;
           switch( assert.action ) {
             case "pageview":
+              found = beacons.filter( res => res.type === assert.action );
               return expectReturn( !!found.length,
                 `[${ source }] expected to send "pageview" data to ${ GA }, but it is not sent` );
             case "event":
@@ -306,26 +307,93 @@ module.exports = function( expect, util ) {
             case "timing":
             case "exception":
               found = beacons.filter( res => res.type === assert.action );
+              validateGaBeacons( found, assert );
               matches = filterGaBeacons( found, assert );
+
               return expectReturn( !!matches.length, `[${ source }] expected to send "${ assert.action }" data `
                 + `(${ valsToString( assert ) }) to ${ GA }, but it is not sent` );
 
             case "ecProductImpression":
               found = beacons.filter( beacon => beacon.ec.impressions.length );
+              validateGaBeacons( found, assert );
               matches = filterGaBeacons( found, assert );
-              //@TODO validat3e required!!!
               return expectReturn( !!matches.length, `[${ source }] expected to send "EC: Product Impression" data `
                 + `(${ valsToString( assert ) }) to ${ GA }, but it is not sent` );
 
             case "ecProductClick":
               found = beacons.filter( beacon => beacon.ec.action.name === "click" );
-              matches = filterGaBeacons( found, assert );
+              validateGaBeacons( found, assert );
               return expectReturn( !!found.length,
                 `[${ source }] expected to send "EC: Product Click" data to ${ GA }, but it is not sent` );
 
+            case "ecProductDetails":
+              found = beacons.filter( beacon => beacon.ec.action.name === "detail" );
+              validateGaBeacons( found, assert );
+              return expectReturn( !!found.length,
+                `[${ source }] expected to send "EC: Product Details View" data to ${ GA }, but it is not sent` );
+
+             case "ecAddToCart":
+              found = beacons.filter( beacon => beacon.ec.action.name === "add" );
+              validateGaBeacons( found, assert );
+              return expectReturn( !!found.length,
+                `[${ source }] expected to send "EC: Add Products to cart" data to ${ GA }, but it is not sent` );
+
+            case "ecRemoveFromCart":
+              found = beacons.filter( beacon => beacon.ec.action.name === "remove" );
+              validateGaBeacons( found, assert );
+              return expectReturn( !!found.length,
+                `[${ source }] expected to send "EC: Remove Products from cart" data to ${ GA }, but it is not sent` );
+
+            case "ecCheckout":
+              found = beacons.filter( beacon => beacon.ec.action.name === "checkout" );
+              validateGaBeacons( found, assert );
+              return expectReturn( !!found.length,
+                `[${ source }] expected to send "EC: Checkout" data to ${ GA }, but it is not sent` );
+
+            case "ecRefund":
+              found = beacons.filter( beacon => beacon.ec.action.name === "refund" );
+              validateGaBeacons( found, assert );
+              matches = filterGaBeacons( found, assert );
+              return expectReturn( !!matches.length,
+                `[${ source }] expected to send "EC: Refund" data `
+                + `(${ valsToString( assert ) }) to ${ GA }, but it is not sent` );
+
+            case "ecPurchase":
+              found = beacons.filter( beacon => beacon.ec.action.name === "purchase" );
+              validateGaBeacons( found, assert );
+              matches = filterGaBeacons( found, assert );
+              return expectReturn( !!matches.length,
+                `[${ source }] expected to send "EC: Purchase" data `
+                + `(${ valsToString( assert ) }) to ${ GA }, but it is not sent` );
+
+            case "ecPromotion":
+              found = beacons.filter( beacon => beacon.ec.action.name === "add promo" );
+              validateGaBeacons( found, assert );
+              matches = filterGaBeacons( found, assert );
+              return expectReturn( !!matches.length,
+                `[${ source }] expected to send "EC: Promotion" data `
+                + `(${ valsToString( assert ) }) to ${ GA }, but it is not sent` );
+
+            case "ecommerceAddTransaction":
+              found = beacons.filter( beacon => beacon.type === "transaction" );
+              validateGaBeacons( found, assert );
+              matches = filterGaBeacons( found, assert );
+              return expectReturn( !!matches.length,
+                `[${ source }] expected to send "EC: Adding a Transaction" data `
+                + `(${ valsToString( assert ) }) to ${ GA }, but it is not sent` );
+
+             case "ecommerceAddItem":
+              found = beacons.filter( beacon => beacon.type === "item" );
+              validateGaBeacons( found, assert );
+              matches = filterGaBeacons( found, assert );
+              return expectReturn( !!matches.length,
+                `[${ source }] expected to send "EC: Adding an Item" data `
+                + `(${ valsToString( assert ) }) to ${ GA }, but it is not sent` );
+
           }
       } catch ( err ) {
-        console.error( err );
+        // console.error( err );
+        return expectReturn( false, `[${ source }] expected no exceptions, but one thrown: ${ err.message }` );
       }
     },
 

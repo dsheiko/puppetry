@@ -61,8 +61,8 @@ export class CommandRowLabel extends React.Component {
          title="Reference to a snippet" />
          { title }
        </span>
-       { record.comment && <i className="is-optional">
-         <br /><Icon type="message" title="Comment" />{ " " } { record.comment }</i> }
+       { record.comment && <i className="is-optional comment-label">
+         <Icon type="message" title="Comment" />{ " " } { record.comment }</i> }
      </div> );
    }
 
@@ -91,7 +91,7 @@ export class CommandRowLabel extends React.Component {
      const { record, testCaseStyle } = this.props,
            testStyle = testCaseStyle || "gherkin",
            schema = getSchema( record.target === "page" ? "page" : "target", record.method );
-         
+
      return ( <div className="container--editable-cell">
        <Tooltip
          title={ record.failure }
@@ -108,8 +108,8 @@ export class CommandRowLabel extends React.Component {
        <span className="token--target">{ record.target }</span>.{ record.method }
        <span className="token--param">{ CommandRowLabel.buildAddon( record ) }</span>
        </React.Fragment> }
-       { record.comment && <i className="is-optional">
-        <br /><Icon type="message" title="Comment" />{ " " } { record.comment }</i> }
+       { record.comment && <i className="is-optional comment-label">
+        <Icon type="message" title="Comment" />{ " " } { record.comment }</i> }
      </div> );
    }
 

@@ -24,7 +24,7 @@ function renderParams({ action, ...a }, prefix = "" ) {
       case "equals":
         return `${ field.key } \`${ val }\``;
       case "contains":
-        return `${ field.key } \`..${ val }..\``;
+        return `${ field.key } ~ \`${ val }\``;
       case "any":
         return ``;
       default:

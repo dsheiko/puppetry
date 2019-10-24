@@ -45,6 +45,17 @@
       flex: 0 0 auto;
     }
 
+    .loading-tip {
+      position: fixed;
+      bottom: 0;
+      padding: 32px;
+      width: 45vw;
+      font-size: 14px;
+      right: 16px;
+      text-align: right;
+      color: #777;
+    }
+
   </style>
   <link rel="stylesheet" href="./assets/app.css">
   <script src="./vendor/smalltalk/smalltalk.min.js"></script>
@@ -58,9 +69,21 @@
       <span>
         <img width="32" height="32" src="./assets/loading.svg" alt="Loading..." />
       </span>
+      <div class="loading-tip" id="tip">
+      </div>
     </div>
   </root>
 
+  <script>
+    const TIPS = [
+        "You can perform a bulk operation on multiple rows if you select them with Shift-click.",
+        "You can use drag & drop and context menu when working with tables.",
+        "Auto-save can be disabled in Settings.",
+        "You can change test case representation style in settings.",
+        "You can export project as text specification. Screenshots per action will be generated automaticaly."
+      ];
+    document.querySelector( "#tip" ).innerHTML = TIPS[ Math.floor( Math.random() * TIPS.length ) ];
+  </script>
   <script crossorigin src="./build/index.js"></script>
 </body>
 

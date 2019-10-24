@@ -141,6 +141,9 @@ export default class AbstractDnDTable extends React.Component {
    */
   onClickRow = ( e, record ) => {
     e.preventDefault();
+    if ( !e.shiftKey ) {
+      return;
+    }
     this.setState(( state ) => {
       if ( typeof state.selected === "undefined" ) {
         state.selected = new Set();

@@ -4,21 +4,68 @@
     <title>analytics.js demo</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      li li h4 {
+        margin: 8px 0 0 0;
+      }
+    </style>
   </head>
   <body>
     <ul>
       <li>
         <h4>Tracking common user interactions</h4>
         <ul>
-          <li><a href="#" id="linkEvent">Event Measurement</a></li>
-          <li><a href="#" id="linkSocial">Social Interactions</a></li>
-          <li><a href="#" id="linkScreen">App / Screen Measurement</a></li>
-          <li><a href="#" id="linkTimings">User Timings</a></li>
-          <li><a href="#" id="linkExceptions">Exceptions Tracking</a></li>
+          <li>
+            <h4>Event Measurement</h4>
+            <ul>
+              <li><a href="#" id="linkEvent1">Category, action, label, value</a></li>
+              <li><a href="#" id="linkEvent2">Category, action, label, nonInteraction</a></li>
+              <li><a href="#" id="linkEvent3">Category, action, label, invalid value</a></li>
+            </ul>
+          </li>
+          <li>
+            <h4>Social Interactions</h4>
+            <ul>
+              <li><a href="#" id="linkSocialValid">Valid</a></li>
+              <li><a href="#" id="linkSocialInvalid">Invalid</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <h4>App / Screen Measurement</h4>
+            <ul>
+              <li><a href="#" id="linkScreen1">screenName</a></li>
+              <li><a href="#" id="linkScreen2">screenName, appName, appId, appVersion, appInstallerId</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <h4>User Timings</h4>
+            <ul>
+              <li><a href="#" id="linkTimingsValid">Valid</a></li>
+              <li><a href="#" id="linkTimingsInvalid">Invalid</a></li>
+            </ul>
+          </li>
+
+          <li>
+            <h4>Exceptions Tracking</h4>
+            <ul>
+              <li><a href="#" id="linkExceptions">Demo exception</a></li>
+            </ul>
+          </li>
+
         </ul>
       </li>
-      <li>
+
+       <li>
         <h4>Ecommerce plugin</h4>
+        <ul>
+          <li><a href="#" id="linkEcAddTranscation">Adding a Transaction</a></li>
+        </ul>
+      </li>
+
+      <li>
+        <h4>Enhanced Ecommerce plugin</h4>
         <ul>
           <li><a href="#" id="linkEcImpression">Measuring a Product Impression</a></li>
           <li><a href="#" id="linkEcClick">Measuring a Product Click</a></li>
@@ -49,6 +96,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   ga("linker:autoLink", [ "www.puppetry.app" ]);
   ga("require", "displayfeatures");
   ga("set", "anonymizeIp", true);
+  ga("require", "ecommerce");
   ga("require", "ec");
   ga("set", "currencyCode", "EUR");
   ga("set", "appName", "Puppetry");
@@ -70,19 +118,63 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       "variant": "black",
       "price": "30",
       "quantity": "1"
-    };
-    listen( "#linkEvent", "click", function(){
-      ga("send", "event", "Videos", "play", "Fall Campaign", "fall.mp4");
+    }, TID = "T12345";
+
+
+    listen( "#linkEcAddTranscation", "click", function(){
+      ga("ecommerce:addItem", {
+        "id": "1234",                     // Transaction ID. Required.
+        "name": "Fluffy Pink Bunnies",    // Product name. Required.
+        "sku": "DD23444",                 // SKU/code.
+        "category": "Party Toys",         // Category or variation.
+        "price": "11.99",                 // Unit price.
+        "quantity": "1"                   // Quantity.
+      });
+
+      ga("ecommerce:addTransaction", {
+        "id": TID,
+        "affiliation": "Acme Clothing",
+        "revenue": "11.99",
+        "shipping": "5",
+        "tax": "1.29"
+      });
+      ga( "ecommerce:send" );
     });
-    listen( "#linkSocial", "click", function(){
+
+    listen( "#linkEvent1", "click", function(){
+      ga( "send", "event", "Videos", "play", "Fall Campaign", 1 );
+    });
+    listen( "#linkEvent2", "click", function(){
+      ga( "send", "event", "Videos", "stop", "Fall Campaign", {
+        nonInteraction: true
+      });
+    });
+    listen( "#linkEvent3", "click", function(){
+      ga( "send", "event", "Videos", "play", "Invalid", "Invalid" );
+    });
+
+    listen( "#linkSocialValid", "click", function(){
       ga("send", "social", "Facebook", "like", "https://puppetry.app");
     });
-    listen( "#linkScreen", "click", function(){
-      ga("send", "screenview", {screenName: "Home"});
+
+    listen( "#linkSocialInvalid", "click", function(){
+      ga("send", "social", "Invalid", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "https://puppetry.app");
     });
-    listen( "#linkTimings", "click", function(){
+
+    listen( "#linkScreen1", "click", function(){
+      ga("send", "screenview", { screenName: "Home" } );
+    });
+    listen( "#linkScreen2", "click", function(){
+      ga("send", "screenview", { screenName: "Docs", appName: "Puppetry", appId: "1234", appVersion: "3.0.0", appInstallerId: "1234" } );
+    });
+
+    listen( "#linkTimingsValid", "click", function(){
       ga("send", "timing", "JS Dependencies", "load", 3549);
     });
+    listen( "#linkTimingsInvalid", "click", function(){
+      ga("send", "timing", "JS Dependencies", "invalid", "Invalid");
+    });
+
     listen( "#linkExceptions", "click", function(){
        ga("send", "exception", {
         "exDescription": "Demo exception thrown",
@@ -193,7 +285,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     listen( "#linkEcTransaction", "click", function(){
       ga("ec:addProduct", fixProduct );
       ga("ec:setAction", "purchase", {
-        "id": "T12345",
+        "id": TID,
         "affiliation": "Google Store - Online",
         "revenue": "37.39",
         "tax": "2.85",
@@ -206,7 +298,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     listen( "#linkEcRefund", "click", function(){
       ga("ec:addProduct", fixProduct );
       ga("ec:setAction", "refund", {
-          "id": "T12345"
+          "id": TID
       });
       ga("send", "event", "Ecommerce", "refund", "Android Warhol T-Shirt");
     });

@@ -99,13 +99,19 @@ export class AssertGaTrackingBeacon extends AbstractComponent {
                 <Option value="exception">Exception</Option>
               </OptGroup>
               <OptGroup label="Ecommerce Plugin">
+                <Option value="ecommerceAddItem">Adding an Item</Option>
+                <Option value="ecommerceAddTransaction">Adding a Transaction</Option>
+              </OptGroup>
+              <OptGroup label="Enhanced Ecommerce Plugin">
                 <Option value="ecProductImpression">Product Impression</Option>
                 <Option value="ecProductClick">Product Click</Option>
                 <Option value="ecProductDetails">Product Details View</Option>
                 <Option value="ecAddToCart">Addition to Cart</Option>
-                <Option value="ecRemoveFromCart">Removal from Cart</Option>
-
-
+                <Option value="ecRemoveFromCart">Remove from Cart</Option>
+                <Option value="ecCheckout">Checkout Process</Option>
+                <Option value="ecRefund">Refund</Option>
+                <Option value="ecPurchase">Purchase</Option>
+                <Option value="ecPromotion">Internal Promotion</Option>
               </OptGroup>
 
             </Select> ) }
@@ -137,7 +143,7 @@ export class AssertGaTrackingBeacon extends AbstractComponent {
         { item.input === "CHECKBOX" && <Col span={4} ><FormItem>
             { getFieldDecorator( `assert.${ item.key }Value`, {
               initialValue: true,
-              valuePropName: ( data[ `${ item.key }Value` ] ? "checked" : "data-ok" )
+              valuePropName: ( data[ `${ item.key }Value` ] ===  true ? "checked" : "data-ok" )
             })(
               <Checkbox></Checkbox>
             ) }

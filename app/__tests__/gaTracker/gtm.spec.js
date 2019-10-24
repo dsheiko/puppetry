@@ -1,5 +1,4 @@
-import UaBeacon from "../../../jest-pkg/lib/BrowserSession/GaTracking/UaBeacon.js";
-
+import UaBeacon from "../../../jest-pkg/lib/GaTracking/UaBeacon.js";
 
 function uri( search ) {
   return `https://www.google-analytics.com/collect?` + search;

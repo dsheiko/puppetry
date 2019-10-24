@@ -26,7 +26,7 @@ class UaBeacon {
 
   toJSON() {
     const type = this.type(),
-          methods = [ "event", "social", "screenview", "timing", "exception" ];
+          methods = [ "event", "social", "screenview", "timing", "exception", "item", "transaction" ];
     return {
       type,
       data: methods.includes( type ) ? this[ type ]() : {},
@@ -47,8 +47,24 @@ class UaBeacon {
     return this.params.t;
   }
 
+
   referrer() {
     return this.params.dr;
+  }
+
+  transaction() {
+    return this.actionFieldObject();
+  }
+
+  item() {
+    return {
+      id: this.params.ti,
+      name: this.params.in,
+      sku: this.params.ic,
+      category: this.params.iv,
+      price: this.params.ip,
+      quantity: this.params.iq
+    };
   }
 
   event() {
@@ -72,7 +88,10 @@ class UaBeacon {
   screenview() {
     return {
         screenName: this.params.cd,
-        appName: this.params.an
+        appName: this.params.an,
+        appVersion: this.params.av,
+        appId: this.params.aid,
+        appInstallerId: this.params.aiid
     };
   }
 
@@ -80,7 +99,8 @@ class UaBeacon {
     return {
         name: this.params.utv,
         value: this.params.utt,
-        category: this.params.utc
+        category: this.params.utc,
+        label: this.params.utl
     };
   }
 
@@ -106,6 +126,7 @@ class UaBeacon {
     if ( typeof this.params.il1pi1id === "undefined" ) {
       return [];
     }
+    // Protocol il<listIndex>pi<productIndex>
     const indices = UaBeacon.getIndices( this.params, /^il1pi(\d+)/ );
     return Object.keys( indices ).map(( inx ) => this.impressionFieldObject( inx ));
   }
@@ -129,7 +150,7 @@ class UaBeacon {
       name: this.params[ `promo${ inx }nm` ]
     };
   }
-
+  // https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#(impression)_list
   impressionFieldObject( inx ) {
     return {
       list: this.params[ `il1nm` ],

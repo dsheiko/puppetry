@@ -1400,3 +1400,7 @@ summary:hover {
 .narrow-row .ant-row.ant-form-item {
   margin-bottom: 8px;
 }
+
+.comment-label {
+  display: block;
+}

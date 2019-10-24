@@ -271,7 +271,7 @@ export default {
     fields: [
       {
         label: "ID",
-        key: "transaction_id",
+        key: "id",
         tooltip: "Unique ID for the transaction"
       },
       {
@@ -280,8 +280,8 @@ export default {
         tooltip: "The store or affiliation from which this transaction occurred"
       },
       {
-        label: "Value",
-        key: "value",
+        label: "Revenue",
+        key: "revenue",
         tooltip: "Value (i.e., revenue) associated with the event",
         input: "NUMBER"
       },
@@ -310,6 +310,7 @@ export default {
       }
     ]
   },
+
   ecPurchase: {
     label: "EC: Purchase",
     description: `Measuring a Transaction.`,
@@ -318,7 +319,7 @@ export default {
     fields: [
       {
         label: "ID",
-        key: "transaction_id",
+        key: "id",
         tooltip: "Unique ID for the transaction"
       },
       {
@@ -327,8 +328,8 @@ export default {
         tooltip: "The store or affiliation from which this transaction occurred"
       },
       {
-        label: "Value",
-        key: "value",
+        label: "Revenue",
+        key: "revenue",
         tooltip: "Value (i.e., revenue) associated with the event",
         input: "NUMBER"
       },
@@ -354,6 +355,87 @@ export default {
         key: "productCount",
         tooltip: "The number of products involved in the transaction",
         input: "NUMBER"
+      }
+    ]
+  },
+
+
+  ecommerceAddItem: {
+    label: "EC: Adding an Item",
+    description: `Measuring a Transaction.`,
+    link: "https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce",
+    
+    fields: [
+      {
+        label: "ID",
+        key: "id",
+        tooltip: "Transaction ID"
+      },
+      {
+        label: "Name",
+        key: "name",
+        tooltip: "Product name"
+      },
+      {
+        label: "SKU",
+        key: "sku",
+        tooltip: "SKU/code"
+      },
+      {
+        label: "Category",
+        key: "category",
+        tooltip: "Category or variation"
+      },
+      {
+        label: "Price",
+        key: "price",
+        tooltip: "Unit price"
+      },
+      {
+        label: "Quantity",
+        key: "quantity",
+        tooltip: "Quantity."
+      }
+    ]
+  },
+
+  ecommerceAddTransaction: {
+    label: "EC: Adding a Transaction",
+    description: `Measuring a Transaction.`,
+    link: "https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce",
+    fields: [
+      {
+        label: "ID",
+        key: "id",
+        tooltip: "Unique ID for the transaction"
+      },
+      {
+        label: "Affiliation",
+        key: "affiliation",
+        tooltip: "The store or affiliation from which this transaction occurred"
+      },
+      {
+        label: "Revenue",
+        key: "revenue",
+        tooltip: "Value (i.e., revenue) associated with the event",
+        input: "NUMBER"
+      },
+      {
+        label: "Tax",
+        key: "tax",
+        tooltip: "Tax amount",
+        input: "NUMBER"
+      },
+      {
+        label: "Shipping",
+        key: "shipping",
+        tooltip: "Shipping cost",
+        input: "NUMBER"
+      },
+      {
+        label: "Coupon",
+        key: "coupon",
+        tooltip: "	The transaction coupon redeemed with the transaction."
       }
     ]
   },

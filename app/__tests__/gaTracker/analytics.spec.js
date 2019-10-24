@@ -1,4 +1,4 @@
-import UaBeacon from "../../../jest-pkg/lib/BrowserSession/GaTracking/UaBeacon.js";
+import UaBeacon from "../../../jest-pkg/lib/GaTracking/UaBeacon.js";
 
 
 function uri( search ) {
@@ -6,6 +6,7 @@ function uri( search ) {
 }
 function getBeacon( search ) {
   const beacon = new UaBeacon( uri( search ) );
+  //console.log( beacon.params );
   return beacon.toJSON();
 }
 
@@ -15,7 +16,7 @@ describe( "Analytics.js", () => {
     expect( UaBeacon.validateUrl( uri( "v=1" ) ) ).toBe( true );
   });
 
-   it( "resolves PageView", () => {
+  it( "resolves PageView", () => {
     const b = getBeacon( `v=1&_v=j79d&aip=1&a=1907993446&t=pageview&cu=EUR&_s=1&dl=http%3A%2F%2F127.0.0.1%2Fdemo%2Fanalytics.html&ul=en-us&de=UTF-8&dt=analytics.js%20demo&sd=24-bit&sr=1920x1080&vp=1335x436&je=0&an=Puppetry&_u=SCCAiEIpB~&jid=1500140113&gjid=537148945&cid=314438285.1558702157&tid=UA-129292661-3&_gid=1383428716.1571729438&z=1669737607` );
      expect( b.type ).toBe( "pageview" );
   });
@@ -45,6 +46,16 @@ describe( "Analytics.js", () => {
      expect( b.type ).toBe( "screenview" );
      expect( b.data.screenName ).toBe( "Home" );
      expect( b.data.appName ).toBe( "Puppetry" );
+  });
+
+  it( "resolves Screen2", () => {
+    const b = getBeacon( `v=1&_v=j79d&aip=1&a=1323142910&t=screenview&cu=EUR&_s=3&cd=Docs&dl=http%3A%2F%2F127.0.0.1%2Fdemo%2Fanalytics.html&ul=en-us&de=UTF-8&dt=analytics.js%20demo&sd=24-bit&sr=1920x1080&vp=1320x436&je=0&an=Puppetry&av=3.0.0&aid=1234&aiid=1234&_u=SCCAiEIpB~&jid=345851545&gjid=1975105668&cid=314438285.1558702157&tid=UA-129292661-3&_gid=1705276901.1571906859&z=59584054` );
+     expect( b.type ).toBe( "screenview" );
+     expect( b.data.screenName ).toBe( "Docs" );
+     expect( b.data.appName ).toBe( "Puppetry" );
+     expect( b.data.appId ).toBe( "1234" );
+     expect( b.data.appInstallerId ).toBe( "1234" );
+     expect( b.data.appVersion ).toBe( "3.0.0" );
   });
 
   it( "resolves Timing", () => {
@@ -152,5 +163,20 @@ describe( "Analytics.js", () => {
     expect( ec[ 0 ].id ).toBe( "PROMO_1234" );
   });
 
+
+  it( "resolves Simple Ecommerce add transaction", () => {
+    const b = getBeacon( `v=1&_v=j79d&aip=1&a=796228985&t=transaction&cu=EUR&_s=4&dl=http%3A%2F%2F127.0.0.1%2Fdemo%2Fanalytics.html&ul=en-us&de=UTF-8&dt=analytics.js%20demo&sd=24-bit&sr=1920x1080&vp=1320x436&je=0&an=Puppetry&_u=SCCAiEI5B~&jid=&gjid=&cid=314438285.1558702157&tid=UA-129292661-3&_gid=1705276901.1571906859&ti=T12345&ta=Acme%20Clothing&tr=11.99&ts=5&tt=1.29&z=2026644948` );
+     expect( b.type ).toBe( "transaction" );
+     const data = b.data;
+     expect( data.id ).toBe( "T12345" );
+     expect( data.affiliation ).toBe( "Acme Clothing" );
+  });
+
+  it( "resolves Simple Ecommerce add item", () => {
+    const b = getBeacon( `v=1&_v=j79d&aip=1&a=1209978191&t=item&cu=EUR&_s=3&dl=http%3A%2F%2F127.0.0.1%2Fdemo%2Fanalytics.html&ul=en-us&de=UTF-8&dt=analytics.js%20demo&sd=24-bit&sr=1920x1080&vp=1320x436&je=0&an=Puppetry&_u=SCCAiEI5B~&jid=&gjid=&cid=314438285.1558702157&tid=UA-129292661-3&_gid=1705276901.1571906859&ti=1234&in=Fluffy%20Pink%20Bunnies&ic=DD23444&iv=Party%20Toys&ip=11.99&iq=1&z=1635278707` );
+     expect( b.type ).toBe( "item" );
+     const data = b.data;
+     expect( data.name ).toBe( "Fluffy Pink Bunnies" );
+  });
 
 });
