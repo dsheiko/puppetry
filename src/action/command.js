@@ -12,7 +12,7 @@ const actions = createActions({
     * @returns {object}
     */
   ADD_COMMAND: ( options, id = null ) => ({
-    options: validate( options, { ...I.ENTITY, ...I.TARGET }),
+    options: validate( options, { ...I.ENTITY, ...I.COMMAND }),
     id: validate( id, I.ID_REF )
   }),
   /**

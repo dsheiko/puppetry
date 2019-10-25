@@ -16,7 +16,6 @@ describe( "GTM", () => {
 
    it( "resolves PageView", () => {
     const b = getBeacon( `v=1&_v=j79d&aip=1&a=779495658&t=pageview&_s=1&dl=http%3A%2F%2F127.0.0.1%2Fdemo%2Fgtm&ul=en-us&de=UTF-8&dt=GTM%20demo&sd=24-bit&sr=1920x1080&vp=1320x436&je=0&_u=CCCAAUIh~&jid=1448834564&gjid=2096549641&cid=314438285.1558702157&tid=UA-129292661-3&_gid=1383428716.1571729438&_r=1&gtm=2ouaa0&z=1769573863` );
-     console.log(b);
      expect( b.type ).toBe( "pageview" );
   });
 

@@ -60,7 +60,7 @@ function insertAdjacentTest( state, title, groupId, position ) {
 function addCommand( state, method, groupId, testId ) {
   return reducer( state, {
     type: actions.addCommand,
-    payload: { method, target: "page", groupId, testId }
+    payload: { options: { method, target: "page", groupId, testId } }
   });
 }
 

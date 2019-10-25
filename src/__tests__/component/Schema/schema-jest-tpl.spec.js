@@ -35,13 +35,13 @@ describe( "Schema.Jest", () => {
   describe( "tplSuite", () => {
     it( "returns valid JavaScript when plain values", () => {
       const code = tplSuite({ title: "FOO", body: "const a = 1;", targets: "const b = 1;",
-        suite: { timeout: 5000 }
+        suite: { timeout: 5000 }, interactive: false, options: { interactiveMode: false }
       });
       expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
     });
     it( "returns valid JavaScript when quoted values", () => {
       const code = tplSuite({ title: `Foo "Bar"`, body: "const a = 1;", targets: "const b = 1;",
-        suite: { timeout: 5000 }
+        suite: { timeout: 5000 }, interactive: false, options: { interactiveMode: false }
       });
       expect( () => validateAsyncFuncBody( code ) ).not.toThrow();
     });
@@ -50,22 +50,22 @@ describe( "Schema.Jest", () => {
   describe( "buildShadowDomQuery", () => {
     test( "single target", () => {
       const res = buildShadowDomQuery( [ FIX_FOO ] );
-      expect( res ).toEqual( `await page.evaluateHandle('document.querySelector( ".foo" )')` );
+      expect( res ).toEqual( `await bs.page.evaluateHandle('document.querySelector( ".foo" )')` );
     });
     test( "double target", () => {
       const res = buildShadowDomQuery( [ FIX_BAR, FIX_FOO ] );
-      expect( res ).toEqual( `await page.evaluateHandle('document.querySelector( ".bar" ).shadowRoot.querySelector( ".foo" )')` );
+      expect( res ).toEqual( `await bs.page.evaluateHandle('document.querySelector( ".bar" ).shadowRoot.querySelector( ".foo" )')` );
     });
     test( "triple target", () => {
       const res = buildShadowDomQuery( [ FIX_BAZ, FIX_BAR, FIX_FOO ] );
-      expect( res ).toEqual( `await page.evaluateHandle('document.querySelector( ".baz" ).shadowRoot.querySelector( ".bar" ).shadowRoot.querySelector( ".foo" )')` );
+      expect( res ).toEqual( `await bs.page.evaluateHandle('document.querySelector( ".baz" ).shadowRoot.querySelector( ".bar" ).shadowRoot.querySelector( ".foo" )')` );
     });
   });
 
   describe( "tplQuery", () => {
     test( "with shadow DOM", () => {
       const res = tplQuery( [ FIX_BAR, FIX_FOO ] );
-      expect( res ).toEqual( `const BAR = async () => await page.evaluateHandle('document.querySelector( ".bar" ).shadowRoot.querySelector( ".foo" )');` );
+      expect( res.includes( `await bs.queryChain` ) ).toBe( true );
     });
     test( "with iframe", () => {
       const res = tplQuery( [ FIX_QUX, FIX_FOO ] );

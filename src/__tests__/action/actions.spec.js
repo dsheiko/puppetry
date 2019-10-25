@@ -168,7 +168,7 @@ describe( "Actions", () => {
 
     it( "performs addCommand", () => {
       const res = actions.addCommand({ testId: FIX_ID, groupId: FIX_ID, title: FIX_TITLE });
-      expect( res.payload.title ).toEqual( FIX_TITLE );
+      expect( res.payload.options.title ).toEqual( FIX_TITLE );
     });
 
     it( "validates addCommand (id is missing)", () => {
