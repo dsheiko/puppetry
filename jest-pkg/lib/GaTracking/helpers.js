@@ -25,6 +25,10 @@ function validate( data, fieldLenMap, scope ) {
         + `See https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference` );
     }
 
+    if ( typeof data[ field ] === "undefined" ) {
+      return;
+    }
+
     if ( "number" in spec && isNaN( parseInt( data[ field ], 10 ) ) ) {
       throw new Error( `Value of "${ field }" field in ${ scope } must be a number. `
         + `See https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference` );
@@ -162,7 +166,7 @@ const assertionMap = {
     predicate: ( b, assert ) => {
       validateProductNumber( b, `Purchase`, assert.productCountValue );
       validate( b.ec.action.data, {
-        id: { number: true }
+        id: { required: true }
       }, "Purchase" );
     }
   },
@@ -170,8 +174,7 @@ const assertionMap = {
   ecPromotion: {
     params: [ "id", "name", "creative", "position" ],
     data: ( b ) => b.ec.promotions[ 0 ],
-    predicate: ( b, assert ) => {
-      validateProductNumber( b, `Promotion`, assert.productCountValue );
+    predicate: ( b ) => {
       validate( b.ec.promotions[ 0 ], {
         id: { required: true }
       }, "Promotion" );
@@ -232,11 +235,11 @@ exports.filterGaBeacons = function( beacons, assert ) {
   return beacons.filter( beacon => {
     const data = assertionMap[ assert.action ].data( beacon );
 
-    return activeProps.every( prop => {
+    return activeProps
+      .filter( prop => typeof assert[ `${ prop }Value`] !== "undefined" )
+      .every( prop => {
       const rawVal = assert[ `${ prop }Value`];
-      if ( typeof rawVal === "undefined" ) {
-        return true;
-      }
+      
       // Boolean
       if ( prop === "nonInteractive" ) {
         return data[ prop ] === rawVal;

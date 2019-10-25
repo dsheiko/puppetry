@@ -368,7 +368,7 @@ module.exports = function( expect, util ) {
                 + `(${ valsToString( assert ) }) to ${ GA }, but it is not sent` );
 
             case "ecPromotion":
-              found = beacons.filter( beacon => beacon.ec.action.name === "add promo" );
+              found = beacons.filter( beacon => beacon.data.action === "add promo" );
               matches = filterGaBeacons( found, assert );
               validateGaBeacons( matches, assert );
               return expectReturn( !!matches.length,
@@ -377,9 +377,7 @@ module.exports = function( expect, util ) {
 
             case "ecommerceAddTransaction":
               found = beacons.filter( beacon => beacon.type === "transaction" );
-              console.log("found", found);
               matches = filterGaBeacons( found, assert );
-              console.log("matches", matches);
               validateGaBeacons( found, assert );
               return expectReturn( !!matches.length,
                 `[${ source }] expected to send "EC: Adding a Transaction" data `

@@ -34,7 +34,6 @@ describe( "expect.toMatchGaTracking", () => {
         "labelAssertion": "equals",
         "labelValue": "Fall Campaign",
         "valueAssertion": "any",
-        "valueValue": 1,
         "nonInteractiveValue": true
       }, "page.assertGaTracking" );
     expect( res.pass ).toBe( true );
@@ -199,6 +198,95 @@ describe( "expect.toMatchGaTracking", () => {
         "priceValue": "40"
       }, "page.assertGaTracking" );
 
+    expect( res.pass ).toBe( true );
+  });
+
+  test( "ecProductClick", () => {
+    const res = fixture.ext.toMatchGaTracking( beacons, {
+         "action": "ecProductClick"
+      }, "page.assertGaTracking" );
+
+    expect( res.pass ).toBe( true );
+  });
+
+  test( "ecAddToCart", () => {
+    const res = fixture.ext.toMatchGaTracking( beacons, {
+        "action": "ecAddToCart",
+        "productCountAssertion": "equals",
+        "productCountValue": 1
+      }, "page.assertGaTracking" );
+
+    expect( res.pass ).toBe( true );
+  });
+
+  test( "ecRemoveFromCart", () => {
+    const res = fixture.ext.toMatchGaTracking( beacons, {
+        "action": "ecRemoveFromCart",
+        "productCountAssertion": "equals",
+        "productCountValue": 1
+      }, "page.assertGaTracking" );
+
+    expect( res.pass ).toBe( true );
+  });
+
+  test( "ecCheckout", () => {
+    const res = fixture.ext.toMatchGaTracking( beacons, {
+        "action": "ecCheckout",
+        "stepAssertion": "equals",
+        "optionAssertion": "any",
+        "productCountAssertion": "equals",
+        "stepValue": 2,
+        "productCountValue": 1
+      }, "page.assertGaTracking" );
+
+    expect( res.pass ).toBe( true );
+  });
+
+  test( "ecRefund", () => {
+    const res = fixture.ext.toMatchGaTracking( beacons, {
+        "action": "ecRefund",
+        "idAssertion": "equals",
+        "affiliationAssertion": "any",
+        "revenueAssertion": "any",
+        "taxAssertion": "any",
+        "shippingAssertion": "any",
+        "couponAssertion": "any",
+        "productCountAssertion": "any",
+        "idValue": "T12345"
+      }, "page.assertGaTracking" );
+
+    expect( res.pass ).toBe( true );
+  });
+
+  test( "ecPurchase", () => {
+    const res = fixture.ext.toMatchGaTracking( beacons, {
+        "action": "ecPurchase",
+        "idAssertion": "equals",
+        "idValue": "T12345",
+        "affiliationAssertion": "any",
+        "revenueAssertion": "any",
+        "taxAssertion": "any",
+        "shippingAssertion": "any",
+        "couponAssertion": "equals",
+        "productCountAssertion": "any",
+        "couponValue": "SUMMER2013"
+      }, "page.assertGaTracking" );
+
+    expect( res.pass ).toBe( true );
+  });
+
+  test( "ecPromotion", () => {
+    const res = fixture.ext.toMatchGaTracking( beacons, {
+        "action": "ecPromotion",
+        "idAssertion": "equals",
+        "idValue": "PROMO_1234",
+        "productCountAssertion": "any",
+        "nameAssertion": "any",
+        "creativeAssertion": "any",
+        "positionAssertion": "any"
+      }, "page.assertGaTracking" );
+
+console.log( res.pass, res.message());
     expect( res.pass ).toBe( true );
   });
 

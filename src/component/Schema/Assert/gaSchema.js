@@ -466,12 +466,6 @@ export default {
         label: "Position",
         key: "position",
         tooltip: "The position of the creative (e.g. banner_slot_1)"
-      },
-      {
-        label: "Product Count",
-        key: "productCount",
-        tooltip: "The number of products involved in the transaction",
-        input: "NUMBER"
       }
     ]
   }
