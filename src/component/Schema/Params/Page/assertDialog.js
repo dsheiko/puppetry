@@ -1,12 +1,9 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertDialog } from "../../Assert/AssertDialog";
-import { truncate } from "service/utils";
-import { CHECKBOX, INPUT } from "../../constants";
 
 function renderBoolean( not ) {
   return [ "true", "false" ].includes( not ) ? not : "false";
 }
-
 
 export const assertDialog = {
 
@@ -21,7 +18,7 @@ export const assertDialog = {
   toLabel: ({ assert }) => `(${ renderBoolean( assert.not ) ? "none" : "any" }
     of type \`${ assert.type }\` with \`${ assert.value }\`)`,
 
-  toGherkin: ({ params, assert }) => `Assert that there were
+  toGherkin: ({ assert }) => `Assert that there were
     called ${ renderBoolean( assert.not ) ? "no" : "any" } dialogs
     of type \`${ assert.type }\` with \`${ assert.value }\``,
 

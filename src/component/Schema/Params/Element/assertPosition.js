@@ -4,7 +4,7 @@ import { renderTarget } from "service/utils";
 
 function assertToLabel( assert ) {
   const text = [ "left", "right" ].includes( assert.position )
-      ? assert.position + " to" : assert.position;
+    ? assert.position + " to" : assert.position;
   return `${ text } \`${ assert.target }\``;
 }
 
@@ -20,7 +20,7 @@ export const assertPosition = {
 
   toLabel: ({ assert }) => `(is ${ assertToLabel( assert ) })`,
 
-  toGherkin: ({ target, params, assert }) => `Assert that element \`${ target }\`
+  toGherkin: ({ target, assert }) => `Assert that element \`${ target }\`
     is located ${ assertToLabel( assert ) }`,
 
   commonly: "assert relative position",

@@ -75,7 +75,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
                 .filter( ( pair ) => pair[ 1 ].current !== null )
                 .map( ([ key, ref ]) => {
                   return new Promise( ( resolve, reject ) => {
-                    const fields = [ key ].concat( result( this.extraFields, key, [] ) );
+                    const fields = [ key ].concat( result( this.extraFields, key, []) );
                     ref.current.validateFields( fields, ( err, values ) => {
                       if ( err ) {
                         return reject( err );

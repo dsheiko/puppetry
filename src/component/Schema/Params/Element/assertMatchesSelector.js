@@ -12,7 +12,7 @@ export const assertMatchesSelector = {
   toLabel: ({ assert }) => `(\`${ assert.value }\`)`,
   commonly: "assert: it matches selector",
 
-  toGherkin: ({ target, params, assert }) => `Assert that element \`${ target }\`
+  toGherkin: ({ target, assert }) => `Assert that element \`${ target }\`
     matches selector \`${ assert.value }\``,
 
   assert: {
@@ -25,8 +25,8 @@ export const assertMatchesSelector = {
 
   testTypes: {
     "assert": {
-        "value": "INPUT"
-      }
+      "value": "INPUT"
+    }
   },
 
   test: [

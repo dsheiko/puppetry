@@ -48,10 +48,10 @@ export const tap = {
   ],
 
   testTypes: {
-      "params": {
-        "x": "INPUT_NUMBER",
-        "y": "INPUT_NUMBER"
-      }
+    "params": {
+      "x": "INPUT_NUMBER",
+      "y": "INPUT_NUMBER"
+    }
   },
 
   test: [

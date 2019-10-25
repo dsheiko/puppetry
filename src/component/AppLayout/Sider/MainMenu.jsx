@@ -329,24 +329,24 @@ export class MainMenu extends GitEnhancedMenu {
               </Menu.Item>
 
               <Menu.Item key="104"
-                onClick={ e => this.openTab( "projectTargets" ) } id="cMainMenuProjectTargets">
+                onClick={ () => this.openTab( "projectTargets" ) } id="cMainMenuProjectTargets">
                 Shared targets
               </Menu.Item>
 
               <Menu.Item key="102"
-                onClick={ e => this.openTab( "projectVariables" ) } id="cMainMenuProjectVariables">
+                onClick={ () => this.openTab( "projectVariables" ) } id="cMainMenuProjectVariables">
                 Template variables
               </Menu.Item>
 
               <Menu.Item key="103"
-                onClick={ e => this.openTab( "projectGit" ) } id="cMainMenuProjectGit">
+                onClick={ () => this.openTab( "projectGit" ) } id="cMainMenuProjectGit">
                 GIT
               </Menu.Item>
 
             </SubMenu>
 
 
-            <Menu.Item key="11" onClick={ e => this.openTab( "settings" ) } id="cMainMenuSettings">
+            <Menu.Item key="11" onClick={ () => this.openTab( "settings" ) } id="cMainMenuSettings">
               <span><Icon type="setting" /><span>Settings</span></span></Menu.Item>
 
             <Menu.Item key="10"

@@ -15,7 +15,7 @@ export const reload = {
   },
 
   toLabel: () => ``,
-  toGherkin: ({ params }) => `Reload the page`,
+  toGherkin: () => `Reload the page`,
   commonly: "",
 
   description: `Refreshes the page`,

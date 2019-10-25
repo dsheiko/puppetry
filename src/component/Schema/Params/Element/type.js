@@ -1,7 +1,7 @@
 import { justify } from "service/assert";
 import { INPUT } from "../../constants";
 import ExpressionParser from "service/ExpressionParser";
-import { truncate, renderTarget } from "service/utils";
+import { renderTarget } from "service/utils";
 
 export const type = {
   template: ({ target, params, id }) => {

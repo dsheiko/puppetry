@@ -1,7 +1,7 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
 import { AssertValue } from "../../Assert/AssertValue";
-import { truncate, normalizeAssertionVerb } from "service/utils";
+import { normalizeAssertionVerb } from "service/utils";
 
 export const assertStyle = {
   template: ( command ) => buildAssertionTpl(
@@ -65,12 +65,12 @@ export const assertStyle = {
 
   testTypes: {
     "assert": {
-        "assertion": "SELECT",
-        "value": "INPUT"
-      },
-      "params": {
-        "name": "INPUT"
-      }
+      "assertion": "SELECT",
+      "value": "INPUT"
+    },
+    "params": {
+      "name": "INPUT"
+    }
   },
 
   test: [

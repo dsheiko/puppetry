@@ -1,8 +1,8 @@
 import { msgDataSaved } from "component/Global/Message";
 const buttons = {
-        ok: "Yes",
-        cancel: "No"
-      };
+  ok: "Yes",
+  cancel: "No"
+};
 
 function noop() {
 }

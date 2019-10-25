@@ -1,6 +1,6 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertValue } from "../../Assert/AssertValue";
-import { truncate, normalizeAssertionVerb } from "service/utils";
+import { normalizeAssertionVerb } from "service/utils";
 
 export const assertUrl = {
   template: ( command ) => buildAssertionTpl(
@@ -11,7 +11,7 @@ export const assertUrl = {
 
 
   toLabel: ({ assert }) => `(${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value }\`)`,
-  toGherkin: ({ params, assert }) => `Assert that
+  toGherkin: ({ assert }) => `Assert that
     page URL ${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value }\``,
 
   commonly: "assert page URL",
@@ -34,10 +34,10 @@ export const assertUrl = {
   test: [
     {
       valid: true,
-     "assert": {
+      "assert": {
         "assertion": "!equals",
         "type": "string",
-        "value": "aaa"
+        "value": "ipsum"
       }
     }
   ]

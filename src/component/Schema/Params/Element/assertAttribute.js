@@ -1,7 +1,7 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
 import { AssertValue } from "../../Assert/AssertValue";
-import { truncate, normalizeAssertionVerb, renderTarget } from "service/utils";
+import { normalizeAssertionVerb, renderTarget } from "service/utils";
 
 export const assertAttribute = {
   template: ( command ) => buildAssertionTpl(
@@ -56,12 +56,12 @@ export const assertAttribute = {
 
   testTypes: {
     "assert": {
-        "assertion": "SELECT",
-        "value": "INPUT"
-      },
-      "params": {
-        "name": "INPUT"
-      }
+      "assertion": "SELECT",
+      "value": "INPUT"
+    },
+    "params": {
+      "name": "INPUT"
+    }
   },
 
   test: [
@@ -70,7 +70,7 @@ export const assertAttribute = {
       "assert": {
         "assertion": "!equals",
         "type": "string",
-        "value": "sss"
+        "value": "ipsum"
       },
       "params": {
         "name": "href"

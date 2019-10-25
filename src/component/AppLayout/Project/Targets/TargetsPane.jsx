@@ -2,19 +2,15 @@ import React from "react";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import { TargetTable } from "component/AppLayout/Main/TargetTable";
-import { Select, Icon } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import actions from "action";
 import * as selectors from "selector/selectors";
-import { INLINE_INPUT_STYLES } from "constant";
+
 import LearnMore from "component/Global/LearnMore";
-import { SELECT_SEARCH_PROPS } from "service/utils";
 
-const { Option } = Select,
-
-      // Mapping state to the props
-      mapStateToProps = ( state ) => ({
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
         environments: state.project.environments,
         selector: {
           getTargetDataTable: () => selectors.getTargetDataTable( state.project.targets )
@@ -35,13 +31,13 @@ export class TargetsPane extends AbstractComponent {
     return (
       <ErrorBoundary>
         <p>Targets are identifiers associated with locators (CSS selector or XPath)
-           that we can refer in the test cases. Shared targets are accessable in all suites of the open project.
+           that we can refer in the test cases. Shared targets are accessible in all suites of the open project.
         </p>
 
         <p><LearnMore href="https://docs.puppetry.app/target" />
         </p>
         <br />
-       <TargetTable model="SharedTarget" action={ action } targets={ selector.getTargetDataTable() } />
+        <TargetTable model="SharedTarget" action={ action } targets={ selector.getTargetDataTable() } />
 
       </ErrorBoundary>
     );

@@ -1,3 +1,4 @@
+/*eslint spellcheck/spell-checker: 0*/
 export default {
   pageview: {
     label: "Page View",
@@ -67,7 +68,7 @@ export default {
         tooltip: "Specifies the target of a social interaction. "
             + "This value is typically a URL but can be any text."
       }
-  ]
+    ]
   },
   screenview: {
     label: "App / Screen",

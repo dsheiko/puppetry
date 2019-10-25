@@ -1,18 +1,12 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertGaTrackingBeacon } from "../../Assert/AssertGaTrackingBeacon";
-import { truncate } from "service/utils";
-import { CHECKBOX, INPUT } from "../../constants";
 import GS_SCHEMA from "component/Schema/Assert/gaSchema";
 
-function renderVals( arr ) {
-  return arr.map( val => `\`${ val }\`` ).join( ", " );
-}
-
 function renderLabel({ action }) {
- if ( typeof GS_SCHEMA[ action ] !== "undefined" && GS_SCHEMA[ action ].label ) {
-  return GS_SCHEMA[ action ].label;
- }
- return action;
+  if ( typeof GS_SCHEMA[ action ] !== "undefined" && GS_SCHEMA[ action ].label ) {
+    return GS_SCHEMA[ action ].label;
+  }
+  return action;
 }
 
 function renderParams({ action, ...a }, prefix = "" ) {
@@ -20,15 +14,15 @@ function renderParams({ action, ...a }, prefix = "" ) {
     const val = a[ `${ field.key }Value` ],
           opa = a[ `${ field.key }Assertion` ];
 
-    switch( opa ) {
-      case "equals":
-        return `${ field.key } \`${ val }\``;
-      case "contains":
-        return `${ field.key } ~ \`${ val }\``;
-      case "any":
-        return ``;
-      default:
-        return `${ field.key } \`${ val ? "true" : "false" }\``;
+    switch ( opa ) {
+    case "equals":
+      return `${ field.key } \`${ val }\``;
+    case "contains":
+      return `${ field.key } ~ \`${ val }\``;
+    case "any":
+      return ``;
+    default:
+      return `${ field.key } \`${ val ? "true" : "false" }\``;
     }
   }).filter( val => val.length );
 
@@ -57,7 +51,7 @@ We also assert that sent payloads are valid according to the Google API`,
 
   toLabel: ({ assert }) => `(\`${ renderLabel( assert ) }\` ${ renderParams( assert, "with" ) })`,
 
-  toGherkin: ({ params, assert }) => `Assert that
+  toGherkin: ({ assert }) => `Assert that
     \`${ renderLabel( assert ) }\` data were to Google Analytics ${ renderParams( assert, "with" ) }`,
 
   assert: {
@@ -69,14 +63,14 @@ We also assert that sent payloads are valid according to the Google API`,
   testTypes: {
     "assert": {
       "action": "SELECT"
-//      "categoryAssertion": "SELECT",
-//      "actionAssertion": "SELECT",
-//      "labelAssertion": "SELECT",
-//      "valueAssertion": "SELECT",
-//      "categoryValue": "INPUT",
-//      "actionValue": "INPUT",
-//      "labelValue": "INPUT",
-//      "valueValue": "INPUT"
+      //      "categoryAssertion": "SELECT",
+      //      "actionAssertion": "SELECT",
+      //      "labelAssertion": "SELECT",
+      //      "valueAssertion": "SELECT",
+      //      "categoryValue": "INPUT",
+      //      "actionValue": "INPUT",
+      //      "labelValue": "INPUT",
+      //      "valueValue": "INPUT"
     }
   },
 

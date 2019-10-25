@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import { Icon } from "antd";
 import Tooltip from "component/Global/Tooltip";
 import { getSchema } from "component/Schema/schema";
-import { truncate, result } from "service/utils";
+import { truncate } from "service/utils";
 import { connect } from "react-redux";
 
-      // Mapping state to the props
+// Mapping state to the props
 const mapStateToProps = ( state ) => ({
         testCaseStyle: state.settings.testCaseStyle
       }),
@@ -20,7 +20,8 @@ export class CommandRowLabel extends React.Component {
 
    static propTypes = {
      record: PropTypes.object.isRequired,
-     snippets: PropTypes.any
+     snippets: PropTypes.any,
+     testCaseStyle: PropTypes.string
    }
 
    static buildAddon( record ) {
@@ -34,18 +35,18 @@ export class CommandRowLabel extends React.Component {
    }
 
    static highlightText( text ) {
-      if ( !text.includes( "`" ) ) {
-        return <span>{ text }</span>;
-      }
-      const chunks = text.split( "`" );
-      return chunks.map( ( chunk, inx ) => {
-        const isVar = inx % 2;
+     if ( !text.includes( "`" ) ) {
+       return <span>{ text }</span>;
+     }
+     const chunks = text.split( "`" );
+     return chunks.map( ( chunk, inx ) => {
+       const isVar = inx % 2;
 
-        return <span key={ inx } className={ isVar ? "label-variable" : "" }>
-          { isVar ? `"${ truncate( chunk, 80 ) }"` : chunk }
-        </span>;
-      });
-    }
+       return <span key={ inx } className={ isVar ? "label-variable" : "" }>
+         { isVar ? `"${ truncate( chunk, 80 ) }"` : chunk }
+       </span>;
+     });
+   }
 
 
    renderRef() {
@@ -56,9 +57,9 @@ export class CommandRowLabel extends React.Component {
 
      return ( <div className="container--editable-cell">
        <span className="command--ref">
-       <Icon
-         type="link"
-         title="Reference to a snippet" />
+         <Icon
+           type="link"
+           title="Reference to a snippet" />
          { title }
        </span>
        { record.comment && <i className="is-optional comment-label">
@@ -66,13 +67,13 @@ export class CommandRowLabel extends React.Component {
      </div> );
    }
 
-  shouldComponentUpdate( nextProps ) {
-    const prev = this.props.record,
-          next = nextProps.record;
-    if ( !this.props.record ) {
-      return false;
-    }
-    if ( prev.id !== next.id
+   shouldComponentUpdate( nextProps ) {
+     const prev = this.props.record,
+           next = nextProps.record;
+     if ( !this.props.record ) {
+       return false;
+     }
+     if ( prev.id !== next.id
           || prev.failure !== next.failure
           || prev.isRef !== next.isRef
           || prev.method !== next.method
@@ -82,10 +83,10 @@ export class CommandRowLabel extends React.Component {
           || prev.ref !== next.ref
           || prev.refName !== next.refName
           || this.props.testCaseStyle !== nextProps.testCaseStyle ) {
-      return true;
-    }
-    return false;
-  }
+       return true;
+     }
+     return false;
+   }
 
    renderCommand() {
      const { record, testCaseStyle } = this.props,
@@ -98,18 +99,18 @@ export class CommandRowLabel extends React.Component {
          icon="exclamation-circle"
          pos="up" />
 
-    { testStyle === "gherkin" && <div className="gherkin">
-      { CommandRowLabel.highlightText( schema.toGherkin( record ) ) }
-      </div> }
-    { testStyle !== "gherkin" && <React.Fragment>
-       <Icon
-         type={ record.target === "page" ? "file" : "scan" }
-         title={ record.target === "page" ? "Page method" : `${ record.target } target method` } />
-       <span className="token--target">{ record.target }</span>.{ record.method }
-       <span className="token--param">{ CommandRowLabel.buildAddon( record ) }</span>
+       { testStyle === "gherkin" && <div className="gherkin">
+         { CommandRowLabel.highlightText( schema.toGherkin( record ) ) }
+       </div> }
+       { testStyle !== "gherkin" && <React.Fragment>
+         <Icon
+           type={ record.target === "page" ? "file" : "scan" }
+           title={ record.target === "page" ? "Page method" : `${ record.target } target method` } />
+         <span className="token--target">{ record.target }</span>.{ record.method }
+         <span className="token--param">{ CommandRowLabel.buildAddon( record ) }</span>
        </React.Fragment> }
        { record.comment && <i className="is-optional comment-label">
-        <Icon type="message" title="Comment" />{ " " } { record.comment }</i> }
+         <Icon type="message" title="Comment" />{ " " } { record.comment }</i> }
      </div> );
    }
 

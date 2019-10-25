@@ -3,7 +3,7 @@ import { InstantModal } from "component/Global/InstantModal";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractForm from "component/AbstractForm";
 import { SnippetVariables } from "./SnippetVariables";
-import { Form, Button, Select, Input, Icon } from "antd";
+import { Form, Button, Select, Input } from "antd";
 import { SELECT_SEARCH_PROPS } from "service/utils";
 
 const FormItem = Form.Item,
@@ -69,8 +69,7 @@ export class SnippetModal extends AbstractForm {
 
     const { isVisible, snippets, record } = this.props,
           { getFieldDecorator } = this.props.form,
-          { loading } = this.state,
-          Addon = <Icon type="message" title="Comment" />;
+          { loading } = this.state;
 
     return ( <ErrorBoundary>
       <InstantModal

@@ -8,8 +8,6 @@ import actions from "../action";
 import * as selectors from "../selector/selectors";
 import { E_GIT_SYNC_RESPONSE } from "constant";
 import { ipcRenderer } from "electron";
-import { Spin } from "antd";
-import debounce from "lodash.debounce";
 import LoadingTip from "component/Global/LoadingTip";
 
 const GREETINGS = [ "Greetings",
@@ -35,7 +33,7 @@ const GREETINGS = [ "Greetings",
           getGroupDataTable: () => selectors.getStructureDataTable( state.suite.groups, "group" ),
           getTestDataTable: ( group ) => selectors.getStructureDataTable( group.tests, "test" ),
           getSelectedTargets: ( selection ) => selectors.getSelectedTargets(
-            selection, Object.assign( {}, state.project.targets, state.suite.targets ) ),
+            selection, Object.assign({}, state.project.targets, state.suite.targets ) ),
           hasTarget: ( target ) => selectors.hasTarget( target, state.suite.targets ),
           findCommandsByTestId:
             ( testId ) => selectors.findCommandsByTestId( testId, state.suite.groups ),
@@ -123,8 +121,7 @@ export class App extends React.Component {
 
   render() {
     const { action, store, selector } = this.props,
-          { loaded, loadingProject } = this.state,
-          tip = loadingProject ? `Loading recent project...` : `Loading...`;
+          { loaded } = this.state;
     return ( <React.Fragment>
       { !loaded && ( <div className="ant-spin ant-spin-lg ant-spin-spinning">
         <img width="100" height="100" src="./assets/puppetry.svg" alt="Puppetry" />
@@ -133,7 +130,7 @@ export class App extends React.Component {
         <span>
           <img width="32" height="32" src="./assets/loading.svg" alt="Loading..." />
         </span>
-        
+
         <LoadingTip />
 
       </div> ) }

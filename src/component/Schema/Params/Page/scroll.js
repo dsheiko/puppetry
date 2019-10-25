@@ -53,10 +53,10 @@ await bs.page.evaluate(( x, y ) => {
   ],
 
   testTypes: {
-      "params": {
-        "x": "INPUT_NUMBER",
-        "y": "INPUT_NUMBER"
-      }
+    "params": {
+      "x": "INPUT_NUMBER",
+      "y": "INPUT_NUMBER"
+    }
   },
 
   test: [

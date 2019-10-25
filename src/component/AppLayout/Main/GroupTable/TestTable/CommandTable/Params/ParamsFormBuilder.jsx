@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ErrorBoundary from "component/ErrorBoundary";
-import { Collapse, Button, Form, Input, InputNumber, Checkbox, Row, Col, Select, Radio, Icon  } from "antd";
+import { Collapse, Button, Form, Input, InputNumber, Checkbox, Select, Radio, Icon  } from "antd";
 import { validate } from "bycontract";
 import Tooltip from "component/Global/Tooltip";
 import { FILE, TEXTAREA, RADIO_GROUP, INPUT, INPUT_NUMBER, CHECKBOX, SELECT } from "component/Schema/constants";
@@ -119,7 +119,7 @@ export class ParamsFormBuilder extends React.Component {
       return ( <Select
         { ...SELECT_SEARCH_PROPS }
         style={ inputStyle }
-        onChange={ ( value ) => ( field.onChange ? field.onChange( value, this.props.form ) : () => {} ) }
+        onChange={ ( value ) => ( field.onChange ? field.onChange( value, this.props.form ) : () => {}) }
         placeholder={ field.placeholder }
         onSelect={ onSelect }
       >
@@ -214,25 +214,25 @@ export class ParamsFormBuilder extends React.Component {
     } : ( field.control === CHECKBOX ? FIELDSET_DEFAULT_CHECKBOX_LAYOUT : FIELDSET_DEFAULT_LAYOUT );
 
     return (  <FormItem
-        { ...formItemLayout }
-        className="ant-form-item--layout"
-        label={ field.control !== CHECKBOX ? labelNode : "" }
+      { ...formItemLayout }
+      className="ant-form-item--layout"
+      label={ field.control !== CHECKBOX ? labelNode : "" }
 
-        key={ `field${inx}` }>
-        { getFieldDecorator( field.name, decoratorOptions )( this.renderControl( field ) ) }
-        { field.description ? <Markdown
-          md={ field.description }
-          className="command-row-description" />    : "" }
-        { field.control === FILE && <Button
-          onClick={ ( e ) => this.onClickSelectFile( e, field ) }>Select file</Button>
-        }
-        { field.hasOwnProperty( "template" ) && <TemplateHelper
-          field={ field }
-          onChange={ this.onTemplateHelperChange }
-          environments={ this.props.environments }
-          variables={ this.props.variables }
-          config={ field.template } /> }
-      </FormItem>  );
+      key={ `field${inx}` }>
+      { getFieldDecorator( field.name, decoratorOptions )( this.renderControl( field ) ) }
+      { field.description ? <Markdown
+        md={ field.description }
+        className="command-row-description" />    : "" }
+      { field.control === FILE && <Button
+        onClick={ ( e ) => this.onClickSelectFile( e, field ) }>Select file</Button>
+      }
+      { field.hasOwnProperty( "template" ) && <TemplateHelper
+        field={ field }
+        onChange={ this.onTemplateHelperChange }
+        environments={ this.props.environments }
+        variables={ this.props.variables }
+        config={ field.template } /> }
+    </FormItem>  );
   };
 
   renderRow = ( row, inx, section ) => {

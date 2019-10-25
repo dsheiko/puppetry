@@ -3,7 +3,7 @@ import { justify } from "service/assert";
 import { truncate } from "service/utils";
 
 function sanitize( val ) {
-  return truncate( val.replace( /\"/m, "" ), 60 );
+  return truncate( val.replace( /"/m, "" ), 60 );
 }
 
 export const evaluate = {
@@ -44,9 +44,9 @@ await bs.page.evaluate(() => {
   ],
 
   testTypes: {
-      "params": {
-        "value": "INPUT"
-      }
+    "params": {
+      "value": "INPUT"
+    }
   },
 
   test: [

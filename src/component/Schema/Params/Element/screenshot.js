@@ -1,7 +1,7 @@
 import { INPUT, CHECKBOX } from "../../constants";
 import { isEveryValueMissing, ruleValidateGenericString } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
-import { truncate, renderTarget } from "service/utils";
+import { renderTarget } from "service/utils";
 import { getCounter } from "service/screenshotCounter";
 
 export const screenshot = {
@@ -16,7 +16,8 @@ export const screenshot = {
           optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
     return `
       // Taking screenshot of ${ target } element
-      await ( ${ renderTarget( target ) } ).screenshot( util.png( ${ JSON.stringify( id ) }, ${ parser.stringify( name ) }${ optArg }) );
+      await ( ${ renderTarget( target ) } ).`
+        + `screenshot( util.png( ${ JSON.stringify( id ) }, ${ parser.stringify( name ) }${ optArg }) );
   `;
   },
 

@@ -28,7 +28,7 @@ export class SelectEnv extends AbstractComponent {
         { theme !== "test-reports" && ( <span className="select-group-inline__label">
           <Icon type="environment" title="Select a target environment" />
         </span> ) }
-      { theme === "test-reports" && ( <span className="select-group-inline__label">
+        { theme === "test-reports" && ( <span className="select-group-inline__label">
           Environment:
         </span> ) }
         <Select

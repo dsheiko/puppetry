@@ -43,29 +43,29 @@ export default {
      * @returns {object}
      */
   [ actions.addCommand ]: ( state, { payload }) => {
-      const { options, id } = normalizeComplexPayload( payload );
-      return update( state, {
-        groups: {
-          [ options.groupId ]: {
-            tests: {
-              [ options.testId ]: {
-                commands: {
-                  $apply: ( ref ) => {
-                    const commands = { ...ref },
-                          id = id || uniqid(),
-                          defaultState = commandDefaultState( id );
-                    commands[ id ] = {
-                      ...defaultState,
-                      ...normalizePayload( options )
-                    };
-                    return commands;
-                  }
+    const { options } = normalizeComplexPayload( payload );
+    return update( state, {
+      groups: {
+        [ options.groupId ]: {
+          tests: {
+            [ options.testId ]: {
+              commands: {
+                $apply: ( ref ) => {
+                  const commands = { ...ref },
+                        id = id || uniqid(),
+                        defaultState = commandDefaultState( id );
+                  commands[ id ] = {
+                    ...defaultState,
+                    ...normalizePayload( options )
+                  };
+                  return commands;
                 }
               }
             }
           }
         }
-      });
+      }
+    });
   },
 
 

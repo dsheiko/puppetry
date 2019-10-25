@@ -10,7 +10,7 @@ await bs.page.evaluate(() => {
   },
 
   toLabel: () => ``,
-  toGherkin: ({ params }) => `Stop execution and call DevTools`,
+  toGherkin: () => `Stop execution and call DevTools`,
   commonly: "stop execution and call DevTools",
 
   description: `Stops execution of JavaScript, and calls (if available) the

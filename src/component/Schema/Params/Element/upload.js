@@ -1,5 +1,5 @@
 import { FILE, INPUT, INPUT_NUMBER } from "../../constants";
-import { truncate, renderTarget, result } from "service/utils";
+import { renderTarget, result } from "service/utils";
 
 export const upload = {
   template: ({ target, params }) => {
@@ -8,8 +8,8 @@ export const upload = {
     return `
       // Upload input[type=file]
       ${ ( name && size )
-        ? `result = util.generateTmpUploadFile( "${ name }", ${ size } );`
-        : `result = "${ path }";` }
+    ? `result = util.generateTmpUploadFile( "${ name }", ${ size } );`
+    : `result = "${ path }";` }
       await ( ${ renderTarget( target ) } ).uploadFile( result );`;
   },
 
@@ -31,7 +31,7 @@ export const upload = {
           size = result( values.params, "size", 0 );
 
     if ( !path && ( !name || !size ) ) {
-        return "You have to provide either attachment file path or name and size in Advanced options";
+      return "You have to provide either attachment file path or name and size in Advanced options";
     }
 
     return null;
@@ -81,7 +81,7 @@ export const upload = {
 
   ],
 
-   testTypes: {
+  testTypes: {
     "params": {
       "path": "INPUT"
     }

@@ -1,3 +1,4 @@
+/*eslint jsx-a11y/no-static-element-interactions: 0*/
 import React from "react";
 import PropTypes from "prop-types";
 import { Tabs, Icon } from "antd";
@@ -9,7 +10,7 @@ import AbstractComponent from "component/AbstractComponent";
 import LearnMore from "component/Global/LearnMore";
 import { connect } from "react-redux";
 
-      // Mapping state to the props
+// Mapping state to the props
 const mapStateToProps = ( state ) => ({
         panes: state.project.appPanels.suite.panes,
         expandedGroups: state.project.groups,

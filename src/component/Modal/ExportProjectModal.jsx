@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 import { Alert, Checkbox, Modal, Button, Select, Icon, message, notification, Spin, Tabs } from "antd";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
-import { exportProject, isDirEmpty, getRuntimeTestPath } from "service/io";
+import { exportProject, isDirEmpty  } from "service/io";
 import tmp from "tmp-promise";
 import BrowseDirectory from "component/Global/BrowseDirectory";
-import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, RUNNER_JEST, E_RUN_TESTS, MODAL_DEFAULT_PROPS } from "constant";
+import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, RUNNER_JEST, MODAL_DEFAULT_PROPS } from "constant";
 import If from "component/Global/If";
 import { TestGeneratorError } from "error";
 import { confirmExportProject } from "service/smalltalk";
 import * as classes from "./classes";
-import { getSnippets, getSelectedVariables, getActiveEnvironment } from "selector/selectors";
+import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
 import { SelectEnv } from "component/Global/SelectEnv";
 import exportPrintableText from "./ExportProjectModal/PrintableText";
 import { TestSpecificationPane } from "./ExportProjectModal/TestSpecificationPane";
@@ -20,7 +20,7 @@ import { BrowserOptions } from "./TestReportModal/BrowserOptions";
 import { SELECT_SEARCH_PROPS } from "service/utils";
 
 const CheckboxGroup = Checkbox.Group,
-  { TabPane } = Tabs,
+      { TabPane } = Tabs,
       { Option } = Select;
 
 export class ExportProjectModal  extends AbstractComponent {
@@ -132,49 +132,48 @@ export class ExportProjectModal  extends AbstractComponent {
             };
 
       this.props.action.saveSettings({ exportDirectory: selectedDirectory });
+      let filename;
       try {
-        let options, convertor;
         switch ( this.state.format ) {
-          case "text":
+        case "text":
 
-            if ( !this.props.readyToRunTests ) {
-              notification.open({
-                message: "Dependencies not installed",
-                description: "Please, run the tests (F6) "
-                  + " to install dependencies."
-              });
-              this.setState({ loading: false, locked: false });
-              return;
-            }
-
-            const filename = await exportPrintableText({
-              projectDirectory,
-              selectedDirectory,
-              checkedList,
-              launcherOptions,
-              project,
-              snippets: this.props.snippets,
-              envDto,
-              runSpecTests: this.refTestSpecificationPane.current
-                ? this.refTestSpecificationPane.current.state.runSpecTests : false
+          if ( !this.props.readyToRunTests ) {
+            notification.open({
+              message: "Dependencies not installed",
+              description: "Please, run the tests (F6) "
+                    + " to install dependencies."
             });
+            this.setState({ loading: false, locked: false });
+            return;
+          }
 
-            this.download( filename );
+          filename = await exportPrintableText({
+            projectDirectory,
+            selectedDirectory,
+            checkedList,
+            launcherOptions,
+            project,
+            snippets: this.props.snippets,
+            envDto,
+            runSpecTests: this.refTestSpecificationPane.current
+              ? this.refTestSpecificationPane.current.state.runSpecTests : false
+          });
 
-            break;
+          this.download( filename );
+          break;
 
-          default:
-            await exportProject(
-              projectDirectory,
-              selectedDirectory,
-              checkedList,
-              { runner: RUNNER_JEST, ...launcherOptions },
-              this.props.snippets,
-              project.targets,
-              envDto
-            );
-            message.info( `Project exported in ${ selectedDirectory }` );
-            break;
+        default:
+          await exportProject(
+            projectDirectory,
+            selectedDirectory,
+            checkedList,
+            { runner: RUNNER_JEST, ...launcherOptions },
+            this.props.snippets,
+            project.targets,
+            envDto
+          );
+          message.info( `Project exported in ${ selectedDirectory }` );
+          break;
         }
 
 
@@ -266,74 +265,74 @@ export class ExportProjectModal  extends AbstractComponent {
           ]}
         >
 
-       <Spin tip="Exporting project..." spinning={ this.state.loading }>
+          <Spin tip="Exporting project..." spinning={ this.state.loading }>
 
 
-        <Tabs
+            <Tabs
               className="tabgroup-test-reports"
               hideAdd={ true }
               animated={ false }
-              >
-
-            <TabPane tab="General" key="1">
-
-          <div className="select-group-inline">
-            <span className="select-group-inline__label">
-              <Icon type="file-unknown" title="Select an output format" />
-            </span>
-            <Select
-              { ...SELECT_SEARCH_PROPS }
-              style={{ width: 348 }}
-              placeholder="Select an output format"
-              onChange={ this.onChangeFormat }
-              defaultValue="jest"
             >
-              <Option value="jest" key="jest">Jest/Puppeteer project (CI-friendly)</Option>
-              <Option value="text" key="text">test specification</Option>
-            </Select>
-          </div>
 
-          { format === "jest" && <JestPane /> }
+              <TabPane tab="General" key="1">
 
-          { format === "text" && <TestSpecificationPane ref={ this.refTestSpecificationPane } /> }
+                <div className="select-group-inline">
+                  <span className="select-group-inline__label">
+                    <Icon type="file-unknown" title="Select an output format" />
+                  </span>
+                  <Select
+                    { ...SELECT_SEARCH_PROPS }
+                    style={{ width: 348 }}
+                    placeholder="Select an output format"
+                    onChange={ this.onChangeFormat }
+                    defaultValue="jest"
+                  >
+                    <Option value="jest" key="jest">Jest/Puppeteer project (CI-friendly)</Option>
+                    <Option value="text" key="text">test specification</Option>
+                  </Select>
+                </div>
 
-            <SelectEnv theme="test-reports" environments={ project.environments }
-              environment={ environment } action={ action } />
+                { format === "jest" && <JestPane /> }
 
-            <BrowseDirectory
-              defaultDirectory={ ( this.props.exportDirectory || tmp.dirSync().name ) }
-              validateStatus={ this.state.browseDirectoryValidateStatus }
-              getSelectedDirectory={ this.getSelectedDirectory }
-              label="Select a directory to export" />
+                { format === "text" && <TestSpecificationPane ref={ this.refTestSpecificationPane } /> }
 
-            <If exp={ files.length }>
-              <p>Please select suites to export:</p>
-              <div className="bottom-line">
-                <Checkbox
-                  indeterminate={ this.state.indeterminate }
-                  onChange={ this.onCheckAllChange }
-                  checked={ this.state.checkAll }
-                >
+                <SelectEnv theme="test-reports" environments={ project.environments }
+                  environment={ environment } action={ action } />
+
+                <BrowseDirectory
+                  defaultDirectory={ ( this.props.exportDirectory || tmp.dirSync().name ) }
+                  validateStatus={ this.state.browseDirectoryValidateStatus }
+                  getSelectedDirectory={ this.getSelectedDirectory }
+                  label="Select a directory to export" />
+
+                <If exp={ files.length }>
+                  <p>Please select suites to export:</p>
+                  <div className="bottom-line">
+                    <Checkbox
+                      indeterminate={ this.state.indeterminate }
+                      onChange={ this.onCheckAllChange }
+                      checked={ this.state.checkAll }
+                    >
                     Check all
-                </Checkbox>
-              </div>
+                    </Checkbox>
+                  </div>
 
-              <div className={ files.length >= 8 ? "is-checkbox-group-scrollable-export" : ""}>
-                <CheckboxGroup options={ files }
-                  value={ checkedList }
-                  onChange={ this.onChange } />
-              </div>
+                  <div className={ files.length >= 8 ? "is-checkbox-group-scrollable-export" : ""}>
+                    <CheckboxGroup options={ files }
+                      value={ checkedList }
+                      onChange={ this.onChange } />
+                  </div>
 
-            </If>
-            <If exp={ !files.length }>
-              <Alert message="No suites available in the project" type="error" />
-            </If>
+                </If>
+                <If exp={ !files.length }>
+                  <Alert message="No suites available in the project" type="error" />
+                </If>
 
-          </TabPane>
-          <TabPane tab="Browser options" key="2">
-            <BrowserOptions ref={ this.refBrowserOptions }  />
-          </TabPane>
-      </Tabs>
+              </TabPane>
+              <TabPane tab="Browser options" key="2">
+                <BrowserOptions ref={ this.refBrowserOptions }  />
+              </TabPane>
+            </Tabs>
 
           </Spin>
 

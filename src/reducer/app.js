@@ -24,7 +24,7 @@ export default handleActions(
       });
     },
 
-     [ actions.setLightboxIndex ]: ( state, { payload }) => {
+    [ actions.setLightboxIndex ]: ( state, { payload }) => {
       return update( state, {
         lightbox: {
           index: {
@@ -47,7 +47,7 @@ export default handleActions(
       });
     },
 
-    [ actions.cleanLightbox ]: ( state, { payload }) => {
+    [ actions.cleanLightbox ]: ( state ) => {
       return update( state, {
         lightbox: {
           images: {

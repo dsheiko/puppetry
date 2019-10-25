@@ -1,6 +1,7 @@
+/*eslint spellcheck/spell-checker: 0*/
 import React from "react";
 import PropTypes from "prop-types";
-import { Form,  Row, Col, Select, Input, Checkbox } from "antd";
+import { Form,  Row, Col, Select, Input } from "antd";
 import If from "component/Global/If";
 import { getAssertion } from "./helpers";
 import AbstractComponent from "component/AbstractComponent";
@@ -42,33 +43,33 @@ export class AssertConsoleMessage extends AbstractComponent {
           type = this.state.type || record.assert.type || "any",
           value = record.assert.value || "";
 
-    return (<React.Fragment>
+    return ( <React.Fragment>
 
 
-    <span className="assert-there-were"><span>Assert there</span><FormItem>
-     { getFieldDecorator( "assert.not", {
-                initialValue: not,
-                rules: [{
-                  required: true
-                }]
-              })( <Select showSearch
-                optionFilterProp="children">
-              <Option value="false">were</Option>
-              <Option value="true">were NO</Option>
-      </Select> ) }
+      <span className="assert-there-were"><span>Assert there</span><FormItem>
+        { getFieldDecorator( "assert.not", {
+          initialValue: not,
+          rules: [{
+            required: true
+          }]
+        })( <Select showSearch
+          optionFilterProp="children">
+          <Option value="false">were</Option>
+          <Option value="true">were NO</Option>
+        </Select> ) }
       </FormItem>
       <span>messages sent to the console like the following</span></span>
 
       <Row gutter={24} >
-          <Col span={8} >
-            <FormItem label="Message type">
-              { getFieldDecorator( "assert.type", {
-                initialValue: type,
-                rules: [{
-                  required: true
-                }]
-              })( <Select showSearch
-                optionFilterProp="children">
+        <Col span={8} >
+          <FormItem label="Message type">
+            { getFieldDecorator( "assert.type", {
+              initialValue: type,
+              rules: [{
+                required: true
+              }]
+            })( <Select showSearch
+              optionFilterProp="children">
               <Option value="any">any</Option>
               <Option value="log">log</Option>
               <Option value="debug">debug</Option>
@@ -83,8 +84,8 @@ export class AssertConsoleMessage extends AbstractComponent {
               <Option value="assert">assert</Option>
               <Option value="count">count</Option>
             </Select> ) }
-            </FormItem>
-          </Col>
+          </FormItem>
+        </Col>
       </Row>
 
       <Row gutter={24}>
@@ -97,15 +98,14 @@ export class AssertConsoleMessage extends AbstractComponent {
                 required: true
               }]
             })( <Select
-                showSearch
-                optionFilterProp="children"
-                onSelect={ this.onSelectAssertion }>
+              showSearch
+              optionFilterProp="children"
+              onSelect={ this.onSelectAssertion }>
               <Option value="haveString">equals</Option>
               <Option value="haveSubstring">contains</Option>
             </Select>  )}
           </FormItem>
         </Col>
-
 
 
         <If exp={ !!assertion }>
@@ -120,7 +120,7 @@ export class AssertConsoleMessage extends AbstractComponent {
                 <Input />
               ) }
             </FormItem>
-            <div className="under-field-decription">You can use
+            <div className="under-field-description">You can use
               { "" } <a onClick={ this.onExtClick } href="https://docs.puppetry.app/template">
               template expressions</a>
             </div>
@@ -128,8 +128,7 @@ export class AssertConsoleMessage extends AbstractComponent {
         </If>
 
 
-
       </Row>
-      </React.Fragment>);
+    </React.Fragment> );
   }
 }

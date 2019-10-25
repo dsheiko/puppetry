@@ -1,10 +1,8 @@
+/*eslint no-unused-vars: 0*/
 import React from "react";
-import PropTypes from "prop-types";
-import { Form, Input } from "antd";
-import { ruleValidateNotEmptyString, ruleValidateVariable } from "service/utils";
+import { Form } from "antd";
 import { AbstractEditableCell } from "./EditableCell/AbstractEditableCell";
-const FormItem = Form.Item,
-      connectForm = Form.create();
+const connectForm = Form.create();
 
 @connectForm
 export class EditableCell extends AbstractEditableCell {

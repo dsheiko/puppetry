@@ -14,7 +14,8 @@ export const assertNodeCount = {
     `(has ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value } \` elements matching \`${ params.selector }\`)`,
 
   toGherkin: ({ target, params, assert }) => `Assert that element \`${ target }\`
-    has ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }\` nested elements matching \`${ params.selector }\``,
+    has ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }\`
+    nested elements matching \`${ params.selector }\``,
 
   commonly: "assert count of child elements",
 

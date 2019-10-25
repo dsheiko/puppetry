@@ -18,9 +18,9 @@
 - improvement: Jest/Puppeteer project (export) has option to run in Firefox ([custom build](https://www.npmjs.com/package/puppeteer-firefox))
 - improvement: test steps and refs now support comments
 - improvement: add suite autosave option
-- improvement: add page.assertPerfomanceAssetWeight
-- improvement: add page.assertPerfomanceAssetCount
-- improvement: add page.assertPerfomanceTiming (page loading, redirection, network latency, processing)
+- improvement: add page.assertPerformanceAssetWeight
+- improvement: add page.assertPerformanceAssetCount
+- improvement: add page.assertPerformanceTiming (page loading, redirection, network latency, processing)
 - improvement: extend page.setViewport with list of predefined resolutions
 - improvement: polish UX for every test step form
 - improvement: support Chrome Extensions
@@ -32,6 +32,7 @@
   - querying in iframe
 - improvement: fix UI rendering performance
 - improvement: add support for record operations (copy/paste, clone, delete, enable/disable) on selections
+- improvement: show tips & tricks on loading screens
 
 ### Updates
 

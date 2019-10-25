@@ -144,14 +144,14 @@ export default class AbstractDnDTable extends React.Component {
     if ( !e.shiftKey ) {
       return;
     }
-    this.setState(( state ) => {
+    this.setState( ( state ) => {
       if ( typeof state.selected === "undefined" ) {
         state.selected = new Set();
       }
       if ( state.selected.has( record.id ) ) {
-        state.selected.delete( record.id )
+        state.selected.delete( record.id );
       } else {
-        state.selected.add( record.id )
+        state.selected.add( record.id );
       }
       return state;
     });
@@ -267,7 +267,7 @@ export default class AbstractDnDTable extends React.Component {
    * Extract key-value from targets
    */
   static findTargets( records ) {
-    return Array.from( records.reduce(( carry, record ) => {
+    return Array.from( records.reduce( ( carry, record ) => {
       carry.add( findTargets( record ) );
       return carry;
     }, new Set() ) );
@@ -346,7 +346,7 @@ export default class AbstractDnDTable extends React.Component {
     // give it a chance to render loading state
     setTimeout( async () => {
       for ( const record of records ) {
-        await update(this.extendActionOptions( record ) );
+        await update( this.extendActionOptions( record ) );
       }
       this.updateSuiteModified( record, "remove" );
       this.props.action.setApp({ loading: false });
@@ -359,7 +359,7 @@ export default class AbstractDnDTable extends React.Component {
 
     this.props.action.setApp({ loading: true });
     // give it a chance to render loading state
-    setTimeout(() => {
+    setTimeout( () => {
       let obj;
       for ( const record of records ) {
         obj = disabled ? { id: record.id, disabled, failure: "" } : { id: record.id, disabled };

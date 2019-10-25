@@ -29,12 +29,12 @@ const keyNames = Object.keys( USKeyboardLayout ),
 
 function getKeyName( params ) {
   return [ params.modifierKey1,
-      params.modifierKey2,
-      params.modifierKey3,
-      params.key ]
-      .filter( key => Boolean( key ) )
-      .map( key => `${ key }` )
-      .join( "+" );
+    params.modifierKey2,
+    params.modifierKey3,
+    params.key ]
+    .filter( key => Boolean( key ) )
+    .map( key => `${ key }` )
+    .join( "+" );
 }
 
 export const press = {

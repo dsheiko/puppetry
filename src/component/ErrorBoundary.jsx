@@ -11,6 +11,7 @@ export default class ErrorBoundary extends React.Component {
     action:  PropTypes.shape({
       setLoadingFor: PropTypes.func.isRequired
     }),
+    className: PropTypes.string,
     children: PropTypes.any
   }
 

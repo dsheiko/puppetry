@@ -1,5 +1,5 @@
-import { exportProject, isDirEmpty, getRuntimeTestPath, readdir, writeFile } from "service/io";
-import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, RUNNER_JEST, RUNNER_PUPPETRY, E_RUN_TESTS, DIR_SCREENSHOTS_TRACE } from "constant";
+import { exportProject, getRuntimeTestPath, readdir, writeFile } from "service/io";
+import { RUNNER_PUPPETRY, E_RUN_TESTS, DIR_SCREENSHOTS_TRACE } from "constant";
 import { ipcRenderer } from "electron";
 import TextConvertor from "service/Export/TextConvertor";
 import { join } from "path";
@@ -19,15 +19,15 @@ export default async function exportPrintableText({
   if ( runSpecTests ) {
     const runtimeTemp = getRuntimeTestPath(),
           specList = await exportProject(
-              projectDirectory,
-              runtimeTemp,
-              checkedList,
-              { runner: RUNNER_PUPPETRY, trace: true, ...launcherOptions },
-              snippets,
-              project.targets,
-              envDto
-            ),
-            report = ipcRenderer.sendSync( E_RUN_TESTS, runtimeTemp, specList );
+            projectDirectory,
+            runtimeTemp,
+            checkedList,
+            { runner: RUNNER_PUPPETRY, trace: true, ...launcherOptions },
+            snippets,
+            project.targets,
+            envDto
+          ),
+          report = ipcRenderer.sendSync( E_RUN_TESTS, runtimeTemp, specList );
 
     try {
       shell.rm( "-rf", selectedDirectory );

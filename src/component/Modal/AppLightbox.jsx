@@ -45,17 +45,16 @@ export class AppLightbox extends React.Component {
   }
 
   render() {
-    const { photoIndex } = this.state,
-          { isVisible, data } = this.props;
-        
+    const { isVisible, data } = this.props;
+
     return ( <ErrorBoundary>
       <ModalGateway>
         { isVisible !== false ? (
           <Modal onClose={ this.onClose }>
-              <Carousel views={ data.images } currentIndex={ this.getCurrentIndex( data ) } />
+            <Carousel views={ data.images } currentIndex={ this.getCurrentIndex( data ) } />
           </Modal>
         ) : null}
       </ModalGateway>
-      </ErrorBoundary> );
+    </ErrorBoundary> );
   }
 }

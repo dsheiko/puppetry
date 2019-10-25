@@ -8,7 +8,7 @@ const INDENT = "   ";
 function printGherkin( txt ) {
   return txt.replace( /\n/gm, "" )
     .replace( /\s+/gm, ` ` )
-    .replace( /\`/gm, `"` );
+    .replace( /`/gm, `"` );
 }
 
 export default class TextConvertor {
@@ -28,7 +28,7 @@ export default class TextConvertor {
     });
   }
 
-  printTest = ( test, tInx, gInx, variables = {} ) => {
+  printTest = ( test, tInx, gInx, variables = {}) => {
     const groupTestRecLabel = `${ gInx + 1 }.${ tInx + 1 }.`;
     if ( test.groupId !== "snippets" ) {
       this.print( `\n` );
@@ -50,7 +50,6 @@ export default class TextConvertor {
         }
         return this.printCommand( command, groupTestRecLabel );
       });
-
 
 
   }
@@ -109,8 +108,8 @@ export default class TextConvertor {
   async convert() {
 
     this.print( this.input.project.name );
-    this.print( `environment: ${ this.input.environment }\n`);
-    this.print( `template variables:`);
+    this.print( `environment: ${ this.input.environment }\n` );
+    this.print( `template variables:` );
     Object.entries( this.input.variables ).forEach( pair => {
       this.print( `${ pair[ 0 ] } = ${ pair[ 1 ] }`, 1 );
     });

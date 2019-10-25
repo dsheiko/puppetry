@@ -1,5 +1,4 @@
 import log from "electron-log";
-import { join } from "path";
 import { TestGeneratorError } from "error";
 import { COMMAND_ID_COMMENT, RUNNER_PUPPETRY, SNIPPETS_GROUP_ID } from "constant";
 import { getTargetChain, getActiveTargets } from "selector/selectors";
@@ -33,9 +32,9 @@ export default class TestGenerator {
 
     this.allTargets = Object.values({ ...sharedTargets, ...snippets.targets, ...targets });
     this.targets = this.allTargets.reduce( ( carry, entry ) => {
-        carry[ entry.target ] = entry.selector;
-        return carry;
-      }, {});
+      carry[ entry.target ] = entry.selector;
+      return carry;
+    }, {});
 
   }
 
@@ -81,7 +80,7 @@ export default class TestGenerator {
     this.interactive.sids.push( command.id );
     // filter by method
     return `\n      await bs.page.waitForSelector(\`body[data-puppetry-next="${ command.id }`
-      + `"]\`, { timeout: ${ INTERATIVE_TIMEOUT } });`
+      + `"]\`, { timeout: ${ INTERATIVE_TIMEOUT } });`;
   }
 
   static getTraceTpl( target, command ) {
@@ -89,8 +88,8 @@ export default class TestGenerator {
           secTarget = ( command.assert && command.assert.target ) ? ", " + tplProp( command.assert.target ) : ``;
 
     return `\n      // Tracing... \n` + ( target === "page"
-        ? `      await bs.tracePage( "${ command.id }" );`
-        : `      await bs.traceTarget( "${ command.id }", { ${ tplProp( target ) + secTarget } });` );
+      ? `      await bs.tracePage( "${ command.id }" );`
+      : `      await bs.traceTarget( "${ command.id }", { ${ tplProp( target ) + secTarget } });` );
   }
 
   /**
@@ -115,7 +114,7 @@ export default class TestGenerator {
         this.options.devtools = true;
         this.options.jestTimeout = 1800000;
       }
-      if ( src === "page" && method.startsWith( "assertPerfomanceAsset" ) ) {
+      if ( src === "page" && method.startsWith( "assertPerformanceAsset" ) ) {
         this.options.requireInterceptTraffic = true;
       }
       if ( src === "page" && method.startsWith( "assertGaTracking" ) ) {
@@ -123,12 +122,12 @@ export default class TestGenerator {
       }
 
       if ( target !== "page" && typeof this.targets[ target ] === "undefined" ) {
-       throw new TestGeneratorError( `Action cannot find "${ target }" target.`
+        throw new TestGeneratorError( `Action cannot find "${ target }" target.`
           + ` Please check your targets` );
       }
       if ( target !== "page" && assert
         && typeof assert.target !== "undefined" && this.targets[ assert.target ] === "undefined" ) {
-       throw new TestGeneratorError( `Action assert on "${ assert.target }" target, but cannot find it.`
+        throw new TestGeneratorError( `Action assert on "${ assert.target }" target, but cannot find it.`
           + ` Please check your targets` );
       }
 

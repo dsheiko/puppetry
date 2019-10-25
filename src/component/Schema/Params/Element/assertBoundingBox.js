@@ -11,11 +11,11 @@ function paramToLabel( param, operator, value ) {
 
 function assertsToLabel( assert ) {
   const labels = [];
-    labels.push( paramToLabel( "x", assert.xOperator, assert.xValue ) );
-    labels.push( paramToLabel( "y", assert.yOperator, assert.yValue ) );
-    labels.push( paramToLabel( "w", assert.wOperator, assert.wValue ) );
-    labels.push( paramToLabel( "h", assert.hOperator, assert.hValue ) );
-  return `${ labels.filter(( val ) => val.length ).join( ", " ) }`;
+  labels.push( paramToLabel( "x", assert.xOperator, assert.xValue ) );
+  labels.push( paramToLabel( "y", assert.yOperator, assert.yValue ) );
+  labels.push( paramToLabel( "w", assert.wOperator, assert.wValue ) );
+  labels.push( paramToLabel( "h", assert.hOperator, assert.hValue ) );
+  return `${ labels.filter( ( val ) => val.length ).join( ", " ) }`;
 }
 
 export const assertBoundingBox = {
@@ -29,7 +29,7 @@ export const assertBoundingBox = {
     return `(${ assertsToLabel( assert ) })`;
   },
 
-  toGherkin: ({ target, params, assert }) => `Assert that size and position of \`${ target }\`
+  toGherkin: ({ target, assert }) => `Assert that size and position of \`${ target }\`
     comply ${ assertsToLabel( assert ) }`,
 
   commonly: "assert size/position",
@@ -55,9 +55,9 @@ export const assertBoundingBox = {
 
   testTypes: {
     "assert": {
-        "xOperator": "SELECT",
-        "xValue": "INPUT_NUMBER"
-      }
+      "xOperator": "SELECT",
+      "xValue": "INPUT_NUMBER"
+    }
   },
 
   test: [

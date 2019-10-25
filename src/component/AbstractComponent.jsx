@@ -11,7 +11,7 @@ export default class AbstractComponent extends React.Component {
       setLoadingFor: PropTypes.func
     })
   }
-  
+
   download = ( file, e = null ) => {
     e && e.preventDefault();
     shell.openItem( file );

@@ -48,7 +48,7 @@ export const toggleClass = {
     }
   ],
 
-   testTypes: {
+  testTypes: {
     "params": {
       "name": "INPUT",
       "toggle": "SELECT"

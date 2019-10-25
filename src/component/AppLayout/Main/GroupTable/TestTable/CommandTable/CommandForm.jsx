@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Form, Row, Col, Alert, Input } from "antd";
-import { ipcRenderer } from "electron";
 import { TargetSelect } from "./TargetSelect";
 import { ElementMethodSelect } from "./ElementMethodSelect";
 import { PageMethodSelect } from "./PageMethodSelect";
@@ -10,12 +9,11 @@ import If from "component/Global/If";
 import { getSchema } from "component/Schema/schema";
 import { Description } from "component/Schema/Params/Description";
 import ErrorBoundary from "component/ErrorBoundary";
-import { FIELDSET_DEFAULT_LAYOUT } from "constant";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
       { TextArea } = Input,
-      TEST_LEADING_METHODS = [ "emulate", "setViewport", "closeDialog", "goto", "assertPerfomanceAssetWeight" ];
+      TEST_LEADING_METHODS = [ "emulate", "setViewport", "closeDialog", "goto", "assertPerformanceAssetWeight" ];
 
 @connectForm
 export class CommandForm extends React.Component {
@@ -23,7 +21,8 @@ export class CommandForm extends React.Component {
    static propTypes = {
      action: PropTypes.shape({
        updateSuite: PropTypes.func.isRequired,
-       updateCommand: PropTypes.func.isRequired
+       updateCommand: PropTypes.func.isRequired,
+       autosaveSuite: PropTypes.func.isRequired
      }),
      // Coming from connectForm
      form: PropTypes.shape({
@@ -115,13 +114,13 @@ export class CommandForm extends React.Component {
   changeMethod = ( method ) => {
     const hasGoto = this.checkTestHasGoto();
 
-//    if ( this.checkTestHasAssertPerfomanceAssetWeight() && hasGoto ) {
-//      return this.setState({
-//        method,
-//        error: `When asserting total weight of loaded assets, for clear results, `
-//          + ` have in a test case no other requests, but page.assertPerfomanceAssetWeight`
-//      });
-//    }
+    //    if ( this.checkTestHasAssertPerformanceAssetWeight() && hasGoto ) {
+    //      return this.setState({
+    //        method,
+    //        error: `When asserting total weight of loaded assets, for clear results, `
+    //          + ` have in a test case no other requests, but page.assertPerformanceAssetWeight`
+    //      });
+    //    }
 
     if ( !TEST_LEADING_METHODS.includes( method ) && !hasGoto ) {
       return this.setState({
@@ -136,19 +135,19 @@ export class CommandForm extends React.Component {
     });
   }
 
-  checkTestHasAssertPerfomanceAssetWeight = () => {
-    return this.props.commands.find( command => ( command.method === "assertPerfomanceAssetWeight" ) );
+  checkTestHasAssertPerformanceAssetWeight = () => {
+    return this.props.commands.find( command => ( command.method === "assertPerformanceAssetWeight" ) );
   }
 
   checkTestHasGoto = () => {
     return this.props.commands.find( command => ( command.method === "goto" ) );
   }
 
-//  componentDidMount() {
-//    ipcRenderer.on( E_RESET_FORM, ( ...args ) => {
-//      this.props.form.resetFields( args[ 1 ] );
-//    });
-//  }
+  //  componentDidMount() {
+  //    ipcRenderer.on( E_RESET_FORM, ( ...args ) => {
+  //      this.props.form.resetFields( args[ 1 ] );
+  //    });
+  //  }
 
 
   componentDidUpdate( prevProps ) {
@@ -175,17 +174,17 @@ export class CommandForm extends React.Component {
   renderCommentField( record ) {
     const { getFieldDecorator } = this.props.form;
     return ( <details>
-              <summary>Comment</summary>
-              <div  className="command-form__noncollapsed">
-              <FormItem className="ant-form-item--layout">
-        { getFieldDecorator( "comment", {
-          initialValue: record.comment
-        } )( <TextArea placeholder="Here you can describe your intent"
-          rows={ 2 }
-          onKeyPress={ ( e ) => this.onKeyPress( e, this.handleSubmit ) } /> ) }
+      <summary>Comment</summary>
+      <div  className="command-form__noncollapsed">
+        <FormItem className="ant-form-item--layout">
+          { getFieldDecorator( "comment", {
+            initialValue: record.comment
+          })( <TextArea placeholder="Here you can describe your intent"
+            rows={ 2 }
+            onKeyPress={ ( e ) => this.onKeyPress( e, this.handleSubmit ) } /> ) }
         </FormItem>
-        </div>
-        </details> );
+      </div>
+    </details> );
   }
 
   render() {
@@ -246,15 +245,15 @@ export class CommandForm extends React.Component {
                 })(
                   !target ? <Input disabled />
                     : (
-                    target === "page"
-                      ? <PageMethodSelect
-                        initialValue={ record.method }
-                        changeMethod={ this.changeMethod }
-                        setFieldsValue={ setFieldsValue } />
-                      : <ElementMethodSelect
-                        initialValue={ record.method }
-                        changeMethod={ this.changeMethod }
-                        setFieldsValue={ setFieldsValue } />
+                      target === "page"
+                        ? <PageMethodSelect
+                          initialValue={ record.method }
+                          changeMethod={ this.changeMethod }
+                          setFieldsValue={ setFieldsValue } />
+                        : <ElementMethodSelect
+                          initialValue={ record.method }
+                          changeMethod={ this.changeMethod }
+                          setFieldsValue={ setFieldsValue } />
                     )
                 )}
               </FormItem>

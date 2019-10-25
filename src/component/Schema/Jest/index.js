@@ -1,5 +1,5 @@
-import { RUNNER_PUPPETRY, SELECTOR_CHAIN_DELIMITER, SELECTOR_CSS } from "constant";
-import { validateSimpleSelector } from "service/selector";
+import { RUNNER_PUPPETRY } from "constant";
+
 import { result } from "service/utils";
 import { renderSuiteHtml } from "./interactive-mode";
 import { TestGeneratorError } from "error";
@@ -19,7 +19,7 @@ const NETWORK_TIMEOUT = 50000,
       );
 
 export function buildShadowDomQuery( targetChain ) {
-  const code = targetChain.reduce(( carry, target, inx ) => {
+  const code = targetChain.reduce( ( carry, target, inx ) => {
     if ( !target.css ) {
       throw new TestGeneratorError( `Shadow DOM queries currently support only CSS selectors` );
     }
@@ -32,17 +32,17 @@ export function buildShadowDomQuery( targetChain ) {
 }
 
 export const tplQuery = ( targetChain ) => {
-    const target = targetChain[ targetChain.length - 1 ],
-          str = JSON.stringify.bind( JSON );
+  const target = targetChain[ targetChain.length - 1 ],
+        str = JSON.stringify.bind( JSON );
 
-    let fnBody = ( target.parentType === "shadowHost"
-      ? buildShadowDomQuery( targetChain )
-      : ( targetChain.length === 1
-        ? `await bs.query( ${ str( target.selector ) }, ${ str( target.css ) }, ${ str( target.target ) } )`
-        : `await bs.queryChain( ${ str( targetChain )}, ${ str( target ) } )` )
-    );
+  let fnBody = ( target.parentType === "shadowHost"
+    ? buildShadowDomQuery( targetChain )
+    : ( targetChain.length === 1
+      ? `await bs.query( ${ str( target.selector ) }, ${ str( target.css ) }, ${ str( target.target ) } )`
+      : `await bs.queryChain( ${ str( targetChain )}, ${ str( target ) } )` )
+  );
 
-    return `bs.TARGETS[ "${ target.target }" ] = async () => ${ fnBody };`;
+  return `bs.TARGETS[ "${ target.target }" ] = async () => ${ fnBody };`;
 
 };
 
@@ -75,6 +75,7 @@ function getSetupOptions( options ) {
  * @returns {String}
  */
 function stringifyData( data ) {
+  /*eslint no-useless-escape: 0*/
   return ( JSON.stringify( data, null, 2 ) ).replace( /\\\"/gm, "'" );
 }
 export const tplSuite = ({
@@ -103,10 +104,10 @@ util.setProjectDirectory( ${ JSON.stringify( projectDirectory ) } );
 ` : `` }
 
 jest.setTimeout( ${  result( options, "jestTimeout", 0 )
-  ? options.jestTimeout
-  : ( options.interactiveMode
-    ? INTERACTIVE_MODE_TIMEOUT
-    : ( suite.timeout || NETWORK_TIMEOUT ) )
+    ? options.jestTimeout
+    : ( options.interactiveMode
+      ? INTERACTIVE_MODE_TIMEOUT
+      : ( suite.timeout || NETWORK_TIMEOUT ) )
 } );
 
 const consoleLog = [], // assetConsoleMessage
@@ -122,7 +123,7 @@ describe( ${ JSON.stringify( title ) }, async () => {
   beforeAll(async () => {
     await bs.setup(${ getSetupOptions( options ) });
 
-    bs.page.on( "console", ( msg ) => consoleLog.push( msg ) );
+    bs.page.on( "console", ( message ) => consoleLog.push( message ) );
     bs.page.on( "dialog", ( dialog ) => dialogLog.push( dialog.message() ) );
 
     ${ options.requireInterceptTraffic ? `bs.performance.watchTraffic();` : `` }

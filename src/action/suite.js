@@ -20,11 +20,10 @@ import snippetsActions from "./snippets";
 import { message } from "antd";
 
 
-
 const actions = createActions({
-        SET_SUITE: ( options ) => validate( options, I.SUITE_OPTIONS ),
-        RESET_SUITE: ( options ) => options
-      });
+  SET_SUITE: ( options ) => validate( options, I.SUITE_OPTIONS ),
+  RESET_SUITE: ( options ) => options
+});
 
 let autosaveTimeout;
 
@@ -40,7 +39,7 @@ actions.autosaveSuite = () => ( dispatch, getState ) => {
         autosaveSuite = () => {
           autosaveTimeout = null;
           dispatch( actions.setSuite({ savedAt: dateToTs(), modified: false }) );
-          dispatch( actions.saveSuite( {}, true ) );
+          dispatch( actions.saveSuite({}, true ) );
           saveProject( store );
           message.destroy();
           message.info( `Data saved!` );

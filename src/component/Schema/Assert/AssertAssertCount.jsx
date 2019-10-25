@@ -1,6 +1,7 @@
+/*eslint react/no-unescaped-entities: 0*/
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Row, Col, Switch, Input, InputNumber, Checkbox } from "antd";
+import { Form, Row, Switch, Input  } from "antd";
 import { getAssertion } from "./helpers";
 import { result } from "service/utils";
 
@@ -21,7 +22,8 @@ export class AssertAssertCount extends React.Component {
     targets: PropTypes.arrayOf( PropTypes.object ),
     form: PropTypes.shape({
       setFieldsValue: PropTypes.func.isRequired,
-      getFieldDecorator: PropTypes.func.isRequired
+      getFieldDecorator: PropTypes.func.isRequired,
+      getFieldValue: PropTypes.func.isRequired
     })
   }
 
@@ -71,79 +73,79 @@ export class AssertAssertCount extends React.Component {
 
   render () {
     const { getFieldDecorator } = this.props.form,
-          { record, targets } = this.props,
+          { record } = this.props,
           data = AssertAssertCount.normalizeEnabled( getAssertion( record ) ),
           enabled = this.state.enabled;
 
     return (
       <React.Fragment>
         <div className="is-invisible">
-            <FormItem>
-              { getFieldDecorator( "assert.assertion", {
-                initialValue: "assertAssetCount"
-              })( <Input readOnly /> ) }
-            </FormItem>
+          <FormItem>
+            { getFieldDecorator( "assert.assertion", {
+              initialValue: "assertAssetCount"
+            })( <Input readOnly /> ) }
+          </FormItem>
         </div>
 
         <h3>Quantity-based metrics based on asset number</h3>
-        <div>Assert the total number of a type of assets doesn't exeed a given limit</div>
+        <div>Assert the total number of a type of assets doesn't exceed a given limit</div>
 
 
         <Row gutter={24} className="ant-form-inline">
-        <table className="assert-perf-table">
+          <table className="assert-perf-table">
 
-          <tbody>
-          { ASSETS.map( asset => (<tr key={ asset.key }
-          className={ result( enabled, asset.key, false ) ? "" : "assert-row-disabled" }>
-              <td>
-                <FormItem>
-                  <FormItem className="perf-switch">
-                    { getFieldDecorator( `assert._enabled.${ asset.key }`, {
-                      initialValue: result( data._enabled, asset.key, false ),
-                      valuePropName: ( result( data._enabled, asset.key, false ) ? "checked" : "data-ok" )
-                    })( <Switch
-                      onChange={ ( checked ) => this.onSwitchChange( checked, asset.key  ) } /> )
+            <tbody>
+              { ASSETS.map( asset => ( <tr key={ asset.key }
+                className={ result( enabled, asset.key, false ) ? "" : "assert-row-disabled" }>
+                <td>
+                  <FormItem>
+                    <FormItem className="perf-switch">
+                      { getFieldDecorator( `assert._enabled.${ asset.key }`, {
+                        initialValue: result( data._enabled, asset.key, false ),
+                        valuePropName: ( result( data._enabled, asset.key, false ) ? "checked" : "data-ok" )
+                      })( <Switch
+                        onChange={ ( checked ) => this.onSwitchChange( checked, asset.key  ) } /> )
+                      }
+                    </FormItem>
+
+                  </FormItem>
+                </td>
+                <td>
+                  { asset.name }
+                </td>
+                <td>
+                &lt;
+                </td>
+                <td>
+                  <FormItem className="assert-perf-size">
+                    { getFieldDecorator( `assert.${ asset.key }`, {
+                      initialValue: data[ asset.key ],
+                      rules: [
+                        {
+                          validator: ( rule, value, callback ) => {
+                            const re = /^\d+$/;
+                            if ( !enabled[ asset.key ])  {
+                              return callback();
+                            }
+                            value = value ? value.trim() : "";
+                            if ( !re.test( value ) ) {
+                              return callback( "Value is not a number" );
+                            }
+                            callback();
+                          }
+                        }
+                      ]
+                    })( <Input /> )
                     }
                   </FormItem>
-
-                </FormItem>
-              </td>
-              <td>
-                  { asset.name }
-              </td>
-              <td>
-                &lt;
-              </td>
-              <td>
-                <FormItem className="assert-perf-size">
-                  { getFieldDecorator( `assert.${ asset.key }`, {
-                    initialValue: data[ asset.key ],
-                    rules: [
-                     {
-                       validator: ( rule, value, callback ) => {
-                          const re = /^\d+$/;
-                           if ( !enabled[ asset.key ] )  {
-                             return callback();
-                           }
-                           value = value ? value.trim() : "";
-                           if ( !re.test( value ) ) {
-                             return callback( "Value is not a number" );
-                           }
-                           callback();
-                       }
-                     }
-                  ]
-                  })( <Input /> )
-                  }
-                </FormItem>
-            </td>
-            <td>requests</td>
-          </tr>)) }
+                </td>
+                <td>requests</td>
+              </tr> ) ) }
 
 
-        </tbody>
-      </table>
-      </Row>
+            </tbody>
+          </table>
+        </Row>
 
       </React.Fragment> );
   }

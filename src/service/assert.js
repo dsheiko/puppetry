@@ -19,32 +19,32 @@ export function buildAssertionTpl( assertionCall, command, preCode ) {
 
 export function stringifyTypes( types, unit = "", op = "<" ) {
   return Object.keys( types._enabled )
-    .filter( ( key ) => types._enabled[ key ] )
+    .filter( ( key ) => types._enabled[ key ])
     .map( ( el ) => `\`${ el }\` ${ op } \`${ types[ el ] }${ unit }\`` ).join( ", " );
 }
 
 function templateConsoleMessageAssertion( cbBody, assert, comment ) {
-  return justify(`
+  return justify( `
 ${ comment }
-consoleLog.forEach( msg => {
-  let result = msg.text();
-  if ( "${ assert.type }" === "any" || msg.type() === "${ assert.type }" ) {${ cbBody }
+consoleLog.forEach( message => {
+  let result = message.text();
+  if ( "${ assert.type }" === "any" || message.type() === "${ assert.type }" ) {${ cbBody }
   }
 });
-  `);
+  ` );
 }
 
 function templateDialogAssertion( cbBody, assert, params, comment ) {
-  return justify(`
+  return justify( `
 ${ comment }
 toHaveSubstring
 
-dialogLog.forEach( msg => {
-  let result = msg;
-  if ( "${ assert.type }" === "any" || msg.type() === "${ assert.type }" ) {${ cbBody }
+dialogLog.forEach( message => {
+  let result = message;
+  if ( "${ assert.type }" === "any" || message.type() === "${ assert.type }" ) {${ cbBody }
   }
 });
-  `);
+  ` );
 }
 
 /**
@@ -57,8 +57,8 @@ dialogLog.forEach( msg => {
  */
 function getEnabledOptions( options ) {
   return Object.entries( options._enabled )
-    .filter( pair => Boolean( pair[ 1 ] ) )
-    .reduce(( carry, pair ) => {
+    .filter( pair => Boolean( pair[ 1 ]) )
+    .reduce( ( carry, pair ) => {
       const key = pair[ 0 ];
       carry[ key ] = options[ key ];
       return carry;
@@ -76,7 +76,7 @@ export function justify( text ) {
 
 function parseTpl( value, id, type = "string" ) {
   if ( typeof type === "undefined" || type !== "string" ) {
-     return JSON.stringify( value );
+    return JSON.stringify( value );
   }
   const parser = new ExpressionParser( id );
   return parser.stringify( value );
@@ -92,63 +92,63 @@ function createCbBody({ assert, target, method, id }) {
         source = `${ target }.${ method }`;
 
   switch ( assertion ) {
-    case "visible":
-      return justify( `expect( result ).toBeVisible( ${ JSON.stringify( assert ) }, "${ source }" );` );
-    case "screenshot":
-      return justify( `expect( result ).toMatchScreenshot( ${ options.mismatchTolerance }, "${ source }" );` );
-    case "selector":
-      return justify( `expect( result ).toBeOk( "${ source }" );` );
-    case "boolean":
-      return justify( `expect( result )${ value ? "" : ".not" }.toBeOk( "${ source }" );` );
-    case "number":
-      return justify( `expect( result ).toPassCondition( "${ operator }", ${ value }, "${ source }" );` );
+  case "visible":
+    return justify( `expect( result ).toBeVisible( ${ JSON.stringify( assert ) }, "${ source }" );` );
+  case "screenshot":
+    return justify( `expect( result ).toMatchScreenshot( ${ options.mismatchTolerance }, "${ source }" );` );
+  case "selector":
+    return justify( `expect( result ).toBeOk( "${ source }" );` );
+  case "boolean":
+    return justify( `expect( result )${ value ? "" : ".not" }.toBeOk( "${ source }" );` );
+  case "number":
+    return justify( `expect( result ).toPassCondition( "${ operator }", ${ value }, "${ source }" );` );
 
-    case "contains":
-      return justify( `expect( result ).toIncludeSubstring( ${ parseTpl( value, id, options.type ) }`
+  case "contains":
+    return justify( `expect( result ).toIncludeSubstring( ${ parseTpl( value, id, options.type ) }`
         + `, "${ source }" );` );
-    case "!contains":
-      return justify( `expect( result ).not.toIncludeSubstring( ${ parseTpl( value, id, options.type ) }`
+  case "!contains":
+    return justify( `expect( result ).not.toIncludeSubstring( ${ parseTpl( value, id, options.type ) }`
         + `, "${ source }" );` );
-    case "equals":
-      return justify( `expect( result ).toBeEqual( ${ parseTpl( value, id, options.type ) }, "${ source }" );` );
-    case "!equals":
-      return justify( `expect( result ).not.toBeEqual( ${ parseTpl( value, id, options.type ) }, "${ source }" );` );
+  case "equals":
+    return justify( `expect( result ).toBeEqual( ${ parseTpl( value, id, options.type ) }, "${ source }" );` );
+  case "!equals":
+    return justify( `expect( result ).not.toBeEqual( ${ parseTpl( value, id, options.type ) }, "${ source }" );` );
 
-    case "haveString":
-      return justify( `expect( result )${ negate( not ) }.toHaveString( ${ parseTpl( value, id, options.type ) }`
+  case "haveString":
+    return justify( `expect( result )${ negate( not ) }.toHaveString( ${ parseTpl( value, id, options.type ) }`
         + `, "${ source }" );` );
-    case "haveSubstring":
-      return justify( `expect( result )${ negate( not ) }.toHaveString( ${ parseTpl( value, id, options.type ) }`
+  case "haveSubstring":
+    return justify( `expect( result )${ negate( not ) }.toHaveString( ${ parseTpl( value, id, options.type ) }`
         + `, "${ source }" );` );
 
-    case "position":
-      return justify( `expect( result ).toMatchPosition`
+  case "position":
+    return justify( `expect( result ).toMatchPosition`
           + `( "${ position }", "${ target }", "${ options.target }", "${ source }" );` );
-    case "boundingBox":
-      return justify( `expect( result )`
+  case "boundingBox":
+    return justify( `expect( result )`
           + `.toMatchBoundingBoxSnapshot( ${ JSON.stringify( options, null, "  " ) }, "${ source }" );` );
 
-    case "assertPerfomanceTiming":
-      return resolveTimingAssertion( options, source );
-    case "assertAssetWeight":
-      return resolveAssetAssertion( "toMatchAssetWeight", options, source );
-    case "assertAssetCount":
-      return resolveAssetAssertion( "toMatchAssetCount", options, source );
-    case "assertGaTracking":
-      return justify( `expect( result )`
+  case "assertPerformanceTiming":
+    return resolveTimingAssertion( options, source );
+  case "assertAssetWeight":
+    return resolveAssetAssertion( "toMatchAssetWeight", options, source );
+  case "assertAssetCount":
+    return resolveAssetAssertion( "toMatchAssetCount", options, source );
+  case "assertGaTracking":
+    return justify( `expect( result )`
           + `.toMatchGaTracking( ${ JSON.stringify( options, null, "  " ) }, "${ source }" );` );
-    default:
-      throw RuntimeError( `Invalid assertion '${ assertion }'` );
+  default:
+    throw RuntimeError( `Invalid assertion '${ assertion }'` );
   }
 
 }
 
 function resolveTimingAssertion( options, source ) {
   const data = getEnabledOptions( options );
-  return Object.entries( data ).reduce(( carry, pair ) => {
-    const type = JSON.stringify( pair[ 0 ] ),
+  return Object.entries( data ).reduce( ( carry, pair ) => {
+    const type = JSON.stringify( pair[ 0 ]),
           rawVal = parseInt( pair[ 1 ], 10 ),
-          val = ( rawVal === NaN ? 0 : rawVal );
+          val = ( isNaN( rawVal ) ? 0 : rawVal );
     carry += justify( `expect( result ).toMatchTiming( `
       + `${ type }, ${ val }, "${ source }" ); ` );
     return carry;
@@ -157,10 +157,10 @@ function resolveTimingAssertion( options, source ) {
 
 function resolveAssetAssertion( assertionMethod, options, source ) {
   const data = getEnabledOptions( options );
-  return Object.entries( data ).reduce(( carry, pair ) => {
-    const type = JSON.stringify( pair[ 0 ] ),
+  return Object.entries( data ).reduce( ( carry, pair ) => {
+    const type = JSON.stringify( pair[ 0 ]),
           rawVal = parseInt( pair[ 1 ], 10 ),
-          val = ( rawVal === NaN ? 0 : rawVal ) * ( assertionMethod === "toMatchAssetCount" ? 1 : 1000 );
+          val = ( isNaN( rawVal ) ? 0 : rawVal ) * ( assertionMethod === "toMatchAssetCount" ? 1 : 1000 );
     carry += justify( `expect( result ).${ assertionMethod }( `
       + `${ type }, ${ val }, "${ source }" ); ` );
     return carry;

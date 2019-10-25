@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Icon, Select } from "antd";
 import { connect } from "react-redux";
 
-      // Mapping state to the props
+// Mapping state to the props
 const mapStateToProps = ( state ) => ({
         suiteTargets: state.suite.targets,
         sharedTargets: state.project.targets

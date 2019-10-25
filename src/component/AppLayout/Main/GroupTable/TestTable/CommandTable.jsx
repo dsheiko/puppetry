@@ -5,7 +5,6 @@ import { connectDnD } from "../../DragableRow";
 import { CommandRowLabel } from "./CommandRowLabel";
 import ErrorBoundary from "component/ErrorBoundary";
 import { RowDropdown } from "component/AppLayout/Main/RowDropdown";
-import { confirmDeleteEntity } from "service/smalltalk";
 import { remote } from "electron";
 import classNames from "classnames";
 import { SNIPPETS_GROUP_ID } from "constant";
@@ -71,8 +70,8 @@ export class CommandTable extends AbstractDnDTable {
 
     menu.append( new MenuItem(
       record.disabled ? {
-          label: "Enable",
-          click: () => this.toggleVisibility( record, false )
+        label: "Enable",
+        click: () => this.toggleVisibility( record, false )
       } : {
         label: "Disable",
         click: () => this.toggleVisibility( record, true )
@@ -231,7 +230,7 @@ export class CommandTable extends AbstractDnDTable {
           || this.props.testId !== nextProps.testId
           || this.props.snippets !== nextProps.snippets
           || this.props.targets !== nextProps.targets
-        ) {
+    ) {
       return true;
     }
     return false;

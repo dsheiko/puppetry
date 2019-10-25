@@ -1,6 +1,5 @@
 import { justify } from "service/assert";
 import { INPUT } from "../../constants";
-import { truncate } from "service/utils";
 
 export const select = {
   template: ({ params, targetSeletor }) => justify(
@@ -45,7 +44,7 @@ export const select = {
     {
       valid: true,
       "params": {
-        "value": "aaa"
+        "value": "ipsum"
       }
     }
   ]

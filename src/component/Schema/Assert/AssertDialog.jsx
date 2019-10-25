@@ -41,38 +41,38 @@ export class AssertDialog extends AbstractComponent {
           not = getAssertion( record ).not || "false",
           type = this.state.type || record.assert.type || "any",
           value = record.assert.value || "";
-    return (<React.Fragment>
+    return ( <React.Fragment>
 
-    <span className="assert-there-were"><span>Assert there</span><FormItem>
-     { getFieldDecorator( "assert.not", {
-                initialValue: not,
-                rules: [{
-                  required: true
-                }]
-              })( <Select>
-              <Option value="false">were</Option>
-              <Option value="true">were NO</Option>
-      </Select> ) }
+      <span className="assert-there-were"><span>Assert there</span><FormItem>
+        { getFieldDecorator( "assert.not", {
+          initialValue: not,
+          rules: [{
+            required: true
+          }]
+        })( <Select>
+          <Option value="false">were</Option>
+          <Option value="true">were NO</Option>
+        </Select> ) }
       </FormItem>
       <span>dialogs called like the following</span></span>
 
       <Row gutter={24} >
-          <Col span={8} >
-            <FormItem label="Dialog type">
-              { getFieldDecorator( "assert.type", {
-                initialValue: type,
-                rules: [{
-                  required: true
-                }]
-              })( <Select showSearch optionFilterProp="children">
+        <Col span={8} >
+          <FormItem label="Dialog type">
+            { getFieldDecorator( "assert.type", {
+              initialValue: type,
+              rules: [{
+                required: true
+              }]
+            })( <Select showSearch optionFilterProp="children">
               <Option value="any">any</Option>
               <Option value="alert">alert</Option>
               <Option value="beforeunload">beforeunload</Option>
               <Option value="confirm">confirm</Option>
               <Option value="prompt">prompt</Option>
             </Select> ) }
-            </FormItem>
-          </Col>
+          </FormItem>
+        </Col>
       </Row>
       <Row gutter={24}>
 
@@ -92,7 +92,6 @@ export class AssertDialog extends AbstractComponent {
         </Col>
 
 
-
         <If exp={ !!assertion }>
           <Col span={12} >
             <FormItem label="Value">
@@ -105,7 +104,7 @@ export class AssertDialog extends AbstractComponent {
                 <Input />
               ) }
             </FormItem>
-            <div className="under-field-decription">You can use
+            <div className="under-field-description">You can use
               { "" } <a onClick={ this.onExtClick } href="https://docs.puppetry.app/template">
               template expressions</a>
             </div>
@@ -113,8 +112,7 @@ export class AssertDialog extends AbstractComponent {
         </If>
 
 
-
       </Row>
-      </React.Fragment>);
+    </React.Fragment> );
   }
 }

@@ -33,9 +33,9 @@ export const waitFor = {
   ],
 
   testTypes: {
-      "params": {
-        "value": "INPUT"
-      }
+    "params": {
+      "value": "INPUT"
+    }
   },
 
   test: [

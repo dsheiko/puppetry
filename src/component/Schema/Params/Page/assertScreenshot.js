@@ -1,10 +1,9 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertScreenshot } from "../../Assert/AssertScreenshot";
-import { isEveryValueFalsy, isSomeValueNull, ruleValidateGenericString } from "service/utils";
-import { truncate } from "service/utils";
+import { isEveryValueFalsy, ruleValidateGenericString } from "service/utils";
 import { getCounter } from "service/screenshotCounter";
 import ExpressionParser from "service/ExpressionParser";
-import { hexToRgb, rgbToHex } from "service/color";
+import { hexToRgb } from "service/color";
 import { INPUT_NUMBER, INPUT, CHECKBOX } from "../../constants";
 
 export const assertScreenshot = {
@@ -24,10 +23,10 @@ export const assertScreenshot = {
           isClipEmpty = isEveryValueFalsy( clip ),
           screenshotOptions = isClipEmpty ? baseOptions : { ...baseOptions, clip },
           pixelmatchOptions = {
-              includeAA: command.params.includeAA,
-              diffColor: hexToRgb( command.params.diffColor ),
-              aaColor: hexToRgb( command.params.aaColor ),
-              threshold: command.assert.mismatchTolerance
+            includeAA: command.params.includeAA,
+            diffColor: hexToRgb( command.params.diffColor ),
+            aaColor: hexToRgb( command.params.aaColor ),
+            threshold: command.assert.mismatchTolerance
           },
           paramName = `"${ command.id }." + ${ parser.stringify( name ) }`,
           paramScreenshotOpts = JSON.stringify( screenshotOptions, null, 2 ),
@@ -41,7 +40,7 @@ export const assertScreenshot = {
   },
 
   toLabel: ({ params }) => `(\`${ params.name }\`)`,
-  toGherkin: ({ params, assert }) => `Asserts that screenshot \`${ params.name }\`
+  toGherkin: ({ params }) => `Asserts that screenshot \`${ params.name }\`
     of the page matches already approved one`,
 
   commonly: "assert page screenshot",

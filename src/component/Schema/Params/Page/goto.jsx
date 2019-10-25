@@ -1,7 +1,6 @@
 import { SELECT, INPUT, INPUT_NUMBER } from "../../constants";
 import { isEveryValueMissing } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
-import { truncate } from "service/utils";
 
 /**
  * @typedef {object} TemplatePayload

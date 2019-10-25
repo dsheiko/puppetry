@@ -1,7 +1,6 @@
 import { INPUT, INPUT_NUMBER, CHECKBOX } from "../../constants";
 import { isEveryValueFalsy, isSomeValueNull, ruleValidateGenericString } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
-import { truncate } from "service/utils";
 import { getCounter } from "service/screenshotCounter";
 
 export const screenshot = {
@@ -131,15 +130,15 @@ export const screenshot = {
   ],
 
   testTypes: {
-      "params": {
-        "name": "INPUT",
-        "fullPage": "CHECKBOX",
-        "omitBackground": "CHECKBOX",
-        "x": "INPUT_NUMBER",
-        "y": "INPUT_NUMBER",
-        "width": "INPUT_NUMBER",
-        "height": "INPUT_NUMBER"
-      }
+    "params": {
+      "name": "INPUT",
+      "fullPage": "CHECKBOX",
+      "omitBackground": "CHECKBOX",
+      "x": "INPUT_NUMBER",
+      "y": "INPUT_NUMBER",
+      "width": "INPUT_NUMBER",
+      "height": "INPUT_NUMBER"
+    }
   },
 
   test: [

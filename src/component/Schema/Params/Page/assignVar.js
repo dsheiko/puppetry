@@ -1,6 +1,5 @@
 import ExpressionParser from "service/ExpressionParser";
 import { INPUT } from "../../constants";
-import { truncate } from "service/utils";
 
 export const assignVar = {
   template: ({ params, id }) => {

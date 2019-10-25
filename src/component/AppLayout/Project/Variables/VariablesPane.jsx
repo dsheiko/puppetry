@@ -2,7 +2,7 @@ import React from "react";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import { VariableTable } from "./VariableTable";
-import { Select, Icon } from "antd";
+import { Select } from "antd";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import actions from "action";

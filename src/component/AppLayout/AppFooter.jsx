@@ -15,11 +15,11 @@ export class AppFooter extends AbstractComponent {
         <Footer>
           <Row type="flex" align="middle" justify="space-between">
             <Col className="text-align-left" span={18}>
-            <span>&copy; { today.getFullYear() } MIT License. Created by
-              { " " } <a href="http://dsheiko.com"
-                onClick={ this.onExtClick }
-                rel="noopener noreferrer"
-                target="_blank">Dmitry Sheiko</a></span>
+              <span>&copy; { today.getFullYear() } MIT License. Created by
+                { " " } <a href="http://dsheiko.com"
+                  onClick={ this.onExtClick }
+                  rel="noopener noreferrer"
+                  target="_blank">Dmitry Sheiko</a></span>
             </Col>
             <Col className="text-align-right" span={6}>
               <a onClick={ this.onExtClick }
@@ -32,7 +32,7 @@ export class AppFooter extends AbstractComponent {
                 title="Find the author on Twitter" className="layout-icon"
                 href="https://twitter.com/sheiko" target="_blank"><Icon type="twitter" /></a>
 
-             <a onClick={ this.onExtClick }
+              <a onClick={ this.onExtClick }
                 rel="noopener noreferrer"
                 title="Find Puppetry on Facebook" className="layout-icon"
                 href="https://www.facebook.com/puppetry.testing" target="_blank"><Icon type="facebook" /></a>

@@ -18,29 +18,30 @@ export default class JsonConvertor {
 
   static commandToJson( command ) {
     return ({
-        target: command.target,
-        method: command.method,
-        params: command.params,
-        assert: command.assert
-      });
+      target: command.target,
+      method: command.method,
+      params: command.params,
+      assert: command.assert
+    });
   }
 
   static snippetCommandsToJson = ( test ) => Object.values( test.commands )
     .filter( command => !command.disabled )
     .map( command => {
-      return JsonConvertor.commandToJson( command );  })
+      return JsonConvertor.commandToJson( command );
+    })
 
   testToJson = ( test ) => {
     let variables = {};
     const commands = Object.values( test.commands )
       .filter( command => !command.disabled )
-      .reduce(( carry, command ) => {
+      .reduce( ( carry, command ) => {
         if ( command.isRef ) {
           if ( !( command.ref in this.input.snippets ) ) {
             return carry;
           }
           variables = command.variables;
-          const commands = JsonConvertor.snippetCommandsToJson( this.input.snippets[ command.ref ] );
+          const commands = JsonConvertor.snippetCommandsToJson( this.input.snippets[ command.ref ]);
           return carry.concat( commands );
         }
         carry.push( JsonConvertor.commandToJson( command ) );

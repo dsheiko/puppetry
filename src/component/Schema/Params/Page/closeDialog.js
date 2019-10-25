@@ -1,7 +1,5 @@
-import { buildAssertionTpl } from "service/assert";
-import { AssertDialog } from "../../Assert/AssertDialog";
 import { truncate, ucfisrt } from "service/utils";
-import { CHECKBOX, INPUT, SELECT } from "../../constants";
+import { INPUT, SELECT } from "../../constants";
 
 function getOptionsString( params ) {
   const options = [];
@@ -105,12 +103,12 @@ export const closeDialog = {
   ],
 
   testTypes: {
-      "params": {
-        "substring": "INPUT",
-        "type": "SELECT",
-        "action": "SELECT",
-        "promptText": "INPUT"
-      }
+    "params": {
+      "substring": "INPUT",
+      "type": "SELECT",
+      "action": "SELECT",
+      "promptText": "INPUT"
+    }
   },
 
   test: [

@@ -1,6 +1,6 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertValue } from "../../Assert/AssertValue";
-import { truncate, normalizeAssertionVerb } from "service/utils";
+import { normalizeAssertionVerb } from "service/utils";
 
 export const assertTitle = {
   template: ( command ) => buildAssertionTpl(
@@ -10,7 +10,7 @@ export const assertTitle = {
   ),
 
   toLabel: ({ assert }) => `(${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value }\`)`,
-  toGherkin: ({ params, assert }) => `Assert that
+  toGherkin: ({ assert }) => `Assert that
     page title ${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value }\``,
 
   commonly: "assert page title",

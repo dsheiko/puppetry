@@ -1,14 +1,8 @@
 import { buildAssertionTpl, stringifyTypes } from "service/assert";
-import { AssertPerfomanceMetrics } from "../../Assert/AssertPerfomanceMetrics";
-import { truncate } from "service/utils";
-import { CHECKBOX, INPUT } from "../../constants";
-
-function renderVals( arr ) {
-  return arr.map( val => `\`${ val }\`` ).join( ", " );
-}
+import { AssertPerformanceMetrics } from "../../Assert/AssertPerformanceMetrics";
 
 
-export const assertPerfomanceTiming = {
+export const assertPerformanceTiming = {
 
   template: ( command ) => {
     return buildAssertionTpl(
@@ -20,14 +14,14 @@ export const assertPerfomanceTiming = {
 
   description: `Asserts a given [resource timing](https://w3c.github.io/perf-timing-primer/#resource-timing)
     under a provided budget`,
-  commonly: "assert perfomance timing",
+  commonly: "assert performance timing",
 
   toLabel: ({ assert }) => `(${ stringifyTypes( assert, "μs" ) })`,
-  toGherkin: ({ params, assert }) => `Assert that the page loading
+  toGherkin: ({ assert }) => `Assert that the page loading
     timings satisfy the budget: ${ stringifyTypes( assert, "μs" ) }`,
 
   assert: {
-    node: AssertPerfomanceMetrics
+    node: AssertPerformanceMetrics
   },
   params: [
   ],
@@ -43,7 +37,7 @@ export const assertPerfomanceTiming = {
     {
       valid: true,
       "assert": {
-        "assertion": "assertPerfomanceTiming",
+        "assertion": "assertPerformanceTiming",
         "_enabled": {
           "loading": true,
           "redirection": false,

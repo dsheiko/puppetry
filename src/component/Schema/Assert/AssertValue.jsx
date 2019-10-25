@@ -89,7 +89,7 @@ export class AssertValue extends AbstractComponent {
                 <Input />
               ) }
             </FormItem>
-            { type === "string" && <div className="under-field-decription">You can use
+            { type === "string" && <div className="under-field-description">You can use
               { "" } <a onClick={ this.onExtClick } href="https://docs.puppetry.app/template">
               template expressions</a>
             </div> }
@@ -118,10 +118,10 @@ export class AssertValue extends AbstractComponent {
                   this.renderValueInput( type )
                 ) }
               </FormItem>
-              { type === "string" && <div className="under-field-decription">You can use
+              { type === "string" && <div className="under-field-description">You can use
                 { "" } <a onClick={ this.onExtClick } href="https://docs.puppetry.app/template">
                 template expressions</a>
-            </div> }
+              </div> }
             </If>
 
           </Col>

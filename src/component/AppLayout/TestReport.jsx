@@ -1,3 +1,4 @@
+/*eslint no-useless-escape: 0*/
 import React from "react";
 import PropTypes from "prop-types";
 import { ipcRenderer, shell } from "electron";
@@ -8,19 +9,17 @@ import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
 import { exportProject, getRuntimeTestPath, parseReportedFailures } from "service/io";
 import { millisecondsToStr } from "service/utils";
-import { Icon, Spin, Button, Collapse, notification } from "antd";
+import { Spin, Collapse, notification } from "antd";
 import { join } from "path";
 import { TestGeneratorError } from "error";
 import Convert from "ansi-to-html";
 import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
 import { ReportBody } from "./TestReport/ReportBody";
 import path from "path";
-import { readdir } from "service/io";
+
 
 const Panel = Collapse.Panel,
       convert = new Convert();
-
-let counter = 0;
 
 
 export class TestReport extends AbstractComponent {
@@ -222,10 +221,10 @@ export class TestReport extends AbstractComponent {
     }
     return ( <ErrorBoundary>
       <If exp={ loading }>
-      <div className="test-report-spin">
-        <Spin spinning={ loading } tip="Tests are running.."></Spin>
-        <LoadingTip />
-      </div>
+        <div className="test-report-spin">
+          <Spin spinning={ loading } tip="Tests are running.."></Spin>
+          <LoadingTip />
+        </div>
       </If>
 
       <If exp={ ok && !loading }>

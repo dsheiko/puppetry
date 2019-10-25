@@ -54,11 +54,11 @@ export const assertContainsClass = {
 
   testTypes: {
     "assert": {
-        "value": "CHECKBOX"
-      },
-      "params": {
-        "name": "INPUT"
-      }
+      "value": "CHECKBOX"
+    },
+    "params": {
+      "name": "INPUT"
+    }
   },
 
   test: [

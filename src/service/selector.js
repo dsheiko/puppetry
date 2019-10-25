@@ -1,5 +1,5 @@
 import { SelectorParserException } from "error";
-import { SELECTOR_CHAIN_DELIMITER, SELECTOR_CSS, SELECTOR_XPATH } from "constant";
+import { SELECTOR_CSS, SELECTOR_XPATH } from "constant";
 
 export function validateSelector( rawSelectorChain ) {
   const selectorChain = ( rawSelectorChain || "" ).trim();
@@ -44,10 +44,10 @@ function validateXpath( selector ) {
 
 export function mapSelectors( targetArr ) {
   return targetArr.map( target => ({
-      target: target.target,
-      selector: target.selector,
-      ref: target.ref,
-      parentType: target.parentType,
-      css: validateSimpleSelector( target.selector ) === SELECTOR_CSS
-  }));
+    target: target.target,
+    selector: target.selector,
+    ref: target.ref,
+    parentType: target.parentType,
+    css: validateSimpleSelector( target.selector ) === SELECTOR_CSS
+  }) );
 }

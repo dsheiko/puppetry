@@ -1,21 +1,23 @@
+/*eslint spellcheck/spell-checker: 0*/
 /*eslint react/no-unescaped-entities: 0*/
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Row, Switch, Input  } from "antd";
+import { Form, Row, Switch, Input } from "antd";
 import { getAssertion } from "./helpers";
 import { result } from "service/utils";
+import Tooltip from "component/Global/Tooltip";
 
 const FormItem = Form.Item,
-      ASSETS = [
-        { name: "JavaScript", key: "script" },
-        { name: "CSS", key: "stylesheet" },
-        { name: "Images", key: "image" },
-        { name: "Media", key: "media" },
-        { name: "Fonts", key: "font" },
-        { name: "XHR/fetch", key: "xhr" }
+      METRICS = [
+        { name: "Page loading", key: "loading", desc: `The whole process of navigation and page load` },
+        { name: "Redirection", key: "redirection", desc: `The time taken by document request redirections` },
+        { name: "Network latency", key: "network", desc: `The time taken to fetch app cache, lookup domain, `
+          + `establish TCP connection, send request, receive response` },
+        { name: "Page processing", key: "processing",
+          desc: `The time taken for page load once the page is received from the server` }
       ];
 
-export class AssertAssertWeight extends React.Component {
+export class AssertPerformanceMetrics extends React.Component {
 
   static propTypes = {
     record: PropTypes.object.isRequired,
@@ -52,7 +54,7 @@ export class AssertAssertWeight extends React.Component {
       return;
     }
     this.setState({
-      enabled: ASSETS.reduce( ( carry, asset ) => {
+      enabled: METRICS.reduce( ( carry, asset ) => {
         carry[ asset.key ] = false;
         return carry;
       }, {})
@@ -63,7 +65,7 @@ export class AssertAssertWeight extends React.Component {
     if ( !data._enabled ) {
       return data;
     }
-    ASSETS.forEach( asset => {
+    METRICS.forEach( asset => {
       if ( typeof data._enabled[ asset.key ] === "undefined" ) {
         data._enabled[ asset.key ] = false;
       }
@@ -74,7 +76,7 @@ export class AssertAssertWeight extends React.Component {
   render () {
     const { getFieldDecorator } = this.props.form,
           { record } = this.props,
-          data = AssertAssertWeight.normalizeEnabled( getAssertion( record ) ),
+          data = AssertPerformanceMetrics.normalizeEnabled( getAssertion( record ) ),
           enabled = this.state.enabled;
 
     return (
@@ -82,19 +84,20 @@ export class AssertAssertWeight extends React.Component {
         <div className="is-invisible">
           <FormItem>
             { getFieldDecorator( "assert.assertion", {
-              initialValue: "assertAssetWeight"
+              initialValue: "assertPerformanceTiming"
             })( <Input readOnly /> ) }
           </FormItem>
         </div>
 
-        <h3>Quantity-based metrics based on asset weight</h3>
-        <div>Assert the total (encoded) size of a type of assets doesn't exceed a given value (in KB)</div>
+        <h3>Milestone timings based on the user-experience loading a page</h3>
+        <div>Assert the time (microseconds) of a page loading stage doesn't exceed a given limit</div>
+
 
         <Row gutter={24} className="ant-form-inline">
           <table className="assert-perf-table">
 
             <tbody>
-              { ASSETS.map( asset => ( <tr key={ asset.key }
+              { METRICS.map( asset => ( <tr key={ asset.key }
                 className={ result( enabled, asset.key, false ) ? "" : "assert-row-disabled" }>
                 <td>
                   <FormItem>
@@ -110,7 +113,11 @@ export class AssertAssertWeight extends React.Component {
                   </FormItem>
                 </td>
                 <td>
-                  { asset.name }
+                  { asset.name }<Tooltip
+                    title={ asset.desc }
+                    icon="question-circle"
+                    pos="up-left"
+                  />
                 </td>
                 <td>
                 &lt;
@@ -134,10 +141,11 @@ export class AssertAssertWeight extends React.Component {
                           }
                         }
                       ]
-                    })( <Input addonAfter="kB" /> )
+                    })( <Input addonAfter="μs" /> )
                     }
                   </FormItem>
                 </td>
+                <td></td>
               </tr> ) ) }
 
 

@@ -1,4 +1,4 @@
-import { INPUT, SELECT, INPUT_NUMBER } from "../../constants";
+import { INPUT, INPUT_NUMBER } from "../../constants";
 import { isEveryValueMissing } from "service/utils";
 import { justify } from "service/assert";
 import ExpressionParser from "service/ExpressionParser";
@@ -6,7 +6,7 @@ import { TXT_PARAM_IS_REQUIRED } from "constant";
 
 export const waitForResponse = {
   template: ({ params, id }) => {
-    const { timeout, visible, hidden } = params,
+    const { timeout } = params,
           options = {
             timeout
           },

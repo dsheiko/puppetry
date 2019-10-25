@@ -63,7 +63,7 @@ export const assertTextCount = {
         "value": 0
       },
       "params": {
-        "text": "ssss"
+        "text": "ipsum"
       }
     }
   ]

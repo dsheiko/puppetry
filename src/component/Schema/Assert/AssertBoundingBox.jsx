@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Row, Col, Select, Input, InputNumber } from "antd";
+import { Form, Row, Select, Input, InputNumber } from "antd";
 import { getAssertion } from "./helpers";
 
 const Option = Select.Option,
@@ -65,7 +65,6 @@ export class AssertBoundingBox extends React.Component {
         </FormItem>
 
 
-
         <Row className="ant-form-inline">
 
           <div className="ant-row ant-form-item ant-form-item--like-input is-short">
@@ -78,7 +77,8 @@ export class AssertBoundingBox extends React.Component {
               rules: [{
                 required: true
               }]
-            })( <Select showSearch optionFilterProp="children" style={{ width: 64 }} onChange={ ( e ) =>  this.onSwitchChange( e, "x" ) }>
+            })( <Select showSearch optionFilterProp="children" style={{ width: 64 }}
+              onChange={ ( e ) =>  this.onSwitchChange( e, "x" ) }>
               <Option value="any">any</Option>
               <Option value="gt">&gt;</Option>
               <Option value="lt">&lt;</Option>
@@ -110,7 +110,8 @@ export class AssertBoundingBox extends React.Component {
               rules: [{
                 required: true
               }]
-            })( <Select showSearch optionFilterProp="children" style={{ width: 64 }} onChange={ ( e ) =>  this.onSwitchChange( e, "y" ) }>
+            })( <Select showSearch optionFilterProp="children" style={{ width: 64 }}
+              onChange={ ( e ) =>  this.onSwitchChange( e, "y" ) }>
               <Option value="any">any</Option>
               <Option value="gt">&gt;</Option>
               <Option value="lt">&lt;</Option>
@@ -141,7 +142,8 @@ export class AssertBoundingBox extends React.Component {
               rules: [{
                 required: true
               }]
-            })( <Select showSearch optionFilterProp="children" style={{ width: 64 }} onChange={ ( e ) =>  this.onSwitchChange( e, "w" ) }>
+            })( <Select showSearch optionFilterProp="children" style={{ width: 64 }}
+              onChange={ ( e ) =>  this.onSwitchChange( e, "w" ) }>
               <Option value="any">any</Option>
               <Option value="gt">&gt;</Option>
               <Option value="lt">&lt;</Option>
@@ -172,7 +174,8 @@ export class AssertBoundingBox extends React.Component {
               rules: [{
                 required: true
               }]
-            })( <Select showSearch optionFilterProp="children" style={{ width: 64 }} onChange={ ( e ) =>  this.onSwitchChange( e, "h" ) }>
+            })( <Select showSearch optionFilterProp="children" style={{ width: 64 }}
+              onChange={ ( e ) =>  this.onSwitchChange( e, "h" ) }>
               <Option value="any">any</Option>
               <Option value="gt">&gt;</Option>
               <Option value="lt">&lt;</Option>

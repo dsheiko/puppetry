@@ -1,6 +1,6 @@
 import { SELECT, INPUT, INPUT_NUMBER } from "../../constants";
 import ExpressionParser from "service/ExpressionParser";
-import { truncate } from "service/utils";
+
 
 export const setCookie = {
   /**
@@ -122,24 +122,24 @@ export const setCookie = {
   ],
 
   testTypes: {
-      "params": {
-        "name": "INPUT",
-        "value": "INPUT",
-        "domain": "INPUT",
-        "path": "INPUT",
-        "expires": "INPUT",
-        "httpOnly": "SELECT",
-        "secure": "SELECT",
-        "sameSite": "SELECT"
-      }
+    "params": {
+      "name": "INPUT",
+      "value": "INPUT",
+      "domain": "INPUT",
+      "path": "INPUT",
+      "expires": "INPUT",
+      "httpOnly": "SELECT",
+      "secure": "SELECT",
+      "sameSite": "SELECT"
+    }
   },
 
   test: [
     {
       valid: true,
       "params": {
-        "name": "aaa",
-        "value": "aaa",
+        "name": "ipsum",
+        "value": "IPSUM",
         "domain": "domain",
         "path": "/path/",
         "expires": 111111111,

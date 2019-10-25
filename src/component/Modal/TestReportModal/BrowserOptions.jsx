@@ -1,15 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { Alert, Checkbox, Modal, Button, Switch, Input } from "antd";
+import { Checkbox, Switch, Input } from "antd";
 import Tooltip from "component/Global/Tooltip";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractComponent from "component/AbstractComponent";
-import If from "component/Global/If";
 import BrowseDirectory from "component/Global/BrowseDirectory";
-import { SelectEnv } from "component/Global/SelectEnv";
 
 /*eslint no-empty: 0*/
-
 const { TextArea } = Input;
 
 /**
@@ -30,7 +26,6 @@ export function updateLauncherArgs( launcherArgs, value, toggle ) {
 
   return args.join( " " );
 }
-
 
 
 export class BrowserOptions extends AbstractComponent {
@@ -103,89 +98,89 @@ export class BrowserOptions extends AbstractComponent {
   }
 
   render() {
-    const checked = !Boolean( this.state.headless );
+    const checked = !this.state.headless;
 
     return (
       <ErrorBoundary>
 
-            <div className="run-in-browser__layout">
-              <div>
-                <Switch
-                checkedChildren="On"
-                unCheckedChildren="Off"
-                checked={ checked }
-                onChange={ this.onSwitchChange } />
-                { " " } run in browser<Tooltip
-                  title={ "By default the tests are running in headless mode (faster). "
+        <div className="run-in-browser__layout">
+          <div>
+            <Switch
+              checkedChildren="On"
+              unCheckedChildren="Off"
+              checked={ checked }
+              onChange={ this.onSwitchChange } />
+            { " " } run in browser<Tooltip
+              title={ "By default the tests are running in headless mode (faster). "
                   + "But you can switch for browser mode and see what is really happening on the page" }
-                  icon="question-circle"
-                />
-              </div>
-              <div className="chromium-checkbox-group">
-                { " " } <Checkbox
-                  checked={ this.state.devtool }
-                  onChange={ e => this.onChangeCheckbox( e.target.checked, "devtool" ) }
-                >
+              icon="question-circle"
+            />
+          </div>
+          <div className="chromium-checkbox-group">
+            { " " } <Checkbox
+              checked={ this.state.devtool }
+              onChange={ e => this.onChangeCheckbox( e.target.checked, "devtool" ) }
+            >
                   DevTools
-                </Checkbox>
+            </Checkbox>
 
-                { " " } <Checkbox
-                  checked={ this.state.incognito }
-                  onChange={ e => this.onChangeCheckbox( e.target.checked, "incognito" ) }
-                >
+            { " " } <Checkbox
+              checked={ this.state.incognito }
+              onChange={ e => this.onChangeCheckbox( e.target.checked, "incognito" ) }
+            >
                   incognito window
-                </Checkbox>
-              </div>
+            </Checkbox>
+          </div>
 
-            </div>
+        </div>
 
 
-            <div className="browser-options-layout">
-              <div>
+        <div className="browser-options-layout">
+          <div>
 
-                { " " } <Checkbox
-                  onChange={ this.onCheckMaximize }
-                >
+            { " " } <Checkbox
+              onChange={ this.onCheckMaximize }
+            >
                   maximized
-                </Checkbox>
+            </Checkbox>
 
-                { " " } <Checkbox
-                  onChange={ this.onCheckFullscreen }
-                >
+            { " " } <Checkbox
+              onChange={ this.onCheckFullscreen }
+            >
                   fullscreen
-                </Checkbox>
+            </Checkbox>
 
-                { " " } <Checkbox
-                  onChange={ this.onCheckIgnoreHttps }
-                >
+            { " " } <Checkbox
+              onChange={ this.onCheckIgnoreHttps }
+            >
                   ignore HTTPS errors
-                </Checkbox>
-              </div>
+            </Checkbox>
+          </div>
 
-              <div className="ant-form-item-label">
-                <label htmlFor="target" title="Additional arguments">
+          <div className="ant-form-item-label">
+            <label htmlFor="target" title="Additional arguments">
                 Additional arguments to Chromium{ " " }
-                  <a
-                    onClick={ this.onExtClick }
-                    href="http://peter.sh/experiments/chromium-command-line-switches/">
+              <a
+                onClick={ this.onExtClick }
+                href="http://peter.sh/experiments/chromium-command-line-switches/">
                     (list of available options)</a></label>
-              </div>
+          </div>
 
-              <TextArea
-                onChange={ this.onChangeLauncherArgs }
-                ref={ this.inputLauncherArgsRef }
-                value={ this.state.launcherArgs }
-                placeholder="--start-maximized --ignore-certificate-errors" />
+          <TextArea
+            onChange={ this.onChangeLauncherArgs }
+            ref={ this.inputLauncherArgsRef }
+            value={ this.state.launcherArgs }
+            placeholder="--start-maximized --ignore-certificate-errors" />
 
 
-            <BrowseDirectory
-              defaultDirectory={ this.state.projectDirectory }
-              validateStatus={ this.state.browseDirectoryValidateStatus }
-              validateMessage={ this.state.browseDirectoryValidateMessage }
-              getSelectedDirectory={ this.getSelectedDirectory }
-              label="Chrome extension location (optional)" />
+          <BrowseDirectory
+            defaultDirectory={ this.state.projectDirectory }
+            validateStatus={ this.state.browseDirectoryValidateStatus }
+            validateMessage={ this.state.browseDirectoryValidateMessage }
+            getSelectedDirectory={ this.getSelectedDirectory }
+            label="Chrome extension location (optional)" />
 
-            </div>
+        </div>
 
 
       </ErrorBoundary>

@@ -1,8 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Form, Input } from "antd";
 import { AbstractEditableCell } from "./AbstractEditableCell";
-import { ruleValidateNotEmptyString, ruleValidateVariable } from "service/utils";
+import { ruleValidateVariable } from "service/utils";
 const FormItem = Form.Item,
       connectForm = Form.create();
 

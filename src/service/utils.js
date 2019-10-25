@@ -53,7 +53,7 @@ export function filterObject( obj, keys ) {
   if ( typeof obj !== "object" ) {
     return {};
   }
-  return keys.reduce(( carry, key ) => {
+  return keys.reduce( ( carry, key ) => {
     if ( key in obj && typeof obj[ key ] !== "undefined" ) {
       carry[ key ] = obj[ key ];
     }
@@ -62,13 +62,13 @@ export function filterObject( obj, keys ) {
 }
 
 export function normalizeAssertionVerb( verb ) {
-  switch( verb ) {
-    case "!equals":
-      return "does not equal";
-    case "!contains":
-      return "does not contain";
-    default:
-      return verb;
+  switch ( verb ) {
+  case "!equals":
+    return "does not equal";
+  case "!contains":
+    return "does not contain";
+  default:
+    return verb;
   }
 }
 
@@ -182,7 +182,7 @@ export function truncate( str, limit ) {
   return ( str.length > limit ) ? str.substr( 0, limit - 3 ) + "..." : str;
 }
 
-  export function ucfisrt( s ) {
+export function ucfisrt( s ) {
   if ( typeof s !== "string" ) {
     return "";
   }

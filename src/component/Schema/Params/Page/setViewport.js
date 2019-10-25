@@ -14,10 +14,10 @@ export const setViewport = {
   `,
 
   toLabel: ({ params }) => `(\`${ params.width }x${ params.height }\`,`
-       + ` \`x${ params.deviceScaleFactor || 1 }\`${ params.isLandscape ? ", \`landscape\`" : "" })`,
+       + ` \`x${ params.deviceScaleFactor || 1 }\`${ params.isLandscape ? `, \`landscape\`` : "" })`,
 
   toGherkin: ({ params }) => `Set browser viewport as \`${ params.width }x${ params.height }\`,`
-       + ` \`x${ params.deviceScaleFactor || 1 }\`${ params.isLandscape ? ", \`landscape\`" : "" }`,
+       + ` \`x${ params.deviceScaleFactor || 1 }\`${ params.isLandscape ? `, \`landscape\`` : "" }`,
 
   commonly: "set window size",
 
@@ -139,14 +139,14 @@ export const setViewport = {
   ],
 
   testTypes: {
-      "params": {
-        "width": "INPUT_NUMBER",
-        "height": "INPUT_NUMBER",
-        "deviceScaleFactor": "INPUT_NUMBER",
-        "isMobile": "CHECKBOX",
-        "hasTouch": "CHECKBOX",
-        "isLandscape": "CHECKBOX"
-      }
+    "params": {
+      "width": "INPUT_NUMBER",
+      "height": "INPUT_NUMBER",
+      "deviceScaleFactor": "INPUT_NUMBER",
+      "isMobile": "CHECKBOX",
+      "hasTouch": "CHECKBOX",
+      "isLandscape": "CHECKBOX"
+    }
   },
 
   test: [

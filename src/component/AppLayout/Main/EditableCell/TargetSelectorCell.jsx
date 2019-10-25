@@ -1,9 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Form, Input, Select, Icon, Alert } from "antd";
 import { AbstractEditableCell } from "./AbstractEditableCell";
 import Tooltip from "component/Global/Tooltip";
-import { ruleValidateNotEmptyString, ruleValidateVariable } from "service/utils";
+import { ruleValidateNotEmptyString } from "service/utils";
 import { getActiveTargets } from "selector/selectors";
 import { SELECT_SEARCH_PROPS } from "service/utils";
 
@@ -70,43 +69,43 @@ export class TargetSelectorCell extends AbstractEditableCell {
               </FormItem>
 
               <details>
-              <summary>Options</summary>
-              <div className="target-options">
+                <summary>Options</summary>
+                <div className="target-options">
 
 
-                {  !activeTargets.length && <Alert
-                  message="No other targets yet available to select as parent one"
-                  type="warning" /> }
-                { activeTargets.length && <FormItem label="Parent target">
-                  { getFieldDecorator( "ref", {
-                    initialValue: ( record.ref || "" )
-                  })(
-                    <Select onChange={ this.onChangeType } { ...SELECT_SEARCH_PROPS }>
-                      <Option key="0" value="">document</Option>
-                      { activeTargets.map( target => ( <Option
-                        key={ target.target }
-                        value={ target.target }>
-                        { target.target }</Option> )) }
-                    </Select>
-                  )}
+                  {  !activeTargets.length && <Alert
+                    message="No other targets yet available to select as parent one"
+                    type="warning" /> }
+                  { activeTargets.length && <FormItem label="Parent target">
+                    { getFieldDecorator( "ref", {
+                      initialValue: ( record.ref || "" )
+                    })(
+                      <Select onChange={ this.onChangeType } { ...SELECT_SEARCH_PROPS }>
+                        <Option key="0" value="">document</Option>
+                        { activeTargets.map( target => ( <Option
+                          key={ target.target }
+                          value={ target.target }>
+                          { target.target }</Option> ) ) }
+                      </Select>
+                    )}
 
-                </FormItem> }
+                  </FormItem> }
 
-                { ( activeTargets.length && ref ) && <FormItem label="Parent type">
-                  { getFieldDecorator( "parentType", {
-                    initialValue: ( record.parentType || "" )
-                  })(
-                    <Select { ...SELECT_SEARCH_PROPS }>
-                      <Option key="0" value="">generic element</Option>
-                      <Option key="1" value="shadowHost">shadow host</Option>
-                      <Option key="2" value="iframe">inline frame</Option>
-                    </Select>
-                  )}
+                  { ( activeTargets.length && ref ) && <FormItem label="Parent type">
+                    { getFieldDecorator( "parentType", {
+                      initialValue: ( record.parentType || "" )
+                    })(
+                      <Select { ...SELECT_SEARCH_PROPS }>
+                        <Option key="0" value="">generic element</Option>
+                        <Option key="1" value="shadowHost">shadow host</Option>
+                        <Option key="2" value="iframe">inline frame</Option>
+                      </Select>
+                    )}
 
-                </FormItem> }
+                  </FormItem> }
 
-              </div>
-            </details>
+                </div>
+              </details>
 
             </Form>
           ) : (

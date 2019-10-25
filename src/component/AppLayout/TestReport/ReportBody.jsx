@@ -1,3 +1,4 @@
+/*eslint jsx-a11y/no-static-element-interactions: 0*/
 import React from "react";
 import PropTypes from "prop-types";
 import AbstractComponent from "component/AbstractComponent";
@@ -5,14 +6,12 @@ import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
 import { DIR_SCREENSHOTS, DIR_SNAPSHOTS, DIR_REPORTS } from "constant";
 import { millisecondsToStr } from "service/utils";
-import { Icon, notification } from "antd";
+import { Icon } from "antd";
 import { readdir } from "service/io";
 import { join, basename } from "path";
 import fs from "fs";
 import recursive from "recursive-readdir";
 import { Thumbnail } from "./Thumbnail";
-import { shell } from "electron";
-
 
 let counter = 0,
     screenshotInx = 0;
@@ -32,22 +31,22 @@ export class ReportBody extends AbstractComponent {
     details: {}
   };
 
-// details format
-//  {
-//    "Suite title (react-html5-form-RWD.spec.js)":
-//      "Group title": [
-//        {
-//          duration: 1764
-//          failureMessages: ""
-//          location: null
-//          numPassingAsserts: 0
-//          status: "passed"
-//          suite: "Suite title"
-//          title: "Test case title"
-//        },
-//        ..
-//      ]
-//  }
+  // details format
+  //  {
+  //    "Suite title (react-html5-form-RWD.spec.js)":
+  //      "Group title": [
+  //        {
+  //          duration: 1764
+  //          failureMessages: ""
+  //          location: null
+  //          numPassingAsserts: 0
+  //          status: "passed"
+  //          suite: "Suite title"
+  //          title: "Test case title"
+  //        },
+  //        ..
+  //      ]
+  //  }
 
   parseTile( rawTitle ) {
     const re = /^(.*) \{(.*)\}$/,
@@ -68,7 +67,7 @@ export class ReportBody extends AbstractComponent {
    * @returns {Array}
    */
   getScreenshotsByTest( testId ) {
-    const { selector, action } = this.props,
+    const { selector } = this.props,
           commands = selector.findCommandsByTestId( testId );
 
     return Object.values( commands )
@@ -95,28 +94,28 @@ export class ReportBody extends AbstractComponent {
       const dirPath = join( this.props.projectDirectory, dir ),
             files = await recursive( dirPath );
 
-      return files.reduce(( carry, filepath ) => {
-          const filename = basename( filepath ),
-                [ id ] = filename.split( "." );
-          carry[ id ] = filepath;
-          return carry;
-        }, {});
+      return files.reduce( ( carry, filepath ) => {
+        const filename = basename( filepath ),
+              [ id ] = filename.split( "." );
+        carry[ id ] = filepath;
+        return carry;
+      }, {});
     } catch ( e ) {
       // e.g. nothing found
       return {};
     }
   }
 
-   getReportsByTest( testId ) {
-     const { selector, action } = this.props,
+  getReportsByTest( testId ) {
+    const { selector } = this.props,
           commands = selector.findCommandsByTestId( testId );
     return Object.values( commands )
-      .filter( command => ( command.method === "assertPerfomanceAssetWeight" && command.id in this.reportMap ) )
+      .filter( command => ( command.method === "assertPerformanceAssetWeight" && command.id in this.reportMap ) )
       .map( command => this.reportMap[ command.id ]);
-   }
+  }
 
-   getSnapshotsByTest( testId ) {
-    const { selector, action } = this.props,
+  getSnapshotsByTest( testId ) {
+    const { selector } = this.props,
           commands = selector.findCommandsByTestId( testId );
 
     return Object.values( commands )
@@ -152,7 +151,7 @@ export class ReportBody extends AbstractComponent {
             DIFF_PATH = join( this.props.projectDirectory, DIR_SNAPSHOTS, "diff" ),
             files = await readdir( EXPECTED_PATH );
 
-      return files.reduce(( carry, expectedFilename ) => {
+      return files.reduce( ( carry, expectedFilename ) => {
         const [ id ] = expectedFilename.split( "." ),
               actual = join( ACTUAL_PATH, expectedFilename ),
               diff = join( DIFF_PATH, expectedFilename ),
@@ -175,7 +174,7 @@ export class ReportBody extends AbstractComponent {
 
 
   async componentDidMount() {
-    const { details, screenshotDirs, selector } = this.props;
+    const { details } = this.props;
 
     this.props.action.cleanLightbox();
 
@@ -188,7 +187,7 @@ export class ReportBody extends AbstractComponent {
     // extend details with screenshots bopund to lightbox
     for ( let suiteKey of Object.keys( details ) ) {
       for ( let describeKey of Object.keys( details[ suiteKey ]) ) {
-        for ( let inx in details[ suiteKey ][ describeKey ] ) {
+        for ( let inx in details[ suiteKey ][ describeKey ]) {
           const spec = details[ suiteKey ][ describeKey ][ inx ],
                 { title, testId } = this.parseTile( spec.title ),
                 screenshots = this.getScreenshotsByTest( testId ),
@@ -196,11 +195,11 @@ export class ReportBody extends AbstractComponent {
                 reports = this.getReportsByTest( testId );
 
           Object.assign( details[ suiteKey ][ describeKey ][ inx ], {
-              title,
-              testId,
-              screenshots,
-              snapshots,
-              reports
+            title,
+            testId,
+            screenshots,
+            snapshots,
+            reports
           });
         }
       }
@@ -213,7 +212,7 @@ export class ReportBody extends AbstractComponent {
     let images = [];
     for ( let suiteKey of Object.keys( details ) ) {
       for ( let describeKey of Object.keys( details[ suiteKey ]) ) {
-        for ( let inx in details[ suiteKey ][ describeKey ] ) {
+        for ( let inx in details[ suiteKey ][ describeKey ]) {
           const { screenshots, snapshots } = details[ suiteKey ][ describeKey ][ inx ];
           images = images.concat( screenshots );
           snapshots.forEach( snapshot => {
@@ -252,15 +251,15 @@ export class ReportBody extends AbstractComponent {
 
       { spec.reports && <div className="thumb-container screenshot-thumb-container">
         { spec.reports.map( ( reportPath, inx ) => ( <a
-        onClick={ ( e ) => this.download( reportPath, e ) }
-        key={ inx }>download performance report</a> ) ) }
-        </div>
+          onClick={ ( e ) => this.download( reportPath, e ) }
+          key={ inx }>download performance report</a> ) ) }
+      </div>
       }
 
       { spec.screenshots && <div className="thumb-container screenshot-thumb-container">
         { spec.screenshots.map( ( item, inx ) => ( <Thumbnail
           key={ inx } item={ item } action={ this.props.action } /> ) ) }
-        </div>
+      </div>
       }
 
 
@@ -287,19 +286,19 @@ export class ReportBody extends AbstractComponent {
   render() {
     const { details } = this.state;
 
-    return (<ErrorBoundary>
+    return ( <ErrorBoundary>
 
-          <div className="bottom-line">
-            { Object.keys( details ).map( suiteKey => ( <div key={ `k${ counter++ }` } className="test-report__suite">
-              { suiteKey }
-              {  Object.keys( details[ suiteKey ]).map( describeKey => ( <div
-                key={ `k${ counter++ }` }
-                className="test-report__describe">
-                { describeKey }
-                { details[ suiteKey ][ describeKey ].map( spec => this.renderLine( spec ) ) }
-              </div> ) ) }
-            </div> ) ) }
-          </div>
+      <div className="bottom-line">
+        { Object.keys( details ).map( suiteKey => ( <div key={ `k${ counter++ }` } className="test-report__suite">
+          { suiteKey }
+          {  Object.keys( details[ suiteKey ]).map( describeKey => ( <div
+            key={ `k${ counter++ }` }
+            className="test-report__describe">
+            { describeKey }
+            { details[ suiteKey ][ describeKey ].map( spec => this.renderLine( spec ) ) }
+          </div> ) ) }
+        </div> ) ) }
+      </div>
     </ErrorBoundary> );
   }
 }

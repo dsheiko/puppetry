@@ -2,9 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
-import { ruleValidateGenericString, result } from "service/utils";
+import { result } from "service/utils";
 import { FIELDSET_DEFAULT_LAYOUT } from "constant";
-import { message, Form, Select, Input, Button, Checkbox } from "antd";
+import { Form, Select, Button, Checkbox } from "antd";
 const FormItem = Form.Item,
       { Option } = Select,
       connectForm = Form.create();
@@ -33,10 +33,10 @@ export class GeneralPane extends AbstractComponent {
 
   render() {
     const { settings } = this.props,
-          { getFieldDecorator, getFieldsError } = this.props.form,
+          { getFieldDecorator } = this.props.form,
           autosave = result( settings, "autosave", true );
 
-    return (<ErrorBoundary>
+    return ( <ErrorBoundary>
       <Form id="cGitconfigForm" onSubmit={ this.handleSubmit }>
 
         <p>Here you can specify Puppetry settings.</p>
@@ -70,7 +70,7 @@ export class GeneralPane extends AbstractComponent {
 
         <FormItem>
           <div className="ant-col ant-col-3">
-           <Button
+            <Button
               id="cSettingsFormSaveBtn"
               type="primary"
               htmlType="submit"
@@ -81,6 +81,6 @@ export class GeneralPane extends AbstractComponent {
         </FormItem>
 
       </Form>
-      </ErrorBoundary> );
+    </ErrorBoundary> );
   }
 }

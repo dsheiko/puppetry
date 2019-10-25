@@ -1,7 +1,7 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
 import { AssertValue } from "../../Assert/AssertValue";
-import { truncate, normalizeAssertionVerb, renderTarget } from "service/utils";
+import { normalizeAssertionVerb, renderTarget } from "service/utils";
 
 export const assertProperty = {
   template: ( command ) => buildAssertionTpl(
@@ -69,7 +69,7 @@ export const assertProperty = {
       "assert": {
         "assertion": "!equals",
         "type": "string",
-        "value": "aaa"
+        "value": "ipsum"
       },
       "params": {
         "name": "checked"

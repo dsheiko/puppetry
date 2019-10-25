@@ -1,10 +1,7 @@
-import { INPUT } from "../../constants";
 import { buildAssertionTpl, stringifyTypes } from "service/assert";
 import { AssertAssertWeight } from "../../Assert/AssertAssertWeight";
-import ExpressionParser from "service/ExpressionParser";
-import { truncate, normalizeAssertionVerb } from "service/utils";
 
-export const assertPerfomanceAssetWeight = {
+export const assertPerformanceAssetWeight = {
   template: ( command ) => {
     return buildAssertionTpl(
       `bs.performance.resources`,
@@ -14,8 +11,8 @@ export const assertPerfomanceAssetWeight = {
     );
   },
 
-  toLabel: ({ params, assert }) => `(${ stringifyTypes( assert, "kB" ) })`,
-  toGherkin: ({ params, assert }) => `Assert that the total weight of assets
+  toLabel: ({ assert }) => `(${ stringifyTypes( assert, "kB" ) })`,
+  toGherkin: ({ assert }) => `Assert that the total weight of assets
     requested by the page satisfies the budget: ${ stringifyTypes( assert, "kB" ) }`,
 
   commonly: "assert weight of assets",
@@ -32,10 +29,10 @@ export const assertPerfomanceAssetWeight = {
   },
 
   testTypes: {
-      "assert": {
-        "_enabled.script": "SWITCH",
-        "script": "INPUT_NUMBER"
-      }
+    "assert": {
+      "_enabled.script": "SWITCH",
+      "script": "INPUT_NUMBER"
+    }
   },
 
   test: [

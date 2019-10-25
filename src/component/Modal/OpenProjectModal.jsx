@@ -85,7 +85,7 @@ export class OpenProjectModal extends AbstractForm {
   render() {
     const { isVisible } = this.props,
           { getFieldsError } = this.props.form;
-        
+
     return (
       <ErrorBoundary>
         <Modal

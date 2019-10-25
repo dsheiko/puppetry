@@ -7,9 +7,9 @@ export default function Tooltip( props ) {
     return <React.Fragment>{ props.children }</React.Fragment>;
   }
 
-  return (<AntdTooltip className="char-pad--left" title={ props.title }>{
+  return ( <AntdTooltip className="char-pad--left" title={ props.title }>{
     props.icon ? ( <Icon type={ props.icon }  /> ) : props.children
-  }</AntdTooltip>);
+  }</AntdTooltip> );
 }
 
 Tooltip.propTypes = {

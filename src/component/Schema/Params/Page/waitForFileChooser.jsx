@@ -1,4 +1,4 @@
-import { SELECT, INPUT_NUMBER } from "../../constants";
+import { INPUT_NUMBER } from "../../constants";
 import { isEveryValueMissing } from "service/utils";
 
 export const waitForFileChooser = {
@@ -42,9 +42,9 @@ export const waitForFileChooser = {
   ],
 
   testTypes: {
-      "params": {
-        "timeout": "INPUT_NUMBER"
-      }
+    "params": {
+      "timeout": "INPUT_NUMBER"
+    }
   },
 
   test: [

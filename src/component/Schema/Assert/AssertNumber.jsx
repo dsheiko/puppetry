@@ -12,6 +12,7 @@ export class AssertNumber extends React.Component {
   static propTypes = {
     record: PropTypes.object.isRequired,
     targets: PropTypes.arrayOf( PropTypes.object ),
+    options: PropTypes.object,
     form: PropTypes.shape({
       setFieldsValue: PropTypes.func.isRequired,
       getFieldDecorator: PropTypes.func.isRequired
@@ -34,7 +35,7 @@ export class AssertNumber extends React.Component {
       <Row gutter={24}>
         <Col span={2} >
           <div className="ant-row ant-form-item ant-form-item--like-input">
-          { resultLabel }
+            { resultLabel }
           </div>
           <FormItem label="Result" className="is-hidden">
             { getFieldDecorator( "assert.assertion", {

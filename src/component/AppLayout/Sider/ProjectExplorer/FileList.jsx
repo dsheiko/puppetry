@@ -17,7 +17,8 @@ export class FileList extends React.Component {
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired,
       removeAppTab: PropTypes.func.isRequired,
-      setApp: PropTypes.func.isRequired
+      setApp: PropTypes.func.isRequired,
+      autosaveProject: PropTypes.func.isRequired
     }),
 
     parentCliked: PropTypes.string.isRequired,

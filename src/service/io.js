@@ -135,15 +135,15 @@ export function copyProject( srcDirectory, targetDirectory ) {
  * @returns {String} - spec.js content
  */
 export async function exportSuite({
-    projectDirectory,
-    outputDirectory,
-    filename,
-    runner,
-    snippets,
-    sharedTargets,
-    env,
-    options
-  }) {
+  projectDirectory,
+  outputDirectory,
+  filename,
+  runner,
+  snippets,
+  sharedTargets,
+  env,
+  options
+}) {
   const suite = await readSuite( projectDirectory, filename ),
         gen = new TestGenerator({
           suite,
@@ -185,8 +185,6 @@ export async function exportProject(
         specFiles = [],
         JEST_PKG = getJestPkgDirectory();
 
-  let hasDebugger = false;
-
   try {
     removeExport( outputDirectory );
     shell.mkdir( "-p" , testDir );
@@ -206,15 +204,15 @@ export async function exportProject(
 
     for ( const filename of suiteFiles ) {
       let specContent = await exportSuite({
-                          projectDirectory,
-                          outputDirectory,
-                          filename,
-                          runner,
-                          snippets,
-                          sharedTargets,
-                          env,
-                          options
-                        });
+        projectDirectory,
+        outputDirectory,
+        filename,
+        runner,
+        snippets,
+        sharedTargets,
+        env,
+        options
+      });
 
       const specFilename = parse( filename ).name + ".spec.js",
             specPath = join( testDir, specFilename );

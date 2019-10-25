@@ -1,6 +1,5 @@
 import ExpressionParser from "service/ExpressionParser";
 import { INPUT, INPUT_NUMBER, TEXTAREA } from "../../constants";
-import { truncate } from "service/utils";
 
 export const assignVarRemotely = {
   template: ({ params, id }) => {

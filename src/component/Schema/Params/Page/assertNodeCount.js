@@ -13,7 +13,8 @@ export const assertNodeCount = {
   toLabel: ({ params, assert }) =>
     `(has ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }\` elements matching \`${ params.selector }\`)`,
 
-  toGherkin: ({ params, assert }) => `Assert that the page has ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }\`
+  toGherkin: ({ params, assert }) => `Assert that the page `
+    + `has ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }\`
     elements matching \`${ params.selector }\` selector`,
 
   commonly: "assert count of elements",

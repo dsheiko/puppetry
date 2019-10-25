@@ -100,15 +100,15 @@ export class AppLayout extends React.Component {
                 gitDetachedHeadState={ !!store.app.gitDetachedHeadState }
                 isGitInitialized={ !!store.git.initialized }
                 hasGitRemote={ !!store.git.hasRemote }
-                />
+              />
 
               { store.app.project.files.length && <ProjectExplorer
-                  projectDirectory={ store.settings.projectDirectory }
-                  projects={ store.settings.projects }
-                  suiteModified={ store.suite.modified }
-                  files={ store.app.project.files }
-                  active={ store.suite.filename }
-                  action={ action } /> }
+                projectDirectory={ store.settings.projectDirectory }
+                projects={ store.settings.projects }
+                suiteModified={ store.suite.modified }
+                files={ store.app.project.files }
+                active={ store.suite.filename }
+                action={ action } /> }
 
             </Sider>
             <Layout>

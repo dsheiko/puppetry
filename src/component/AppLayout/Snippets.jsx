@@ -9,7 +9,7 @@ import AbstractForm from "component/AbstractForm";
 import LearnMore from "component/Global/LearnMore";
 import { connect } from "react-redux";
 
-      // Mapping state to the props
+// Mapping state to the props
 const mapStateToProps = ( state ) => ({
         panes: state.project.appPanels.suite.panes,
         expandedGroups: state.project.groups,
@@ -45,7 +45,7 @@ export class Snippets extends AbstractForm {
     }, 10 );
   }
 
-   shouldComponentUpdate( nextProps ) {
+  shouldComponentUpdate( nextProps ) {
 
     if ( this.props.groups !== nextProps.groups
       || this.props.panes !== nextProps.panes
@@ -64,9 +64,7 @@ export class Snippets extends AbstractForm {
             panes,
             groups,
             expandedGroups,
-            targets,
-            title,
-            timeout
+            targets
           } = this.props,
 
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),

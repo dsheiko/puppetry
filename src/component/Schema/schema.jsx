@@ -31,9 +31,9 @@ import { waitForFileChooser } from "./Params/Page/waitForFileChooser";
 import { assertConsoleMessage } from "./Params/Page/assertConsoleMessage";
 import { assertDialog } from "./Params/Page/assertDialog";
 import { closeDialog } from "./Params/Page/closeDialog";
-import { assertPerfomanceAssetWeight } from "./Params/Page/assertPerfomanceAssetWeight";
-import { assertPerfomanceAssetCount } from "./Params/Page/assertPerfomanceAssetCount";
-import { assertPerfomanceTiming } from "./Params/Page/assertPerfomanceTiming";
+import { assertPerformanceAssetWeight } from "./Params/Page/assertPerformanceAssetWeight";
+import { assertPerformanceAssetCount } from "./Params/Page/assertPerformanceAssetCount";
+import { assertPerformanceTiming } from "./Params/Page/assertPerformanceTiming";
 import { assertGaTracking } from "./Params/Page/assertGaTracking";
 
 import { screenshot as screenshotElement } from "./Params/Element/screenshot";
@@ -140,9 +140,9 @@ export const schema = {
     assertScreenshot: assertScreenshotPage,
     assertConsoleMessage,
     assertDialog,
-    assertPerfomanceAssetWeight,
-    assertPerfomanceAssetCount,
-    assertPerfomanceTiming,
+    assertPerformanceAssetWeight,
+    assertPerformanceAssetCount,
+    assertPerformanceTiming,
     assertGaTracking
   }
 };

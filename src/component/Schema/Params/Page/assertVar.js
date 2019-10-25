@@ -1,7 +1,7 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertValue } from "../../Assert/AssertValue";
 import { INPUT } from "../../constants";
-import { truncate, normalizeAssertionVerb } from "service/utils";
+import { normalizeAssertionVerb } from "service/utils";
 
 export const assertVar = {
   template: ( command ) => buildAssertionTpl(
@@ -10,7 +10,8 @@ export const assertVar = {
     `// Asserting that variable associated with a given name satisfies the given constraint`
   ),
 
-  toLabel: ({ params, assert }) => `(\`${ params.name }\` ${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value }\`)`,
+  toLabel: ({ params, assert }) => `(\`${ params.name }\` `
+    + `${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value }\`)`,
   toGherkin: ({ params, assert }) => `Assert that template variable \`${ params.name }\`
    ${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value }\``,
 
@@ -54,25 +55,25 @@ export const assertVar = {
 
   testTypes: {
     "assert": {
-        "assertion": "SELECT",
-        "value": "INPUT"
-      },
-      "params": {
-        "name": "SELECT"
-      }
+      "assertion": "SELECT",
+      "value": "INPUT"
+    },
+    "params": {
+      "name": "SELECT"
+    }
   },
 
   test: [
     {
       valid: true,
-       "assert": {
-          "assertion": "equals",
-          "type": "string",
-          "value": "foo"
-        },
-        "params": {
-          "name": "FOO"
-        }
+      "assert": {
+        "assertion": "equals",
+        "type": "string",
+        "value": "foo"
+      },
+      "params": {
+        "name": "FOO"
+      }
     }
   ]
 };

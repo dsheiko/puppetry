@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Alert, Checkbox, Modal, Button, Switch, Input, Tabs } from "antd";
+import { Alert, Checkbox, Modal, Button, Tabs } from "antd";
 import Tooltip from "component/Global/Tooltip";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractComponent from "component/AbstractComponent";
@@ -104,7 +104,7 @@ export class TestReportModal extends AbstractComponent {
   onClickOk = async ( e ) => {
     e.preventDefault();
     this.setState({ loading: true });
-    setTimeout(() => {
+    setTimeout( () => {
 
       try {
         const current = this.getCurrentFile(),
@@ -154,7 +154,6 @@ export class TestReportModal extends AbstractComponent {
 
   render() {
     const { isVisible, files } = this.props,
-          { browserOptions } = this.state,
           current = this.getCurrentFile(),
           checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
@@ -194,58 +193,58 @@ export class TestReportModal extends AbstractComponent {
               className="tabgroup-test-reports"
               hideAdd={ true }
               animated={ false }
-              >
+            >
 
-            <TabPane tab="General" key="1">
+              <TabPane tab="General" key="1">
 
 
-              <SelectEnv theme="test-reports" environments={ this.props.project.environments }
-                environment={ this.props.environment } action={ this.props.action } />
+                <SelectEnv theme="test-reports" environments={ this.props.project.environments }
+                  environment={ this.props.environment } action={ this.props.action } />
 
-              <div className="test-options">
+                <div className="test-options">
 
-                <Checkbox onChange={ e  => this.onChangeCheckbox( e.target.checked, "interactiveMode" ) } >
+                  <Checkbox onChange={ e  => this.onChangeCheckbox( e.target.checked, "interactiveMode" ) } >
                   interactive mode<Tooltip
-                        title={ "This mode allows you to control testing flow" }
-                        icon="info-circle"
-                      />
-                </Checkbox>
+                      title={ "This mode allows you to control testing flow" }
+                      icon="info-circle"
+                    />
+                  </Checkbox>
 
-                <Checkbox onChange={ e  => this.onChangeCheckbox( e.target.checked, "updateSnapshot" ) } >
+                  <Checkbox onChange={ e  => this.onChangeCheckbox( e.target.checked, "updateSnapshot" ) } >
                   update comparison images<Tooltip
-                        title={ "For CSS regression testing use this option to force Puppetry "
+                      title={ "For CSS regression testing use this option to force Puppetry "
                           + "updating snapshots (screenshots representing proper states of the targets)" }
-                        icon="info-circle"
-                      />
-                </Checkbox>
+                      icon="info-circle"
+                    />
+                  </Checkbox>
 
-              </div>
+                </div>
 
 
-            <p>Please select suites to run:</p>
-            <div className="bottom-line">
-              <Checkbox
-                indeterminate={ this.state.indeterminate }
-                onChange={ this.onCheckAllChange }
-                checked={ this.state.checkAll }
-              >
+                <p>Please select suites to run:</p>
+                <div className="bottom-line">
+                  <Checkbox
+                    indeterminate={ this.state.indeterminate }
+                    onChange={ this.onCheckAllChange }
+                    checked={ this.state.checkAll }
+                  >
                   Check all
-              </Checkbox>
-            </div>
-            <div
-              className={ "modal-suites-checkbox-group"
+                  </Checkbox>
+                </div>
+                <div
+                  className={ "modal-suites-checkbox-group"
                 + ( files.length >= 8 ? "is-checkbox-group-scrollable" : "" ) }>
-              <CheckboxGroup options={ files }
-                value={ checkedList }
-                onChange={ this.onChange } />
-            </div>
+                  <CheckboxGroup options={ files }
+                    value={ checkedList }
+                    onChange={ this.onChange } />
+                </div>
 
 
-            </TabPane>
+              </TabPane>
 
-            <TabPane tab="Browser options" key="2">
-              <BrowserOptions ref={ this.refBrowserOptions }  />
-            </TabPane>
+              <TabPane tab="Browser options" key="2">
+                <BrowserOptions ref={ this.refBrowserOptions }  />
+              </TabPane>
 
             </Tabs>
 

@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AbstractComponent from "component/AbstractComponent";
-import { Form, Input, Checkbox } from "antd";
-import { ruleValidateNotEmptyString, ruleValidateVariable } from "service/utils";
+import { Form, Checkbox } from "antd";
+
 const FormItem = Form.Item,
       connectForm = Form.create();
 
@@ -34,7 +34,7 @@ export class EditableCheckbox extends AbstractComponent {
   }
 
   render() {
-    const { placeholder, dataIndex, record, prefixIcon, className } = this.props,
+    const { dataIndex, record } = this.props,
           { getFieldDecorator } = this.props.form,
           { editing } = record,
           value = this.props.record[ dataIndex ];
@@ -44,7 +44,7 @@ export class EditableCheckbox extends AbstractComponent {
         {
           editing ? (
             <Form className="cell-form">
-             <FormItem>
+              <FormItem>
                 { getFieldDecorator( dataIndex, {
                   initialValue: value,
                   valuePropName: ( value ? "checked" : "data-ok" )
@@ -52,11 +52,11 @@ export class EditableCheckbox extends AbstractComponent {
                   <Checkbox
                     onChange={ this.onChange }
                     tabIndex={ 3 }>
-                      <span>hidden <span className="is-optional">(please, use for sensitive data <a
-                        onClick={ this.onExtClick }
-                        href="https://docs.puppetry.app/template#environment-variables">env variables</a>)</span>
-                      </span>
-                    </Checkbox>
+                    <span>hidden <span className="is-optional">(please, use for sensitive data <a
+                      onClick={ this.onExtClick }
+                      href="https://docs.puppetry.app/template#environment-variables">env variables</a>)</span>
+                    </span>
+                  </Checkbox>
                 )}
               </FormItem>
             </Form>

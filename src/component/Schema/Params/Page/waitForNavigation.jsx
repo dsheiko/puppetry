@@ -72,10 +72,10 @@ export const waitForNavigation = {
   ],
 
   testTypes: {
-      "params": {
-        "timeout": "INPUT_NUMBER",
-        "waitUntil": "SELECT"
-      }
+    "params": {
+      "timeout": "INPUT_NUMBER",
+      "waitUntil": "SELECT"
+    }
   },
 
   test: [

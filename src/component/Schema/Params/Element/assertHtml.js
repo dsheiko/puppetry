@@ -1,6 +1,6 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertValue } from "../../Assert/AssertValue";
-import { truncate, normalizeAssertionVerb, renderTarget } from "service/utils";
+import { normalizeAssertionVerb, renderTarget } from "service/utils";
 
 export const assertHtml = {
   template: ( command ) => buildAssertionTpl(
@@ -13,7 +13,7 @@ export const assertHtml = {
     return assert.value ? `(${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\`)`
       : "";
   },
-  toGherkin: ({ target, params, assert }) => `Assert that text content of \`${ target }\`
+  toGherkin: ({ target, assert }) => `Assert that text content of \`${ target }\`
     ${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\``,
 
   commonly: "assert HTML",
@@ -28,9 +28,9 @@ export const assertHtml = {
 
   testTypes: {
     "assert": {
-        "assertion": "SELECT",
-        "value": "INPUT"
-      }
+      "assertion": "SELECT",
+      "value": "INPUT"
+    }
   },
 
   test: [
@@ -39,7 +39,7 @@ export const assertHtml = {
       "assert": {
         "assertion": "!equals",
         "type": "string",
-        "value": "aaa"
+        "value": "ipsum"
       }
     }
   ]

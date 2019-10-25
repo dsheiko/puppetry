@@ -1,10 +1,7 @@
-import { INPUT } from "../../constants";
 import { buildAssertionTpl, stringifyTypes } from "service/assert";
 import { AssertAssertCount } from "../../Assert/AssertAssertCount";
-import ExpressionParser from "service/ExpressionParser";
-import { truncate, normalizeAssertionVerb } from "service/utils";
 
-export const assertPerfomanceAssetCount = {
+export const assertPerformanceAssetCount = {
   template: ( command ) => {
 
     return buildAssertionTpl(
@@ -15,9 +12,9 @@ export const assertPerfomanceAssetCount = {
   },
 
 
-  toLabel: ({ params, assert }) => `(${ stringifyTypes( assert, "" ) })`,
+  toLabel: ({ assert }) => `(${ stringifyTypes( assert, "" ) })`,
 
-  toGherkin: ({ params, assert }) => `Assert that the total amount of assets
+  toGherkin: ({ assert }) => `Assert that the total amount of assets
     requested by the page satisfies the budget: ${ stringifyTypes( assert, " requests" ) }`,
 
   commonly: "assert count of assets",
