@@ -10,6 +10,7 @@ import { E_GIT_SYNC_RESPONSE } from "constant";
 import { ipcRenderer } from "electron";
 import { Spin } from "antd";
 import debounce from "lodash.debounce";
+import LoadingTip from "component/Global/LoadingTip";
 
 const GREETINGS = [ "Greetings",
         "Hi there",
@@ -24,14 +25,6 @@ const GREETINGS = [ "Greetings",
         "How are you doing today?",
         "What have you been up to?",
         "How are you feeling today?"
-      ],
-
-      TIPS = [
-        "You can perform a bulk operation on multiple rows if you select them with Shift-click.",
-        "You can use drag & drop and context menu when working with tables.",
-        "Auto-save can be disabled in Settings.",
-        "You can change test case representation style in settings.",
-        "You can export project as text specification. Screenshots per action will be generated automaticaly."
       ],
 
       // Mapping state to the props
@@ -136,12 +129,13 @@ export class App extends React.Component {
       { !loaded && ( <div className="ant-spin ant-spin-lg ant-spin-spinning">
         <img width="100" height="100" src="./assets/puppetry.svg" alt="Puppetry" />
         <h1>Puppetry</h1>
-        <div className="loading-tip">
-        { TIPS[ Math.floor( Math.random() * TIPS.length ) ] }
-        </div>
+
         <span>
           <img width="32" height="32" src="./assets/loading.svg" alt="Loading..." />
         </span>
+        
+        <LoadingTip />
+
       </div> ) }
       { loaded && <AppLayout action={ action } store={ store } selector={ selector } /> }
     </React.Fragment> );

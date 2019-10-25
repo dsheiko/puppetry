@@ -111,3 +111,25 @@ exports.MODAL_DEFAULT_PROPS = {
   forceRender: true,
   confirmLoading: false
 };
+
+
+exports.TIPS = [
+  "To perform a bulk operation on multiple rows, <br /> select them with “Shift-click”.",
+  "You can use drag & drop and context menu <br />when working with tables.",
+  "Auto-saving can be disabled in “Settings”.",
+  "You can change test case representation style in settings.",
+  "You can export project as text specification. <br />Screenshots per action will be generated automatically.",
+  "Did you know that you can make an in-app screenshot <br />with “Ctrl/CMD-Shift-4”?",
+  "To find application working directory,<br /> click on “Edit” icon next to project name",
+  "To run tests in browser, opt-in in <br />“Run Tests” / “Browser options”  tab.",
+  "You can copy table rows in one project<br /> and paste them into another.",
+  "If your test site has broken SSL certificate,<br /> tick on “ignore HTTPS errors” in “Browser options” tab.",
+  "To follow testing steps one by one,<br /> tick on “interactive mode” on “Run Tests” modal.",
+  "You can set BASE_URL values for dev/stage/live environments<br /> and refer the variable in the test cases",
+  "Use snippets to reuse testing flows among test cases",
+  "Use “page.assertConsoleMessage” to test console messages<br /> on the page under test",
+  "You can accept/dismiss “window.prompt”<br /> with “page.closeDialog” action",
+  "To run exported project in Firefox,<br /> call “npm run test:firefox”",
+  "You can use “page.assertScreenshot” to compare page views<br /> before refactoring CSS and after"
+
+];

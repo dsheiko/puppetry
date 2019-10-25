@@ -1404,3 +1404,15 @@ summary:hover {
 .comment-label {
   display: block;
 }
+
+.report-panel-tab .loading-tip {
+  bottom: 48px;
+}
+
+.test-report-spin {
+  height: 100%;
+  min-height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

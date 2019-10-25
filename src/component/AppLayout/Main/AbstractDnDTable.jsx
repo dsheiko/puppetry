@@ -360,8 +360,10 @@ export default class AbstractDnDTable extends React.Component {
     this.props.action.setApp({ loading: true });
     // give it a chance to render loading state
     setTimeout(() => {
+      let obj;
       for ( const record of records ) {
-        update( this.extendActionOptions({ id: record.id, disabled }) );
+        obj = disabled ? { id: record.id, disabled, failure: "" } : { id: record.id, disabled };
+        update( this.extendActionOptions( obj ) );
       }
       this.updateSuiteModified( record, "update" );
       this.props.action.setApp({ loading: false });

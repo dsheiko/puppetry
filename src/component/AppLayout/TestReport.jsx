@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { ipcRenderer, shell } from "electron";
 import { E_RUN_TESTS, SNIPPETS_GROUP_ID, DIR_SCREENSHOTS } from "constant";
+import LoadingTip from "component/Global/LoadingTip";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
@@ -221,7 +222,10 @@ export class TestReport extends AbstractComponent {
     }
     return ( <ErrorBoundary>
       <If exp={ loading }>
-        <Spin spinning={ loading } tip="Tests are running.."><br /><br /><br /><br /><br /></Spin>
+      <div className="test-report-spin">
+        <Spin spinning={ loading } tip="Tests are running.."></Spin>
+        <LoadingTip />
+      </div>
       </If>
 
       <If exp={ ok && !loading }>

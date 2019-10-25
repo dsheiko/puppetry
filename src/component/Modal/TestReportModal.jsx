@@ -103,32 +103,36 @@ export class TestReportModal extends AbstractComponent {
 
   onClickOk = async ( e ) => {
     e.preventDefault();
-
     this.setState({ loading: true });
-    try {
-      const current = this.getCurrentFile(),
-            browserOptions = this.getBrowserOptions(),
-            checkedList = this.state.modified  ? this.state.checkedList : [ current ];
+    setTimeout(() => {
 
-      this.props.action.setApp({
-        checkedList,
-        testReportModal: false,
-        headless: ( this.state.interactiveMode === true ? false : browserOptions.headless ),
-        incognito: browserOptions.incognito,
-        ignoreHTTPSErrors: browserOptions.ignoreHTTPSErrors,
-        launcherArgs: browserOptions.launcherArgs,
-        devtools: browserOptions.devtools,
-        updateSnapshot: this.state.updateSnapshot,
-        interactiveMode: this.state.interactiveMode
-      });
+      try {
+        const current = this.getCurrentFile(),
+              browserOptions = this.getBrowserOptions(),
+              checkedList = this.state.modified  ? this.state.checkedList : [ current ];
+
+        this.props.action.setApp({
+          checkedList,
+          testReportModal: false,
+          headless: ( this.state.interactiveMode === true ? false : browserOptions.headless ),
+          incognito: browserOptions.incognito,
+          ignoreHTTPSErrors: browserOptions.ignoreHTTPSErrors,
+          launcherArgs: browserOptions.launcherArgs,
+          devtools: browserOptions.devtools,
+          updateSnapshot: this.state.updateSnapshot,
+          interactiveMode: this.state.interactiveMode
+        });
 
 
-      this.props.action.removeAppTab( "testReport" );
-      this.props.action.addAppTab( "testReport" );
-    } catch ( err ) {
-      console.error( "TestReportModal", err );
-    }
-    this.setState({ loading: false });
+        this.props.action.removeAppTab( "testReport" );
+        this.props.action.addAppTab( "testReport" );
+      } catch ( err ) {
+        console.error( "TestReportModal", err );
+      }
+      this.setState({ loading: false });
+
+    }, 50 );
+
   }
 
   // Do not update until visible
@@ -157,7 +161,7 @@ export class TestReportModal extends AbstractComponent {
     return (
       <ErrorBoundary>
         <Modal
-          title="Test Reports"
+          title="Run Tests"
           visible={ isVisible }
           closable
           onCancel={this.onClickCancel}
