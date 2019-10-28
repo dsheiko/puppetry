@@ -29,9 +29,10 @@ export class SuiteForm extends AbstractForm {
       if ( !err ) {
         const title = values.title,
               timeout = values.timeout,
-              { updateSuite }  = this.props.action;
+              { updateSuite, autosaveSuite }  = this.props.action;
 
         updateSuite({ title, timeout });
+        autosaveSuite();
         message.info( `Data has been successfully updated` );
         this.props.form.resetFields();
       }

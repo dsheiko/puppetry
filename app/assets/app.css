@@ -678,7 +678,7 @@ margin: 16px 16px 16px 16px;
   padding-right: 24px;
 }
 
-.container--editable-cell .anticon:first-child {
+.container--editable-cell .anticon {
   margin-right: 5px;
 }
 .container--editable-cell [data-balloon] + .anticon {
@@ -1415,4 +1415,18 @@ summary:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.command-form-extra-fields {
+  position: relative;
+}
+
+.wait-for-target {
+  position: absolute;
+  left: 100px;
+  top: 0;
+}
+
+.wait-for-target .ant-form-item-control {
+  line-height: 21px;
 }

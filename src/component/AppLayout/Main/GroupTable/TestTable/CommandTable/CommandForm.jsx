@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Row, Col, Alert, Input } from "antd";
+import { Form, Row, Col, Alert, Input, Checkbox } from "antd";
 import { TargetSelect } from "./TargetSelect";
 import { ElementMethodSelect } from "./ElementMethodSelect";
 import { PageMethodSelect } from "./PageMethodSelect";
@@ -9,6 +9,7 @@ import If from "component/Global/If";
 import { getSchema } from "component/Schema/schema";
 import { Description } from "component/Schema/Params/Description";
 import ErrorBoundary from "component/ErrorBoundary";
+import { result } from "service/utils";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
@@ -95,7 +96,8 @@ export class CommandForm extends React.Component {
           method: values.method,
           params: values.params,
           assert: values.assert,
-          comment: values.comment
+          comment: values.comment,
+          waitForTarget: values.waitForTarget || false
         });
 
         this.updateSuiteModified();
@@ -113,14 +115,6 @@ export class CommandForm extends React.Component {
 
   changeMethod = ( method ) => {
     const hasGoto = this.checkTestHasGoto();
-
-    //    if ( this.checkTestHasAssertPerformanceAssetWeight() && hasGoto ) {
-    //      return this.setState({
-    //        method,
-    //        error: `When asserting total weight of loaded assets, for clear results, `
-    //          + ` have in a test case no other requests, but page.assertPerformanceAssetWeight`
-    //      });
-    //    }
 
     if ( !TEST_LEADING_METHODS.includes( method ) && !hasGoto ) {
       return this.setState({
@@ -142,12 +136,6 @@ export class CommandForm extends React.Component {
   checkTestHasGoto = () => {
     return this.props.commands.find( command => ( command.method === "goto" ) );
   }
-
-  //  componentDidMount() {
-  //    ipcRenderer.on( E_RESET_FORM, ( ...args ) => {
-  //      this.props.form.resetFields( args[ 1 ] );
-  //    });
-  //  }
 
 
   componentDidUpdate( prevProps ) {
@@ -171,9 +159,14 @@ export class CommandForm extends React.Component {
     return true;
   }
 
-  renderCommentField( record ) {
-    const { getFieldDecorator } = this.props.form;
-    return ( <details>
+  renderExtraFields( record ) {
+    const { getFieldDecorator } = this.props.form,
+          target = this.state.target || record.target,
+          method = this.state.method || record.method,
+          currentTarget = target === "page" ?  null
+            : this.props.targets.find( data => data.target === target );
+
+    return ( <div className="command-form-extra-fields"><details>
       <summary>Comment</summary>
       <div  className="command-form__noncollapsed">
         <FormItem className="ant-form-item--layout">
@@ -184,7 +177,18 @@ export class CommandForm extends React.Component {
             onKeyPress={ ( e ) => this.onKeyPress( e, this.handleSubmit ) } /> ) }
         </FormItem>
       </div>
-    </details> );
+    </details>
+
+    { ( currentTarget && !currentTarget.ref && method !== "assertVisible" && method !== "waitForTarget" )
+    ? <div className="wait-for-target">
+     <FormItem className="ant-form-item--layout">
+        { getFieldDecorator( "waitForTarget", {
+          initialValue: true,
+          valuePropName: ( result( record, "waitForTarget", false ) ? "checked" : "data-ok" )
+        })( <Checkbox>wait for target</Checkbox> ) }
+      </FormItem>
+    </div> :  null }
+    </div> );
   }
 
   render() {
@@ -206,7 +210,6 @@ export class CommandForm extends React.Component {
               params: {},
               assert: {}
             };
-
     return (
       <ErrorBoundary>
         <Form onSubmit={this.handleSubmit} className="command-form" id="cCommandForm">
@@ -265,7 +268,7 @@ export class CommandForm extends React.Component {
             <Description schema={ schema } target={ target } />
           ) : null }
 
-          { schema && this.renderCommentField( record ) }
+          { schema && this.renderExtraFields( record ) }
 
           <If exp={ this.state.validationError }>
             <Alert
@@ -279,7 +282,6 @@ export class CommandForm extends React.Component {
               <ErrorBoundary>
                 <ParamsFormBuilder
                   schema={ schema }
-                  targets={ targets }
                   record={ safeRecord }
                   onSubmit={ this.handleSubmit }
                   form={ this.props.form } />

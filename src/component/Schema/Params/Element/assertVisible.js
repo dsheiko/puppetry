@@ -1,24 +1,30 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertVisible } from "../../Assert/AssertVisible";
-import { renderTarget } from "service/utils";
+
 
 function visibleObjToString( obj ) {
-  if ( typeof obj.value !== "undefined" ) {
-    obj = {
-      isDisplayed: obj.value,
-      isVisible: obj.value,
-      isOpaque: obj.value,
-      isIntersecting: obj.value
-    };
+  if ( obj.value !== true ) {
+    return `\`NOT available\``;
   }
-  return [ `${ obj.isDisplayed ? "" : "NOT " }displayed`, `${ obj.isVisible ? "" : "NOT " }visible`,
-    `${ obj.isOpaque ? "" : "NOT " } opaque`, `${ obj.isIntersecting ? "" : "NOT " }within the viewport` ]
-    .map( val => `\`${ val }\`` ).join( ", " );
+  const chunks = [ `available` ];
+  if ( obj.display !== "any" ) {
+    chunks.push( `${ obj.display === "not" ? "NOT " : "" }displayed` );
+  }
+  if ( obj.visibility !== "any" ) {
+    chunks.push( `${ obj.visibility === "not" ? "NOT " : "" }visible` );
+  }
+  if ( obj.opacity !== "any" ) {
+    chunks.push( `${ obj.opacity === "not" ? "opaque" : "transparent" }` );
+  }
+  if ( obj.isIntersecting ) {
+    chunks.push( `within the viewport` );
+  }
+  return chunks.map( val => `\`${ val }\`` ).join( ", " );
 }
 
 export const assertVisible = {
   template: ( command ) => buildAssertionTpl(
-    `await bs.target( ${ renderTarget( command.target ) } ).isVisible()`,
+    ( `await bs.target( await bs.getTargetOrFalse(${ JSON.stringify( command.target ) }) ).isVisible()` ),
     command,
     `// Asserting that ${ command.target } element is visible`
   ),
@@ -28,7 +34,7 @@ export const assertVisible = {
   toGherkin: ({ target, assert }) => `Assert that element \`${ target }\`
     is ${ visibleObjToString( assert ) }`,
 
-  commonly: "assert it is visible",
+  commonly: "assert visibility",
 
   assert: {
     node: AssertVisible,

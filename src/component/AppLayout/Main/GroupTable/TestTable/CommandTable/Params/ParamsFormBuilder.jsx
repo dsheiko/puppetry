@@ -267,7 +267,7 @@ export class ParamsFormBuilder extends React.Component {
     return (
       <fieldset className="command-form__fieldset" key={ `section_${ inx }` }>
         { !section.collapsed && <legend>
-          <span>{ section.legend || "Parameters" }</span>
+          <span>{ section.legend || "" }</span>
           { section.tooltip && <Tooltip title={ section.tooltip } icon="question-circle" pos="up-left" /> }
         </legend> }
         { section.description &&

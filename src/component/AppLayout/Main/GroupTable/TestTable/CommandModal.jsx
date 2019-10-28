@@ -5,7 +5,18 @@ import { CommandForm } from "./CommandTable/CommandForm";
 import { InstantModal } from "component/Global/InstantModal";
 import ErrorBoundary from "component/ErrorBoundary";
 
+import { connect } from "react-redux";
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        suiteTargets: state.suite.targets,
+        sharedTargets: state.project.targets
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = () => ({
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 export class CommandModal extends React.Component {
 
   static propTypes = {
@@ -51,7 +62,9 @@ export class CommandModal extends React.Component {
 
   render() {
     const { loading, submitted } = this.state,
-          { action, targets, record, isVisible, commands } = this.props,
+          { action, record, isVisible, commands, sharedTargets, suiteTargets } = this.props,
+
+          targets = Object.values({ ...sharedTargets, ...suiteTargets }),
 
           deferCommandForm = () => <CommandForm
             submitted={ submitted }

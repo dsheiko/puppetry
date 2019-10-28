@@ -56,7 +56,7 @@ export function getVariableDataTable( variables, env ) {
 
 export function getActiveTargets( targets ) {
   return Object.values( targets )
-    .filter( target => ( !target.disabled && target.target ) );
+    .filter( target => ( !!target.target ) );
 }
 
 

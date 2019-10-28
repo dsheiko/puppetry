@@ -54,13 +54,32 @@ module.exports = function( bs, util ) {
 
   bs.TARGETS = {};
 
-  bs.getTarget = async( name )  => {
-    if ( typeof bs.TARGETS[ name ] !== "function" ) {
+
+  function getTargetByName( name ) {
+    if ( typeof bs.TARGETS[ name ] === "undefined" ) {
       throw Error( `Target "${ name }" is not defined` );
     }
-    return await bs.TARGETS[ name ]();
+    return bs.TARGETS[ name ];
+  }
+
+  /**
+   * When target is not available to doesn't thow an exceptiion, but returns false
+   * @param {String} name
+   * @returns {ElementHandle|Boolean}
+   */
+  bs.getTargetOrFalse = async( name )  => {
+    const target = getTargetByName( name );
+    try {
+      return await target();
+    } catch ( e ) {
+      return false;
+    }
   };
 
+  bs.getTarget = async( name )  => {
+    const target = getTargetByName( name );
+    return await target();
+  };
 
   /**
    *

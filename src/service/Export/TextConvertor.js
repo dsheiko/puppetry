@@ -2,6 +2,7 @@ import { join } from "path";
 import { message } from "antd";
 import { writeFile, readFile } from "../io";
 import { getSchema } from "component/Schema/schema";
+import { truncate, extendToGherkin } from "service/utils";
 
 const INDENT = "   ";
 
@@ -66,10 +67,13 @@ export default class TextConvertor {
     this.onCommand && this.onCommand( command, recordLabel );
 
     if ( typeof schema.toGherkin === "function" ) {
-      this.print( `${ recordLabel } ${ printGherkin( schema.toGherkin( command ) ) }`, 3 );
+      this.print( `${ recordLabel } ${ printGherkin( extendToGherkin( command, schema.toGherkin( command ) ) ) }`, 3 );
       return;
     }
     const addOn = typeof schema.toLabel === "function" ? schema.toLabel( command ) : "()";
+    if ( command.waitForTarget ) {
+      this.print( `${ recordLabel } ${ command.target }.waitForTarget()`, 3 );
+    }
     this.print( `${ recordLabel } ${ command.target }.${ command.method }${ addOn }`, 3 );
   }
 
@@ -106,23 +110,27 @@ export default class TextConvertor {
   }
 
   async convert() {
+    try {
+      this.print( this.input.project.name );
+      this.print( `environment: ${ this.input.environment }\n` );
+      this.print( `template variables:` );
+      Object.entries( this.input.variables ).forEach( pair => {
+        this.print( `${ pair[ 0 ] } = ${ pair[ 1 ] }`, 1 );
+      });
 
-    this.print( this.input.project.name );
-    this.print( `environment: ${ this.input.environment }\n` );
-    this.print( `template variables:` );
-    Object.entries( this.input.variables ).forEach( pair => {
-      this.print( `${ pair[ 0 ] } = ${ pair[ 1 ] }`, 1 );
-    });
+      for ( const file of this.input.checkedList ) {
+        const json = JSON.parse( await readFile( join( this.input.projectDirectory, file ), "utf8" ) );
+        this.convertSuite( json );
+      }
 
-    for ( const file of this.input.checkedList ) {
-      const json = JSON.parse( await readFile( join( this.input.projectDirectory, file ), "utf8" ) );
-      this.convertSuite( json );
+      const outputFile = join( this.input.selectedDirectory, "puppetry-export.txt" );
+      await writeFile( outputFile, this.output );
+      message.info( `Project exported as ${ outputFile }` );
+      return outputFile;
+    } catch ( err ) {
+      console.error( err );
+      throw err;
     }
-
-    const outputFile = join( this.input.selectedDirectory, "puppetry-export.txt" );
-    await writeFile( outputFile, this.output );
-    message.info( `Project exported as ${ outputFile }` );
-    return outputFile;
   }
 
 }

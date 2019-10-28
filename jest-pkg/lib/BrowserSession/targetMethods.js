@@ -37,19 +37,27 @@ module.exports = function( page ) {
        * @returns {Promise<Object>}
        **/
       isVisible: async function(){
-        const boundingBox = await elementHandle.boundingBox(),
-              isIntersectingViewport = await elementHandle.isIntersectingViewport(),
+        if ( elementHandle === false ) {
+          return {
+            isAvailable: false
+          };
+        }
+        const isIntersectingViewport = await elementHandle.isIntersectingViewport(),
               handleOpacity = await page.evaluateHandle( ( el ) =>
                 window.getComputedStyle( el, null ).getPropertyValue( "opacity" ), elementHandle ),
               handleVisibility = await page.evaluateHandle( ( el ) =>
                 window.getComputedStyle( el, null ).getPropertyValue( "visibility" ), elementHandle ),
+              handleDisplay = await page.evaluateHandle( ( el ) =>
+                window.getComputedStyle( el, null ).getPropertyValue( "display" ), elementHandle ),
               opacity = parseFloat( await handleOpacity.jsonValue() ),
-              visibility = await handleVisibility.jsonValue();
+              visibility = await handleVisibility.jsonValue(),
+              display = await handleDisplay.jsonValue();
 
         return {
-          isDisplayed: boundingBox !== null,
-          isVisible: visibility !=="hidden",
-          isOpaque: opacity !== 0,
+          isAvailable: true,
+          display,
+          visibility,
+          opacity,
           isIntersecting: isIntersectingViewport
         };
       },

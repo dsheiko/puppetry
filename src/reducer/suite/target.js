@@ -129,8 +129,10 @@ export default {
     if ( isTargetNotUnique( state, payload ) ) {
       payload.target += "_" + uniqid().toUpperCase();
     }
+    if ( typeof payload.selector === "string" ) {
+      payload.selector = payload.selector.trim();
+    }
     const newState = update( state, {
-
       targets: {
         $apply: ( ref ) => {
           const targets = { ...ref },

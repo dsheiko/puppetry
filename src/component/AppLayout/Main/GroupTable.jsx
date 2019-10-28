@@ -9,7 +9,7 @@ import { ipcRenderer } from "electron";
 import { confirmRecording } from "service/smalltalk";
 import { E_DELEGATE_RECORDER_SESSION, E_OPEN_RECORDER_WINDOW } from "constant";
 
-const recordPrefIcon = <Icon type="idcard" title="Group" />;
+const recordPrefIcon = <Icon type="border-outer" title="Scope starting a new browser session" />;
 
 @connectDnD
 export class GroupTable extends AbstractEditableTable {

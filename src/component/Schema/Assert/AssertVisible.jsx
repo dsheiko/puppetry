@@ -1,13 +1,15 @@
 /*eslint react/no-unescaped-entities: 0*/
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Input, Checkbox } from "antd";
+import { Form, Input, Checkbox, Select, Row, Col, Icon } from "antd";
 import { getAssertion } from "./helpers";
 import { result } from "service/utils";
+import AbstractComponent from "component/AbstractComponent";
 
-const FormItem = Form.Item;
+const FormItem = Form.Item,
+      { Option } = Select;
 
-export class AssertVisible extends React.Component {
+export class AssertVisible extends AbstractComponent {
 
   static propTypes = {
     record: PropTypes.object.isRequired,
@@ -18,10 +20,19 @@ export class AssertVisible extends React.Component {
     })
   }
 
+  state = {
+    available: true
+  }
+
+  onChangeAvailable = ( e ) => {
+    this.setState({ available: e.target.checked });
+  }
+
   render () {
     const { getFieldDecorator } = this.props.form,
           { record } = this.props,
-          assert = getAssertion( record );
+          assert = getAssertion( record ),
+          available = result( assert, "value", this.state.available );
 
     return ( <div>
       <div className="is-invisible">
@@ -34,42 +45,104 @@ export class AssertVisible extends React.Component {
       <div>Target element:</div>
       <div className="command-form__noncollapsed markdown">
         <FormItem className="is-shrinked">
-          { getFieldDecorator( "assert.isDisplayed", {
+          { getFieldDecorator( "assert.value", {
             initialValue: true,
-            valuePropName: ( result( assert, "isDisplayed", true ) ? "checked" : "data-ok" )
+            valuePropName: ( result( assert, "value", true ) ? "checked" : "data-ok" )
           })(
-            <Checkbox> is displayed (display isn't <code>none</code>)</Checkbox>
+            <Checkbox onChange={ this.onChangeAvailable }> is available (currently exists in the <a
+              href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction"
+              onClick={ this.onExtClick }>DOM</a>)</Checkbox>
           ) }
         </FormItem>
 
-        <FormItem className="is-shrinked">
-          { getFieldDecorator( "assert.isVisible", {
-            initialValue: true,
-            valuePropName: ( result( assert, "isVisible", true ) ? "checked" : "data-ok" )
-          })(
-            <Checkbox> is visible (visibility isn't <code>hidden</code>)</Checkbox>
-          ) }
-        </FormItem>
 
-        <FormItem className="is-shrinked">
-          { getFieldDecorator( "assert.isOpaque", {
-            initialValue: true,
-            valuePropName: ( result( assert, "isOpaque", true ) ? "checked" : "data-ok" )
-          })(
-            <Checkbox> is opaque (opacity isn't <code>0</code>)</Checkbox>
-          ) }
-        </FormItem>
+        <Row gutter={24} className="narrow-row">
+
+          <Col span={3} >
+            <div className="ant-row ant-form-item ant-form-item--like-input">
+            display
+              { " " } <a
+                href="https://developer.mozilla.org/en-US/docs/Web/CSS/display"
+                onClick={ this.onExtClick }><Icon type="info-circle" /></a>
+            </div>
+          </Col>
+
+          <Col span={4} >
+            <FormItem className="is-shrinked">
+              { getFieldDecorator( "assert.display", {
+                initialValue: result( assert, "display", "any" )
+              })(
+                <Select disabled={ !available }>
+                  <Option value="any">any</Option>
+                  <Option value="not">NOT none</Option>
+                  <Option value="none">none</Option>
+                </Select>
+              ) }
+            </FormItem>
+          </Col>
+        </Row>
+
+        <Row gutter={24} className="narrow-row">
+
+          <Col span={3} >
+            <div className="ant-row ant-form-item ant-form-item--like-input">
+            visibility
+              { " " } <a
+                href="https://developer.mozilla.org/en-US/docs/Web/CSS/visibility"
+                onClick={ this.onExtClick }><Icon type="info-circle" /></a>
+            </div>
+          </Col>
+          <Col span={4} >
+            <FormItem className="is-shrinked">
+              { getFieldDecorator( "assert.visibility", {
+                initialValue: result( assert, "visibility", "any" )
+              })(
+                <Select disabled={ !available }>
+                  <Option value="any">any</Option>
+                  <Option value="not">NOT hidden</Option>
+                  <Option value="hidden">hidden</Option>
+                </Select>
+              ) }
+            </FormItem>
+          </Col>
+        </Row>
+
+        <Row gutter={24} className="narrow-row">
+
+          <Col span={3} >
+            <div className="ant-row ant-form-item ant-form-item--like-input">
+            opacity
+              { " " } <a
+                href="https://developer.mozilla.org/en-US/docs/Web/CSS/opacity"
+                onClick={ this.onExtClick }><Icon type="info-circle" /></a>
+            </div>
+          </Col>
+          <Col span={4} >
+            <FormItem className="is-shrinked">
+              { getFieldDecorator( "assert.opacity", {
+                initialValue: result( assert, "opacity", "any" )
+              })(
+                <Select disabled={ !available }>
+                  <Option value="any">any</Option>
+                  <Option value="not">NOT 0</Option>
+                  <Option value="0">0</Option>
+                </Select>
+              ) }
+            </FormItem>
+          </Col>
+        </Row>
 
         <FormItem className="is-shrinked">
           { getFieldDecorator( "assert.isIntersecting", {
             initialValue: true,
-            valuePropName: ( result( assert, "isIntersecting", true ) ? "checked" : "data-ok" )
+            valuePropName: ( result( assert, "isIntersecting", false ) ? "checked" : "data-ok" )
           })(
-            <Checkbox> is within the current viewport</Checkbox>
+            <Checkbox disabled={ !available }> is within the current viewport</Checkbox>
           ) }
         </FormItem>
 
       </div>
+
     </div> );
   }
 }

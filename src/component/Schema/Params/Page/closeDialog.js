@@ -1,4 +1,4 @@
-import { truncate, ucfisrt } from "service/utils";
+import { truncate, ucfirst } from "service/utils";
 import { INPUT, SELECT } from "../../constants";
 
 function getOptionsString( params ) {
@@ -33,7 +33,7 @@ export const closeDialog = {
   commonly: "dismiss/accept dialog",
 
   toLabel: ({ params }) => `(${ getOptionsString( params ) })`,
-  toGherkin: ({ params }) => `${ ucfisrt( params.action ) } dialog
+  toGherkin: ({ params }) => `${ ucfirst( params.action ) } dialog
     of type \`${ params.type }\` with with \`${ params.substring }\``,
 
   params: [

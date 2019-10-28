@@ -199,7 +199,6 @@ export class AppLayout extends React.Component {
         <CommandModal
           isVisible={ commandModal.isVisible }
           commands={ commandModal.commands }
-          targets={ commandModal.targets }
           action={ action }
           record={ commandModal.record } />
 

@@ -12,6 +12,7 @@
 - improvement: add page.assertConsoleMessage
 - improvement: add page.assertDialog
 - improvement: add page.closeDialog
+- improvement: add option XPath to page.waitForSelector
 - improvement: extend target.assertVisible with options `displayed`, `visible`, `opaque`, `within the current viewport`
 - improvement: all assertions accept the opposite assumptions (equal/not equal, contain/ doesn't contain)
 - improvement: mixed type assertion simplified - one can assert only for string value. Exceptions are assertProperty/Attribute where additionally one can assert for boolean
@@ -33,6 +34,8 @@
 - improvement: fix UI rendering performance
 - improvement: add support for record operations (copy/paste, clone, delete, enable/disable) on selections
 - improvement: show tips & tricks on loading screens
+- improvement: add option to wait for target to every target method
+- improvement: add target.waitForTarget
 
 ### Updates
 

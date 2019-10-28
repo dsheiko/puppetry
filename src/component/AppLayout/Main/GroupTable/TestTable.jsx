@@ -6,7 +6,7 @@ import { EditableCell } from "../EditableCell";
 import ErrorBoundary from "component/ErrorBoundary";
 import { connectDnD } from "../DragableRow";
 
-const recordPrefIcon = <Icon type="bars" title="Test" />;
+const recordPrefIcon = <Icon type="bars" title="Test case, specification of commands and assertions" />;
 
 @connectDnD
 export class TestTable extends AbstractEditableTable {

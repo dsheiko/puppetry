@@ -11,8 +11,8 @@ function renderState( params ) {
   return ( params.visible === "on" ? " is visible" : ( params.hidden === "on"  ? " is hidden" : "" ) );
 }
 
-export const waitForSelector = {
-  template: ({ params }) => {
+export const waitForTarget = {
+  template: ({ params, targetObj }) => {
     const { timeout, visible, hidden } = params,
           options = {
             timeout,
@@ -20,44 +20,32 @@ export const waitForSelector = {
             hidden: hidden === "on"
           },
           optArg = isEveryValueMissing( options ) ? `` : `, ${ JSON.stringify( options ) }`;
+
+    if ( targetObj === null ) {
+      return;
+    }
+
     return justify( `
-// Waiting for an element matching ${ params.value }
-await bs.page.${ validateSimpleSelector( params.value ) === SELECTOR_XPATH ? "waitForXPath" : "waitForSelector" }`
-    + `( ${ JSON.stringify( params.value ) }${ optArg } );` );
+// Waiting for the target
+await bs.page.${ targetObj.css ? "waitForSelector" : "waitForXPath" }`
+    + `( ${ JSON.stringify( targetObj.selector ) }${ optArg } );` );
   },
 
   toLabel: ({ params }) => {
     return `(\`${ params.value }\` ${ renderState( params ) })`;
   },
 
-  toGherkin: ({ params }) => `Wait until element \`${ params.value }\`
+  toGherkin: ({ params, target }) => `Wait until target \`${ target }\`
      ${ renderState( params ) } with timeout \`${ params.timeout }ms\``,
 
-  commonly: "wait for selector/XPath",
+  commonly: "wait for target",
 
   description: `Waits for an element matching a provided
-    [CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors)
-    or [XPath](https://developer.mozilla.org/en-US/docs/Web/XPath) to appear in page`,
+    target to appear in page.
+
+NOTE: This method is ignored by chained targets`,
   params: [
     {
-      legend: "",
-      tooltip: "",
-      fields: [
-        {
-          name: "params.value",
-          control: INPUT,
-          label: "CSS selector or XPath",
-          tooltip: "A selector or XPath of an element to wait for",
-          placeholder: "",
-          rules: [{
-            required: true,
-            message: TXT_PARAM_IS_REQUIRED
-          }]
-        }
-      ]
-    },
-    {
-      collapsed: true,
       tooltip: "",
       fields: [
         {
@@ -102,7 +90,6 @@ await bs.page.${ validateSimpleSelector( params.value ) === SELECTOR_XPATH ? "wa
   ],
   testTypes: {
     "params": {
-      "value": "INPUT",
       "visible": "SELECT",
       "hidden": "SELECT",
       "timeout": "INPUT_NUMBER"

@@ -31,6 +31,7 @@ export default class TestGenerator {
     this.runner = runner; // RUNNER_PUPPETRY when embedded
 
     this.allTargets = Object.values({ ...sharedTargets, ...snippets.targets, ...targets });
+    this.normalizedTargets = mapSelectors( getActiveTargets( this.allTargets ) );
     this.targets = this.allTargets.reduce( ( carry, entry ) => {
       carry[ entry.target ] = entry.selector;
       return carry;
@@ -44,10 +45,9 @@ export default class TestGenerator {
    * @returns {String}
    */
   parseTargets() {
-    const allTargets = mapSelectors( getActiveTargets( this.allTargets ) );
-    return allTargets
+    return this.normalizedTargets
       .filter( ({ target, selector }) => Boolean( target ) && Boolean( selector ) )
-      .map( target => this.schema.jest.tplQuery( getTargetChain( target, allTargets ) ) )
+      .map( target => this.schema.jest.tplQuery( getTargetChain( target, this.allTargets ) ) )
       .join( "\n" );
   }
 
@@ -92,6 +92,18 @@ export default class TestGenerator {
       : `      await bs.traceTarget( "${ command.id }", { ${ tplProp( target ) + secTarget } });` );
   }
 
+  renderWaitForTarget( target ) {
+
+    const match = this.normalizedTargets.find( data => data.target === target && !data.ref );
+    if ( !match )  {
+      return "";
+    }
+    return `      // Wait for CSS selector/Xpath to appear in page`
+    + match.css
+      ? `      await bs.page.waitForSelector( ${ JSON.stringify( match.selector ) } );\n`
+      : `      bs.page.waitForXPath( ${ JSON.stringify( match.selector ) } )\n`;
+  }
+
   /**
    * @param {Object} command
    * @returns {string}
@@ -109,6 +121,7 @@ export default class TestGenerator {
       if ( ! ( method in this.schema[ src ]) ) {
         return ``;
       }
+
       if ( src === "page" && method.startsWith( "debug" ) ) {
         this.options.headless = false;
         this.options.devtools = true;
@@ -133,11 +146,14 @@ export default class TestGenerator {
 
       const traceCode = this.options.trace ? TestGenerator.getTraceTpl( target, command ) : ``,
             interactiveModeCode = this.options.interactiveMode ? this.getInteractiveModeTpl( command ) : ``,
-            chunk = this.schema[ src ][ method ].template({
+            waitForTarget = ( src !== "page" && command.waitForTarget === true )
+              ? this.renderWaitForTarget( target ) : ``,
+            chunk = waitForTarget + this.schema[ src ][ method ].template({
               target,
               assert,
               params,
               targetSeletor: this.targets[ target ],
+              targetObj: target in this.normalizedTargets ? this.normalizedTargets[ target ] : null,
               method,
               id: command.id,
               testId: command.testId

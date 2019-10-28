@@ -29,6 +29,14 @@ export const SELECT_SEARCH_PROPS = {
   filterOption: ( input, option ) => option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0
 };
 
+export function extendToLabel( record, text ) {
+  return record.waitForTarget ? `target.waitForTarget(), ` + text : text;
+}
+
+export function extendToGherkin( record, text ) {
+  return record.waitForTarget ? `Wait for target \`${ record.target } \` and ` + lcfirst( text ) : text;
+}
+
 /**
  * Underscore: return object prop value or a given default one if not defined
  * @param {Object} obj
@@ -182,9 +190,17 @@ export function truncate( str, limit ) {
   return ( str.length > limit ) ? str.substr( 0, limit - 3 ) + "..." : str;
 }
 
-export function ucfisrt( s ) {
+export function ucfirst( s ) {
   if ( typeof s !== "string" ) {
     return "";
   }
   return s.charAt( 0 ).toUpperCase() + s.slice( 1 );
 }
+
+export function lcfirst( s ) {
+  if ( typeof s !== "string" ) {
+    return "";
+  }
+  return s.charAt( 0 ).toLowerCase() + s.slice( 1 );
+}
+

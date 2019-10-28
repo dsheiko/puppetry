@@ -57,6 +57,7 @@ import { assertContainsClass } from "./Params/Element/assertContainsClass";
 import { setAttribute } from "./Params/Element/setAttribute";
 import { tap as tapElement } from "./Params/Element/tap";
 import { scroll as scrollElement } from "./Params/Element/scroll";
+import { waitForTarget } from "./Params/Element/waitForTarget";
 import { assertScroll as assertScrollElement } from "./Params/Element/assertScroll";
 import { checkBox }  from "./Params/Element/checkBox";
 import { assertNodeCount as assertNodeCountElement } from "./Params/Element/assertNodeCount";
@@ -94,6 +95,7 @@ export const schema = {
     toggleClass,
     setAttribute,
     screenshot: screenshotElement,
+    waitForTarget,
     assertAttribute,
     assertProperty,
     assertVisible,

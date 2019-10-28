@@ -10,12 +10,6 @@ module.exports = function( expect, util ) {
     eq: "="
   };
 
-  function visibleObjToString( obj ) {
-    return `${ obj.isDisplayed ? "" : "NOT " }displayed, ${ obj.isVisible ? "" : "NOT " }visible,`
-    + ` ${ obj.isOpaque ? "" : "NOT " } opaque, ${ obj.isIntersecting ? "" : "NOT " }within the viewport`;
-  }
-
-
   /**
    *
    * @param {Number} a
@@ -239,19 +233,50 @@ module.exports = function( expect, util ) {
      * @returns {Object}
      */
     toBeVisible( actual, expected, source ) {
-        const pass = typeof expected.value !== "undefined"
-        // support Puppetry@<3.0.0
-        ? ( actual.isDisplayed === expected.value
-          && actual.isVisible === expected.value
-          && actual.isOpaque === expected.value
-          && actual.isIntersecting === expected.value )
-        : ( actual.isDisplayed === expected.isDisplayed
-          && actual.isVisible === expected.isVisible
-          && actual.isOpaque === expected.isOpaque
-          && actual.isIntersecting === expected.isIntersecting );
+        switch ( true ) {
 
-        return expectReturn( pass, `[${ source }] expected the target element to be `
-          + `${ visibleObjToString( expected ) }, but it is ${ visibleObjToString( actual ) }` );
+          case actual.isAvailable === false && expected.isAvailable !== true:
+            // early exist, makes no sense to proceed
+            return expectReturn( true, `[${ source }] expected the target element to be `
+              + `available, but it is not` );
+
+          case actual.isAvailable === false && expected.isAvailable === true:
+            return expectReturn( false, `[${ source }] expected the target element to be `
+              + `available, but it is not` );
+
+          case actual.display === "none" && expected.display === "not":
+            return expectReturn( false, `[${ source }] expected the target element to have `
+              + `display NOT none, but it is none` );
+
+          case actual.display !== "none" && expected.display === "none":
+            return expectReturn( false, `[${ source }] expected the target element to have `
+              + `display none, but it is ${ actual.display }` );
+
+          case  actual.visibility === "hidden" && expected.visibility === "not":
+            return expectReturn( false, `[${ source }] expected the target element to have `
+              + `visibility NOT hidden, but it is hidden` );
+
+          case actual.visibility !== "hidden" && expected.visibility === "hidden":
+            return expectReturn( false, `[${ source }] expected the target element to have `
+              + `visibility hidden, but it is ${ actual.visibility }` );
+
+          case actual.opacity === 0 && expected.opacity === "not":
+            return expectReturn( false, `[${ source }] expected the target element to have `
+              + `opacity > 0, but it is 0` );
+
+          case actual.opacity !== 0 && expected.opacity === "0":
+            return expectReturn( false, `[${ source }] expected the target element to have `
+              + `opacity 0, but it is ${ actual.opacity }` );
+
+          case actual.isIntersecting !== true && expected.isIntersecting === true:
+            return expectReturn( false, `[${ source }] expected the target element to be `
+              + `within the viewport, but it is not` );
+        }
+
+        // everything fine
+        return expectReturn( true, `[${ source }] expected the target element to be `
+            + `available, but it is not` );
+
     },
 
 
