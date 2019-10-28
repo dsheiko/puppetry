@@ -2,7 +2,7 @@ import { join } from "path";
 import { message } from "antd";
 import { writeFile, readFile } from "../io";
 import { getSchema } from "component/Schema/schema";
-import { truncate, extendToGherkin } from "service/utils";
+import { extendToGherkin } from "service/utils";
 
 const INDENT = "   ";
 

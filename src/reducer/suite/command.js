@@ -43,7 +43,8 @@ export default {
      * @returns {object}
      */
   [ actions.addCommand ]: ( state, { payload }) => {
-    const { options } = normalizeComplexPayload( payload );
+    const { options, id } = normalizeComplexPayload( payload ),
+          uid = id || uniqid();
     return update( state, {
       groups: {
         [ options.groupId ]: {
@@ -52,9 +53,8 @@ export default {
               commands: {
                 $apply: ( ref ) => {
                   const commands = { ...ref },
-                        id = id || uniqid(),
-                        defaultState = commandDefaultState( id );
-                  commands[ id ] = {
+                        defaultState = commandDefaultState( uid );
+                  commands[ uid ] = {
                     ...defaultState,
                     ...normalizePayload( options )
                   };

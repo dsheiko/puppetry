@@ -4,7 +4,9 @@ const FIX_RECORD = {
         id: "actionID",
         disabled: false,
         groupId: "groupID",
-        testId: "testID"
+        testId: "testID",
+        targetSeletor: ".selector",
+        targetObj: { css: true, slector: ".selector" }
       },
       methods = Object.keys( schema.element )
         .filter( method =>

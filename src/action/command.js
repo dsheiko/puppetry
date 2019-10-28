@@ -1,3 +1,4 @@
+import uniqid from "uniqid";
 import { createActions } from "redux-actions";
 import { validate } from "bycontract";
 import * as I from "interface";
@@ -78,9 +79,10 @@ actions.swapCommand = ( payload ) => async ( dispatch, getState ) => {
 
 };
 
-actions.pasteCommand = ( payload, dest, id ) => async ( dispatch ) => {
+actions.pasteCommand = ( payload, dest, uid ) => async ( dispatch ) => {
   try {
-    const merged = { ...payload, testId: dest.testId, groupId: dest.groupId },
+    const id = uid || uniqid(),
+          merged = { ...payload, testId: dest.testId, groupId: dest.groupId },
           position = { after: dest.id };
     dispatch(
       dest.hasOwnProperty( "id" )

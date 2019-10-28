@@ -1,8 +1,6 @@
-import { INPUT, SELECT, INPUT_NUMBER } from "../../constants";
+import { SELECT, INPUT_NUMBER } from "../../constants";
 import { isEveryValueMissing } from "service/utils";
-import { validateSimpleSelector } from "service/selector";
 import { justify } from "service/assert";
-import { TXT_PARAM_IS_REQUIRED, SELECTOR_XPATH } from "constant";
 
 function renderState( params ) {
   if ( params.visible !== "on" && params.hidden !== "on" ) {

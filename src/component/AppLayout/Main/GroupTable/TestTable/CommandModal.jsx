@@ -25,6 +25,8 @@ export class CommandModal extends React.Component {
       removeCommand: PropTypes.func.isRequired,
       updateSuite: PropTypes.func.isRequired
     }),
+    sharedTargets: PropTypes.object,
+    suiteTargets: PropTypes.object,
     record: PropTypes.object,
     commands: PropTypes.any,
     isVisible: PropTypes.bool.isRequired,

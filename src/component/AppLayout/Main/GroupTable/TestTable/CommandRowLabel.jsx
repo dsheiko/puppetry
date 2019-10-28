@@ -63,7 +63,7 @@ export class CommandRowLabel extends React.Component {
          { title }
        </span>
        { record.comment && <i className="is-optional comment-label">
-       <Icon type="message" title="Comment" /><span>{ record.comment }</span></i> }
+         <Icon type="message" title="Comment" /><span>{ record.comment }</span></i> }
      </div> );
    }
 
@@ -103,21 +103,21 @@ export class CommandRowLabel extends React.Component {
          { CommandRowLabel.highlightText( extendToGherkin( record, schema.toGherkin( record ) ) ) }
        </div> }
        { testStyle !== "gherkin" && <React.Fragment>
-           { record.waitForTarget && <React.Fragment>
-            <Icon
-            type={ record.target === "page" ? "file" : "scan" }
-            title={ record.target === "page" ? "Page method" : `${ record.target } target method` } />
-            <span className="token--target">{ record.target }</span>.waitForTarget
-            <span className="token--param">()</span><br />
-           </React.Fragment> }
-        <Icon
+         { record.waitForTarget && <React.Fragment>
+           <Icon
+             type={ record.target === "page" ? "file" : "scan" }
+             title={ record.target === "page" ? "Page method" : `${ record.target } target method` } />
+           <span className="token--target">{ record.target }</span>.waitForTarget
+           <span className="token--param">()</span><br />
+         </React.Fragment> }
+         <Icon
            type={ record.target === "page" ? "file" : "scan" }
            title={ record.target === "page" ? "Page method" : `${ record.target } target method` } />
          <span className="token--target">{ record.target }</span>.{ record.method }
          <span className="token--param">{ CommandRowLabel.buildAddon( record ) }</span>
        </React.Fragment> }
        { record.comment && <i className="is-optional comment-label">
-       <Icon type="message" title="Comment" /><span>{ record.comment }</span></i> }
+         <Icon type="message" title="Comment" /><span>{ record.comment }</span></i> }
      </div> );
    }
 

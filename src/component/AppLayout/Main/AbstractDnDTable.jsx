@@ -190,6 +190,7 @@ export default class AbstractDnDTable extends React.Component {
       const id = uniqid();
       update( record, destRec, id );
       destRec = { id, testId: dest.testId, groupId: dest.groupId };
+
       if ( typeof dest.testId === "undefined" ) {
         delete destRec.testId;
       }
@@ -212,7 +213,6 @@ export default class AbstractDnDTable extends React.Component {
           pasteMethod = `paste${ payload.model }`,
           update = this.props.action[ pasteMethod ],
           records = Array.isArray( payload.data ) ? payload.data : [ payload.data ];
-
 
     this.props.action.setApp({ loading: true });
 

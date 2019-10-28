@@ -22,7 +22,8 @@ export const waitForSelector = {
           optArg = isEveryValueMissing( options ) ? `` : `, ${ JSON.stringify( options ) }`;
     return justify( `
 // Waiting for an element matching ${ params.value }
-await bs.page.${ validateSimpleSelector( params.value ) === SELECTOR_XPATH ? "waitForXPath" : "waitForSelector" }`
+await bs.page.${ ( typeof window !== "undefined" && validateSimpleSelector( params.value ) === SELECTOR_XPATH )
+    ? "waitForXPath" : "waitForSelector" }`
     + `( ${ JSON.stringify( params.value ) }${ optArg } );` );
   },
 

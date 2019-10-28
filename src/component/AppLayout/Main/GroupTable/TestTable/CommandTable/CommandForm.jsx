@@ -180,14 +180,14 @@ export class CommandForm extends React.Component {
     </details>
 
     { ( currentTarget && !currentTarget.ref && method !== "assertVisible" && method !== "waitForTarget" )
-    ? <div className="wait-for-target">
-     <FormItem className="ant-form-item--layout">
-        { getFieldDecorator( "waitForTarget", {
-          initialValue: true,
-          valuePropName: ( result( record, "waitForTarget", false ) ? "checked" : "data-ok" )
-        })( <Checkbox>wait for target</Checkbox> ) }
-      </FormItem>
-    </div> :  null }
+      ? <div className="wait-for-target">
+        <FormItem className="ant-form-item--layout">
+          { getFieldDecorator( "waitForTarget", {
+            initialValue: true,
+            valuePropName: ( result( record, "waitForTarget", false ) ? "checked" : "data-ok" )
+          })( <Checkbox>wait for the target</Checkbox> ) }
+        </FormItem>
+      </div> :  null }
     </div> );
   }
 
