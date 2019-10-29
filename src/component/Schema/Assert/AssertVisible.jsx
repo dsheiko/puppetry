@@ -46,8 +46,8 @@ export class AssertVisible extends AbstractComponent {
       <div className="command-form__noncollapsed markdown">
         <FormItem className="is-shrinked">
           { getFieldDecorator( "assert.value", {
-            initialValue: true,
-            valuePropName: ( result( assert, "value", true ) ? "checked" : "data-ok" )
+            initialValue: result( assert, "value", true ),
+            valuePropName: "checked"
           })(
             <Checkbox onChange={ this.onChangeAvailable }> is available (currently exists in the <a
               href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction"
@@ -134,8 +134,8 @@ export class AssertVisible extends AbstractComponent {
 
         <FormItem className="is-shrinked">
           { getFieldDecorator( "assert.isIntersecting", {
-            initialValue: true,
-            valuePropName: ( result( assert, "isIntersecting", false ) ? "checked" : "data-ok" )
+            initialValue: result( assert, "isIntersecting", false ),
+            valuePropName: "checked"
           })(
             <Checkbox disabled={ !available }> is within the current viewport</Checkbox>
           ) }

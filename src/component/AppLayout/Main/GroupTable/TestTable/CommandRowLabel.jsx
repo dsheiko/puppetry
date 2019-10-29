@@ -82,6 +82,8 @@ export class CommandRowLabel extends React.Component {
           || prev.assert !== next.assert
           || prev.ref !== next.ref
           || prev.refName !== next.refName
+          || prev.waitForTarget !== next.waitForTarget
+          || prev.comment !== next.comment
           || this.props.testCaseStyle !== nextProps.testCaseStyle ) {
        return true;
      }

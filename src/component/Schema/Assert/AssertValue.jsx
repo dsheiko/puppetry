@@ -102,8 +102,8 @@ export class AssertValue extends AbstractComponent {
             <If exp={ type === "boolean" }>
               <FormItem label="Value">
                 { getFieldDecorator( "assert.value", {
-                  initialValue: true,
-                  valuePropName: ( value ? "checked" : "data-ok" )
+                  initialValue: value,
+                  valuePropName: "checked" 
                 })(
                   <Checkbox>is true</Checkbox>
                 ) }

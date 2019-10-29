@@ -39,8 +39,8 @@ export class AssertBoolean extends React.Component {
         <Col>
           <FormItem label="Result">
             { getFieldDecorator( "assert.value", {
-              initialValue: true,
-              valuePropName: ( value ? "checked" : "data-ok" )
+              initialValue: value,
+              valuePropName: "checked"
             })(
               <Checkbox>{ textNode }</Checkbox>
             ) }

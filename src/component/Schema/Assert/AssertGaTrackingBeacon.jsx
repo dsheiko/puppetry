@@ -141,8 +141,8 @@ export class AssertGaTrackingBeacon extends AbstractComponent {
 
           { item.input === "CHECKBOX" && <Col span={4} ><FormItem>
             { getFieldDecorator( `assert.${ item.key }Value`, {
-              initialValue: true,
-              valuePropName: ( data[ `${ item.key }Value` ] ===  true ? "checked" : "data-ok" )
+              initialValue: data[ `${ item.key }Value` ] ===  true,
+              valuePropName: "checked" 
             })(
               <Checkbox></Checkbox>
             ) }

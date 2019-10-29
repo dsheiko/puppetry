@@ -1084,6 +1084,10 @@ td:hover .editable-cell-icon {
   padding: 8px 0;
 }
 
+.thumb-container:empty {
+  display: none;
+}
+
 .thumb-container h4 {
   font-weight: 600;
 }

@@ -104,7 +104,7 @@ export class AssertPerformanceMetrics extends React.Component {
                     <FormItem className="perf-switch">
                       { getFieldDecorator( `assert._enabled.${ asset.key }`, {
                         initialValue: result( data._enabled, asset.key, false ),
-                        valuePropName: ( result( data._enabled, asset.key, false ) ? "checked" : "data-ok" )
+                        valuePropName: "checked"
                       })( <Switch
                         onChange={ ( checked ) => this.onSwitchChange( checked, asset.key  ) } /> )
                       }

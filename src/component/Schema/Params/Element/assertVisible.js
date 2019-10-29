@@ -8,10 +8,10 @@ function visibleObjToString( obj ) {
   }
   const chunks = [ `available` ];
   if ( obj.display !== "any" ) {
-    chunks.push( `${ obj.display === "not" ? "NOT " : "" }displayed` );
+    chunks.push( `${ obj.display !== "not" ? "NOT " : "" }displayed` );
   }
   if ( obj.visibility !== "any" ) {
-    chunks.push( `${ obj.visibility === "not" ? "NOT " : "" }visible` );
+    chunks.push( `${ obj.visibility !== "not" ? "NOT " : "" }visible` );
   }
   if ( obj.opacity !== "any" ) {
     chunks.push( `${ obj.opacity === "not" ? "opaque" : "transparent" }` );

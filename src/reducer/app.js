@@ -38,10 +38,14 @@ export default handleActions(
       if ( !payload ) {
         return state;
       }
+      const images = payload.map( item => {
+        item.src = item.src + `?${ Date.now() }`;
+        return item;
+      });
       return update( state, {
         lightbox: {
           images: {
-            $set: payload
+            $set: images
           }
         }
       });

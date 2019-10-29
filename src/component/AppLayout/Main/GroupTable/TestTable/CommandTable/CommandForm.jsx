@@ -173,8 +173,7 @@ export class CommandForm extends React.Component {
           { getFieldDecorator( "comment", {
             initialValue: record.comment
           })( <TextArea placeholder="Here you can describe your intent"
-            rows={ 2 }
-            onKeyPress={ ( e ) => this.onKeyPress( e, this.handleSubmit ) } /> ) }
+            rows={ 2 } /> ) }
         </FormItem>
       </div>
     </details>
@@ -183,8 +182,8 @@ export class CommandForm extends React.Component {
       ? <div className="wait-for-target">
         <FormItem className="ant-form-item--layout">
           { getFieldDecorator( "waitForTarget", {
-            initialValue: true,
-            valuePropName: ( result( record, "waitForTarget", false ) ? "checked" : "data-ok" )
+            initialValue: result( record, "waitForTarget", false ),
+            valuePropName: "checked"
           })( <Checkbox>wait for the target</Checkbox> ) }
         </FormItem>
       </div> :  null }

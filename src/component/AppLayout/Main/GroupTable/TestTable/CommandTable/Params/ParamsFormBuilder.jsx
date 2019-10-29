@@ -168,10 +168,7 @@ export class ParamsFormBuilder extends React.Component {
 
     return ( ( record.params && record.params.hasOwnProperty( key ) )
       ? record.params[ key ]
-      : ( field.control === CHECKBOX
-        // unlikely we need to specify default value for checkbox
-        ? false
-        : result( field, "initialValue", record ) )
+      : result( field, "initialValue", "" )
     );
   }
 
@@ -200,7 +197,7 @@ export class ParamsFormBuilder extends React.Component {
     });
 
     if ( field.control === CHECKBOX ) {
-      decoratorOptions.valuePropName = ( initialValue ? "checked" : "data-ok" );
+      decoratorOptions.valuePropName = "checked";
       decoratorOptions.initialValue = initialValue;
     }
 
