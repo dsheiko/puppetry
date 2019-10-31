@@ -23,7 +23,7 @@ export function findTargets( record ) {
   if ( record.target === "page" ) {
     return [];
   }
-  if ( "assert" in record && "target" in record.assert ) {
+  if ( typeof record.assert === "object" && "target" in record.assert ) {
     return [ ...new Set([ record.target, record.assert.target ]) ];
   }
   return [ record.target ];

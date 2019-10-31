@@ -4,6 +4,7 @@ import AbstractForm from "component/AbstractForm";
 import { ruleValidateGenericString } from "service/utils";
 import { message, Form, Icon, Input, InputNumber, Button } from "antd";
 const FormItem = Form.Item,
+      { TextArea } = Input,
       connectForm = Form.create();
 
 @connectForm
@@ -29,9 +30,10 @@ export class SuiteForm extends AbstractForm {
       if ( !err ) {
         const title = values.title,
               timeout = values.timeout,
+              description = values.description,
               { updateSuite, autosaveSuite }  = this.props.action;
 
-        updateSuite({ title, timeout });
+        updateSuite({ title, timeout, description });
         autosaveSuite();
         message.info( `Data has been successfully updated` );
         this.props.form.resetFields();
@@ -66,6 +68,12 @@ export class SuiteForm extends AbstractForm {
             />
           )}
 
+        </FormItem>
+        <FormItem label="Description">
+          { getFieldDecorator( "description", {
+            initialValue: this.props.description || ""
+          })( <TextArea
+            rows={ 2 } /> ) }
         </FormItem>
         <FormItem  label="Test timeout (ms)">
           { getFieldDecorator( "timeout", {

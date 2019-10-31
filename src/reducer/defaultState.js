@@ -120,6 +120,7 @@ export default {
     title: null,
     timeout: 50000,
     snippets: false,
+    description: null,
     savedAt: null,
     loadedAt: null,
     modified: false,

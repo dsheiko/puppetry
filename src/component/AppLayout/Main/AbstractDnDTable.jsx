@@ -267,10 +267,15 @@ export default class AbstractDnDTable extends React.Component {
    * Extract key-value from targets
    */
   static findTargets( records ) {
-    return Array.from( records.reduce( ( carry, record ) => {
-      carry.add( findTargets( record ) );
-      return carry;
-    }, new Set() ) );
+    try {
+      return Array.from( records.reduce( ( carry, record ) => {
+        carry.add( findTargets( record ) );
+        return carry;
+      }, new Set() ) );
+    } catch ( e ) {
+      console.error( e );
+      return []
+    }
   }
 
   /**

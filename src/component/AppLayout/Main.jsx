@@ -17,6 +17,7 @@ const mapStateToProps = ( state ) => ({
         groups: state.suite.groups,
         targets: state.suite.targets,
         title: state.suite.title,
+        description: state.suite.description,
         timeout: state.suite.timeout
       }),
       // Mapping actions to the props
@@ -56,6 +57,7 @@ export class Main extends AbstractComponent {
       || this.props.expandedGroups !== nextProps.expandedGroups
       || this.props.targets !== nextProps.targets
       || this.props.title !== nextProps.title
+      || this.props.description !== nextProps.description
       || this.props.timeout !== nextProps.timeout ) {
       return true;
     }
@@ -74,6 +76,7 @@ export class Main extends AbstractComponent {
             expandedGroups,
             targets,
             title,
+            description,
             timeout
           } = this.props,
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
@@ -86,7 +89,6 @@ export class Main extends AbstractComponent {
     return (
       <ErrorBoundary>
         <div id="cMain" className="panes-container">
-
 
           <Tabs
             className="tabgroup-suite"
@@ -130,7 +132,7 @@ export class Main extends AbstractComponent {
             </TabPane>
 
             <TabPane tab={ "Suite options" } key="options">
-              <SuiteForm  action={ action } title={ title } timeout={ timeout } />
+              <SuiteForm  action={ action } title={ title } timeout={ timeout } description={ description } />
             </TabPane>
 
           </Tabs>

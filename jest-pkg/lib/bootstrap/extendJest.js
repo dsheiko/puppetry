@@ -151,7 +151,7 @@ module.exports = function( expect, util ) {
               : ( operator === "gt" ? received > value : received < value );
 
       return expectReturn( pass,
-        `[${ source }] expected ${ received } ${ OPERATOR_MAP[ operator ] } ${ value }` );
+        `[${ source }] expected ${ received } to be ${ OPERATOR_MAP[ operator ] } ${ value }` );
     },
 
     /**
@@ -170,21 +170,21 @@ module.exports = function( expect, util ) {
 
       if ( isEnabled( snapshot, "xValue" ) && !x ) {
         return expectReturn( x,
-          `[${ source }] expected for box.x: ${received.x} ${OPERATOR_MAP[snapshot.xOperator]} ${snapshot.xValue}` );
+          `[${ source }] expected for box.x: ${received.x} to be ${OPERATOR_MAP[snapshot.xOperator]} ${snapshot.xValue}` );
       }
       if ( isEnabled( snapshot, "yValue" ) && !y ) {
         return expectReturn( y,
-          `[${ source }] expected for box.y: ${received.y} ${OPERATOR_MAP[snapshot.yOperator]} ${snapshot.yValue}` );
+          `[${ source }] expected for box.y: ${received.y} to be ${OPERATOR_MAP[snapshot.yOperator]} ${snapshot.yValue}` );
       }
       if ( isEnabled( snapshot, "wValue" ) &&!w ) {
         return expectReturn( w,
           `[${ source }] expected for box.width: `
-            + `${received.width} ${OPERATOR_MAP[snapshot.wOperator]} ${snapshot.wValue}` );
+            + `${received.width} to be ${OPERATOR_MAP[snapshot.wOperator]} ${snapshot.wValue}` );
       }
       if ( isEnabled( snapshot, "hValue" ) && !h ) {
         return expectReturn( h,
           `[${ source }] expected for box.height: ${received.height}`
-            + ` ${OPERATOR_MAP[snapshot.hOperator]} ${snapshot.hValue}` );
+            + ` to be ${OPERATOR_MAP[snapshot.hOperator]} ${snapshot.hValue}` );
       }
       return expectReturn( true, `` );
     },
@@ -235,12 +235,12 @@ module.exports = function( expect, util ) {
     toBeVisible( actual, expected, source ) {
         switch ( true ) {
 
-          case actual.isAvailable === false && expected.isAvailable !== true:
+          case actual.isAvailable === false && expected.value !== true:
             // early exist, makes no sense to proceed
             return expectReturn( true, `[${ source }] expected the target element to be `
               + `available, but it is not` );
 
-          case actual.isAvailable === false && expected.isAvailable === true:
+          case actual.isAvailable === false && expected.value === true:
             return expectReturn( false, `[${ source }] expected the target element to be `
               + `available, but it is not` );
 
@@ -442,13 +442,13 @@ module.exports = function( expect, util ) {
           pass = a.y + a.height <= b.y;
           if ( !pass ) {
             return expectReturn( pass, `[${ source }] expected ${ target } (y=${ a.y }, height=${ a.height }) `
-              + `is above ${ counterpart } (y=${ b.y })` );
+              + `to be above ${ counterpart } (y=${ b.y })` );
           }
           break;
         case "below":
           pass = a.y >= b.y + b.height;
           if ( !pass ) {
-            return expectReturn( pass, `[${ source }] expected ${ target } (y=${ a.y }) is below ${ counterpart } `
+            return expectReturn( pass, `[${ source }] expected ${ target } (y=${ a.y }) to be below ${ counterpart } `
               + `(y=${ b.y }, height=${ b.height }) ` );
           }
           break;
@@ -457,13 +457,14 @@ module.exports = function( expect, util ) {
           if ( !pass ) {
             return expectReturn( pass, `[${ source }] expected ${ target } `
               + `(x=${ a.x }, width=${ a.width }) `
-              + `is left to ${ counterpart } (x=${ b.x })` );
+              + `to be left to ${ counterpart } (x=${ b.x })` );
           }
           break;
         case "right":
           pass = a.x >= b.x + b.width;
           if ( !pass ) {
-            return expectReturn( pass, `[${ source }] expected ${ target } (x=${ a.x }) is right to ${ counterpart } `
+            return expectReturn( pass, `[${ source }] expected ${ target } (x=${ a.x }) `
+              + `to be right to ${ counterpart } `
               + `(x=${ b.x }, width=${ b.width })` );
           }
           break;

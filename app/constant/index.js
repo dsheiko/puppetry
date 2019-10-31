@@ -130,6 +130,7 @@ exports.TIPS = [
   "Use “page.assertConsoleMessage” to test console messages<br /> on the page under test",
   "You can accept/dismiss “window.prompt”<br /> with “page.closeDialog” action",
   "To run exported project in Firefox,<br /> call “npm run test:firefox”",
-  "You can use “page.assertScreenshot” to compare page views<br /> before refactoring CSS and after"
+  "You can use “page.assertScreenshot” to compare page views<br /> before refactoring CSS and after",
+  "You can use “page.debug” to pause test execution<br /> and inspect the page"
 
 ];

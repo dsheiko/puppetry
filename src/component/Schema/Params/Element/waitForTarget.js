@@ -20,7 +20,7 @@ export const waitForTarget = {
           optArg = isEveryValueMissing( options ) ? `` : `, ${ JSON.stringify( options ) }`;
 
     if ( targetObj === null ) {
-      return;
+      return "";
     }
 
     return justify( `

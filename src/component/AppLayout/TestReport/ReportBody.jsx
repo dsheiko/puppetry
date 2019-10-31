@@ -13,8 +13,7 @@ import fs from "fs";
 import recursive from "recursive-readdir";
 import { Thumbnail } from "./Thumbnail";
 
-let counter = 0,
-    screenshotInx = 0;
+let counter = 0;
 
 export class ReportBody extends AbstractComponent {
 
@@ -26,6 +25,8 @@ export class ReportBody extends AbstractComponent {
     details: PropTypes.object.isRequired,
     projectDirectory: PropTypes.string.isRequired
   }
+
+  screenshotInx = 0;
 
   state = {
     details: {}
@@ -64,7 +65,7 @@ export class ReportBody extends AbstractComponent {
   /**
    * Find all screenshots belonging to a given test case
    * @param {string} testId
-   * @returns {Array}
+   * @returns {lightboxImage[]}
    */
   getScreenshotsByTest( testId ) {
     const { selector } = this.props,
@@ -79,7 +80,7 @@ export class ReportBody extends AbstractComponent {
         return {
           src,
           caption,
-          inx: screenshotInx++
+          inx: this.screenshotInx++
         };
       });
   }
@@ -97,7 +98,7 @@ export class ReportBody extends AbstractComponent {
       return files.reduce( ( carry, filepath ) => {
         const filename = basename( filepath ),
               [ id ] = filename.split( "." );
-        carry[ id ] = filepath;
+        carry[ id ] = `${ filepath }?${ Date.now() }`;
         return carry;
       }, {});
     } catch ( e ) {
@@ -106,6 +107,11 @@ export class ReportBody extends AbstractComponent {
     }
   }
 
+  /**
+   *
+   * @param {String} testId
+   * @returns {ScreenshotDTO[]}
+   */
   getReportsByTest( testId ) {
     const { selector } = this.props,
           commands = selector.findCommandsByTestId( testId );
@@ -114,6 +120,11 @@ export class ReportBody extends AbstractComponent {
       .map( command => this.reportMap[ command.id ]);
   }
 
+  /**
+   *
+   * @param {String} testId
+   * @returns {SnapshotDTO[]}
+   */
   getSnapshotsByTest( testId ) {
     const { selector } = this.props,
           commands = selector.findCommandsByTestId( testId );
@@ -128,17 +139,17 @@ export class ReportBody extends AbstractComponent {
           expected: {
             src: dto.expected,
             caption,
-            inx: screenshotInx++
+            inx: this.screenshotInx++
           },
           actual: {
             src: dto.actual,
             caption,
-            inx: screenshotInx++
+            inx: this.screenshotInx++
           },
           diff: {
             src: dto.diff,
             caption,
-            inx: screenshotInx++
+            inx: this.screenshotInx++
           }
         };
       });
@@ -176,6 +187,8 @@ export class ReportBody extends AbstractComponent {
   async componentDidMount() {
     const { details } = this.props;
 
+    this.screenshotInx = 0;
+
     this.props.action.cleanLightbox();
 
     this.screenhotMap = await this.getAssetMap( DIR_SCREENSHOTS );
@@ -208,7 +221,24 @@ export class ReportBody extends AbstractComponent {
     this.setState({ details });
   }
 
+  /**
+   *
+   * @typedef {Object} lightboxImage
+   * @property {String} src
+   * @property {String} caption
+   * @property {Number} inx
+   */
+
+  /**
+   * Detals come from props and extended with matching screenshots, snapshots
+   * let's traverse it and extract images for Lightbox
+   * @param {Object} details
+   * @returns {undefined}
+   */
   pupulateLightbox( details ) {
+    /**
+     * @type lightboxImage[]
+     */
     let images = [];
     for ( let suiteKey of Object.keys( details ) ) {
       for ( let describeKey of Object.keys( details[ suiteKey ]) ) {

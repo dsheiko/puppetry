@@ -31,7 +31,14 @@ export default class TestGenerator {
     this.runner = runner; // RUNNER_PUPPETRY when embedded
 
     this.allTargets = Object.values({ ...sharedTargets, ...snippets.targets, ...targets });
-    this.normalizedTargets = mapSelectors( getActiveTargets( this.allTargets ) );
+    // resolve css prop
+    this.normalizedTargets = mapSelectors( getActiveTargets( this.allTargets ) )
+      .filter( entry => !entry.ref )
+      .reduce( ( carry, entry ) => {
+        carry[ entry.target ] = entry;
+        return carry;
+      }, {});
+
     this.targets = this.allTargets.reduce( ( carry, entry ) => {
       carry[ entry.target ] = entry.selector;
       return carry;
@@ -45,7 +52,7 @@ export default class TestGenerator {
    * @returns {String}
    */
   parseTargets() {
-    return this.normalizedTargets
+    return Object.values( this.normalizedTargets )
       .filter( ({ target, selector }) => Boolean( target ) && Boolean( selector ) )
       .map( target => this.schema.jest.tplQuery( getTargetChain( target, this.allTargets ) ) )
       .join( "\n" );
@@ -93,8 +100,7 @@ export default class TestGenerator {
   }
 
   renderWaitForTarget( target ) {
-
-    const match = this.normalizedTargets.find( data => data.target === target && !data.ref );
+    const match = this.normalizedTargets[ target ];
     if ( !match )  {
       return "";
     }
@@ -144,8 +150,12 @@ export default class TestGenerator {
           + ` Please check your targets` );
       }
 
+
+
       const traceCode = this.options.trace ? TestGenerator.getTraceTpl( target, command ) : ``,
             interactiveModeCode = this.options.interactiveMode ? this.getInteractiveModeTpl( command ) : ``,
+            targetObj = ( target !== "page" && target in this.normalizedTargets )
+              ? this.normalizedTargets[ target ] : null,
             waitForTarget = ( src !== "page" && command.waitForTarget === true )
               ? this.renderWaitForTarget( target ) : ``,
             chunk = waitForTarget + this.schema[ src ][ method ].template({
@@ -153,11 +163,12 @@ export default class TestGenerator {
               assert,
               params,
               targetSeletor: this.targets[ target ],
-              targetObj: target in this.normalizedTargets ? this.normalizedTargets[ target ] : null,
+              targetObj,
               method,
               id: command.id,
               testId: command.testId
             }) + traceCode + interactiveModeCode;
+
 
       // we need targets to highlight in interactive mode
       if ( target !== "page" ) {
