@@ -16,9 +16,7 @@
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <style>
-        body {
-          padding: 32px;
-        }
+
         .cart .card .card-image img {
           max-height: 100px;
           width: auto;
@@ -54,19 +52,31 @@
         .card-reveal ul > li {
           list-style-type: disc;
         }
+        nav {
+          background: #002140;
+        }
+        nav .brand-logo {
+          padding-left: 16px;
+        }
       </style>
     </head>
 
     <body>
 
-
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Puppetry Sandbox</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#demo-store">Demo Store</a></li>
+        <li><a href="#demo-form">Demo Form</a></li>
+      </ul>
+    </div>
+  </nav>
     <div class="row main-container">
 
       <div class="col s12">
-        <h3>Puppetry Sandbox</h3>
-        <p>Here we can fiddle with different automated testing approaches</p>
-        <br />
-        <h4>Demo Store</h4>
+        
+        <h4 id="demo-store">Demo Store</h4>
         <p>It's not a real store, but dummy one to test Google Analytics tracker</p>
       </div>
 
@@ -140,16 +150,16 @@
         <br />
         <br />
         <br />
-        <h4>Demo Form</h4>
+        <h4 id="demo-form">Demo Form</h4>
       </div>
 
-      <form>
+      <form class="row">
         <div class="row">
-          <div class="input-field col s6">
+          <div class="input-field col l6 m12">
             <input id="fname" type="text" class="validate">
             <label for="fname">First Name</label>
           </div>
-          <div class="input-field col s6">
+          <div class="input-field col l6 m12">
             <input id="lname" type="text" class="validate">
             <label for="lname">Last Name</label>
           </div>
