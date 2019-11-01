@@ -1,0 +1,163 @@
+{
+  "title": "Shadow Dom",
+  "timeout": 50000,
+  "snippets": false,
+  "savedAt": 1572623182,
+  "loadedAt": 1572623123,
+  "modified": false,
+  "filename": "shadow-dom.json",
+  "targets": {
+    "5thk1bzkc52": {
+      "target": "LOCAL_INPUT",
+      "id": "5thk1bzkc52",
+      "editing": false,
+      "selector": "#input-2 > input",
+      "key": "5thk1bzkc52",
+      "ref": "SHADOW_HOST",
+      "elementType": "shadowHost",
+      "parentType": "shadowHost"
+    },
+    "5thk1bzmmfx": {
+      "target": "SHADOW_HOST",
+      "id": "5thk1bzmmfx",
+      "editing": false,
+      "selector": "body > div > demo-snippet:nth-child(2) > paper-input:nth-child(2)",
+      "key": "5thk1bzmmfx",
+      "elementType": "",
+      "ref": ""
+    }
+  },
+  "groups": {
+    "egmk168h2kf": {
+      "title": "Check querying in Shadow DOM",
+      "id": "egmk168h2kf",
+      "editing": false,
+      "key": "egmk168h2kf",
+      "tests": {
+        "egmk168h7zs": {
+          "title": "Type in local input",
+          "id": "egmk168h7zs",
+          "editing": false,
+          "groupId": "egmk168h2kf",
+          "key": "egmk168h7zs",
+          "commands": {
+            "egmk168he8c": {
+              "editing": false,
+              "id": "egmk168he8c",
+              "key": "egmk168he8c",
+              "target": "page",
+              "method": "setViewport",
+              "params": {
+                "width": 1980,
+                "height": 1080,
+                "deviceScaleFactor": 1,
+                "isMobile": false,
+                "hasTouch": false,
+                "isLandscape": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "egmk168h2kf",
+              "testId": "egmk168h7zs"
+            },
+            "egmk168if3f": {
+              "editing": false,
+              "id": "egmk168if3f",
+              "key": "egmk168if3f",
+              "target": "page",
+              "method": "goto",
+              "params": {
+                "url": "https://npm-demos.appspot.com/@polymer/paper-input@3.0.1/demo/index.html",
+                "timeout": 30000,
+                "waitUntil": "networkidle2"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "egmk168h2kf",
+              "testId": "egmk168h7zs"
+            },
+            "7a9k1c3365k": {
+              "editing": false,
+              "id": "7a9k1c3365k",
+              "key": "7a9k1c3365k",
+              "target": "LOCAL_INPUT",
+              "method": "type",
+              "params": {
+                "value": "Lorem Ipsum"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "egmk168h2kf",
+              "testId": "egmk168h7zs",
+              "waitForTarget": false
+            },
+            "egmk168m5l8": {
+              "editing": false,
+              "id": "egmk168m5l8",
+              "key": "egmk168m5l8",
+              "target": "LOCAL_INPUT",
+              "method": "screenshot",
+              "params": {
+                "name": "Input has new value",
+                "omitBackground": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "egmk168h2kf",
+              "testId": "egmk168h7zs",
+              "waitForTarget": false
+            },
+            "hbfk2gb85at": {
+              "editing": false,
+              "id": "hbfk2gb85at",
+              "key": "hbfk2gb85at",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "Entire page",
+                "fullPage": true,
+                "omitBackground": false,
+                "x": null,
+                "y": null,
+                "width": null,
+                "height": null
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "egmk168h2kf",
+              "testId": "egmk168h7zs",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false
+        }
+      }
+    }
+  },
+  "puppetry": "3.0.0-beta.2"
+}

@@ -1,0 +1,315 @@
+{
+  "title": null,
+  "timeout": 50000,
+  "snippets": true,
+  "description": null,
+  "savedAt": 1572617859,
+  "loadedAt": 1572617852,
+  "modified": false,
+  "filename": ".snippets.json",
+  "targets": {
+    "jotk2g4k6sl": {
+      "editing": false,
+      "id": "jotk2g4k6sl",
+      "key": "jotk2g4k6sl",
+      "target": "FIRSTNAME_INPUT",
+      "selector": "#fname",
+      "disabled": false,
+      "adding": false
+    },
+    "jotk2g4k6sm": {
+      "editing": false,
+      "id": "jotk2g4k6sm",
+      "key": "jotk2g4k6sm",
+      "target": "LASTNAME_INPUT",
+      "selector": "#lname",
+      "disabled": false,
+      "adding": false
+    },
+    "jotk2g4k6sn": {
+      "editing": false,
+      "id": "jotk2g4k6sn",
+      "key": "jotk2g4k6sn",
+      "target": "MESSAGE_INPUT",
+      "selector": "#comment",
+      "disabled": false,
+      "adding": false,
+      "ref": ""
+    },
+    "jotk2g4k6so": {
+      "editing": false,
+      "id": "jotk2g4k6so",
+      "key": "jotk2g4k6so",
+      "target": "CONSENT_CHECKBOX",
+      "selector": "#consent",
+      "disabled": false,
+      "adding": false
+    },
+    "jotk2g4k6sp": {
+      "editing": false,
+      "id": "jotk2g4k6sp",
+      "key": "jotk2g4k6sp",
+      "target": "OPTION_RADIO_1",
+      "selector": "#option1",
+      "disabled": false,
+      "adding": false
+    },
+    "jotk2g4k6sq": {
+      "editing": false,
+      "id": "jotk2g4k6sq",
+      "key": "jotk2g4k6sq",
+      "target": "ATTACHMENT_FILE",
+      "selector": "#attachment",
+      "disabled": false,
+      "adding": false
+    },
+    "8fzk2g5h99t": {
+      "target": "FORM",
+      "id": "8fzk2g5h99t",
+      "editing": false,
+      "selector": "#form",
+      "ref": "",
+      "key": "8fzk2g5h99t"
+    },
+    "8fzk2g5idxk": {
+      "target": "SUBMIT_BTN",
+      "id": "8fzk2g5idxk",
+      "editing": false,
+      "selector": "#submit",
+      "ref": "",
+      "key": "8fzk2g5idxk"
+    }
+  },
+  "groups": {
+    "snippets": {
+      "editing": false,
+      "id": "snippets",
+      "key": "snippets",
+      "title": "Snippets",
+      "tests": {
+        "jotk2g4k9tw": {
+          "title": "Fill out the form",
+          "id": "jotk2g4k9tw",
+          "editing": false,
+          "groupId": "snippets",
+          "key": "jotk2g4k9tw",
+          "commands": {
+            "8fzk2g5hxcu": {
+              "editing": false,
+              "id": "8fzk2g5hxcu",
+              "key": "8fzk2g5hxcu",
+              "target": "FORM",
+              "method": "reset",
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "snippets",
+              "testId": "jotk2g4k9tw",
+              "waitForTarget": false
+            },
+            "jotk2g4lsni": {
+              "editing": false,
+              "id": "jotk2g4lsni",
+              "key": "jotk2g4lsni",
+              "target": "FIRSTNAME_INPUT",
+              "method": "type",
+              "params": {
+                "value": "{{ faker( \"name.firstName\", \"en\" ) }}"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "snippets",
+              "testId": "jotk2g4k9tw",
+              "waitForTarget": true
+            },
+            "jotk2g4p33d": {
+              "editing": false,
+              "id": "jotk2g4p33d",
+              "key": "jotk2g4p33d",
+              "target": "LASTNAME_INPUT",
+              "method": "type",
+              "params": {
+                "value": "{{ faker( \"name.lastName\", \"en\" ) }}"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "snippets",
+              "testId": "jotk2g4k9tw",
+              "waitForTarget": false
+            },
+            "hjgk2g4zini": {
+              "editing": false,
+              "id": "hjgk2g4zini",
+              "key": "hjgk2g4zini",
+              "target": "MESSAGE_INPUT",
+              "method": "type",
+              "params": {
+                "value": "{{ MESSAGE }}"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "snippets",
+              "testId": "jotk2g4k9tw",
+              "waitForTarget": false
+            },
+            "hjgk2g4zw55": {
+              "editing": false,
+              "id": "hjgk2g4zw55",
+              "key": "hjgk2g4zw55",
+              "target": "CONSENT_CHECKBOX",
+              "method": "checkBox",
+              "params": {
+                "checked": "false"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "snippets",
+              "testId": "jotk2g4k9tw",
+              "waitForTarget": false
+            },
+            "hjgk2g50f2c": {
+              "editing": false,
+              "id": "hjgk2g50f2c",
+              "key": "hjgk2g50f2c",
+              "target": "OPTION_RADIO_1",
+              "method": "checkBox",
+              "params": {
+                "checked": "false"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "snippets",
+              "testId": "jotk2g4k9tw",
+              "waitForTarget": false
+            },
+            "3wik2g59v5x": {
+              "editing": false,
+              "id": "3wik2g59v5x",
+              "key": "3wik2g59v5x",
+              "target": "ATTACHMENT_FILE",
+              "method": "upload",
+              "params": {
+                "size": 10000,
+                "name": "attachment.txt"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "snippets",
+              "testId": "jotk2g4k9tw",
+              "waitForTarget": false
+            },
+            "8fzk2g5jah0": {
+              "editing": false,
+              "id": "8fzk2g5jah0",
+              "key": "8fzk2g5jah0",
+              "target": "SUBMIT_BTN",
+              "method": "click",
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "snippets",
+              "testId": "jotk2g4k9tw",
+              "waitForTarget": false
+            },
+            "8fzk2g5mpej": {
+              "editing": false,
+              "id": "8fzk2g5mpej",
+              "key": "8fzk2g5mpej",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "false",
+                "type": "alert",
+                "assertion": "haveString",
+                "value": "Data sent"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "snippets",
+              "testId": "jotk2g4k9tw",
+              "waitForTarget": false
+            },
+            "8fzk2g5tyvk": {
+              "editing": false,
+              "id": "8fzk2g5tyvk",
+              "key": "8fzk2g5tyvk",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "Seed {{ counter() }}",
+                "fullPage": false,
+                "omitBackground": false,
+                "x": null,
+                "y": null,
+                "width": null,
+                "height": null
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "snippets",
+              "testId": "jotk2g4k9tw",
+              "waitForTarget": false
+            }
+          }
+        }
+      },
+      "disabled": false,
+      "expanded": false,
+      "adding": false
+    }
+  },
+  "puppetry": "3.0.0-beta.2"
+}

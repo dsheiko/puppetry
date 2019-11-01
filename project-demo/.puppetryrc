@@ -1,75 +1,96 @@
 {
-  "name": "E2E testing showcase",
-  "panels": [
-    "groups"
-  ],
+  "name": "Demo Project",
+  "appPanels": {
+    "suite": {
+      "panes": [
+        "groups"
+      ]
+    },
+    "settings": {
+      "panes": []
+    }
+  },
   "groups": {
-    "_1": {
-      "key": 0,
+    "snippets": {
+      "key": "snippets",
       "value": true,
       "tests": {
-        "_1_2": {
-          "key": 1,
-          "value": true
-        },
-        "_1_3": {
-          "key": 2,
-          "value": false
-        },
-        "olhjnyhr4zd": {
-          "key": "olhjnyhr4zd",
+        "jotk2g4k9tw": {
+          "key": "jotk2g4k9tw",
           "value": true
         }
       }
     },
-    "_2": {
-      "key": 1,
+    "8fzk2g5fpkb": {
+      "key": "8fzk2g5fpkb",
       "value": true,
       "tests": {
-        "_2_1": {
-          "key": 0,
-          "value": false
-        },
-        "_2_2": {
-          "key": 1,
-          "value": false
-        },
-        "olhjnyhrjcg": {
-          "key": "olhjnyhrjcg",
-          "value": true
-        },
-        "olhjnyhro5a": {
-          "key": "olhjnyhro5a",
+        "8fzk2g5fxnj": {
+          "key": "8fzk2g5fxnj",
           "value": true
         }
       }
     },
-    "1u2jnyned4o": {
-      "key": "1u2jnyned4o",
+    "egmk168h2kf": {
+      "key": "egmk168h2kf",
       "value": true,
       "tests": {
-        "1u2jnynetdn": {
-          "key": "1u2jnynetdn",
+        "egmk168h7zs": {
+          "key": "egmk168h7zs",
           "value": true
         }
       }
     },
-    "36ijnyo161a": {
-      "key": "36ijnyo161a",
+    "dduk2fx837q": {
+      "key": "dduk2fx837q",
       "value": true,
       "tests": {
-        "36ijnyo1oho": {
-          "key": "36ijnyo1oho",
-          "value": true
-        },
-        "36ijnyo2e41": {
-          "key": "36ijnyo2e41",
+        "dduk2fx8bwf": {
+          "key": "dduk2fx8bwf",
           "value": true
         }
       }
     }
   },
+  "savedAt": 1572627409,
   "modified": false,
-  "lastOpenSuite": "react-html5-form-RWD.json",
-  "puppetry": "1.0.0"
+  "lastOpenSuite": "sandbox-rwd.json",
+  "variables": {
+    "dduk2fx8tvf": {
+      "name": "SANDBOX_BASEURL",
+      "id": "dduk2fx8tvf",
+      "editing": false,
+      "value": "http://127.0.0.1:8080",
+      "env": "test",
+      "key": "dduk2fx8tvf"
+    },
+    "dduk2fx9hrh": {
+      "editing": false,
+      "id": "dduk2fx9hrh",
+      "key": "dduk2fx9hrh",
+      "name": "SANDBOX_BASEURL",
+      "value": "http://127.0.0.1:8080",
+      "env": "stage",
+      "disabled": false,
+      "adding": false
+    },
+    "dduk2fx9hug": {
+      "editing": false,
+      "id": "dduk2fx9hug",
+      "key": "dduk2fx9hug",
+      "name": "SANDBOX_BASEURL",
+      "value": "http://127.0.0.1:8080",
+      "env": "production",
+      "disabled": false,
+      "adding": false
+    }
+  },
+  "targets": {},
+  "environments": [
+    "test",
+    "stage",
+    "production"
+  ],
+  "projectDirectory": "/home/sheiko/PUPPETRY/demo--project",
+  "puppetry": "3.0.0-beta.2"
 }
