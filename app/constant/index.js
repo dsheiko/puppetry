@@ -88,6 +88,8 @@ exports.SELECTOR_CHAIN_DELIMITER = ">>";
 exports.SELECTOR_CSS = 1;
 exports.SELECTOR_XPATH = 2;
 
+exports.STORAGE_KEY_SETTINGS = "settings";
+
 exports.FIELDSET_DEFAULT_LAYOUT = {
   labelCol: {
     span: 3

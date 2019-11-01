@@ -5,8 +5,8 @@ import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
 import { DIR_SCREENSHOTS, DIR_SNAPSHOTS, DIR_REPORTS } from "constant";
-import { millisecondsToStr } from "service/utils";
-import { Icon } from "antd";
+import { millisecondsToStr, result } from "service/utils";
+import { Icon, Button } from "antd";
 import { readdir } from "service/io";
 import { join, basename } from "path";
 import fs from "fs";
@@ -69,20 +69,34 @@ export class ReportBody extends AbstractComponent {
    */
   getScreenshotsByTest( testId ) {
     const { selector } = this.props,
-          commands = selector.findCommandsByTestId( testId );
+          commands = Object.values( selector.findCommandsByTestId( testId ) ),
 
-    return Object.values( commands )
-      .filter( command => ( command.method === "screenshot" && command.id in this.screenhotMap ) )
-      .map( command => {
-        const src = this.screenhotMap[ command.id ],
-              caption = this.stripTpl( command.params.name );
+          suiteScreenshots = commands
+            .filter( command => (  command.method === "screenshot" && command.id in this.screenhotMap ) )
+            .reduce(( carry, command ) => {
+              this.screenhotMap[ command.id ].forEach( src => {
+                carry.push({
+                  src,
+                  caption: this.stripTpl( command.params.name ),
+                  inx: this.screenshotInx++
+                });
+              });
+              return carry;
+            }, []),
+          refScreenshots = commands
+            .filter( command => (  command.ref && command.id in this.screenhotMap ) )
+            .reduce(( carry, command ) => {
+              this.screenhotMap[ command.id ].forEach( src => {
+                carry.push({
+                  src,
+                  caption: "Screenshot",
+                  inx: this.screenshotInx++
+                });
+              });
+              return carry;
+            }, []);
 
-        return {
-          src,
-          caption,
-          inx: this.screenshotInx++
-        };
-      });
+    return suiteScreenshots.concat( refScreenshots );
   }
 
   /**
@@ -98,7 +112,8 @@ export class ReportBody extends AbstractComponent {
       return files.reduce( ( carry, filepath ) => {
         const filename = basename( filepath ),
               [ id ] = filename.split( "." );
-        carry[ id ] = `${ filepath }?${ Date.now() }`;
+        carry[ id ] = result( carry, id, []);
+        carry[ id ].push( `${ filepath }?${ Date.now() }` );
         return carry;
       }, {});
     } catch ( e ) {
@@ -117,7 +132,9 @@ export class ReportBody extends AbstractComponent {
           commands = selector.findCommandsByTestId( testId );
     return Object.values( commands )
       .filter( command => ( command.method === "assertPerformanceAssetWeight" && command.id in this.reportMap ) )
-      .map( command => this.reportMap[ command.id ]);
+      .reduce( ( carry, command ) => {
+        return carry.concat( this.reportMap[ command.id ] );
+      }, []);
   }
 
   /**
@@ -168,11 +185,11 @@ export class ReportBody extends AbstractComponent {
               diff = join( DIFF_PATH, expectedFilename ),
               expected = join( EXPECTED_PATH, expectedFilename );
 
-        if ( fs.existsSync( actual ) && fs.existsSync( diff ) ) {
+        if ( fs.existsSync( actual ) && fs.existsSync( expected ) ) {
           carry[ id ] = {
             expected,
             actual,
-            diff
+            diff: fs.existsSync( diff ) ? diff : null
           };
         }
         return carry;
@@ -248,7 +265,7 @@ export class ReportBody extends AbstractComponent {
           snapshots.forEach( snapshot => {
             images.push( snapshot.expected );
             images.push( snapshot.actual );
-            images.push( snapshot.diff );
+            snapshot.diff && images.push( snapshot.diff );
           });
         }
       }
@@ -257,7 +274,6 @@ export class ReportBody extends AbstractComponent {
   }
 
   renderLine( spec ) {
-
     return ( <div
       key={ `k${ counter++ }` }
       className="test-report__it">
@@ -280,9 +296,9 @@ export class ReportBody extends AbstractComponent {
       </If>
 
       { spec.reports && <div className="thumb-container screenshot-thumb-container">
-        { spec.reports.map( ( reportPath, inx ) => ( <a
-          onClick={ ( e ) => this.download( reportPath, e ) }
-          key={ inx }>download performance report</a> ) ) }
+        { spec.reports.map( ( reportPath, inx ) => ( <Button
+          key={ inx }
+          onClick={ ( e ) => this.download( reportPath, e ) }>Download performance report</Button> ) ) }
       </div>
       }
 
@@ -303,10 +319,10 @@ export class ReportBody extends AbstractComponent {
           <h4>Actual</h4>
           <Thumbnail item={ item.actual }  action={ this.props.action } />
         </div>
-        <div>
+        { item.diff.src && <div>
           <h4>Diff</h4>
           <Thumbnail item={ item.diff }  action={ this.props.action } />
-        </div>
+        </div> }
       </div> ) ) }
 
 

@@ -84,6 +84,7 @@ module.exports = function( expect, util ) {
      * @returns {Object}
      */
     toMatchScreenshot( received, mismatchTolerance, source ) {
+      console.log("received", received);
       const pass = Number( received ) === 0;
       return expectReturn( pass,
         `[${ source }] expected to satisfy mismatch tolerance of ${ mismatchTolerance }`,
@@ -107,7 +108,7 @@ module.exports = function( expect, util ) {
 
    /**
      * Assert that at least one element of passed array includes substring
-     * @param {String} received
+     * @param {String[]} received
      * @param {String} substring
      * @param {String} source
      * @returns {Object}
@@ -122,7 +123,7 @@ module.exports = function( expect, util ) {
 
      /**
      * Assert that at least one element of passed array includes substring
-     * @param {String} received
+     * @param {String[]} received
      * @param {String} substring
      * @param {String} source
      * @returns {Object}

@@ -19,15 +19,18 @@ let PATH_SCREENSHOTS = join( __dirname, "/../", "/screenshots"),
     /**
      * @see https://pptr.dev/#?product=Puppeteer&version=v1.5.0&show=api-class-page
      * @param {string} id
+     * @param {string} parentId
      * @param {string} screenshotTitle
      * @param {Object} [options]
      * @returns {Object}
      */
-const png = ( id, screenshotTitle, options = {} ) => {
+const png = ( id, parentId, screenshotTitle, options = {} ) => {
         const FILENAME_RE = /[^a-zA-Z\d\-\_]/g,
               normalizedTitle = screenshotTitle.replace( FILENAME_RE, "-" ),
               normalizedSuiteTitle = SUITE_NAME.replace( FILENAME_RE, "-" ),
-              path = join( PATH_SCREENSHOTS, normalizedSuiteTitle, `${ id }.${ normalizedTitle }.png` );
+              fileName = `${ id }.${ normalizedTitle }.png`;
+              path = join( PATH_SCREENSHOTS, normalizedSuiteTitle,
+                parentId !== null ? parentId + "." + fileName : fileName );
         shell.mkdir( "-p" , dirname( path ) );
         return { path, ...options };
       },

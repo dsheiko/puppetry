@@ -124,7 +124,7 @@ exports.installRuntimeTest = ( event, appInstallDirectory ) => {
       "node-localstorage@^1.3.1",
       "puppeteer@1.19.0",
       "shelljs@^0.8.2",
-      "pixelmatch@^5.0.2",
+      "pixelmatch@^5.1.0",
       "pngjs@^3.4.0",
       "text-table@^0.2.0"
     ], ( err, data ) => {

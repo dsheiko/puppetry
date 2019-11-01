@@ -5,7 +5,7 @@ import { renderTarget } from "service/utils";
 import { getCounter } from "service/screenshotCounter";
 
 export const screenshot = {
-  template: ({ target, params, id }) => {
+  template: ({ target, params, id, parentId }) => {
     const { name, omitBackground } = params,
           parser = new ExpressionParser( id ),
           baseOptions = {
@@ -17,7 +17,8 @@ export const screenshot = {
     return `
       // Taking screenshot of ${ target } element
       await ( ${ renderTarget( target ) } ).`
-        + `screenshot( util.png( ${ JSON.stringify( id ) }, ${ parser.stringify( name ) }${ optArg }) );
+        + `screenshot( util.png( ${ JSON.stringify( id ) }, `
+    + `${ parentId ? JSON.stringify( parentId ) : "null" }, ${ parser.stringify( name ) }${ optArg }) );
   `;
   },
 

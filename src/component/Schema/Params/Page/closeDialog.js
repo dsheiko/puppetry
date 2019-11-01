@@ -5,7 +5,7 @@ function getOptionsString( params ) {
   const options = [];
   options.push( params.action );
   options.push( `\`${ params.type }\`` );
-  options.push( `with \`${ truncate( params.substring, 60 ) }\`` );
+  params.substring && options.push( `with \`${ truncate( params.substring, 60 ) }\`` );
   return options.join( " " );
 }
 
@@ -19,7 +19,7 @@ export const closeDialog = {
         if ( "${ params.type }" !== "any" && dialog.type() !== "${ params.type }" ) {
           return;
         }
-        if ( !result.includes( ${ JSON.stringify( params.substring ) } ) ) {
+        if ( ${ JSON.stringify( params.substring ) } && !result.includes( ${ JSON.stringify( params.substring ) } ) ) {
           return;
         }
         ${ params.action === "dismiss" ? `await dialog.dismiss();` : `` }
@@ -27,14 +27,15 @@ export const closeDialog = {
       });
   `,
 
-  description: `Dismiss or accept dialog (alert, beforeunload, confirm or prompt) when it invokes
+  description: `Listen to dialog events and dismiss or accept dialogs (alert, beforeunload, confirm or prompt)
+as they are called
 
 **NOTE**: the step must be defined before the expected dialog event`,
   commonly: "dismiss/accept dialog",
 
   toLabel: ({ params }) => `(${ getOptionsString( params ) })`,
-  toGherkin: ({ params }) => `${ ucfirst( params.action ) } dialog
-    of type \`${ params.type }\` with with \`${ params.substring }\``,
+  toGherkin: ({ params }) => `Listen to dialog events and ${ ucfirst( params.action ) } any dialog
+    of type \`${ params.type }\` ${ params.substring ? `with \`${ params.substring }\`` : `` }`,
 
   params: [
     {
@@ -42,17 +43,6 @@ export const closeDialog = {
       legend: "",
       tooltip: "",
       fields: [
-
-        {
-          name: "params.substring",
-          control: INPUT,
-          label: "Message has",
-          placeholder: "",
-          rules: [{
-            required: true,
-            message: `Field is required.`
-          }]
-        },
 
         {
           name: "params.type",
@@ -72,6 +62,13 @@ export const closeDialog = {
             required: true,
             message: `Field is required.`
           }]
+        },
+
+        {
+          name: "params.substring",
+          control: INPUT,
+          label: "Message has",
+          placeholder: ""
         },
 
         {

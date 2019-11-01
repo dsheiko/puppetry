@@ -26,8 +26,8 @@ export const upload = {
    before going with this command.`,
 
   validate: ( values ) => {
-    const path = result( values.params, "path", "" ).trim(),
-          name = result( values.params, "name", "" ).trim(),
+    const path = String( result( values.params, "path", "" ) ).trim(),
+          name = String( result( values.params, "name", "" ) ).trim(),
           size = result( values.params, "size", 0 );
 
     if ( !path && ( !name || !size ) ) {

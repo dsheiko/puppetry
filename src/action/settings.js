@@ -2,11 +2,10 @@ import { createActions } from "redux-actions";
 import { handleException } from "./helpers";
 import { getDateString, checkNewVersion } from "../service/http";
 import { validate } from "bycontract";
+import { STORAGE_KEY_SETTINGS } from "constant";
 import * as I from "interface";
 
-const STORAGE_KEY_SETTINGS = "settings",
-
-      actions = createActions({
+const actions = createActions({
         SET_SETTINGS: ( options ) => validate( options, I.SETTINGS_OPTIONS ),
 
         ADD_SETTINGS_PROJECT: ( options ) => options,

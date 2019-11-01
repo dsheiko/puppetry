@@ -33,7 +33,7 @@ export default class TestGenerator {
     this.allTargets = Object.values({ ...sharedTargets, ...snippets.targets, ...targets });
     // resolve css prop
     this.normalizedTargets = mapSelectors( getActiveTargets( this.allTargets ) )
-      .filter( entry => !entry.ref )
+      //.filter( entry => !entry.ref )
       .reduce( ( carry, entry ) => {
         carry[ entry.target ] = entry;
         return carry;
@@ -54,16 +54,17 @@ export default class TestGenerator {
   parseTargets() {
     return Object.values( this.normalizedTargets )
       .filter( ({ target, selector }) => Boolean( target ) && Boolean( selector ) )
-      .map( target => this.schema.jest.tplQuery( getTargetChain( target, this.allTargets ) ) )
+      .map( target => this.schema.jest.tplQuery( getTargetChain( target, this.normalizedTargets ) ) )
       .join( "\n" );
   }
 
   /**
    * @param {string} ref
    * @param {object} variables
+   * @param {string} parentId
    * @returns {string}
    */
-  parseRef = ( ref, variables ) => {
+  parseRef = ( ref, variables, parentId ) => {
     const groups = this.snippets.groups;
     if ( !groups.hasOwnProperty( SNIPPETS_GROUP_ID ) ) {
       return ``;
@@ -76,6 +77,7 @@ export default class TestGenerator {
           env = ( variables && Object.keys( variables ).length )
             ? `      Object.assign( ENV, ${ JSON.stringify( variables ) } );\n` : ``,
           chunk = Object.values( test.commands )
+            .map( command => Object.assign( {}, command, { parentId } ) )
             .map( this.parseCommand ).join( "\n" );
     return `      // SNIPPET ${ test.title }: START\n${ env }${ chunk }\n      // SNIPPET ${ test.title }: END\n`;
   }
@@ -115,13 +117,13 @@ export default class TestGenerator {
    * @returns {string}
    */
   parseCommand = ( command ) => {
-    const { isRef, ref, target, method, params, assert, variables, disabled } = command,
+    const { isRef, ref, target, method, params, assert, variables, disabled, id } = command,
           src = target === "page" ? "page" : "element";
     if ( disabled ) {
       return ``;
     }
     if ( isRef ) {
-      return this.parseRef( ref, variables );
+      return this.parseRef( ref, variables, id );
     }
     try {
       if ( ! ( method in this.schema[ src ]) ) {
@@ -166,7 +168,8 @@ export default class TestGenerator {
               targetObj,
               method,
               id: command.id,
-              testId: command.testId
+              testId: command.testId,
+              parentId: command.parentId
             }) + traceCode + interactiveModeCode;
 
 

@@ -79,7 +79,7 @@ export class ParamsFormBuilder extends React.Component {
   onTemplateHelperChange = ( name, val ) => {
     const { setFieldsValue, getFieldValue } = this.props.form;
     setFieldsValue({
-      [ name ]: getFieldValue( name ) + val
+      [ name ]: getFieldValue( name ) + ( typeof val === "string" ? val : "" )
     });
   }
 
@@ -164,12 +164,13 @@ export class ParamsFormBuilder extends React.Component {
    */
   getInitialValue( field ) {
     const { record } = this.props,
-          key = field.name.replace( /^params\./, "" );
+          key = field.name.replace( /^params\./, "" ),
+          initialValue = ( ( record.params && record.params.hasOwnProperty( key ) )
+            ? record.params[ key ]
+            : result( field, "initialValue", "" )
+          );
 
-    return ( ( record.params && record.params.hasOwnProperty( key ) )
-      ? record.params[ key ]
-      : result( field, "initialValue", "" )
-    );
+    return field.control === "CHECKBOX" ? Boolean( initialValue ) : initialValue;
   }
 
 

@@ -25,22 +25,27 @@ module.exports = function( bs, util ) {
 
       await bs.page.screenshot({ path: actualPath, ...screenshotOpts });
 
-      const expectedImg = PNG.sync.read( fs.readFileSync( expectedPath ) );
-            actualImg = PNG.sync.read( fs.readFileSync( actualPath ) ),
-            { width, height } = expectedImg,
-            diffImg = new PNG({ width, height }),
+      try {
+        const expectedImg = PNG.sync.read( fs.readFileSync( expectedPath ) );
+              actualImg = PNG.sync.read( fs.readFileSync( actualPath ) ),
+              { width, height } = expectedImg,
+              diffImg = new PNG({ width, height }),
 
-            res = pixelmatch( expectedImg.data, actualImg.data, diffImg.data, width, height, {
-              threshold: pixelmatchOpts.threshold,
-              diffColor: pixelmatchOpts.diffColor,
-              aaColor: pixelmatchOpts.aaColor,
-              includeAA: pixelmatchOpts.includeAA
-            });
+              res = pixelmatch( expectedImg.data, actualImg.data, diffImg.data, width, height, {
+                threshold: pixelmatchOpts.threshold,
+                diffColor: pixelmatchOpts.diffColor,
+                aaColor: pixelmatchOpts.aaColor,
+                includeAA: pixelmatchOpts.includeAA
+              });
 
-      // alternative
-      // diffImg.pack().pipe( fs.createWriteStream( diffPath ) );
-      fs.writeFileSync( diffPath, PNG.sync.write( diffImg ) );
-      return res;
+        // alternative
+        // diffImg.pack().pipe( fs.createWriteStream( diffPath ) );
+        fs.writeFileSync( diffPath, PNG.sync.write( diffImg ) );
+        console.log("res", res);
+        return res;
+      } catch( e ) {
+        return 1;
+      }
     };
 
 };

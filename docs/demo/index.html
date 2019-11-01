@@ -58,6 +58,9 @@
         nav .brand-logo {
           padding-left: 16px;
         }
+        h4 {
+          font-size: 50px;
+        }
       </style>
     </head>
 
@@ -65,7 +68,7 @@
 
   <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Puppetry Sandbox</a>
+      <a href="#" class="brand-logo">Sandbox</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="#demo-store">Demo Store</a></li>
         <li><a href="#demo-form">Demo Form</a></li>
@@ -74,7 +77,7 @@
   </nav>
     <div class="row main-container">
 
-      <div class="col s12">
+      <div class="row">
 
         <h4 id="demo-store">Demo Store</h4>
         <p>It's not a real store, but dummy one to test Google Analytics tracker</p>
@@ -82,40 +85,42 @@
 
 
 
-        <div class="col l6 m12">
-           <div class="card">
-            <div class="card-image waves-effect waves-block waves-light">
-              <img class="activator" src="images/tshirt-white.png">
-            </div>
-            <div class="card-content">
-              <span class="card-title activator grey-text text-darken-4">Puppetry T-Shirt (white)<i class="material-icons right">more_vert</i></span>
-              <p><a id="addtocartwhite" href="#" data-modal="cart" data-sku="white">Add to cart</a></p>
-            </div>
-            <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4">Puppetry T-Shirt (white)<i class="material-icons right">close</i></span>
-              <p>
-                It’s not a real product, but a dummy one to test <code>gtag.js</code> code. The expected behavior:
-              <ul>
-                <li>When clicking on the “Add to cart” button we send out
-                  <a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_additions_to_and_removals_from_shopping_carts"><code>add_to_cart event</code> with product information </a>
-                </li>
-                <li>When clicking on the “Checkout” button we  inform Google Analytics about beginning of
-                  <a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_checkouts">checkout process</a>
-                </li>
-                <li>When clicking on the “Proceed” button we pass to Google Analytics the selected payment method
-                  <a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_checkouts">(checkout option)</a>
-                </li>
-                 <li>When clicking on the “Buy” button we send out <a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_purchases">purchase event</a>
-                </li>
-              </ul>
-
-              </p>
-            </div>
-          </div>
-        </div>
+      <div class="row">
 
         <div class="col l6 m12">
-           <div class="card">
+          <div class="card product">
+           <div class="card-image waves-effect waves-block waves-light">
+             <img class="activator" src="images/tshirt-white.png">
+           </div>
+           <div class="card-content">
+             <span class="card-title activator grey-text text-darken-4">Puppetry T-Shirt (white)<i class="material-icons right">more_vert</i></span>
+             <p><a id="addtocartwhite" href="#" data-modal="cart" data-sku="white">Add to cart</a></p>
+           </div>
+           <div class="card-reveal">
+             <span class="card-title grey-text text-darken-4">Puppetry T-Shirt (white)<i class="material-icons right">close</i></span>
+             <p>
+               It’s not a real product, but a dummy one to test <code>gtag.js</code> code. The expected behavior:
+             <ul>
+               <li>When clicking on the “Add to cart” button we send out
+                 <a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_additions_to_and_removals_from_shopping_carts"><code>add_to_cart event</code> with product information </a>
+               </li>
+               <li>When clicking on the “Checkout” button we  inform Google Analytics about beginning of
+                 <a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_checkouts">checkout process</a>
+               </li>
+               <li>When clicking on the “Proceed” button we pass to Google Analytics the selected payment method
+                 <a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_checkouts">(checkout option)</a>
+               </li>
+                <li>When clicking on the “Buy” button we send out <a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_purchases">purchase event</a>
+               </li>
+             </ul>
+
+             </p>
+           </div>
+         </div>
+       </div>
+
+        <div class="col l6 m12">
+           <div class="card product">
             <div class="card-image waves-effect waves-block waves-light">
               <img class="activator" src="images/tshirt-black.png">
             </div>
@@ -146,14 +151,16 @@
           </div>
         </div>
 
-      <div class="col s12">
+      </div>
+
+      <div class="row">
         <br />
         <br />
         <br />
         <h4 id="demo-form">Demo Form</h4>
       </div>
 
-      <form class="row">
+      <form class="row" id="form">
         <div class="row">
           <div class="input-field col l6 m12">
             <input id="fname" type="text" class="validate">
@@ -183,11 +190,11 @@
 
             <div class="file-field input-field col s6">
               <p><label>
-                <input name="option" type="radio" value="1" />
+                <input id="option1" name="option" type="radio" value="1" />
                 <span>Option 1</span>
               </label></p>
               <p><label>
-                <input name="option" type="radio" value="2" />
+                <input id="option2" name="option" type="radio" value="2" />
                 <span>Option 2</span>
               </label></p>
             </div>
@@ -207,7 +214,7 @@
 
 
         <div class="row file-field toolbox">
-           <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+           <button id="submit" class="btn waves-effect waves-light" type="submit" name="action">Submit
             <i class="material-icons right">send</i>
           </button>
         </div>
@@ -381,6 +388,9 @@
 
           });
 
+          listen( "#form", "submit", function( el ){
+            alert( "Data sent" );
+          });
 
         });
       </script>

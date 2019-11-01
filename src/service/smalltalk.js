@@ -1,10 +1,16 @@
 import { msgDataSaved } from "component/Global/Message";
+import { STORAGE_KEY_SETTINGS } from "constant";
+
 const buttons = {
   ok: "Yes",
   cancel: "No"
 };
 
 function noop() {
+}
+
+function getSettings() {
+  return JSON.parse( localStorage.getItem( STORAGE_KEY_SETTINGS ) || "{}" );
 }
 
 export async function confirmRemove( count ) {
@@ -51,6 +57,14 @@ export async function confirmRecording() {
 
 export async function confirmUnsavedChanges({ saveSuite, setSuite }) {
   try {
+
+    const settings = getSettings();
+
+    if ( settings.autosave ) {
+      saveSuite();
+      return true;
+    }
+
     await smalltalk
       .confirm( "Unsaved Changes", "You have unsaved changes in open suite file. What do we do?" , {
         buttons: {

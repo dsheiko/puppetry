@@ -4,7 +4,7 @@ import ExpressionParser from "service/ExpressionParser";
 import { getCounter } from "service/screenshotCounter";
 
 export const screenshot = {
-  template: ({ params, id }) => {
+  template: ({ params, id, parentId }) => {
     const { name, fullPage, omitBackground, x, y, width, height } = params,
           parser = new ExpressionParser( id ),
           clip = {
@@ -27,7 +27,8 @@ export const screenshot = {
     const optArg = isEveryValueFalsy( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
     return `
       // Taking screenshot of ${ isClipEmpty ? "the page" : "the specified region" }
-      await bs.page.screenshot( util.png( ${ JSON.stringify( id ) }, ${ parser.stringify( name ) }${ optArg }) );
+      await bs.page.screenshot( util.png( ${ JSON.stringify( id ) }, `
+    + `${ parentId ? JSON.stringify( parentId ) : "null" }, ${ parser.stringify( name ) }${ optArg }) );
   `;
   },
 

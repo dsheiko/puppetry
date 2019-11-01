@@ -146,6 +146,9 @@ actions.saveSuite = ( options = {}, autosave = false ) => async ( dispatch, getS
   const store = getState(),
         { projectDirectory } = store.settings,
         { filename } = { ...store.suite, ...options };
+
+  clearTimeout( autosaveTimeout );
+  
   try {
     if ( !filename ) {
       throw new InvalidArgumentError( "Empty suite filename" );

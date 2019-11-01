@@ -74,7 +74,7 @@ const getTargetChainRecursive = function( target, targets ) {
   if ( !target.ref ) {
     return chain;
   }
-  const ref = getTarget( target.ref, targets );
+  const ref = targets[ target.ref ];
   return chain.concat( getTargetChainRecursive( ref, targets ) );
 };
 

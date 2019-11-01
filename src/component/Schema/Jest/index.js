@@ -124,7 +124,7 @@ describe( ${ JSON.stringify( title ) }, async () => {
     await bs.setup(${ getSetupOptions( options ) });
 
     bs.page.on( "console", ( message ) => consoleLog.push( message ) );
-    bs.page.on( "dialog", ( dialog ) => dialogLog.push( dialog.message() ) );
+    bs.page.on( "dialog", ( dialog ) => dialogLog.push( dialog ) );
 
     ${ options.requireInterceptTraffic ? `bs.performance.watchTraffic();` : `` }
 

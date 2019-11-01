@@ -26,25 +26,21 @@ export function stringifyTypes( types, unit = "", op = "<" ) {
 function templateConsoleMessageAssertion( cbBody, assert, comment ) {
   return justify( `
 ${ comment }
-consoleLog.forEach( message => {
-  let result = message.text();
-  if ( "${ assert.type }" === "any" || message.type() === "${ assert.type }" ) {${ cbBody }
-  }
-});
+result = consoleLog
+  .filter( message => ( "${ assert.type }" === "any" || message.type() === "${ assert.type }" ) )
+  .map( message => message.text() );
+${ cbBody }
   ` );
 }
 
 function templateDialogAssertion( cbBody, assert, params, comment ) {
   return justify( `
 ${ comment }
-toHaveSubstring
-
-dialogLog.forEach( message => {
-  let result = message;
-  if ( "${ assert.type }" === "any" || message.type() === "${ assert.type }" ) {${ cbBody }
-  }
-});
-  ` );
+result = dialogLog
+  .filter( dialog => ( "${ assert.type }" === "any" || dialog.type() === "${ assert.type }" ) )
+  .map( dialog => dialog.message() );
+${ cbBody }
+` );
 }
 
 /**
