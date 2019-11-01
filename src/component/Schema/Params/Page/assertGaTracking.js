@@ -52,7 +52,7 @@ We also assert that sent payloads are valid according to the Google API`,
   toLabel: ({ assert }) => `(\`${ renderLabel( assert ) }\` ${ renderParams( assert, "with" ) })`,
 
   toGherkin: ({ assert }) => `Assert that
-    \`${ renderLabel( assert ) }\` data were to Google Analytics ${ renderParams( assert, "with" ) }`,
+    \`${ renderLabel( assert ) }\` data were sent to Google Analytics ${ renderParams( assert, "with" ) }`,
 
   assert: {
     node: AssertGaTrackingBeacon

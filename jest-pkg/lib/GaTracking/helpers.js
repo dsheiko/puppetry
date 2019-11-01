@@ -139,10 +139,11 @@ const assertionMap = {
     }
   },
   ecCheckout: {
-    params: [ "step", "option" ],
+    params: [ "step", "option", "eventAction" ],
     data: ( b ) => b.ec.action.data,
     predicate: ( b, assert ) => {
-      validateProductNumber( b, `Checkout`, assert.productCountValue );
+      typeof assert.productCountValue !== "undefined"
+        && validateProductNumber( b, `Checkout`, assert.productCountValue );
       validate( b.ec.action.data, {
         step: { number: true }
       }, "Checkout" );
@@ -239,7 +240,7 @@ exports.filterGaBeacons = function( beacons, assert ) {
       .filter( prop => typeof assert[ `${ prop }Value`] !== "undefined" )
       .every( prop => {
       const rawVal = assert[ `${ prop }Value`];
-      
+
       // Boolean
       if ( prop === "nonInteractive" ) {
         return data[ prop ] === rawVal;
@@ -248,6 +249,9 @@ exports.filterGaBeacons = function( beacons, assert ) {
       const expectedVal = String( assert[ `${ prop }Value`] ).trim(),
             actualVal = String( data[ prop ] ).trim();
 
+      if ( typeof process.env.DEBUG_GA_BEACON !== "undefined" ) {
+        console.info( "toMatchGaTracking#2", { prop, expectedVal, actualVal });
+      }
       return assert[ `${ prop }Assertion`] === "contains"
        ? actualVal.includes( expectedVal )
        : actualVal === expectedVal;

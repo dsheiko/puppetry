@@ -145,7 +145,8 @@ function registerCommand({ target, method, params }) {
       return;
     }
 
-    commands.push({ target, method, params });
+    commands.push({ target, method, params,
+      waitForTarget: ( target !== "page" && method !== "assertVisible" && method !== "waitForTarget" ) });
     printLog( `<b>${ target }</b>.${ method }(<i>${ JSON.stringify( params ) }</i>)` );
   } catch ( e ) {
     log.warn( `renderer.js process: registerCommand(): ${ e }` );

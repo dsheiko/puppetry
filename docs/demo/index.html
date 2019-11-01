@@ -75,7 +75,7 @@
     <div class="row main-container">
 
       <div class="col s12">
-        
+
         <h4 id="demo-store">Demo Store</h4>
         <p>It's not a real store, but dummy one to test Google Analytics tracker</p>
       </div>
@@ -89,7 +89,7 @@
             </div>
             <div class="card-content">
               <span class="card-title activator grey-text text-darken-4">Puppetry T-Shirt (white)<i class="material-icons right">more_vert</i></span>
-              <p><a href="#" data-modal="cart" data-sku="white">Add to cart</a></p>
+              <p><a id="addtocartwhite" href="#" data-modal="cart" data-sku="white">Add to cart</a></p>
             </div>
             <div class="card-reveal">
               <span class="card-title grey-text text-darken-4">Puppetry T-Shirt (white)<i class="material-icons right">close</i></span>
@@ -239,7 +239,7 @@
 
       </div>
       <div class="modal-footer">
-        <a href="#" data-modal="checkout" class="modal-close waves-effect waves-green btn-flat">Checkout (not really)</a>
+        <a id="checkoutbtn" href="#" data-modal="checkout" class="modal-close waves-effect waves-green btn-flat">Checkout (not really)</a>
       </div>
     </div>
 
@@ -251,7 +251,7 @@
         <p>Let's pretend we are selecting a payment method</p>
 
         <div class="input-field col s12">
-          <select id="payment-method">
+          <select id="paymentmethod">
             <option value="" disabled selected>Choose your payment method</option>
             <option value="MasterCard">MasterCard</option>
             <option value="Visa">Visa</option>
@@ -262,7 +262,7 @@
 
       </div>
       <div class="modal-footer">
-        <a href="#" data-modal="purchase" class="modal-close waves-effect waves-green btn-flat">Proceed</a>
+        <a id="proceedbtn" href="#" data-modal="purchase" class="modal-close waves-effect waves-green btn-flat">Proceed</a>
       </div>
     </div>
 
@@ -274,7 +274,7 @@
 
       </div>
       <div class="modal-footer">
-        <a href="#!" data-buy class="modal-close waves-effect waves-green btn-flat">Buy (not really)</a>
+        <a id="purchasebtn" href="#!" class="modal-close waves-effect waves-green btn-flat">Buy (not really)</a>
       </div>
     </div>
 
@@ -348,7 +348,7 @@
           });
 
 
-          listen( "[data-modal=checkout]", "click", function( el ){
+          listen( "#checkoutbtn", "click", function( el ){
             gtag("event", "begin_checkout", {
               "items": [
                 product
@@ -357,8 +357,8 @@
             });
           });
 
-          listen( "[data-modal=purchase]", "click", function( el ){
-            var payMethod = document.querySelector( "#payment-method" );
+          listen( "#proceedbtn", "click", function( el ){
+            var payMethod = document.querySelector( "#paymentmethod" );
             gtag("event", "set_checkout_option", {
               "checkout_step": 1,
               "checkout_option": "payment method",
@@ -366,7 +366,7 @@
             });
           });
 
-          listen( "[data-buy]", "click", function( el ){
+          listen( "#purchasebtn", "click", function( el ){
             gtag("event", "purchase", {
               "transaction_id": "24." + Date.now(),
               "affiliation": "",

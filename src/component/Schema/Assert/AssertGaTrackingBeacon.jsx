@@ -134,7 +134,7 @@ export class AssertGaTrackingBeacon extends AbstractComponent {
         {  LABELS[ action ].fields.map( item => ( <Row gutter={24} key={ item.key }>
 
           <Col span={3} >
-            <div className="ant-row ant-form-item ant-form-item--like-input">
+            <div className="ant-row ant-form-item ant-form-item--like-input is-nowrap">
               { item.tooltip ? getLabel( item.label, item.tooltip ) : item.label }
             </div>
           </Col>
@@ -142,7 +142,7 @@ export class AssertGaTrackingBeacon extends AbstractComponent {
           { item.input === "CHECKBOX" && <Col span={4} ><FormItem>
             { getFieldDecorator( `assert.${ item.key }Value`, {
               initialValue: data[ `${ item.key }Value` ] ===  true,
-              valuePropName: "checked" 
+              valuePropName: "checked"
             })(
               <Checkbox></Checkbox>
             ) }
@@ -159,7 +159,8 @@ export class AssertGaTrackingBeacon extends AbstractComponent {
                 onSelect={ val => this.onSelectAssertion( val, `${ item.key }Assertion` ) }>
                 <Option value="any">any</Option>
                 <Option value="equals">equals</Option>
-                { item.input !== "NUMBER" ? <Option value="contains">contains</Option> : null }
+                { ( item.input !== "NUMBER" && item.input !== "SELECT" )
+                  ? <Option value="contains">contains</Option> : null }
               </Select> ) }
             </FormItem>
           </Col> }
@@ -172,7 +173,13 @@ export class AssertGaTrackingBeacon extends AbstractComponent {
                   required: true
                 }]
               })(
-                item.input === "NUMBER" ? <InputNumber /> : <Input />
+
+                item.input === "SELECT" ?  <Select>{
+                    Object.entries( item.options ).map( ( pair ) => (<Option
+                      value={ pair[ 0 ] }>{ pair[ 0 ] }</Option>))
+                  }
+                </Select> : ( item.input === "NUMBER" ? <InputNumber /> : <Input /> )
+
               ) }
             </FormItem> }
           </Col> }

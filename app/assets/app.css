@@ -1442,3 +1442,8 @@ summary:hover {
   padding: 16px 0;
   margin: 0;
 }
+
+
+.is-nowrap {
+  white-space: nowrap
+}

@@ -209,18 +209,20 @@ actions.createSuiteByRecording = ({ targets, commands }) => ( dispatch ) => {
       dispatch( groupActions.addGroup({ title: "Recorded session" }, groupId ) );
       dispatch( testActions.addTest({ title: "Recorded test case", groupId }, testId ) );
       // Seed commands
-      commands.forEach( ({ method, target, params }) => {
+      commands.forEach( ({ method, target, params, waitForTarget }) => {
 
         dispatch( commandActions.addCommand({
           target,
           method,
           params,
           groupId,
-          testId
+          testId,
+          waitForTarget
         }) );
       });
 
       dispatch( appActions.setApp({ loading: false }) );
+      dispatch( actions.autosaveSuite() );
     } catch ( ex ) {
       handleException( ex, dispatch, "Cannot create suite by recording" );
     }

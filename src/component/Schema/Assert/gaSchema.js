@@ -257,6 +257,17 @@ export default {
           + "on the checkout page, like selected payment method."
       },
       {
+        label: "Event Action",
+        key: "eventAction",
+        input: "SELECT",
+        options: {
+          begin_checkout: "begin_checkout",
+          checkout_progress: "checkout_progress",
+          set_checkout_option: "set_checkout_option"
+        },
+        tooltip: "Gtag.js uses different event actions to measure checkout steps."
+      },
+      {
         label: "Product Count",
         key: "productCount",
         tooltip: "The number of products involved in the checkout process",

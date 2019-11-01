@@ -36,7 +36,9 @@ class UaBeacon {
         currency: this.params.cu,
         action: {
           name: this.params.pa,
-          data: this.actionFieldObject()
+          data: Object.assign( {}, this.actionFieldObject(),
+            // special case to support checkout og GTM
+            { eventAction: this.params.ea } )
         },
         products: typeof this.params.pr1id !== "undefined" ? this.ecProducts() : []
       }

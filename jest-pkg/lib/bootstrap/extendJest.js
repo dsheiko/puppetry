@@ -318,6 +318,9 @@ module.exports = function( expect, util ) {
      * @returns {Object}
      */
     toMatchGaTracking( beacons, assert, source ) {
+        if ( typeof process.env.DEBUG_GA_BEACON !== "undefined" ) {
+          console.info( "toMatchGaTracking#1", { action: assert.action, beacons } );
+        }
         try {
           const GA = "Google Analytics";
           let matches, found;
@@ -371,10 +374,13 @@ module.exports = function( expect, util ) {
                 `[${ source }] expected to send "EC: Remove Products from cart" data to ${ GA }, but it is not sent` );
 
             case "ecCheckout":
-              found = beacons.filter( beacon => beacon.ec.action.name === "checkout" );
+              found = beacons.filter( beacon => ( beacon.ec.action.name === "checkout"
+                || beacon.ec.action.name === "checkout_option" ) );
+              matches = filterGaBeacons( found, assert );
               validateGaBeacons( found, assert );
-              return expectReturn( !!found.length,
-                `[${ source }] expected to send "EC: Checkout" data to ${ GA }, but it is not sent` );
+              return expectReturn( !!matches.length,
+                `[${ source }] expected to send "EC: Checkout" data `
+                + `(${ valsToString( assert ) }) to ${ GA }, but it is not sent` );
 
             case "ecRefund":
               found = beacons.filter( beacon => beacon.ec.action.name === "refund" );
