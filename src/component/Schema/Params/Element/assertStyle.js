@@ -1,7 +1,7 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
 import { AssertString } from "../../Assert/AssertString";
-import { normalizeAssertionVerb } from "service/utils";
+import { normalizeAssertionVerb, normalizeAssertionValue } from "service/utils";
 
 export const assertStyle = {
   template: ( command ) => buildAssertionTpl(
@@ -15,13 +15,13 @@ export const assertStyle = {
 
   toLabel: ({ params, assert }) => {
     return `(${ params.name + ( params.pseudo || "" ) } `
-          + `${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\`)`;
+          + `${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )})`;
   },
 
   toGherkin: ({ target, params, assert }) => `Assert that
   \`${ params.name + ( params.pseudo || "" ) }\`
     computed style property of  \`${ target }\`
-    ${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\``,
+    ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )}`,
 
   commonly: "assert style",
 

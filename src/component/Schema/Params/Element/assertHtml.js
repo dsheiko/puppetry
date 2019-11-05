@@ -1,6 +1,6 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertString } from "../../Assert/AssertString";
-import { normalizeAssertionVerb, renderTarget } from "service/utils";
+import { normalizeAssertionVerb, normalizeAssertionValue, renderTarget } from "service/utils";
 
 export const assertHtml = {
   template: ( command ) => buildAssertionTpl(
@@ -10,11 +10,10 @@ export const assertHtml = {
   ),
 
   toLabel: ({ assert }) => {
-    return assert.value ? `(${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\`)`
-      : "";
+    return `(${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )})`;
   },
   toGherkin: ({ target, assert }) => `Assert that text content of \`${ target }\`
-    ${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\``,
+    ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )}`,
 
   commonly: "assert HTML",
 

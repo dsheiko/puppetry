@@ -1458,3 +1458,6 @@ summary:hover {
   max-height: 220px;
 }
 
+.ant-row.ant-form-item.is-text-align-left {
+  text-align: left;
+}

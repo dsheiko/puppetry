@@ -5,9 +5,9 @@ module.exports = function( expect, util ) {
    * Extending JEST
    */
   const OPERATOR_MAP = {
-    gt: ">",
-    lt: "<",
-    eq: "="
+    gt: "> ",
+    lt: "< ",
+    eq: ""
   };
 
   /**
@@ -18,7 +18,13 @@ module.exports = function( expect, util ) {
    * @returns {Boolean}
    */
   function compare( a, operator, b ) {
+    // When parameter omited
+    if ( isNaN( b ) ) {
+      return true;
+    }
     switch( operator ) {
+      case "eq":
+        return a === b;
       case "gt":
         return a > b;
       default:
@@ -197,7 +203,7 @@ module.exports = function( expect, util ) {
               : ( operator === "gt" ? received > value : received < value );
 
       return expectReturn( pass,
-        `[${ source }] expected ${ received } to be ${ OPERATOR_MAP[ operator ] } ${ value }` );
+        `[${ source }] expected ${ received } to be ${ OPERATOR_MAP[ operator ] }${ value }` );
     },
 
     /**
@@ -216,21 +222,23 @@ module.exports = function( expect, util ) {
 
       if ( isEnabled( snapshot, "xValue" ) && !x ) {
         return expectReturn( x,
-          `[${ source }] expected for box.x: ${received.x} to be ${OPERATOR_MAP[snapshot.xOperator]} ${snapshot.xValue}` );
+          `[${ source }] expected for box.x (${received.x}px) to be `
+          + `${OPERATOR_MAP[snapshot.xOperator]}${snapshot.xValue}px` );
       }
       if ( isEnabled( snapshot, "yValue" ) && !y ) {
         return expectReturn( y,
-          `[${ source }] expected for box.y: ${received.y} to be ${OPERATOR_MAP[snapshot.yOperator]} ${snapshot.yValue}` );
+          `[${ source }] expected for box.y (${received.y}px) to be `
+          + `${OPERATOR_MAP[snapshot.yOperator]}${snapshot.yValue}px` );
       }
       if ( isEnabled( snapshot, "wValue" ) &&!w ) {
         return expectReturn( w,
-          `[${ source }] expected for box.width: `
-            + `${received.width} to be ${OPERATOR_MAP[snapshot.wOperator]} ${snapshot.wValue}` );
+          `[${ source }] expected for box.width (`
+            + `${received.width}px) to be ${OPERATOR_MAP[snapshot.wOperator]}${snapshot.wValue}px` );
       }
       if ( isEnabled( snapshot, "hValue" ) && !h ) {
         return expectReturn( h,
-          `[${ source }] expected for box.height: ${received.height}`
-            + ` to be ${OPERATOR_MAP[snapshot.hOperator]} ${snapshot.hValue}` );
+          `[${ source }] expected for box.height (${received.height}px)`
+            + ` to be ${OPERATOR_MAP[snapshot.hOperator]}${snapshot.hValue}px` );
       }
       return expectReturn( true, `` );
     },

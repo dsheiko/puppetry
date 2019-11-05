@@ -14,7 +14,7 @@ export const assertAttribute = {
   ),
 
   toLabel: ({ params, assert }) => `(\`${ params.name }\``
-    + ` ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert.value )})`,
+    + ` ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )})`,
 
   toGherkin: ({ target, params, assert }) => `Assert that attribute \`${ params.name }\` of \`${ target }\`
     ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )}`,

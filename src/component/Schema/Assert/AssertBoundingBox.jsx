@@ -80,6 +80,7 @@ export class AssertBoundingBox extends React.Component {
             })( <Select showSearch optionFilterProp="children" style={{ width: 64 }}
               onChange={ ( e ) =>  this.onSwitchChange( e, "x" ) }>
               <Option value="any">any</Option>
+              <Option value="eq">=</Option>
               <Option value="gt">&gt;</Option>
               <Option value="lt">&lt;</Option>
             </Select> ) }
@@ -95,6 +96,9 @@ export class AssertBoundingBox extends React.Component {
             })( <InputNumber /> )
             }
           </FormItem> }
+
+          { state.x !== "any" && <div
+            className="ant-row ant-form-item ant-form-item--like-input is-short is-text-align-left">px</div> }
 
         </Row>
 
@@ -113,6 +117,7 @@ export class AssertBoundingBox extends React.Component {
             })( <Select showSearch optionFilterProp="children" style={{ width: 64 }}
               onChange={ ( e ) =>  this.onSwitchChange( e, "y" ) }>
               <Option value="any">any</Option>
+              <Option value="eq">=</Option>
               <Option value="gt">&gt;</Option>
               <Option value="lt">&lt;</Option>
             </Select> ) }
@@ -127,6 +132,9 @@ export class AssertBoundingBox extends React.Component {
             })( <InputNumber /> )
             }
           </FormItem> }
+
+          { state.y !== "any" && <div
+            className="ant-row ant-form-item ant-form-item--like-input is-short is-text-align-left">px</div> }
 
         </Row>
 
@@ -145,6 +153,7 @@ export class AssertBoundingBox extends React.Component {
             })( <Select showSearch optionFilterProp="children" style={{ width: 64 }}
               onChange={ ( e ) =>  this.onSwitchChange( e, "w" ) }>
               <Option value="any">any</Option>
+              <Option value="eq">=</Option>
               <Option value="gt">&gt;</Option>
               <Option value="lt">&lt;</Option>
             </Select> ) }
@@ -159,6 +168,9 @@ export class AssertBoundingBox extends React.Component {
             })( <InputNumber /> )
             }
           </FormItem> }
+
+          { state.w !== "any" && <div
+            className="ant-row ant-form-item ant-form-item--like-input is-short is-text-align-left">px</div> }
 
         </Row>
 
@@ -177,6 +189,7 @@ export class AssertBoundingBox extends React.Component {
             })( <Select showSearch optionFilterProp="children" style={{ width: 64 }}
               onChange={ ( e ) =>  this.onSwitchChange( e, "h" ) }>
               <Option value="any">any</Option>
+              <Option value="eq">=</Option>
               <Option value="gt">&gt;</Option>
               <Option value="lt">&lt;</Option>
             </Select> ) }
@@ -191,6 +204,9 @@ export class AssertBoundingBox extends React.Component {
             })( <InputNumber /> )
             }
           </FormItem> }
+
+          { state.h !== "any" && <div
+            className="ant-row ant-form-item ant-form-item--like-input is-short is-text-align-left">px</div> }
 
         </Row>
 
