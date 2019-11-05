@@ -7,8 +7,8 @@ export const scroll = {
     return justify( `
 // Set the number of pixels that an element's content is scrolled horizontally/vertically.
 await bs.page.$eval( '${ command.targetSeletor }',  ( el, x, y ) => {
-  el.scrollTop = x;
-  el.scrollLeft = y;
+  el.scrollTop = y;
+  el.scrollLeft = x;
 }, ${ parseInt( x, 10 ) }, ${ parseInt( y, 10 ) } );` );
   },
 

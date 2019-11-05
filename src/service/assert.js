@@ -83,6 +83,23 @@ function negate( not ) {
   return ( not === "false" || !not ) ? `` : `.not`;
 }
 
+function getExpectation( method, params, assert ) {
+  switch ( method ) {
+    case "assertConsoleMessage":
+      return JSON.stringify( `to find console messages `
+      + `of type "${ assert.type }" with message ${ assert.assertion !== "haveString" ? "~ " : "" }`
+      + `"${ assert.value }"` );
+    case "assertTextCount":
+    case "assertNodeCount":
+      return JSON.stringify( `number of the matching elements` );
+    case "assertScroll":
+      return typeof params.direction !== "undefined"
+        ? JSON.stringify( `scroll offset ${ params.direction }` ) : `null`;
+      default:
+        return "null";
+  }
+}
+
 function createCbBody({ assert, target, method, id, params }) {
   const { assertion, value, operator, position, not, ...options } = assert,
         source = `${ target }.${ method }`;
@@ -93,11 +110,13 @@ function createCbBody({ assert, target, method, id, params }) {
   case "screenshot":
     return justify( `expect( result ).toMatchScreenshot( ${ options.mismatchTolerance }, "${ source }" );` );
   case "selector":
-    return justify( `expect( result ).toBeOk( "${ source }" );` );
+    return justify( `expect( result ).toMatchSelector( "${ value }", "${ source }" );` );
   case "boolean":
     return justify( `expect( result )${ value ? "" : ".not" }.toBeOk( "${ source }" );` );
+
   case "number":
-    return justify( `expect( result ).toPassCondition( "${ operator }", ${ value }, "${ source }" );` );
+    return justify( `expect( result ).toPassCondition( "${ operator }", ${ value },`
+      + ` ${ getExpectation( method, params, assert ) }, "${ source }" );` );
 
   case "contains":
     return justify( `expect( result ).toIncludeSubstring( ${ parseTpl( value, id, options.type ) }`
@@ -114,6 +133,12 @@ function createCbBody({ assert, target, method, id, params }) {
   case "!empty":
     return justify( `expect( result ).not.toBeEmpty( "${ source }" );` );
 
+
+  case "hasClass":
+    return justify( `expect( result ).toHaveClass( "${ params.name }", "${ source }" );` );
+  case "!hasClass":
+    return justify( `expect( result ).not.toHaveClass( "${ params.name }", "${ source }" );` );
+
   case "hasAttribute":
     return justify( `expect( result ).toHaveAttribute( "${ params.name }", "${ source }" );` );
   case "!hasAttribute":
@@ -126,10 +151,10 @@ function createCbBody({ assert, target, method, id, params }) {
 
   case "haveString":
     return justify( `expect( result )${ negate( not ) }.toHaveString( ${ parseTpl( value, id, options.type ) }`
-        + `, "${ source }" );` );
+        + `, ${ getExpectation( method, params, assert ) }, "${ source }" );` );
   case "haveSubstring":
-    return justify( `expect( result )${ negate( not ) }.toHaveString( ${ parseTpl( value, id, options.type ) }`
-        + `, "${ source }" );` );
+    return justify( `expect( result )${ negate( not ) }.toHaveSubstring( ${ parseTpl( value, id, options.type ) }`
+        + `, ${ getExpectation( method, params, assert ) }, "${ source }" );` );
 
   case "position":
     return justify( `expect( result ).toMatchPosition`

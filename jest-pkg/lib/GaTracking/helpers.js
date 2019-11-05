@@ -100,7 +100,7 @@ const assertionMap = {
     }
   },
   ecProductImpression: {
-    params: ["description"],
+    params: [ "id", "name", "list", "brand", "category", "variant", "position", "price" ],
     data: ( b ) => b.ec.impressions[ 0 ],
     predicate: ( b ) => {
       validate( b.ec.impressions[ 0 ], {

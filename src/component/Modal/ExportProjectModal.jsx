@@ -181,7 +181,9 @@ export class ExportProjectModal  extends AbstractComponent {
 
 
       } catch ( err ) {
+        console.error( err );
         const message = err instanceof TestGeneratorError ? "Test parser error" : "Cannot export project";
+        this.props.action.setApp({ exportProjectModal: false });
         this.props.action.setError({
           visible: true,
           message,

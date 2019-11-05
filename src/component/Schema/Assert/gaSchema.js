@@ -112,7 +112,7 @@ export default {
     fields: [
       {
         label: "Variable",
-        key: "name",
+        key: "var",
         tooltip: "A string to identify the variable being recorded"
       },
       {

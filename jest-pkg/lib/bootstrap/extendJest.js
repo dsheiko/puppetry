@@ -82,6 +82,34 @@ module.exports = function( expect, util ) {
         `[${ source }] expected ${ JSON.stringify( prop ) } to be absent` );
     },
 
+    /**
+     * Assert value is truthy
+     * @param {Boolean} received
+     * @param {String} prop - property/attribute
+     * @param {String} source
+     * @returns {Object}
+     */
+    toHaveClass( received, prop, source ) {
+      const pass = Boolean( received );
+      return expectReturn( pass,
+        `[${ source }] expected to contain class ${ JSON.stringify( prop ) }`,
+        `[${ source }] expected not to contain class ${ JSON.stringify( prop ) }` );
+    },
+
+    /**
+     * Assert value is truthy
+     * @param {Boolean} received
+     * @param {String} prop - property/attribute
+     * @param {String} source
+     * @returns {Object}
+     */
+    toMatchSelector( received, prop, source ) {
+      const pass = Boolean( received );
+      return expectReturn( pass,
+        `[${ source }] expected to match selector ${ JSON.stringify( prop ) }`,
+        `[${ source }] expected not to match selector ${ JSON.stringify( prop ) }` );
+    },
+
      /**
      * Assert value is truthy
      * @param {Boolean} received
@@ -135,7 +163,6 @@ module.exports = function( expect, util ) {
      * @returns {Object}
      */
     toMatchScreenshot( received, mismatchTolerance, source ) {
-      console.log("received", received);
       const pass = Number( received ) === 0;
       return expectReturn( pass,
         `[${ source }] expected to satisfy mismatch tolerance of ${ mismatchTolerance }`,
@@ -161,30 +188,43 @@ module.exports = function( expect, util ) {
      * Assert that at least one element of passed array includes substring
      * @param {String[]} received
      * @param {String} substring
+     * @param {String} expectation
      * @param {String} source
      * @returns {Object}
      */
-    toHaveString( received, substring, source ) {
+    toHaveString( received, substring, expectation, source ) {
       const pass = received.some( string => string === substring ),
             receivedPrint = `[${ received.join(",").substr( 0, 128 ) }..]`;
+
+      if ( expectation ) {
+        return expectReturn( pass,
+        `[${ source }] expected ${ expectation }`,
+        `[${ source }] expected not ${ expectation }` );
+      }
       return expectReturn( pass,
-        `[${ source }] expected "${ receivedPrint }" to have "${substring}"`,
-        `[${ source }] expected "${ receivedPrint }" not to have "${substring}"` );
+        `[${ source }] expected at least one of "${ receivedPrint }" to be "${substring}"`,
+        `[${ source }] expected none of "${ receivedPrint }" to be "${substring}"` );
     },
 
      /**
      * Assert that at least one element of passed array includes substring
      * @param {String[]} received
      * @param {String} substring
+     * @param {String} expectation
      * @param {String} source
      * @returns {Object}
      */
-    toHaveSubstring( received, substring, source ) {
+    toHaveSubstring( received, substring, expectation, source ) {
       const pass = received.some( string => string.includes( substring ) ),
             receivedPrint = `[${ received.join(",").substr( 0, 128 ) }..]`;
+      if ( expectation ) {
+        return expectReturn( pass,
+        `[${ source }] expected ${ expectation }`,
+        `[${ source }] expected not ${ expectation }` );
+      }
       return expectReturn( pass,
-        `[${ source }] expected "${ receivedPrint }" to contain "${substring}"`,
-        `[${ source }] expected "${ receivedPrint }" not to contain "${substring}"` );
+        `[${ source }] expected at least one of "${ receivedPrint }" to contain "${substring}"`,
+        `[${ source }] expected none of "${ receivedPrint }" to contain "${substring}"` );
     },
 
     /**
@@ -192,10 +232,11 @@ module.exports = function( expect, util ) {
      * @param {Number} rawReceived
      * @param {String} operator
      * @param {Number} rawValue
+     * @param {String} expectation
      * @param {String} source
      * @returns {Object}
      */
-    toPassCondition( rawReceived, operator, rawValue, source ) {
+    toPassCondition( rawReceived, operator, rawValue, expectation, source ) {
       const received = parseInt( rawReceived, 10 ),
             value = parseInt( rawValue, 10 ),
             pass = operator === "eq"
@@ -203,7 +244,8 @@ module.exports = function( expect, util ) {
               : ( operator === "gt" ? received > value : received < value );
 
       return expectReturn( pass,
-        `[${ source }] expected ${ received } to be ${ OPERATOR_MAP[ operator ] }${ value }` );
+        `[${ source }] expected ${ expectation
+          ? `${ expectation } (${ received })` : received } to be ${ OPERATOR_MAP[ operator ] }${ value }` );
     },
 
     /**
