@@ -1,29 +1,31 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
-import { AssertValue } from "../../Assert/AssertValue";
-import { normalizeAssertionVerb, renderTarget } from "service/utils";
+import { AssertAttribute } from "../../Assert/AssertAttribute";
+import { normalizeAssertionVerb, normalizeAssertionValue, renderTarget } from "service/utils";
 
 export const assertAttribute = {
   template: ( command ) => buildAssertionTpl(
-    `await bs.target( ${ renderTarget( command.target ) } ).getAttr( "${ command.params.name }" )`,
+    ( command.assert && ["set", "!set" ].includes( command.assert.assertion )
+    ? `await bs.target( ${ renderTarget( command.target ) } ).hasAttr( "${ command.params.name }" )`
+    : `await bs.target( ${ renderTarget( command.target ) } ).getAttr( "${ command.params.name }" )` ),
     command,
     `// Asserting that "${ command.params.name }" `
       + `attribute's value of ${ command.target } satisfies the given constraint`
   ),
 
   toLabel: ({ params, assert }) => `(\`${ params.name }\``
-    + ` ${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\`)`,
+    + ` ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert.value )})`,
 
   toGherkin: ({ target, params, assert }) => `Assert that attribute \`${ params.name }\` of \`${ target }\`
-    ${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\``,
+    ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )}`,
 
   commonly: "assert attribute",
 
 
   assert: {
-    node: AssertValue,
+    node: AssertAttribute,
     options: {
-      boolean: true
+      type: "attribute"
     }
   },
   description: `Asserts that the
@@ -38,7 +40,7 @@ export const assertAttribute = {
           control: INPUT,
           label: "Attribute name",
           description: `HTML attribute. E.g. for \`<a href="" data-foo=""></a>\`
-          you can obtain href or \`data-foo\`.
+          you can obtain \`href\` or \`data-foo\`.
 [See here for details](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes)`,
           placeholder: "e.g. href",
           initialValue: "",

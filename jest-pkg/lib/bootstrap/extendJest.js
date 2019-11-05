@@ -62,6 +62,34 @@ module.exports = function( expect, util ) {
         `[${ source }] expected to be falsy` );
     },
 
+     /**
+     * Assert value is truthy
+     * @param {Boolean} received
+     * @param {String} prop - property/attribute
+     * @param {String} source
+     * @returns {Object}
+     */
+    toHaveAttribute( received, prop, source ) {
+      const pass = Boolean( received );
+      return expectReturn( pass,
+        `[${ source }] expected ${ JSON.stringify( prop ) } to be present`,
+        `[${ source }] expected ${ JSON.stringify( prop ) } to be absent` );
+    },
+
+     /**
+     * Assert value is truthy
+     * @param {Boolean} received
+     * @param {String} prop - property/attribute
+     * @param {String} source
+     * @returns {Object}
+     */
+    toHavePropertyTrue( received, prop, source ) {
+      const pass = Boolean( received );
+      return expectReturn( pass,
+        `[${ source }] expected ${ JSON.stringify( prop ) } to be true`,
+        `[${ source }] expected ${ JSON.stringify( prop ) } to be false` );
+    },
+
     /**
      * Assert values equal
      * @param {String|Number|Boolean} received
@@ -74,6 +102,23 @@ module.exports = function( expect, util ) {
       return expectReturn( pass,
         `[${ source }] expected ${ JSON.stringify( received ) } to equal ${ JSON.stringify( value ) }`,
         `[${ source }] expected ${ JSON.stringify( received ) } not to equal ${ JSON.stringify( value ) }` );
+    },
+
+     /**
+     * Assert value is an empty string
+     * @param {String} received
+     * @param {String} source
+     * @returns {Object}
+     */
+    toBeEmpty( received, source ) {
+      if ( typeof received !== "string" ) {
+        return expectReturn( false,
+          `[${ source }] expected ${ JSON.stringify( received ) } to be a string, but it is ${ typeof received }` );
+      }
+      const pass = !received.trim().length;
+      return expectReturn( pass,
+        `[${ source }] expected ${ JSON.stringify( received ) } to be empty`,
+        `[${ source }] expected ${ JSON.stringify( received ) } to be not empty` );
     },
 
      /**

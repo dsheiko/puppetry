@@ -1,6 +1,6 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
-import { AssertValue } from "../../Assert/AssertValue";
+import { AssertString } from "../../Assert/AssertString";
 import { normalizeAssertionVerb } from "service/utils";
 
 export const assertStyle = {
@@ -26,7 +26,7 @@ export const assertStyle = {
   commonly: "assert style",
 
   assert: {
-    node: AssertValue
+    node: AssertString
   },
   description: `Asserts that the
 [computed style](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle)

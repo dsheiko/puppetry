@@ -178,14 +178,27 @@ export default class TestGenerator {
         this.interactive.targets[ command.id ] = [{  target, selector: this.targets[ target ] }];
       }
       // Provide source code with markers
-      return this.runner === RUNNER_PUPPETRY
+      const code = this.runner === RUNNER_PUPPETRY
         ? `      ${ COMMAND_ID_COMMENT }${ command.groupId }:${ command.testId }:${ command.id }\n${ chunk }`
         : chunk;
+
+      return ( typeof command.comment === "string" && command.comment.startsWith( "@assert " ) )
+       ? this.renderCommandTryCath( code, command.comment ) : code;
+
     } catch ( err ) {
       console.warn( "parseCommand error:", err, command );
       log.warn( `Renderer process: TestGenerator.parseCommand: ${ err }` );
       throw new TestGeneratorError( `${ target }.${ method }(): ${ err.message }` );
     }
+  }
+
+  /**
+   * To generate self-tests
+   */
+  renderCommandTryCath( code, comment ) {
+    const substr = comment.substr( 8 ).trim();
+    return `\n      try { ${ code }\n      } catch( err ){\n      `
+      + `  expect( err.message ).toMatch( ${ JSON.stringify( substr ) } );\n      }`;
   }
 
   parseTest = ( test ) => {

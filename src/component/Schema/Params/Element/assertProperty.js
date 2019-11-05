@@ -1,7 +1,7 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
-import { AssertValue } from "../../Assert/AssertValue";
-import { normalizeAssertionVerb, renderTarget } from "service/utils";
+import { AssertProperty } from "../../Assert/AssertProperty";
+import { normalizeAssertionVerb, normalizeAssertionValue, renderTarget } from "service/utils";
 
 export const assertProperty = {
   template: ( command ) => buildAssertionTpl(
@@ -12,17 +12,17 @@ export const assertProperty = {
   ),
 
   toLabel: ({ params, assert }) => `(\`${ params.name }\``
-    + ` ${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\`)`,
+    + ` ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert.value )})`,
 
-  toGherkin: ({ target, params, assert }) => `Assert that \`${ params.name }\` property of \`${ target }\`
-    ${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\``,
+  toGherkin: ({ target, params, assert }) => `Assert that property \`${ params.name }\` of \`${ target }\`
+    ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )}`,
 
   commonly: "assert property",
 
   assert: {
-    node: AssertValue,
+    node: AssertProperty,
     options: {
-      boolean: true
+      type: "property"
     }
   },
   description: `Asserts that the

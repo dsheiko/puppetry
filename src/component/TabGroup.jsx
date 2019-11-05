@@ -22,7 +22,6 @@ export class TabGroup extends React.Component {
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired
     }),
-    store: PropTypes.object.isRequired,
     selector: PropTypes.object
   }
 
@@ -35,7 +34,7 @@ export class TabGroup extends React.Component {
   }
 
   remove = async ( targetKey ) => {
-    if ( targetKey === "suite" && this.props.store.suite.modified ) {
+    if ( targetKey === "suite" && this.props.suiteModified ) {
       await confirmUnsavedChanges({
         saveSuite: this.props.action.saveSuite,
         setSuite: this.props.action.setSuite
@@ -45,25 +44,25 @@ export class TabGroup extends React.Component {
   }
 
   render() {
-    const { store, action, selector } = this.props,
-          { tabs } = store.app,
-          { suite } = store,
-          
-          suiteTitle = suite.description || suite.title,
+    const {
+            action, selector, app, projectDirectory, suiteTitle, suiteModified,
+            suiteSnippets, suiteFilename, project, snippets, git, settings, suiteTargets
+          } = this.props,
+          { tabs } = app,
 
-          suiteTabTitle = suite.filename
-            ? ( store.suite.snippets
+          suiteTabTitle = suiteFilename
+            ? ( suiteSnippets
               ? "Snippets"
               :  <Tooltip placement="bottomRight" title={ suiteTitle }>
-        <Icon type="container" />{ suite.filename }
+        <Icon type="container" />{ suiteFilename }
       </Tooltip> )
             : "Loading..." ,
 
           panes = {
 
             suite: () => ( <TabPane tab={ suiteTabTitle } key="suite" closable={ true }>
-              { store.suite.snippets && <Snippets action={ action } selector={ selector } /> }
-              { !store.suite.snippets && <Main
+              { suiteSnippets && <Snippets action={ action } selector={ selector } /> }
+              { !suiteSnippets && <Main
                 action={ action }
                 selector={ selector } /> }
             </TabPane> ),
@@ -72,20 +71,20 @@ export class TabGroup extends React.Component {
               key="testReport" closable={ true } className="report-panel-tab">
               <TestReport
                 action={ action }
-                targets={ store.suite.targets }
-                projectDirectory={ store.settings.projectDirectory }
-                headless={ store.app.headless }
-                launcherArgs={ store.app.launcherArgs }
-                checkedList={ store.app.checkedList }
-                environment={ store.app.environment }
+                targets={ suiteTargets }
+                projectDirectory={ projectDirectory }
+                headless={ app.headless }
+                launcherArgs={ app.launcherArgs }
+                checkedList={ app.checkedList }
+                environment={ app.environment }
                 options={{
-                  updateSnapshot: store.app.updateSnapshot,
-                  interactiveMode: store.app.interactiveMode,
-                  incognito: store.app.incognito,
-                  ignoreHTTPSErrors: store.app.ignoreHTTPSErrors
+                  updateSnapshot: app.updateSnapshot,
+                  interactiveMode: app.interactiveMode,
+                  incognito: app.incognito,
+                  ignoreHTTPSErrors: app.ignoreHTTPSErrors
                 }}
-                project={ store.project }
-                snippets={ store.snippets }
+                project={ project }
+                snippets={ snippets }
                 selector={ selector }
               />
             </TabPane> ),
@@ -102,15 +101,15 @@ export class TabGroup extends React.Component {
 
             projectGit: () => ( <TabPane tab={ "GIT" } key="projectGit" closable={ true }>
               <div className="tabpane-frame">
-                <GitPane action={ action } git={ store.git } projectDirectory={ store.settings.projectDirectory } />
+                <GitPane action={ action } git={  git } projectDirectory={ projectDirectory } />
               </div>
             </TabPane> ),
 
             settings: () => ( <TabPane tab={ "Settings" } key="settings" closable={ true }>
               <SettingsPanel
                 action={ action }
-                settings={ store.settings }
-                project={ store.project }
+                settings={ settings }
+                project={ project }
               />
             </TabPane> )
           };

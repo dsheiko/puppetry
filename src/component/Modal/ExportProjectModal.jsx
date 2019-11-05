@@ -254,6 +254,7 @@ export class ExportProjectModal  extends AbstractComponent {
               key="back" onClick={this.onClickCancel}>Cancel</Button> ),
             ( <Button
               className={ classes.BTN_OK }
+              ref={ ( el ) => el && el.buttonNode && el.buttonNode.focus() }
               key="submit"
               type="primary"
               autoFocus={ true }

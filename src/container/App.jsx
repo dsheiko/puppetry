@@ -27,7 +27,7 @@ const GREETINGS = [ "Greetings",
 
       // Mapping state to the props
       mapStateToProps = ( state ) => ({
-        store: state,
+
         selector: {
           getTargetDataTable: () => selectors.getTargetDataTable( state.suite.targets ),
           getGroupDataTable: () => selectors.getStructureDataTable( state.suite.groups, "group" ),
@@ -60,7 +60,7 @@ export class App extends React.Component {
       loadGit: PropTypes.func,
       loadSnippets: PropTypes.func.isRequired
     }),
-    store: PropTypes.object,
+
     selector: PropTypes.object
   }
 
@@ -120,7 +120,7 @@ export class App extends React.Component {
   }
 
   render() {
-    const { action, store, selector } = this.props,
+    const { action, selector } = this.props,
           { loaded } = this.state;
     return ( <React.Fragment>
       { !loaded && ( <div className="ant-spin ant-spin-lg ant-spin-spinning">
@@ -134,7 +134,7 @@ export class App extends React.Component {
         <LoadingTip />
 
       </div> ) }
-      { loaded && <AppLayout action={ action } store={ store } selector={ selector } /> }
+      { loaded && <AppLayout action={ action } selector={ selector } /> }
     </React.Fragment> );
   }
 }

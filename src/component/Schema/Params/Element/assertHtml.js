@@ -1,5 +1,5 @@
 import { buildAssertionTpl } from "service/assert";
-import { AssertValue } from "../../Assert/AssertValue";
+import { AssertString } from "../../Assert/AssertString";
 import { normalizeAssertionVerb, renderTarget } from "service/utils";
 
 export const assertHtml = {
@@ -20,7 +20,7 @@ export const assertHtml = {
 
   description: `Asserts that the HTML content of the focused element satisfies the given constraint`,
   assert: {
-    node: AssertValue
+    node: AssertString
   },
   params: [
 

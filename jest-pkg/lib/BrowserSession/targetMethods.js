@@ -33,6 +33,16 @@ module.exports = function( page ) {
       },
 
       /**
+       * Does element have attribute
+       * @param {string} attr
+       * @returns {Promise<string>}
+       */
+      hasAttr: async function( attr ){
+        const handle = await page.evaluateHandle( ( el, attr ) => el.hasAttribute( attr ), elementHandle, attr );
+        return await handle.jsonValue();
+      },
+
+      /**
        * Check if element is visible in the DOM
        * @returns {Promise<Object>}
        **/

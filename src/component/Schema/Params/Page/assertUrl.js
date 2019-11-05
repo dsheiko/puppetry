@@ -1,5 +1,5 @@
 import { buildAssertionTpl } from "service/assert";
-import { AssertValue } from "../../Assert/AssertValue";
+import { AssertString } from "../../Assert/AssertString";
 import { normalizeAssertionVerb } from "service/utils";
 
 export const assertUrl = {
@@ -18,7 +18,7 @@ export const assertUrl = {
 
   description: `Asserts that the page URL satisfies the given constraint`,
   assert: {
-    node: AssertValue
+    node: AssertString
   },
   params: [
 

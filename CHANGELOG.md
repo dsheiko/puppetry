@@ -39,9 +39,11 @@
 
 ### Updates
 
-- improvement: updated to Electron 6
-- improvement: updated to Puppeteer 1.19
-- improvement: updated to Jest 24.9
+- improvement: update to Electron 7
+- improvement: update to Puppeteer 2
+- improvement: update to Jest 24.9
+- improvement: update to React 16.11
+- improvement: update to React-redux 7
 
 # Puppetry 2.0.4
 

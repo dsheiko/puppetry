@@ -1,5 +1,5 @@
 import { buildAssertionTpl } from "service/assert";
-import { AssertValue } from "../../Assert/AssertValue";
+import { AssertString } from "../../Assert/AssertString";
 import { INPUT } from "../../constants";
 import { normalizeAssertionVerb } from "service/utils";
 
@@ -19,7 +19,7 @@ export const assertVar = {
 
   description: `Asserts that variable associated with a given name satisfies the given constraint`,
   assert: {
-    node: AssertValue
+    node: AssertString
   },
   params: [
     {

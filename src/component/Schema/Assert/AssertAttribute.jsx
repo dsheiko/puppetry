@@ -8,7 +8,7 @@ import AbstractComponent from "component/AbstractComponent";
 const Option = Select.Option,
       FormItem = Form.Item;
 
-export class AssertValue extends AbstractComponent {
+export class AssertAttribute extends AbstractComponent {
 
   state = {
     assertion: "",
@@ -37,7 +37,6 @@ export class AssertValue extends AbstractComponent {
   render () {
     const { getFieldDecorator } = this.props.form,
           { record, options } = this.props,
-          hasBoolean = !!( options && options.boolean ),
           assertion = this.state.assertion || getAssertion( record ).assertion || "equals",
           type = this.state.type || record.assert.type || "string",
           value = record.assert.value || "";
@@ -55,27 +54,22 @@ export class AssertValue extends AbstractComponent {
               onSelect={ this.onSelectAssertion }>
               <Option value="equals">equals</Option>
               <Option value="contains">contains</Option>
+              <Option value="hasAttribute">is present</Option>
               <Option value="!equals">does not equal</Option>
               <Option value="!contains">does not contain</Option>
+              <Option value="!hasAttribute">is absent</Option>
             </Select> ) }
           </FormItem>
+          { ( assertion === "set" || assertion === "!set" ) && <div className="under-field-description">
+           A number of attributes are boolean attributes. The presence of a boolean attribute on an element
+            represents the true <code>value</code>, and the absence of the attribute
+            represents the <code>false</code> value.
+            { "" } <a onClick={ this.onExtClick }
+            href="http://www.w3.org/TR/html5/infrastructure.html#boolean-attributes">
+            HTML Living Standard</a>
+          </div> }
         </Col>
 
-        <If exp={ ( hasBoolean && ( assertion === "equals" || assertion === "!equals" ) ) }>
-          <Col span={4} >
-            <FormItem label="Type">
-              { getFieldDecorator( "assert.type", {
-                initialValue: type,
-                rules: [{
-                  required: true
-                }]
-              })( <Select showSearch optionFilterProp="children" onSelect={ this.onSelectType }>
-                <Option value="string">string</Option>
-                <Option value="boolean">boolean</Option>
-              </Select> ) }
-            </FormItem>
-          </Col>
-        </If>
 
         <If exp={ ( assertion === "contains" || assertion === "!contains" ) }>
           <Col span={12} >
@@ -89,40 +83,27 @@ export class AssertValue extends AbstractComponent {
                 <Input />
               ) }
             </FormItem>
-            { type === "string" && <div className="under-field-description">You can use
+            <div className="under-field-description">You can use
               { "" } <a onClick={ this.onExtClick } href="https://docs.puppetry.app/template">
               template expressions</a>
-            </div> }
+            </div>
           </Col>
         </If>
 
-        <If exp={ ( ( assertion === "equals" || assertion === "!equals" ) && !!type ) }>
+        <If exp={ ( assertion === "equals" || assertion === "!equals" ) }>
           <Col span={12} >
 
-            <If exp={ type === "boolean" }>
-              <FormItem label="Value">
-                { getFieldDecorator( "assert.value", {
-                  initialValue: value,
-                  valuePropName: "checked" 
-                })(
-                  <Checkbox>is true</Checkbox>
-                ) }
-              </FormItem>
-            </If>
-
-            <If exp={ type !== "boolean" }>
               <FormItem label="Value">
                 { getFieldDecorator( "assert.value", {
                   initialValue: value
                 })(
-                  this.renderValueInput( type )
+                  <Input />
                 ) }
               </FormItem>
-              { type === "string" && <div className="under-field-description">You can use
+              <div className="under-field-description">You can use
                 { "" } <a onClick={ this.onExtClick } href="https://docs.puppetry.app/template">
                 template expressions</a>
-              </div> }
-            </If>
+              </div>
 
           </Col>
         </If>
@@ -130,13 +111,5 @@ export class AssertValue extends AbstractComponent {
       </Row> );
   }
 
-  renderValueInput( type ) {
-    switch ( true ) {
-    case type === "number":
-      return <InputNumber />;
-    default:
-      return <Input />;
-    }
-  }
 
 }

@@ -249,6 +249,10 @@ body {
   color: #ad6800;
 }
 
+.command-form  .ant-form-explain {
+  background: white;
+}
+
 [draggable=false] {
   -webkit-user-drag: none;
   user-select: none;
@@ -380,7 +384,7 @@ nav >  ul, nav >  ul ol {
   /*flex: 1 1 auto;*/
   padding: 0;
   max-width: 250px;
-  height: calc(100vh - 364px);
+  height: calc(100vh - 370px);
   overflow-y: auto;
 }
 
@@ -1448,3 +1452,9 @@ summary:hover {
 .is-nowrap {
   white-space: nowrap
 }
+
+.modal-suites-checkbox-groupis-checkbox-group-scrollable {
+  overflow-y: auto;
+  max-height: 220px;
+}
+

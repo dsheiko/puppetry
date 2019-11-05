@@ -1,5 +1,5 @@
 import { buildAssertionTpl } from "service/assert";
-import { AssertValue } from "../../Assert/AssertValue";
+import { AssertString } from "../../Assert/AssertString";
 import { normalizeAssertionVerb } from "service/utils";
 
 export const assertContent = {
@@ -17,7 +17,7 @@ export const assertContent = {
   content ${ normalizeAssertionVerb( assert.assertion ) } \`${ assert.value }\``,
 
   assert: {
-    node: AssertValue
+    node: AssertString
   },
   params: [
 

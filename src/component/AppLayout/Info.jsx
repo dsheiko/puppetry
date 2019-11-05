@@ -32,7 +32,7 @@ export class Info extends AbstractComponent {
 
 
   render() {
-    const { store } = this.props;
+    const { projectFiles, projectName, projectDirectory } = this.props;
     return (
       <div className="welcome info" id="cInfo">
         <h1>Project</h1>
@@ -41,7 +41,7 @@ export class Info extends AbstractComponent {
               Name
           </Col>
           <Col span={22}>
-            <Input disabled value={ store.project.name } />
+            <Input disabled value={ projectName } />
           </Col>
         </Row>
 
@@ -50,13 +50,13 @@ export class Info extends AbstractComponent {
               Location
           </Col>
           <Col span={22}>
-            <Input disabled value={ store.settings.projectDirectory } />
+            <Input disabled value={ projectDirectory } />
           </Col>
         </Row>
 
 
         <p>You have a project open. { " " }
-          <If exp={ store.app.project.files.length }>
+          <If exp={ projectFiles.length }>
             Now you can
             { " " } <Button id="cInfoCreateBtn"
               onClick={ this.onCreate }>create</Button> or
@@ -64,7 +64,7 @@ export class Info extends AbstractComponent {
               onClick={ this.onOpen }>open</Button>
             { " " } a test suite file.
           </If>
-          <If exp={ !store.app.project.files.length }>
+          <If exp={ !projectFiles.length }>
              Now you can
             { " " } <Button id="cInfoCreateBtn"
               onClick={ this.onCreate }>create</Button>

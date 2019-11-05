@@ -31,13 +31,22 @@ import { GitCloneModal } from "./Modal/GitCloneModal";
 import { EditProjectModal } from "./Modal/EditProjectModal";
 import { EditEnvironmentsModal } from "./Modal/EditEnvironmentsModal";
 import { AppLightbox } from "./Modal/AppLightbox";
+import { connect } from "react-redux";
 
 import { TabGroup  } from "./TabGroup";
 import If from "component/Global/If";
 
 
-const { Sider } = Layout;
+const { Sider } = Layout,
+      // Mapping state to the props
+      mapStateToProps = ( state ) => ({
+        store: state
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = () => ({
+      });
 
+@connect( mapStateToProps, mapDispatchToProps )
 export class AppLayout extends React.Component {
 
   state = {
@@ -117,10 +126,26 @@ export class AppLayout extends React.Component {
               <div className="layout-content">
 
                 <If exp={ tabsAnyTrue }>
-                  <TabGroup action={ action } store={ store } selector={ selector } />
+                  <TabGroup action={ action }
+                    projectDirectory={ store.settings.projectDirectory }
+                    app={ store.app }
+                    suiteModified={ store.suite.modified }
+                    suiteSnippets={ store.suite.snippets }
+                    suiteTargets={ store.suite.targets }
+                    suiteFilename={ store.suite.filename }
+                    suiteTitle={ store.suite.description || store.suite.title }
+                    project={ store.project }
+                    snippets={ store.snippets }
+                    git={ store.git }
+                    settings={ store.settings }
+                    selector={ selector } />
                 </If>
                 <If exp={ !tabsAnyTrue }>
-                  { projectDirectory ? ( <Info action={ action } store={ store } /> )
+                  { projectDirectory ? ( <Info action={ action }
+                  projectFiles={ store.app.project.files }
+                  projectName={ store.project.name }
+                  projectDirectory={ store.settings.projectDirectory }
+                   /> )
                     : ( <Welcome action={ action } projectDirectory={ projectDirectory } /> )
                   }
                 </If>

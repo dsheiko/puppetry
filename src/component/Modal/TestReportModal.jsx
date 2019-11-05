@@ -179,6 +179,7 @@ export class TestReportModal extends AbstractComponent {
               key="submit"
               type="primary"
               autoFocus={ true }
+              ref={ ( el ) => el && el.buttonNode && el.buttonNode.focus() }
               disabled={ !checkedList.length }
               loading={ this.state.loading }
               onClick={this.onClickOk}>

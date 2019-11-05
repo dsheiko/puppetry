@@ -83,7 +83,7 @@ function negate( not ) {
   return ( not === "false" || !not ) ? `` : `.not`;
 }
 
-function createCbBody({ assert, target, method, id }) {
+function createCbBody({ assert, target, method, id, params }) {
   const { assertion, value, operator, position, not, ...options } = assert,
         source = `${ target }.${ method }`;
 
@@ -109,6 +109,20 @@ function createCbBody({ assert, target, method, id }) {
     return justify( `expect( result ).toBeEqual( ${ parseTpl( value, id, options.type ) }, "${ source }" );` );
   case "!equals":
     return justify( `expect( result ).not.toBeEqual( ${ parseTpl( value, id, options.type ) }, "${ source }" );` );
+  case "empty":
+    return justify( `expect( result ).toBeEmpty( "${ source }" );` );
+  case "!empty":
+    return justify( `expect( result ).not.toBeEmpty( "${ source }" );` );
+
+  case "hasAttribute":
+    return justify( `expect( result ).toHaveAttribute( "${ params.name }", "${ source }" );` );
+  case "!hasAttribute":
+    return justify( `expect( result ).not.toHaveAttribute( "${ params.name }", "${ source }" );` );
+
+  case "hasProperty":
+    return justify( `expect( result ).toHavePropertyTrue( "${ params.name }", "${ source }" );` );
+  case "!hasProperty":
+    return justify( `expect( result ).not.toHavePropertyTrue( "${ params.name }", "${ source }" );` );
 
   case "haveString":
     return justify( `expect( result )${ negate( not ) }.toHaveString( ${ parseTpl( value, id, options.type ) }`

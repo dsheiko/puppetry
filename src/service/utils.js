@@ -69,8 +69,25 @@ export function filterObject( obj, keys ) {
   }, {});
 }
 
+export function normalizeAssertionValue( assert ) {
+  return ( assert.assertion !== "hasAttribute" && assert.assertion !== "!hasAttribute"
+    && assert.assertion !== "hasProperty" && assert.assertion !== "!hasProperty" ) ? ` \`${ assert.value }\`` : ``;
+}
+
 export function normalizeAssertionVerb( verb ) {
   switch ( verb ) {
+  case "hasAttribute":
+    return "is present";
+  case "!hasAttribute":
+    return "is absent";
+  case "hasProperty":
+    return "is true";
+  case "!hasProperty":
+    return "is false";
+  case "empty":
+    return "is empty";
+  case "!empty":
+    return "is not empty";
   case "!equals":
     return "does not equal";
   case "!contains":
