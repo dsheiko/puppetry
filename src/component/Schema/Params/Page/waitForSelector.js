@@ -47,7 +47,7 @@ await bs.page.${ ( typeof window !== "undefined" && validateSimpleSelector( para
         {
           name: "params.value",
           control: INPUT,
-          label: "CSS selector or XPath",
+          label: "Selector/XPath",
           tooltip: "A selector or XPath of an element to wait for",
           placeholder: "",
           rules: [{

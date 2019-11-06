@@ -26,7 +26,7 @@ await bs.page.evaluate(( x, y ) => {
         {
           name: "params.x",
           control: INPUT_NUMBER,
-          label: "x-coordinate (px)",
+          label: "x (px)",
           initialValue: 0,
           tooltip: `Set the horizontal pixel value that you want to scroll by`,
           placeholder: "e.g. 0",
@@ -38,7 +38,7 @@ await bs.page.evaluate(( x, y ) => {
         {
           name: "params.y",
           control: INPUT_NUMBER,
-          label: "y-coordinate (px)",
+          label: "y (px)",
           initialValue: 0,
           tooltip: `Set the vertical pixel value that you want to scroll by`,
           placeholder: "e.g. 0",

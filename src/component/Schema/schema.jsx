@@ -27,7 +27,6 @@ import { assertNodeCount as assertNodeCountPage } from "./Params/Page/assertNode
 import { assertScreenshot as assertScreenshotPage } from "./Params/Page/assertScreenshot";
 import { waitForRequest } from "./Params/Page/waitForRequest";
 import { waitForResponse } from "./Params/Page/waitForResponse";
-import { waitForFileChooser } from "./Params/Page/waitForFileChooser";
 import { assertConsoleMessage } from "./Params/Page/assertConsoleMessage";
 import { assertDialog } from "./Params/Page/assertDialog";
 import { closeDialog } from "./Params/Page/closeDialog";
@@ -48,6 +47,7 @@ import { click } from "./Params/Element/click";
 import { hover } from "./Params/Element/hover";
 import { reset } from "./Params/Element/reset";
 import { select } from "./Params/Element/select";
+import { scrollIntoView } from "./Params/Element/scrollIntoView";
 import { assertBoundingBox } from "./Params/Element/assertBoundingBox";
 import { assertPosition } from "./Params/Element/assertPosition";
 import { assertStyle } from "./Params/Element/assertStyle";
@@ -90,6 +90,7 @@ export const schema = {
     upload,
     tap: tapElement,
     scroll: scrollElement,
+    scrollIntoView,
     hover,
     checkBox,
     toggleClass,
@@ -126,7 +127,6 @@ export const schema = {
     waitForNavigation,
     waitForResponse,
     waitForRequest,
-    waitForFileChooser,
     evaluate,
     runjs,
     debug,

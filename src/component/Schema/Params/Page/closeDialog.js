@@ -34,8 +34,9 @@ as they are called
   commonly: "dismiss/accept dialog",
 
   toLabel: ({ params }) => `(${ getOptionsString( params ) })`,
-  toGherkin: ({ params }) => `Listen to dialog events and ${ ucfirst( params.action ) } any dialog
-    of type \`${ params.type }\` ${ params.substring ? `with \`${ params.substring }\`` : `` }`,
+  toGherkin: ({ params }) => `Listen to dialog events and ${ params.action } any dialog
+    of type \`${ params.type }\` ${ params.substring ? `with \`${ params.substring }\`` : `` }`
+    + ( params.promptText  ? ` and type in it \`${ params.promptText }\`` : `` ),
 
   params: [
     {

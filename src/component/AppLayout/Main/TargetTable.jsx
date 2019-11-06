@@ -124,7 +124,9 @@ export class TargetTable extends AbstractEditableTable {
     const data = this.props.targets;
 
     return (
-      <div className="box-margin-vertical">
+      <div className="box-margin-vertical is-relative">
+        <a className="btn-to-bottom" href="#cTargetTableEditCsvBtn">
+        <Icon type="arrow-down" /></a>
         <ErrorBoundary>
           <Table
             id="cTargetTable"

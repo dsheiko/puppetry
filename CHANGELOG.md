@@ -8,10 +8,10 @@
 - improvement: new interactive mode
 - improvement: add page.waitForRequest
 - improvement: add page.waitForResponse
-- improvement: add page.waitForFileChooser
 - improvement: add page.assertConsoleMessage
 - improvement: add page.assertDialog
 - improvement: add page.closeDialog
+- improvement: add target.scrollIntoView
 - improvement: add option XPath to page.waitForSelector
 - improvement: extend target.assertVisible with options `displayed`, `visible`, `opaque`, `within the current viewport`
 - improvement: all assertions accept the opposite assumptions (equal/not equal, contain/ doesn't contain)

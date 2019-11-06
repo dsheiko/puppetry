@@ -10,7 +10,7 @@ import { remote, clipboard } from "electron";
 
 
 const { Menu, MenuItem } = remote,
-      APP_NAME = remote.app.getName(),
+      APP_NAME = remote.app.name,
       APP_VERSION = remote.app.getVersion();
 
 export default class AbstractDnDTable extends React.Component {

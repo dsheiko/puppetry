@@ -87,6 +87,10 @@ function getExpectation( method, params, assert ) {
   switch ( method ) {
     case "assertConsoleMessage":
       return JSON.stringify( `to find console messages `
+      + `of type "${ assert.type }" with text ${ assert.assertion !== "haveString" ? "~ " : "" }`
+      + `"${ assert.value }"` );
+   case "assertDialog":
+      return JSON.stringify( `to find dialogs `
       + `of type "${ assert.type }" with message ${ assert.assertion !== "haveString" ? "~ " : "" }`
       + `"${ assert.value }"` );
     case "assertTextCount":

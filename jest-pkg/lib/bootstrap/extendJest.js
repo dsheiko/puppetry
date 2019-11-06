@@ -300,7 +300,7 @@ module.exports = function( expect, util ) {
                 return carry;
               }, 0 );
 
-        return expectReturn( totalWeight <= val, `[${ source }] expected `
+        return expectReturn( totalWeight < val, `[${ source }] expected `
           + `total weight of ${ type } assets to be under`
           + ` ${ util.bytesToString( val ) }, but found ${ assets.length } assets `
           + `with total weight ${ util.bytesToString( totalWeight ) }` );
@@ -316,7 +316,7 @@ module.exports = function( expect, util ) {
      */
     toMatchAssetCount( resources, type, val, source ) {
         const assets = resources.filter( res => res.type.toLowerCase() === type.toLowerCase() );
-        return expectReturn( assets.length <= val, `[${ source }] expected `
+        return expectReturn( assets.length < val, `[${ source }] expected `
           + `total number of ${ type } assets to be under`
           + ` ${ val }, but found ${ assets.length  }` );
     },

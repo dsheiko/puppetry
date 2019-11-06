@@ -1,19 +1,19 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertString } from "../../Assert/AssertString";
 import { INPUT } from "../../constants";
-import { normalizeAssertionVerb } from "service/utils";
+import { normalizeAssertionVerb, normalizeAssertionValue } from "service/utils";
 
 export const assertVar = {
   template: ( command ) => buildAssertionTpl(
-    `ENV[ ${ JSON.stringify( command.params.name ) } ]`,
+    `ENV[ ${ JSON.stringify( command.params.name ) } ] || ""`,
     command,
     `// Asserting that variable associated with a given name satisfies the given constraint`
   ),
 
   toLabel: ({ params, assert }) => `(\`${ params.name }\` `
-    + `${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value }\`)`,
+    + `${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )})`,
   toGherkin: ({ params, assert }) => `Assert that template variable \`${ params.name }\`
-   ${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value }\``,
+   ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )}`,
 
   commonly: "assert template variable value",
 

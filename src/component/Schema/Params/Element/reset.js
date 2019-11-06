@@ -11,7 +11,7 @@ export const reset = {
   if ( "value" in el ) {
     el.value = "";
   }
-})` ),
+});` ),
   toLabel: () => ``,
   toGherkin: ({ target }) => `Reset form/input \`${ target }\``,
   commonly: "reset input or form",

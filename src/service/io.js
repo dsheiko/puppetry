@@ -462,7 +462,7 @@ export function getAppInstallPath() {
   if ( "appInstallPath" in cache ) {
     return cache[ "appInstallPath" ];
   }
-  const appInstallPath = dirname( findLogPath( remote.app.getName() ) );
+  const appInstallPath = dirname( findLogPath( remote.app.name ) );
   cache[ "appInstallPath" ] = appInstallPath;
   return appInstallPath;
 }

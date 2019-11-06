@@ -81,10 +81,7 @@ export class AssertString extends AbstractComponent {
 
               <FormItem label="Value">
                 { getFieldDecorator( "assert.value", {
-                  initialValue: value,
-                  rules: [{
-                    required: true
-                  }]
+                  initialValue: value
                 })(
                   <Input />
                 ) }

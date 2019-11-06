@@ -1,5 +1,5 @@
 import { justify } from "service/assert";
-import { CHECKBOX } from "../../constants";
+import { SELECT } from "../../constants";
 
 export const checkBox = {
   template: ({ params, targetSeletor }) => justify(
@@ -13,8 +13,8 @@ export const checkBox = {
     }, `
     + `"${ params.checked }" );` ),
 
-  toLabel: ({ params }) => `(\`${ params.checked ? "checked" : "unchecked" }\`)`,
-  toGherkin: ({ target, params }) => `Set checkbox \`${ target }\` ${ params.checked ? "on" : "off" }`,
+  toLabel: ({ params }) => `(\`${ params.checked === "true" ? "checked" : "unchecked" }\`)`,
+  toGherkin: ({ target, params }) => `Set checkbox \`${ target }\` ${ params.checked === "true" ? "on" : "off" }`,
 
   commonly: "toggle checkbox/radio",
 
@@ -27,8 +27,19 @@ export const checkBox = {
       fields: [
         {
           name: "params.checked",
-          control: CHECKBOX,
-          label: "is checked",
+          control: SELECT,
+          inputStyle: { maxWidth: 128 },
+          options: [
+            {
+              value: "true",
+              description: "is checked"
+            },
+            {
+              value: "false",
+              description: "is unchecked"
+            }
+          ],
+          label: "State",
           help: "",
           initialValue: "false"
         }
@@ -46,7 +57,7 @@ export const checkBox = {
     {
       valid: true,
       "params": {
-        "checked": true
+        "checked": "true"
       }
     }
   ]

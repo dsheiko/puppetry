@@ -1,0 +1,4241 @@
+{
+  "title": "puppeteer",
+  "timeout": 50000,
+  "snippets": false,
+  "savedAt": 1573044758,
+  "loadedAt": 1573044642,
+  "modified": false,
+  "filename": "puppeteer.json",
+  "targets": {
+    "eelk2n5e0gz": {
+      "editing": false,
+      "id": "eelk2n5e0gz",
+      "key": "eelk2n5e0gz",
+      "target": "GENERIC",
+      "selector": "#generic",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0h0": {
+      "editing": false,
+      "id": "eelk2n5e0h0",
+      "key": "eelk2n5e0h0",
+      "target": "DISPLAYED",
+      "selector": "#displayed",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0h1": {
+      "editing": false,
+      "id": "eelk2n5e0h1",
+      "key": "eelk2n5e0h1",
+      "target": "NOT_DISPLAYED",
+      "selector": "#not_displayed",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0h2": {
+      "editing": false,
+      "id": "eelk2n5e0h2",
+      "key": "eelk2n5e0h2",
+      "target": "VISIBLE",
+      "selector": "#visible",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0h3": {
+      "editing": false,
+      "id": "eelk2n5e0h3",
+      "key": "eelk2n5e0h3",
+      "target": "NOT_VISIBLE",
+      "selector": "#not_visible",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0h5": {
+      "editing": false,
+      "id": "eelk2n5e0h5",
+      "key": "eelk2n5e0h5",
+      "target": "OPACITY",
+      "selector": "#opacity",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0h6": {
+      "editing": false,
+      "id": "eelk2n5e0h6",
+      "key": "eelk2n5e0h6",
+      "target": "NOT_OPACITY",
+      "selector": "#not_opacity",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0h7": {
+      "editing": false,
+      "id": "eelk2n5e0h7",
+      "key": "eelk2n5e0h7",
+      "target": "CLICK",
+      "selector": "#click",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0h8": {
+      "editing": false,
+      "id": "eelk2n5e0h8",
+      "key": "eelk2n5e0h8",
+      "target": "DISABLED_BTN",
+      "selector": "#disabledBtn",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0h9": {
+      "editing": false,
+      "id": "eelk2n5e0h9",
+      "key": "eelk2n5e0h9",
+      "target": "PROP_INPUT",
+      "selector": "#propInput",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0hb": {
+      "editing": false,
+      "id": "eelk2n5e0hb",
+      "key": "eelk2n5e0hb",
+      "target": "PROP_CHECKBOX",
+      "selector": "#propCheckbox",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0hc": {
+      "editing": false,
+      "id": "eelk2n5e0hc",
+      "key": "eelk2n5e0hc",
+      "target": "ASSERT_STYLE_EL",
+      "selector": "#assertStyle",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0hl": {
+      "editing": false,
+      "id": "eelk2n5e0hl",
+      "key": "eelk2n5e0hl",
+      "target": "BLOCK_LEFT_TOP",
+      "selector": "#blockLeftTop",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0hm": {
+      "editing": false,
+      "id": "eelk2n5e0hm",
+      "key": "eelk2n5e0hm",
+      "target": "BLOCK_NEXT_TOP",
+      "selector": "#blockNextTop",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0hn": {
+      "editing": false,
+      "id": "eelk2n5e0hn",
+      "key": "eelk2n5e0hn",
+      "target": "LIST",
+      "selector": "#list",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0ho": {
+      "editing": false,
+      "id": "eelk2n5e0ho",
+      "key": "eelk2n5e0ho",
+      "target": "CONTAINER",
+      "selector": "#container",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0hp": {
+      "editing": false,
+      "id": "eelk2n5e0hp",
+      "key": "eelk2n5e0hp",
+      "target": "ALERT_BTN",
+      "selector": "#alert",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0hq": {
+      "editing": false,
+      "id": "eelk2n5e0hq",
+      "key": "eelk2n5e0hq",
+      "target": "PROMPT_BTN",
+      "selector": "#prompt",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0hr": {
+      "editing": false,
+      "id": "eelk2n5e0hr",
+      "key": "eelk2n5e0hr",
+      "target": "CONFIRM_BTN",
+      "selector": "#confirm",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0hs": {
+      "editing": false,
+      "id": "eelk2n5e0hs",
+      "key": "eelk2n5e0hs",
+      "target": "PROMPT_ACCEPT_BTN",
+      "selector": "#promptAccept",
+      "disabled": false,
+      "adding": false
+    },
+    "eelk2n5e0hz": {
+      "editing": false,
+      "id": "eelk2n5e0hz",
+      "key": "eelk2n5e0hz",
+      "target": "CONFIRM_ACCEPT_BTN",
+      "selector": "#confirmAccept",
+      "disabled": false,
+      "adding": false
+    }
+  },
+  "groups": {
+    "eoyk2a8u1qy": {
+      "title": "Scope",
+      "id": "eoyk2a8u1qy",
+      "editing": false,
+      "key": "eoyk2a8u1qy",
+      "tests": {
+        "18qk2kmgi5v": {
+          "editing": false,
+          "id": "18qk2kmgi5v",
+          "key": "18qk2kmgi5v",
+          "title": "page.goto",
+          "commands": {
+            "18qk2kmgycj": {
+              "editing": false,
+              "id": "18qk2kmgycj",
+              "key": "18qk2kmgycj",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "18qk2kmgi5v",
+              "waitForTarget": false,
+              "entity": "command"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "eoyk2a8u1qy"
+        },
+        "18qk2kmoej2": {
+          "editing": false,
+          "id": "18qk2kmoej2",
+          "key": "18qk2kmoej2",
+          "title": "target.assertAttribute",
+          "commands": {
+            "18qk2kmpfy2": {
+              "editing": false,
+              "id": "18qk2kmpfy2",
+              "key": "18qk2kmpfy2",
+              "target": "CLICK",
+              "method": "click",
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "18qk2kmoej2",
+              "waitForTarget": false
+            },
+            "c5bk2lneslk": {
+              "editing": false,
+              "id": "c5bk2lneslk",
+              "key": "c5bk2lneslk",
+              "target": "DISABLED_BTN",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "equals",
+                "value": "disabledBtn"
+              },
+              "params": {
+                "name": "id"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "18qk2kmoej2",
+              "waitForTarget": false
+            },
+            "d2kk2lonu0t": {
+              "editing": false,
+              "id": "d2kk2lonu0t",
+              "key": "d2kk2lonu0t",
+              "target": "DISABLED_BTN",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "contains",
+                "value": "disabled"
+              },
+              "params": {
+                "name": "id"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "18qk2kmoej2",
+              "waitForTarget": false
+            },
+            "d2kk2lonnzt": {
+              "editing": false,
+              "id": "d2kk2lonnzt",
+              "key": "d2kk2lonnzt",
+              "target": "DISABLED_BTN",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "equals",
+                "value": "ok"
+              },
+              "params": {
+                "name": "data-ok"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "18qk2kmoej2",
+              "waitForTarget": false
+            },
+            "c5bk2lnfq6i": {
+              "editing": false,
+              "id": "c5bk2lnfq6i",
+              "key": "c5bk2lnfq6i",
+              "target": "DISABLED_BTN",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "hasAttribute",
+                "value": "disabledBtn"
+              },
+              "params": {
+                "name": "disabled"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "18qk2kmoej2",
+              "waitForTarget": false
+            },
+            "d2kk2looeus": {
+              "editing": false,
+              "id": "d2kk2looeus",
+              "key": "d2kk2looeus",
+              "target": "DISABLED_BTN",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "!hasAttribute",
+                "value": "disabledBtn"
+              },
+              "params": {
+                "name": "disabled"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "18qk2kmoej2",
+              "waitForTarget": false,
+              "comment": "@assert [DISABLED_BTN.assertAttribute] expected \"disabled\" to be absent"
+            },
+            "co8k2loan2c": {
+              "editing": false,
+              "id": "co8k2loan2c",
+              "key": "co8k2loan2c",
+              "target": "DISABLED_BTN",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "hasAttribute",
+                "value": "disabledBtn"
+              },
+              "params": {
+                "name": "non-existing"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "18qk2kmoej2",
+              "waitForTarget": false,
+              "comment": "@assert  [DISABLED_BTN.assertAttribute] expected \"non-existing\" to be present"
+            },
+            "d2kk2looz0x": {
+              "editing": false,
+              "id": "d2kk2looz0x",
+              "key": "d2kk2looz0x",
+              "target": "DISABLED_BTN",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "!hasAttribute",
+                "value": "disabledBtn"
+              },
+              "params": {
+                "name": "non-existing"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "18qk2kmoej2",
+              "waitForTarget": false,
+              "comment": ""
+            }
+          },
+          "disabled": true,
+          "expanded": false,
+          "adding": false,
+          "groupId": "eoyk2a8u1qy",
+          "failure": ""
+        },
+        "co8k2loa3sh": {
+          "editing": false,
+          "id": "co8k2loa3sh",
+          "key": "co8k2loa3sh",
+          "title": "target.click",
+          "commands": {
+            "co8k2loa458": {
+              "editing": false,
+              "id": "co8k2loa458",
+              "key": "co8k2loa458",
+              "target": "CLICK",
+              "method": "click",
+              "assert": {},
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "co8k2loa3sh",
+              "waitForTarget": false
+            },
+            "co8k2loa4du": {
+              "editing": false,
+              "id": "co8k2loa4du",
+              "key": "co8k2loa4du",
+              "target": "DISABLED_BTN",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "equals",
+                "value": "disabledBtn"
+              },
+              "params": {
+                "name": "id"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "co8k2loa3sh",
+              "waitForTarget": false
+            },
+            "co8k2loa4kd": {
+              "editing": false,
+              "id": "co8k2loa4kd",
+              "key": "co8k2loa4kd",
+              "target": "DISABLED_BTN",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "hasAttribute",
+                "value": "disabledBtn"
+              },
+              "params": {
+                "name": "disabled"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "co8k2loa3sh",
+              "waitForTarget": false
+            },
+            "co8k2loa4rv": {
+              "editing": false,
+              "id": "co8k2loa4rv",
+              "key": "co8k2loa4rv",
+              "target": "CLICK",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "hasAttribute",
+                "value": true
+              },
+              "params": {
+                "name": "disabled"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "co8k2loa3sh",
+              "waitForTarget": false
+            }
+          },
+          "disabled": true,
+          "expanded": false,
+          "adding": false,
+          "groupId": "eoyk2a8u1qy",
+          "failure": ""
+        },
+        "eoyk2a8u52z": {
+          "title": "target.assertVisible",
+          "id": "eoyk2a8u52z",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "eoyk2a8u52z",
+          "commands": {
+            "eoyk2a8wy68": {
+              "editing": false,
+              "id": "eoyk2a8wy68",
+              "key": "eoyk2a8wy68",
+              "target": "GENERIC",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "value": true,
+                "display": "any",
+                "visibility": "any",
+                "opacity": "any",
+                "isIntersecting": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eoyk2a8u52z"
+            },
+            "fajk2a8zpa7": {
+              "editing": false,
+              "id": "fajk2a8zpa7",
+              "key": "fajk2a8zpa7",
+              "target": "GENERIC",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "value": true,
+                "display": "not",
+                "visibility": "not",
+                "opacity": "not",
+                "isIntersecting": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eoyk2a8u52z"
+            },
+            "fajk2a90we4": {
+              "editing": false,
+              "id": "fajk2a90we4",
+              "key": "fajk2a90we4",
+              "target": "DISPLAYED",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "value": true,
+                "display": "none",
+                "visibility": "any",
+                "opacity": "any",
+                "isIntersecting": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eoyk2a8u52z",
+              "comment": "@assert [DISPLAYED.assertVisible] expected the target element to have display none, but it is flex",
+              "waitForTarget": false
+            },
+            "fajk2a91f28": {
+              "editing": false,
+              "id": "fajk2a91f28",
+              "key": "fajk2a91f28",
+              "target": "NOT_DISPLAYED",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "value": true,
+                "display": "not",
+                "visibility": "any",
+                "opacity": "any",
+                "isIntersecting": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eoyk2a8u52z",
+              "comment": "@assert [NOT_DISPLAYED.assertVisible] expected the target element to have display NOT none, but it is none",
+              "waitForTarget": false
+            },
+            "fajk2a91vbi": {
+              "editing": false,
+              "id": "fajk2a91vbi",
+              "key": "fajk2a91vbi",
+              "target": "VISIBLE",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "value": true,
+                "display": "any",
+                "visibility": "hidden",
+                "opacity": "any",
+                "isIntersecting": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eoyk2a8u52z",
+              "comment": "@assert [VISIBLE.assertVisible] expected the target element to have visibility hidden, but it is collapse",
+              "waitForTarget": false
+            },
+            "fajk2a9285a": {
+              "editing": false,
+              "id": "fajk2a9285a",
+              "key": "fajk2a9285a",
+              "target": "NOT_VISIBLE",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "value": true,
+                "display": "any",
+                "visibility": "not",
+                "opacity": "any",
+                "isIntersecting": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eoyk2a8u52z",
+              "comment": "@assert [NOT_VISIBLE.assertVisible] expected the target element to have visibility NOT hidden, but it is hidden",
+              "waitForTarget": false
+            },
+            "fajk2a92l34": {
+              "editing": false,
+              "id": "fajk2a92l34",
+              "key": "fajk2a92l34",
+              "target": "OPACITY",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "value": true,
+                "display": "any",
+                "visibility": "any",
+                "opacity": "0",
+                "isIntersecting": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eoyk2a8u52z",
+              "comment": "@assert [OPACITY.assertVisible] expected the target element to have opacity 0, but it is 0.5",
+              "waitForTarget": false
+            },
+            "fajk2a935mz": {
+              "editing": false,
+              "id": "fajk2a935mz",
+              "key": "fajk2a935mz",
+              "target": "NOT_OPACITY",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "value": true,
+                "display": "any",
+                "visibility": "any",
+                "opacity": "not",
+                "isIntersecting": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eoyk2a8u52z",
+              "comment": "@assert [NOT_OPACITY.assertVisible] expected the target element to have opacity > 0, but it is 0",
+              "waitForTarget": false
+            }
+          },
+          "disabled": true,
+          "failure": ""
+        },
+        "djlk2lp5idd": {
+          "title": "target.assertProperty",
+          "id": "djlk2lp5idd",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "djlk2lp5idd",
+          "commands": {
+            "dywk2lp8lm6": {
+              "editing": false,
+              "id": "dywk2lp8lm6",
+              "key": "dywk2lp8lm6",
+              "target": "PROP_CHECKBOX",
+              "method": "assertProperty",
+              "assert": {
+                "assertion": "!hasProperty",
+                "value": ""
+              },
+              "params": {
+                "name": "checked"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "djlk2lp5idd",
+              "waitForTarget": false
+            },
+            "e0ok2lpa3dd": {
+              "editing": false,
+              "id": "e0ok2lpa3dd",
+              "key": "e0ok2lpa3dd",
+              "target": "PROP_CHECKBOX",
+              "method": "click",
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "djlk2lp5idd",
+              "waitForTarget": false
+            },
+            "e0ok2lpanuw": {
+              "editing": false,
+              "id": "e0ok2lpanuw",
+              "key": "e0ok2lpanuw",
+              "target": "PROP_CHECKBOX",
+              "method": "assertProperty",
+              "assert": {
+                "assertion": "hasProperty",
+                "value": ""
+              },
+              "params": {
+                "name": "checked"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "djlk2lp5idd",
+              "waitForTarget": false
+            },
+            "e0ok2lptbiz": {
+              "editing": false,
+              "id": "e0ok2lptbiz",
+              "key": "e0ok2lptbiz",
+              "target": "PROP_INPUT",
+              "method": "assertProperty",
+              "assert": {
+                "assertion": "equals",
+                "value": "Lorem"
+              },
+              "params": {
+                "name": "value"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "djlk2lp5idd",
+              "waitForTarget": false
+            },
+            "fmrk2lqnwqq": {
+              "editing": false,
+              "id": "fmrk2lqnwqq",
+              "key": "fmrk2lqnwqq",
+              "target": "PROP_INPUT",
+              "method": "assertProperty",
+              "assert": {
+                "assertion": "contains",
+                "value": "rem"
+              },
+              "params": {
+                "name": "value"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "djlk2lp5idd",
+              "waitForTarget": false
+            },
+            "fmrk2lqpnmi": {
+              "editing": false,
+              "id": "fmrk2lqpnmi",
+              "key": "fmrk2lqpnmi",
+              "target": "PROP_INPUT",
+              "method": "type",
+              "params": {
+                "value": "Ipsum"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "djlk2lp5idd",
+              "waitForTarget": false
+            },
+            "fmrk2lqqcct": {
+              "editing": false,
+              "id": "fmrk2lqqcct",
+              "key": "fmrk2lqqcct",
+              "target": "PROP_INPUT",
+              "method": "assertProperty",
+              "assert": {
+                "assertion": "equals",
+                "value": "Lorem"
+              },
+              "params": {
+                "name": "value"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "djlk2lp5idd",
+              "waitForTarget": false,
+              "comment": "@assert PROP_INPUT.assertProperty] expected \"IpsumLorem\" to equal \"Lorem\""
+            },
+            "fmrk2lqqnrq": {
+              "editing": false,
+              "id": "fmrk2lqqnrq",
+              "key": "fmrk2lqqnrq",
+              "target": "PROP_INPUT",
+              "method": "assertProperty",
+              "assert": {
+                "assertion": "!equals",
+                "value": "Lorem"
+              },
+              "params": {
+                "name": "value"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "djlk2lp5idd",
+              "waitForTarget": false
+            }
+          },
+          "disabled": true,
+          "failure": ""
+        },
+        "fzvk2lr6ecw": {
+          "title": "target.assertStyle",
+          "id": "fzvk2lr6ecw",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "fzvk2lr6ecw",
+          "commands": {
+            "fzvk2lrh8au": {
+              "editing": false,
+              "id": "fzvk2lrh8au",
+              "key": "fzvk2lrh8au",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertStyle",
+              "assert": {
+                "assertion": "equals",
+                "value": "red"
+              },
+              "params": {
+                "name": "background-color"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "fzvk2lr6ecw",
+              "comment": "@assert [ASSERT_STYLE_EL.assertStyle] expected \"rgb(255, 0, 0)\" to equal \"red\"",
+              "waitForTarget": false
+            },
+            "fzvk2lrnpz3": {
+              "editing": false,
+              "id": "fzvk2lrnpz3",
+              "key": "fzvk2lrnpz3",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertStyle",
+              "assert": {
+                "assertion": "contains",
+                "value": "rgb"
+              },
+              "params": {
+                "name": "background-color"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "fzvk2lr6ecw",
+              "comment": "",
+              "waitForTarget": false
+            },
+            "fzvk2lrpo02": {
+              "editing": false,
+              "id": "fzvk2lrpo02",
+              "key": "fzvk2lrpo02",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertStyle",
+              "assert": {
+                "assertion": "contains",
+                "value": "something"
+              },
+              "params": {
+                "name": "background-color"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "fzvk2lr6ecw",
+              "comment": "@assert [ASSERT_STYLE_EL.assertStyle] expected \"rgb(255, 0, 0)\" to contain \"something\"",
+              "waitForTarget": false
+            },
+            "fzvk2lrs7g3": {
+              "editing": false,
+              "id": "fzvk2lrs7g3",
+              "key": "fzvk2lrs7g3",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertStyle",
+              "assert": {
+                "assertion": "!contains",
+                "value": "something"
+              },
+              "params": {
+                "name": "background-color"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "fzvk2lr6ecw",
+              "comment": "",
+              "waitForTarget": false
+            },
+            "golk2lrt5sf": {
+              "editing": false,
+              "id": "golk2lrt5sf",
+              "key": "golk2lrt5sf",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertStyle",
+              "assert": {
+                "assertion": "!equals",
+                "value": "something"
+              },
+              "params": {
+                "name": "background-color"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "fzvk2lr6ecw",
+              "comment": "",
+              "waitForTarget": false
+            },
+            "golk2lrtoh8": {
+              "editing": false,
+              "id": "golk2lrtoh8",
+              "key": "golk2lrtoh8",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertStyle",
+              "assert": {
+                "assertion": "!empty",
+                "value": "something"
+              },
+              "params": {
+                "name": "background-color"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "fzvk2lr6ecw",
+              "comment": "",
+              "waitForTarget": false
+            },
+            "gpzk2lrwjai": {
+              "editing": false,
+              "id": "gpzk2lrwjai",
+              "key": "gpzk2lrwjai",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertStyle",
+              "assert": {
+                "assertion": "empty",
+                "value": "something"
+              },
+              "params": {
+                "name": "background-color"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "fzvk2lr6ecw",
+              "comment": "@assert [ASSERT_STYLE_EL.assertStyle] expected \"rgb(255, 0, 0)\" to be empty",
+              "waitForTarget": false
+            },
+            "fzvk2lrjef8": {
+              "editing": false,
+              "id": "fzvk2lrjef8",
+              "key": "fzvk2lrjef8",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertStyle",
+              "assert": {
+                "assertion": "equals",
+                "value": "rgb(255, 0, 0)"
+              },
+              "params": {
+                "name": "background-color"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "fzvk2lr6ecw",
+              "waitForTarget": false
+            },
+            "fzvk2lrjwqf": {
+              "editing": false,
+              "id": "fzvk2lrjwqf",
+              "key": "fzvk2lrjwqf",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertStyle",
+              "assert": {
+                "assertion": "equals",
+                "value": "rgb(255, 255, 0)"
+              },
+              "params": {
+                "name": "background-color",
+                "pseudo": ":before"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "fzvk2lr6ecw",
+              "waitForTarget": false
+            },
+            "fzvk2lrlpcq": {
+              "editing": false,
+              "id": "fzvk2lrlpcq",
+              "key": "fzvk2lrlpcq",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertStyle",
+              "assert": {
+                "assertion": "equals",
+                "value": "rgb(255, 255, 0)"
+              },
+              "params": {
+                "name": "background-color",
+                "pseudo": ":after"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "fzvk2lr6ecw",
+              "comment": "@assert [ASSERT_STYLE_EL.assertStyle] expected \"rgb(0, 0, 255)\" to equal \"rgb(255, 255, 0)\"",
+              "waitForTarget": false
+            },
+            "fzvk2lrn310": {
+              "editing": false,
+              "id": "fzvk2lrn310",
+              "key": "fzvk2lrn310",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertStyle",
+              "assert": {
+                "assertion": "equals",
+                "value": "rgb(0, 0, 255)"
+              },
+              "params": {
+                "name": "background-color",
+                "pseudo": ":after"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "fzvk2lr6ecw",
+              "comment": "@assert [ASSERT_STYLE_EL.assertStyle] expected \"rgb(0, 0, 255)\" to equal \"rgb(255, 255, 0)\"",
+              "waitForTarget": false
+            }
+          },
+          "disabled": true,
+          "failure": ""
+        },
+        "he1k2lsxhxp": {
+          "title": "target.assertHtml",
+          "id": "he1k2lsxhxp",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "he1k2lsxhxp",
+          "commands": {
+            "he1k2lsyxc7": {
+              "editing": false,
+              "id": "he1k2lsyxc7",
+              "key": "he1k2lsyxc7",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertHtml",
+              "assert": {
+                "assertion": "equals",
+                "value": "Lorem"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "he1k2lsxhxp",
+              "waitForTarget": false
+            },
+            "he1k2lszi88": {
+              "editing": false,
+              "id": "he1k2lszi88",
+              "key": "he1k2lszi88",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertHtml",
+              "assert": {
+                "assertion": "!empty",
+                "value": "Lorem"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "he1k2lsxhxp",
+              "waitForTarget": false
+            },
+            "he1k2lszx6w": {
+              "editing": false,
+              "id": "he1k2lszx6w",
+              "key": "he1k2lszx6w",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertHtml",
+              "assert": {
+                "assertion": "contains",
+                "value": "Lorem"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "he1k2lsxhxp",
+              "waitForTarget": false
+            },
+            "hjvk2lt6ns8": {
+              "editing": false,
+              "id": "hjvk2lt6ns8",
+              "key": "hjvk2lt6ns8",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertHtml",
+              "assert": {
+                "assertion": "!equals",
+                "value": "Lorem"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "he1k2lsxhxp",
+              "waitForTarget": false,
+              "comment": "@assert [ASSERT_STYLE_EL.assertHtml] expected \"Lorem\" not to equal \"Lorem\""
+            },
+            "hjvk2lt6y2z": {
+              "editing": false,
+              "id": "hjvk2lt6y2z",
+              "key": "hjvk2lt6y2z",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertHtml",
+              "assert": {
+                "assertion": "!contains",
+                "value": "Lorem"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "he1k2lsxhxp",
+              "waitForTarget": false,
+              "comment": "@assert [ASSERT_STYLE_EL.assertHtml] expected \"Lorem\" not to contain \"Lorem\""
+            },
+            "hjvk2lt764z": {
+              "editing": false,
+              "id": "hjvk2lt764z",
+              "key": "hjvk2lt764z",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertHtml",
+              "assert": {
+                "assertion": "empty",
+                "value": "Lorem"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "he1k2lsxhxp",
+              "waitForTarget": false,
+              "comment": "@assert [ASSERT_STYLE_EL.assertHtml] expected \"Lorem\" to be empty"
+            }
+          },
+          "disabled": true,
+          "failure": ""
+        },
+        "hjvk2ltc6i0": {
+          "title": "target.assertBoundingBox",
+          "id": "hjvk2ltc6i0",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "hjvk2ltc6i0",
+          "commands": {
+            "hjvk2ltd87z": {
+              "editing": false,
+              "id": "hjvk2ltd87z",
+              "key": "hjvk2ltd87z",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertBoundingBox",
+              "assert": {
+                "assertion": "boundingBox",
+                "xOperator": "any",
+                "yOperator": "any",
+                "wOperator": "eq",
+                "hOperator": "eq",
+                "wValue": 200,
+                "hValue": 60
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "hjvk2ltc6i0",
+              "waitForTarget": false
+            },
+            "idgk2lu2aqu": {
+              "editing": false,
+              "id": "idgk2lu2aqu",
+              "key": "idgk2lu2aqu",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertBoundingBox",
+              "assert": {
+                "assertion": "boundingBox",
+                "xOperator": "any",
+                "yOperator": "any",
+                "wOperator": "gt",
+                "hOperator": "any",
+                "wValue": 100
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "hjvk2ltc6i0",
+              "waitForTarget": false
+            },
+            "idgk2lu2nv1": {
+              "editing": false,
+              "id": "idgk2lu2nv1",
+              "key": "idgk2lu2nv1",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertBoundingBox",
+              "assert": {
+                "assertion": "boundingBox",
+                "xOperator": "any",
+                "yOperator": "any",
+                "wOperator": "lt",
+                "hOperator": "any",
+                "wValue": 300
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "hjvk2ltc6i0",
+              "waitForTarget": false
+            },
+            "j6tk2luz3nb": {
+              "editing": false,
+              "id": "j6tk2luz3nb",
+              "key": "j6tk2luz3nb",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertBoundingBox",
+              "assert": {
+                "assertion": "boundingBox",
+                "xOperator": "any",
+                "yOperator": "gt",
+                "wOperator": "any",
+                "hOperator": "any",
+                "yValue": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "hjvk2ltc6i0",
+              "waitForTarget": false
+            },
+            "iu4k2lug1zz": {
+              "editing": false,
+              "id": "iu4k2lug1zz",
+              "key": "iu4k2lug1zz",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertBoundingBox",
+              "assert": {
+                "assertion": "boundingBox",
+                "xOperator": "any",
+                "yOperator": "any",
+                "wOperator": "any",
+                "hOperator": "lt",
+                "hValue": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "hjvk2ltc6i0",
+              "waitForTarget": false,
+              "comment": "@assert [ASSERT_STYLE_EL.assertBoundingBox] expected for box.height (60px) to be < 0px"
+            },
+            "iu4k2lugrv9": {
+              "editing": false,
+              "id": "iu4k2lugrv9",
+              "key": "iu4k2lugrv9",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertBoundingBox",
+              "assert": {
+                "assertion": "boundingBox",
+                "xOperator": "gt",
+                "yOperator": "any",
+                "wOperator": "any",
+                "hOperator": "any",
+                "xValue": 5000
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "hjvk2ltc6i0",
+              "waitForTarget": false,
+              "comment": "@assert [ASSERT_STYLE_EL.assertBoundingBox] expected for box.x (8px) to be > 5000px"
+            },
+            "idgk2lu2xgr": {
+              "editing": false,
+              "id": "idgk2lu2xgr",
+              "key": "idgk2lu2xgr",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertBoundingBox",
+              "assert": {
+                "assertion": "boundingBox",
+                "xOperator": "any",
+                "yOperator": "any",
+                "wOperator": "eq",
+                "hOperator": "any",
+                "wValue": 300
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "hjvk2ltc6i0",
+              "waitForTarget": false,
+              "comment": "@assert [ASSERT_STYLE_EL.assertBoundingBox] expected for box.width (200px) to be 300px"
+            },
+            "idgk2lu386e": {
+              "editing": false,
+              "id": "idgk2lu386e",
+              "key": "idgk2lu386e",
+              "target": "BLOCK_LEFT_TOP",
+              "method": "assertBoundingBox",
+              "assert": {
+                "assertion": "boundingBox",
+                "xOperator": "eq",
+                "yOperator": "eq",
+                "wOperator": "any",
+                "hOperator": "any",
+                "xValue": 0,
+                "yValue": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "hjvk2ltc6i0",
+              "waitForTarget": false
+            },
+            "idgk2lu3szr": {
+              "editing": false,
+              "id": "idgk2lu3szr",
+              "key": "idgk2lu3szr",
+              "target": "BLOCK_NEXT_TOP",
+              "method": "assertBoundingBox",
+              "assert": {
+                "assertion": "boundingBox",
+                "xOperator": "eq",
+                "yOperator": "any",
+                "wOperator": "any",
+                "hOperator": "any",
+                "xValue": 122
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "hjvk2ltc6i0",
+              "waitForTarget": false
+            }
+          },
+          "disabled": true,
+          "failure": ""
+        },
+        "jhik2lv1okl": {
+          "title": "target.assertContainsClass",
+          "id": "jhik2lv1okl",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "jhik2lv1okl",
+          "commands": {
+            "jhik2lv24kl": {
+              "editing": false,
+              "id": "jhik2lv24kl",
+              "key": "jhik2lv24kl",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertContainsClass",
+              "assert": {
+                "assertion": "hasClass"
+              },
+              "params": {
+                "name": "one-div"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "jhik2lv1okl",
+              "waitForTarget": false
+            },
+            "jrbk2lvjfbq": {
+              "editing": false,
+              "id": "jrbk2lvjfbq",
+              "key": "jrbk2lvjfbq",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertContainsClass",
+              "assert": {
+                "assertion": "!hasClass"
+              },
+              "params": {
+                "name": "one-div"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "jhik2lv1okl",
+              "waitForTarget": false,
+              "comment": "@assert [ASSERT_STYLE_EL.assertContainsClass] expected not to contain class \"one-div\""
+            },
+            "jrbk2lvjrsa": {
+              "editing": false,
+              "id": "jrbk2lvjrsa",
+              "key": "jrbk2lvjrsa",
+              "target": "DISABLED_BTN",
+              "method": "assertContainsClass",
+              "assert": {
+                "assertion": "hasClass"
+              },
+              "params": {
+                "name": ":disabled"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "jhik2lv1okl",
+              "waitForTarget": false
+            },
+            "kk6k2lwtmh7": {
+              "editing": false,
+              "id": "kk6k2lwtmh7",
+              "key": "kk6k2lwtmh7",
+              "target": "DISABLED_BTN",
+              "method": "assertContainsClass",
+              "assert": {
+                "assertion": "!hasClass"
+              },
+              "params": {
+                "name": ":disabled"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "jhik2lv1okl",
+              "waitForTarget": false,
+              "comment": "@assert [DISABLED_BTN.assertContainsClass] expected not to contain class \":disabled\""
+            },
+            "kk6k2lwt934": {
+              "editing": false,
+              "id": "kk6k2lwt934",
+              "key": "kk6k2lwt934",
+              "target": "DISABLED_BTN",
+              "method": "assertContainsClass",
+              "assert": {
+                "assertion": "hasClass"
+              },
+              "params": {
+                "name": ":active"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "jhik2lv1okl",
+              "waitForTarget": false,
+              "comment": "@assert [DISABLED_BTN.assertContainsClass] expected to contain class \":active\""
+            }
+          },
+          "disabled": true,
+          "failure": ""
+        },
+        "kk6k2lww2t7": {
+          "title": "target.assertMatchesSelector",
+          "id": "kk6k2lww2t7",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "kk6k2lww2t7",
+          "commands": {
+            "kk6k2lwwbud": {
+              "editing": false,
+              "id": "kk6k2lwwbud",
+              "key": "kk6k2lwwbud",
+              "target": "DISABLED_BTN",
+              "method": "assertMatchesSelector",
+              "assert": {
+                "assertion": "selector",
+                "value": "#disabledBtn"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kk6k2lww2t7",
+              "waitForTarget": false
+            },
+            "kk6k2lwxsjh": {
+              "editing": false,
+              "id": "kk6k2lwxsjh",
+              "key": "kk6k2lwxsjh",
+              "target": "DISABLED_BTN",
+              "method": "assertMatchesSelector",
+              "assert": {
+                "assertion": "selector",
+                "value": "#disabledBtn:not(button)"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kk6k2lww2t7",
+              "waitForTarget": false,
+              "comment": "@assert [DISABLED_BTN.assertMatchesSelector] expected to match selector \"#disabledBtn:not(button)\""
+            },
+            "kk6k2lwye1s": {
+              "editing": false,
+              "id": "kk6k2lwye1s",
+              "key": "kk6k2lwye1s",
+              "target": "DISABLED_BTN",
+              "method": "assertMatchesSelector",
+              "assert": {
+                "assertion": "selector",
+                "value": ":disabled"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kk6k2lww2t7",
+              "waitForTarget": false
+            }
+          },
+          "disabled": true,
+          "failure": ""
+        },
+        "kxuk2lx76wr": {
+          "title": "target.assertNodeCount",
+          "id": "kxuk2lx76wr",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "kxuk2lx76wr",
+          "commands": {
+            "kxuk2lx7jwe": {
+              "editing": false,
+              "id": "kxuk2lx7jwe",
+              "key": "kxuk2lx7jwe",
+              "target": "LIST",
+              "method": "assertNodeCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "eq",
+                "value": 3
+              },
+              "params": {
+                "selector": "li"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kxuk2lx76wr",
+              "waitForTarget": false
+            },
+            "kxuk2lx8ayt": {
+              "editing": false,
+              "id": "kxuk2lx8ayt",
+              "key": "kxuk2lx8ayt",
+              "target": "LIST",
+              "method": "assertNodeCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "gt",
+                "value": 1
+              },
+              "params": {
+                "selector": "li"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kxuk2lx76wr",
+              "waitForTarget": false
+            },
+            "kxuk2lx8mr0": {
+              "editing": false,
+              "id": "kxuk2lx8mr0",
+              "key": "kxuk2lx8mr0",
+              "target": "LIST",
+              "method": "assertNodeCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "eq",
+                "value": 1
+              },
+              "params": {
+                "selector": "li"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kxuk2lx76wr",
+              "comment": "@assert [LIST.assertNodeCount] expected number of the matching elements (3) to be 1",
+              "waitForTarget": false
+            },
+            "kxuk2lx8w3f": {
+              "editing": false,
+              "id": "kxuk2lx8w3f",
+              "key": "kxuk2lx8w3f",
+              "target": "LIST",
+              "method": "assertNodeCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "lt",
+                "value": 1
+              },
+              "params": {
+                "selector": "li"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kxuk2lx76wr",
+              "comment": "@assert [LIST.assertNodeCount] expected number of the matching elements (3) to be < 1",
+              "waitForTarget": false
+            }
+          },
+          "disabled": true,
+          "failure": ""
+        },
+        "oblk2lzohdj": {
+          "editing": false,
+          "id": "oblk2lzohdj",
+          "key": "oblk2lzohdj",
+          "title": "page.assertNodeCount",
+          "commands": {
+            "oblk2lzohqj": {
+              "editing": false,
+              "id": "oblk2lzohqj",
+              "key": "oblk2lzohqj",
+              "target": "page",
+              "method": "assertNodeCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "eq",
+                "value": 3
+              },
+              "params": {
+                "selector": "#list li"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lzohdj",
+              "waitForTarget": false
+            },
+            "oblk2lzohxj": {
+              "editing": false,
+              "id": "oblk2lzohxj",
+              "key": "oblk2lzohxj",
+              "target": "page",
+              "method": "assertNodeCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "gt",
+                "value": 1
+              },
+              "params": {
+                "selector": "#list li"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lzohdj",
+              "waitForTarget": false
+            },
+            "oblk2lzoi3q": {
+              "editing": false,
+              "id": "oblk2lzoi3q",
+              "key": "oblk2lzoi3q",
+              "target": "page",
+              "method": "assertNodeCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "eq",
+                "value": 1
+              },
+              "params": {
+                "selector": "#list li"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lzohdj",
+              "comment": "@assert [page.assertNodeCount] expected number of the matching elements (3) to be 1",
+              "waitForTarget": false
+            },
+            "oblk2lzoiat": {
+              "editing": false,
+              "id": "oblk2lzoiat",
+              "key": "oblk2lzoiat",
+              "target": "page",
+              "method": "assertNodeCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "lt",
+                "value": 1
+              },
+              "params": {
+                "selector": "#list li"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lzohdj",
+              "comment": "@assert [page.assertNodeCount] expected number of the matching elements (3) to be < 1",
+              "waitForTarget": false
+            }
+          },
+          "disabled": true,
+          "expanded": false,
+          "adding": false,
+          "groupId": "eoyk2a8u1qy",
+          "failure": ""
+        },
+        "kxuk2lxc0w1": {
+          "title": "target.assertPosition",
+          "id": "kxuk2lxc0w1",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "kxuk2lxc0w1",
+          "commands": {
+            "kxuk2lxccod": {
+              "editing": false,
+              "id": "kxuk2lxccod",
+              "key": "kxuk2lxccod",
+              "target": "BLOCK_LEFT_TOP",
+              "method": "assertPosition",
+              "assert": {
+                "assertion": "position",
+                "position": "left",
+                "target": "BLOCK_NEXT_TOP"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kxuk2lxc0w1",
+              "waitForTarget": false
+            },
+            "kxuk2lxcv05": {
+              "editing": false,
+              "id": "kxuk2lxcv05",
+              "key": "kxuk2lxcv05",
+              "target": "BLOCK_NEXT_TOP",
+              "method": "assertPosition",
+              "assert": {
+                "assertion": "position",
+                "position": "right",
+                "target": "BLOCK_LEFT_TOP"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kxuk2lxc0w1",
+              "waitForTarget": false
+            },
+            "lbuk2lxgs3e": {
+              "editing": false,
+              "id": "lbuk2lxgs3e",
+              "key": "lbuk2lxgs3e",
+              "target": "ASSERT_STYLE_EL",
+              "method": "assertPosition",
+              "assert": {
+                "assertion": "position",
+                "position": "below",
+                "target": "BLOCK_LEFT_TOP"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kxuk2lxc0w1",
+              "waitForTarget": false
+            },
+            "lbuk2lxg8rc": {
+              "editing": false,
+              "id": "lbuk2lxg8rc",
+              "key": "lbuk2lxg8rc",
+              "target": "BLOCK_NEXT_TOP",
+              "method": "assertPosition",
+              "assert": {
+                "assertion": "position",
+                "position": "left",
+                "target": "BLOCK_LEFT_TOP"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kxuk2lxc0w1",
+              "waitForTarget": false,
+              "comment": "@assert [BLOCK_NEXT_TOP.assertPosition] expected BLOCK_NEXT_TOP (x=122, width=152) to be left to BLOCK_LEFT_TOP (x=0)"
+            },
+            "lbuk2lxgce4": {
+              "editing": false,
+              "id": "lbuk2lxgce4",
+              "key": "lbuk2lxgce4",
+              "target": "BLOCK_NEXT_TOP",
+              "method": "assertPosition",
+              "assert": {
+                "assertion": "position",
+                "position": "below",
+                "target": "BLOCK_LEFT_TOP"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kxuk2lxc0w1",
+              "waitForTarget": false,
+              "comment": "@assert [BLOCK_NEXT_TOP.assertPosition] expected BLOCK_NEXT_TOP (y=0) to be below BLOCK_LEFT_TOP (y=0, height=34)"
+            }
+          },
+          "disabled": true,
+          "failure": ""
+        },
+        "lbuk2lxlwie": {
+          "title": "target.assertScroll",
+          "id": "lbuk2lxlwie",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "lbuk2lxlwie",
+          "commands": {
+            "lbuk2lxo6b5": {
+              "editing": false,
+              "id": "lbuk2lxo6b5",
+              "key": "lbuk2lxo6b5",
+              "target": "CONTAINER",
+              "method": "assertScroll",
+              "assert": {
+                "assertion": "number",
+                "operator": "eq",
+                "value": 0
+              },
+              "params": {
+                "direction": "vertically"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "lbuk2lxlwie",
+              "waitForTarget": false
+            },
+            "lbuk2lxnexg": {
+              "editing": false,
+              "id": "lbuk2lxnexg",
+              "key": "lbuk2lxnexg",
+              "target": "CONTAINER",
+              "method": "scroll",
+              "params": {
+                "x": 0,
+                "y": 32
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "lbuk2lxlwie",
+              "waitForTarget": false
+            },
+            "lbuk2lxodfi": {
+              "editing": false,
+              "id": "lbuk2lxodfi",
+              "key": "lbuk2lxodfi",
+              "target": "CONTAINER",
+              "method": "assertScroll",
+              "assert": {
+                "assertion": "number",
+                "operator": "eq",
+                "value": 0
+              },
+              "params": {
+                "direction": "vertically"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "lbuk2lxlwie",
+              "waitForTarget": false,
+              "comment": "@assert  [CONTAINER.assertScroll] expected scroll offset vertically (32) to be 0"
+            },
+            "m6ik2ly4m11": {
+              "editing": false,
+              "id": "m6ik2ly4m11",
+              "key": "m6ik2ly4m11",
+              "target": "CONTAINER",
+              "method": "assertScroll",
+              "assert": {
+                "assertion": "number",
+                "operator": "eq",
+                "value": 32
+              },
+              "params": {
+                "direction": "vertically"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "lbuk2lxlwie",
+              "waitForTarget": false
+            }
+          },
+          "disabled": true,
+          "failure": ""
+        },
+        "mu1k2lypjks": {
+          "title": "target.screenshot",
+          "id": "mu1k2lypjks",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "mu1k2lypjks",
+          "commands": {
+            "mu1k2lyq1mr": {
+              "editing": false,
+              "id": "mu1k2lyq1mr",
+              "key": "mu1k2lyq1mr",
+              "target": "CONTAINER",
+              "method": "screenshot",
+              "assert": {},
+              "params": {
+                "name": "Assert scroll",
+                "omitBackground": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "mu1k2lypjks",
+              "waitForTarget": false,
+              "entity": "command"
+            }
+          },
+          "disabled": true,
+          "failure": ""
+        },
+        "mu1k2lyqh2s": {
+          "title": "target.assertScreenshot",
+          "id": "mu1k2lyqh2s",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "mu1k2lyqh2s",
+          "commands": {
+            "mu1k2lyquiy": {
+              "editing": false,
+              "id": "mu1k2lyquiy",
+              "key": "mu1k2lyquiy",
+              "target": "CONTAINER",
+              "method": "assertTextCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "eq",
+                "value": 1
+              },
+              "params": {
+                "text": "Line1"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "mu1k2lyqh2s",
+              "waitForTarget": false
+            },
+            "mu1k2lytlzc": {
+              "editing": false,
+              "id": "mu1k2lytlzc",
+              "key": "mu1k2lytlzc",
+              "target": "CONTAINER",
+              "method": "assertTextCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "eq",
+                "value": 5
+              },
+              "params": {
+                "text": "Line"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "mu1k2lyqh2s",
+              "waitForTarget": false
+            },
+            "mu1k2lytyzn": {
+              "editing": false,
+              "id": "mu1k2lytyzn",
+              "key": "mu1k2lytyzn",
+              "target": "CONTAINER",
+              "method": "assertTextCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "gt",
+                "value": 1
+              },
+              "params": {
+                "text": "Line"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "mu1k2lyqh2s",
+              "waitForTarget": false
+            },
+            "mu1k2lyu7n9": {
+              "editing": false,
+              "id": "mu1k2lyu7n9",
+              "key": "mu1k2lyu7n9",
+              "target": "CONTAINER",
+              "method": "assertTextCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "lt",
+                "value": 10
+              },
+              "params": {
+                "text": "Line"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "mu1k2lyqh2s",
+              "waitForTarget": false
+            },
+            "mu1k2lyuy70": {
+              "editing": false,
+              "id": "mu1k2lyuy70",
+              "key": "mu1k2lyuy70",
+              "target": "CONTAINER",
+              "method": "assertTextCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "eq",
+                "value": 2
+              },
+              "params": {
+                "text": "Line1"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "mu1k2lyqh2s",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [CONTAINER.assertTextCount] expected number of the matching elements (1) to be 2"
+            },
+            "mu1k2lyv716": {
+              "editing": false,
+              "id": "mu1k2lyv716",
+              "key": "mu1k2lyv716",
+              "target": "CONTAINER",
+              "method": "assertTextCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "gt",
+                "value": 2
+              },
+              "params": {
+                "text": "Line1"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "mu1k2lyqh2s",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [CONTAINER.assertTextCount] expected number of the matching elements (1) to be > 2"
+            }
+          },
+          "disabled": true,
+          "failure": ""
+        },
+        "n57k2lz10xw": {
+          "title": "page.assertConsoleMessage",
+          "id": "n57k2lz10xw",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "n57k2lz10xw",
+          "commands": {
+            "n57k2lz1mnz": {
+              "editing": false,
+              "id": "n57k2lz1mnz",
+              "key": "n57k2lz1mnz",
+              "target": "page",
+              "method": "assertConsoleMessage",
+              "assert": {
+                "not": "false",
+                "type": "any",
+                "assertion": "haveString",
+                "value": "log message"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "n57k2lz10xw",
+              "waitForTarget": false
+            },
+            "n57k2lz2ykl": {
+              "editing": false,
+              "id": "n57k2lz2ykl",
+              "key": "n57k2lz2ykl",
+              "target": "page",
+              "method": "assertConsoleMessage",
+              "assert": {
+                "not": "false",
+                "type": "any",
+                "assertion": "haveSubstring",
+                "value": "message"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "n57k2lz10xw",
+              "waitForTarget": false
+            },
+            "n57k2lz310s": {
+              "editing": false,
+              "id": "n57k2lz310s",
+              "key": "n57k2lz310s",
+              "target": "page",
+              "method": "assertConsoleMessage",
+              "assert": {
+                "not": "false",
+                "type": "log",
+                "assertion": "haveString",
+                "value": "log message"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "n57k2lz10xw",
+              "waitForTarget": false
+            },
+            "n57k2lz3vgo": {
+              "editing": false,
+              "id": "n57k2lz3vgo",
+              "key": "n57k2lz3vgo",
+              "target": "page",
+              "method": "assertConsoleMessage",
+              "assert": {
+                "not": "false",
+                "type": "info",
+                "assertion": "haveString",
+                "value": "info message"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "n57k2lz10xw",
+              "waitForTarget": false
+            },
+            "nq0k2lzdy2m": {
+              "editing": false,
+              "id": "nq0k2lzdy2m",
+              "key": "nq0k2lzdy2m",
+              "target": "page",
+              "method": "assertConsoleMessage",
+              "assert": {
+                "not": "true",
+                "type": "error",
+                "assertion": "haveSubstring",
+                "value": "ERROR"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "n57k2lz10xw",
+              "waitForTarget": false
+            },
+            "nq0k2lzfdz7": {
+              "editing": false,
+              "id": "nq0k2lzfdz7",
+              "key": "nq0k2lzfdz7",
+              "target": "page",
+              "method": "assertConsoleMessage",
+              "assert": {
+                "not": "true",
+                "type": "warning",
+                "assertion": "haveSubstring",
+                "value": "ERROR"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "n57k2lz10xw",
+              "waitForTarget": false,
+              "comment": "@assert [page.assertConsoleMessage] expected not to find console messages of type \"warning\" with text ~ \"ERROR\""
+            },
+            "oblk2lzm7lc": {
+              "editing": false,
+              "id": "oblk2lzm7lc",
+              "key": "oblk2lzm7lc",
+              "target": "page",
+              "method": "assertConsoleMessage",
+              "assert": {
+                "not": "true",
+                "type": "log",
+                "assertion": "haveString",
+                "value": "log message"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "n57k2lz10xw",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertConsoleMessage] expected not to find console messages of type \"log\" with text \"log message\""
+            },
+            "2i9k2m29cez": {
+              "editing": false,
+              "id": "2i9k2m29cez",
+              "key": "2i9k2m29cez",
+              "target": "page",
+              "method": "assertConsoleMessage",
+              "assert": {
+                "not": "false",
+                "type": "log",
+                "assertion": "haveString",
+                "value": "hoho"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "n57k2lz10xw",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertConsoleMessage] expected to find console messages of type \"log\" with text \"hoho\""
+            }
+          },
+          "disabled": true,
+          "failure": ""
+        },
+        "oblk2lztvre": {
+          "title": "page.assertGaTracking (pessimistic)",
+          "id": "oblk2lztvre",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "oblk2lztvre",
+          "commands": {
+            "oblk2lzu869": {
+              "editing": false,
+              "id": "oblk2lzu869",
+              "key": "oblk2lzu869",
+              "target": "page",
+              "method": "assertGaTracking",
+              "assert": {
+                "assertion": "assertGaTracking",
+                "action": "pageview"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lztvre",
+              "comment": "@assert [page.assertGaTracking] expected to send \"pageview\" data to Google Analytics, but it is not sent",
+              "waitForTarget": false
+            },
+            "oblk2lzujep": {
+              "editing": false,
+              "id": "oblk2lzujep",
+              "key": "oblk2lzujep",
+              "target": "page",
+              "method": "assertGaTracking",
+              "assert": {
+                "assertion": "assertGaTracking",
+                "action": "event",
+                "categoryAssertion": "any",
+                "actionAssertion": "equals",
+                "actionValue": "Lorem",
+                "labelAssertion": "any",
+                "valueAssertion": "any",
+                "nonInteractiveValue": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lztvre",
+              "comment": "@assert [page.assertGaTracking] expected to send \"event\"",
+              "waitForTarget": false
+            },
+            "oblk2lzzeki": {
+              "editing": false,
+              "id": "oblk2lzzeki",
+              "key": "oblk2lzzeki",
+              "target": "page",
+              "method": "assertGaTracking",
+              "assert": {
+                "assertion": "assertGaTracking",
+                "action": "social",
+                "networkAssertion": "any",
+                "actionAssertion": "equals",
+                "actionValue": "Lorem",
+                "targetAssertion": "any"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lztvre",
+              "comment": "@assert [page.assertGaTracking] expected to send \"social\" data",
+              "waitForTarget": false
+            },
+            "oblk2lzzq1u": {
+              "editing": false,
+              "id": "oblk2lzzq1u",
+              "key": "oblk2lzzq1u",
+              "target": "page",
+              "method": "assertGaTracking",
+              "assert": {
+                "assertion": "assertGaTracking",
+                "action": "screenview",
+                "screenNameAssertion": "any",
+                "appNameAssertion": "equals",
+                "appNameValue": "Lorem",
+                "appIdAssertion": "any",
+                "appVersionAssertion": "any",
+                "appInstallerIdAssertion": "any"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lztvre",
+              "comment": "@assert [page.assertGaTracking] expected to send \"screenview\"",
+              "waitForTarget": false
+            },
+            "oblk2m00apn": {
+              "editing": false,
+              "id": "oblk2m00apn",
+              "key": "oblk2m00apn",
+              "target": "page",
+              "method": "assertGaTracking",
+              "assert": {
+                "assertion": "assertGaTracking",
+                "action": "timing",
+                "varAssertion": "equals",
+                "varValue": "Lorem",
+                "valueAssertion": "any",
+                "categoryAssertion": "any",
+                "labelAssertion": "any"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lztvre",
+              "comment": "@assert [page.assertGaTracking] expected to send \"timing\"",
+              "waitForTarget": false
+            },
+            "oblk2m00xwn": {
+              "editing": false,
+              "id": "oblk2m00xwn",
+              "key": "oblk2m00xwn",
+              "target": "page",
+              "method": "assertGaTracking",
+              "assert": {
+                "assertion": "assertGaTracking",
+                "action": "exception",
+                "descriptionAssertion": "equals",
+                "descriptionValue": "Lorem"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lztvre",
+              "comment": "@assert [page.assertGaTracking] expected to send \"exception\"",
+              "waitForTarget": false
+            },
+            "oblk2m01byp": {
+              "editing": false,
+              "id": "oblk2m01byp",
+              "key": "oblk2m01byp",
+              "target": "page",
+              "method": "assertGaTracking",
+              "assert": {
+                "assertion": "assertGaTracking",
+                "action": "ecommerceAddItem",
+                "idAssertion": "any",
+                "nameAssertion": "equals",
+                "nameValue": "Lorem",
+                "skuAssertion": "any",
+                "categoryAssertion": "any",
+                "priceAssertion": "any",
+                "quantityAssertion": "any"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lztvre",
+              "comment": "@assert [page.assertGaTracking] expected to send \"EC: Adding an Item\"",
+              "waitForTarget": false
+            },
+            "oblk2m01pln": {
+              "editing": false,
+              "id": "oblk2m01pln",
+              "key": "oblk2m01pln",
+              "target": "page",
+              "method": "assertGaTracking",
+              "assert": {
+                "assertion": "assertGaTracking",
+                "action": "ecommerceAddTransaction",
+                "idAssertion": "equals",
+                "idValue": "Lorem",
+                "affiliationAssertion": "any",
+                "revenueAssertion": "any",
+                "taxAssertion": "any",
+                "shippingAssertion": "any",
+                "couponAssertion": "any"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lztvre",
+              "comment": "@assert [page.assertGaTracking] expected to send \"EC: Adding a Transaction\"",
+              "waitForTarget": false
+            },
+            "oblk2m026m8": {
+              "editing": false,
+              "id": "oblk2m026m8",
+              "key": "oblk2m026m8",
+              "target": "page",
+              "method": "assertGaTracking",
+              "assert": {
+                "assertion": "assertGaTracking",
+                "action": "ecProductImpression",
+                "idAssertion": "equals",
+                "idValue": "Lorem",
+                "nameAssertion": "any",
+                "listAssertion": "any",
+                "brandAssertion": "any",
+                "categoryAssertion": "any",
+                "variantAssertion": "any",
+                "positionAssertion": "any",
+                "priceAssertion": "any"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lztvre",
+              "comment": "@assert [page.assertGaTracking] expected to send \"EC: Product Impression\" data (id = \"Lorem\")",
+              "waitForTarget": false
+            },
+            "oblk2m02gya": {
+              "editing": false,
+              "id": "oblk2m02gya",
+              "key": "oblk2m02gya",
+              "target": "page",
+              "method": "assertGaTracking",
+              "assert": {
+                "assertion": "assertGaTracking",
+                "action": "ecProductClick"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lztvre",
+              "comment": "@assert [page.assertGaTracking] expected to send \"EC: Product Click\"",
+              "waitForTarget": false
+            },
+            "x5k2m0pnhn": {
+              "editing": false,
+              "id": "x5k2m0pnhn",
+              "key": "x5k2m0pnhn",
+              "target": "page",
+              "method": "assertGaTracking",
+              "assert": {
+                "assertion": "assertGaTracking",
+                "action": "ecProductDetails"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lztvre",
+              "comment": "@assert [page.assertGaTracking] expected to send \"EC: Product Details View\"",
+              "waitForTarget": false
+            },
+            "x5k2m0pqja": {
+              "editing": false,
+              "id": "x5k2m0pqja",
+              "key": "x5k2m0pqja",
+              "target": "page",
+              "method": "assertGaTracking",
+              "assert": {
+                "assertion": "assertGaTracking",
+                "action": "ecAddToCart",
+                "productCountAssertion": "any"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lztvre",
+              "comment": "@assert [page.assertGaTracking] expected to send \"EC: Add Products to cart\"",
+              "waitForTarget": false
+            },
+            "x5k2m0ptfc": {
+              "editing": false,
+              "id": "x5k2m0ptfc",
+              "key": "x5k2m0ptfc",
+              "target": "page",
+              "method": "assertGaTracking",
+              "assert": {
+                "assertion": "assertGaTracking",
+                "action": "ecRemoveFromCart",
+                "productCountAssertion": "any"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lztvre",
+              "comment": "@assert [page.assertGaTracking] expected to send \"EC: Remove Products from cart\"",
+              "waitForTarget": false
+            },
+            "x5k2m0qlsc": {
+              "editing": false,
+              "id": "x5k2m0qlsc",
+              "key": "x5k2m0qlsc",
+              "target": "page",
+              "method": "assertGaTracking",
+              "assert": {
+                "assertion": "assertGaTracking",
+                "action": "ecCheckout",
+                "stepAssertion": "equals",
+                "stepValue": 1,
+                "optionAssertion": "any",
+                "eventActionAssertion": "any",
+                "productCountAssertion": "any"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lztvre",
+              "comment": "@assert [page.assertGaTracking] expected to send \"EC: Checkout\"",
+              "waitForTarget": false
+            },
+            "x5k2m0qoq6": {
+              "editing": false,
+              "id": "x5k2m0qoq6",
+              "key": "x5k2m0qoq6",
+              "target": "page",
+              "method": "assertGaTracking",
+              "assert": {
+                "assertion": "assertGaTracking",
+                "action": "ecRefund",
+                "idAssertion": "equals",
+                "idValue": "Lorem",
+                "affiliationAssertion": "any",
+                "revenueAssertion": "any",
+                "taxAssertion": "any",
+                "shippingAssertion": "any",
+                "couponAssertion": "any",
+                "productCountAssertion": "any"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lztvre",
+              "comment": "@assert [page.assertGaTracking] expected to send \"EC: Refund\" data (id = \"Lorem\") ",
+              "waitForTarget": false
+            },
+            "x5k2m0rlvf": {
+              "editing": false,
+              "id": "x5k2m0rlvf",
+              "key": "x5k2m0rlvf",
+              "target": "page",
+              "method": "assertGaTracking",
+              "assert": {
+                "assertion": "assertGaTracking",
+                "action": "ecPurchase",
+                "idAssertion": "equals",
+                "idValue": "Lorem",
+                "affiliationAssertion": "any",
+                "revenueAssertion": "any",
+                "taxAssertion": "any",
+                "shippingAssertion": "any",
+                "couponAssertion": "any",
+                "productCountAssertion": "any"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lztvre",
+              "comment": "@assert [page.assertGaTracking] expected to send \"EC: Purchase\" data (id = \"Lorem\")",
+              "waitForTarget": false
+            },
+            "x5k2m0rp0l": {
+              "editing": false,
+              "id": "x5k2m0rp0l",
+              "key": "x5k2m0rp0l",
+              "target": "page",
+              "method": "assertGaTracking",
+              "assert": {
+                "assertion": "assertGaTracking",
+                "action": "ecPromotion",
+                "idAssertion": "equals",
+                "idValue": "Lorem",
+                "nameAssertion": "any",
+                "creativeAssertion": "any",
+                "positionAssertion": "any"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "oblk2lztvre",
+              "comment": "@assert [page.assertGaTracking] expected to send \"EC: Promotion\" data (id = \"Lorem\") ",
+              "waitForTarget": false
+            }
+          },
+          "disabled": true,
+          "failure": ""
+        },
+        "e1dk2n2mf0k": {
+          "title": "page.assertDialog / page.closeDialog (alert)",
+          "id": "e1dk2n2mf0k",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "e1dk2n2mf0k",
+          "commands": {
+            "e1dk2n2yvfg": {
+              "editing": false,
+              "id": "e1dk2n2yvfg",
+              "key": "e1dk2n2yvfg",
+              "target": "page",
+              "method": "closeDialog",
+              "params": {
+                "type": "alert",
+                "substring": "Lorem1",
+                "action": "dismiss"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "e1dk2n2mf0k",
+              "waitForTarget": false
+            },
+            "e1dk2n30oqc": {
+              "editing": false,
+              "id": "e1dk2n30oqc",
+              "key": "e1dk2n30oqc",
+              "target": "ALERT_BTN",
+              "method": "click",
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "e1dk2n2mf0k",
+              "waitForTarget": false
+            },
+            "e1dk2n2wcsh": {
+              "editing": false,
+              "id": "e1dk2n2wcsh",
+              "key": "e1dk2n2wcsh",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "false",
+                "type": "any",
+                "assertion": "haveString",
+                "value": "Lorem1"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "e1dk2n2mf0k",
+              "waitForTarget": false
+            },
+            "e1dk2n31k0r": {
+              "editing": false,
+              "id": "e1dk2n31k0r",
+              "key": "e1dk2n31k0r",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "false",
+                "type": "alert",
+                "assertion": "haveString",
+                "value": "Lorem1"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "e1dk2n2mf0k",
+              "waitForTarget": false
+            },
+            "e1dk2n329dg": {
+              "editing": false,
+              "id": "e1dk2n329dg",
+              "key": "e1dk2n329dg",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "false",
+                "type": "alert",
+                "assertion": "haveSubstring",
+                "value": "Lorem"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "e1dk2n2mf0k",
+              "waitForTarget": false
+            },
+            "e1dk2n33hpn": {
+              "editing": false,
+              "id": "e1dk2n33hpn",
+              "key": "e1dk2n33hpn",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "false",
+                "type": "confirm",
+                "assertion": "haveSubstring",
+                "value": "Lorem"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "e1dk2n2mf0k",
+              "comment": "@assert [page.assertDialog] expected to find dialogs of type \"confirm\" with message ~ \"Lorem\"",
+              "waitForTarget": false
+            },
+            "e1dk2n3320n": {
+              "editing": false,
+              "id": "e1dk2n3320n",
+              "key": "e1dk2n3320n",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "true",
+                "type": "alert",
+                "assertion": "haveSubstring",
+                "value": "Lorem"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "e1dk2n2mf0k",
+              "waitForTarget": false,
+              "comment": "@assert [page.assertDialog] expected not to find dialogs of type \"alert\" with message ~ \"Lorem\""
+            }
+          },
+          "disabled": true,
+          "failure": ""
+        },
+        "eelk2n3dk6b": {
+          "editing": false,
+          "id": "eelk2n3dk6b",
+          "key": "eelk2n3dk6b",
+          "title": "page.assertDialog / page.closeDialog (confirm-dismiss)",
+          "commands": {
+            "eelk2n3dkiw": {
+              "editing": false,
+              "id": "eelk2n3dkiw",
+              "key": "eelk2n3dkiw",
+              "target": "page",
+              "method": "closeDialog",
+              "params": {
+                "type": "any",
+                "substring": "Lorem2",
+                "action": "dismiss"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3dk6b",
+              "waitForTarget": false
+            },
+            "eelk2n3dkrv": {
+              "editing": false,
+              "id": "eelk2n3dkrv",
+              "key": "eelk2n3dkrv",
+              "target": "CONFIRM_BTN",
+              "method": "click",
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3dk6b",
+              "waitForTarget": false
+            },
+            "eelk2n3dkz9": {
+              "editing": false,
+              "id": "eelk2n3dkz9",
+              "key": "eelk2n3dkz9",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "false",
+                "type": "any",
+                "assertion": "haveString",
+                "value": "Lorem2"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3dk6b",
+              "waitForTarget": false
+            },
+            "eelk2n3dl7a": {
+              "editing": false,
+              "id": "eelk2n3dl7a",
+              "key": "eelk2n3dl7a",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "false",
+                "type": "confirm",
+                "assertion": "haveString",
+                "value": "Lorem2"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3dk6b",
+              "waitForTarget": false
+            },
+            "eelk2n3dlf3": {
+              "editing": false,
+              "id": "eelk2n3dlf3",
+              "key": "eelk2n3dlf3",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "false",
+                "type": "confirm",
+                "assertion": "haveSubstring",
+                "value": "Lorem"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3dk6b",
+              "waitForTarget": false
+            },
+            "eelk2n3dlof": {
+              "editing": false,
+              "id": "eelk2n3dlof",
+              "key": "eelk2n3dlof",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "false",
+                "type": "alert",
+                "assertion": "haveString",
+                "value": "Lorem2"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3dk6b",
+              "comment": "@assert [page.assertDialog] expected to find dialogs of type \"alert\" with message \"Lorem2\"",
+              "waitForTarget": false
+            },
+            "eelk2n3dlx8": {
+              "editing": false,
+              "id": "eelk2n3dlx8",
+              "key": "eelk2n3dlx8",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "true",
+                "type": "confirm",
+                "assertion": "haveString",
+                "value": "Lorem2"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3dk6b",
+              "waitForTarget": false,
+              "comment": "@assert [page.assertDialog] expected not to find dialogs of type \"confirm\" with message \"Lorem2\""
+            },
+            "eelk2n5emk0": {
+              "editing": false,
+              "id": "eelk2n5emk0",
+              "key": "eelk2n5emk0",
+              "target": "CONFIRM_BTN",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "equals",
+                "value": "false"
+              },
+              "params": {
+                "name": "data-rsp"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3dk6b",
+              "waitForTarget": false,
+              "entity": "command"
+            }
+          },
+          "disabled": true,
+          "expanded": false,
+          "adding": false,
+          "groupId": "eoyk2a8u1qy",
+          "failure": ""
+        },
+        "eelk2n3tdlq": {
+          "editing": false,
+          "id": "eelk2n3tdlq",
+          "key": "eelk2n3tdlq",
+          "title": "page.assertDialog / page.closeDialog (confirm-accept)",
+          "commands": {
+            "eelk2n3tdy2": {
+              "editing": false,
+              "id": "eelk2n3tdy2",
+              "key": "eelk2n3tdy2",
+              "target": "page",
+              "method": "closeDialog",
+              "params": {
+                "type": "confirm",
+                "substring": "Lorem4",
+                "action": "accept"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3tdlq",
+              "waitForTarget": false
+            },
+            "eelk2n3te73": {
+              "editing": false,
+              "id": "eelk2n3te73",
+              "key": "eelk2n3te73",
+              "target": "CONFIRM_ACCEPT_BTN",
+              "method": "click",
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3tdlq",
+              "waitForTarget": false
+            },
+            "eelk2n3tefw": {
+              "editing": false,
+              "id": "eelk2n3tefw",
+              "key": "eelk2n3tefw",
+              "target": "CONFIRM_ACCEPT_BTN",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "equals",
+                "value": "true"
+              },
+              "params": {
+                "name": "data-rsp"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3tdlq",
+              "waitForTarget": false
+            }
+          },
+          "disabled": true,
+          "expanded": false,
+          "adding": false,
+          "groupId": "eoyk2a8u1qy",
+          "failure": ""
+        },
+        "eelk2n3rt3z": {
+          "editing": false,
+          "id": "eelk2n3rt3z",
+          "key": "eelk2n3rt3z",
+          "title": "page.assertDialog / page.closeDialog (prompt-dismiss)",
+          "commands": {
+            "eelk2n3rtm9": {
+              "editing": false,
+              "id": "eelk2n3rtm9",
+              "key": "eelk2n3rtm9",
+              "target": "page",
+              "method": "closeDialog",
+              "params": {
+                "type": "prompt",
+                "substring": "Lorem3",
+                "action": "dismiss",
+                "promptText": "Ipsum"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3rt3z",
+              "waitForTarget": false
+            },
+            "eelk2n3rttp": {
+              "editing": false,
+              "id": "eelk2n3rttp",
+              "key": "eelk2n3rttp",
+              "target": "PROMPT_BTN",
+              "method": "click",
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3rt3z",
+              "waitForTarget": false
+            },
+            "fxak2n5upav": {
+              "editing": false,
+              "id": "fxak2n5upav",
+              "key": "fxak2n5upav",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "false",
+                "type": "prompt",
+                "assertion": "haveString",
+                "value": "Lorem3"
+              },
+              "params": {},
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3rt3z",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "fxak2n5upul": {
+              "editing": false,
+              "id": "fxak2n5upul",
+              "key": "fxak2n5upul",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "true",
+                "type": "prompt",
+                "assertion": "haveString",
+                "value": "Lorem3"
+              },
+              "params": {},
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3rt3z",
+              "waitForTarget": false,
+              "comment": "@assert [page.assertDialog] expected not to find dialogs of type \"prompt\" with message \"Lorem3\"",
+              "entity": "command"
+            },
+            "eelk2n3ru13": {
+              "editing": false,
+              "id": "eelk2n3ru13",
+              "key": "eelk2n3ru13",
+              "target": "PROMPT_BTN",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "!equals",
+                "value": "Ipsum"
+              },
+              "params": {
+                "name": "data-rsp"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3rt3z",
+              "waitForTarget": false,
+              "entity": "command"
+            }
+          },
+          "disabled": true,
+          "expanded": false,
+          "adding": false,
+          "groupId": "eoyk2a8u1qy",
+          "failure": ""
+        },
+        "eelk2n3dotg": {
+          "editing": false,
+          "id": "eelk2n3dotg",
+          "key": "eelk2n3dotg",
+          "title": "page.assertDialog / page.closeDialog (prompt-accept)",
+          "commands": {
+            "eelk2n3dp8b": {
+              "editing": false,
+              "id": "eelk2n3dp8b",
+              "key": "eelk2n3dp8b",
+              "target": "page",
+              "method": "closeDialog",
+              "params": {
+                "type": "prompt",
+                "substring": "Lorem5",
+                "action": "accept",
+                "promptText": "Ipsum"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3dotg",
+              "waitForTarget": false
+            },
+            "eelk2n3dpgc": {
+              "editing": false,
+              "id": "eelk2n3dpgc",
+              "key": "eelk2n3dpgc",
+              "target": "PROMPT_ACCEPT_BTN",
+              "method": "click",
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3dotg",
+              "waitForTarget": false
+            },
+            "eelk2n3mvz6": {
+              "editing": false,
+              "id": "eelk2n3mvz6",
+              "key": "eelk2n3mvz6",
+              "target": "PROMPT_ACCEPT_BTN",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "equals",
+                "value": "Ipsum"
+              },
+              "params": {
+                "name": "data-rsp"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eelk2n3dotg",
+              "waitForTarget": false
+            }
+          },
+          "disabled": true,
+          "expanded": false,
+          "adding": false,
+          "groupId": "eoyk2a8u1qy",
+          "failure": ""
+        },
+        "iq7k2n8q80b": {
+          "title": "page.assertNodeCount",
+          "id": "iq7k2n8q80b",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "iq7k2n8q80b",
+          "commands": {
+            "iq7k2n8rt6y": {
+              "editing": false,
+              "id": "iq7k2n8rt6y",
+              "key": "iq7k2n8rt6y",
+              "target": "page",
+              "method": "assertNodeCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "eq",
+                "value": 3
+              },
+              "params": {
+                "selector": "#list li"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "iq7k2n8q80b",
+              "waitForTarget": false
+            },
+            "iq7k2n8sn0o": {
+              "editing": false,
+              "id": "iq7k2n8sn0o",
+              "key": "iq7k2n8sn0o",
+              "target": "page",
+              "method": "assertNodeCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "gt",
+                "value": 1
+              },
+              "params": {
+                "selector": "#list li"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "iq7k2n8q80b",
+              "waitForTarget": false
+            },
+            "iq7k2n8svs8": {
+              "editing": false,
+              "id": "iq7k2n8svs8",
+              "key": "iq7k2n8svs8",
+              "target": "page",
+              "method": "assertNodeCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "lt",
+                "value": 10
+              },
+              "params": {
+                "selector": "#list li"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "iq7k2n8q80b",
+              "waitForTarget": false
+            },
+            "iq7k2n8t4uy": {
+              "editing": false,
+              "id": "iq7k2n8t4uy",
+              "key": "iq7k2n8t4uy",
+              "target": "page",
+              "method": "assertNodeCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "eq",
+                "value": 10
+              },
+              "params": {
+                "selector": "#list li"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "iq7k2n8q80b",
+              "comment": "@assert [page.assertNodeCount] expected number of the matching elements (3) to be 10",
+              "waitForTarget": false
+            },
+            "iq7k2n8tcrd": {
+              "editing": false,
+              "id": "iq7k2n8tcrd",
+              "key": "iq7k2n8tcrd",
+              "target": "page",
+              "method": "assertNodeCount",
+              "assert": {
+                "assertion": "number",
+                "operator": "gt",
+                "value": 10
+              },
+              "params": {
+                "selector": "#list li"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "iq7k2n8q80b",
+              "comment": "@assert [page.assertNodeCount] expected number of the matching elements (3) to be > 10",
+              "waitForTarget": false
+            }
+          },
+          "disabled": true,
+          "failure": ""
+        },
+        "iq7k2n8vedc": {
+          "title": "page.assertPerformanceAssetCount",
+          "id": "iq7k2n8vedc",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "iq7k2n8vedc",
+          "commands": {
+            "iq7k2n91w8t": {
+              "editing": false,
+              "id": "iq7k2n91w8t",
+              "key": "iq7k2n91w8t",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "iq7k2n8vedc",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "iq7k2n8vwve": {
+              "editing": false,
+              "id": "iq7k2n8vwve",
+              "key": "iq7k2n8vwve",
+              "target": "page",
+              "method": "assertPerformanceAssetCount",
+              "assert": {
+                "assertion": "assertAssetCount",
+                "_enabled": {
+                  "script": true,
+                  "stylesheet": true,
+                  "image": true,
+                  "media": true,
+                  "font": true,
+                  "xhr": false
+                },
+                "script": "5",
+                "stylesheet": "5",
+                "image": "5",
+                "media": "5",
+                "font": "5"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "iq7k2n8vedc",
+              "waitForTarget": false
+            },
+            "iq7k2n8zl8t": {
+              "editing": false,
+              "id": "iq7k2n8zl8t",
+              "key": "iq7k2n8zl8t",
+              "target": "page",
+              "method": "assertPerformanceAssetCount",
+              "assert": {
+                "assertion": "assertAssetCount",
+                "_enabled": {
+                  "script": true,
+                  "stylesheet": false,
+                  "image": false,
+                  "media": false,
+                  "font": false,
+                  "xhr": false
+                },
+                "script": "1",
+                "stylesheet": "5",
+                "image": "5",
+                "media": "5",
+                "font": "5"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "iq7k2n8vedc",
+              "waitForTarget": false,
+              "comment": "@assert [page.assertPerformanceAssetCount] expected total number of script assets to be under 1, but found 1"
+            }
+          },
+          "disabled": true,
+          "failure": ""
+        },
+        "joqk2n96tb3": {
+          "editing": false,
+          "id": "joqk2n96tb3",
+          "key": "joqk2n96tb3",
+          "title": "page.assertPerformanceAssetWeight",
+          "commands": {
+            "joqk2n9t3a9": {
+              "editing": false,
+              "id": "joqk2n9t3a9",
+              "key": "joqk2n9t3a9",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "joqk2n96tb3",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "joqk2n96u1g": {
+              "editing": false,
+              "id": "joqk2n96u1g",
+              "key": "joqk2n96u1g",
+              "target": "page",
+              "method": "assertPerformanceAssetWeight",
+              "assert": {
+                "assertion": "assertAssetWeight",
+                "_enabled": {
+                  "script": true,
+                  "stylesheet": true,
+                  "image": true,
+                  "media": true,
+                  "font": true,
+                  "xhr": true
+                },
+                "script": "100",
+                "stylesheet": "111",
+                "image": "111",
+                "media": "111",
+                "font": "111",
+                "xhr": "111"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "joqk2n96tb3",
+              "waitForTarget": false
+            },
+            "joqk2n96ue7": {
+              "editing": false,
+              "id": "joqk2n96ue7",
+              "key": "joqk2n96ue7",
+              "target": "page",
+              "method": "assertPerformanceAssetWeight",
+              "assert": {
+                "assertion": "assertAssetWeight",
+                "_enabled": {
+                  "script": true,
+                  "stylesheet": false,
+                  "image": false,
+                  "media": false,
+                  "font": false,
+                  "xhr": false
+                },
+                "script": "0"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "joqk2n96tb3",
+              "waitForTarget": false,
+              "comment": "@assert [page.assertPerformanceAssetWeight] expected total weight of script assets to be under 0, but found 1 assets with total weight"
+            }
+          },
+          "disabled": true,
+          "expanded": false,
+          "adding": false,
+          "groupId": "eoyk2a8u1qy",
+          "failure": ""
+        },
+        "kiyk2na6w4i": {
+          "title": "page.assertPerformanceTiming",
+          "id": "kiyk2na6w4i",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "kiyk2na6w4i",
+          "commands": {
+            "kiyk2na78ij": {
+              "editing": false,
+              "id": "kiyk2na78ij",
+              "key": "kiyk2na78ij",
+              "target": "page",
+              "method": "assertPerformanceTiming",
+              "assert": {
+                "assertion": "assertPerformanceTiming",
+                "_enabled": {
+                  "loading": true,
+                  "redirection": true,
+                  "network": true,
+                  "processing": true
+                },
+                "loading": "3000",
+                "redirection": "3000",
+                "network": "3000",
+                "processing": "3000"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2na6w4i",
+              "waitForTarget": false
+            },
+            "kiyk2na82jc": {
+              "editing": false,
+              "id": "kiyk2na82jc",
+              "key": "kiyk2na82jc",
+              "target": "page",
+              "method": "assertPerformanceTiming",
+              "assert": {
+                "assertion": "assertPerformanceTiming",
+                "_enabled": {
+                  "loading": true,
+                  "redirection": true,
+                  "network": true,
+                  "processing": true
+                },
+                "loading": "1",
+                "redirection": "1",
+                "network": "1",
+                "processing": "1"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2na6w4i",
+              "waitForTarget": false
+            }
+          }
+        }
+      }
+    }
+  },
+  "puppetry": "3.0.0-beta.2"
+}
