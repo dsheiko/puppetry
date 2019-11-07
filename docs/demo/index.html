@@ -1,0 +1,395 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>Puppetry Sandbox</title>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <style>
+
+        .cart .card .card-image img {
+          max-height: 100px;
+          width: auto;
+          margin: 0 auto;
+        }
+        .modal {
+          background: white;
+        }
+        .cart .card {
+          box-shadow: none;
+        }
+        .card .card-image img.activator {
+          max-height: 250px;
+          width: auto;
+          margin: 0 auto;
+        }
+        .main-container {
+          max-width: 920px;
+        }
+        .toolbox {
+          display: flex;
+          justify-content: flex-end;
+        }
+        .card-reveal ul {
+          display: block;
+          list-style-type: disc;
+          margin-top: 1em;
+          margin-bottom: 1em;
+          margin-left: 0;
+          margin-right: 0;
+          padding-left: 16px;
+        }
+        .card-reveal ul > li {
+          list-style-type: disc;
+        }
+        nav {
+          background: #002140;
+        }
+        nav .brand-logo {
+          padding-left: 16px;
+        }
+      </style>
+    </head>
+
+    <body>
+
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Sandbox</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#demo-store">Demo Store</a></li>
+        <li><a href="#demo-form">Demo Form</a></li>
+      </ul>
+    </div>
+  </nav>
+    <div class="row main-container">
+
+      <div class="row">
+
+        <h4 id="demo-store">Demo Store</h4>
+        <p>It's not a real store, but dummy one to test Google Analytics tracker</p>
+      </div>
+
+
+
+      <div class="row">
+
+        <div class="col l6 m12">
+          <div class="card product">
+           <div class="card-image waves-effect waves-block waves-light">
+             <img class="activator" src="images/tshirt-white.png">
+           </div>
+           <div class="card-content">
+             <span class="card-title activator grey-text text-darken-4">Puppetry T-Shirt (white)<i class="material-icons right">more_vert</i></span>
+             <p><a id="addtocartwhite" href="#" data-modal="cart" data-sku="white">Add to cart</a></p>
+           </div>
+           <div class="card-reveal">
+             <span class="card-title grey-text text-darken-4">Puppetry T-Shirt (white)<i class="material-icons right">close</i></span>
+             <p>
+               It’s not a real product, but a dummy one to test <code>gtag.js</code> code. The expected behavior:
+             <ul>
+               <li>When clicking on the “Add to cart” button we send out
+                 <a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_additions_to_and_removals_from_shopping_carts"><code>add_to_cart event</code> with product information </a>
+               </li>
+               <li>When clicking on the “Checkout” button we  inform Google Analytics about beginning of
+                 <a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_checkouts">checkout process</a>
+               </li>
+               <li>When clicking on the “Proceed” button we pass to Google Analytics the selected payment method
+                 <a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_checkouts">(checkout option)</a>
+               </li>
+                <li>When clicking on the “Buy” button we send out <a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_purchases">purchase event</a>
+               </li>
+             </ul>
+
+             </p>
+           </div>
+         </div>
+       </div>
+
+        <div class="col l6 m12">
+           <div class="card product">
+            <div class="card-image waves-effect waves-block waves-light">
+              <img class="activator" src="images/tshirt-black.png">
+            </div>
+            <div class="card-content">
+              <span class="card-title activator grey-text text-darken-4">Puppetry T-Shirt (black)<i class="material-icons right">more_vert</i></span>
+              <p><a href="#" data-modal="cart" data-sku="black">Add to cart</a></p>
+            </div>
+            <div class="card-reveal">
+              <span class="card-title grey-text text-darken-4">Puppetry T-Shirt (black)<i class="material-icons right">close</i></span>
+                 <p>
+                It’s not a real product, but a dummy one to test <code>gtag.js</code> code. The expected behavior:
+              <ul>
+                <li>When clicking on the “Add to cart” button we send out
+                  <a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_additions_to_and_removals_from_shopping_carts"><code>add_to_cart event</code> with product information </a>
+                </li>
+                <li>When clicking on the “Checkout” button we  inform Google Analytics about beginning of
+                  <a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_checkouts">checkout process</a>
+                </li>
+                <li>When clicking on the “Proceed” button we pass to Google Analytics the selected payment method
+                  <a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_checkouts">(checkout option)</a>
+                </li>
+                 <li>When clicking on the “Buy” button we send out <a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gtagjs/enhanced-ecommerce#measure_purchases">purchase event</a>
+                </li>
+              </ul>
+
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <br />
+        <br />
+        <br />
+        <h4 id="demo-form">Demo Form</h4>
+      </div>
+
+      <form class="row" id="form">
+        <div class="row">
+          <div class="input-field col l6 m12">
+            <input id="fname" type="text" class="validate">
+            <label for="fname">First Name</label>
+          </div>
+          <div class="input-field col l6 m12">
+            <input id="lname" type="text" class="validate">
+            <label for="lname">Last Name</label>
+          </div>
+        </div>
+
+
+        <div class="row">
+            <div class="input-field col s12">
+              <textarea id="comment" class="materialize-textarea"></textarea>
+              <label for="comment">You message</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="file-field input-field col s6">
+              <p><label for="consent">
+                <input type="checkbox" id="consent" />
+                <span>I give my consent to the storage of my data</span>
+                </label></p>
+            </div>
+
+            <div class="file-field input-field col s6">
+              <p><label>
+                <input id="option1" name="option" type="radio" value="1" />
+                <span>Option 1</span>
+              </label></p>
+              <p><label>
+                <input id="option2" name="option" type="radio" value="2" />
+                <span>Option 2</span>
+              </label></p>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="file-field input-field col s6">
+            <div class="btn">
+              <span>File</span>
+              <input type="file" id="attachment">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row file-field toolbox">
+           <button id="submit" class="btn waves-effect waves-light" type="submit" name="action">Submit
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+
+
+    <div id="cart" class="modal cart">
+      <div class="modal-content">
+        <h4>Shopping Cart</h4>
+
+        <div class="row">
+        <div class="col s12">
+            <div class="card horizontal">
+              <div class="card-image">
+                <img src="images/tshirt-white.png">
+              </div>
+              <div class="card-stacked">
+                <div class="card-content">
+                  <p>It’s just a dummy shopping cart. We use it to check if the Ecommerce events are being sent to Google Analytics.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <a id="checkoutbtn" href="#" data-modal="checkout" class="modal-close waves-effect waves-green btn-flat">Checkout (not really)</a>
+      </div>
+    </div>
+
+
+    <div id="checkout" class="modal checkout">
+      <div class="modal-content">
+        <h4>Checkout</h4>
+        <p></p>
+        <p>Let's pretend we are selecting a payment method</p>
+
+        <div class="input-field col s12">
+          <select id="paymentmethod">
+            <option value="" disabled selected>Choose your payment method</option>
+            <option value="MasterCard">MasterCard</option>
+            <option value="Visa">Visa</option>
+            <option value="AmericanExpress">AmericanExpress</option>
+          </select>
+          <label></label>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <a id="proceedbtn" href="#" data-modal="purchase" class="modal-close waves-effect waves-green btn-flat">Proceed</a>
+      </div>
+    </div>
+
+    <div id="purchase" class="modal checkout">
+      <div class="modal-content">
+        <h4>Purchase</h4>
+        <p></p>
+        <p>Imagine now we’ve done with checkout flow and ready to perform the purchase</p>
+
+      </div>
+      <div class="modal-footer">
+        <a id="purchasebtn" href="#!" class="modal-close waves-effect waves-green btn-flat">Buy (not really)</a>
+      </div>
+    </div>
+
+
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129292661-3"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <script>
+
+        document.addEventListener( "DOMContentLoaded", function() {
+
+          // Helper for event listening
+          function listen( sel, ev, handler ) {
+            [].slice.call( document.querySelectorAll( sel ) ).forEach(function( el ){
+              el.addEventListener( ev, function( e ){
+                e.preventDefault();
+                handler( el );
+              }, false );
+            });
+          }
+
+          function getProduct( variant ) {
+            return {
+              "id": "P12345" + variant,
+              "name": "Puppetry T-Shirt",
+              "list_name": "Main page",
+              "brand": "Puppetry",
+              "category": "T-Shirts",
+              "variant":  variant,
+              "list_position": variant === "white" ? 1 : 2,
+              "quantity": 1,
+              "price": "0"
+            };
+          }
+
+          function updateCart( modalEl, el ) {
+              modalEl.querySelector( ".card-image > img" )
+                .setAttribute( "src", "images/tshirt-" + el.dataset.sku + ".png" );
+          }
+
+          var modals = M.Modal.init( document.querySelectorAll( ".modal" ) ),
+              product = {};
+
+          M.FormSelect.init( document.querySelectorAll( "select" ) );
+
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag("js", new Date());
+          gtag("config", "UA-129292661-3", { "anonymize_ip": true, "link_attribution": true });
+
+
+
+          // Handle open modal
+          listen( "[data-modal]", "click", function( el ){
+            modals.forEach(function( modal ){
+              modal.close();
+            });
+            var modalEl = document.querySelector( "#" + el.dataset.modal );
+            // If it's Cart, update content
+            el.dataset.modal === "cart" && updateCart( modalEl, el );
+            M.Modal.getInstance( modalEl ).open();
+          });
+
+          listen( "[data-modal=cart]", "click", function( el ){
+            product = getProduct( el.dataset.sku );
+            gtag("event", "add_to_cart", {
+              "items": [
+                getProduct( el.dataset.sku )
+              ]
+            });
+          });
+
+
+          listen( "#checkoutbtn", "click", function( el ){
+            gtag("event", "begin_checkout", {
+              "items": [
+                product
+              ],
+              "coupon": ""
+            });
+          });
+
+          listen( "#proceedbtn", "click", function( el ){
+            var payMethod = document.querySelector( "#paymentmethod" );
+            gtag("event", "set_checkout_option", {
+              "checkout_step": 1,
+              "checkout_option": "payment method",
+              "value": payMethod.value
+            });
+          });
+
+          listen( "#purchasebtn", "click", function( el ){
+            gtag("event", "purchase", {
+              "transaction_id": "24." + Date.now(),
+              "affiliation": "",
+              "value": 0,
+              "currency": "EUR",
+              "tax": 0,
+              "shipping": 0,
+              "items": [
+                product
+              ]
+            });
+
+          });
+
+          listen( "#form", "submit", function( el ){
+            alert( "Data sent" );
+          });
+
+        });
+      </script>
+    </body>
+  </html>
