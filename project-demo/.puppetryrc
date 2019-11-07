@@ -62,15 +62,15 @@
       }
     }
   },
-  "savedAt": 1573140255,
+  "savedAt": 1573145384,
   "modified": false,
-  "lastOpenSuite": "todomvc.json",
+  "lastOpenSuite": "sandbox-performance.json",
   "variables": {
     "dduk2fx8tvf": {
       "name": "SANDBOX_BASEURL",
       "id": "dduk2fx8tvf",
       "editing": false,
-      "value": "http://127.0.0.1:8080",
+      "value": "https://puppetry.app/demo/",
       "env": "test",
       "key": "dduk2fx8tvf"
     },
@@ -79,7 +79,7 @@
       "id": "dduk2fx9hrh",
       "key": "dduk2fx9hrh",
       "name": "SANDBOX_BASEURL",
-      "value": "http://127.0.0.1:8080",
+      "value": "https://puppetry.app/demo/",
       "env": "stage",
       "disabled": false,
       "adding": false
@@ -89,7 +89,7 @@
       "id": "dduk2fx9hug",
       "key": "dduk2fx9hug",
       "name": "SANDBOX_BASEURL",
-      "value": "http://127.0.0.1:8080",
+      "value": "https://puppetry.app/demo/",
       "env": "production",
       "disabled": false,
       "adding": false

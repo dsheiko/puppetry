@@ -115,9 +115,10 @@ export class ReportBody extends AbstractComponent {
 
       return files.reduce( ( carry, filepath ) => {
         const filename = basename( filepath ),
-              [ id ] = filename.split( "." );
+              [ id ] = filename.split( "." ),
+              newFilepath = ( dir === DIR_REPORTS ) ? filepath : `${ filepath }?${ Date.now() }`;
         carry[ id ] = result( carry, id, []);
-        carry[ id ].push( `${ filepath }?${ Date.now() }` );
+        carry[ id ].push( newFilepath );
         return carry;
       }, {});
     } catch ( e ) {
@@ -151,9 +152,11 @@ export class ReportBody extends AbstractComponent {
    */
   getSnapshotsByTest( testId ) {
     const { selector } = this.props,
-          commands = selector.findCommandsByTestId( testId );
-
-    return Object.values( commands )
+          commandsObj = selector.findCommandsByTestId( testId );
+    if ( typeof commandsObj === "undefined" || commandsObj === null ) {
+      return [];
+    }
+    return Object.values( commandsObj )
       .filter( command => ( command.method === "assertScreenshot" && command.id in this.snapshotMap ) )
       .map( command => {
         const dto = this.snapshotMap[ command.id ],
