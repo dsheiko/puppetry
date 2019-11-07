@@ -2,8 +2,8 @@
   "title": "puppeteer",
   "timeout": 50000,
   "snippets": false,
-  "savedAt": 1573125622,
-  "loadedAt": 1573125130,
+  "savedAt": 1573139040,
+  "loadedAt": 1573139633,
   "modified": false,
   "filename": "puppeteer.json",
   "targets": {
@@ -7146,5 +7146,5 @@
       }
     }
   },
-  "puppetry": "3.0.0-beta.2"
+  "puppetry": "3.0.0-beta.3"
 }

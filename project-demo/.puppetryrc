@@ -50,11 +50,21 @@
           "value": true
         }
       }
+    },
+    "bx4k266y2x9": {
+      "key": "bx4k266y2x9",
+      "value": true,
+      "tests": {
+        "bx4k266ygz0": {
+          "key": "bx4k266ygz0",
+          "value": true
+        }
+      }
     }
   },
-  "savedAt": 1572627409,
+  "savedAt": 1573140255,
   "modified": false,
-  "lastOpenSuite": "sandbox-rwd.json",
+  "lastOpenSuite": "todomvc.json",
   "variables": {
     "dduk2fx8tvf": {
       "name": "SANDBOX_BASEURL",
@@ -92,5 +102,5 @@
     "production"
   ],
   "projectDirectory": "/home/sheiko/PUPPETRY/demo--project",
-  "puppetry": "3.0.0-beta.2"
+  "puppetry": "3.0.0-beta.3"
 }

@@ -3,7 +3,7 @@
   "timeout": 50000,
   "snippets": false,
   "savedAt": 1572524556,
-  "loadedAt": 1572621992,
+  "loadedAt": 1573140222,
   "modified": false,
   "filename": "todomvc.json",
   "targets": {
@@ -2541,6 +2541,6 @@
       }
     }
   },
-  "puppetry": "3.0.0-beta.2",
+  "puppetry": "3.0.0-beta.3",
   "description": "TODOMVC app functional tests based on the specification (https://github.com/tastejs/todomvc/blob/master/app-spec.md)"
 }

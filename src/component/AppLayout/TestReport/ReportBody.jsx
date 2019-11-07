@@ -69,7 +69,11 @@ export class ReportBody extends AbstractComponent {
    */
   getScreenshotsByTest( testId ) {
     const { selector } = this.props,
-          commands = Object.values( selector.findCommandsByTestId( testId ) ),
+          commandsObj = selector.findCommandsByTestId( testId );
+    if ( typeof commandsObj === "undefined" || commandsObj === null ) {
+      return [];
+    }
+    const commands = Object.values( commandsObj ),
 
           suiteScreenshots = commands
             .filter( command => (  command.method === "screenshot" && command.id in this.screenhotMap ) )
@@ -129,8 +133,11 @@ export class ReportBody extends AbstractComponent {
    */
   getReportsByTest( testId ) {
     const { selector } = this.props,
-          commands = selector.findCommandsByTestId( testId );
-    return Object.values( commands )
+          commandsObj = selector.findCommandsByTestId( testId );
+    if ( typeof commandsObj === "undefined" || commandsObj === null ) {
+      return [];
+    }
+    return Object.values( commandsObj )
       .filter( command => ( command.method === "assertPerformanceAssetWeight" && command.id in this.reportMap ) )
       .reduce( ( carry, command ) => {
         return carry.concat( this.reportMap[ command.id ]);

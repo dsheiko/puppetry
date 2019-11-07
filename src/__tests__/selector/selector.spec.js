@@ -3,7 +3,7 @@ import * as method from "../../selector/selectors";
 const FIX_FOO = { target: "FOO", selector: ".foo" },
       FIX_BAR = { target: "BAR", selector: ".bar", ref: "FOO", parentType: "css" },
       FIX_BAZ = { target: "BAZ", selector: ".baz", ref: "BAR", parentType: "css" },
-      FIX_CHAIN = [ FIX_FOO, FIX_BAR, FIX_BAZ ];
+      FIX_CHAIN = { FOO: FIX_FOO, BAR: FIX_BAR, BAZ: FIX_BAZ };
 
 describe( "Selectors", () => {
 

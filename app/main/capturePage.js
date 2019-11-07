@@ -11,8 +11,8 @@ const { globalShortcut, ipcRenderer } = require( "electron" ),
 module.exports = function( win ) {
 
   globalShortcut.register('CommandOrControl+Shift+Alt+4', () => {
-    win.capturePage( img => {
-      const date = new Date(),
+    win.capturePage().then(( img ) => {
+        const date = new Date(),
             ts = Math.round( date.getTime() / 1000 ),
             filename = `screenshot-${ ts }.png`;
       fs.writeFileSync(

@@ -83,10 +83,13 @@ module.exports = function( mainWindow ) {
 
 
   ipcMain.on( E_BROWSE_DIRECTORY, ( event ) => {
-    const directories = dialog.showOpenDialogSync({
+    dialog.showOpenDialog({
       properties: [ "openDirectory", "createDirectory" ]
+    }).then(result => {
+      event.sender.send( E_DIRECTORY_SELECTED, result.filePaths ? result.filePaths[ 0 ] : "" );
+    }).catch( ( err ) => {
+      console.log( err );
     });
-    event.sender.send( E_DIRECTORY_SELECTED, directories ? directories[ 0 ] : "" );
   });
 
   ipcMain.on( E_INSTALL_RUNTIME_TEST, async ( event, runtimeTestDirectory ) => {
@@ -109,14 +112,18 @@ module.exports = function( mainWindow ) {
 
 
   ipcMain.on( E_BROWSE_FILE, ( event, defaultPath ) => {
-    const files = dialog.showOpenDialogSync({
+    dialog.showOpenDialog({
       defaultPath,
       properties: [ "openFile" ],
       filters: [
         { name: "Files" }
       ]
+    }).then(result => {
+      event.sender.send( E_FILE_SELECTED, result.filePaths ? result.filePaths[ 0 ] : "" );
+    }).catch( ( err ) => {
+      console.log( err );
     });
-    event.sender.send( E_FILE_SELECTED, files ? files[ 0 ] : "" );
+
   });
 
   ipcMain.on( E_WATCH_FILE_NAVIGATOR, async ( event, projectDirectory ) => {

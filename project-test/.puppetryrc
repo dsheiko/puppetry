@@ -93,7 +93,7 @@
       "tests": {
         "eoyk2a8u52z": {
           "key": "eoyk2a8u52z",
-          "value": false
+          "value": true
         },
         "18qk2kmealh": {
           "key": "18qk2kmealh",
@@ -389,9 +389,9 @@
       "tests": {}
     }
   },
-  "savedAt": 1573135188,
+  "savedAt": 1573139754,
   "modified": false,
-  "lastOpenSuite": "ga--tracker--gmt.json",
+  "lastOpenSuite": "puppeteer.json",
   "variables": {},
   "targets": {
     "js4k1ukyk9a": {
@@ -409,5 +409,5 @@
   ],
   "autosave": true,
   "projectDirectory": "/home/sheiko/PUPPETRY/puppetry-test",
-  "puppetry": "3.0.0-beta.2"
+  "puppetry": "3.0.0-beta.3"
 }
