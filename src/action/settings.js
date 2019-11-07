@@ -6,12 +6,12 @@ import { STORAGE_KEY_SETTINGS } from "constant";
 import * as I from "interface";
 
 const actions = createActions({
-        SET_SETTINGS: ( options ) => validate( options, I.SETTINGS_OPTIONS ),
+  SET_SETTINGS: ( options ) => validate( options, I.SETTINGS_OPTIONS ),
 
-        ADD_SETTINGS_PROJECT: ( options ) => options,
+  ADD_SETTINGS_PROJECT: ( options ) => options,
 
-        REMOVE_SETTINGS_PROJECT: ( options ) => options
-      });
+  REMOVE_SETTINGS_PROJECT: ( options ) => options
+});
 
 // SETTINGS
 

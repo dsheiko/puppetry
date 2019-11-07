@@ -22,7 +22,18 @@ export class TabGroup extends React.Component {
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired
     }),
-    selector: PropTypes.object
+    selector: PropTypes.object,
+    projectDirectory: PropTypes.any,
+    app: PropTypes.any,
+    suiteModified: PropTypes.any,
+    suiteSnippets: PropTypes.any,
+    suiteTargets: PropTypes.any,
+    suiteFilename: PropTypes.any,
+    suiteTitle: PropTypes.any,
+    project: PropTypes.any,
+    snippets: PropTypes.any,
+    git: PropTypes.any,
+    settings: PropTypes.any
   }
 
   onEdit = ( targetKey, action ) => {
@@ -45,7 +56,7 @@ export class TabGroup extends React.Component {
 
   render() {
     const {
-            action, selector, app, projectDirectory, suiteTitle, suiteModified,
+            action, selector, app, projectDirectory, suiteTitle,
             suiteSnippets, suiteFilename, project, snippets, git, settings, suiteTargets
           } = this.props,
           { tabs } = app,
@@ -54,8 +65,8 @@ export class TabGroup extends React.Component {
             ? ( suiteSnippets
               ? "Snippets"
               :  <Tooltip placement="bottomRight" title={ suiteTitle }>
-        <Icon type="container" />{ suiteFilename }
-      </Tooltip> )
+                <Icon type="container" />{ suiteFilename }
+              </Tooltip> )
             : "Loading..." ,
 
           panes = {

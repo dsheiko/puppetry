@@ -296,6 +296,7 @@ export class CommandForm extends React.Component {
               <ErrorBoundary>
                 { Assert ? <Assert
                   targets={ targets }
+                  onPressEnter={ this.handleSubmit }
                   options={ assertOptions }
                   form={ this.props.form }
                   record={ safeRecord } /> : null }

@@ -47,7 +47,9 @@ export default {
     merge[ gid ] = { ...testDefaultState( gid ), ...options, commands: {}};
 
     return update( state, {
-
+      modified: {
+        $set: true
+      },
       groups: {
         [ options.groupId ]: {
           tests: {
@@ -82,7 +84,9 @@ export default {
           }, {});
 
     return update( state, {
-
+      modified: {
+        $set: true
+      },
       groups: {
         [ options.groupId ]: {
           tests: {
@@ -101,7 +105,9 @@ export default {
      * @returns {object}
      */
   [ actions.updateTest ]: ( state, { payload }) => update( state, {
-
+    modified: {
+      $set: true
+    },
     groups: {
       [ payload.groupId ]: {
         tests: {
@@ -126,7 +132,9 @@ export default {
      * @returns {object}
      */
   [ actions.removeTest ]: ( state, { payload }) => update( state, {
-
+    modified: {
+      $set: true
+    },
     groups: {
       [ payload.groupId ]: {
         tests: {

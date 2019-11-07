@@ -72,7 +72,7 @@ export function filterObject( obj, keys ) {
 export function normalizeAssertionValue( assert ) {
   return ( assert.assertion !== "hasAttribute" && assert.assertion !== "!hasAttribute"
     && assert.assertion !== "hasProperty" && assert.assertion !== "!hasProperty"
-    && assert.assertion !== "empty" && assert.assertion !== "!empty") ? ` \`${ assert.value }\`` : ``;
+    && assert.assertion !== "empty" && assert.assertion !== "!empty" ) ? ` \`${ assert.value }\`` : ``;
 }
 
 export function normalizeAssertionVerb( verb ) {

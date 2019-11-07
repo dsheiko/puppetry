@@ -146,6 +146,9 @@ module.exports = {
            "identifiers": false,
            "lang": "en_US",
            "skipWords": [
+            "nowrap",
+            "keydown",
+            "smalltalk",
             "tabpane",
             "noncollapsed",
             "shrinked",

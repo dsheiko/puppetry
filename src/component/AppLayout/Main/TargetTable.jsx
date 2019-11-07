@@ -126,7 +126,7 @@ export class TargetTable extends AbstractEditableTable {
     return (
       <div className="box-margin-vertical is-relative">
         <a className="btn-to-bottom" href="#cTargetTableEditCsvBtn">
-        <Icon type="arrow-down" /></a>
+          <Icon type="arrow-down" /></a>
         <ErrorBoundary>
           <Table
             id="cTargetTable"

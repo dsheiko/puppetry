@@ -419,7 +419,7 @@ module.exports = function( expect, util ) {
         }
         try {
           const GA = "Google Analytics";
-          let matches, found;
+          let matches, found, precise;
           switch( assert.action ) {
             case "pageview":
               found = beacons.filter( res => res.type === assert.action );
@@ -440,7 +440,16 @@ module.exports = function( expect, util ) {
 
             case "ecProductImpression":
               found = beacons.filter( beacon => beacon.ec.impressions.length );
-              matches = filterGaBeacons( found, assert );
+              // we need now an even per impression
+              precise = found.reduce( ( carry, b ) => {
+                b.ec.impressions.forEach( i => {
+                  const data = b;
+                  data.ec.impressions= [ i ];
+                  carry.push( data );
+                });
+                return carry;
+              }, []);
+              matches = filterGaBeacons( precise, assert );
               validateGaBeacons( matches, assert );
               return expectReturn( !!matches.length, `[${ source }] expected to send "EC: Product Impression" data `
                 + `(${ valsToString( assert ) }) to ${ GA }, but it is not sent` );
@@ -495,7 +504,7 @@ module.exports = function( expect, util ) {
                 + `(${ valsToString( assert ) }) to ${ GA }, but it is not sent` );
 
             case "ecPromotion":
-              found = beacons.filter( beacon => beacon.data.action === "add promo" );
+              found = beacons.filter( beacon => beacon.data.action === "add promo" || beacon.ec.promotions.length );
               matches = filterGaBeacons( found, assert );
               validateGaBeacons( matches, assert );
               return expectReturn( !!matches.length,

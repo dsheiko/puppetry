@@ -100,6 +100,7 @@ class UaBeacon {
   timing() {
     return {
         name: this.params.utv,
+        "var": this.params.utv,
         value: this.params.utt,
         category: this.params.utc,
         label: this.params.utl
@@ -161,6 +162,7 @@ class UaBeacon {
       category: this.params[ `il1pi${ inx }ca` ],
       brand: this.params[ `il1pi${ inx }br` ],
       variant: this.params[ `il1pi${ inx }va` ],
+      position: this.params[ `il1pi${ inx }ps` ],
       listPosition: this.params[ `il1pi${ inx }ps` ],
       price: this.params[ `il1pi${ inx }pr` ]
     };

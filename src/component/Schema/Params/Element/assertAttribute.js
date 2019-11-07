@@ -5,9 +5,9 @@ import { normalizeAssertionVerb, normalizeAssertionValue, renderTarget } from "s
 
 export const assertAttribute = {
   template: ( command ) => buildAssertionTpl(
-    ( command.assert && ["set", "!set" ].includes( command.assert.assertion )
-    ? `await bs.target( ${ renderTarget( command.target ) } ).hasAttr( "${ command.params.name }" )`
-    : `await bs.target( ${ renderTarget( command.target ) } ).getAttr( "${ command.params.name }" )` ),
+    ( command.assert && [ "hasAttribute", "!hasAttribute" ].includes( command.assert.assertion )
+      ? `await bs.target( ${ renderTarget( command.target ) } ).hasAttr( "${ command.params.name }" )`
+      : `await bs.target( ${ renderTarget( command.target ) } ).getAttr( "${ command.params.name }" )` ),
     command,
     `// Asserting that "${ command.params.name }" `
       + `attribute's value of ${ command.target } satisfies the given constraint`

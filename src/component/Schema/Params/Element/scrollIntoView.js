@@ -1,5 +1,4 @@
 import { justify } from "service/assert";
-import { renderTarget } from "service/utils";
 
 export const scrollIntoView = {
   template: ({ targetSeletor }) => justify(

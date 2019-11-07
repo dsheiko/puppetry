@@ -115,6 +115,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
 
     update( payload );
     this.updateSuiteModified( payload, "update" );
+
   }
 
   removeRecord = ( id ) => {
@@ -133,9 +134,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
   }
 
   updateSuiteModified() {
-    this.props.action.updateSuite({
-      modified: true
-    });
+    this.props.action.setProject({ modified: true });
     typeof this.resetSelected === "function" && this.resetSelected();
     this.props.action.autosaveSuite();
   }

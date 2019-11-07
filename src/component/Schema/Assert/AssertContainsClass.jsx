@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form,  Row, Col, Select, Input, InputNumber, Checkbox } from "antd";
-import If from "component/Global/If";
+import { Form, Row, Col, Select } from "antd";
 import { getAssertion } from "./helpers";
 import AbstractComponent from "component/AbstractComponent";
 
@@ -12,6 +11,7 @@ export class AssertContainsClass extends AbstractComponent {
 
   static propTypes = {
     record: PropTypes.object.isRequired,
+    onPressEnter: PropTypes.func.isRequired,
     form: PropTypes.shape({
       getFieldDecorator: PropTypes.func.isRequired
     })
@@ -19,7 +19,7 @@ export class AssertContainsClass extends AbstractComponent {
 
   render () {
     const { getFieldDecorator } = this.props.form,
-          { record, options } = this.props,
+          { record } = this.props,
           assertion = getAssertion( record ).assertion || "contains";
     return (
       <Row gutter={24}>

@@ -6,10 +6,10 @@ export const toggleClass = {
     `// Toggle class value\n`
     + `await bs.page.$eval( '${ command.targetSeletor }',
   ( el, className, toggle ) => el.classList.toggle( className, toggle ), `
-    + `"${ command.params.name }", ${ command.params.toggle ? "true" : "false" } )` ),
+    + `"${ command.params.name }", ${ command.params.toggle === "add" ? "true" : "false" } )` ),
 
   toLabel: ({ params }) => `(${ params.toggle } \`${ params.name }\`)`,
-  toGherkin: ({ target, params }) => `${ params.toggle ? "Add" : "Remove" }
+  toGherkin: ({ target, params }) => `${ params.toggle === "add" ? "Add" : "Remove" }
     class \`${ params.name }\` to element \`${ target }\``,
   commonly: "toggle class",
 

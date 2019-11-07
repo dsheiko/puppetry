@@ -1,4 +1,4 @@
-import { truncate, ucfirst } from "service/utils";
+import { truncate } from "service/utils";
 import { INPUT, SELECT } from "../../constants";
 
 function getOptionsString( params ) {

@@ -53,6 +53,9 @@ export default {
     merge[ gid ] = { ...targetDefaultState( gid ), ...options };
 
     return update( state, {
+      modified: {
+        $set: true
+      },
       targets: {
         $merge: merge
       }
@@ -87,6 +90,9 @@ export default {
     }, {});
 
     return update( state, {
+      modified: {
+        $set: true
+      },
       targets: {
         $set: entities
       }
@@ -94,6 +100,9 @@ export default {
   },
 
   [ actions.clearTarget ]: ( state ) => update( state, {
+    modified: {
+      $set: true
+    },
     targets: {
       $set: {}
     }
@@ -108,6 +117,9 @@ export default {
     */
   [ actions.setTarget ]: ( state, { payload }) => {
     return update( state, {
+      modified: {
+        $set: true
+      },
       targets: {
         $apply: ( ref ) => {
           const targets = { ...ref },
@@ -133,6 +145,9 @@ export default {
       payload.selector = payload.selector.trim();
     }
     const newState = update( state, {
+      modified: {
+        $set: true
+      },
       targets: {
         $apply: ( ref ) => {
           const targets = { ...ref },
@@ -153,6 +168,9 @@ export default {
    * @returns {object}
    */
   [ actions.removeTarget ]: ( state, { payload }) => update( state, {
+    modified: {
+      $set: true
+    },
     targets: {
       $unset:[ payload.id ]
     }

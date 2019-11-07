@@ -19,6 +19,7 @@ export class AssertAssertWeight extends React.Component {
 
   static propTypes = {
     record: PropTypes.object.isRequired,
+    onPressEnter: PropTypes.func.isRequired,
     targets: PropTypes.arrayOf( PropTypes.object ),
     form: PropTypes.shape({
       setFieldsValue: PropTypes.func.isRequired,
@@ -134,7 +135,7 @@ export class AssertAssertWeight extends React.Component {
                           }
                         }
                       ]
-                    })( <Input addonAfter="kB" /> )
+                    })( <Input onPressEnter={ ( e ) => this.props.onPressEnter( e ) } addonAfter="kB" /> )
                     }
                   </FormItem>
                 </td>

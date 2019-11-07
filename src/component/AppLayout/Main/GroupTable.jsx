@@ -125,7 +125,9 @@ export class GroupTable extends AbstractEditableTable {
             .map( item => item.key );
 
     return (
-      <div className="box-margin-vertical group-table">
+      <div className="box-margin-vertical group-table is-relative">
+        <a className="btn-to-bottom" href="#cGroupTableRecordBtn">
+          <Icon type="arrow-down" /></a>
         <ErrorBoundary>
           <Table
             id="cGroupTable"

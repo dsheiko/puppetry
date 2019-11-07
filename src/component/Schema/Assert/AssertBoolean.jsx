@@ -10,6 +10,7 @@ export class AssertBoolean extends React.Component {
 
   static propTypes = {
     record: PropTypes.object.isRequired,
+    onPressEnter: PropTypes.func.isRequired,
     targets: PropTypes.arrayOf( PropTypes.object ),
     options: PropTypes.object,
     form: PropTypes.shape({

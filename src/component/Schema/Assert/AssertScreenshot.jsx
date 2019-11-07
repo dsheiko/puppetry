@@ -9,6 +9,7 @@ export class AssertScreenshot extends React.Component {
 
   static propTypes = {
     record: PropTypes.object.isRequired,
+    onPressEnter: PropTypes.func.isRequired,
     targets: PropTypes.arrayOf( PropTypes.object ),
     form: PropTypes.shape({
       setFieldsValue: PropTypes.func.isRequired,
@@ -44,7 +45,7 @@ export class AssertScreenshot extends React.Component {
               rules: [{
                 required: true
               }]
-            })( <Input placeholder="e.g. 0.2"  /> )
+            })( <Input placeholder="e.g. 0.2" onPressEnter={ ( e ) => this.props.onPressEnter( e ) } /> )
             }
           </FormItem>
         </Col>

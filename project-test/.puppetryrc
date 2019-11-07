@@ -1,0 +1,413 @@
+{
+  "name": "Automated tests of Puppetry",
+  "appPanels": {
+    "suite": {
+      "panes": [
+        "groups"
+      ]
+    },
+    "settings": {
+      "panes": []
+    }
+  },
+  "groups": {
+    "snippets": {
+      "key": "snippets",
+      "value": true,
+      "tests": {
+        "js4k1ul11xn": {
+          "key": "js4k1ul11xn",
+          "value": true
+        }
+      }
+    },
+    "js4k1ukrx11": {
+      "key": "js4k1ukrx11",
+      "value": true,
+      "tests": {
+        "js4k1uks7mk": {
+          "key": "js4k1uks7mk",
+          "value": true
+        }
+      }
+    },
+    "2ywk1hn2cpl": {
+      "key": "2ywk1hn2cpl",
+      "value": true,
+      "tests": {
+        "2ywk1hn36di": {
+          "key": "2ywk1hn36di",
+          "value": true
+        }
+      }
+    },
+    "egmk168h2kf": {
+      "key": "egmk168h2kf",
+      "value": true,
+      "tests": {
+        "p2vk1gjh85t": {
+          "key": "p2vk1gjh85t",
+          "value": true
+        },
+        "egmk168h7zs": {
+          "key": "egmk168h7zs",
+          "value": true
+        }
+      }
+    },
+    "ntk194dt8k": {
+      "key": "ntk194dt8k",
+      "value": true,
+      "tests": {
+        "ntk194j7yy": {
+          "key": "ntk194j7yy",
+          "value": false
+        },
+        "bgkk205w8mo": {
+          "key": "bgkk205w8mo",
+          "value": true
+        },
+        "bgkk205wjd9": {
+          "key": "bgkk205wjd9",
+          "value": true
+        },
+        "4bqk19d6g6d": {
+          "key": "4bqk19d6g6d",
+          "value": true
+        }
+      }
+    },
+    "oaek0qg47i8": {
+      "key": "oaek0qg47i8",
+      "value": true,
+      "tests": {
+        "oaek0qg4e16": {
+          "key": "oaek0qg4e16",
+          "value": true
+        }
+      }
+    },
+    "eoyk2a8u1qy": {
+      "key": "eoyk2a8u1qy",
+      "value": true,
+      "tests": {
+        "eoyk2a8u52z": {
+          "key": "eoyk2a8u52z",
+          "value": false
+        },
+        "18qk2kmealh": {
+          "key": "18qk2kmealh",
+          "value": true
+        },
+        "18qk2kmgi5v": {
+          "key": "18qk2kmgi5v",
+          "value": true
+        },
+        "18qk2kmhf9x": {
+          "key": "18qk2kmhf9x",
+          "value": true
+        },
+        "18qk2kmoej2": {
+          "key": "18qk2kmoej2",
+          "value": false
+        },
+        "djlk2lp5idd": {
+          "key": "djlk2lp5idd",
+          "value": false
+        },
+        "fzvk2lr6ecw": {
+          "key": "fzvk2lr6ecw",
+          "value": false
+        },
+        "he1k2lsxhxp": {
+          "key": "he1k2lsxhxp",
+          "value": false
+        },
+        "hjvk2ltc6i0": {
+          "key": "hjvk2ltc6i0",
+          "value": false
+        },
+        "jhik2lv1okl": {
+          "key": "jhik2lv1okl",
+          "value": false
+        },
+        "kk6k2lww2t7": {
+          "key": "kk6k2lww2t7",
+          "value": false
+        },
+        "kxuk2lx76wr": {
+          "key": "kxuk2lx76wr",
+          "value": false
+        },
+        "kxuk2lxc0w1": {
+          "key": "kxuk2lxc0w1",
+          "value": false
+        },
+        "lbuk2lxlwie": {
+          "key": "lbuk2lxlwie",
+          "value": false
+        },
+        "mu1k2lypjks": {
+          "key": "mu1k2lypjks",
+          "value": false
+        },
+        "mu1k2lyqh2s": {
+          "key": "mu1k2lyqh2s",
+          "value": false
+        },
+        "n57k2lz10xw": {
+          "key": "n57k2lz10xw",
+          "value": false
+        },
+        "oblk2lzohdj": {
+          "key": "oblk2lzohdj",
+          "value": false
+        },
+        "oblk2lztvre": {
+          "key": "oblk2lztvre",
+          "value": false
+        },
+        "e1dk2n2mf0k": {
+          "key": "e1dk2n2mf0k",
+          "value": false
+        },
+        "eelk2n3dk6b": {
+          "key": "eelk2n3dk6b",
+          "value": false
+        },
+        "eelk2n3dotg": {
+          "key": "eelk2n3dotg",
+          "value": false
+        },
+        "eelk2n3pfk3": {
+          "key": "eelk2n3pfk3",
+          "value": false
+        },
+        "eelk2n3s0s1": {
+          "key": "eelk2n3s0s1",
+          "value": true
+        },
+        "eelk2n3tdlq": {
+          "key": "eelk2n3tdlq",
+          "value": false
+        },
+        "eelk2n3rt3z": {
+          "key": "eelk2n3rt3z",
+          "value": false
+        },
+        "iq7k2n8q80b": {
+          "key": "iq7k2n8q80b",
+          "value": false
+        },
+        "iq7k2n8vedc": {
+          "key": "iq7k2n8vedc",
+          "value": false
+        },
+        "joqk2n96tb3": {
+          "key": "joqk2n96tb3",
+          "value": false
+        },
+        "kiyk2na6w4i": {
+          "key": "kiyk2na6w4i",
+          "value": true
+        },
+        "kiyk2nadls3": {
+          "key": "kiyk2nadls3",
+          "value": false
+        },
+        "kiyk2naegvz": {
+          "key": "kiyk2naegvz",
+          "value": false
+        },
+        "kiyk2nav8hg": {
+          "key": "kiyk2nav8hg",
+          "value": false
+        },
+        "kiyk2nb23k0": {
+          "key": "kiyk2nb23k0",
+          "value": false
+        },
+        "kiyk2nc8jwu": {
+          "key": "kiyk2nc8jwu",
+          "value": false
+        },
+        "mzyk2nd6ygy": {
+          "key": "mzyk2nd6ygy",
+          "value": false
+        },
+        "nqmk2ndknbg": {
+          "key": "nqmk2ndknbg",
+          "value": false
+        },
+        "nqmk2ndr34q": {
+          "key": "nqmk2ndr34q",
+          "value": false
+        },
+        "nqmk2ne6cgp": {
+          "key": "nqmk2ne6cgp",
+          "value": false
+        },
+        "ojsk2nebqlj": {
+          "key": "ojsk2nebqlj",
+          "value": false
+        },
+        "ojsk2nept7b": {
+          "key": "ojsk2nept7b",
+          "value": false
+        },
+        "p7wk2nfbb6b": {
+          "key": "p7wk2nfbb6b",
+          "value": false
+        },
+        "p7wk2nfc2wo": {
+          "key": "p7wk2nfc2wo",
+          "value": false
+        },
+        "p7wk2nfeu0j": {
+          "key": "p7wk2nfeu0j",
+          "value": false
+        },
+        "1tak2nfozub": {
+          "key": "1tak2nfozub",
+          "value": false
+        },
+        "1tak2nfpm88": {
+          "key": "1tak2nfpm88",
+          "value": false
+        },
+        "1tak2nfqiic": {
+          "key": "1tak2nfqiic",
+          "value": false
+        },
+        "21lk2ng62ue": {
+          "key": "21lk2ng62ue",
+          "value": false
+        },
+        "2crk2ngfh57": {
+          "key": "2crk2ngfh57",
+          "value": false
+        },
+        "2crk2ngg8lf": {
+          "key": "2crk2ngg8lf",
+          "value": false
+        },
+        "3ouk2nh0ykn": {
+          "key": "3ouk2nh0ykn",
+          "value": false
+        },
+        "40ok2nhiiiz": {
+          "key": "40ok2nhiiiz",
+          "value": false
+        },
+        "45ok2nhnqwj": {
+          "key": "45ok2nhnqwj",
+          "value": false
+        },
+        "45ok2nhrgra": {
+          "key": "45ok2nhrgra",
+          "value": false
+        },
+        "4x5k2nibs60": {
+          "key": "4x5k2nibs60",
+          "value": false
+        },
+        "4x5k2nid4lx": {
+          "key": "4x5k2nid4lx",
+          "value": false
+        },
+        "62wk2njc1c9": {
+          "key": "62wk2njc1c9",
+          "value": false
+        },
+        "g1jk2ogy13h": {
+          "key": "g1jk2ogy13h",
+          "value": false
+        },
+        "g8xk2ohakgr": {
+          "key": "g8xk2ohakgr",
+          "value": true
+        },
+        "gt6k2oig03d": {
+          "key": "gt6k2oig03d",
+          "value": false
+        },
+        "gt6k2oigye2": {
+          "key": "gt6k2oigye2",
+          "value": false
+        },
+        "heqk2oir7ia": {
+          "key": "heqk2oir7ia",
+          "value": false
+        },
+        "heqk2oitc71": {
+          "key": "heqk2oitc71",
+          "value": false
+        },
+        "iadk2ojgyu7": {
+          "key": "iadk2ojgyu7",
+          "value": false
+        },
+        "co8k2loa3sh": {
+          "key": "co8k2loa3sh",
+          "value": true
+        }
+      }
+    },
+    "g9zk2ohcyg9": {
+      "key": "g9zk2ohcyg9",
+      "value": true,
+      "tests": {}
+    },
+    "gbqk2ohgzdt": {
+      "key": "gbqk2ohgzdt",
+      "value": true,
+      "tests": {}
+    },
+    "gotk2ohwj65": {
+      "key": "gotk2ohwj65",
+      "value": true,
+      "tests": {}
+    },
+    "gotk2ohwqpb": {
+      "key": "gotk2ohwqpb",
+      "value": true,
+      "tests": {}
+    },
+    "gs8k2oi8ucl": {
+      "key": "gs8k2oi8ucl",
+      "value": true,
+      "tests": {}
+    },
+    "gs8k2oi91l7": {
+      "key": "gs8k2oi91l7",
+      "value": true,
+      "tests": {}
+    },
+    "gt6k2oiaa11": {
+      "key": "gt6k2oiaa11",
+      "value": true,
+      "tests": {}
+    }
+  },
+  "savedAt": 1573135188,
+  "modified": false,
+  "lastOpenSuite": "ga--tracker--gmt.json",
+  "variables": {},
+  "targets": {
+    "js4k1ukyk9a": {
+      "target": "SHARED_H3A",
+      "id": "js4k1ukyk9a",
+      "editing": false,
+      "selector": "body > section:nth-child(2) > div > h2",
+      "key": "js4k1ukyk9a"
+    }
+  },
+  "environments": [
+    "test",
+    "stage",
+    "production"
+  ],
+  "autosave": true,
+  "projectDirectory": "/home/sheiko/PUPPETRY/puppetry-test",
+  "puppetry": "3.0.0-beta.2"
+}

@@ -6,9 +6,6 @@ const buttons = {
   cancel: "No"
 };
 
-function noop() {
-}
-
 function getSettings() {
   return JSON.parse( localStorage.getItem( STORAGE_KEY_SETTINGS ) || "{}" );
 }

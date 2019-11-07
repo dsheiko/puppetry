@@ -142,10 +142,10 @@ export class AppLayout extends React.Component {
                 </If>
                 <If exp={ !tabsAnyTrue }>
                   { projectDirectory ? ( <Info action={ action }
-                  projectFiles={ store.app.project.files }
-                  projectName={ store.project.name }
-                  projectDirectory={ store.settings.projectDirectory }
-                   /> )
+                    projectFiles={ store.app.project.files }
+                    projectName={ store.project.name }
+                    projectDirectory={ store.settings.projectDirectory }
+                  /> )
                     : ( <Welcome action={ action } projectDirectory={ projectDirectory } /> )
                   }
                 </If>

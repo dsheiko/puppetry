@@ -46,6 +46,9 @@ export default {
     const { options, id } = normalizeComplexPayload( payload ),
           uid = id || uniqid();
     return update( state, {
+      modified: {
+        $set: true
+      },
       groups: {
         [ options.groupId ]: {
           tests: {
@@ -94,7 +97,9 @@ export default {
 
 
     return update( state, {
-
+      modified: {
+        $set: true
+      },
       groups: {
         [ options.groupId ]: {
           tests: {
@@ -117,7 +122,9 @@ export default {
      * @returns {object}
      */
   [ actions.updateCommand ]: ( state, { payload }) => update( state, {
-
+    modified: {
+      $set: true
+    },
     groups: {
       [ payload.groupId ]: {
         tests: {
@@ -143,7 +150,9 @@ export default {
      * @returns {object}
      */
   [ actions.removeCommand ]: ( state, { payload }) => update( state, {
-
+    modified: {
+      $set: true
+    },
     groups: {
       [ payload.groupId ]: {
         tests: {

@@ -77,7 +77,7 @@ export default class TestGenerator {
           env = ( variables && Object.keys( variables ).length )
             ? `      Object.assign( ENV, ${ JSON.stringify( variables ) } );\n` : ``,
           chunk = Object.values( test.commands )
-            .map( command => Object.assign( {}, command, { parentId } ) )
+            .map( command => Object.assign({}, command, { parentId }) )
             .map( this.parseCommand ).join( "\n" );
     return `      // SNIPPET ${ test.title }: START\n${ env }${ chunk }\n      // SNIPPET ${ test.title }: END\n`;
   }
@@ -153,7 +153,6 @@ export default class TestGenerator {
       }
 
 
-
       const traceCode = this.options.trace ? TestGenerator.getTraceTpl( target, command ) : ``,
             interactiveModeCode = this.options.interactiveMode ? this.getInteractiveModeTpl( command ) : ``,
             targetObj = ( target !== "page" && target in this.normalizedTargets )
@@ -183,7 +182,7 @@ export default class TestGenerator {
         : chunk;
 
       return ( typeof command.comment === "string" && command.comment.startsWith( "@assert " ) )
-       ? this.renderCommandTryCath( code, command.comment ) : code;
+        ? this.renderCommandTryCath( code, command.comment ) : code;
 
     } catch ( err ) {
       console.warn( "parseCommand error:", err, command );

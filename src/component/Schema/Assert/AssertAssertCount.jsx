@@ -19,6 +19,7 @@ export class AssertAssertCount extends React.Component {
 
   static propTypes = {
     record: PropTypes.object.isRequired,
+    onPressEnter: PropTypes.func.isRequired,
     targets: PropTypes.arrayOf( PropTypes.object ),
     form: PropTypes.shape({
       setFieldsValue: PropTypes.func.isRequired,
@@ -135,7 +136,7 @@ export class AssertAssertCount extends React.Component {
                           }
                         }
                       ]
-                    })( <Input /> )
+                    })( <Input onPressEnter={ ( e ) => this.props.onPressEnter( e ) } /> )
                     }
                   </FormItem>
                 </td>

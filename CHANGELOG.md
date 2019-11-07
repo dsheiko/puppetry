@@ -36,6 +36,7 @@
 - improvement: show tips & tricks on loading screens
 - improvement: add option to wait for target to every target method
 - improvement: add target.waitForTarget
+- improvement: UI, all inputs on press Enter submit, confirmation dialogs on Enter accept
 
 ### Updates
 

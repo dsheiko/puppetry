@@ -274,7 +274,7 @@ export default class AbstractDnDTable extends React.Component {
       }, new Set() ) );
     } catch ( e ) {
       console.error( e );
-      return []
+      return [];
     }
   }
 

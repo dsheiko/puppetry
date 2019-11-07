@@ -73,7 +73,7 @@ export class ReportBody extends AbstractComponent {
 
           suiteScreenshots = commands
             .filter( command => (  command.method === "screenshot" && command.id in this.screenhotMap ) )
-            .reduce(( carry, command ) => {
+            .reduce( ( carry, command ) => {
               this.screenhotMap[ command.id ].forEach( src => {
                 carry.push({
                   src,
@@ -85,7 +85,7 @@ export class ReportBody extends AbstractComponent {
             }, []),
           refScreenshots = commands
             .filter( command => (  command.ref && command.id in this.screenhotMap ) )
-            .reduce(( carry, command ) => {
+            .reduce( ( carry, command ) => {
               this.screenhotMap[ command.id ].forEach( src => {
                 carry.push({
                   src,
@@ -133,7 +133,7 @@ export class ReportBody extends AbstractComponent {
     return Object.values( commands )
       .filter( command => ( command.method === "assertPerformanceAssetWeight" && command.id in this.reportMap ) )
       .reduce( ( carry, command ) => {
-        return carry.concat( this.reportMap[ command.id ] );
+        return carry.concat( this.reportMap[ command.id ]);
       }, []);
   }
 

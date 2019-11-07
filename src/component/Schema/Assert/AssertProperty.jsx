@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form,  Row, Col, Select, Input, InputNumber, Checkbox } from "antd";
+import { Form,  Row, Col, Select, Input } from "antd";
 import If from "component/Global/If";
 import { getAssertion } from "./helpers";
 import AbstractComponent from "component/AbstractComponent";
@@ -17,6 +17,7 @@ export class AssertProperty extends AbstractComponent {
 
   static propTypes = {
     record: PropTypes.object.isRequired,
+    onPressEnter: PropTypes.func.isRequired,
     form: PropTypes.shape({
       getFieldDecorator: PropTypes.func.isRequired
     })
@@ -36,9 +37,8 @@ export class AssertProperty extends AbstractComponent {
 
   render () {
     const { getFieldDecorator } = this.props.form,
-          { record, options } = this.props,
+          { record } = this.props,
           assertion = this.state.assertion || getAssertion( record ).assertion || "equals",
-          type = this.state.type || record.assert.type || "string",
           value = record.assert.value || "";
     return (
       <Row gutter={24}>
@@ -72,7 +72,7 @@ export class AssertProperty extends AbstractComponent {
                   required: true
                 }]
               })(
-                <Input />
+                <Input onPressEnter={ ( e ) => this.props.onPressEnter( e ) } />
               ) }
             </FormItem>
             <div className="under-field-description">You can use
@@ -85,17 +85,17 @@ export class AssertProperty extends AbstractComponent {
         <If exp={ ( assertion === "equals" || assertion === "!equals" ) }>
           <Col span={12} >
 
-              <FormItem label="Value">
-                { getFieldDecorator( "assert.value", {
-                  initialValue: value
-                })(
-                  <Input />
-                ) }
-              </FormItem>
-              <div className="under-field-description">You can use
-                { "" } <a onClick={ this.onExtClick } href="https://docs.puppetry.app/template">
+            <FormItem label="Value">
+              { getFieldDecorator( "assert.value", {
+                initialValue: value
+              })(
+                <Input onPressEnter={ ( e ) => this.props.onPressEnter( e ) } />
+              ) }
+            </FormItem>
+            <div className="under-field-description">You can use
+              { "" } <a onClick={ this.onExtClick } href="https://docs.puppetry.app/template">
                 template expressions</a>
-              </div>
+            </div>
 
           </Col>
         </If>

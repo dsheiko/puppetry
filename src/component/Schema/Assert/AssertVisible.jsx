@@ -13,6 +13,7 @@ export class AssertVisible extends AbstractComponent {
 
   static propTypes = {
     record: PropTypes.object.isRequired,
+    onPressEnter: PropTypes.func.isRequired,
     targets: PropTypes.arrayOf( PropTypes.object ),
     form: PropTypes.shape({
       setFieldsValue: PropTypes.func.isRequired,
@@ -137,7 +138,8 @@ export class AssertVisible extends AbstractComponent {
             initialValue: result( assert, "isIntersecting", false ),
             valuePropName: "checked"
           })(
-            <Checkbox disabled={ !available }> is within the current viewport</Checkbox>
+            <Checkbox disabled={ !available }> is within the current viewport
+              <i>(set if <code>off</code> when you don't want to check it)</i></Checkbox>
           ) }
         </FormItem>
 

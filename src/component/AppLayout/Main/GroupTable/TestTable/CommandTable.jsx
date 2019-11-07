@@ -21,7 +21,7 @@ const { Menu, MenuItem } = remote,
       // Mapping actions to the props
       mapDispatchToProps = () => ({
       });
-
+/*eslint react/prop-types: 0*/
 @connect( mapStateToProps, mapDispatchToProps )
 @connectDnD
 export class CommandTable extends AbstractDnDTable {

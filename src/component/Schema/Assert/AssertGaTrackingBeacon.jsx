@@ -32,6 +32,7 @@ export class AssertGaTrackingBeacon extends AbstractComponent {
 
   static propTypes = {
     record: PropTypes.object.isRequired,
+    onPressEnter: PropTypes.func.isRequired,
     form: PropTypes.shape({
       getFieldDecorator: PropTypes.func.isRequired
     })
@@ -175,10 +176,12 @@ export class AssertGaTrackingBeacon extends AbstractComponent {
               })(
 
                 item.input === "SELECT" ?  <Select>{
-                    Object.entries( item.options ).map( ( pair ) => (<Option
-                      value={ pair[ 0 ] }>{ pair[ 0 ] }</Option>))
-                  }
-                </Select> : ( item.input === "NUMBER" ? <InputNumber /> : <Input /> )
+                  Object.entries( item.options ).map( ( pair ) => ( <Option
+                    key={ pair[ 0 ] } value={ pair[ 0 ] }>{ pair[ 0 ] }</Option> ) )
+                }
+                </Select> : ( item.input === "NUMBER"
+                  ? <InputNumber onPressEnter={ ( e ) => this.props.onPressEnter( e ) } />
+                  : <Input onPressEnter={ ( e ) => this.props.onPressEnter( e ) } /> )
 
               ) }
             </FormItem> }

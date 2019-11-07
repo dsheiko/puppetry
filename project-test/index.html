@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test</title>
 <style>
   #displayed {
     display: flex;
@@ -16,6 +20,11 @@
   }
   #not_opacity {
     opacity: 0;
+  }
+  #out {
+    position: absolute;
+    left: -9000px;
+    top: -9000px;
   }
   button {
     color: #333;
@@ -43,6 +52,14 @@
     display: block;
   }
 
+  .is-hidden {
+    display: none !important;
+  }
+
+  #blockLeftTop:hover {
+    background-color: #eee;
+  }
+
   #blockNextTop {
     top: 0;
     left: 122px;
@@ -64,10 +81,20 @@
     width: 264px;
   }
 
+  .new-target {
+    background: green;
+  }
+
   body {
     padding-top: 32px;
   }
 </style>
+</head>
+<body>
+
+<div id="info"></div>
+
+<div id="out">out of viewport</div>
 
 <h3>page.closeDialog</h3>
 <button id="closeDialog">closeDialog</button>
@@ -83,6 +110,12 @@
 
 <a id="blockLeftTop">Left-top</a>
 <a id="blockNextTop">Next-top</a>
+
+<p>
+<button id="request">Make a request</button>
+<button id="reload">Reload</button>
+</p>
+
 
 <h3>target.assertAttribute</h3>
 <button id="disabledBtn" disabled data-ok="ok">disabled</button>
@@ -118,6 +151,38 @@
   <div>Line5</div>
 </div>
 
+<p>
+  <input id="file" type="file" />
+</p>
+<p>
+  <input id="input" />
+</p>
+<p>
+  <input id="checkbox" type="checkbox" />
+</p>
+<p>
+  <input id="radio" type="radio" name="radio" />
+</p>
+
+<p>
+  <select id="select">
+    <optgroup label="Swedish Cars">
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+    </optgroup>
+    <optgroup label="German Cars">
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+    </optgroup>
+  </select>
+</p>
+
+<form id="form">
+  <input id="formInput" value="Lorem" />
+</form>
+
+<a id="callTarget">Call target</a>
+
 
 <script>
   document.addEventListener( "DOMContentLoaded", function() {
@@ -136,8 +201,19 @@
       });
     }
 
+
+    listen( "#callTarget", "click", function( el ){
+      setTimeout(() => {
+        el.classList.add( "new-target" );
+      }, 50);
+    });
+
     listen( "#click", "click", function( el ){
-      el.setAttribute( "disabled", true );
+      el.dataset.rsp = "clicked";
+    });
+
+    listen( "#click", "dblclick", function( el ){
+      el.dataset.rsp = "double-clicked";
     });
 
     listen( "#alert", "click", function( el ){
@@ -160,6 +236,32 @@
       el.dataset.rsp = prompt( "Lorem5" ) || "";
     });
 
+    listen( "#blockLeftTop", "click", function( el ){
+      el.dataset.rsp = "clicked";
+    });
+
+    listen( "#blockLeftTop", "dblclick", function( el ){
+      el.dataset.rsp = "double-clicked";
+    });
+
+    listen( "#request", "click", function( el ){
+      fetch( "./puppeteer.json" );
+    });
+
+    listen( "#reload", "click", function( el ){
+      window.reload();
+    });
+
+
+
+     document.addEventListener( "keydown", function( e ){
+       if ( e.keyCode === 13 && e.altKey && e.ctrlKey && e.shiftKey ) {
+         document.querySelector( "#info" ).dataset.rsp = "press";
+         document.querySelector( "#info" ).innerHTML = "press";
+       }
+     }, false );
+
+
 
   });
 
@@ -173,3 +275,6 @@
   })();
 
 </script>
+
+</body>
+</html>

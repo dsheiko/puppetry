@@ -18,6 +18,7 @@ export class AssertConsoleMessage extends AbstractComponent {
 
   static propTypes = {
     record: PropTypes.object.isRequired,
+    onPressEnter: PropTypes.func.isRequired,
     form: PropTypes.shape({
       getFieldDecorator: PropTypes.func.isRequired
     })
@@ -117,7 +118,7 @@ export class AssertConsoleMessage extends AbstractComponent {
                   required: true
                 }]
               })(
-                <Input />
+                <Input onPressEnter={ ( e ) => this.props.onPressEnter( e ) } />
               ) }
             </FormItem>
             <div className="under-field-description">You can use

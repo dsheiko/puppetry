@@ -2,8 +2,8 @@
   "title": "puppeteer",
   "timeout": 50000,
   "snippets": false,
-  "savedAt": 1573044758,
-  "loadedAt": 1573044642,
+  "savedAt": 1573125622,
+  "loadedAt": 1573125130,
   "modified": false,
   "filename": "puppeteer.json",
   "targets": {
@@ -195,6 +195,110 @@
       "selector": "#confirmAccept",
       "disabled": false,
       "adding": false
+    },
+    "ojsk2ner0it": {
+      "target": "INFO",
+      "id": "ojsk2ner0it",
+      "editing": false,
+      "selector": "#info",
+      "ref": "",
+      "key": "ojsk2ner0it"
+    },
+    "1tak2nfodk1": {
+      "target": "FILE",
+      "id": "1tak2nfodk1",
+      "editing": false,
+      "selector": "#file",
+      "ref": "",
+      "key": "1tak2nfodk1"
+    },
+    "1tak2nfxa1l": {
+      "target": "REQUEST",
+      "id": "1tak2nfxa1l",
+      "editing": false,
+      "selector": "#request",
+      "ref": "",
+      "key": "1tak2nfxa1l"
+    },
+    "21lk2ng2hmj": {
+      "target": "RELOAD",
+      "id": "21lk2ng2hmj",
+      "editing": false,
+      "selector": "#reload",
+      "ref": "",
+      "key": "21lk2ng2hmj"
+    },
+    "3ouk2nh3mhj": {
+      "target": "INPUT",
+      "id": "3ouk2nh3mhj",
+      "editing": false,
+      "selector": "#input",
+      "ref": "",
+      "key": "3ouk2nh3mhj"
+    },
+    "3ouk2nh41dl": {
+      "target": "CHECKBOX",
+      "id": "3ouk2nh41dl",
+      "editing": false,
+      "selector": "#checkbox",
+      "ref": "",
+      "key": "3ouk2nh41dl"
+    },
+    "3ouk2nh4bhn": {
+      "target": "RADIO",
+      "id": "3ouk2nh4bhn",
+      "editing": false,
+      "selector": "#radio",
+      "ref": "",
+      "key": "3ouk2nh4bhn"
+    },
+    "45ok2nhqa1b": {
+      "target": "FORM",
+      "id": "45ok2nhqa1b",
+      "editing": false,
+      "selector": "#form",
+      "ref": "",
+      "key": "45ok2nhqa1b"
+    },
+    "45ok2nhqip3": {
+      "target": "FORM_INPUT",
+      "id": "45ok2nhqip3",
+      "editing": false,
+      "selector": "#formInput",
+      "ref": "",
+      "key": "45ok2nhqip3"
+    },
+    "4x5k2nirkwb": {
+      "target": "SELECT",
+      "id": "4x5k2nirkwb",
+      "editing": false,
+      "selector": "#select",
+      "ref": "",
+      "key": "4x5k2nirkwb"
+    },
+    "iadk2ojhd9c": {
+      "target": "CALL_TARGET",
+      "id": "iadk2ojhd9c",
+      "editing": false,
+      "selector": "#callTarget",
+      "ref": "",
+      "key": "iadk2ojhd9c"
+    },
+    "iadk2ojjkcb": {
+      "target": "NEW_TARGET",
+      "id": "iadk2ojjkcb",
+      "editing": false,
+      "selector": ".new-target",
+      "ref": "",
+      "key": "iadk2ojjkcb"
+    },
+    "izqk2okoy45": {
+      "target": "OUT_OF_VIEW",
+      "id": "izqk2okoy45",
+      "editing": false,
+      "selector": "#out",
+      "ref": "",
+      "key": "izqk2okoy45"
     }
   },
   "groups": {
@@ -210,6 +314,32 @@
           "key": "18qk2kmgi5v",
           "title": "page.goto",
           "commands": {
+            "kiyk2naruu7": {
+              "editing": false,
+              "id": "kiyk2naruu7",
+              "key": "kiyk2naruu7",
+              "target": "page",
+              "method": "setViewport",
+              "params": {
+                "width": "1920",
+                "height": "1080",
+                "resolution": "1920x1080",
+                "deviceScaleFactor": 1,
+                "isMobile": false,
+                "hasTouch": false,
+                "isLandscape": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "18qk2kmgi5v",
+              "waitForTarget": false
+            },
             "18qk2kmgycj": {
               "editing": false,
               "id": "18qk2kmgycj",
@@ -440,115 +570,7 @@
               "comment": ""
             }
           },
-          "disabled": true,
-          "expanded": false,
-          "adding": false,
-          "groupId": "eoyk2a8u1qy",
-          "failure": ""
-        },
-        "co8k2loa3sh": {
-          "editing": false,
-          "id": "co8k2loa3sh",
-          "key": "co8k2loa3sh",
-          "title": "target.click",
-          "commands": {
-            "co8k2loa458": {
-              "editing": false,
-              "id": "co8k2loa458",
-              "key": "co8k2loa458",
-              "target": "CLICK",
-              "method": "click",
-              "assert": {},
-              "params": {
-                "button": "left",
-                "clickCount": 1,
-                "delay": 0
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "co8k2loa3sh",
-              "waitForTarget": false
-            },
-            "co8k2loa4du": {
-              "editing": false,
-              "id": "co8k2loa4du",
-              "key": "co8k2loa4du",
-              "target": "DISABLED_BTN",
-              "method": "assertAttribute",
-              "assert": {
-                "assertion": "equals",
-                "value": "disabledBtn"
-              },
-              "params": {
-                "name": "id"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "co8k2loa3sh",
-              "waitForTarget": false
-            },
-            "co8k2loa4kd": {
-              "editing": false,
-              "id": "co8k2loa4kd",
-              "key": "co8k2loa4kd",
-              "target": "DISABLED_BTN",
-              "method": "assertAttribute",
-              "assert": {
-                "assertion": "hasAttribute",
-                "value": "disabledBtn"
-              },
-              "params": {
-                "name": "disabled"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "co8k2loa3sh",
-              "waitForTarget": false
-            },
-            "co8k2loa4rv": {
-              "editing": false,
-              "id": "co8k2loa4rv",
-              "key": "co8k2loa4rv",
-              "target": "CLICK",
-              "method": "assertAttribute",
-              "assert": {
-                "assertion": "hasAttribute",
-                "value": true
-              },
-              "params": {
-                "name": "disabled"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "co8k2loa3sh",
-              "waitForTarget": false
-            }
-          },
-          "disabled": true,
+          "disabled": false,
           "expanded": false,
           "adding": false,
           "groupId": "eoyk2a8u1qy",
@@ -764,9 +786,89 @@
               "testId": "eoyk2a8u52z",
               "comment": "@assert [NOT_OPACITY.assertVisible] expected the target element to have opacity > 0, but it is 0",
               "waitForTarget": false
+            },
+            "izqk2okpzd6": {
+              "editing": false,
+              "id": "izqk2okpzd6",
+              "key": "izqk2okpzd6",
+              "target": "OUT_OF_VIEW",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "value": true,
+                "display": "any",
+                "visibility": "any",
+                "opacity": "any",
+                "isIntersecting": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eoyk2a8u52z",
+              "comment": "@assert [OUT_OF_VIEW.assertVisible] expected the target element to be within the viewport, but it is not",
+              "waitForTarget": false
+            },
+            "izqk2okrw4v": {
+              "editing": false,
+              "id": "izqk2okrw4v",
+              "key": "izqk2okrw4v",
+              "target": "NOT_VISIBLE",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "value": true,
+                "display": "any",
+                "visibility": "any",
+                "opacity": "any",
+                "isIntersecting": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eoyk2a8u52z",
+              "comment": "",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "izqk2oktbpm": {
+              "editing": false,
+              "id": "izqk2oktbpm",
+              "key": "izqk2oktbpm",
+              "target": "NOT_DISPLAYED",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "value": true,
+                "display": "any",
+                "visibility": "any",
+                "opacity": "any",
+                "isIntersecting": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "eoyk2a8u52z",
+              "comment": "@assert [NOT_DISPLAYED.assertVisible] expected the target element to be within the viewport, but it is not",
+              "waitForTarget": false,
+              "entity": "command"
             }
           },
-          "disabled": true,
+          "disabled": false,
           "failure": ""
         },
         "djlk2lp5idd": {
@@ -964,7 +1066,7 @@
               "waitForTarget": false
             }
           },
-          "disabled": true,
+          "disabled": false,
           "failure": ""
         },
         "fzvk2lr6ecw": {
@@ -1251,7 +1353,7 @@
               "waitForTarget": false
             }
           },
-          "disabled": true,
+          "disabled": false,
           "failure": ""
         },
         "he1k2lsxhxp": {
@@ -1391,7 +1493,7 @@
               "comment": "@assert [ASSERT_STYLE_EL.assertHtml] expected \"Lorem\" to be empty"
             }
           },
-          "disabled": true,
+          "disabled": false,
           "failure": ""
         },
         "hjvk2ltc6i0": {
@@ -1632,7 +1734,7 @@
               "waitForTarget": false
             }
           },
-          "disabled": true,
+          "disabled": false,
           "failure": ""
         },
         "jhik2lv1okl": {
@@ -1761,7 +1863,7 @@
               "comment": "@assert [DISABLED_BTN.assertContainsClass] expected to contain class \":active\""
             }
           },
-          "disabled": true,
+          "disabled": false,
           "failure": ""
         },
         "kk6k2lww2t7": {
@@ -1836,7 +1938,7 @@
               "waitForTarget": false
             }
           },
-          "disabled": true,
+          "disabled": false,
           "failure": ""
         },
         "kxuk2lx76wr": {
@@ -1949,7 +2051,7 @@
               "waitForTarget": false
             }
           },
-          "disabled": true,
+          "disabled": false,
           "failure": ""
         },
         "oblk2lzohdj": {
@@ -2061,7 +2163,7 @@
               "waitForTarget": false
             }
           },
-          "disabled": true,
+          "disabled": false,
           "expanded": false,
           "adding": false,
           "groupId": "eoyk2a8u1qy",
@@ -2187,7 +2289,7 @@
               "comment": "@assert [BLOCK_NEXT_TOP.assertPosition] expected BLOCK_NEXT_TOP (y=0) to be below BLOCK_LEFT_TOP (y=0, height=34)"
             }
           },
-          "disabled": true,
+          "disabled": false,
           "failure": ""
         },
         "lbuk2lxlwie": {
@@ -2295,7 +2397,7 @@
               "waitForTarget": false
             }
           },
-          "disabled": true,
+          "disabled": false,
           "failure": ""
         },
         "mu1k2lypjks": {
@@ -2329,7 +2431,7 @@
               "entity": "command"
             }
           },
-          "disabled": true,
+          "disabled": false,
           "failure": ""
         },
         "mu1k2lyqh2s": {
@@ -2494,7 +2596,7 @@
               "comment": "@assert [CONTAINER.assertTextCount] expected number of the matching elements (1) to be > 2"
             }
           },
-          "disabled": true,
+          "disabled": false,
           "failure": ""
         },
         "n57k2lz10xw": {
@@ -2694,7 +2796,7 @@
               "comment": "@assert [page.assertConsoleMessage] expected to find console messages of type \"log\" with text \"hoho\""
             }
           },
-          "disabled": true,
+          "disabled": false,
           "failure": ""
         },
         "oblk2lztvre": {
@@ -3153,7 +3255,7 @@
               "waitForTarget": false
             }
           },
-          "disabled": true,
+          "disabled": false,
           "failure": ""
         },
         "e1dk2n2mf0k": {
@@ -3325,7 +3427,7 @@
               "comment": "@assert [page.assertDialog] expected not to find dialogs of type \"alert\" with message ~ \"Lorem\""
             }
           },
-          "disabled": true,
+          "disabled": false,
           "failure": ""
         },
         "eelk2n3dk6b": {
@@ -3521,7 +3623,7 @@
               "entity": "command"
             }
           },
-          "disabled": true,
+          "disabled": false,
           "expanded": false,
           "adding": false,
           "groupId": "eoyk2a8u1qy",
@@ -3602,7 +3704,7 @@
               "waitForTarget": false
             }
           },
-          "disabled": true,
+          "disabled": false,
           "expanded": false,
           "adding": false,
           "groupId": "eoyk2a8u1qy",
@@ -3736,7 +3838,7 @@
               "entity": "command"
             }
           },
-          "disabled": true,
+          "disabled": false,
           "expanded": false,
           "adding": false,
           "groupId": "eoyk2a8u1qy",
@@ -3818,7 +3920,7 @@
               "waitForTarget": false
             }
           },
-          "disabled": true,
+          "disabled": false,
           "expanded": false,
           "adding": false,
           "groupId": "eoyk2a8u1qy",
@@ -3959,7 +4061,7 @@
               "waitForTarget": false
             }
           },
-          "disabled": true,
+          "disabled": false,
           "failure": ""
         },
         "iq7k2n8vedc": {
@@ -4061,7 +4163,7 @@
               "comment": "@assert [page.assertPerformanceAssetCount] expected total number of script assets to be under 1, but found 1"
             }
           },
-          "disabled": true,
+          "disabled": false,
           "failure": ""
         },
         "joqk2n96tb3": {
@@ -4159,7 +4261,7 @@
               "comment": "@assert [page.assertPerformanceAssetWeight] expected total weight of script assets to be under 0, but found 1 assets with total weight"
             }
           },
-          "disabled": true,
+          "disabled": false,
           "expanded": false,
           "adding": false,
           "groupId": "eoyk2a8u1qy",
@@ -4230,9 +4332,2816 @@
               "isRef": false,
               "groupId": "eoyk2a8u1qy",
               "testId": "kiyk2na6w4i",
+              "comment": "@assert [page.assertPerformanceTiming] expected the loading time to be under 1μs, but found",
               "waitForTarget": false
             }
-          }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "kiyk2nadls3": {
+          "title": "page.assertScreenshot",
+          "id": "kiyk2nadls3",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "kiyk2nadls3",
+          "commands": {
+            "kiyk2nadxio": {
+              "editing": false,
+              "id": "kiyk2nadxio",
+              "key": "kiyk2nadxio",
+              "target": "page",
+              "method": "assertScreenshot",
+              "assert": {
+                "assertion": "screenshot",
+                "mismatchTolerance": "0.2"
+              },
+              "params": {
+                "name": "Page 1",
+                "fullPage": true,
+                "omitBackground": true,
+                "x": null,
+                "y": null,
+                "width": null,
+                "height": null,
+                "includeAA": true,
+                "diffColor": "#FF0000",
+                "aaColor": "#FFFF00"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2nadls3",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "kiyk2naegvz": {
+          "title": "page.assertScroll",
+          "id": "kiyk2naegvz",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "kiyk2naegvz",
+          "commands": {
+            "kiyk2naezhr": {
+              "editing": false,
+              "id": "kiyk2naezhr",
+              "key": "kiyk2naezhr",
+              "target": "page",
+              "method": "setViewport",
+              "params": {
+                "width": 50,
+                "height": 300,
+                "resolution": "",
+                "deviceScaleFactor": 1,
+                "isMobile": false,
+                "hasTouch": false,
+                "isLandscape": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2naegvz",
+              "waitForTarget": false
+            },
+            "kiyk2nafkll": {
+              "editing": false,
+              "id": "kiyk2nafkll",
+              "key": "kiyk2nafkll",
+              "target": "page",
+              "method": "assertScroll",
+              "assert": {
+                "assertion": "number",
+                "operator": "eq",
+                "value": 0
+              },
+              "params": {
+                "direction": "horizontally"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2naegvz",
+              "waitForTarget": false
+            },
+            "kiyk2nafxrp": {
+              "editing": false,
+              "id": "kiyk2nafxrp",
+              "key": "kiyk2nafxrp",
+              "target": "page",
+              "method": "assertScroll",
+              "assert": {
+                "assertion": "number",
+                "operator": "eq",
+                "value": 0
+              },
+              "params": {
+                "direction": "vertically"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2naegvz",
+              "waitForTarget": false
+            },
+            "kiyk2nag4sl": {
+              "editing": false,
+              "id": "kiyk2nag4sl",
+              "key": "kiyk2nag4sl",
+              "target": "page",
+              "method": "scroll",
+              "params": {
+                "x": 50,
+                "y": 50
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2naegvz",
+              "waitForTarget": false
+            },
+            "kiyk2naigff": {
+              "editing": false,
+              "id": "kiyk2naigff",
+              "key": "kiyk2naigff",
+              "target": "page",
+              "method": "assertScroll",
+              "assert": {
+                "assertion": "number",
+                "operator": "eq",
+                "value": 0
+              },
+              "params": {
+                "direction": "horizontally"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2naegvz",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertScroll] expected scroll offset horizontally (50) to be 0"
+            },
+            "kiyk2naigw4": {
+              "editing": false,
+              "id": "kiyk2naigw4",
+              "key": "kiyk2naigw4",
+              "target": "page",
+              "method": "assertScroll",
+              "assert": {
+                "assertion": "number",
+                "operator": "eq",
+                "value": 0
+              },
+              "params": {
+                "direction": "vertically"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2naegvz",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertScroll] expected scroll offset vertically (50) to be 0"
+            },
+            "kiyk2nas1cs": {
+              "editing": false,
+              "id": "kiyk2nas1cs",
+              "key": "kiyk2nas1cs",
+              "target": "page",
+              "method": "setViewport",
+              "params": {
+                "width": "1920",
+                "height": "1080",
+                "resolution": "1920x1080",
+                "deviceScaleFactor": 1,
+                "isMobile": false,
+                "hasTouch": false,
+                "isLandscape": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2naegvz",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": ""
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "kiyk2nav8hg": {
+          "title": "page.assertTitle",
+          "id": "kiyk2nav8hg",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "kiyk2nav8hg",
+          "commands": {
+            "kiyk2nawcag": {
+              "editing": false,
+              "id": "kiyk2nawcag",
+              "key": "kiyk2nawcag",
+              "target": "page",
+              "method": "assertTitle",
+              "assert": {
+                "assertion": "equals",
+                "value": "Test"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2nav8hg",
+              "waitForTarget": false
+            },
+            "kiyk2nawqp0": {
+              "editing": false,
+              "id": "kiyk2nawqp0",
+              "key": "kiyk2nawqp0",
+              "target": "page",
+              "method": "assertTitle",
+              "assert": {
+                "assertion": "contains",
+                "value": "est"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2nav8hg",
+              "waitForTarget": false
+            },
+            "kiyk2nawu0v": {
+              "editing": false,
+              "id": "kiyk2nawu0v",
+              "key": "kiyk2nawu0v",
+              "target": "page",
+              "method": "assertTitle",
+              "assert": {
+                "assertion": "!empty",
+                "value": "Test"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2nav8hg",
+              "waitForTarget": false
+            },
+            "kiyk2nawxdx": {
+              "editing": false,
+              "id": "kiyk2nawxdx",
+              "key": "kiyk2nawxdx",
+              "target": "page",
+              "method": "assertTitle",
+              "assert": {
+                "assertion": "equals",
+                "value": "Lorem"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2nav8hg",
+              "comment": "@assert [page.assertTitle] expected \"Test\" to equal \"Lorem\"",
+              "waitForTarget": false
+            },
+            "kiyk2naxncj": {
+              "editing": false,
+              "id": "kiyk2naxncj",
+              "key": "kiyk2naxncj",
+              "target": "page",
+              "method": "assertTitle",
+              "assert": {
+                "assertion": "!equals",
+                "value": "Test"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2nav8hg",
+              "comment": "@assert [page.assertTitle] expected \"Test\" not to equal \"Test\"",
+              "waitForTarget": false
+            },
+            "kiyk2nay0zh": {
+              "editing": false,
+              "id": "kiyk2nay0zh",
+              "key": "kiyk2nay0zh",
+              "target": "page",
+              "method": "assertTitle",
+              "assert": {
+                "assertion": "empty",
+                "value": "Test"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2nav8hg",
+              "comment": "@assert [page.assertTitle] expected \"Test\" to be empty",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "kiyk2nb23k0": {
+          "title": "page.assertUrl",
+          "id": "kiyk2nb23k0",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "kiyk2nb23k0",
+          "commands": {
+            "kiyk2nb2df1": {
+              "editing": false,
+              "id": "kiyk2nb2df1",
+              "key": "kiyk2nb2df1",
+              "target": "page",
+              "method": "assertUrl",
+              "assert": {
+                "assertion": "contains",
+                "value": "127.0.0.1"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2nb23k0",
+              "waitForTarget": false
+            },
+            "kiyk2nb361p": {
+              "editing": false,
+              "id": "kiyk2nb361p",
+              "key": "kiyk2nb361p",
+              "target": "page",
+              "method": "assertUrl",
+              "assert": {
+                "assertion": "equals",
+                "value": "https://google.com"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2nb23k0",
+              "comment": "@assert [page.assertUrl] expected \"http://127.0.0.1:8080/\" to equal \"https://google.com\"",
+              "waitForTarget": false
+            },
+            "kiyk2nb3li1": {
+              "editing": false,
+              "id": "kiyk2nb3li1",
+              "key": "kiyk2nb3li1",
+              "target": "page",
+              "method": "assertUrl",
+              "assert": {
+                "assertion": "!equals",
+                "value": "https://google.com"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2nb23k0",
+              "waitForTarget": false
+            },
+            "kiyk2nb3y3p": {
+              "editing": false,
+              "id": "kiyk2nb3y3p",
+              "key": "kiyk2nb3y3p",
+              "target": "page",
+              "method": "assertUrl",
+              "assert": {
+                "assertion": "!empty",
+                "value": "https://google.com"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2nb23k0",
+              "comment": "",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "kiyk2nc8jwu": {
+          "title": "page.assertVar/page.assignVar",
+          "id": "kiyk2nc8jwu",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "kiyk2nc8jwu",
+          "commands": {
+            "kiyk2nc931g": {
+              "editing": false,
+              "id": "kiyk2nc931g",
+              "key": "kiyk2nc931g",
+              "target": "page",
+              "method": "assertVar",
+              "assert": {
+                "assertion": "!empty",
+                "value": "FOO"
+              },
+              "params": {
+                "name": "FOO"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2nc8jwu",
+              "waitForTarget": false,
+              "comment": "@assert [page.assertVar] expected \"\" to be not empty"
+            },
+            "mj6k2nccmea": {
+              "editing": false,
+              "id": "mj6k2nccmea",
+              "key": "mj6k2nccmea",
+              "target": "page",
+              "method": "assertVar",
+              "assert": {
+                "assertion": "empty",
+                "value": "FOO"
+              },
+              "params": {
+                "name": "FOO"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2nc8jwu",
+              "waitForTarget": false
+            },
+            "mj6k2nccd9i": {
+              "editing": false,
+              "id": "mj6k2nccd9i",
+              "key": "mj6k2nccd9i",
+              "target": "page",
+              "method": "assertVar",
+              "assert": {
+                "assertion": "equals",
+                "value": "Lorem"
+              },
+              "params": {
+                "name": "FOO"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2nc8jwu",
+              "waitForTarget": false,
+              "comment": "@assert [page.assertVar] expected \"\" to equal \"Lorem\""
+            },
+            "mzyk2nczwnq": {
+              "editing": false,
+              "id": "mzyk2nczwnq",
+              "key": "mzyk2nczwnq",
+              "target": "page",
+              "method": "assignVar",
+              "params": {
+                "name": "FOO",
+                "value": "Lorem"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2nc8jwu",
+              "waitForTarget": false
+            },
+            "mzyk2nd1gm6": {
+              "editing": false,
+              "id": "mzyk2nd1gm6",
+              "key": "mzyk2nd1gm6",
+              "target": "page",
+              "method": "assertVar",
+              "assert": {
+                "assertion": "!empty",
+                "value": "FOO"
+              },
+              "params": {
+                "name": "FOO"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2nc8jwu",
+              "waitForTarget": false
+            },
+            "mzyk2nd1vgf": {
+              "editing": false,
+              "id": "mzyk2nd1vgf",
+              "key": "mzyk2nd1vgf",
+              "target": "page",
+              "method": "assertVar",
+              "assert": {
+                "assertion": "equals",
+                "value": "Lorem"
+              },
+              "params": {
+                "name": "FOO"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2nc8jwu",
+              "waitForTarget": false
+            },
+            "mzyk2nd26jy": {
+              "editing": false,
+              "id": "mzyk2nd26jy",
+              "key": "mzyk2nd26jy",
+              "target": "page",
+              "method": "assertVar",
+              "assert": {
+                "assertion": "contains",
+                "value": "rem"
+              },
+              "params": {
+                "name": "FOO"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "kiyk2nc8jwu",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "mzyk2nd6ygy": {
+          "title": "page.assignVarRemotely",
+          "id": "mzyk2nd6ygy",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "mzyk2nd6ygy",
+          "commands": {
+            "mzyk2nd7nd5": {
+              "editing": false,
+              "id": "mzyk2nd7nd5",
+              "key": "mzyk2nd7nd5",
+              "target": "page",
+              "method": "assignVarRemotely",
+              "params": {
+                "name": "BAR",
+                "url": "http://localhost:8080/puppeteer.json",
+                "interval": 1000,
+                "timeout": 60000,
+                "parserFn": "( json ) => {\n  return json ? json.title : null;\n}"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "mzyk2nd6ygy",
+              "waitForTarget": false
+            },
+            "mzyk2nd925l": {
+              "editing": false,
+              "id": "mzyk2nd925l",
+              "key": "mzyk2nd925l",
+              "target": "page",
+              "method": "assertVar",
+              "assert": {
+                "assertion": "!empty",
+                "value": "1"
+              },
+              "params": {
+                "name": "BAR"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "mzyk2nd6ygy",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "nqmk2ndknbg": {
+          "title": "page.click",
+          "id": "nqmk2ndknbg",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "nqmk2ndknbg",
+          "commands": {
+            "nqmk2ndn6w7": {
+              "editing": false,
+              "id": "nqmk2ndn6w7",
+              "key": "nqmk2ndn6w7",
+              "target": "page",
+              "method": "click",
+              "params": {
+                "x": 10,
+                "y": 10,
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "nqmk2ndknbg",
+              "waitForTarget": false
+            },
+            "nqmk2ndotx3": {
+              "editing": false,
+              "id": "nqmk2ndotx3",
+              "key": "nqmk2ndotx3",
+              "target": "BLOCK_LEFT_TOP",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "equals",
+                "value": "clicked"
+              },
+              "params": {
+                "name": "data-rsp"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "nqmk2ndknbg",
+              "waitForTarget": false
+            },
+            "nqmk2ndq24c": {
+              "editing": false,
+              "id": "nqmk2ndq24c",
+              "key": "nqmk2ndq24c",
+              "target": "page",
+              "method": "click",
+              "params": {
+                "x": 10,
+                "y": 10,
+                "button": "left",
+                "clickCount": 2,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "nqmk2ndknbg",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "nqmk2ndq2m6": {
+              "editing": false,
+              "id": "nqmk2ndq2m6",
+              "key": "nqmk2ndq2m6",
+              "target": "BLOCK_LEFT_TOP",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "equals",
+                "value": "double-clicked"
+              },
+              "params": {
+                "name": "data-rsp"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "nqmk2ndknbg",
+              "waitForTarget": false,
+              "entity": "command"
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "nqmk2ndr34q": {
+          "title": "page.emulate",
+          "id": "nqmk2ndr34q",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "nqmk2ndr34q",
+          "commands": {
+            "nqmk2ndrok0": {
+              "editing": false,
+              "id": "nqmk2ndrok0",
+              "key": "nqmk2ndrok0",
+              "target": "page",
+              "method": "emulate",
+              "params": {
+                "device": "iPhone 5"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "nqmk2ndr34q",
+              "waitForTarget": false
+            },
+            "nqmk2ndwl7x": {
+              "editing": false,
+              "id": "nqmk2ndwl7x",
+              "key": "nqmk2ndwl7x",
+              "target": "page",
+              "method": "runjs",
+              "params": {
+                "value": "expect( ( await bs.page.viewport() ).width ).toBeEqual( 320, \"page.runjs\" );"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "nqmk2ndr34q",
+              "waitForTarget": false
+            },
+            "nqmk2ne5lox": {
+              "editing": false,
+              "id": "nqmk2ne5lox",
+              "key": "nqmk2ne5lox",
+              "target": "page",
+              "method": "setViewport",
+              "params": {
+                "width": "1920",
+                "height": "1080",
+                "resolution": "1920x1080",
+                "deviceScaleFactor": 1,
+                "isMobile": false,
+                "hasTouch": false,
+                "isLandscape": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "nqmk2ndr34q",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "nqmk2ne6cgp": {
+          "title": "page.evaluate",
+          "id": "nqmk2ne6cgp",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "nqmk2ne6cgp",
+          "commands": {
+            "nqmk2ne74jv": {
+              "editing": false,
+              "id": "nqmk2ne74jv",
+              "key": "nqmk2ne74jv",
+              "target": "page",
+              "method": "evaluate",
+              "params": {
+                "value": "document.querySelector( \"#disabledBtn\" ).dataset.rsp = \"updated\";"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "nqmk2ne6cgp",
+              "waitForTarget": false
+            },
+            "nqmk2ne9qiy": {
+              "editing": false,
+              "id": "nqmk2ne9qiy",
+              "key": "nqmk2ne9qiy",
+              "target": "DISABLED_BTN",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "equals",
+                "value": "updated"
+              },
+              "params": {
+                "name": "data-rsp"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "nqmk2ne6cgp",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "ojsk2nebqlj": {
+          "title": "page.moveMouse",
+          "id": "ojsk2nebqlj",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "ojsk2nebqlj",
+          "commands": {
+            "ojsk2nee3ke": {
+              "editing": false,
+              "id": "ojsk2nee3ke",
+              "key": "ojsk2nee3ke",
+              "target": "BLOCK_LEFT_TOP",
+              "method": "assertStyle",
+              "assert": {
+                "assertion": "equals",
+                "value": "rgba(0, 0, 0, 0)"
+              },
+              "params": {
+                "name": "background-color"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "ojsk2nebqlj",
+              "waitForTarget": false
+            },
+            "ojsk2nefc6j": {
+              "editing": false,
+              "id": "ojsk2nefc6j",
+              "key": "ojsk2nefc6j",
+              "target": "page",
+              "method": "moveMouse",
+              "params": {
+                "x": 10,
+                "y": 10
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "ojsk2nebqlj",
+              "waitForTarget": false
+            },
+            "ojsk2neewhl": {
+              "editing": false,
+              "id": "ojsk2neewhl",
+              "key": "ojsk2neewhl",
+              "target": "BLOCK_LEFT_TOP",
+              "method": "assertStyle",
+              "assert": {
+                "assertion": "equals",
+                "value": "rgb(238, 238, 238)"
+              },
+              "params": {
+                "name": "background-color"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "ojsk2nebqlj",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "ojsk2nept7b": {
+          "title": "page.press",
+          "id": "ojsk2nept7b",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "ojsk2nept7b",
+          "commands": {
+            "ojsk2nesbdu": {
+              "editing": false,
+              "id": "ojsk2nesbdu",
+              "key": "ojsk2nesbdu",
+              "target": "INFO",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "!equals",
+                "value": "press"
+              },
+              "params": {
+                "name": "data-rsp"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "ojsk2nept7b",
+              "waitForTarget": false
+            },
+            "ojsk2neqc9b": {
+              "editing": false,
+              "id": "ojsk2neqc9b",
+              "key": "ojsk2neqc9b",
+              "target": "page",
+              "method": "press",
+              "params": {
+                "key": "Enter",
+                "modifierKey1": "Shift",
+                "modifierKey2": "Control",
+                "modifierKey3": "Alt"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "ojsk2nept7b",
+              "waitForTarget": false
+            },
+            "ojsk2nes7il": {
+              "editing": false,
+              "id": "ojsk2nes7il",
+              "key": "ojsk2nes7il",
+              "target": "INFO",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "equals",
+                "value": "press"
+              },
+              "params": {
+                "name": "data-rsp"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "ojsk2nept7b",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "p7wk2nfbb6b": {
+          "title": "page.reload",
+          "id": "p7wk2nfbb6b",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "p7wk2nfbb6b",
+          "commands": {
+            "p7wk2nfbvd0": {
+              "editing": false,
+              "id": "p7wk2nfbvd0",
+              "key": "p7wk2nfbvd0",
+              "target": "page",
+              "method": "reload",
+              "params": {
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "p7wk2nfbb6b",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "p7wk2nfc2wo": {
+          "title": "page.screenshot",
+          "id": "p7wk2nfc2wo",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "p7wk2nfc2wo",
+          "commands": {
+            "p7wk2nfch9v": {
+              "editing": false,
+              "id": "p7wk2nfch9v",
+              "key": "p7wk2nfch9v",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "Simple",
+                "fullPage": false,
+                "omitBackground": false,
+                "x": null,
+                "y": null,
+                "width": null,
+                "height": null
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "p7wk2nfc2wo",
+              "waitForTarget": false
+            },
+            "p7wk2nfcvhm": {
+              "editing": false,
+              "id": "p7wk2nfcvhm",
+              "key": "p7wk2nfcvhm",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "Fullpage",
+                "fullPage": true,
+                "omitBackground": false,
+                "x": null,
+                "y": null,
+                "width": null,
+                "height": null
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "p7wk2nfc2wo",
+              "waitForTarget": false
+            },
+            "p7wk2nfcyjr": {
+              "editing": false,
+              "id": "p7wk2nfcyjr",
+              "key": "p7wk2nfcyjr",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "Omit background",
+                "fullPage": false,
+                "omitBackground": true,
+                "x": null,
+                "y": null,
+                "width": null,
+                "height": null
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "p7wk2nfc2wo",
+              "waitForTarget": false
+            },
+            "p7wk2nfdj6s": {
+              "editing": false,
+              "id": "p7wk2nfdj6s",
+              "key": "p7wk2nfdj6s",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "Clip",
+                "fullPage": false,
+                "omitBackground": false,
+                "x": 3,
+                "y": 3,
+                "width": 40,
+                "height": 40
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "p7wk2nfc2wo",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "p7wk2nfeu0j": {
+          "title": "page.setCookie",
+          "id": "p7wk2nfeu0j",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "p7wk2nfeu0j",
+          "commands": {
+            "p7wk2nff6m7": {
+              "editing": false,
+              "id": "p7wk2nff6m7",
+              "key": "p7wk2nff6m7",
+              "target": "page",
+              "method": "setCookie",
+              "params": {
+                "name": "FOO",
+                "value": "foo",
+                "domain": "127.0.0.1:8080",
+                "httpOnly": "",
+                "secure": "",
+                "sameSite": ""
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "p7wk2nfeu0j",
+              "waitForTarget": false
+            },
+            "p7wk2nfgxnr": {
+              "editing": false,
+              "id": "p7wk2nfgxnr",
+              "key": "p7wk2nfgxnr",
+              "target": "page",
+              "method": "runjs",
+              "params": {
+                "value": "expect( ( ( await bs.page.cookies() ).find( cookie => cookie.name === \"FOO\" ) ).value ).toBeEqual( \"foo\", \"page.runjs\" );"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "p7wk2nfeu0j",
+              "waitForTarget": false,
+              "entity": "command"
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "1tak2nfozub": {
+          "title": "page.tap",
+          "id": "1tak2nfozub",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "1tak2nfozub",
+          "commands": {
+            "1tak2nfp6q9": {
+              "editing": false,
+              "id": "1tak2nfp6q9",
+              "key": "1tak2nfp6q9",
+              "target": "page",
+              "method": "tap",
+              "params": {
+                "x": 10,
+                "y": 10
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "1tak2nfozub",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "1tak2nfpm88": {
+          "title": "page.waitFor",
+          "id": "1tak2nfpm88",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "1tak2nfpm88",
+          "commands": {
+            "1tak2nfpwzy": {
+              "editing": false,
+              "id": "1tak2nfpwzy",
+              "key": "1tak2nfpwzy",
+              "target": "page",
+              "method": "waitFor",
+              "params": {
+                "value": 50
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "1tak2nfpm88",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "1tak2nfqiic": {
+          "editing": false,
+          "id": "1tak2nfqiic",
+          "key": "1tak2nfqiic",
+          "title": "page.waitForNavigation",
+          "commands": {
+            "1tak2nfzp08": {
+              "editing": false,
+              "id": "1tak2nfzp08",
+              "key": "1tak2nfzp08",
+              "target": "RELOAD",
+              "method": "click",
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "1tak2nfqiic",
+              "waitForTarget": false
+            },
+            "1tak2nfqj3z": {
+              "editing": false,
+              "id": "1tak2nfqj3z",
+              "key": "1tak2nfqj3z",
+              "target": "page",
+              "method": "waitForNavigation",
+              "params": {
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "1tak2nfqiic",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "eoyk2a8u1qy",
+          "failure": ""
+        },
+        "21lk2ng62ue": {
+          "title": "page.waitForRequest",
+          "id": "21lk2ng62ue",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "21lk2ng62ue",
+          "commands": {
+            "21lk2ng6ij0": {
+              "editing": false,
+              "id": "21lk2ng6ij0",
+              "key": "21lk2ng6ij0",
+              "target": "REQUEST",
+              "method": "click",
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "21lk2ng62ue",
+              "waitForTarget": false
+            },
+            "2crk2ng810j": {
+              "editing": false,
+              "id": "2crk2ng810j",
+              "key": "2crk2ng810j",
+              "target": "page",
+              "method": "waitForRequest",
+              "params": {
+                "value": "http://127.0.0.1:8080/puppeteer.json",
+                "timeout": 30000
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "21lk2ng62ue",
+              "waitForTarget": false,
+              "entity": "command"
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "2crk2ngfh57": {
+          "editing": false,
+          "id": "2crk2ngfh57",
+          "key": "2crk2ngfh57",
+          "title": "page.waitForResponse",
+          "commands": {
+            "2crk2ngfhmv": {
+              "editing": false,
+              "id": "2crk2ngfhmv",
+              "key": "2crk2ngfhmv",
+              "target": "REQUEST",
+              "method": "click",
+              "assert": {},
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "2crk2ngfh57",
+              "waitForTarget": false
+            },
+            "2crk2ngfhzl": {
+              "editing": false,
+              "id": "2crk2ngfhzl",
+              "key": "2crk2ngfhzl",
+              "target": "page",
+              "method": "waitForResponse",
+              "params": {
+                "value": "http://127.0.0.1:8080/puppeteer.json",
+                "timeout": 30000
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "2crk2ngfh57",
+              "waitForTarget": false,
+              "entity": "command"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "eoyk2a8u1qy",
+          "failure": ""
+        },
+        "2crk2ngg8lf": {
+          "title": "page.waitForSelector",
+          "id": "2crk2ngg8lf",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "2crk2ngg8lf",
+          "commands": {
+            "2crk2nghxzr": {
+              "editing": false,
+              "id": "2crk2nghxzr",
+              "key": "2crk2nghxzr",
+              "target": "page",
+              "method": "waitForSelector",
+              "params": {
+                "value": "#blockLeftTop",
+                "visible": "off",
+                "hidden": "off",
+                "timeout": 30000
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "2crk2ngg8lf",
+              "waitForTarget": false
+            },
+            "3fok2ngjnog": {
+              "editing": false,
+              "id": "3fok2ngjnog",
+              "key": "3fok2ngjnog",
+              "target": "page",
+              "method": "waitForSelector",
+              "params": {
+                "value": "//*[@id=\"blockLeftTop\"]",
+                "visible": "off",
+                "hidden": "off",
+                "timeout": 30000
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "2crk2ngg8lf",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "3ouk2nh0ykn": {
+          "title": "target.checkBox",
+          "id": "3ouk2nh0ykn",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "3ouk2nh0ykn",
+          "commands": {
+            "3ouk2nh4xw5": {
+              "editing": false,
+              "id": "3ouk2nh4xw5",
+              "key": "3ouk2nh4xw5",
+              "target": "CHECKBOX",
+              "method": "checkBox",
+              "params": {
+                "checked": "true"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "3ouk2nh0ykn",
+              "waitForTarget": false
+            },
+            "40ok2nhf285": {
+              "editing": false,
+              "id": "40ok2nhf285",
+              "key": "40ok2nhf285",
+              "target": "CHECKBOX",
+              "method": "assertProperty",
+              "assert": {
+                "assertion": "hasProperty",
+                "value": ""
+              },
+              "params": {
+                "name": "checked"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "3ouk2nh0ykn",
+              "waitForTarget": false
+            },
+            "40ok2nhhhup": {
+              "editing": false,
+              "id": "40ok2nhhhup",
+              "key": "40ok2nhhhup",
+              "target": "CHECKBOX",
+              "method": "checkBox",
+              "params": {
+                "checked": "false"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "3ouk2nh0ykn",
+              "waitForTarget": false
+            },
+            "40ok2nhhq7r": {
+              "editing": false,
+              "id": "40ok2nhhq7r",
+              "key": "40ok2nhhq7r",
+              "target": "CHECKBOX",
+              "method": "assertProperty",
+              "assert": {
+                "assertion": "!hasProperty",
+                "value": ""
+              },
+              "params": {
+                "name": "checked"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "3ouk2nh0ykn",
+              "waitForTarget": false
+            },
+            "40ok2nhgjd4": {
+              "editing": false,
+              "id": "40ok2nhgjd4",
+              "key": "40ok2nhgjd4",
+              "target": "RADIO",
+              "method": "checkBox",
+              "params": {
+                "checked": "true"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "3ouk2nh0ykn",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "40ok2nhgjwe": {
+              "editing": false,
+              "id": "40ok2nhgjwe",
+              "key": "40ok2nhgjwe",
+              "target": "RADIO",
+              "method": "assertProperty",
+              "assert": {
+                "assertion": "hasProperty",
+                "value": ""
+              },
+              "params": {
+                "name": "checked"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "3ouk2nh0ykn",
+              "waitForTarget": false,
+              "entity": "command"
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "40ok2nhiiiz": {
+          "title": "target.click",
+          "id": "40ok2nhiiiz",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "40ok2nhiiiz",
+          "commands": {
+            "40ok2nhiwlr": {
+              "editing": false,
+              "id": "40ok2nhiwlr",
+              "key": "40ok2nhiwlr",
+              "target": "CLICK",
+              "method": "click",
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "40ok2nhiiiz",
+              "waitForTarget": false
+            },
+            "40ok2nhkkp1": {
+              "editing": false,
+              "id": "40ok2nhkkp1",
+              "key": "40ok2nhkkp1",
+              "target": "CLICK",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "equals",
+                "value": "clicked"
+              },
+              "params": {
+                "name": "data-rsp"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "40ok2nhiiiz",
+              "waitForTarget": false
+            },
+            "40ok2nhlass": {
+              "editing": false,
+              "id": "40ok2nhlass",
+              "key": "40ok2nhlass",
+              "target": "CLICK",
+              "method": "click",
+              "params": {
+                "button": "left",
+                "clickCount": 2,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "40ok2nhiiiz",
+              "waitForTarget": false
+            },
+            "40ok2nhl3ah": {
+              "editing": false,
+              "id": "40ok2nhl3ah",
+              "key": "40ok2nhl3ah",
+              "target": "CLICK",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "equals",
+                "value": "double-clicked"
+              },
+              "params": {
+                "name": "data-rsp"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "40ok2nhiiiz",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "45ok2nhnqwj": {
+          "title": "target.hover",
+          "id": "45ok2nhnqwj",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "45ok2nhnqwj",
+          "commands": {
+            "45ok2nhoh9w": {
+              "editing": false,
+              "id": "45ok2nhoh9w",
+              "key": "45ok2nhoh9w",
+              "target": "BLOCK_LEFT_TOP",
+              "method": "assertStyle",
+              "assert": {
+                "assertion": "equals",
+                "value": "rgba(0, 0, 0, 0)"
+              },
+              "params": {
+                "name": "background-color"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "45ok2nhnqwj",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "45ok2nhohr3": {
+              "editing": false,
+              "id": "45ok2nhohr3",
+              "key": "45ok2nhohr3",
+              "target": "BLOCK_LEFT_TOP",
+              "method": "hover",
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "45ok2nhnqwj",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "45ok2nhoi5b": {
+              "editing": false,
+              "id": "45ok2nhoi5b",
+              "key": "45ok2nhoi5b",
+              "target": "BLOCK_LEFT_TOP",
+              "method": "assertStyle",
+              "assert": {
+                "assertion": "equals",
+                "value": "rgb(238, 238, 238)"
+              },
+              "params": {
+                "name": "background-color"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "45ok2nhnqwj",
+              "waitForTarget": false,
+              "entity": "command"
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "45ok2nhrgra": {
+          "title": "target.reset",
+          "id": "45ok2nhrgra",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "45ok2nhrgra",
+          "commands": {
+            "45ok2nhyg9l": {
+              "editing": false,
+              "id": "45ok2nhyg9l",
+              "key": "45ok2nhyg9l",
+              "target": "FORM_INPUT",
+              "method": "scrollIntoView",
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "45ok2nhrgra",
+              "waitForTarget": true
+            },
+            "45ok2nhtxu4": {
+              "editing": false,
+              "id": "45ok2nhtxu4",
+              "key": "45ok2nhtxu4",
+              "target": "FORM_INPUT",
+              "method": "reset",
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "45ok2nhrgra",
+              "waitForTarget": true
+            },
+            "45ok2nhudjw": {
+              "editing": false,
+              "id": "45ok2nhudjw",
+              "key": "45ok2nhudjw",
+              "target": "FORM_INPUT",
+              "method": "assertProperty",
+              "assert": {
+                "assertion": "!equals",
+                "value": "Lorem"
+              },
+              "params": {
+                "name": "value"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "45ok2nhrgra",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "4x5k2niao1f": {
+              "editing": false,
+              "id": "4x5k2niao1f",
+              "key": "4x5k2niao1f",
+              "target": "page",
+              "method": "reload",
+              "assert": {},
+              "params": {
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "45ok2nhrgra",
+              "waitForTarget": false
+            },
+            "4x5k2nibo7v": {
+              "editing": false,
+              "id": "4x5k2nibo7v",
+              "key": "4x5k2nibo7v",
+              "target": "FORM_INPUT",
+              "method": "type",
+              "params": {
+                "value": "Ipsum"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "45ok2nhrgra",
+              "waitForTarget": false
+            },
+            "4x5k2nibs48": {
+              "editing": false,
+              "id": "4x5k2nibs48",
+              "key": "4x5k2nibs48",
+              "target": "FORM",
+              "method": "reset",
+              "assert": {},
+              "params": {},
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "45ok2nhrgra",
+              "waitForTarget": false
+            },
+            "4x5k2nib4is": {
+              "editing": false,
+              "id": "4x5k2nib4is",
+              "key": "4x5k2nib4is",
+              "target": "FORM_INPUT",
+              "method": "assertProperty",
+              "assert": {
+                "assertion": "equals",
+                "value": "Lorem"
+              },
+              "params": {
+                "name": "value"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "45ok2nhrgra",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "4x5k2nibs60": {
+          "title": "target.screenshot",
+          "id": "4x5k2nibs60",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "4x5k2nibs60",
+          "commands": {
+            "4x5k2nictcs": {
+              "editing": false,
+              "id": "4x5k2nictcs",
+              "key": "4x5k2nictcs",
+              "target": "BLOCK_LEFT_TOP",
+              "method": "screenshot",
+              "params": {
+                "name": "Element 1",
+                "omitBackground": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "4x5k2nibs60",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "4x5k2nid4lx": {
+          "title": "target.scrollIntoView",
+          "id": "4x5k2nid4lx",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "4x5k2nid4lx",
+          "commands": {
+            "4x5k2niidud": {
+              "editing": false,
+              "id": "4x5k2niidud",
+              "key": "4x5k2niidud",
+              "target": "page",
+              "method": "setViewport",
+              "params": {
+                "width": 1920,
+                "height": 500,
+                "resolution": "",
+                "deviceScaleFactor": 1,
+                "isMobile": false,
+                "hasTouch": false,
+                "isLandscape": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "4x5k2nid4lx",
+              "waitForTarget": false
+            },
+            "4x5k2nifpuk": {
+              "editing": false,
+              "id": "4x5k2nifpuk",
+              "key": "4x5k2nifpuk",
+              "target": "page",
+              "method": "reload",
+              "params": {
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "4x5k2nid4lx",
+              "waitForTarget": false
+            },
+            "4x5k2nif69j": {
+              "editing": false,
+              "id": "4x5k2nif69j",
+              "key": "4x5k2nif69j",
+              "target": "FORM_INPUT",
+              "method": "scrollIntoView",
+              "assert": {},
+              "params": {},
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "4x5k2nid4lx",
+              "waitForTarget": true,
+              "entity": "command"
+            },
+            "4x5k2nifsc7": {
+              "editing": false,
+              "id": "4x5k2nifsc7",
+              "key": "4x5k2nifsc7",
+              "target": "page",
+              "method": "assertScroll",
+              "assert": {
+                "assertion": "number",
+                "operator": "gt",
+                "value": 0
+              },
+              "params": {
+                "direction": "vertically"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "4x5k2nid4lx",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "62wk2njc1c9": {
+          "title": "target.select",
+          "id": "62wk2njc1c9",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "62wk2njc1c9",
+          "commands": {
+            "62wk2njcaml": {
+              "editing": false,
+              "id": "62wk2njcaml",
+              "key": "62wk2njcaml",
+              "target": "SELECT",
+              "method": "select",
+              "params": {
+                "value": "mercedes"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "62wk2njc1c9",
+              "waitForTarget": false
+            },
+            "62wk2njd0v5": {
+              "editing": false,
+              "id": "62wk2njd0v5",
+              "key": "62wk2njd0v5",
+              "target": "SELECT",
+              "method": "screenshot",
+              "params": {
+                "name": "Element 1",
+                "omitBackground": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "62wk2njc1c9",
+              "waitForTarget": false
+            },
+            "g1jk2ogwv5m": {
+              "editing": false,
+              "id": "g1jk2ogwv5m",
+              "key": "g1jk2ogwv5m",
+              "target": "SELECT",
+              "method": "assertProperty",
+              "assert": {
+                "assertion": "equals",
+                "value": "mercedes"
+              },
+              "params": {
+                "name": "value"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "62wk2njc1c9",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "g1jk2ogy13h": {
+          "title": "target.setAttribute",
+          "id": "g1jk2ogy13h",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "g1jk2ogy13h",
+          "commands": {
+            "gt6k2oiekh9": {
+              "editing": false,
+              "id": "gt6k2oiekh9",
+              "key": "gt6k2oiekh9",
+              "target": "INFO",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "!equals",
+                "value": "true"
+              },
+              "params": {
+                "name": "data-new"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "g1jk2ogy13h",
+              "waitForTarget": false
+            },
+            "gt6k2oicw7w": {
+              "editing": false,
+              "id": "gt6k2oicw7w",
+              "key": "gt6k2oicw7w",
+              "target": "INFO",
+              "method": "setAttribute",
+              "params": {
+                "name": "data-new",
+                "value": "true"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "g1jk2ogy13h",
+              "waitForTarget": false
+            },
+            "gt6k2oidohx": {
+              "editing": false,
+              "id": "gt6k2oidohx",
+              "key": "gt6k2oidohx",
+              "target": "INFO",
+              "method": "assertAttribute",
+              "assert": {
+                "assertion": "equals",
+                "value": "true"
+              },
+              "params": {
+                "name": "data-new"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "g1jk2ogy13h",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "gt6k2oig03d": {
+          "title": "target.tap",
+          "id": "gt6k2oig03d",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "gt6k2oig03d",
+          "commands": {
+            "gt6k2oigjmy": {
+              "editing": false,
+              "id": "gt6k2oigjmy",
+              "key": "gt6k2oigjmy",
+              "target": "BLOCK_LEFT_TOP",
+              "method": "tap",
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "gt6k2oig03d",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "gt6k2oigye2": {
+          "title": "target.toggleClass",
+          "id": "gt6k2oigye2",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "gt6k2oigye2",
+          "commands": {
+            "gt6k2oikxan": {
+              "editing": false,
+              "id": "gt6k2oikxan",
+              "key": "gt6k2oikxan",
+              "target": "page",
+              "method": "reload",
+              "params": {
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "gt6k2oigye2",
+              "waitForTarget": false
+            },
+            "gt6k2oiihud": {
+              "editing": false,
+              "id": "gt6k2oiihud",
+              "key": "gt6k2oiihud",
+              "target": "BLOCK_LEFT_TOP",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "value": true,
+                "display": "not",
+                "visibility": "any",
+                "opacity": "any",
+                "isIntersecting": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "gt6k2oigye2",
+              "waitForTarget": false
+            },
+            "gt6k2oij7uv": {
+              "editing": false,
+              "id": "gt6k2oij7uv",
+              "key": "gt6k2oij7uv",
+              "target": "BLOCK_LEFT_TOP",
+              "method": "toggleClass",
+              "params": {
+                "name": "is-hidden",
+                "toggle": "add"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "gt6k2oigye2",
+              "waitForTarget": false
+            },
+            "gt6k2oij52t": {
+              "editing": false,
+              "id": "gt6k2oij52t",
+              "key": "gt6k2oij52t",
+              "target": "BLOCK_LEFT_TOP",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "value": true,
+                "display": "none",
+                "visibility": "any",
+                "opacity": "any",
+                "isIntersecting": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "gt6k2oigye2",
+              "waitForTarget": false
+            },
+            "gt6k2oikce1": {
+              "editing": false,
+              "id": "gt6k2oikce1",
+              "key": "gt6k2oikce1",
+              "target": "BLOCK_LEFT_TOP",
+              "method": "toggleClass",
+              "params": {
+                "name": "is-hidden",
+                "toggle": "remove"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "gt6k2oigye2",
+              "waitForTarget": false
+            },
+            "gt6k2oik3h1": {
+              "editing": false,
+              "id": "gt6k2oik3h1",
+              "key": "gt6k2oik3h1",
+              "target": "BLOCK_LEFT_TOP",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "value": true,
+                "display": "not",
+                "visibility": "any",
+                "opacity": "any",
+                "isIntersecting": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "gt6k2oigye2",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "heqk2oir7ia": {
+          "title": "target.type",
+          "id": "heqk2oir7ia",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "heqk2oir7ia",
+          "commands": {
+            "heqk2oirktw": {
+              "editing": false,
+              "id": "heqk2oirktw",
+              "key": "heqk2oirktw",
+              "target": "INPUT",
+              "method": "reset",
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "heqk2oir7ia",
+              "waitForTarget": false
+            },
+            "heqk2oirx81": {
+              "editing": false,
+              "id": "heqk2oirx81",
+              "key": "heqk2oirx81",
+              "target": "INPUT",
+              "method": "type",
+              "params": {
+                "value": "Lorem"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "heqk2oir7ia",
+              "waitForTarget": false
+            },
+            "heqk2oisglt": {
+              "editing": false,
+              "id": "heqk2oisglt",
+              "key": "heqk2oisglt",
+              "target": "INPUT",
+              "method": "assertProperty",
+              "assert": {
+                "assertion": "equals",
+                "value": "Lorem"
+              },
+              "params": {
+                "name": "value"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "heqk2oir7ia",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "heqk2oitc71": {
+          "title": "target.upload",
+          "id": "heqk2oitc71",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "heqk2oitc71",
+          "commands": {
+            "heqk2oitl31": {
+              "editing": false,
+              "id": "heqk2oitl31",
+              "key": "heqk2oitl31",
+              "target": "FILE",
+              "method": "upload",
+              "params": {
+                "path": "/home/sheiko/Pictures/Screenshot from 2019-10-22 10-03-38.png",
+                "size": null,
+                "name": "attachment.txt"
+              },
+              "disabled": true,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "heqk2oitc71",
+              "waitForTarget": false
+            },
+            "iadk2ojaasi": {
+              "editing": false,
+              "id": "iadk2ojaasi",
+              "key": "iadk2ojaasi",
+              "target": "FILE",
+              "method": "upload",
+              "params": {
+                "size": 1000,
+                "name": "attachment.txt"
+              },
+              "disabled": true,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "heqk2oitc71",
+              "waitForTarget": false
+            },
+            "iadk2ojbe3c": {
+              "editing": false,
+              "id": "iadk2ojbe3c",
+              "key": "iadk2ojbe3c",
+              "target": "FILE",
+              "method": "upload",
+              "params": {
+                "size": 1000,
+                "name": "custom.txt"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "heqk2oitc71",
+              "waitForTarget": false
+            },
+            "i6ik2oj82zt": {
+              "editing": false,
+              "id": "i6ik2oj82zt",
+              "key": "i6ik2oj82zt",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "Page 1",
+                "fullPage": false,
+                "omitBackground": false,
+                "x": null,
+                "y": null,
+                "width": null,
+                "height": null
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "heqk2oitc71",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
+        },
+        "iadk2ojgyu7": {
+          "title": "target.waitForTarget",
+          "id": "iadk2ojgyu7",
+          "editing": false,
+          "groupId": "eoyk2a8u1qy",
+          "key": "iadk2ojgyu7",
+          "commands": {
+            "iadk2oji4h0": {
+              "editing": false,
+              "id": "iadk2oji4h0",
+              "key": "iadk2oji4h0",
+              "target": "CALL_TARGET",
+              "method": "click",
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "iadk2ojgyu7",
+              "waitForTarget": false
+            },
+            "iadk2ojipx3": {
+              "editing": false,
+              "id": "iadk2ojipx3",
+              "key": "iadk2ojipx3",
+              "target": "NEW_TARGET",
+              "method": "waitForTarget",
+              "params": {
+                "visible": "off",
+                "hidden": "off",
+                "timeout": 30000
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "iadk2ojgyu7",
+              "waitForTarget": false
+            },
+            "in4k2ojrf3k": {
+              "editing": false,
+              "id": "in4k2ojrf3k",
+              "key": "in4k2ojrf3k",
+              "target": "NEW_TARGET",
+              "method": "waitForTarget",
+              "params": {
+                "visible": "on",
+                "hidden": "off",
+                "timeout": 30000
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "iadk2ojgyu7",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "failure": ""
         }
       }
     }

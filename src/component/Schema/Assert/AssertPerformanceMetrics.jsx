@@ -21,6 +21,7 @@ export class AssertPerformanceMetrics extends React.Component {
 
   static propTypes = {
     record: PropTypes.object.isRequired,
+    onPressEnter: PropTypes.func.isRequired,
     targets: PropTypes.arrayOf( PropTypes.object ),
     form: PropTypes.shape({
       setFieldsValue: PropTypes.func.isRequired,
@@ -141,7 +142,7 @@ export class AssertPerformanceMetrics extends React.Component {
                           }
                         }
                       ]
-                    })( <Input addonAfter="μs" /> )
+                    })( <Input addonAfter="μs" onPressEnter={ ( e ) => this.props.onPressEnter( e ) } /> )
                     }
                   </FormItem>
                 </td>
