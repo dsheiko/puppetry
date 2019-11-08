@@ -46,7 +46,7 @@ const png = ( id, parentId, screenshotTitle, options = {} ) => {
 
       generateTmpUploadFile = ( name, size ) => {
         const path = join( os.tmpdir(), name );
-        fs.writeFileSync( path, new Buffer( size * 1024 ) );
+        fs.writeFileSync( path, Buffer.allocUnsafe( size * 1024 ) );
         return path;
       },
 
@@ -97,7 +97,24 @@ const png = ( id, parentId, screenshotTitle, options = {} ) => {
        * @param {number} max
        * @returns {number}
        */
-      randomInt = ( max ) => Math.floor( Math.random() * Math.floor( max ) );
+      randomInt = ( max ) => Math.floor( Math.random() * Math.floor( max ) ),
+
+      /**
+       * Report step to Allure
+       * @see https://github.com/zaqqaz/jest-allure
+       * @param {String} name
+       */
+      startStep = ( name ) => {
+        typeof global.reporter !== "undefined" && global.reporter.startStep( name );
+      },
+
+      /**
+       * Report step to Allure
+       * @see https://github.com/zaqqaz/jest-allure
+       */
+      endStep = () => {
+        typeof global.reporter !== "undefined" && global.reporter.endStep();
+      };
 
 
 /**
@@ -196,6 +213,9 @@ exports.util = {
   png,
 
   tracePng,
+
+  startStep,
+  endStep,
 
   getComparePath,
 

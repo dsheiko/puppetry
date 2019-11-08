@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "test:firefox": "cross-env PUPPETRY_DRIVER=firefox jest",
-    "test:debug": "cross-env PUPPETEER_RUN_IN_BROWSER=true jest --detectOpenHandles"
+    "test:debug": "cross-env PUPPETEER_RUN_IN_BROWSER=true jest --detectOpenHandles",
+    "report": "allure serve"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +31,7 @@
     "shelljs": "^0.8.2",
     "pixelmatch": "^5.1.0",
     "pngjs": "^3.4.0",
-    "text-table": "^0.2.0"
+    "text-table": "^0.2.0",
+    "jest-allure": "^0.1.1"
   }
 }

@@ -119,7 +119,7 @@ ${ buildEnv( env ) }
 
 ${ targets }
 
-describe( ${ JSON.stringify( title ) }, async () => {
+describe( ${ JSON.stringify( title ) }, () => {
   beforeAll(async () => {
     await bs.setup(${ getSetupOptions( options ) });
 
@@ -156,7 +156,7 @@ ${body}
 `;
 
 export const tplGroup = ({ title, body }) => `
-  describe( ${ JSON.stringify( title ) }, async () => {
+  describe( ${ JSON.stringify( title ) }, () => {
 ${body}
   });
 `;

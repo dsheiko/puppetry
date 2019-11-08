@@ -83,8 +83,8 @@ export const upload = {
 
   testTypes: {
     "params": {
-        "size": "INPUT",
-        "name": "INPUT"
+      "size": "INPUT",
+      "name": "INPUT"
     }
   },
 

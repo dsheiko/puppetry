@@ -389,7 +389,7 @@
       "tests": {}
     }
   },
-  "savedAt": 1573215728,
+  "savedAt": 1573229482,
   "modified": false,
   "lastOpenSuite": "puppeteer.json",
   "variables": {},
@@ -409,5 +409,5 @@
   ],
   "autosave": true,
   "projectDirectory": "/home/sheiko/PUPPETRY/puppetry-test",
-  "puppetry": "3.0.0-beta.3"
+  "puppetry": "3.0.0-RC.1"
 }

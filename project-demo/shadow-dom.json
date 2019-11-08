@@ -2,8 +2,8 @@
   "title": "Shadow Dom",
   "timeout": 50000,
   "snippets": false,
-  "savedAt": 1572623182,
-  "loadedAt": 1572623123,
+  "savedAt": 1573228468,
+  "loadedAt": 1573228045,
   "modified": false,
   "filename": "shadow-dom.json",
   "targets": {
@@ -74,7 +74,7 @@
               "params": {
                 "url": "https://npm-demos.appspot.com/@polymer/paper-input@3.0.1/demo/index.html",
                 "timeout": 30000,
-                "waitUntil": "networkidle2"
+                "waitUntil": "networkidle0"
               },
               "disabled": false,
               "failure": "",
@@ -84,7 +84,8 @@
               "ref": "",
               "isRef": false,
               "groupId": "egmk168h2kf",
-              "testId": "egmk168h7zs"
+              "testId": "egmk168h7zs",
+              "waitForTarget": false
             },
             "7a9k1c3365k": {
               "editing": false,
@@ -159,5 +160,5 @@
       }
     }
   },
-  "puppetry": "3.0.0-beta.2"
+  "puppetry": "3.0.0-RC.1"
 }

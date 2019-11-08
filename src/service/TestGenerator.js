@@ -181,8 +181,10 @@ export default class TestGenerator {
         ? `      ${ COMMAND_ID_COMMENT }${ command.groupId }:${ command.testId }:${ command.id }\n${ chunk }`
         : chunk;
 
-      return ( typeof command.comment === "string" && command.comment.startsWith( "@assert " ) )
-        ? this.renderCommandTryCath( code, command.comment ) : code;
+      return `      util.startStep( ${ JSON.stringify( `${ target }.${ method }` ) } );\n`
+        + ( ( typeof command.comment === "string" && command.comment.startsWith( "@assert " ) )
+          ? this.renderCommandTryCath( code, command.comment ) : code )
+        + `\n      util.endStep();\n`;
 
     } catch ( err ) {
       console.warn( "parseCommand error:", err, command );

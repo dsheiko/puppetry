@@ -15,6 +15,7 @@ import {
   DEMO_PROJECT_DIRECTORY,
   COMMAND_ID_COMMENT,
   RUNNER_PUPPETRY,
+  RUNNER_JEST,
   SNIPPETS_FILENAME,
   DIR_SCREENSHOTS,
   DIR_SNAPSHOTS
@@ -201,6 +202,12 @@ export async function exportProject(
     shell.chmod( "-R", "+w", outputDirectory );
     shell.cp( "-RLf" , JEST_PKG + "/*", outputDirectory  );
     shell.mkdir( "-p" , join( outputDirectory, "specs" ) );
+
+    if ( runner === RUNNER_JEST ) {
+      await writeFile( join( outputDirectory, "jest.config.js" ), `module.exports = {
+  setupFilesAfterEnv: [ "jest-allure/dist/setup" ]
+};`, "utf8" );
+    }
 
     for ( const filename of suiteFiles ) {
       let specContent = await exportSuite({

@@ -37,6 +37,7 @@
 - improvement: add option to wait for target to every target method
 - improvement: add target.waitForTarget
 - improvement: UI, all inputs on press Enter submit, confirmation dialogs on Enter accept
+- improvement: exported project now generates [Allure reports](http://allure.qatools.ru/)
 
 ### Updates
 

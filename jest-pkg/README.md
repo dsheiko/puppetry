@@ -11,6 +11,7 @@ After running the tests `npm test`, you can find the generated screenshots in th
 - `npm test` - run tests in command-line
 - `npm run test:firefox` - run tests in command-line with [puppeteer-firefox](https://www.npmjs.com/package/puppeteer-firefox)
 - `npm run test:debug` - run tests in command-line and in browser
+- `npm run report` - see report in browser with [Allure server](https://github.com/allure-framework/allure2)
 
 
 ## Note
