@@ -32,7 +32,7 @@ import { EditProjectModal } from "./Modal/EditProjectModal";
 import { EditEnvironmentsModal } from "./Modal/EditEnvironmentsModal";
 import { AppLightbox } from "./Modal/AppLightbox";
 import { connect } from "react-redux";
-
+import * as selectors from "selector/selectors";
 import { TabGroup  } from "./TabGroup";
 import If from "component/Global/If";
 
@@ -40,7 +40,8 @@ import If from "component/Global/If";
 const { Sider } = Layout,
       // Mapping state to the props
       mapStateToProps = ( state ) => ({
-        store: state
+        store: state,
+        cleanSnippets: selectors.getCleanSnippetsMemoized( state )
       }),
       // Mapping actions to the props
       mapDispatchToProps = () => ({
@@ -64,7 +65,7 @@ export class AppLayout extends React.Component {
   }
 
   render() {
-    const { action, store, selector } = this.props,
+    const { action, store, selector, cleanSnippets } = this.props,
           { projectDirectory, exportDirectory } = store.settings,
           { commandModal, snippetModal, tabs } = store.app,
           tabsAnyTrue = Object.keys( tabs.available ).some( key => tabs.available[ key ]);
@@ -230,7 +231,7 @@ export class AppLayout extends React.Component {
         { snippetModal.isVisible && <SnippetModal
           isVisible={ true }
           record={ snippetModal.record }
-          snippets={ selector.getSnippets() }
+          snippets={ cleanSnippets }
           action={ action } /> }
 
         <InstallRuntimeTestModal

@@ -9,14 +9,13 @@ import { remote } from "electron";
 import classNames from "classnames";
 import { SNIPPETS_GROUP_ID } from "constant";
 import { connect } from "react-redux";
-
 import * as selectors from "selector/selectors";
 
 const { Menu, MenuItem } = remote,
       // Mapping state to the props
       mapStateToProps = ( state ) => ({
         snippets: state.snippets,
-        cleanSnippets: selectors.getSnippets( state.snippets )
+        cleanSnippets: selectors.getCleanSnippetsMemoized( state )
       }),
       // Mapping actions to the props
       mapDispatchToProps = () => ({

@@ -32,10 +32,10 @@ export class TargetTable extends AbstractEditableTable {
             ref={ ref }
             record={ record }
             onSubmit={ this.onSubmit }
+            targets={ this.props.targets }
             dataIndex="target"
             className="input--target"
             placeholder="Enter target name"
-
             model={ this.model }
             updateRecord={ this.updateRecord }
           />

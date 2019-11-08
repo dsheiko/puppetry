@@ -1,6 +1,7 @@
 import uniqid from "uniqid";
 import { validate } from "bycontract";
 import { SNIPPETS_GROUP_ID } from "constant";
+import { createSelector } from "reselect";
 
 function setEntity( arr, entity ) {
   return arr.map( record => ({ ...record, entity }) );
@@ -16,6 +17,16 @@ export function findCommandsByTestId( testId, groups ) {
   return null;
 }
 
+const stateSnippets = ( state ) => state.snippets,
+      stateSuiteTargets = ( state ) => state.suite.targets,
+      stateProjectTargets = ( state ) => state.project.targets,
+      stateSuiteGroups = ( state ) => state.suite.groups;
+
+export const getCleanSnippetsMemoized = createSelector( stateSnippets, getSnippets );
+export const getProjectTargetDataTableMemoized = createSelector( stateProjectTargets, getTargetDataTable );
+export const getSuiteTargetDataTableMemoized = createSelector( stateSuiteTargets, getTargetDataTable );
+export const getSuiteGroupsMemoized = createSelector( stateSuiteGroups,
+  ( groups ) => getStructureDataTable( groups, "group" ) );
 
 export function getActiveEnvironment( environments, environment ) {
   validate( arguments, [ "string[]", "string" ]);

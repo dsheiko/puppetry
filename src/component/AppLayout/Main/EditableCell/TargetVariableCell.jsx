@@ -10,7 +10,7 @@ export class TargetVariableCell extends AbstractEditableCell {
 
 
   render() {
-    const { placeholder, dataIndex, record, prefixIcon, className, type } = this.props,
+    const { placeholder, dataIndex, record, prefixIcon, className, type, targets } = this.props,
           { getFieldDecorator } = this.props.form,
           { editing } = record,
           inputOtherProps = type ? { type } : {},
@@ -27,6 +27,14 @@ export class TargetVariableCell extends AbstractEditableCell {
                   rules: [
                     {
                       validator: ruleValidateVariable
+                    },
+                    {
+                      validator: ( rule, value, callback ) => {
+                        if ( targets.find( obj => obj.target === value ) ) {
+                          return callback( `Name ${ value } is already in use` );
+                        }
+                        callback();
+                      }
                     },
                     {
                       transform: ( value ) => value.trim()

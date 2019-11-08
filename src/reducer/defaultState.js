@@ -12,6 +12,7 @@ export default {
   // Runtime state
   app: {
     greeting: "Hello!",
+    bootstrapLoaded: false,
     loading: false,
 
     readyToRunTests: false,

@@ -9,6 +9,7 @@ import ErrorBoundary from "component/ErrorBoundary";
 import AbstractComponent from "component/AbstractComponent";
 import LearnMore from "component/Global/LearnMore";
 import { connect } from "react-redux";
+import * as selectors from "selector/selectors";
 
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
@@ -18,7 +19,9 @@ const mapStateToProps = ( state ) => ({
         targets: state.suite.targets,
         title: state.suite.title,
         description: state.suite.description,
-        timeout: state.suite.timeout
+        timeout: state.suite.timeout,
+        targetDataTable: selectors.getSuiteTargetDataTableMemoized( state ),
+        groupDataTable: selectors.getSuiteGroupsMemoized( state )
       }),
       // Mapping actions to the props
       mapDispatchToProps = () => ({
@@ -77,7 +80,9 @@ export class Main extends AbstractComponent {
             targets,
             title,
             description,
-            timeout
+            timeout,
+            targetDataTable,
+            groupDataTable
           } = this.props,
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
           groupsLabel = ( <span><Icon type="audit" />Test Cases</span> );
@@ -85,7 +90,7 @@ export class Main extends AbstractComponent {
     if ( panes.length ) {
       [ activeKey ] = panes;
     }
-
+    
     return (
       <ErrorBoundary>
         <div id="cMain" className="panes-container">
@@ -104,7 +109,7 @@ export class Main extends AbstractComponent {
 
               <p><LearnMore href="https://docs.puppetry.app/target" />
               </p>
-              <TargetTable action={action} targets={ selector.getTargetDataTable() } />
+              <TargetTable action={action} targets={ targetDataTable } />
             </TabPane>
 
             <TabPane tab={ groupsLabel } key="groups">
@@ -127,7 +132,7 @@ export class Main extends AbstractComponent {
                 action={ action }
                 selector={ selector }
                 expanded={ expandedGroups }
-                groups={ selector.getGroupDataTable() }
+                groups={ groupDataTable }
                 targets={ targets } />
             </TabPane>
 

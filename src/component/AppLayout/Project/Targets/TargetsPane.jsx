@@ -12,9 +12,7 @@ import LearnMore from "component/Global/LearnMore";
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
         environments: state.project.environments,
-        selector: {
-          getTargetDataTable: () => selectors.getTargetDataTable( state.project.targets )
-        }
+        targetDataTable: selectors.getProjectTargetDataTableMemoized( state )
       }),
       // Mapping actions to the props
       mapDispatchToProps = ( dispatch ) => ({
@@ -26,7 +24,7 @@ const mapStateToProps = ( state ) => ({
 export class TargetsPane extends AbstractComponent {
 
   render() {
-    const { action, selector } = this.props;
+    const { action, targetDataTable } = this.props;
 
     return (
       <ErrorBoundary>
@@ -37,7 +35,7 @@ export class TargetsPane extends AbstractComponent {
         <p><LearnMore href="https://docs.puppetry.app/target" />
         </p>
         <br />
-        <TargetTable model="SharedTarget" action={ action } targets={ selector.getTargetDataTable() } />
+        <TargetTable model="SharedTarget" action={ action } targets={ targetDataTable } />
 
       </ErrorBoundary>
     );

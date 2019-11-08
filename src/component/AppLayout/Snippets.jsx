@@ -8,13 +8,15 @@ import { SNIPPETS_GROUP_ID } from "constant";
 import AbstractForm from "component/AbstractForm";
 import LearnMore from "component/Global/LearnMore";
 import { connect } from "react-redux";
+import * as selectors from "selector/selectors";
 
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
         panes: state.project.appPanels.suite.panes,
         expandedGroups: state.project.groups,
         groups: state.suite.groups,
-        targets: state.suite.targets
+        targets: state.suite.targets,
+        targetDataTable: selectors.getSuiteTargetDataTableMemoized( state )
       }),
       // Mapping actions to the props
       mapDispatchToProps = () => ({
@@ -64,7 +66,8 @@ export class Snippets extends AbstractForm {
             panes,
             groups,
             expandedGroups,
-            targets
+            targets,
+            targetDataTable
           } = this.props,
 
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
@@ -77,7 +80,7 @@ export class Snippets extends AbstractForm {
     if ( panes.length ) {
       [ activeKey ] = panes;
     }
-
+    
     return (
       <ErrorBoundary>
         <div id="cSnippets" className="panes-container">
@@ -95,7 +98,7 @@ export class Snippets extends AbstractForm {
               </p>
 
               <p><LearnMore href="https://docs.puppetry.app/target"/></p>
-              <TargetTable action={action} targets={ selector.getTargetDataTable() } />
+              <TargetTable action={action} targets={ targetDataTable } />
             </TabPane>
 
             <TabPane tab={ snippetsLabel } key="groups">
