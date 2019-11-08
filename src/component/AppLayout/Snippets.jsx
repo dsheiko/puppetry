@@ -80,7 +80,7 @@ export class Snippets extends AbstractForm {
     if ( panes.length ) {
       [ activeKey ] = panes;
     }
-    
+
     return (
       <ErrorBoundary>
         <div id="cSnippets" className="panes-container">

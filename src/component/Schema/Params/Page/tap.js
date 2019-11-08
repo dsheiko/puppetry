@@ -23,7 +23,7 @@ export const tap = {
         {
           name: "params.x",
           control: INPUT_NUMBER,
-          label: "x",
+          label: "x (px)",
           tooltip: "",
           placeholder: "",
           rules: [{
@@ -34,7 +34,7 @@ export const tap = {
         {
           name: "params.y",
           control: INPUT_NUMBER,
-          label: "y",
+          label: "y (px)",
           tooltip: "",
           placeholder: "",
           rules: [{

@@ -27,7 +27,8 @@ async function setActionInputValue( id, value, input ) {
       case "INPUT_NUMBER":
         return await ctx.client.setValue( selector, value );
       case "SELECT":
-        return await ctx.select( selector, value );
+        await ctx.select( selector, value );
+        return await ctx.client.pause( 300 );
       case "CHECKBOX":
         return await ctx.toggleCheckbox( selector, value );
       case "SWITCH":
@@ -124,21 +125,21 @@ describe( "New Project", () => {
     await ctx.screenshot( "newly-created-suite" );
   });
 
-//  test( "go tab OPTIONS", async() => {
-//    await ctx.client.click( `${ S.PANEL_SUITE_TABGROUP } .ant-tabs-tab:nth-child(3)` );
-//    await ctx.client.waitForExist( `#cSuiteForm #title` );
-//    // expect( await ctx.client.isExisting( `#cSuiteForm #title` ) ).toBeTruthy();
-//  });
-//
-//  test( "change suite options", async() => {
-//    await ctx.client.setValue( `#cSuiteForm #title`, "Test Suite Modified" );
-//    await ctx.client.setValue( `#cSuiteForm #timeout`, 70000 );
-//    await ctx.client.click( `#cSuiteFormChangeBtn` );
-//    await ctx.client.pause( 300 );
-//    expect( await ctx.boundaryError() ).toBeFalsy();
-//    await ctx.screenshot( "suite-form-modified" );
-//  });
-//
+  test( "go tab OPTIONS", async() => {
+    await ctx.client.click( `${ S.PANEL_SUITE_TABGROUP } .ant-tabs-tab:nth-child(3)` );
+    await ctx.client.waitForExist( `#cSuiteForm #title` );
+    // expect( await ctx.client.isExisting( `#cSuiteForm #title` ) ).toBeTruthy();
+  });
+
+  test( "change suite options", async() => {
+    await ctx.client.setValue( `#cSuiteForm #title`, "Test Suite Modified" );
+    await ctx.client.setValue( `#cSuiteForm #timeout`, 70000 );
+    await ctx.client.click( `#cSuiteFormChangeBtn` );
+    await ctx.client.pause( 300 );
+    expect( await ctx.boundaryError() ).toBeFalsy();
+    await ctx.screenshot( "suite-form-modified" );
+  });
+
   test( "go tab TARGETS", async() => {
     await ctx.client.click( `${ S.PANEL_SUITE_TABGROUP } .ant-tabs-tab:nth-child(1)` );
     await ctx.client.waitForExist( `#cTargetTable .input--target` );
@@ -147,10 +148,10 @@ describe( "New Project", () => {
   });
 
   test( "add a target", async() => {
-    expect( await ctx.client.isExisting( "#cTargetTable .input--target > input" ) ).toBeTruthy();
-    expect( await ctx.client.isExisting( "#cTargetTable .input--selector > input" ) ).toBeTruthy();
-    await ctx.client.setValue( "#cTargetTable .input--target > input", FIX_TARGET );
-    await ctx.client.setValue( "#cTargetTable .input--selector > input", ".foo" );
+    expect( await ctx.client.isExisting( "#cTargetTable .ant-form-item-control input.input--target" ) ).toBeTruthy();
+    expect( await ctx.client.isExisting( "#cTargetTable .ant-form-item-control input.input--selector" ) ).toBeTruthy();
+    await ctx.client.setValue( "#cTargetTable .ant-form-item-control input.input--target", FIX_TARGET );
+    await ctx.client.setValue( "#cTargetTable .ant-form-item-control input.input--selector", ".foo" );
     await ctx.client.click( `#cTargetTable ${ S.EDITABLE_ROW_SUBMIT_BTN }` );
     expect( await ctx.boundaryError() ).toBeFalsy();
     await ctx.screenshot( "new-target" );

@@ -10,13 +10,12 @@ import { E_GIT_SYNC_RESPONSE } from "constant";
 import { ipcRenderer } from "electron";
 import LoadingTip from "component/Global/LoadingTip";
 
-      // Mapping state to the props
+// Mapping state to the props
 const mapStateToProps = ( state ) => ({
         bootstrapLoaded: state.app.bootstrapLoaded,
         selector: {
-          getTestDataTable: ( group ) => selectors.getStructureDataTable( group.tests, "test" ),
-          getSelectedTargets: ( selection ) => selectors.getSelectedTargets(
-            selection, Object.assign({}, state.project.targets, state.suite.targets ) ),
+          getTestDataTable: ( group ) => selectors.getGroupTestsMemoized( group ),
+          getSelectedTargets: ( selection ) => selectors.getSelectedTargetsMemoized({ ...state, selection }),
           hasTarget: ( target ) => selectors.hasTarget( target, state.suite.targets ),
           findCommandsByTestId:
             ( testId ) => selectors.findCommandsByTestId( testId, state.suite.groups )
@@ -42,7 +41,7 @@ export class App extends React.Component {
       loadGit: PropTypes.func,
       loadSnippets: PropTypes.func.isRequired
     }),
-
+    bootstrapLoaded: PropTypes.bool.isRequired,
     selector: PropTypes.object
   }
 

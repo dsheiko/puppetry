@@ -20,13 +20,22 @@ export function findCommandsByTestId( testId, groups ) {
 const stateSnippets = ( state ) => state.snippets,
       stateSuiteTargets = ( state ) => state.suite.targets,
       stateProjectTargets = ( state ) => state.project.targets,
-      stateSuiteGroups = ( state ) => state.suite.groups;
+      stateSuiteGroups = ( state ) => state.suite.groups,
+      groupTests = ( group ) => group.tests,
+      allTargets = ( state ) => ({
+        targets: Object.assign({}, state.project.targets, state.suite.targets ),
+        selection: state.selection
+      });
 
 export const getCleanSnippetsMemoized = createSelector( stateSnippets, getSnippets );
 export const getProjectTargetDataTableMemoized = createSelector( stateProjectTargets, getTargetDataTable );
 export const getSuiteTargetDataTableMemoized = createSelector( stateSuiteTargets, getTargetDataTable );
 export const getSuiteGroupsMemoized = createSelector( stateSuiteGroups,
   ( groups ) => getStructureDataTable( groups, "group" ) );
+export const getGroupTestsMemoized = createSelector( groupTests,
+  ( tests ) => getStructureDataTable( tests, "test" ) );
+export const getSelectedTargetsMemoized = createSelector( allTargets,
+  ({ targets, selection }) => getSelectedTargets( selection, targets ) );
 
 export function getActiveEnvironment( environments, environment ) {
   validate( arguments, [ "string[]", "string" ]);
@@ -142,7 +151,7 @@ export function hasTarget( variable, targets ) {
 
 /**
  *
- * @param {Array} selection
+ * @param {String[]} selection
  * @param {Object} targets
  * @returns {Object}
  */
@@ -159,5 +168,5 @@ export function getSelectedTargets( selection, targets ) {
 export function getSnippets( snippets ) {
   return snippets.groups && snippets.groups.hasOwnProperty( SNIPPETS_GROUP_ID )
     ? snippets.groups[ SNIPPETS_GROUP_ID ].tests
-    : [];
+    : {};
 }

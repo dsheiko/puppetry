@@ -57,7 +57,7 @@ export const assertContainsClass = {
 
   testTypes: {
     "assert": {
-      "value": "CHECKBOX"
+      "assertion": "SELECT"
     },
     "params": {
       "name": "INPUT"
@@ -68,8 +68,7 @@ export const assertContainsClass = {
     {
       valid: true,
       "assert": {
-        "assertion": "boolean",
-        "value": true
+        "assertion": "hasClass"
       },
       "params": {
         "name": ".foo"

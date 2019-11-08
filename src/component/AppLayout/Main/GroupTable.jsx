@@ -93,6 +93,7 @@ export class GroupTable extends AbstractEditableTable {
   renderExpandedTable = ( group ) => {
     const tests = this.props.selector.getTestDataTable( group ),
           targets = Object.values( this.props.targets );
+
     return ( <TestTable
       expanded={ this.props.expanded }
       targets={ targets }

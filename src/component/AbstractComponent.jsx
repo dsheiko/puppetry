@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { shell } from "electron";
 import { notification } from "antd";
 
+/*eslint no-useless-escape: 0*/
 
 export default class AbstractComponent extends React.Component {
 

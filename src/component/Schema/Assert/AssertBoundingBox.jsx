@@ -56,7 +56,7 @@ export class AssertBoundingBox extends React.Component {
 
     return (
       <React.Fragment>
-        <FormItem label="Result" classdName="is-hidden">
+        <FormItem label="Result" className="is-hidden">
           { getFieldDecorator( "assert.assertion", {
             initialValue: "boundingBox",
             rules: [{

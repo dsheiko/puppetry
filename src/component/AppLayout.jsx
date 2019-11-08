@@ -61,7 +61,8 @@ export class AppLayout extends React.Component {
   static propTypes = {
     action: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired,
-    selector: PropTypes.object.isRequired
+    selector: PropTypes.object.isRequired,
+    cleanSnippets: PropTypes.object.isRequired
   }
 
   render() {

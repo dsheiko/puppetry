@@ -90,7 +90,7 @@ export class Main extends AbstractComponent {
     if ( panes.length ) {
       [ activeKey ] = panes;
     }
-    
+
     return (
       <ErrorBoundary>
         <div id="cMain" className="panes-container">

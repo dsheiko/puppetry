@@ -56,7 +56,9 @@ export const assertBoundingBox = {
   testTypes: {
     "assert": {
       "xOperator": "SELECT",
-      "xValue": "INPUT_NUMBER"
+      "xValue": "INPUT_NUMBER",
+      "yOperator": "SELECT",
+      "yValue": "INPUT_NUMBER"
     }
   },
 
@@ -65,11 +67,12 @@ export const assertBoundingBox = {
       valid: true,
       "assert": {
         "assertion": "boundingBox",
-        "xOperator": "gt",
-        "yOperator": "any",
+        "xOperator": "eq",
+        "yOperator": "eq",
         "wOperator": "any",
         "hOperator": "any",
-        "xValue": 1
+        "xValue": "1",
+        "yValue": "1"
       }
     }
   ]

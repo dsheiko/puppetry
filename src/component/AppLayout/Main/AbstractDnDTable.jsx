@@ -264,12 +264,13 @@ export default class AbstractDnDTable extends React.Component {
   }
 
   /**
-   * Extract key-value from targets
+   * Extract an array of targets
+   * @returns array
    */
   static findTargets( records ) {
     try {
       return Array.from( records.reduce( ( carry, record ) => {
-        carry.add( findTargets( record ) );
+        findTargets( record ).forEach( target => carry.add( target ) );
         return carry;
       }, new Set() ) );
     } catch ( e ) {
@@ -282,6 +283,7 @@ export default class AbstractDnDTable extends React.Component {
    * Copy into clipboard
    */
   copyClipboard = ( record ) => {
+
     const records = this.getSelectedRecords( record ),
           payload = {
             app: {
@@ -295,7 +297,6 @@ export default class AbstractDnDTable extends React.Component {
               // We attach targets referenced from copied records
               : this.props.selector.getSelectedTargets( AbstractDnDTable.findTargets( records ) )
           };
-
     this.resetSelected();
     clipboard.writeText( JSON.stringify( payload, null, 2 ) );
   }

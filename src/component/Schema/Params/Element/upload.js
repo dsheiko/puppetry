@@ -83,7 +83,8 @@ export const upload = {
 
   testTypes: {
     "params": {
-      "path": "INPUT"
+        "size": "INPUT",
+        "name": "INPUT"
     }
   },
 
@@ -91,7 +92,8 @@ export const upload = {
     {
       valid: true,
       "params": {
-        "path": "/home/sheiko/Pictures/Screenshot from 2019-07-03 11-33-56.png"
+        "size": "10",
+        "name": "attachment.txt"
       }
     }
   ]
