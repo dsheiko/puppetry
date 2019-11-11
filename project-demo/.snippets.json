@@ -4,7 +4,7 @@
   "snippets": true,
   "description": null,
   "savedAt": 1572617859,
-  "loadedAt": 1572617852,
+  "loadedAt": 1573230782,
   "modified": false,
   "filename": ".snippets.json",
   "targets": {
@@ -311,5 +311,5 @@
       "adding": false
     }
   },
-  "puppetry": "3.0.0-beta.2"
+  "puppetry": "3.0.0-RC.1"
 }

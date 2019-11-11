@@ -30,7 +30,7 @@ export class TargetVariableCell extends AbstractEditableCell {
                     },
                     {
                       validator: ( rule, value, callback ) => {
-                        if ( targets.find( obj => obj.target === value ) ) {
+                        if ( targets.find( obj => obj.target === value && record.target !== value ) ) {
                           return callback( `Name ${ value } is already in use` );
                         }
                         callback();
