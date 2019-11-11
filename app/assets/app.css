@@ -1481,3 +1481,8 @@ summary:hover {
   margin-top: 0;
   margin-bottom: 1em;
 }
+
+.allure-test-report-checkbox {
+  margin-top: -8px;
+  margin-bottom: 8px;
+}

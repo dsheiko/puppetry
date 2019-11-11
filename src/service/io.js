@@ -205,7 +205,7 @@ export async function exportProject(
     shell.cp( "-RLf" , JEST_PKG + "/*", outputDirectory  );
     shell.mkdir( "-p" , join( outputDirectory, "specs" ) );
 
-    if ( runner === RUNNER_JEST ) {
+    if ( runner === RUNNER_JEST && options.allure  ) {
       await writeFile( join( outputDirectory, "jest.config.js" ), `module.exports = {
   setupFilesAfterEnv: [ "jest-allure/dist/setup" ]
 };`, "utf8" );

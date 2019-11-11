@@ -2,7 +2,10 @@ import { buildAssertionTpl } from "service/assert";
 import { AssertConsoleMessage } from "../../Assert/AssertConsoleMessage";
 
 function renderBoolean( not ) {
-  return [ "true", "false" ].includes( not ) ? not : "false";
+  if ( typeof not !== "string" ) {
+    return "false";
+  }
+  return not;
 }
 
 export const assertConsoleMessage = {
@@ -15,11 +18,11 @@ export const assertConsoleMessage = {
   description: `Assert console message`,
   commonly: "assert console message",
 
-  toLabel: ({ assert }) => `(${ renderBoolean( assert.not ) ? "none" : "any" }
+  toLabel: ({ assert }) => `(${ renderBoolean( assert.not ) === "true" ? "none" : "any" }
     of type \`${ assert.type }\` with \`${ assert.value }\`)`,
 
   toGherkin: ({ assert }) => `Assert that there were
-    sent to the console ${ renderBoolean( assert.not ) ? "no" : "any" } messages
+    sent to the console ${ renderBoolean( assert.not ) === "true" ? "no" : "any" } messages
     of type \`${ assert.type }\` with \`${ assert.value }\``,
 
   assert: {

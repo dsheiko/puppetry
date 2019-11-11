@@ -64,9 +64,9 @@ export class Info extends AbstractComponent {
         </Row>
 
         { this.state.error  && <div className="p"><Alert
-              description={ this.state.error }
-              type="warning"
-              closable /></div> }
+          description={ this.state.error }
+          type="warning"
+          closable /></div> }
 
         <p>You have a project open. { " " }
           <If exp={ projectFiles.length }>

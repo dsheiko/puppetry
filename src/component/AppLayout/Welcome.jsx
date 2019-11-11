@@ -41,9 +41,9 @@ export class Welcome extends AbstractComponent {
         <h1>Welcome!</h1>
         <p>You are using Puppetry, scriptless E2E test automation tool.</p>
         { this.state.error  && <div className="p"><Alert
-              description={ this.state.error }
-              type="warning"
-              closable /></div> }
+          description={ this.state.error }
+          type="warning"
+          closable /></div> }
         <p>What you can do now is to open a
           { " " } <Button id="cWelcomeDemoProjectBtn"
             onClick={ this.onOpenDemoProject }>demo project</Button> or

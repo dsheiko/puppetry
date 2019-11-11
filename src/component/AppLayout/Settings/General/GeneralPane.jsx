@@ -4,7 +4,7 @@ import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import { result } from "service/utils";
 import { FIELDSET_DEFAULT_LAYOUT } from "constant";
-import { Form, Select, Button, Checkbox } from "antd";
+import { Form, Select, Button, Checkbox, message } from "antd";
 const FormItem = Form.Item,
       { Option } = Select,
       connectForm = Form.create();
@@ -17,9 +17,17 @@ export class GeneralPane extends AbstractComponent {
     settings: PropTypes.object
   }
 
+  state = {
+    modified: false
+  }
+
+  onChange = () => {
+    this.setState({ modified: true });
+  }
+
   handleSubmit = ( e = null ) => {
     e && e.preventDefault();
-
+    this.setState({ modified: false });
     this.props.form.validateFieldsAndScroll( ( err, values ) => {
       if ( err ) {
         return;
@@ -28,6 +36,7 @@ export class GeneralPane extends AbstractComponent {
         autosave: values.autosave,
         testCaseStyle: values.testCaseStyle
       });
+      message.info( `Data has been successfully updated` );
     });
   }
 
@@ -46,7 +55,7 @@ export class GeneralPane extends AbstractComponent {
             initialValue: autosave,
             valuePropName: ( autosave ? "checked" : "data-ok" )
           })(
-            <Checkbox>save changes automatically</Checkbox>
+            <Checkbox onChange={ this.onChange }>save changes automatically</Checkbox>
           )}
         </FormItem>
 
@@ -58,6 +67,7 @@ export class GeneralPane extends AbstractComponent {
             <Select
               showSearch
               style={{ maxWidth: 200 }}
+              onChange={ this.onChange }
               optionFilterProp="children"
               filterOption={( input, option ) => option.props.children.toLowerCase()
                 .indexOf( input.toLowerCase() ) >= 0}
@@ -74,6 +84,7 @@ export class GeneralPane extends AbstractComponent {
               id="cSettingsFormSaveBtn"
               type="primary"
               htmlType="submit"
+              disabled={ !this.state.modified }
             >Save</Button>
           </div>
           <div className="ant-col ant-col-21 form-buttons" style={{ maxWidth: 200 }}>

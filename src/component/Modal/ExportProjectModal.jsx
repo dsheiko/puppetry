@@ -53,7 +53,8 @@ export class ExportProjectModal  extends AbstractComponent {
     checkAll: false,
     modified: false,
     format: "jest",
-    loading: false
+    loading: false,
+    allure: false
   }
 
   constructor( props ) {
@@ -70,6 +71,12 @@ export class ExportProjectModal  extends AbstractComponent {
       launcherArgs: "",
       devtools: false
     };
+  }
+
+  onChangeAllure = ( e ) => {
+    this.setState({
+      allure: e.target.checked
+    });
   }
 
   onChange = ( checkedList ) => {
@@ -167,7 +174,7 @@ export class ExportProjectModal  extends AbstractComponent {
             projectDirectory,
             selectedDirectory,
             checkedList,
-            { runner: RUNNER_JEST, ...launcherOptions },
+            { runner: RUNNER_JEST, ...launcherOptions, allure: this.state.allure },
             this.props.snippets,
             project.targets,
             envDto
@@ -299,14 +306,21 @@ export class ExportProjectModal  extends AbstractComponent {
 
                 { format === "text" && <TestSpecificationPane ref={ this.refTestSpecificationPane } /> }
 
+
                 <SelectEnv theme="test-reports" environments={ project.environments }
                   environment={ environment } action={ action } />
+
 
                 <BrowseDirectory
                   defaultDirectory={ ( this.props.exportDirectory || tmp.dirSync().name ) }
                   validateStatus={ this.state.browseDirectoryValidateStatus }
                   getSelectedDirectory={ this.getSelectedDirectory }
                   label="Select a directory to export" />
+
+                { format === "jest" && <div className="allure-test-report-checkbox">
+                  <Checkbox onChange={ this.onChangeAllure }>generate
+                    { " " } <a onClick={ this.onExtClick } href="http://allure.qatools.ru/">Allure Test Report</a>
+                  </Checkbox></div> }
 
                 <If exp={ files.length }>
                   <p>Please select suites to export:</p>

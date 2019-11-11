@@ -29,8 +29,8 @@ await bs.page.${ targetObj.css ? "waitForSelector" : "waitForXPath" }`
     + `( ${ JSON.stringify( targetObj.selector ) }${ optArg } );` );
   },
 
-  toLabel: ({ params }) => {
-    return `(\`${ params.value }\` ${ renderState( params ) })`;
+  toLabel: ({ params, target }) => {
+    return `(\`${ target }\` ${ renderState( params ) })`;
   },
 
   toGherkin: ({ params, target }) => `Wait until target \`${ target }\`

@@ -181,16 +181,19 @@ export default class TestGenerator {
         ? `      ${ COMMAND_ID_COMMENT }${ command.groupId }:${ command.testId }:${ command.id }\n${ chunk }`
         : chunk;
 
-      return `      util.startStep( ${ JSON.stringify( `${ target }.${ method }` ) } );\n`
-        + ( ( typeof command.comment === "string" && command.comment.startsWith( "@assert " ) )
-          ? this.renderCommandTryCath( code, command.comment ) : code )
-        + `\n      util.endStep();\n`;
+      return this.wrapCommandBody( ( typeof command.comment === "string" && command.comment.startsWith( "@assert " ) )
+        ? this.renderCommandTryCath( code, command.comment ) : code, target, method );
 
     } catch ( err ) {
       console.warn( "parseCommand error:", err, command );
       log.warn( `Renderer process: TestGenerator.parseCommand: ${ err }` );
       throw new TestGeneratorError( `${ target }.${ method }(): ${ err.message }` );
     }
+  }
+
+  wrapCommandBody( body, target, method ) {
+    return this.options.allure ? `      util.startStep( ${ JSON.stringify( `${ target }.${ method }` ) } );\n`
+      + body + `\n      util.endStep();\n` : body;
   }
 
   /**
