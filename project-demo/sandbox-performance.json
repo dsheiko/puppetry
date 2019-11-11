@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1573143628,
-  "loadedAt": 1573145374,
+  "savedAt": 1573464641,
+  "loadedAt": 1573464602,
   "modified": false,
   "filename": "sandbox-performance.json",
   "targets": {
@@ -160,7 +160,7 @@
                   "font": false,
                   "xhr": false
                 },
-                "script": "5",
+                "script": "6",
                 "stylesheet": "10",
                 "image": "100"
               },
@@ -209,5 +209,5 @@
       }
     }
   },
-  "puppetry": "3.0.0-beta.3"
+  "puppetry": "3.0.0-RC.1"
 }

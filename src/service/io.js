@@ -8,6 +8,8 @@ import log from "electron-log";
 import TestGenerator from "service/TestGenerator";
 import { schema } from "component/Schema/schema";
 import writeFileAtomic from "write-file-atomic";
+import { confirmCreateProject } from "service/smalltalk";
+
 import {
   PUPPETRY_LOCK_FILE,
   JEST_PKG_DIRECTORY,
@@ -448,20 +450,24 @@ function getJestPkgDirectory() {
   return join( getAsarUnpackedAppDirectory(), JEST_PKG_DIRECTORY );
 }
 
-export function getDemoProjectDirectory() {
+export async function getDemoProjectDirectory() {
   const SRC_DIR = join( getAsarUnpackedAppDirectory(), DEMO_PROJECT_DIRECTORY ),
         DEST_DIR = join( getAppInstallPath(), DEMO_PROJECT_DIRECTORY );
 
-  if ( !fs.existsSync( join( DEST_DIR, ".puppetryrc" ) ) ) {
-    try {
-      shell.mkdir( "-p" , DEST_DIR );
-      shell.chmod( "-R", "+w", DEST_DIR );
-      shell.cp( "-Rf", SRC_DIR, getAppInstallPath() );
-    } catch ( e ) {
-      log.warn( `Renderer process: io.getDemoProjectDirectory(${SRC_DIR}, ${DEST_DIR}):`
-        + ` ${ e }` );
-    }
+  if ( !isDirEmpty( DEST_DIR ) && !await confirmCreateProject() ) {
+    return;
   }
+
+  try {
+    shell.rm( "-pr" , DEST_DIR );
+    shell.mkdir( "-p" , DEST_DIR );
+    shell.chmod( "-R", "+w", DEST_DIR );
+    shell.cp( "-Rf", SRC_DIR, getAppInstallPath() );
+  } catch ( e ) {
+    log.warn( `Renderer process: io.getDemoProjectDirectory(${SRC_DIR}, ${DEST_DIR}):`
+      + ` ${ e }` );
+  }
+
   return DEST_DIR;
 }
 
