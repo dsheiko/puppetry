@@ -58,10 +58,15 @@ describe( "First launch", () => {
 
     test( "it loads demo project by click", async () => {
       await ctx.client.click( "#cWelcomeDemoProjectBtn" );
-      await ctx.client.waitForExist( "#cMain" );
+      await ctx.client.pause( 200 );
+      if ( await ctx.client.isExisting( `.smalltalk button[data-name="js-ok"]`  ) ) {
+        await ctx.client.click( `.smalltalk button[data-name="js-ok"]` );
+      }
+
       await ctx.waitUntilLayoutUpdates();
-      expect( await ctx.boundaryError() ).toBeFalsy();
       await ctx.screenshot( "demo-project-screen" );
+      await ctx.client.waitForExist( "#cMain" );
+      expect( await ctx.boundaryError() ).toBeFalsy();
     });
   });
 
