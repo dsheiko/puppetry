@@ -455,17 +455,19 @@ export async function getDemoProjectDirectory() {
         DEST_DIR = join( getAppInstallPath(), DEMO_PROJECT_DIRECTORY );
 
   if ( !isDirEmpty( DEST_DIR ) && !await confirmCreateProject() ) {
-    return;
+    return "";
   }
 
   try {
-    shell.rm( "-pr" , DEST_DIR );
+    shell.rm( "-rf" , DEST_DIR );
     shell.mkdir( "-p" , DEST_DIR );
     shell.chmod( "-R", "+w", DEST_DIR );
     shell.cp( "-Rf", SRC_DIR, getAppInstallPath() );
   } catch ( e ) {
     log.warn( `Renderer process: io.getDemoProjectDirectory(${SRC_DIR}, ${DEST_DIR}):`
       + ` ${ e }` );
+    throw new Error( `Cannot create demo project in ${ DEST_DIR }. `
+      + `Please make sure that you have write permission for it` );
   }
 
   return DEST_DIR;

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button, Row, Col, Input } from "antd";
+import { Button, Row, Col, Input, Alert } from "antd";
 import AbstractComponent from "component/AbstractComponent";
 import If from "component/Global/If";
 import { getDemoProjectDirectory } from "service/io";
@@ -14,10 +14,19 @@ export class Info extends AbstractComponent {
     })
   }
 
+  state = {
+    error: ""
+  }
+
   onOpenDemoProject = async ( e ) => {
     const { loadProject } = this.props.action;
     e.preventDefault();
-    await loadProject( getDemoProjectDirectory() );
+    try {
+      const demoProject = await getDemoProjectDirectory();
+      demoProject && await loadProject( demoProject );
+    } catch ( err ) {
+      this.setState({ error: err.message });
+    }
   }
 
   onCreate = ( e ) => {
@@ -54,6 +63,10 @@ export class Info extends AbstractComponent {
           </Col>
         </Row>
 
+        { this.state.error  && <div className="p"><Alert
+              description={ this.state.error }
+              type="warning"
+              closable /></div> }
 
         <p>You have a project open. { " " }
           <If exp={ projectFiles.length }>
