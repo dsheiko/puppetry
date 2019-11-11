@@ -40,6 +40,21 @@ module.exports = function( bs, util ) {
     return await query({ target, selector, css });
   };
 
+  /**
+   * Helper to reduce code during Target declaration
+   * @param {String} target
+   * @param {Function} fn
+   * @returns {ElementHandle}
+   */
+  bs.tryLocalTarget = async ( target, fn ) => {
+    try {
+        return await fn();
+    }
+    catch( err ){
+      throw new Error( `Cannot find the shadow root of target ${ target }` );
+    }
+  };
+
    /**
    * Evaluate the XPath expression and return the first ElementHandle
    *

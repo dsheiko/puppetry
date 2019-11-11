@@ -36,7 +36,7 @@ export const tplQuery = ( targetChain ) => {
         str = JSON.stringify.bind( JSON );
 
   let fnBody = ( target.parentType === "shadowHost"
-    ? buildShadowDomQuery( targetChain )
+    ? `bs.tryLocalTarget( \`${ target.target }\`, async () => ${ buildShadowDomQuery( targetChain ) } )`
     : ( targetChain.length === 1
       ? `await bs.query( ${ str( target.selector ) }, ${ str( target.css ) }, ${ str( target.target ) } )`
       : `await bs.queryChain( ${ str( targetChain )}, ${ str( target ) } )` )
