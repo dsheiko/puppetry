@@ -32,6 +32,12 @@ module.exports = function( expect, util ) {
     }
   }
 
+  function normalizeMessage( msg ) {
+    if ( typeof msg !== "string" ) {
+      return msg;
+    }
+    return msg.replace( /[\n]/gm, " " );
+  }
   /**
    * Helper
    * @param {Boolean} pass
@@ -42,7 +48,7 @@ module.exports = function( expect, util ) {
   function expectReturn( pass, errorMsg, vsMsg = null ) {
     const negativeErrorMsg = vsMsg || errorMsg.replace( " expected ", " not expected " );
     return {
-      message: () => pass ? negativeErrorMsg : errorMsg,
+      message: () => normalizeMessage( pass ? negativeErrorMsg : errorMsg ),
       pass
     };
   }
@@ -331,14 +337,37 @@ module.exports = function( expect, util ) {
     toBeVisible( actual, expected, source ) {
         switch ( true ) {
 
-          case actual.isAvailable === false && expected.value !== true:
+          case actual.isAvailable === false && expected.availability === "available":
             // early exist, makes no sense to proceed
             return expectReturn( true, `[${ source }] expected the target element to be `
               + `available, but it is not` );
 
-          case actual.isAvailable === false && expected.value === true:
+          case actual.isAvailable === true && expected.availability === "unavailable":
+            // early exist, makes no sense to proceed
+            return expectReturn( true, `[${ source }] expected the target element to be `
+              + `not available, but it is` );
+
+          case expected.availability === "visible"
+            && (
+              actual.isAvailable === false
+              || actual.display === "none"
+              || actual.visibility === "hidden"
+              || actual.opacity === 0
+              || !actual.isIntersecting
+            ):
             return expectReturn( false, `[${ source }] expected the target element to be `
-              + `available, but it is not` );
+              + `available and observable, but it is not` );
+
+          case expected.availability === "invisible"
+            && (
+              actual.isAvailable === true
+              || actual.display !== "none"
+              || actual.visibility !== "hidden"
+              || actual.opacity !== 0
+              || actual.isIntersecting
+            ):
+            return expectReturn( false, `[${ source }] expected the target element to be `
+              + `available and not observable, but it is` );
 
           case actual.display === "none" && expected.display === "not":
             return expectReturn( false, `[${ source }] expected the target element to have `
@@ -364,9 +393,13 @@ module.exports = function( expect, util ) {
             return expectReturn( false, `[${ source }] expected the target element to have `
               + `opacity 0, but it is ${ actual.opacity }` );
 
-          case actual.isIntersecting !== true && expected.isIntersecting === true:
+          case actual.isIntersecting !== true && expected.isIntersecting === "true":
             return expectReturn( false, `[${ source }] expected the target element to be `
               + `within the viewport, but it is not` );
+
+          case actual.isIntersecting === true && expected.isIntersecting === "false":
+            return expectReturn( false, `[${ source }] expected the target element to be `
+              + `out of the viewport, but it is not` );
         }
 
         // everything fine

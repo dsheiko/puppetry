@@ -37,7 +37,7 @@
       "tests": {
         "2ywk1hn36di": {
           "key": "2ywk1hn36di",
-          "value": true
+          "value": false
         }
       }
     },
@@ -109,7 +109,7 @@
         },
         "18qk2kmoej2": {
           "key": "18qk2kmoej2",
-          "value": true
+          "value": false
         },
         "djlk2lp5idd": {
           "key": "djlk2lp5idd",
@@ -387,11 +387,99 @@
       "key": "gt6k2oiaa11",
       "value": true,
       "tests": {}
+    },
+    "9mxk2vql8y4": {
+      "key": "9mxk2vql8y4",
+      "value": true,
+      "tests": {
+        "9mxk2vqlc8k": {
+          "key": "9mxk2vqlc8k",
+          "value": true
+        },
+        "9mxk2vqnzs5": {
+          "key": "9mxk2vqnzs5",
+          "value": true
+        },
+        "boek2vrcw2x": {
+          "key": "boek2vrcw2x",
+          "value": false
+        },
+        "nsgk2vrrbnp": {
+          "key": "nsgk2vrrbnp",
+          "value": true
+        },
+        "nsgk2vrrhvn": {
+          "key": "nsgk2vrrhvn",
+          "value": true
+        },
+        "nsgk2vrslm1": {
+          "key": "nsgk2vrslm1",
+          "value": true
+        },
+        "nsgk2vrrtei": {
+          "key": "nsgk2vrrtei",
+          "value": true
+        },
+        "nsgk2vrxtwu": {
+          "key": "nsgk2vrxtwu",
+          "value": true
+        },
+        "nsgk2vs3imj": {
+          "key": "nsgk2vs3imj",
+          "value": true
+        },
+        "nsgk2vs8rgk": {
+          "key": "nsgk2vs8rgk",
+          "value": true
+        },
+        "8oak2w2puuk": {
+          "key": "8oak2w2puuk",
+          "value": true
+        }
+      }
+    },
+    "k2vk2vvd4pi": {
+      "key": "k2vk2vvd4pi",
+      "value": true,
+      "tests": {
+        "7vnk2vvh37f": {
+          "key": "7vnk2vvh37f",
+          "value": false
+        },
+        "oi5k2vxsk5n": {
+          "key": "oi5k2vxsk5n",
+          "value": false
+        },
+        "oi5k2vxusqu": {
+          "key": "oi5k2vxusqu",
+          "value": false
+        },
+        "2zhk2vy5p9h": {
+          "key": "2zhk2vy5p9h",
+          "value": false
+        },
+        "5svk2vywi01": {
+          "key": "5svk2vywi01",
+          "value": false
+        },
+        "lxwk2vzkk7n": {
+          "key": "lxwk2vzkk7n",
+          "value": true
+        },
+        "8oak2w2uqf9": {
+          "key": "8oak2w2uqf9",
+          "value": true
+        },
+        "8oak2w30c0a": {
+          "key": "8oak2w30c0a",
+          "value": true
+        }
+      }
     }
   },
-  "savedAt": 1573473010,
+  "savedAt": 1573578067,
   "modified": false,
-  "lastOpenSuite": "puppeteer.json",
+  "lastOpenSuite": "target.assertVisible.json",
   "variables": {},
   "targets": {
     "js4k1ukyk9a": {
@@ -409,5 +497,5 @@
   ],
   "autosave": true,
   "projectDirectory": "/home/sheiko/PUPPETRY/puppetry-test",
-  "puppetry": "3.0.0-RC.1"
+  "puppetry": "3.0.0-RC.2"
 }

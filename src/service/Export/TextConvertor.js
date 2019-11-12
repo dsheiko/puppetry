@@ -87,6 +87,11 @@ export default class TextConvertor {
 
     const targets = { ...this.input.snippets.targets, ...suite.targets };
     Object.values( targets ).forEach( item => {
+      if ( item.ref ) {
+        this.print( `${ item.target } = ${ item.ref }`
+          + `${ item.parentType ? `(${ item.parentType })` : `` } > ${ item.selector }`, 2 );
+        return;
+      }
       this.print( `${ item.target } = ${ item.selector }`, 2 );
     });
 

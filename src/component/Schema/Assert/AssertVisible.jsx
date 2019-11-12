@@ -1,9 +1,10 @@
 /*eslint react/no-unescaped-entities: 0*/
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Input, Checkbox, Select, Row, Col, Icon } from "antd";
+import { Form, Input, Select, Row, Col, Icon } from "antd";
 import { getAssertion } from "./helpers";
 import { result } from "service/utils";
+import { migrateAssertVisible } from "service/suite";
 import AbstractComponent from "component/AbstractComponent";
 
 const FormItem = Form.Item,
@@ -22,18 +23,19 @@ export class AssertVisible extends AbstractComponent {
   }
 
   state = {
-    available: true
   }
 
-  onChangeAvailable = ( e ) => {
-    this.setState({ available: e.target.checked });
+  onChangeAvailable = ( availability ) => {
+    this.setState({ availability });
   }
 
   render () {
     const { getFieldDecorator } = this.props.form,
           { record } = this.props,
-          assert = getAssertion( record ),
-          available = result( assert, "value", this.state.available );
+          command = migrateAssertVisible( record ),
+          assert = getAssertion( command ),
+          availability = result( this.state, "availability", assert.availability ) || "visible",
+          available = availability === "available";
 
     return ( <div>
       <div className="is-invisible">
@@ -43,25 +45,54 @@ export class AssertVisible extends AbstractComponent {
           })( <Input readOnly disabled /> ) }
         </FormItem>
       </div>
-      <div>Target element:</div>
+
       <div className="command-form__noncollapsed markdown">
-        <FormItem className="is-shrinked">
-          { getFieldDecorator( "assert.value", {
-            initialValue: result( assert, "value", true ),
-            valuePropName: "checked"
-          })(
-            <Checkbox onChange={ this.onChangeAvailable }> is available (currently exists in the <a
-              href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction"
-              onClick={ this.onExtClick }>DOM</a>)</Checkbox>
-          ) }
-        </FormItem>
 
 
         <Row gutter={24} className="narrow-row">
 
           <Col span={3} >
             <div className="ant-row ant-form-item ant-form-item--like-input">
-            display
+            The target is
+
+            </div>
+          </Col>
+
+          <Col span={8} >
+            <FormItem className="is-shrinked">
+              { getFieldDecorator( "assert.availability", {
+                initialValue: result( assert, "availability", "visible" )
+              })(
+                <Select onChange={ this.onChangeAvailable }>
+                  <Option value="visible">present on the page and observable</Option>
+                  <Option value="available">present on the page</Option>
+                  <Option value="invisible">present, but NOT observable</Option>
+                  <Option value="unavailable">NOT present on the page</Option>
+
+                </Select>
+              ) }
+
+              <div className="template-helper">
+                { availability === "visible" && <span>The target is available in the DOM and
+            visible to the user (displayed, visible, opaque, within the viewport)</span> }
+                { availability === "available" && <span>The target is available in the DOM.
+            Use the options below to assert the visibility</span> }
+                { availability === "invisible" && <span>The target is available in the DOM,
+            not not visible to the user (display: none or visibility: hidden or opacity:
+            0 or out of the viewport)</span> }
+                { availability === "unavailable" && <span>The target is not available in the DOM</span> }
+
+              </div>
+            </FormItem>
+          </Col>
+        </Row>
+
+
+        <Row gutter={24} className="narrow-row">
+
+          <Col span={3} >
+            <div className="ant-row ant-form-item ant-form-item--like-input">
+            CSS display
               { " " } <a
                 href="https://developer.mozilla.org/en-US/docs/Web/CSS/display"
                 onClick={ this.onExtClick }><Icon type="info-circle" /></a>
@@ -87,7 +118,7 @@ export class AssertVisible extends AbstractComponent {
 
           <Col span={3} >
             <div className="ant-row ant-form-item ant-form-item--like-input">
-            visibility
+            CSS visibility
               { " " } <a
                 href="https://developer.mozilla.org/en-US/docs/Web/CSS/visibility"
                 onClick={ this.onExtClick }><Icon type="info-circle" /></a>
@@ -112,7 +143,7 @@ export class AssertVisible extends AbstractComponent {
 
           <Col span={3} >
             <div className="ant-row ant-form-item ant-form-item--like-input">
-            opacity
+            CSS opacity
               { " " } <a
                 href="https://developer.mozilla.org/en-US/docs/Web/CSS/opacity"
                 onClick={ this.onExtClick }><Icon type="info-circle" /></a>
@@ -133,15 +164,32 @@ export class AssertVisible extends AbstractComponent {
           </Col>
         </Row>
 
-        <FormItem className="is-shrinked">
-          { getFieldDecorator( "assert.isIntersecting", {
-            initialValue: result( assert, "isIntersecting", false ),
-            valuePropName: "checked"
-          })(
-            <Checkbox disabled={ !available }> is within the current viewport
-              <i>(set if <code>off</code> when you don't want to check it)</i></Checkbox>
-          ) }
-        </FormItem>
+
+        <Row gutter={24} className="narrow-row">
+
+          <Col span={3} >
+            <div className="ant-row ant-form-item ant-form-item--like-input">
+            offset
+              { " " } <a
+                href="https://pptr.dev/#?product=Puppeteer&version=v2.0.0&show=api-elementhandleisintersectingviewport"
+                onClick={ this.onExtClick }><Icon type="info-circle" /></a>
+            </div>
+          </Col>
+          <Col span={4} >
+            <FormItem className="is-shrinked">
+              { getFieldDecorator( "assert.isIntersecting", {
+                initialValue: result( assert, "isIntersecting", "any" )
+              })(
+                <Select disabled={ !available }>
+                  <Option value="any">any</Option>
+                  <Option value="true">within the viewport</Option>
+                  <Option value="false">out of the viewport</Option>
+                </Select>
+              ) }
+            </FormItem>
+          </Col>
+        </Row>
+
 
       </div>
 

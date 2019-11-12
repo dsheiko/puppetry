@@ -26,7 +26,11 @@ module.exports = function( bs, util ) {
    */
   async function query( target, pelh = bs.page ) {
     if ( target.parentType === "iframe" ) {
-      pelh = pelh.contentFrame;
+      pelh = await pelh.contentFrame();
+    }
+    if ( !pelh ) {
+      throw new Error( `Cannot find parent of ${ target.target } `
+        + `(${ target.css ? "CSS": "XPath" }: ${ target.selector })` );
     }
     const elh = target.css ? await pelh.$( target.selector ) : await queryXpath( target.selector, pelh );
     if ( !elh ) {

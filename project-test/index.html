@@ -88,6 +88,10 @@
   body {
     padding-top: 32px;
   }
+  iframe {
+    border: 1px solid #ccc;
+    height: 100px;
+  }
 </style>
 </head>
 <body>
@@ -183,6 +187,29 @@
 
 <a id="callTarget">Call target</a>
 
+<div id="level1">
+  <span>level 1</span>
+  <div id="level2">
+    <span>level 2</span>
+    <div id="level3">
+      level 3
+    </div>
+  </div>
+</div>
+
+<iframe id="iframeFoo" src="./iframe-foo.html?"></iframe>
+
+<foo-component id="fooShadowRoot"></foo-component>
+<template id="fooTemplate">
+  <div id="shadowLocalTarget">
+    Local Target in Shadow DOM
+  </div>
+  <bar-component id="barShadowRoot"></bar-component>
+</template>
+<template id="barTemplate">
+  <div id="shadowLocalNestedTarget">Local Target in Nested Shadow DOM</div>
+</template>
+
 
 <script>
   document.addEventListener( "DOMContentLoaded", function() {
@@ -201,6 +228,18 @@
       });
     }
 
+    function registerCustomElement( elName, templateId ) {
+      globalThis.customElements.define( elName, class extends HTMLElement {
+      constructor() {
+          super();
+          this.attachShadow({ mode: "open" });
+          this.shadowRoot.appendChild( document.getElementById( templateId ).content );
+        }
+      });
+    }
+
+    registerCustomElement( "foo-component", "fooTemplate" );
+    registerCustomElement( "bar-component", "barTemplate" );
 
     listen( "#callTarget", "click", function( el ){
       setTimeout(() => {

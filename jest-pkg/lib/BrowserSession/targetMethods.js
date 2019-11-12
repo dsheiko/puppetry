@@ -52,24 +52,32 @@ module.exports = function( page ) {
             isAvailable: false
           };
         }
-        const isIntersectingViewport = await elementHandle.isIntersectingViewport(),
-              handleOpacity = await page.evaluateHandle( ( el ) =>
-                window.getComputedStyle( el, null ).getPropertyValue( "opacity" ), elementHandle ),
-              handleVisibility = await page.evaluateHandle( ( el ) =>
-                window.getComputedStyle( el, null ).getPropertyValue( "visibility" ), elementHandle ),
-              handleDisplay = await page.evaluateHandle( ( el ) =>
-                window.getComputedStyle( el, null ).getPropertyValue( "display" ), elementHandle ),
-              opacity = parseFloat( await handleOpacity.jsonValue() ),
-              visibility = await handleVisibility.jsonValue(),
-              display = await handleDisplay.jsonValue();
+        try {
+          const isIntersectingViewport = await elementHandle.isIntersectingViewport(),
+                handleOpacity = await page.evaluateHandle( ( el ) =>
+                  window.getComputedStyle( el, null ).getPropertyValue( "opacity" ), elementHandle ),
+                handleVisibility = await page.evaluateHandle( ( el ) =>
+                  window.getComputedStyle( el, null ).getPropertyValue( "visibility" ), elementHandle ),
+                handleDisplay = await page.evaluateHandle( ( el ) =>
+                  window.getComputedStyle( el, null ).getPropertyValue( "display" ), elementHandle ),
+                opacity = parseFloat( await handleOpacity.jsonValue() ),
+                visibility = await handleVisibility.jsonValue(),
+                display = await handleDisplay.jsonValue();
 
-        return {
-          isAvailable: true,
-          display,
-          visibility,
-          opacity,
-          isIntersecting: isIntersectingViewport
-        };
+          return {
+            isAvailable: true,
+            display,
+            visibility,
+            opacity,
+            isIntersecting: isIntersectingViewport
+          };
+        } catch( e ) {
+          // Chaining in iFrame/ShadowDOM
+          // JSHandles can be evaluated only in the context they were created!
+          return {
+            isAvailable: elementHandle !== false
+          };
+        }
       },
 
       /**

@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Select, Icon, Alert } from "antd";
+import { Form, Input, Select, Icon } from "antd";
 import { AbstractEditableCell } from "./AbstractEditableCell";
 import Tooltip from "component/Global/Tooltip";
 import { ruleValidateNotEmptyString } from "service/utils";
@@ -68,15 +68,11 @@ export class TargetSelectorCell extends AbstractEditableCell {
 
               </FormItem>
 
-              <details>
+              { activeTargets.length ? <details>
                 <summary>Options</summary>
                 <div className="target-options">
 
-
-                  {  !activeTargets.length && <Alert
-                    message="No other targets yet available to select as parent one"
-                    type="warning" /> }
-                  { activeTargets.length && <FormItem label="Parent target">
+                  <FormItem label="Parent target">
                     { getFieldDecorator( "ref", {
                       initialValue: ( record.ref || "" )
                     })(
@@ -89,9 +85,9 @@ export class TargetSelectorCell extends AbstractEditableCell {
                       </Select>
                     )}
 
-                  </FormItem> }
+                  </FormItem>
 
-                  { ( activeTargets.length && ref ) && <FormItem label="Parent type">
+                  { ref ? <FormItem label="Parent type">
                     { getFieldDecorator( "parentType", {
                       initialValue: ( record.parentType || "" )
                     })(
@@ -102,10 +98,10 @@ export class TargetSelectorCell extends AbstractEditableCell {
                       </Select>
                     )}
 
-                  </FormItem> }
+                  </FormItem> : null }
 
                 </div>
-              </details>
+              </details> : null }
 
             </Form>
           ) : (

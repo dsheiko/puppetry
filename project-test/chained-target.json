@@ -1,0 +1,507 @@
+{
+  "title": "Chained Target",
+  "timeout": 50000,
+  "snippets": false,
+  "description": "",
+  "savedAt": 1573577246,
+  "loadedAt": 1573576532,
+  "modified": false,
+  "filename": "chained-target.json",
+  "targets": {
+    "7vnk2vvh36o": {
+      "target": "LEVEL_1",
+      "id": "7vnk2vvh36o",
+      "editing": false,
+      "selector": "#level1",
+      "key": "7vnk2vvh36o"
+    },
+    "7vnk2vvhrk1": {
+      "target": "LEVEL_2",
+      "id": "7vnk2vvhrk1",
+      "editing": false,
+      "selector": "#level2",
+      "ref": "LEVEL_1",
+      "parentType": "",
+      "key": "7vnk2vvhrk1"
+    },
+    "7vnk2vvkgft": {
+      "editing": false,
+      "id": "7vnk2vvkgft",
+      "key": "7vnk2vvkgft",
+      "target": "LEVEL_3",
+      "selector": "#level3",
+      "disabled": false,
+      "adding": false,
+      "parentType": "",
+      "ref": "LEVEL_2"
+    },
+    "oi5k2vxclx2": {
+      "target": "IFRAME_FOO",
+      "id": "oi5k2vxclx2",
+      "editing": false,
+      "selector": "#iframeFoo",
+      "ref": "",
+      "key": "oi5k2vxclx2"
+    },
+    "oi5k2vxlm6p": {
+      "target": "IFRAME_BAR",
+      "id": "oi5k2vxlm6p",
+      "editing": false,
+      "selector": "#iframeBar",
+      "ref": "IFRAME_FOO",
+      "key": "oi5k2vxlm6p",
+      "parentType": "iframe"
+    },
+    "oi5k2vxm0u8": {
+      "target": "IFRAME_FOO_LOCAL",
+      "id": "oi5k2vxm0u8",
+      "editing": false,
+      "selector": "#iframeFooLocalTarget",
+      "ref": "IFRAME_FOO",
+      "key": "oi5k2vxm0u8",
+      "parentType": "iframe"
+    },
+    "oi5k2vxmg5h": {
+      "target": "IFRAME_BAR_LOCAL",
+      "id": "oi5k2vxmg5h",
+      "editing": false,
+      "selector": "#iframeBarLocalTarget",
+      "ref": "IFRAME_BAR",
+      "key": "oi5k2vxmg5h",
+      "parentType": "iframe"
+    },
+    "oi5k2vxoom7": {
+      "target": "IFRAME_FOO_LOCAL_CONTAINER",
+      "id": "oi5k2vxoom7",
+      "editing": false,
+      "selector": "#iframeFooLocalContainer",
+      "ref": "IFRAME_FOO",
+      "parentType": "iframe",
+      "key": "oi5k2vxoom7"
+    },
+    "oi5k2vxrodj": {
+      "editing": false,
+      "id": "oi5k2vxrodj",
+      "key": "oi5k2vxrodj",
+      "target": "IFRAME_FOO_LOCAL_CHILD",
+      "selector": "#iframeFooLocalChild",
+      "disabled": false,
+      "adding": false,
+      "parentType": "",
+      "ref": "IFRAME_FOO_LOCAL_CONTAINER"
+    },
+    "7iwk2vy96g2": {
+      "target": "SHADOWDOM_FOO",
+      "id": "7iwk2vy96g2",
+      "editing": false,
+      "selector": "#fooShadowRoot",
+      "ref": "",
+      "key": "7iwk2vy96g2"
+    },
+    "7iwk2vyba6g": {
+      "target": "SHADOWDOM_FOO_LOCAL",
+      "id": "7iwk2vyba6g",
+      "editing": false,
+      "selector": "#shadowLocalTarget",
+      "ref": "SHADOWDOM_FOO",
+      "key": "7iwk2vyba6g",
+      "parentType": "shadowHost"
+    },
+    "7iwk2vyc1yt": {
+      "target": "SHADOWDOM_BAR",
+      "id": "7iwk2vyc1yt",
+      "editing": false,
+      "selector": "#barShadowRoot",
+      "ref": "SHADOWDOM_FOO",
+      "key": "7iwk2vyc1yt",
+      "parentType": "shadowHost"
+    },
+    "7iwk2vycpiu": {
+      "target": "SHADOWDOM_BAR_LOCAL",
+      "id": "7iwk2vycpiu",
+      "editing": false,
+      "selector": "#shadowLocalNestedTarget",
+      "ref": "SHADOWDOM_BAR",
+      "key": "7iwk2vycpiu",
+      "parentType": "shadowHost"
+    }
+  },
+  "groups": {
+    "k2vk2vvd4pi": {
+      "title": "Chained Targets",
+      "id": "k2vk2vvd4pi",
+      "editing": false,
+      "key": "k2vk2vvd4pi",
+      "tests": {
+        "7vnk2vvpx9i": {
+          "editing": false,
+          "id": "7vnk2vvpx9i",
+          "key": "7vnk2vvpx9i",
+          "title": "page.goto",
+          "commands": {
+            "7vnk2vvpxi3": {
+              "editing": false,
+              "id": "7vnk2vvpxi3",
+              "key": "7vnk2vvpxi3",
+              "target": "page",
+              "method": "setViewport",
+              "assert": {},
+              "params": {
+                "width": "1920",
+                "height": "1080",
+                "resolution": "1920x1080",
+                "deviceScaleFactor": 1,
+                "isMobile": false,
+                "hasTouch": false,
+                "isLandscape": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "7vnk2vvpx9i",
+              "waitForTarget": false
+            },
+            "7vnk2vvpxmd": {
+              "editing": false,
+              "id": "7vnk2vvpxmd",
+              "key": "7vnk2vvpxmd",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "7vnk2vvpx9i",
+              "waitForTarget": false,
+              "entity": "command"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test"
+        },
+        "7vnk2vvh37f": {
+          "title": "We can chain generic elements",
+          "id": "7vnk2vvh37f",
+          "editing": false,
+          "groupId": "k2vk2vvd4pi",
+          "key": "7vnk2vvh37f",
+          "commands": {
+            "7vnk2vvl68t": {
+              "editing": false,
+              "id": "7vnk2vvl68t",
+              "key": "7vnk2vvl68t",
+              "target": "LEVEL_3",
+              "method": "assertHtml",
+              "assert": {
+                "assertion": "contains",
+                "value": "level 3"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "7vnk2vvh37f",
+              "waitForTarget": false
+            }
+          }
+        },
+        "oi5k2vxsk5n": {
+          "title": "We can access element in iFrame",
+          "id": "oi5k2vxsk5n",
+          "editing": false,
+          "groupId": "k2vk2vvd4pi",
+          "key": "oi5k2vxsk5n",
+          "commands": {
+            "oi5k2vxss74": {
+              "editing": false,
+              "id": "oi5k2vxss74",
+              "key": "oi5k2vxss74",
+              "target": "IFRAME_FOO_LOCAL",
+              "method": "assertHtml",
+              "assert": {
+                "assertion": "contains",
+                "value": "iFrame FOO Local Target"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "oi5k2vxsk5n",
+              "waitForTarget": false
+            }
+          }
+        },
+        "oi5k2vxusqu": {
+          "editing": false,
+          "id": "oi5k2vxusqu",
+          "key": "oi5k2vxusqu",
+          "title": "We can access element in iFrame within other iFrame",
+          "commands": {
+            "oi5k2vxuszm": {
+              "editing": false,
+              "id": "oi5k2vxuszm",
+              "key": "oi5k2vxuszm",
+              "target": "IFRAME_BAR_LOCAL",
+              "method": "assertHtml",
+              "assert": {
+                "assertion": "contains",
+                "value": "iFrame BAR Local Target"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "oi5k2vxusqu",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi"
+        },
+        "2zhk2vy5p9h": {
+          "editing": false,
+          "id": "2zhk2vy5p9h",
+          "key": "2zhk2vy5p9h",
+          "title": "We can access chained element in iFrame",
+          "commands": {
+            "2zhk2vy5pl8": {
+              "editing": false,
+              "id": "2zhk2vy5pl8",
+              "key": "2zhk2vy5pl8",
+              "target": "IFRAME_FOO_LOCAL_CONTAINER",
+              "method": "assertVisible",
+              "assert": {
+                "availability": "available",
+                "display": "any",
+                "visibility": "any",
+                "opacity": "any",
+                "isIntersecting": "any",
+                "assertion": "visible"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "2zhk2vy5p9h",
+              "waitForTarget": false
+            },
+            "7iwk2vygxzl": {
+              "editing": false,
+              "id": "7iwk2vygxzl",
+              "key": "7iwk2vygxzl",
+              "target": "IFRAME_FOO_LOCAL_CHILD",
+              "method": "assertHtml",
+              "assert": {
+                "assertion": "equals",
+                "value": "iFrame FOO Child"
+              },
+              "params": {},
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "2zhk2vy5p9h",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi"
+        },
+        "5svk2vywi01": {
+          "title": "We can access element in Shadow DOM",
+          "id": "5svk2vywi01",
+          "editing": false,
+          "groupId": "k2vk2vvd4pi",
+          "key": "5svk2vywi01",
+          "commands": {
+            "5svk2vyxoe1": {
+              "editing": false,
+              "id": "5svk2vyxoe1",
+              "key": "5svk2vyxoe1",
+              "target": "SHADOWDOM_FOO_LOCAL",
+              "method": "assertHtml",
+              "assert": {
+                "assertion": "contains",
+                "value": "Local Target in Shadow DOM"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "5svk2vywi01",
+              "waitForTarget": false
+            }
+          }
+        },
+        "lxwk2vzkk7n": {
+          "editing": false,
+          "id": "lxwk2vzkk7n",
+          "key": "lxwk2vzkk7n",
+          "title": "We can access element in Shadow Root within other Shadow Root",
+          "commands": {
+            "lxwk2vzkkkf": {
+              "editing": false,
+              "id": "lxwk2vzkkkf",
+              "key": "lxwk2vzkkkf",
+              "target": "SHADOWDOM_BAR_LOCAL",
+              "method": "assertHtml",
+              "assert": {
+                "assertion": "contains",
+                "value": "Local Target in Nested Shadow DOM"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "lxwk2vzkk7n",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi"
+        },
+        "8oak2w2uqf9": {
+          "editing": false,
+          "id": "8oak2w2uqf9",
+          "key": "8oak2w2uqf9",
+          "title": "Query with evaluate",
+          "commands": {
+            "8oak2w2uqwz": {
+              "editing": false,
+              "id": "8oak2w2uqwz",
+              "key": "8oak2w2uqwz",
+              "target": "page",
+              "method": "evaluate",
+              "params": {
+                "value": "document.querySelector( \"#fooShadowRoot\" ).shadowRoot.querySelector( \"#barShadowRoot\" ).shadowRoot.querySelector( \"#shadowLocalNestedTarget\" ).innerHTML=\"changed\";\n"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "8oak2w2uqf9",
+              "waitForTarget": false
+            },
+            "8oak2w2vr9e": {
+              "editing": false,
+              "id": "8oak2w2vr9e",
+              "key": "8oak2w2vr9e",
+              "target": "SHADOWDOM_BAR_LOCAL",
+              "method": "assertHtml",
+              "assert": {
+                "assertion": "contains",
+                "value": "changed"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "8oak2w2uqf9",
+              "waitForTarget": false,
+              "entity": "command"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test"
+        },
+        "8oak2w30c0a": {
+          "editing": false,
+          "id": "8oak2w30c0a",
+          "key": "8oak2w30c0a",
+          "title": "Query with runJs",
+          "commands": {
+            "8oak2w30cs3": {
+              "editing": false,
+              "id": "8oak2w30cs3",
+              "key": "8oak2w30cs3",
+              "target": "page",
+              "method": "runjs",
+              "params": {
+                "value": "let ehandle = await bs.page.evaluateHandle(() => document.querySelector( \"#fooShadowRoot\" ).shadowRoot.querySelector( \"#barShadowRoot\" ).shadowRoot.querySelector( \"#shadowLocalNestedTarget\" ) );\nresult = await bs.target( ehandle ).getProp( \"innerHTML\" );\nexpect( result ).toBe( \"changed\" );"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "8oak2w30c0a",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test"
+        }
+      }
+    }
+  },
+  "puppetry": "3.0.0-RC.2"
+}

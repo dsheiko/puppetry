@@ -1,5 +1,6 @@
 import { RuntimeError } from "error";
 import ExpressionParser from "service/ExpressionParser";
+import { migrateAssertVisible } from "service/suite";
 
 export function buildAssertionTpl( assertionCall, command, preCode ) {
   try {
@@ -116,6 +117,11 @@ function createCbBody({ assert, target, method, id, params }) {
   case "selector":
     return justify( `expect( result ).toMatchSelector( "${ value }", "${ source }" );` );
   case "boolean":
+    // support Puppetry < 3.0.0
+    if ( method === "assertVisible" ) {
+      return justify( `expect( result ).toBeVisible( ${ JSON.stringify(
+        migrateAssertVisible({ method, assert }) ) }, "${ source }" );` );
+    }
     return justify( `expect( result )${ value ? "" : ".not" }.toBeOk( "${ source }" );` );
 
   case "number":

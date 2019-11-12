@@ -62,9 +62,9 @@
       }
     }
   },
-  "savedAt": 1573472871,
+  "savedAt": 1573578577,
   "modified": false,
-  "lastOpenSuite": "shadow-dom.json",
+  "lastOpenSuite": "todomvc.json",
   "variables": {
     "dduk2fx8tvf": {
       "name": "SANDBOX_BASEURL",
@@ -102,5 +102,5 @@
     "production"
   ],
   "projectDirectory": "/home/sheiko/PUPPETRY/demo--project",
-  "puppetry": "3.0.0-RC.1"
+  "puppetry": "3.0.0-RC.2"
 }

@@ -66,3 +66,35 @@ function hasTargetInAssert( command, target ) {
     && "target" in command.assert
     && command.assert.target === target;
 }
+
+export function migrateAssertVisible( command ) {
+  // Puppetry 2.x to 3.x
+  if ( command.method === "assertVisible" && command.assert.assertion === "boolean" ) {
+    return {
+      ...command,
+      assert: {
+        "assertion": "visible",
+        "availability": command.assert.value ? "visible" : "invisible",
+        "display": "any",
+        "visibility": "any",
+        "opacity": "any",
+        "isIntersecting": "any"
+      }
+    };
+  }
+  // Puppetry 3 RC1 to 3.x
+  if ( command.method === "assertVisible" && typeof command.assert.value !== "undefined" ) {
+    return {
+      ...command,
+      assert: {
+        "assertion": "visible",
+        "availability": command.assert.value ? "available" : "unavailable",
+        "display": command.assert.display,
+        "visibility": command.assert.visibility,
+        "opacity": command.assert.visibility.opacity,
+        "isIntersecting": command.assert.isIntersecting ? "true" : "false"
+      }
+    };
+  }
+  return command;
+}
