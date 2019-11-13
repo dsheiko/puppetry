@@ -109,6 +109,8 @@ export class AppLayout extends React.Component {
                 suiteModified={ !!store.suite.modified }
                 readyToRunTests={ !!store.app.readyToRunTests }
                 gitDetachedHeadState={ !!store.app.gitDetachedHeadState }
+                gitConfigUsername={ !!store.git.configUsername }
+                gitConfigEmail={ !!store.git.configEmail }
                 isGitInitialized={ !!store.git.initialized }
                 hasGitRemote={ !!store.git.hasRemote }
               />

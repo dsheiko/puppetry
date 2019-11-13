@@ -2,8 +2,8 @@
   "title": "TodoMVC",
   "timeout": 50000,
   "snippets": false,
-  "savedAt": 1572524556,
-  "loadedAt": 1573580426,
+  "savedAt": 1573648586,
+  "loadedAt": 1573648355,
   "modified": false,
   "filename": "todomvc.json",
   "targets": {
@@ -245,11 +245,11 @@
               "method": "assertVisible",
               "assert": {
                 "assertion": "visible",
-                "value": true,
+                "availability": "visible",
                 "display": "any",
                 "visibility": "any",
                 "opacity": "any",
-                "isIntersecting": true
+                "isIntersecting": "any"
               },
               "disabled": false,
               "failure": "",
@@ -259,7 +259,8 @@
               "ref": "",
               "isRef": false,
               "groupId": "bx4k266y2x9",
-              "testId": "bx4k266ygz0"
+              "testId": "bx4k266ygz0",
+              "waitForTarget": false
             },
             "eoyk2a8jyrf": {
               "editing": false,
@@ -276,7 +277,7 @@
                 "isIntersecting": false
               },
               "disabled": false,
-              "failure": "Error: [MAIN.assertVisible] expected the target element to be available, but it ",
+              "failure": "",
               "variables": {},
               "expanded": false,
               "refName": "",

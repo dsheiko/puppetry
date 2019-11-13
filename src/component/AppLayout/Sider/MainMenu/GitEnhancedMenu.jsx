@@ -56,8 +56,8 @@ export class GitEnhancedMenu extends React.PureComponent {
   }
 
   onFileGitCommit = async () => {
-    const { gitDetachedHeadState, git } = this.props;
-    if ( !git.initialized || gitDetachedHeadState ) {
+    const { gitDetachedHeadState, isGitInitialized } = this.props;
+    if ( !isGitInitialized || gitDetachedHeadState ) {
       return;
     }
     if ( this.props.suiteModified ) {
@@ -80,7 +80,7 @@ export class GitEnhancedMenu extends React.PureComponent {
   }
 
   onFileGitInitialize = () => {
-    const { projectDirectory } = this.props,
+    const { projectDirectory, gitConfigUsername, gitConfigEmail } = this.props,
           { git } = this.props.project;
 
     if ( !projectDirectory ) {
@@ -88,7 +88,7 @@ export class GitEnhancedMenu extends React.PureComponent {
       return;
     }
 
-    if ( !git.configUsername.trim() || !git.configEmail.trim() ) {
+    if ( !gitConfigUsername.trim() || !gitConfigEmail.trim() ) {
       message.error( "You need to provide GIT configuration first" );
       this.props.action.addAppTab( "settings" );
       return;

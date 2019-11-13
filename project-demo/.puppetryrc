@@ -58,11 +58,19 @@
         "bx4k266ygz0": {
           "key": "bx4k266ygz0",
           "value": true
+        },
+        "gask2ab771w": {
+          "key": "gask2ab771w",
+          "value": true
+        },
+        "6kgk2bmpt6t": {
+          "key": "6kgk2bmpt6t",
+          "value": true
         }
       }
     }
   },
-  "savedAt": 1573580458,
+  "savedAt": 1573648586,
   "modified": false,
   "lastOpenSuite": "todomvc.json",
   "variables": {
