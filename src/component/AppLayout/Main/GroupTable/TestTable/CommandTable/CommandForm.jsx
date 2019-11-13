@@ -97,6 +97,7 @@ export class CommandForm extends React.Component {
           params: values.params,
           assert: values.assert,
           comment: values.comment,
+          failure: "",
           waitForTarget: values.waitForTarget || false
         });
 
