@@ -9,10 +9,10 @@ function visibleObjToString( obj ) {
     return `\`NOT available\``;
   }
   if ( obj.availability === "visible" ) {
-    return `\`available\`, \`displayed\`, \`visible\`, \`opaque\`, \`within the viewport\``;
+    return `\`available\` and \`visible\``;
   }
   if ( obj.availability === "invisible" ) {
-    return `\`available\`, \`NOT displayed\` or \`NOT visible\` or \`transparent\` or \`out of the viewport\``;
+    return `\`available\`, but \`NOT visible\``;
   }
   const chunks = [ `available` ];
 
@@ -20,7 +20,7 @@ function visibleObjToString( obj ) {
     chunks.push( `${ obj.display !== "not" ? "NOT " : "" }displayed` );
   }
   if ( obj.visibility !== "any" ) {
-    chunks.push( `${ obj.visibility !== "not" ? "NOT " : "" }visible` );
+    chunks.push( `${ obj.visibility !== "not" ? "" : "not " }hidden` );
   }
   if ( obj.opacity !== "any" ) {
     chunks.push( `${ obj.opacity === "not" ? "opaque" : "transparent" }` );

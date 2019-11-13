@@ -68,13 +68,17 @@ export default class TextConvertor {
 
     if ( typeof schema.toGherkin === "function" ) {
       this.print( `${ recordLabel } ${ printGherkin( extendToGherkin( command, schema.toGherkin( command ) ) ) }`, 3 );
-      return;
+
+    } else {
+      const addOn = typeof schema.toLabel === "function" ? schema.toLabel( command ) : "()";
+      if ( command.waitForTarget ) {
+        this.print( `${ recordLabel } ${ command.target }.waitForTarget()`, 3 );
+      }
+      this.print( `${ recordLabel } ${ command.target }.${ command.method }${ addOn }`, 3 );
     }
-    const addOn = typeof schema.toLabel === "function" ? schema.toLabel( command ) : "()";
-    if ( command.waitForTarget ) {
-      this.print( `${ recordLabel } ${ command.target }.waitForTarget()`, 3 );
+    if ( command.comment ) {
+      this.print( `▷ ${ command.comment }`, 4 );
     }
-    this.print( `${ recordLabel } ${ command.target }.${ command.method }${ addOn }`, 3 );
   }
 
   convertSuite( suite ) {
