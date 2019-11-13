@@ -12,10 +12,11 @@ export const waitForResponse = {
           },
           parser = new ExpressionParser( id ),
           urlString = parser.stringify( params.value ),
-          optArg = isEveryValueMissing( options ) ? `` : `, ${ JSON.stringify( options ) }`;
+          optArg = isEveryValueMissing( options ) ? `` : `, ${ JSON.stringify( options ) }`,
+          predicate = `( rsp ) => rsp.url().includes( ${ urlString } )`;
     return justify( `
 // Waiting for a response
-await bs.page.waitForResponse( ${ urlString }${ optArg } );` );
+await bs.page.waitForResponse( ${ predicate }${ optArg } );` );
   },
 
   toLabel: ({ params }) => {
@@ -36,7 +37,8 @@ await bs.page.waitForResponse( ${ urlString }${ optArg } );` );
           name: "params.value",
           control: INPUT,
           label: "URL",
-          placeholder: "e.g. http://example.com/resource",
+          tooltip: "Specify here a part of URL to match a response we are waiting for",
+          placeholder: "e.g. http://example.com/resource or /resource",
           description: `You can use [template expressions](https://docs.puppetry.app/template)`,
           rules: [{
             required: true,

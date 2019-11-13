@@ -1,4 +1,5 @@
 import { ExpressionParserException } from "error";
+import { renderTarget } from "service/utils";
 /*eslint no-useless-escape: 0*/
 
 function extractParams( func, directive ) {
@@ -32,13 +33,15 @@ class Parsers {
   };
 
   // {{ htmlOf("FOO") }}
-  htmlOf = ([ target ]) => `await bs.target( await ${ target }() ).getProp( "innerHTML" )`;
+  htmlOf = ([ target ]) => `await bs.target( ${ renderTarget( target ) } ).getProp( "innerHTML" )`;
 
   // {{ attributeOf("FOO", "href") }}
-  attributeOf = ([ target, attr ]) => `await bs.target( await ${ target }() ).getAttr( ${ JSON.stringify( attr ) } )`;
+  attributeOf = ([ target, attr ]) => `await bs.target( ${ renderTarget( target ) } )`
+    + `.getAttr( ${ JSON.stringify( attr ) } )`;
 
   // {{ propertyOf("FOO", "checked") }}
-  propertyOf = ([ target, prop ]) => `await bs.target( await ${ target }() ).getProp( ${ JSON.stringify( prop ) } )`;
+  propertyOf = ([ target, prop ]) => `await bs.target( ${ renderTarget( target ) } )`
+    + `.getProp( ${ JSON.stringify( prop ) } )`;
 
   // {{ env("SECRET") }}
   env = ([ key ]) => `process.env.${ key }`;

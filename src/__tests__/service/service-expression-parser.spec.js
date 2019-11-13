@@ -36,19 +36,19 @@ describe( "ExpressionParser", () => {
   it( `parses {{ htmlOf( "FOO" ) }}`, () => {
     let res;
     res = expParser.parseExp( `{{ htmlOf( "FOO" ) }}` );
-    expect( res ).toBe( `await bs.target( await FOO() ).getProp( "innerHTML" )` );
+    expect( res ).toBe( `await bs.target( await bs.getTarget( "FOO" ) ).getProp( "innerHTML" )` );
   });
 
   it( `parses {{ attributeOf( "FOO", "foo" ) }}`, () => {
     let res;
     res = expParser.parseExp( `{{ attributeOf( "FOO", "foo" ) }}` );
-    expect( res ).toBe( `await bs.target( await FOO() ).getAttr( "foo" )` );
+    expect( res ).toBe( `await bs.target( await bs.getTarget( "FOO" ) ).getAttr( "foo" )` );
   });
 
   it( `parses {{ propertyOf( "FOO", "foo" ) }}`, () => {
     let res;
     res = expParser.parseExp( `{{ propertyOf( "FOO", "foo" ) }}` );
-    expect( res ).toBe( `await bs.target( await FOO() ).getProp( "foo" )` );
+    expect( res ).toBe( `await bs.target( await bs.getTarget( "FOO" ) ).getProp( "foo" )` );
   });
 
   it( "parses {{ random() }}", () => {
