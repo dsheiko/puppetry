@@ -271,25 +271,5 @@ describe( "New Project", () => {
   });
 
 
-//  test( `select target: ${ FIX_TARGET }`, async() => {
-//    // ADD COMMAND
-//    await ctx.client.click( `#cCommandTableAddBtn` );
-//    await ctx.client.pause( 500 );
-//    // SELECT TARGET
-//    await ctx.select( "#cCommandForm .select--target", FIX_TARGET );
-//    await ctx.client.pause( 500 );
-//    expect( await ctx.boundaryError() ).toBeFalsy();
-//    await ctx.screenshot( "select target" );
-//  });
-//
-//  Object.keys( schema.element ).forEach( method => {
-//    // SELECT METHOD
-//    test( `select element method: ${ method }`, async() => {
-//      await ctx.select( "#cCommandForm .select--element-method", method );
-//      await ctx.client.pause( 500 );
-//      expect( await ctx.boundaryError() ).toBeFalsy();
-//      await ctx.screenshot( `new-command--select-${ method }` );
-//    });
-//  });
 
 });

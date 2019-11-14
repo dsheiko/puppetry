@@ -13,9 +13,12 @@ import * as selectors from "selector/selectors";
 
 const { Menu, MenuItem } = remote,
       // Mapping state to the props
-      mapStateToProps = ( state ) => ({
+      mapStateToProps = ( state, props ) => ({
+        title: state.suite.title,
         snippets: state.snippets,
-        cleanSnippets: selectors.getCleanSnippetsMemoized( state )
+        cleanSnippets: selectors.getCleanSnippetsMemoized( state ),
+        //commands: selectors.getCommandsArray( state, props.groupId, props.testId )
+        commands: selectors.getCommandsMemoized( state, props )
       }),
       // Mapping actions to the props
       mapDispatchToProps = () => ({
@@ -258,10 +261,7 @@ export class CommandTable extends AbstractDnDTable {
 
   render() {
     const { cleanSnippets } = this.props,
-          // When click Add record, it creates new temporary record, that shall not display, but
-          // still needed in the data
-          commands = this.props.commands
-            .filter( command => ( command.ref || ( command.target && command.method ) ) );
+          commands = this.props.commands.filter( command => ( command.ref || ( command.target && command.method ) ) );
 
     return ( <ErrorBoundary>
       <Table

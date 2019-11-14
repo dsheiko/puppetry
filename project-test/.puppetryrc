@@ -481,9 +481,9 @@
       }
     }
   },
-  "savedAt": 1573734195,
+  "savedAt": 1573737890,
   "modified": false,
-  "lastOpenSuite": "target.waitForResponse.json",
+  "lastOpenSuite": "puppeteer.json",
   "variables": {},
   "targets": {
     "js4k1ukyk9a": {

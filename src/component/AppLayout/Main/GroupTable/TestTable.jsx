@@ -56,12 +56,8 @@ export class TestTable extends AbstractEditableTable {
   }
 
   renderExpandedTable = ( test ) => {
-    const commands = test.commands
-            ? Object.values( test.commands )
-              .map( record => ({ ...record, entity: "command" }) )
-            : [],
-          targets = this.props.targets;
-    return ( <CommandTable commands={commands}
+    const targets = this.props.targets;
+    return ( <CommandTable
       targets={ targets }
       testId={ test.id }
       selector={ this.props.selector }

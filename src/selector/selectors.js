@@ -37,6 +37,24 @@ export const getGroupTestsMemoized = createSelector( groupTests,
 export const getSelectedTargetsMemoized = createSelector( allTargets,
   ({ targets, selection }) => getSelectedTargets( selection, targets ) );
 
+const getCommandsArray = ( state, props ) => {
+  const group = state.suite.groups[ props.groupId ];
+  if ( typeof group === "undefined" ) {
+    return {};
+  }
+  const test = group.tests[ props.testId ];
+  if ( typeof test === "undefined" ) {
+    return {};
+  }
+  return test.commands;
+};
+
+export const getCommandsMemoized = createSelector( getCommandsArray,
+  ( commands ) => Object.values( commands )
+    .map( record => ({ ...record, entity: "command" }) )
+);
+
+
 export function getActiveEnvironment( environments, environment ) {
   validate( arguments, [ "string[]", "string" ]);
   const [ firstEnv ] = environments;
