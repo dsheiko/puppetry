@@ -133,6 +133,6 @@ exports.TIPS = [
   "You can accept/dismiss “window.prompt”<br /> with “page.closeDialog” action",
   "To run exported project in Firefox,<br /> call “npm run test:firefox”",
   "You can use “page.assertScreenshot” to compare page views<br /> before refactoring CSS and after",
-  "You can use “page.debug” to pause test execution<br /> and inspect the page"
-
+  "You can use “page.debug” to pause test execution<br /> and inspect the page",
+  "Did you know that you can navigate suite tabs with “Crtl-TAB”?"
 ];

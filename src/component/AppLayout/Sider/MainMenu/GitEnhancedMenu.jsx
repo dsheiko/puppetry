@@ -18,6 +18,9 @@ export class GitEnhancedMenu extends React.PureComponent {
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired
     }),
+    isGitInitialized: PropTypes.any,
+    gitConfigUsername: PropTypes.string.isRequired,
+    gitConfigEmail: PropTypes.string.isRequired,
     gitDetachedHeadState: PropTypes.func.isRequired,
     git: PropTypes.object,
     project: PropTypes.object.isRequired,

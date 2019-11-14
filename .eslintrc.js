@@ -164,6 +164,7 @@ module.exports = {
             "facebook",
             "1px",
             "cid",
+            "Str",
             "Args",
             "devtool",
             "rgba",

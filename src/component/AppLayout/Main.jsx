@@ -26,6 +26,7 @@ const mapStateToProps = ( state ) => ({
       // Mapping actions to the props
       mapDispatchToProps = () => ({
       }),
+      KEY_TAB = 9,
       TabPane = Tabs.TabPane;
 
 @connect( mapStateToProps, mapDispatchToProps )
@@ -72,10 +73,37 @@ export class Main extends AbstractComponent {
     this.props.action.addAppTab( tabKey );
   }
 
+  panes = [ "targets", "groups", "options" ];
+
+  onKeyDown = ( e ) => {
+    if ( e.keyCode === KEY_TAB && e.ctrlKey ) {
+      const activeKey = this.getActivePane(),
+            index = this.panes.indexOf( activeKey ) + 1,
+            nextKey = typeof this.panes[ index ] === "undefined" ? this.panes[ 0 ] : this.panes[ index ];
+      this.props.action.updateProjectPanes( "suite", [ nextKey ]);
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener( "keydown", this.onKeyDown, false );
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener( "keydown", this.onKeyDown );
+  }
+
+  getActivePane() {
+    const { panes  } = this.props;
+    let activeKey = "targets";
+    if ( panes.length ) {
+      [ activeKey ] = panes;
+    }
+    return activeKey;
+  }
+
   render() {
     const { action,
             selector,
-            panes,
             expandedGroups,
             targets,
             title,
@@ -85,11 +113,8 @@ export class Main extends AbstractComponent {
             groupDataTable
           } = this.props,
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
-          groupsLabel = ( <span><Icon type="audit" />Test Cases</span> );
-    let activeKey = "targets";
-    if ( panes.length ) {
-      [ activeKey ] = panes;
-    }
+          groupsLabel = ( <span><Icon type="audit" />Test Cases</span> ),
+          activeKey = this.getActivePane();
 
     return (
       <ErrorBoundary>
