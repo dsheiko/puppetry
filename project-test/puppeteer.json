@@ -2,8 +2,8 @@
   "title": "puppeteer",
   "timeout": 50000,
   "snippets": false,
-  "savedAt": 1573562427,
-  "loadedAt": 1573562414,
+  "savedAt": 1573731272,
+  "loadedAt": 1573730539,
   "modified": false,
   "filename": "puppeteer.json",
   "targets": {
@@ -5530,7 +5530,7 @@
               "entity": "command"
             }
           },
-          "disabled": false,
+          "disabled": true,
           "failure": ""
         },
         "2crk2ngfh57": {
@@ -6851,5 +6851,5 @@
       }
     }
   },
-  "puppetry": "3.0.0-RC.1"
+  "puppetry": "3.0.0-RC.2"
 }

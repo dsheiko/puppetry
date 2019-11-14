@@ -1,0 +1,149 @@
+{
+  "title": "target.assertVisible",
+  "timeout": 50000,
+  "snippets": false,
+  "description": "",
+  "savedAt": 1573734166,
+  "loadedAt": 1573734154,
+  "modified": false,
+  "filename": "target.waitForResponse.json",
+  "targets": {
+    "dtgk2yl6kqz": {
+      "target": "IMAGE",
+      "id": "dtgk2yl6kqz",
+      "editing": false,
+      "selector": "#image",
+      "key": "dtgk2yl6kqz"
+    }
+  },
+  "groups": {
+    "9mxk2vql8y4": {
+      "title": "target.waitForResponse",
+      "id": "9mxk2vql8y4",
+      "editing": false,
+      "key": "9mxk2vql8y4",
+      "tests": {
+        "9mxk2vqm91h": {
+          "editing": false,
+          "id": "9mxk2vqm91h",
+          "key": "9mxk2vqm91h",
+          "title": "page.goto",
+          "commands": {
+            "9mxk2vqm98r": {
+              "editing": false,
+              "id": "9mxk2vqm98r",
+              "key": "9mxk2vqm98r",
+              "target": "page",
+              "method": "setViewport",
+              "assert": {},
+              "params": {
+                "width": "1920",
+                "height": "1080",
+                "resolution": "1920x1080",
+                "deviceScaleFactor": 1,
+                "isMobile": false,
+                "hasTouch": false,
+                "isLandscape": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "9mxk2vql8y4",
+              "testId": "9mxk2vqm91h",
+              "waitForTarget": false
+            },
+            "9mxk2vqm9d1": {
+              "editing": false,
+              "id": "9mxk2vqm9d1",
+              "key": "9mxk2vqm9d1",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "9mxk2vql8y4",
+              "testId": "9mxk2vqm91h",
+              "waitForTarget": false,
+              "entity": "command"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "9mxk2vql8y4",
+          "entity": "test"
+        },
+        "nsgk2vrxtwu": {
+          "editing": false,
+          "id": "nsgk2vrxtwu",
+          "key": "nsgk2vrxtwu",
+          "title": "wait for image to load",
+          "commands": {
+            "dtgk2yl7iw5": {
+              "editing": false,
+              "id": "dtgk2yl7iw5",
+              "key": "dtgk2yl7iw5",
+              "target": "page",
+              "method": "assignVar",
+              "params": {
+                "name": "IMAGE_SRC",
+                "value": "{{ attributeOf(\"IMAGE\", \"src\") }}"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "9mxk2vql8y4",
+              "testId": "nsgk2vrxtwu",
+              "waitForTarget": false
+            },
+            "dtgk2yl8srm": {
+              "editing": false,
+              "id": "dtgk2yl8srm",
+              "key": "dtgk2yl8srm",
+              "target": "page",
+              "method": "waitForResponse",
+              "params": {
+                "value": "{{ IMAGE_SRC }}",
+                "skip": true,
+                "timeout": 30000
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "9mxk2vql8y4",
+              "testId": "nsgk2vrxtwu",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "9mxk2vql8y4"
+        }
+      }
+    }
+  },
+  "puppetry": "3.0.0-RC.2"
+}

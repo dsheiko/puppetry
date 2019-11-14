@@ -6,7 +6,7 @@ import { TXT_PARAM_IS_REQUIRED } from "constant";
 
 export const waitForResponse = {
   template: ({ params, id }) => {
-    const { timeout, resolve } = params,
+    const { timeout, skip } = params,
           options = {
             timeout
           },
@@ -17,17 +17,17 @@ export const waitForResponse = {
     return justify( `
 // Waiting for a response
 searchStr = ${ urlString }.replace( /^\\./, "" );
-if ( ${ resolve ? `!bs.performance.resources.find( item =>  item.url.includes( searchStr ) )` : `true` } ) {
+if ( ${ skip ? `!bs.performance.resources.find( item =>  item.url.includes( searchStr ) )` : `true` } ) {
   await bs.page.waitForResponse( ${ predicate }${ optArg } );
 }` );
   },
 
   toLabel: ({ params }) => {
-    return `(\`${ params.value }\`)`;
+    return `(\`${ params.value }\`, timeout \`${ params.timeout }ms)`;
   },
 
   toGherkin: ({ params }) => `Wait for response \`${ params.value }\`
-    with timeout \`${ params.timeout }ms\``,
+    with timeout \`${ params.timeout }ms\`${ params.skip ? `, skip when already responded` : `` }`,
 
   commonly: "wait for response",
 
@@ -49,11 +49,11 @@ if ( ${ resolve ? `!bs.performance.resources.find( item =>  item.url.includes( s
           }]
         },
         {
-          name: "params.resolve",
+          name: "params.skip",
           control: CHECKBOX,
-          label: "resolve if already responded",
+          label: "skip if already responded",
           initialValue: false,
-          tooltip: `Stop waiting if any request for URL matching the provided string already responded.`,
+          tooltip: `Do not wait if any request for URL matching the provided string already responded.`,
           placeholder: "",
           rules: []
         }
