@@ -104,6 +104,7 @@ export default class TextConvertor {
     Object.values( suite.groups )
       .filter( group => !group.disabled )
       .forEach( ( group, gInx ) => {
+        this.print( `\n`, 0 );
         this.print( `${ gInx + 1 }. describe: ${ group.title }`, 1 );
         Object.values( group.tests )
           .filter( test => !test.disabled )

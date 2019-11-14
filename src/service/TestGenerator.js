@@ -141,6 +141,9 @@ export default class TestGenerator {
       if ( src === "page" && method.startsWith( "assertGaTracking" ) ) {
         this.options.requireInterceptTraffic = true;
       }
+      if ( src === "page" && ( method.startsWith( "waitForRequest" ) || method.startsWith( "waitForResponse" ) ) ) {
+        this.options.requireInterceptTraffic = true;
+      }
 
       if ( target !== "page" && typeof this.targets[ target ] === "undefined" ) {
         throw new TestGeneratorError( `Action cannot find "${ target }" target.`

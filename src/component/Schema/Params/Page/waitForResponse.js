@@ -1,4 +1,4 @@
-import { INPUT, INPUT_NUMBER } from "../../constants";
+import { INPUT, INPUT_NUMBER, CHECKBOX } from "../../constants";
 import { isEveryValueMissing } from "service/utils";
 import { justify } from "service/assert";
 import ExpressionParser from "service/ExpressionParser";
@@ -6,17 +6,20 @@ import { TXT_PARAM_IS_REQUIRED } from "constant";
 
 export const waitForResponse = {
   template: ({ params, id }) => {
-    const { timeout } = params,
+    const { timeout, resolve } = params,
           options = {
             timeout
           },
           parser = new ExpressionParser( id ),
           urlString = parser.stringify( params.value ),
           optArg = isEveryValueMissing( options ) ? `` : `, ${ JSON.stringify( options ) }`,
-          predicate = `( rsp ) => rsp.url().includes( ${ urlString } )`;
+          predicate = `( rsp ) => rsp.url().includes( searchStr )`;
     return justify( `
 // Waiting for a response
-await bs.page.waitForResponse( ${ predicate }${ optArg } );` );
+searchStr = ${ urlString }.replace( /^\\./, "" );
+if ( ${ resolve ? `!bs.performance.resources.find( item =>  item.url.includes( searchStr ) )` : `true` } ) {
+  await bs.page.waitForResponse( ${ predicate }${ optArg } );
+}` );
   },
 
   toLabel: ({ params }) => {
@@ -44,6 +47,15 @@ await bs.page.waitForResponse( ${ predicate }${ optArg } );` );
             required: true,
             message: TXT_PARAM_IS_REQUIRED
           }]
+        },
+        {
+          name: "params.resolve",
+          control: CHECKBOX,
+          label: "resolve if already responded",
+          initialValue: false,
+          tooltip: `Stop waiting if any request for URL matching the provided string already responded.`,
+          placeholder: "",
+          rules: []
         }
       ]
     },
