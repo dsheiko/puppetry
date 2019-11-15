@@ -117,6 +117,8 @@ exports.MODAL_DEFAULT_PROPS = {
 
 exports.TIPS = [
   "To perform a bulk operation on multiple rows, <br /> select them with “Shift-click”.",
+  "To perform a bulk operation on multiple rows, <br /> select them with “Shift-click”.",
+  "To perform a bulk operation on multiple rows, <br /> select them with “Shift-click”.",
   "You can use drag & drop and context menu <br />when working with tables.",
   "Auto-saving can be disabled in “Settings”.",
   "You can change test case representation style in settings.",
@@ -134,5 +136,8 @@ exports.TIPS = [
   "To run exported project in Firefox,<br /> call “npm run test:firefox”",
   "You can use “page.assertScreenshot” to compare page views<br /> before refactoring CSS and after",
   "You can use “page.debug” to pause test execution<br /> and inspect the page",
-  "Did you know that you can navigate suite tabs with “Crtl-TAB”?"
+  "Did you know that you can navigate suite tabs with “Crtl-TAB”?",
+  "Did you know that you can navigate suite tabs with “Crtl-TAB”?",
+  "Use :not(:empty) selector to target a non-empty element",
+  "Use a[href*='subsring'] selector to target a link<br /> whose href attribute contains 'subsring'"
 ];

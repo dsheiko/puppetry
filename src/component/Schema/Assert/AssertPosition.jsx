@@ -72,7 +72,7 @@ export class AssertPosition extends React.Component {
               rules: [{
                 required: true
               }]
-            })( <Select showSearch optionFilterProp="children" >
+            })( <Select showSearch optionFilterProp="children" style={{ width: 522 }}>
               { filteredTargets.map( ( t, inx ) => (
                 <Option value={ t } key={ inx }>{ t }</Option>
               ) )}
