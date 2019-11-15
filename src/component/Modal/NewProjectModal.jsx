@@ -58,10 +58,6 @@ export class NewProjectModal extends AbstractForm {
       return;
     }
 
-    if ( !isDirEmpty( projectDirectory ) && !await confirmCreateProject() ) {
-      return;
-    }
-
     validateFields( async ( err, values ) => {
       const { name, suiteTitle } = values,
             projectFilename = normalizeSuiteName( name ),
@@ -69,6 +65,10 @@ export class NewProjectModal extends AbstractForm {
             newProjectDirectory = join( projectDirectory, projectFilename );
 
       if ( err ) {
+        return;
+      }
+
+      if ( !isDirEmpty( newProjectDirectory ) && !await confirmCreateProject() ) {
         return;
       }
 

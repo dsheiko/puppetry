@@ -46,7 +46,8 @@ export class AssertSelector extends React.Component {
               rules: [{
                 required: true
               }]
-            })( <Input placeholder="e.g. :invalid" onPressEnter={ ( e ) => this.props.onPressEnter( e ) } /> )
+            })( <Input placeholder="e.g. :invalid or :not(:empty)"
+              onPressEnter={ ( e ) => this.props.onPressEnter( e ) } /> )
             }
           </FormItem>
         </Col>

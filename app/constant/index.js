@@ -139,5 +139,5 @@ exports.TIPS = [
   "Did you know that you can navigate suite tabs with “Crtl-TAB”?",
   "Did you know that you can navigate suite tabs with “Crtl-TAB”?",
   "Use :not(:empty) selector to target a non-empty element",
-  "Use a[href*='subsring'] selector to target a link<br /> whose href attribute contains 'subsring'"
+  "Use a[href*='keyword'] selector to target a link<br /> whose href attribute contains 'keyword'"
 ];

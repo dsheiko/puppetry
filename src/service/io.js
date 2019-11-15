@@ -347,7 +347,7 @@ export function isDirEmpty( directory ) {
     return !fs.readdirSync( directory ).length;
   } catch ( e ) {
     log.warn( `Renderer process: io.isDirEmpty: ${ e }` );
-    return false;
+    return true;
   }
 }
 
