@@ -70,9 +70,9 @@
       }
     }
   },
-  "savedAt": 1573648586,
+  "savedAt": 1574075115,
   "modified": false,
-  "lastOpenSuite": "todomvc.json",
+  "lastOpenSuite": "sandbox-exhaustive.json",
   "variables": {
     "dduk2fx8tvf": {
       "name": "SANDBOX_BASEURL",
@@ -101,14 +101,23 @@
       "env": "production",
       "disabled": false,
       "adding": false
+    },
+    "j6bk348ihy7": {
+      "name": "SANDBOX_BASEURL",
+      "id": "j6bk348ihy7",
+      "editing": false,
+      "value": "http://127.0.0.1:8080/",
+      "env": "local",
+      "key": "j6bk348ihy7"
     }
   },
   "targets": {},
   "environments": [
     "test",
     "stage",
-    "production"
+    "production",
+    "local"
   ],
   "projectDirectory": "/home/sheiko/PUPPETRY/demo--project",
-  "puppetry": "3.0.0-RC.2"
+  "puppetry": "3.0.0-RC.3"
 }

@@ -259,7 +259,8 @@ export default class TestGenerator {
         projectDirectory: this.projectDirectory,
         outputDirectory: this.outputDirectory,
         interactive: this.interactive,
-        body
+        body,
+        snippets: this.snippets
       });
     } catch ( err ) {
       console.warn( "generate error:", err );

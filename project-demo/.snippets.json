@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": true,
   "description": null,
-  "savedAt": 1572617859,
-  "loadedAt": 1573230782,
+  "savedAt": 1574074542,
+  "loadedAt": 1574074473,
   "modified": false,
   "filename": ".snippets.json",
   "targets": {
@@ -118,7 +118,7 @@
               "target": "FIRSTNAME_INPUT",
               "method": "type",
               "params": {
-                "value": "{{ faker( \"name.firstName\", \"en\" ) }}"
+                "value": "{{FIRST_NAME}}"
               },
               "disabled": false,
               "failure": "",
@@ -129,7 +129,7 @@
               "isRef": false,
               "groupId": "snippets",
               "testId": "jotk2g4k9tw",
-              "waitForTarget": true
+              "waitForTarget": false
             },
             "jotk2g4p33d": {
               "editing": false,
@@ -138,7 +138,7 @@
               "target": "LASTNAME_INPUT",
               "method": "type",
               "params": {
-                "value": "{{ faker( \"name.lastName\", \"en\" ) }}"
+                "value": "Doe"
               },
               "disabled": false,
               "failure": "",
@@ -158,7 +158,7 @@
               "target": "MESSAGE_INPUT",
               "method": "type",
               "params": {
-                "value": "{{ MESSAGE }}"
+                "value": "{{ faker( \"lorem.sentence\", \"en\" ) }}"
               },
               "disabled": false,
               "failure": "",
@@ -254,29 +254,6 @@
               "testId": "jotk2g4k9tw",
               "waitForTarget": false
             },
-            "8fzk2g5mpej": {
-              "editing": false,
-              "id": "8fzk2g5mpej",
-              "key": "8fzk2g5mpej",
-              "target": "page",
-              "method": "assertDialog",
-              "assert": {
-                "not": "false",
-                "type": "alert",
-                "assertion": "haveString",
-                "value": "Data sent"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "snippets",
-              "testId": "jotk2g4k9tw",
-              "waitForTarget": false
-            },
             "8fzk2g5tyvk": {
               "editing": false,
               "id": "8fzk2g5tyvk",
@@ -311,5 +288,5 @@
       "adding": false
     }
   },
-  "puppetry": "3.0.0-RC.1"
+  "puppetry": "3.0.0-RC.3"
 }

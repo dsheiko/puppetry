@@ -1,0 +1,240 @@
+{
+  "title": "Exhaustive Testing Example",
+  "timeout": 50000,
+  "snippets": false,
+  "description": null,
+  "savedAt": 1574069944,
+  "loadedAt": 1574070107,
+  "modified": false,
+  "filename": "sandbox-exhaustive.json",
+  "targets": {},
+  "groups": {
+    "8fzk2g5fpkb": {
+      "title": "Bulk data testing example",
+      "id": "8fzk2g5fpkb",
+      "editing": false,
+      "key": "8fzk2g5fpkb",
+      "tests": {
+        "8fzk2g5fxnj": {
+          "title": "Seeding the form",
+          "id": "8fzk2g5fxnj",
+          "editing": false,
+          "groupId": "8fzk2g5fpkb",
+          "key": "8fzk2g5fxnj",
+          "commands": {
+            "8fzk2g5g95f": {
+              "editing": false,
+              "id": "8fzk2g5g95f",
+              "key": "8fzk2g5g95f",
+              "target": "page",
+              "method": "setViewport",
+              "assert": {},
+              "params": {
+                "width": "1920",
+                "height": "1080",
+                "resolution": "1920x1080",
+                "deviceScaleFactor": 1
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "8fzk2g5fpkb",
+              "testId": "8fzk2g5fxnj",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "8fzk2g5g9du": {
+              "editing": false,
+              "id": "8fzk2g5g9du",
+              "key": "8fzk2g5g9du",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "{{ SANDBOX_BASEURL }}",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "8fzk2g5fpkb",
+              "testId": "8fzk2g5fxnj",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "7rnk347fs73": {
+              "editing": true,
+              "id": "7rnk347fs73",
+              "key": "7rnk347fs73",
+              "target": "page",
+              "method": "closeDialog",
+              "params": {
+                "type": "any",
+                "action": "dismiss"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "8fzk2g5fpkb",
+              "testId": "8fzk2g5fxnj",
+              "comment": "On submit the form calls Alert dialog with OK/FAIL, we shall close it",
+              "waitForTarget": false
+            },
+            "8fzk2g5m0pq": {
+              "editing": false,
+              "id": "8fzk2g5m0pq",
+              "key": "8fzk2g5m0pq",
+              "target": "",
+              "method": "",
+              "assert": {},
+              "params": {},
+              "disabled": false,
+              "failure": "",
+              "variables": {
+                "MESSAGE": "Latin script",
+                "FIRST_NAME": "Latin script"
+              },
+              "expanded": false,
+              "refName": "Fill out the form",
+              "ref": "jotk2g4k9tw",
+              "isRef": true,
+              "groupId": "8fzk2g5fpkb",
+              "testId": "8fzk2g5fxnj",
+              "comment": "With Latin script",
+              "entity": "command"
+            },
+            "7rnk347mwlh": {
+              "editing": false,
+              "id": "7rnk347mwlh",
+              "key": "7rnk347mwlh",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "false",
+                "type": "alert",
+                "assertion": "haveString",
+                "value": "OK"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "8fzk2g5fpkb",
+              "testId": "8fzk2g5fxnj",
+              "waitForTarget": false
+            },
+            "8fzk2g5m5ie": {
+              "editing": false,
+              "id": "8fzk2g5m5ie",
+              "key": "8fzk2g5m5ie",
+              "target": "",
+              "method": "",
+              "assert": {},
+              "params": {},
+              "disabled": false,
+              "failure": "",
+              "variables": {
+                "MESSAGE": "αßÁáÀàÅåÄäæ",
+                "FIRST_NAME": "αßÁáÀàÅåÄäæ"
+              },
+              "expanded": false,
+              "refName": "Fill out the form",
+              "ref": "jotk2g4k9tw",
+              "isRef": true,
+              "groupId": "8fzk2g5fpkb",
+              "testId": "8fzk2g5fxnj",
+              "comment": "Non-Latin European script",
+              "entity": "command"
+            },
+            "7rnk347mudz": {
+              "editing": false,
+              "id": "7rnk347mudz",
+              "key": "7rnk347mudz",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "false",
+                "type": "alert",
+                "assertion": "haveString",
+                "value": "OK"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "8fzk2g5fpkb",
+              "testId": "8fzk2g5fxnj",
+              "waitForTarget": false
+            },
+            "8fzk2g5m7rt": {
+              "editing": false,
+              "id": "8fzk2g5m7rt",
+              "key": "8fzk2g5m7rt",
+              "target": "",
+              "method": "",
+              "assert": {},
+              "params": {},
+              "disabled": false,
+              "failure": "",
+              "variables": {
+                "MESSAGE": "⌚😀",
+                "FIRST_NAME": "⌚😀⏳☀️"
+              },
+              "expanded": false,
+              "refName": "Fill out the form",
+              "ref": "jotk2g4k9tw",
+              "isRef": true,
+              "groupId": "8fzk2g5fpkb",
+              "testId": "8fzk2g5fxnj",
+              "comment": "Basic_Emoji",
+              "entity": "command"
+            },
+            "7rnk347mnm7": {
+              "editing": false,
+              "id": "7rnk347mnm7",
+              "key": "7rnk347mnm7",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "false",
+                "type": "alert",
+                "assertion": "haveString",
+                "value": "OK"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "8fzk2g5fpkb",
+              "testId": "8fzk2g5fxnj",
+              "waitForTarget": false
+            }
+          }
+        }
+      }
+    }
+  },
+  "puppetry": "3.0.0-RC.3"
+}

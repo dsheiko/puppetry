@@ -346,7 +346,7 @@ export function isDirEmpty( directory ) {
   try {
     return !fs.readdirSync( directory ).length;
   } catch ( e ) {
-    log.warn( `Renderer process: io.isDirEmpty: ${ e }` );
+    process.env.JEST_WORKER_ID || log.warn( `Renderer process: io.isDirEmpty: ${ e }` );
     return true;
   }
 }

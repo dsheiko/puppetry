@@ -18,6 +18,9 @@
           updateView = ( nextId ) => {
             COMMAND_LIST.forEach( el => el.classList.remove( "__PUPPETRY_ACTIVE" ) );
             const li = document.querySelector( "li[data-puppetry-cid='" + nextId + "']" );
+            if ( !li ) {
+              return;
+            }
             li.classList.add( "__PUPPETRY_ACTIVE" );
             li.scrollIntoView();
           },
@@ -97,4 +100,17 @@
       }
     }, false );
 
+    function fixIndex() {
+      const nextId = data.sids[ stepIndex ];
+      let li = document.querySelector( "li[data-puppetry-cid='" + nextId + "']" );
+      if ( li ) {
+        return;
+      }
+      li = document.querySelector( "li[data-puppetry-cid]" );
+      stepIndex = data.sids.indexOf( li.dataset.puppetryCid );
+      return stepIndex >= 0 ? stepIndex : 0;
+    }
+
+
+    fixIndex();
     updateView( data.sids[ stepIndex ] );

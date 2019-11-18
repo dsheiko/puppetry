@@ -157,14 +157,14 @@
         <h4 id="demo-form">Demo Form</h4>
       </div>
 
-      <form class="row" id="form">
+      <form class="row" id="form" novalidate>
         <div class="row">
           <div class="input-field col l6 m12">
-            <input id="fname" type="text" class="validate">
+            <input id="fname" type="text" class="validate" pattern=".{3,32}" required >
             <label for="fname">First Name</label>
           </div>
           <div class="input-field col l6 m12">
-            <input id="lname" type="text" class="validate">
+            <input id="lname" type="text" class="validate" pattern=".{3,32}" required>
             <label for="lname">Last Name</label>
           </div>
         </div>
@@ -390,7 +390,9 @@
           });
 
           listen( "#form", "submit", function( el ){
-            alert( "Data sent" );
+            const msg = el.checkValidity() ? "OK" : "FAIL";
+            alert( msg );
+            console.info( msg );
           });
 
         });

@@ -1,16 +1,16 @@
 {
-  "title": "Testing bulk data",
+  "title": "Exhaustive Testing Example",
   "timeout": 50000,
   "snippets": false,
   "description": null,
-  "savedAt": 1573143190,
-  "loadedAt": 1573230946,
+  "savedAt": 1574075035,
+  "loadedAt": 1574075085,
   "modified": false,
-  "filename": "sandbox-bulk-data.json",
+  "filename": "sandbox-exhaustive.json",
   "targets": {},
   "groups": {
     "8fzk2g5fpkb": {
-      "title": "Bulk data testing example",
+      "title": "Form",
       "id": "8fzk2g5fpkb",
       "editing": false,
       "key": "8fzk2g5fpkb",
@@ -71,16 +71,14 @@
               "waitForTarget": false,
               "entity": "command"
             },
-            "mt7k2g8265w": {
-              "editing": false,
-              "id": "mt7k2g8265w",
-              "key": "mt7k2g8265w",
+            "7rnk347fs73": {
+              "editing": true,
+              "id": "7rnk347fs73",
+              "key": "7rnk347fs73",
               "target": "page",
               "method": "closeDialog",
-              "assert": {},
               "params": {
-                "substring": "",
-                "type": "alert",
+                "type": "any",
                 "action": "dismiss"
               },
               "disabled": false,
@@ -92,8 +90,8 @@
               "isRef": false,
               "groupId": "8fzk2g5fpkb",
               "testId": "8fzk2g5fxnj",
-              "waitForTarget": false,
-              "entity": "command"
+              "comment": "On submit the form calls Alert dialog with OK/FAIL, we shall close it",
+              "waitForTarget": false
             },
             "8fzk2g5m0pq": {
               "editing": false,
@@ -106,7 +104,8 @@
               "disabled": false,
               "failure": "",
               "variables": {
-                "MESSAGE": "Latin script"
+                "MESSAGE": "Latin script",
+                "FIRST_NAME": "Latin script"
               },
               "expanded": false,
               "refName": "Fill out the form",
@@ -114,7 +113,31 @@
               "isRef": true,
               "groupId": "8fzk2g5fpkb",
               "testId": "8fzk2g5fxnj",
-              "comment": "With Latin script"
+              "comment": "With Latin script",
+              "entity": "command"
+            },
+            "7rnk347mwlh": {
+              "editing": false,
+              "id": "7rnk347mwlh",
+              "key": "7rnk347mwlh",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "false",
+                "type": "alert",
+                "assertion": "haveString",
+                "value": "OK"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "8fzk2g5fpkb",
+              "testId": "8fzk2g5fxnj",
+              "waitForTarget": false
             },
             "8fzk2g5m5ie": {
               "editing": false,
@@ -127,7 +150,8 @@
               "disabled": false,
               "failure": "",
               "variables": {
-                "MESSAGE": "αßÁáÀàÅåÄäæ"
+                "MESSAGE": "αßÁáÀàÅåÄäæ",
+                "FIRST_NAME": "αßÁáÀàÅåÄäæ"
               },
               "expanded": false,
               "refName": "Fill out the form",
@@ -137,6 +161,29 @@
               "testId": "8fzk2g5fxnj",
               "comment": "Non-Latin European script",
               "entity": "command"
+            },
+            "7rnk347mudz": {
+              "editing": false,
+              "id": "7rnk347mudz",
+              "key": "7rnk347mudz",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "false",
+                "type": "alert",
+                "assertion": "haveString",
+                "value": "OK"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "8fzk2g5fpkb",
+              "testId": "8fzk2g5fxnj",
+              "waitForTarget": false
             },
             "8fzk2g5m7rt": {
               "editing": false,
@@ -149,7 +196,8 @@
               "disabled": false,
               "failure": "",
               "variables": {
-                "MESSAGE": "⌚😀"
+                "MESSAGE": "⌚😀",
+                "FIRST_NAME": "⌚😀⏳☀️"
               },
               "expanded": false,
               "refName": "Fill out the form",
@@ -160,32 +208,33 @@
               "comment": "Basic_Emoji",
               "entity": "command"
             },
-            "8fzk2g5qqzl": {
+            "7rnk347mnm7": {
               "editing": false,
-              "id": "8fzk2g5qqzl",
-              "key": "8fzk2g5qqzl",
-              "target": "",
-              "method": "",
-              "assert": {},
-              "params": {},
+              "id": "7rnk347mnm7",
+              "key": "7rnk347mnm7",
+              "target": "page",
+              "method": "assertDialog",
+              "assert": {
+                "not": "false",
+                "type": "alert",
+                "assertion": "haveString",
+                "value": "OK"
+              },
               "disabled": false,
               "failure": "",
-              "variables": {
-                "MESSAGE": "⌚😀"
-              },
+              "variables": {},
               "expanded": false,
-              "refName": "Fill out the form",
-              "ref": "jotk2g4k9tw",
-              "isRef": true,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
               "groupId": "8fzk2g5fpkb",
               "testId": "8fzk2g5fxnj",
-              "comment": "Basic_Emoji",
-              "entity": "command"
+              "waitForTarget": false
             }
           }
         }
       }
     }
   },
-  "puppetry": "3.0.0-RC.1"
+  "puppetry": "3.0.0-RC.3"
 }
