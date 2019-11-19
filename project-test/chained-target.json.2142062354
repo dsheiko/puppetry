@@ -3,9 +3,9 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1574089644,
-  "loadedAt": 1574089117,
-  "modified": true,
+  "savedAt": 1574088622,
+  "loadedAt": 1574086380,
+  "modified": false,
   "filename": "chained-target.json",
   "targets": {
     "7vnk2vvh36o": {
@@ -101,7 +101,7 @@
     "7iwk2vyba6g": {
       "target": "SHADOWDOM_FOO_LOCAL",
       "id": "7iwk2vyba6g",
-      "editing": true,
+      "editing": false,
       "selector": "#shadowLocalTarget",
       "ref": "SHADOWDOM_FOO",
       "key": "7iwk2vyba6g",
@@ -420,6 +420,39 @@
           "adding": false,
           "groupId": "k2vk2vvd4pi"
         },
+        "57yk34jpj96": {
+          "editing": false,
+          "id": "57yk34jpj96",
+          "key": "57yk34jpj96",
+          "title": "We can access element in Shadow Root within other Shadow Root full XPATH",
+          "commands": {
+            "57yk34jpjip": {
+              "editing": false,
+              "id": "57yk34jpjip",
+              "key": "57yk34jpjip",
+              "target": "SHADOW_BAR_LOCAL_XPATH",
+              "method": "assertHtml",
+              "assert": {
+                "assertion": "equals",
+                "value": ""
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "57yk34jpj96",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi"
+        },
         "8oak2w2uqf9": {
           "editing": false,
           "id": "8oak2w2uqf9",
@@ -511,5 +544,5 @@
       }
     }
   },
-  "puppetry": "3.0.0-RC.3"
+  "puppetry": "3.0.0"
 }

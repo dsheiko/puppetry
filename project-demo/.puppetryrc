@@ -70,7 +70,7 @@
       }
     }
   },
-  "savedAt": 1574075115,
+  "savedAt": 1574085483,
   "modified": false,
   "lastOpenSuite": "sandbox-exhaustive.json",
   "variables": {
@@ -119,5 +119,5 @@
     "local"
   ],
   "projectDirectory": "/home/sheiko/PUPPETRY/demo--project",
-  "puppetry": "3.0.0-RC.3"
+  "puppetry": "3.0.0"
 }

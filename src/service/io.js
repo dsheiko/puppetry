@@ -120,7 +120,7 @@ export function isExportDirEmpty( exportDirectory ) {
 export function removeExport( exportDirectory ) {
   fs.readdirSync( exportDirectory )
     .filter( name => EXPORT_ASSETS.includes( name ) )
-    .forEach( name => shell.rm( "-rf" , join( exportDirectory, name ) ) );
+    .forEach( name => shell.rm( "-rf", join( exportDirectory, name ) ) );
 }
 
 export function copyProject( srcDirectory, targetDirectory ) {
@@ -196,6 +196,9 @@ export async function exportProject(
 
     if ( options.updateSnapshot ) {
       shell.rm( "-rf" , join( projectDirectory, DIR_SNAPSHOTS ) );
+    } else {
+      shell.rm( "-rf" , join( projectDirectory, DIR_SNAPSHOTS, "actual" ) );
+      shell.rm( "-rf" , join( projectDirectory, DIR_SNAPSHOTS, "diff" ) );
     }
 
     shell.mkdir( "-p" , join( projectDirectory, DIR_SCREENSHOTS ) );

@@ -3,9 +3,9 @@
   "timeout": 50000,
   "snippets": false,
   "description": null,
-  "savedAt": 1574075035,
-  "loadedAt": 1574075085,
-  "modified": false,
+  "savedAt": 1574076160,
+  "loadedAt": 1574076093,
+  "modified": true,
   "filename": "sandbox-exhaustive.json",
   "targets": {},
   "groups": {
@@ -104,7 +104,6 @@
               "disabled": false,
               "failure": "",
               "variables": {
-                "MESSAGE": "Latin script",
                 "FIRST_NAME": "Latin script"
               },
               "expanded": false,
@@ -150,7 +149,6 @@
               "disabled": false,
               "failure": "",
               "variables": {
-                "MESSAGE": "αßÁáÀàÅåÄäæ",
                 "FIRST_NAME": "αßÁáÀàÅåÄäæ"
               },
               "expanded": false,
@@ -196,7 +194,6 @@
               "disabled": false,
               "failure": "",
               "variables": {
-                "MESSAGE": "⌚😀",
                 "FIRST_NAME": "⌚😀⏳☀️"
               },
               "expanded": false,

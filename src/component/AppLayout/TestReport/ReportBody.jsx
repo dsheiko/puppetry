@@ -197,9 +197,9 @@ export class ReportBody extends AbstractComponent {
 
         if ( fs.existsSync( actual ) && fs.existsSync( expected ) ) {
           carry[ id ] = {
-            expected,
-            actual,
-            diff: fs.existsSync( diff ) ? diff : null
+            expected: `${ expected }?${ Date.now() }`,
+            actual: `${ actual }?${ Date.now() }`,
+            diff: fs.existsSync( diff ) ? `${ diff }?${ Date.now() }` : null
           };
         }
         return carry;

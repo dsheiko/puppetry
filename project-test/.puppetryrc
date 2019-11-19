@@ -3,7 +3,7 @@
   "appPanels": {
     "suite": {
       "panes": [
-        "groups"
+        "targets"
       ]
     },
     "settings": {
@@ -464,7 +464,7 @@
         },
         "5svk2vywi01": {
           "key": "5svk2vywi01",
-          "value": false
+          "value": true
         },
         "lxwk2vzkk7n": {
           "key": "lxwk2vzkk7n",
@@ -477,13 +477,17 @@
         "8oak2w30c0a": {
           "key": "8oak2w30c0a",
           "value": true
+        },
+        "57yk34jpj96": {
+          "key": "57yk34jpj96",
+          "value": true
         }
       }
     }
   },
-  "savedAt": 1573737890,
+  "savedAt": 1574090875,
   "modified": false,
-  "lastOpenSuite": "puppeteer.json",
+  "lastOpenSuite": "chained-target.json",
   "variables": {},
   "targets": {
     "js4k1ukyk9a": {
@@ -501,5 +505,5 @@
   ],
   "autosave": true,
   "projectDirectory": "/home/sheiko/PUPPETRY/puppetry-test",
-  "puppetry": "3.0.0-RC.2"
+  "puppetry": "3.0.0-RC.3"
 }
