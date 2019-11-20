@@ -1,8 +1,16 @@
-import { INPUT, CHECKBOX } from "../../constants";
+import { INPUT, CHECKBOX, TARGET_SELECT } from "../../constants";
 import { isEveryValueMissing, ruleValidateGenericString } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
 import { renderTarget } from "service/utils";
 import { getCounter } from "service/screenshotCounter";
+
+function getTargetMap( targetsArr ){
+  return `{
+${ targetsArr.map(
+    ( name ) => `          "${ name }": async () =>  await bs.getTargetOrFalse(${ JSON.stringify( name ) })` )
+    .join( ",\n" ) }
+        }`;
+}
 
 export const screenshot = {
   template: ({ target, params, id, parentId }) => {
@@ -12,13 +20,22 @@ export const screenshot = {
             omitBackground
           },
           options = baseOptions,
-
-          optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
+          optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `,
+          makeScreenshotCode = `await ( ${ renderTarget( target ) } ).`
+            + `screenshot( util.png( ${ JSON.stringify( id ) }, `
+            + `${ parentId ? JSON.stringify( parentId ) : "null" }, ${ parser.stringify( name ) }${ optArg }) )`;
     return `
-      // Taking screenshot of ${ target } element
-      await ( ${ renderTarget( target ) } ).`
-        + `screenshot( util.png( ${ JSON.stringify( id ) }, `
-    + `${ parentId ? JSON.stringify( parentId ) : "null" }, ${ parser.stringify( name ) }${ optArg }) );
+      // Taking screenshot of ${ target } element${
+  ( typeof params.targets !== "undefined" && typeof params.targets.length !== "undefined"
+        && params.targets.length )
+    ? `
+      await bs.traceTarget( "${ id }",
+        ${ getTargetMap( params.targets ) },
+        async() => {
+          ${ makeScreenshotCode };
+        });`
+    : `
+      ${ makeScreenshotCode };`}
   `;
   },
 
@@ -29,6 +46,7 @@ export const screenshot = {
 
   description: `Takes a screenshot of the target element.`,
 
+  requiresTargets: true,
 
   params: [
     {
@@ -55,6 +73,15 @@ export const screenshot = {
           {
             transform: ( value ) => value.trim()
           }]
+        },
+        {
+          name: "params.targets",
+          label: "show targets",
+          control: TARGET_SELECT,
+          tooltip: `Here you can select targets to be highlighted on the screenshot.`,
+          initialValue: [],
+          placeholder: "",
+          rules: []
         },
         {
           name: "params.omitBackground",

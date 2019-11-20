@@ -4,7 +4,8 @@ import ErrorBoundary from "component/ErrorBoundary";
 import { Collapse, Button, Form, Input, InputNumber, Checkbox, Select, Radio, Icon  } from "antd";
 import { validate } from "bycontract";
 import Tooltip from "component/Global/Tooltip";
-import { FILE, TEXTAREA, RADIO_GROUP, INPUT, INPUT_NUMBER, CHECKBOX, SELECT } from "component/Schema/constants";
+import { FILE, TEXTAREA, RADIO_GROUP, INPUT, INPUT_NUMBER, CHECKBOX, SELECT,
+  TARGET_SELECT } from "component/Schema/constants";
 import { ipcRenderer } from "electron";
 import { E_BROWSE_FILE, E_FILE_SELECTED, FIELDSET_DEFAULT_LAYOUT, FIELDSET_DEFAULT_CHECKBOX_LAYOUT } from "constant";
 import Markdown from "component/Global/Markdown";
@@ -36,10 +37,13 @@ const FormItem = Form.Item,
         </span>
       ),
 
-      mapStateToProps = ( state ) => ({
-        environments: state.project.environments,
-        variables: state.project.variables
-      }),
+      mapStateToProps = ( state, props ) => {
+        return {
+          environments: state.project.environments,
+          variables: state.project.variables,
+          targets: props.schema.requiresTargets ? state.suite.targets : {}
+        };
+      },
       // Mapping actions to the props
       mapDispatchToProps = () => ({
       });
@@ -57,7 +61,8 @@ export class ParamsFormBuilder extends React.Component {
     record: PropTypes.object.isRequired,
     schema: PropTypes.any,
     environments: PropTypes.any,
-    variables: PropTypes.any
+    variables: PropTypes.any,
+    targets: PropTypes.object
   }
 
   onClickSelectFile = ( e, item ) => {
@@ -93,11 +98,13 @@ export class ParamsFormBuilder extends React.Component {
 
   renderControl = ( field ) => {
     const { setFieldsValue } = this.props.form,
-          { onSubmit } = this.props,
+          { onSubmit, targets } = this.props,
+          safeTargets = Object.values( targets ).filter( item => item.target ),
           onSelect = ( value ) => {
             setFieldsValue({ [ field.name ]: value });
           },
           inputStyle = field.inputStyle || {};
+
     switch ( field.control ) {
     case INPUT:
       return ( <Input placeholder={ field.placeholder }
@@ -115,11 +122,26 @@ export class ParamsFormBuilder extends React.Component {
         rows={ 4 } /> );
     case FILE:
       return ( <Input style={ inputStyle } onClick={ this.onClickSelectFile } disabled  /> );
+    case TARGET_SELECT:
+      return ( <Select
+        { ...SELECT_SEARCH_PROPS }
+        mode="multiple"
+        style={ inputStyle }
+        placeholder={ field.placeholder }
+        onChange={ onSelect }
+      >
+        {
+          safeTargets.map( ( option, inx ) => ( <Option
+            key={inx} value={ option.target }>{ option.target }</Option>
+          ) )
+        }
+      </Select> );
     case SELECT:
+      // onChange={ ( value ) => ( field.onChange ? field.onChange( value, this.props.form ) : () => {}) }
       return ( <Select
         { ...SELECT_SEARCH_PROPS }
         style={ inputStyle }
-        onChange={ ( value ) => ( field.onChange ? field.onChange( value, this.props.form ) : () => {}) }
+
         placeholder={ field.placeholder }
         onSelect={ onSelect }
       >

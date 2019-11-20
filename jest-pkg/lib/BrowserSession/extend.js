@@ -131,14 +131,17 @@ module.exports = function( bs, util ) {
 
   /**
    * Create element that highlights a given target
-   * @param {Function} elementHandleCb
+   * @param {Function|false} elementHandleCb
    * @param {String} targetName
    * @param {String} fgColor
    * @returns {void}
    */
   async function createTargetHighlight( elementHandleCb, targetName, fgColor = "red" ) {
-      const elementHandle = await elementHandleCb(),
-            boundingBox = await elementHandle.boundingBox();
+      const elementHandle = await elementHandleCb();
+      if ( !elementHandle ) {
+        return;
+      }
+      const boundingBox = await elementHandle.boundingBox();
       if ( !boundingBox ) {
         return;
       }
@@ -168,12 +171,16 @@ module.exports = function( bs, util ) {
     await bs.page.screenshot( util.tracePng( `${ stepId }` ) );
   };
 
-  bs.traceTarget = async ( stepId, targetMap  )  => {
+  bs.traceTarget = async ( stepId, targetMap, cb = null  )  => {
     try {
       for ( let pair of Object.entries( targetMap ) ) {
         await createTargetHighlight( pair[ 1 ], pair[ 0 ] );
       }
-      await bs.page.screenshot( util.tracePng( `${ stepId }` ) );
+      if ( cb ) {
+        await cb();
+      } else {
+        await bs.page.screenshot( util.tracePng( `${ stepId }` ) );
+      }
       await bs.page.evaluate( () => {
         Array.from( document.querySelectorAll( "[data-puppetry=__puppetry-highlight-target]" ) )
           .forEach( el => el.parentNode.removeChild( el ) );

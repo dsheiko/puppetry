@@ -24,6 +24,7 @@
 - improvement: add page.assertPerformanceTiming (page loading, redirection, network latency, processing)
 - improvement: add page.setUserAgent
 - improvement: extend page.setViewport with list of predefined resolutions
+- improvement: extend *.screenshot with "show targets" option
 - improvement: polish UX for every test step form
 - improvement: support Chrome Extensions
 - improvement: add ignoreHTTPSErrors launcher option

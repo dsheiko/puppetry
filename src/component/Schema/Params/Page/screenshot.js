@@ -1,7 +1,15 @@
-import { INPUT, INPUT_NUMBER, CHECKBOX } from "../../constants";
+import { INPUT, INPUT_NUMBER, TARGET_SELECT, CHECKBOX } from "../../constants";
 import { isEveryValueFalsy, isSomeValueNull, ruleValidateGenericString } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
 import { getCounter } from "service/screenshotCounter";
+
+function getTargetMap( targetsArr ){
+  return `{
+${ targetsArr.map(
+    ( name ) => `          "${ name }": async () =>  await bs.getTargetOrFalse(${ JSON.stringify( name ) })` )
+    .join( ",\n" ) }
+        }`;
+}
 
 export const screenshot = {
   template: ({ params, id, parentId }) => {
@@ -24,25 +32,41 @@ export const screenshot = {
       throw new Error( "You have to provide either all clip parameters or none" );
     }
 
-    const optArg = isEveryValueFalsy( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
+    const optArg = isEveryValueFalsy( options ) ? ` ` : `, ${ JSON.stringify( options ) } `,
+          makeScreenshotCode = `await bs.page.screenshot( util.png( ${ JSON.stringify( id ) }, `
+            + `${ parentId ? JSON.stringify( parentId ) : "null" }, ${ parser.stringify( name ) }${ optArg }) )`;
+
     return `
-      // Taking screenshot of ${ isClipEmpty ? "the page" : "the specified region" }
-      await bs.page.screenshot( util.png( ${ JSON.stringify( id ) }, `
-    + `${ parentId ? JSON.stringify( parentId ) : "null" }, ${ parser.stringify( name ) }${ optArg }) );
-  `;
+      // Taking screenshot of ${ isClipEmpty ? "the page" : "the specified region" }${
+  ( typeof params.targets !== "undefined" && typeof params.targets.length !== "undefined"
+        && params.targets.length )
+    ? `
+      await bs.traceTarget( "${ id }",
+        ${ getTargetMap( params.targets ) },
+        async() => {
+          ${ makeScreenshotCode };
+        });`
+    : `
+      ${ makeScreenshotCode };`}
+`;
   },
 
   toLabel: ({ params }) => `(\`${ params.name }\`)`,
   commonly: "make screenshot",
   toGherkin: ({ params }) => `Take screenshot \`${ params.name }\` of the open page`,
 
+  requiresTargets: true,
+
   description: `Takes a screenshot of the page or a specified region.`,
 
   validate: ( values ) => {
-    const { x, y, width, height } = values.params;
+    const { x, y, width, height, fullPage, omitBackground } = values.params;
     if ( x !== null || y !== null || width !== null || height !== null ) {
       if ( x === null || y === null || width === null || height === null ) {
         return "You have to provide either all clip parameters or none";
+      }
+      if ( fullPage || omitBackground ) {
+        return "You can provide either clip parameters or fullpage / omit background";
       }
     }
 
@@ -74,6 +98,15 @@ export const screenshot = {
           {
             transform: ( value ) => value.trim()
           }]
+        },
+        {
+          name: "params.targets",
+          label: "show targets",
+          control: TARGET_SELECT,
+          tooltip: `Here you can select targets to be highlighted on the screenshot.`,
+          initialValue: [],
+          placeholder: "",
+          rules: []
         },
         {
           name: "params.fullPage",
