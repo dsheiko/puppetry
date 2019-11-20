@@ -48,6 +48,10 @@
         "dduk2fx8bwf": {
           "key": "dduk2fx8bwf",
           "value": true
+        },
+        "3i0k2fy6u0g": {
+          "key": "3i0k2fy6u0g",
+          "value": true
         }
       }
     },
@@ -70,9 +74,9 @@
       }
     }
   },
-  "savedAt": 1574085483,
+  "savedAt": 1574249958,
   "modified": false,
-  "lastOpenSuite": "sandbox-exhaustive.json",
+  "lastOpenSuite": "sandbox-ga.json",
   "variables": {
     "dduk2fx8tvf": {
       "name": "SANDBOX_BASEURL",

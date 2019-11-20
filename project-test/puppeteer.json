@@ -2,8 +2,8 @@
   "title": "puppeteer",
   "timeout": 50000,
   "snippets": false,
-  "savedAt": 1573731272,
-  "loadedAt": 1573737878,
+  "savedAt": 1574252890,
+  "loadedAt": 1574252850,
   "modified": false,
   "filename": "puppeteer.json",
   "targets": {
@@ -363,6 +363,38 @@
               "testId": "18qk2kmgi5v",
               "waitForTarget": false,
               "entity": "command"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "eoyk2a8u1qy"
+        },
+        "2hgk379h439": {
+          "editing": false,
+          "id": "2hgk379h439",
+          "key": "2hgk379h439",
+          "title": "page.setUserAgent",
+          "commands": {
+            "5jek379i6qf": {
+              "editing": false,
+              "id": "5jek379i6qf",
+              "key": "5jek379i6qf",
+              "target": "page",
+              "method": "setUserAgent",
+              "params": {
+                "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; Xbox; Xbox One) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36 Edge/15.15063 "
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "2hgk379h439",
+              "waitForTarget": false
             }
           },
           "disabled": false,
@@ -2311,6 +2343,30 @@
           "groupId": "eoyk2a8u1qy",
           "key": "n57k2lz10xw",
           "commands": {
+            "ltbk378cvgn": {
+              "editing": false,
+              "id": "ltbk378cvgn",
+              "key": "ltbk378cvgn",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "n57k2lz10xw",
+              "waitForTarget": false,
+              "entity": "command"
+            },
             "n57k2lz1mnz": {
               "editing": false,
               "id": "n57k2lz1mnz",
@@ -2333,6 +2389,30 @@
               "groupId": "eoyk2a8u1qy",
               "testId": "n57k2lz10xw",
               "waitForTarget": false
+            },
+            "ltbk378ck2v": {
+              "editing": false,
+              "id": "ltbk378ck2v",
+              "key": "ltbk378ck2v",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "n57k2lz10xw",
+              "waitForTarget": false,
+              "entity": "command"
             },
             "n57k2lz2ykl": {
               "editing": false,
@@ -2357,6 +2437,30 @@
               "testId": "n57k2lz10xw",
               "waitForTarget": false
             },
+            "ltbk378c5ai": {
+              "editing": false,
+              "id": "ltbk378c5ai",
+              "key": "ltbk378c5ai",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "n57k2lz10xw",
+              "waitForTarget": false,
+              "entity": "command"
+            },
             "n57k2lz310s": {
               "editing": false,
               "id": "n57k2lz310s",
@@ -2379,6 +2483,30 @@
               "groupId": "eoyk2a8u1qy",
               "testId": "n57k2lz10xw",
               "waitForTarget": false
+            },
+            "ltbk378byg5": {
+              "editing": false,
+              "id": "ltbk378byg5",
+              "key": "ltbk378byg5",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "n57k2lz10xw",
+              "waitForTarget": false,
+              "entity": "command"
             },
             "n57k2lz3vgo": {
               "editing": false,
@@ -2403,6 +2531,30 @@
               "testId": "n57k2lz10xw",
               "waitForTarget": false
             },
+            "ltbk378bqbm": {
+              "editing": false,
+              "id": "ltbk378bqbm",
+              "key": "ltbk378bqbm",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "n57k2lz10xw",
+              "waitForTarget": false,
+              "entity": "command"
+            },
             "nq0k2lzdy2m": {
               "editing": false,
               "id": "nq0k2lzdy2m",
@@ -2425,6 +2577,30 @@
               "groupId": "eoyk2a8u1qy",
               "testId": "n57k2lz10xw",
               "waitForTarget": false
+            },
+            "ltbk378bhyu": {
+              "editing": false,
+              "id": "ltbk378bhyu",
+              "key": "ltbk378bhyu",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "n57k2lz10xw",
+              "waitForTarget": false,
+              "entity": "command"
             },
             "nq0k2lzfdz7": {
               "editing": false,
@@ -2450,6 +2626,30 @@
               "waitForTarget": false,
               "comment": "@assert [page.assertConsoleMessage] expected not to find console messages of type \"warning\" with text ~ \"ERROR\""
             },
+            "ltbk378ba6e": {
+              "editing": false,
+              "id": "ltbk378ba6e",
+              "key": "ltbk378ba6e",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "n57k2lz10xw",
+              "waitForTarget": false,
+              "entity": "command"
+            },
             "oblk2lzm7lc": {
               "editing": false,
               "id": "oblk2lzm7lc",
@@ -2474,6 +2674,30 @@
               "waitForTarget": false,
               "entity": "command",
               "comment": "@assert [page.assertConsoleMessage] expected not to find console messages of type \"log\" with text \"log message\""
+            },
+            "ltbk378ay58": {
+              "editing": false,
+              "id": "ltbk378ay58",
+              "key": "ltbk378ay58",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eoyk2a8u1qy",
+              "testId": "n57k2lz10xw",
+              "waitForTarget": false,
+              "entity": "command"
             },
             "2i9k2m29cez": {
               "editing": false,
@@ -2961,674 +3185,6 @@
             }
           },
           "disabled": false,
-          "failure": ""
-        },
-        "e1dk2n2mf0k": {
-          "title": "page.assertDialog / page.closeDialog (alert)",
-          "id": "e1dk2n2mf0k",
-          "editing": false,
-          "groupId": "eoyk2a8u1qy",
-          "key": "e1dk2n2mf0k",
-          "commands": {
-            "e1dk2n2yvfg": {
-              "editing": false,
-              "id": "e1dk2n2yvfg",
-              "key": "e1dk2n2yvfg",
-              "target": "page",
-              "method": "closeDialog",
-              "params": {
-                "type": "alert",
-                "substring": "Lorem1",
-                "action": "dismiss"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "e1dk2n2mf0k",
-              "waitForTarget": false
-            },
-            "e1dk2n30oqc": {
-              "editing": false,
-              "id": "e1dk2n30oqc",
-              "key": "e1dk2n30oqc",
-              "target": "ALERT_BTN",
-              "method": "click",
-              "params": {
-                "button": "left",
-                "clickCount": 1,
-                "delay": 0
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "e1dk2n2mf0k",
-              "waitForTarget": false
-            },
-            "e1dk2n2wcsh": {
-              "editing": false,
-              "id": "e1dk2n2wcsh",
-              "key": "e1dk2n2wcsh",
-              "target": "page",
-              "method": "assertDialog",
-              "assert": {
-                "not": "false",
-                "type": "any",
-                "assertion": "haveString",
-                "value": "Lorem1"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "e1dk2n2mf0k",
-              "waitForTarget": false
-            },
-            "e1dk2n31k0r": {
-              "editing": false,
-              "id": "e1dk2n31k0r",
-              "key": "e1dk2n31k0r",
-              "target": "page",
-              "method": "assertDialog",
-              "assert": {
-                "not": "false",
-                "type": "alert",
-                "assertion": "haveString",
-                "value": "Lorem1"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "e1dk2n2mf0k",
-              "waitForTarget": false
-            },
-            "e1dk2n329dg": {
-              "editing": false,
-              "id": "e1dk2n329dg",
-              "key": "e1dk2n329dg",
-              "target": "page",
-              "method": "assertDialog",
-              "assert": {
-                "not": "false",
-                "type": "alert",
-                "assertion": "haveSubstring",
-                "value": "Lorem"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "e1dk2n2mf0k",
-              "waitForTarget": false
-            },
-            "e1dk2n33hpn": {
-              "editing": false,
-              "id": "e1dk2n33hpn",
-              "key": "e1dk2n33hpn",
-              "target": "page",
-              "method": "assertDialog",
-              "assert": {
-                "not": "false",
-                "type": "confirm",
-                "assertion": "haveSubstring",
-                "value": "Lorem"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "e1dk2n2mf0k",
-              "comment": "@assert [page.assertDialog] expected to find dialogs of type \"confirm\" with message ~ \"Lorem\"",
-              "waitForTarget": false
-            },
-            "e1dk2n3320n": {
-              "editing": false,
-              "id": "e1dk2n3320n",
-              "key": "e1dk2n3320n",
-              "target": "page",
-              "method": "assertDialog",
-              "assert": {
-                "not": "true",
-                "type": "alert",
-                "assertion": "haveSubstring",
-                "value": "Lorem"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "e1dk2n2mf0k",
-              "waitForTarget": false,
-              "comment": "@assert [page.assertDialog] expected not to find dialogs of type \"alert\" with message ~ \"Lorem\""
-            }
-          },
-          "disabled": false,
-          "failure": ""
-        },
-        "eelk2n3dk6b": {
-          "editing": false,
-          "id": "eelk2n3dk6b",
-          "key": "eelk2n3dk6b",
-          "title": "page.assertDialog / page.closeDialog (confirm-dismiss)",
-          "commands": {
-            "eelk2n3dkiw": {
-              "editing": false,
-              "id": "eelk2n3dkiw",
-              "key": "eelk2n3dkiw",
-              "target": "page",
-              "method": "closeDialog",
-              "params": {
-                "type": "any",
-                "substring": "Lorem2",
-                "action": "dismiss"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3dk6b",
-              "waitForTarget": false
-            },
-            "eelk2n3dkrv": {
-              "editing": false,
-              "id": "eelk2n3dkrv",
-              "key": "eelk2n3dkrv",
-              "target": "CONFIRM_BTN",
-              "method": "click",
-              "params": {
-                "button": "left",
-                "clickCount": 1,
-                "delay": 0
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3dk6b",
-              "waitForTarget": false
-            },
-            "eelk2n3dkz9": {
-              "editing": false,
-              "id": "eelk2n3dkz9",
-              "key": "eelk2n3dkz9",
-              "target": "page",
-              "method": "assertDialog",
-              "assert": {
-                "not": "false",
-                "type": "any",
-                "assertion": "haveString",
-                "value": "Lorem2"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3dk6b",
-              "waitForTarget": false
-            },
-            "eelk2n3dl7a": {
-              "editing": false,
-              "id": "eelk2n3dl7a",
-              "key": "eelk2n3dl7a",
-              "target": "page",
-              "method": "assertDialog",
-              "assert": {
-                "not": "false",
-                "type": "confirm",
-                "assertion": "haveString",
-                "value": "Lorem2"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3dk6b",
-              "waitForTarget": false
-            },
-            "eelk2n3dlf3": {
-              "editing": false,
-              "id": "eelk2n3dlf3",
-              "key": "eelk2n3dlf3",
-              "target": "page",
-              "method": "assertDialog",
-              "assert": {
-                "not": "false",
-                "type": "confirm",
-                "assertion": "haveSubstring",
-                "value": "Lorem"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3dk6b",
-              "waitForTarget": false
-            },
-            "eelk2n3dlof": {
-              "editing": false,
-              "id": "eelk2n3dlof",
-              "key": "eelk2n3dlof",
-              "target": "page",
-              "method": "assertDialog",
-              "assert": {
-                "not": "false",
-                "type": "alert",
-                "assertion": "haveString",
-                "value": "Lorem2"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3dk6b",
-              "comment": "@assert [page.assertDialog] expected to find dialogs of type \"alert\" with message \"Lorem2\"",
-              "waitForTarget": false
-            },
-            "eelk2n3dlx8": {
-              "editing": false,
-              "id": "eelk2n3dlx8",
-              "key": "eelk2n3dlx8",
-              "target": "page",
-              "method": "assertDialog",
-              "assert": {
-                "not": "true",
-                "type": "confirm",
-                "assertion": "haveString",
-                "value": "Lorem2"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3dk6b",
-              "waitForTarget": false,
-              "comment": "@assert [page.assertDialog] expected not to find dialogs of type \"confirm\" with message \"Lorem2\""
-            },
-            "eelk2n5emk0": {
-              "editing": false,
-              "id": "eelk2n5emk0",
-              "key": "eelk2n5emk0",
-              "target": "CONFIRM_BTN",
-              "method": "assertAttribute",
-              "assert": {
-                "assertion": "equals",
-                "value": "false"
-              },
-              "params": {
-                "name": "data-rsp"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3dk6b",
-              "waitForTarget": false,
-              "entity": "command"
-            }
-          },
-          "disabled": false,
-          "expanded": false,
-          "adding": false,
-          "groupId": "eoyk2a8u1qy",
-          "failure": ""
-        },
-        "eelk2n3tdlq": {
-          "editing": false,
-          "id": "eelk2n3tdlq",
-          "key": "eelk2n3tdlq",
-          "title": "page.assertDialog / page.closeDialog (confirm-accept)",
-          "commands": {
-            "eelk2n3tdy2": {
-              "editing": false,
-              "id": "eelk2n3tdy2",
-              "key": "eelk2n3tdy2",
-              "target": "page",
-              "method": "closeDialog",
-              "params": {
-                "type": "confirm",
-                "substring": "Lorem4",
-                "action": "accept"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3tdlq",
-              "waitForTarget": false
-            },
-            "eelk2n3te73": {
-              "editing": false,
-              "id": "eelk2n3te73",
-              "key": "eelk2n3te73",
-              "target": "CONFIRM_ACCEPT_BTN",
-              "method": "click",
-              "params": {
-                "button": "left",
-                "clickCount": 1,
-                "delay": 0
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3tdlq",
-              "waitForTarget": false
-            },
-            "eelk2n3tefw": {
-              "editing": false,
-              "id": "eelk2n3tefw",
-              "key": "eelk2n3tefw",
-              "target": "CONFIRM_ACCEPT_BTN",
-              "method": "assertAttribute",
-              "assert": {
-                "assertion": "equals",
-                "value": "true"
-              },
-              "params": {
-                "name": "data-rsp"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3tdlq",
-              "waitForTarget": false
-            }
-          },
-          "disabled": false,
-          "expanded": false,
-          "adding": false,
-          "groupId": "eoyk2a8u1qy",
-          "failure": ""
-        },
-        "eelk2n3rt3z": {
-          "editing": false,
-          "id": "eelk2n3rt3z",
-          "key": "eelk2n3rt3z",
-          "title": "page.assertDialog / page.closeDialog (prompt-dismiss)",
-          "commands": {
-            "eelk2n3rtm9": {
-              "editing": false,
-              "id": "eelk2n3rtm9",
-              "key": "eelk2n3rtm9",
-              "target": "page",
-              "method": "closeDialog",
-              "params": {
-                "type": "prompt",
-                "substring": "Lorem3",
-                "action": "dismiss",
-                "promptText": "Ipsum"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3rt3z",
-              "waitForTarget": false
-            },
-            "eelk2n3rttp": {
-              "editing": false,
-              "id": "eelk2n3rttp",
-              "key": "eelk2n3rttp",
-              "target": "PROMPT_BTN",
-              "method": "click",
-              "params": {
-                "button": "left",
-                "clickCount": 1,
-                "delay": 0
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3rt3z",
-              "waitForTarget": false
-            },
-            "fxak2n5upav": {
-              "editing": false,
-              "id": "fxak2n5upav",
-              "key": "fxak2n5upav",
-              "target": "page",
-              "method": "assertDialog",
-              "assert": {
-                "not": "false",
-                "type": "prompt",
-                "assertion": "haveString",
-                "value": "Lorem3"
-              },
-              "params": {},
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3rt3z",
-              "waitForTarget": false,
-              "entity": "command"
-            },
-            "fxak2n5upul": {
-              "editing": false,
-              "id": "fxak2n5upul",
-              "key": "fxak2n5upul",
-              "target": "page",
-              "method": "assertDialog",
-              "assert": {
-                "not": "true",
-                "type": "prompt",
-                "assertion": "haveString",
-                "value": "Lorem3"
-              },
-              "params": {},
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3rt3z",
-              "waitForTarget": false,
-              "comment": "@assert [page.assertDialog] expected not to find dialogs of type \"prompt\" with message \"Lorem3\"",
-              "entity": "command"
-            },
-            "eelk2n3ru13": {
-              "editing": false,
-              "id": "eelk2n3ru13",
-              "key": "eelk2n3ru13",
-              "target": "PROMPT_BTN",
-              "method": "assertAttribute",
-              "assert": {
-                "assertion": "!equals",
-                "value": "Ipsum"
-              },
-              "params": {
-                "name": "data-rsp"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3rt3z",
-              "waitForTarget": false,
-              "entity": "command"
-            }
-          },
-          "disabled": false,
-          "expanded": false,
-          "adding": false,
-          "groupId": "eoyk2a8u1qy",
-          "failure": ""
-        },
-        "eelk2n3dotg": {
-          "editing": false,
-          "id": "eelk2n3dotg",
-          "key": "eelk2n3dotg",
-          "title": "page.assertDialog / page.closeDialog (prompt-accept)",
-          "commands": {
-            "eelk2n3dp8b": {
-              "editing": false,
-              "id": "eelk2n3dp8b",
-              "key": "eelk2n3dp8b",
-              "target": "page",
-              "method": "closeDialog",
-              "params": {
-                "type": "prompt",
-                "substring": "Lorem5",
-                "action": "accept",
-                "promptText": "Ipsum"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3dotg",
-              "waitForTarget": false
-            },
-            "eelk2n3dpgc": {
-              "editing": false,
-              "id": "eelk2n3dpgc",
-              "key": "eelk2n3dpgc",
-              "target": "PROMPT_ACCEPT_BTN",
-              "method": "click",
-              "params": {
-                "button": "left",
-                "clickCount": 1,
-                "delay": 0
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3dotg",
-              "waitForTarget": false
-            },
-            "eelk2n3mvz6": {
-              "editing": false,
-              "id": "eelk2n3mvz6",
-              "key": "eelk2n3mvz6",
-              "target": "PROMPT_ACCEPT_BTN",
-              "method": "assertAttribute",
-              "assert": {
-                "assertion": "equals",
-                "value": "Ipsum"
-              },
-              "params": {
-                "name": "data-rsp"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "eoyk2a8u1qy",
-              "testId": "eelk2n3dotg",
-              "waitForTarget": false
-            }
-          },
-          "disabled": false,
-          "expanded": false,
-          "adding": false,
-          "groupId": "eoyk2a8u1qy",
           "failure": ""
         },
         "iq7k2n8q80b": {
@@ -6851,5 +6407,5 @@
       }
     }
   },
-  "puppetry": "3.0.0-RC.2"
+  "puppetry": "3.0.0"
 }

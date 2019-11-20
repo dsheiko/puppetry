@@ -13,6 +13,7 @@ import { reload } from "./Params/Page/reload";
 import { waitFor } from "./Params/Page/waitFor";
 import { waitForSelector } from "./Params/Page/waitForSelector";
 import { press } from "./Params/Page/press";
+import { setUserAgent } from "./Params/Page/setUserAgent";
 import { evaluate } from "./Params/Page/evaluate";
 import { runjs } from "./Params/Page/runjs";
 import { debug } from "./Params/Page/debug";
@@ -121,6 +122,7 @@ export const schema = {
     press,
     scroll: scrollPage,
     reload,
+    setUserAgent,
     setCookie,
     waitFor,
     waitForSelector,

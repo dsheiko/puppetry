@@ -22,6 +22,7 @@
 - improvement: add page.assertPerformanceAssetWeight
 - improvement: add page.assertPerformanceAssetCount
 - improvement: add page.assertPerformanceTiming (page loading, redirection, network latency, processing)
+- improvement: add page.setUserAgent
 - improvement: extend page.setViewport with list of predefined resolutions
 - improvement: polish UX for every test step form
 - improvement: support Chrome Extensions

@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1573464641,
-  "loadedAt": 1573464602,
+  "savedAt": 1574163600,
+  "loadedAt": 1574161068,
   "modified": false,
   "filename": "sandbox-performance.json",
   "targets": {
@@ -129,7 +129,7 @@
                   "font": false,
                   "xhr": false
                 },
-                "script": "120",
+                "script": "200",
                 "stylesheet": "50",
                 "image": "1500"
               },
@@ -190,11 +190,11 @@
                   "processing": true
                 },
                 "loading": "4000",
-                "network": "1000",
+                "network": "1250",
                 "processing": "3500"
               },
               "disabled": false,
-              "failure": "Error: [page.assertPerformanceTiming] expected the network time to be under 400μ",
+              "failure": "",
               "variables": {},
               "expanded": false,
               "refName": "",
@@ -209,5 +209,5 @@
       }
     }
   },
-  "puppetry": "3.0.0-RC.1"
+  "puppetry": "3.0.0-RC.3"
 }

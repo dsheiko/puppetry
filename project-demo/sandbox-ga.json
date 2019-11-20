@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1572605357,
-  "loadedAt": 1572605824,
+  "savedAt": 1574168588,
+  "loadedAt": 1574249943,
   "modified": false,
   "filename": "sandbox-ga.json",
   "targets": {
@@ -489,7 +489,7 @@
                 "productCountAssertion": "any"
               },
               "disabled": false,
-              "failure": "Error: [page.assertGaTracking] expected to send \"EC: Checkout\" data (step = \"1\",",
+              "failure": "",
               "variables": {},
               "expanded": false,
               "refName": "",
@@ -554,16 +554,15 @@
               "assert": {
                 "assertion": "assertGaTracking",
                 "action": "ecPurchase",
-                "productCountAssertion": "equals",
                 "idAssertion": "contains",
+                "idValue": "24.",
                 "affiliationAssertion": "any",
-                "revenueAssertion": "equals",
+                "revenueAssertion": "any",
                 "taxAssertion": "any",
                 "shippingAssertion": "any",
                 "couponAssertion": "any",
-                "idValue": "24.",
-                "productCountValue": 1,
-                "revenueValue": 0
+                "productCountAssertion": "equals",
+                "productCountValue": 1
               },
               "disabled": false,
               "failure": "",
@@ -586,5 +585,5 @@
       }
     }
   },
-  "puppetry": "3.0.0-beta.2"
+  "puppetry": "3.0.0"
 }

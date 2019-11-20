@@ -335,6 +335,10 @@ module.exports = function( expect, util ) {
      * @returns {Object}
      */
     toBeVisible( actual, expected, source ) {
+        const renderDetails = ( actual ) => actual.isAvailable ? `[display: ${ actual.display }, `
+              + `visibility: ${ actual.visibility }, opacity: ${ actual.opacity }, `
+              + `offset: ${ actual.isIntersecting ? "within viewport" : "out of viewport" }]`
+              : `[ not available ]`;
         switch ( true ) {
 
           case actual.isAvailable === false && expected.availability === "available":
@@ -356,18 +360,17 @@ module.exports = function( expect, util ) {
               || !actual.isIntersecting
             ):
             return expectReturn( false, `[${ source }] expected the target element to be `
-              + `available and observable, but it is not` );
+              + `available and observable, but it is not ${ renderDetails( actual ) }`);
 
-          case expected.availability === "invisible"
-            && (
-              actual.isAvailable === true
-              || actual.display !== "none"
-              || actual.visibility !== "hidden"
-              || actual.opacity !== 0
-              || actual.isIntersecting
-            ):
-            return expectReturn( false, `[${ source }] expected the target element to be `
+          case expected.availability === "invisible" && actual.isAvailable === true:
+            if ( actual.display === "none"
+              || actual.visibility === "hidden"
+              || actual.opacity === 0 ) {
+              return expectReturn( true, `[${ source }] expected the target element to be `
               + `available and not observable, but it is` );
+            }
+            return expectReturn( false, `[${ source }] expected the target element to be `
+              + `available and not observable, but it is ${ renderDetails( actual ) }` );
 
           case actual.display === "none" && expected.display === "not":
             return expectReturn( false, `[${ source }] expected the target element to have `

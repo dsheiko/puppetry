@@ -3,7 +3,7 @@
   "appPanels": {
     "suite": {
       "panes": [
-        "targets"
+        "groups"
       ]
     },
     "settings": {
@@ -141,7 +141,7 @@
         },
         "kxuk2lxc0w1": {
           "key": "kxuk2lxc0w1",
-          "value": true
+          "value": false
         },
         "lbuk2lxlwie": {
           "key": "lbuk2lxlwie",
@@ -153,23 +153,23 @@
         },
         "mu1k2lyqh2s": {
           "key": "mu1k2lyqh2s",
-          "value": true
+          "value": false
         },
         "n57k2lz10xw": {
           "key": "n57k2lz10xw",
-          "value": true
+          "value": false
         },
         "oblk2lzohdj": {
           "key": "oblk2lzohdj",
-          "value": true
+          "value": false
         },
         "oblk2lztvre": {
           "key": "oblk2lztvre",
-          "value": true
+          "value": false
         },
         "e1dk2n2mf0k": {
           "key": "e1dk2n2mf0k",
-          "value": true
+          "value": false
         },
         "eelk2n3dk6b": {
           "key": "eelk2n3dk6b",
@@ -350,6 +350,10 @@
         "co8k2loa3sh": {
           "key": "co8k2loa3sh",
           "value": true
+        },
+        "2hgk379h439": {
+          "key": "2hgk379h439",
+          "value": true
         }
       }
     },
@@ -483,11 +487,33 @@
           "value": true
         }
       }
+    },
+    "ltbk378s7fb": {
+      "key": "ltbk378s7fb",
+      "value": true,
+      "tests": {
+        "ltbk378vixm": {
+          "key": "ltbk378vixm",
+          "value": true
+        },
+        "ltbk378vm6i": {
+          "key": "ltbk378vm6i",
+          "value": true
+        },
+        "ltbk378vnt5": {
+          "key": "ltbk378vnt5",
+          "value": true
+        },
+        "ltbk378vomc": {
+          "key": "ltbk378vomc",
+          "value": true
+        }
+      }
     }
   },
-  "savedAt": 1574090875,
+  "savedAt": 1574252904,
   "modified": false,
-  "lastOpenSuite": "chained-target.json",
+  "lastOpenSuite": "puppeteer.json",
   "variables": {},
   "targets": {
     "js4k1ukyk9a": {
@@ -505,5 +531,5 @@
   ],
   "autosave": true,
   "projectDirectory": "/home/sheiko/PUPPETRY/puppetry-test",
-  "puppetry": "3.0.0-RC.3"
+  "puppetry": "3.0.0"
 }

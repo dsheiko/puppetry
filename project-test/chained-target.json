@@ -4,8 +4,8 @@
   "snippets": false,
   "description": "",
   "savedAt": 1574089644,
-  "loadedAt": 1574089117,
-  "modified": true,
+  "loadedAt": 1574250095,
+  "modified": false,
   "filename": "chained-target.json",
   "targets": {
     "7vnk2vvh36o": {
@@ -511,5 +511,5 @@
       }
     }
   },
-  "puppetry": "3.0.0-RC.3"
+  "puppetry": "3.0.0"
 }
