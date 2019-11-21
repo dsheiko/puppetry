@@ -31,7 +31,7 @@ result = consoleLog
   .filter( message => ( "${ assert.type }" === "any" || message.type() === "${ assert.type }" ) )
   .map( message => message.text() );
 ${ cbBody.replace( /^ /g, "" ) }
-consoleLog = [];
+${ assert.reset !== false ? `consoleLog = [];` : `` }
   ` );
 }
 
@@ -42,7 +42,7 @@ result = dialogLog
   .filter( dialog => ( "${ assert.type }" === "any" || dialog.type() === "${ assert.type }" ) )
   .map( dialog => dialog.message() );
 ${ cbBody.replace( /^ /g, "" ) }
-dialogLog = [];
+${ assert.reset !== false ? `dialogLog = [];` : `` }
 ` );
 }
 

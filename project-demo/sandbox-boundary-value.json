@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": null,
-  "savedAt": 1574075043,
-  "loadedAt": 1574075036,
+  "savedAt": 1574330891,
+  "loadedAt": 1574330878,
   "modified": false,
   "filename": "sandbox-boundary-value.json",
   "targets": {},
@@ -127,7 +127,8 @@
                 "not": "false",
                 "type": "info",
                 "assertion": "haveString",
-                "value": "FAIL"
+                "value": "FAIL",
+                "reset": true
               },
               "disabled": false,
               "failure": "",
@@ -173,9 +174,9 @@
                 "not": "false",
                 "type": "info",
                 "assertion": "haveString",
-                "value": "FAIL"
+                "value": "FAIL",
+                "reset": true
               },
-              "params": {},
               "disabled": false,
               "failure": "",
               "variables": {},
@@ -193,5 +194,5 @@
       }
     }
   },
-  "puppetry": "3.0.0-RC.3"
+  "puppetry": "3.0.0"
 }

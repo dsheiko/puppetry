@@ -2,8 +2,8 @@
   "title": "TodoMVC",
   "timeout": 50000,
   "snippets": false,
-  "savedAt": 1573648586,
-  "loadedAt": 1574069029,
+  "savedAt": 1574264638,
+  "loadedAt": 1574264599,
   "modified": false,
   "filename": "todomvc.json",
   "targets": {
@@ -492,6 +492,11 @@
               "method": "screenshot",
               "params": {
                 "name": "#1 Item added",
+                "targets": [
+                  "HEADER",
+                  "MAIN",
+                  "FOOTER"
+                ],
                 "fullPage": false,
                 "omitBackground": false,
                 "x": null,
@@ -2542,6 +2547,6 @@
       }
     }
   },
-  "puppetry": "3.0.0-RC.3",
+  "puppetry": "3.0.0",
   "description": "TODOMVC app functional tests based on the specification (https://github.com/tastejs/todomvc/blob/master/app-spec.md)"
 }

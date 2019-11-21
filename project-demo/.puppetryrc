@@ -74,9 +74,9 @@
       }
     }
   },
-  "savedAt": 1574263658,
+  "savedAt": 1574330982,
   "modified": false,
-  "lastOpenSuite": "sandbox-ga.json",
+  "lastOpenSuite": "sandbox-exhaustive.json",
   "variables": {
     "dduk2fx8tvf": {
       "name": "SANDBOX_BASEURL",

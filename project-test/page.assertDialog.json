@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": null,
-  "savedAt": 1574252279,
-  "loadedAt": 1574251993,
+  "savedAt": 1574331070,
+  "loadedAt": 1574331293,
   "modified": false,
   "filename": "page.assertDialog.json",
   "targets": {
@@ -157,9 +157,9 @@
                 "not": "false",
                 "type": "any",
                 "assertion": "haveString",
-                "value": "Lorem1"
+                "value": "Lorem1",
+                "reset": false
               },
-              "params": {},
               "disabled": false,
               "failure": "",
               "variables": {},
@@ -170,30 +170,6 @@
               "groupId": "ltbk378s7fb",
               "testId": "ltbk378vixm",
               "waitForTarget": false
-            },
-            "ltbk378vk8h": {
-              "editing": false,
-              "id": "ltbk378vk8h",
-              "key": "ltbk378vk8h",
-              "target": "ALERT_BTN",
-              "method": "click",
-              "assert": {},
-              "params": {
-                "button": "left",
-                "clickCount": 1,
-                "delay": 0
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "ltbk378s7fb",
-              "testId": "ltbk378vixm",
-              "waitForTarget": false,
-              "entity": "command"
             },
             "ltbk378vkek": {
               "editing": false,
@@ -205,9 +181,9 @@
                 "not": "false",
                 "type": "alert",
                 "assertion": "haveString",
-                "value": "Lorem1"
+                "value": "Lorem1",
+                "reset": false
               },
-              "params": {},
               "disabled": false,
               "failure": "",
               "variables": {},
@@ -219,30 +195,6 @@
               "testId": "ltbk378vixm",
               "waitForTarget": false
             },
-            "ltbk378vkql": {
-              "editing": false,
-              "id": "ltbk378vkql",
-              "key": "ltbk378vkql",
-              "target": "ALERT_BTN",
-              "method": "click",
-              "assert": {},
-              "params": {
-                "button": "left",
-                "clickCount": 1,
-                "delay": 0
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "ltbk378s7fb",
-              "testId": "ltbk378vixm",
-              "waitForTarget": false,
-              "entity": "command"
-            },
             "ltbk378vkwz": {
               "editing": false,
               "id": "ltbk378vkwz",
@@ -253,9 +205,9 @@
                 "not": "false",
                 "type": "alert",
                 "assertion": "haveSubstring",
-                "value": "Lorem"
+                "value": "Lorem",
+                "reset": false
               },
-              "params": {},
               "disabled": false,
               "failure": "",
               "variables": {},

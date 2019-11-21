@@ -1,10 +1,11 @@
 /*eslint spellcheck/spell-checker: 0*/
 import React from "react";
 import PropTypes from "prop-types";
-import { Form,  Row, Col, Select, Input } from "antd";
+import { Form,  Row, Col, Select, Input, Checkbox } from "antd";
 import If from "component/Global/If";
 import { getAssertion } from "./helpers";
 import AbstractComponent from "component/AbstractComponent";
+import Tooltip from "component/Global/Tooltip";
 
 const Option = Select.Option,
       FormItem = Form.Item;
@@ -129,6 +130,20 @@ export class AssertConsoleMessage extends AbstractComponent {
         </If>
 
 
+      </Row>
+      <Row gutter={24}>
+        <Col span={ 24 } >
+          <FormItem >
+            { getFieldDecorator( "assert.reset", {
+              initialValue: typeof record.assert.reset === "undefined" ? true : record.assert.reset,
+              valuePropName: "checked"
+            })( <Checkbox>flush the stack of console messages <Tooltip
+              title="Tick it off we you do sequential assertions after a single event"
+              icon="question-circle"
+              pos="up-left"
+            /></Checkbox> ) }
+          </FormItem>
+        </Col>
       </Row>
     </React.Fragment> );
   }

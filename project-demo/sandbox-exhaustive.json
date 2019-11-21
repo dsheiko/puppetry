@@ -3,9 +3,9 @@
   "timeout": 50000,
   "snippets": false,
   "description": null,
-  "savedAt": 1574076160,
-  "loadedAt": 1574076093,
-  "modified": true,
+  "savedAt": 1574330810,
+  "loadedAt": 1574330953,
+  "modified": false,
   "filename": "sandbox-exhaustive.json",
   "targets": {},
   "groups": {
@@ -125,7 +125,8 @@
                 "not": "false",
                 "type": "alert",
                 "assertion": "haveString",
-                "value": "OK"
+                "value": "OK",
+                "reset": true
               },
               "disabled": false,
               "failure": "",
@@ -170,7 +171,8 @@
                 "not": "false",
                 "type": "alert",
                 "assertion": "haveString",
-                "value": "OK"
+                "value": "OK",
+                "reset": true
               },
               "disabled": false,
               "failure": "",
@@ -215,7 +217,8 @@
                 "not": "false",
                 "type": "alert",
                 "assertion": "haveString",
-                "value": "OK"
+                "value": "OK",
+                "reset": true
               },
               "disabled": false,
               "failure": "",
@@ -233,5 +236,5 @@
       }
     }
   },
-  "puppetry": "3.0.0-RC.3"
+  "puppetry": "3.0.0"
 }
