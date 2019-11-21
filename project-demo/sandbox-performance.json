@@ -4,7 +4,7 @@
   "snippets": false,
   "description": "",
   "savedAt": 1574163600,
-  "loadedAt": 1574161068,
+  "loadedAt": 1574350226,
   "modified": false,
   "filename": "sandbox-performance.json",
   "targets": {
@@ -209,5 +209,5 @@
       }
     }
   },
-  "puppetry": "3.0.0-RC.3"
+  "puppetry": "3.0.0"
 }

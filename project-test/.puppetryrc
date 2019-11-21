@@ -402,7 +402,7 @@
         },
         "9mxk2vqnzs5": {
           "key": "9mxk2vqnzs5",
-          "value": false
+          "value": true
         },
         "boek2vrcw2x": {
           "key": "boek2vrcw2x",
@@ -410,7 +410,7 @@
         },
         "nsgk2vrrbnp": {
           "key": "nsgk2vrrbnp",
-          "value": false
+          "value": true
         },
         "nsgk2vrrhvn": {
           "key": "nsgk2vrrhvn",
@@ -418,11 +418,11 @@
         },
         "nsgk2vrslm1": {
           "key": "nsgk2vrslm1",
-          "value": false
+          "value": true
         },
         "nsgk2vrrtei": {
           "key": "nsgk2vrrtei",
-          "value": false
+          "value": true
         },
         "nsgk2vrxtwu": {
           "key": "nsgk2vrxtwu",
@@ -430,11 +430,11 @@
         },
         "nsgk2vs3imj": {
           "key": "nsgk2vs3imj",
-          "value": false
+          "value": true
         },
         "nsgk2vs8rgk": {
           "key": "nsgk2vs8rgk",
-          "value": false
+          "value": true
         },
         "8oak2w2puuk": {
           "key": "8oak2w2puuk",
@@ -511,9 +511,9 @@
       }
     }
   },
-  "savedAt": 1574331348,
+  "savedAt": 1574354674,
   "modified": false,
-  "lastOpenSuite": "page.assertDialog.json",
+  "lastOpenSuite": "target.assertVisible.json",
   "variables": {},
   "targets": {
     "js4k1ukyk9a": {

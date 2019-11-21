@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1573577748,
-  "loadedAt": 1573577966,
+  "savedAt": 1574354656,
+  "loadedAt": 1574354490,
   "modified": false,
   "filename": "target.assertVisible.json",
   "targets": {
@@ -234,58 +234,6 @@
               "entity": "command",
               "waitForTarget": false
             },
-            "nsgk2vrxudt": {
-              "editing": false,
-              "id": "nsgk2vrxudt",
-              "key": "nsgk2vrxudt",
-              "target": "GENERIC",
-              "method": "assertVisible",
-              "assert": {
-                "assertion": "visible",
-                "availability": "unavailable",
-                "display": "not",
-                "visibility": "not",
-                "opacity": "any",
-                "isIntersecting": "true"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "9mxk2vql8y4",
-              "testId": "nsgk2vrxtwu",
-              "entity": "command",
-              "waitForTarget": false
-            },
-            "nsgk2vs10ro": {
-              "editing": false,
-              "id": "nsgk2vs10ro",
-              "key": "nsgk2vs10ro",
-              "target": "NOT_AVAILABLE",
-              "method": "assertVisible",
-              "assert": {
-                "assertion": "visible",
-                "availability": "available",
-                "display": "any",
-                "visibility": "any",
-                "opacity": "any",
-                "isIntersecting": "any"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "9mxk2vql8y4",
-              "testId": "nsgk2vrxtwu",
-              "entity": "command",
-              "waitForTarget": false
-            },
             "nsgk2vs1f8z": {
               "editing": false,
               "id": "nsgk2vs1f8z",
@@ -311,12 +259,67 @@
               "testId": "nsgk2vrxtwu",
               "entity": "command",
               "waitForTarget": false
+            },
+            "ivdk38xbjvh": {
+              "editing": false,
+              "id": "ivdk38xbjvh",
+              "key": "ivdk38xbjvh",
+              "target": "GENERIC",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "availability": "unavailable",
+                "display": "any",
+                "visibility": "any",
+                "opacity": "any",
+                "isIntersecting": "any"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "9mxk2vql8y4",
+              "testId": "nsgk2vrxtwu",
+              "entity": "command",
+              "waitForTarget": false,
+              "comment": "@assert [GENERIC.assertVisible] expected the target element to be not available, but it is"
+            },
+            "ivdk38xbnk2": {
+              "editing": false,
+              "id": "ivdk38xbnk2",
+              "key": "ivdk38xbnk2",
+              "target": "NOT_AVAILABLE",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "availability": "available",
+                "display": "any",
+                "visibility": "any",
+                "opacity": "any",
+                "isIntersecting": "any"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "9mxk2vql8y4",
+              "testId": "nsgk2vrxtwu",
+              "entity": "command",
+              "waitForTarget": false,
+              "comment": "@assert [NOT_AVAILABLE.assertVisible] expected the target element to be available, but it is not"
             }
           },
           "disabled": false,
           "expanded": false,
           "adding": false,
-          "groupId": "9mxk2vql8y4"
+          "groupId": "9mxk2vql8y4",
+          "failure": ""
         },
         "nsgk2vs3imj": {
           "editing": false,
@@ -489,7 +492,8 @@
           "disabled": false,
           "expanded": false,
           "adding": false,
-          "groupId": "9mxk2vql8y4"
+          "groupId": "9mxk2vql8y4",
+          "failure": ""
         },
         "nsgk2vs8rgk": {
           "editing": false,
@@ -497,60 +501,6 @@
           "key": "nsgk2vs8rgk",
           "title": "target.assertVisible (available and NOT visible)",
           "commands": {
-            "nsgk2vs8rry": {
-              "editing": false,
-              "id": "nsgk2vs8rry",
-              "key": "nsgk2vs8rry",
-              "target": "GENERIC",
-              "method": "assertVisible",
-              "assert": {
-                "assertion": "visible",
-                "availability": "invisible",
-                "display": "any",
-                "visibility": "any",
-                "opacity": "any",
-                "isIntersecting": "any"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "9mxk2vql8y4",
-              "testId": "nsgk2vs8rgk",
-              "entity": "command",
-              "waitForTarget": false,
-              "comment": "@assert [GENERIC.assertVisible] expected the target element to be available and not observable, but it is"
-            },
-            "nsgk2vs8s0p": {
-              "editing": false,
-              "id": "nsgk2vs8s0p",
-              "key": "nsgk2vs8s0p",
-              "target": "NOT_AVAILABLE",
-              "method": "assertVisible",
-              "assert": {
-                "assertion": "visible",
-                "availability": "invisible",
-                "display": "any",
-                "visibility": "any",
-                "opacity": "any",
-                "isIntersecting": "any"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "9mxk2vql8y4",
-              "testId": "nsgk2vs8rgk",
-              "entity": "command",
-              "waitForTarget": false,
-              "comment": "@assert [NOT_AVAILABLE.assertVisible] expected the target element to be available and not observable, but it is"
-            },
             "nsgk2vs8sah": {
               "editing": false,
               "id": "nsgk2vs8sah",
@@ -576,7 +526,7 @@
               "testId": "nsgk2vs8rgk",
               "entity": "command",
               "waitForTarget": false,
-              "comment": "@assert [NOT_DISPLAYED.assertVisible] expected the target element to be available and not observable, but it is"
+              "comment": ""
             },
             "nsgk2vs8sim": {
               "editing": false,
@@ -603,7 +553,7 @@
               "testId": "nsgk2vs8rgk",
               "entity": "command",
               "waitForTarget": false,
-              "comment": "@assert [NOT_VISIBLE.assertVisible] expected the target element to be available and not observable, but it is"
+              "comment": ""
             },
             "nsgk2vs8sqo": {
               "editing": false,
@@ -630,7 +580,7 @@
               "testId": "nsgk2vs8rgk",
               "entity": "command",
               "waitForTarget": false,
-              "comment": "@assert [NOT_OPAQUE.assertVisible] expected the target element to be available and not observable, but it is"
+              "comment": ""
             },
             "nsgk2vs8sys": {
               "editing": false,
@@ -657,7 +607,63 @@
               "testId": "nsgk2vs8rgk",
               "entity": "command",
               "waitForTarget": false,
-              "comment": "@assert [OUT_OF_VIEW.assertVisible] expected the target element to be available and not observable, but it is"
+              "comment": ""
+            },
+            "jfgk38y165t": {
+              "editing": false,
+              "id": "jfgk38y165t",
+              "key": "jfgk38y165t",
+              "target": "GENERIC",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "availability": "invisible",
+                "display": "any",
+                "visibility": "any",
+                "opacity": "any",
+                "isIntersecting": "any"
+              },
+              "params": {},
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "9mxk2vql8y4",
+              "testId": "nsgk2vs8rgk",
+              "entity": "command",
+              "waitForTarget": false,
+              "comment": "@assert [GENERIC.assertVisible] expected the target element to be available and not observable, but it is"
+            },
+            "jfgk38y16hx": {
+              "editing": false,
+              "id": "jfgk38y16hx",
+              "key": "jfgk38y16hx",
+              "target": "NOT_AVAILABLE",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "availability": "invisible",
+                "display": "any",
+                "visibility": "any",
+                "opacity": "any",
+                "isIntersecting": "any"
+              },
+              "params": {},
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "9mxk2vql8y4",
+              "testId": "nsgk2vs8rgk",
+              "entity": "command",
+              "waitForTarget": false,
+              "comment": "@assert [NOT_AVAILABLE.assertVisible] expected the target element to be available and not observable, but it is"
             }
           },
           "disabled": false,
@@ -901,7 +907,8 @@
           "disabled": false,
           "expanded": false,
           "adding": false,
-          "groupId": "9mxk2vql8y4"
+          "groupId": "9mxk2vql8y4",
+          "failure": ""
         },
         "nsgk2vrrbnp": {
           "title": "target.assertVisible (opacity)",
@@ -1018,7 +1025,9 @@
               "waitForTarget": false,
               "entity": "command"
             }
-          }
+          },
+          "disabled": false,
+          "failure": ""
         },
         "nsgk2vrslm1": {
           "title": "target.assertVisible (offset)",
@@ -1108,10 +1117,12 @@
               "waitForTarget": false,
               "entity": "command"
             }
-          }
+          },
+          "disabled": false,
+          "failure": ""
         }
       }
     }
   },
-  "puppetry": "3.0.0-RC.2"
+  "puppetry": "3.0.0"
 }

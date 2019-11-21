@@ -64,10 +64,10 @@ export class AssertVisible extends AbstractComponent {
                 initialValue: result( assert, "availability", "visible" )
               })(
                 <Select onChange={ this.onChangeAvailable }>
-                  <Option value="visible">present on the page and observable</Option>
-                  <Option value="available">present on the page</Option>
-                  <Option value="invisible">present, but NOT observable</Option>
-                  <Option value="unavailable">NOT present on the page</Option>
+                  <Option value="visible">available on the page and observable</Option>
+                  <Option value="available">available on the page</Option>
+                  <Option value="invisible">available, but NOT observable</Option>
+                  <Option value="unavailable">NOT available on the page</Option>
 
                 </Select>
               ) }

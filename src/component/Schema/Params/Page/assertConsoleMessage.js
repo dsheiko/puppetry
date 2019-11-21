@@ -19,11 +19,11 @@ export const assertConsoleMessage = {
   commonly: "assert console message",
 
   toLabel: ({ assert }) => `(${ renderBoolean( assert.not ) === "true" ? "none" : "any" }
-    of type \`${ assert.type }\` with \`${ assert.value }\`)`,
+    of type \`${ assert.type }\` with \`${ assert.value }\`${ assert.reset !== false ? " and flush stack" : "" })`,
 
   toGherkin: ({ assert }) => `Assert that there were
     sent to the console ${ renderBoolean( assert.not ) === "true" ? "no" : "any" } messages
-    of type \`${ assert.type }\` with \`${ assert.value }\``,
+    of type \`${ assert.type }\` with \`${ assert.value }\`${ assert.reset !== false ? " and flush stack" : "" }`,
 
   assert: {
     node: AssertConsoleMessage
