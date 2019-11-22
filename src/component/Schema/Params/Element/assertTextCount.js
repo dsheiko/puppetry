@@ -14,7 +14,7 @@ export const assertTextCount = {
   toLabel: ({ params, assert }) =>
     `(has ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }\` child elements with \`${ params.text }\`)`,
 
-  toGherkin: ({ target, params, assert }) => `Assert that element \`${ target }\` has
+  toGherkin: ({ target, params, assert }) => `Assert that target \`${ target }\` has
    ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }\` child elements containing \`${ params.text }\``,
 
   commonly: "assert count of elements with text",

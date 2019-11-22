@@ -20,7 +20,7 @@ export const assertPosition = {
 
   toLabel: ({ assert }) => `(is ${ assertToLabel( assert ) })`,
 
-  toGherkin: ({ target, assert }) => `Assert that element \`${ target }\`
+  toGherkin: ({ target, assert }) => `Assert that target \`${ target }\`
     is located ${ assertToLabel( assert ) }`,
 
   commonly: "assert relative position",

@@ -137,13 +137,15 @@ export class ParamsFormBuilder extends React.Component {
         }
       </Select> );
     case SELECT:
-      // onChange={ ( value ) => ( field.onChange ? field.onChange( value, this.props.form ) : () => {}) }
       return ( <Select
         { ...SELECT_SEARCH_PROPS }
         style={ inputStyle }
 
         placeholder={ field.placeholder }
-        onSelect={ onSelect }
+        onSelect={ ( value ) => {
+          field.onChange && field.onChange( value, this.props.form );
+          onSelect( value );
+        }}
       >
         {
           field.options.map( ( option, inx ) => {

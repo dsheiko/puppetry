@@ -12,7 +12,7 @@ export const assertHtml = {
   toLabel: ({ assert }) => {
     return `(${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )})`;
   },
-  toGherkin: ({ target, assert }) => `Assert that text content of \`${ target }\`
+  toGherkin: ({ target, assert }) => `Assert that HTML content of \`${ target }\`
     ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )}`,
 
   commonly: "assert HTML",

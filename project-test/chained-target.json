@@ -4,8 +4,8 @@
   "snippets": false,
   "description": "",
   "savedAt": 1574089644,
-  "loadedAt": 1574250095,
-  "modified": false,
+  "loadedAt": 1574423663,
+  "modified": true,
   "filename": "chained-target.json",
   "targets": {
     "7vnk2vvh36o": {
@@ -43,6 +43,17 @@
       "ref": "",
       "key": "oi5k2vxclx2"
     },
+    "m2jk3a3d9ue": {
+      "editing": false,
+      "id": "m2jk3a3d9ue",
+      "key": "m2jk3a3d9ue",
+      "target": "IFRAME_FOO_LOCAL",
+      "selector": "#iframeFooLocalTarget",
+      "disabled": false,
+      "adding": false,
+      "parentType": "iframe",
+      "ref": "IFRAME_FOO"
+    },
     "oi5k2vxlm6p": {
       "target": "IFRAME_BAR",
       "id": "oi5k2vxlm6p",
@@ -50,15 +61,6 @@
       "selector": "#iframeBar",
       "ref": "IFRAME_FOO",
       "key": "oi5k2vxlm6p",
-      "parentType": "iframe"
-    },
-    "oi5k2vxm0u8": {
-      "target": "IFRAME_FOO_LOCAL",
-      "id": "oi5k2vxm0u8",
-      "editing": false,
-      "selector": "#iframeFooLocalTarget",
-      "ref": "IFRAME_FOO",
-      "key": "oi5k2vxm0u8",
       "parentType": "iframe"
     },
     "oi5k2vxmg5h": {

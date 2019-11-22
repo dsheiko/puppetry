@@ -48,7 +48,7 @@ export const assertVisible = {
 
   toGherkin: ( command ) => {
     const { target, assert } = migrateAssertVisible( command );
-    return `Assert that element \`${ target }\` is ${ visibleObjToString( assert ) }`;
+    return `Assert that target \`${ target }\` is ${ visibleObjToString( assert ) }`;
   },
 
   commonly: "assert visibility",

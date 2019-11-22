@@ -3,7 +3,7 @@
   "appPanels": {
     "suite": {
       "panes": [
-        "groups"
+        "targets"
       ]
     },
     "settings": {
@@ -145,7 +145,7 @@
         },
         "lbuk2lxlwie": {
           "key": "lbuk2lxlwie",
-          "value": false
+          "value": true
         },
         "mu1k2lypjks": {
           "key": "mu1k2lypjks",
@@ -353,7 +353,7 @@
         },
         "2hgk379h439": {
           "key": "2hgk379h439",
-          "value": true
+          "value": false
         }
       }
     },
@@ -511,9 +511,9 @@
       }
     }
   },
-  "savedAt": 1574354674,
+  "savedAt": 1574424146,
   "modified": false,
-  "lastOpenSuite": "target.assertVisible.json",
+  "lastOpenSuite": "chained-target.json",
   "variables": {},
   "targets": {
     "js4k1ukyk9a": {
