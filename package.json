@@ -38,7 +38,8 @@
     "lint:fix": "eslint --ext=js,jsx --fix ./src",
     "preversion": "npm run lint && npm run test && npm run build",
     "postversion": "git push && git push --tags",
-    "publish:snapcraft": "snapcraft push dist/puppetry-linux-v$npm_package_version-amd64.snap --release stable"
+    "publish:snapcraft": "snapcraft push dist/puppetry-linux-v$npm_package_version-amd64.snap --release stable",
+    "readme": "markserv ."
   },
   "dependencies": {
     "@babel/core": "^7.1.2",

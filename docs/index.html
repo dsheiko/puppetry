@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link href="./assets/index.css" rel="stylesheet" type="text/css">
+    <link href="./assets/index.css?8" rel="stylesheet" type="text/css">
 
 
     <meta name="description" content="Open source cross-platform IDE for functional automated testing built on top of Puppeteer and Jest. With Puppetry QA engineers can record and manage test cases instead of coding.">
@@ -129,11 +129,11 @@
 
           <img
               class="banner__img lazyload blur-up"
-              alt="Puppetry is an open-source desktop application that gives non-developers the ability to create, manage, and integrate automated tests for Web"
-              src="./assets/img/puppetry-welcome.png?v2"
+              alt="Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline"
+              src="./assets/img/puppetry-welcome.png?v3"
               srcset="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTg1Ij48ZGVmcy8+PHBhdGggZmlsbD0iI2I4YzBjNyIgZD0iTTAgMGgzMDB2MTg1SDB6Ii8+PGcgZmlsbC1vcGFjaXR5PSIuNSI+PHBhdGggZD0iTTY1LTE4LjJ2MjIxLjVMLTE4LjIgNzUuNnoiLz48cGF0aCBmaWxsPSIjMDAwMDE2IiBkPSJNLTE4LjIgMTc4LjdsOTguNSAyNC42TDExLTE4LjJ6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTY3LjQtMTguMmwyNTAuOCA5MS40TDY4LjYgMjAzLjN6Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTI5My42IDE3Ny41Vi0xOC4yTDYwLjQgMTc2LjR6Ii8+PHBhdGggZmlsbD0iIzAwMDIzNyIgZD0iTTY1IDE4Mi4yTC0xOC4yIDQuMWw4NC40IDMuNXoiLz48cGF0aCBkPSJNMjk0LjcgMTUuOGwyMy41IDczLjgtMjIuMyA4NS42eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik02OS43IDE3NEw2Ni4yIDE3IDI5NiAxOC4yeiIvPjxwYXRoIGZpbGw9IiMwMDIwNGEiIGQ9Ik02Ni4yLjZMNjQgMTgyLjJsLTgyLTguMnoiLz48cGF0aCBmaWxsPSIjMjAyMzBjIiBkPSJNMTU2LjQgMTc4LjdoMTYxLjhMMjM1IDIwMy4zeiIvPjxwYXRoIGZpbGw9IiM1NjU3NDYiIGQ9Ik05MC44IDIwMy4zbC01MC40LTI1LjggMTQzIDIuNHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTE2LjYgMTc3LjVsMTcwLTExLjcgMS4xLTE1N3oiLz48cGF0aCBmaWxsPSIjMGE3MWMzIiBkPSJNMTEuMSA4MS40bC03IDI1LjggNjMuMy0xMi45eiIvPjxwYXRoIGZpbGw9IiMwMDBhMTYiIGQ9Ik02NSA4OC41bC0xLTcyLjdMMi45IDI0eiIvPjxwYXRoIGZpbGw9IiNmZWZkZmQiIGQ9Ik0xNDAgNy42bDEzNi0xLjIgMTguNyAxNjQuMXoiLz48cGF0aCBmaWxsPSIjYzJiNmE3IiBkPSJNNTIuMS0xOC4yTDEzOSA1LjNILTE4eiIvPjxwYXRoIGZpbGw9IiMwMDE3M2IiIGQ9Ik0xLjggODguNWw2MC45IDkwLjItNTUtMS4yeiIvPjwvZz48L3N2Zz4="
-              data-srcset="./assets/img/puppetry-welcome-620.png 1x,
-                           ./assets/img/puppetry-welcome.png?v2 2x"
+              data-srcset="./assets/img/puppetry-welcome-620.png?v3 1x,
+                           ./assets/img/puppetry-welcome.png?v3 2x"
               data-sizes="auto"
               />
 
@@ -157,15 +157,30 @@
           <div class="hero-card">
             <img class="hero-card__icon" src="./assets/img/round-touch_app-24px.svg" alt="Web testing solution for non-developers" />
             <h3>Web testing solution for non-developers</h3>
-            <p>Puppetry doesn't require programming skills. You just select from the list one of available methods or assertions for a page or an element on the page and follow the guiding tips.
+            <p>
+              Puppetry requires neither programming skills nor experience with any of web-drivers/frameworks.
+              Everything you may need to create and manage tests is available via
+              <a target="_blank" href="https://docs.puppetry.app/v/3.0.0/getting-started">extensive UI</a> and achievable without any scripting.
             </p>
           </div>
+
           <div class="hero-card">
-            <img class="hero-card__icon" src="./assets/img/round-developer_board-24px.svg" alt="Ready for Continuous Integration" />
-            <h3>Ready for Continuous Integration</h3>
-            <p>Puppetry can <a target="_blank" href="https://docs.puppetry.app/exporting-tests-for-ci">export the tests</a> into a Jest.js project.
-              Thus they can be run in the command-line, e.g. in CI/CD pipeline.</p>
+
+            <svg class="MuiSvgIcon-root jss688" focusable="false" viewBox="0 0 24 24" aria-hidden="true" role="presentation" tabindex="-1" title="DoneAll"><path d="M18 7l-1.41-1.41-6.34 6.34 1.41 1.41L18 7zm4.24-1.41L11.66 16.17 7.48 12l-1.41 1.41L11.66 19l12-12-1.42-1.41zM.41 13.41L6 19l1.41-1.41L1.83 12 .41 13.41z"></path></svg>
+            <h3>Comprehensive E2E Testing</h3>
+            <p>
+              Puppetry supports various testing approaches including
+              <a target="_blank" href="https://docs.puppetry.app/v/3.0.0/getting-started">Functional testing</a>,
+              <a target="_blank" href="https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-dynamic-content">Testing Dynamic Content</a>,
+              <a target="_blank" href="https://docs.puppetry.app/v/3.0.0/testing-techniques/exhaustive-testing">Exhaustive Testing</a>,
+              <a target="_blank" href="https://docs.puppetry.app/v/3.0.0/testing-techniques/performance-testing">Performance Testing</a>,
+              <a target="_blank" href="https://docs.puppetry.app/v/3.0.0/testing-techniques/css-regression-testing"><nobr>CSS Regression</nobr> Testing</a>,
+              <a target="_blank" href="https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-google-analytics-tracking-code">Testing Google Analytics tracking code</a>,
+              <a target="_blank" href="https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-chrome-extensions">Testing Chrome Extensions</a>,
+              <a target="_blank" href="https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-emails">Testing Transactional Emails</a>.
+            </p>
           </div>
+
           <div class="hero-card">
             <img class="hero-card__icon" src="./assets/img/round-account_balance-24px.svg" alt="Standing on the shoulders of giants" />
             <h3>Standing on the shoulders of giants</h3>
@@ -179,24 +194,27 @@
 
         <div class="hero-grid">
           <div class="hero-card">
+            <img class="hero-card__icon" src="./assets/img/round-developer_board-24px.svg" alt="Ready for Continuous Integration" />
+            <h3>Ready for Continuous Integration</h3>
+            <p>Puppetry can <a target="_blank" href="https://docs.puppetry.app/v/3.0.0/export/exporting-tests-for-ci">export the tests</a> into a Jest.js project,
+              which can be easily included in CI/CD pipeline.</p>
+          </div>
+
+          <div class="hero-card">
             <img class="hero-card__icon" src="./assets/img/baseline-video-cam-24px.svg?12" alt="Automation recording" />
             <h3>Automation recording</h3>
-            <p>Puppetry can <a target="_blank" href="https://docs.puppetry.app/suite#record-suite">record your interactions with the application</a>
+            <p>Puppetry can <a target="_blank" href="https://docs.puppetry.app/v/3.0.0/suite#record-suite">record your interactions with the application</a>
               under test and converts them into a test suite.
             </p>
           </div>
           <div class="hero-card">
             <img class="hero-card__icon" src="./assets/img/baseline-developer_mode-24px.svg" alt="Template expressions" />
             <h3>Template expressions</h3>
-            <p>With Puppetry you can use <a target="_blank" href="https://docs.puppetry.app/template">template tags</a> to refer variables defined per environment (test, stage, production).
+            <p>With Puppetry you can use <a target="_blank" href="https://docs.puppetry.app/v/3.0.0/template">template tags</a> to refer variables defined per environment (test, stage, production).
               Moreover, you can apply template functions to build a value, e.g. by using
               <a target="_blank" href="https://github.com/marak/Faker.js">Faker.js methods</a></p>
           </div>
-          <div class="hero-card">
-            <img class="hero-card__icon" src="./assets/img/baseline-extension-24px.svg" alt="Reusable and configurable test scenarios" />
-            <h3>Reusable and configurable test scenarios</h3>
-            <p>Puppetry allows creating <a target="_blank" href="https://docs.puppetry.app/snippets">test scenarios and referring them from test cases</a>.  When referring test scenarios we can provide an execution context.</p>
-          </div>
+
         </div>
 
       </div>
@@ -209,16 +227,20 @@
         <div class="feature feature--left">
 
          <div class="feature__ic">
+           <div class="feature__img-frame">
             <img
                 class="feature__img lazyload blur-up"
                 data-sizes="auto"
-                src="./assets/img/screen-manage-structure.png?v2"
+                src="/assets/img/v3/manage-structure.gif?1"
+                srcset="/assets/img/v3/manage-structure-prefetch.png"
+                data-srcset="/assets/img/v3/manage-structure.gif?1"
                 alt="Manage your test structure"  />
+           </div>
           </div>
           <div>
             <h3>Manage your test structure</h3>
-            <p>The test organizational structure consists of projects. Every project has one or more test suites. Every suite is split in tests.
-              And test may contain one or more browser methods and assertions.
+            <p>The test organizational structure consists of projects. Every project has one or more test suites. Every suite is split in test cases,
+              where test case may contain one or more browser methods and assertions.
             </p>
           </div>
 
@@ -228,16 +250,24 @@
           <div>
             <h3>Locate and define element targets</h3>
             <p>
-              Test target can be either page or an element on the page. In the second case we need to inform Puppetry project what exact elements we mean. Locating an element is quite easy in a modern browser. You just need to right-click on the target element and copy its CSS selector or XPath.
+              Test target can be either page or an element on the page.
+              In the second case we need to inform Puppetry project what exact elements we mean.
+              Locating an element is quite easy in a modern browser. You just need to right-click on the target element and copy its CSS selector or XPath.
               Puppetry takes in both. See <a href="https://www.youtube.com/watch?v=bAoyZSQAZHg" target="_blank" title="How to add a target in Puppetry">how to</a>.
               We just need to assign a meaninful name (alias) to the element in "Test targets" tab and copy/paste the locator (selector/XPath)
             </p>
           </div>
           <div class="feature__ic">
+            <div class="feature__img-frame">
             <img
               class="feature__img lazyload blur-up"
               data-sizes="auto"
-              src="./assets/img/screen-add-target.png?v2" alt="Locate and define element target"  />
+              src="./assets/img/v3/manage-targets.gif"
+              srcset="/assets/img/v3/manage-targets-prefetch.png"
+              data-srcset="./assets/img/v3/manage-targets.gif"
+              alt="Locate and define element target"
+              />
+            </div>
           </div>
         </div>
 
@@ -246,28 +276,28 @@
             <img
               class="feature__img lazyload blur-up"
               data-sizes="auto"
-              src="./assets/img/screen-select-target.png?v2" alt="Select a target"  />
+              src="./assets/img/v3/select-target.png" alt="Select a target"  />
           </div>
           <div>
             <h3>Select a target</h3>
             <p>
-              As we provided a name for a test we can add a command. Command means settings a browser method or an assertion on a target.
+              Test cases we populate with commands. Command means settings a browser method or an assertion on a target.
               Available targets are page and all the already defined elements aliases.
-
             </p>
           </div>
         </div>
 
         <div class="feature feature--right">
           <div>
-            <h3>Select a method</h3>
-            <p>Underlying form dynamically adapts to actual target/method combination. So when select both we get method parameters (mandatory and optional)</p>
+            <h3>Call a method</h3>
+            <p>Underlying form dynamically adapts to actual target/method combination.
+              So when both selected we get method parameters (mandatory and optional)</p>
           </div>
           <div class="feature__ic">
             <img
               class="feature__img lazyload blur-up"
               data-sizes="auto"
-              src="./assets/img/screen-perform-method.png?v2" alt="Select a method"  />
+              src="./assets/img/v3/call-method.png" alt="Select a method"  />
           </div>
         </div>
 
@@ -276,24 +306,27 @@
             <img
               class="feature__img lazyload blur-up"
               data-sizes="auto"
-              src="./assets/img/screen-assert.png?v2" alt="Make an assertion"  />
+              src="./assets/img/v3/make-assertion.png" alt="Make an assertion"  />
           </div>
           <div>
             <h3>Make an assertion</h3>
-            <p>Similar to method parameters you deal with assertions. Usually it sounds like “I assert that method return value is [select an operator e.g. greater/lower than] a provided value.</p>
+            <p>With assertions we not just perform a browser method, but test the result.
+              Usually it sounds like “I assert that the result equals/contains/greater than/lower than/..  a provided value.</p>
           </div>
         </div>
 
         <div class="feature feature--right">
           <div>
             <h3>Get test report</h3>
-            <p>As we press F6 Puppetry generates Jest project and runs internally the tests. </p>
+            <p>As we press F6 Puppetry generates Jest project and runs internally the tests.
+            The report may include screenshots and network activity details.</p>
           </div>
           <div class="feature__ic">
             <img
               class="feature__img lazyload blur-up"
               data-sizes="auto"
-              src="./assets/img/screen-test-resutls.png?v2" alt="Get test report"  />
+              src="./assets/img/v3/get-report.png?1" alt="Get test report"  />
+
           </div>
         </div>
 
@@ -303,7 +336,7 @@
 
     <section class="section section--features section--integration">
       <div class="container">
-        <h2>Export tests and run on server</h2>
+        <h2>Export tests and run on the server</h2>
 
         <div class="feature feature--left">
 
@@ -311,7 +344,7 @@
             <img
               class="feature__img lazyload blur-up"
               data-sizes="auto"
-              src="./assets/img/screen-cli.png?v2" alt="Export project for CI"  />
+              src="./assets/img/v3/export-tests1.png" alt="Export project for CI"  />
           </div>
           <div>
             <h3>Export your tests</h3>
@@ -333,7 +366,7 @@
             <img
               class="feature__img lazyload blur-up"
               data-sizes="auto"
-              src="./assets/img/screen-code.png?v2" alt="Generated test code"  />
+              src="./assets/img/v3/export-tests2.png" alt="Generated test code"  />
           </div>
         </div>
 

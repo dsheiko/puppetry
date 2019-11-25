@@ -1,10 +1,10 @@
 {
-  "title": "Sandbox GA",
+  "title": "Sandbox RWD",
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1573228918,
-  "loadedAt": 1573228906,
+  "savedAt": 1574680746,
+  "loadedAt": 1574680432,
   "modified": false,
   "filename": "sandbox-rwd.json",
   "targets": {
@@ -101,11 +101,11 @@
               "method": "assertVisible",
               "assert": {
                 "assertion": "visible",
-                "value": true,
-                "display": "not",
+                "availability": "visible",
+                "display": "any",
                 "visibility": "any",
                 "opacity": "any",
-                "isIntersecting": false
+                "isIntersecting": "any"
               },
               "disabled": false,
               "failure": "",
@@ -300,5 +300,5 @@
       }
     }
   },
-  "puppetry": "3.0.0-RC.1"
+  "puppetry": "3.0.0"
 }
