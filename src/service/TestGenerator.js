@@ -106,10 +106,10 @@ export default class TestGenerator {
     if ( !match )  {
       return "";
     }
-    return `      // Wait for CSS selector/Xpath to appear in page`
-    + match.css
+    return `      // Wait for CSS selector/Xpath to appear in page\n`
+    + ( match.css === true
       ? `      await bs.page.waitForSelector( ${ JSON.stringify( match.selector ) } );\n`
-      : `      bs.page.waitForXPath( ${ JSON.stringify( match.selector ) } )\n`;
+      : `      await bs.page.waitForXPath( ${ JSON.stringify( match.selector ) } );\n` );
   }
 
   /**
