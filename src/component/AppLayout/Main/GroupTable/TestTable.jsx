@@ -6,7 +6,7 @@ import { EditableCell } from "../EditableCell";
 import ErrorBoundary from "component/ErrorBoundary";
 import { connectDnD } from "../DragableRow";
 
-const recordPrefIcon = <Icon type="bars" title="Test" />;
+const recordPrefIcon = <Icon type="bars" title="Test case, specification of commands and assertions" />;
 
 @connectDnD
 export class TestTable extends AbstractEditableTable {
@@ -52,15 +52,12 @@ export class TestTable extends AbstractEditableTable {
     this.props.action.setProject({
       groups: expanded
     });
+    this.props.action.autosaveProject();
   }
 
   renderExpandedTable = ( test ) => {
-    const commands = test.commands
-            ? Object.values( test.commands )
-              .map( record => ({ ...record, entity: "command" }) )
-            : [],
-          targets = this.props.targets;
-    return ( <CommandTable commands={commands}
+    const targets = this.props.targets;
+    return ( <CommandTable
       targets={ targets }
       testId={ test.id }
       selector={ this.props.selector }
@@ -82,9 +79,18 @@ export class TestTable extends AbstractEditableTable {
     return `model--test${ record.disabled ? " row-disabled" : "" } ` + this.buildRowClassName( record );
   }
 
+  /**
+   * Override the abstract method to provide record array for Drag&Drop selected rows
+   * @returns {Array}
+   */
+  getRecords() {
+    return this.props.tests || [];
+  }
+
   render() {
     const { tests } = this.props,
           expanded = this.selectExpanded();
+
     return (
       <ErrorBoundary>
         <Table

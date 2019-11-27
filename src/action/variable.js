@@ -78,10 +78,10 @@ actions.swapVariable = ( payload ) => async ( dispatch, getState ) => {
 };
 
 
-actions.pasteVariable = ( payload, dest ) => async ( dispatch ) => {
+actions.pasteVariable = ( payload, dest, uid ) => async ( dispatch ) => {
   try {
     const position = { after: dest.id };
-    dispatch( actions.insertAdjacentVariable( payload, position ) );
+    dispatch( actions.insertAdjacentVariable( payload, position, uid ) );
   } catch ( ex ) {
     handleException( ex, dispatch, "Cannot paste variable" );
   }

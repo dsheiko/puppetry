@@ -1,13 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Icon, Select } from "antd";
-const Option = Select.Option;
+import { connect } from "react-redux";
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        suiteTargets: state.suite.targets,
+        sharedTargets: state.project.targets
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = () => ({
+      }),
+      Option = Select.Option;
 
+@connect( mapStateToProps, mapDispatchToProps )
 export class TargetSelect extends React.Component {
 
   static propTypes = {
-    targets: PropTypes.array.isRequired,
+    suiteTargets: PropTypes.object,
+    sharedTargets: PropTypes.object,
     changeTarget: PropTypes.func.isRequired,
     setFieldsValue: PropTypes.func.isRequired,
     initialValue: PropTypes.string.isRequired
@@ -19,7 +30,8 @@ export class TargetSelect extends React.Component {
   }
 
   render() {
-    const { targets, initialValue } = this.props;
+    const { suiteTargets, sharedTargets, initialValue } = this.props,
+          targets = Object.values({ ...sharedTargets, ...suiteTargets });
     return (
       <Select
         showSearch

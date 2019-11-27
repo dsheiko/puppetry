@@ -10,6 +10,12 @@ await bs.page.evaluate(( x, y ) => {
   window.scrollBy( x, y );
 }, ${ parseInt( x, 10 ) }, ${ parseInt( y, 10 ) });` );
   },
+
+  toLabel: ({ params }) => `(x: \`${ params.x }px\`, y: \`${ params.y }px\`)`,
+  toGherkin: ({ params }) => `Scroll the page by \`${ params.x }px\` horizontally and \`${ params.y }px\` vertically`,
+  commonly: "",
+
+
   description: `Scrolls the document in the window by the given amount`,
   params: [
     {
@@ -20,7 +26,7 @@ await bs.page.evaluate(( x, y ) => {
         {
           name: "params.x",
           control: INPUT_NUMBER,
-          label: "x-coordinate (px)",
+          label: "x (px)",
           initialValue: 0,
           tooltip: `Set the horizontal pixel value that you want to scroll by`,
           placeholder: "e.g. 0",
@@ -32,7 +38,7 @@ await bs.page.evaluate(( x, y ) => {
         {
           name: "params.y",
           control: INPUT_NUMBER,
-          label: "y-coordinate (px)",
+          label: "y (px)",
           initialValue: 0,
           tooltip: `Set the vertical pixel value that you want to scroll by`,
           placeholder: "e.g. 0",
@@ -43,6 +49,23 @@ await bs.page.evaluate(( x, y ) => {
         }
 
       ]
+    }
+  ],
+
+  testTypes: {
+    "params": {
+      "x": "INPUT_NUMBER",
+      "y": "INPUT_NUMBER"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "x": 1,
+        "y": 1
+      }
     }
   ]
 };

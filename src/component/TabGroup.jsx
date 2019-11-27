@@ -1,9 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Tabs, Icon } from "antd";
+import { Tabs, Icon, Tooltip } from "antd";
 import { Main } from "./AppLayout/Main";
 import { Snippets } from "./AppLayout/Snippets";
 import { SettingsPanel } from "./AppLayout/Settings/SettingsPanel";
+import { VariablesPane } from "./AppLayout/Project/Variables/VariablesPane";
+import { GitPane } from "./AppLayout/Project/Git/GitPane";
+import { TargetsPane } from "./AppLayout/Project/Targets/TargetsPane";
 import { TestReport } from "./AppLayout/TestReport";
 import ErrorBoundary from "component/ErrorBoundary";
 import { confirmUnsavedChanges } from "service/smalltalk";
@@ -19,8 +22,18 @@ export class TabGroup extends React.Component {
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired
     }),
-    store: PropTypes.object.isRequired,
-    selector: PropTypes.object
+    selector: PropTypes.object,
+    projectDirectory: PropTypes.any,
+    app: PropTypes.any,
+    suiteModified: PropTypes.any,
+    suiteSnippets: PropTypes.any,
+    suiteTargets: PropTypes.any,
+    suiteFilename: PropTypes.any,
+    suiteTitle: PropTypes.any,
+    project: PropTypes.any,
+    snippets: PropTypes.any,
+    git: PropTypes.any,
+    settings: PropTypes.any
   }
 
   onEdit = ( targetKey, action ) => {
@@ -32,7 +45,7 @@ export class TabGroup extends React.Component {
   }
 
   remove = async ( targetKey ) => {
-    if ( targetKey === "suite" && this.props.store.suite.modified ) {
+    if ( targetKey === "suite" && this.props.suiteModified ) {
       await confirmUnsavedChanges({
         saveSuite: this.props.action.saveSuite,
         setSuite: this.props.action.setSuite
@@ -42,41 +55,72 @@ export class TabGroup extends React.Component {
   }
 
   render() {
-    const { store, action, selector } = this.props,
-          { tabs } = store.app,
-          { suite } = store,
+    const {
+            action, selector, app, projectDirectory, suiteTitle,
+            suiteSnippets, suiteFilename, project, snippets, git, settings, suiteTargets
+          } = this.props,
+          { tabs } = app,
 
-          suiteTabTitle = suite.filename
-            ? ( store.suite.snippets
+          suiteTabTitle = suiteFilename
+            ? ( suiteSnippets
               ? "Snippets"
-              : <span><Icon title={ "Suite: " + suite.title } type="container" />{ suite.filename }</span> )
+              :  <Tooltip placement="bottomRight" title={ suiteTitle }>
+                <Icon type="container" />{ suiteFilename }
+              </Tooltip> )
             : "Loading..." ,
 
           panes = {
+
             suite: () => ( <TabPane tab={ suiteTabTitle } key="suite" closable={ true }>
-              { store.suite.snippets && <Snippets action={ action } store={ store } selector={ selector } /> }
-              { !store.suite.snippets && <Main action={ action } store={ store } selector={ selector } /> }
+              { suiteSnippets && <Snippets action={ action } selector={ selector } /> }
+              { !suiteSnippets && <Main
+                action={ action }
+                selector={ selector } /> }
             </TabPane> ),
+
             testReport: () => ( <TabPane tab="Test report"
               key="testReport" closable={ true } className="report-panel-tab">
               <TestReport
                 action={ action }
-                targets={ store.suite.targets }
-                projectDirectory={ store.settings.projectDirectory }
-                headless={ store.app.headless }
-                launcherArgs={ store.app.launcherArgs }
-                checkedList={ store.app.checkedList }
-                environment={ store.app.environment }
-                project={ store.project }
-                snippets={ store.snippets }
+                targets={ suiteTargets }
+                projectDirectory={ projectDirectory }
+                headless={ app.headless }
+                launcherArgs={ app.launcherArgs }
+                checkedList={ app.checkedList }
+                environment={ app.environment }
+                options={{
+                  updateSnapshot: app.updateSnapshot,
+                  interactiveMode: app.interactiveMode,
+                  incognito: app.incognito,
+                  ignoreHTTPSErrors: app.ignoreHTTPSErrors
+                }}
+                project={ project }
+                snippets={ snippets }
+                selector={ selector }
               />
             </TabPane> ),
+
+            projectVariables: () => ( <TabPane tab={ "Template variables" } key="projectVariables" closable={ true }>
+              <div className="tabpane-frame"><VariablesPane /></div>
+            </TabPane> ),
+
+            projectTargets: () => ( <TabPane tab={ "Shared targets" } key="projectTargets" closable={ true }>
+              <div className="tabpane-frame">
+                <TargetsPane action={ action }  />
+              </div>
+            </TabPane> ),
+
+            projectGit: () => ( <TabPane tab={ "GIT" } key="projectGit" closable={ true }>
+              <div className="tabpane-frame">
+                <GitPane action={ action } git={  git } projectDirectory={ projectDirectory } />
+              </div>
+            </TabPane> ),
+
             settings: () => ( <TabPane tab={ "Settings" } key="settings" closable={ true }>
               <SettingsPanel
                 action={ action }
-                projectDirectory={ store.settings.projectDirectory }
-                git={ store.git }
-                project={ store.project }
+                settings={ settings }
+                project={ project }
               />
             </TabPane> )
           };

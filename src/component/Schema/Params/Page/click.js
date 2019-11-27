@@ -1,5 +1,6 @@
 import { INPUT_NUMBER, SELECT } from "../../constants";
 import { isEveryValueMissing } from "service/utils";
+import { renderClick } from "service/utils";
 
 export const click = {
   template: ({ params }) => {
@@ -12,6 +13,11 @@ export const click = {
       // Emulating mouse click at x=${ x }, y=${ y }
       await bs.page.mouse.click( ${ x }, ${ y }${ optArg });`;
   },
+
+  toLabel: ({ params }) => `(x: \`${ params.x }px\`, y: \`${ params.y }px\`${ renderClick( params, ", " ) })`,
+  toGherkin: ({ params }) => `Emulate mouse click at
+    x: \`${ params.x }px\` and y: \`${ params.y }px\`${ renderClick( params, " with " ) }`,
+  commonly: "click mouse",
 
   description: `Emulates mouse click according to given options`,
 
@@ -87,6 +93,29 @@ export const click = {
           rules: []
         }
       ]
+    }
+  ],
+
+  testTypes: {
+    "params": {
+      "x": "INPUT_NUMBER",
+      "y": "INPUT_NUMBER",
+      "button": "SELECT",
+      "clickCount": "INPUT_NUMBER",
+      "delay": "INPUT_NUMBER"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "x": 1,
+        "y": 1,
+        "button": "left",
+        "clickCount": 1,
+        "delay": 0
+      }
     }
   ]
 };

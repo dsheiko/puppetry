@@ -1,15 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ErrorBoundary from "component/ErrorBoundary";
-import { Collapse, Button, Form, Input, InputNumber, Checkbox, Row, Col, Select, Radio, Icon  } from "antd";
+import { Collapse, Button, Form, Input, InputNumber, Checkbox, Select, Radio, Icon  } from "antd";
 import { validate } from "bycontract";
 import Tooltip from "component/Global/Tooltip";
-import { FILE, TEXTAREA, RADIO_GROUP, INPUT, INPUT_NUMBER, CHECKBOX, SELECT } from "component/Schema/constants";
+import { FILE, TEXTAREA, RADIO_GROUP, INPUT, INPUT_NUMBER, CHECKBOX, SELECT,
+  TARGET_SELECT } from "component/Schema/constants";
 import { ipcRenderer } from "electron";
-import { E_BROWSE_FILE, E_FILE_SELECTED } from "constant";
+import { E_BROWSE_FILE, E_FILE_SELECTED, FIELDSET_DEFAULT_LAYOUT, FIELDSET_DEFAULT_CHECKBOX_LAYOUT } from "constant";
 import Markdown from "component/Global/Markdown";
 import { TemplateHelper } from "./TemplateHelper";
 import { connect } from "react-redux";
+import { SELECT_SEARCH_PROPS } from "service/utils";
 
 function result( obj, prop, record ) {
   if ( typeof obj[ prop ] === "function" ) {
@@ -30,14 +32,18 @@ const FormItem = Form.Item,
           <Tooltip
             title={ tooltip }
             icon="question-circle"
+            pos="up-left"
           />
         </span>
       ),
 
-      mapStateToProps = ( state ) => ({
-        environments: state.project.environments,
-        variables: state.project.variables
-      }),
+      mapStateToProps = ( state, props ) => {
+        return {
+          environments: state.project.environments,
+          variables: state.project.variables,
+          targets: props.schema.requiresTargets ? state.suite.targets : {}
+        };
+      },
       // Mapping actions to the props
       mapDispatchToProps = () => ({
       });
@@ -55,7 +61,8 @@ export class ParamsFormBuilder extends React.Component {
     record: PropTypes.object.isRequired,
     schema: PropTypes.any,
     environments: PropTypes.any,
-    variables: PropTypes.any
+    variables: PropTypes.any,
+    targets: PropTypes.object
   }
 
   onClickSelectFile = ( e, item ) => {
@@ -77,7 +84,7 @@ export class ParamsFormBuilder extends React.Component {
   onTemplateHelperChange = ( name, val ) => {
     const { setFieldsValue, getFieldValue } = this.props.form;
     setFieldsValue({
-      [ name ]: getFieldValue( name ) + val
+      [ name ]: getFieldValue( name ) + ( typeof val === "string" ? val : "" )
     });
   }
 
@@ -91,11 +98,13 @@ export class ParamsFormBuilder extends React.Component {
 
   renderControl = ( field ) => {
     const { setFieldsValue } = this.props.form,
-          { onSubmit } = this.props,
+          { onSubmit, targets } = this.props,
+          safeTargets = Object.values( targets ).filter( item => item.target ),
           onSelect = ( value ) => {
             setFieldsValue({ [ field.name ]: value });
           },
           inputStyle = field.inputStyle || {};
+
     switch ( field.control ) {
     case INPUT:
       return ( <Input placeholder={ field.placeholder }
@@ -113,14 +122,30 @@ export class ParamsFormBuilder extends React.Component {
         rows={ 4 } /> );
     case FILE:
       return ( <Input style={ inputStyle } onClick={ this.onClickSelectFile } disabled  /> );
-    case SELECT:
+    case TARGET_SELECT:
       return ( <Select
-        showSearch
+        { ...SELECT_SEARCH_PROPS }
+        mode="multiple"
         style={ inputStyle }
         placeholder={ field.placeholder }
-        optionFilterProp="children"
-        onSelect={ onSelect }
-        filterOption={( input, option ) => option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0}
+        onChange={ onSelect }
+      >
+        {
+          safeTargets.map( ( option, inx ) => ( <Option
+            key={inx} value={ option.target }>{ option.target }</Option>
+          ) )
+        }
+      </Select> );
+    case SELECT:
+      return ( <Select
+        { ...SELECT_SEARCH_PROPS }
+        style={ inputStyle }
+
+        placeholder={ field.placeholder }
+        onSelect={ ( value ) => {
+          field.onChange && field.onChange( value, this.props.form );
+          onSelect( value );
+        }}
       >
         {
           field.options.map( ( option, inx ) => {
@@ -137,6 +162,7 @@ export class ParamsFormBuilder extends React.Component {
         { field.tooltip && ( <Tooltip
           title={ field.tooltip }
           icon="question-circle"
+          pos="up-left"
         /> )}
 
       </Checkbox> );
@@ -162,15 +188,13 @@ export class ParamsFormBuilder extends React.Component {
    */
   getInitialValue( field ) {
     const { record } = this.props,
-          key = field.name.replace( /^params\./, "" );
+          key = field.name.replace( /^params\./, "" ),
+          initialValue = ( ( record.params && record.params.hasOwnProperty( key ) )
+            ? record.params[ key ]
+            : result( field, "initialValue", "" )
+          );
 
-    return ( ( record.params && record.params.hasOwnProperty( key ) )
-      ? record.params[ key ]
-      : ( field.control === CHECKBOX
-        // unlikely we need to specify default value for checkbox
-        ? false
-        : result( field, "initialValue", record ) )
-    );
+    return field.control === "CHECKBOX" ? Boolean( initialValue ) : initialValue;
   }
 
 
@@ -198,7 +222,7 @@ export class ParamsFormBuilder extends React.Component {
     });
 
     if ( field.control === CHECKBOX ) {
-      decoratorOptions.valuePropName = ( initialValue ? "checked" : "data-ok" );
+      decoratorOptions.valuePropName = "checked";
       decoratorOptions.initialValue = initialValue;
     }
 
@@ -209,31 +233,28 @@ export class ParamsFormBuilder extends React.Component {
       wrapperCol: {
         span: section.span.input
       }
-    } : {};
+    } : ( field.control === CHECKBOX ? FIELDSET_DEFAULT_CHECKBOX_LAYOUT : FIELDSET_DEFAULT_LAYOUT );
 
-    return ( <Col span={ field.span || 24 } key={ `field_${ inx }` }>
+    return (  <FormItem
+      { ...formItemLayout }
+      className="ant-form-item--layout"
+      label={ field.control !== CHECKBOX ? labelNode : "" }
 
-      <FormItem
-        { ...formItemLayout }
-        label={ field.control !== CHECKBOX ? labelNode : "" }
-        key={ `field${inx}` }>
-        { getFieldDecorator( field.name, decoratorOptions )( this.renderControl( field ) ) }
-        { field.description ? <Markdown
-          md={ field.description }
-          className="command-row-description" />    : "" }
-        { field.control === FILE && <Button
-          onClick={ ( e ) => this.onClickSelectFile( e, field ) }>Select file</Button>
-        }
-        { field.hasOwnProperty( "template" ) && <TemplateHelper
-          field={ field }
-          onChange={ this.onTemplateHelperChange }
-          environments={ this.props.environments }
-          variables={ this.props.variables }
-          config={ field.template } /> }
-      </FormItem>
-
-
-    </Col> );
+      key={ `field${inx}` }>
+      { getFieldDecorator( field.name, decoratorOptions )( this.renderControl( field ) ) }
+      { field.description ? <Markdown
+        md={ field.description }
+        className="command-row-description" />    : "" }
+      { field.control === FILE && <Button
+        onClick={ ( e ) => this.onClickSelectFile( e, field ) }>Select file</Button>
+      }
+      { field.hasOwnProperty( "template" ) && <TemplateHelper
+        field={ field }
+        onChange={ this.onTemplateHelperChange }
+        environments={ this.props.environments }
+        variables={ this.props.variables }
+        config={ field.template } /> }
+    </FormItem>  );
   };
 
   renderRow = ( row, inx, section ) => {
@@ -241,12 +262,12 @@ export class ParamsFormBuilder extends React.Component {
       description: "string=",
       fields: "array"
     });
-    return ( <Row gutter={16} key={ `row_${ inx }` } className="ant-form-inline edit-command-inline">
+    return ( <div key={ inx } className="command-form__noncollapsed">
       { row.description ? <Markdown
         md={ row.description }
         className="command-row-description" /> : "" }
       { row.fields.map( ( field, inx ) => this.renderField( field, inx, section ) ) }
-    </Row> );
+    </div> );
   };
 
   mapFieldsToRow = ( field ) => ({
@@ -268,8 +289,8 @@ export class ParamsFormBuilder extends React.Component {
     return (
       <fieldset className="command-form__fieldset" key={ `section_${ inx }` }>
         { !section.collapsed && <legend>
-          <span>{ section.legend || "Parameters" }</span>
-          { section.tooltip && <Tooltip title={ section.tooltip } icon="question-circle" /> }
+          <span>{ section.legend || "" }</span>
+          { section.tooltip && <Tooltip title={ section.tooltip } icon="question-circle" pos="up-left" /> }
         </legend> }
         { section.description &&
         <Markdown
@@ -290,7 +311,7 @@ export class ParamsFormBuilder extends React.Component {
     return section.collapsed
       ? ( <Collapse key={ `collapse_${ inx }` }
         expandIcon={({ isActive }) => ( <Icon
-          type="right-circle" rotate={isActive ? 90 : 0} /> )}
+          type="right" rotate={isActive ? 90 : 0} /> )}
       >
         <Panel key={ `panel_${ inx }` }
 

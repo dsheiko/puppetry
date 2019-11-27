@@ -8,32 +8,17 @@ import actions from "../action";
 import * as selectors from "../selector/selectors";
 import { E_GIT_SYNC_RESPONSE } from "constant";
 import { ipcRenderer } from "electron";
+import LoadingTip from "component/Global/LoadingTip";
 
-const GREETINGS = [ "Greetings",
-        "Hi there",
-        "How's everything?",
-        "How are things?",
-        "Good to see you",
-        "Great to see you",
-        "Nice to see you",
-        "How have you been?",
-        "Nice to see you again.",
-        "Greetings and salutations!",
-        "How are you doing today?",
-        "What have you been up to?",
-        "How are you feeling today?"
-      ],
-
-      // Mapping state to the props
-      mapStateToProps = ( state ) => ({
-        store: state,
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        bootstrapLoaded: state.app.bootstrapLoaded,
         selector: {
-          getTargetDataTable: () => selectors.getTargetDataTable( state.suite.targets ),
-          getGroupDataTable: () => selectors.getStructureDataTable( state.suite.groups, "group" ),
-          getTestDataTable: ( group ) => selectors.getStructureDataTable( group.tests, "test" ),
-          getSelectedTargets: ( selection ) => selectors.getSelectedTargets( selection, state.suite.targets ),
+          getTestDataTable: ( group ) => selectors.getGroupTestsMemoized( group ),
+          getSelectedTargets: ( selection ) => selectors.getSelectedTargetsMemoized({ ...state, selection }),
           hasTarget: ( target ) => selectors.hasTarget( target, state.suite.targets ),
-          getSnippets: () => selectors.getSnippets( state.snippets )
+          findCommandsByTestId:
+            ( testId ) => selectors.findCommandsByTestId( testId, state.suite.groups )
         }
       }),
       // Mapping actions to the props
@@ -56,7 +41,7 @@ export class App extends React.Component {
       loadGit: PropTypes.func,
       loadSnippets: PropTypes.func.isRequired
     }),
-    store: PropTypes.object,
+    bootstrapLoaded: PropTypes.bool.isRequired,
     selector: PropTypes.object
   }
 
@@ -80,7 +65,7 @@ export class App extends React.Component {
     ipcRenderer.removeAllListeners( E_GIT_SYNC_RESPONSE );
     ipcRenderer.once( E_GIT_SYNC_RESPONSE, this.onSyncResponse );
 
-    setApp({ greeting: GREETINGS[ Math.floor( Math.random() * GREETINGS.length ) ] });
+    // setApp({ greeting: GREETINGS[ Math.floor( Math.random() * GREETINGS.length ) ] });
     checkRuntimeTestDirReady();
     checkNewVersion();
 
@@ -88,9 +73,9 @@ export class App extends React.Component {
     loadGit();
 
     if ( !settings.projectDirectory ) {
+      setApp({ bootstrapLoaded: true });
       return;
     }
-
 
     try {
       await loadProject();
@@ -105,12 +90,25 @@ export class App extends React.Component {
       log.warn( `Renderer process: App.checkGit: ${ e }` );
     }
 
+    setApp({ bootstrapLoaded: true });
   }
 
   render() {
-    const { action, store, selector } = this.props;
-    return (
-      <AppLayout action={ action } store={ store } selector={ selector } />
-    );
+    const { action, selector, bootstrapLoaded } = this.props;
+
+    return ( <React.Fragment>
+      { !bootstrapLoaded && ( <div className="ant-spin ant-spin-lg ant-spin-spinning">
+        <img width="100" height="100" src="./assets/puppetry.svg" alt="Puppetry" />
+        <h1>Puppetry</h1>
+
+        <span>
+          <img width="32" height="32" src="./assets/loading.svg" alt="Loading..." />
+        </span>
+
+        <LoadingTip />
+
+      </div> ) }
+      { bootstrapLoaded && <AppLayout action={ action } selector={ selector } /> }
+    </React.Fragment> );
   }
 }

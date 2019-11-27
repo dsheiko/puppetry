@@ -1,0 +1,204 @@
+{
+  "title": "Shadow Dom",
+  "timeout": 50000,
+  "snippets": false,
+  "savedAt": 1573464486,
+  "loadedAt": 1573472858,
+  "modified": false,
+  "filename": "shadow-dom.json",
+  "targets": {
+    "5thk1bzkc52": {
+      "target": "LOCAL_RADIOBOX",
+      "id": "5thk1bzkc52",
+      "editing": false,
+      "selector": "#r5",
+      "key": "5thk1bzkc52",
+      "ref": "SHADOW_HOST",
+      "elementType": "shadowHost",
+      "parentType": "shadowHost"
+    },
+    "k8kk2u7ynvs": {
+      "editing": false,
+      "id": "k8kk2u7ynvs",
+      "key": "k8kk2u7ynvs",
+      "target": "LOCAL_LABEL",
+      "selector": "label[for=r5]",
+      "disabled": false,
+      "adding": false,
+      "parentType": "shadowHost",
+      "ref": "SHADOW_HOST",
+      "elementType": "shadowHost"
+    },
+    "5thk1bzmmfx": {
+      "target": "SHADOW_HOST",
+      "id": "5thk1bzmmfx",
+      "editing": false,
+      "selector": "#starRating",
+      "key": "5thk1bzmmfx",
+      "elementType": "",
+      "ref": ""
+    }
+  },
+  "groups": {
+    "egmk168h2kf": {
+      "title": "Check querying in Shadow DOM",
+      "id": "egmk168h2kf",
+      "editing": false,
+      "key": "egmk168h2kf",
+      "tests": {
+        "egmk168h7zs": {
+          "title": "Type in local input",
+          "id": "egmk168h7zs",
+          "editing": false,
+          "groupId": "egmk168h2kf",
+          "key": "egmk168h7zs",
+          "commands": {
+            "egmk168he8c": {
+              "editing": false,
+              "id": "egmk168he8c",
+              "key": "egmk168he8c",
+              "target": "page",
+              "method": "setViewport",
+              "params": {
+                "width": 1980,
+                "height": 1080,
+                "deviceScaleFactor": 1,
+                "isMobile": false,
+                "hasTouch": false,
+                "isLandscape": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "egmk168h2kf",
+              "testId": "egmk168h7zs"
+            },
+            "lo8k2u83gdd": {
+              "editing": false,
+              "id": "lo8k2u83gdd",
+              "key": "lo8k2u83gdd",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "{{ SANDBOX_BASEURL }}",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "egmk168h2kf",
+              "testId": "egmk168h7zs",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "7a9k1c3365k": {
+              "editing": false,
+              "id": "7a9k1c3365k",
+              "key": "7a9k1c3365k",
+              "target": "LOCAL_LABEL",
+              "method": "click",
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "egmk168h2kf",
+              "testId": "egmk168h7zs",
+              "waitForTarget": false
+            },
+            "lo8k2u83trx": {
+              "editing": false,
+              "id": "lo8k2u83trx",
+              "key": "lo8k2u83trx",
+              "target": "LOCAL_RADIOBOX",
+              "method": "assertProperty",
+              "assert": {
+                "assertion": "hasProperty",
+                "value": ""
+              },
+              "params": {
+                "name": "checked"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "egmk168h2kf",
+              "testId": "egmk168h7zs",
+              "waitForTarget": false
+            },
+            "egmk168m5l8": {
+              "editing": false,
+              "id": "egmk168m5l8",
+              "key": "egmk168m5l8",
+              "target": "SHADOW_HOST",
+              "method": "screenshot",
+              "params": {
+                "name": "Shadow host",
+                "omitBackground": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "egmk168h2kf",
+              "testId": "egmk168h7zs",
+              "waitForTarget": false
+            },
+            "hbfk2gb85at": {
+              "editing": false,
+              "id": "hbfk2gb85at",
+              "key": "hbfk2gb85at",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "Entire page",
+                "fullPage": true,
+                "omitBackground": false,
+                "x": null,
+                "y": null,
+                "width": null,
+                "height": null
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "egmk168h2kf",
+              "testId": "egmk168h7zs",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false
+        }
+      }
+    }
+  },
+  "puppetry": "3.0.0-RC.1"
+}

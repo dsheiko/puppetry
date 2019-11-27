@@ -118,12 +118,15 @@ exports.installRuntimeTest = ( event, appInstallDirectory ) => {
 
     npm.commands.install( appInstallDirectory, [
       "cross-env@^5.2.0",
-      "jest@^23.6.0",
+      "jest@^24.9.0",
       "node-fetch@^2.6.0",
       "faker@^4.1.0",
       "node-localstorage@^1.3.1",
-      "puppeteer@1.17.0",
-      "shelljs@^0.8.2"
+      "puppeteer@2.0.0",
+      "shelljs@^0.8.2",
+      "pixelmatch@^5.1.0",
+      "pngjs@^3.4.0",
+      "text-table@^0.2.0"
     ], ( err, data ) => {
       if ( err ) {
         log.error( `Main process: NPM(2): ${err}` );

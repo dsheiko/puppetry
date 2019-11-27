@@ -9,3 +9,5 @@ export const TestGeneratorError = CustomError( "TestGeneratorError",
   CaughtException, { message: "Test generatorerror" });
 export const ExpressionParserException = CustomError( "ExpressionParserException", {
   message: "Cannot parse this expression" });
+export const SelectorParserException = CustomError( "SelectorParserException", {
+  message: "Cannot parse this expression" });

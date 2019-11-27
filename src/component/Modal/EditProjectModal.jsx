@@ -6,6 +6,7 @@ import ErrorBoundary from "component/ErrorBoundary";
 import * as classes from "./classes";
 import { getAppInstallPath } from "service/io";
 import { ruleValidateGenericString } from "service/utils";
+import { MODAL_DEFAULT_PROPS } from "constant";
 
 const FormItem = Form.Item,
       connectForm = Form.create();
@@ -73,6 +74,7 @@ export class EditProjectModal extends AbstractForm {
           closable
           onCancel={this.onClickCancel}
           onOk={this.onClickOk}
+          { ...MODAL_DEFAULT_PROPS }
           footer={[
             ( <Button
               className={ classes.BTN_CANCEL }

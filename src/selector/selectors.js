@@ -1,10 +1,59 @@
 import uniqid from "uniqid";
 import { validate } from "bycontract";
 import { SNIPPETS_GROUP_ID } from "constant";
+import { createSelector } from "reselect";
 
 function setEntity( arr, entity ) {
   return arr.map( record => ({ ...record, entity }) );
 }
+
+export function findCommandsByTestId( testId, groups ) {
+  const values = Object.values( groups );
+  for ( let group of values ) {
+    if ( testId in group.tests ) {
+      return group.tests[ testId ].commands;
+    }
+  }
+  return null;
+}
+
+const stateSnippets = ( state ) => state.snippets,
+      stateSuiteTargets = ( state ) => state.suite.targets,
+      stateProjectTargets = ( state ) => state.project.targets,
+      stateSuiteGroups = ( state ) => state.suite.groups,
+      groupTests = ( group ) => group.tests,
+      allTargets = ( state ) => ({
+        targets: Object.assign({}, state.project.targets, state.suite.targets ),
+        selection: state.selection
+      });
+
+export const getCleanSnippetsMemoized = createSelector( stateSnippets, getSnippets );
+export const getProjectTargetDataTableMemoized = createSelector( stateProjectTargets, getTargetDataTable );
+export const getSuiteTargetDataTableMemoized = createSelector( stateSuiteTargets, getTargetDataTable );
+export const getSuiteGroupsMemoized = createSelector( stateSuiteGroups,
+  ( groups ) => getStructureDataTable( groups, "group" ) );
+export const getGroupTestsMemoized = createSelector( groupTests,
+  ( tests ) => getStructureDataTable( tests, "test" ) );
+export const getSelectedTargetsMemoized = createSelector( allTargets,
+  ({ targets, selection }) => getSelectedTargets( selection, targets ) );
+
+const getCommandsArray = ( state, props ) => {
+  const group = state.suite.groups[ props.groupId ];
+  if ( typeof group === "undefined" ) {
+    return {};
+  }
+  const test = group.tests[ props.testId ];
+  if ( typeof test === "undefined" ) {
+    return {};
+  }
+  return test.commands;
+};
+
+export const getCommandsMemoized = createSelector( getCommandsArray,
+  ( commands ) => Object.values( commands )
+    .map( record => ({ ...record, entity: "command" }) )
+);
+
 
 export function getActiveEnvironment( environments, environment ) {
   validate( arguments, [ "string[]", "string" ]);
@@ -40,6 +89,37 @@ export function getVariableDataTable( variables, env ) {
   });
 
   return data;
+}
+
+
+export function getActiveTargets( targets ) {
+  return Object.values( targets )
+    .filter( target => ( !!target.target ) );
+}
+
+
+function getTarget( variable, targets ) {
+  return Object.values( targets )
+    .find( item => variable === item.target );
+}
+
+const getTargetChainRecursive = function( target, targets ) {
+  const chain = [ target ];
+  chainLen++;
+  if ( chainLen > 10 ) {
+    throw new Error( `Too many chains, it looks like a loop` );
+  }
+  if ( !target.ref ) {
+    return chain;
+  }
+  const ref = targets[ target.ref ];
+  return chain.concat( getTargetChainRecursive( ref, targets ) );
+};
+
+let chainLen;
+export function getTargetChain( target, targets ) {
+  chainLen = 0;
+  return getTargetChainRecursive( target, targets ).reverse();
 }
 
 export function getTargetDataTable( targets ) {
@@ -79,18 +159,17 @@ export function getStructureDataTable( record, entity ) {
 
 /**
  *
- * @param {String} target
+ * @param {String} variable
  * @param {Object} targets
  * @returns {Boolean}
  */
-export function hasTarget( target, targets ) {
-  return Boolean( Object.values( targets )
-    .find( item => target === item.target ) );
+export function hasTarget( variable, targets ) {
+  return Boolean( getTarget( variable, targets ) );
 }
 
 /**
  *
- * @param {Array} selection
+ * @param {String[]} selection
  * @param {Object} targets
  * @returns {Object}
  */
@@ -107,5 +186,5 @@ export function getSelectedTargets( selection, targets ) {
 export function getSnippets( snippets ) {
   return snippets.groups && snippets.groups.hasOwnProperty( SNIPPETS_GROUP_ID )
     ? snippets.groups[ SNIPPETS_GROUP_ID ].tests
-    : [];
+    : {};
 }

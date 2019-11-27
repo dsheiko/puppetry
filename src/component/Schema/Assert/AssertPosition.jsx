@@ -10,6 +10,7 @@ export class AssertPosition extends React.Component {
 
   static propTypes = {
     record: PropTypes.object.isRequired,
+    onPressEnter: PropTypes.func.isRequired,
     targets: PropTypes.arrayOf( PropTypes.object ),
     form: PropTypes.shape({
       setFieldsValue: PropTypes.func.isRequired,
@@ -46,9 +47,10 @@ export class AssertPosition extends React.Component {
 
         <Row gutter={24} className="ant-form-inline">
 
-          <FormItem>
-            <Input defaultValue="Element is" readOnly  />
-          </FormItem>
+
+          <div className="ant-row ant-form-item ant-form-item--like-input is-short">
+            Target is
+          </div>
 
           <FormItem>
             { getFieldDecorator( "assert.position", {
@@ -56,7 +58,7 @@ export class AssertPosition extends React.Component {
               rules: [{
                 required: true
               }]
-            })( <Select >
+            })( <Select showSearch optionFilterProp="children" >
               <Option value="above">above</Option>
               <Option value="left">left to</Option>
               <Option value="right">right to</Option>
@@ -70,7 +72,7 @@ export class AssertPosition extends React.Component {
               rules: [{
                 required: true
               }]
-            })( <Select >
+            })( <Select showSearch optionFilterProp="children" style={{ width: 522 }}>
               { filteredTargets.map( ( t, inx ) => (
                 <Option value={ t } key={ inx }>{ t }</Option>
               ) )}

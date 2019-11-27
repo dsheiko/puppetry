@@ -13,6 +13,7 @@ import { reload } from "./Params/Page/reload";
 import { waitFor } from "./Params/Page/waitFor";
 import { waitForSelector } from "./Params/Page/waitForSelector";
 import { press } from "./Params/Page/press";
+import { setUserAgent } from "./Params/Page/setUserAgent";
 import { evaluate } from "./Params/Page/evaluate";
 import { runjs } from "./Params/Page/runjs";
 import { debug } from "./Params/Page/debug";
@@ -24,6 +25,16 @@ import { setCookie } from "./Params/Page/setCookie";
 import { assertScroll as assertScrollPage } from "./Params/Page/assertScroll";
 import { waitForNavigation } from "./Params/Page/waitForNavigation";
 import { assertNodeCount as assertNodeCountPage } from "./Params/Page/assertNodeCount";
+import { assertScreenshot as assertScreenshotPage } from "./Params/Page/assertScreenshot";
+import { waitForRequest } from "./Params/Page/waitForRequest";
+import { waitForResponse } from "./Params/Page/waitForResponse";
+import { assertConsoleMessage } from "./Params/Page/assertConsoleMessage";
+import { assertDialog } from "./Params/Page/assertDialog";
+import { closeDialog } from "./Params/Page/closeDialog";
+import { assertPerformanceAssetWeight } from "./Params/Page/assertPerformanceAssetWeight";
+import { assertPerformanceAssetCount } from "./Params/Page/assertPerformanceAssetCount";
+import { assertPerformanceTiming } from "./Params/Page/assertPerformanceTiming";
+import { assertGaTracking } from "./Params/Page/assertGaTracking";
 
 import { screenshot as screenshotElement } from "./Params/Element/screenshot";
 import { assertProperty } from "./Params/Element/assertProperty";
@@ -37,6 +48,7 @@ import { click } from "./Params/Element/click";
 import { hover } from "./Params/Element/hover";
 import { reset } from "./Params/Element/reset";
 import { select } from "./Params/Element/select";
+import { scrollIntoView } from "./Params/Element/scrollIntoView";
 import { assertBoundingBox } from "./Params/Element/assertBoundingBox";
 import { assertPosition } from "./Params/Element/assertPosition";
 import { assertStyle } from "./Params/Element/assertStyle";
@@ -46,6 +58,7 @@ import { assertContainsClass } from "./Params/Element/assertContainsClass";
 import { setAttribute } from "./Params/Element/setAttribute";
 import { tap as tapElement } from "./Params/Element/tap";
 import { scroll as scrollElement } from "./Params/Element/scroll";
+import { waitForTarget } from "./Params/Element/waitForTarget";
 import { assertScroll as assertScrollElement } from "./Params/Element/assertScroll";
 import { checkBox }  from "./Params/Element/checkBox";
 import { assertNodeCount as assertNodeCountElement } from "./Params/Element/assertNodeCount";
@@ -54,57 +67,11 @@ import { assertTextCount as assertTextCountElement } from "./Params/Element/asse
 
 import { tplQuery, tplSuite, tplGroup, tplTest } from "./Jest";
 
-const methodLables = {
-  page: {
-    emulate: "emulate device",
-    setViewport: "set window size",
-    click: "click mouse",
-    moveMouse: "move mouse",
-    tapTouchscreen: "tap",
-    press: "press a key",
-    setCookie: "set page cookies",
-    screenshot: "make screenshot",
-    assertTitle: "assert page title",
-    assertUrl: "assert page URL",
-    assertContent: "assert page HTML",
-    waitFor: "wait for timeout",
-    waitForSelector: "wait for selector",
-    waitForNavigation: "wait for navigation",
-    assignVar: "set template variable dynamically",
-    assignVarRemotely: "set template variable with webhook",
-    assertNodeCount: "assert count of elements",
-    assertScroll: "assert window scroll offset",
-    assertVar: "assert template variable value",
-    evaluate: "evaluate JavaScript in the page context",
-    runjs: "run custom JavaScript in the suite",
-    debug: "stop execution and call DevTools"
-  },
-  element: {
-    upload: "attach a file to file input",
-    reset: "reset input or form",
-    toggleClass: "toggle class",
-    checkBox: "toggle checkbox/radio",
-    screenshot: "make screenshot",
-    setAttribute: "set attribute",
-    assertAttribute: "assert attribute",
-    assertProperty: "assert property",
-    assertVisible: "assert it is visible",
-    assertHtml: "assert HTML",
-    assertBoundingBox: "assert size/position",
-    assertPosition: "assert relative position",
-    assertStyle: "assert style",
-    assertMatchesSelector: "assert it matches selector",
-    assertNodeCount: "assert count of child elements",
-    assertTextCount: "assert count of elements with text",
-    assertContainsClass: "assert it contains class",
-    assertScroll: "assert scroll offset"
-  }
-};
-
 export function displayMethod( target, method ) {
-  return method in methodLables[ target ]
+  const mSchema = getSchema( target, method );
+  return mSchema.commonly
     ? ( <span className="method-title" data-keyword={ method }>{
-      methodLables[ target ][ method ] + " " } <i>({ method })</i></span> )
+      mSchema.commonly + " " } <i>({ method })</i></span> )
     : method;
 }
 
@@ -124,11 +91,13 @@ export const schema = {
     upload,
     tap: tapElement,
     scroll: scrollElement,
+    scrollIntoView,
     hover,
     checkBox,
     toggleClass,
     setAttribute,
     screenshot: screenshotElement,
+    waitForTarget,
     assertAttribute,
     assertProperty,
     assertVisible,
@@ -153,13 +122,17 @@ export const schema = {
     press,
     scroll: scrollPage,
     reload,
+    setUserAgent,
     setCookie,
     waitFor,
     waitForSelector,
     waitForNavigation,
+    waitForResponse,
+    waitForRequest,
     evaluate,
     runjs,
     debug,
+    closeDialog,
     assignVar,
     assignVarRemotely,
     assertTitle,
@@ -167,7 +140,14 @@ export const schema = {
     assertContent,
     assertNodeCount: assertNodeCountPage,
     assertScroll: assertScrollPage,
-    assertVar
+    assertVar,
+    assertScreenshot: assertScreenshotPage,
+    assertConsoleMessage,
+    assertDialog,
+    assertPerformanceAssetWeight,
+    assertPerformanceAssetCount,
+    assertPerformanceTiming,
+    assertGaTracking
   }
 };
 

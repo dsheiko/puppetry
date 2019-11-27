@@ -1,17 +1,32 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
-import { AssertValue } from "../../Assert/AssertValue";
-
+import { AssertAttribute } from "../../Assert/AssertAttribute";
+import { normalizeAssertionVerb, normalizeAssertionValue, renderTarget } from "service/utils";
 
 export const assertAttribute = {
   template: ( command ) => buildAssertionTpl(
-    `await bs.target( await ${ command.target }() ).getAttr( "${ command.params.name }" )`,
+    ( command.assert && [ "hasAttribute", "!hasAttribute" ].includes( command.assert.assertion )
+      ? `await bs.target( ${ renderTarget( command.target ) } ).hasAttr( "${ command.params.name }" )`
+      : `await bs.target( ${ renderTarget( command.target ) } ).getAttr( "${ command.params.name }" )` ),
     command,
     `// Asserting that "${ command.params.name }" `
       + `attribute's value of ${ command.target } satisfies the given constraint`
   ),
+
+  toLabel: ({ params, assert }) => `(\`${ params.name }\``
+    + ` ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )})`,
+
+  toGherkin: ({ target, params, assert }) => `Assert that attribute \`${ params.name }\` of \`${ target }\`
+    ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )}`,
+
+  commonly: "assert attribute",
+
+
   assert: {
-    node: AssertValue
+    node: AssertAttribute,
+    options: {
+      type: "attribute"
+    }
   },
   description: `Asserts that the
   specified [attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes)
@@ -25,7 +40,7 @@ export const assertAttribute = {
           control: INPUT,
           label: "Attribute name",
           description: `HTML attribute. E.g. for \`<a href="" data-foo=""></a>\`
-          you can obtain href or \`data-foo\`.
+          you can obtain \`href\` or \`data-foo\`.
 [See here for details](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes)`,
           placeholder: "e.g. href",
           initialValue: "",
@@ -38,6 +53,30 @@ export const assertAttribute = {
           }]
         }
       ]
+    }
+  ],
+
+  testTypes: {
+    "assert": {
+      "assertion": "SELECT",
+      "value": "INPUT"
+    },
+    "params": {
+      "name": "INPUT"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "!equals",
+        "type": "string",
+        "value": "ipsum"
+      },
+      "params": {
+        "name": "href"
+      }
     }
   ]
 };

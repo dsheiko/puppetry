@@ -30,6 +30,11 @@ const actions = createActions({
     * @param {object} options = { id, target, selector, editing }
     * @returns {object}
     */
+  SET_TARGET: ( options ) => validate( options, { ...I.ENTITY, ...I.TARGET, ...I.UPDATE }),
+  /**
+    * @param {object} options = { id, target, selector, editing }
+    * @returns {object}
+    */
   UPDATE_TARGET: ( options ) => validate( options, { ...I.ENTITY, ...I.TARGET, ...I.UPDATE }),
   /**
     * @param {object} ref = { id }
@@ -54,10 +59,10 @@ actions.swapTarget = ( payload ) => async ( dispatch, getState ) => {
 };
 
 
-actions.pasteTarget = ( payload, dest ) => async ( dispatch ) => {
+actions.pasteTarget = ( payload, dest, uid ) => async ( dispatch ) => {
   try {
     const position = { after: dest.id };
-    dispatch( actions.insertAdjacentTarget( payload, position ) );
+    dispatch( actions.insertAdjacentTarget( payload, position, uid ) );
   } catch ( ex ) {
     handleException( ex, dispatch, "Cannot paste target" );
   }

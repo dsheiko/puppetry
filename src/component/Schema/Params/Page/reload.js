@@ -13,12 +13,16 @@ export const reload = {
       await bs.page.reload(${optArg});
     `;
   },
+
+  toLabel: () => ``,
+  toGherkin: () => `Reload the page`,
+  commonly: "",
+
   description: `Refreshes the page`,
   params: [
     {
       collapsed: true,
       tooltip: "",
-      span: { label: 4, input: 18 },
       fields: [
         {
           name: "params.timeout",
@@ -35,7 +39,7 @@ pass 0 to disable timeout.`,
           name: "params.waitUntil",
           inputStyle: { maxWidth: 200 },
           control: SELECT,
-          label: "Wait until event",
+          label: "Wait till event",
           tooltip: `Waits for a specified event before continue`,
           placeholder: "",
           initialValue: "load",
@@ -58,6 +62,23 @@ pass 0 to disable timeout.`,
         }
 
       ]
+    }
+  ],
+
+  testTypes: {
+    "params": {
+      "timeout": "INPUT_NUMBER",
+      "waitUntil": "SELECT"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "timeout": 30000,
+        "waitUntil": "load"
+      }
     }
   ]
 };

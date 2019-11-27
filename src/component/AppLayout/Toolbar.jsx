@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import { remote } from "electron";
 import { Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
-import AbstractComponent from "component/AbstractComponent";
+import AbstractPureComponent from "component/AbstractPureComponent";
 import { confirmUnsavedChanges } from "service/smalltalk";
 import If from "component/Global/If";
 import { truncate } from "service/utils";
 
 const win = remote.getCurrentWindow();
 
-export class Toolbar extends AbstractComponent {
+export class Toolbar extends AbstractPureComponent {
 
   static propTypes = {
     action:  PropTypes.shape({
@@ -21,11 +21,7 @@ export class Toolbar extends AbstractComponent {
     }),
 
     suiteModified: PropTypes.bool.isRequired,
-
-    project:  PropTypes.shape({
-      modified: PropTypes.bool.isRequired,
-      name: PropTypes.string.isRequired
-    })
+    projectName: PropTypes.string
   }
 
   state = {
@@ -69,15 +65,15 @@ export class Toolbar extends AbstractComponent {
 
   render() {
     const { isMaximized } = this.state,
-          { project } = this.props;
+          { projectName } = this.props;
 
     return (
       <ErrorBoundary>
         <div id="cToolbar" className="toolbar">
           <div>
-            <If exp={ project.name }>
+            <If exp={ projectName }>
               <Icon type="project" />{ " " }
-              Project: { " " }<span id="cToolbarProjectName">{ truncate( project.name, 80 ) }</span>
+              Project: { " " }<span id="cToolbarProjectName">{ truncate( projectName, 80 ) }</span>
               { " " }<a tabIndex={-3} role="button"
                 title="Edit project name"
                 onClick={ this.onEditProject }><Icon type="tool" /></a>

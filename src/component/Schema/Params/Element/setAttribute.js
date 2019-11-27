@@ -12,6 +12,12 @@ export const setAttribute = {
     el.setAttribute( prop, value );
   }, `
     + `"${ command.params.name }", "${ command.params.value }" );` ),
+
+  toLabel: ({ params }) => `(\`${ params.name }\`, \`${ params.value }\`)`,
+  toGherkin: ({ target, params }) => `Set value \`${ params.value }\`
+  of attribute \`${ params.name }\` on \`${ target }\``,
+  commonly: "set attribute",
+
   description: `Sets the value of an [attribute](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttribute)`
     + ` on \`{target}\` target`,
   params: [
@@ -40,6 +46,23 @@ export const setAttribute = {
           placeholder: "e.g. true"
         }
       ]
+    }
+  ],
+
+  testTypes: {
+    "params": {
+      "name": "INPUT",
+      "value": "INPUT"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "name": "checked",
+        "value": "true"
+      }
     }
   ]
 };

@@ -1,0 +1,119 @@
+
+      .__PUPPETRY_toolbox {
+        position: fixed;
+        z-index: 99999;
+        top: 0;
+        left: 0;
+        width: 216px;
+        color: rgba(0, 0, 0, 0.65);
+        border: 1px solid black;
+        background-color: white;
+        padding: 8px;
+        font-family: 'Roboto', Camphor, Open Sans, Segoe UI, sans-serif;
+        font-size: 14px;
+      }
+
+      .__PUPPETRY_header {
+        height: 32px;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        cursor: move;
+      }
+
+      .__PUPPETRY_header > div {
+        line-height: 32px;
+        font-size: 16px;
+      }
+
+      .__PUPPETRY_btn {
+        color: #fff;
+        background-color: #1890ff;
+        border-color: #1890ff;
+        text-shadow: 0 -1px 0 rgba(0,0,0,0.12);
+        -webkit-box-shadow: 0 2px 0 rgba(0,0,0,0.045);
+        box-shadow: 0 2px 0 rgba(0,0,0,0.045);
+        line-height: 1.5;
+        position: relative;
+        display: inline-block;
+        font-weight: 400;
+        white-space: nowrap;
+        text-align: center;
+        background-image: none;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: all .3s cubic-bezier(.645, .045, .355, 1);
+        -webkit-user-select: none;
+        user-select: none;
+        touch-action: manipulation;
+        height: 32px;
+        padding: 0 15px;
+        font-size: 14px;
+        border-radius: 4px;
+      }
+
+      .__PUPPETRY_btn:hover, .__PUPPETRY_btn:focus {
+        color: #fff;
+        background-color: #40a9ff;
+        border-color: #40a9ff;
+      }
+
+      .__PUPPETRY_btn:active {
+        outline: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+        color: #fff;
+        background-color: #096dd9;
+        border-color: #096dd9;
+      }
+
+      .__PUPPETRY_suite {
+        height: 320px;
+        width: 200px;
+        overflow: auto;
+        padding: 16px 0;
+        margin-top: 8px;
+      }
+      .__PUPPETRY_suite ul {
+        padding: 0 0;
+        margin: 0;
+        list-style: none;
+        cursor: default;
+      }
+      .__PUPPETRY_suite > ul > li > ul > li > span {
+        padding-left: 8px;
+      }
+      .__PUPPETRY_suite > ul > li > ul > li > ul > li > span {
+        padding-left: 16px;
+      }
+      .__PUPPETRY_suite ul li > span  {
+        display: block;
+        padding: 4px 0;
+        white-space: nowrap;
+        display: inline-block;
+      }
+      .__PUPPETRY_suite ul li {
+        margin: 0;
+        padding: 0;
+        /*border-top: 1px solid rgba(0, 0, 0, .1);*/
+      }
+      .__PUPPETRY_C_LI {
+        cursor: default;
+      }
+
+      .__PUPPETRY_C_LI b {
+        font-weight: 600;
+      }
+      .__PUPPETRY_C_LI i {
+        font-style: normal;
+        opacity: 0.7;
+      }
+      .__PUPPETRY_ACTIVE > span {
+        background-color: #0fa573;
+        color: white;
+      }
+
+      .__PUPPETRY_nJNTY4bY_target {
+        border: 1px dashed red !important;
+        outline: 1px dashed white !important;
+      }

@@ -53,6 +53,7 @@ export class SnippetTable extends AbstractEditableTable {
     this.props.action.setProject({
       groups: expanded
     });
+    this.props.action.autosaveProject();
   }
 
   renderExpandedTable = ( test ) => {
@@ -82,13 +83,21 @@ export class SnippetTable extends AbstractEditableTable {
     return `model--test${ record.disabled ? " row-disabled" : "" } ` + this.buildRowClassName( record );
   }
 
+  /**
+   * Override the abstract method to provide record array for Drag&Drop selected rows
+   * @returns {Array}
+   */
+  getRecords() {
+    return this.props.tests;
+  }
+
   render() {
     const { tests } = this.props,
           expanded = this.selectExpanded();
     return (
       <ErrorBoundary>
         <Table
-          className="draggable-table"
+          className="draggable-table snippets-table"
           id="cTestTable"
           components={this.components}
           onRow={this.onRow}

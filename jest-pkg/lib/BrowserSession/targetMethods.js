@@ -33,20 +33,51 @@ module.exports = function( page ) {
       },
 
       /**
+       * Does element have attribute
+       * @param {string} attr
+       * @returns {Promise<string>}
+       */
+      hasAttr: async function( attr ){
+        const handle = await page.evaluateHandle( ( el, attr ) => el.hasAttribute( attr ), elementHandle, attr );
+        return await handle.jsonValue();
+      },
+
+      /**
        * Check if element is visible in the DOM
-       * @returns {Promise<Boolean>}
+       * @returns {Promise<Object>}
        **/
       isVisible: async function(){
-        const boundingBox = await elementHandle.boundingBox(),
-              isIntersectingViewport = await elementHandle.isIntersectingViewport(),
-              handleOpacity = await page.evaluateHandle( ( el ) =>
-                window.getComputedStyle( el, null ).getPropertyValue( "opacity" ), elementHandle ),
-              handleVisibility = await page.evaluateHandle( ( el ) =>
-                window.getComputedStyle( el, null ).getPropertyValue( "visibility" ), elementHandle ),
-              opacity = parseFloat( await handleOpacity.jsonValue() ),
-              visibility = await handleVisibility.jsonValue();
+        if ( elementHandle === false ) {
+          return {
+            isAvailable: false
+          };
+        }
+        try {
+          const isIntersectingViewport = await elementHandle.isIntersectingViewport(),
+                handleOpacity = await page.evaluateHandle( ( el ) =>
+                  window.getComputedStyle( el, null ).getPropertyValue( "opacity" ), elementHandle ),
+                handleVisibility = await page.evaluateHandle( ( el ) =>
+                  window.getComputedStyle( el, null ).getPropertyValue( "visibility" ), elementHandle ),
+                handleDisplay = await page.evaluateHandle( ( el ) =>
+                  window.getComputedStyle( el, null ).getPropertyValue( "display" ), elementHandle ),
+                opacity = parseFloat( await handleOpacity.jsonValue() ),
+                visibility = await handleVisibility.jsonValue(),
+                display = await handleDisplay.jsonValue();
 
-        return ( boundingBox !== null && isIntersectingViewport && opacity !== 0 && visibility !=="hidden" );
+          return {
+            isAvailable: true,
+            display,
+            visibility,
+            opacity,
+            isIntersecting: isIntersectingViewport
+          };
+        } catch( e ) {
+          // Chaining in iFrame/ShadowDOM
+          // JSHandles can be evaluated only in the context they were created!
+          return {
+            isAvailable: elementHandle !== false
+          };
+        }
       },
 
       /**

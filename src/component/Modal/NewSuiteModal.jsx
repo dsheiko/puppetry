@@ -7,6 +7,7 @@ import If from "component/Global/If";
 import { normalizeFilename } from "service/io";
 import { ruleValidateGenericString } from "service/utils";
 import * as classes from "./classes";
+import { MODAL_DEFAULT_PROPS } from "constant";
 
 /*eslint no-useless-escape: 0*/
 
@@ -88,6 +89,7 @@ export class NewSuiteModal extends AbstractForm {
           disabled={ this.hasErrors( getFieldsError() )  }
           closable
           onCancel={this.onClickCancel}
+          { ...MODAL_DEFAULT_PROPS }
           footer={[
             ( <Button
               autoFocus={ true }

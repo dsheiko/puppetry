@@ -8,6 +8,10 @@ export const tap = {
       await bs.page.touchscreen.tap( ${ x }, ${ y });`;
   },
 
+  toLabel: ({ params }) => `(x: \`${ params.x }px\`, y: \`${ params.y }px\`)`,
+  toGherkin: ({ params }) => `Tap at x = \`${ params.x }px\`, y = \`${ params.y }px\``,
+  commonly: "",
+
   description: `Emulates tap according to given options`,
 
   params: [
@@ -19,7 +23,7 @@ export const tap = {
         {
           name: "params.x",
           control: INPUT_NUMBER,
-          label: "x",
+          label: "x (px)",
           tooltip: "",
           placeholder: "",
           rules: [{
@@ -30,7 +34,7 @@ export const tap = {
         {
           name: "params.y",
           control: INPUT_NUMBER,
-          label: "y",
+          label: "y (px)",
           tooltip: "",
           placeholder: "",
           rules: [{
@@ -41,5 +45,22 @@ export const tap = {
       ]
     }
 
+  ],
+
+  testTypes: {
+    "params": {
+      "x": "INPUT_NUMBER",
+      "y": "INPUT_NUMBER"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "x": 1,
+        "y": 1
+      }
+    }
   ]
 };

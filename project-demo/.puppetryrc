@@ -1,75 +1,127 @@
 {
-  "name": "E2E testing showcase",
-  "panels": [
-    "groups"
-  ],
+  "name": "Demo Project",
+  "appPanels": {
+    "suite": {
+      "panes": [
+        "groups"
+      ]
+    },
+    "settings": {
+      "panes": []
+    }
+  },
   "groups": {
-    "_1": {
-      "key": 0,
+    "snippets": {
+      "key": "snippets",
       "value": true,
       "tests": {
-        "_1_2": {
-          "key": 1,
-          "value": true
-        },
-        "_1_3": {
-          "key": 2,
-          "value": false
-        },
-        "olhjnyhr4zd": {
-          "key": "olhjnyhr4zd",
+        "jotk2g4k9tw": {
+          "key": "jotk2g4k9tw",
           "value": true
         }
       }
     },
-    "_2": {
-      "key": 1,
+    "8fzk2g5fpkb": {
+      "key": "8fzk2g5fpkb",
       "value": true,
       "tests": {
-        "_2_1": {
-          "key": 0,
-          "value": false
-        },
-        "_2_2": {
-          "key": 1,
-          "value": false
-        },
-        "olhjnyhrjcg": {
-          "key": "olhjnyhrjcg",
-          "value": true
-        },
-        "olhjnyhro5a": {
-          "key": "olhjnyhro5a",
+        "8fzk2g5fxnj": {
+          "key": "8fzk2g5fxnj",
           "value": true
         }
       }
     },
-    "1u2jnyned4o": {
-      "key": "1u2jnyned4o",
+    "egmk168h2kf": {
+      "key": "egmk168h2kf",
       "value": true,
       "tests": {
-        "1u2jnynetdn": {
-          "key": "1u2jnynetdn",
+        "egmk168h7zs": {
+          "key": "egmk168h7zs",
           "value": true
         }
       }
     },
-    "36ijnyo161a": {
-      "key": "36ijnyo161a",
+    "dduk2fx837q": {
+      "key": "dduk2fx837q",
       "value": true,
       "tests": {
-        "36ijnyo1oho": {
-          "key": "36ijnyo1oho",
+        "dduk2fx8bwf": {
+          "key": "dduk2fx8bwf",
           "value": true
         },
-        "36ijnyo2e41": {
-          "key": "36ijnyo2e41",
+        "3i0k2fy6u0g": {
+          "key": "3i0k2fy6u0g",
+          "value": true
+        }
+      }
+    },
+    "bx4k266y2x9": {
+      "key": "bx4k266y2x9",
+      "value": true,
+      "tests": {
+        "bx4k266ygz0": {
+          "key": "bx4k266ygz0",
+          "value": true
+        },
+        "gask2ab771w": {
+          "key": "gask2ab771w",
+          "value": true
+        },
+        "6kgk2bmpt6t": {
+          "key": "6kgk2bmpt6t",
           "value": true
         }
       }
     }
   },
+  "savedAt": 1574845349,
   "modified": false,
-  "lastOpenSuite": "react-html5-form-RWD.json",
-  "puppetry": "1.0.0"
+  "lastOpenSuite": "todomvc.json",
+  "variables": {
+    "dduk2fx8tvf": {
+      "name": "SANDBOX_BASEURL",
+      "id": "dduk2fx8tvf",
+      "editing": false,
+      "value": "https://puppetry.app/demo/",
+      "env": "test",
+      "key": "dduk2fx8tvf"
+    },
+    "dduk2fx9hrh": {
+      "editing": false,
+      "id": "dduk2fx9hrh",
+      "key": "dduk2fx9hrh",
+      "name": "SANDBOX_BASEURL",
+      "value": "https://puppetry.app/demo/",
+      "env": "stage",
+      "disabled": false,
+      "adding": false
+    },
+    "dduk2fx9hug": {
+      "editing": false,
+      "id": "dduk2fx9hug",
+      "key": "dduk2fx9hug",
+      "name": "SANDBOX_BASEURL",
+      "value": "https://puppetry.app/demo/",
+      "env": "production",
+      "disabled": false,
+      "adding": false
+    },
+    "j6bk348ihy7": {
+      "name": "SANDBOX_BASEURL",
+      "id": "j6bk348ihy7",
+      "editing": false,
+      "value": "http://127.0.0.1:8080/",
+      "env": "local",
+      "key": "j6bk348ihy7"
+    }
+  },
+  "targets": {},
+  "environments": [
+    "test",
+    "stage",
+    "production",
+    "local"
+  ],
+  "projectDirectory": "/home/sheiko/PUPPETRY/demo--project",
+  "puppetry": "3.0.0"
 }

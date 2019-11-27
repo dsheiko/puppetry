@@ -4,7 +4,10 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src *; img-src * data: https:; media-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'">
+  <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; connect-src *; img-src * data: https:;
+        media-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval';
+        style-src 'self' 'unsafe-inline'">
   <title>Puppetry</title>
   <meta
     name="viewport"
@@ -16,6 +19,50 @@
   <link rel="icon" type="image/png" sizes="96x96" href="./assets/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
 
+  <style>
+    root > .ant-spin {
+      position: fixed;
+      display: flex;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      flex-flow: column nowrap;
+      justify-content: center;
+      align-items: center;
+      background: #f0f2f5;
+          line-height: 1.5;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+      font-variant: tabular-nums;
+    }
+    root > .ant-spin > h1 {
+      font-size: 24px;
+      color: rgba(0, 0, 0, 0.85);
+      font-weight: bold;
+      margin: 16px 0;
+    }
+    root > .ant-spin > * {
+      flex: 0 0 auto;
+    }
+
+     @keyframes showup { from { opacity: 0; } to { opacity: 1; }  }
+
+    .loading-tip {
+      position: fixed;
+      bottom: 0;
+      padding: 32px;
+      width: 45vw;
+      font-size: 14px;
+      right: 16px;
+      text-align: right;
+      color: #777;
+      font-family: Roboto;
+      font-size: 16px;
+      font-style: italic;
+      animation: 0.3s showup;
+    }
+
+  </style>
   <link rel="stylesheet" href="./assets/app.css">
   <script src="./vendor/smalltalk/smalltalk.min.js"></script>
 </head>
@@ -28,9 +75,40 @@
       <span>
         <img width="32" height="32" src="./assets/loading.svg" alt="Loading..." />
       </span>
+      <div class="loading-tip" id="tip">
+      </div>
     </div>
   </root>
 
+  <script>
+    const TIPS = [
+  "To perform a bulk operation on multiple rows, <br /> select them with “Shift-click”.",
+  "To perform a bulk operation on multiple rows, <br /> select them with “Shift-click”.",
+  "To perform a bulk operation on multiple rows, <br /> select them with “Shift-click”.",
+  "You can use drag & drop and context menu <br />when working with tables.",
+  "Auto-saving can be disabled in “Settings”.",
+  "You can change test case representation style in settings.",
+  "You can export project as text specification. <br />Screenshots per action will be generated automatically.",
+  "Did you know that you can make an in-app screenshot <br />with “Ctrl/CMD-Shift-4”?",
+  "To find application working directory,<br /> click on “Edit” icon next to project name",
+  "To run tests in browser, opt-in in <br />“Run Tests” / “Browser options”  tab.",
+  "You can copy table rows in one project<br /> and paste them into another.",
+  "If your test site has broken SSL certificate,<br /> tick on “ignore HTTPS errors” in “Browser options” tab.",
+  "To follow testing steps one by one,<br /> tick on “interactive mode” on “Run Tests” modal.",
+  "You can set BASE_URL values for dev/stage/live environments<br /> and refer the variable in the test cases",
+  "Use snippets to reuse testing flows among test cases",
+  "Use “page.assertConsoleMessage” to test console messages<br /> on the page under test",
+  "You can accept/dismiss “window.prompt”<br /> with “page.closeDialog” action",
+  "To run exported project in Firefox,<br /> call “npm run test:firefox”",
+  "You can use “page.assertScreenshot” to compare page views<br /> before refactoring CSS and after",
+  "Did you know that you can navigate suite tabs with “Crtl-TAB”?",
+  "Did you know that you can navigate suite tabs with “Crtl-TAB”?",
+  "Use :not(:empty) selector to target a non-empty element",
+  "Use a[href*='keyword'] selector to target a link<br /> whose href attribute contains 'keyword'"
+
+      ];
+    document.querySelector( "#tip" ).innerHTML = TIPS[ Math.floor( Math.random() * TIPS.length ) ];
+  </script>
   <script crossorigin src="./build/index.js"></script>
 </body>
 

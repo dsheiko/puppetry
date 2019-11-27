@@ -11,9 +11,20 @@ export const waitForNavigation = {
           optArg = isEveryValueMissing( options ) ? `` : ` ${ JSON.stringify( options ) } `;
     return `
       // Waiting for the given event
-      await bs.page.waitForNavigation(${optArg});
+      try {
+        await bs.page.waitForNavigation(${optArg});
+      } catch ( e ) {
+        // if timeout, try to proceed anyways
+      }
     `;
   },
+
+  toLabel: ({ params }) => {
+    return `(\`${ params.waitUntil }\` with timeout \`${ params.timeout }ms\`)`;
+  },
+  toGherkin: ({ params }) => `Wait until \`${ params.waitUntil }\` navigation event
+    with timeout \`${ params.timeout }ms\``,
+  commonly: "wait for navigation",
 
   description: `Waits until a given event before proceeding to the next command`,
 
@@ -21,7 +32,6 @@ export const waitForNavigation = {
     {
       collapsed: true,
       tooltip: "",
-      span: { label: 4, input: 18 },
       fields: [
         {
           name: "params.timeout",
@@ -36,7 +46,7 @@ export const waitForNavigation = {
         {
           name: "params.waitUntil",
           control: SELECT,
-          label: "Wait until event",
+          label: "Wait till event",
           tooltip: `Waits for a specified event before continue`,
           placeholder: "",
           initialValue: "load",
@@ -58,6 +68,23 @@ export const waitForNavigation = {
         }
 
       ]
+    }
+  ],
+
+  testTypes: {
+    "params": {
+      "timeout": "INPUT_NUMBER",
+      "waitUntil": "SELECT"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "timeout": 30000,
+        "waitUntil": "load"
+      }
     }
   ]
 };

@@ -1,4 +1,5 @@
 import { justify } from "service/assert";
+
 export const reset = {
   template: ({ targetSeletor }) => justify(
     `// Reset the input or form\n`
@@ -10,7 +11,16 @@ export const reset = {
   if ( "value" in el ) {
     el.value = "";
   }
-})` ),
+});` ),
+  toLabel: () => ``,
+  toGherkin: ({ target }) => `Reset form/input \`${ target }\``,
+  commonly: "reset input or form",
   description: `Resets the input or form element`,
-  params: []
+  params: [],
+
+  test: [
+    {
+      valid: true
+    }
+  ]
 };

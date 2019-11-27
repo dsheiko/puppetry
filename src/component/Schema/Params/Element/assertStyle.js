@@ -1,6 +1,7 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
-import { AssertValue } from "../../Assert/AssertValue";
+import { AssertString } from "../../Assert/AssertString";
+import { normalizeAssertionVerb, normalizeAssertionValue } from "service/utils";
 
 export const assertStyle = {
   template: ( command ) => buildAssertionTpl(
@@ -11,8 +12,21 @@ export const assertStyle = {
     `// Asserting that "${ command.params.name }" CSS property's `
       + `value of ${ command.target } satisfies the given constraint`
   ),
+
+  toLabel: ({ params, assert }) => {
+    return `(${ params.name + ( params.pseudo || "" ) } `
+          + `${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )})`;
+  },
+
+  toGherkin: ({ target, params, assert }) => `Assert that
+  \`${ params.name + ( params.pseudo || "" ) }\`
+    computed style property of  \`${ target }\`
+    ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )}`,
+
+  commonly: "assert style",
+
   assert: {
-    node: AssertValue
+    node: AssertString
   },
   description: `Asserts that the
 [computed style](https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle)
@@ -46,6 +60,30 @@ export const assertStyle = {
           placeholder: "e.g. :before"
         }
       ]
+    }
+  ],
+
+  testTypes: {
+    "assert": {
+      "assertion": "SELECT",
+      "value": "INPUT"
+    },
+    "params": {
+      "name": "INPUT"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "equals",
+        "type": "string",
+        "value": "1px"
+      },
+      "params": {
+        "name": "border"
+      }
     }
   ]
 };

@@ -1,6 +1,7 @@
 import { SELECT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
 import { AssertNumber } from "../../Assert/AssertNumber";
+import { HAS_OPERATOR_MAP } from "service/utils";
 
 export const assertScroll = {
   template: ( command ) => buildAssertionTpl(
@@ -10,10 +11,22 @@ export const assertScroll = {
     `// Asserting that scroll offset on ${ command.target } `
       + `satisfies the given constraint`
   ),
+
+  toLabel: ({ params, assert }) =>
+    `(\`${ params.direction }\` by ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }px\`)`,
+
+  toGherkin: ({ target, params, assert }) => `Assert that target \`${ target }\`
+    is scrolled \`${ params.direction }\` by ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }px\``,
+
+  commonly: "assert scroll offset",
+
   description: `Asserts that [scroll](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTop)
 offset on the target satisfies the given constraint`,
   assert: {
-    node: AssertNumber
+    node: AssertNumber,
+    options: {
+      resultLabel: "Offset is"
+    }
   },
   params: [
     {
@@ -36,6 +49,30 @@ offset on the target satisfies the given constraint`,
         }
 
       ]
+    }
+  ],
+
+  testTypes: {
+    "assert": {
+      "operator": "SELECT",
+      "value": "INPUT_NUMBER"
+    },
+    "params": {
+      "direction": "SELECT"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "number",
+        "operator": "eq",
+        "value": 2
+      },
+      "params": {
+        "direction": "horizontally"
+      }
     }
   ]
 };

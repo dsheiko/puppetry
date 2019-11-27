@@ -8,6 +8,8 @@ import log from "electron-log";
 import TestGenerator from "service/TestGenerator";
 import { schema } from "component/Schema/schema";
 import writeFileAtomic from "write-file-atomic";
+import { confirmCreateProject } from "service/smalltalk";
+
 import {
   PUPPETRY_LOCK_FILE,
   JEST_PKG_DIRECTORY,
@@ -15,36 +17,42 @@ import {
   DEMO_PROJECT_DIRECTORY,
   COMMAND_ID_COMMENT,
   RUNNER_PUPPETRY,
-  SNIPPETS_FILENAME
+  RUNNER_JEST,
+  SNIPPETS_FILENAME,
+  DIR_SCREENSHOTS,
+  DIR_SNAPSHOTS
 } from "constant";
-import findLogPath from "electron-log/lib/transports/file/find-log-path";
+import findLogPath from "electron-log/lib/transports/file/findLogPath";
 
 const PROJECT_FILE_NAME = ".puppetryrc",
       PROJECT_FALLBAK_NAME = ".puppertyrc",
       GIT_FILE_NAME = ".puppetrygit",
-      readFile = util.promisify( fs.readFile ),
-      //writeFile = util.promisify( fs.writeFile ),
-      writeFile = ( filename, data ) => new Promise( ( resolve, reject ) => {
-        writeFileAtomic( filename, data, ( err ) => {
-          if ( err ) {
-            return reject( err );
-          }
-          resolve();
-        });
-      }),
-      unlink = util.promisify( fs.unlink ),
-      readdir = util.promisify( fs.readdir ),
-      lstat = util.promisify( fs.lstat ),
       cache = {},
       EXPORT_ASSETS = [
         "specs",
-        "screenshots",
         "lib",
         "package.json",
         "README.md"
       ];
+export const readFile = util.promisify( fs.readFile );
+//writeFile = util.promisify( fs.writeFile ),
+export const writeFile = ( filename, data ) => new Promise( ( resolve, reject ) => {
+  writeFileAtomic( filename, data, ( err ) => {
+    if ( err ) {
+      return reject( err );
+    }
+    resolve();
+  });
+});
+export const unlink = util.promisify( fs.unlink );
+export const readdir = util.promisify( fs.readdir );
+export const lstat = util.promisify( fs.lstat );
 
 shell.config.fatal = true;
+
+export function mkdir( dir ) {
+  shell.mkdir( "-p" , dir );
+}
 
 function findCommandIdInCode( lines, pos ) {
   while ( pos >= 0 && !lines[ pos ].startsWith( COMMAND_ID_COMMENT ) ) {
@@ -59,24 +67,28 @@ export function isGitInitialized( projectDirectory ) {
 
 export async function parseReportedFailures( reportedErrorPositions ) {
   const commands = [];
-  for ( const [ file, errors ] of Object.entries( reportedErrorPositions ) ) {
-    let fileContents = await readFile( file, "utf8" );
-    // when timeout qs file we get extrnal sources e.g. node_modules/jest-jasmine2/build/jasmine/Spec.js
-    if ( fileContents.indexOf( COMMAND_ID_COMMENT ) === -1 ) {
-      break;
-    }
-    const lines = fileContents.split( "\n" ).map( line => line.trim() );
-    // release memory
-    fileContents = null;
-    for ( const error of errors ) {
-      const match = findCommandIdInCode( lines, error.line - 1 ); // line 1 equals index 0
-      if ( !match.startsWith( COMMAND_ID_COMMENT ) ) {
+  try {
+    for ( const [ file, errors ] of Object.entries( reportedErrorPositions ) ) {
+      let fileContents = await readFile( file, "utf8" );
+      // when timeout qs file we get extrnal sources e.g. node_modules/jest-jasmine2/build/jasmine/Spec.js
+      if ( fileContents.indexOf( COMMAND_ID_COMMENT ) === -1 ) {
         break;
       }
-      const idComment = match.substr( COMMAND_ID_COMMENT.length ),
-            [ groupId, testId, id ] = idComment.split( ":" );
-      commands.push({ groupId, testId, id, failure: error.message });
+      const lines = fileContents.split( "\n" ).map( line => line.trim() );
+      // release memory
+      fileContents = null;
+      for ( const error of errors ) {
+        const match = findCommandIdInCode( lines, error.line - 1 ); // line 1 equals index 0
+        if ( !match || !match.startsWith( COMMAND_ID_COMMENT ) ) {
+          break;
+        }
+        const idComment = match.substr( COMMAND_ID_COMMENT.length ),
+              [ groupId, testId, id ] = idComment.split( ":" );
+        commands.push({ groupId, testId, id, failure: error.message });
+      }
     }
+  } catch ( err ) {
+    console.error( err );
   }
   return commands;
 }
@@ -112,7 +124,7 @@ export function isExportDirEmpty( exportDirectory ) {
 export function removeExport( exportDirectory ) {
   fs.readdirSync( exportDirectory )
     .filter( name => EXPORT_ASSETS.includes( name ) )
-    .forEach( name => shell.rm( "-rf" , join( exportDirectory, name ) ) );
+    .forEach( name => shell.rm( "-rf", join( exportDirectory, name ) ) );
 }
 
 export function copyProject( srcDirectory, targetDirectory ) {
@@ -126,11 +138,32 @@ export function copyProject( srcDirectory, targetDirectory ) {
  * @param {String} filename
  * @param {String} runner
  * @param {Object} snippets
+ * @param {Object} sharedTargets
  * @returns {String} - spec.js content
  */
-export async function exportSuite( projectDirectory, filename, runner, snippets, env ) {
+export async function exportSuite({
+  projectDirectory,
+  outputDirectory,
+  filename,
+  runner,
+  snippets,
+  sharedTargets,
+  env,
+  options
+}) {
   const suite = await readSuite( projectDirectory, filename ),
-        gen = new TestGenerator( suite, schema, suite.targets, runner, projectDirectory, snippets, env );
+        gen = new TestGenerator({
+          suite,
+          schema,
+          targets: suite.targets,
+          runner,
+          projectDirectory,
+          outputDirectory,
+          snippets,
+          sharedTargets,
+          env,
+          options
+        });
   return gen.generate();
 }
 
@@ -142,55 +175,68 @@ export async function exportSuite( projectDirectory, filename, runner, snippets,
  * @param {String[]} suiteFiles ["foo.json",..]
  * @param {Object} puppeteerOptions
  * @param {Object} snippets
+ * @param {Object} sharedTargets
+ * @param {Object} env
  * @returns {String[]} - ["foo.spec.js",..]
  */
 export async function exportProject(
   projectDirectory,
   outputDirectory,
   suiteFiles,
-  { headless = true, launcherArgs = "", runner = RUNNER_PUPPETRY },
+  { runner = RUNNER_PUPPETRY, ...options },
   snippets,
+  sharedTargets,
   env
 ) {
   const testDir = join( outputDirectory, "specs" ),
         specFiles = [],
         JEST_PKG = getJestPkgDirectory();
 
-  let hasDebugger = false;
-
   try {
     removeExport( outputDirectory );
     shell.mkdir( "-p" , testDir );
-    shell.mkdir( "-p" , join( outputDirectory, "screenshots" ) );
+
+    shell.rm( "-rf" , join( projectDirectory, DIR_SCREENSHOTS ) );
+
+    if ( options.updateSnapshot ) {
+      shell.rm( "-rf" , join( projectDirectory, DIR_SNAPSHOTS ) );
+    } else {
+      shell.rm( "-rf" , join( projectDirectory, DIR_SNAPSHOTS, "actual" ) );
+      shell.rm( "-rf" , join( projectDirectory, DIR_SNAPSHOTS, "diff" ) );
+    }
+
+    shell.mkdir( "-p" , join( projectDirectory, DIR_SCREENSHOTS ) );
+    shell.mkdir( "-p" , join( projectDirectory, DIR_SNAPSHOTS ) );
+
     shell.chmod( "-R", "+w", outputDirectory );
     shell.cp( "-RLf" , JEST_PKG + "/*", outputDirectory  );
+    shell.mkdir( "-p" , join( outputDirectory, "specs" ) );
+
+    if ( runner === RUNNER_JEST && options.allure  ) {
+      await writeFile( join( outputDirectory, "jest.config.js" ), `module.exports = {
+  setupFilesAfterEnv: [ "jest-allure/dist/setup" ]
+};`, "utf8" );
+    }
 
     for ( const filename of suiteFiles ) {
-      let specContent = await exportSuite( projectDirectory, filename, runner, snippets, env );
+      let specContent = await exportSuite({
+        projectDirectory,
+        outputDirectory,
+        filename,
+        runner,
+        snippets,
+        sharedTargets,
+        env,
+        options
+      });
+
       const specFilename = parse( filename ).name + ".spec.js",
-            specPath = join( testDir, specFilename ),
-            specHasDebugger = specContent.includes( " debugger;" );
-      // When contians debugger; let's rise timeout to 30 min
-      if ( !headless && specHasDebugger ) {
-        specContent = specContent
-          .replace( /jest\.setTimeout\(\s*(\d+)\s*\);/g, "jest.setTimeout( 1800000 );" );
-      }
-      hasDebugger = hasDebugger || specHasDebugger;
+            specPath = join( testDir, specFilename );
+
       await writeFile( specPath, specContent, "utf8" );
       specFiles.push( specFilename );
     }
 
-    if ( !headless ) {
-      const browserSession = join( outputDirectory, "lib/BrowserSession.js" );
-      let text = await readFile( browserSession, "utf8" );
-      // in case  debugger; we need DevTools enabled
-      if ( hasDebugger ) {
-        text = text.replace( "process.env.PUPPETEER_DEVTOOLS", "true" );
-      }
-      text = text.replace( "process.env.PUPPETEER_RUN_IN_BROWSER", "true" );
-      text = text.replace( /process\.env\.PUPPETEER_LAUNCHER_ARGS/g, JSON.stringify( launcherArgs ) );
-      await writeFile( browserSession, text, "utf8" );
-    }
 
     return specFiles;
   } catch ( e ) {
@@ -307,8 +353,8 @@ export function isDirEmpty( directory ) {
   try {
     return !fs.readdirSync( directory ).length;
   } catch ( e ) {
-    log.warn( `Renderer process: io.isDirEmpty: ${ e }` );
-    return false;
+    process.env.JEST_WORKER_ID || log.warn( `Renderer process: io.isDirEmpty: ${ e }` );
+    return true;
   }
 }
 
@@ -411,20 +457,26 @@ function getJestPkgDirectory() {
   return join( getAsarUnpackedAppDirectory(), JEST_PKG_DIRECTORY );
 }
 
-export function getDemoProjectDirectory() {
+export async function getDemoProjectDirectory() {
   const SRC_DIR = join( getAsarUnpackedAppDirectory(), DEMO_PROJECT_DIRECTORY ),
         DEST_DIR = join( getAppInstallPath(), DEMO_PROJECT_DIRECTORY );
 
-  if ( !fs.existsSync( join( DEST_DIR, ".puppetryrc" ) ) ) {
-    try {
-      shell.mkdir( "-p" , DEST_DIR );
-      shell.chmod( "-R", "+w", DEST_DIR );
-      shell.cp( "-Rf", SRC_DIR, getAppInstallPath() );
-    } catch ( e ) {
-      log.warn( `Renderer process: io.getDemoProjectDirectory(${SRC_DIR}, ${DEST_DIR}):`
-        + ` ${ e }` );
-    }
+  if ( !isDirEmpty( DEST_DIR ) && !await confirmCreateProject() ) {
+    return "";
   }
+
+  try {
+    shell.rm( "-rf" , DEST_DIR );
+    shell.mkdir( "-p" , DEST_DIR );
+    shell.chmod( "-R", "+w", DEST_DIR );
+    shell.cp( "-Rf", SRC_DIR, getAppInstallPath() );
+  } catch ( e ) {
+    log.warn( `Renderer process: io.getDemoProjectDirectory(${SRC_DIR}, ${DEST_DIR}):`
+      + ` ${ e }` );
+    throw new Error( `Cannot create demo project in ${ DEST_DIR }. `
+      + `Please make sure that you have write permission for it` );
+  }
+
   return DEST_DIR;
 }
 
@@ -432,7 +484,7 @@ export function getAppInstallPath() {
   if ( "appInstallPath" in cache ) {
     return cache[ "appInstallPath" ];
   }
-  const appInstallPath = dirname( findLogPath( remote.app.getName() ) );
+  const appInstallPath = dirname( findLogPath( remote.app.name ) );
   cache[ "appInstallPath" ] = appInstallPath;
   return appInstallPath;
 }

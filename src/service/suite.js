@@ -1,4 +1,8 @@
-
+/**
+ *
+ * @param {Object} record
+ * @returns {Object[]}
+ */
 export function findTargets( record ) {
   // group
   if ( "tests" in record ) {
@@ -19,7 +23,7 @@ export function findTargets( record ) {
   if ( record.target === "page" ) {
     return [];
   }
-  if ( "assert" in record && "target" in record.assert ) {
+  if ( typeof record.assert === "object" && "target" in record.assert ) {
     return [ ...new Set([ record.target, record.assert.target ]) ];
   }
   return [ record.target ];
@@ -61,4 +65,36 @@ function hasTargetInAssert( command, target ) {
     && typeof command.assert === "object"
     && "target" in command.assert
     && command.assert.target === target;
+}
+
+export function migrateAssertVisible( command ) {
+  // Puppetry 2.x to 3.x
+  if ( command.method === "assertVisible" && command.assert.assertion === "boolean" ) {
+    return {
+      ...command,
+      assert: {
+        "assertion": "visible",
+        "availability": command.assert.value ? "visible" : "invisible",
+        "display": "any",
+        "visibility": "any",
+        "opacity": "any",
+        "isIntersecting": "any"
+      }
+    };
+  }
+  // Puppetry 3 RC1 to 3.x
+  if ( command.method === "assertVisible" && typeof command.assert.value !== "undefined" ) {
+    return {
+      ...command,
+      assert: {
+        "assertion": "visible",
+        "availability": command.assert.value ? "available" : "unavailable",
+        "display": command.assert.display,
+        "visibility": command.assert.visibility,
+        "opacity": command.assert.visibility.opacity,
+        "isIntersecting": command.assert.isIntersecting ? "true" : "false"
+      }
+    };
+  }
+  return command;
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Row, Col, Alert } from "antd";
+import { Form, Row, Col, Alert, Input, Checkbox } from "antd";
 import { TargetSelect } from "./TargetSelect";
 import { ElementMethodSelect } from "./ElementMethodSelect";
 import { PageMethodSelect } from "./PageMethodSelect";
@@ -9,11 +9,12 @@ import If from "component/Global/If";
 import { getSchema } from "component/Schema/schema";
 import { Description } from "component/Schema/Params/Description";
 import ErrorBoundary from "component/ErrorBoundary";
-
+import { result } from "service/utils";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
-      TEST_LEADING_METHODS = [ "emulate", "setViewport", "goto" ];
+      { TextArea } = Input,
+      TEST_LEADING_METHODS = [ "emulate", "setViewport", "closeDialog", "goto", "assertPerformanceAssetWeight" ];
 
 @connectForm
 export class CommandForm extends React.Component {
@@ -21,7 +22,8 @@ export class CommandForm extends React.Component {
    static propTypes = {
      action: PropTypes.shape({
        updateSuite: PropTypes.func.isRequired,
-       updateCommand: PropTypes.func.isRequired
+       updateCommand: PropTypes.func.isRequired,
+       autosaveSuite: PropTypes.func.isRequired
      }),
      // Coming from connectForm
      form: PropTypes.shape({
@@ -48,10 +50,20 @@ export class CommandForm extends React.Component {
      };
    }
 
+   resetState() {
+     this.setState({
+       target: "",
+       method: "",
+       error: "",
+       validationError: ""
+     });
+   }
+
    updateSuiteModified() {
      this.props.action.updateSuite({
        modified: true
      });
+     this.props.action.autosaveSuite();
    }
 
 
@@ -83,11 +95,14 @@ export class CommandForm extends React.Component {
           target: values.target,
           method: values.method,
           params: values.params,
-          assert: values.assert
+          assert: values.assert,
+          comment: values.comment,
+          failure: "",
+          waitForTarget: values.waitForTarget || false
         });
 
         this.updateSuiteModified();
-
+        this.resetState();
         closeModal();
       }
     });
@@ -100,7 +115,9 @@ export class CommandForm extends React.Component {
   }
 
   changeMethod = ( method ) => {
-    if ( !TEST_LEADING_METHODS.includes( method ) && !this.checkTestHasGoto() ) {
+    const hasGoto = this.checkTestHasGoto();
+
+    if ( !TEST_LEADING_METHODS.includes( method ) && !hasGoto ) {
       return this.setState({
         method,
         error: `You shall start the test with page.goto. `
@@ -111,6 +128,10 @@ export class CommandForm extends React.Component {
       method,
       error: ""
     });
+  }
+
+  checkTestHasAssertPerformanceAssetWeight = () => {
+    return this.props.commands.find( command => ( command.method === "assertPerformanceAssetWeight" ) );
   }
 
   checkTestHasGoto = () => {
@@ -139,6 +160,37 @@ export class CommandForm extends React.Component {
     return true;
   }
 
+  renderExtraFields( record ) {
+    const { getFieldDecorator } = this.props.form,
+          target = this.state.target || record.target,
+          method = this.state.method || record.method,
+          currentTarget = target === "page" ?  null
+            : this.props.targets.find( data => data.target === target );
+
+    return ( <div className="command-form-extra-fields"><details>
+      <summary>Comment</summary>
+      <div  className="command-form__noncollapsed">
+        <FormItem className="ant-form-item--layout">
+          { getFieldDecorator( "comment", {
+            initialValue: record.comment
+          })( <TextArea placeholder="Here you can describe your intent"
+            rows={ 2 } /> ) }
+        </FormItem>
+      </div>
+    </details>
+
+    { ( currentTarget && !currentTarget.ref && method !== "assertVisible" && method !== "waitForTarget" )
+      ? <div className="wait-for-target">
+        <FormItem className="ant-form-item--layout">
+          { getFieldDecorator( "waitForTarget", {
+            initialValue: result( record, "waitForTarget", false ),
+            valuePropName: "checked"
+          })( <Checkbox>wait for the target</Checkbox> ) }
+        </FormItem>
+      </div> :  null }
+    </div> );
+  }
+
   render() {
     const { getFieldDecorator, setFieldsValue } = this.props.form,
           { targets, record } = this.props,
@@ -146,6 +198,7 @@ export class CommandForm extends React.Component {
           method = this.state.method || record.method,
           schema = getSchema( target, method ),
           Assert = schema && schema.assert ? schema.assert.node : null,
+          assertOptions = schema && schema.assert ? schema.assert.options : null,
           safeRecord = this.isSavedOne( record )
             ? {
               params: {},
@@ -157,21 +210,18 @@ export class CommandForm extends React.Component {
               params: {},
               assert: {}
             };
-
     return (
       <ErrorBoundary>
         <Form onSubmit={this.handleSubmit} className="command-form" id="cCommandForm">
           <If exp={ this.state.error }>
             <Alert
-              message="Notice"
               description={ this.state.error }
               type="warning"
               closable />
           </If>
           <Row gutter={24}>
             <Col xl={8} lg={12} md={24}>
-              <FormItem label="Target"
-                help={ targets.length ? null: "Consider adding test targets in the suite" }>
+              <FormItem label="Target">
                 {getFieldDecorator( "target", {
                   initialValue: record.target,
                   rules: [{
@@ -181,7 +231,6 @@ export class CommandForm extends React.Component {
                 })(
                   <TargetSelect
                     setFieldsValue={ setFieldsValue }
-                    targets={ targets }
                     initialValue={ record.target }
                     changeTarget={ this.changeTarget } />
                 )}
@@ -197,15 +246,18 @@ export class CommandForm extends React.Component {
                     message: "Please select method"
                   }]
                 })(
-                  target === "page"
-                    ? <PageMethodSelect
-                      initialValue={ record.method }
-                      changeMethod={ this.changeMethod }
-                      setFieldsValue={ setFieldsValue } />
-                    : <ElementMethodSelect
-                      initialValue={ record.method }
-                      changeMethod={ this.changeMethod }
-                      setFieldsValue={ setFieldsValue } />
+                  !target ? <Input disabled />
+                    : (
+                      target === "page"
+                        ? <PageMethodSelect
+                          initialValue={ record.method }
+                          changeMethod={ this.changeMethod }
+                          setFieldsValue={ setFieldsValue } />
+                        : <ElementMethodSelect
+                          initialValue={ record.method }
+                          changeMethod={ this.changeMethod }
+                          setFieldsValue={ setFieldsValue } />
+                    )
                 )}
               </FormItem>
             </Col>
@@ -216,20 +268,20 @@ export class CommandForm extends React.Component {
             <Description schema={ schema } target={ target } />
           ) : null }
 
+          { schema && this.renderExtraFields( record ) }
+
           <If exp={ this.state.validationError }>
             <Alert
-              message="Error"
               description={ this.state.validationError }
               type="error"
               closable />
           </If>
 
-          <If exp={ schema && schema.params.length }>
+          <If exp={ schema && schema.params && schema.params.length }>
             <div className="command-form ">
               <ErrorBoundary>
                 <ParamsFormBuilder
                   schema={ schema }
-                  targets={ targets }
                   record={ safeRecord }
                   onSubmit={ this.handleSubmit }
                   form={ this.props.form } />
@@ -245,11 +297,15 @@ export class CommandForm extends React.Component {
               <ErrorBoundary>
                 { Assert ? <Assert
                   targets={ targets }
+                  onPressEnter={ this.handleSubmit }
+                  options={ assertOptions }
                   form={ this.props.form }
                   record={ safeRecord } /> : null }
               </ErrorBoundary>
             </fieldset>
           </If>
+
+
         </Form>
       </ErrorBoundary>
     );

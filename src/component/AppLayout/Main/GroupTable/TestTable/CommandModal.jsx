@@ -5,7 +5,18 @@ import { CommandForm } from "./CommandTable/CommandForm";
 import { InstantModal } from "component/Global/InstantModal";
 import ErrorBoundary from "component/ErrorBoundary";
 
+import { connect } from "react-redux";
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        suiteTargets: state.suite.targets,
+        sharedTargets: state.project.targets
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = () => ({
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 export class CommandModal extends React.Component {
 
   static propTypes = {
@@ -14,6 +25,8 @@ export class CommandModal extends React.Component {
       removeCommand: PropTypes.func.isRequired,
       updateSuite: PropTypes.func.isRequired
     }),
+    sharedTargets: PropTypes.object,
+    suiteTargets: PropTypes.object,
     record: PropTypes.object,
     commands: PropTypes.any,
     isVisible: PropTypes.bool.isRequired,
@@ -34,7 +47,7 @@ export class CommandModal extends React.Component {
   }
 
   onCancel = ( record ) => {
-    const { setApp, removeCommand, updateSuite } = this.props.action;
+    const { setApp, removeCommand } = this.props.action;
     this.setState({ submitted: false });
     setApp({
       commandModal: {
@@ -46,13 +59,14 @@ export class CommandModal extends React.Component {
     // an empty record is added to the list, we have to remove it
     if ( record && !record.target ) {
       removeCommand( record );
-      updateSuite({ modified: true });
     }
   }
 
   render() {
     const { loading, submitted } = this.state,
-          { action, targets, record, isVisible, commands } = this.props,
+          { action, record, isVisible, commands, sharedTargets, suiteTargets } = this.props,
+
+          targets = Object.values({ ...sharedTargets, ...suiteTargets }),
 
           deferCommandForm = () => <CommandForm
             submitted={ submitted }
@@ -70,7 +84,7 @@ export class CommandModal extends React.Component {
         title="Edit Command/Assertion"
         id="cCommandModal"
         onOk={this.onOK}
-        onCancel={this.onCancel}
+        onCancel={() => this.onCancel( record )}
         footer={[
           <Button key="back"
             className="btn--modal-command-cancel"

@@ -9,6 +9,7 @@ export class AssertSelector extends React.Component {
 
   static propTypes = {
     record: PropTypes.object.isRequired,
+    onPressEnter: PropTypes.func.isRequired,
     targets: PropTypes.arrayOf( PropTypes.object ),
     form: PropTypes.shape({
       setFieldsValue: PropTypes.func.isRequired,
@@ -45,7 +46,8 @@ export class AssertSelector extends React.Component {
               rules: [{
                 required: true
               }]
-            })( <Input placeholder="e.g. :invalid" /> )
+            })( <Input placeholder="e.g. :invalid or :not(:empty)"
+              onPressEnter={ ( e ) => this.props.onPressEnter( e ) } /> )
             }
           </FormItem>
         </Col>

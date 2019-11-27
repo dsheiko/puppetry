@@ -2,10 +2,110 @@ import { remote, shell } from "electron";
 
 export const isEveryValueMissing = ( obj ) => Object.values( obj ).every( val => typeof val === "undefined" );
 export const isSomeValueMissing = ( obj ) => Object.values( obj ).some( val => typeof val === "undefined" );
+export const isEveryValueNull = ( obj ) => Object.values( obj ).every( val => val === null );
+export const isSomeValueNull = ( obj ) => Object.values( obj ).some( val => val === null );
+export const isEveryValueFalsy = ( obj ) => Object.values( obj ).every( val => !val );
 
+
+export const OPERATOR_MAP = {
+  gt: ">",
+  lt: "<",
+  eq: "="
+};
+
+export const HAS_OPERATOR_MAP = {
+  gt: "more than",
+  lt: "less than",
+  eq: ""
+};
+
+export function renderTarget( targetName ) {
+  return `await bs.getTarget( "${ targetName }" )`;
+}
+
+export const SELECT_SEARCH_PROPS = {
+  showSearch: true,
+  optionFilterProp: "children",
+  filterOption: ( input, option ) => option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0
+};
+
+export function extendToLabel( record, text ) {
+  return record.waitForTarget ? `target.waitForTarget(), ` + text : text;
+}
+
+export function extendToGherkin( record, text ) {
+  return record.waitForTarget ? `Wait for target \`${ record.target } \` and ` + lcfirst( text ) : text;
+}
+
+/**
+ * Underscore: return object prop value or a given default one if not defined
+ * @param {Object} obj
+ * @param {String} key
+ * @param {*} defaultVal
+ * @returns {*}
+ */
+export function result( obj, key, defaultVal = null ) {
+  if ( typeof obj !== "object" ) {
+    return defaultVal;
+  }
+  return ( key in obj && typeof obj[ key ] !== "undefined" ) ? obj[ key ] : defaultVal;
+}
+
+/**
+ *
+ * @param {Object} obj
+ * @param {String[]} keys
+ * @returns {Object}
+ */
+export function filterObject( obj, keys ) {
+  if ( typeof obj !== "object" ) {
+    return {};
+  }
+  return keys.reduce( ( carry, key ) => {
+    if ( key in obj && typeof obj[ key ] !== "undefined" ) {
+      carry[ key ] = obj[ key ];
+    }
+    return carry;
+  }, {});
+}
+
+export function normalizeAssertionValue( assert ) {
+  return ( assert.assertion !== "hasAttribute" && assert.assertion !== "!hasAttribute"
+    && assert.assertion !== "hasProperty" && assert.assertion !== "!hasProperty"
+    && assert.assertion !== "empty" && assert.assertion !== "!empty" ) ? ` \`${ assert.value }\`` : ``;
+}
+
+export function normalizeAssertionVerb( verb ) {
+  switch ( verb ) {
+  case "hasAttribute":
+    return "is present";
+  case "!hasAttribute":
+    return "is absent";
+  case "hasProperty":
+    return "is true";
+  case "!hasProperty":
+    return "is false";
+  case "empty":
+    return "is empty";
+  case "!empty":
+    return "is not empty";
+  case "!equals":
+    return "does not equal";
+  case "!contains":
+    return "does not contain";
+  default:
+    return verb;
+  }
+}
+
+export function renderClick( params, pref = "" ) {
+  const text = ( params.button ? `\`${ params.button  } button\`` : "" )
+   + `${ parseInt( params.clickCount, 10 ) === 2 ? ", `double click`" : "" }`;
+  return text ? pref + text : "";
+}
 
 export const ruleValidateVariable = ( rule, value, callback ) => {
-  const reConst = /^[A-Z_\-0-9]+$/g;
+  const reConst = /^[A-Z_0-9]+$/g;
   value = value.trim();
   if ( !value.length ) {
     return callback( "The value shall not be empty" );
@@ -107,3 +207,18 @@ export function truncate( str, limit ) {
   str = ( "" + str ).trim();
   return ( str.length > limit ) ? str.substr( 0, limit - 3 ) + "..." : str;
 }
+
+export function ucfirst( s ) {
+  if ( typeof s !== "string" ) {
+    return "";
+  }
+  return s.charAt( 0 ).toUpperCase() + s.slice( 1 );
+}
+
+export function lcfirst( s ) {
+  if ( typeof s !== "string" ) {
+    return "";
+  }
+  return s.charAt( 0 ).toLowerCase() + s.slice( 1 );
+}
+

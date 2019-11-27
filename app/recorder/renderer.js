@@ -30,13 +30,21 @@ function notify( txt ) {
   setTimeout( () => notifyEl.classList.toggle( "has-go", false ), 1000 );
 }
 
-function loadUrl( url ) {
-  localStorage.setItem( STORAGE_URL, url );
-  webview.src = url;
+function onceWebviewReady() {
+  webview.removeEventListener( "dom-ready", onceWebviewReady );
   webview.send( "goto" );
   info.classList.add( "is-hidden" );
   webview.classList.remove( "is-hidden" );
   okBtn.removeAttribute( "disabled" );
+}
+
+function loadUrl( url ) {
+  localStorage.setItem( STORAGE_URL, url );
+  webview.src = url;
+
+  webview.addEventListener( "dom-ready", onceWebviewReady );
+
+
   commands.push({
     target: "page",
     method: "goto",
@@ -137,7 +145,8 @@ function registerCommand({ target, method, params }) {
       return;
     }
 
-    commands.push({ target, method, params });
+    commands.push({ target, method, params,
+      waitForTarget: ( target !== "page" && method !== "assertVisible" && method !== "waitForTarget" ) });
     printLog( `<b>${ target }</b>.${ method }(<i>${ JSON.stringify( params ) }</i>)` );
   } catch ( e ) {
     log.warn( `renderer.js process: registerCommand(): ${ e }` );

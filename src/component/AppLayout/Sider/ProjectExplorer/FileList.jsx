@@ -17,7 +17,8 @@ export class FileList extends React.Component {
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired,
       removeAppTab: PropTypes.func.isRequired,
-      setApp: PropTypes.func.isRequired
+      setApp: PropTypes.func.isRequired,
+      autosaveProject: PropTypes.func.isRequired
     }),
 
     parentCliked: PropTypes.string.isRequired,
@@ -43,7 +44,7 @@ export class FileList extends React.Component {
 
   onDblClick = async ( e ) => {
     e.preventDefault();
-    const { openSuiteFile } = this.props.action,
+    const { openSuiteFile, autosaveProject } = this.props.action,
           file = e.target.dataset.id;
 
     if ( this.props.suiteModified ) {
@@ -54,6 +55,7 @@ export class FileList extends React.Component {
     }
 
     openSuiteFile( file );
+    autosaveProject();
   }
 
   onRightClick = ( e ) => {

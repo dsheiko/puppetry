@@ -1,4 +1,5 @@
 import { ExpressionParserException } from "error";
+import { renderTarget } from "service/utils";
 /*eslint no-useless-escape: 0*/
 
 function extractParams( func, directive ) {
@@ -30,6 +31,17 @@ class Parsers {
   iterate = function([ json ]) {
     return `util.exp.iterate( ${ jstr( json  ) }, ${ jstr( this.commandId ) } )`;
   };
+
+  // {{ htmlOf("FOO") }}
+  htmlOf = ([ target ]) => `await bs.target( ${ renderTarget( target ) } ).getProp( "innerHTML" )`;
+
+  // {{ attributeOf("FOO", "href") }}
+  attributeOf = ([ target, attr ]) => `await bs.target( ${ renderTarget( target ) } )`
+    + `.getAttr( ${ JSON.stringify( attr ) } )`;
+
+  // {{ propertyOf("FOO", "checked") }}
+  propertyOf = ([ target, prop ]) => `await bs.target( ${ renderTarget( target ) } )`
+    + `.getProp( ${ JSON.stringify( prop ) } )`;
 
   // {{ env("SECRET") }}
   env = ([ key ]) => `process.env.${ key }`;
@@ -75,7 +87,8 @@ export default class ExpressionParser {
     const parser = Object.getOwnPropertyNames( this.parsers )
       .find( ( available ) => exp.startsWith( available + "(" ) );
     if ( !parser ) {
-      throw new ExpressionParserException( `Cannot parse expression ${ exp }. Expected syntax {{ method(..) }}` );
+      console.warn( `Cannot parse expression ${ exp }. Expected syntax {{ method(..) }}` );
+      return `\`${ rawExp }\``;
     }
     try {
       return this.parsers[ parser ]( extractParams( parser, exp ) );

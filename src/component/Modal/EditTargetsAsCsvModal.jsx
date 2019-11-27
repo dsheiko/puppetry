@@ -4,12 +4,19 @@ import AbstractForm from "component/AbstractForm";
 import { Form, Modal, Button, Input } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import * as classes from "./classes";
+import { MODAL_DEFAULT_PROPS } from "constant";
 
 /*eslint no-useless-escape: 0*/
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
       { TextArea } = Input;
+
+function targetToCsvLine( row ) {
+  return `${ row.target },${ row.selector }`
+   + ( row.ref ? `,${ row.ref }` : `` )
+   + ( row.parentType ? `,${ row.parentType }` : `` );
+}
 
 @connectForm
 export class EditTargetsAsCsvModal extends AbstractForm {
@@ -32,7 +39,7 @@ export class EditTargetsAsCsvModal extends AbstractForm {
   }
 
   onClickOk = ( e ) => {
-    const { clearTarget, addTarget } = this.props.action,
+    const { clearTarget, addTarget, updateSuite } = this.props.action,
           { validateFields } = this.props.form;
 
     e.preventDefault();
@@ -44,18 +51,22 @@ export class EditTargetsAsCsvModal extends AbstractForm {
         .filter( line => line.trim() )
         .map( line => {
           const chunks = line.split( "," ),
-                target = chunks.shift(),
-                selector = chunks.join( "," );
+                [ target, selector, ref, parentType ] = chunks;
 
           return {
             target,
-            selector
+            selector,
+            ref,
+            parentType
           };
         });
 
       clearTarget();
       data.forEach( chunk => {
         addTarget( chunk );
+      });
+      updateSuite({
+        modified: true
       });
       this.close();
     });
@@ -78,7 +89,7 @@ export class EditTargetsAsCsvModal extends AbstractForm {
   render() {
     const { isVisible, targets } = this.props,
           initialValue = !targets ? [] : Object.values( targets )
-            .map( row => `${ row.target },${ row.selector }` ).join( "\n" ),
+            .map( targetToCsvLine ).join( "\n" ),
           { getFieldDecorator, getFieldsError } = this.props.form;
 
     return (
@@ -89,6 +100,7 @@ export class EditTargetsAsCsvModal extends AbstractForm {
           className="c-new-suite-modal"
           disabled={ this.hasErrors( getFieldsError() )  }
           closable
+          { ...MODAL_DEFAULT_PROPS }
           onCancel={this.onClickCancel}
           footer={[
             ( <Button
@@ -102,15 +114,16 @@ export class EditTargetsAsCsvModal extends AbstractForm {
         >
 
           { isVisible && <Form>
+            <div className="markdown">
+              Here you can edit targets in CSV (comma-separated values) format.
+              Please, define lines representing simple targets as <code>TARGET,SELECTOR</code>
+              and chained targets as <code>TARGET,SELECTOR,PARENT_TARGET,PARENT_TYPE</code>
+            </div>
             <FormItem  label="Targets">
               { getFieldDecorator( "csv", {
-                initialValue,
-                rules: [{
-                  required: true,
-                  message: "Please enter export table"
-                }]
+                initialValue
               })(
-                <TextArea autosize={{ minRows: 8, maxRows: 12 }} />
+                <TextArea rows="8" />
               )}
             </FormItem>
           </Form> }

@@ -4,7 +4,7 @@ import AbstractForm from "component/AbstractForm";
 import { Form, Modal, Button, Input } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { ipcRenderer } from "electron";
-import { E_GIT_COMMIT } from "constant";
+import { E_GIT_COMMIT, MODAL_DEFAULT_PROPS } from "constant";
 import * as classes from "./classes";
 
 /*eslint no-useless-escape: 0*/
@@ -77,6 +77,7 @@ export class GitCommitModal extends AbstractForm {
           disabled={ this.hasErrors( getFieldsError() )  }
           closable
           onCancel={this.onClickCancel}
+          { ...MODAL_DEFAULT_PROPS }
           footer={[
             ( <Button
               autoFocus={ true }

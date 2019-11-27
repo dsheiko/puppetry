@@ -4,14 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest",
-    "test:debug": "cross-env PUPPETEER_RUN_IN_BROWSER=true jest --detectOpenHandles"
+    "test": "jest",
+    "test:firefox": "cross-env PUPPETRY_DRIVER=firefox jest",
+    "test:debug": "cross-env PUPPETEER_RUN_IN_BROWSER=true jest --detectOpenHandles",
+    "report": "allure serve"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "jest": {
     "verbose": true,
+    "extraGlobals": [ "Math" ],
+    "setupFilesAfterEnv": [ "./lib/fix-return-warning.js" ],
     "testMatch": [
       "**/*.spec.js"
     ]
@@ -19,10 +23,15 @@
   "dependencies": {
     "cross-env": "^5.2.0",
     "faker": "^4.1.0",
-    "jest": "^23.6.0",
+    "jest": "^24.9.0",
     "node-fetch": "^2.6.0",
     "node-localstorage": "^1.3.1",
-    "puppeteer": "^1.17.0",
-    "shelljs": "^0.8.2"
+    "puppeteer": "^2.0.0",
+    "puppeteer-firefox": "*",
+    "shelljs": "^0.8.2",
+    "pixelmatch": "^5.1.0",
+    "pngjs": "^3.4.0",
+    "text-table": "^0.2.0",
+    "jest-allure": "^0.1.1"
   }
 }

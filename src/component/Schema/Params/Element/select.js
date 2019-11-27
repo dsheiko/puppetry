@@ -5,6 +5,12 @@ export const select = {
   template: ({ params, targetSeletor }) => justify(
     `// Emulating select\n`
     + `await bs.page.select( "${ targetSeletor }", "${ params.value }" );` ),
+
+  toLabel: ({ params }) => `(\`${ params.value }\`)`,
+  toGherkin: ({ target, params }) => `Select \`${ params.value }\` in \`${ target }\``,
+  commonly: "",
+
+
   description: `Sets value on select element`,
   params: [
     {
@@ -15,7 +21,7 @@ export const select = {
         {
           name: "params.value",
           control: INPUT,
-          label: "Text of an option value to look for",
+          label: "Option value",
           help: "",
           placeholder: "e.g. foo",
           initialValue: "",
@@ -25,6 +31,21 @@ export const select = {
           }]
         }
       ]
+    }
+  ],
+
+  testTypes: {
+    "params": {
+      "value": "INPUT"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "value": "ipsum"
+      }
     }
   ]
 };

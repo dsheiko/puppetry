@@ -8,6 +8,11 @@ await bs.page.evaluate(() => {
   debugger;
 });` );
   },
+
+  toLabel: () => ``,
+  toGherkin: () => `Stop execution and call DevTools`,
+  commonly: "stop execution and call DevTools",
+
   description: `Stops execution of JavaScript, and calls (if available) the
 [debugging function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger).
 During test scenarios may happen many things - DOM changes, pages load. It makes hard to figure out why some test
@@ -15,5 +20,11 @@ assertions fail in some particular moment.  You can use this tool to set a break
 soon as it reaches this point. So you will be able to examine the page state with DevTools.
 
 NOTE: This command makes sense only if you set Puppetry to run tests in browser (F6)`,
-  params: []
+  params: [],
+
+  test: [
+    {
+      valid: true
+    }
+  ]
 };

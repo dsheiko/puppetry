@@ -24,6 +24,39 @@ export default handleActions(
       });
     },
 
+    [ actions.setLightboxIndex ]: ( state, { payload }) => {
+      return update( state, {
+        lightbox: {
+          index: {
+            $set: payload
+          }
+        }
+      });
+    },
+
+    [ actions.setLightboxImages ]: ( state, { payload }) => {
+      if ( !payload ) {
+        return state;
+      }
+      return update( state, {
+        lightbox: {
+          images: {
+            $set: payload
+          }
+        }
+      });
+    },
+
+    [ actions.cleanLightbox ]: ( state ) => {
+      return update( state, {
+        lightbox: {
+          images: {
+            $set: []
+          }
+        }
+      });
+    },
+
     [ actions.addAppTab ]: ( state, { payload }) => {
       if ( !payload ) {
         return state;

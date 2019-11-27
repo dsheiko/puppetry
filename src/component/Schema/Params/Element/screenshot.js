@@ -1,46 +1,52 @@
-import { INPUT, CHECKBOX } from "../../constants";
+import { INPUT, CHECKBOX, TARGET_SELECT } from "../../constants";
 import { isEveryValueMissing, ruleValidateGenericString } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
+import { renderTarget } from "service/utils";
+import { getCounter } from "service/screenshotCounter";
 
-let counterCache = new Set(), counter = 0;
-/**
- * the logic is that complex because
- * ParamsFormBuilder re-renders with onChange event and simple counter
- * would iterate every time
- * @param {string} id
- * @returns {Number}
- */
-function getCounter( id ) {
-  if ( counterCache.has( id ) ) {
-    return counter;
-  }
-  counterCache.add( id );
-  counter++;
-  return counter;
+function getTargetMap( targetsArr ){
+  return `{
+${ targetsArr.map(
+    ( name ) => `          "${ name }": async () =>  await bs.getTargetOrFalse(${ JSON.stringify( name ) })` )
+    .join( ",\n" ) }
+        }`;
 }
 
 export const screenshot = {
-  template: ({ target, params, id }) => {
+  template: ({ target, params, id, parentId }) => {
     const { name, omitBackground } = params,
           parser = new ExpressionParser( id ),
           baseOptions = {
             omitBackground
           },
           options = baseOptions,
-
-          optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
+          optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `,
+          makeScreenshotCode = `await ( ${ renderTarget( target ) } ).`
+            + `screenshot( util.png( ${ JSON.stringify( id ) }, `
+            + `${ parentId ? JSON.stringify( parentId ) : "null" }, ${ parser.stringify( name ) }${ optArg }) )`;
     return `
-      // Taking screenshot of ${ target } element
-      await ( await ${ target }() ).screenshot( util.png( ${ parser.stringify( name ) }${ optArg }) );
+      // Taking screenshot of ${ target } element${
+  ( typeof params.targets !== "undefined" && typeof params.targets.length !== "undefined"
+        && params.targets.length )
+    ? `
+      await bs.traceTarget( "${ id }",
+        ${ getTargetMap( params.targets ) },
+        async() => {
+          ${ makeScreenshotCode };
+        });`
+    : `
+      ${ makeScreenshotCode };`}
   `;
   },
+
+  toLabel: ({ params }) => `(\`${ params.name }\`)`,
+  commonly: "make screenshot",
+
+  toGherkin: ({ target, params }) => `Take screenshot \`${ params.name }\` of \`${ target }\``,
+
   description: `Takes a screenshot of the target element.`,
 
-  test: {
-    "params": {
-      "name": "Screenshot"
-    }
-  },
+  requiresTargets: true,
 
   params: [
     {
@@ -69,6 +75,15 @@ export const screenshot = {
           }]
         },
         {
+          name: "params.targets",
+          label: "show targets",
+          control: TARGET_SELECT,
+          tooltip: `Here you can select targets to be highlighted on the screenshot.`,
+          initialValue: [],
+          placeholder: "",
+          rules: []
+        },
+        {
           name: "params.omitBackground",
           label: "omit background",
           control: CHECKBOX ,
@@ -80,5 +95,22 @@ export const screenshot = {
       ]
     }
 
+  ],
+
+  testTypes: {
+    "params": {
+      "name": "INPUT",
+      "omitBackground": "CHECKBOX"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "name": "Element 1",
+        "omitBackground": false
+      }
+    }
   ]
 };

@@ -1,16 +1,29 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
-import { AssertValue } from "../../Assert/AssertValue";
+import { AssertProperty } from "../../Assert/AssertProperty";
+import { normalizeAssertionVerb, normalizeAssertionValue, renderTarget } from "service/utils";
 
 export const assertProperty = {
   template: ( command ) => buildAssertionTpl(
-    `await bs.target( await ${ command.target }() ).getProp( "${ command.params.name }" )`,
+    `await bs.target( ${ renderTarget( command.target ) } ).getProp( "${ command.params.name }" )`,
     command,
     `// Asserting that "${ command.params.name }" property's `
       + `value of ${ command.target } satisfies the given constraint`
   ),
+
+  toLabel: ({ params, assert }) => `(\`${ params.name }\``
+    + ` ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )})`,
+
+  toGherkin: ({ target, params, assert }) => `Assert that property \`${ params.name }\` of \`${ target }\`
+    ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )}`,
+
+  commonly: "assert property",
+
   assert: {
-    node: AssertValue
+    node: AssertProperty,
+    options: {
+      type: "property"
+    }
   },
   description: `Asserts that the
   specified [property](https://developer.mozilla.org/en-US/docs/Web/API/Element)
@@ -37,6 +50,30 @@ export const assertProperty = {
           }]
         }
       ]
+    }
+  ],
+
+  testTypes: {
+    "assert": {
+      "assertion": "SELECT",
+      "value": "INPUT"
+    },
+    "params": {
+      "name": "INPUT"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "!equals",
+        "type": "string",
+        "value": "ipsum"
+      },
+      "params": {
+        "name": "checked"
+      }
     }
   ]
 };

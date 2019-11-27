@@ -1,3 +1,54 @@
+# Puppetry 3.0.0
+
+### Features
+- improvement: add export format: human readable report
+- improvement: add template expressions htmlOf, attributeOf, propertyOf
+- improvement: new Test report UI with screenshot thumbnails and lightbox
+- improvement: new CSS regression testing
+- improvement: new interactive mode
+- improvement: add page.waitForRequest
+- improvement: add page.waitForResponse
+- improvement: add page.assertConsoleMessage
+- improvement: add page.assertDialog
+- improvement: add page.closeDialog
+- improvement: add target.scrollIntoView
+- improvement: add option XPath to page.waitForSelector
+- improvement: extend target.assertVisible with options `displayed`, `visible`, `opaque`, `within the current viewport`
+- improvement: all assertions accept the opposite assumptions (equal/not equal, contain/ doesn't contain)
+- improvement: mixed type assertion simplified - one can assert only for string value. Exceptions are assertProperty/Attribute where additionally one can assert for boolean
+- improvement: Jest/Puppeteer project (export) has option to run in Firefox ([custom build](https://www.npmjs.com/package/puppeteer-firefox))
+- improvement: test steps and refs now support comments
+- improvement: add suite autosave option
+- improvement: add page.assertPerformanceAssetWeight
+- improvement: add page.assertPerformanceAssetCount
+- improvement: add page.assertPerformanceTiming (page loading, redirection, network latency, processing)
+- improvement: add page.setUserAgent
+- improvement: extend page.setViewport with list of predefined resolutions
+- improvement: extend *.screenshot with "show targets" option
+- improvement: polish UX for every test step form
+- improvement: support Chrome Extensions
+- improvement: add ignoreHTTPSErrors launcher option
+- improvement: support to test Google Analytics tracking (pageview, event, social)
+- improvement: support for target chaining
+  - querying within other element
+  - querying in Shadow DOM
+  - querying in iframe
+- improvement: fix UI rendering performance
+- improvement: add support for record operations (copy/paste, clone, delete, enable/disable) on selections
+- improvement: show tips & tricks on loading screens
+- improvement: add option to wait for target to every target method
+- improvement: add target.waitForTarget
+- improvement: UI, all inputs on press Enter submit, confirmation dialogs on Enter accept
+- improvement: exported project now generates [Allure reports](http://allure.qatools.ru/)
+
+### Updates
+
+- improvement: update to Electron 7
+- improvement: update to Puppeteer 2
+- improvement: update to Jest 24.9
+- improvement: update to React 16.11
+- improvement: update to React-redux 7
+
 # Puppetry 2.0.4
 
 ### Bug fixes

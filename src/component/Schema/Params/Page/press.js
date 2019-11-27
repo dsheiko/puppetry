@@ -27,6 +27,16 @@ const keyNames = Object.keys( USKeyboardLayout ),
 
       modifierPress = ( key, action ) => key ? `await bs.page.keyboard.${ action }( "${ key }" );` + "\n" : "";
 
+function getKeyName( params ) {
+  return [ params.modifierKey1,
+    params.modifierKey2,
+    params.modifierKey3,
+    params.key ]
+    .filter( key => Boolean( key ) )
+    .map( key => `${ key }` )
+    .join( "+" );
+}
+
 export const press = {
   template: ({ params }) => {
     const { key, modifierKey1, modifierKey2, modifierKey3 } = params,
@@ -40,6 +50,15 @@ ${ renderModifiers( "down" ) }
 await bs.page.keyboard.press( "${ key }" );
 ${ renderModifiers( "up" ) }` );
   },
+
+  toLabel: ({ params }) => {
+    return `(\`${ getKeyName( params ) }\`)`;
+  },
+
+  toGherkin: ({ params }) => `Emulate pressing key \`${ getKeyName( params ) }\``,
+
+
+  commonly: "press a key",
 
   description: `Emulates pressing on a key, optionally with modifiers such as ⇧, ⌥, alt, control, ⌘`,
 
@@ -109,5 +128,26 @@ ${ renderModifiers( "up" ) }` );
     }
 
 
+  ],
+
+  testTypes: {
+    "params": {
+      "key": "SELECT",
+      "modifierKey1": "SELECT",
+      "modifierKey2": "SELECT",
+      "modifierKey3": "SELECT"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "key": "NumpadEnter",
+        "modifierKey1": "",
+        "modifierKey2": "",
+        "modifierKey3": ""
+      }
+    }
   ]
 };

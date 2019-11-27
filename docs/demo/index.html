@@ -157,14 +157,14 @@
         <h4 id="demo-form">Demo Form</h4>
       </div>
 
-      <form class="row" id="form">
+      <form class="row" id="form" novalidate>
         <div class="row">
           <div class="input-field col l6 m12">
-            <input id="fname" type="text" class="validate">
+            <input id="fname" type="text" class="validate" pattern=".{3,32}" required >
             <label for="fname">First Name</label>
           </div>
           <div class="input-field col l6 m12">
-            <input id="lname" type="text" class="validate">
+            <input id="lname" type="text" class="validate" pattern=".{3,32}" required>
             <label for="lname">Last Name</label>
           </div>
         </div>
@@ -209,11 +209,15 @@
           </div>
         </div>
 
-
-        <div class="row file-field toolbox">
-           <button id="submit" class="btn waves-effect waves-light" type="submit" name="action">Submit
-            <i class="material-icons right">send</i>
-          </button>
+        <div class="row">
+          <div class="col s6">
+            <star-rating id="starRating"></star-rating>
+          </div>
+          <div class="toolbox input-field col s6">
+            <button id="submit" class="btn waves-effect waves-light" type="submit" name="action">Submit
+             <i class="material-icons right">send</i>
+           </button>
+          </div>
         </div>
 
       </form>
@@ -386,10 +390,69 @@
           });
 
           listen( "#form", "submit", function( el ){
-            alert( "Data sent" );
+            const msg = el.checkValidity() ? "OK" : "FAIL";
+            alert( msg );
+            console.info( msg );
           });
 
         });
       </script>
+
+
+      <script src="./star-rating.js" defer></script>
+
+      <template id="star-rating">
+        <style type="text/css">
+
+          :host {
+            display: flex;
+            width: 226px;
+          }
+
+          .rating {
+            display: inline-block;
+            white-space: nowrap;
+            margin: 0 auto 1em;
+            font-size: 45px;
+            overflow: hidden;
+            user-select: none;
+          }
+          .rating input {
+            float: right;
+            opacity: 0;
+            position: absolute;
+          }
+          .rating label {
+            float: right;
+            color: #aaa;
+            text-decoration: none;
+            transition: color .2s;
+            cursor: pointer;
+          }
+
+          .rating label:hover {
+            color: orange;
+          }
+
+          .rating label:hover ~ label,
+          .rating > input:checked ~ label {
+            color: orange;
+          }
+
+
+        </style>
+
+      <div class="rating">
+          <input name="stars" id="r5" type="radio"><label for="r5">☆</label>
+          <input name="stars" id="r4" type="radio"><label for="r4">☆</label>
+          <input name="stars" id="r3" type="radio"><label for="r3">☆</label>
+          <input name="stars" id="r2" type="radio"><label for="r2">☆</label>
+          <input name="stars" id="r1" type="radio"><label for="r1">☆</label>
+      </div>
+
+      </template>
+
+
+
     </body>
   </html>

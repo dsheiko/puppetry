@@ -3,6 +3,8 @@ const { app, ipcMain, Menu, shell } = require( "electron" ),
         E_MENU_OPEN_PROJECT, E_MENU_SAVE_SUITE, E_MENU_SAVE_SUITE_AS, E_SUITE_LIST_UPDATED,
         E_MENU_OPEN_SUITE, E_MENU_EXPORT_PROJECT, E_MENU_EXIT_APP, E_MENU_RUN } = require( "../constant" );
 
+const isMac = process.platform === "darwin";
+
 function buildAppMenu( win, projectDirectory = null, suiteFilename = null, files = [] ) {
   const template = [
     {
@@ -86,9 +88,23 @@ function buildAppMenu( win, projectDirectory = null, suiteFilename = null, files
         { role: "cut" },
         { role: "copy" },
         { role: "paste" },
-        { role: "pasteandmatchstyle" },
-        { role: "delete" },
-        { role: "selectall" }
+        ...(isMac ? [
+          { role: "pasteAndMatchStyle" },
+          { role: "delete" },
+          { role: "selectAll" },
+          { type: "separator" },
+          {
+            label: "Speech",
+            submenu: [
+              { role: "startspeaking" },
+              { role: "stopspeaking" }
+            ]
+          }
+        ] : [
+          { role: "delete" },
+          { type: "separator" },
+          { role: "selectAll" }
+        ])
       ]
     },
 

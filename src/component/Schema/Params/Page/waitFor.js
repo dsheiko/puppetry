@@ -5,6 +5,11 @@ export const waitFor = {
       // Waiting for ${params.value} ms
       await bs.page.waitFor( ${params.value} );
   `,
+
+  toLabel: ({ params }) => `(\`${ params.value }ms\`)`,
+  toGherkin: ({ params }) => `Wait for \`${ params.value }ms\``,
+  commonly: "wait for timeout",
+
   description: `Waits for a given time before proceeding to the next command`,
   params: [
     {
@@ -15,7 +20,7 @@ export const waitFor = {
         {
           name: "params.value",
           control: INPUT_NUMBER,
-          label: "Timeout to wait for (ms)",
+          label: "Timeout (ms)",
           tooltip: "",
           placeholder: "",
           rules: [{
@@ -24,6 +29,21 @@ export const waitFor = {
           }]
         }
       ]
+    }
+  ],
+
+  testTypes: {
+    "params": {
+      "value": "INPUT"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "value": 1
+      }
     }
   ]
 };

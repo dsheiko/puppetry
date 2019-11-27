@@ -3,6 +3,7 @@ import actions from "../action";
 import DEFAULT_STATE from "./defaultState";
 import update from "immutability-helper";
 import variable from "./project/variable";
+import sharedTarget from "./project/sharedTarget";
 
 export default handleActions(
   {
@@ -65,7 +66,8 @@ export default handleActions(
       });
     },
 
-    ...variable
+    ...variable,
+    ...sharedTarget
   },
   DEFAULT_STATE.project
 );

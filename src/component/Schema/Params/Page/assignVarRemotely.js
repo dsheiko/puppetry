@@ -17,6 +17,12 @@ export const assignVarRemotely = {
         }
       });`;
   },
+
+
+  toLabel: ({ params }) => `(\`${ params.name }\` with \`${  params.url }\`)`,
+  toGherkin: ({ params }) => `Set template variable \`${ params.name }\` with webhook \`${  params.url }\``,
+  commonly: "set template variable with webhook",
+
   description: `Polls \`URL\` with a given intervals until a response satisfying \`parserFn\` function received
 or a specified timeout exceeded. It can be used, for example,
 to retrieve a value from an [email sent by the application under test](https://docs.puppetry.app/testing-emails)`,
@@ -26,7 +32,6 @@ to retrieve a value from an [email sent by the application under test](https://d
       legend: "",
       description: "",
       tooltip: "",
-      span: { label: 4, input: 18 },
       fields: [
         {
           name: "params.name",
@@ -111,6 +116,29 @@ or extend it e.g. into [a chain of requests](https://docs.puppetry.app/testing-e
         }
 
       ]
+    }
+  ],
+
+  testTypes: {
+    "params": {
+      "name": "INPUT",
+      "url": "INPUT",
+      "interval": "INPUT_NUMBER",
+      "timeout": "INPUT_NUMBER",
+      "parserFn": "INPUT"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "name": "FAR",
+        "url": "http://puppetry.app",
+        "interval": 1000,
+        "timeout": 60000,
+        "parserFn": "( json ) => {\n  return json ? json.value : null;\n}"
+      }
     }
   ]
 };

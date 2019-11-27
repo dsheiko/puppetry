@@ -1,3 +1,4 @@
+exports.E_RESET_FORM = "resetFormEvent";
 exports.E_RUN_REPORT = "runReport";
 exports.E_BROWSE_DIRECTORY = "browseDirectory";
 exports.E_DIRECTORY_SELECTED = "directorySelected";
@@ -74,5 +75,69 @@ exports.RUNNER_JEST = "RUNNER_JEST";
 exports.SNIPPETS_FILENAME = ".snippets.json";
 exports.SNIPPETS_GROUP_ID = "snippets";
 
+// screenshots/.trace for printable text
+exports.DIR_SCREENSHOTS_TRACE = ".trace";
+exports.DIR_SCREENSHOTS = "screenshots";
+exports.DIR_SNAPSHOTS = "snapshots";
+exports.DIR_REPORTS = "reports";
 
 exports.INLINE_INPUT_STYLES = { width: 200 };
+
+exports.SELECTOR_CHAIN_DELIMITER = ">>";
+
+exports.SELECTOR_CSS = 1;
+exports.SELECTOR_XPATH = 2;
+
+exports.STORAGE_KEY_SETTINGS = "settings";
+
+exports.FIELDSET_DEFAULT_LAYOUT = {
+  labelCol: {
+    span: 3
+  },
+  wrapperCol: {
+    span: 21
+  }
+};
+
+exports.FIELDSET_DEFAULT_CHECKBOX_LAYOUT = {
+  wrapperCol: {
+    span: 21,
+    offset: 3
+  }
+};
+
+
+exports.MODAL_DEFAULT_PROPS = {
+  transitionName: "none",
+  maskTransitionName: "none",
+  forceRender: true,
+  confirmLoading: false
+};
+
+
+exports.TIPS = [
+  "To perform a bulk operation on multiple rows, <br /> select them with “Shift-click”.",
+  "To perform a bulk operation on multiple rows, <br /> select them with “Shift-click”.",
+  "To perform a bulk operation on multiple rows, <br /> select them with “Shift-click”.",
+  "You can use drag & drop and context menu <br />when working with tables.",
+  "Auto-saving can be disabled in “Settings”.",
+  "You can change test case representation style in settings.",
+  "You can export project as text specification. <br />Screenshots per action will be generated automatically.",
+  "Did you know that you can make an in-app screenshot <br />with “Ctrl/CMD-Shift-4”?",
+  "To find application working directory,<br /> click on “Edit” icon next to project name",
+  "To run tests in browser, opt-in in <br />“Run Tests” / “Browser options”  tab.",
+  "You can copy table rows in one project<br /> and paste them into another.",
+  "If your test site has broken SSL certificate,<br /> tick on “ignore HTTPS errors” in “Browser options” tab.",
+  "To follow testing steps one by one,<br /> tick on “interactive mode” on “Run Tests” modal.",
+  "You can set BASE_URL values for dev/stage/live environments<br /> and refer the variable in the test cases",
+  "Use snippets to reuse testing flows among test cases",
+  "Use “page.assertConsoleMessage” to test console messages<br /> on the page under test",
+  "You can accept/dismiss “window.prompt”<br /> with “page.closeDialog” action",
+  "To run exported project in Firefox,<br /> call “npm run test:firefox”",
+  "You can use “page.assertScreenshot” to compare page views<br /> before refactoring CSS and after",
+  "You can use “page.debug” to pause test execution<br /> and inspect the page",
+  "Did you know that you can navigate suite tabs with “Crtl-TAB”?",
+  "Did you know that you can navigate suite tabs with “Crtl-TAB”?",
+  "Use :not(:empty) selector to target a non-empty element",
+  "Use a[href*='keyword'] selector to target a link<br /> whose href attribute contains 'keyword'"
+];

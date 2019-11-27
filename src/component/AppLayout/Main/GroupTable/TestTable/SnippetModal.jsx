@@ -3,7 +3,8 @@ import { InstantModal } from "component/Global/InstantModal";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractForm from "component/AbstractForm";
 import { SnippetVariables } from "./SnippetVariables";
-import { Form, Button, Select } from "antd";
+import { Form, Button, Select, Input } from "antd";
+import { SELECT_SEARCH_PROPS } from "service/utils";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
@@ -34,9 +35,13 @@ export class SnippetModal extends AbstractForm {
       record.variables = this.state.variables;
 
       if ( record.id ) {
-        action.updateCommand({ ...record, ref: values.snippet, isRef: true, refName: match.title });
+        action.updateCommand({
+          ...record, ref: values.snippet, comment: values.comment, isRef: true, refName: match.title
+        });
       } else {
-        action.addCommand({ ...record, ref: values.snippet, isRef: true, refName: match.title });
+        action.addCommand({
+          ...record, ref: values.snippet, comment: values.comment, isRef: true, refName: match.title
+        });
       }
       this.close();
     });
@@ -97,11 +102,8 @@ export class SnippetModal extends AbstractForm {
               ]
             })(
               <Select
-                showSearch
                 placeholder="Select a snippet"
-                filterOption={( input, option ) => (
-                  option.props.children.toLowerCase().indexOf( input.toLowerCase() ) >= 0 )
-                }
+                { ...SELECT_SEARCH_PROPS }
               >
                 {
                   Object.values( snippets ).map( snippet => ( <Option key={ snippet.id }>
@@ -111,8 +113,19 @@ export class SnippetModal extends AbstractForm {
             )}
           </FormItem>
 
+          <FormItem label="Comment (optional)">
+            { getFieldDecorator( "comment", {
+              initialValue: ( record ? record.comment :  null )
+            })(
+              <Input placeholder="Explain your intent" onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
+            )}
+          </FormItem>
+
         </Form>
+
         <SnippetVariables record={ record } onChanged={ this.onVariablesChanged } />
+
+
       </InstantModal>
     </ErrorBoundary> );
   }

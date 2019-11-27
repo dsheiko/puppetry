@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test</title>
+<style>
+  #displayed {
+    display: flex;
+  }
+  #not_displayed {
+    display: none;
+  }
+  #visible {
+    visibility: collapse;
+  }
+  #not_visible {
+    visibility: hidden;
+  }
+  #opacity {
+    opacity: .5;
+  }
+  #not_opacity {
+    opacity: 0;
+  }
+  #out {
+    position: absolute;
+    left: -9000px;
+    top: -9000px;
+  }
+  button {
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+  }
+  button:disabled {
+    background: #ccc;
+    border-color: #ccc;
+    cursor: not-allowed;
+    color: #000;
+  }
+
+  .one-div { background: red; width: 200px; height: 60px; position: relative; }
+  .one-div::before { background: yellow; content: ""; position: absolute; left: 0; top: 0; height: 10px; width: 100%; }
+  .one-div::after { background: blue; content: ""; position: absolute; left: 0; bottom: 0; height: 10px; width: 100%; }
+
+  #blockLeftTop {
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 32px;
+    position: fixed;
+    border: 1px solid #ccc;
+    display: block;
+  }
+
+  .is-hidden {
+    display: none !important;
+  }
+
+  #blockLeftTop:hover {
+    background-color: #eee;
+  }
+
+  #blockNextTop {
+    top: 0;
+    left: 122px;
+    width: 150px;
+    height: 32px;
+    position: fixed;
+    border: 1px solid #ccc;
+    display: block;
+  }
+
+  #container {
+    height: 64px;
+    border: 1px solid #ccc;
+    overflow: auto;
+    width: 64px;
+  }
+  #container div {
+    height: 32px;
+    width: 264px;
+  }
+
+  .new-target {
+    background: green;
+  }
+
+  body {
+    padding-top: 32px;
+  }
+  iframe {
+    border: 1px solid #ccc;
+    height: 100px;
+  }
+</style>
+</head>
+<body>
+
+<div id="info"></div>
+
+<div id="out">out of viewport</div>
+
+<h3>page.closeDialog</h3>
+<button id="closeDialog">closeDialog</button>
+
+<h3>target.click</h3>
+<button id="click">Click</button>
+<button id="alert">Alert</button>
+<button id="confirm">Confirm</button>
+<button id="prompt">Prompt</button>
+<button id="confirmAccept">Confirm</button>
+<button id="promptAccept">Prompt</button>
+
+
+<a id="blockLeftTop">Left-top</a>
+<a id="blockNextTop">Next-top</a>
+
+<p>
+<button id="request">Make a request</button>
+<button id="reload">Reload</button>
+</p>
+
+
+<h3>target.assertAttribute</h3>
+<button id="disabledBtn" disabled data-ok="ok">disabled</button>
+
+<h3>target.assertProperty</h3>
+<input id="propInput" type="text" value="Lorem">
+<input id="propCheckbox" type="checkbox" />
+
+<h3>target.assertStyle</h3>
+<div id="assertStyle" class="one-div">Lorem</div>
+
+<h3>target.assertVisible</h3>
+<a id="generic">generic</a>
+<a id="displayed">displayed</a>
+<a id="not_displayed">NOT displayed</a>
+<a id="visible">visible</a>
+<a id="not_visible">NOT visible</a>
+<a id="opacity">opacity</a>
+<a id="not_opacity">NOT opacity</a>
+
+<ul id="list">
+  <li>1</li>
+  <li>2</li>
+  <li>3</li>
+</ul>
+
+
+<div id="container">
+  <div>Line1</div>
+  <div>Line2</div>
+  <div>Line3</div>
+  <div>Line4</div>
+  <div>Line5</div>
+</div>
+
+<p>
+  <input id="file" type="file" />
+</p>
+<p>
+  <input id="input" />
+</p>
+<p>
+  <input id="checkbox" type="checkbox" />
+</p>
+<p>
+  <input id="radio" type="radio" name="radio" />
+</p>
+
+<p>
+  <select id="select">
+    <optgroup label="Swedish Cars">
+      <option value="volvo">Volvo</option>
+      <option value="saab">Saab</option>
+    </optgroup>
+    <optgroup label="German Cars">
+      <option value="mercedes">Mercedes</option>
+      <option value="audi">Audi</option>
+    </optgroup>
+  </select>
+</p>
+
+<form id="form">
+  <input id="formInput" value="Lorem" />
+</form>
+
+<a id="callTarget">Call target</a>
+
+
+<img id="image" src="http://dsheiko.com/assets/me.jpg" alt="" />
+
+<div id="level1">
+  <span>level 1</span>
+  <div id="level2">
+    <span>level 2</span>
+    <div id="level3">
+      level 3
+    </div>
+  </div>
+</div>
+
+<iframe id="iframeFoo" src="./iframe-foo.html?"></iframe>
+
+<foo-component id="fooShadowRoot"></foo-component>
+<template id="fooTemplate">
+  <div id="shadowLocalTarget">
+    Local Target in Shadow DOM
+  </div>
+  <bar-component id="barShadowRoot"></bar-component>
+</template>
+<template id="barTemplate">
+  <div id="shadowLocalNestedTarget">Local Target in Nested Shadow DOM</div>
+</template>
+
+
+<script>
+  document.addEventListener( "DOMContentLoaded", function() {
+
+    console.log( "log message" );
+    console.info( "info message" );
+    console.warn( "ERROR" );
+
+    // Helper for event listening
+    function listen( sel, ev, handler ) {
+      [].slice.call( document.querySelectorAll( sel ) ).forEach(function( el ){
+        el.addEventListener( ev, function( e ){
+          e.preventDefault();
+          handler( el );
+        }, false );
+      });
+    }
+
+    function registerCustomElement( elName, templateId ) {
+      globalThis.customElements.define( elName, class extends HTMLElement {
+      constructor() {
+          super();
+          this.attachShadow({ mode: "open" });
+          this.shadowRoot.appendChild( document.getElementById( templateId ).content );
+        }
+      });
+    }
+
+    registerCustomElement( "foo-component", "fooTemplate" );
+    registerCustomElement( "bar-component", "barTemplate" );
+
+    listen( "#callTarget", "click", function( el ){
+      setTimeout(() => {
+        el.classList.add( "new-target" );
+      }, 50);
+    });
+
+    listen( "#click", "click", function( el ){
+      el.dataset.rsp = "clicked";
+    });
+
+    listen( "#click", "dblclick", function( el ){
+      el.dataset.rsp = "double-clicked";
+    });
+
+    listen( "#alert", "click", function( el ){
+      alert( "Lorem1" );
+    });
+
+    listen( "#confirm", "click", function( el ){
+      el.dataset.rsp = confirm( "Lorem2" ) ? "true" : "false";
+    });
+
+    listen( "#prompt", "click", function( el ){
+      el.dataset.rsp = prompt( "Lorem3" ) || "";
+    });
+
+     listen( "#confirmAccept", "click", function( el ){
+      el.dataset.rsp = confirm( "Lorem4" ) ? "true" : "false";
+    });
+
+    listen( "#promptAccept", "click", function( el ){
+      el.dataset.rsp = prompt( "Lorem5" ) || "";
+    });
+
+    listen( "#blockLeftTop", "click", function( el ){
+      el.dataset.rsp = "clicked";
+    });
+
+    listen( "#blockLeftTop", "dblclick", function( el ){
+      el.dataset.rsp = "double-clicked";
+    });
+
+    listen( "#request", "click", function( el ){
+      fetch( "./puppeteer.json" );
+    });
+
+    listen( "#reload", "click", function( el ){
+      window.reload();
+    });
+
+
+
+     document.addEventListener( "keydown", function( e ){
+       if ( e.keyCode === 13 && e.altKey && e.ctrlKey && e.shiftKey ) {
+         document.querySelector( "#info" ).dataset.rsp = "press";
+         document.querySelector( "#info" ).innerHTML = "press";
+       }
+     }, false );
+
+
+
+  });
+
+  (function() {
+    var po = document.createElement('script'),
+        s = document.getElementsByTagName('script')[ 0 ];
+    po.type = 'text/javascript';
+    po.async = true;
+    po.src = './index.js?' +  Date.now();
+    s.parentNode.insertBefore( po, s );
+  })();
+
+</script>
+
+</body>
+</html>

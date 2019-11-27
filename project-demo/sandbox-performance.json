@@ -1,0 +1,213 @@
+{
+  "title": "Sandbox GA",
+  "timeout": 50000,
+  "snippets": false,
+  "description": "",
+  "savedAt": 1574163600,
+  "loadedAt": 1574679902,
+  "modified": false,
+  "filename": "sandbox-performance.json",
+  "targets": {
+    "7ouk2g0j11z": {
+      "editing": false,
+      "id": "7ouk2g0j11z",
+      "key": "7ouk2g0j11z",
+      "target": "ADD_TO_CART_BTN",
+      "selector": "#addtocartwhite",
+      "disabled": false,
+      "adding": false
+    },
+    "7ouk2g0j120": {
+      "editing": false,
+      "id": "7ouk2g0j120",
+      "key": "7ouk2g0j120",
+      "target": "CHECKOUT_BTN",
+      "selector": "#checkoutbtn",
+      "disabled": false,
+      "adding": false
+    },
+    "7ouk2g0j121": {
+      "editing": false,
+      "id": "7ouk2g0j121",
+      "key": "7ouk2g0j121",
+      "target": "PROCEED_BTN",
+      "selector": "#proceedbtn",
+      "disabled": false,
+      "adding": false
+    },
+    "7ouk2g0j122": {
+      "editing": false,
+      "id": "7ouk2g0j122",
+      "key": "7ouk2g0j122",
+      "target": "PURCHASE_BTN",
+      "selector": "#purchasebtn",
+      "disabled": false,
+      "adding": false
+    },
+    "7ouk2g0j123": {
+      "editing": false,
+      "id": "7ouk2g0j123",
+      "key": "7ouk2g0j123",
+      "target": "PAYMENT_METHOD_SELECT",
+      "selector": "#paymentmethod",
+      "disabled": false,
+      "adding": false
+    }
+  },
+  "groups": {
+    "dduk2fx837q": {
+      "title": "Performance Budget",
+      "id": "dduk2fx837q",
+      "editing": false,
+      "key": "dduk2fx837q",
+      "tests": {
+        "dduk2fx8bwf": {
+          "title": "Main page",
+          "id": "dduk2fx8bwf",
+          "editing": false,
+          "groupId": "dduk2fx837q",
+          "key": "dduk2fx8bwf",
+          "commands": {
+            "dduk2fx9q6u": {
+              "editing": false,
+              "id": "dduk2fx9q6u",
+              "key": "dduk2fx9q6u",
+              "target": "page",
+              "method": "setViewport",
+              "params": {
+                "width": "1920",
+                "height": "1080",
+                "resolution": "1920x1080",
+                "deviceScaleFactor": 1
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "dduk2fx837q",
+              "testId": "dduk2fx8bwf",
+              "waitForTarget": false
+            },
+            "dduk2fxa0zh": {
+              "editing": false,
+              "id": "dduk2fxa0zh",
+              "key": "dduk2fxa0zh",
+              "target": "page",
+              "method": "goto",
+              "params": {
+                "url": "{{ SANDBOX_BASEURL }}",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "dduk2fx837q",
+              "testId": "dduk2fx8bwf",
+              "waitForTarget": false
+            },
+            "dduk2fxb5yw": {
+              "editing": false,
+              "id": "dduk2fxb5yw",
+              "key": "dduk2fxb5yw",
+              "target": "page",
+              "method": "assertPerformanceAssetWeight",
+              "assert": {
+                "assertion": "assertAssetWeight",
+                "_enabled": {
+                  "script": true,
+                  "stylesheet": true,
+                  "image": true,
+                  "media": false,
+                  "font": false,
+                  "xhr": false
+                },
+                "script": "200",
+                "stylesheet": "50",
+                "image": "1500"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "dduk2fx837q",
+              "testId": "dduk2fx8bwf",
+              "waitForTarget": false
+            },
+            "hbfk2gbdxml": {
+              "editing": false,
+              "id": "hbfk2gbdxml",
+              "key": "hbfk2gbdxml",
+              "target": "page",
+              "method": "assertPerformanceAssetCount",
+              "assert": {
+                "assertion": "assertAssetCount",
+                "_enabled": {
+                  "script": true,
+                  "stylesheet": true,
+                  "image": true,
+                  "media": false,
+                  "font": false,
+                  "xhr": false
+                },
+                "script": "6",
+                "stylesheet": "10",
+                "image": "100"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "dduk2fx837q",
+              "testId": "dduk2fx8bwf",
+              "waitForTarget": false
+            },
+            "hbfk2gbef1p": {
+              "editing": false,
+              "id": "hbfk2gbef1p",
+              "key": "hbfk2gbef1p",
+              "target": "page",
+              "method": "assertPerformanceTiming",
+              "assert": {
+                "assertion": "assertPerformanceTiming",
+                "_enabled": {
+                  "loading": true,
+                  "redirection": false,
+                  "network": true,
+                  "processing": true
+                },
+                "loading": "4000",
+                "network": "1250",
+                "processing": "3500"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "dduk2fx837q",
+              "testId": "dduk2fx8bwf",
+              "waitForTarget": false
+            }
+          }
+        }
+      }
+    }
+  },
+  "puppetry": "3.0.0"
+}

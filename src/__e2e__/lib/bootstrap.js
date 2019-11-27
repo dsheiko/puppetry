@@ -1,3 +1,5 @@
+// @see https://webdriver.io/docs/api.html
+// @see https://electronjs.org/spectron
 const { Application } = require( "spectron" ),
       { join } = require( "path" ),
       fs = require( "fs" ),
@@ -15,6 +17,10 @@ shell.config.fatal = true;
 
 shell.mkdir( "-p" , SCREENSHOT_PATH );
 
+function sprintfCount( num ) {
+  return String( num + 100000 ).substr( 1 );
+}
+
 class Ctx {
 
   constructor() {
@@ -31,6 +37,10 @@ class Ctx {
         PUPPETRY_CLEAN_START: true,
         PUPPETRY_SPECTRON: true
       },
+      chromeDriverArgs: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox"
+      ],
       webdriverOptions: {
         deprecationWarnings: false
       }
@@ -48,7 +58,7 @@ class Ctx {
     const dir = join( SCREENSHOT_PATH, this.ns ),
           buf = await this.app.browserWindow.capturePage();
     shell.mkdir( "-p" , dir );
-    fs.writeFileSync( join( dir, `${ this.counter++ }--${ name }.png` ), buf );
+    fs.writeFileSync( join( dir, `${ sprintfCount( this.counter++ ) }--${ name }.png` ), buf );
   }
 
   async waitUntilLayoutUpdates() {
@@ -61,6 +71,7 @@ class Ctx {
   async setAttribute( selector, attr, value ) {
     await this.app.client.execute( ( selector, attr, value ) => {
       const el = document.querySelector( selector );
+      el.scrollIntoView();
       if ( typeof value === "undefined" ) {
         el.removeAttribute( attr );
         return;
@@ -69,11 +80,104 @@ class Ctx {
     }, selector, attr, value );
   }
 
+  /**
+   * Emulate user-like toggle
+   * @param {String} selector
+   * @param {Boolean} toggle
+   */
+  async toggleCheckbox( selector, toggle ) {
+
+    await this.app.client.execute( ( selector, toggle ) => {
+      const el = document.querySelector( selector );
+      el.scrollIntoView();
+      if ( toggle && !el.parentNode.classList.contains( "ant-checkbox-checked" ) ) {
+        el.parentNode.parentNode.click();
+      }
+      if ( !toggle && el.parentNode.classList.contains( "ant-checkbox-checked" ) ) {
+        el.parentNode.parentNode.click();
+      }
+      return [ el.parentNode.tagName, el.parentNode.parentNode.tagName ];
+    }, selector, toggle );
+  }
+
   async setValue( selector, value ) {
     await this.app.client.execute( ( selector, value ) => {
-      document.querySelector( selector ).value = value;
+      const el = document.querySelector( selector );
+      el.scrollIntoView();
+      el.value = value;
     }, selector, value );
   }
+
+  async click( selector ) {
+    await this.app.client.execute( ( selector ) => {
+      const el = document.querySelector( selector );
+      el.scrollIntoView();
+      el.click();
+    }, selector );
+  }
+
+//  async type( selector, value ) {
+//      // reset the input, because despite docs https://webdriver.io/docs/api/element/setValue.html
+//      // .client.setValue works like addValue
+//      await this.app.client.execute( ( selector ) => {
+//        const el = document.querySelector( selector );
+//        // When it's INPUT_NUMBER reset is 0
+//        el.setAttribute( "value", el.classList.contains( "ant-input-number-input" ) ? 0 : "" );
+//      }, selector );
+//      return await this.app.client.setValue( selector, value );
+//  }
+
+  /**
+   * Emulate change select value for Ant.Design select
+   * @param {type} selector
+   * @param {type} value
+   */
+  async select( selector, value ) {
+    // Here what we do:
+    // 1) find select parent node and click on it open
+    // 2) find hash to match open global modal with dropdown menu
+    // 3) find list if options (dropdown menu items)
+    // 4) find one matching given value
+    // 5) click on it
+    const debug = await this.app.client.execute( ( selector, value ) => {
+      try {
+        const el = document.querySelector( selector ),
+              oValue = value.trim();
+        el.scrollIntoView();
+        el.click();
+        const hash = el.querySelector( "[aria-controls]" ).getAttribute( "aria-controls" ),
+              list = Array.from( document.querySelectorAll( `[id="${ hash }"] .ant-select-dropdown-menu-item` ) ),
+              optionNode = list.find( el => {
+                const span = el.querySelector( "span" );
+                // Target/Method selectors have ReactElements inside options
+                if ( span ) {
+                  return span.dataset.keyword.trim() === oValue;
+                }
+                return el.textContent.trim() === oValue;
+              });
+
+        optionNode && optionNode.click();
+        return { hash, optionNode, value, options: list.map( el => el.tagName ) };
+      } catch ( e ) {
+        return { exception: e };
+      }
+
+    }, selector, value );
+
+    await this.app.client.pause( 200 );
+  }
+
+  // Well the problem is user
+//  async select( selector, value ) {
+//    await this.app.client.execute( ( selector ) => {
+//      document.querySelector( selector ).scrollIntoView();
+//    }, selector );
+//    await this.app.client.click( `${ selector } .ant-select-selection--single` );
+//    await this.app.client.pause( 100 );
+//    await this.app.client.setValue( `${ selector } input.ant-select-search__field`, value );
+//    await this.app.client.keys([ "Enter" ]);
+//    await this.app.client.pause( 100 );
+//  }
 
   async expectMenuItemsAvailable( spec ) {
     const keys = Object.keys( spec );
@@ -136,13 +240,7 @@ class Ctx {
 
  }
 
-  async select( selector, value ) {
-    await this.app.client.click( `${ selector } .ant-select-selection--single` );
-    await this.app.client.pause( 100 );
-    await this.app.client.setValue( `${ selector } input.ant-select-search__field`, value );
-    await this.app.client.keys([ "Enter" ]);
-    await this.app.client.pause( 100 );
-  }
+
 
   createTmpDir( key ) {
     this.tmpDir[ key ] = tmp.dirSync().name;
@@ -184,8 +282,8 @@ expect.extend({
   toBeOk( received, source ) {
     const pass = Boolean( received );
     return expectReturn( pass,
-      `[${ source }] expected ${ JSON.stringify( received ) } to be truthy`,
-      `[${ source }] expected ${ JSON.stringify( received ) } to be falsy` );
+      `[${ source }] expected to be available`,
+      `[${ source }] expected to be not available` );
   },
 
   /**
@@ -201,6 +299,7 @@ expect.extend({
       `[${ source }] expected ${ JSON.stringify( received ) } to equal ${ JSON.stringify( value ) }`,
       `[${ source }] expected ${ JSON.stringify( received ) } not to equal ${ JSON.stringify( value ) }` );
   }
+
 });
 
 exports.Ctx = Ctx;

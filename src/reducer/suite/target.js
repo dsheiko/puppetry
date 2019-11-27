@@ -53,6 +53,9 @@ export default {
     merge[ gid ] = { ...targetDefaultState( gid ), ...options };
 
     return update( state, {
+      modified: {
+        $set: true
+      },
       targets: {
         $merge: merge
       }
@@ -87,6 +90,9 @@ export default {
     }, {});
 
     return update( state, {
+      modified: {
+        $set: true
+      },
       targets: {
         $set: entities
       }
@@ -94,11 +100,36 @@ export default {
   },
 
   [ actions.clearTarget ]: ( state ) => update( state, {
+    modified: {
+      $set: true
+    },
     targets: {
       $set: {}
     }
   }),
 
+
+  /**
+    * Update record without saving
+    * @param {object} state
+    * @param {Entity} payload (EntityRef required)
+    * @returns {object}
+    */
+  [ actions.setTarget ]: ( state, { payload }) => {
+    return update( state, {
+      modified: {
+        $set: true
+      },
+      targets: {
+        $apply: ( ref ) => {
+          const targets = { ...ref },
+                id = payload.id;
+          targets[ id ] = { ...targets[ id ], ...payload, key: id };
+          return targets;
+        }
+      }
+    });
+  },
 
   /**
     * Update record
@@ -110,8 +141,13 @@ export default {
     if ( isTargetNotUnique( state, payload ) ) {
       payload.target += "_" + uniqid().toUpperCase();
     }
+    if ( typeof payload.selector === "string" ) {
+      payload.selector = payload.selector.trim();
+    }
     const newState = update( state, {
-
+      modified: {
+        $set: true
+      },
       targets: {
         $apply: ( ref ) => {
           const targets = { ...ref },
@@ -132,6 +168,9 @@ export default {
    * @returns {object}
    */
   [ actions.removeTarget ]: ( state, { payload }) => update( state, {
+    modified: {
+      $set: true
+    },
     targets: {
       $unset:[ payload.id ]
     }

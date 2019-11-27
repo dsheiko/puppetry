@@ -27,17 +27,17 @@ export const goto = {
           optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
     return `
       // Navigating to ${ url }
+      bs.performance.reset();
       await bs.page.goto( ${ urlString }${ optArg });
     `;
   },
 
   description: "Navigates to a given URL and waits until the page loaded",
 
-  test: {
-    "params": {
-      "url": "https://www.google.com"
-    }
-  },
+  toLabel: ({ params }) => `(\`${ params.url }\`)`,
+  commonly: "visit page",
+
+  toGherkin: ({ params }) => `Visit \`${ params.url }\``,
 
   params: [
     {
@@ -61,7 +61,6 @@ export const goto = {
     },
     {
       collapsed: true,
-      span: { label: 4, input: 18 },
       description: "",
       tooltip: "",
 
@@ -83,7 +82,7 @@ export const goto = {
           inputStyle: { maxWidth: 200 },
           name: "params.waitUntil",
           control: SELECT,
-          label: "Wait until event",
+          label: "Wait till event",
           tooltip: `Waits for a specified event before continue`,
           placeholder: "",
           description: `Where events can be either:
@@ -104,6 +103,25 @@ export const goto = {
           }]
         }
       ]
+    }
+  ],
+
+  testTypes: {
+    "params": {
+      "url": "INPUT",
+      "timeout": "INPUT_NUMBER",
+      "waitUntil": "SELECT"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "url": "http://todomvc.com/examples/react/#/",
+        "timeout": 30000,
+        "waitUntil": "load"
+      }
     }
   ]
 };

@@ -9,6 +9,13 @@ export const assignVar = {
       // Assign template variable dynamically
       ENV[ ${ JSON.stringify( params.name ) } ] = ${ value };`;
   },
+
+
+  toLabel: ({ params }) => `(\`${ params.name }\`, \`${ params.value }\`)`,
+  toGherkin: ({ params }) => `Set value \`${ params.value }\` to template variable ${ params.name }`,
+
+  commonly: "set template variable dynamically",
+
   description: `Assigns template variable dynamically`,
 
   params: [
@@ -16,7 +23,6 @@ export const assignVar = {
       legend: "",
       description: "",
       tooltip: "",
-      span: { label: 4, input: 18 },
       fields: [
         {
           name: "params.name",
@@ -52,6 +58,23 @@ export const assignVar = {
           }]
         }
       ]
+    }
+  ],
+
+  testTypes: {
+    "params": {
+      "name": "INPUT",
+      "value": "INPUT"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "name": "FOO",
+        "value": "foo"
+      }
     }
   ]
 };

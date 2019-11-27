@@ -4,6 +4,7 @@ import AbstractForm from "component/AbstractForm";
 import { ruleValidateGenericString } from "service/utils";
 import { message, Form, Icon, Input, InputNumber, Button } from "antd";
 const FormItem = Form.Item,
+      { TextArea } = Input,
       connectForm = Form.create();
 
 @connectForm
@@ -23,15 +24,26 @@ export class SuiteForm extends AbstractForm {
     })
   }
 
+  state = {
+    modified: false
+  }
+
+  onChange = () => {
+    this.setState({ modified: true });
+  }
+
   onSubmit = ( e ) => {
     e.preventDefault();
+    this.setState({ modified: false });
     this.props.form.validateFieldsAndScroll( ( err, values ) => {
       if ( !err ) {
         const title = values.title,
               timeout = values.timeout,
-              { updateSuite }  = this.props.action;
+              description = values.description,
+              { updateSuite, autosaveSuite }  = this.props.action;
 
-        updateSuite({ title, timeout });
+        updateSuite({ title, timeout, description });
+        autosaveSuite();
         message.info( `Data has been successfully updated` );
         this.props.form.resetFields();
       }
@@ -60,11 +72,19 @@ export class SuiteForm extends AbstractForm {
           })(
             <Input
               onPressEnter={this.onSubmit}
+              onChange={ this.onChange }
               placeholder="Describe suite"
               prefix={ <Icon type="profile" title="Suite" /> }
             />
           )}
 
+        </FormItem>
+        <FormItem label="Description">
+          { getFieldDecorator( "description", {
+            initialValue: this.props.description || ""
+          })( <TextArea
+            onChange={ this.onChange }
+            rows={ 2 } /> ) }
         </FormItem>
         <FormItem  label="Test timeout (ms)">
           { getFieldDecorator( "timeout", {
@@ -76,6 +96,7 @@ export class SuiteForm extends AbstractForm {
             ]
           })(
             <InputNumber
+              onChange={ this.onChange }
               onPressEnter={this.onSubmit}
             />
           )}
@@ -86,7 +107,7 @@ export class SuiteForm extends AbstractForm {
             id="cSuiteFormChangeBtn"
             type="primary"
             htmlType="submit"
-            disabled={ this.hasErrors( getFieldsError() ) }
+            disabled={ !this.state.modified || this.hasErrors( getFieldsError() ) }
           >Save</Button>
         </FormItem>
       </Form>

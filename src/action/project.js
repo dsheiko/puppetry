@@ -21,6 +21,7 @@ import appActions from "./app";
 import gitActions from "./git";
 import suiteActions from "./suite";
 import snippetsActions from "./snippets";
+import { result } from "service/utils";
 
 /*eslint no-empty: 0*/
 
@@ -31,6 +32,8 @@ const actions = createActions({
   REMOVE_ENV: ( env ) => env,
   UPDATE_PROJECT_PANES: ( panel, panes ) => ({ panel, panes })
 });
+
+let autosaveTimeout;
 
 // PROJECT
 
@@ -113,6 +116,19 @@ actions.loadProjectFiles = ( directory = null ) => async ( dispatch, getState ) 
     handleException( ex, dispatch, "Cannot load project files" );
   }
 
+};
+
+actions.autosaveProject = () => ( dispatch, getState ) => {
+  const store = getState(),
+        autosaveSuite = () => {
+          autosaveTimeout = null;
+          saveProject( store );
+        };
+
+  if ( result( store.settings, "autosave", true ) && store.settings.projectDirectory ) {
+    clearTimeout( autosaveTimeout );
+    autosaveTimeout = setTimeout( autosaveSuite, 800 );
+  }
 };
 
 actions.saveProject = () => async ( dispatch, getState ) => {

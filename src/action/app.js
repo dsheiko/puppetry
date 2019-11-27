@@ -20,7 +20,13 @@ const actions = createActions({
 
   REMOVE_APP_TAB: ( tabKey ) => validate( tabKey, "string" ),
 
-  SET_APP_TAB: ( tabKey ) => validate( tabKey, "string" )
+  SET_APP_TAB: ( tabKey ) => validate( tabKey, "string" ),
+
+  SET_LIGHTBOX_IMAGES: ( images ) => validate( images, "object[]" ),
+
+  SET_LIGHTBOX_INDEX: ( index ) => validate( index, "number" ),
+
+  CLEAN_LIGHTBOX: () => {}
 });
 
 // APP

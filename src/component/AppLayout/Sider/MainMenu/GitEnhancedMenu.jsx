@@ -8,7 +8,7 @@ import { E_GIT_INIT,
   E_GIT_LOG, E_GIT_LOG_RESPONSE, E_GIT_COMMIT_RESPONSE } from "constant";
 
 
-export class GitEnhancedMenu extends React.Component {
+export class GitEnhancedMenu extends React.PureComponent {
 
   static propTypes = {
     action:  PropTypes.shape({
@@ -18,6 +18,9 @@ export class GitEnhancedMenu extends React.Component {
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired
     }),
+    isGitInitialized: PropTypes.any,
+    gitConfigUsername: PropTypes.string.isRequired,
+    gitConfigEmail: PropTypes.string.isRequired,
     gitDetachedHeadState: PropTypes.func.isRequired,
     git: PropTypes.object,
     project: PropTypes.object.isRequired,
@@ -56,8 +59,8 @@ export class GitEnhancedMenu extends React.Component {
   }
 
   onFileGitCommit = async () => {
-    const { gitDetachedHeadState, git } = this.props;
-    if ( !git.initialized || gitDetachedHeadState ) {
+    const { gitDetachedHeadState, isGitInitialized } = this.props;
+    if ( !isGitInitialized || gitDetachedHeadState ) {
       return;
     }
     if ( this.props.suiteModified ) {
@@ -80,7 +83,7 @@ export class GitEnhancedMenu extends React.Component {
   }
 
   onFileGitInitialize = () => {
-    const { projectDirectory } = this.props,
+    const { projectDirectory, gitConfigUsername, gitConfigEmail } = this.props,
           { git } = this.props.project;
 
     if ( !projectDirectory ) {
@@ -88,7 +91,7 @@ export class GitEnhancedMenu extends React.Component {
       return;
     }
 
-    if ( !git.configUsername.trim() || !git.configEmail.trim() ) {
+    if ( !gitConfigUsername.trim() || !gitConfigEmail.trim() ) {
       message.error( "You need to provide GIT configuration first" );
       this.props.action.addAppTab( "settings" );
       return;

@@ -18,7 +18,7 @@ class StdErrCapturer extends Writable {
 const strErrCapturer = new StdErrCapturer();
 
 module.exports = async( cwd, targetFiles ) => {
-  const { runCLI } = require( "jest-cli/build/cli" ),
+  const { runCLI } = require( "jest-cli/build" ),
         options = {
           projects: [ cwd ],
           _: targetFiles,
@@ -35,6 +35,7 @@ module.exports = async( cwd, targetFiles ) => {
   process.stderr.write = strErrCapturer.write.bind( strErrCapturer );
   // Run JEST
   const report = await runCLI( options, options.projects );
+
   // Restore stderr (hopefully)
   process.stderr.write = save;
 

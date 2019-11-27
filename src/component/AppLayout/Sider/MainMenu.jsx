@@ -25,13 +25,14 @@ export class MainMenu extends GitEnhancedMenu {
       closeApp: PropTypes.func.isRequired,
       removeAppTab: PropTypes.func.isRequired
     }),
-    files: PropTypes.array.isRequired,
+    isProjectEmpty: PropTypes.bool.isRequired,
+    isGitInitialized: PropTypes.bool.isRequired,
+    hasGitRemote: PropTypes.bool.isRequired,
     readyToRunTests: PropTypes.bool.isRequired,
-    projectDirectory: PropTypes.string,
-    suiteFilename: PropTypes.string,
-    suiteModified: PropTypes.bool
+    isProjectOpen: PropTypes.bool.isRequired,
+    isSuiteOpen: PropTypes.bool.isRequired,
+    suiteModified: PropTypes.bool.isRequired
   }
-
 
   hotkeyMap = {
     "ctrl+s": "onSave",
@@ -67,11 +68,11 @@ export class MainMenu extends GitEnhancedMenu {
   }
 
   onSave = () => {
-    const { suiteFilename, projectDirectory } = this.props;
-    if ( !projectDirectory ) {
+    const { isSuiteOpen, isProjectOpen } = this.props;
+    if ( !isProjectOpen ) {
       return;
     }
-    if ( !suiteFilename ) {
+    if ( !isSuiteOpen ) {
       return this.onSaveAs();
     }
     this.props.action.saveSuite();
@@ -79,16 +80,16 @@ export class MainMenu extends GitEnhancedMenu {
   }
 
   onSaveAs = () => {
-    const { projectDirectory } = this.props;
-    if ( !projectDirectory ) {
+    const { isProjectOpen } = this.props;
+    if ( !isProjectOpen ) {
       return;
     }
     this.props.action.setApp({ saveSuiteAsModal: true });
   }
 
   onSaveProjectAs = () => {
-    const { projectDirectory } = this.props;
-    if ( !projectDirectory ) {
+    const { isProjectOpen } = this.props;
+    if ( !isProjectOpen ) {
       return;
     }
     this.props.action.setApp({ saveProjectAsModal: true });
@@ -115,8 +116,8 @@ export class MainMenu extends GitEnhancedMenu {
   }
 
   onOpenSuite = async () => {
-    const { projectDirectory, files } = this.props;
-    if ( !projectDirectory || !files.length ) {
+    const { isProjectOpen, isProjectEmpty } = this.props;
+    if ( !isProjectOpen || isProjectEmpty ) {
       return;
     }
     if ( this.props.suiteModified ) {
@@ -129,8 +130,8 @@ export class MainMenu extends GitEnhancedMenu {
   }
 
   onNewSuite = async () => {
-    const { projectDirectory } = this.props;
-    if ( !projectDirectory ) {
+    const { isProjectOpen } = this.props;
+    if ( !isProjectOpen ) {
       return;
     }
     if ( this.props.suiteModified ) {
@@ -154,8 +155,8 @@ export class MainMenu extends GitEnhancedMenu {
   }
 
   onRuntimeTestInstall = async () => {
-    const { projectDirectory } = this.props;
-    if ( !projectDirectory ) {
+    const { isProjectOpen } = this.props;
+    if ( !isProjectOpen ) {
       return;
     }
     if ( this.props.suiteModified ) {
@@ -178,8 +179,8 @@ export class MainMenu extends GitEnhancedMenu {
   }
 
   onExportProject = async () => {
-    const { projectDirectory } = this.props;
-    if ( !projectDirectory ) {
+    const { isProjectOpen } = this.props;
+    if ( !isProjectOpen ) {
       return;
     }
     if ( this.props.suiteModified ) {
@@ -192,7 +193,7 @@ export class MainMenu extends GitEnhancedMenu {
   }
 
   onSnippets = async () => {
-    const { openSuiteFile, saveSuite, setSuite } = this.props.action;
+    const { openSuiteFile, saveSuite, setSuite, autosaveProject } = this.props.action;
 
     if ( this.props.suiteModified ) {
       await confirmUnsavedChanges({
@@ -202,10 +203,11 @@ export class MainMenu extends GitEnhancedMenu {
     }
 
     openSuiteFile( SNIPPETS_FILENAME );
+    autosaveProject();
   }
 
-  onSettings = async () => {
-    this.props.action.addAppTab( "settings" );
+  openTab = async ( tabKey ) => {
+    this.props.action.addAppTab( tabKey );
   }
 
   onRendererInfo( ev, msg ) {
@@ -244,7 +246,7 @@ export class MainMenu extends GitEnhancedMenu {
 
   render() {
     const hotkeys = Object.keys( this.hotkeyMap ).join( ", " ),
-          { projectDirectory, git, suiteFilename, readyToRunTests, files,
+          { isProjectOpen, isGitInitialized, hasGitRemote, isSuiteOpen, readyToRunTests, isProjectEmpty,
             gitDetachedHeadState } = this.props;
 
     return (
@@ -254,7 +256,7 @@ export class MainMenu extends GitEnhancedMenu {
           onKeyDown={ this.onKeyDown }
         >
           <Menu id="cMainMenu"
-            forceSubMenuRender={ Boolean( process.env.PUPPETRY_SPECTRON ) }
+            forceSubMenuRender={ true }
             theme="dark"
             mode="vertical"
             selectable={ false }>
@@ -266,19 +268,19 @@ export class MainMenu extends GitEnhancedMenu {
             >
               <Menu.Item key="file1" onClick={ this.onNewProject } id="cMainMenuNewProject">
                 New Project... { " " }<kbd>{ ostr( "Ctrl-Shift-N" ) }</kbd></Menu.Item>
-              <Menu.Item key="file7" disabled={ !projectDirectory }
+              <Menu.Item key="file7" disabled={ !isProjectOpen }
                 onClick={ this.onSaveProjectAs } id="cMainMenuSaveProjectAs">
                 Save Project As...</Menu.Item>
-              <Menu.Item key="file2" disabled={ !projectDirectory }
+              <Menu.Item key="file2" disabled={ !isProjectOpen }
                 onClick={ this.onNewSuite } id="cMainMenuNewSuite">
                 New Suite... { " " }<kbd>{ ostr( "Ctrl-N" ) }</kbd></Menu.Item>
               <Menu.Item key="file3" onClick={ this.onOpenProject } id="cMainMenuOpenProject">
                 Open Project... { " " }<kbd>{ ostr( "Ctrl-Shift-O" ) }</kbd></Menu.Item>
-              <Menu.Item key="file4" disabled={ !projectDirectory || !files.length  } id="cMainMenuOpenSuite"
+              <Menu.Item key="file4" disabled={ !isProjectOpen || isProjectEmpty  } id="cMainMenuOpenSuite"
                 onClick={ this.onOpenSuite }>Open Suite...</Menu.Item>
-              <Menu.Item key="file5" disabled={ !suiteFilename } onClick={ this.onSave } id="cMainMenuSaveSuite">
+              <Menu.Item key="file5" disabled={ !isSuiteOpen } onClick={ this.onSave } id="cMainMenuSaveSuite">
                 Save Suite { " " }<kbd>{ ostr( "Ctrl-S" ) }</kbd></Menu.Item>
-              <Menu.Item key="file6" disabled={ !suiteFilename } onClick={ this.onSaveAs } id="cMainMenuSaveAsSuite">
+              <Menu.Item key="file6" disabled={ !isSuiteOpen } onClick={ this.onSaveAs } id="cMainMenuSaveAsSuite">
                 Save Suite As...</Menu.Item>
 
               <SubMenu
@@ -286,44 +288,71 @@ export class MainMenu extends GitEnhancedMenu {
                 id="cMainMenuFileGit"
                 title={<span><Icon type="branches" /><span>Git</span></span>}
               >
-                <Menu.Item key="git1" disabled={ !suiteFilename || git.initialized }
+                <Menu.Item key="git1" disabled={ !isSuiteOpen || isGitInitialized }
                   onClick={ this.onFileGitInitialize } id="cMainMenuFileGitInit">
                   Initialize</Menu.Item>
-                <Menu.Item key="git2" disabled={ !git.hasRemote }
+                <Menu.Item key="git2" disabled={ !hasGitRemote }
                   onClick={ this.onFileGitClone } id="cMainMenuFileGitClone">
                   Clone...</Menu.Item>
 
-                <Menu.Item key="git3" disabled={ !suiteFilename || !git.initialized || gitDetachedHeadState }
+                <Menu.Item key="git3" disabled={ !isSuiteOpen || !isGitInitialized || gitDetachedHeadState }
                   onClick={ this.onFileGitCheckout } id="cMainMenuFileGitCheckout">
                   Checkout...</Menu.Item>
 
-                <Menu.Item key="git5" disabled={ !suiteFilename || !git.initialized || gitDetachedHeadState }
+                <Menu.Item key="git5" disabled={ !isSuiteOpen || !isGitInitialized || gitDetachedHeadState }
                   onClick={ this.onFileGitCommit }
                   id="cMainMenuFileGitCommit">Commit...{ " " }<kbd>{ ostr( "Ctrl-Shift-S" ) }</kbd></Menu.Item>
                 <Menu.Item key="git6"
-                  disabled={ !suiteFilename || !git.initialized || !git.hasRemote || gitDetachedHeadState }
+                  disabled={ !isSuiteOpen || !isGitInitialized  || !hasGitRemote || gitDetachedHeadState }
                   onClick={ this.onFileGitSync } id="cMainMenuFileGitPull">
                   Sync with remote...</Menu.Item>
 
               </SubMenu>
 
-              <Menu.Item key="7" disabled={ !projectDirectory } id="cMainMenuExportProject"
+              <Menu.Item key="7" disabled={ !isProjectOpen } id="cMainMenuExportProject"
                 onClick={ this.onExportProject }>
-                Export Project for CI... { " " }<kbd>{ ostr( "Ctrl-Shift-E" ) }</kbd></Menu.Item>
+                Export Project as... { " " }<kbd>{ ostr( "Ctrl-Shift-E" ) }</kbd></Menu.Item>
               <Menu.Item key="8">Exit</Menu.Item>
 
             </SubMenu>
 
-            <Menu.Item key="15" disabled={ !projectDirectory } onClick={ this.onSnippets } id="cMainMenuSnippets">
-              <span><Icon type="snippets" /><span>Snippets</span></span></Menu.Item>
 
-            <Menu.Item key="11" onClick={ this.onSettings } id="cMainMenuSettings">
-              <span><Icon type="setting" /><span>Settings...</span></span></Menu.Item>
+            <SubMenu
+              key="project"
+              id="cMainMenuFile"
+              disabled={ !isProjectOpen }
+              title={<span><Icon type="project" /><span>Project</span></span>}
+            >
+
+              <Menu.Item key="101" onClick={ this.onSnippets } id="cMainMenuProjectSnippets">
+                Snippets
+              </Menu.Item>
+
+              <Menu.Item key="104"
+                onClick={ () => this.openTab( "projectTargets" ) } id="cMainMenuProjectTargets">
+                Shared targets
+              </Menu.Item>
+
+              <Menu.Item key="102"
+                onClick={ () => this.openTab( "projectVariables" ) } id="cMainMenuProjectVariables">
+                Template variables
+              </Menu.Item>
+
+              <Menu.Item key="103"
+                onClick={ () => this.openTab( "projectGit" ) } id="cMainMenuProjectGit">
+                GIT
+              </Menu.Item>
+
+            </SubMenu>
+
+
+            <Menu.Item key="11" onClick={ () => this.openTab( "settings" ) } id="cMainMenuSettings">
+              <span><Icon type="setting" /><span>Settings</span></span></Menu.Item>
 
             <Menu.Item key="10"
               id="cMainMenuRun"
               className={ readyToRunTests ? "" : "is-not-ready" }
-              disabled={ !projectDirectory } onClick={ readyToRunTests
+              disabled={ !isProjectOpen } onClick={ readyToRunTests
                 ? this.onTestReport : this.onRuntimeTestInstall }>
               <span><Icon type="right-square-o" /><span>Run... <kbd>F6</kbd></span></span>
             </Menu.Item>

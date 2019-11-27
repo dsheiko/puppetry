@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Button } from "antd";
+import { Button, Alert } from "antd";
 import AbstractComponent from "component/AbstractComponent";
 import { getDemoProjectDirectory } from "service/io";
 
@@ -14,10 +14,20 @@ export class Welcome extends AbstractComponent {
     projectDirectory: PropTypes.string.isRequired
   }
 
+  state = {
+    error: ""
+  }
+
   onOpenDemoProject = async ( e ) => {
     const { loadProject } = this.props.action;
     e.preventDefault();
-    await loadProject( getDemoProjectDirectory() );
+    this.setState({ error: "" });
+    try {
+      const demoProject = await getDemoProjectDirectory();
+      demoProject && await loadProject( demoProject );
+    } catch ( err ) {
+      this.setState({ error: err.message });
+    }
   }
 
   onCreateProject = ( e ) => {
@@ -30,7 +40,10 @@ export class Welcome extends AbstractComponent {
       <div className="welcome" id="cWelcome">
         <h1>Welcome!</h1>
         <p>You are using Puppetry, scriptless E2E test automation tool.</p>
-
+        { this.state.error  && <div className="p"><Alert
+          description={ this.state.error }
+          type="warning"
+          closable /></div> }
         <p>What you can do now is to open a
           { " " } <Button id="cWelcomeDemoProjectBtn"
             onClick={ this.onOpenDemoProject }>demo project</Button> or
@@ -59,7 +72,7 @@ or attribute has a specified value, or element{"'"}s position and size match the
             { " " } <a onClick={ this.onExtClick } href="https://www.youtube.com/watch?v=du2Jnm-TzJc">you
           just right-click on a target element and copy selector or XPath</a>
           </li>
-          <li>to manage your test structure ( project, suite, test cases, test steps )</li>
+          <li>to manage your test structure ( project, suite, test cases, actions )</li>
           <li>to manage browser methods and assertions</li>
         </ul>
         <br />

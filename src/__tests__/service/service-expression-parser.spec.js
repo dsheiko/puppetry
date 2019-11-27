@@ -33,6 +33,24 @@ describe( "ExpressionParser", () => {
     expect( res ).toBe( `process.env.FOO` );
   });
 
+  it( `parses {{ htmlOf( "FOO" ) }}`, () => {
+    let res;
+    res = expParser.parseExp( `{{ htmlOf( "FOO" ) }}` );
+    expect( res ).toBe( `await bs.target( await bs.getTarget( "FOO" ) ).getProp( "innerHTML" )` );
+  });
+
+  it( `parses {{ attributeOf( "FOO", "foo" ) }}`, () => {
+    let res;
+    res = expParser.parseExp( `{{ attributeOf( "FOO", "foo" ) }}` );
+    expect( res ).toBe( `await bs.target( await bs.getTarget( "FOO" ) ).getAttr( "foo" )` );
+  });
+
+  it( `parses {{ propertyOf( "FOO", "foo" ) }}`, () => {
+    let res;
+    res = expParser.parseExp( `{{ propertyOf( "FOO", "foo" ) }}` );
+    expect( res ).toBe( `await bs.target( await bs.getTarget( "FOO" ) ).getProp( "foo" )` );
+  });
+
   it( "parses {{ random() }}", () => {
     const res = expParser.parseExp( `{{ random([ "a", "b", "c" ]) }}` );
     expect( res ).toBe( `util.exp.random( ["a","b","c"] )` );
@@ -43,6 +61,7 @@ describe( "ExpressionParser", () => {
     res = expParser.parseExp( `{{ counter() }}` );
     expect( res ).toBe( `util.exp.counter( "CID" )` );
   });
+
 
   it( "parses {{ iterate() }}", () => {
     let res;
@@ -64,7 +83,7 @@ describe( "ExpressionParser", () => {
   it( `parses {{ faker( "address.streetSuffix" ) }}`, () => {
     const expr = expParser.buildFakerDirective( "address.streetSuffix" ),
           res = expParser.parseExp( expr );
-          
+
     expect( res ).toBe( `util.exp.fake( "address.streetSuffix", "en" )` );
   });
 

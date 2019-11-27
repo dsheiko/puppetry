@@ -1,16 +1,29 @@
 import { INPUT } from "../../constants";
 import { buildAssertionTpl } from "service/assert";
 import { AssertNumber } from "../../Assert/AssertNumber";
+import { HAS_OPERATOR_MAP, renderTarget } from "service/utils";
 
 export const assertTextCount = {
   template: ( command ) => buildAssertionTpl(
-    `( await ( await ${ command.target }() )`
+    `( await ( ${ renderTarget( command.target ) } )`
     + `.$x( \`//*[contains(text(), ${ JSON.stringify( command.params.text ) })]\`) ).length`,
     command,
     `// Asserting that number of child elements containing a specified text satisfies the given constraint`
   ),
+
+  toLabel: ({ params, assert }) =>
+    `(has ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }\` child elements with \`${ params.text }\`)`,
+
+  toGherkin: ({ target, params, assert }) => `Assert that target \`${ target }\` has
+   ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }\` child elements containing \`${ params.text }\``,
+
+  commonly: "assert count of elements with text",
+
   assert: {
-    node: AssertNumber
+    node: AssertNumber,
+    options: {
+      resultLabel: "Number is"
+    }
   },
   description: `Asserts that number of child elements containing a specified text satisfies the given constraint`,
   params: [
@@ -27,6 +40,31 @@ export const assertTextCount = {
           }]
         }
       ]
+    }
+  ],
+
+  testTypes: {
+    "assert": {
+      "assertion": "SELECT",
+      "operator": "SELECT",
+      "value": "INPUT_NUMBER"
+    },
+    "params": {
+      "text": "INPUT"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "assert": {
+        "assertion": "number",
+        "operator": "eq",
+        "value": 0
+      },
+      "params": {
+        "text": "ipsum"
+      }
     }
   ]
 };

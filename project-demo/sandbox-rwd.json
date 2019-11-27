@@ -1,0 +1,304 @@
+{
+  "title": "Sandbox RWD",
+  "timeout": 50000,
+  "snippets": false,
+  "description": "",
+  "savedAt": 1574680746,
+  "loadedAt": 1574680432,
+  "modified": false,
+  "filename": "sandbox-rwd.json",
+  "targets": {
+    "jotk2g321qf": {
+      "editing": false,
+      "id": "jotk2g321qf",
+      "key": "jotk2g321qf",
+      "target": "MAIN_NAV",
+      "selector": "#nav-mobile",
+      "disabled": false,
+      "adding": false
+    },
+    "jotk2g321s7": {
+      "target": "PRODUCT_WHITE",
+      "id": "jotk2g321s7",
+      "editing": false,
+      "selector": ".main-container > .row .col:nth-child(1) .product",
+      "ref": "",
+      "key": "jotk2g321s7"
+    },
+    "jotk2g3f6i5": {
+      "target": "PRODUCT_BLACK",
+      "id": "jotk2g3f6i5",
+      "editing": false,
+      "selector": ".main-container > .row .col:nth-child(2) .product",
+      "ref": "",
+      "key": "jotk2g3f6i5"
+    }
+  },
+  "groups": {
+    "dduk2fx837q": {
+      "title": "Sandbox RWD",
+      "id": "dduk2fx837q",
+      "editing": false,
+      "key": "dduk2fx837q",
+      "tests": {
+        "dduk2fx8bwf": {
+          "title": "on Desktop",
+          "id": "dduk2fx8bwf",
+          "editing": false,
+          "groupId": "dduk2fx837q",
+          "key": "dduk2fx8bwf",
+          "commands": {
+            "dduk2fx9q6u": {
+              "editing": false,
+              "id": "dduk2fx9q6u",
+              "key": "dduk2fx9q6u",
+              "target": "page",
+              "method": "setViewport",
+              "params": {
+                "width": "1920",
+                "height": "1080",
+                "resolution": "1920x1080",
+                "deviceScaleFactor": 1
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "dduk2fx837q",
+              "testId": "dduk2fx8bwf",
+              "waitForTarget": false
+            },
+            "dduk2fxa0zh": {
+              "editing": false,
+              "id": "dduk2fxa0zh",
+              "key": "dduk2fxa0zh",
+              "target": "page",
+              "method": "goto",
+              "params": {
+                "url": "{{ SANDBOX_BASEURL }}",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "dduk2fx837q",
+              "testId": "dduk2fx8bwf",
+              "waitForTarget": false
+            },
+            "dduk2fxb5yw": {
+              "editing": false,
+              "id": "dduk2fxb5yw",
+              "key": "dduk2fxb5yw",
+              "target": "MAIN_NAV",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "availability": "visible",
+                "display": "any",
+                "visibility": "any",
+                "opacity": "any",
+                "isIntersecting": "any"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "dduk2fx837q",
+              "testId": "dduk2fx8bwf",
+              "waitForTarget": false
+            },
+            "jotk2g3fizh": {
+              "editing": false,
+              "id": "jotk2g3fizh",
+              "key": "jotk2g3fizh",
+              "target": "PRODUCT_WHITE",
+              "method": "assertPosition",
+              "assert": {
+                "assertion": "position",
+                "position": "left",
+                "target": "PRODUCT_BLACK"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "dduk2fx837q",
+              "testId": "dduk2fx8bwf",
+              "waitForTarget": false
+            },
+            "jotk2g46k0o": {
+              "editing": false,
+              "id": "jotk2g46k0o",
+              "key": "jotk2g46k0o",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "on Desktop",
+                "fullPage": false,
+                "omitBackground": false,
+                "x": null,
+                "y": null,
+                "width": null,
+                "height": null
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "dduk2fx837q",
+              "testId": "dduk2fx8bwf",
+              "waitForTarget": false
+            }
+          }
+        },
+        "jotk2g3449f": {
+          "editing": false,
+          "id": "jotk2g3449f",
+          "key": "jotk2g3449f",
+          "title": "on iPhone X",
+          "commands": {
+            "jotk2g344i9": {
+              "editing": false,
+              "id": "jotk2g344i9",
+              "key": "jotk2g344i9",
+              "target": "page",
+              "method": "emulate",
+              "params": {
+                "device": "iPhone X"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "dduk2fx837q",
+              "testId": "jotk2g3449f",
+              "waitForTarget": false
+            },
+            "jotk2g344p7": {
+              "editing": false,
+              "id": "jotk2g344p7",
+              "key": "jotk2g344p7",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "{{ SANDBOX_BASEURL }}",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "dduk2fx837q",
+              "testId": "jotk2g3449f",
+              "waitForTarget": false
+            },
+            "jotk2g344wg": {
+              "editing": false,
+              "id": "jotk2g344wg",
+              "key": "jotk2g344wg",
+              "target": "MAIN_NAV",
+              "method": "assertVisible",
+              "assert": {
+                "assertion": "visible",
+                "value": true,
+                "display": "none",
+                "visibility": "any",
+                "opacity": "any",
+                "isIntersecting": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "dduk2fx837q",
+              "testId": "jotk2g3449f",
+              "waitForTarget": false
+            },
+            "jotk2g3g7o0": {
+              "editing": false,
+              "id": "jotk2g3g7o0",
+              "key": "jotk2g3g7o0",
+              "target": "PRODUCT_WHITE",
+              "method": "assertPosition",
+              "assert": {
+                "assertion": "position",
+                "position": "above",
+                "target": "PRODUCT_BLACK"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "dduk2fx837q",
+              "testId": "jotk2g3449f",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "jotk2g473s3": {
+              "editing": false,
+              "id": "jotk2g473s3",
+              "key": "jotk2g473s3",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "on iPhone X",
+                "fullPage": false,
+                "omitBackground": false,
+                "x": null,
+                "y": null,
+                "width": null,
+                "height": null
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "dduk2fx837q",
+              "testId": "jotk2g3449f",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "dduk2fx837q"
+        }
+      }
+    }
+  },
+  "puppetry": "3.0.0"
+}

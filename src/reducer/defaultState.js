@@ -5,13 +5,18 @@ export default {
     projects: {}, // { dir, name }
     exportDirectory: "",
     lastCheckedVersion: "",
-    checkDate: ""
+    checkDate: "",
+    autosave: true,
+    testCaseStyle: "gherkin"
   },
   // Runtime state
   app: {
     greeting: "Hello!",
+    bootstrapLoaded: false,
     loading: false,
+
     readyToRunTests: false,
+
     // currently selected env
     environment: "",
 
@@ -44,6 +49,12 @@ export default {
     gitCheckoutModal: false,
     gitCloneModal: false,
     editEnvironmentsModal: false,
+    appLightbox: false,
+
+    lightbox: {
+      index: 0,
+      images: []
+    },
 
     commandModal: {
       isVisible: false,
@@ -61,6 +72,9 @@ export default {
       available: {
         suite: false,
         testReport: false,
+        projectVariables: false,
+        projectGit: false,
+        projectTargets: false,
         settings: false
       },
       active: "suite"
@@ -68,7 +82,11 @@ export default {
 
     checkedList: [],
     headless: true,
+    incognito: true,
+    ignoreHTTPSErrors: false,
     launcherArgs: "",
+    updateSnapshot: false,
+    interactiveMode: false,
 
     // Dynamic info coming not from project file, but from file watcher
     project: {
@@ -95,6 +113,7 @@ export default {
     lastOpenSuite: "",
 
     variables: {},
+    targets: {},
     environments: [ "test", "stage", "production" ]
   },
   // actual (Selected) suite
@@ -102,6 +121,7 @@ export default {
     title: null,
     timeout: 50000,
     snippets: false,
+    description: null,
     savedAt: null,
     loadedAt: null,
     modified: false,
@@ -173,7 +193,9 @@ export const targetDefaultState = ( id ) => ({
   target: "",
   selector: "",
   disabled: false,
-  adding: false
+  adding: false,
+  parentType: "",
+  ref: ""
 });
 
 export const variableDefaultState = ( id ) => ({
@@ -184,5 +206,6 @@ export const variableDefaultState = ( id ) => ({
   value: "",
   env: "",
   disabled: false,
-  adding: false
+  adding: false,
+  hidden: false
 });

@@ -4,6 +4,7 @@ import log from "electron-log";
 import { Button, Popconfirm, Divider } from "antd";
 import AbstractDnDTable from "./AbstractDnDTable";
 import { RowDropdown } from "./RowDropdown";
+import { result } from "service/utils";
 
 export default class AbstractEditableTable extends AbstractDnDTable {
 
@@ -46,6 +47,8 @@ export default class AbstractEditableTable extends AbstractDnDTable {
     return this.fieldRefs[ id ][ field ];
   }
 
+  extraFields = [];
+
   toggleEdit = ( id, editing ) => {
     const update = this.props.action[ `update${this.model}` ];
     document.body.classList.toggle( "disable-dnd", editing );
@@ -60,19 +63,30 @@ export default class AbstractEditableTable extends AbstractDnDTable {
     }
   }
 
+  validateFormField() {
+    return true;
+  }
+
   onSubmit = async ( record ) => {
     try {
       const id = record.id,
-            res = await Promise.all( Object.entries( this.fieldRefs[ id ]).map( ([ key, ref ]) => {
-              return new Promise( ( resolve, reject ) => {
-                ref.current.validateFields([ key ], ( err, values ) => {
-                  if ( err ) {
-                    return reject( err );
-                  }
-                  resolve( values );
-                });
-              });
-            }) ),
+            res = await Promise.all(
+              Object.entries( this.fieldRefs[ id ])
+                .filter( ( pair ) => pair[ 1 ].current !== null )
+                .map( ([ key, ref ]) => {
+                  return new Promise( ( resolve, reject ) => {
+                    const fields = [ key ].concat( result( this.extraFields, key, []) );
+                    ref.current.validateFields( fields, ( err, values ) => {
+                      if ( err ) {
+                        return reject( err );
+                      }
+                      if ( !this.validateFormField( key, values[ key ], ref.current ) ) {
+                        return reject( "Invalid syntax" );
+                      }
+                      resolve( values );
+                    });
+                  });
+                }) ),
             options = res.reduce( ( carry, obj ) => ({
               ...carry,
               ...obj,
@@ -101,6 +115,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
 
     update( payload );
     this.updateSuiteModified( payload, "update" );
+
   }
 
   removeRecord = ( id ) => {
@@ -119,9 +134,9 @@ export default class AbstractEditableTable extends AbstractDnDTable {
   }
 
   updateSuiteModified() {
-    this.props.action.updateSuite({
-      modified: true
-    });
+    this.props.action.setProject({ modified: true });
+    typeof this.resetSelected === "function" && this.resetSelected();
+    this.props.action.autosaveSuite();
   }
 
   getActionColumn() {

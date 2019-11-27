@@ -1,5 +1,10 @@
 import { TEXTAREA } from "../../constants";
 import { justify } from "service/assert";
+import { truncate } from "service/utils";
+
+function sanitize( val ) {
+  return truncate( val.replace( /"/m, "" ), 60 );
+}
 
 export const evaluate = {
   template: ({ params }) => {
@@ -11,11 +16,9 @@ await bs.page.evaluate(() => {
 });` );
   },
 
-  test: {
-    "params": {
-      "value": "FOO"
-    }
-  },
+  toLabel: ({ params }) => `(\`${ sanitize( params.value ) }\`)`,
+  toGherkin: ({ params }) => `Evaluate JavaScript in the page context: \`${ sanitize( params.value ) }\``,
+  commonly: "evaluate JavaScript in the page context",
 
   description: `Evaluates JavaScript code in the page context`,
   params: [
@@ -27,7 +30,7 @@ await bs.page.evaluate(() => {
         {
           name: "params.value",
           control: TEXTAREA,
-          label: "JavaScript code to inject",
+          label: "JavaScript",
           initialValue: "",
           placeholder: `document.body.classList.add( "foo" );`,
           rules: [{
@@ -37,6 +40,21 @@ await bs.page.evaluate(() => {
         }
 
       ]
+    }
+  ],
+
+  testTypes: {
+    "params": {
+      "value": "INPUT"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "value": "console.log(1);"
+      }
     }
   ]
 };

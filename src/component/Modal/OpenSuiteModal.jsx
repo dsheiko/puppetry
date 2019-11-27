@@ -5,6 +5,7 @@ import { Modal, Menu, Alert } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
 import { confirmUnsavedChanges } from "service/smalltalk";
+import { MODAL_DEFAULT_PROPS } from "constant";
 
 
 export class OpenSuiteModal extends AbstractForm {
@@ -25,7 +26,7 @@ export class OpenSuiteModal extends AbstractForm {
   }
 
   onClick = async ( file ) => {
-    const { openSuiteFile } = this.props.action;
+    const { openSuiteFile, autosaveProject } = this.props.action;
 
     if ( this.props.suiteModified ) {
       await confirmUnsavedChanges({
@@ -35,6 +36,7 @@ export class OpenSuiteModal extends AbstractForm {
     }
 
     openSuiteFile( file );
+    autosaveProject();
     this.props.action.setApp({ openSuiteModal: false });
   }
 
@@ -59,6 +61,7 @@ export class OpenSuiteModal extends AbstractForm {
           visible={ isVisible }
           closable
           onCancel={this.onClickCancel}
+          { ...MODAL_DEFAULT_PROPS }
           footer={ null }
         >
 

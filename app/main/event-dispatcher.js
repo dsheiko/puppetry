@@ -57,6 +57,10 @@ module.exports = function( mainWindow ) {
 
     // Create the browser window.
     const recorderWindow = new BrowserWindow(Object.assign({
+      webPreferences: {
+        webviewTag: true,
+        nodeIntegration: true
+      },
       width: APP_WIN_WIDTH,
       height: APP_WIN_HEIGHT,
       minWidth: 320,
@@ -81,8 +85,10 @@ module.exports = function( mainWindow ) {
   ipcMain.on( E_BROWSE_DIRECTORY, ( event ) => {
     dialog.showOpenDialog({
       properties: [ "openDirectory", "createDirectory" ]
-    }, ( directories ) => {
-      event.sender.send( E_DIRECTORY_SELECTED, directories ? directories[ 0 ] : "" );
+    }).then(result => {
+      event.sender.send( E_DIRECTORY_SELECTED, result.filePaths ? result.filePaths[ 0 ] : "" );
+    }).catch( ( err ) => {
+      console.log( err );
     });
   });
 
@@ -112,9 +118,12 @@ module.exports = function( mainWindow ) {
       filters: [
         { name: "Files" }
       ]
-    }, ( files ) => {
-      event.sender.send( E_FILE_SELECTED, files ? files[ 0 ] : "" );
+    }).then(result => {
+      event.sender.send( E_FILE_SELECTED, result.filePaths ? result.filePaths[ 0 ] : "" );
+    }).catch( ( err ) => {
+      console.log( err );
     });
+
   });
 
   ipcMain.on( E_WATCH_FILE_NAVIGATOR, async ( event, projectDirectory ) => {

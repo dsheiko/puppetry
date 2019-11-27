@@ -16,9 +16,9 @@
 
 Puppetry is an open-source cross-platform desktop application that gives non-developers the ability to create, manage, and integrate automated tests for Web
 
-![Puppetry 2](https://github.com/dsheiko/puppetry/blob/master/docs/assets/img/puppetry-welcome.png)
+![Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline](https://github.com/dsheiko/puppetry/raw/master/docs/assets/img/puppetry-welcome.png)
 
-[:tv: Watch introduction video](https://vimeo.com/345458272  "Introduction to Puppetry 2")
+[:tv: Watch introduction video](https://youtu.be/dfuNhTCRMRg  "Recording Automated Tests with Puppetry")
 
 
 # Key Features
@@ -26,11 +26,26 @@ Puppetry is an open-source cross-platform desktop application that gives non-dev
 - Can be used by QA engineers with no programming background
 - Features Headless Chrome ([Puppeteer](https://pptr.dev)) and [Jest](https://jestjs.io/)
 - Tests can run within the application as well as to be [exported e.g. for CI-server](https://docs.puppetry.app/exporting-tests-for-ci)
-- [Version control (GIT integration)](https://docs.puppetry.app/version-control)
+- Exporting
+  - as [Jest.js project](https://docs.puppetry.app/v/3.0.0/export/exporting-tests-for-ci), ready to plugin in in CI/CD pipeline
+  - as [human-readable test specification](https://docs.puppetry.app/v/3.0.0/export/export-as-test-specification) provided with screenshots per test step.
 - [Staging, template variables and expressions](https://docs.puppetry.app/template)
 - [Reusable and configurable test scenarios](https://docs.puppetry.app/snippets)
 - [Built-in automation recorder](https://docs.puppetry.app/suite#recording-suite-showcase)
-- [Testing flows with transactional emails](https://docs.puppetry.app/testing-emails)
+- [Interactive mode](https://docs.puppetry.app/v/3.0.0/running-tests/interactive-mode), where one can navigate test steps similar to Cypress
+- [Version control (GIT integration)](https://docs.puppetry.app/v/3.0.0/version-control)
+- Support Allure test reports
+- Support of distinct testing types:
+  - [Functional testing](https://docs.puppetry.app/v/3.0.0/getting-started)
+  - [Testing Dynamic Content](https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-dynamic-content)
+  - [Exhaustive Testing](https://docs.puppetry.app/v/3.0.0/testing-techniques/exhaustive-testing)
+  - [Performance Testing](https://docs.puppetry.app/v/3.0.0/testing-techniques/performance-testing)
+  - [CSS Regression Testing](https://docs.puppetry.app/v/3.0.0/testing-techniques/css-regression-testing)
+  - [Testing Google Analytics tracking code](https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-google-analytics-tracking-code)
+  - [Testing Chrome Extensions](https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-chrome-extensions)
+  - [Testing Shadow DOM](https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-shadow-dom)
+  - [Testing Transactional Emails](https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-emails).
+
 
 # Welcome Puppetry
 Puppetry offers you an easy-to-use UI where you choose browser methods and assertions from a predefined list, with predefined settings, guided by extensive tips.
@@ -64,7 +79,6 @@ Current only the following OS are supported:
 
 - get acquainted with guides
   - [the great document](https://github.com/firstcontributions/first-contributions) about first contributions
-  - [Dev-Notes](https://github.com/dsheiko/puppetry/wiki/Dev-Notes), e.g. on how to add a browser method/assertion
 - examine the [Backlog](https://github.com/dsheiko/puppetry/projects), suggest new features
 - look into existing Issues, come up with a fix (`master` branch)
 - implement new features (`dev` branch)
@@ -72,6 +86,17 @@ Current only the following OS are supported:
 Please adhere the coding style. We have one based on jQuery's JavaScript Style Guide. You can find the validation rules in `.eslintrc`
 and lint the code by running `npm run lint`
 
+
+## Thanks
+
+A special thanks to
+[Monika Rao](https://github.com/monika-12),
+[vteixeira19](https://github.com/vteixeira19),
+[Gernot Messow](https://github.com/uvexgmessow),
+[Carlos Mantilla](https://github.com/ceoaliongroo),
+[kkmuffme](https://github.com/kkmuffme),
+[Ravindra Jadhav](https://github.com/jadhavravindra)
+for the ideas and support
 
 ## Credits
 

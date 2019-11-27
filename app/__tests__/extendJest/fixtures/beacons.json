@@ -1,0 +1,555 @@
+[
+  {
+    "type": "pageview",
+    "data": {},
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "data": {}
+      },
+      "products": []
+    }
+  },
+  {
+    "type": "dc",
+    "data": {},
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "action": {
+        "data": {}
+      },
+      "products": []
+    }
+  },
+  {
+    "type": "event",
+    "data": {
+      "category": "Videos",
+      "action": "play",
+      "label": "Fall Campaign",
+      "value": "1",
+      "nonInteractive": false
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "data": {}
+      },
+      "products": []
+    }
+  },
+  {
+    "type": "event",
+    "data": {
+      "category": "Videos",
+      "action": "stop",
+      "label": "Fall Campaign",
+      "nonInteractive": true
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "data": {}
+      },
+      "products": []
+    }
+  },
+  {
+    "type": "event",
+    "data": {
+      "category": "Videos",
+      "action": "play",
+      "label": "Invalid",
+      "value": "Invalid",
+      "nonInteractive": false
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "data": {}
+      },
+      "products": []
+    }
+  },
+  {
+    "type": "social",
+    "data": {
+      "network": "Facebook",
+      "action": "like",
+      "target": "https://puppetry.app"
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "data": {}
+      },
+      "products": []
+    }
+  },
+  {
+    "type": "social",
+    "data": {
+      "network": "Invalid",
+      "action": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "target": "https://puppetry.app"
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "data": {}
+      },
+      "products": []
+    }
+  },
+  {
+    "type": "screenview",
+    "data": {
+      "screenName": "Home",
+      "appName": "Puppetry"
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "data": {}
+      },
+      "products": []
+    }
+  },
+  {
+    "type": "screenview",
+    "data": {
+      "screenName": "Docs",
+      "appName": "Puppetry",
+      "appVersion": "3.0.0",
+      "appId": "1234",
+      "appInstallerId": "1234"
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "data": {}
+      },
+      "products": []
+    }
+  },
+  {
+    "type": "transaction",
+    "data": {
+      "id": "1234"
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "data": {
+          "id": "1234"
+        }
+      },
+      "products": []
+    }
+  },
+  {
+    "type": "item",
+    "data": {
+      "id": "1234",
+      "name": "Fluffy Pink Bunnies",
+      "sku": "DD23444",
+      "category": "Party Toys",
+      "price": "11.99",
+      "quantity": "1"
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "data": {
+          "id": "1234"
+        }
+      },
+      "products": []
+    }
+  },
+  {
+    "type": "transaction",
+    "data": {
+      "id": "T12345",
+      "affiliation": "Acme Clothing",
+      "revenue": "11.99",
+      "tax": "1.29",
+      "shipping": "5"
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "data": {
+          "id": "T12345",
+          "affiliation": "Acme Clothing",
+          "revenue": "11.99",
+          "tax": "1.29",
+          "shipping": "5"
+        }
+      },
+      "products": []
+    }
+  },
+  {
+    "type": "timing",
+    "data": {
+      "name": "load",
+      "value": "3549",
+      "category": "JS Dependencies"
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "data": {}
+      },
+      "products": []
+    }
+  },
+  {
+    "type": "timing",
+    "data": {
+      "name": "invalid",
+      "value": "Invalid",
+      "category": "JS Dependencies"
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "data": {}
+      },
+      "products": []
+    }
+  },
+  {
+    "type": "exception",
+    "data": {
+      "description": "Demo exception thrown",
+      "fatal": false
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "data": {}
+      },
+      "products": []
+    }
+  },
+  {
+    "type": "event",
+    "data": {
+      "category": "Ecommerce",
+      "action": "Impression",
+      "label": "YouTube Organic T-Shirt",
+      "nonInteractive": false
+    },
+    "ec": {
+      "impressions": [
+        {
+          "list": "Search Results",
+          "id": "P12345",
+          "name": "Android Warhol T-Shirt",
+          "category": "Apparel/T-Shirts",
+          "brand": "Google",
+          "variant": "black",
+          "listPosition": "1",
+          "price": "30"
+        },
+        {
+          "list": "Search Results",
+          "id": "P67890",
+          "name": "YouTube Organic T-Shirt",
+          "category": "Apparel/T-Shirts",
+          "brand": "YouTube",
+          "variant": "gray",
+          "listPosition": "2",
+          "price": "40"
+        }
+      ],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "data": {}
+      },
+      "products": []
+    }
+  },
+  {
+    "type": "event",
+    "data": {
+      "category": "Ecommerce",
+      "action": "click",
+      "label": "Results",
+      "nonInteractive": false
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "name": "click",
+        "data": {
+          "list": "Search Results"
+        }
+      },
+      "products": [
+        {
+          "id": "P12345",
+          "name": "Android Warhol T-Shirt",
+          "category": "Apparel",
+          "brand": "Google",
+          "variant": "black",
+          "listPosition": "1",
+          "price": "30",
+          "quantity": "1",
+          "coupon": "SUMMER"
+        },
+        {
+          "id": "P12346",
+          "name": "Android Warhol T-Shirt2",
+          "category": "Apparel",
+          "brand": "Google",
+          "variant": "black",
+          "listPosition": "2",
+          "price": "40",
+          "quantity": "1",
+          "coupon": "SUMMER"
+        }
+      ]
+    }
+  },
+  {
+    "type": "event",
+    "data": {
+      "category": "Ecommerce",
+      "action": "details",
+      "label": "Android Warhol T-Shirt",
+      "nonInteractive": true
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "name": "detail",
+        "data": {}
+      },
+      "products": [
+        {
+          "id": "P12345",
+          "name": "Android Warhol T-Shirt",
+          "category": "Apparel",
+          "brand": "Google",
+          "variant": "black"
+        }
+      ]
+    }
+  },
+  {
+    "type": "event",
+    "data": {
+      "category": "Ecommerce",
+      "action": "add to cart",
+      "label": "Android Warhol T-Shirt",
+      "nonInteractive": false
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "name": "add",
+        "data": {}
+      },
+      "products": [
+        {
+          "id": "P12345",
+          "name": "Android Warhol T-Shirt",
+          "category": "Apparel",
+          "brand": "Google",
+          "variant": "black",
+          "price": "30",
+          "quantity": "1"
+        }
+      ]
+    }
+  },
+  {
+    "type": "event",
+    "data": {
+      "category": "Ecommerce",
+      "action": "remove from cart",
+      "label": "Android Warhol T-Shirt",
+      "nonInteractive": false
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "name": "remove",
+        "data": {}
+      },
+      "products": [
+        {
+          "id": "P12345",
+          "name": "Android Warhol T-Shirt",
+          "category": "Apparel",
+          "brand": "Google",
+          "variant": "black",
+          "price": "30",
+          "quantity": "1"
+        }
+      ]
+    }
+  },
+  {
+    "type": "event",
+    "data": {
+      "category": "Ecommerce",
+      "action": "shipping",
+      "label": "Android Warhol T-Shirt",
+      "nonInteractive": false
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "name": "checkout",
+        "data": {
+          "step": "2"
+        }
+      },
+      "products": [
+        {
+          "id": "P12345",
+          "name": "Android Warhol T-Shirt",
+          "category": "Apparel",
+          "brand": "Google",
+          "variant": "black",
+          "price": "30",
+          "quantity": "1"
+        }
+      ]
+    }
+  },
+  {
+    "type": "event",
+    "data": {
+      "category": "Ecommerce",
+      "action": "transaction",
+      "label": "Android Warhol T-Shirt",
+      "nonInteractive": false
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "name": "purchase",
+        "data": {
+          "id": "T12345",
+          "affiliation": "Google Store - Online",
+          "revenue": "37.39",
+          "tax": "2.85",
+          "shipping": "5.34",
+          "coupon": "SUMMER2013"
+        }
+      },
+      "products": [
+        {
+          "id": "P12345",
+          "name": "Android Warhol T-Shirt",
+          "category": "Apparel",
+          "brand": "Google",
+          "variant": "black",
+          "price": "30",
+          "quantity": "1"
+        }
+      ]
+    }
+  },
+  {
+    "type": "event",
+    "data": {
+      "category": "Ecommerce",
+      "action": "refund",
+      "label": "Android Warhol T-Shirt",
+      "nonInteractive": false
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [],
+      "currency": "EUR",
+      "action": {
+        "name": "refund",
+        "data": {
+          "id": "T12345"
+        }
+      },
+      "products": [
+        {
+          "id": "P12345",
+          "name": "Android Warhol T-Shirt",
+          "category": "Apparel",
+          "brand": "Google",
+          "variant": "black",
+          "price": "30",
+          "quantity": "1"
+        }
+      ]
+    }
+  },
+  {
+    "type": "event",
+    "data": {
+      "category": "Ecommerce",
+      "action": "add promo",
+      "label": "Summer Sale",
+      "nonInteractive": false
+    },
+    "ec": {
+      "impressions": [],
+      "promotions": [
+        {
+          "id": "PROMO_1234",
+          "name": "Summer Sale"
+        }
+      ],
+      "currency": "EUR",
+      "action": {
+        "data": {}
+      },
+      "products": []
+    }
+  }
+]

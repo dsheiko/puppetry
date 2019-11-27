@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { remote } from "electron";
 import classNames  from "classnames";
-import {  Spin, Layout } from "antd";
+import { Spin, Layout } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { CheckoutMaster } from "component/Global/CheckoutMaster";
 import { Toolbar } from "./AppLayout/Toolbar";
@@ -30,13 +30,24 @@ import { GitCheckoutModal } from "./Modal/GitCheckoutModal";
 import { GitCloneModal } from "./Modal/GitCloneModal";
 import { EditProjectModal } from "./Modal/EditProjectModal";
 import { EditEnvironmentsModal } from "./Modal/EditEnvironmentsModal";
-
+import { AppLightbox } from "./Modal/AppLightbox";
+import { connect } from "react-redux";
+import * as selectors from "selector/selectors";
 import { TabGroup  } from "./TabGroup";
 import If from "component/Global/If";
 
 
-const { Sider } = Layout;
+const { Sider } = Layout,
+      // Mapping state to the props
+      mapStateToProps = ( state ) => ({
+        store: state,
+        cleanSnippets: selectors.getCleanSnippetsMemoized( state )
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = () => ({
+      });
 
+@connect( mapStateToProps, mapDispatchToProps )
 export class AppLayout extends React.Component {
 
   state = {
@@ -50,11 +61,12 @@ export class AppLayout extends React.Component {
   static propTypes = {
     action: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired,
-    selector: PropTypes.object.isRequired
+    selector: PropTypes.object.isRequired,
+    cleanSnippets: PropTypes.object.isRequired
   }
 
   render() {
-    const { action, store, selector } = this.props,
+    const { action, store, selector, cleanSnippets } = this.props,
           { projectDirectory, exportDirectory } = store.settings,
           { commandModal, snippetModal, tabs } = store.app,
           tabsAnyTrue = Object.keys( tabs.available ).some( key => tabs.available[ key ]);
@@ -91,38 +103,53 @@ export class AppLayout extends React.Component {
 
               <MainMenu
                 action={ action }
-                files={ store.app.project.files }
-                projectDirectory={ projectDirectory }
-                suiteFilename={ store.suite.filename }
+                isProjectEmpty={ !store.app.project.files.length }
+                isSuiteOpen={ !!store.suite.filename }
+                isProjectOpen={ !!projectDirectory }
+                suiteModified={ !!store.suite.modified }
+                readyToRunTests={ !!store.app.readyToRunTests }
+                gitDetachedHeadState={ !!store.app.gitDetachedHeadState }
+                gitConfigUsername={ !!store.git.configUsername }
+                gitConfigEmail={ !!store.git.configEmail }
+                isGitInitialized={ !!store.git.initialized }
+                hasGitRemote={ !!store.git.hasRemote }
+              />
+
+              { store.app.project.files.length && <ProjectExplorer
+                projectDirectory={ store.settings.projectDirectory }
+                projects={ store.settings.projects }
                 suiteModified={ store.suite.modified }
-                readyToRunTests={ store.app.readyToRunTests }
-                gitDetachedHeadState={ store.app.gitDetachedHeadState }
-                git={ store.git }
-                project={ store.project } />
-
-              <If exp={ store.app.project.files.length }>
-                <ProjectExplorer
-
-                  projectDirectory={ store.settings.projectDirectory }
-                  projects={ store.settings.projects }
-                  suiteModified={ store.suite.modified }
-                  files={ store.app.project.files }
-                  active={ store.suite.filename }
-                  action={action} />
-              </If>
-
+                files={ store.app.project.files }
+                active={ store.suite.filename }
+                action={ action } /> }
 
             </Sider>
             <Layout>
-              <Toolbar project={ store.project } suiteModified={ store.suite.modified } action={ action } />
+              <Toolbar projectName={ store.project.name } suiteModified={ store.suite.modified } action={ action } />
 
               <div className="layout-content">
 
                 <If exp={ tabsAnyTrue }>
-                  <TabGroup action={ action } store={ store } selector={ selector } />
+                  <TabGroup action={ action }
+                    projectDirectory={ store.settings.projectDirectory }
+                    app={ store.app }
+                    suiteModified={ store.suite.modified }
+                    suiteSnippets={ store.suite.snippets }
+                    suiteTargets={ store.suite.targets }
+                    suiteFilename={ store.suite.filename }
+                    suiteTitle={ store.suite.description || store.suite.title }
+                    project={ store.project }
+                    snippets={ store.snippets }
+                    git={ store.git }
+                    settings={ store.settings }
+                    selector={ selector } />
                 </If>
                 <If exp={ !tabsAnyTrue }>
-                  { projectDirectory ? ( <Info action={ action } store={ store } /> )
+                  { projectDirectory ? ( <Info action={ action }
+                    projectFiles={ store.app.project.files }
+                    projectName={ store.project.name }
+                    projectDirectory={ store.settings.projectDirectory }
+                  /> )
                     : ( <Welcome action={ action } projectDirectory={ projectDirectory } /> )
                   }
                 </If>
@@ -195,19 +222,19 @@ export class AppLayout extends React.Component {
           snippets={ store.snippets }
           project={ store.project }
           environment={ store.app.environment }
+          readyToRunTests={ store.app.readyToRunTests }
           isVisible={ store.app.exportProjectModal } />
 
         <CommandModal
           isVisible={ commandModal.isVisible }
           commands={ commandModal.commands }
-          targets={ commandModal.targets }
           action={ action }
           record={ commandModal.record } />
 
         { snippetModal.isVisible && <SnippetModal
           isVisible={ true }
           record={ snippetModal.record }
-          snippets={ selector.getSnippets() }
+          snippets={ cleanSnippets }
           action={ action } /> }
 
         <InstallRuntimeTestModal
@@ -266,6 +293,10 @@ export class AppLayout extends React.Component {
           environments={ store.project.environments }
           action={ action } />
 
+        <AppLightbox
+          isVisible={ store.app.appLightbox }
+          data={ store.app.lightbox }
+          action={ action } />
 
       </ErrorBoundary>
     );

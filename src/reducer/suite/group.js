@@ -45,6 +45,9 @@ export default {
     merge[ gid ] = { ...groupDefaultState( gid ), ...options, tests: {}};
 
     return update( state, {
+      modified: {
+        $set: true
+      },
       groups: {
         $merge: merge
       }
@@ -76,7 +79,9 @@ export default {
           }, {});
 
     return update( state, {
-
+      modified: {
+        $set: true
+      },
       groups: {
         $set: entities
       }
@@ -92,7 +97,9 @@ export default {
           });
 
     return update( state, {
-
+      modified: {
+        $set: true
+      },
       groups: {
         $set: resArr.reduce( ( carry, item ) => {
           carry[ item.id ] = item;
@@ -111,7 +118,9 @@ export default {
   [ actions.updateGroup ]: ( state, { payload }) => {
 
     return update( state, {
-
+      modified: {
+        $set: true
+      },
       groups: {
         $apply: ( ref ) => {
           const groups = { ...ref },
@@ -133,7 +142,9 @@ export default {
      * @returns {object}
      */
   [ actions.removeGroup ]: ( state, { payload }) => update( state, {
-
+    modified: {
+      $set: true
+    },
     groups: {
       $unset:[ payload.id ]
     }

@@ -1,26 +1,18 @@
-import { INPUT, INPUT_NUMBER, CHECKBOX } from "../../constants";
-import { isEveryValueMissing, isSomeValueMissing, ruleValidateGenericString } from "service/utils";
+import { INPUT, INPUT_NUMBER, TARGET_SELECT, CHECKBOX } from "../../constants";
+import { isEveryValueFalsy, isSomeValueNull, ruleValidateGenericString } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
+import { getCounter } from "service/screenshotCounter";
 
-let counterCache = new Set(), counter = 0;
-/**
- * the logic is that complex because
- * ParamsFormBuilder re-renders with onChange event and simple counter
- * would iterate every time
- * @param {string} id
- * @returns {Number}
- */
-function getCounter( id ) {
-  if ( counterCache.has( id ) ) {
-    return counter;
-  }
-  counterCache.add( id );
-  counter++;
-  return counter;
+function getTargetMap( targetsArr ){
+  return `{
+${ targetsArr.map(
+    ( name ) => `          "${ name }": async () =>  await bs.getTargetOrFalse(${ JSON.stringify( name ) })` )
+    .join( ",\n" ) }
+        }`;
 }
 
 export const screenshot = {
-  template: ({ params, id }) => {
+  template: ({ params, id, parentId }) => {
     const { name, fullPage, omitBackground, x, y, width, height } = params,
           parser = new ExpressionParser( id ),
           clip = {
@@ -33,33 +25,52 @@ export const screenshot = {
             fullPage,
             omitBackground
           },
-          isClipEmpty = isEveryValueMissing( clip ),
+          isClipEmpty = isEveryValueFalsy( clip ),
           options = isClipEmpty ? baseOptions : { ...baseOptions, clip };
 
-    if ( !isClipEmpty && isSomeValueMissing( clip ) ) {
+    if ( !isClipEmpty && isSomeValueNull( clip ) ) {
       throw new Error( "You have to provide either all clip parameters or none" );
     }
 
-    const optArg = isEveryValueMissing( options ) ? ` ` : `, ${ JSON.stringify( options ) } `;
+    const optArg = isEveryValueFalsy( options ) ? ` ` : `, ${ JSON.stringify( options ) } `,
+          makeScreenshotCode = `await bs.page.screenshot( util.png( ${ JSON.stringify( id ) }, `
+            + `${ parentId ? JSON.stringify( parentId ) : "null" }, ${ parser.stringify( name ) }${ optArg }) )`;
+
     return `
-      // Taking screenshot of ${ isClipEmpty ? "the page" : "the specified region" }
-      await bs.page.screenshot( util.png( ${ parser.stringify( name ) }${ optArg }) );
-  `;
+      // Taking screenshot of ${ isClipEmpty ? "the page" : "the specified region" }${
+  ( typeof params.targets !== "undefined" && typeof params.targets.length !== "undefined"
+        && params.targets.length )
+    ? `
+      await bs.traceTarget( "${ id }",
+        ${ getTargetMap( params.targets ) },
+        async() => {
+          ${ makeScreenshotCode };
+        });`
+    : `
+      ${ makeScreenshotCode };`}
+`;
   },
+
+  toLabel: ({ params }) => `(\`${ params.name }\`)`,
+  commonly: "make screenshot",
+  toGherkin: ({ params }) => `Take screenshot \`${ params.name }\` of the open page`,
+
+  requiresTargets: true,
+
   description: `Takes a screenshot of the page or a specified region.`,
 
   validate: ( values ) => {
-    const { x, y, width, height } = values.params;
-    if ( !x && !y && !width && !height ) {
-      return null;
+    const { x, y, width, height, fullPage, omitBackground } = values.params;
+    if ( x !== null || y !== null || width !== null || height !== null ) {
+      if ( x === null || y === null || width === null || height === null ) {
+        return "You have to provide either all clip parameters or none";
+      }
+      if ( fullPage || omitBackground ) {
+        return "You can provide either clip parameters or fullpage / omit background";
+      }
     }
-    return "You have to provide either all clip parameters or none";
-  },
 
-  test: {
-    "params": {
-      "name": "Screenshot"
-    }
+    return null;
   },
 
   params: [
@@ -89,9 +100,18 @@ export const screenshot = {
           }]
         },
         {
+          name: "params.targets",
+          label: "show targets",
+          control: TARGET_SELECT,
+          tooltip: `Here you can select targets to be highlighted on the screenshot.`,
+          initialValue: [],
+          placeholder: "",
+          rules: []
+        },
+        {
           name: "params.fullPage",
           label: "fullpage",
-          control: CHECKBOX ,
+          control: CHECKBOX,
           tooltip: `When true, takes a screenshot of the full scrollable page.`,
           initialValue: false,
           placeholder: "",
@@ -100,7 +120,7 @@ export const screenshot = {
         {
           name: "params.omitBackground",
           label: "omit background",
-          control: CHECKBOX ,
+          control: CHECKBOX,
           tooltip: `Hides default white background and allows capturing screenshots with transparency.`,
           initialValue: false,
           placeholder: "",
@@ -111,44 +131,62 @@ export const screenshot = {
 
     {
       collapsed: true,
-      span: { label: 4, input: 18 },
       tooltip: "An object which specifies clipping region of the page.",
       fields: [
         {
           name: "params.x",
           control: INPUT_NUMBER,
           label: "x (px)",
-          tooltip: "",
-          placeholder: "",
-          rules: []
+          initialValue: null
         },
         {
           name: "params.y",
           control: INPUT_NUMBER,
           label: "y (px)",
-          tooltip: "",
-          placeholder: "",
-          rules: []
+          initialValue: null
         },
         {
           name: "params.width",
           control: INPUT_NUMBER,
           label: "width (px)",
-          tooltip: "",
-          placeholder: "",
-          rules: []
+          initialValue: null
         },
         {
           name: "params.height",
           control: INPUT_NUMBER,
           label: "height (px)",
-          tooltip: "",
-          placeholder: "",
-          rules: []
+          initialValue: null
         }
 
       ]
     }
 
+  ],
+
+  testTypes: {
+    "params": {
+      "name": "INPUT",
+      "fullPage": "CHECKBOX",
+      "omitBackground": "CHECKBOX",
+      "x": "INPUT_NUMBER",
+      "y": "INPUT_NUMBER",
+      "width": "INPUT_NUMBER",
+      "height": "INPUT_NUMBER"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "name": "Page 1",
+        "fullPage": false,
+        "omitBackground": false,
+        "x": null,
+        "y": null,
+        "width": null,
+        "height": null
+      }
+    }
   ]
 };

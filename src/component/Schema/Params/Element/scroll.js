@@ -7,10 +7,16 @@ export const scroll = {
     return justify( `
 // Set the number of pixels that an element's content is scrolled horizontally/vertically.
 await bs.page.$eval( '${ command.targetSeletor }',  ( el, x, y ) => {
-  el.scrollTop = x;
-  el.scrollLeft = y;
+  el.scrollTop = y;
+  el.scrollLeft = x;
 }, ${ parseInt( x, 10 ) }, ${ parseInt( y, 10 ) } );` );
   },
+
+  toLabel: ({ params }) => `(x: \`${ params.x }px\`, y: \`${ params.y }px\`)`,
+  toGherkin: ({ target, params }) => `Scroll \`${ target }\`
+    by \`${ params.x }px\` horizontally and \`${ params.y }px\` vertically`,
+  commonly: "",
+
   description: `Sets the number of pixels that an element's content is scrolled horizontally/vertically.`,
   params: [
     {
@@ -21,7 +27,7 @@ await bs.page.$eval( '${ command.targetSeletor }',  ( el, x, y ) => {
         {
           name: "params.x",
           control: INPUT_NUMBER,
-          label: "horizontally (px)",
+          label: "horizon. (px)",
           initialValue: 0,
           tooltip: `Set the number of pixels that an element's content is scrolled horizontally`,
           placeholder: "e.g. 0",
@@ -44,6 +50,23 @@ await bs.page.$eval( '${ command.targetSeletor }',  ( el, x, y ) => {
         }
 
       ]
+    }
+  ],
+
+  testTypes: {
+    "params": {
+      "x": "INPUT_NUMBER",
+      "y": "INPUT_NUMBER"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "x": 0,
+        "y": 0
+      }
     }
   ]
 };

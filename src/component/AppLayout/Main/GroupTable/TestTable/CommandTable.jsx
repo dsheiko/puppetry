@@ -5,23 +5,25 @@ import { connectDnD } from "../../DragableRow";
 import { CommandRowLabel } from "./CommandRowLabel";
 import ErrorBoundary from "component/ErrorBoundary";
 import { RowDropdown } from "component/AppLayout/Main/RowDropdown";
-import { confirmDeleteEntity } from "service/smalltalk";
 import { remote } from "electron";
 import classNames from "classnames";
 import { SNIPPETS_GROUP_ID } from "constant";
 import { connect } from "react-redux";
-
 import * as selectors from "selector/selectors";
 
 const { Menu, MenuItem } = remote,
       // Mapping state to the props
-      mapStateToProps = ( state ) => ({
-        snippets: selectors.getSnippets( state.snippets )
+      mapStateToProps = ( state, props ) => ({
+        title: state.suite.title,
+        snippets: state.snippets,
+        cleanSnippets: selectors.getCleanSnippetsMemoized( state ),
+        //commands: selectors.getCommandsArray( state, props.groupId, props.testId )
+        commands: selectors.getCommandsMemoized( state, props )
       }),
       // Mapping actions to the props
       mapDispatchToProps = () => ({
       });
-
+/*eslint react/prop-types: 0*/
 @connect( mapStateToProps, mapDispatchToProps )
 @connectDnD
 export class CommandTable extends AbstractDnDTable {
@@ -37,7 +39,7 @@ export class CommandTable extends AbstractDnDTable {
         title: "Command",
         dataIndex: "target",
 
-        render: ( text, record ) => ( <CommandRowLabel record={ record } snippets={ props.snippets } /> )
+        render: ( text, record ) => ( <CommandRowLabel record={ record } snippets={ props.cleanSnippets } /> )
       },
       this.getActionColumn()
     ];
@@ -50,6 +52,8 @@ export class CommandTable extends AbstractDnDTable {
     this.props.action.updateSuite({
       modified: true
     });
+    this.props.action.autosaveSuite();
+    this.resetSelected();
   }
 
   onContextMenu = ( e, record  ) => {
@@ -69,10 +73,10 @@ export class CommandTable extends AbstractDnDTable {
     menu.append( new MenuItem(
       record.disabled ? {
         label: "Enable",
-        click: () => this.updateRecord({ id: record.id, disabled: false })
+        click: () => this.toggleVisibility( record, false )
       } : {
         label: "Disable",
-        click: () => this.updateRecord({ id: record.id, disabled: true })
+        click: () => this.toggleVisibility( record, true )
       }
     ) );
 
@@ -113,9 +117,7 @@ export class CommandTable extends AbstractDnDTable {
 
     menu.append( new MenuItem({
       label: "Delete",
-      click: async () => {
-        await confirmDeleteEntity( "command" ) && this.removeRecord( record.id );
-      }
+      click: () => this.removeRecords( record )
     }) );
 
     menu.popup({
@@ -152,6 +154,7 @@ export class CommandTable extends AbstractDnDTable {
 
   onEditCommand( record ) {
     const { setApp } = this.props.action;
+    this.resetSelected();
     if ( record.ref || record.isRef ) {
       setApp({
         snippetModal: {
@@ -219,8 +222,17 @@ export class CommandTable extends AbstractDnDTable {
     }) + ` ` + this.buildRowClassName( record );
   }
 
-  shouldComponentUpdate( nextProps ) {
-    if ( this.props.commands !== nextProps.commands ) {
+
+  shouldComponentUpdate( nextProps, nextState ) {
+    if ( this.state !== nextState ) {
+      return true;
+    }
+    if ( this.props.commands !== nextProps.commands
+          || this.props.groupId !== nextProps.groupId
+          || this.props.testId !== nextProps.testId
+          || this.props.snippets !== nextProps.snippets
+          || this.props.targets !== nextProps.targets
+    ) {
       return true;
     }
     return false;
@@ -239,12 +251,17 @@ export class CommandTable extends AbstractDnDTable {
     });
   }
 
+  /**
+   * Override the abstract method to provide record array for Drag&Drop selected rows
+   * @returns {Array}
+   */
+  getRecords() {
+    return this.props.commands || [];
+  }
+
   render() {
-    const { snippets } = this.props,
-          // When click Add record, it creates new temporary record, that shall not display, but
-          // still needed in the data
-          commands = this.props.commands
-            .filter( command => ( command.ref || ( command.target && command.method ) ) );
+    const { cleanSnippets } = this.props,
+          commands = this.props.commands.filter( command => ( command.ref || ( command.target && command.method ) ) );
 
     return ( <ErrorBoundary>
       <Table
@@ -262,7 +279,7 @@ export class CommandTable extends AbstractDnDTable {
             id="cCommandTableAddBtn"
             onClick={ this.addRecord }><Icon type="plus" />Add a command/assertion</Button>
 
-          { ( this.props.groupId !== SNIPPETS_GROUP_ID && Object.keys( snippets ).length ) ? <Button
+          { ( this.props.groupId !== SNIPPETS_GROUP_ID && Object.keys( cleanSnippets ).length ) ? <Button
             id="cCommandTableAddSnippetBtn"
             type="dashed"
             onClick={ this.addSnippet }><Icon type="plus" />Add a reference</Button> :  null }

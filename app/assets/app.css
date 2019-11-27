@@ -3,6 +3,9 @@
   --color-ok: #52c41a;
   --color-fail: red;
   --color-primary: #40a9ff;
+  /* Background color disabled record */
+  --color-bg-disabled: #fff3e0;
+  --color-bg-selected: #e6f7ff;
   --rhythm: 8px;
 }
 
@@ -11,11 +14,15 @@
 }
 
 .ant-table-row.is-right-clicked {
-  background: #f0f2f5;
+  background: var(--layout-background);
 }
 
 body .smalltalk {
   z-index: 1500;
+}
+
+.is-white {
+  background: var(--layout-background);
 }
 
 .info .ant-row {
@@ -164,7 +171,7 @@ a > .anticon {
 }
 
 body {
-  background-color: #f0f2f5;
+  background-color: var(--layout-background);
 }
 
 .is-hidden {
@@ -242,6 +249,10 @@ body {
   color: #ad6800;
 }
 
+.command-form  .ant-form-explain {
+  background: white;
+}
+
 [draggable=false] {
   -webkit-user-drag: none;
   user-select: none;
@@ -253,6 +264,8 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
+  padding: 16px;
+  border-radius: 8px;
 }
 .critical-error > * {
   flex: 0 0 auto;
@@ -356,23 +369,6 @@ nav >  ul, nav >  ul ol {
   flex: 1 1 auto;
 }
 
-root > .ant-spin {
-  position: fixed;
-  display: flex;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
-  background: var(--layout-background);
-}
-
-root > .ant-spin > * {
-  flex: 0 0 auto;
-}
-
 
 .project-navigator {
   margin: 8px 0 0 0;
@@ -388,7 +384,7 @@ root > .ant-spin > * {
   /*flex: 1 1 auto;*/
   padding: 0;
   max-width: 250px;
-  height: calc(100vh - 364px);
+  height: calc(100vh - 370px);
   overflow-y: auto;
 }
 
@@ -403,10 +399,8 @@ root > .ant-spin > * {
   background: #002f5c;
 }
 
-.project-navigator__nav  ul {
+.project-navigator__nav ul {
   height: 100%;
-  max-height: calc(100vh - 324px);
-  overflow: auto;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -648,9 +642,10 @@ margin-bottom: 0;
 }
 
 .ant-form.cell-form .ant-form-explain {
-position: absolute;
-padding: 6px;
-background-color: rgba(255, 255, 255, .8);
+  position: absolute;
+  padding: 2px 12px;
+  background-color: white;
+  width: 100%;
 }
 
 .ant-form.suite-form {
@@ -687,7 +682,7 @@ margin: 16px 16px 16px 16px;
   padding-right: 24px;
 }
 
-.container--editable-cell .anticon:first-child {
+.container--editable-cell .anticon {
   margin-right: 5px;
 }
 .container--editable-cell [data-balloon] + .anticon {
@@ -732,9 +727,36 @@ td:hover .editable-cell-icon {
   background: none;
 }
 
-.ant-table-tbody > tr:hover > td {
-  background: #e6f7ff;
+.row-disabled > td {
+  color: rgba(0,0,0, .5);
+  background-color: var(--color-bg-disabled);
 }
+/* remove highlighting on hover*/
+.layout .ant-table-thead > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected):not(is-row-selected) > td,
+.layout .ant-table-tbody > tr.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected):not(is-row-selected) > td,
+.layout .ant-table-thead > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected):not(is-row-selected) > td,
+.layout .ant-table-tbody > tr:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected):not(is-row-selected) > td {
+  background: none;
+}
+
+.layout .ant-table-thead > tr.row-disabled.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected):not(is-row-selected) > td,
+.layout .ant-table-tbody > tr.row-disabled.ant-table-row-hover:not(.ant-table-expanded-row):not(.ant-table-row-selected):not(is-row-selected) > td,
+.layout .ant-table-thead > tr.row-disabled:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected):not(is-row-selected) > td,
+.layout .ant-table-tbody > tr.row-disabled:hover:not(.ant-table-expanded-row):not(.ant-table-row-selected):not(is-row-selected) > td {
+  background-color: var(--color-bg-disabled);
+}
+
+.layout .ant-table.ant-table-default .ant-table-tbody > tr.ant-table-row.is-row-selected > td,
+.layout .ant-table.ant-table-default .ant-table-tbody > tr.ant-table-row.is-row-selected:hover > td{
+  background: var(--color-bg-selected);
+}
+
+.layout .ant-table.ant-table-default .ant-table-tbody > tr.ant-table-row.is-row-selected > td .ant-table.ant-table-default .ant-table-tbody > tr.ant-table-row.is-row-selected > td {
+  background: none;
+}
+
+
+
 
 .btn--save {
   margin-right: 8px;
@@ -758,13 +780,8 @@ td:hover .editable-cell-icon {
   line-height: 21px;
 }
 
-.row-disabled > td {
-  color: rgba(0,0,0, .5);
-  background-color: #fff3e0;
-}
-.row-disabled:hover > td {
-  background-color: #fee0b0 !important;
-}
+
+
 
 .row-failure .table-actions-cell,
 .row-disabled .table-actions-cell {
@@ -945,9 +962,7 @@ td:hover .editable-cell-icon {
   display: flex;
   align-items: center;
 }
-.command-options-panel .ant-collapse-header .anticon-right-circle {
-    margin-top: 5px !important;
-}
+
 .command-options-panel .ant-collapse-header svg {
   width: 18px;
   height: 18px;
@@ -955,7 +970,7 @@ td:hover .editable-cell-icon {
 
 .template-helper {
   display: flex;
-  padding: 0 0 16px 0;
+  padding: 0;
   align-items: center;
   color: rgba(0, 0, 0, 0.45);
 }
@@ -1002,6 +1017,10 @@ td:hover .editable-cell-icon {
   overflow-wrap: break-word;
 }
 
+.gherkin {
+  word-break: normal;
+}
+
 .is-checkbox-group-scrollable .ant-checkbox-group {
   height: calc(100vh - 467px);
   width: 100%;
@@ -1009,7 +1028,7 @@ td:hover .editable-cell-icon {
 }
 
 .is-checkbox-group-scrollable-export .ant-checkbox-group {
-  height: calc(100vh - 609px);
+  height: calc(100vh - 614px);
   width: 100%;
   overflow-y: auto;
 }
@@ -1031,4 +1050,439 @@ td:hover .editable-cell-icon {
 	background: #879fb6;
   width: 10px;
   border: 1px solid #bdc4cb;
+}
+
+.export-desc {
+  margin: 8px 0 16px 0;
+}
+
+.under-field-description {
+  margin-top: -24px;
+  margin-bottom: -2px;
+}
+
+/* variables have many editable fields stacked vertically, so we need to align by first line */
+.ant-table-row.model--variable > td {
+  vertical-align: top;
+}
+
+.ant-table-row.model--variable > td .table-actions {
+  margin-top: 8px;
+}
+
+.test-options {
+  margin: 16px 0;
+}
+
+.report-container {
+  display: flex;
+  flex-flow: column nowrap;
+  margin: -4px;
+  padding: 8px 0;
+}
+
+.thumb-container {
+  display: flex;
+  flex-flow: row wrap;
+  margin: -4px;
+  padding: 8px 0;
+}
+
+.thumb-container:empty {
+  display: none;
+}
+
+.thumb-container h4 {
+  font-weight: 600;
+  color: gray;
+}
+
+
+.snapshot-thumb-container > div {
+  margin: 4px;
+  width: 224px;
+  text-align: center;
+}
+
+.screenshot-thumb-container figure {
+  margin: 4px;
+}
+
+.thumb-container figure {
+  width: 224px;
+  height: 126px;
+  background-color: var(--layout-background);
+  overflow: hidden;
+  outline: 1px solid #98a6ba;
+  position: relative;
+}
+
+.screenshot-thumb__download, .screenshot-thumb__caption {
+  position: absolute;
+  height: 24px;
+  line-height: 24px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 8px;
+  width: 100%;
+  transition: bottom .3s ease-in-out, top .3s ease-in-out;
+  background: rgba(255, 255, 255, 0.65);
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.screenshot-thumb__caption {
+  bottom: 0;
+  left: 0;
+}
+
+.screenshot-thumb__download {
+  top: -24px;
+  left: 0;
+}
+
+.thumb-container figure:hover {
+  outline: 1px solid #00529e;
+}
+
+.thumb-container figure:hover .screenshot-thumb__caption  {
+  bottom: -24px;
+}
+
+.thumb-container figure:hover .screenshot-thumb__download  {
+  top: 0;
+}
+
+.screenshot-thumb {
+  /* maintain 16:9 aspect ratio */
+  /* https://calculateaspectratio.com/ */
+  width: 224px;
+  height: 126px;
+  object-fit: contain;
+  transition: transform .3s ease-in-out;
+  cursor: pointer;
+}
+
+.screenshot-thumb:hover {
+  transform: scale( 1.2 );
+}
+/* When Assert fomr below the collapsable (Advanced options) we need an indent */
+.command-form > .ant-collapse {
+  margin-bottom: 16px;
+}
+
+
+.assert-there-were {
+  display: flex;
+  align-items: center;
+}
+
+.assert-there-were > span:first-child {
+  margin-right: 8px;
+}
+.assert-there-were > span:last-child {
+  margin-left: 8px;
+}
+
+.assert-there-were .ant-row.ant-form-item {
+  display: inline-block;
+  margin: 0;
+}
+
+.assert-there-were .ant-select.ant-select-enabled {
+  width: 110px;
+}
+
+.assert-perf-table {
+  margin-left: 8px;
+}
+.assert-perf-table td {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.assert-perf-table td .ant-row.ant-form-item {
+  margin: 0;
+  padding: 0;
+}
+
+.assert-perf-table thead td {
+  font-weight: bold;
+}
+
+.assert-perf-table .assert-perf-size {
+  width: 100px;
+}
+
+.assert-perf-table .assert-perf-size .ant-form-explain {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 300px;
+  z-index: 1000;
+}
+
+.assert-row-disabled > *:not(:first-child) {
+  opacity: 0.6;
+}
+
+
+.ant-form-item-label > label:not(.ant-form-item-required) {
+  opacity: 0.7;
+}
+
+/*
+case: label [input] [input]
+use it when we want label be aligned with following inline inputs
+*/
+.ant-row.ant-form-item.ant-form-item--like-input {
+  display: inline-block;
+  width: 100%;
+  height: 32px;
+  line-height: 40px;
+  text-align: right;
+}
+
+.ant-row.ant-form-item.ant-form-item--like-input.is-short {
+  width: 64px;
+}
+
+.ant-form-item--like-input.is-vertical {
+  margin-top: 40px;
+}
+
+
+.command-form .ant-alert {
+  margin-bottom: 16px;
+}
+
+.ant-form-item--layout .ant-form-item-label {
+  text-align: left;
+}
+/*
+align with collapsed (Advanced options))
+*/
+.command-form__noncollapsed {
+  padding: 0 18px;
+}
+.ant-collapse-content .command-form__noncollapsed {
+  padding: 0;
+}
+/*
+model target rows have options and therefore cannot be centered
+*/
+.ant-table-tbody > tr.model--target > td {
+  vertical-align: top;
+}
+
+.ant-table-tbody > tr.model--target > td .table-actions {
+  margin-top: 8px;
+}
+
+
+summary:focus {
+  outline: 0;
+}
+summary {
+  cursor: pointer;
+  color: #1890ff;
+}
+summary:hover {
+  color: #40a9ff;
+}
+
+.ant-modal-body details {
+  margin-bottom: 8px;
+}
+.ant-modal-body details > div {
+  padding: 16px 0 8px 0;
+}
+.test-options-wrapper {
+  margin-top: 16px;
+}
+.label-variable,
+.target-ref {
+  color: #e65100;
+}
+
+.target-options {
+  margin: 8px 0;
+  padding: 0 16px 8px 16px;
+  background: #fafafa;
+  border-radius: 4px;
+}
+
+.ant-select i {
+  opacity: 0.7;
+}
+
+
+.browser-options-layout {
+  padding-top: 16px;
+}
+
+.target-options_desc {
+  font-size: 12px;
+}
+
+.chromium-checkbox-group .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+
+}
+.modal-suites-checkbox-group {
+  max-height: 140px;
+  overflow-y: auto;
+}
+
+
+.ant-table-tbody > tr.ant-table-expanded-row[data-row-key]:hover > td {
+  background: none;
+}
+
+.perf-switch {
+  width: 48px;
+}
+
+.ant-modal-body details > div.command-form__noncollapsed {
+  margin-top: 8px;
+  padding: 0 18px;
+}
+
+.ant-modal-body .ant-tabs.ant-tabs-top {
+  margin-top: -16px;
+}
+
+.export-project-modal .ant-modal-body {
+  max-height: calc(100vh - 260px);
+  overflow-y: auto;
+}
+
+.ant-form-item {
+  margin-bottom: 16px;
+}
+
+/* For tabbed pages like Variables/Git the content needs to stay inside the frame */
+.tabpane-frame {
+  height: calc(100vh - 186px);
+  overflow-y: auto;
+  padding-right: 16px;
+}
+/* Settings */
+.subtabpane-frame {
+  height: calc(100vh - 268px);
+  overflow-y: auto;
+  padding-right: 16px;
+}
+
+.ant-col-21.form-buttons {
+  text-align: right;
+}
+
+/* Disable modal animation to improve performance */
+.ant-modal-mask *,
+.ant-modal-wrap * {
+    animation: 0s !important;
+}
+
+.ant-layout-footer .text-align-left {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.ant-layout-footer .text-align-right {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center;
+}
+/* Form item with checkbox look too spacy */
+.ant-form-item.is-shrinked {
+  margin: 0;
+}
+
+.snippets-table .ant-table-expanded-row td {
+  padding-right: 0;
+}
+
+.narrow-row .ant-row.ant-form-item {
+  margin-bottom: 8px;
+}
+
+.comment-label {
+  display: block;
+}
+
+.report-panel-tab .loading-tip {
+  bottom: 48px;
+}
+
+.test-report-spin {
+  height: 100%;
+  min-height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.command-form-extra-fields {
+  position: relative;
+}
+
+.wait-for-target {
+  position: absolute;
+  left: 100px;
+  top: 0;
+}
+
+.wait-for-target .ant-form-item-control {
+  line-height: 21px;
+}
+
+
+.suite-description {
+  opacity: 0.7;
+  font-style: italic;
+  padding: 16px 0;
+  margin: 0;
+}
+
+
+.is-nowrap {
+  white-space: nowrap
+}
+
+.modal-suites-checkbox-groupis-checkbox-group-scrollable {
+  overflow-y: auto;
+  max-height: 220px;
+}
+
+.ant-row.ant-form-item.is-text-align-left {
+  text-align: left;
+}
+
+.screenshot-thumb-container .ant-btn:not(:last-child) {
+  margin-right: 8px;
+}
+
+.btn-to-bottom {
+  position: absolute;
+  top: -32px;
+  font-size: 16px;
+  right: 16px;
+}
+
+.is-relative {
+  position: relative;
+}
+
+.p {
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.allure-test-report-checkbox {
+  margin-top: -8px;
+  margin-bottom: 8px;
 }

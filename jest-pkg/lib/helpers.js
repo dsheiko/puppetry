@@ -1,43 +1,150 @@
 
 const { join } = require( "path" ),
+      fs = require( "fs" ),
+      os = require( "os" ),
       shell = require( "shelljs" ),
       fetch = require( "node-fetch" ),
+      table = require( "text-table" ),
       { dirname } = require( "path" ),
       { LocalStorage } = require( "node-localstorage" ),
       faker = require( "faker" ),
-      localStorage = new LocalStorage( join( __dirname, "/../", "/storage" ) );
+      localStorage = new LocalStorage( join( __dirname, "/../", "/storage" ) ),
+      DIR_SCREENSHOTS_TRACE = ".trace";
 
 let PATH_SCREENSHOTS = join( __dirname, "/../", "/screenshots"),
+    PATH_REPORTS = join( __dirname, "/../", "/reports"),
+    PATH_COMPARE = join( __dirname, "/../", "/snapshots"),
     SUITE_NAME = "";
 
     /**
      * @see https://pptr.dev/#?product=Puppeteer&version=v1.5.0&show=api-class-page
-     * @param {string} filePath
+     * @param {string} id
+     * @param {string} parentId
+     * @param {string} screenshotTitle
      * @param {Object} [options]
      * @returns {Object}
      */
-const png = ( filePath, options = {} ) => {
-        const normalizedPath = filePath.replace( /[^a-zA-Z\d\-\_]/g, "-" );
-        const path = join( PATH_SCREENSHOTS, SUITE_NAME, `${normalizedPath}.png` );
+const png = ( id, parentId, screenshotTitle, options = {} ) => {
+        const FILENAME_RE = /[^a-zA-Z\d\-\_]/g,
+              normalizedTitle = screenshotTitle.replace( FILENAME_RE, "-" ),
+              normalizedSuiteTitle = SUITE_NAME.replace( FILENAME_RE, "-" ),
+              fileName = `${ id }.${ normalizedTitle }.png`;
+              path = join( PATH_SCREENSHOTS, normalizedSuiteTitle,
+                parentId !== null ? parentId + "." + fileName : fileName );
         shell.mkdir( "-p" , dirname( path ) );
         return { path, ...options };
       },
       /**
-       * Removes outdated suite screenshots on the beggining of test
+       * @param {string} fileName
+       * @returns {Object}
        */
-      cleanupScreenshotsDir = () => {
-        const path = join( PATH_SCREENSHOTS, SUITE_NAME );
-        try {
-          shell.rm( "-rf" , path );
-        } catch ( e ) {
-          // ignore
-        }
+      tracePng = ( fileName ) => {
+        const path = join( PATH_SCREENSHOTS, DIR_SCREENSHOTS_TRACE, `${ fileName }.png` );
+        shell.mkdir( "-p" , dirname( path ) );
+        return { path };
       },
+
+      generateTmpUploadFile = ( name, size ) => {
+        const path = join( os.tmpdir(), name );
+        fs.writeFileSync( path, Buffer.allocUnsafe( size * 1024 ) );
+        return path;
+      },
+
+
+      performanceResourcesToTable = ( resources ) => {
+        const arr = resources.map( r => ([ truncate( r.url, 90 ), r.type, bytesToString( r.length ) ]));
+        return table([
+          [ "URL", "Type", "Size" ],
+          ...arr
+        ]);
+      },
+
+      saveResourceReport = ( id, resources ) => {
+        saveReport( id, "resources.txt", performanceResourcesToTable( resources ) );
+      },
+
+      /**
+       * @param {string} id
+       * @param {string} filename
+       * @param {string} contents
+       */
+      saveReport = ( id, filename, contents ) => {
+        const FILENAME_RE = /[^a-zA-Z\d\-\_]/g,
+              normalizedTitle = filename.replace( FILENAME_RE, "-" ),
+              normalizedSuiteTitle = SUITE_NAME.replace( FILENAME_RE, "-" ),
+              path = join( PATH_REPORTS, normalizedSuiteTitle, `${ id }.${ normalizedTitle }` );
+        shell.mkdir( "-p" , dirname( path ) );
+        return fs.writeFileSync( path, contents, "utf8" );
+      },
+
+      /**
+       * Create all of comparing dirs when non existing
+       */
+      initCompareDirs = () => {
+        [ "expected", "actual", "diff" ].forEach(( stage ) => {
+          shell.mkdir( "-p" , join( PATH_COMPARE, stage ) );
+        });
+      },
+      /**
+       * @param {string} stage
+       * @param {string} testId
+       * @returns {string}
+       */
+      getComparePath = ( stage, testId ) => join( PATH_COMPARE, stage, `${ testId }.png` ),
+
+
       /**
        * @param {number} max
        * @returns {number}
        */
-      randomInt = ( max ) => Math.floor( Math.random() * Math.floor( max ) );
+      randomInt = ( max ) => Math.floor( Math.random() * Math.floor( max ) ),
+
+      /**
+       * Report step to Allure
+       * @see https://github.com/zaqqaz/jest-allure
+       * @param {String} name
+       */
+      startStep = ( name ) => {
+        typeof global.reporter !== "undefined" && global.reporter.startStep( name );
+      },
+
+      /**
+       * Report step to Allure
+       * @see https://github.com/zaqqaz/jest-allure
+       */
+      endStep = () => {
+        typeof global.reporter !== "undefined" && global.reporter.endStep();
+      };
+
+
+/**
+ *
+ * @param {String} str
+ * @param {Number} limit
+ * @returns {String}
+ */
+function truncate( str, limit ) {
+  str = ( "" + str ).trim();
+  return ( str.length > limit ) ? str.substr( 0, limit - 3 ) + "..." : str;
+}
+
+/**
+ *
+ * @param {Number} size
+ * @returns {Number}
+ */
+function bytesToString( size ) {
+  const neg = size < 0;
+  if ( !size ) {
+    return size;
+  }
+  if ( neg ) {
+      size = -size;
+  }
+  const i = Math.floor( Math.log( size ) / Math.log( 1024 ) );
+  return ( neg ? "-" : "" ) + ( size / Math.pow( 1024, i ) )
+    .toFixed( 2 ) * 1 + [ "B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" ][ i ];
+};
 
 /**
  *
@@ -105,17 +212,32 @@ exports.util = {
 
   png,
 
-  setPngBasePath: ( path ) => {
-    PATH_SCREENSHOTS = path;
+  tracePng,
+
+  startStep,
+  endStep,
+
+  getComparePath,
+
+  initCompareDirs,
+
+  bytesToString,
+
+  saveResourceReport,
+
+  setProjectDirectory: ( projectDirectory ) => {
+    PATH_SCREENSHOTS = join( projectDirectory, "/screenshots");
+    PATH_COMPARE = join( projectDirectory, "/snapshots");
+    PATH_REPORTS = join( projectDirectory, "/reports");
   },
 
   setSuiteName: ( name ) => {
     SUITE_NAME = name;
   },
 
-  pollForValue,
+  generateTmpUploadFile,
 
-  cleanupScreenshotsDir,
+  pollForValue,
 
   exp: {
     fake,

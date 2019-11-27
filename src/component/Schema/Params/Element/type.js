@@ -1,13 +1,20 @@
 import { justify } from "service/assert";
 import { INPUT } from "../../constants";
 import ExpressionParser from "service/ExpressionParser";
+import { renderTarget } from "service/utils";
+
 export const type = {
   template: ({ target, params, id }) => {
     const parser = new ExpressionParser( id );
     return justify(
       `// Emulating user input\n`
-    + `await ( await ${target}() ).type( ${ parser.stringify( params.value ) } );` );
+    + `await ( ${ renderTarget( target ) } ).type( ${ parser.stringify( params.value ) } );` );
   },
+
+  toLabel: ({ params }) => `(\`${ params.value }\`)`,
+  toGherkin: ({ target, params }) => `Type \`${ params.value }\` into \`${ target }\``,
+  commonly: "",
+
   description: `Focuses the element, and then sends keyboard events for each character in the text`,
   params: [
     {
@@ -29,6 +36,21 @@ export const type = {
           }]
         }
       ]
+    }
+  ],
+
+  testTypes: {
+    "params": {
+      "value": "INPUT"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "value": "val"
+      }
     }
   ]
 };

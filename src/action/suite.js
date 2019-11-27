@@ -5,7 +5,7 @@ import { version, handleException, saveProject } from "./helpers";
 import uniqid from "uniqid";
 import DEFAULT_STATE from "reducer/defaultState";
 import { InvalidArgumentError } from "error";
-import { dateToTs } from "service/utils";
+import { dateToTs, result } from "service/utils";
 import errorActions from "./error";
 import { writeSuite, readSuite, removeSuite, normalizeFilename } from "../service/io";
 import { ipcRenderer } from "electron";
@@ -17,15 +17,39 @@ import groupActions from "./group";
 import testActions from "./test";
 import commandActions from "./command";
 import snippetsActions from "./snippets";
+import { message } from "antd";
+
 
 const actions = createActions({
   SET_SUITE: ( options ) => validate( options, I.SUITE_OPTIONS ),
   RESET_SUITE: ( options ) => options
 });
 
+let autosaveTimeout;
+
+
 actions.updateSuite = ( suite ) => ( dispatch ) => {
   dispatch( projectActions.setProject({ modified: true }) );
   dispatch( actions.setSuite( suite ) );
+};
+
+actions.autosaveSuite = () => ( dispatch, getState ) => {
+
+  const store = getState(),
+        autosaveSuite = () => {
+          autosaveTimeout = null;
+          dispatch( actions.setSuite({ savedAt: dateToTs(), modified: false }) );
+          dispatch( actions.saveSuite({}, true ) );
+          saveProject( store );
+          message.destroy();
+          message.info( `Data saved!` );
+        };
+
+  if ( result( store.settings, "autosave", true ) && store.settings.projectDirectory && store.suite.filename ) {
+    clearTimeout( autosaveTimeout );
+    autosaveTimeout = setTimeout( autosaveSuite, 1500 );
+  }
+
 };
 
 actions.removeSuite = ( filename ) => async ( dispatch, getState ) => {
@@ -77,6 +101,22 @@ function createSnippetsSuite( dispatch ) {
   }) );
 }
 
+function normalizeSuite( suite ) {
+  Object.entries( suite.groups ).forEach( gPairs => {
+    const [ gid, group ] = gPairs;
+    Object.entries( group.tests ).forEach( tPairs => {
+      const [ tid, test ] = tPairs;
+      Object.entries( test.commands ).forEach( cPairs => {
+        const [ cid, command ] = cPairs;
+        if ( !command.target && !command.method && !command.ref ) {
+          delete suite.groups[ gid ].tests[ tid ].commands[ cid ];
+        }
+      });
+    });
+  });
+  return suite;
+}
+
 actions.loadSuite = ( filename, options = { silent: false }) => async ( dispatch, getState ) => {
   try {
     const store = getState(),
@@ -85,7 +125,7 @@ actions.loadSuite = ( filename, options = { silent: false }) => async ( dispatch
           // in case of snippets
           suite = data === null
             ? { ...DEFAULT_STATE.suite, filename }
-            : data;
+            : normalizeSuite( data );
 
     suite.snippets = ( filename === SNIPPETS_FILENAME );
 
@@ -102,10 +142,13 @@ actions.loadSuite = ( filename, options = { silent: false }) => async ( dispatch
 
 };
 
-actions.saveSuite = ( options = {}) => async ( dispatch, getState ) => {
+actions.saveSuite = ( options = {}, autosave = false ) => async ( dispatch, getState ) => {
   const store = getState(),
         { projectDirectory } = store.settings,
         { filename } = { ...store.suite, ...options };
+
+  clearTimeout( autosaveTimeout );
+
   try {
     if ( !filename ) {
       throw new InvalidArgumentError( "Empty suite filename" );
@@ -118,7 +161,9 @@ actions.saveSuite = ( options = {}) => async ( dispatch, getState ) => {
 
     await saveProject( store );
 
-    dispatch( actions.updateSuite({ savedAt: dateToTs(), modified: false }) );
+    if ( !autosave ) {
+      dispatch( actions.updateSuite({ savedAt: dateToTs(), modified: false }) );
+    }
 
     if ( store.suite.snippets ) {
       await dispatch( snippetsActions.resetSnippets({
@@ -138,8 +183,11 @@ actions.saveSuite = ( options = {}) => async ( dispatch, getState ) => {
 
 actions.openSuiteFile = ( filename, options = { silent: false }) => ( dispatch ) => {
   dispatch( appActions.setApp({ loading: true }) );
-  dispatch( actions.loadSuite( filename, options ) );
-  dispatch( appActions.setApp({ loading: false }) );
+  setTimeout( async () => {
+    await dispatch( actions.loadSuite( filename, options ) );
+    dispatch( appActions.setApp({ loading: false }) );
+  }, 50 );
+
 };
 
 
@@ -164,18 +212,20 @@ actions.createSuiteByRecording = ({ targets, commands }) => ( dispatch ) => {
       dispatch( groupActions.addGroup({ title: "Recorded session" }, groupId ) );
       dispatch( testActions.addTest({ title: "Recorded test case", groupId }, testId ) );
       // Seed commands
-      commands.forEach( ({ method, target, params }) => {
+      commands.forEach( ({ method, target, params, waitForTarget }) => {
 
         dispatch( commandActions.addCommand({
           target,
           method,
           params,
           groupId,
-          testId
+          testId,
+          waitForTarget
         }) );
       });
 
       dispatch( appActions.setApp({ loading: false }) );
+      dispatch( actions.autosaveSuite() );
     } catch ( ex ) {
       handleException( ex, dispatch, "Cannot create suite by recording" );
     }

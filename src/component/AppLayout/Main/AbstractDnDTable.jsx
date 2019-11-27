@@ -2,13 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import { DragableRow } from "./DragableRow";
-import { confirmDeleteEntity } from "service/smalltalk";
+import { confirmRemove, confirmClone } from "service/smalltalk";
 import { findTargets } from "service/suite";
 import { clipboardReadObj } from "service/copypaste";
+import uniqid from "uniqid";
 import { remote, clipboard } from "electron";
 
+
 const { Menu, MenuItem } = remote,
-      APP_NAME = remote.app.getName(),
+      APP_NAME = remote.app.name,
       APP_VERSION = remote.app.getVersion();
 
 export default class AbstractDnDTable extends React.Component {
@@ -52,10 +54,10 @@ export default class AbstractDnDTable extends React.Component {
       menu.append( new MenuItem(
         record.disabled ? {
           label: "Enable",
-          click: () => this.updateRecord({ id: record.id, disabled: false })
+          click: () => this.toggleVisibility( record, false )
         } : {
           label: "Disable",
-          click: () => this.updateRecord({ id: record.id, disabled: true })
+          click: () => this.toggleVisibility( record, true )
         }
       ) );
     }
@@ -93,9 +95,7 @@ export default class AbstractDnDTable extends React.Component {
 
     menu.append( new MenuItem({
       label: "Delete",
-      click: async () => {
-        await confirmDeleteEntity( "command" ) && this.removeRecord( record.id );
-      }
+      click: () => this.removeRecords( record )
     }) );
 
     menu.popup({
@@ -105,16 +105,19 @@ export default class AbstractDnDTable extends React.Component {
   }
 
   buildRowClassName( record ) {
+    const selected = typeof this.state.selected === "undefined" ? new Set() : this.state.selected;
     if ( !this.state || !this.state.contextMenuAnchor ) {
       return classNames({
         "disable-dnd": record.adding,
-        "disable-expand": record.adding
+        "disable-expand": record.adding,
+        "is-row-selected": selected.has( record.id )
       });
     }
     return classNames({
       "is-right-clicked": this.state.contextMenuAnchor === record.id,
       "disable-dnd": record.adding,
-      "disable-expand": record.adding
+      "disable-expand": record.adding,
+      "is-row-selected": selected.has( record.id )
     });
   }
 
@@ -125,8 +128,34 @@ export default class AbstractDnDTable extends React.Component {
   onRow = ( record, index ) => ({
     index,
     moveRow: this.moveRow,
-    onContextMenu: ( e ) => this.onContextMenu( e, record )
+    onContextMenu: ( e ) => this.onContextMenu( e, record ),
+    onClick: ( e ) => this.onClickRow( e, record )
   });
+
+
+  resetSelected() {
+    this.setState({ selected: new Set() });
+  }
+  /**
+   * Register highlihted rows in the state
+   */
+  onClickRow = ( e, record ) => {
+    if ( !e.shiftKey ) {
+      return;
+    }
+    e.preventDefault();
+    this.setState( ( state ) => {
+      if ( typeof state.selected === "undefined" ) {
+        state.selected = new Set();
+      }
+      if ( state.selected.has( record.id ) ) {
+        state.selected.delete( record.id );
+      } else {
+        state.selected.add( record.id );
+      }
+      return state;
+    });
+  }
 
   onEdit = ( record ) => {
     this.toggleEdit( record.id, true );
@@ -153,6 +182,25 @@ export default class AbstractDnDTable extends React.Component {
   }
 
   /**
+   * Helper to paste a set of records
+   */
+  static pasteRecords( update, records, dest ) {
+    let destRec = dest;
+    records.forEach( record  => {
+      const id = uniqid();
+      update( record, destRec, id );
+      destRec = { id, testId: dest.testId, groupId: dest.groupId };
+
+      if ( typeof dest.testId === "undefined" ) {
+        delete destRec.testId;
+      }
+      if ( typeof dest.groupId === "undefined" ) {
+        delete destRec.groupId;
+      }
+    });
+  }
+
+  /**
    * @param {GroupEntity|TestEntity|CommandEntity|TargetEntity} record -
    *  represents position after which we paste data from clipboard
    */
@@ -162,20 +210,22 @@ export default class AbstractDnDTable extends React.Component {
       return;
     }
     const payload = clipboardReadObj(),
-          update = this.props.action[ `paste${ payload.model }` ];
+          pasteMethod = `paste${ payload.model }`,
+          update = this.props.action[ pasteMethod ],
+          records = Array.isArray( payload.data ) ? payload.data : [ payload.data ];
 
     this.props.action.setApp({ loading: true });
 
     setTimeout( () => {
 
       if ( record.entity === "group" && payload.model === "Test" ) {
-        update( payload.data, {
+        AbstractDnDTable.pasteRecords( update, records, {
           groupId: record.id
         });
       }
 
       if ( record.entity === "test" && payload.model === "Command" ) {
-        update( payload.data, {
+        AbstractDnDTable.pasteRecords( update, records, {
           testId: record.id,
           groupId: record.groupId
         });
@@ -183,8 +233,9 @@ export default class AbstractDnDTable extends React.Component {
 
       if ( record.entity === payload.model.toLowerCase() ) {
         // inject group/test/commands
-        update( payload.data, record );
+        AbstractDnDTable.pasteRecords( update, records, record );
       }
+
 
       // inject required targets
       Object.values( payload.targets ).forEach( target => {
@@ -194,26 +245,65 @@ export default class AbstractDnDTable extends React.Component {
         this.props.action.addTarget( target );
       });
 
+      this.resetSelected();
       this.updateSuiteModified( record, "paste" );
       this.props.action.setApp({ loading: false });
     }, 200 );
   }
 
+  /**
+   * Return array of record by selected of if none by hovered one
+   * @param {Object} record
+   * @returns {Object[]}
+   */
+  getSelectedRecords( record ) {
+    if ( typeof this.getRecords === "function" && this.state.selected && this.state.selected.size ) {
+      return this.getRecords().filter( record => this.state.selected.has( record.id ) );
+    }
+    return [ record ];
+  }
+
+  /**
+   * Extract an array of targets
+   * @returns array
+   */
+  static findTargets( records ) {
+    try {
+      return Array.from( records.reduce( ( carry, record ) => {
+        findTargets( record ).forEach( target => carry.add( target ) );
+        return carry;
+      }, new Set() ) );
+    } catch ( e ) {
+      console.error( e );
+      return [];
+    }
+  }
+
+  /**
+   * Copy into clipboard
+   */
   copyClipboard = ( record ) => {
-    const payload = {
-      app: {
-        name: APP_NAME,
-        version: APP_VERSION
-      },
-      model: this.model,
-      data: record,
-      targets: [ "Target", "Variable" ].includes( this.model )
-        ? []
-        : this.props.selector.getSelectedTargets( findTargets( record ) )
-    };
+
+    const records = this.getSelectedRecords( record ),
+          payload = {
+            app: {
+              name: APP_NAME,
+              version: APP_VERSION
+            },
+            model: this.model,
+            data: records,
+            targets: [ "Target", "Variable" ].includes( this.model )
+              ? []
+              // We attach targets referenced from copied records
+              : this.props.selector.getSelectedTargets( AbstractDnDTable.findTargets( records ) )
+          };
+    this.resetSelected();
     clipboard.writeText( JSON.stringify( payload, null, 2 ) );
   }
 
+  /**
+   * Insert from clipboard
+   */
   insertRecord = ( record ) => {
     const update = this.props.action[ `insertAdjacent${this.model}` ],
           node = { editing: true };
@@ -234,13 +324,54 @@ export default class AbstractDnDTable extends React.Component {
     this.updateSuiteModified( node, "insert" );
   }
 
-  cloneRecord = ( record ) => {
-    const update = this.props.action[ `clone${this.model}` ];
+  cloneRecord = async ( record ) => {
+    const update = this.props.action[ `clone${this.model}` ],
+          records = this.getSelectedRecords( record );
+    if ( records.length > 1 && !( await confirmClone( records.length ) ) ) {
+      return;
+    }
+    this.props.action.setApp({ loading: true });
+    // give it a chance to render loading state
+    setTimeout( async () => {
+      for ( const record of records ) {
+        await update( record );
+      }
+      this.updateSuiteModified( record, "clone" );
+      this.props.action.setApp({ loading: false });
+    }, 200 );
+  }
+
+  removeRecords = async ( record ) => {
+    const update = this.props.action[ `remove${this.model}` ],
+          records = this.getSelectedRecords( record );
+
+    if ( records.length > 1 && !( await confirmRemove( records.length ) ) ) {
+      return;
+    }
+    this.props.action.setApp({ loading: true });
+    // give it a chance to render loading state
+    setTimeout( async () => {
+      for ( const record of records ) {
+        await update( this.extendActionOptions( record ) );
+      }
+      this.updateSuiteModified( record, "remove" );
+      this.props.action.setApp({ loading: false });
+    }, 200 );
+  }
+
+  toggleVisibility = async ( record, disabled ) => {
+    const update = this.props.action[ `update${this.model}` ],
+          records = this.getSelectedRecords( record );
+
     this.props.action.setApp({ loading: true });
     // give it a chance to render loading state
     setTimeout( () => {
-      update( record );
-      this.updateSuiteModified( record, "clone" );
+      let obj;
+      for ( const record of records ) {
+        obj = disabled ? { id: record.id, disabled, failure: "" } : { id: record.id, disabled };
+        update( this.extendActionOptions( obj ) );
+      }
+      this.updateSuiteModified( record, "update" );
       this.props.action.setApp({ loading: false });
     }, 200 );
   }

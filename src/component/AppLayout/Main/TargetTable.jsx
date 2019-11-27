@@ -1,8 +1,10 @@
 import React from "react";
 import { Table, Icon, Button } from "antd";
 import AbstractEditableTable from "./AbstractEditableTable";
-import { EditableCell } from "./EditableCell";
+import { TargetSelectorCell } from "./EditableCell/TargetSelectorCell";
+import { TargetVariableCell } from "./EditableCell/TargetVariableCell";
 import { connectDnD } from "./DragableRow";
+import { validateSelector } from "service/selector";
 import ErrorBoundary from "component/ErrorBoundary";
 
 @connectDnD
@@ -15,7 +17,9 @@ export class TargetTable extends AbstractEditableTable {
     super( props );
 
     this.fields = [ "target",  "selector" ];
-    this.model = "Target";
+    this.extraFields = { "selector": [ "parentType", "ref" ]};
+    this.model = props.model || "Target";
+
 
     this.columns = [
       {
@@ -24,14 +28,14 @@ export class TargetTable extends AbstractEditableTable {
         width: "30%",
         render: ( text, record ) => {
           const ref = this.registerRef( record.id, "target" );
-          return ( <EditableCell
+          return ( <TargetVariableCell
             ref={ ref }
             record={ record }
             onSubmit={ this.onSubmit }
+            targets={ this.props.targets }
             dataIndex="target"
             className="input--target"
             placeholder="Enter target name"
-            liftFormStateUp={ this.liftFormStateUp }
             model={ this.model }
             updateRecord={ this.updateRecord }
           />
@@ -44,16 +48,16 @@ export class TargetTable extends AbstractEditableTable {
         width: "calc(70% - 160px)",
         render: ( text, record ) => {
           const ref = this.registerRef( record.id, "selector" );
-          return ( <EditableCell
+          return ( <TargetSelectorCell
             ref={ ref }
             record={ record }
             onSubmit={ this.onSubmit }
             dataIndex="selector"
             className="input--selector"
             placeholder="Enter CSS selector or xPath"
-            liftFormStateUp={ this.liftFormStateUp }
             model={ this.model }
             updateRecord={ this.updateRecord }
+            targets={ this.props.targets }
           />
           );
         }
@@ -62,6 +66,32 @@ export class TargetTable extends AbstractEditableTable {
     ];
 
   }
+
+  /**
+   * Check selector on submit
+   * @param {String} key
+   * @param {String} value
+   * @param {Form} form
+   * @returns {Boolean}
+   */
+  validateFormField( key, value, form ) {
+    if ( key !== "selector" ) {
+      return true;
+    }
+    try {
+      validateSelector( value );
+    } catch ( e ) {
+      form.setFields({
+        selector: {
+          value,
+          errors: [ e ]
+        }
+      });
+      return false;
+    }
+    return true;
+  }
+
 
   onRowClassName = ( record ) => {
     return "model--target " + this.buildRowClassName( record );
@@ -72,18 +102,31 @@ export class TargetTable extends AbstractEditableTable {
     this.props.action.setApp({ editTargetsAsCsvModal: true });
   }
 
-  shouldComponentUpdate( nextProps ) {
+  shouldComponentUpdate( nextProps, nextState ) {
+    if ( this.state !== nextState ) {
+      return true;
+    }
     if ( this.props.targets !== nextProps.targets ) {
       return true;
     }
     return false;
   }
 
+  /**
+   * Override the abstract method to provide record array for Drag&Drop selected rows
+   * @returns {Array}
+   */
+  getRecords() {
+    return this.props.targets;
+  }
+
   render() {
     const data = this.props.targets;
 
     return (
-      <div className="box-margin-vertical">
+      <div className="box-margin-vertical is-relative">
+        <a className="btn-to-bottom" href="#cTargetTableEditCsvBtn">
+          <Icon type="arrow-down" /></a>
         <ErrorBoundary>
           <Table
             id="cTargetTable"

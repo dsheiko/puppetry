@@ -5,11 +5,12 @@ import { Form, Modal, Input, Button } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
 import BrowseDirectory from "component/Global/BrowseDirectory";
-import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS } from "constant";
+import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, MODAL_DEFAULT_PROPS } from "constant";
 import { isDirEmpty } from "service/io";
 import { confirmCreateProject } from "service/smalltalk";
-import { normalizeFilename } from "service/io";
+import { normalizeFilename, mkdir } from "service/io";
 import * as classes from "./classes";
+import { join } from "path";
 import { ruleValidateGenericString } from "service/utils";
 
 const FormItem = Form.Item,
@@ -52,26 +53,37 @@ export class NewProjectModal extends AbstractForm {
 
     e.preventDefault();
 
-    if ( !this.isBrowseDirectoryValid() ) {
-      return;
-    }
 
-    if ( !isDirEmpty( projectDirectory ) && !await confirmCreateProject() ) {
+    if ( !this.isBrowseDirectoryValid() ) {
       return;
     }
 
     validateFields( async ( err, values ) => {
       const { name, suiteTitle } = values,
-            filename = normalizeSuiteName( suiteTitle );
+            projectFilename = normalizeSuiteName( name ),
+            filename = normalizeSuiteName( suiteTitle ),
+            newProjectDirectory = join( projectDirectory, projectFilename );
 
       if ( err ) {
         return;
       }
 
+      if ( !isDirEmpty( newProjectDirectory ) && !await confirmCreateProject() ) {
+        return;
+      }
+
+      try {
+        mkdir( newProjectDirectory );
+      } catch ( err ) {
+        this.setState({ locked: true,
+          browseDirectoryValidateStatus: `Cannot create directory ${ newProjectDirectory }` });
+        return;
+      }
+
       setApp({ newProjectModal: false });
-      await updateProject({ projectDirectory, name }, true );
+      await updateProject({ projectDirectory: newProjectDirectory, name }, true );
       await createSuite( filename, suiteTitle );
-      await loadProject( projectDirectory );
+      await loadProject( newProjectDirectory );
       setApp({ newSuiteModal: false });
     });
   }
@@ -119,6 +131,7 @@ export class NewProjectModal extends AbstractForm {
           closable
           onCancel={this.onClickCancel}
           onOk={this.onClickOk}
+          { ...MODAL_DEFAULT_PROPS }
           footer={[
             ( <Button
               key="back"

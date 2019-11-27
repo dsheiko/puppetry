@@ -1,6 +1,7 @@
 import { SELECT, INPUT, INPUT_NUMBER } from "../../constants";
 import ExpressionParser from "service/ExpressionParser";
 
+
 export const setCookie = {
   /**
    * @param {TemplatePayload} payload
@@ -25,6 +26,11 @@ export const setCookie = {
     `;
   },
 
+
+  toLabel: ({ params }) => `(\`${ params.name }\`, \`${ params.value }\`)`,
+  toGherkin: ({ params }) => `Set page cookie \`${ params.name }\` = \`${ params.value }\``,
+  commonly: "set page cookies",
+
   description: "Sets [cookies](https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie) on the page",
 
   params: [
@@ -32,13 +38,12 @@ export const setCookie = {
       legend: "",
       description: "",
       tooltip: "",
-      span: { label: 4, input: 18 },
       fields: [
         {
           name: "params.name",
           template: true,
           control: INPUT,
-          inputStyle: { maxWidth: 200 },
+          inputStyle: { maxWidth: 432 },
           label: "Name",
           placeholder: "e.g. foo",
           rules: [{
@@ -62,7 +67,7 @@ export const setCookie = {
           template: true,
           control: INPUT,
           label: "Domain",
-          inputStyle: { maxWidth: 200 },
+          inputStyle: { maxWidth: 432 },
           rules: [{
             required: true,
             message: `Field is required.`
@@ -72,7 +77,6 @@ export const setCookie = {
     },
     {
       collapsed: true,
-      span: { label: 4, input: 18 },
       description: "",
       tooltip: "",
 
@@ -114,6 +118,35 @@ export const setCookie = {
           options: [ "", "Strict", "Lax" ]
         }
       ]
+    }
+  ],
+
+  testTypes: {
+    "params": {
+      "name": "INPUT",
+      "value": "INPUT",
+      "domain": "INPUT",
+      "path": "INPUT",
+      "expires": "INPUT",
+      "httpOnly": "SELECT",
+      "secure": "SELECT",
+      "sameSite": "SELECT"
+    }
+  },
+
+  test: [
+    {
+      valid: true,
+      "params": {
+        "name": "ipsum",
+        "value": "IPSUM",
+        "domain": "domain",
+        "path": "/path/",
+        "expires": 111111111,
+        "httpOnly": "true",
+        "secure": "true",
+        "sameSite": "Lax"
+      }
     }
   ]
 };

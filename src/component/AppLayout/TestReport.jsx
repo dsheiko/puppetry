@@ -1,23 +1,25 @@
+/*eslint no-useless-escape: 0*/
 import React from "react";
 import PropTypes from "prop-types";
 import { ipcRenderer, shell } from "electron";
-import { E_RUN_TESTS, SNIPPETS_GROUP_ID } from "constant";
+import { E_RUN_TESTS, SNIPPETS_GROUP_ID, DIR_SCREENSHOTS } from "constant";
+import LoadingTip from "component/Global/LoadingTip";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
 import { exportProject, getRuntimeTestPath, parseReportedFailures } from "service/io";
 import { millisecondsToStr } from "service/utils";
-import { Icon, Spin, Button, Collapse, notification } from "antd";
+import { Spin, Collapse, notification } from "antd";
 import { join } from "path";
 import { TestGeneratorError } from "error";
 import Convert from "ansi-to-html";
 import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
+import { ReportBody } from "./TestReport/ReportBody";
 import path from "path";
+
 
 const Panel = Collapse.Panel,
       convert = new Convert();
-
-let counter = 0;
 
 
 export class TestReport extends AbstractComponent {
@@ -26,6 +28,7 @@ export class TestReport extends AbstractComponent {
     projectDirectory: PropTypes.string.isRequired,
     checkedList: PropTypes.arrayOf( PropTypes.string ).isRequired,
     targets: PropTypes.any,
+    selector: PropTypes.any,
     action: PropTypes.shape({
       setError: PropTypes.func.isRequired,
       removeAppTab: PropTypes.func.isRequired,
@@ -44,7 +47,7 @@ export class TestReport extends AbstractComponent {
   }
 
   onOpenDirectory = () => {
-    shell.openItem( join( this.props.projectDirectory, "screenshots" ) );
+    shell.openItem( join( this.props.projectDirectory, DIR_SCREENSHOTS ) );
     notification.open({
       message: "Opening system file manager",
       description: "The requested directory will open in the default file manager in a few seconds"
@@ -52,7 +55,9 @@ export class TestReport extends AbstractComponent {
   }
 
   run = async () => {
-    const { project, environment } = this.props;
+    const { project, environment } = this.props,
+          // options from Report modal like interactiveMode, updateSnapshot
+          options = this.props.options || {};
     this.props.action.saveSuite();
     this.props.action.resetCommandFailures();
     try {
@@ -66,10 +71,12 @@ export class TestReport extends AbstractComponent {
               this.runtimeTemp,
               this.props.checkedList,
               {
-                headless: this.props.headless,
-                launcherArgs: this.props.launcherArgs
+                headless: ( options.interactiveMode ? false : this.props.headless ),
+                launcherArgs: this.props.launcherArgs,
+                ...options
               },
               this.props.snippets,
+              project.targets,
               {
                 variables: getSelectedVariables( project.variables, activeEnv ),
                 environment
@@ -194,8 +201,16 @@ export class TestReport extends AbstractComponent {
     }, {});
   }
 
+
   render() {
-    const { report, loading, ok, stdErr, details } = this.state;
+    const { report, loading, ok, stdErr, details } = this.state,
+          printableStdErr = convert.toHtml( stdErr )
+            .replace( /\n/mg, "" )
+            .replace( /<br\s*\/>+/mg, "\n" )
+            .replace( /\s[AD]\s/mg, "" )
+            .replace( /\n+/mg, "<br />" )
+            .replace( /color\:#FFF/mg, "color:rgba(0,0,0,0.65)" );
+
 
     if ( report !== {} && !report ) {
       this.props.action.setError({
@@ -204,21 +219,17 @@ export class TestReport extends AbstractComponent {
         description: "Jest testing framework could not run the tests"
       });
     }
-
     return ( <ErrorBoundary>
       <If exp={ loading }>
-        <Spin spinning={ loading } tip="Tests are running.."><br /><br /><br /><br /><br /></Spin>
+        <div className="test-report-spin">
+          <Spin spinning={ loading } tip="Tests are running.."></Spin>
+          <LoadingTip />
+        </div>
       </If>
 
       <If exp={ ok && !loading }>
         <div id="cTestReport">
 
-          <p>
-            <Button
-              onClick={ this.onOpenDirectory }
-              type="primary"
-              icon="folder-open">Open directory with generated screenshots</Button>
-          </p>
 
           <div>{ report.success
             ? ( <div className="tr-badge is-ok">PASSED</div> )
@@ -227,43 +238,14 @@ export class TestReport extends AbstractComponent {
 
           { ( stdErr && !report.success ) && <Collapse>
             <Panel header="Error details" key="1">
-              <p dangerouslySetInnerHTML={{ __html: convert.toHtml( stdErr ) }}></p>
+              <p dangerouslySetInnerHTML={{ __html: printableStdErr }}></p>
             </Panel>
           </Collapse> }
 
-          <div className="bottom-line">
-            { Object.keys( details ).map( suiteKey => ( <div key={ `k${ counter++ }` } className="test-report__suite">
-              { suiteKey }
-              {  Object.keys( details[ suiteKey ]).map( describeKey => ( <div
-                key={ `k${ counter++ }` }
-                className="test-report__describe">
-                { describeKey }
-                { details[ suiteKey ][ describeKey ].map( spec => ( <div
-                  key={ `k${ counter++ }` }
-                  className="test-report__it">
-                  <If exp={ spec.status === "passed" }>
-                    <Icon
-                      className="test-report__ok"
-                      type="check" theme="outlined" fill="#52c41a" width="16" height="16" />
-                  </If>
-                  <If exp={ spec.status !== "passed" }>
-                    <Icon
-                      className="test-report__fail"
-                      type="close" theme="outlined" fill="#eb2f96" width="16" height="16" />
-                  </If>
-                  { " " }<span className="test-report__it__title">{ spec.title }
-                    { " " }({ millisecondsToStr( spec.duration ) })
-                  </span>
-
-                  <If exp={ spec.status !== "passed" && spec.failureMessages }>
-                    <div  className="test-report__it__exception">{ spec.failureMessages }</div>
-                  </If>
-
-
-                </div> ) ) }
-              </div> ) ) }
-            </div> ) ) }
-          </div>
+          <ReportBody details={ details }
+            projectDirectory={ this.props.projectDirectory }
+            selector={ this.props.selector }
+            action={ this.props.action } />
 
 
           <dl className="tr-row">

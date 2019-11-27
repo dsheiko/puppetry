@@ -1,19 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Alert, Checkbox, Modal, Button, message } from "antd";
+import { Alert, Checkbox, Modal, Button, Select, Icon, message, notification, Spin, Tabs } from "antd";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
-import { exportProject, isDirEmpty } from "service/io";
+import { exportProject, isDirEmpty  } from "service/io";
+import tmp from "tmp-promise";
 import BrowseDirectory from "component/Global/BrowseDirectory";
-import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, RUNNER_JEST } from "constant";
+import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, RUNNER_JEST, MODAL_DEFAULT_PROPS } from "constant";
 import If from "component/Global/If";
 import { TestGeneratorError } from "error";
 import { confirmExportProject } from "service/smalltalk";
 import * as classes from "./classes";
 import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
 import { SelectEnv } from "component/Global/SelectEnv";
+import exportPrintableText from "./ExportProjectModal/PrintableText";
+import { TestSpecificationPane } from "./ExportProjectModal/TestSpecificationPane";
+import { JestPane } from "./ExportProjectModal/JestPane";
+import { BrowserOptions } from "./TestReportModal/BrowserOptions";
+import { SELECT_SEARCH_PROPS } from "service/utils";
 
-const CheckboxGroup = Checkbox.Group;
+const CheckboxGroup = Checkbox.Group,
+      { TabPane } = Tabs,
+      { Option } = Select;
 
 export class ExportProjectModal  extends AbstractComponent {
 
@@ -31,6 +39,8 @@ export class ExportProjectModal  extends AbstractComponent {
     files: PropTypes.arrayOf( PropTypes.string ).isRequired,
     snippets: PropTypes.any,
     project: PropTypes.any,
+    // needed for export printable text
+    readyToRunTests: PropTypes.bool.isRequired,
     environment: PropTypes.any
   }
 
@@ -41,7 +51,32 @@ export class ExportProjectModal  extends AbstractComponent {
     checkedList: [],
     indeterminate: true,
     checkAll: false,
-    modified: false
+    modified: false,
+    format: "jest",
+    loading: false,
+    allure: false
+  }
+
+  constructor( props ) {
+    super( props );
+    this.refBrowserOptions = React.createRef();
+    this.refTestSpecificationPane = React.createRef();
+  }
+
+  getBrowserOptions() {
+    return this.refBrowserOptions.current ? this.refBrowserOptions.current.state : {
+      headless: true,
+      incognito:true,
+      ignoreHTTPSErrors: false,
+      launcherArgs: "",
+      devtools: false
+    };
+  }
+
+  onChangeAllure = ( e ) => {
+    this.setState({
+      allure: e.target.checked
+    });
   }
 
   onChange = ( checkedList ) => {
@@ -86,34 +121,83 @@ export class ExportProjectModal  extends AbstractComponent {
     }
 
 
-    this.setState({ locked: true });
+    this.setState({ locked: true, loading: true });
     // give it time to update component state, before processing
     setTimeout( async () => {
-      const activeEnv = getActiveEnvironment( project.environments, environment );
+      const activeEnv = getActiveEnvironment( project.environments, environment ),
+            envDto = {
+              variables: getSelectedVariables( project.variables, activeEnv ),
+              environment: activeEnv
+            },
+            browserOptions = this.getBrowserOptions(),
+            launcherOptions = {
+              headless: browserOptions.headless,
+              incognito: browserOptions.incognito,
+              ignoreHTTPSErrors: browserOptions.ignoreHTTPSErrors,
+              launcherArgs: browserOptions.launcherArgs,
+              devtools: browserOptions.devtools
+            };
+
       this.props.action.saveSettings({ exportDirectory: selectedDirectory });
+      let filename;
       try {
-        await exportProject(
-          projectDirectory,
-          selectedDirectory,
-          checkedList,
-          { runner: RUNNER_JEST },
-          this.props.snippets,
-          {
-            variables: getSelectedVariables( project.variables, activeEnv ),
-            environment
+        switch ( this.state.format ) {
+        case "text":
+
+          if ( !this.props.readyToRunTests ) {
+            notification.open({
+              message: "Dependencies not installed",
+              description: "Please, run the tests (F6) "
+                    + " to install dependencies."
+            });
+            this.setState({ loading: false, locked: false });
+            return;
           }
-        );
-        message.info( `Project exported in ${ selectedDirectory }` );
+
+          filename = await exportPrintableText({
+            projectDirectory,
+            selectedDirectory,
+            checkedList,
+            launcherOptions,
+            project,
+            snippets: this.props.snippets,
+            envDto,
+            runSpecTests: this.refTestSpecificationPane.current
+              ? this.refTestSpecificationPane.current.state.runSpecTests : false
+          });
+
+          this.download( filename );
+          break;
+
+        default:
+          await exportProject(
+            projectDirectory,
+            selectedDirectory,
+            checkedList,
+            { runner: RUNNER_JEST, ...launcherOptions, allure: this.state.allure },
+            this.props.snippets,
+            project.targets,
+            envDto
+          );
+          message.info( `Project exported in ${ selectedDirectory }` );
+          break;
+        }
+
+
         this.props.action.setApp({ exportProjectModal: false });
+
+
       } catch ( err ) {
+        console.error( err );
         const message = err instanceof TestGeneratorError ? "Test parser error" : "Cannot export project";
+        this.props.action.setApp({ exportProjectModal: false });
         this.props.action.setError({
           visible: true,
           message,
           description: err.message
         });
       } finally {
-        this.setState({ locked: false });
+        this.setState({ loading: false, locked: false });
       }
     }, 100 );
   }
@@ -147,6 +231,10 @@ export class ExportProjectModal  extends AbstractComponent {
     return true;
   }
 
+  onChangeFormat = ( format ) => {
+    this.setState({ format });
+  }
+
   getCurrentFile() {
     const { files, currentSuite } = this.props,
           currentFile = files.find( file => currentSuite === file );
@@ -155,6 +243,7 @@ export class ExportProjectModal  extends AbstractComponent {
 
   render() {
     const { isVisible, files, project, environment, action } = this.props,
+          { format } = this.state,
           current = this.getCurrentFile(),
           checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
@@ -166,14 +255,15 @@ export class ExportProjectModal  extends AbstractComponent {
           closable
           onCancel={ this.onClickCancel }
           onOk={this.onClickOk}
-          className="checkbox-group--vertical"
-
+          className="export-project-modal checkbox-group--vertical"
+          { ...MODAL_DEFAULT_PROPS }
           footer={[
             ( <Button
               className={ classes.BTN_CANCEL }
               key="back" onClick={this.onClickCancel}>Cancel</Button> ),
             ( <Button
               className={ classes.BTN_OK }
+              ref={ ( el ) => el && el.buttonNode && el.buttonNode.focus() }
               key="submit"
               type="primary"
               autoFocus={ true }
@@ -184,45 +274,84 @@ export class ExportProjectModal  extends AbstractComponent {
             </Button> )
           ]}
         >
-          <p>
-        As you press &quot;Export&quot; Puppetry generates a
-            { " " }<a onClick={ this.onExtClick } href="https://jestjs.io/">Jest project</a>{ " " }
-         in the provided location.
-        You just need to navigate into the directory,
-        install dependencies (<code>npm install</code>) and run the tests (<code>npm test</code>).
-          </p>
 
-          <SelectEnv environments={ project.environments }
-            environment={ environment } action={ action } />
+          <Spin tip="Exporting project..." spinning={ this.state.loading }>
 
-          <BrowseDirectory
-            defaultDirectory={ this.props.exportDirectory }
-            validateStatus={ this.state.browseDirectoryValidateStatus }
-            getSelectedDirectory={ this.getSelectedDirectory }
-            label="Select a directory to export" />
 
-          <If exp={ files.length }>
-            <p>Please select suites to export:</p>
-            <div className="bottom-line">
-              <Checkbox
-                indeterminate={ this.state.indeterminate }
-                onChange={ this.onCheckAllChange }
-                checked={ this.state.checkAll }
-              >
-                  Check all
-              </Checkbox>
-            </div>
+            <Tabs
+              className="tabgroup-test-reports"
+              hideAdd={ true }
+              animated={ false }
+            >
 
-            <div className={ files.length >= 8 ? "is-checkbox-group-scrollable-export" : ""}>
-              <CheckboxGroup options={ files }
-                value={ checkedList }
-                onChange={ this.onChange } />
-            </div>
+              <TabPane tab="General" key="1">
 
-          </If>
-          <If exp={ !files.length }>
-            <Alert message="No suites available in the project" type="error" />
-          </If>
+                <div className="select-group-inline">
+                  <span className="select-group-inline__label">
+                    <Icon type="file-unknown" title="Select an output format" />
+                  </span>
+                  <Select
+                    { ...SELECT_SEARCH_PROPS }
+                    style={{ width: 348 }}
+                    placeholder="Select an output format"
+                    onChange={ this.onChangeFormat }
+                    defaultValue="jest"
+                  >
+                    <Option value="jest" key="jest">Jest/Puppeteer project (CI-friendly)</Option>
+                    <Option value="text" key="text">test specification</Option>
+                  </Select>
+                </div>
+
+                { format === "jest" && <JestPane /> }
+
+                { format === "text" && <TestSpecificationPane ref={ this.refTestSpecificationPane } /> }
+
+
+                <SelectEnv theme="test-reports" environments={ project.environments }
+                  environment={ environment } action={ action } />
+
+
+                <BrowseDirectory
+                  defaultDirectory={ ( this.props.exportDirectory || tmp.dirSync().name ) }
+                  validateStatus={ this.state.browseDirectoryValidateStatus }
+                  getSelectedDirectory={ this.getSelectedDirectory }
+                  label="Select a directory to export" />
+
+                { format === "jest" && <div className="allure-test-report-checkbox">
+                  <Checkbox onChange={ this.onChangeAllure }>generate
+                    { " " } <a onClick={ this.onExtClick } href="http://allure.qatools.ru/">Allure Test Report</a>
+                  </Checkbox></div> }
+
+                <If exp={ files.length }>
+                  <p>Please select suites to export:</p>
+                  <div className="bottom-line">
+                    <Checkbox
+                      indeterminate={ this.state.indeterminate }
+                      onChange={ this.onCheckAllChange }
+                      checked={ this.state.checkAll }
+                    >
+                    Check all
+                    </Checkbox>
+                  </div>
+
+                  <div className={ files.length >= 8 ? "is-checkbox-group-scrollable-export" : ""}>
+                    <CheckboxGroup options={ files }
+                      value={ checkedList }
+                      onChange={ this.onChange } />
+                  </div>
+
+                </If>
+                <If exp={ !files.length }>
+                  <Alert message="No suites available in the project" type="error" />
+                </If>
+
+              </TabPane>
+              <TabPane tab="Browser options" key="2">
+                <BrowserOptions ref={ this.refBrowserOptions }  />
+              </TabPane>
+            </Tabs>
+
+          </Spin>
 
         </Modal>
       </ErrorBoundary>
