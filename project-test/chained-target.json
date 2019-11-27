@@ -3,9 +3,9 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1574089644,
-  "loadedAt": 1574423663,
-  "modified": true,
+  "savedAt": 1574780563,
+  "loadedAt": 1574780354,
+  "modified": false,
   "filename": "chained-target.json",
   "targets": {
     "7vnk2vvh36o": {

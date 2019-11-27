@@ -18,7 +18,7 @@ Puppetry is an open-source cross-platform desktop application that gives non-dev
 
 ![Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline](https://github.com/dsheiko/puppetry/raw/master/docs/assets/img/puppetry-welcome.png)
 
-[:tv: Watch introduction video](https://vimeo.com/345458272  "Introduction to Puppetry 2")
+[:tv: Watch introduction video](https://youtu.be/dfuNhTCRMRg  "Recording Automated Tests with Puppetry")
 
 
 # Key Features
@@ -34,7 +34,6 @@ Puppetry is an open-source cross-platform desktop application that gives non-dev
 - [Built-in automation recorder](https://docs.puppetry.app/suite#recording-suite-showcase)
 - [Interactive mode](https://docs.puppetry.app/v/3.0.0/running-tests/interactive-mode), where one can navigate test steps similar to Cypress
 - [Version control (GIT integration)](https://docs.puppetry.app/v/3.0.0/version-control)
-- [Testing flows with transactional emails](https://docs.puppetry.app/testing-emails)
 - Support Allure test reports
 - Support of distinct testing types:
   - [Functional testing](https://docs.puppetry.app/v/3.0.0/getting-started)
@@ -87,6 +86,17 @@ Current only the following OS are supported:
 Please adhere the coding style. We have one based on jQuery's JavaScript Style Guide. You can find the validation rules in `.eslintrc`
 and lint the code by running `npm run lint`
 
+
+## Thanks
+
+A special thanks to
+[Monika Rao](https://github.com/monika-12),
+[vteixeira19](https://github.com/vteixeira19),
+[Gernot Messow](https://github.com/uvexgmessow),
+[Carlos Mantilla](https://github.com/ceoaliongroo),
+[kkmuffme](https://github.com/kkmuffme),
+[Ravindra Jadhav](https://github.com/jadhavravindra)
+for the ideas and support
 
 ## Credits
 

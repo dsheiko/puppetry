@@ -3,7 +3,7 @@
   "appPanels": {
     "suite": {
       "panes": [
-        "targets"
+        "groups"
       ]
     },
     "settings": {
@@ -485,6 +485,10 @@
         "57yk34jpj96": {
           "key": "57yk34jpj96",
           "value": true
+        },
+        "7vnk2vvpx9i": {
+          "key": "7vnk2vvpx9i",
+          "value": true
         }
       }
     },
@@ -511,7 +515,7 @@
       }
     }
   },
-  "savedAt": 1574424146,
+  "savedAt": 1574780615,
   "modified": false,
   "lastOpenSuite": "chained-target.json",
   "variables": {},
