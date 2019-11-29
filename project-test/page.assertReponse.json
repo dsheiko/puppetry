@@ -1,0 +1,807 @@
+{
+  "title": "Chained Target",
+  "timeout": 50000,
+  "snippets": false,
+  "description": "",
+  "savedAt": 1575048725,
+  "loadedAt": 1575048700,
+  "modified": false,
+  "filename": "page.assertReponse.json",
+  "targets": {
+    "7vnk2vvh36o": {
+      "target": "LEVEL_1",
+      "id": "7vnk2vvh36o",
+      "editing": false,
+      "selector": "#level1",
+      "key": "7vnk2vvh36o"
+    },
+    "7vnk2vvhrk1": {
+      "target": "LEVEL_2",
+      "id": "7vnk2vvhrk1",
+      "editing": false,
+      "selector": "#level2",
+      "ref": "LEVEL_1",
+      "parentType": "",
+      "key": "7vnk2vvhrk1"
+    },
+    "7vnk2vvkgft": {
+      "editing": false,
+      "id": "7vnk2vvkgft",
+      "key": "7vnk2vvkgft",
+      "target": "LEVEL_3",
+      "selector": "#level3",
+      "disabled": false,
+      "adding": false,
+      "parentType": "",
+      "ref": "LEVEL_2"
+    },
+    "oi5k2vxclx2": {
+      "target": "IFRAME_FOO",
+      "id": "oi5k2vxclx2",
+      "editing": false,
+      "selector": "#iframeFoo",
+      "ref": "",
+      "key": "oi5k2vxclx2"
+    },
+    "m2jk3a3d9ue": {
+      "editing": false,
+      "id": "m2jk3a3d9ue",
+      "key": "m2jk3a3d9ue",
+      "target": "IFRAME_FOO_LOCAL",
+      "selector": "#iframeFooLocalTarget",
+      "disabled": false,
+      "adding": false,
+      "parentType": "iframe",
+      "ref": "IFRAME_FOO"
+    },
+    "oi5k2vxlm6p": {
+      "target": "IFRAME_BAR",
+      "id": "oi5k2vxlm6p",
+      "editing": false,
+      "selector": "#iframeBar",
+      "ref": "IFRAME_FOO",
+      "key": "oi5k2vxlm6p",
+      "parentType": "iframe"
+    },
+    "oi5k2vxmg5h": {
+      "target": "IFRAME_BAR_LOCAL",
+      "id": "oi5k2vxmg5h",
+      "editing": false,
+      "selector": "#iframeBarLocalTarget",
+      "ref": "IFRAME_BAR",
+      "key": "oi5k2vxmg5h",
+      "parentType": "iframe"
+    },
+    "oi5k2vxoom7": {
+      "target": "IFRAME_FOO_LOCAL_CONTAINER",
+      "id": "oi5k2vxoom7",
+      "editing": false,
+      "selector": "#iframeFooLocalContainer",
+      "ref": "IFRAME_FOO",
+      "parentType": "iframe",
+      "key": "oi5k2vxoom7"
+    },
+    "oi5k2vxrodj": {
+      "editing": false,
+      "id": "oi5k2vxrodj",
+      "key": "oi5k2vxrodj",
+      "target": "IFRAME_FOO_LOCAL_CHILD",
+      "selector": "#iframeFooLocalChild",
+      "disabled": false,
+      "adding": false,
+      "parentType": "",
+      "ref": "IFRAME_FOO_LOCAL_CONTAINER"
+    },
+    "7iwk2vy96g2": {
+      "target": "SHADOWDOM_FOO",
+      "id": "7iwk2vy96g2",
+      "editing": true,
+      "selector": "#fooShadowRoot",
+      "ref": "",
+      "key": "7iwk2vy96g2"
+    },
+    "7iwk2vyba6g": {
+      "target": "SHADOWDOM_FOO_LOCAL",
+      "id": "7iwk2vyba6g",
+      "editing": true,
+      "selector": "#shadowLocalTarget",
+      "ref": "SHADOWDOM_FOO",
+      "key": "7iwk2vyba6g",
+      "parentType": "shadowHost"
+    },
+    "7iwk2vyc1yt": {
+      "target": "SHADOWDOM_BAR",
+      "id": "7iwk2vyc1yt",
+      "editing": false,
+      "selector": "#barShadowRoot",
+      "ref": "SHADOWDOM_FOO",
+      "key": "7iwk2vyc1yt",
+      "parentType": "shadowHost"
+    },
+    "7iwk2vycpiu": {
+      "target": "SHADOWDOM_BAR_LOCAL",
+      "id": "7iwk2vycpiu",
+      "editing": false,
+      "selector": "#shadowLocalNestedTarget",
+      "ref": "SHADOWDOM_BAR",
+      "key": "7iwk2vycpiu",
+      "parentType": "shadowHost"
+    },
+    "57yk34it3mn": {
+      "target": "SHADOW_BAR_LOCAL_XPATH",
+      "id": "57yk34it3mn",
+      "editing": false,
+      "selector": "/html/body/foo-component//bar-component//div",
+      "ref": "",
+      "key": "57yk34it3mn"
+    }
+  },
+  "groups": {
+    "k2vk2vvd4pi": {
+      "title": "page.assertReponse",
+      "id": "k2vk2vvd4pi",
+      "editing": false,
+      "key": "k2vk2vvd4pi",
+      "tests": {
+        "7vnk2vvpx9i": {
+          "editing": false,
+          "id": "7vnk2vvpx9i",
+          "key": "7vnk2vvpx9i",
+          "title": "Look and feel in the table",
+          "commands": {
+            "7vnk2vvpxmd": {
+              "editing": false,
+              "id": "7vnk2vvpxmd",
+              "key": "7vnk2vvpxmd",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "equals",
+                "statusValue": 500,
+                "statusTextOperator": "equals",
+                "statusTextValue": "foo",
+                "textOperator": "contains",
+                "textValue": "bar",
+                "headerOperator": "specific",
+                "headerName": "x-foo",
+                "headerValue": "FOO"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "7vnk2vvpx9i",
+              "waitForTarget": false,
+              "entity": "command",
+              "params": {
+                "url": "https://httpstat.us/200"
+              },
+              "comment": "@assert [page.assertResponse]"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
+        "i1wk3kcgkxo": {
+          "editing": false,
+          "id": "i1wk3kcgkxo",
+          "key": "i1wk3kcgkxo",
+          "title": "Status",
+          "commands": {
+            "i1wk3kcgl7r": {
+              "editing": false,
+              "id": "i1wk3kcgl7r",
+              "key": "i1wk3kcgl7r",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "equals",
+                "statusValue": 200,
+                "statusTextOperator": "any",
+                "textOperator": "any",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://httpstat.us/200"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "i1wk3kcgkxo",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "i1wk3kcijcc": {
+              "editing": false,
+              "id": "i1wk3kcijcc",
+              "key": "i1wk3kcijcc",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "equals",
+                "statusValue": 500,
+                "statusTextOperator": "any",
+                "textOperator": "any",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://httpstat.us/500"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "i1wk3kcgkxo",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "i1wk3kci2xr": {
+              "editing": false,
+              "id": "i1wk3kci2xr",
+              "key": "i1wk3kci2xr",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "equals",
+                "statusValue": 500,
+                "statusTextOperator": "any",
+                "textOperator": "any",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://httpstat.us/200"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "i1wk3kcgkxo",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/200 with status code to be 500, but received code 200"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
+        "icsk3kcmllh": {
+          "editing": false,
+          "id": "icsk3kcmllh",
+          "key": "icsk3kcmllh",
+          "title": "Status Text",
+          "commands": {
+            "icsk3kcmlw1": {
+              "editing": false,
+              "id": "icsk3kcmlw1",
+              "key": "icsk3kcmlw1",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "any",
+                "statusTextOperator": "equals",
+                "statusTextValue": "Not Found",
+                "textOperator": "any",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://httpstat.us/404"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "icsk3kcmllh",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "icsk3kcnuaw": {
+              "editing": false,
+              "id": "icsk3kcnuaw",
+              "key": "icsk3kcnuaw",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "any",
+                "statusTextOperator": "contains",
+                "statusTextValue": "Found",
+                "textOperator": "any",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://httpstat.us/404"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "icsk3kcmllh",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "icsk3kco7n0": {
+              "editing": false,
+              "id": "icsk3kco7n0",
+              "key": "icsk3kco7n0",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "any",
+                "statusTextOperator": "!equals",
+                "statusTextValue": "Lost",
+                "textOperator": "any",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://httpstat.us/404"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "icsk3kcmllh",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "icsk3kcojf3": {
+              "editing": false,
+              "id": "icsk3kcojf3",
+              "key": "icsk3kcojf3",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "any",
+                "statusTextOperator": "!contains",
+                "statusTextValue": "Lost",
+                "textOperator": "any",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://httpstat.us/404"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "icsk3kcmllh",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "icsk3kcostm": {
+              "editing": false,
+              "id": "icsk3kcostm",
+              "key": "icsk3kcostm",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "any",
+                "statusTextOperator": "!empty",
+                "textOperator": "any",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://httpstat.us/404"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "icsk3kcmllh",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "icsk3kcp54l": {
+              "editing": false,
+              "id": "icsk3kcp54l",
+              "key": "icsk3kcp54l",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "any",
+                "statusTextOperator": "empty",
+                "textOperator": "any",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://httpstat.us/404"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "icsk3kcmllh",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert page.assertResponse] expected HTTP/S response matching https://httpstat.us/404 with status text to be empty, but received text"
+            },
+            "icsk3kcpcyc": {
+              "editing": false,
+              "id": "icsk3kcpcyc",
+              "key": "icsk3kcpcyc",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "any",
+                "statusTextOperator": "equals",
+                "statusTextValue": "I'm a teapot",
+                "textOperator": "any",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://httpstat.us/404"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "icsk3kcmllh",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/404 with status text to be \"I'm a teapot\", but received text \"Not Found\""
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
+        "j4qk3kd1bo0": {
+          "editing": false,
+          "id": "j4qk3kd1bo0",
+          "key": "j4qk3kd1bo0",
+          "title": "Data (Text)",
+          "commands": {
+            "j4qk3kd1c0z": {
+              "editing": false,
+              "id": "j4qk3kd1c0z",
+              "key": "j4qk3kd1c0z",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "any",
+                "statusTextOperator": "any",
+                "textOperator": "contains",
+                "textValue": "userId",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://jsonplaceholder.typicode.com/todos/1"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "j4qk3kd1bo0",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "kxjk3kenon9": {
+              "editing": false,
+              "id": "kxjk3kenon9",
+              "key": "kxjk3kenon9",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "any",
+                "statusTextOperator": "any",
+                "textOperator": "!equals",
+                "textValue": "Luke",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://jsonplaceholder.typicode.com/todos/1"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "j4qk3kd1bo0",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "kxjk3keo6zj": {
+              "editing": false,
+              "id": "kxjk3keo6zj",
+              "key": "kxjk3keo6zj",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "any",
+                "statusTextOperator": "any",
+                "textOperator": "!contains",
+                "textValue": "Luke",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://jsonplaceholder.typicode.com/todos/1"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "j4qk3kd1bo0",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "kxjk3keofbd": {
+              "editing": false,
+              "id": "kxjk3keofbd",
+              "key": "kxjk3keofbd",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "any",
+                "statusTextOperator": "any",
+                "textOperator": "!empty",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://jsonplaceholder.typicode.com/todos/1"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "j4qk3kd1bo0",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "j4qk3kd1c7w": {
+              "editing": false,
+              "id": "j4qk3kd1c7w",
+              "key": "j4qk3kd1c7w",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "any",
+                "statusTextOperator": "any",
+                "textOperator": "equals",
+                "headerOperator": "any",
+                "textValue": "404 Not Found"
+              },
+              "params": {
+                "url": "https://httpstat.us/404"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "j4qk3kd1bo0",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "lemk3kf0khg": {
+              "editing": false,
+              "id": "lemk3kf0khg",
+              "key": "lemk3kf0khg",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "any",
+                "statusTextOperator": "any",
+                "textOperator": "equals",
+                "textValue": "Nope",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://httpstat.us/404"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "j4qk3kd1bo0",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/404 with data to be \"Nope\", but received data \"404 Not Found\""
+            },
+            "kxjk3keou6l": {
+              "editing": false,
+              "id": "kxjk3keou6l",
+              "key": "kxjk3keou6l",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "any",
+                "statusTextOperator": "any",
+                "textOperator": "empty",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://httpstat.us/404"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "j4qk3kd1bo0",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/404 with data to be empty, but received data is not"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test"
+        },
+        "kxjk3kemtzz": {
+          "editing": false,
+          "id": "kxjk3kemtzz",
+          "key": "kxjk3kemtzz",
+          "title": "Headers",
+          "commands": {
+            "kxjk3kemuad": {
+              "editing": false,
+              "id": "kxjk3kemuad",
+              "key": "kxjk3kemuad",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "any",
+                "statusTextOperator": "any",
+                "textOperator": "any",
+                "headerOperator": "specific",
+                "headerName": "x-powered-by",
+                "headerValue": "Express"
+              },
+              "params": {
+                "url": "https://jsonplaceholder.typicode.com/todos/1"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "kxjk3kemtzz",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "l69k3kewufu": {
+              "editing": false,
+              "id": "l69k3kewufu",
+              "key": "l69k3kewufu",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "any",
+                "statusTextOperator": "any",
+                "textOperator": "any",
+                "headerOperator": "specific",
+                "headerName": "x-powered-by",
+                "headerValue": "Nope"
+              },
+              "params": {
+                "url": "https://jsonplaceholder.typicode.com/todos/1"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "kxjk3kemtzz",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://jsonplaceholder.typicode.com/todos/1 to have header x-powered-by: Nope, but it does not"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test"
+        }
+      }
+    }
+  },
+  "puppetry": "3.0.1"
+}

@@ -82,9 +82,10 @@ export class ParamsFormBuilder extends React.Component {
   }
 
   onTemplateHelperChange = ( name, val ) => {
-    const { setFieldsValue, getFieldValue } = this.props.form;
+    const { setFieldsValue, getFieldValue } = this.props.form,
+          prevValue = getFieldValue( name ) || "";
     setFieldsValue({
-      [ name ]: getFieldValue( name ) + ( typeof val === "string" ? val : "" )
+      [ name ]: prevValue + ( typeof val === "string" ? val : "" )
     });
   }
 

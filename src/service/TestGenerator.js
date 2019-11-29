@@ -135,8 +135,14 @@ export default class TestGenerator {
         this.options.devtools = true;
         this.options.jestTimeout = 1800000;
       }
+      if ( src === "page" && method.startsWith( "assertResponse" ) ) {
+        this.options.requireInterceptResponses = true;
+      }
       if ( src === "page" && method.startsWith( "assertPerformanceAsset" ) ) {
         this.options.requireInterceptTraffic = true;
+      }
+      if ( src === "page" && method.startsWith( "setUserAgent" ) ) {
+        this.options.setUserAgent = true;
       }
       if ( src === "page" && method.startsWith( "assertGaTracking" ) ) {
         this.options.requireInterceptTraffic = true;

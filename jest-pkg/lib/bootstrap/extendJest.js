@@ -60,6 +60,44 @@ module.exports = function( expect, util ) {
     return assert.enabled[ key ];
   }
 
+  function shorten( str ) {
+    return str.length > 100 ? str.substr( 0, 100 ) + "..." : str;
+  }
+
+  function testResponse( field, assert, getValue ) {
+    let operator = assert[ `${ field }Operator` ],
+        expected = assert[ `${ field }Value` ],
+        actual;
+
+    if ( operator === "any" )     {
+      return true;
+    }
+    actual = getValue();
+    if ( field === "status" )  {
+      actual = parseInt( actual, 10 );
+      expected = parseInt( expected, 10 );
+    }
+    switch ( operator ) {
+      case "equals":
+        return { exp: actual === expected, actual: `"${ shorten( actual ) }"`, expected: `to be "${ expected }"` };
+      case "contains":
+        return { exp: actual.includes( expected ),
+          actual: `"${ shorten( actual ) }"`, expected: `to contain "${ expected }"` };
+      case "empty":
+        return { exp: !Boolean( actual.trim() ), actual: "is not", expected: "to be empty" };
+      case "!equals":
+        return { exp: actual !== expected,
+          actual: `"${ shorten( actual ) }"`, expected: `NOT to be "${ expected }"` };
+      case "!contains":
+        return { exp: !actual.includes( expected ),
+          actual: `"${ shorten( actual ) }"`, expected: `NOT to contain "${ expected }"` };
+      case "!empty":
+        return { exp: Boolean( actual.trim() ), actual: "is", expected: "to be NOT empty" };
+      default:
+        return true;
+    }
+  }
+
   expect.extend({
     /**
      * Assert value is truthy
@@ -325,6 +363,50 @@ module.exports = function( expect, util ) {
         return expectReturn( assets.length < val, `[${ source }] expected `
           + `total number of ${ type } assets to be under`
           + ` ${ val }, but found ${ assets.length  }` );
+    },
+
+      /**
+     *
+     * @param {Response} rsp
+     * @param {String} url
+     * @param {Object} assert
+     * @param {String} source
+     * @returns {Object}
+     */
+    toMatchResponse( rsp, url, assert, source ) {
+      const errIntro = `[${ source }] expected HTTP/S response matching ${ url }`,
+            RE = /\"/g;
+      if ( !rsp ) {
+        // early exist, makes no sense to proceed
+        return expectReturn( false, `${ errIntro }, but nothing intercepted` );
+      }
+      let res;
+      res = testResponse( "status", assert, () => rsp.status() );
+      if ( res !== true && !res.exp ) {
+        return expectReturn( res.exp,
+          `${ errIntro } with status code ${ res.expected.replace( RE, "" ) },`
+          + ` but received code ${ res.actual.replace( RE, "" ) }` );
+      }
+      res = testResponse( "statusText", assert, () => rsp.statusText() );
+      if ( res !== true && !res.exp ) {
+        return expectReturn( res.exp,
+          `${ errIntro } with status text ${ res.expected }, but received text ${ res.actual }` );
+      }
+      res = testResponse( "text", assert, () => rsp.data );
+      if ( res !== true && !res.exp ) {
+        return expectReturn( res.exp,
+          `${ errIntro } with data ${ res.expected }, but received data `
+            + `${ res.actual }` );
+      }
+
+      if ( assert.headerOperator === "any" ) {
+        return expectReturn( true, `${ errIntro }, but nothing intercepted` );
+      }
+      const pass = Object.entries( rsp.headers() )
+        .find( pair => ( pair[ 0 ] === assert.headerName && pair[ 1 ] === assert.headerValue ) );
+      return expectReturn( Boolean( pass ),
+        `${ errIntro } to have header ${ assert.headerName }: ${ assert.headerValue }, but it does not` );
+
     },
 
     /**

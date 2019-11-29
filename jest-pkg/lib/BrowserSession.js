@@ -18,15 +18,23 @@ class BrowserSession {
    * @param {Object} setupOptions
    */
   async setup( setupOptions ) {
-    // when called like PUPPETEER_RUN_IN_BROWSER=true jest open in a browser
-    const launcherArgs = process.env.PUPPETEER_LAUNCHER_ARGS
-      ? process.env.PUPPETEER_LAUNCHER_ARGS : setupOptions.launcherArgs,
-          options = {
+    const setupOptionsLauncherArgsString = setupOptions.launcherArgs || "",
+          // when called like PUPPETEER_RUN_IN_BROWSER=true jest open in a browser
+          launcherArgsString =  process.env.PUPPETEER_LAUNCHER_ARGS
+            ? process.env.PUPPETEER_LAUNCHER_ARGS : setupOptionsLauncherArgsString,
+          launcherArgs = launcherArgsString.split( " " ) ;
+
+    if ( setupOptions.setUserAgent ) {
+      launcherArgs.includes( "--no-sandbox" ) || launcherArgs.push( "--no-sandbox" );
+      launcherArgs.includes( "--disable-setuid-sandbox" ) || launcherArgs.push( "--disable-setuid-sandbox" );
+    }
+
+    const options = {
             headless: ( setupOptions.hasOwnProperty( "headless" )
               ? setupOptions.headless : !process.env.PUPPETEER_RUN_IN_BROWSER ),
             devtools: Boolean( process.env.PUPPETEER_DEVTOOLS || setupOptions.devtools ),
             ignoreHTTPSErrors: setupOptions.ignoreHTTPSErrors || false,
-            args: launcherArgs.split( " " )
+            args: launcherArgs
           };
 
     if ( options.headless ) {

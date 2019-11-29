@@ -74,7 +74,7 @@
       }
     }
   },
-  "savedAt": 1574845349,
+  "savedAt": 1575027284,
   "modified": false,
   "lastOpenSuite": "todomvc.json",
   "variables": {
@@ -123,5 +123,5 @@
     "local"
   ],
   "projectDirectory": "/home/sheiko/PUPPETRY/demo--project",
-  "puppetry": "3.0.0"
+  "puppetry": "3.0.1"
 }

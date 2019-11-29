@@ -1,3 +1,12 @@
+# Puppetry 3.0.1
+
+### Features
+- improvement: add page.waitForRequest
+
+### Bug fixes
+- fix: issue #48, incorrect selectors for querySelectorAll
+- fix: remove undefined in Template expression builder
+
 # Puppetry 3.0.0
 
 ### Features
