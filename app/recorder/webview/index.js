@@ -33,8 +33,9 @@ delete window.module;
 //    }
 
     function getQuery( el ) {
-      if ( el.id && document.querySelectorAll( `#${ el.id }` ).length === 1 ) {
-        return `#${ el.id }`;
+      const idSelector = `#${ CSS.escape( el.id ) }`;
+      if ( el.id && document.querySelectorAll( idSelector ).length === 1 ) {
+        return idSelector;
       }
       if ( el.name && document.querySelectorAll( `${ el.tagName }[name="${ el.name }"]` ).length === 1 ) {
         return `${ el.tagName }[name="${ el.name }"]`;
