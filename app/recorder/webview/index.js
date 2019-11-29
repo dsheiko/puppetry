@@ -33,7 +33,7 @@ delete window.module;
 //    }
 
     function getQuery( el ) {
-      let idSelector = `#${ CSS.escape( el.id ) }`;
+      const idSelector = `#${ CSS.escape( el.id ) }`;
       if ( el.id && document.querySelectorAll( idSelector ).length === 1 ) {
         return idSelector;
       }
