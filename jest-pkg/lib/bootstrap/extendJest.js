@@ -403,7 +403,8 @@ module.exports = function( expect, util ) {
         return expectReturn( true, `${ errIntro }, but nothing intercepted` );
       }
       const pass = Object.entries( rsp.headers() )
-        .find( pair => ( pair[ 0 ] === assert.headerName && pair[ 1 ] === assert.headerValue ) );
+        .find( pair => ( pair[ 0 ].toLowerCase() === assert.headerName.toLowerCase()
+          && pair[ 1 ] === assert.headerValue ) );
       return expectReturn( Boolean( pass ),
         `${ errIntro } to have header ${ assert.headerName }: ${ assert.headerValue }, but it does not` );
 

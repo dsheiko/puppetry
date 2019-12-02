@@ -1,5 +1,6 @@
 src/__tests__/**/*.js
 src/__e2e__/**/*.js
 src/vendor/**/*
-src/service/KatalonParser.js
+src/service/contentTypes.js
+src/service/statusCodes.js
 webpack.config.js

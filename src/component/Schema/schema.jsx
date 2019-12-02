@@ -36,6 +36,7 @@ import { assertPerformanceAssetCount } from "./Params/Page/assertPerformanceAsse
 import { assertPerformanceTiming } from "./Params/Page/assertPerformanceTiming";
 import { assertGaTracking } from "./Params/Page/assertGaTracking";
 import { assertResponse } from "./Params/Page/assertResponse";
+import { mockRequest } from "./Params/Page/mockRequest";
 
 import { screenshot as screenshotElement } from "./Params/Element/screenshot";
 import { assertProperty } from "./Params/Element/assertProperty";
@@ -125,6 +126,7 @@ export const schema = {
     reload,
     setUserAgent,
     setCookie,
+    mockRequest,
     waitFor,
     waitForSelector,
     waitForNavigation,

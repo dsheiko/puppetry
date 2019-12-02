@@ -1,4 +1,8 @@
 const UaBeacon = require( "../GaTracking/UaBeacon" );
+
+function atob( a ) {
+  return new Buffer( a, "base64" ).toString( "binary" );
+}
 /**
  * Extending Puppeteer
  *
@@ -198,6 +202,44 @@ module.exports = function( bs, util ) {
       .map( req => new UaBeacon( req.url ) )
       .map( beacon => beacon.toJSON() );
   };
+
+  /**
+     * @see https://medium.com/@jsoverson/using-chrome-devtools-protocol-with-puppeteer-737a1300bac0
+     */
+  bs.mockRequest = async ( url, status, contentType, newBody, headers ) => {
+
+    const session = await bs.page.target().createCDPSession(),
+          patterns = [ `*${ url }*` ];
+
+    await session.send( "Network.enable" );
+
+    await session.send( "Network.setRequestInterception", {
+      patterns: patterns.map( pattern => ({
+        urlPattern: pattern,
+        interceptionStage: "HeadersReceived"
+      }))
+    });
+
+    session.on( "Network.requestIntercepted", async ({ interceptionId, request, responseHeaders, resourceType }) => {
+
+      const newHeaders = [
+        "Date: " + ( new Date() ).toUTCString(),
+        "Connection: closed",
+        "Content-Length: " + newBody.length,
+        "Content-Type: " + contentType,
+        ...headers
+      ];
+
+      await session.send( "Network.continueInterceptedRequest", {
+        interceptionId,
+        rawResponse: btoa( `HTTP/1.1 ${ status }\r\n`
+          + newHeaders.join('\r\n') + '\r\n\r\n' + newBody )
+      });
+
+      session.detach();
+    });
+
+  },
 
   // assert preformance budget
   bs.performance = {

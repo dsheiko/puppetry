@@ -2,10 +2,12 @@
 
 ### Features
 - improvement: add page.waitForRequest
+- improvement: add page.mockRequest
 
 ### Bug fixes
 - fix: issue #48, incorrect selectors for querySelectorAll
 - fix: remove undefined in Template expression builder
+- fix: automatically adds --no-sandbox -disable-setuid-sandbox Chromium arguments when page.setUserAgent
 
 # Puppetry 3.0.0
 

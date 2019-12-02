@@ -1,0 +1,369 @@
+{
+  "title": "Chained Target",
+  "timeout": 50000,
+  "snippets": false,
+  "description": "",
+  "savedAt": 1575287400,
+  "loadedAt": 1575287408,
+  "modified": false,
+  "filename": "page.mockRequest.json",
+  "targets": {},
+  "groups": {
+    "k2vk2vvd4pi": {
+      "title": "page.mockRequest",
+      "id": "k2vk2vvd4pi",
+      "editing": false,
+      "key": "k2vk2vvd4pi",
+      "tests": {
+        "7vnk2vvpx9i": {
+          "editing": false,
+          "id": "7vnk2vvpx9i",
+          "key": "7vnk2vvpx9i",
+          "title": "Positive without headers",
+          "commands": {
+            "7vnk2vvpxmd": {
+              "editing": false,
+              "id": "7vnk2vvpxmd",
+              "key": "7vnk2vvpxmd",
+              "target": "page",
+              "method": "mockRequest",
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "7vnk2vvpx9i",
+              "waitForTarget": false,
+              "entity": "command",
+              "params": {
+                "url": "https://httpstat.us/404",
+                "statusCode": "200 OK",
+                "contentType": "application/json",
+                "body": "{ status: 1 }",
+                "headers": ""
+              },
+              "comment": ""
+            },
+            "c2sk3o9vrmf": {
+              "editing": false,
+              "id": "c2sk3o9vrmf",
+              "key": "c2sk3o9vrmf",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "equals",
+                "statusValue": 200,
+                "statusTextOperator": "equals",
+                "statusTextValue": "OK",
+                "textOperator": "contains",
+                "textValue": "status: 1",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://httpstat.us/404"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "7vnk2vvpx9i",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": ""
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
+        "dp4k3ocf2mu": {
+          "editing": false,
+          "id": "dp4k3ocf2mu",
+          "key": "dp4k3ocf2mu",
+          "title": "Negative without headers",
+          "commands": {
+            "dp4k3ocf2y1": {
+              "editing": false,
+              "id": "dp4k3ocf2y1",
+              "key": "dp4k3ocf2y1",
+              "target": "page",
+              "method": "mockRequest",
+              "params": {
+                "url": "https://httpstat.us/404",
+                "statusCode": "200 OK",
+                "contentType": "application/javascript",
+                "body": "OK",
+                "headers": ""
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "dp4k3ocf2mu",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": ""
+            },
+            "dp4k3ocf35b": {
+              "editing": false,
+              "id": "dp4k3ocf35b",
+              "key": "dp4k3ocf35b",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "equals",
+                "statusValue": 200,
+                "statusTextOperator": "any",
+                "textOperator": "equals",
+                "textValue": "FAIL",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://httpstat.us/404"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "dp4k3ocf2mu",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/404 with data to be \"FAIL\", but received data \"OK\""
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
+        "dp4k3ocfa3h": {
+          "editing": false,
+          "id": "dp4k3ocfa3h",
+          "key": "dp4k3ocfa3h",
+          "title": "Positive with headers",
+          "commands": {
+            "dp4k3ocfaas": {
+              "editing": false,
+              "id": "dp4k3ocfaas",
+              "key": "dp4k3ocfaas",
+              "target": "page",
+              "method": "mockRequest",
+              "params": {
+                "url": "https://httpstat.us/404",
+                "statusCode": "200 OK",
+                "contentType": "application/javascript",
+                "body": "OK",
+                "headers": "X-Access-Token: SECRET\nX-User-Agent: CUSTOM"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "dp4k3ocfa3h",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": ""
+            },
+            "dp4k3ocfagm": {
+              "editing": false,
+              "id": "dp4k3ocfagm",
+              "key": "dp4k3ocfagm",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "equals",
+                "statusValue": 200,
+                "statusTextOperator": "any",
+                "textOperator": "any",
+                "headerOperator": "specific",
+                "headerName": "X-Access-Token",
+                "headerValue": "SECRET"
+              },
+              "params": {
+                "url": "https://httpstat.us/404"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "dp4k3ocfa3h",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": ""
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
+        "effk3od60ew": {
+          "editing": false,
+          "id": "effk3od60ew",
+          "key": "effk3od60ew",
+          "title": "Negative with headers",
+          "commands": {
+            "effk3od60pf": {
+              "editing": false,
+              "id": "effk3od60pf",
+              "key": "effk3od60pf",
+              "target": "page",
+              "method": "mockRequest",
+              "assert": {},
+              "params": {
+                "url": "https://httpstat.us/404",
+                "statusCode": 200,
+                "contentType": "application/javascript",
+                "body": "OK",
+                "headers": "X-Access-Token: SECRET\nX-User-Agent: CUSTOM"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "effk3od60ew",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": ""
+            },
+            "effk3od60w6": {
+              "editing": false,
+              "id": "effk3od60w6",
+              "key": "effk3od60w6",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "equals",
+                "statusValue": 200,
+                "statusTextOperator": "any",
+                "textOperator": "any",
+                "headerOperator": "specific",
+                "headerName": "X-Access-Token",
+                "headerValue": "SOMETHING ELSE"
+              },
+              "params": {
+                "url": "https://httpstat.us/404"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "effk3od60ew",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/404 to have header X-Access-Token: SOMETHING ELSE, but it does not"
+            },
+            "effk3od79af": {
+              "editing": false,
+              "id": "effk3od79af",
+              "key": "effk3od79af",
+              "target": "page",
+              "method": "mockRequest",
+              "assert": {},
+              "params": {
+                "url": "https://httpstat.us/404",
+                "statusCode": 200,
+                "contentType": "application/javascript",
+                "body": "OK",
+                "headers": "X-Access-Token: SECRET\nX-User-Agent: CUSTOM"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "effk3od60ew",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": ""
+            },
+            "effk3od79k9": {
+              "editing": false,
+              "id": "effk3od79k9",
+              "key": "effk3od79k9",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "equals",
+                "statusValue": 200,
+                "statusTextOperator": "any",
+                "textOperator": "any",
+                "headerOperator": "specific",
+                "headerName": "SOMETHING ELSE",
+                "headerValue": "SOMETHING ELSE"
+              },
+              "params": {
+                "url": "https://httpstat.us/404"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "effk3od60ew",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/404 to have header SOMETHING ELSE: SOMETHING ELSE, but it does not"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        }
+      }
+    }
+  },
+  "puppetry": "3.0.1"
+}

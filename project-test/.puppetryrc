@@ -488,7 +488,7 @@
         },
         "7vnk2vvpx9i": {
           "key": "7vnk2vvpx9i",
-          "value": false
+          "value": true
         },
         "i1wk3kcgkxo": {
           "key": "i1wk3kcgkxo",
@@ -496,15 +496,27 @@
         },
         "icsk3kcmllh": {
           "key": "icsk3kcmllh",
-          "value": true
+          "value": false
         },
         "j4qk3kd1bo0": {
           "key": "j4qk3kd1bo0",
-          "value": true
+          "value": false
         },
         "kxjk3kemtzz": {
           "key": "kxjk3kemtzz",
+          "value": false
+        },
+        "dp4k3ocf2mu": {
+          "key": "dp4k3ocf2mu",
           "value": true
+        },
+        "dp4k3ocfa3h": {
+          "key": "dp4k3ocfa3h",
+          "value": true
+        },
+        "effk3od60ew": {
+          "key": "effk3od60ew",
+          "value": false
         }
       }
     },
@@ -531,9 +543,9 @@
       }
     }
   },
-  "savedAt": 1575048725,
+  "savedAt": 1575287417,
   "modified": false,
-  "lastOpenSuite": "page.assertReponse.json",
+  "lastOpenSuite": "page.mockRequest.json",
   "variables": {},
   "targets": {
     "js4k1ukyk9a": {
