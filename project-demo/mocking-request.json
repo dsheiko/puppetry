@@ -1,13 +1,21 @@
 {
-  "title": "Exhaustive Testing Example",
+  "title": "Boundary Value Testing Example",
   "timeout": 50000,
   "snippets": false,
   "description": null,
-  "savedAt": 1574415449,
-  "loadedAt": 1574415330,
+  "savedAt": 1575369350,
+  "loadedAt": 1575367583,
   "modified": false,
-  "filename": "sandbox-exhaustive.json",
-  "targets": {},
+  "filename": "mocking-request.json",
+  "targets": {
+    "kr4k3oltnrz": {
+      "target": "ALERT_BOX",
+      "id": "kr4k3oltnrz",
+      "editing": false,
+      "selector": "#alert",
+      "key": "kr4k3oltnrz"
+    }
+  },
   "groups": {
     "8fzk2g5fpkb": {
       "title": "Form",
@@ -28,14 +36,12 @@
               "key": "8fzk2g5g95f",
               "target": "page",
               "method": "setViewport",
+              "assert": {},
               "params": {
-                "width": "1440",
-                "height": "900",
-                "resolution": "1440x900",
-                "deviceScaleFactor": 1,
-                "isMobile": false,
-                "hasTouch": false,
-                "isLandscape": false
+                "width": "1920",
+                "height": "1080",
+                "resolution": "1920x1080",
+                "deviceScaleFactor": 1
               },
               "disabled": false,
               "failure": "",
@@ -73,12 +79,13 @@
               "waitForTarget": false,
               "entity": "command"
             },
-            "7rnk347fs73": {
+            "ft7k34bgi0u": {
               "editing": true,
-              "id": "7rnk347fs73",
-              "key": "7rnk347fs73",
+              "id": "ft7k34bgi0u",
+              "key": "ft7k34bgi0u",
               "target": "page",
               "method": "closeDialog",
+              "assert": {},
               "params": {
                 "type": "any",
                 "action": "dismiss"
@@ -93,42 +100,20 @@
               "groupId": "8fzk2g5fpkb",
               "testId": "8fzk2g5fxnj",
               "comment": "On submit the form calls Alert dialog with OK/FAIL, we shall close it",
-              "waitForTarget": false
-            },
-            "8fzk2g5m0pq": {
-              "editing": false,
-              "id": "8fzk2g5m0pq",
-              "key": "8fzk2g5m0pq",
-              "target": "",
-              "method": "",
-              "assert": {},
-              "params": {},
-              "disabled": false,
-              "failure": "",
-              "variables": {
-                "FIRST_NAME": "Latin script"
-              },
-              "expanded": false,
-              "refName": "Fill out the form",
-              "ref": "jotk2g4k9tw",
-              "isRef": true,
-              "groupId": "8fzk2g5fpkb",
-              "testId": "8fzk2g5fxnj",
-              "comment": "With Latin script",
+              "waitForTarget": false,
               "entity": "command"
             },
-            "7rnk347mwlh": {
+            "kr4k3olvrhn": {
               "editing": false,
-              "id": "7rnk347mwlh",
-              "key": "7rnk347mwlh",
+              "id": "kr4k3olvrhn",
+              "key": "kr4k3olvrhn",
               "target": "page",
-              "method": "assertDialog",
-              "assert": {
-                "not": "false",
-                "type": "alert",
-                "assertion": "haveString",
-                "value": "OK",
-                "reset": true
+              "method": "mockRequest",
+              "params": {
+                "url": "response.jso",
+                "statusCode": "500 Internal Server Error",
+                "contentType": "application/javascript",
+                "body": "{ \"status\": \"FAIL\" }"
               },
               "disabled": false,
               "failure": "",
@@ -139,12 +124,13 @@
               "isRef": false,
               "groupId": "8fzk2g5fpkb",
               "testId": "8fzk2g5fxnj",
-              "waitForTarget": false
+              "waitForTarget": false,
+              "comment": "We intercept the submit reuest to the server and replace it with errorred one"
             },
-            "8fzk2g5m5ie": {
+            "ft7k34bgia4": {
               "editing": false,
-              "id": "8fzk2g5m5ie",
-              "key": "8fzk2g5m5ie",
+              "id": "ft7k34bgia4",
+              "key": "ft7k34bgia4",
               "target": "",
               "method": "",
               "assert": {},
@@ -152,7 +138,7 @@
               "disabled": false,
               "failure": "",
               "variables": {
-                "FIRST_NAME": "αßÁáÀàÅåÄäæ"
+                "FIRST_NAME": "John"
               },
               "expanded": false,
               "refName": "Fill out the form",
@@ -160,21 +146,22 @@
               "isRef": true,
               "groupId": "8fzk2g5fpkb",
               "testId": "8fzk2g5fxnj",
-              "comment": "Non-Latin European script",
+              "comment": "Valid name",
               "entity": "command"
             },
-            "7rnk347mudz": {
+            "kr4k3om0f3g": {
               "editing": false,
-              "id": "7rnk347mudz",
-              "key": "7rnk347mudz",
-              "target": "page",
-              "method": "assertDialog",
+              "id": "kr4k3om0f3g",
+              "key": "kr4k3om0f3g",
+              "target": "ALERT_BOX",
+              "method": "assertVisible",
               "assert": {
-                "not": "false",
-                "type": "alert",
-                "assertion": "haveString",
-                "value": "OK",
-                "reset": true
+                "assertion": "visible",
+                "availability": "available",
+                "display": "not",
+                "visibility": "any",
+                "opacity": "any",
+                "isIntersecting": "any"
               },
               "disabled": false,
               "failure": "",
@@ -185,58 +172,13 @@
               "isRef": false,
               "groupId": "8fzk2g5fpkb",
               "testId": "8fzk2g5fxnj",
-              "waitForTarget": false
-            },
-            "8fzk2g5m7rt": {
-              "editing": false,
-              "id": "8fzk2g5m7rt",
-              "key": "8fzk2g5m7rt",
-              "target": "",
-              "method": "",
-              "assert": {},
-              "params": {},
-              "disabled": false,
-              "failure": "",
-              "variables": {
-                "FIRST_NAME": "⌚😀⏳☀️"
-              },
-              "expanded": false,
-              "refName": "Fill out the form",
-              "ref": "jotk2g4k9tw",
-              "isRef": true,
-              "groupId": "8fzk2g5fpkb",
-              "testId": "8fzk2g5fxnj",
-              "comment": "Basic_Emoji",
-              "entity": "command"
-            },
-            "7rnk347mnm7": {
-              "editing": false,
-              "id": "7rnk347mnm7",
-              "key": "7rnk347mnm7",
-              "target": "page",
-              "method": "assertDialog",
-              "assert": {
-                "not": "false",
-                "type": "alert",
-                "assertion": "haveString",
-                "value": "OK",
-                "reset": true
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "8fzk2g5fpkb",
-              "testId": "8fzk2g5fxnj",
-              "waitForTarget": false
+              "waitForTarget": false,
+              "comment": "When client receives non-200 status code from server it should show warning"
             }
           }
         }
       }
     }
   },
-  "puppetry": "3.0.0"
+  "puppetry": "3.0.1"
 }

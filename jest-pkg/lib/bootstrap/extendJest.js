@@ -380,7 +380,13 @@ module.exports = function( expect, util ) {
         // early exist, makes no sense to proceed
         return expectReturn( false, `${ errIntro }, but nothing intercepted` );
       }
-      let res;
+      let res, reqMethod = rsp.request().method().toUpperCase();
+
+      if ( assert.method && assert.method !== "any" && assert.method !== reqMethod ) {
+        return expectReturn( false, `${ errIntro } with method ${ assert.method }, `
+          + `but received ${ reqMethod }` );
+      }
+
       res = testResponse( "status", assert, () => rsp.status() );
       if ( res !== true && !res.exp ) {
         return expectReturn( res.exp,

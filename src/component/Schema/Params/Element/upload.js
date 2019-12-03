@@ -65,7 +65,7 @@ export const upload = {
         {
           name: "params.size",
           control: INPUT_NUMBER,
-          label: "File Size (ms)",
+          label: "File Size (Kb)",
           initialValue: 0,
           placeholder: ""
         },

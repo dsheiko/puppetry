@@ -11,6 +11,10 @@ function renderValue( verb, value ) {
 function renderConstraints( assert ) {
   const res = [];
 
+  if ( assert.method && assert.method !== "any" ) {
+    res.push( `method \`${ assert.method }\`` );
+  }
+
   if ( assert.statusOperator !== "any" ) {
     res.push( `status code ${ normalizeAssertionVerb( assert.statusOperator ) }`
       + `${ renderValue( assert.statusOperator, assert.statusValue ) }` );

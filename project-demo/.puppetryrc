@@ -72,11 +72,21 @@
           "value": true
         }
       }
+    },
+    "fgck3of2mj2": {
+      "key": "fgck3of2mj2",
+      "value": true,
+      "tests": {
+        "fgck3of2skv": {
+          "key": "fgck3of2skv",
+          "value": true
+        }
+      }
     }
   },
-  "savedAt": 1575027284,
+  "savedAt": 1575371086,
   "modified": false,
-  "lastOpenSuite": "todomvc.json",
+  "lastOpenSuite": "mocking-request.json",
   "variables": {
     "dduk2fx8tvf": {
       "name": "SANDBOX_BASEURL",

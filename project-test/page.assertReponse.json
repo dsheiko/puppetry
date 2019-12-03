@@ -3,9 +3,9 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1575048725,
-  "loadedAt": 1575284734,
-  "modified": true,
+  "savedAt": 1575370845,
+  "loadedAt": 1575370773,
+  "modified": false,
   "filename": "page.assertReponse.json",
   "targets": {},
   "groups": {
@@ -29,6 +29,7 @@
               "method": "assertResponse",
               "assert": {
                 "assertion": "response",
+                "method": "GET",
                 "statusOperator": "equals",
                 "statusValue": 500,
                 "statusTextOperator": "equals",
@@ -67,7 +68,7 @@
           "editing": false,
           "id": "i1wk3kcgkxo",
           "key": "i1wk3kcgkxo",
-          "title": "Status",
+          "title": "Method",
           "commands": {
             "i1wk3kcgl7r": {
               "editing": false,
@@ -77,43 +78,14 @@
               "method": "assertResponse",
               "assert": {
                 "assertion": "response",
-                "statusOperator": "equals",
-                "statusValue": 200,
+                "method": "GET",
+                "statusOperator": "any",
                 "statusTextOperator": "any",
                 "textOperator": "any",
                 "headerOperator": "any"
               },
               "params": {
                 "url": "https://httpstat.us/200"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "i1wk3kcgkxo",
-              "waitForTarget": false,
-              "entity": "command"
-            },
-            "i1wk3kcijcc": {
-              "editing": false,
-              "id": "i1wk3kcijcc",
-              "key": "i1wk3kcijcc",
-              "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "statusOperator": "equals",
-                "statusValue": 500,
-                "statusTextOperator": "any",
-                "textOperator": "any",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "https://httpstat.us/500"
               },
               "disabled": false,
               "failure": "",
@@ -135,6 +107,108 @@
               "method": "assertResponse",
               "assert": {
                 "assertion": "response",
+                "method": "DELETE",
+                "statusOperator": "any",
+                "statusTextOperator": "any",
+                "textOperator": "any",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://httpstat.us/200"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "i1wk3kcgkxo",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/200 with method DELETE, but received GET"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
+        "9oek3pqt10p": {
+          "editing": false,
+          "id": "9oek3pqt10p",
+          "key": "9oek3pqt10p",
+          "title": "Status",
+          "commands": {
+            "9oek3pqt1c4": {
+              "editing": false,
+              "id": "9oek3pqt1c4",
+              "key": "9oek3pqt1c4",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "equals",
+                "statusValue": 200,
+                "statusTextOperator": "any",
+                "textOperator": "any",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://httpstat.us/200"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "9oek3pqt10p",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "9oek3pqt1ih": {
+              "editing": false,
+              "id": "9oek3pqt1ih",
+              "key": "9oek3pqt1ih",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "equals",
+                "statusValue": 500,
+                "statusTextOperator": "any",
+                "textOperator": "any",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://httpstat.us/500"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "9oek3pqt10p",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "9oek3pqt1od": {
+              "editing": false,
+              "id": "9oek3pqt1od",
+              "key": "9oek3pqt1od",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
                 "statusOperator": "equals",
                 "statusValue": 500,
                 "statusTextOperator": "any",
@@ -152,7 +226,7 @@
               "ref": "",
               "isRef": false,
               "groupId": "k2vk2vvd4pi",
-              "testId": "i1wk3kcgkxo",
+              "testId": "9oek3pqt10p",
               "waitForTarget": false,
               "entity": "command",
               "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/200 with status code to be 500, but received code 200"

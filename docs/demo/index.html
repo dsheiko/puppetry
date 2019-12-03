@@ -58,6 +58,9 @@
         nav .brand-logo {
           padding-left: 16px;
         }
+        .is-hidden {
+          display: none !important;
+        }
       </style>
     </head>
 
@@ -155,6 +158,15 @@
         <br />
         <br />
         <h4 id="demo-form">Demo Form</h4>
+      </div>
+
+      <div class="row is-hidden" id="alert">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Could not submit the form</span>
+              <p>Oops, something went wrong.</p>
+            </div>
+          </div>
       </div>
 
       <form class="row" id="form" novalidate>
@@ -389,12 +401,24 @@
 
           });
 
+          function showAlert() {
+            document.querySelector( "#alert" ).classList.remove( "is-hidden" );
+          }
+          function hideAlert() {
+            document.querySelector( "#alert" ).classList.add( "is-hidden" );
+          }
+
           listen( "#form", "submit", function( el ){
             const msg = el.checkValidity() ? "OK" : "FAIL";
-            alert( msg );
-            console.info( msg );
+            hideAlert();
+            fetch( "./response.json" )
+              .then(function( rsp ){
+                rsp.status !== 200 && showAlert();
+                alert( msg );
+                console.info( msg );
+              })
+              .catch( showAlert );
           });
-
         });
       </script>
 
