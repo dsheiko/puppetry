@@ -1,8 +1,5 @@
 const UaBeacon = require( "../GaTracking/UaBeacon" );
 
-function atob( a ) {
-  return new Buffer( a, "base64" ).toString( "binary" );
-}
 /**
  * Extending Puppeteer
  *
@@ -12,6 +9,14 @@ function atob( a ) {
 module.exports = function( bs, util ) {
 
   const RES_TYPES = [ "Stylesheet", "Image", "Media", "Font", "Script", "XHR", "Fetch" ];
+
+  let lastMockSession = null;
+
+
+  function btoa( a ) {
+    return Buffer.from( a ).toString( "base64" );
+  }
+
 
   /**
    * @typedef {Target}
@@ -196,6 +201,24 @@ module.exports = function( bs, util ) {
     }
   };
 
+  bs.replaceRequest = async ( method, postData )  => {
+    await bs.page.setRequestInterception( true );
+    bs.page.once("request", interceptedRequest => {
+      if ( postData ) {
+        return interceptedRequest.continue({
+          method,
+          postData,
+          headers: {
+            ...interceptedRequest.headers(),
+            "X-Request-Method": method,
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+        });
+      }
+      interceptedRequest.continue();
+    });
+  },
+
   bs.getGaTracking = ()  => {
     return bs.performance.resources
       .filter( req => UaBeacon.validateUrl( req.url ) )
@@ -206,8 +229,10 @@ module.exports = function( bs, util ) {
   /**
      * @see https://medium.com/@jsoverson/using-chrome-devtools-protocol-with-puppeteer-737a1300bac0
      */
-  bs.mockRequest = async ( url, status, contentType, newBody, headers ) => {
-
+  bs.mockRequest = async ( url, method, status, contentType, newBody, headers ) => {
+    if ( lastMockSession ) {
+      lastMockSession.detach();
+    }
     const session = await bs.page.target().createCDPSession(),
           patterns = [ `*${ url }*` ];
 
@@ -220,7 +245,14 @@ module.exports = function( bs, util ) {
       }))
     });
 
+    lastMockSession = session;
+
     session.on( "Network.requestIntercepted", async ({ interceptionId, request, responseHeaders, resourceType }) => {
+
+      if ( ( method || "GET" ) !== request.method.toUpperCase() ) {
+        await session.send( "Network.continueInterceptedRequest", { interceptionId });
+        return;
+      }
 
       const newHeaders = [
         "Date: " + ( new Date() ).toUTCString(),

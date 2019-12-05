@@ -19,16 +19,17 @@ export const mockRequest = {
    * @returns {String}
    */
   template: ({ params, id }) => {
-    const { url, statusCode, contentType, body, headers } = params,
+    const { url, method, statusCode, contentType, body, headers } = params,
           parser = new ExpressionParser( id ),
           urlString = parser.stringify( url ),
+          me = JSON.stringify( method ),
           sc = JSON.stringify( statusCode ),
           ct = JSON.stringify( contentType ),
           bo = JSON.stringify( body ),
           he = typeof headers === "undefined" ? "[]" : JSON.stringify( headers
             .replace( /[\n\r]/, "\n" )
             .split( "\n" )
-            .filter( data => data.trim().length && data.includes( ":" ) )
+            .filter( data => data && data.trim().length && data.includes( ":" ) )
             .map( data => {
               const [ name, value ] = data.split( ":" );
               return `${ name.trim().toLowerCase() }: ${ value.trim() }`;
@@ -36,7 +37,7 @@ export const mockRequest = {
           );
     return `
       // Navigating to ${ url }
-      await bs.mockRequest( ${ urlString }, ${ sc }, ${ ct }, ${ bo }, ${ he } );
+      await bs.mockRequest( ${ urlString }, ${ me }, ${ sc }, ${ ct }, ${ bo }, ${ he } );
     `;
   },
 
@@ -46,11 +47,12 @@ NOTE: As soon as a matching request intercepted the session gets detached,
 meaning Puppetry stop listening for mocking. You have to set \`page.mockRequest\`
 before every request that you want to mock.`,
 
-  toLabel: ({ params }) => `(\`${ params.url }\` => \`${ params.statusCode }\`,`
+  toLabel: ({ params }) => `(\`${ params.method || "GET" } ${ params.url }\` => \`${ params.statusCode }\`,`
     + `\`${ params.contentType }\`, \`${ params.body }\`)`,
   commonly: "mock request",
 
-  toGherkin: ({ params }) => `Listen for the next request like \`*${ params.url }*\` to mock with `
+  toGherkin: ({ params }) => `Listen for the next request like `
+    + `\`${ params.method || "GET" } *${ params.url }*\` to mock with `
     + ` status \`${ params.statusCode }\`,`
     + ` content type \`${ params.contentType }\`, body \`${ params.body }\``,
 
@@ -71,6 +73,14 @@ before every request that you want to mock.`,
             required: true,
             message: `Field is required.`
           }]
+        },
+        {
+          name: "params.method",
+          inputStyle: { maxWidth: 200 },
+          control: SELECT,
+          label: "Request method",
+          initialValue: "GET",
+          options: [ "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH" ]
         }
       ]
     },

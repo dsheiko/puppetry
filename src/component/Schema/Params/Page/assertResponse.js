@@ -1,7 +1,7 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertResponse } from "../../Assert/AssertResponse";
 import { normalizeAssertionVerb } from "service/utils";
-import { INPUT } from "../../constants";
+import { INPUT, SELECT } from "../../constants";
 import ExpressionParser from "service/ExpressionParser";
 
 function renderValue( verb, value ) {
@@ -10,11 +10,7 @@ function renderValue( verb, value ) {
 
 function renderConstraints( assert ) {
   const res = [];
-
-  if ( assert.method && assert.method !== "any" ) {
-    res.push( `method \`${ assert.method }\`` );
-  }
-
+  
   if ( assert.statusOperator !== "any" ) {
     res.push( `status code ${ normalizeAssertionVerb( assert.statusOperator ) }`
       + `${ renderValue( assert.statusOperator, assert.statusValue ) }` );
@@ -39,20 +35,25 @@ export const assertResponse = {
 
   template: ( command ) => {
     const parser = new ExpressionParser( command.params.id ),
-          urlString = parser.stringify( command.params.url );
+          urlString = parser.stringify( command.params.url ),
+          intercept = ( command.params.method && command.params.method !== "GET" )
+            ? ( `bs.replaceRequest( ${ JSON.stringify( command.params.method ) },`
+              + ` ${ JSON.stringify( command.params.data ) } );` )
+            : ``;
 
-    return buildAssertionTpl(
-      `await bs.page.goto( ${ urlString }, { waitUntil: "networkidle0" } )`,
+    return buildAssertionTpl(`await bs.page.goto( ${ urlString }, { waitUntil: "networkidle0" } )`,
       command,
-      `// Asserts that the HTTP/S response satisfies the given constraint`
+      `// Asserts that the HTTP/S response satisfies the given constraint
+${ intercept }`
     );
   },
   description: `Asserts that the HTTP/S response satisfies the given constraint`,
   commonly: "assert HTTP/S response",
 
-  toLabel: ({ params, assert }) => `(\`${ params.url }\`, ${ renderConstraints( assert ) })`,
+  toLabel: ({ params, assert }) => `(\`${ params.method || "GET" } ${ params.url }\`,`
+    + ` ${ renderConstraints( assert ) })`,
 
-  toGherkin: ({ params, assert }) => `Assert that URL \`${ params.url }\` `
+  toGherkin: ({ params, assert }) => `Assert that request \`${ params.method || "GET" } ${ params.url }\` `
     + `responds with ${ renderConstraints( assert ) }`,
 
   assert: {
@@ -75,6 +76,21 @@ export const assertResponse = {
             required: true,
             message: `Field is required.`
           }]
+        },
+        {
+          name: "params.method",
+          inputStyle: { maxWidth: 200 },
+          control: SELECT,
+          label: "Request method",
+          initialValue: "GET",
+          options: [ "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH" ]
+        },
+        {
+          name: "params.data",
+          control: INPUT,
+          label: "POST data",
+          description: `As URL-encoded form (application/x-www-form-urlencoded)`,
+          placeholder: "paramFoo=value&paramBar=value"
         }
       ]
     }

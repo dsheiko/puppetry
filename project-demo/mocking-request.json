@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": null,
-  "savedAt": 1575369350,
-  "loadedAt": 1575367583,
+  "savedAt": 1575373578,
+  "loadedAt": 1575371085,
   "modified": false,
   "filename": "mocking-request.json",
   "targets": {
@@ -110,7 +110,7 @@
               "target": "page",
               "method": "mockRequest",
               "params": {
-                "url": "response.jso",
+                "url": "response.json",
                 "statusCode": "500 Internal Server Error",
                 "contentType": "application/javascript",
                 "body": "{ \"status\": \"FAIL\" }"
@@ -125,7 +125,7 @@
               "groupId": "8fzk2g5fpkb",
               "testId": "8fzk2g5fxnj",
               "waitForTarget": false,
-              "comment": "We intercept the submit reuest to the server and replace it with errorred one"
+              "comment": "We intercept the submit reuest to the server and replace it with errored one"
             },
             "ft7k34bgia4": {
               "editing": false,

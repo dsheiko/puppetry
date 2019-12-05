@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1575370845,
-  "loadedAt": 1575370773,
+  "savedAt": 1575466258,
+  "loadedAt": 1575465217,
   "modified": false,
   "filename": "page.assertReponse.json",
   "targets": {},
@@ -78,14 +78,17 @@
               "method": "assertResponse",
               "assert": {
                 "assertion": "response",
-                "method": "GET",
-                "statusOperator": "any",
+                "statusOperator": "equals",
+                "statusValue": 200,
                 "statusTextOperator": "any",
-                "textOperator": "any",
+                "textOperator": "contains",
+                "textValue": "\"foo\":\"FOO\"",
                 "headerOperator": "any"
               },
               "params": {
-                "url": "https://httpstat.us/200"
+                "url": "https://postman-echo.com/post",
+                "method": "POST",
+                "data": "foo=FOO&bar=BAR"
               },
               "disabled": false,
               "failure": "",
@@ -99,22 +102,89 @@
               "waitForTarget": false,
               "entity": "command"
             },
-            "i1wk3kci2xr": {
+            "mbqk3rb73yp": {
               "editing": false,
-              "id": "i1wk3kci2xr",
-              "key": "i1wk3kci2xr",
+              "id": "mbqk3rb73yp",
+              "key": "mbqk3rb73yp",
               "target": "page",
               "method": "assertResponse",
               "assert": {
                 "assertion": "response",
-                "method": "DELETE",
-                "statusOperator": "any",
+                "statusOperator": "equals",
+                "statusValue": 200,
                 "statusTextOperator": "any",
-                "textOperator": "any",
+                "textOperator": "contains",
+                "textValue": "\"foo\":\"FOO\"",
                 "headerOperator": "any"
               },
               "params": {
-                "url": "https://httpstat.us/200"
+                "url": "https://postman-echo.com/delete",
+                "method": "DELETE",
+                "data": "foo=FOO&bar=BAR"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "i1wk3kcgkxo",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "muhk3rbbxhx": {
+              "editing": false,
+              "id": "muhk3rbbxhx",
+              "key": "muhk3rbbxhx",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "equals",
+                "statusValue": 200,
+                "statusTextOperator": "any",
+                "textOperator": "contains",
+                "textValue": "\"foo\":\"FOO\"",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://postman-echo.com/put",
+                "method": "PUT",
+                "data": "foo=FOO&bar=BAR"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "i1wk3kcgkxo",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "muhk3rbcgrg": {
+              "editing": false,
+              "id": "muhk3rbcgrg",
+              "key": "muhk3rbcgrg",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "equals",
+                "statusValue": 200,
+                "statusTextOperator": "any",
+                "textOperator": "contains",
+                "textValue": "lorem impsum",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://postman-echo.com/put",
+                "method": "PUT",
+                "data": "foo=FOO&bar=BAR"
               },
               "disabled": false,
               "failure": "",
@@ -127,7 +197,7 @@
               "testId": "i1wk3kcgkxo",
               "waitForTarget": false,
               "entity": "command",
-              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/200 with method DELETE, but received GET"
+              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://postman-echo.com/put with data to contain \"lorem impsum\", but received data \"{\"args\":{},\"data\":\"\",\"files\":{},\"form\":{\"foo\":\"FOO\",\"bar\":\"BAR\"},\"headers\":{\"x-forwarded-proto\":\"htt...\""
             }
           },
           "disabled": false,
@@ -670,7 +740,8 @@
           "expanded": false,
           "adding": false,
           "groupId": "k2vk2vvd4pi",
-          "entity": "test"
+          "entity": "test",
+          "failure": ""
         },
         "kxjk3kemtzz": {
           "editing": false,
@@ -744,10 +815,11 @@
           "expanded": false,
           "adding": false,
           "groupId": "k2vk2vvd4pi",
-          "entity": "test"
+          "entity": "test",
+          "failure": ""
         }
       }
     }
   },
-  "puppetry": "3.0.1"
+  "puppetry": "3.0.0"
 }

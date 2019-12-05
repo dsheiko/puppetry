@@ -140,6 +140,9 @@
 <a id="opacity">opacity</a>
 <a id="not_opacity">NOT opacity</a>
 
+<a id="makePostRequest">Make POST Request</a>
+
+
 <ul id="list">
   <li>1</li>
   <li>2</li>
@@ -294,6 +297,20 @@
       window.reload();
     });
 
+    listen( "#makePostRequest", "click", function( el ){
+      fetch( "/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: JSON.stringify({ foo: "FOO" })
+      })
+      .then( rsp => {
+        console.log(rsp.status);
+        return rsp.text();
+      } )
+      .then( json => console.log( "Post response", json ) );
+    });
 
 
      document.addEventListener( "keydown", function( e ){

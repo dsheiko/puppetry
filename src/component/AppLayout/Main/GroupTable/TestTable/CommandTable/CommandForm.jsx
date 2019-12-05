@@ -14,7 +14,8 @@ import { result } from "service/utils";
 const FormItem = Form.Item,
       connectForm = Form.create(),
       { TextArea } = Input,
-      TEST_LEADING_METHODS = [ "emulate", "setViewport", "closeDialog", "goto", "assertPerformanceAssetWeight" ];
+      TEST_LEADING_METHODS = [ "emulate", "setViewport", "closeDialog", "goto",
+        "assertPerformanceAssetWeight", "assertResponse" ];
 
 @connectForm
 export class CommandForm extends React.Component {

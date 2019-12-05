@@ -80,43 +80,10 @@ export class AssertResponse extends AbstractComponent {
 
       <div className="command-form__noncollapsed markdown">
 
-        <Row gutter={24} className="narrow-row">
-
-          <Col span={4} >
-            <div className="ant-row ant-form-item ant-form-item--like-input">
-              Request method
-              { " " } <a
-                href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods"
-                onClick={ this.onExtClick }><Icon type="info-circle" /></a>
-            </div>
-          </Col>
-
-          <Col span={4} >
-            <FormItem className="is-shrinked">
-              { getFieldDecorator( "assert.method", {
-                initialValue: result( assert, "method", "any" )
-              })(
-                <Select>
-                  <Option value="any">any</Option>
-                  <Option value="GET">GET</Option>
-                  <Option value="HEAD">HEAD</Option>
-                  <Option value="POST">POST</Option>
-                  <Option value="PUT">PUT</Option>
-                  <Option value="DELETE">DELETE</Option>
-                  <Option value="CONNECT">CONNECT</Option>
-                  <Option value="OPTIONS">OPTIONS</Option>
-                  <Option value="TRACE">TRACE</Option>
-                  <Option value="PATCH">PATCH</Option>
-                </Select>
-              ) }
-            </FormItem>
-          </Col>
-
-        </Row>
 
         <Row gutter={24} className="narrow-row">
 
-          <Col span={4} >
+          <Col span={3} >
             <div className="ant-row ant-form-item ant-form-item--like-input">
               Status code
               { " " } <a
@@ -155,7 +122,7 @@ export class AssertResponse extends AbstractComponent {
 
         <Row gutter={24} className="narrow-row">
 
-          <Col span={4} >
+          <Col span={3} >
             <div className="ant-row ant-form-item ant-form-item--like-input">
               Status text
               { " " } <a
@@ -183,7 +150,7 @@ export class AssertResponse extends AbstractComponent {
 
         <Row gutter={24} className="narrow-row">
 
-          <Col span={4} >
+          <Col span={3} >
             <div className="ant-row ant-form-item ant-form-item--like-input">
               Data (text)
               { " " } <a
@@ -211,7 +178,7 @@ export class AssertResponse extends AbstractComponent {
 
         <Row gutter={24} className="narrow-row">
 
-          <Col span={4} >
+          <Col span={3} >
             <div className="ant-row ant-form-item ant-form-item--like-input">
               has header
               { " " } <a
@@ -236,7 +203,7 @@ export class AssertResponse extends AbstractComponent {
         </Row>
 
         { showInput( headerOperator ) ? <Row gutter={24} className="narrow-row">
-          <Col span={4} >
+          <Col span={3} >
           </Col>
           <Col span={12} >
             <FormItem { ...layout } label="with name">

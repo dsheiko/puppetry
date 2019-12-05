@@ -3,11 +3,19 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1575287400,
-  "loadedAt": 1575287408,
+  "savedAt": 1575539199,
+  "loadedAt": 1575535259,
   "modified": false,
   "filename": "page.mockRequest.json",
-  "targets": {},
+  "targets": {
+    "ms3k3sh0itg": {
+      "target": "MAKE_POST_REQUEST_LINK",
+      "id": "ms3k3sh0itg",
+      "editing": false,
+      "selector": "#makePostRequest",
+      "key": "ms3k3sh0itg"
+    }
+  },
   "groups": {
     "k2vk2vvd4pi": {
       "title": "page.mockRequest",
@@ -19,8 +27,30 @@
           "editing": false,
           "id": "7vnk2vvpx9i",
           "key": "7vnk2vvpx9i",
-          "title": "Positive without headers",
+          "title": "Methods match - replace original request",
           "commands": {
+            "ms3k3sjajbz": {
+              "editing": false,
+              "id": "ms3k3sjajbz",
+              "key": "ms3k3sjajbz",
+              "target": "page",
+              "method": "goto",
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "7vnk2vvpx9i",
+              "waitForTarget": false
+            },
             "7vnk2vvpxmd": {
               "editing": false,
               "id": "7vnk2vvpxmd",
@@ -39,18 +69,169 @@
               "waitForTarget": false,
               "entity": "command",
               "params": {
+                "url": "http://127.0.0.1:8080",
+                "method": "PUT",
+                "statusCode": "200 OK",
+                "contentType": "application/json",
+                "body": "Lorem ipsum",
+                "headers": ""
+              },
+              "comment": ""
+            },
+            "ms3k3sjauko": {
+              "editing": false,
+              "id": "ms3k3sjauko",
+              "key": "ms3k3sjauko",
+              "target": "MAKE_POST_REQUEST_LINK",
+              "method": "click",
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "7vnk2vvpx9i",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
+        "ms3k3sj9sxj": {
+          "editing": true,
+          "id": "ms3k3sj9sxj",
+          "key": "ms3k3sj9sxj",
+          "title": "",
+          "commands": {},
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi"
+        },
+        "nhqk3rdi2qf": {
+          "editing": false,
+          "id": "nhqk3rdi2qf",
+          "key": "nhqk3rdi2qf",
+          "title": "Methods dismatch - leave original request untouched",
+          "commands": {
+            "nhqk3rdi3cy": {
+              "editing": false,
+              "id": "nhqk3rdi3cy",
+              "key": "nhqk3rdi3cy",
+              "target": "page",
+              "method": "mockRequest",
+              "assert": {},
+              "params": {
+                "url": "https://postman-echo.com/post",
+                "method": "GET",
+                "statusCode": "200 OK",
+                "contentType": "application/json",
+                "body": "Lorem ipsum",
+                "headers": ""
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "nhqk3rdi2qf",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": ""
+            },
+            "nhqk3rdi3k2": {
+              "editing": false,
+              "id": "nhqk3rdi3k2",
+              "key": "nhqk3rdi3k2",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "statusOperator": "equals",
+                "statusValue": 200,
+                "statusTextOperator": "equals",
+                "statusTextValue": "OK",
+                "textOperator": "!equals",
+                "headerOperator": "any",
+                "textValue": "Lorem ipsum"
+              },
+              "params": {
+                "url": "https://postman-echo.com/post",
+                "method": "POST",
+                "data": "foo=FOO"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "nhqk3rdi2qf",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": ""
+            }
+          },
+          "disabled": true,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
+        "nhqk3rcutp5": {
+          "editing": false,
+          "id": "nhqk3rcutp5",
+          "key": "nhqk3rcutp5",
+          "title": "Positive without headers",
+          "commands": {
+            "nhqk3rcuu31": {
+              "editing": false,
+              "id": "nhqk3rcuu31",
+              "key": "nhqk3rcuu31",
+              "target": "page",
+              "method": "mockRequest",
+              "assert": {},
+              "params": {
                 "url": "https://httpstat.us/404",
                 "statusCode": "200 OK",
                 "contentType": "application/json",
                 "body": "{ status: 1 }",
                 "headers": ""
               },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "nhqk3rcutp5",
+              "waitForTarget": false,
+              "entity": "command",
               "comment": ""
             },
-            "c2sk3o9vrmf": {
+            "nhqk3rcuu9v": {
               "editing": false,
-              "id": "c2sk3o9vrmf",
-              "key": "c2sk3o9vrmf",
+              "id": "nhqk3rcuu9v",
+              "key": "nhqk3rcuu9v",
               "target": "page",
               "method": "assertResponse",
               "assert": {
@@ -74,13 +255,13 @@
               "ref": "",
               "isRef": false,
               "groupId": "k2vk2vvd4pi",
-              "testId": "7vnk2vvpx9i",
+              "testId": "nhqk3rcutp5",
               "waitForTarget": false,
               "entity": "command",
               "comment": ""
             }
           },
-          "disabled": false,
+          "disabled": true,
           "expanded": false,
           "adding": false,
           "groupId": "k2vk2vvd4pi",
@@ -151,7 +332,7 @@
               "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/404 with data to be \"FAIL\", but received data \"OK\""
             }
           },
-          "disabled": false,
+          "disabled": true,
           "expanded": false,
           "adding": false,
           "groupId": "k2vk2vvd4pi",
@@ -223,7 +404,7 @@
               "comment": ""
             }
           },
-          "disabled": false,
+          "disabled": true,
           "expanded": false,
           "adding": false,
           "groupId": "k2vk2vvd4pi",
@@ -355,7 +536,7 @@
               "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/404 to have header SOMETHING ELSE: SOMETHING ELSE, but it does not"
             }
           },
-          "disabled": false,
+          "disabled": true,
           "expanded": false,
           "adding": false,
           "groupId": "k2vk2vvd4pi",
@@ -365,5 +546,5 @@
       }
     }
   },
-  "puppetry": "3.0.1"
+  "puppetry": "3.0.0"
 }
