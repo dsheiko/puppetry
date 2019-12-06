@@ -126,8 +126,9 @@ describe( ${ JSON.stringify( title ) }, () => {
     bs.page.on( "console", ( message ) => consoleLog.push( message ) );
     bs.page.on( "dialog", ( dialog ) => dialogLog.push( dialog ) );
 
+    ${ options.requireNetworkTraffic ? `bs.network.watchTraffic();` : `` }
     ${ options.requireInterceptTraffic ? `bs.performance.watchTraffic();` : `` }
-    
+
     ${ options.interactiveMode ? `
     let stepIndex = 0;
     await bs.page.exposeFunction('setPuppetryStepIndex', index => {

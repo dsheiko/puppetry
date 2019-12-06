@@ -80,7 +80,7 @@ export class SnippetVariables extends AbstractForm {
     return ( <ErrorBoundary>
 
       <Collapse>
-        <Panel header="Local Template Variables (optional)" key="1">
+        <Panel header="Local Template Variables" key="1">
           <p>You can assign variables that will be available as
             { "" }<a href="https://docs.puppetry.app/template" onClick={ this.onExtClick }>
               { "" } template expressions</a>{ "" } in the snippet</p>
@@ -134,6 +134,20 @@ export class SnippetVariables extends AbstractForm {
             </Row>
             <Table columns={ this.columns } dataSource={ variables } pagination={{ pageSize: 3 }} />
           </Form>
+        </Panel>
+        <Panel header="Repeat" key="2">
+        <Form>
+            <Form.Item label="For every element matching selector">
+              { getFieldDecorator( "css", {
+                rules: [
+                  {
+                    required: true,
+                    message: `Field is required.`
+                  }
+                ]
+              })( <Input placeholder=".main ul li"  /> )}
+            </Form.Item>
+        </Form>
         </Panel>
       </Collapse>
 

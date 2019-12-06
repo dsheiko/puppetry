@@ -30,6 +30,7 @@ import { GitCheckoutModal } from "./Modal/GitCheckoutModal";
 import { GitCloneModal } from "./Modal/GitCloneModal";
 import { EditProjectModal } from "./Modal/EditProjectModal";
 import { EditEnvironmentsModal } from "./Modal/EditEnvironmentsModal";
+import { GroupOptionsModal } from "./Modal/GroupOptionsModal";
 import { AppLightbox } from "./Modal/AppLightbox";
 import { connect } from "react-redux";
 import * as selectors from "selector/selectors";
@@ -68,7 +69,7 @@ export class AppLayout extends React.Component {
   render() {
     const { action, store, selector, cleanSnippets } = this.props,
           { projectDirectory, exportDirectory } = store.settings,
-          { commandModal, snippetModal, tabs } = store.app,
+          { commandModal, groupOptionsModal, snippetModal, tabs } = store.app,
           tabsAnyTrue = Object.keys( tabs.available ).some( key => tabs.available[ key ]);
 
     return (
@@ -224,6 +225,11 @@ export class AppLayout extends React.Component {
           environment={ store.app.environment }
           readyToRunTests={ store.app.readyToRunTests }
           isVisible={ store.app.exportProjectModal } />
+
+       <GroupOptionsModal
+          isVisible={ groupOptionsModal.isVisible }
+          action={ action }
+          record={ null } />
 
         <CommandModal
           isVisible={ commandModal.isVisible }

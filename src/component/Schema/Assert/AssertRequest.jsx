@@ -1,4 +1,3 @@
-
 /*eslint react/no-unescaped-entities: 0*/
 import React from "react";
 import PropTypes from "prop-types";
@@ -33,7 +32,7 @@ function renderOperator( assert, name, getFieldDecorator, onSelect ) {
   </FormItem> );
 }
 
-export class AssertResponse extends AbstractComponent {
+export class AssertRequest extends AbstractComponent {
 
   static propTypes = {
     record: PropTypes.object.isRequired,
@@ -75,102 +74,46 @@ export class AssertResponse extends AbstractComponent {
       <div className="is-invisible">
         <FormItem >
           { getFieldDecorator( "assert.assertion", {
-            initialValue: "response"
+            initialValue: "request"
           })( <Input readOnly disabled /> ) }
         </FormItem>
       </div>
 
-
       <div className="command-form__noncollapsed markdown">
 
-         <Row gutter={24} className="narrow-row">
-            <Col span={ 4 /*1st*/ }>
-            <div className="ant-row ant-form-item ant-form-item--like-input">
-              Assert there
-            </div>
-            </Col>
-            <Col span={4}>
-              <FormItem>
-                { getFieldDecorator( "assert.not", {
-                  initialValue: result( assert, "not", "false" ),
-                  rules: [{
-                    required: true
-                  }]
-                })( <Select showSearch
-                  optionFilterProp="children">
-                  <Option value="false">were</Option>
-                  <Option value="true">were NO</Option>
-                </Select> ) }
-              </FormItem>
-            </Col>
-            <Col span={16} >
-            <div className="ant-row ant-form-item ant-form-item--like-input" style={{ "text-align": "left" }}>
-              requests like the following
-            </div>
-            </Col>
-          </Row>
-
-          <Row gutter={24} className="narrow-row">
-
-          <Col span={ 4 /*1st*/ } >
-            <div className="ant-row ant-form-item ant-form-item--like-input">
-              Request URL like
-            </div>
-          </Col>
-
-          <Col span={12} >
-            <FormItem>
-              { getFieldDecorator( "assert.url", {
-                initialValue:  result( assert, "url", "" )
-              })(
-                <Input onPressEnter={ ( e ) => this.props.onPressEnter( e ) } />
-              ) }
-            </FormItem>
-          </Col>
-
-        </Row>
 
         <Row gutter={24} className="narrow-row">
 
-          <Col span={ 4 /*1st*/ } >
+          <Col span={3} >
             <div className="ant-row ant-form-item ant-form-item--like-input">
-              Request method
-            </div>
-          </Col>
-
-          <Col span={4} >
-            <FormItem className="is-shrinked">
-              { getFieldDecorator( "assert.method", {
-                initialValue: result( assert, "method", "GET" )
-              })(
-                <Select>
-                { [ "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH" ]
-                  .map( val => ( <Option key={ val } value={ val }>{ val }</Option> ))}
-                </Select>
-              ) }
-            </FormItem>
-          </Col>
-
-        </Row>
-
-
-        <Row gutter={24} className="narrow-row">
-
-          <Col span={ 4 /*1st*/ } >
-            <div className="ant-row ant-form-item ant-form-item--like-input">
-              Response status
+              Status code
               { " " } <a
                 href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status"
                 onClick={ this.onExtClick }><Icon type="info-circle" /></a>
             </div>
           </Col>
 
-          <Col span={6} >
+          <Col span={4} >
             <FormItem className="is-shrinked">
-              { getFieldDecorator( "assert.status", {
-                initialValue: result( assert, "status", "any" )
+              { getFieldDecorator( "assert.statusOperator", {
+                initialValue: result( assert, "statusOperator", "any" )
               })(
-                <Select { ...SELECT_SEARCH_PROPS } >
+                <Select onSelect={ ( val ) => this.onSelect( "statusOperator", val ) }>
+                  <Option value="any">any</Option>
+                  <Option value="equals">equals</Option>
+                  <Option value="!equals">does not equal</Option>
+                </Select>
+              ) }
+            </FormItem>
+          </Col>
+
+
+          <Col span={6} >
+            { showInput( statusOperator ) ? <FormItem className="is-shrinked">
+              { getFieldDecorator( "assert.statusValue", {
+                initialValue:  result( assert, "statusValue", "" )
+              })(
+                <Select { ...SELECT_SEARCH_PROPS }>
                   <Option value="">any</Option>
                    {
                     statusCodes.map( val => {
@@ -180,10 +123,87 @@ export class AssertResponse extends AbstractComponent {
                   }
                 </Select>
               ) }
+            </FormItem> : null }
+          </Col>
+
+        </Row>
+
+
+        <Row gutter={24} className="narrow-row">
+
+          <Col span={3} >
+            <div className="ant-row ant-form-item ant-form-item--like-input">
+              Data (text)
+              { " " } <a
+                href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseText"
+                onClick={ this.onExtClick }><Icon type="info-circle" /></a>
+            </div>
+          </Col>
+
+          <Col span={4} >
+            {  renderOperator( assert, "textOperator", getFieldDecorator, this.onSelect ) }
+          </Col>
+
+
+          <Col span={12} >
+            { showInput( textOperator ) ? <FormItem>
+              { getFieldDecorator( "assert.textValue", {
+                initialValue:  result( assert, "textValue", "" )
+              })(
+                <Input onPressEnter={ ( e ) => this.props.onPressEnter( e ) } />
+              ) }
+            </FormItem> : null }
+          </Col>
+
+        </Row>
+
+        <Row gutter={24} className="narrow-row">
+
+          <Col span={3} >
+            <div className="ant-row ant-form-item ant-form-item--like-input">
+              has header
+              { " " } <a
+                href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers"
+                onClick={ this.onExtClick }><Icon type="info-circle" /></a>
+            </div>
+          </Col>
+
+          <Col span={4} >
+            <FormItem className="is-shrinked">
+              { getFieldDecorator( "assert.headerOperator", {
+                initialValue: result( assert, "headerOperator", "any" )
+              })(
+                <Select onSelect={ ( val ) => this.onSelect( "headerOperator", val ) }>
+                  <Option value="any">any</Option>
+                  <Option value="specific">specific</Option>
+                </Select>
+              ) }
             </FormItem>
           </Col>
 
         </Row>
+
+        { showInput( headerOperator ) ? <Row gutter={24} className="narrow-row">
+          <Col span={3} >
+          </Col>
+          <Col span={12} >
+            <FormItem { ...layout } label="with name">
+              { getFieldDecorator( "assert.headerName", {
+                initialValue: result( assert, "headerName", "" )
+              })(
+                <Input onPressEnter={ ( e ) => this.props.onPressEnter( e ) } />
+              ) }
+            </FormItem>
+            <FormItem { ...layout } label="with value">
+              { getFieldDecorator( "assert.headerValue", {
+                initialValue: result( assert, "headerValue", "" )
+              })(
+                <Input onPressEnter={ ( e ) => this.props.onPressEnter( e ) } />
+              ) }
+            </FormItem>
+          </Col>
+        </Row> : null }
+
 
       </div>
 

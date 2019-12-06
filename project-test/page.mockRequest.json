@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1575539199,
-  "loadedAt": 1575535259,
+  "savedAt": 1575556138,
+  "loadedAt": 1575556092,
   "modified": false,
   "filename": "page.mockRequest.json",
   "targets": {
@@ -99,6 +99,35 @@
               "groupId": "k2vk2vvd4pi",
               "testId": "7vnk2vvpx9i",
               "waitForTarget": false
+            },
+            "1thk3snata1": {
+              "editing": false,
+              "id": "1thk3snata1",
+              "key": "1thk3snata1",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "request",
+                "not": "false",
+                "url": "http://127.0.0.1:8080",
+                "method": "GET",
+                "status": "200",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "http://127.0.0.1:8080",
+                "method": "POST"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "7vnk2vvpx9i",
+              "waitForTarget": false
             }
           },
           "disabled": false,
@@ -158,9 +187,9 @@
               "id": "nhqk3rdi3k2",
               "key": "nhqk3rdi3k2",
               "target": "page",
-              "method": "assertResponse",
+              "method": "assertRequest",
               "assert": {
-                "assertion": "response",
+                "assertion": "request",
                 "statusOperator": "equals",
                 "statusValue": 200,
                 "statusTextOperator": "equals",
@@ -233,9 +262,9 @@
               "id": "nhqk3rcuu9v",
               "key": "nhqk3rcuu9v",
               "target": "page",
-              "method": "assertResponse",
+              "method": "assertRequest",
               "assert": {
-                "assertion": "response",
+                "assertion": "request",
                 "statusOperator": "equals",
                 "statusValue": 200,
                 "statusTextOperator": "equals",
@@ -305,9 +334,9 @@
               "id": "dp4k3ocf35b",
               "key": "dp4k3ocf35b",
               "target": "page",
-              "method": "assertResponse",
+              "method": "assertRequest",
               "assert": {
-                "assertion": "response",
+                "assertion": "request",
                 "statusOperator": "equals",
                 "statusValue": 200,
                 "statusTextOperator": "any",
@@ -329,7 +358,7 @@
               "testId": "dp4k3ocf2mu",
               "waitForTarget": false,
               "entity": "command",
-              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/404 with data to be \"FAIL\", but received data \"OK\""
+              "comment": "@assert [page.assertRequest] expected HTTP/S response matching https://httpstat.us/404 with data to be \"FAIL\", but received data \"OK\""
             }
           },
           "disabled": true,
@@ -376,9 +405,9 @@
               "id": "dp4k3ocfagm",
               "key": "dp4k3ocfagm",
               "target": "page",
-              "method": "assertResponse",
+              "method": "assertRequest",
               "assert": {
-                "assertion": "response",
+                "assertion": "request",
                 "statusOperator": "equals",
                 "statusValue": 200,
                 "statusTextOperator": "any",
@@ -449,9 +478,9 @@
               "id": "effk3od60w6",
               "key": "effk3od60w6",
               "target": "page",
-              "method": "assertResponse",
+              "method": "assertRequest",
               "assert": {
-                "assertion": "response",
+                "assertion": "request",
                 "statusOperator": "equals",
                 "statusValue": 200,
                 "statusTextOperator": "any",
@@ -474,7 +503,7 @@
               "testId": "effk3od60ew",
               "waitForTarget": false,
               "entity": "command",
-              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/404 to have header X-Access-Token: SOMETHING ELSE, but it does not"
+              "comment": "@assert [page.assertRequest] expected HTTP/S response matching https://httpstat.us/404 to have header X-Access-Token: SOMETHING ELSE, but it does not"
             },
             "effk3od79af": {
               "editing": false,
@@ -508,9 +537,9 @@
               "id": "effk3od79k9",
               "key": "effk3od79k9",
               "target": "page",
-              "method": "assertResponse",
+              "method": "assertRequest",
               "assert": {
-                "assertion": "response",
+                "assertion": "request",
                 "statusOperator": "equals",
                 "statusValue": 200,
                 "statusTextOperator": "any",
@@ -533,7 +562,7 @@
               "testId": "effk3od60ew",
               "waitForTarget": false,
               "entity": "command",
-              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/404 to have header SOMETHING ELSE: SOMETHING ELSE, but it does not"
+              "comment": "@assert [page.assertRequest] expected HTTP/S response matching https://httpstat.us/404 to have header SOMETHING ELSE: SOMETHING ELSE, but it does not"
             }
           },
           "disabled": true,

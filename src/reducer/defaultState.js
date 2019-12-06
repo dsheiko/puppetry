@@ -56,6 +56,11 @@ export default {
       images: []
     },
 
+    groupOptionsModal: {
+      isVisible: false,
+      record: null
+    },
+
     commandModal: {
       isVisible: false,
       record: null,

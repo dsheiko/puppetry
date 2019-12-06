@@ -4,9 +4,9 @@
   "snippets": false,
   "description": "",
   "savedAt": 1574680746,
-  "loadedAt": 1574680432,
-  "modified": false,
-  "filename": "sandbox-rwd.json",
+  "loadedAt": 1575625475,
+  "modified": true,
+  "filename": "testing-RWD.json",
   "targets": {
     "jotk2g321qf": {
       "editing": false,
@@ -38,7 +38,7 @@
     "dduk2fx837q": {
       "title": "Sandbox RWD",
       "id": "dduk2fx837q",
-      "editing": false,
+      "editing": true,
       "key": "dduk2fx837q",
       "tests": {
         "dduk2fx8bwf": {

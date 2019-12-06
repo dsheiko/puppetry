@@ -35,6 +35,7 @@ import { assertPerformanceAssetWeight } from "./Params/Page/assertPerformanceAss
 import { assertPerformanceAssetCount } from "./Params/Page/assertPerformanceAssetCount";
 import { assertPerformanceTiming } from "./Params/Page/assertPerformanceTiming";
 import { assertGaTracking } from "./Params/Page/assertGaTracking";
+import { assertRequest } from "./Params/Page/assertRequest";
 import { assertResponse } from "./Params/Page/assertResponse";
 import { mockRequest } from "./Params/Page/mockRequest";
 
@@ -145,6 +146,7 @@ export const schema = {
     assertScroll: assertScrollPage,
     assertVar,
     assertScreenshot: assertScreenshotPage,
+    assertRequest,
     assertResponse,
     assertConsoleMessage,
     assertDialog,

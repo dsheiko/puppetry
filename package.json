@@ -29,7 +29,7 @@
     "dist:m": "electron-builder -m -c.mac.identity=null",
     "dist:all": "electron-builder -mwl -c.mac.identity=null",
     "dist": "electron-builder --linux snap",
-    "start:project-test": "http-server -s0 ./project-test",
+    "start:project-test": "node ./project-test/server.js",
     "start": "cross-env ELECTRON_ENV=dev electron .",
     "start:prod": "cross-env ELECTRON_ENV=production electron .",
     "start:clean": "cross-env ELECTRON_ENV=dev PUPPETRY_CLEAN_START=true electron .",

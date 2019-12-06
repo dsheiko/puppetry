@@ -365,6 +365,31 @@ module.exports = function( expect, util ) {
           + ` ${ val }, but found ${ assets.length  }` );
     },
 
+    /**
+     *
+     * @param {Response[]} responses
+     * @param {Object} assert
+     * @param {String} source
+     * @returns {Object}
+     */
+    toMatchResponse( responses, assert, source ) {
+      const matches = responses.filter( rsp => {
+        return rsp.url().includes( assert.url )
+          && ( assert.method === "any" || rsp.request().method().toUpperCase() === assert.method )
+          && ( assert.status && parseInt( rsp.status(), 10 ) === parseInt( assert.status, 10 ) );
+      });
+
+      if ( assert.not === "true" ) {
+        return expectReturn( Boolean( !matches.length ), `[${ source }] expected NO HTTP/S `
+          + `responses matching ${ assert.method } *${ assert.url }*`
+          + ` with status code ${ assert.status }, but found ${ matches.length }` );
+      }
+      return expectReturn( Boolean( matches.length ), `[${ source }] expected any HTTP/S `
+        + `responses matching ${ assert.method } *${ assert.url }*`
+        + ` with status code ${ assert.status }, but found none` );
+
+    },
+
       /**
      *
      * @param {Response} rsp
@@ -373,7 +398,7 @@ module.exports = function( expect, util ) {
      * @param {String} source
      * @returns {Object}
      */
-    toMatchResponse( rsp, url, assert, source ) {
+    toMatchRequest( rsp, url, assert, source ) {
       const errIntro = `[${ source }] expected HTTP/S response matching ${ url }`,
             RE = /\"/g;
       if ( !rsp ) {
@@ -388,11 +413,7 @@ module.exports = function( expect, util ) {
           `${ errIntro } with status code ${ res.expected.replace( RE, "" ) },`
           + ` but received code ${ res.actual.replace( RE, "" ) }` );
       }
-      res = testResponse( "statusText", assert, () => rsp.statusText() );
-      if ( res !== true && !res.exp ) {
-        return expectReturn( res.exp,
-          `${ errIntro } with status text ${ res.expected }, but received text ${ res.actual }` );
-      }
+
       res = testResponse( "text", assert, () => rsp.data );
       if ( res !== true && !res.exp ) {
         return expectReturn( res.exp,

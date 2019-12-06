@@ -4,7 +4,7 @@ import AbstractEditableTable from "./AbstractEditableTable";
 import { connectDnD } from "./DragableRow";
 import ErrorBoundary from "component/ErrorBoundary";
 import { TestTable } from "./GroupTable/TestTable";
-import { EditableCell } from "./EditableCell";
+import { GroupCell } from "./EditableCell/GroupCell";
 import { ipcRenderer } from "electron";
 import { confirmRecording } from "service/smalltalk";
 import { E_DELEGATE_RECORDER_SESSION, E_OPEN_RECORDER_WINDOW } from "constant";
@@ -23,7 +23,7 @@ export class GroupTable extends AbstractEditableTable {
         render: ( text, record ) => {
           const ref = this.registerRef( record.id, "title" );
           return (
-            <EditableCell
+            <GroupCell
               ref={ ref }
               prefixIcon={ recordPrefIcon }
               record={ record }
@@ -31,6 +31,7 @@ export class GroupTable extends AbstractEditableTable {
               className="input--title"
               dataIndex="title"
               placeholder="Enter a group name"
+              action={ this.props.action }
               model={ this.model }
               updateRecord={ this.updateRecord }
             />

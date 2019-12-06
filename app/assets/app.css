@@ -1486,3 +1486,23 @@ summary:hover {
   margin-top: -8px;
   margin-bottom: 8px;
 }
+
+
+/*
+group rows have options and therefore cannot be centered
+*/
+.ant-table-tbody > tr.model--group > td {
+  vertical-align: top;
+}
+
+.ant-table-tbody > tr.model--group > td.ant-table-row-expand-icon-cell {
+  padding-top: 26px;
+}
+
+.ant-table-tbody > tr.model--group > td .table-actions {
+  margin-top: 8px;
+}
+
+.modal--instant.modal--instant-group-options .ant-modal-wrap .ant-modal {
+  width: 70%;
+}

@@ -4,11 +4,15 @@ const http = require( "http" ),
       { join, extname } = require( "path" ),
       CT_MAP = {
         ".html": "text/html",
-        ".js": "text/javascript"
+        ".js": "text/javascript",
+        ".json": "application/json"
       };
 
 function renderJson( res, data ) {
-  res.writeHead( 200, { "Content-Type": "application/json" });
+  res.writeHead( 200, {
+    "Content-Type": "application/json",
+    "x-powered-by": "Puppetry"
+  });
   res.end( JSON.stringify( data, null, 2 ) );
 }
 

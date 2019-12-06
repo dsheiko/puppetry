@@ -273,6 +273,21 @@ module.exports = function( bs, util ) {
 
   },
 
+  bs.network = {
+    responses: [],
+
+    reset: () => {
+      bs.network.responses = [];
+    },
+
+    async watchTraffic() {
+      bs.network.reset();
+      bs.page.on( "response", rsp => {
+        bs.network.responses.push( rsp );
+      });
+    }
+  },
+
   // assert preformance budget
   bs.performance = {
     responses: {},
@@ -289,6 +304,8 @@ module.exports = function( bs, util ) {
 
       const session = await bs.page.target().createCDPSession();
       await session.send( "Network.enable" );
+
+      bs.performance.reset();
 
       // map responses
       session.on( "Network.responseReceived", ({ requestId, response, type }) => {
