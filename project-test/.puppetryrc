@@ -508,19 +508,55 @@
         },
         "dp4k3ocf2mu": {
           "key": "dp4k3ocf2mu",
-          "value": false
+          "value": true
         },
         "dp4k3ocfa3h": {
           "key": "dp4k3ocfa3h",
-          "value": false
+          "value": true
         },
         "effk3od60ew": {
           "key": "effk3od60ew",
-          "value": false
+          "value": true
         },
         "nhqk3rdi2qf": {
           "key": "nhqk3rdi2qf",
+          "value": true
+        },
+        "5t1k3sunxxf": {
+          "key": "5t1k3sunxxf",
+          "value": true
+        },
+        "72ik3svb5wx": {
+          "key": "72ik3svb5wx",
+          "value": true
+        },
+        "9oek3pqt10p": {
+          "key": "9oek3pqt10p",
           "value": false
+        },
+        "i3gk3yb5akb": {
+          "key": "i3gk3yb5akb",
+          "value": true
+        },
+        "nhqk3rcutp5": {
+          "key": "nhqk3rcutp5",
+          "value": true
+        },
+        "icvk3ybeyo7": {
+          "key": "icvk3ybeyo7",
+          "value": true
+        },
+        "icvk3ybg3xw": {
+          "key": "icvk3ybg3xw",
+          "value": true
+        },
+        "jhuk3zu6ixs": {
+          "key": "jhuk3zu6ixs",
+          "value": true
+        },
+        "ov1k3zysi2a": {
+          "key": "ov1k3zysi2a",
+          "value": true
         }
       }
     },
@@ -545,11 +581,21 @@
           "value": true
         }
       }
+    },
+    "eadk3y906y9": {
+      "key": "eadk3y906y9",
+      "value": true,
+      "tests": {
+        "eadk3y90k3g": {
+          "key": "eadk3y90k3g",
+          "value": true
+        }
+      }
     }
   },
-  "savedAt": 1575539199,
+  "savedAt": 1575989181,
   "modified": false,
-  "lastOpenSuite": "page.mockRequest.json",
+  "lastOpenSuite": "page.assertRest.json",
   "variables": {},
   "targets": {
     "js4k1ukyk9a": {

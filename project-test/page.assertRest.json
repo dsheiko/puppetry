@@ -1,0 +1,664 @@
+{
+  "title": "Chained Target",
+  "timeout": 50000,
+  "snippets": false,
+  "description": "",
+  "savedAt": 1575989146,
+  "loadedAt": 1575988990,
+  "modified": false,
+  "filename": "page.assertRest.json",
+  "targets": {},
+  "groups": {
+    "k2vk2vvd4pi": {
+      "title": "page.assertReponse",
+      "id": "k2vk2vvd4pi",
+      "editing": false,
+      "key": "k2vk2vvd4pi",
+      "tests": {
+        "7vnk2vvpx9i": {
+          "editing": false,
+          "id": "7vnk2vvpx9i",
+          "key": "7vnk2vvpx9i",
+          "title": "Look and feel in the table",
+          "commands": {
+            "7vnk2vvpxmd": {
+              "editing": false,
+              "id": "7vnk2vvpxmd",
+              "key": "7vnk2vvpxmd",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "equals",
+                "statusValue": 500,
+                "textOperator": "contains",
+                "textValue": "bar",
+                "jpOperator": "matches",
+                "headerOperator": "specific",
+                "headerName": "x-foo",
+                "headerValue": "FOO",
+                "jpExp": "$.store.book.price",
+                "jpVal": "22"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "7vnk2vvpx9i",
+              "waitForTarget": false,
+              "entity": "command",
+              "params": {
+                "url": "http://127.0.0.1:8080/status/200",
+                "method": "GET"
+              },
+              "comment": "@assert [page.assertRest]"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
+        "9oek3pqt10p": {
+          "editing": false,
+          "id": "9oek3pqt10p",
+          "key": "9oek3pqt10p",
+          "title": "Status",
+          "commands": {
+            "9oek3pqt1c4": {
+              "editing": false,
+              "id": "9oek3pqt1c4",
+              "key": "9oek3pqt1c4",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "equals",
+                "statusValue": 200,
+                "textOperator": "any",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "http://127.0.0.1:8080/status/200",
+                "method": "GET"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "9oek3pqt10p",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "9oek3pqt1ih": {
+              "editing": false,
+              "id": "9oek3pqt1ih",
+              "key": "9oek3pqt1ih",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "equals",
+                "statusValue": 500,
+                "textOperator": "any",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "http://127.0.0.1:8080/status/500",
+                "method": "GET"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "9oek3pqt10p",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "9oek3pqt1od": {
+              "editing": false,
+              "id": "9oek3pqt1od",
+              "key": "9oek3pqt1od",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "equals",
+                "statusValue": 500,
+                "textOperator": "any",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "http://127.0.0.1:8080/status/200",
+                "method": "GET"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "9oek3pqt10p",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertRest] expected HTTP/S response matching http://127.0.0.1:8080/status/200 with status code to be 500, but received code 200"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
+        "j4qk3kd1bo0": {
+          "editing": false,
+          "id": "j4qk3kd1bo0",
+          "key": "j4qk3kd1bo0",
+          "title": "Data (Text)",
+          "commands": {
+            "j4qk3kd1c0z": {
+              "editing": false,
+              "id": "j4qk3kd1c0z",
+              "key": "j4qk3kd1c0z",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "any",
+                "textOperator": "contains",
+                "textValue": "puppeteer",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "http://127.0.0.1:8080/puppeteer.json",
+                "method": "GET"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "j4qk3kd1bo0",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "kxjk3keo6zj": {
+              "editing": false,
+              "id": "kxjk3keo6zj",
+              "key": "kxjk3keo6zj",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "any",
+                "textOperator": "!contains",
+                "textValue": "@Luke@",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "http://127.0.0.1:8080/puppeteer.json",
+                "method": "GET"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "j4qk3kd1bo0",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "kxjk3keofbd": {
+              "editing": false,
+              "id": "kxjk3keofbd",
+              "key": "kxjk3keofbd",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "any",
+                "textOperator": "!empty",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "http://127.0.0.1:8080/puppeteer.json",
+                "method": "GET"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "j4qk3kd1bo0",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "j4qk3kd1c7w": {
+              "editing": false,
+              "id": "j4qk3kd1c7w",
+              "key": "j4qk3kd1c7w",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "any",
+                "textOperator": "equals",
+                "textValue": "404 Not Found",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "http://127.0.0.1:8080/status/404",
+                "method": "GET"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "j4qk3kd1bo0",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "lemk3kf0khg": {
+              "editing": false,
+              "id": "lemk3kf0khg",
+              "key": "lemk3kf0khg",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "any",
+                "textOperator": "equals",
+                "textValue": "Nope",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "http://127.0.0.1:8080/status/404",
+                "method": "GET"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "j4qk3kd1bo0",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertRest] expected HTTP/S response matching http://127.0.0.1:8080/status/404 with data to be \"Nope\", but received data \"404 Not Found\""
+            },
+            "kxjk3keou6l": {
+              "editing": false,
+              "id": "kxjk3keou6l",
+              "key": "kxjk3keou6l",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "any",
+                "textOperator": "empty",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "http://127.0.0.1:8080/status/404",
+                "method": "GET"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "j4qk3kd1bo0",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertRest] expected HTTP/S response matching http://127.0.0.1:8080/status/404 with data to be empty, but received data is not"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
+        "kxjk3kemtzz": {
+          "editing": false,
+          "id": "kxjk3kemtzz",
+          "key": "kxjk3kemtzz",
+          "title": "Headers",
+          "commands": {
+            "kxjk3kemuad": {
+              "editing": false,
+              "id": "kxjk3kemuad",
+              "key": "kxjk3kemuad",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "any",
+                "textOperator": "any",
+                "headerOperator": "specific",
+                "headerName": "content-type",
+                "headerValue": "application/json"
+              },
+              "params": {
+                "url": "http://127.0.0.1:8080/puppeteer.json",
+                "method": "GET"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "kxjk3kemtzz",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "l69k3kewufu": {
+              "editing": false,
+              "id": "l69k3kewufu",
+              "key": "l69k3kewufu",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "any",
+                "textOperator": "any",
+                "headerOperator": "specific",
+                "headerName": "content-type",
+                "headerValue": "Nope"
+              },
+              "params": {
+                "url": "http://127.0.0.1:8080/puppeteer.json",
+                "method": "GET"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "kxjk3kemtzz",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertRest] expected HTTP/S response matching http://127.0.0.1:8080/puppeteer.json to have header content-type: Nope, but it does not"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
+        "ov1k3zysi2a": {
+          "title": "JSONPath",
+          "id": "ov1k3zysi2a",
+          "editing": false,
+          "groupId": "k2vk2vvd4pi",
+          "key": "ov1k3zysi2a",
+          "commands": {
+            "ov1k3zyy6aa": {
+              "editing": false,
+              "id": "ov1k3zyy6aa",
+              "key": "ov1k3zyy6aa",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "equals",
+                "statusValue": 200,
+                "textOperator": "contains",
+                "textValue": "\"foo\":\"FOO\"",
+                "jpOperator": "matches",
+                "headerOperator": "any",
+                "jpExp": "$.form.foo",
+                "jpVal": "FOO"
+              },
+              "params": {
+                "url": "https://postman-echo.com/post",
+                "method": "POST",
+                "data": "foo=FOO&bar=BAR"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "ov1k3zysi2a",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "ov1k3zz00tq": {
+              "editing": false,
+              "id": "ov1k3zz00tq",
+              "key": "ov1k3zz00tq",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "equals",
+                "statusValue": 200,
+                "textOperator": "contains",
+                "textValue": "\"foo\":\"FOO\"",
+                "jpOperator": "matches",
+                "jpExp": "$.form.foo",
+                "jpVal": "BAR",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://postman-echo.com/post",
+                "method": "POST",
+                "data": "foo=FOO&bar=BAR"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "ov1k3zysi2a",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertRest] expected HTTP/S response matching https://postman-echo.com/post to match $.form.foo = BAR, but nothing intercepted"
+            }
+          }
+        }
+      }
+    },
+    "eadk3y906y9": {
+      "title": "page.assertReponse methods",
+      "id": "eadk3y906y9",
+      "editing": false,
+      "key": "eadk3y906y9",
+      "tests": {
+        "eadk3y90k3g": {
+          "editing": false,
+          "id": "eadk3y90k3g",
+          "key": "eadk3y90k3g",
+          "title": "Method",
+          "commands": {
+            "eadk3y90kjt": {
+              "editing": false,
+              "id": "eadk3y90kjt",
+              "key": "eadk3y90kjt",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "equals",
+                "statusValue": 200,
+                "textOperator": "contains",
+                "textValue": "\"foo\":\"FOO\"",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://postman-echo.com/post",
+                "method": "POST",
+                "data": "foo=FOO&bar=BAR"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eadk3y906y9",
+              "testId": "eadk3y90k3g",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "eadk3y90kt4": {
+              "editing": false,
+              "id": "eadk3y90kt4",
+              "key": "eadk3y90kt4",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "equals",
+                "statusValue": 200,
+                "textOperator": "contains",
+                "textValue": "\"foo\":\"FOO\"",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://postman-echo.com/delete",
+                "method": "DELETE",
+                "data": "foo=FOO&bar=BAR"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eadk3y906y9",
+              "testId": "eadk3y90k3g",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "eadk3y90l1i": {
+              "editing": false,
+              "id": "eadk3y90l1i",
+              "key": "eadk3y90l1i",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "equals",
+                "statusValue": 200,
+                "textOperator": "contains",
+                "textValue": "\"foo\":\"FOO\"",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://postman-echo.com/put",
+                "method": "PUT",
+                "data": "foo=FOO&bar=BAR"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eadk3y906y9",
+              "testId": "eadk3y90k3g",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "eadk3y90lba": {
+              "editing": false,
+              "id": "eadk3y90lba",
+              "key": "eadk3y90lba",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "equals",
+                "statusValue": 200,
+                "textOperator": "contains",
+                "textValue": "lorem impsum",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "https://postman-echo.com/put",
+                "method": "PUT",
+                "data": "foo=FOO&bar=BAR"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "eadk3y906y9",
+              "testId": "eadk3y90k3g",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertRest] expected HTTP/S response matching https://postman-echo.com/put with data to contain \"lorem impsum\", but received data \"{\"args\":{},\"data\":\"\",\"files\":{},\"form\":{\"foo\":\"FOO\",\"bar\":\"BAR\"},\"headers\":{\"x-forwarded-proto\":\"htt...\""
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "eadk3y906y9",
+          "entity": "test",
+          "failure": ""
+        }
+      },
+      "disabled": false,
+      "failure": ""
+    }
+  },
+  "puppetry": "3.0.0"
+}

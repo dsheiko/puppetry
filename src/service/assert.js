@@ -176,9 +176,13 @@ function createCbBody({ assert, target, method, id, params }) {
           + `.toMatchBoundingBoxSnapshot( ${ JSON.stringify( options, null, "  " ) }, "${ source }" );` );
 
   case "response":
+    return justify( `expect( result )`
+          + `.toMatchResponse( ${ JSON.stringify( { ...options, not }, null, "  " ) }, "${ source }" );` );
+
+  case "rest":
     return justify( options.textOperator !== "any" ? `result.data = await result.text();\n` : `` )
           + justify( `expect( result )`
-          + `.toMatchResponse( ${ JSON.stringify( params.url ) }, `
+          + `.toMatchRest( ${ JSON.stringify( params.url ) }, `
           + `${ JSON.stringify( options, null, "  " ) }, "${ source }" );` );
   case "assertPerformanceTiming":
     return resolveTimingAssertion( options, source );

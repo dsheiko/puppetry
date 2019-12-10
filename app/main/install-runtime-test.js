@@ -121,6 +121,7 @@ exports.installRuntimeTest = ( event, appInstallDirectory ) => {
       "jest@^24.9.0",
       "node-fetch@^2.6.0",
       "faker@^4.1.0",
+      "jsonpath@^1.0.2",
       "node-localstorage@^1.3.1",
       "puppeteer@2.0.0",
       "shelljs@^0.8.2",

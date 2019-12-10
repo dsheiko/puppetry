@@ -45,12 +45,8 @@
       "key": "dduk2fx837q",
       "value": true,
       "tests": {
-        "dduk2fx8bwf": {
-          "key": "dduk2fx8bwf",
-          "value": true
-        },
-        "3i0k2fy6u0g": {
-          "key": "3i0k2fy6u0g",
+        "jotk2g3449f": {
+          "key": "jotk2g3449f",
           "value": true
         }
       }
@@ -84,9 +80,9 @@
       }
     }
   },
-  "savedAt": 1575387172,
+  "savedAt": 1575627364,
   "modified": false,
-  "lastOpenSuite": "mocking-request.json",
+  "lastOpenSuite": "testing-RWD.json",
   "variables": {
     "dduk2fx8tvf": {
       "name": "SANDBOX_BASEURL",
@@ -133,5 +129,5 @@
     "local"
   ],
   "projectDirectory": "/home/sheiko/PUPPETRY/demo--project",
-  "puppetry": "3.0.1"
+  "puppetry": "3.0.0"
 }
