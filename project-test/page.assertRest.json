@@ -4,7 +4,7 @@
   "snippets": false,
   "description": "",
   "savedAt": 1575989146,
-  "loadedAt": 1575988990,
+  "loadedAt": 1576060731,
   "modified": false,
   "filename": "page.assertRest.json",
   "targets": {},
@@ -660,5 +660,5 @@
       "failure": ""
     }
   },
-  "puppetry": "3.0.0"
+  "puppetry": "3.1.0"
 }

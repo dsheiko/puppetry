@@ -1,7 +1,8 @@
-import { SELECT, INPUT, TEXTAREA } from "../../constants";
+import { FILE, SELECT, INPUT, TEXTAREA } from "../../constants";
 import ExpressionParser from "service/ExpressionParser";
 import contentTypes from "service/contentTypes";
 import statusCodes from "service/statusCodes";
+import fs from "fs";
 
 /**
  * @typedef {object} TemplatePayload
@@ -19,13 +20,13 @@ export const mockRequest = {
    * @returns {String}
    */
   template: ({ params, id }) => {
-    const { url, method, statusCode, contentType, body, headers } = params,
+    const { url, method, statusCode, contentType, body, bodyPath, headers } = params,
           parser = new ExpressionParser( id ),
           urlString = parser.stringify( url ),
           me = JSON.stringify( method ),
           sc = JSON.stringify( statusCode ),
           ct = JSON.stringify( contentType ),
-          bo = JSON.stringify( body ),
+          bo = JSON.stringify( bodyPath ? fs.readFileSync( bodyPath, "utf8" ) : body ),
           he = typeof headers === "undefined" ? "[]" : JSON.stringify( headers
             .replace( /[\n\r]/, "\n" )
             .split( "\n" )
@@ -48,13 +49,25 @@ meaning Puppetry stop listening for mocking. You have to set \`page.mockRequest\
 before every request that you want to mock.`,
 
   toLabel: ({ params }) => `(\`${ params.method || "GET" } ${ params.url }\` => \`${ params.statusCode }\`,`
-    + `\`${ params.contentType }\`, \`${ params.body }\`)`,
+    + `\`${ params.contentType }\`, \`${ params.bodyPath ? params.bodyPath : params.body }\`)`,
   commonly: "mock request",
 
   toGherkin: ({ params }) => `Listen for the next request like `
     + `\`${ params.method || "GET" } *${ params.url }*\` to mock with `
     + ` status \`${ params.statusCode }\`,`
-    + ` content type \`${ params.contentType }\`, body \`${ params.body }\``,
+    + ` content type \`${ params.contentType }\`, body \`${ params.bodyPath ? params.bodyPath : params.body }\``,
+
+
+  validate: ( values ) => {
+    const { body, bodyPath } = values.params;
+    if ( body && body.trim() ) {
+      return null;
+    }
+    if ( bodyPath && bodyPath.trim() ) {
+      return null;
+    }
+    return "You have to ether specify text body or select a JSON file";
+  },
 
   params: [
     {
@@ -115,10 +128,17 @@ before every request that you want to mock.`,
           name: "params.body",
           control: TEXTAREA,
           label: "Text body",
-          placeholder: `{ status: "ok"}`,
+          placeholder: `{ status: "ok"}`
+        },
+        {
+          name: "params.bodyPath",
+          control: FILE,
+          optional: true,
+          label: "...or JSON file",
+          tooltip: "",
+          placeholder: "",
           rules: [{
-            required: true,
-            message: `Field is required.`
+            message: "Select a file path to seed the body"
           }]
         },
         {

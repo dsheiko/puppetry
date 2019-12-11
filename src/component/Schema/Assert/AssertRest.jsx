@@ -1,7 +1,7 @@
 /*eslint react/no-unescaped-entities: 0*/
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Input, InputNumber, Select, Row, Col, Icon } from "antd";
+import { Form, Input, Select, Row, Col, Icon } from "antd";
 import { getAssertion } from "./helpers";
 import { result, SELECT_SEARCH_PROPS } from "service/utils";
 import AbstractComponent from "component/AbstractComponent";
@@ -67,9 +67,7 @@ export class AssertRest extends AbstractComponent {
           textOperator = result( this.state, "textOperator", result( assert, "textOperator", "any" ) ),
           jpOperator = result( this.state, "jpOperator", result( assert, "jpOperator", "any" ) ),
           headerOperator = result( this.state, "headerOperator", result( assert, "headerOperator", "any" ) ),
-          statusOperator = result( this.state, "statusOperator", result( assert, "statusOperator", "any" ) ),
-          statusTextOperator = result( this.state, "statusTextOperator",
-            result( assert, "statusTextOperator", "any" ) );
+          statusOperator = result( this.state, "statusOperator", result( assert, "statusOperator", "any" ) );
 
     return ( <div>
       <div className="is-invisible">
@@ -116,7 +114,7 @@ export class AssertRest extends AbstractComponent {
               })(
                 <Select { ...SELECT_SEARCH_PROPS }>
                   <Option value="">any</Option>
-                   {
+                  {
                     statusCodes.map( val => {
                       const [ code ] = val.split( " " );
                       return ( <Option key={ val } value={ code }>{ val }</Option> );

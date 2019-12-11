@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1575889273,
-  "loadedAt": 1575888539,
+  "savedAt": 1576060063,
+  "loadedAt": 1576059964,
   "modified": false,
   "filename": "page.mockRequest.json",
   "targets": {
@@ -114,6 +114,8 @@
                 "not": "false",
                 "url": "http://127.0.0.1:8080",
                 "method": "POST",
+                "textOperator": "any",
+                "jpOperator": "any",
                 "status": "200"
               },
               "params": {
@@ -129,10 +131,130 @@
               "groupId": "k2vk2vvd4pi",
               "testId": "icvk3ybg3xw",
               "waitForTarget": false,
-              "comment": "@assert [page.assertResponse] expected any HTTP/S responses matching POST *http://127.0.0.1:8080* with status code 200, but found none"
+              "comment": "@assert [page.assertResponse] expected any HTTP/S responses matching POST *http://127.0.0.1:8080* with response like status code 200, but found none"
             }
           },
           "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
+        "p4jk414zo1z": {
+          "editing": false,
+          "id": "p4jk414zo1z",
+          "key": "p4jk414zo1z",
+          "title": "POST interceptedand matches the assertion by body path",
+          "commands": {
+            "p4jk414zog0": {
+              "editing": false,
+              "id": "p4jk414zog0",
+              "key": "p4jk414zog0",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "p4jk414zo1z",
+              "waitForTarget": false
+            },
+            "p4jk414zorc": {
+              "editing": false,
+              "id": "p4jk414zorc",
+              "key": "p4jk414zorc",
+              "target": "page",
+              "method": "mockRequest",
+              "params": {
+                "url": "http://127.0.0.1:8080",
+                "method": "POST",
+                "statusCode": "200 OK",
+                "contentType": "text/plain",
+                "body": "",
+                "bodyPath": "/home/sheiko/tmp/data.json",
+                "headers": ""
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "p4jk414zo1z",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": ""
+            },
+            "p4jk414zp2f": {
+              "editing": false,
+              "id": "p4jk414zp2f",
+              "key": "p4jk414zp2f",
+              "target": "MAKE_POST_REQUEST_LINK",
+              "method": "click",
+              "assert": {},
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "p4jk414zo1z",
+              "waitForTarget": false
+            },
+            "p4jk414zpc4": {
+              "editing": false,
+              "id": "p4jk414zpc4",
+              "key": "p4jk414zpc4",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "not": "false",
+                "url": "http://127.0.0.1:8080",
+                "method": "POST",
+                "textOperator": "any",
+                "jpOperator": "matches",
+                "jpExp": "$.store.book[0].author",
+                "jpVal": "Nigel Rees",
+                "status": ""
+              },
+              "params": {
+                "waitFor": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "p4jk414zo1z",
+              "waitForTarget": false,
+              "comment": ""
+            }
+          },
+          "disabled": true,
           "expanded": false,
           "adding": false,
           "groupId": "k2vk2vvd4pi",
@@ -368,6 +490,7 @@
                 "statusValue": 200,
                 "textOperator": "equals",
                 "textValue": "FAIL",
+                "jpOperator": "any",
                 "headerOperator": "any"
               },
               "params": {
@@ -385,7 +508,7 @@
               "testId": "dp4k3ocf2mu",
               "waitForTarget": false,
               "entity": "command",
-              "comment": "@assert [page.assertRequest] expected HTTP/S response matching http://127.0.0.1:8080/status/404 with data to be \"FAIL\", but received data \"OK\""
+              "comment": "@assert [page.assertRest] expected HTTP/S response matching http://127.0.0.1:8080/status/404 with data to be \"FAIL\", but received data \"OK\""
             }
           },
           "disabled": false,
@@ -512,6 +635,7 @@
                 "statusOperator": "equals",
                 "statusValue": 200,
                 "textOperator": "any",
+                "jpOperator": "any",
                 "headerOperator": "specific",
                 "headerName": "X-Access-Token",
                 "headerValue": "SOMETHING ELSE"
@@ -531,7 +655,7 @@
               "testId": "effk3od60ew",
               "waitForTarget": false,
               "entity": "command",
-              "comment": "@assert [page.assertRequest] expected HTTP/S response matching http://127.0.0.1:8080/status/404 to have header X-Access-Token: SOMETHING ELSE, but it does not"
+              "comment": "@assert [page.assertRest] expected HTTP/S response matching http://127.0.0.1:8080/status/404 to have header X-Access-Token: SOMETHING ELSE, but it does not"
             },
             "effk3od79af": {
               "editing": false,
@@ -571,6 +695,7 @@
                 "statusOperator": "equals",
                 "statusValue": 200,
                 "textOperator": "any",
+                "jpOperator": "any",
                 "headerOperator": "specific",
                 "headerName": "SOMETHING ELSE",
                 "headerValue": "SOMETHING ELSE"
@@ -590,7 +715,7 @@
               "testId": "effk3od60ew",
               "waitForTarget": false,
               "entity": "command",
-              "comment": "@assert [page.assertRequest] expected HTTP/S response matching http://127.0.0.1:8080/status/404 to have header SOMETHING ELSE: SOMETHING ELSE, but it does not"
+              "comment": "@assert [page.assertRest] expected HTTP/S response matching http://127.0.0.1:8080/status/404 to have header SOMETHING ELSE: SOMETHING ELSE, but it does not"
             }
           },
           "disabled": false,

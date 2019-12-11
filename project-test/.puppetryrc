@@ -557,6 +557,10 @@
         "ov1k3zysi2a": {
           "key": "ov1k3zysi2a",
           "value": true
+        },
+        "p4jk414zo1z": {
+          "key": "p4jk414zo1z",
+          "value": false
         }
       }
     },
@@ -593,7 +597,7 @@
       }
     }
   },
-  "savedAt": 1575989181,
+  "savedAt": 1576060937,
   "modified": false,
   "lastOpenSuite": "page.assertRest.json",
   "variables": {},
@@ -613,5 +617,5 @@
   ],
   "autosave": true,
   "projectDirectory": "/home/sheiko/PUPPETRY/puppetry-test",
-  "puppetry": "3.0.0"
+  "puppetry": "3.1.0"
 }

@@ -1,7 +1,8 @@
 # Puppetry 3.0.1
 
 ### Features
-- improvement: add page.waitForRequest
+- improvement: add page.assertRest
+- improvement: add page.assertResponse
 - improvement: add page.mockRequest
 
 ### Bug fixes

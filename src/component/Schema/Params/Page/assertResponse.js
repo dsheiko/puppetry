@@ -1,12 +1,8 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertResponse } from "../../Assert/AssertResponse";
-import { normalizeAssertionVerb } from "service/utils";
-import { INPUT, SELECT, CHECKBOX } from "../../constants";
-import ExpressionParser from "service/ExpressionParser";
+import { CHECKBOX } from "../../constants";
 
-function renderValue( verb, value ) {
-  return ( verb === "empty" || verb === "!empty" ) ? `` : ` \`${ value }\``;
-}
+/*eslint no-useless-escape: 0*/
 
 function renderBoolean( not ) {
   if ( typeof not !== "string" ) {
@@ -36,11 +32,11 @@ export const assertResponse = {
     return buildAssertionTpl( `await bs.network.getResponseMatches(${ JSON.stringify( command.assert ) })`,
       command,
       `// Asserts that the HTTP/S response satisfies the given constraint${
-      ( command.params && command.params.waitFor )
-      ? `
+        ( command.params && command.params.waitFor )
+          ? `
 searchStr = ${ JSON.stringify( command.assert.url ) }.replace( /^\./, "" );
 await bs.page.waitForResponse( ( rsp ) => rsp.url().includes( searchStr ), {"timeout":30000} );`
-      : `` }
+          : `` }
 await bs.network.waitUntilResolved();`
 
     );

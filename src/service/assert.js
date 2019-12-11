@@ -177,7 +177,7 @@ function createCbBody({ assert, target, method, id, params }) {
 
   case "response":
     return justify( `expect( result )`
-          + `.toMatchResponse( ${ JSON.stringify( { ...options, not }, null, "  " ) }, "${ source }" );` );
+          + `.toMatchResponse( ${ JSON.stringify({ ...options, not }, null, "  " ) }, "${ source }" );` );
 
   case "rest":
     return justify( options.textOperator !== "any" ? `result.data = await result.text();\n` : `` )

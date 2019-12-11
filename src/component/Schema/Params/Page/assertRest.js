@@ -42,7 +42,7 @@ export const assertRest = {
               + ` ${ JSON.stringify( command.params.data ) } );` )
             : ``;
 
-    return buildAssertionTpl(`await bs.page.goto( ${ urlString }, { waitUntil: "networkidle0" } )`,
+    return buildAssertionTpl( `await bs.page.goto( ${ urlString }, { waitUntil: "networkidle0" } )`,
       command,
       `// Makes HTTP/S request and asserts that the response satisfies the given constraint
 ${ intercept }`
