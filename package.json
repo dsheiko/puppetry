@@ -155,6 +155,7 @@
     "directories": {
       "buildResources": "app/assets"
     },
+    "copyright": "©2019 Dmitry Sheiko",
     "files": [
       "app",
       "jest-pkg",
@@ -174,10 +175,14 @@
       "iconSize": 128,
       "contents": [
         {
+          "x": 380,
+          "y": 240,
           "type": "link",
           "path": "/Applications"
         },
         {
+          "x": 122,
+          "y": 240,
           "type": "file"
         }
       ]
