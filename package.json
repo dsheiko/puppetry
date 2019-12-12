@@ -177,7 +177,7 @@
     },
     "dmg": {
       "title": "Puppetry Installer",
-      "artifactName": "puppetry-mac-${version}.${ext}",
+      "artifactName": "puppetry-mac-v${version}.${ext}",
       "icon": "./app/assets/icon.icns",
       "iconSize": 150,
       "contents": [
