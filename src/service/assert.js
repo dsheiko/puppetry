@@ -180,8 +180,10 @@ function createCbBody({ assert, target, method, id, params }) {
           + `.toMatchResponse( ${ JSON.stringify({ ...options, not }, null, "  " ) }, "${ source }" );` );
 
   case "rest":
-    return justify( options.textOperator !== "any" ? `result.data = await result.text();\n` : `` )
-          + justify( `expect( result )`
+    return justify( `
+result.data = await result.text();
+ENV[ "PUPPETRY_LAST_RESPONSE_TEXT" ] = result.data;
+expect( result )`
           + `.toMatchRest( ${ JSON.stringify( params.url ) }, `
           + `${ JSON.stringify( options, null, "  " ) }, "${ source }" );` );
   case "assertPerformanceTiming":

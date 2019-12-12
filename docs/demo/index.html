@@ -411,11 +411,11 @@
           listen( "#form", "submit", function( el ){
             const msg = el.checkValidity() ? "OK" : "FAIL";
             hideAlert();
+            alert( msg );
+            console.info( msg );
             fetch( "./response.json" )
               .then(function( rsp ){
                 rsp.status !== 200 && showAlert();
-                alert( msg );
-                console.info( msg );
               })
               .catch( showAlert );
           });

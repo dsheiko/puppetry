@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1575989146,
-  "loadedAt": 1576060731,
+  "savedAt": 1576150036,
+  "loadedAt": 1576149994,
   "modified": false,
   "filename": "page.assertRest.json",
   "targets": {},
@@ -355,6 +355,131 @@
           "entity": "test",
           "failure": ""
         },
+        "2o6k42mliig": {
+          "editing": false,
+          "id": "2o6k42mliig",
+          "key": "2o6k42mliig",
+          "title": "Data (Text) - Assign Variable",
+          "commands": {
+            "2o6k42mlj1y": {
+              "editing": false,
+              "id": "2o6k42mlj1y",
+              "key": "2o6k42mlj1y",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "any",
+                "textOperator": "contains",
+                "textValue": "puppeteer",
+                "headerOperator": "any"
+              },
+              "params": {
+                "url": "http://127.0.0.1:8080/puppeteer.json",
+                "method": "GET"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "2o6k42mliig",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "4iik42my5sf": {
+              "editing": false,
+              "id": "4iik42my5sf",
+              "key": "4iik42my5sf",
+              "target": "page",
+              "method": "assertVar",
+              "assert": {
+                "assertion": "contains",
+                "value": "puppetry"
+              },
+              "params": {
+                "name": "PUPPETRY_LAST_RESPONSE_TEXT"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "2o6k42mliig",
+              "waitForTarget": false
+            },
+            "2o6k42mn5ab": {
+              "editing": false,
+              "id": "2o6k42mn5ab",
+              "key": "2o6k42mn5ab",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "equals",
+                "statusValue": 200,
+                "textOperator": "contains",
+                "textValue": "\"foo\":\"FOO\"",
+                "jpOperator": "matches",
+                "headerOperator": "any",
+                "jpExp": "$.form.foo",
+                "jpVal": "FOO"
+              },
+              "params": {
+                "url": "https://postman-echo.com/post",
+                "method": "POST",
+                "data": "foo=FOO&bar=BAR"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "2o6k42mliig",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "4iik42n001t": {
+              "editing": false,
+              "id": "4iik42n001t",
+              "key": "4iik42n001t",
+              "target": "page",
+              "method": "assertVar",
+              "assert": {
+                "assertion": "contains",
+                "value": "\"foo\":\"FOO\""
+              },
+              "params": {
+                "name": "PUPPETRY_LAST_RESPONSE_TEXT"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "2o6k42mliig",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
         "kxjk3kemtzz": {
           "editing": false,
           "id": "kxjk3kemtzz",
@@ -506,7 +631,9 @@
               "entity": "command",
               "comment": "@assert [page.assertRest] expected HTTP/S response matching https://postman-echo.com/post to match $.form.foo = BAR, but nothing intercepted"
             }
-          }
+          },
+          "disabled": false,
+          "failure": ""
         }
       }
     },

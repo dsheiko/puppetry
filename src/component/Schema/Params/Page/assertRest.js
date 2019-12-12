@@ -48,7 +48,9 @@ export const assertRest = {
 ${ intercept }`
     );
   },
-  description: `Makes HTTP/S request and asserts that the response satisfies the given constraint`,
+  description: `Makes HTTP/S request and asserts that the response satisfies the given constraint.
+
+  NOTE: The method automatically assigns the response text data to template variable \`PUPPETRY_LAST_RESPONSE_TEXT\``,
   commonly: "make request and assert response",
 
   toLabel: ({ params, assert }) => `(\`${ params.method || "GET" } ${ params.url }\``

@@ -166,9 +166,20 @@
       "project-demo/**/*"
     ],
     "mac": {
-      "category": "public.app-category.developer-tools",
-      "target": [
-        "zip"
+      "category": "public.app-category.developer-tools"
+    },
+    "dmg": {
+      "background": "app/assets/512x512.png",
+      "icon": "app/assets/icon.icns",
+      "iconSize": 128,
+      "contents": [
+        {
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "type": "file"
+        }
       ]
     },
     "nsis": {

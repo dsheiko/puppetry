@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1576060063,
-  "loadedAt": 1576059964,
+  "savedAt": 1576148522,
+  "loadedAt": 1576148477,
   "modified": false,
   "filename": "page.mockRequest.json",
   "targets": {
@@ -728,5 +728,5 @@
       }
     }
   },
-  "puppetry": "3.0.0"
+  "puppetry": "3.1.0"
 }
