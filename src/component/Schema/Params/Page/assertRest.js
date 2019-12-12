@@ -100,9 +100,8 @@ ${ intercept }`
   ],
 
   testTypes: {
-    "assert": {
-      "assertion": "SELECT",
-      "value": "INPUT"
+    "params": {
+      "url": "INPUT"
     }
   },
 
@@ -110,14 +109,16 @@ ${ intercept }`
     {
       valid: true,
       params: {
-        url: "https://httpstat.us/200"
+        url: "https://httpstat.us/200",
+        method: "GET",
+        data: ""
       },
       "assert": {
-        assertion: "response",
+        assertion: "rest",
         textOperator: "any",
         headerOperator: "any",
         statusOperator: "any",
-        statusTextOperator: "any"
+        jpOperator: "any"
       }
     }
   ]

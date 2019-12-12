@@ -114,6 +114,7 @@
     "electron-builder": "^21.2.0",
     "electron-debug": "^3.0.1",
     "electron-devtools-installer": "^2.2.4",
+    "electron-notarize": "^0.2.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "eslint": "^5.7.0",
@@ -167,21 +168,28 @@
       "project-demo/**/*"
     ],
     "mac": {
-      "category": "public.app-category.developer-tools"
+      "icon": "app/assets/icon.icns",
+      "category": "public.app-category.developer-tools",
+      "artifactName": "puppetry-macOS-${version}.${ext}",
+      "entitlements": "./app/resources/macos/entitlements.mac.plist",
+      "entitlementsInherit": "./app/resources/macos/entitlements.mac.inherit.plist",
+      "hardenedRuntime": true
     },
     "dmg": {
-      "background": "app/assets/512x512.png",
-      "icon": "app/assets/icon.icns",
-      "iconSize": 128,
+      "title": "Simplenote Installer",
+      "artifactName": "Simplenote-macOS-${version}.${ext}",
+      "background": "./app/assets/512x512.png",
+      "icon": "./app/assets/icon.icns",
+      "iconSize": 150,
       "contents": [
         {
-          "x": 380,
+          "x": 480,
           "y": 240,
           "type": "link",
           "path": "/Applications"
         },
         {
-          "x": 122,
+          "x": 130,
           "y": 240,
           "type": "file"
         }
@@ -222,6 +230,8 @@
           ]
         }
       ]
-    }
+    },
+    "afterSign": "./after_sign_hook.js",
+    "afterAllArtifactBuild": "./after_sign_hook.js"
   }
 }
