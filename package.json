@@ -176,21 +176,20 @@
       "hardenedRuntime": true
     },
     "dmg": {
-      "title": "Simplenote Installer",
-      "artifactName": "Simplenote-macOS-${version}.${ext}",
-      "background": "./app/assets/512x512.png",
+      "title": "Puppetry Installer",
+      "artifactName": "puppetry-mac-v${version}.${ext}",
       "icon": "./app/assets/icon.icns",
       "iconSize": 150,
       "contents": [
         {
-          "x": 480,
-          "y": 240,
+          "x": 410,
+          "y": 160,
           "type": "link",
           "path": "/Applications"
         },
         {
           "x": 130,
-          "y": 240,
+          "y": 160,
           "type": "file"
         }
       ]
