@@ -27,24 +27,26 @@ Puppetry is an open-source cross-platform desktop application that gives non-dev
 - Features Headless Chrome ([Puppeteer](https://pptr.dev)) and [Jest](https://jestjs.io/)
 - Tests can run within the application as well as to be [exported e.g. for CI-server](https://docs.puppetry.app/exporting-tests-for-ci)
 - Exporting
-  - as [Jest.js project](https://docs.puppetry.app/v/3.0.0/export/exporting-tests-for-ci), ready to plugin in in CI/CD pipeline
-  - as [human-readable test specification](https://docs.puppetry.app/v/3.0.0/export/export-as-test-specification) provided with screenshots per test step.
+  - as [Jest.js project](https://docs.puppetry.app/export/exporting-tests-for-ci), ready to plugin in in CI/CD pipeline
+  - as [human-readable test specification](https://docs.puppetry.app/export/export-as-test-specification) provided with screenshots per test step.
 - [Staging, template variables and expressions](https://docs.puppetry.app/template)
 - [Reusable and configurable test scenarios](https://docs.puppetry.app/snippets)
 - [Built-in automation recorder](https://docs.puppetry.app/suite#recording-suite-showcase)
-- [Interactive mode](https://docs.puppetry.app/v/3.0.0/running-tests/interactive-mode), where one can navigate test steps similar to Cypress
-- [Version control (GIT integration)](https://docs.puppetry.app/v/3.0.0/version-control)
+- [Interactive mode](https://docs.puppetry.app/running-tests/interactive-mode), where one can navigate test steps similar to Cypress
+- [Version control (GIT integration)](https://docs.puppetry.app/version-control)
 - Support Allure test reports
 - Support of distinct testing types:
-  - [Functional testing](https://docs.puppetry.app/v/3.0.0/getting-started)
-  - [Testing Dynamic Content](https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-dynamic-content)
-  - [Exhaustive Testing](https://docs.puppetry.app/v/3.0.0/testing-techniques/exhaustive-testing)
-  - [Performance Testing](https://docs.puppetry.app/v/3.0.0/testing-techniques/performance-testing)
-  - [CSS Regression Testing](https://docs.puppetry.app/v/3.0.0/testing-techniques/css-regression-testing)
-  - [Testing Google Analytics tracking code](https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-google-analytics-tracking-code)
-  - [Testing Chrome Extensions](https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-chrome-extensions)
-  - [Testing Shadow DOM](https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-shadow-dom)
-  - [Testing Transactional Emails](https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-emails).
+  - [Functional testing](https://docs.puppetry.app/getting-started)
+  - [Testing Dynamic Content](https://docs.puppetry.app/testing-techniques/testing-dynamic-content)
+  - [Exhaustive Testing](https://docs.puppetry.app/testing-techniques/exhaustive-testing)
+  - [Performance Testing](https://docs.puppetry.app/testing-techniques/performance-testing)
+  - [CSS Regression Testing](https://docs.puppetry.app/testing-techniques/css-regression-testing)
+  - [Mocking HTTP/S Requests](https://docs.puppetry.app/testing-techniques/mocking-http-s-requests)
+  - [Testing REST API](https://docs.puppetry.app/testing-techniques/testing-rest-api)
+  - [Testing Google Analytics tracking code](https://docs.puppetry.app/testing-techniques/testing-google-analytics-tracking-code)
+  - [Testing Chrome Extensions](https://docs.puppetry.app/testing-techniques/testing-chrome-extensions)
+  - [Testing Shadow DOM](https://docs.puppetry.app/testing-techniques/testing-shadow-dom)
+  - [Testing Transactional Emails](https://docs.puppetry.app/testing-techniques/testing-emails).
 
 
 # Welcome Puppetry
