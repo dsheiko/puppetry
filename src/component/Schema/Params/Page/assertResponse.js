@@ -1,96 +1,79 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertResponse } from "../../Assert/AssertResponse";
-import { normalizeAssertionVerb } from "service/utils";
-import { INPUT, SELECT } from "../../constants";
-import ExpressionParser from "service/ExpressionParser";
+import { CHECKBOX } from "../../constants";
 
-function renderValue( verb, value ) {
-  return ( verb === "empty" || verb === "!empty" ) ? `` : ` \`${ value }\``;
+/*eslint no-useless-escape: 0*/
+
+function renderBoolean( not ) {
+  if ( typeof not !== "string" ) {
+    return "false";
+  }
+  return not;
 }
 
-function renderConstraints( assert ) {
+function renderConstraints( assert, pref = "" ) {
   const res = [];
-  
-  if ( assert.statusOperator !== "any" ) {
-    res.push( `status code ${ normalizeAssertionVerb( assert.statusOperator ) }`
-      + `${ renderValue( assert.statusOperator, assert.statusValue ) }` );
+  if ( assert.status && assert.status !== "any" ) {
+    res.push( `status code \`${ assert.status }\`` );
   }
-
-  if ( assert.statusTextOperator !== "any" ) {
-    res.push( `status text ${ normalizeAssertionVerb( assert.statusTextOperator ) }`
-      + `${ renderValue( assert.statusTextOperator, assert.statusTextValue ) }` );
+  if ( assert.text && assert.textOperator && assert.textOperator !== "any" ) {
+    res.push( `keyword \`${ assert.text }\`` );
   }
-
-  if ( assert.textOperator !== "any" ) {
-    res.push( `data ${ normalizeAssertionVerb( assert.textOperator ) }`
-      + `${ renderValue( assert.textOperator, assert.textValue ) }` );
+  if ( assert.jpExp && assert.jpOperator && assert.jpOperator !== "any" ) {
+    res.push( `JSONPath \`${ assert.jpExp }\` = \`${ assert.jpVal }\`` );
   }
-  if ( assert.headerOperator !== "any" ) {
-    res.push( `header \`${ assert.headerName }: ${ assert.headerValue }\`` );
-  }
-  return res.join( ", " );
+  return res.length ? pref + res.join( ", " ) : "";
 }
 
 export const assertResponse = {
 
   template: ( command ) => {
-    const parser = new ExpressionParser( command.params.id ),
-          urlString = parser.stringify( command.params.url ),
-          intercept = ( command.params.method && command.params.method !== "GET" )
-            ? ( `bs.replaceRequest( ${ JSON.stringify( command.params.method ) },`
-              + ` ${ JSON.stringify( command.params.data ) } );` )
-            : ``;
 
-    return buildAssertionTpl(`await bs.page.goto( ${ urlString }, { waitUntil: "networkidle0" } )`,
+    return buildAssertionTpl( `await bs.network.getResponseMatches(${ JSON.stringify( command.assert ) })`,
       command,
-      `// Asserts that the HTTP/S response satisfies the given constraint
-${ intercept }`
+      `// Asserts that the HTTP/S response satisfies the given constraint${
+        ( command.params && command.params.waitFor )
+          ? `
+searchStr = ${ JSON.stringify( command.assert.url ) }.replace( /^\./, "" );
+await bs.page.waitForResponse( ( rsp ) => rsp.url().includes( searchStr ), {"timeout":30000} );`
+          : `` }
+await bs.network.waitUntilResolved();`
+
     );
   },
   description: `Asserts that the HTTP/S response satisfies the given constraint`,
   commonly: "assert HTTP/S response",
 
-  toLabel: ({ params, assert }) => `(\`${ params.method || "GET" } ${ params.url }\`,`
+  toLabel: ({ assert }) => `(${ renderBoolean( assert.not ) === "true" ? "none" : "any" } `
+  + ` like \`${ assert.method || "GET" } ${ assert.url }\`,`
     + ` ${ renderConstraints( assert ) })`,
 
-  toGherkin: ({ params, assert }) => `Assert that request \`${ params.method || "GET" } ${ params.url }\` `
-    + `responds with ${ renderConstraints( assert ) }`,
+  toGherkin: ({ assert }) => `Assert there were ${ assert.not === "true" ? "NO" : "" } requests like `
+    + `\`${ assert.method || "GET" } ${ assert.url }\``
+    + `${ renderConstraints( assert, " with response like " ) }`,
 
   assert: {
     node: AssertResponse
   },
   params: [
     {
+
       legend: "",
-      description: "",
       tooltip: "",
+      span: {
+        wrapperCol: {
+          span: 21,
+          offset: 0
+        }
+      },
       fields: [
         {
-          name: "params.url",
-          template: true,
-          control: INPUT,
-          label: "URL",
-          tooltip: `URL to request. The url should include scheme, e.g. https://.`,
-          placeholder: "e.g. https://www.google.com/",
-          rules: [{
-            required: true,
-            message: `Field is required.`
-          }]
-        },
-        {
-          name: "params.method",
-          inputStyle: { maxWidth: 200 },
-          control: SELECT,
-          label: "Request method",
-          initialValue: "GET",
-          options: [ "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH" ]
-        },
-        {
-          name: "params.data",
-          control: INPUT,
-          label: "POST data",
-          description: `As URL-encoded form (application/x-www-form-urlencoded)`,
-          placeholder: "paramFoo=value&paramBar=value"
+          name: "params.waitFor",
+          label: "Wait for response",
+          control: CHECKBOX,
+          initialValue: true,
+          placeholder: "",
+          rules: []
         }
       ]
     }
@@ -98,17 +81,12 @@ ${ intercept }`
 
   testTypes: {
     "assert": {
-      "assertion": "SELECT",
-      "value": "INPUT"
     }
   },
 
   test: [
     {
       valid: true,
-      params: {
-        url: "https://httpstat.us/200"
-      },
       "assert": {
         assertion: "response",
         textOperator: "any",

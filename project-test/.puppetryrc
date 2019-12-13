@@ -488,7 +488,7 @@
         },
         "7vnk2vvpx9i": {
           "key": "7vnk2vvpx9i",
-          "value": true
+          "value": false
         },
         "i1wk3kcgkxo": {
           "key": "i1wk3kcgkxo",
@@ -508,19 +508,63 @@
         },
         "dp4k3ocf2mu": {
           "key": "dp4k3ocf2mu",
-          "value": false
+          "value": true
         },
         "dp4k3ocfa3h": {
           "key": "dp4k3ocfa3h",
-          "value": false
+          "value": true
         },
         "effk3od60ew": {
           "key": "effk3od60ew",
-          "value": false
+          "value": true
         },
         "nhqk3rdi2qf": {
           "key": "nhqk3rdi2qf",
+          "value": true
+        },
+        "5t1k3sunxxf": {
+          "key": "5t1k3sunxxf",
+          "value": true
+        },
+        "72ik3svb5wx": {
+          "key": "72ik3svb5wx",
+          "value": true
+        },
+        "9oek3pqt10p": {
+          "key": "9oek3pqt10p",
           "value": false
+        },
+        "i3gk3yb5akb": {
+          "key": "i3gk3yb5akb",
+          "value": true
+        },
+        "nhqk3rcutp5": {
+          "key": "nhqk3rcutp5",
+          "value": true
+        },
+        "icvk3ybeyo7": {
+          "key": "icvk3ybeyo7",
+          "value": true
+        },
+        "icvk3ybg3xw": {
+          "key": "icvk3ybg3xw",
+          "value": true
+        },
+        "jhuk3zu6ixs": {
+          "key": "jhuk3zu6ixs",
+          "value": true
+        },
+        "ov1k3zysi2a": {
+          "key": "ov1k3zysi2a",
+          "value": false
+        },
+        "p4jk414zo1z": {
+          "key": "p4jk414zo1z",
+          "value": false
+        },
+        "2o6k42mliig": {
+          "key": "2o6k42mliig",
+          "value": true
         }
       }
     },
@@ -545,9 +589,14 @@
           "value": true
         }
       }
+    },
+    "eadk3y906y9": {
+      "key": "eadk3y906y9",
+      "value": false,
+      "tests": {}
     }
   },
-  "savedAt": 1575539199,
+  "savedAt": 1576223356,
   "modified": false,
   "lastOpenSuite": "page.mockRequest.json",
   "variables": {},
@@ -567,5 +616,5 @@
   ],
   "autosave": true,
   "projectDirectory": "/home/sheiko/PUPPETRY/puppetry-test",
-  "puppetry": "3.0.0"
+  "puppetry": "3.1.0"
 }

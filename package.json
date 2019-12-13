@@ -1,7 +1,7 @@
 {
   "name": "puppetry",
   "description": "Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "author": "Dmitry Sheiko <me@dsheiko.com> (http://dsheiko.com)",
   "engines": {
     "node": ">=11.7.0"
@@ -29,7 +29,7 @@
     "dist:m": "electron-builder -m -c.mac.identity=null",
     "dist:all": "electron-builder -mwl -c.mac.identity=null",
     "dist": "electron-builder --linux snap",
-    "start:project-test": "http-server -s0 ./project-test",
+    "start:project-test": "node ./project-test/server.js",
     "start": "cross-env ELECTRON_ENV=dev electron .",
     "start:prod": "cross-env ELECTRON_ENV=production electron .",
     "start:clean": "cross-env ELECTRON_ENV=dev PUPPETRY_CLEAN_START=true electron .",
@@ -111,9 +111,10 @@
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
     "electron": "^7.0.1",
-    "electron-builder": "^22.1.0",
+    "electron-builder": "^21.2.0",
     "electron-debug": "^3.0.1",
     "electron-devtools-installer": "^2.2.4",
+    "electron-notarize": "^0.2.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
     "eslint": "^5.7.0",
@@ -124,6 +125,7 @@
     "esprima": "^4.0.1",
     "imagemin": "^7.0.0",
     "imagemin-webp": "^5.1.0",
+    "jsonpath": "^1.0.2",
     "live-plugin-manager": "^0.12.0",
     "redux-devtools-extension": "^2.13.5",
     "regenerator-runtime": "^0.12.1",
@@ -154,6 +156,7 @@
     "directories": {
       "buildResources": "app/assets"
     },
+    "copyright": "©2019 Dmitry Sheiko",
     "files": [
       "app",
       "jest-pkg",
@@ -165,9 +168,30 @@
       "project-demo/**/*"
     ],
     "mac": {
+      "icon": "app/assets/icon.icns",
       "category": "public.app-category.developer-tools",
-      "target": [
-        "zip"
+      "artifactName": "puppetry-macOS-${version}.${ext}",
+      "entitlements": "./app/resources/macos/entitlements.mac.plist",
+      "entitlementsInherit": "./app/resources/macos/entitlements.mac.inherit.plist",
+      "hardenedRuntime": true
+    },
+    "dmg": {
+      "title": "Puppetry Installer",
+      "artifactName": "puppetry-mac-v${version}.${ext}",
+      "icon": "./app/assets/icon.icns",
+      "iconSize": 150,
+      "contents": [
+        {
+          "x": 410,
+          "y": 160,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 130,
+          "y": 160,
+          "type": "file"
+        }
       ]
     },
     "nsis": {
@@ -205,6 +229,8 @@
           ]
         }
       ]
-    }
+    },
+    "afterSign": "./after_sign_hook.js",
+    "afterAllArtifactBuild": "./after_sign_hook.js"
   }
 }

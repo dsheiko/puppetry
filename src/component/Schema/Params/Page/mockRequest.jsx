@@ -1,7 +1,19 @@
-import { SELECT, INPUT, TEXTAREA } from "../../constants";
+import { FILE, SELECT, INPUT, TEXTAREA } from "../../constants";
 import ExpressionParser from "service/ExpressionParser";
 import contentTypes from "service/contentTypes";
 import statusCodes from "service/statusCodes";
+import fs from "fs";
+
+/**
+ *
+ * @param {String} tpl
+ * @param {String} id
+ * @returns {String}
+ */
+function stringifyTpl( tpl, id ) {
+  const parser = new ExpressionParser( id );
+  return parser.stringify( tpl );
+}
 
 /**
  * @typedef {object} TemplatePayload
@@ -19,21 +31,20 @@ export const mockRequest = {
    * @returns {String}
    */
   template: ({ params, id }) => {
-    const { url, method, statusCode, contentType, body, headers } = params,
-          parser = new ExpressionParser( id ),
-          urlString = parser.stringify( url ),
+    const { url, method, statusCode, contentType, body, bodyPath, headers } = params,
+          urlString = stringifyTpl( url, id ),
           me = JSON.stringify( method ),
           sc = JSON.stringify( statusCode ),
           ct = JSON.stringify( contentType ),
-          bo = JSON.stringify( body ),
-          he = typeof headers === "undefined" ? "[]" : JSON.stringify( headers
+          bo = bodyPath ? JSON.stringify( fs.readFileSync( bodyPath, "utf8" ) ) : stringifyTpl( body, id ),
+          he = typeof headers === "undefined" ? "[]" : stringifyTpl( headers
             .replace( /[\n\r]/, "\n" )
             .split( "\n" )
             .filter( data => data && data.trim().length && data.includes( ":" ) )
             .map( data => {
               const [ name, value ] = data.split( ":" );
               return `${ name.trim().toLowerCase() }: ${ value.trim() }`;
-            })
+            }), id
           );
     return `
       // Navigating to ${ url }
@@ -48,13 +59,25 @@ meaning Puppetry stop listening for mocking. You have to set \`page.mockRequest\
 before every request that you want to mock.`,
 
   toLabel: ({ params }) => `(\`${ params.method || "GET" } ${ params.url }\` => \`${ params.statusCode }\`,`
-    + `\`${ params.contentType }\`, \`${ params.body }\`)`,
+    + `\`${ params.contentType }\`, \`${ params.bodyPath ? params.bodyPath : params.body }\`)`,
   commonly: "mock request",
 
   toGherkin: ({ params }) => `Listen for the next request like `
     + `\`${ params.method || "GET" } *${ params.url }*\` to mock with `
     + ` status \`${ params.statusCode }\`,`
-    + ` content type \`${ params.contentType }\`, body \`${ params.body }\``,
+    + ` content type \`${ params.contentType }\`, body \`${ params.bodyPath ? params.bodyPath : params.body }\``,
+
+
+  validate: ( values ) => {
+    const { body, bodyPath } = values.params;
+    if ( body && body.trim() ) {
+      return null;
+    }
+    if ( bodyPath && bodyPath.trim() ) {
+      return null;
+    }
+    return "You have to ether specify text body or select a JSON file";
+  },
 
   params: [
     {
@@ -116,16 +139,25 @@ before every request that you want to mock.`,
           control: TEXTAREA,
           label: "Text body",
           placeholder: `{ status: "ok"}`,
+          description: `You can use [template expressions](https://docs.puppetry.app/template)`
+        },
+        {
+          name: "params.bodyPath",
+          control: FILE,
+          optional: true,
+          label: "...or JSON file",
+          tooltip: "",
+          placeholder: "",
           rules: [{
-            required: true,
-            message: `Field is required.`
+            message: "Select a file path to seed the body"
           }]
         },
         {
           name: "params.headers",
           control: TEXTAREA,
           label: "Headers",
-          placeholder: `Accept-Language: en;q=0.8\nX-Access-Token: SECRET`
+          placeholder: `Accept-Language: en;q=0.8\nX-Access-Token: SECRET`,
+          description: `You can use [template expressions](https://docs.puppetry.app/template)`
         }
       ]
     }

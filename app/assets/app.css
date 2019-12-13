@@ -1486,3 +1486,7 @@ summary:hover {
   margin-top: -8px;
   margin-bottom: 8px;
 }
+
+.indent-left {
+  margin-left: 8px;
+}

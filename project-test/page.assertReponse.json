@@ -3,11 +3,23 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1575466258,
-  "loadedAt": 1575465217,
+  "savedAt": 1575987430,
+  "loadedAt": 1575987203,
   "modified": false,
   "filename": "page.assertReponse.json",
-  "targets": {},
+  "targets": {
+    "5t1k3sunypm": {
+      "editing": false,
+      "id": "5t1k3sunypm",
+      "key": "5t1k3sunypm",
+      "target": "MAKE_POST_REQUEST_LINK",
+      "selector": "#makePostRequest",
+      "disabled": false,
+      "adding": false,
+      "parentType": "",
+      "ref": ""
+    }
+  },
   "groups": {
     "k2vk2vvd4pi": {
       "title": "page.assertReponse",
@@ -15,30 +27,23 @@
       "editing": false,
       "key": "k2vk2vvd4pi",
       "tests": {
-        "7vnk2vvpx9i": {
+        "5t1k3sunxxf": {
           "editing": false,
-          "id": "7vnk2vvpx9i",
-          "key": "7vnk2vvpx9i",
-          "title": "Look and feel in the table",
+          "id": "5t1k3sunxxf",
+          "key": "5t1k3sunxxf",
+          "title": "Assert there were responses with given status",
           "commands": {
-            "7vnk2vvpxmd": {
+            "5t1k3suny42": {
               "editing": false,
-              "id": "7vnk2vvpxmd",
-              "key": "7vnk2vvpxmd",
+              "id": "5t1k3suny42",
+              "key": "5t1k3suny42",
               "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "method": "GET",
-                "statusOperator": "equals",
-                "statusValue": 500,
-                "statusTextOperator": "equals",
-                "statusTextValue": "foo",
-                "textOperator": "contains",
-                "textValue": "bar",
-                "headerOperator": "specific",
-                "headerName": "x-foo",
-                "headerValue": "FOO"
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
               },
               "disabled": false,
               "failure": "",
@@ -48,47 +53,46 @@
               "ref": "",
               "isRef": false,
               "groupId": "k2vk2vvd4pi",
-              "testId": "7vnk2vvpx9i",
-              "waitForTarget": false,
-              "entity": "command",
-              "params": {
-                "url": "https://httpstat.us/200"
-              },
-              "comment": "@assert [page.assertResponse]"
-            }
-          },
-          "disabled": false,
-          "expanded": false,
-          "adding": false,
-          "groupId": "k2vk2vvd4pi",
-          "entity": "test",
-          "failure": ""
-        },
-        "i1wk3kcgkxo": {
-          "editing": false,
-          "id": "i1wk3kcgkxo",
-          "key": "i1wk3kcgkxo",
-          "title": "Method",
-          "commands": {
-            "i1wk3kcgl7r": {
+              "testId": "5t1k3sunxxf",
+              "waitForTarget": false
+            },
+            "5t1k3sunyee": {
               "editing": false,
-              "id": "i1wk3kcgl7r",
-              "key": "i1wk3kcgl7r",
+              "id": "5t1k3sunyee",
+              "key": "5t1k3sunyee",
+              "target": "MAKE_POST_REQUEST_LINK",
+              "method": "click",
+              "assert": {},
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "5t1k3sunxxf",
+              "waitForTarget": false
+            },
+            "5t1k3sunyjt": {
+              "editing": false,
+              "id": "5t1k3sunyjt",
+              "key": "5t1k3sunyjt",
               "target": "page",
               "method": "assertResponse",
               "assert": {
                 "assertion": "response",
-                "statusOperator": "equals",
-                "statusValue": 200,
-                "statusTextOperator": "any",
-                "textOperator": "contains",
-                "textValue": "\"foo\":\"FOO\"",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "https://postman-echo.com/post",
+                "not": "false",
+                "url": "http://127.0.0.1:8080",
                 "method": "POST",
-                "data": "foo=FOO&bar=BAR"
+                "textOperator": "any",
+                "jpOperator": "any",
+                "status": "200"
               },
               "disabled": false,
               "failure": "",
@@ -98,29 +102,26 @@
               "ref": "",
               "isRef": false,
               "groupId": "k2vk2vvd4pi",
-              "testId": "i1wk3kcgkxo",
+              "testId": "5t1k3sunxxf",
               "waitForTarget": false,
-              "entity": "command"
+              "params": {
+                "waitFor": true
+              }
             },
-            "mbqk3rb73yp": {
+            "71ck3sv6pnq": {
               "editing": false,
-              "id": "mbqk3rb73yp",
-              "key": "mbqk3rb73yp",
+              "id": "71ck3sv6pnq",
+              "key": "71ck3sv6pnq",
               "target": "page",
               "method": "assertResponse",
               "assert": {
                 "assertion": "response",
-                "statusOperator": "equals",
-                "statusValue": 200,
-                "statusTextOperator": "any",
-                "textOperator": "contains",
-                "textValue": "\"foo\":\"FOO\"",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "https://postman-echo.com/delete",
-                "method": "DELETE",
-                "data": "foo=FOO&bar=BAR"
+                "not": "false",
+                "url": "http://127.0.0.1:8080",
+                "method": "POST",
+                "textOperator": "any",
+                "jpOperator": "any",
+                "status": "500"
               },
               "disabled": false,
               "failure": "",
@@ -130,29 +131,27 @@
               "ref": "",
               "isRef": false,
               "groupId": "k2vk2vvd4pi",
-              "testId": "i1wk3kcgkxo",
+              "testId": "5t1k3sunxxf",
               "waitForTarget": false,
-              "entity": "command"
+              "comment": "@assert [page.assertResponse] expected any HTTP/S responses matching POST *http://127.0.0.1:8080* with response like status code 500, but found none",
+              "params": {
+                "waitFor": false
+              }
             },
-            "muhk3rbbxhx": {
+            "6swk3sv4x4s": {
               "editing": false,
-              "id": "muhk3rbbxhx",
-              "key": "muhk3rbbxhx",
+              "id": "6swk3sv4x4s",
+              "key": "6swk3sv4x4s",
               "target": "page",
               "method": "assertResponse",
               "assert": {
                 "assertion": "response",
-                "statusOperator": "equals",
-                "statusValue": 200,
-                "statusTextOperator": "any",
-                "textOperator": "contains",
-                "textValue": "\"foo\":\"FOO\"",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "https://postman-echo.com/put",
-                "method": "PUT",
-                "data": "foo=FOO&bar=BAR"
+                "not": "false",
+                "url": "http://127.0.0.1:8080",
+                "method": "GET",
+                "textOperator": "any",
+                "jpOperator": "any",
+                "status": "200"
               },
               "disabled": false,
               "failure": "",
@@ -162,29 +161,27 @@
               "ref": "",
               "isRef": false,
               "groupId": "k2vk2vvd4pi",
-              "testId": "i1wk3kcgkxo",
+              "testId": "5t1k3sunxxf",
               "waitForTarget": false,
-              "entity": "command"
+              "comment": "@assert [page.assertResponse] expected any HTTP/S responses matching POST *non-matching* with response like status code 200, but found none",
+              "params": {
+                "waitFor": false
+              }
             },
-            "muhk3rbcgrg": {
+            "5t1k3sup172": {
               "editing": false,
-              "id": "muhk3rbcgrg",
-              "key": "muhk3rbcgrg",
+              "id": "5t1k3sup172",
+              "key": "5t1k3sup172",
               "target": "page",
               "method": "assertResponse",
               "assert": {
                 "assertion": "response",
-                "statusOperator": "equals",
-                "statusValue": 200,
-                "statusTextOperator": "any",
-                "textOperator": "contains",
-                "textValue": "lorem impsum",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "https://postman-echo.com/put",
-                "method": "PUT",
-                "data": "foo=FOO&bar=BAR"
+                "not": "false",
+                "url": "non-matching",
+                "method": "POST",
+                "textOperator": "any",
+                "jpOperator": "any",
+                "status": "200"
               },
               "disabled": false,
               "failure": "",
@@ -194,10 +191,12 @@
               "ref": "",
               "isRef": false,
               "groupId": "k2vk2vvd4pi",
-              "testId": "i1wk3kcgkxo",
+              "testId": "5t1k3sunxxf",
               "waitForTarget": false,
-              "entity": "command",
-              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://postman-echo.com/put with data to contain \"lorem impsum\", but received data \"{\"args\":{},\"data\":\"\",\"files\":{},\"form\":{\"foo\":\"FOO\",\"bar\":\"BAR\"},\"headers\":{\"x-forwarded-proto\":\"htt...\""
+              "comment": "@assert [page.assertResponse] expected any HTTP/S responses matching POST *non-matching* with response like status code 200, but found none",
+              "params": {
+                "waitFor": false
+              }
             }
           },
           "disabled": false,
@@ -207,28 +206,23 @@
           "entity": "test",
           "failure": ""
         },
-        "9oek3pqt10p": {
+        "72ik3svb5wx": {
           "editing": false,
-          "id": "9oek3pqt10p",
-          "key": "9oek3pqt10p",
-          "title": "Status",
+          "id": "72ik3svb5wx",
+          "key": "72ik3svb5wx",
+          "title": "Assert there were responses with given keyword in body",
           "commands": {
-            "9oek3pqt1c4": {
+            "72ik3svb691": {
               "editing": false,
-              "id": "9oek3pqt1c4",
-              "key": "9oek3pqt1c4",
+              "id": "72ik3svb691",
+              "key": "72ik3svb691",
               "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "statusOperator": "equals",
-                "statusValue": 200,
-                "statusTextOperator": "any",
-                "textOperator": "any",
-                "headerOperator": "any"
-              },
+              "method": "goto",
+              "assert": {},
               "params": {
-                "url": "https://httpstat.us/200"
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
               },
               "disabled": false,
               "failure": "",
@@ -238,26 +232,20 @@
               "ref": "",
               "isRef": false,
               "groupId": "k2vk2vvd4pi",
-              "testId": "9oek3pqt10p",
-              "waitForTarget": false,
-              "entity": "command"
+              "testId": "72ik3svb5wx",
+              "waitForTarget": false
             },
-            "9oek3pqt1ih": {
+            "72ik3svb6g5": {
               "editing": false,
-              "id": "9oek3pqt1ih",
-              "key": "9oek3pqt1ih",
-              "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "statusOperator": "equals",
-                "statusValue": 500,
-                "statusTextOperator": "any",
-                "textOperator": "any",
-                "headerOperator": "any"
-              },
+              "id": "72ik3svb6g5",
+              "key": "72ik3svb6g5",
+              "target": "MAKE_POST_REQUEST_LINK",
+              "method": "click",
+              "assert": {},
               "params": {
-                "url": "https://httpstat.us/500"
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
               },
               "disabled": false,
               "failure": "",
@@ -267,287 +255,24 @@
               "ref": "",
               "isRef": false,
               "groupId": "k2vk2vvd4pi",
-              "testId": "9oek3pqt10p",
-              "waitForTarget": false,
-              "entity": "command"
+              "testId": "72ik3svb5wx",
+              "waitForTarget": false
             },
-            "9oek3pqt1od": {
+            "72ik3svb706": {
               "editing": false,
-              "id": "9oek3pqt1od",
-              "key": "9oek3pqt1od",
+              "id": "72ik3svb706",
+              "key": "72ik3svb706",
               "target": "page",
               "method": "assertResponse",
               "assert": {
                 "assertion": "response",
-                "statusOperator": "equals",
-                "statusValue": 500,
-                "statusTextOperator": "any",
-                "textOperator": "any",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "https://httpstat.us/200"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "9oek3pqt10p",
-              "waitForTarget": false,
-              "entity": "command",
-              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/200 with status code to be 500, but received code 200"
-            }
-          },
-          "disabled": false,
-          "expanded": false,
-          "adding": false,
-          "groupId": "k2vk2vvd4pi",
-          "entity": "test",
-          "failure": ""
-        },
-        "icsk3kcmllh": {
-          "editing": false,
-          "id": "icsk3kcmllh",
-          "key": "icsk3kcmllh",
-          "title": "Status Text",
-          "commands": {
-            "icsk3kcmlw1": {
-              "editing": false,
-              "id": "icsk3kcmlw1",
-              "key": "icsk3kcmlw1",
-              "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "statusOperator": "any",
-                "statusTextOperator": "equals",
-                "statusTextValue": "Not Found",
-                "textOperator": "any",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "https://httpstat.us/404"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "icsk3kcmllh",
-              "waitForTarget": false,
-              "entity": "command"
-            },
-            "icsk3kcnuaw": {
-              "editing": false,
-              "id": "icsk3kcnuaw",
-              "key": "icsk3kcnuaw",
-              "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "statusOperator": "any",
-                "statusTextOperator": "contains",
-                "statusTextValue": "Found",
-                "textOperator": "any",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "https://httpstat.us/404"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "icsk3kcmllh",
-              "waitForTarget": false,
-              "entity": "command"
-            },
-            "icsk3kco7n0": {
-              "editing": false,
-              "id": "icsk3kco7n0",
-              "key": "icsk3kco7n0",
-              "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "statusOperator": "any",
-                "statusTextOperator": "!equals",
-                "statusTextValue": "Lost",
-                "textOperator": "any",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "https://httpstat.us/404"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "icsk3kcmllh",
-              "waitForTarget": false,
-              "entity": "command"
-            },
-            "icsk3kcojf3": {
-              "editing": false,
-              "id": "icsk3kcojf3",
-              "key": "icsk3kcojf3",
-              "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "statusOperator": "any",
-                "statusTextOperator": "!contains",
-                "statusTextValue": "Lost",
-                "textOperator": "any",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "https://httpstat.us/404"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "icsk3kcmllh",
-              "waitForTarget": false,
-              "entity": "command"
-            },
-            "icsk3kcostm": {
-              "editing": false,
-              "id": "icsk3kcostm",
-              "key": "icsk3kcostm",
-              "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "statusOperator": "any",
-                "statusTextOperator": "!empty",
-                "textOperator": "any",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "https://httpstat.us/404"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "icsk3kcmllh",
-              "waitForTarget": false,
-              "entity": "command"
-            },
-            "icsk3kcp54l": {
-              "editing": false,
-              "id": "icsk3kcp54l",
-              "key": "icsk3kcp54l",
-              "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "statusOperator": "any",
-                "statusTextOperator": "empty",
-                "textOperator": "any",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "https://httpstat.us/404"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "icsk3kcmllh",
-              "waitForTarget": false,
-              "entity": "command",
-              "comment": "@assert page.assertResponse] expected HTTP/S response matching https://httpstat.us/404 with status text to be empty, but received text"
-            },
-            "icsk3kcpcyc": {
-              "editing": false,
-              "id": "icsk3kcpcyc",
-              "key": "icsk3kcpcyc",
-              "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "statusOperator": "any",
-                "statusTextOperator": "equals",
-                "statusTextValue": "I'm a teapot",
-                "textOperator": "any",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "https://httpstat.us/404"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "icsk3kcmllh",
-              "waitForTarget": false,
-              "entity": "command",
-              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/404 with status text to be \"I'm a teapot\", but received text \"Not Found\""
-            }
-          },
-          "disabled": false,
-          "expanded": false,
-          "adding": false,
-          "groupId": "k2vk2vvd4pi",
-          "entity": "test",
-          "failure": ""
-        },
-        "j4qk3kd1bo0": {
-          "editing": false,
-          "id": "j4qk3kd1bo0",
-          "key": "j4qk3kd1bo0",
-          "title": "Data (Text)",
-          "commands": {
-            "j4qk3kd1c0z": {
-              "editing": false,
-              "id": "j4qk3kd1c0z",
-              "key": "j4qk3kd1c0z",
-              "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "statusOperator": "any",
-                "statusTextOperator": "any",
+                "not": "false",
+                "url": "http://127.0.0.1:8080",
+                "method": "POST",
                 "textOperator": "contains",
-                "textValue": "userId",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "https://jsonplaceholder.typicode.com/todos/1"
+                "text": "The Lord of the Rings",
+                "jpOperator": "any",
+                "status": ""
               },
               "disabled": false,
               "failure": "",
@@ -557,26 +282,31 @@
               "ref": "",
               "isRef": false,
               "groupId": "k2vk2vvd4pi",
-              "testId": "j4qk3kd1bo0",
+              "testId": "72ik3svb5wx",
               "waitForTarget": false,
-              "entity": "command"
+              "comment": "",
+              "params": {
+                "waitFor": true
+              }
             },
-            "kxjk3kenon9": {
+            "o4hk3zxytk7": {
               "editing": false,
-              "id": "kxjk3kenon9",
-              "key": "kxjk3kenon9",
+              "id": "o4hk3zxytk7",
+              "key": "o4hk3zxytk7",
               "target": "page",
               "method": "assertResponse",
               "assert": {
                 "assertion": "response",
-                "statusOperator": "any",
-                "statusTextOperator": "any",
-                "textOperator": "!equals",
-                "textValue": "Luke",
-                "headerOperator": "any"
+                "not": "false",
+                "url": "http://127.0.0.1:8080",
+                "method": "POST",
+                "textOperator": "contains",
+                "text": "Something",
+                "jpOperator": "any",
+                "status": ""
               },
               "params": {
-                "url": "https://jsonplaceholder.typicode.com/todos/1"
+                "waitFor": false
               },
               "disabled": false,
               "failure": "",
@@ -586,154 +316,9 @@
               "ref": "",
               "isRef": false,
               "groupId": "k2vk2vvd4pi",
-              "testId": "j4qk3kd1bo0",
+              "testId": "72ik3svb5wx",
               "waitForTarget": false,
-              "entity": "command"
-            },
-            "kxjk3keo6zj": {
-              "editing": false,
-              "id": "kxjk3keo6zj",
-              "key": "kxjk3keo6zj",
-              "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "statusOperator": "any",
-                "statusTextOperator": "any",
-                "textOperator": "!contains",
-                "textValue": "Luke",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "https://jsonplaceholder.typicode.com/todos/1"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "j4qk3kd1bo0",
-              "waitForTarget": false,
-              "entity": "command"
-            },
-            "kxjk3keofbd": {
-              "editing": false,
-              "id": "kxjk3keofbd",
-              "key": "kxjk3keofbd",
-              "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "statusOperator": "any",
-                "statusTextOperator": "any",
-                "textOperator": "!empty",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "https://jsonplaceholder.typicode.com/todos/1"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "j4qk3kd1bo0",
-              "waitForTarget": false,
-              "entity": "command"
-            },
-            "j4qk3kd1c7w": {
-              "editing": false,
-              "id": "j4qk3kd1c7w",
-              "key": "j4qk3kd1c7w",
-              "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "statusOperator": "any",
-                "statusTextOperator": "any",
-                "textOperator": "equals",
-                "headerOperator": "any",
-                "textValue": "404 Not Found"
-              },
-              "params": {
-                "url": "https://httpstat.us/404"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "j4qk3kd1bo0",
-              "waitForTarget": false,
-              "entity": "command"
-            },
-            "lemk3kf0khg": {
-              "editing": false,
-              "id": "lemk3kf0khg",
-              "key": "lemk3kf0khg",
-              "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "statusOperator": "any",
-                "statusTextOperator": "any",
-                "textOperator": "equals",
-                "textValue": "Nope",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "https://httpstat.us/404"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "j4qk3kd1bo0",
-              "waitForTarget": false,
-              "entity": "command",
-              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/404 with data to be \"Nope\", but received data \"404 Not Found\""
-            },
-            "kxjk3keou6l": {
-              "editing": false,
-              "id": "kxjk3keou6l",
-              "key": "kxjk3keou6l",
-              "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "statusOperator": "any",
-                "statusTextOperator": "any",
-                "textOperator": "empty",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "https://httpstat.us/404"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "j4qk3kd1bo0",
-              "waitForTarget": false,
-              "entity": "command",
-              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://httpstat.us/404 with data to be empty, but received data is not"
+              "comment": "@assert [page.assertResponse] expected any HTTP/S responses matching POST *http://127.0.0.1:8080* with response like keyword Something, but found none"
             }
           },
           "disabled": false,
@@ -743,29 +328,23 @@
           "entity": "test",
           "failure": ""
         },
-        "kxjk3kemtzz": {
+        "jhuk3zu6ixs": {
           "editing": false,
-          "id": "kxjk3kemtzz",
-          "key": "kxjk3kemtzz",
-          "title": "Headers",
+          "id": "jhuk3zu6ixs",
+          "key": "jhuk3zu6ixs",
+          "title": "Assert there were responses with given JSONPath",
           "commands": {
-            "kxjk3kemuad": {
+            "jhuk3zu6j93": {
               "editing": false,
-              "id": "kxjk3kemuad",
-              "key": "kxjk3kemuad",
+              "id": "jhuk3zu6j93",
+              "key": "jhuk3zu6j93",
               "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "statusOperator": "any",
-                "statusTextOperator": "any",
-                "textOperator": "any",
-                "headerOperator": "specific",
-                "headerName": "x-powered-by",
-                "headerValue": "Express"
-              },
+              "method": "goto",
+              "assert": {},
               "params": {
-                "url": "https://jsonplaceholder.typicode.com/todos/1"
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
               },
               "disabled": false,
               "failure": "",
@@ -775,27 +354,20 @@
               "ref": "",
               "isRef": false,
               "groupId": "k2vk2vvd4pi",
-              "testId": "kxjk3kemtzz",
-              "waitForTarget": false,
-              "entity": "command"
+              "testId": "jhuk3zu6ixs",
+              "waitForTarget": false
             },
-            "l69k3kewufu": {
+            "jhuk3zu6jlp": {
               "editing": false,
-              "id": "l69k3kewufu",
-              "key": "l69k3kewufu",
-              "target": "page",
-              "method": "assertResponse",
-              "assert": {
-                "assertion": "response",
-                "statusOperator": "any",
-                "statusTextOperator": "any",
-                "textOperator": "any",
-                "headerOperator": "specific",
-                "headerName": "x-powered-by",
-                "headerValue": "Nope"
-              },
+              "id": "jhuk3zu6jlp",
+              "key": "jhuk3zu6jlp",
+              "target": "MAKE_POST_REQUEST_LINK",
+              "method": "click",
+              "assert": {},
               "params": {
-                "url": "https://jsonplaceholder.typicode.com/todos/1"
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
               },
               "disabled": false,
               "failure": "",
@@ -805,10 +377,72 @@
               "ref": "",
               "isRef": false,
               "groupId": "k2vk2vvd4pi",
-              "testId": "kxjk3kemtzz",
+              "testId": "jhuk3zu6ixs",
+              "waitForTarget": false
+            },
+            "jhuk3zu6jyn": {
+              "editing": false,
+              "id": "jhuk3zu6jyn",
+              "key": "jhuk3zu6jyn",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "not": "false",
+                "url": "http://127.0.0.1:8080",
+                "method": "POST",
+                "textOperator": "any",
+                "jpOperator": "matches",
+                "jpExp": "$.data.store.book[0].title",
+                "jpVal": "Moby Dick",
+                "status": ""
+              },
+              "params": {
+                "waitFor": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "jhuk3zu6ixs",
               "waitForTarget": false,
-              "entity": "command",
-              "comment": "@assert [page.assertResponse] expected HTTP/S response matching https://jsonplaceholder.typicode.com/todos/1 to have header x-powered-by: Nope, but it does not"
+              "comment": ""
+            },
+            "lmhk3zvjq0c": {
+              "editing": false,
+              "id": "lmhk3zvjq0c",
+              "key": "lmhk3zvjq0c",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "not": "false",
+                "url": "http://127.0.0.1:8080",
+                "method": "POST",
+                "textOperator": "any",
+                "jpOperator": "matches",
+                "jpExp": "$.data.store.book[1].title",
+                "jpVal": "Moby Dick",
+                "status": ""
+              },
+              "params": {
+                "waitFor": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "jhuk3zu6ixs",
+              "waitForTarget": false,
+              "comment": "@assert [page.assertResponse] expected any HTTP/S responses matching POST *http://127.0.0.1:8080* with response like JSONPath $.data.store.book[1].title = Moby Dick, but found none"
             }
           },
           "disabled": false,
