@@ -596,9 +596,9 @@
       "tests": {}
     }
   },
-  "savedAt": 1576151487,
+  "savedAt": 1576223356,
   "modified": false,
-  "lastOpenSuite": "page.assertRest.json",
+  "lastOpenSuite": "page.mockRequest.json",
   "variables": {},
   "targets": {
     "js4k1ukyk9a": {

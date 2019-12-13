@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1576148522,
-  "loadedAt": 1576148477,
+  "savedAt": 1576223331,
+  "loadedAt": 1576223320,
   "modified": false,
   "filename": "page.mockRequest.json",
   "targets": {
@@ -58,7 +58,6 @@
               "key": "icvk3ybg4gf",
               "target": "page",
               "method": "mockRequest",
-              "assert": {},
               "params": {
                 "url": "http://127.0.0.1:8080",
                 "method": "POST",

@@ -5,6 +5,17 @@ import statusCodes from "service/statusCodes";
 import fs from "fs";
 
 /**
+ *
+ * @param {String} tpl
+ * @param {String} id
+ * @returns {String}
+ */
+function stringifyTpl( tpl, id ) {
+  const parser = new ExpressionParser( id );
+  return parser.stringify( tpl );
+}
+
+/**
  * @typedef {object} TemplatePayload
  * @property {string} target
  * @property {string} method
@@ -21,20 +32,19 @@ export const mockRequest = {
    */
   template: ({ params, id }) => {
     const { url, method, statusCode, contentType, body, bodyPath, headers } = params,
-          parser = new ExpressionParser( id ),
-          urlString = parser.stringify( url ),
+          urlString = stringifyTpl( url, id ),
           me = JSON.stringify( method ),
           sc = JSON.stringify( statusCode ),
           ct = JSON.stringify( contentType ),
-          bo = JSON.stringify( bodyPath ? fs.readFileSync( bodyPath, "utf8" ) : body ),
-          he = typeof headers === "undefined" ? "[]" : JSON.stringify( headers
+          bo = bodyPath ? JSON.stringify( fs.readFileSync( bodyPath, "utf8" ) ) : stringifyTpl( body, id ),
+          he = typeof headers === "undefined" ? "[]" : stringifyTpl( headers
             .replace( /[\n\r]/, "\n" )
             .split( "\n" )
             .filter( data => data && data.trim().length && data.includes( ":" ) )
             .map( data => {
               const [ name, value ] = data.split( ":" );
               return `${ name.trim().toLowerCase() }: ${ value.trim() }`;
-            })
+            }), id
           );
     return `
       // Navigating to ${ url }
@@ -128,7 +138,8 @@ before every request that you want to mock.`,
           name: "params.body",
           control: TEXTAREA,
           label: "Text body",
-          placeholder: `{ status: "ok"}`
+          placeholder: `{ status: "ok"}`,
+          description: `You can use [template expressions](https://docs.puppetry.app/template)`
         },
         {
           name: "params.bodyPath",
@@ -145,7 +156,8 @@ before every request that you want to mock.`,
           name: "params.headers",
           control: TEXTAREA,
           label: "Headers",
-          placeholder: `Accept-Language: en;q=0.8\nX-Access-Token: SECRET`
+          placeholder: `Accept-Language: en;q=0.8\nX-Access-Token: SECRET`,
+          description: `You can use [template expressions](https://docs.puppetry.app/template)`
         }
       ]
     }
