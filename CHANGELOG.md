@@ -1,4 +1,4 @@
-# Puppetry 3.0.1
+# Puppetry 3.1.0
 
 ### Features
 - improvement: add page.assertRest
