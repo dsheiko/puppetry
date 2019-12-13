@@ -10,7 +10,7 @@
 [![Gitter chat](https://badges.gitter.im/dsheiko/gitter.png)](https://gitter.im/dsheiko/puppetry)
 [<img src="https://img.shields.io/badge/slack-puppetry.app-yellow.svg?logo=slack">](https://puppetry-app.slack.com)
 [![Total downloads](https://img.shields.io/github/downloads/dsheiko/puppetry/total.svg)](https://github.com/dsheiko/puppetry/releases)
-[![Latest download](https://img.shields.io/github/downloads/dsheiko/puppetry/v3.0.0/total.svg)](https://github.com/dsheiko/puppetry/releases/latest)
+[![Latest download](https://img.shields.io/github/downloads/dsheiko/puppetry/v3.1.0/total.svg)](https://github.com/dsheiko/puppetry/releases/latest)
 
 <h3 align="center">CODELESS END-TO-END AUTOMATED TESTING</h3>
 
