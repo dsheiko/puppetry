@@ -170,7 +170,7 @@
     "mac": {
       "icon": "app/assets/icon.icns",
       "category": "public.app-category.developer-tools",
-      "artifactName": "puppetry-macOS-${version}.${ext}",
+      "artifactName": "puppetry-mac-v${version}.${ext}",
       "entitlements": "./app/resources/macos/entitlements.mac.plist",
       "entitlementsInherit": "./app/resources/macos/entitlements.mac.inherit.plist",
       "hardenedRuntime": true
@@ -179,17 +179,18 @@
       "title": "Puppetry Installer",
       "artifactName": "puppetry-mac-v${version}.${ext}",
       "icon": "./app/assets/icon.icns",
-      "iconSize": 150,
+      "background": "./app/resources/macos/dmg-background.png",
+      "iconSize": 120,
       "contents": [
         {
-          "x": 410,
-          "y": 160,
+          "x": 415,
+          "y": 240,
           "type": "link",
           "path": "/Applications"
         },
         {
-          "x": 130,
-          "y": 160,
+          "x": 142,
+          "y": 240,
           "type": "file"
         }
       ]
