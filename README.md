@@ -69,12 +69,12 @@ Current only the following OS are supported:
 -   Ubuntu 14.04 and greater (64 bit)
 -   MacOS X 10.10 (Yosemite) and greater (64 bit)
 
-On Linux can be insalled with [Snapcraft](https://snapcraft.io/docs/installing-snapd):
+On Linux can be installed with [Snapcraft](https://snapcraft.io/docs/installing-snapd):
 ```
 sudo snap install puppetry
 ```
 
-On Mac can be insalled with [Homebrew](https://brew.sh/):
+On Mac can be installed with [Homebrew](https://brew.sh/):
 ```
 brew cask install puppetry
 ```
