@@ -5,6 +5,8 @@ const bs = require( "./BrowserSession" ),
 require( "./bootstrap/cssRegression" )( bs, util );
 // Extend BS
 require( "./BrowserSession/extend" )( bs, util );
+// add crawler methods
+require( "./BrowserSession/crawler" )( bs );
 
 require( "./bootstrap/extendJest" )( expect, util );
 
