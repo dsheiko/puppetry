@@ -1,4 +1,23 @@
-const UaBeacon = require( "../GaTracking/UaBeacon" );
+const UaBeacon = require( "../GaTracking/UaBeacon" ),
+      jp = require( "jsonpath" );
+
+
+function matchJsonPath( text, exp, val ) {
+  try {
+    const json = JSON.parse( text );
+    return String( jp.query( json, exp ) ).trim() === val.trim();
+  } catch( e ) {
+    return false;
+  }
+}
+
+function isTextRequest( rsp ) {
+  const cType = rsp.headers()[ "content-type" ];
+  return typeof cType === "undefined"
+    || cType.startsWith( "text/" )
+    || cType === "application/json"
+    || cType === "application/ld+json";
+}
 
 /**
  * Extending Puppeteer
@@ -9,9 +28,6 @@ const UaBeacon = require( "../GaTracking/UaBeacon" );
 module.exports = function( bs, util ) {
 
   const RES_TYPES = [ "Stylesheet", "Image", "Media", "Font", "Script", "XHR", "Fetch" ];
-
-  let lastMockSession = null;
-
 
   function btoa( a ) {
     return Buffer.from( a ).toString( "base64" );
@@ -230,9 +246,6 @@ module.exports = function( bs, util ) {
      * @see https://medium.com/@jsoverson/using-chrome-devtools-protocol-with-puppeteer-737a1300bac0
      */
   bs.mockRequest = async ( url, method, status, contentType, newBody, headers ) => {
-    if ( lastMockSession ) {
-      lastMockSession.detach();
-    }
     const session = await bs.page.target().createCDPSession(),
           patterns = [ `*${ url }*` ];
 
@@ -244,8 +257,6 @@ module.exports = function( bs, util ) {
         interceptionStage: "HeadersReceived"
       }))
     });
-
-    lastMockSession = session;
 
     session.on( "Network.requestIntercepted", async ({ interceptionId, request, responseHeaders, resourceType }) => {
 
@@ -275,15 +286,52 @@ module.exports = function( bs, util ) {
 
   bs.network = {
     responses: [],
+    resolved: true,
 
     reset: () => {
       bs.network.responses = [];
     },
 
+    async getResponseMatches( assert ) {
+      const responses = bs.network.responses.filter( rsp => ( rsp.url.includes( assert.url )
+        && ( assert.method === "any" || rsp.method === assert.method ) )
+        && ( !assert.status || assert.status === "any"
+          || parseInt( rsp.status, 10 ) === parseInt( assert.status, 10 ) )
+      );
+      return responses.filter( rsp => {
+        return ( !assert.text || assert.textOperator === "any" || rsp.text.includes( assert.text ) )
+          && ( !assert.jpOperator || assert.jpOperator === "any"
+            || matchJsonPath( rsp.text, assert.jpExp, assert.jpVal ) );
+      });
+    },
+
+    /**
+     * If requested came, but the body isn't resolved yet
+     * @returns {Promise}
+     */
+    waitUntilResolved() {
+      return new Promise(( resolve ) => {
+        let counter = 0;
+        const interval = setInterval(() => {
+          if ( counter++ > 80 || bs.network.resolved ) {
+            clearInterval( interval );
+            return resolve();
+          }
+        }, 50 );
+      });
+    },
+
     async watchTraffic() {
       bs.network.reset();
-      bs.page.on( "response", rsp => {
-        bs.network.responses.push( rsp );
+      bs.page.on( "response", async ( rsp ) => {
+        bs.network.resolved = false;
+        bs.network.responses.push({
+          url: rsp.url(),
+          status: parseInt( rsp.status(), 10 ),
+          method: rsp.request().method().toUpperCase(),
+          text: isTextRequest( rsp ) ? await rsp.text() : ""
+        });
+        bs.network.resolved = true;
       });
     }
   },

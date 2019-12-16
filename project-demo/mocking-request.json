@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": null,
-  "savedAt": 1575373578,
-  "loadedAt": 1575371085,
+  "savedAt": 1576223141,
+  "loadedAt": 1576223125,
   "modified": false,
   "filename": "mocking-request.json",
   "targets": {
@@ -111,6 +111,7 @@
               "method": "mockRequest",
               "params": {
                 "url": "response.json",
+                "method": "GET",
                 "statusCode": "500 Internal Server Error",
                 "contentType": "application/javascript",
                 "body": "{ \"status\": \"FAIL\" }"
@@ -180,5 +181,5 @@
       }
     }
   },
-  "puppetry": "3.0.1"
+  "puppetry": "3.1.0"
 }

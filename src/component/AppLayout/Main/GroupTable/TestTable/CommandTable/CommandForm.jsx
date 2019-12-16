@@ -13,9 +13,7 @@ import { result } from "service/utils";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
-      { TextArea } = Input,
-      TEST_LEADING_METHODS = [ "emulate", "setViewport", "closeDialog", "goto",
-        "assertPerformanceAssetWeight", "assertResponse" ];
+      { TextArea } = Input;
 
 @connectForm
 export class CommandForm extends React.Component {
@@ -116,15 +114,6 @@ export class CommandForm extends React.Component {
   }
 
   changeMethod = ( method ) => {
-    const hasGoto = this.checkTestHasGoto();
-
-    if ( !TEST_LEADING_METHODS.includes( method ) && !hasGoto ) {
-      return this.setState({
-        method,
-        error: `You shall start the test with page.goto. `
-          + `It can be prepended by page.emulate or page.setViewport though`
-      });
-    }
     this.setState({
       method,
       error: ""

@@ -32,7 +32,7 @@ function renderOperator( assert, name, getFieldDecorator, onSelect ) {
   </FormItem> );
 }
 
-export class AssertRequest extends AbstractComponent {
+export class AssertRest extends AbstractComponent {
 
   static propTypes = {
     record: PropTypes.object.isRequired,
@@ -65,6 +65,7 @@ export class AssertRequest extends AbstractComponent {
             }
           },
           textOperator = result( this.state, "textOperator", result( assert, "textOperator", "any" ) ),
+          jpOperator = result( this.state, "jpOperator", result( assert, "jpOperator", "any" ) ),
           headerOperator = result( this.state, "headerOperator", result( assert, "headerOperator", "any" ) ),
           statusOperator = result( this.state, "statusOperator", result( assert, "statusOperator", "any" ) );
 
@@ -72,7 +73,7 @@ export class AssertRequest extends AbstractComponent {
       <div className="is-invisible">
         <FormItem >
           { getFieldDecorator( "assert.assertion", {
-            initialValue: "request"
+            initialValue: "rest"
           })( <Input readOnly disabled /> ) }
         </FormItem>
       </div>
@@ -149,6 +150,51 @@ export class AssertRequest extends AbstractComponent {
                 initialValue:  result( assert, "textValue", "" )
               })(
                 <Input onPressEnter={ ( e ) => this.props.onPressEnter( e ) } />
+              ) }
+            </FormItem> : null }
+          </Col>
+
+        </Row>
+
+        <Row gutter={24} className="narrow-row">
+
+          <Col span={ 3 } >
+            <div className="ant-row ant-form-item ant-form-item--like-input">
+              JSONPath { " " }<a
+                href="https://www.npmjs.com/package/jsonpath"
+                onClick={ this.onExtClick }><Icon type="info-circle" /></a>
+            </div>
+          </Col>
+
+          <Col span={4} >
+            <FormItem className="is-shrinked">
+              { getFieldDecorator( "assert.jpOperator", {
+                initialValue: result( assert, "jpOperator", "any" )
+              })(
+                <Select onSelect={ ( val ) => this.onSelect( "jpOperator", val ) }>
+                  <Option value="any">any</Option>
+                  <Option value="matches">matches</Option>
+                </Select>
+              ) }
+            </FormItem>
+          </Col>
+
+          <Col span={8} >
+            { showInput( jpOperator ) ? <FormItem>
+              { getFieldDecorator( "assert.jpExp", {
+                initialValue:  result( assert, "jpExp", "" )
+              })(
+                <Input onPressEnter={ ( e ) => this.props.onPressEnter( e ) } placeholder="$.store.book[2].price" />
+              ) }
+            </FormItem> : null }
+          </Col>
+
+          <Col span={8} >
+            { showInput( jpOperator ) ? <FormItem>
+              { getFieldDecorator( "assert.jpVal", {
+                initialValue:  result( assert, "jpVal", "" )
+              })(
+                <Input onPressEnter={ ( e ) => this.props.onPressEnter( e ) }  placeholder="202" />
               ) }
             </FormItem> : null }
           </Col>

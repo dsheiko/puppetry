@@ -31,13 +31,30 @@ function collectRequestData( req, callback ) {
     callback( null );
 }
 
+function log( req ) {
+  console.log( `${ req.method } ${ req.url }` );
+}
+
 http.createServer(( req, res ) => {
+
+  if ( req.url.includes( "/status/200" ) ) {
+    log( req );
+    return res.writeHead( 200 ).end( "200 OK" );
+  }
+  if ( req.url.includes( "/status/500" ) ) {
+    log( req );
+    return res.writeHead( 500 ).end( "500 Internal Server Error" );
+  }
+  if ( req.url.includes( "/status/404" ) ) {
+    log( req );
+    return res.writeHead( 404).end( "404 Not Found" );
+  }
 
   const fileName = url.parse( req.url ).pathname.replace( /^\//, "" ) || "index.html",
         ext = extname( fileName );
 
   if ( req.method !== "GET" ) {
-    console.log( `${ req.method } ${ req.url }` );
+    log( req );
     return collectRequestData( req, ( data ) => {
       renderJson( res, { method: req.method, data: JSON.parse( data ) } );
     });
@@ -47,7 +64,7 @@ http.createServer(( req, res ) => {
     res.writeHead( 404 );
     return res.end( "Cannot find " + fileName );
   }
-  console.log( `${ req.method } ${ req.url }` );
+  log( req );
   res.writeHead( 200, { "Content-Type": CT_MAP[ ext ] });
   res.end( fs.readFileSync( join( __dirname, fileName ) ) );
 }).listen( 8080 );

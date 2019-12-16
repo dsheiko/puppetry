@@ -97,6 +97,14 @@ export class ParamsFormBuilder extends React.Component {
      }
    }
 
+   onClickReset = ( e, field ) => {
+     e.preventDefault();
+     const { setFieldsValue } = this.props.form;
+     setFieldsValue({
+       [ field.name ]: ""
+     });
+   }
+
   renderControl = ( field ) => {
     const { setFieldsValue } = this.props.form,
           { onSubmit, targets } = this.props,
@@ -248,6 +256,11 @@ export class ParamsFormBuilder extends React.Component {
         className="command-row-description" />    : "" }
       { field.control === FILE && <Button
         onClick={ ( e ) => this.onClickSelectFile( e, field ) }>Select file</Button>
+      }
+      { ( field.control === FILE && field.optional ) ? <a
+        className="indent-left"
+        role="button" tabIndex={-1}
+        onClick={ ( e ) => this.onClickReset( e, field ) }>Reset</a> : null
       }
       { field.hasOwnProperty( "template" ) && <TemplateHelper
         field={ field }

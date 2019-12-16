@@ -2,7 +2,7 @@
 /*eslint react/no-unescaped-entities: 0*/
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Input, InputNumber, Select, Row, Col, Icon } from "antd";
+import { Form, Input, Select, Row, Col, Icon } from "antd";
 import { getAssertion } from "./helpers";
 import { result, SELECT_SEARCH_PROPS } from "service/utils";
 import AbstractComponent from "component/AbstractComponent";
@@ -13,24 +13,6 @@ const FormItem = Form.Item,
 
 function showInput( val ) {
   return val !== "any" && val !== "empty" && val !== "!empty";
-}
-
-function renderOperator( assert, name, getFieldDecorator, onSelect ) {
-  return ( <FormItem className="is-shrinked">
-    { getFieldDecorator( `assert.${ name }`, {
-      initialValue: result( assert, name, "any" )
-    })(
-      <Select onSelect={ ( val ) => onSelect( name, val ) }>
-        <Option value="any">any</Option>
-        <Option value="equals">equals</Option>
-        <Option value="contains">contains</Option>
-        <Option value="empty">is empty</Option>
-        <Option value="!equals">does not equal</Option>
-        <Option value="!contains">does not contain</Option>
-        <Option value="!empty">is not empty</Option>
-      </Select>
-    ) }
-  </FormItem> );
 }
 
 export class AssertResponse extends AbstractComponent {
@@ -57,19 +39,8 @@ export class AssertResponse extends AbstractComponent {
     const { getFieldDecorator } = this.props.form,
           { record } = this.props,
           assert = getAssertion( record ),
-          layout = {
-            labelCol: {
-              span: 4
-            },
-            wrapperCol: {
-              span: 12
-            }
-          },
           textOperator = result( this.state, "textOperator", result( assert, "textOperator", "any" ) ),
-          headerOperator = result( this.state, "headerOperator", result( assert, "headerOperator", "any" ) ),
-          statusOperator = result( this.state, "statusOperator", result( assert, "statusOperator", "any" ) ),
-          statusTextOperator = result( this.state, "statusTextOperator",
-            result( assert, "statusTextOperator", "any" ) );
+          jpOperator = result( this.state, "jpOperator", result( assert, "jpOperator", "any" ) );
 
     return ( <div>
       <div className="is-invisible">
@@ -83,34 +54,34 @@ export class AssertResponse extends AbstractComponent {
 
       <div className="command-form__noncollapsed markdown">
 
-         <Row gutter={24} className="narrow-row">
-            <Col span={ 4 /*1st*/ }>
+        <Row gutter={24} className="narrow-row">
+          <Col span={ 4 /*1st*/ }>
             <div className="ant-row ant-form-item ant-form-item--like-input">
               Assert there
             </div>
-            </Col>
-            <Col span={4}>
-              <FormItem>
-                { getFieldDecorator( "assert.not", {
-                  initialValue: result( assert, "not", "false" ),
-                  rules: [{
-                    required: true
-                  }]
-                })( <Select showSearch
-                  optionFilterProp="children">
-                  <Option value="false">were</Option>
-                  <Option value="true">were NO</Option>
-                </Select> ) }
-              </FormItem>
-            </Col>
-            <Col span={16} >
-            <div className="ant-row ant-form-item ant-form-item--like-input" style={{ "text-align": "left" }}>
+          </Col>
+          <Col span={4}>
+            <FormItem>
+              { getFieldDecorator( "assert.not", {
+                initialValue: result( assert, "not", "false" ),
+                rules: [{
+                  required: true
+                }]
+              })( <Select showSearch
+                optionFilterProp="children">
+                <Option value="false">were</Option>
+                <Option value="true">were NO</Option>
+              </Select> ) }
+            </FormItem>
+          </Col>
+          <Col span={16} >
+            <div className="ant-row ant-form-item ant-form-item--like-input" style={{ "textAlign": "left" }}>
               requests like the following
             </div>
-            </Col>
-          </Row>
+          </Col>
+        </Row>
 
-          <Row gutter={24} className="narrow-row">
+      <div className="command-form__noncollapsed markdown">
 
           <Col span={ 4 /*1st*/ } >
             <div className="ant-row ant-form-item ant-form-item--like-input">
@@ -144,9 +115,88 @@ export class AssertResponse extends AbstractComponent {
                 initialValue: result( assert, "method", "GET" )
               })(
                 <Select>
-                { [ "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH" ]
-                  .map( val => ( <Option key={ val } value={ val }>{ val }</Option> ))}
+                  { [ "GET", "HEAD", "POST", "PUT", "DELETE", "CONNECT", "OPTIONS", "TRACE", "PATCH" ]
+                    .map( val => ( <Option key={ val } value={ val }>{ val }</Option> ) )}
                 </Select>
+              ) }
+            </FormItem>
+          </Col>
+
+        </Row>
+
+
+          <Row gutter={24} className="narrow-row">
+
+          <Col span={ 4 /*1st*/ } >
+            <div className="ant-row ant-form-item ant-form-item--like-input">
+              Keyword in body
+            </div>
+          </Col>
+
+          <Col span={4} >
+            <FormItem className="is-shrinked">
+              { getFieldDecorator( "assert.textOperator", {
+                initialValue: result( assert, "textOperator", "any" )
+              })(
+                <Select onSelect={ ( val ) => this.onSelect( "textOperator", val ) }>
+                  <Option value="any">any</Option>
+                  <Option value="matches">matches</Option>
+                </Select>
+              ) }
+            </FormItem>
+          </Col>
+
+          <Col span={12} >
+            { showInput( textOperator ) ? <FormItem>
+              { getFieldDecorator( "assert.text", {
+                initialValue:  result( assert, "text", "" )
+              })(
+                <Input onPressEnter={ ( e ) => this.props.onPressEnter( e ) } />
+              ) }
+            </FormItem>
+          </Col>
+
+        </Row>
+
+        <Row gutter={24} className="narrow-row">
+
+          <Col span={ 4 /*1st*/ } >
+            <div className="ant-row ant-form-item ant-form-item--like-input">
+              JSONPath in body { " " }<a
+                href="https://www.npmjs.com/package/jsonpath"
+                onClick={ this.onExtClick }><Icon type="info-circle" /></a>
+            </div>
+          </Col>
+
+          <Col span={4} >
+            <FormItem className="is-shrinked">
+              { getFieldDecorator( "assert.jpOperator", {
+                initialValue: result( assert, "jpOperator", "any" )
+              })(
+                <Select onSelect={ ( val ) => this.onSelect( "jpOperator", val ) }>
+                  <Option value="any">any</Option>
+                  <Option value="matches">matches</Option>
+                </Select>
+              ) }
+            </FormItem>
+          </Col>
+
+          <Col span={8} >
+            { showInput( jpOperator ) ? <FormItem>
+              { getFieldDecorator( "assert.jpExp", {
+                initialValue:  result( assert, "jpExp", "" )
+              })(
+                <Input onPressEnter={ ( e ) => this.props.onPressEnter( e ) } placeholder="$.store.book[2].price" />
+              ) }
+            </FormItem> : null }
+          </Col>
+
+          <Col span={8} >
+            { showInput( jpOperator ) ? <FormItem>
+              { getFieldDecorator( "assert.jpVal", {
+                initialValue:  result( assert, "jpVal", "" )
+              })(
+                <Input onPressEnter={ ( e ) => this.props.onPressEnter( e ) }  placeholder="202" />
               ) }
             </FormItem>
           </Col>
@@ -172,7 +222,7 @@ export class AssertResponse extends AbstractComponent {
               })(
                 <Select { ...SELECT_SEARCH_PROPS } >
                   <Option value="">any</Option>
-                   {
+                  {
                     statusCodes.map( val => {
                       const [ code ] = val.split( " " );
                       return ( <Option key={ val } value={ code }>{ val }</Option> );

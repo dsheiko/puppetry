@@ -303,7 +303,25 @@
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
         },
-        body: JSON.stringify({ foo: "FOO" })
+        body: JSON.stringify({
+          "store": {
+            "book": [
+              {
+                "category": "fiction",
+                "author": "Herman Melville",
+                "title": "Moby Dick",
+                "isbn": "0-553-21311-3",
+                "price": 8.99
+              }, {
+                 "category": "fiction",
+                "author": "J. R. R. Tolkien",
+                "title": "The Lord of the Rings",
+                "isbn": "0-395-19395-8",
+                "price": 22.99
+              }
+            ]
+          }
+        })
       })
       .then( rsp => {
         console.log(rsp.status);

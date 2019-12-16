@@ -177,12 +177,14 @@ function createCbBody({ assert, target, method, id, params }) {
 
   case "response":
     return justify( `expect( result )`
-          + `.toMatchResponse( ${ JSON.stringify( { ...options, not }, null, "  " ) }, "${ source }" );` );
+          + `.toMatchResponse( ${ JSON.stringify({ ...options, not }, null, "  " ) }, "${ source }" );` );
 
-  case "request":
-    return justify( options.textOperator !== "any" ? `result.data = await result.text();\n` : `` )
-          + justify( `expect( result )`
-          + `.toMatchRequest( ${ JSON.stringify( params.url ) }, `
+  case "rest":
+    return justify( `
+result.data = await result.text();
+ENV[ "PUPPETRY_LAST_RESPONSE_TEXT" ] = result.data;
+expect( result )`
+          + `.toMatchRest( ${ JSON.stringify( params.url ) }, `
           + `${ JSON.stringify( options, null, "  " ) }, "${ source }" );` );
   case "assertPerformanceTiming":
     return resolveTimingAssertion( options, source );

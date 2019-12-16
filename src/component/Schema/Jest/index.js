@@ -150,6 +150,8 @@ ${ JSON.stringify( renderSuiteHtml( suite, snippets ) ) }
   });
 
   afterAll(async () => {
+${ options.requireNetworkTraffic ? `    // Let it detach CDP session
+    await bs.page.waitFor( 500 );`: `` }
     await bs.teardown();
   });
 

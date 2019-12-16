@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1575559949,
-  "loadedAt": 1575559714,
+  "savedAt": 1575987430,
+  "loadedAt": 1575987203,
   "modified": false,
   "filename": "page.assertReponse.json",
   "targets": {
@@ -31,7 +31,7 @@
           "editing": false,
           "id": "5t1k3sunxxf",
           "key": "5t1k3sunxxf",
-          "title": "Assert there were responses",
+          "title": "Assert there were responses with given status",
           "commands": {
             "5t1k3suny42": {
               "editing": false,
@@ -79,28 +79,6 @@
               "testId": "5t1k3sunxxf",
               "waitForTarget": false
             },
-            "6swk3sv3kci": {
-              "editing": false,
-              "id": "6swk3sv3kci",
-              "key": "6swk3sv3kci",
-              "target": "page",
-              "method": "waitForResponse",
-              "params": {
-                "value": "http://127.0.0.1:8080/",
-                "skip": false,
-                "timeout": 30000
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "5t1k3sunxxf",
-              "waitForTarget": false
-            },
             "5t1k3sunyjt": {
               "editing": false,
               "id": "5t1k3sunyjt",
@@ -112,6 +90,8 @@
                 "not": "false",
                 "url": "http://127.0.0.1:8080",
                 "method": "POST",
+                "textOperator": "any",
+                "jpOperator": "any",
                 "status": "200"
               },
               "disabled": false,
@@ -123,7 +103,10 @@
               "isRef": false,
               "groupId": "k2vk2vvd4pi",
               "testId": "5t1k3sunxxf",
-              "waitForTarget": false
+              "waitForTarget": false,
+              "params": {
+                "waitFor": true
+              }
             },
             "71ck3sv6pnq": {
               "editing": false,
@@ -136,6 +119,8 @@
                 "not": "false",
                 "url": "http://127.0.0.1:8080",
                 "method": "POST",
+                "textOperator": "any",
+                "jpOperator": "any",
                 "status": "500"
               },
               "disabled": false,
@@ -148,7 +133,10 @@
               "groupId": "k2vk2vvd4pi",
               "testId": "5t1k3sunxxf",
               "waitForTarget": false,
-              "comment": "@assert [page.assertResponse] expected any HTTP/S responses matching POST *http://127.0.0.1:8080* with status code 500, but found none"
+              "comment": "@assert [page.assertResponse] expected any HTTP/S responses matching POST *http://127.0.0.1:8080* with response like status code 500, but found none",
+              "params": {
+                "waitFor": false
+              }
             },
             "6swk3sv4x4s": {
               "editing": false,
@@ -161,6 +149,8 @@
                 "not": "false",
                 "url": "http://127.0.0.1:8080",
                 "method": "GET",
+                "textOperator": "any",
+                "jpOperator": "any",
                 "status": "200"
               },
               "disabled": false,
@@ -173,7 +163,10 @@
               "groupId": "k2vk2vvd4pi",
               "testId": "5t1k3sunxxf",
               "waitForTarget": false,
-              "comment": "@assert [page.assertResponse] expected any HTTP/S responses matching POST *non-matching* with status code 200, but found none"
+              "comment": "@assert [page.assertResponse] expected any HTTP/S responses matching POST *non-matching* with response like status code 200, but found none",
+              "params": {
+                "waitFor": false
+              }
             },
             "5t1k3sup172": {
               "editing": false,
@@ -186,6 +179,8 @@
                 "not": "false",
                 "url": "non-matching",
                 "method": "POST",
+                "textOperator": "any",
+                "jpOperator": "any",
                 "status": "200"
               },
               "disabled": false,
@@ -198,7 +193,10 @@
               "groupId": "k2vk2vvd4pi",
               "testId": "5t1k3sunxxf",
               "waitForTarget": false,
-              "comment": "@assert [page.assertResponse] expected any HTTP/S responses matching POST *non-matching* with status code 200, but found none"
+              "comment": "@assert [page.assertResponse] expected any HTTP/S responses matching POST *non-matching* with response like status code 200, but found none",
+              "params": {
+                "waitFor": false
+              }
             }
           },
           "disabled": false,
@@ -212,7 +210,7 @@
           "editing": false,
           "id": "72ik3svb5wx",
           "key": "72ik3svb5wx",
-          "title": "Assert there were responses",
+          "title": "Assert there were responses with given keyword in body",
           "commands": {
             "72ik3svb691": {
               "editing": false,
@@ -260,29 +258,6 @@
               "testId": "72ik3svb5wx",
               "waitForTarget": false
             },
-            "72ik3svb6nl": {
-              "editing": false,
-              "id": "72ik3svb6nl",
-              "key": "72ik3svb6nl",
-              "target": "page",
-              "method": "waitForResponse",
-              "assert": {},
-              "params": {
-                "value": "http://127.0.0.1:8080/",
-                "skip": false,
-                "timeout": 30000
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "72ik3svb5wx",
-              "waitForTarget": false
-            },
             "72ik3svb706": {
               "editing": false,
               "id": "72ik3svb706",
@@ -291,10 +266,13 @@
               "method": "assertResponse",
               "assert": {
                 "assertion": "response",
-                "not": "true",
+                "not": "false",
                 "url": "http://127.0.0.1:8080",
                 "method": "POST",
-                "status": "500"
+                "textOperator": "contains",
+                "text": "The Lord of the Rings",
+                "jpOperator": "any",
+                "status": ""
               },
               "disabled": false,
               "failure": "",
@@ -306,20 +284,29 @@
               "groupId": "k2vk2vvd4pi",
               "testId": "72ik3svb5wx",
               "waitForTarget": false,
-              "comment": ""
+              "comment": "",
+              "params": {
+                "waitFor": true
+              }
             },
-            "72ik3svb76v": {
+            "o4hk3zxytk7": {
               "editing": false,
-              "id": "72ik3svb76v",
-              "key": "72ik3svb76v",
+              "id": "o4hk3zxytk7",
+              "key": "o4hk3zxytk7",
               "target": "page",
               "method": "assertResponse",
               "assert": {
                 "assertion": "response",
-                "not": "true",
+                "not": "false",
                 "url": "http://127.0.0.1:8080",
-                "method": "DELETE",
-                "status": "200"
+                "method": "POST",
+                "textOperator": "contains",
+                "text": "Something",
+                "jpOperator": "any",
+                "status": ""
+              },
+              "params": {
+                "waitFor": false
               },
               "disabled": false,
               "failure": "",
@@ -331,20 +318,87 @@
               "groupId": "k2vk2vvd4pi",
               "testId": "72ik3svb5wx",
               "waitForTarget": false,
-              "comment": ""
-            },
-            "72ik3svb7db": {
+              "comment": "@assert [page.assertResponse] expected any HTTP/S responses matching POST *http://127.0.0.1:8080* with response like keyword Something, but found none"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
+        "jhuk3zu6ixs": {
+          "editing": false,
+          "id": "jhuk3zu6ixs",
+          "key": "jhuk3zu6ixs",
+          "title": "Assert there were responses with given JSONPath",
+          "commands": {
+            "jhuk3zu6j93": {
               "editing": false,
-              "id": "72ik3svb7db",
-              "key": "72ik3svb7db",
+              "id": "jhuk3zu6j93",
+              "key": "jhuk3zu6j93",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "jhuk3zu6ixs",
+              "waitForTarget": false
+            },
+            "jhuk3zu6jlp": {
+              "editing": false,
+              "id": "jhuk3zu6jlp",
+              "key": "jhuk3zu6jlp",
+              "target": "MAKE_POST_REQUEST_LINK",
+              "method": "click",
+              "assert": {},
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "jhuk3zu6ixs",
+              "waitForTarget": false
+            },
+            "jhuk3zu6jyn": {
+              "editing": false,
+              "id": "jhuk3zu6jyn",
+              "key": "jhuk3zu6jyn",
               "target": "page",
               "method": "assertResponse",
               "assert": {
                 "assertion": "response",
-                "not": "true",
-                "url": "non-matching",
+                "not": "false",
+                "url": "http://127.0.0.1:8080",
                 "method": "POST",
-                "status": "200"
+                "textOperator": "any",
+                "jpOperator": "matches",
+                "jpExp": "$.data.store.book[0].title",
+                "jpVal": "Moby Dick",
+                "status": ""
+              },
+              "params": {
+                "waitFor": true
               },
               "disabled": false,
               "failure": "",
@@ -354,22 +408,29 @@
               "ref": "",
               "isRef": false,
               "groupId": "k2vk2vvd4pi",
-              "testId": "72ik3svb5wx",
+              "testId": "jhuk3zu6ixs",
               "waitForTarget": false,
               "comment": ""
             },
-            "72ik3svbyhq": {
+            "lmhk3zvjq0c": {
               "editing": false,
-              "id": "72ik3svbyhq",
-              "key": "72ik3svbyhq",
+              "id": "lmhk3zvjq0c",
+              "key": "lmhk3zvjq0c",
               "target": "page",
               "method": "assertResponse",
               "assert": {
                 "assertion": "response",
-                "not": "true",
+                "not": "false",
                 "url": "http://127.0.0.1:8080",
                 "method": "POST",
-                "status": "200"
+                "textOperator": "any",
+                "jpOperator": "matches",
+                "jpExp": "$.data.store.book[1].title",
+                "jpVal": "Moby Dick",
+                "status": ""
+              },
+              "params": {
+                "waitFor": false
               },
               "disabled": false,
               "failure": "",
@@ -379,9 +440,9 @@
               "ref": "",
               "isRef": false,
               "groupId": "k2vk2vvd4pi",
-              "testId": "72ik3svb5wx",
+              "testId": "jhuk3zu6ixs",
               "waitForTarget": false,
-              "comment": "@assert [page.assertResponse] expected NO HTTP/S responses matching POST *http://127.0.0.1:8080* with status code 200, but found"
+              "comment": "@assert [page.assertResponse] expected any HTTP/S responses matching POST *http://127.0.0.1:8080* with response like JSONPath $.data.store.book[1].title = Moby Dick, but found none"
             }
           },
           "disabled": false,

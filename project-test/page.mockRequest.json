@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1575556138,
-  "loadedAt": 1575556092,
+  "savedAt": 1576223331,
+  "loadedAt": 1576223320,
   "modified": false,
   "filename": "page.mockRequest.json",
   "targets": {
@@ -23,11 +23,248 @@
       "editing": false,
       "key": "k2vk2vvd4pi",
       "tests": {
+        "icvk3ybg3xw": {
+          "editing": false,
+          "id": "icvk3ybg3xw",
+          "key": "icvk3ybg3xw",
+          "title": "POST intercepted but does not match the assertion",
+          "commands": {
+            "icvk3ybg4av": {
+              "editing": false,
+              "id": "icvk3ybg4av",
+              "key": "icvk3ybg4av",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "icvk3ybg3xw",
+              "waitForTarget": false
+            },
+            "icvk3ybg4gf": {
+              "editing": false,
+              "id": "icvk3ybg4gf",
+              "key": "icvk3ybg4gf",
+              "target": "page",
+              "method": "mockRequest",
+              "params": {
+                "url": "http://127.0.0.1:8080",
+                "method": "POST",
+                "statusCode": "202 Accepted",
+                "contentType": "text/plain",
+                "body": "Lorem ipsum",
+                "headers": ""
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "icvk3ybg3xw",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": ""
+            },
+            "icvk3ybg4lm": {
+              "editing": false,
+              "id": "icvk3ybg4lm",
+              "key": "icvk3ybg4lm",
+              "target": "MAKE_POST_REQUEST_LINK",
+              "method": "click",
+              "assert": {},
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "icvk3ybg3xw",
+              "waitForTarget": false
+            },
+            "icvk3ybg4r0": {
+              "editing": false,
+              "id": "icvk3ybg4r0",
+              "key": "icvk3ybg4r0",
+              "target": "page",
+              "method": "assertResponse",
+              "assert": {
+                "assertion": "response",
+                "not": "false",
+                "url": "http://127.0.0.1:8080",
+                "method": "POST",
+                "textOperator": "any",
+                "jpOperator": "any",
+                "status": "200"
+              },
+              "params": {
+                "waitFor": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "icvk3ybg3xw",
+              "waitForTarget": false,
+              "comment": "@assert [page.assertResponse] expected any HTTP/S responses matching POST *http://127.0.0.1:8080* with response like status code 200, but found none"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
+        "p4jk414zo1z": {
+          "editing": false,
+          "id": "p4jk414zo1z",
+          "key": "p4jk414zo1z",
+          "title": "POST interceptedand matches the assertion by body path",
+          "commands": {
+            "p4jk414zog0": {
+              "editing": false,
+              "id": "p4jk414zog0",
+              "key": "p4jk414zog0",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "p4jk414zo1z",
+              "waitForTarget": false
+            },
+            "p4jk414zorc": {
+              "editing": false,
+              "id": "p4jk414zorc",
+              "key": "p4jk414zorc",
+              "target": "page",
+              "method": "mockRequest",
+              "params": {
+                "url": "http://127.0.0.1:8080",
+                "method": "POST",
+                "statusCode": "200 OK",
+                "contentType": "text/plain",
+                "body": "",
+                "bodyPath": "/home/sheiko/tmp/data.json",
+                "headers": ""
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "p4jk414zo1z",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": ""
+            },
+            "p4jk414zp2f": {
+              "editing": false,
+              "id": "p4jk414zp2f",
+              "key": "p4jk414zp2f",
+              "target": "MAKE_POST_REQUEST_LINK",
+              "method": "click",
+              "assert": {},
+              "params": {
+                "button": "left",
+                "clickCount": 1,
+                "delay": 0
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "p4jk414zo1z",
+              "waitForTarget": false
+            },
+            "p4jk414zpc4": {
+              "editing": false,
+              "id": "p4jk414zpc4",
+              "key": "p4jk414zpc4",
+              "target": "page",
+              "method": "assertRequest",
+              "assert": {
+                "assertion": "response",
+                "not": "false",
+                "url": "http://127.0.0.1:8080",
+                "method": "POST",
+                "textOperator": "any",
+                "jpOperator": "matches",
+                "jpExp": "$.store.book[0].author",
+                "jpVal": "Nigel Rees",
+                "status": ""
+              },
+              "params": {
+                "waitFor": true
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "p4jk414zo1z",
+              "waitForTarget": false,
+              "comment": ""
+            }
+          },
+          "disabled": true,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
         "7vnk2vvpx9i": {
           "editing": false,
           "id": "7vnk2vvpx9i",
           "key": "7vnk2vvpx9i",
-          "title": "Methods match - replace original request",
+          "title": "POST intercepted  and matches the assertion",
           "commands": {
             "ms3k3sjajbz": {
               "editing": false,
@@ -70,9 +307,9 @@
               "entity": "command",
               "params": {
                 "url": "http://127.0.0.1:8080",
-                "method": "PUT",
-                "statusCode": "200 OK",
-                "contentType": "application/json",
+                "method": "POST",
+                "statusCode": "202 Accepted",
+                "contentType": "text/plain",
                 "body": "Lorem ipsum",
                 "headers": ""
               },
@@ -107,16 +344,11 @@
               "target": "page",
               "method": "assertResponse",
               "assert": {
-                "assertion": "request",
+                "assertion": "response",
                 "not": "false",
                 "url": "http://127.0.0.1:8080",
-                "method": "GET",
-                "status": "200",
-                "headerOperator": "any"
-              },
-              "params": {
-                "url": "http://127.0.0.1:8080",
-                "method": "POST"
+                "method": "POST",
+                "status": "202"
               },
               "disabled": false,
               "failure": "",
@@ -127,97 +359,13 @@
               "isRef": false,
               "groupId": "k2vk2vvd4pi",
               "testId": "7vnk2vvpx9i",
-              "waitForTarget": false
+              "waitForTarget": false,
+              "params": {
+                "waitFor": true
+              }
             }
           },
           "disabled": false,
-          "expanded": false,
-          "adding": false,
-          "groupId": "k2vk2vvd4pi",
-          "entity": "test",
-          "failure": ""
-        },
-        "ms3k3sj9sxj": {
-          "editing": true,
-          "id": "ms3k3sj9sxj",
-          "key": "ms3k3sj9sxj",
-          "title": "",
-          "commands": {},
-          "disabled": false,
-          "expanded": false,
-          "adding": false,
-          "groupId": "k2vk2vvd4pi"
-        },
-        "nhqk3rdi2qf": {
-          "editing": false,
-          "id": "nhqk3rdi2qf",
-          "key": "nhqk3rdi2qf",
-          "title": "Methods dismatch - leave original request untouched",
-          "commands": {
-            "nhqk3rdi3cy": {
-              "editing": false,
-              "id": "nhqk3rdi3cy",
-              "key": "nhqk3rdi3cy",
-              "target": "page",
-              "method": "mockRequest",
-              "assert": {},
-              "params": {
-                "url": "https://postman-echo.com/post",
-                "method": "GET",
-                "statusCode": "200 OK",
-                "contentType": "application/json",
-                "body": "Lorem ipsum",
-                "headers": ""
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "nhqk3rdi2qf",
-              "waitForTarget": false,
-              "entity": "command",
-              "comment": ""
-            },
-            "nhqk3rdi3k2": {
-              "editing": false,
-              "id": "nhqk3rdi3k2",
-              "key": "nhqk3rdi3k2",
-              "target": "page",
-              "method": "assertRequest",
-              "assert": {
-                "assertion": "request",
-                "statusOperator": "equals",
-                "statusValue": 200,
-                "statusTextOperator": "equals",
-                "statusTextValue": "OK",
-                "textOperator": "!equals",
-                "headerOperator": "any",
-                "textValue": "Lorem ipsum"
-              },
-              "params": {
-                "url": "https://postman-echo.com/post",
-                "method": "POST",
-                "data": "foo=FOO"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "nhqk3rdi2qf",
-              "waitForTarget": false,
-              "entity": "command",
-              "comment": ""
-            }
-          },
-          "disabled": true,
           "expanded": false,
           "adding": false,
           "groupId": "k2vk2vvd4pi",
@@ -228,7 +376,7 @@
           "editing": false,
           "id": "nhqk3rcutp5",
           "key": "nhqk3rcutp5",
-          "title": "Positive without headers",
+          "title": "GET intercepted and matches assertion",
           "commands": {
             "nhqk3rcuu31": {
               "editing": false,
@@ -236,9 +384,9 @@
               "key": "nhqk3rcuu31",
               "target": "page",
               "method": "mockRequest",
-              "assert": {},
               "params": {
-                "url": "https://httpstat.us/404",
+                "url": "http://127.0.0.1:8080/status/404",
+                "method": "GET",
                 "statusCode": "200 OK",
                 "contentType": "application/json",
                 "body": "{ status: 1 }",
@@ -262,19 +410,18 @@
               "id": "nhqk3rcuu9v",
               "key": "nhqk3rcuu9v",
               "target": "page",
-              "method": "assertRequest",
+              "method": "assertRest",
               "assert": {
-                "assertion": "request",
+                "assertion": "rest",
                 "statusOperator": "equals",
                 "statusValue": 200,
-                "statusTextOperator": "equals",
-                "statusTextValue": "OK",
                 "textOperator": "contains",
                 "textValue": "status: 1",
                 "headerOperator": "any"
               },
               "params": {
-                "url": "https://httpstat.us/404"
+                "url": "http://127.0.0.1:8080/status/404",
+                "method": "GET"
               },
               "disabled": false,
               "failure": "",
@@ -290,7 +437,7 @@
               "comment": ""
             }
           },
-          "disabled": true,
+          "disabled": false,
           "expanded": false,
           "adding": false,
           "groupId": "k2vk2vvd4pi",
@@ -301,7 +448,7 @@
           "editing": false,
           "id": "dp4k3ocf2mu",
           "key": "dp4k3ocf2mu",
-          "title": "Negative without headers",
+          "title": "GET intercepted but does not match assertion",
           "commands": {
             "dp4k3ocf2y1": {
               "editing": false,
@@ -310,7 +457,8 @@
               "target": "page",
               "method": "mockRequest",
               "params": {
-                "url": "https://httpstat.us/404",
+                "url": "http://127.0.0.1:8080/status/404",
+                "method": "GET",
                 "statusCode": "200 OK",
                 "contentType": "application/javascript",
                 "body": "OK",
@@ -334,18 +482,19 @@
               "id": "dp4k3ocf35b",
               "key": "dp4k3ocf35b",
               "target": "page",
-              "method": "assertRequest",
+              "method": "assertRest",
               "assert": {
-                "assertion": "request",
+                "assertion": "rest",
                 "statusOperator": "equals",
                 "statusValue": 200,
-                "statusTextOperator": "any",
                 "textOperator": "equals",
                 "textValue": "FAIL",
+                "jpOperator": "any",
                 "headerOperator": "any"
               },
               "params": {
-                "url": "https://httpstat.us/404"
+                "url": "http://127.0.0.1:8080/status/404",
+                "method": "GET"
               },
               "disabled": false,
               "failure": "",
@@ -358,10 +507,10 @@
               "testId": "dp4k3ocf2mu",
               "waitForTarget": false,
               "entity": "command",
-              "comment": "@assert [page.assertRequest] expected HTTP/S response matching https://httpstat.us/404 with data to be \"FAIL\", but received data \"OK\""
+              "comment": "@assert [page.assertRest] expected HTTP/S response matching http://127.0.0.1:8080/status/404 with data to be \"FAIL\", but received data \"OK\""
             }
           },
-          "disabled": true,
+          "disabled": false,
           "expanded": false,
           "adding": false,
           "groupId": "k2vk2vvd4pi",
@@ -372,7 +521,7 @@
           "editing": false,
           "id": "dp4k3ocfa3h",
           "key": "dp4k3ocfa3h",
-          "title": "Positive with headers",
+          "title": "Get intercepted and headers modified",
           "commands": {
             "dp4k3ocfaas": {
               "editing": false,
@@ -381,7 +530,8 @@
               "target": "page",
               "method": "mockRequest",
               "params": {
-                "url": "https://httpstat.us/404",
+                "url": "http://127.0.0.1:8080/status/404",
+                "method": "GET",
                 "statusCode": "200 OK",
                 "contentType": "application/javascript",
                 "body": "OK",
@@ -405,19 +555,19 @@
               "id": "dp4k3ocfagm",
               "key": "dp4k3ocfagm",
               "target": "page",
-              "method": "assertRequest",
+              "method": "assertRest",
               "assert": {
-                "assertion": "request",
+                "assertion": "rest",
                 "statusOperator": "equals",
                 "statusValue": 200,
-                "statusTextOperator": "any",
                 "textOperator": "any",
                 "headerOperator": "specific",
                 "headerName": "X-Access-Token",
                 "headerValue": "SECRET"
               },
               "params": {
-                "url": "https://httpstat.us/404"
+                "url": "http://127.0.0.1:8080/status/404",
+                "method": "GET"
               },
               "disabled": false,
               "failure": "",
@@ -433,7 +583,7 @@
               "comment": ""
             }
           },
-          "disabled": true,
+          "disabled": false,
           "expanded": false,
           "adding": false,
           "groupId": "k2vk2vvd4pi",
@@ -444,7 +594,7 @@
           "editing": false,
           "id": "effk3od60ew",
           "key": "effk3od60ew",
-          "title": "Negative with headers",
+          "title": "Get intercepted and headers modified yet does not match assertion",
           "commands": {
             "effk3od60pf": {
               "editing": false,
@@ -452,9 +602,9 @@
               "key": "effk3od60pf",
               "target": "page",
               "method": "mockRequest",
-              "assert": {},
               "params": {
-                "url": "https://httpstat.us/404",
+                "url": "http://127.0.0.1:8080/status/404",
+                "method": "GET",
                 "statusCode": 200,
                 "contentType": "application/javascript",
                 "body": "OK",
@@ -478,19 +628,20 @@
               "id": "effk3od60w6",
               "key": "effk3od60w6",
               "target": "page",
-              "method": "assertRequest",
+              "method": "assertRest",
               "assert": {
-                "assertion": "request",
+                "assertion": "rest",
                 "statusOperator": "equals",
                 "statusValue": 200,
-                "statusTextOperator": "any",
                 "textOperator": "any",
+                "jpOperator": "any",
                 "headerOperator": "specific",
                 "headerName": "X-Access-Token",
                 "headerValue": "SOMETHING ELSE"
               },
               "params": {
-                "url": "https://httpstat.us/404"
+                "url": "http://127.0.0.1:8080/status/404",
+                "method": "GET"
               },
               "disabled": false,
               "failure": "",
@@ -503,7 +654,7 @@
               "testId": "effk3od60ew",
               "waitForTarget": false,
               "entity": "command",
-              "comment": "@assert [page.assertRequest] expected HTTP/S response matching https://httpstat.us/404 to have header X-Access-Token: SOMETHING ELSE, but it does not"
+              "comment": "@assert [page.assertRest] expected HTTP/S response matching http://127.0.0.1:8080/status/404 to have header X-Access-Token: SOMETHING ELSE, but it does not"
             },
             "effk3od79af": {
               "editing": false,
@@ -511,9 +662,9 @@
               "key": "effk3od79af",
               "target": "page",
               "method": "mockRequest",
-              "assert": {},
               "params": {
-                "url": "https://httpstat.us/404",
+                "url": "http://127.0.0.1:8080/status/404",
+                "method": "GET",
                 "statusCode": 200,
                 "contentType": "application/javascript",
                 "body": "OK",
@@ -537,19 +688,20 @@
               "id": "effk3od79k9",
               "key": "effk3od79k9",
               "target": "page",
-              "method": "assertRequest",
+              "method": "assertRest",
               "assert": {
-                "assertion": "request",
+                "assertion": "rest",
                 "statusOperator": "equals",
                 "statusValue": 200,
-                "statusTextOperator": "any",
                 "textOperator": "any",
+                "jpOperator": "any",
                 "headerOperator": "specific",
                 "headerName": "SOMETHING ELSE",
                 "headerValue": "SOMETHING ELSE"
               },
               "params": {
-                "url": "https://httpstat.us/404"
+                "url": "http://127.0.0.1:8080/status/404",
+                "method": "GET"
               },
               "disabled": false,
               "failure": "",
@@ -562,10 +714,10 @@
               "testId": "effk3od60ew",
               "waitForTarget": false,
               "entity": "command",
-              "comment": "@assert [page.assertRequest] expected HTTP/S response matching https://httpstat.us/404 to have header SOMETHING ELSE: SOMETHING ELSE, but it does not"
+              "comment": "@assert [page.assertRest] expected HTTP/S response matching http://127.0.0.1:8080/status/404 to have header SOMETHING ELSE: SOMETHING ELSE, but it does not"
             }
           },
-          "disabled": true,
+          "disabled": false,
           "expanded": false,
           "adding": false,
           "groupId": "k2vk2vvd4pi",
@@ -575,5 +727,5 @@
       }
     }
   },
-  "puppetry": "3.0.0"
+  "puppetry": "3.1.0"
 }

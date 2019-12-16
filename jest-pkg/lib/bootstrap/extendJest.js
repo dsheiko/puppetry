@@ -1,4 +1,28 @@
-const { assertionMap, filterGaBeacons, validateGaBeacons, valsToString } = require( "../GaTracking/helpers" );
+const { assertionMap, filterGaBeacons, validateGaBeacons, valsToString } = require( "../GaTracking/helpers" ),
+      jp = require( "jsonpath" );
+
+function matchJsonPath( text, exp, val ) {
+  try {
+    const json = JSON.parse( text );
+    return String( jp.query( json, exp ) ).trim() === val.trim();
+  } catch( e ) {
+    return false;
+  }
+}
+
+function renderResponseConstraints( assert, pref = "" ) {
+  const res = [];
+  if ( assert.status && assert.status !== "any" ) {
+    res.push( `status code ${ assert.status }` );
+  }
+  if ( assert.text && assert.textOperator && assert.textOperator !== "any" ) {
+    res.push( `keyword ${ assert.text }` );
+  }
+  if ( assert.jpExp && assert.jpOperator && assert.jpOperator !== "any" ) {
+    res.push( `JSONPath ${ assert.jpExp } = ${ assert.jpVal }` );
+  }
+  return res.length ? pref + res.join( ", " ) : "";
+}
 
 module.exports = function( expect, util ) {
   /**
@@ -372,21 +396,16 @@ module.exports = function( expect, util ) {
      * @param {String} source
      * @returns {Object}
      */
-    toMatchResponse( responses, assert, source ) {
-      const matches = responses.filter( rsp => {
-        return rsp.url().includes( assert.url )
-          && ( assert.method === "any" || rsp.request().method().toUpperCase() === assert.method )
-          && ( assert.status && parseInt( rsp.status(), 10 ) === parseInt( assert.status, 10 ) );
-      });
-
+    toMatchResponse( matches, assert, source ) {
+      const rspDesc = renderResponseConstraints( assert, " with response like " );
       if ( assert.not === "true" ) {
         return expectReturn( Boolean( !matches.length ), `[${ source }] expected NO HTTP/S `
           + `responses matching ${ assert.method } *${ assert.url }*`
-          + ` with status code ${ assert.status }, but found ${ matches.length }` );
+          + `${ rspDesc }, but found ${ matches.length }` );
       }
       return expectReturn( Boolean( matches.length ), `[${ source }] expected any HTTP/S `
         + `responses matching ${ assert.method } *${ assert.url }*`
-        + ` with status code ${ assert.status }, but found none` );
+        + `${ rspDesc }, but found none` );
 
     },
 
@@ -398,7 +417,7 @@ module.exports = function( expect, util ) {
      * @param {String} source
      * @returns {Object}
      */
-    toMatchRequest( rsp, url, assert, source ) {
+    toMatchRest( rsp, url, assert, source ) {
       const errIntro = `[${ source }] expected HTTP/S response matching ${ url }`,
             RE = /\"/g;
       if ( !rsp ) {
@@ -419,6 +438,11 @@ module.exports = function( expect, util ) {
         return expectReturn( res.exp,
           `${ errIntro } with data ${ res.expected }, but received data `
             + `${ res.actual }` );
+      }
+
+      if ( assert.jpOperator && assert.jpOperator !== "any" ) {
+        return expectReturn( matchJsonPath( rsp.data, assert.jpExp, assert.jpVal ),
+          `${ errIntro } to match ${ assert.jpExp } = ${ assert.jpVal }, but nothing intercepted` );
       }
 
       if ( assert.headerOperator === "any" ) {

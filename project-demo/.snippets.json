@@ -4,8 +4,8 @@
   "snippets": true,
   "description": null,
   "savedAt": 1574074542,
-  "loadedAt": 1574074473,
-  "modified": false,
+  "loadedAt": 1576141393,
+  "modified": true,
   "filename": ".snippets.json",
   "targets": {
     "jotk2g4k6sl": {
@@ -288,5 +288,5 @@
       "adding": false
     }
   },
-  "puppetry": "3.0.0-RC.3"
+  "puppetry": "3.1.0"
 }
