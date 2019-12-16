@@ -94,6 +94,7 @@ brew cask install puppetry
 - examine the [Backlog](https://github.com/dsheiko/puppetry/projects), suggest new features
 - look into existing Issues, come up with a fix (`master` branch)
 - implement new features (`dev` branch)
+- check [Developer Guide](https://github.com/dsheiko/puppetry/wiki/)
 
 Please adhere the coding style. We have one based on jQuery's JavaScript Style Guide. You can find the validation rules in `.eslintrc`
 and lint the code by running `npm run lint`
