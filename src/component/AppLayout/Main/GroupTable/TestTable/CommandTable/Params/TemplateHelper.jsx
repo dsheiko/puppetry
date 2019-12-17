@@ -51,6 +51,16 @@ export class TemplateHelper extends React.Component {
     this.setState({ envName: e.target.value });
   }
 
+  onHtmlOfChange = ( e ) => {
+    this.setState({ htmlOf: e.target.value });
+  }
+
+  onHtmlOfClick = ( e ) => {
+    this.props.onChange( this.props.field.name,
+      `{{ htmlOf( ${ JSON.stringify( this.state.htmlOf ) } ) }}` );
+    this.reset();
+  }
+
   onFakerMethodChange = ( val ) => {
     this.setState({ fakerMethod: val });
   }
@@ -73,6 +83,12 @@ export class TemplateHelper extends React.Component {
   onCounterClick = () => {
     this.props.onChange( this.props.field.name,
       `{{ counter() }}` );
+    this.reset();
+  }
+
+  onUniqidClick = () => {
+    this.props.onChange( this.props.field.name,
+      `{{ uniqid() }}` );
     this.reset();
   }
 
@@ -102,7 +118,7 @@ export class TemplateHelper extends React.Component {
   render() {
 
     const { variables, environments } = this.props,
-          { exp, iterateList, randomList, envName, fakerMethod } = this.state,
+          { exp, iterateList, randomList, envName, fakerMethod, htmlOf } = this.state,
           [ activeEnv ] = environments,
           selStyle = { width: 160 };
 
@@ -117,9 +133,11 @@ export class TemplateHelper extends React.Component {
 
         <Option key="1" value="variables">Variables</Option>
         <Option key="2" value="env">env()</Option>
+        <Option key="7" value="uniqid">uniqid()</Option>
         <Option key="3" value="counter">counter()</Option>
         <Option key="4" value="iterate">iterate()</Option>
         <Option key="5" value="random">random()</Option>
+        <Option key="8" value="htmlOf">htmlOf()</Option>
         <Option key="6" value="faker">faker()</Option>
       </Select>
 
@@ -151,6 +169,11 @@ export class TemplateHelper extends React.Component {
         size="small"
         onClick={ this.onCounterClick }>Insert</Button> }
 
+      { exp === "uniqid" && <Button
+        size="small"
+        onClick={ this.onUniqidClick }>Insert</Button> }
+
+
       { exp === "random" && <Select
         placeholder="Enter values"
         mode="tags" tokenSeparators={[ "," ]}
@@ -160,6 +183,14 @@ export class TemplateHelper extends React.Component {
       { ( exp === "random" && randomList.length ) ? <Button
         size="small"
         onClick={ this.onRandomClick }>Insert</Button> : null }
+
+      { exp === "htmlOf" && <Input
+        placeholder="Enter target name"
+        size="small" onChange={ this.onHtmlOfChange } /> }
+
+      { ( exp === "htmlOf" && htmlOf ) ? <Button
+        size="small"
+        onClick={ this.onHtmlOfClick }>Insert</Button> : null }
 
       { exp === "env" && <Input
         placeholder="Enter name"

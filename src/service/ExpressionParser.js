@@ -1,5 +1,6 @@
 import { ExpressionParserException } from "error";
 import { renderTarget } from "service/utils";
+import uniqid from "uniqid";
 /*eslint no-useless-escape: 0*/
 
 function extractParams( func, directive ) {
@@ -18,6 +19,9 @@ class Parsers {
   // {{ faker("address.streetSuffix", "en") }}
   faker = ([ method, locale = "en" ]) =>
     `util.exp.fake( ${ jstr( method ) }, ${ jstr( locale === "undefined" ? "en" : locale ) } )`;
+
+  // {{ uniqid() }}
+  uniqid = () => JSON.stringify( uniqid() );
 
   // {{ random(["aa", "bb"]) }}
   random = ([ json ]) => `util.exp.random( ${ jstr( json ) } )`;

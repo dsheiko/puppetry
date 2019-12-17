@@ -1,3 +1,8 @@
+# Puppetry 3.1.1
+
+### Features
+- improvement: add template expression uniqid
+
 # Puppetry 3.1.0
 
 ### Features
