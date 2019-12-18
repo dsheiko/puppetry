@@ -20,6 +20,15 @@ Puppetry is an open-source cross-platform desktop application that gives non-dev
 
 [:tv: Watch introduction video](https://youtu.be/dfuNhTCRMRg  "Recording Automated Tests with Puppetry")
 
+# Welcome Puppetry
+Puppetry offers you an easy-to-use UI where you choose browser methods and assertions from a predefined list, with predefined settings, guided by extensive tips.
+Namely you can do the following:
+- record user flow
+- declare element targets as pairs `variable = locator`, where locator can be either CSS selector or Xpath.
+- manage your test structure in BDD style (project, suite, test context, test case)
+- manage page/element methods and assertions
+- run the tests
+- export the project as Jest/Puppeteer bundle ready to run in CLI (e.g. by a continuous integration server)
 
 # Key Features
 
@@ -48,16 +57,6 @@ Puppetry is an open-source cross-platform desktop application that gives non-dev
   - [Testing Shadow DOM](https://docs.puppetry.app/testing-techniques/testing-shadow-dom)
   - [Testing Transactional Emails](https://docs.puppetry.app/testing-techniques/testing-emails).
 
-
-# Welcome Puppetry
-Puppetry offers you an easy-to-use UI where you choose browser methods and assertions from a predefined list, with predefined settings, guided by extensive tips.
-Namely you can do the following:
-- record user flow
-- declare element targets as pairs `variable = locator`, where locator can be either CSS selector or Xpath.
-- manage your test structure in BDD style (project, suite, test context, test case)
-- manage page/element methods and assertions
-- run the tests
-- export the project as Jest/Puppeteer bundle ready to run in CLI (e.g. by a continuous integration server)
 
 ## Download
 
