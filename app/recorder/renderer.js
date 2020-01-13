@@ -243,6 +243,12 @@ urlInput.addEventListener( "keyup", ( e ) => {
   }
 }, false );
 
+document.querySelector( "#loadUrl" ).addEventListener( "click", e => {
+  e.preventDefault();
+  loadUrl( urlInput.value );
+}, false );
+
+
 
 options.forEach( data => {
   const opt = document.createElement( "option" );

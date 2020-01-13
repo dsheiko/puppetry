@@ -2,6 +2,7 @@
 
 ### Features
 - improvement: add template expression uniqid
+- improvement: add "Load URL" button into Recorder
 
 ### Bug fixes
 - fix: issue #59, recorder to accept pages with not secure certificates
