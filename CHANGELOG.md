@@ -3,6 +3,9 @@
 ### Features
 - improvement: add template expression uniqid
 
+### Bug fixes
+- fix: issue #59, Problem with recording when page is not secure with certificate
+
 # Puppetry 3.1.0
 
 ### Features

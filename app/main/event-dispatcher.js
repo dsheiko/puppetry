@@ -1,4 +1,4 @@
-const { ipcMain, dialog, remote, BrowserWindow, rendererWindow } = require( "electron" ),
+const { ipcMain, dialog, remote, BrowserWindow, rendererWindow, app } = require( "electron" ),
       { E_BROWSE_DIRECTORY, E_DIRECTORY_SELECTED, E_RUN_TESTS,
         E_TEST_REPORTED, E_WATCH_FILE_NAVIGATOR, E_BROWSE_FILE, E_FILE_SELECTED,
         E_INSTALL_RUNTIME_TEST, E_SHOW_CONFIRM_DIALOG, E_CONFIRM_DIALOG_VALUE,
@@ -28,6 +28,10 @@ function findExternalDisplay() {
   });
 }
 
+// https://github.com/dsheiko/puppetry/issues/59
+app.on( "certificate-error", ( event, webContents, url, error, certificate, callback ) => {
+  callback( true );
+});
 
 module.exports = function( mainWindow ) {
 

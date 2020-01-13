@@ -4,7 +4,7 @@ import { truncate } from "service/utils";
 
 
 function sanitize( val ) {
-  return truncate( val.replace( /"/m, "" ), 60 );
+  return truncate( val.replace( /["`]/m, "" ), 60 );
 }
 
 export const runjs = {
