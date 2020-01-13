@@ -4,7 +4,8 @@
 - improvement: add template expression uniqid
 
 ### Bug fixes
-- fix: issue #59, Problem with recording when page is not secure with certificate
+- fix: issue #59, recorder to accept pages with not secure certificates
+- fix: issue #61, incognito mode for recorder webview
 
 # Puppetry 3.1.0
 

@@ -1,4 +1,4 @@
-const { ipcMain, dialog, remote, BrowserWindow, rendererWindow, app } = require( "electron" ),
+const { ipcMain, dialog, remote, BrowserWindow, rendererWindow, app, session } = require( "electron" ),
       { E_BROWSE_DIRECTORY, E_DIRECTORY_SELECTED, E_RUN_TESTS,
         E_TEST_REPORTED, E_WATCH_FILE_NAVIGATOR, E_BROWSE_FILE, E_FILE_SELECTED,
         E_INSTALL_RUNTIME_TEST, E_SHOW_CONFIRM_DIALOG, E_CONFIRM_DIALOG_VALUE,
@@ -83,6 +83,8 @@ module.exports = function( mainWindow ) {
     }) );
 
     recorderWindow.focus();
+    // https://github.com/dsheiko/puppetry/issues/61
+    session.fromPartition( "persist:recorder" ).clearStorageData();
   });
 
 
