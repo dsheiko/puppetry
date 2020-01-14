@@ -55,7 +55,7 @@ export class TemplateHelper extends React.Component {
     this.setState({ htmlOf: e.target.value });
   }
 
-  onHtmlOfClick = ( e ) => {
+  onHtmlOfClick = () => {
     this.props.onChange( this.props.field.name,
       `{{ htmlOf( ${ JSON.stringify( this.state.htmlOf ) } ) }}` );
     this.reset();
