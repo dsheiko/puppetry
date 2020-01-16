@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>How to test Chrome Extensions</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/index.css" rel="stylesheet" type="text/css">
+
+    <meta name="description" content="An average Chrome Extension is HTML5 application, therefore we can test it with Puppetry. The only difference here is in way we obtain the page context. The following walkthrough explains how it can be done">
+    <meta name="keywords" content="puppetry, Puppetry Testing, Testing Chrome Extension, GUI testing'" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" href="/assets/img/favicon-96x96.png" type="image/x-icon">
+    <link rel="icon" href="/assets/img/favicon-96x96.png" type="image/x-icon">
+
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="How to test Chrome Extensions" />
+    <meta property="og:description" content="An average Chrome Extension is HTML5 application, therefore we can test it with Puppetry. The only difference here is in way we obtain the page context. The following walkthrough explains how it can be done" />
+    <meta property="og:url" content="https://puppetry.app/tip/howto-test-chrome-extensions/" />
+    <meta property="og:site_name" content="Puppetry" />
+    <meta property="article:publisher" content="https://github.com/dsheiko" />
+
+    <meta itemprop="image" content="https://puppetry.app/tip/howto-test-chrome-extensions/howto_chrome5.png">
+    <meta name="twitter:image:src" content="https://puppetry.app/tip/howto-test-chrome-extensions/howto_chrome5.png">
+    <meta property="og:image" content="https://puppetry.app/tip/howto-test-chrome-extensions/howto_chrome5.png">
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:description" content="An average Chrome Extension is HTML5 application, therefore we can test it with Puppetry. The only difference here is in way we obtain the page context. The following walkthrough explains how it can be done" />
+    <meta name="twitter:title" content="How to test Chrome Extensions" />
+    <meta name="twitter:site" content="@sheiko" />
+    <meta name="twitter:image" content="https://puppetry.app/tip/howto-test-chrome-extensions/howto_chrome5.png" />
+    <meta name="twitter:creator" content="@sheiko" />
+
+
+    <link rel="canonical" href="https://puppetry.app/tip/howto-test-chrome-extensions/">
+
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+    <link rel="preconnect" href="https://api.github.com" crossorigin>
+    <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
+
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "HowTo",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://puppetry.app/tip/howto-test-chrome-extensions/howto_chrome5.png"
+      },
+      "name": "How to test Chrome Extensions",
+      "description": "An average Chrome Extension is HTML5 application, therefore we can test it with Puppetry. The only difference here is in way we obtain the page context. The following walkthrough explains how it can be done",
+      "totalTime": "PT15M",
+
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "Chrome extension"
+        }
+      ],
+
+      "tool": [
+        {
+          "@type": "HowToTool",
+          "name": "Puppetry - codeless end-to-end testing"
+        }
+      ],
+      "step":[
+        {
+          "@type": "HowToStep",
+          "name": "Open Extension Management page",
+          "text": "Open Chrome browser; navigate to chrome://extensions; turn on the Developer mode switcher",
+          "image": "https://puppetry.app/tip/howto-test-chrome-extensions/howto_chrome1.png",
+          "url": "https://puppetry.app/tip/howto-test-chrome-extensions/#howtoStep1"
+        }, {
+          "@type": "HowToStep",
+          "name": "Add your extension",
+          "text": "Load the unpacked version of your extension. You can create a demo one with extensionizr.com service. Write down the extension ID (e.g. eclajhagmjdnniapeipnfejgmplgehme) from appeared extension card.",
+          "image": "https://puppetry.app/tip/howto-test-chrome-extensions/howto_chrome2.png",
+          "url": "https://puppetry.app/tip/howto-test-chrome-extensions/#howtoStep2"
+        }, {
+          "@type": "HowToStep",
+          "name": "Access the extension in the tests",
+          "text": "Launch Puppetry and create an empty test case. Check the extension manifest.json file for default_popup value. Add command page.goto with URL like chrome-extension://EXTENSION_ID/EXTENSION_RELATIVE_URL.",
+          "image": "https://puppetry.app/tip/howto-test-chrome-extensions/howto_chrome3.png",
+          "url": "https://puppetry.app/tip/howto-test-chrome-extensions/#howtoStep3"
+        }, {
+          "@type": "HowToStep",
+          "name": "Run the tests",
+          "text": "Open Run Tests dialog (press F6 or Run in the main menu). Switch to Browser options and set the Chrome extension folder location (with Browse... button). Click on Run button.",
+          "image": "https://puppetry.app/tip/howto-test-chrome-extensions/howto_chrome4.png",
+          "url": "https://puppetry.app/tip/howto-test-chrome-extensions/#howtoStep4"
+        }, {
+          "@type": "HowToStep",
+          "name": "Observe the report",
+          "text": "So we have got the screenshot with Chrome extension page view. Thus we can develop a real test case with commands and assertions pointed at the extension page context.",
+          "image": "https://puppetry.app/tip/howto-test-chrome-extensions/howto_chrome5.png",
+          "url": "https://puppetry.app/tip/howto-test-chrome-extensions/#howtoStep5"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129292661-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-129292661-1');
+    </script>
+
+
+    <script type="text/javascript">
+      WebFontConfig = {
+        google: { families: [ "Roboto" ] }
+      };
+      (function() {
+        var wf = document.createElement( "script" );
+        wf.src = "https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js";
+        wf.type = "text/javascript";
+        wf.async = "true";
+        var s = document.getElementsByTagName( "script" )[ 0 ];
+        s.parentNode.insertBefore( wf, s );
+      })();
+    </script>
+
+
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+
+        <header class="navbar">
+          <div class="navbar__logo">
+            <img class="navbar__img"  src="/assets/img/puppetry.svg" alt="Puppetry logo" />
+            <a href="/" class="navbar__title">
+              Puppetry
+            </a>
+          </div>
+          <div class="navbar__menu">
+            <div  class="navbar__menu_github">
+
+            <div class="fb-like github-button"
+                 data-href="https://www.facebook.com/puppetry.testing/"
+                 data-width="" data-layout="button_count"
+                 data-action="like"
+                 data-size="large"
+                 data-show-faces="false"
+                 data-share="false"></div>
+
+            <a class="github-button" href="https://github.com/dsheiko/puppetry/fork" data-icon="octicon-repo-forked" data-size="large" aria-label="Fork Puppetry.app on GitHub">Fork</a>
+            <a class="github-button" href="https://github.com/dsheiko/puppetry" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star Puppetry.app on GitHub">Star</a>
+            </div>
+            <div  class="navbar__menu_puppetry">
+
+
+            <a  href="https://github.com/dsheiko/puppetry/releases" target="_blank" class="btn btn--secondary btn--md"
+                title="Download Puppetry"
+                aria-label="Download Puppetry" role="button">Download</a>
+            </div>
+          </div>
+
+
+
+
+        </header>
+
+
+        </div>
+
+
+      </div>
+    </section>
+
+    <section class="section section--features">
+      <div class="container">
+        <h2>How to test Chrome Extensions</h2>
+        <p class="section__intro">An average Chrome Extension is HTML5 application, therefore we can test it with Puppetry. The only difference here is in way we obtain the page context. The following walkthrough explains how it can be done</p>
+
+        <div id="howtoStep1" class="feature feature--left">
+
+         <div class="feature__ic">
+           <div class="feature__img-frame">
+            <img
+                class="feature__img lazyload blur-up"
+                data-sizes="auto"
+                src="./howto_chrome1.png"
+                alt="Loading the Chrome extension"  />
+           </div>
+          </div>
+          <div>
+            <h3>Open Extension Management page</h3>
+            <ul class="p">
+              <li>Open Chrome browser.</li>
+              <li>Navigate to <a href="chrome://extensions" target="_blank">chrome://extensions</a></li>
+              <li>Turn on the Developer mode switcher.</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div id="howtoStep2" class="feature feature--right">
+          <div>
+            <h3>Add your extension</h3>
+            <ul class="p">
+              <li>Load the unpacked version of your extension. You can create a demo one with <a href="https://extensionizr.com/" target="_blank">extensionizr.com</a> service.</li>
+              <li>Write down the extension ID (e.g. <code>eclajhagmjdnniapeipnfejgmplgehme</code>) from appeared extension card.</li>
+            </ul>
+          </div>
+          <div class="feature__ic">
+            <div class="feature__img-frame">
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./howto_chrome2.png"
+              alt="Adding extension"
+              />
+            </div>
+          </div>
+        </div>
+
+         <div  id="howtoStep3" class="feature feature--left">
+          <div class="feature__ic">
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./howto_chrome3.png"
+              alt="Accessing the extension in the tests"  />
+          </div>
+          <div>
+            <h3>Access the extension in the tests</h3>
+            <ul class="p">
+              <li>Launch Puppetry and create an empty test case.</li>
+              <li>Check the extension <code>manifest.json</code> file for default_popup value (e.g. <code>src/page_action/page_action.html</code>).</li>
+              <li>Add command <b>page.goto</b> with URL like <code>chrome-extension://EXTENSION_ID/EXTENSION_RELATIVE_URL</code>.
+              </li>
+              <li>Add command page.screenshot to take a screenshot when the extension HTML is loaded.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div  id="howtoStep4" class="feature feature--right">
+          <div>
+            <h3>Run the tests</h3>
+            <ul class="p">
+              <li>Open Run Tests dialog (press <strong>F6</strong> or <strong>Run</strong> in the main menu).</li>
+              <li>Switch to Browser options and set the Chrome extension folder location (with <strong>Browse...</strong> button).</li>
+              <li>Click on <strong>Run</strong> button.</li>
+            </ul>
+          </div>
+          <div class="feature__ic">
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./howto_chrome4.png"
+              alt="Run the tests"  />
+          </div>
+        </div>
+
+        <div  id="howtoStep5" class="feature feature--left">
+          <div class="feature__ic">
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./howto_chrome5.png"
+              alt="Observe the report"  />
+          </div>
+          <div>
+            <h3>Observe the report</h3>
+            <p>So we have got the screenshot with Chrome extension page view. Thus we can develop a real test case with commands and assertions pointed at the extension page context.</p>
+          </div>
+        </div>
+
+
+      </div>
+    </section>
+
+
+
+    <section class="section section--features section--footer">
+      <div class="container">
+
+
+        <div class="footer">
+          <div class="footer__copyright">
+            © <span id="cYear">2019</span> MIT License. Created by  <a href="http://dsheiko.com" target="_blank">Dmitry Sheiko</a>
+          </div>
+          <div class="footer__links">
+
+            <a rel="noopener noreferrer" title="Find me on Amazon" class="layout-icon" href="https://www.amazon.com/default/e/B0788FN46T/" target="_blank">
+                <i class="anticon anticon-amazon">
+                   <svg viewBox="64 64 896 896" class="" data-icon="amazon" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                      <path d="M825 768.9c-3.3-.9-7.3-.4-11.9 1.3-61.6 28.2-121.5 48.3-179.7 60.2C507.7 856 385.2 842.6 266 790.3c-33.1-14.6-79.1-39.2-138-74a9.36 9.36 0 0 0-5.3-2c-2-.1-3.7.1-5.3.9-1.6.8-2.8 1.8-3.7 3.1-.9 1.3-1.1 3.1-.4 5.4.6 2.2 2.1 4.7 4.6 7.4 10.4 12.2 23.3 25.2 38.6 39s35.6 29.4 60.9 46.8c25.3 17.4 51.8 32.9 79.3 46.4 27.6 13.5 59.6 24.9 96.1 34.1s73 13.8 109.4 13.8c36.2 0 71.4-3.7 105.5-10.9 34.2-7.3 63-15.9 86.5-25.9 23.4-9.9 45-21 64.8-33 19.8-12 34.4-22.2 43.9-30.3 9.5-8.2 16.3-14.6 20.2-19.4 4.6-5.7 6.9-10.6 6.9-14.9.1-4.5-1.7-7.1-5-7.9zM527.4 348.1c-15.2 1.3-33.5 4.1-55 8.3-21.5 4.1-41.4 9.3-59.8 15.4s-37.2 14.6-56.3 25.4c-19.2 10.8-35.5 23.2-49 37s-24.5 31.1-33.1 52c-8.6 20.8-12.9 43.7-12.9 68.7 0 27.1 4.7 51.2 14.3 72.5 9.5 21.3 22.2 38 38.2 50.4 15.9 12.4 34 22.1 54 29.2 20 7.1 41.2 10.3 63.2 9.4 22-.9 43.5-4.3 64.4-10.3 20.8-5.9 40.4-15.4 58.6-28.3 18.2-12.9 33.1-28.2 44.8-45.7 4.3 6.6 8.1 11.5 11.5 14.7l8.7 8.9c5.8 5.9 14.7 14.6 26.7 26.1 11.9 11.5 24.1 22.7 36.3 33.7l104.4-99.9-6-4.9c-4.3-3.3-9.4-8-15.2-14.3-5.8-6.2-11.6-13.1-17.2-20.5-5.7-7.4-10.6-16.1-14.7-25.9-4.1-9.8-6.2-19.3-6.2-28.5V258.7c0-10.1-1.9-21-5.7-32.8-3.9-11.7-10.7-24.5-20.7-38.3-10-13.8-22.4-26.2-37.2-37-14.9-10.8-34.7-20-59.6-27.4-24.8-7.4-52.6-11.1-83.2-11.1-31.3 0-60.4 3.7-87.6 10.9-27.1 7.3-50.3 17-69.7 29.2-19.3 12.2-35.9 26.3-49.7 42.4-13.8 16.1-24.1 32.9-30.8 50.4-6.7 17.5-10.1 35.2-10.1 53.1L408 310c5.5-16.4 12.9-30.6 22-42.8 9.2-12.2 17.9-21 25.8-26.5 8-5.5 16.6-9.9 25.7-13.2 9.2-3.3 15.4-5 18.6-5.4 3.2-.3 5.7-.4 7.6-.4 26.7 0 45.2 7.9 55.6 23.6 6.5 9.5 9.7 23.9 9.7 43.3v56.6c-15.2.6-30.4 1.6-45.6 2.9zM573.1 500c0 16.6-2.2 31.7-6.5 45-9.2 29.1-26.7 47.4-52.4 54.8-22.4 6.6-43.7 3.3-63.9-9.8-21.5-14-32.2-33.8-32.2-59.3 0-19.9 5-36.9 15-51.1 10-14.1 23.3-24.7 40-31.7s33-12 49-14.9c15.9-3 33-4.8 51-5.4V500zm335.2 218.9c-4.3-5.4-15.9-8.9-34.9-10.7-19-1.8-35.5-1.7-49.7.4-15.3 1.8-31.1 6.2-47.3 13.4-16.3 7.1-23.4 13.1-21.6 17.8l.7 1.3.9.7 1.4.2h4.6c.8 0 1.8-.1 3.2-.2 1.4-.1 2.7-.3 3.9-.4 1.2-.1 2.9-.3 5.1-.4 2.1-.1 4.1-.4 6-.7.3 0 3.7-.3 10.3-.9 6.6-.6 11.4-1 14.3-1.3 2.9-.3 7.8-.6 14.5-.9 6.7-.3 12.1-.3 16.1 0 4 .3 8.5.7 13.6 1.1 5.1.4 9.2 1.3 12.4 2.7 3.2 1.3 5.6 3 7.1 5.1 5.2 6.6 4.2 21.2-3 43.9s-14 40.8-20.4 54.2c-2.8 5.7-2.8 9.2 0 10.7s6.7.1 11.9-4c15.6-12.2 28.6-30.6 39.1-55.3 6.1-14.6 10.5-29.8 13.1-45.7 2.4-15.9 2-26.2-1.3-31z"></path>
+                   </svg>
+                </i>
+             </a>
+             <a rel="noopener noreferrer" title="Contact me on Twitter" class="layout-icon" href="https://twitter.com/sheiko" target="_blank">
+                <i class="anticon anticon-twitter">
+                   <svg viewBox="64 64 896 896" class="" data-icon="twitter" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                      <path d="M928 254.3c-30.6 13.2-63.9 22.7-98.2 26.4a170.1 170.1 0 0 0 75-94 336.64 336.64 0 0 1-108.2 41.2A170.1 170.1 0 0 0 672 174c-94.5 0-170.5 76.6-170.5 170.6 0 13.2 1.6 26.4 4.2 39.1-141.5-7.4-267.7-75-351.6-178.5a169.32 169.32 0 0 0-23.2 86.1c0 59.2 30.1 111.4 76 142.1a172 172 0 0 1-77.1-21.7v2.1c0 82.9 58.6 151.6 136.7 167.4a180.6 180.6 0 0 1-44.9 5.8c-11.1 0-21.6-1.1-32.2-2.6C211 652 273.9 701.1 348.8 702.7c-58.6 45.9-132 72.9-211.7 72.9-14.3 0-27.5-.5-41.2-2.1C171.5 822 261.2 850 357.8 850 671.4 850 843 590.2 843 364.7c0-7.4 0-14.8-.5-22.2 33.2-24.3 62.3-54.4 85.5-88.2z"></path>
+                   </svg>
+                </i>
+             </a>
+
+             <a rel="noopener noreferrer" title="Visit Puppetry on Facebook" class="layout-icon" href="https://www.facebook.com/puppetry.testing/" target="_blank">
+                <i class="anticon">
+                  <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="facebook" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                    <path d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-32 736H663.9V602.2h104l15.6-120.7H663.9v-77.1c0-35 9.7-58.8 59.8-58.8h63.9v-108c-11.1-1.5-49-4.8-93.2-4.8-92.2 0-155.3 56.3-155.3 159.6v89H434.9v120.7h104.3V848H176V176h672v672z"></path>
+                  </svg>
+                </i>
+             </a>
+
+             <a rel="noopener noreferrer" title="Visit Puppetry on Github" class="layout-icon" href="https://github.com/dsheiko/puppetry" target="_blank">
+                <i class="anticon anticon-github">
+                   <svg viewBox="64 64 896 896" class="" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                      <path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0 1 38.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path>
+                   </svg>
+                </i>
+             </a>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <div id="fb-root"></div>
+    <script>
+      document.querySelector( "#cYear" ).innerHTML = ( new Date() ).getFullYear();
+    </script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script async defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v4.0&appId=227086787320417&autoLogAppEvents=1"></script>
+    <script src="/js/ls.rias.min.js"></script>
+    <script src="/js/lazysizes.min.js"></script>
+
+
+  </body>
+</html>

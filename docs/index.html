@@ -18,7 +18,7 @@
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Puppetry - codeless end-to-end test automation" />
-    <meta property="og:description" content="Puppetry is an open-source scriptless test automation IDE that can be used by QA engineers with no programming background. Tests can be included into CI/CD pipeline" />
+    <meta property="og:description" content="Automated testing tool built on top of Puppeteer, which allows QA engineers to record, manage and run functional tests as well as include into CI/CD pipeline" />
     <meta property="og:url" content="https://puppetry.app" />
     <meta property="og:site_name" content="Puppetry" />
     <meta property="article:publisher" content="https://github.com/dsheiko" />
@@ -123,37 +123,37 @@
           "name": "Manage your test structure",
           "text": "The test organizational structure consists of projects. Every project has one or more test suites. Every suite is split in test cases, where test case may contain one or more browser methods and assertions.",
           "image": "https://puppetry.app/assets/img/v3/manage-structure.gif",
-          "url": "https://docs.puppetry.app/managing-assets"
+          "url": "https://puppetry.app/#howtoStep1"
         }, {
           "@type": "HowToStep",
           "name": "Locate and define element targets",
           "text": "Test target can be either page or an element on the page. In the second case we need to inform Puppetry project what exact elements we mean. Locating an element is quite easy in a modern browser. You just need to right-click on the target element and copy its CSS selector or XPath",
           "image": "https://puppetry.app/assets/img/v3/manage-targets.gif",
-          "url": "https://docs.puppetry.app/target/simple-target"
+          "url": "https://puppetry.app/#howtoStep2"
         }, {
           "@type": "HowToStep",
           "name": "Select a target",
           "text": "Test cases we populate with commands. Command means settings a browser method or an assertion on a target. Available targets are page and all the already defined elements aliases.",
           "image": "https://puppetry.app/assets/img/v3/select-target.png",
-          "url": "https://docs.puppetry.app/test-step"
+          "url": "https://puppetry.app/#howtoStep3"
         }, {
           "@type": "HowToStep",
           "name": "Call a method",
           "text": "Underlying form dynamically adapts to actual target/method combination. So when both selected we get method parameters (mandatory and optional)",
           "image": "https://puppetry.app/assets/img/v3/call-method.png",
-          "url": "https://docs.puppetry.app/test-step"
+          "url": "https://puppetry.app/#howtoStep4"
         }, {
           "@type": "HowToStep",
           "name": "Make an assertion",
           "text": "With assertions we not just perform a browser method, but test the result. Usually it sounds like “I assert that the result equals/contains/greater than/lower than/.. a provided value.",
           "image": "https://puppetry.app/assets/img/v3/make-assertion.png",
-          "url": "https://docs.puppetry.app/test-step"
+          "url": "https://puppetry.app/#howtoStep5"
         }, {
           "@type": "HowToStep",
           "name": "Get test report",
           "text": "As we press F6 Puppetry generates Jest project and runs internally the tests. The report may include screenshots and network activity details.",
           "image": "https://puppetry.app/assets/img/v3/get-report.png",
-          "url": "https://docs.puppetry.app/test-reports"
+          "url": "https://puppetry.app/#howtoStep6"
         }
       ]
     }
@@ -287,7 +287,7 @@
               <a target="_blank" href="https://docs.puppetry.app/testing-techniques/mocking-http-s-requests">Mocking <nobr>HTTP/S Requests</nobr></a>,
               <a target="_blank" href="https://docs.puppetry.app/testing-techniques/testing-rest-api"><nobr>REST API</nobr> Testing</a>,
               <a target="_blank" href="https://docs.puppetry.app/testing-techniques/testing-google-analytics-tracking-code">Testing Google Analytics tracking code</a>,
-              <a target="_blank" href="https://docs.puppetry.app/testing-techniques/testing-chrome-extensions">Testing Chrome Extensions</a>,
+              <a target="_blank" href="/tip/howto-test-chrome-extensions/">Testing Chrome Extensions</a>,
               <a target="_blank" href="https://docs.puppetry.app/testing-techniques/testing-emails">Testing Transactional Emails</a>.
             </p>
           </div>
@@ -335,7 +335,7 @@
       <div class="container">
         <h2>Create and run E2E tests</h2>
 
-        <div class="feature feature--left">
+        <div id="howtoStep1" class="feature feature--left">
 
          <div class="feature__ic">
            <div class="feature__img-frame">
@@ -357,7 +357,7 @@
 
         </div>
 
-        <div class="feature feature--right">
+        <div id="howtoStep2" class="feature feature--right">
           <div>
             <h3>Locate and define element targets</h3>
             <p>
@@ -382,7 +382,7 @@
           </div>
         </div>
 
-         <div class="feature feature--left">
+         <div  id="howtoStep3" class="feature feature--left">
           <div class="feature__ic">
             <img
               class="feature__img lazyload blur-up"
@@ -398,7 +398,7 @@
           </div>
         </div>
 
-        <div class="feature feature--right">
+        <div  id="howtoStep4" class="feature feature--right">
           <div>
             <h3>Call a method</h3>
             <p>Underlying form dynamically adapts to actual target/method combination.
@@ -412,7 +412,7 @@
           </div>
         </div>
 
-        <div class="feature feature--left">
+        <div  id="howtoStep5" class="feature feature--left">
           <div class="feature__ic">
             <img
               class="feature__img lazyload blur-up"
@@ -426,7 +426,7 @@
           </div>
         </div>
 
-        <div class="feature feature--right">
+        <div id="howtoStep6" class="feature feature--right">
           <div>
             <h3>Get test report</h3>
             <p>As we press F6 Puppetry generates Jest project and runs internally the tests.

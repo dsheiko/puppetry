@@ -87,6 +87,13 @@ body {
       font-size: 22px;
       line-height: 24px;
       font-weight: 500;
+      text-decoration: none;
+      color: white;
+    }
+
+    .navbar__title:hover, .navbar__title:visited {
+      color: white;
+      text-decoration: none;
     }
 
   .navbar__menu {
@@ -301,18 +308,18 @@ img.lazyload:not([src]) {
     width: 100%;
   }
 
-  .feature p {
+  .feature p, .feature .p {
     font-size: 16px;
     opacity: 0.8;
     line-height: 24px;
   }
 
-  .feature p a {
+  .feature p a, .feature .p a {
     color: rgba(255, 2555, 255, 0.55);
     text-decoration: underline;
   }
 
-  .feature p a:hover {
+  .feature p a:hover, .feature .p a:hover {
     color: white;
   }
 
@@ -515,4 +522,32 @@ img.lazyload:not([src]) {
 .video-thumb:hover img {
   transform: scale(1.04);
   filter: brightness(120%);
+}
+
+
+.feature .p  strong {
+  font-weight: bold;
+}
+
+.feature .p code {
+    display: inline-block;
+    padding: 3px 6px;
+    font-size: 95%;
+    border-radius: 3px;
+    background-color: #0059af;
+    box-decoration-break: clone;
+}
+
+.feature ul {
+  list-style: disc;
+  padding-left: 16px;
+}
+.feature ul li, .section__intro {
+  font-size: 16px;
+  opacity: 0.8;
+  line-height: 24px;
+}
+
+.section__intro {
+  padding-top: 16px;
 }
