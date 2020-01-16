@@ -91,6 +91,74 @@
     }
     </script>
 
+
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "HowTo",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://puppetry.app/assets/img/puppetry-welcome-620.png"
+      },
+      "name": "How to create and run functional tests",
+      "description": "End-to-end testing of a web application is mostly about locating a target (page or DOM element), performing a command on it (navigate to URL, modify DOM, etc.) and asserting that the target satisfies the provided conditions. Puppetry provides a user-friendly interface to define targets and manage test cases bundled in test suits.",
+      "totalTime": "PT10M",
+
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "Web-site or Chrome-extension to test"
+        }
+      ],
+
+      "tool": [
+        {
+          "@type": "HowToTool",
+          "name": "Puppetry - codeless end-to-end testing"
+        }
+      ],
+      "step":[
+        {
+          "@type": "HowToStep",
+          "name": "Manage your test structure",
+          "text": "The test organizational structure consists of projects. Every project has one or more test suites. Every suite is split in test cases, where test case may contain one or more browser methods and assertions.",
+          "image": "https://puppetry.app/assets/img/v3/manage-structure.gif",
+          "url": "https://docs.puppetry.app/managing-assets"
+        }, {
+          "@type": "HowToStep",
+          "name": "Locate and define element targets",
+          "text": "Test target can be either page or an element on the page. In the second case we need to inform Puppetry project what exact elements we mean. Locating an element is quite easy in a modern browser. You just need to right-click on the target element and copy its CSS selector or XPath",
+          "image": "https://puppetry.app/assets/img/v3/manage-targets.gif",
+          "url": "https://docs.puppetry.app/target/simple-target"
+        }, {
+          "@type": "HowToStep",
+          "name": "Select a target",
+          "text": "Test cases we populate with commands. Command means settings a browser method or an assertion on a target. Available targets are page and all the already defined elements aliases.",
+          "image": "https://puppetry.app/assets/img/v3/select-target.png",
+          "url": "https://docs.puppetry.app/test-step"
+        }, {
+          "@type": "HowToStep",
+          "name": "Call a method",
+          "text": "Underlying form dynamically adapts to actual target/method combination. So when both selected we get method parameters (mandatory and optional)",
+          "image": "https://puppetry.app/assets/img/v3/call-method.png",
+          "url": "https://docs.puppetry.app/test-step"
+        }, {
+          "@type": "HowToStep",
+          "name": "Make an assertion",
+          "text": "With assertions we not just perform a browser method, but test the result. Usually it sounds like “I assert that the result equals/contains/greater than/lower than/.. a provided value.",
+          "image": "https://puppetry.app/assets/img/v3/make-assertion.png",
+          "url": "https://docs.puppetry.app/test-step"
+        }, {
+          "@type": "HowToStep",
+          "name": "Get test report",
+          "text": "As we press F6 Puppetry generates Jest project and runs internally the tests. The report may include screenshots and network activity details.",
+          "image": "https://puppetry.app/assets/img/v3/get-report.png",
+          "url": "https://docs.puppetry.app/test-reports"
+        }
+      ]
+    }
+    </script>
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129292661-1"></script>
     <script>
