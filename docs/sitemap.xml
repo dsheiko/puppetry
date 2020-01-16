@@ -1,145 +1,614 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"> 
-  <url>
-    <loc>https://puppetry.app/index.html</loc>
-    <lastmod>2019-08-05</lastmod>
-  </url>
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!--
+ created with Free Online Sitemap Generator www.xml-sitemaps.com
+-->
 <url>
-  <loc>https://docs.puppetry.app/</loc>
-  <lastmod>2019-08-05T08:01:50+00:00</lastmod>
-  <priority>1.00</priority>
+<loc>https://puppetry.app/</loc>
+<lastmod>2020-01-16T14:31:48+00:00</lastmod>
+<priority>1.00</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/getting-started</loc>
-  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>
+https://puppetry.app/tip/howto-test-chrome-extensions/
+</loc>
+<lastmod>2020-01-16T14:31:48+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/managing-assets</loc>
-  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://docs.puppetry.app/</loc>
+<lastmod>2020-01-16T13:09:44+00:00</lastmod>
+<priority>1.00</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/project</loc>
-  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://docs.puppetry.app/getting-started</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/suite</loc>
-  <lastmod>2019-08-05T03:58:21+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://docs.puppetry.app/project</loc>
+<lastmod>2020-01-15T18:59:59+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/group</loc>
-  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://docs.puppetry.app/suite</loc>
+<lastmod>2020-01-15T19:04:48+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/target</loc>
-  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://docs.puppetry.app/group</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/test-case</loc>
-  <lastmod>2019-08-05T03:40:40+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://docs.puppetry.app/target</loc>
+<lastmod>2020-01-15T18:59:59+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/test-step</loc>
-  <lastmod>2019-08-04T10:00:19+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://docs.puppetry.app/test-case</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/snippets</loc>
-  <lastmod>2019-08-05T03:58:20+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://docs.puppetry.app/test-step</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/running-tests</loc>
-  <lastmod>2019-08-05T06:48:59+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://docs.puppetry.app/managing-assets</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/exporting-tests-for-ci</loc>
-  <lastmod>2019-08-05T03:38:40+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://docs.puppetry.app/snippets</loc>
+<lastmod>2020-01-15T19:01:21+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/template</loc>
-  <lastmod>2019-08-05T03:39:40+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://docs.puppetry.app/running-tests</loc>
+<lastmod>2020-01-15T19:01:23+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/version-control</loc>
-  <lastmod>2019-08-05T01:08:14+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://docs.puppetry.app/test-reports</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/testing-emails</loc>
-  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://docs.puppetry.app/export</loc>
+<lastmod>2020-01-15T19:02:01+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/testing-forms-with-captcha</loc>
-  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://docs.puppetry.app/settings</loc>
+<lastmod>2020-01-15T19:02:01+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/command-api</loc>
-  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://docs.puppetry.app/template</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/examples</loc>
-  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
-  <priority>0.80</priority>
+<loc>https://docs.puppetry.app/testing-techniques</loc>
+<lastmod>2020-01-15T19:02:01+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/test-step/commands</loc>
-  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
-  <priority>0.64</priority>
+<loc>https://docs.puppetry.app/version-control</loc>
+<lastmod>2020-01-15T19:02:01+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/test-step/page-assertions</loc>
-  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
-  <priority>0.64</priority>
+<loc>https://docs.puppetry.app/tips-and-tricks</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/test-step/target-commands</loc>
-  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
-  <priority>0.64</priority>
+<loc>https://docs.puppetry.app/command-api</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/test-step/target-assertions</loc>
-  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
-  <priority>0.64</priority>
+<loc>https://docs.puppetry.app/examples</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.80</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/running-tests/troubleshooting</loc>
-  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
-  <priority>0.64</priority>
+<loc>https://docs.puppetry.app/target/simple-target</loc>
+<lastmod>2020-01-15T19:00:29+00:00</lastmod>
+<priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/testing-emails/example-with-restmail.net</loc>
-  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
-  <priority>0.64</priority>
+<loc>https://docs.puppetry.app/target/iframe-target</loc>
+<lastmod>2020-01-15T19:00:29+00:00</lastmod>
+<priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/testing-emails/example-with-.../</loc>
-  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
-  <priority>0.64</priority>
+<loc>https://docs.puppetry.app/target/shadowdom-target</loc>
+<lastmod>2020-01-15T19:00:30+00:00</lastmod>
+<priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/testing-emails/example-with-imap-bridge</loc>
-  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
-  <priority>0.64</priority>
+<loc>https://docs.puppetry.app/target/chained-target</loc>
+<lastmod>2020-01-15T19:00:30+00:00</lastmod>
+<priority>0.64</priority>
 </url>
 <url>
-  <loc>https://docs.puppetry.app/testing-emails/example-with-google-api</loc>
-  <lastmod>2019-08-05T08:32:35+00:00</lastmod>
-  <priority>0.64</priority>
+<loc>https://docs.puppetry.app/target/shared-target</loc>
+<lastmod>2020-01-16T09:22:52+00:00</lastmod>
+<priority>0.64</priority>
 </url>
-
-
+<url>
+<loc>https://docs.puppetry.app/test-step/commands</loc>
+<lastmod>2020-01-15T19:01:49+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/test-step/page-assertions
+</loc>
+<lastmod>2020-01-15T19:01:49+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/test-step/target-commands
+</loc>
+<lastmod>2020-01-15T19:01:49+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/test-step/target-assertions
+</loc>
+<lastmod>2020-01-15T19:01:49+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/running-tests/interactive-mode
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/running-tests/troubleshooting
+</loc>
+<lastmod>2020-01-15T19:02:30+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/running-tests/interactive-mode
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/testing-techniques/css-regression-testing
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-chrome-extensions
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/test-reports</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/export/exporting-tests-for-ci
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/export/export-as-test-specification
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/testing-techniques/testing-emails
+</loc>
+<lastmod>2020-01-15T19:04:53+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/testing-techniques/testing-dynamic-content
+</loc>
+<lastmod>2020-01-15T18:58:59+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/testing-techniques/exhaustive-testing
+</loc>
+<lastmod>2020-01-15T18:59:00+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/testing-techniques/performance-testing
+</loc>
+<lastmod>2020-01-15T18:59:00+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/testing-techniques/css-regression-testing
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/testing-techniques/testing-shadow-dom
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/testing-techniques/testing-google-analytics-tracking-code
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/testing-techniques/testing-chrome-extensions
+</loc>
+<lastmod>2020-01-16T13:02:29+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/testing-techniques/testing-rest-api
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/testing-techniques/mocking-http-s-requests
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/testing-techniques/testing-forms-with-captcha
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/tips-and-tricks/embrace-the-power-of-css
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.64</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/getting-started</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/project</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/suite</loc>
+<lastmod>2020-01-16T14:25:17+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/group</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/target</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/test-case</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/test-step</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/managing-assets</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/snippets</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/running-tests</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/running-tests/troubleshooting
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/export</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/settings</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/template</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/testing-techniques
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/version-control</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/tips-and-tricks</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/command-api</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>https://docs.puppetry.app/v/3.0.0/examples</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-dynamic-content
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/testing-techniques/exhaustive-testing
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/testing-techniques/performance-testing
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-shadow-dom
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-google-analytics-tracking-code
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-rest-api
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/testing-techniques/mocking-http-s-requests
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-emails
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-forms-with-captcha
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/testing-techniques/testing-emails/example-with-restmail.net
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/testing-techniques/testing-emails/example-with-.../
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/testing-techniques/testing-emails/example-with-imap-bridge
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/testing-techniques/testing-emails/example-with-google-api
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.51</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/target/simple-target
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.41</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/target/iframe-target
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.41</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/target/shadowdom-target
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.41</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/target/chained-target
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.41</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/target/shared-target
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.41</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/test-step/commands
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.41</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/test-step/page-assertions
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.41</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/test-step/target-commands
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.41</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/test-step/target-assertions
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.41</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/export/exporting-tests-for-ci
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.41</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/export/export-as-test-specification
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.41</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/tips-and-tricks/embrace-the-power-of-css
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.41</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-emails/example-with-restmail.net
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.41</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-emails/example-with-.../
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.41</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-emails/example-with-imap-bridge
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.41</priority>
+</url>
+<url>
+<loc>
+https://docs.puppetry.app/v/3.0.0/testing-techniques/testing-emails/example-with-google-api
+</loc>
+<lastmod>2020-01-16T14:37:38+00:00</lastmod>
+<priority>0.41</priority>
+</url>
 </urlset>
