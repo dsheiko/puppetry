@@ -551,3 +551,12 @@ img.lazyload:not([src]) {
 .section__intro {
   padding-top: 16px;
 }
+
+.section--features .section__intro a {
+    color: rgba(255, 2555, 255, 0.55);
+    text-decoration: underline;
+  }
+
+  .section--features .section__intro a:hover, .section--features .section__intro  a:hover {
+    color: white;
+  }

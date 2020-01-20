@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>How to test Responsive Web Design with Puppetry</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/index.css" rel="stylesheet" type="text/css">
+
+    <meta name="description" content="Nowadays web traffic from mobile devices is really high. Thus we need to make sure our pages are respectively designed (see Responsive Web Design). Most common practice here is to hide/replace page layout parts on smaller screens and change the display flow direction depending on screen size. Below we are going to see how easy to test RWD-related specs with Puppetry.">
+    <meta name="keywords" content="puppetry, Puppetry Testing, Testing Chrome Extension, GUI testing'" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" href="/assets/img/favicon-96x96.png" type="image/x-icon">
+    <link rel="icon" href="/assets/img/favicon-96x96.png" type="image/x-icon">
+
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="How to test Responsive Web Design" />
+    <meta property="og:description" content="Nowadays web traffic from mobile devices is really high. Thus we need to make sure our pages are respectively designed (see Responsive Web Design). Most common practice here is to hide/replace page layout parts on smaller screens and change the display flow direction depending on screen size. Below we are going to see how easy to test RWD-related specs with Puppetry." />
+    <meta property="og:url" content="https://puppetry.app/tip/howto-test-chrome-extensions/" />
+    <meta property="og:site_name" content="Puppetry" />
+    <meta property="article:publisher" content="https://github.com/dsheiko" />
+
+    <meta itemprop="image" content="https://puppetry.app/tip/howto-test-responsive-web-design/howto-rwd4.png">
+    <meta name="twitter:image:src" content="https://puppetry.app/tip/howto-test-responsive-web-design/howto-rwd4.png">
+    <meta property="og:image" content="https://puppetry.app/tip/howto-test-responsive-web-design/howto-rwd4.png">
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:description" content="Nowadays web traffic from mobile devices is really high. Thus we need to make sure our pages are respectively designed (see Responsive Web Design). Most common practice here is to hide/replace page layout parts on smaller screens and change the display flow direction depending on screen size. Below we are going to see how easy to test RWD-related specs with Puppetry." />
+    <meta name="twitter:title" content="How to test Responsive Web Design" />
+    <meta name="twitter:site" content="@sheiko" />
+    <meta name="twitter:image" content="https://puppetry.app/tip/howto-test-responsive-web-design/howto-rwd4.png" />
+    <meta name="twitter:creator" content="@sheiko" />
+
+
+    <link rel="canonical" href="https://puppetry.app/tip/howto-test-chrome-extensions/">
+
+    <link rel="preconnect" href="https://www.google-analytics.com" crossorigin>
+    <link rel="preconnect" href="https://api.github.com" crossorigin>
+    <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
+
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "HowTo",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://puppetry.app/tip/howto-test-responsive-web-design/howto-rwd4.png"
+      },
+      "name": "How to test Responsive Web Design",
+      "description": "Nowadays web traffic from mobile devices is really high. Thus we need to make sure our pages are respectively designed (see Responsive Web Design). Most common practice here is to hide/replace page layout parts on smaller screens and change the display flow direction depending on screen size. Below we are going to see how easy to test RWD-related specs with Puppetry.",
+      "totalTime": "PT15M",
+
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "A page to test"
+        }
+      ],
+
+      "tool": [
+        {
+          "@type": "HowToTool",
+          "name": "Puppetry - codeless end-to-end testing"
+        }
+      ],
+      "step":[
+        {
+          "@type": "HowToStep",
+          "name": "Define test targets",
+          "text": "Find out which page elements depend on display size",
+          "image": "https://puppetry.app/tip/howto-test-chrome-extensions/howto-rwd1.png",
+          "url": "https://puppetry.app/tip/howto-test-responsive-web-design/#howtoStep1"
+        }, {
+          "@type": "HowToStep",
+          "name": "Register test targets",
+          "text": "Introduce the targets to Puppetry",
+          "image": "https://puppetry.app/tip/howto-test-responsive-web-design/howto-rwd2.png",
+          "url": "https://puppetry.app/tip/howto-test-responsive-web-design/#howtoStep2"
+        }, {
+          "@type": "HowToStep",
+          "name": "Create test structure",
+          "text": "Then we jump to Test cases tab, create group Sandbox RWD and the first test On Desktop",
+          "image": "https://puppetry.app/tip/howto-test-responsive-web-design/howto-rwd2a.png",
+          "url": "https://puppetry.app/tip/howto-test-responsive-web-design/#howtoStep3"
+        },
+          "@type": "HowToStep",
+          "name": "Add test action: goto",
+          "text": "First we need to instruct Puppetry to navigate the page under test. So we click Add a command/assertion, select target page and method goto. In the form we enter the test page URL",
+          "image": "https://puppetry.app/tip/howto-test-responsive-web-design/howto-rwd1a.png",
+          "url": "https://puppetry.app/tip/howto-test-responsive-web-design/#howtoStep4"
+        }
+
+        , {
+          "@type": "HowToStep",
+          "name": "Add test action: assertVisible",
+          "text": "Next we want to ensure that main menu (container) is available and visible on wider screens. We click Add a command/assertion, select target MAIN_NAV and method assertVisible. We confirm the default ",
+          "image": "https://puppetry.app/tip/howto-test-responsive-web-design/howto-rwd1b.png",
+          "url": "https://puppetry.app/tip/howto-test-responsive-web-design/#howtoStep5"
+        }, {
+          "@type": "HowToStep",
+          "name": "Add test action: assertPosition",
+          "text": "We want also to test that product cards are aligned horizontally. We click Add a command/assertion, select target PRODUCT_WHITE and method assertPosition.",
+          "image": "https://puppetry.app/tip/howto-test-responsive-web-design/howto-rwd1c.png",
+          "url": "https://puppetry.app/tip/howto-test-responsive-web-design/#howtoStep6"
+        }, {
+          "@type": "HowToStep",
+          "name": "Create the test case for mobile",
+          "text": "We create a new test case on iPhone X. This time we start with page.emulate action. Thus we inform Puppetry that we want it to render the page with iPhone X emulator",
+          "image": "https://puppetry.app/tip/howto-test-responsive-web-design/howto-rwd2b.png",
+          "url": "https://puppetry.app/tip/howto-test-responsive-web-design/#howtoStep7"
+        }, {
+          "@type": "HowToStep",
+          "name": "Tune the test case for mobile view",
+          "text": "Pretty much the same way as above we add actions to navigate to the test page and assert availability of main menu and positions of product cards.",
+          "image": "https://puppetry.app/tip/howto-test-responsive-web-design/howto-rwd4.png",
+          "url": "https://puppetry.app/tip/howto-test-responsive-web-design/#howtoStep8"
+        }, {
+          "@type": "HowToStep",
+          "name": "Run the tests",
+          "text": "We run tests (F6) and get the report.",
+          "image": "https://puppetry.app/tip/howto-test-responsive-web-design/howto-rwd5.png",
+          "url": "https://puppetry.app/tip/howto-test-responsive-web-design/#howtoStep9"
+        }
+
+      ]
+    }
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129292661-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-129292661-1');
+    </script>
+
+
+    <script type="text/javascript">
+      WebFontConfig = {
+        google: { families: [ "Roboto" ] }
+      };
+      (function() {
+        var wf = document.createElement( "script" );
+        wf.src = "https://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js";
+        wf.type = "text/javascript";
+        wf.async = "true";
+        var s = document.getElementsByTagName( "script" )[ 0 ];
+        s.parentNode.insertBefore( wf, s );
+      })();
+    </script>
+
+
+  </head>
+  <body>
+    <section class="section">
+      <div class="container">
+
+        <header class="navbar">
+          <div class="navbar__logo">
+            <img class="navbar__img"  src="/assets/img/puppetry.svg" alt="Puppetry logo" />
+            <a href="/" class="navbar__title">
+              Puppetry
+            </a>
+          </div>
+          <div class="navbar__menu">
+            <div  class="navbar__menu_github">
+
+            <div class="fb-like github-button"
+                 data-href="https://www.facebook.com/puppetry.testing/"
+                 data-width="" data-layout="button_count"
+                 data-action="like"
+                 data-size="large"
+                 data-show-faces="false"
+                 data-share="false"></div>
+
+            <a class="github-button" href="https://github.com/dsheiko/puppetry/fork" data-icon="octicon-repo-forked" data-size="large" aria-label="Fork Puppetry.app on GitHub">Fork</a>
+            <a class="github-button" href="https://github.com/dsheiko/puppetry" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star Puppetry.app on GitHub">Star</a>
+            </div>
+            <div  class="navbar__menu_puppetry">
+
+
+            <a  href="https://github.com/dsheiko/puppetry/releases" target="_blank" class="btn btn--secondary btn--md"
+                title="Download Puppetry"
+                aria-label="Download Puppetry" role="button">Download</a>
+            </div>
+          </div>
+
+
+
+
+        </header>
+
+
+        </div>
+
+
+      </div>
+    </section>
+
+    <section class="section section--features">
+      <div class="container">
+        <h2>How to test Responsive Web Design</h2>
+        <p class="section__intro">
+          Nowadays web traffic from mobile devices is really high. Thus we need to make sure our pages are respectively designed
+          (see <a rel="nofollow" href="https://en.wikipedia.org/wiki/Responsive_web_design" target="_blank">Responsive Web Design</a>). Most common practice here is to hide/replace page layout parts on smaller screens and change the display flow direction depending on screen size. Below we are going to see how easy to test RWD-related specs with Puppetry.
+
+        </p>
+
+        <div id="howtoStep1" class="feature feature--left">
+
+         <div class="feature__ic">
+           <div class="feature__img-frame">
+            <img
+                class="feature__img lazyload blur-up"
+                data-sizes="auto"
+                src="./howto-rwd1.png"
+                alt="Define test targets"  />
+           </div>
+          </div>
+          <div>
+            <h3>Define test targets</h3>
+            <p class="p">Our <a href="https://puppetry.app/demo/" target="_blank">page under test</a> consists mainly from navigation bar and product listing.
+              On wider screens it shows products cards aligned horizontally. On mobile devices they are aligned vertically.
+              Besides, on mobile the main navigation menu is hidden.
+              In order to test this behavior we define our targets: at least two product cards and the main menu container.</p>
+          </div>
+
+        </div>
+
+        <div id="howtoStep2" class="feature feature--right">
+          <div>
+            <h3>Register test targets</h3>
+            <p>
+              Now we can create a new test suite in Puppetry, switch to the Targets tab and introduce our target elements as name = CSS selector.
+            </p>
+          </div>
+          <div class="feature__ic">
+            <div class="feature__img-frame">
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./howto-rwd2.png"
+              alt="Register test targets"
+              />
+            </div>
+          </div>
+        </div>
+
+         <div  id="howtoStep3" class="feature feature--left">
+          <div class="feature__ic">
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./howto-rwd2a.png"
+              alt="Create test structure"  />
+          </div>
+          <div>
+            <h3>Create test structure</h3>
+            <p>Then we jump to Test cases tab, create group "Sandbox RWD" and the first test "On Desktop".</p>
+          </div>
+        </div>
+
+        <div  id="howtoStep4" class="feature feature--right">
+          <div>
+            <h3>Add test action: goto</h3>
+            <p>First we need to instruct Puppetry to navigate the page under test. So we click "Add a command/assertion", select target "page" and method "goto". It shows up a form where we enter the test page URL</p>
+          </div>
+          <div class="feature__ic">
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./howto-rwd1a.png"
+              alt="Add test action: goto"  />
+          </div>
+        </div>
+
+        <div  id="howtoStep5" class="feature feature--left">
+          <div class="feature__ic">
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./howto-rwd1b.png"
+              alt="Add test action: assertVisible"  />
+          </div>
+          <div>
+            <h3>Add test action: assertVisible</h3>
+            <p>Next we want to ensure that main menu (container) is available and visible on wider screens.
+We click "Add a command/assertion", select target "MAIN_NAV" (one of targets we have registered) and method "assertVisible".
+We confirm the default assertion "The target is available and observable on the page".
+</p>
+          </div>
+        </div>
+
+
+
+
+        <div  id="howtoStep6" class="feature feature--right">
+          <div>
+            <h3>Add test action: assertPosition</h3>
+            <p>
+We want also to test that product cards are aligned horizontally.
+We click "Add a command/assertion", select target "PRODUCT_WHITE" (one of targets we have registered) and method "assertPosition".
+
+            </p>
+          </div>
+          <div class="feature__ic">
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./howto-rwd1c.png"
+              alt="Add test action: assertPosition"  />
+          </div>
+        </div>
+
+
+
+
+        <div  id="howtoStep61" class="feature feature--left">
+          <div class="feature__ic">
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./howto-rwd3.png"
+              alt="bserve the test case"  />
+          </div>
+          <div>
+            <h3>Observe the test case</h3>
+            <p>Now the test has to have all the steps we added
+</p>
+          </div>
+        </div>
+
+
+        <div  id="howtoStep7" class="feature feature--right">
+          <div>
+            <h3>Create the test case for mobile</h3>
+            <p>We create a new test case "on iPhone X". This time we start with page.emulate action. Thus we inform Puppetry that we want it to render the page with iPhone X emulator</p>
+          </div>
+          <div class="feature__ic">
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./howto-rwd2b.png"
+              alt="Create the test for mobile"  />
+          </div>
+        </div>
+
+        <div  id="howtoStep8" class="feature feature--left">
+          <div class="feature__ic">
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./howto-rwd4.png"
+              alt="Tune the test case for mobile view"  />
+          </div>
+          <div>
+            <h3>Tune the test case for mobile view</h3>
+            <p>Pretty much the same way as above we add actions to navigate to the test page and assert availability of main menu and positions of product cards.
+</p>
+          </div>
+        </div>
+
+
+        <div  id="howtoStep9" class="feature feature--right">
+          <div>
+            <h3>Run the tests</h3>
+            <p>
+We run tests (F6) and get the report.
+
+            </p>
+          </div>
+          <div class="feature__ic">
+            <img
+              class="feature__img lazyload blur-up"
+              data-sizes="auto"
+              src="./howto-rwd5.png"
+              alt="Test report"  />
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </section>
+
+
+
+    <section class="section section--features section--footer">
+      <div class="container">
+
+
+        <div class="footer">
+          <div class="footer__copyright">
+            © <span id="cYear">2019</span> MIT License. Created by  <a href="http://dsheiko.com" target="_blank">Dmitry Sheiko</a>
+          </div>
+          <div class="footer__links">
+
+            <a rel="noopener noreferrer" title="Find me on Amazon" class="layout-icon" href="https://www.amazon.com/default/e/B0788FN46T/" target="_blank">
+                <i class="anticon anticon-amazon">
+                   <svg viewBox="64 64 896 896" class="" data-icon="amazon" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                      <path d="M825 768.9c-3.3-.9-7.3-.4-11.9 1.3-61.6 28.2-121.5 48.3-179.7 60.2C507.7 856 385.2 842.6 266 790.3c-33.1-14.6-79.1-39.2-138-74a9.36 9.36 0 0 0-5.3-2c-2-.1-3.7.1-5.3.9-1.6.8-2.8 1.8-3.7 3.1-.9 1.3-1.1 3.1-.4 5.4.6 2.2 2.1 4.7 4.6 7.4 10.4 12.2 23.3 25.2 38.6 39s35.6 29.4 60.9 46.8c25.3 17.4 51.8 32.9 79.3 46.4 27.6 13.5 59.6 24.9 96.1 34.1s73 13.8 109.4 13.8c36.2 0 71.4-3.7 105.5-10.9 34.2-7.3 63-15.9 86.5-25.9 23.4-9.9 45-21 64.8-33 19.8-12 34.4-22.2 43.9-30.3 9.5-8.2 16.3-14.6 20.2-19.4 4.6-5.7 6.9-10.6 6.9-14.9.1-4.5-1.7-7.1-5-7.9zM527.4 348.1c-15.2 1.3-33.5 4.1-55 8.3-21.5 4.1-41.4 9.3-59.8 15.4s-37.2 14.6-56.3 25.4c-19.2 10.8-35.5 23.2-49 37s-24.5 31.1-33.1 52c-8.6 20.8-12.9 43.7-12.9 68.7 0 27.1 4.7 51.2 14.3 72.5 9.5 21.3 22.2 38 38.2 50.4 15.9 12.4 34 22.1 54 29.2 20 7.1 41.2 10.3 63.2 9.4 22-.9 43.5-4.3 64.4-10.3 20.8-5.9 40.4-15.4 58.6-28.3 18.2-12.9 33.1-28.2 44.8-45.7 4.3 6.6 8.1 11.5 11.5 14.7l8.7 8.9c5.8 5.9 14.7 14.6 26.7 26.1 11.9 11.5 24.1 22.7 36.3 33.7l104.4-99.9-6-4.9c-4.3-3.3-9.4-8-15.2-14.3-5.8-6.2-11.6-13.1-17.2-20.5-5.7-7.4-10.6-16.1-14.7-25.9-4.1-9.8-6.2-19.3-6.2-28.5V258.7c0-10.1-1.9-21-5.7-32.8-3.9-11.7-10.7-24.5-20.7-38.3-10-13.8-22.4-26.2-37.2-37-14.9-10.8-34.7-20-59.6-27.4-24.8-7.4-52.6-11.1-83.2-11.1-31.3 0-60.4 3.7-87.6 10.9-27.1 7.3-50.3 17-69.7 29.2-19.3 12.2-35.9 26.3-49.7 42.4-13.8 16.1-24.1 32.9-30.8 50.4-6.7 17.5-10.1 35.2-10.1 53.1L408 310c5.5-16.4 12.9-30.6 22-42.8 9.2-12.2 17.9-21 25.8-26.5 8-5.5 16.6-9.9 25.7-13.2 9.2-3.3 15.4-5 18.6-5.4 3.2-.3 5.7-.4 7.6-.4 26.7 0 45.2 7.9 55.6 23.6 6.5 9.5 9.7 23.9 9.7 43.3v56.6c-15.2.6-30.4 1.6-45.6 2.9zM573.1 500c0 16.6-2.2 31.7-6.5 45-9.2 29.1-26.7 47.4-52.4 54.8-22.4 6.6-43.7 3.3-63.9-9.8-21.5-14-32.2-33.8-32.2-59.3 0-19.9 5-36.9 15-51.1 10-14.1 23.3-24.7 40-31.7s33-12 49-14.9c15.9-3 33-4.8 51-5.4V500zm335.2 218.9c-4.3-5.4-15.9-8.9-34.9-10.7-19-1.8-35.5-1.7-49.7.4-15.3 1.8-31.1 6.2-47.3 13.4-16.3 7.1-23.4 13.1-21.6 17.8l.7 1.3.9.7 1.4.2h4.6c.8 0 1.8-.1 3.2-.2 1.4-.1 2.7-.3 3.9-.4 1.2-.1 2.9-.3 5.1-.4 2.1-.1 4.1-.4 6-.7.3 0 3.7-.3 10.3-.9 6.6-.6 11.4-1 14.3-1.3 2.9-.3 7.8-.6 14.5-.9 6.7-.3 12.1-.3 16.1 0 4 .3 8.5.7 13.6 1.1 5.1.4 9.2 1.3 12.4 2.7 3.2 1.3 5.6 3 7.1 5.1 5.2 6.6 4.2 21.2-3 43.9s-14 40.8-20.4 54.2c-2.8 5.7-2.8 9.2 0 10.7s6.7.1 11.9-4c15.6-12.2 28.6-30.6 39.1-55.3 6.1-14.6 10.5-29.8 13.1-45.7 2.4-15.9 2-26.2-1.3-31z"></path>
+                   </svg>
+                </i>
+             </a>
+             <a rel="noopener noreferrer" title="Contact me on Twitter" class="layout-icon" href="https://twitter.com/sheiko" target="_blank">
+                <i class="anticon anticon-twitter">
+                   <svg viewBox="64 64 896 896" class="" data-icon="twitter" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                      <path d="M928 254.3c-30.6 13.2-63.9 22.7-98.2 26.4a170.1 170.1 0 0 0 75-94 336.64 336.64 0 0 1-108.2 41.2A170.1 170.1 0 0 0 672 174c-94.5 0-170.5 76.6-170.5 170.6 0 13.2 1.6 26.4 4.2 39.1-141.5-7.4-267.7-75-351.6-178.5a169.32 169.32 0 0 0-23.2 86.1c0 59.2 30.1 111.4 76 142.1a172 172 0 0 1-77.1-21.7v2.1c0 82.9 58.6 151.6 136.7 167.4a180.6 180.6 0 0 1-44.9 5.8c-11.1 0-21.6-1.1-32.2-2.6C211 652 273.9 701.1 348.8 702.7c-58.6 45.9-132 72.9-211.7 72.9-14.3 0-27.5-.5-41.2-2.1C171.5 822 261.2 850 357.8 850 671.4 850 843 590.2 843 364.7c0-7.4 0-14.8-.5-22.2 33.2-24.3 62.3-54.4 85.5-88.2z"></path>
+                   </svg>
+                </i>
+             </a>
+
+             <a rel="noopener noreferrer" title="Visit Puppetry on Facebook" class="layout-icon" href="https://www.facebook.com/puppetry.testing/" target="_blank">
+                <i class="anticon">
+                  <svg viewBox="64 64 896 896" focusable="false" class="" data-icon="facebook" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                    <path d="M880 112H144c-17.7 0-32 14.3-32 32v736c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V144c0-17.7-14.3-32-32-32zm-32 736H663.9V602.2h104l15.6-120.7H663.9v-77.1c0-35 9.7-58.8 59.8-58.8h63.9v-108c-11.1-1.5-49-4.8-93.2-4.8-92.2 0-155.3 56.3-155.3 159.6v89H434.9v120.7h104.3V848H176V176h672v672z"></path>
+                  </svg>
+                </i>
+             </a>
+
+             <a rel="noopener noreferrer" title="Visit Puppetry on Github" class="layout-icon" href="https://github.com/dsheiko/puppetry" target="_blank">
+                <i class="anticon anticon-github">
+                   <svg viewBox="64 64 896 896" class="" data-icon="github" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                      <path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0 1 38.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path>
+                   </svg>
+                </i>
+             </a>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <div id="fb-root"></div>
+    <script>
+      document.querySelector( "#cYear" ).innerHTML = ( new Date() ).getFullYear();
+    </script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script async defer type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v4.0&appId=227086787320417&autoLogAppEvents=1"></script>
+    <script src="/js/ls.rias.min.js"></script>
+    <script src="/js/lazysizes.min.js"></script>
+
+
+  </body>
+</html>

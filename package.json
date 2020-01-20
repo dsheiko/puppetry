@@ -156,7 +156,7 @@
     "directories": {
       "buildResources": "app/assets"
     },
-    "copyright": "©2019 Dmitry Sheiko",
+    "copyright": "©2020 Dmitry Sheiko",
     "files": [
       "app",
       "jest-pkg",
