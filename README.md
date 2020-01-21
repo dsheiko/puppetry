@@ -19,7 +19,7 @@ Puppetry is an open-source cross-platform desktop application that gives non-dev
 ![Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline](https://github.com/dsheiko/puppetry/raw/master/docs/assets/img/puppetry-welcome.png)
 
 - [:tv: Recording Automated Tests with Puppetry](https://youtu.be/dfuNhTCRMRg  "Recording Automated Tests with Puppetry")
-- [:tv: How to test Responsive Web Design with Puppetry](https://youtu.be/JU_gy1XKrPs  "How to test Responsive Web Design with Puppetry")
+- [:tv: How to test Responsive Web Design with Puppetry](https://youtu.be/m1az-KLboG8  "How to test Responsive Web Design with Puppetry")
 
 # Welcome Puppetry
 Puppetry offers you an easy-to-use UI where you choose browser methods and assertions from a predefined list, with predefined settings, guided by extensive tips.
