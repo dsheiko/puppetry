@@ -26,6 +26,7 @@
     "build:dev": "cross-env NODE_ENV=development && webpack --config webpack.config.js",
     "pack": "electron-builder --dir",
     "dist:l": "electron-builder -l",
+    "dist:w": "electron-builder -w --config ./electron-builder-appx.json",
     "dist:m": "electron-builder -m -c.mac.identity=null",
     "dist:all": "electron-builder -wl",
     "dist": "electron-builder --linux snap",
