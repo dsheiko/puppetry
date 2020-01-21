@@ -49,7 +49,7 @@ Namely you can do the following:
   - [Testing Dynamic Content](https://docs.puppetry.app/testing-techniques/testing-dynamic-content)
   - [Exhaustive Testing](https://docs.puppetry.app/testing-techniques/exhaustive-testing)
   - [Performance Testing](https://docs.puppetry.app/testing-techniques/performance-testing)
-  - [CSS Regression Testing](https://docs.puppetry.app/testing-techniques/css-regression-testing)
+  - [Visual Regression Testing](https://docs.puppetry.app/testing-techniques/css-regression-testing)
   - [Mocking HTTP/S Requests](https://docs.puppetry.app/testing-techniques/mocking-http-s-requests)
   - [Testing REST API](https://docs.puppetry.app/testing-techniques/testing-rest-api)
   - [Testing Google Analytics tracking code](https://docs.puppetry.app/testing-techniques/testing-google-analytics-tracking-code)
