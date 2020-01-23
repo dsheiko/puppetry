@@ -308,18 +308,18 @@ img.lazyload:not([src]) {
     width: 100%;
   }
 
-  .feature p, .feature .p {
+  .feature p, .p {
     font-size: 16px;
     opacity: 0.8;
     line-height: 24px;
   }
 
-  .feature p a, .feature .p a {
+  .feature p a, .p a {
     color: rgba(255, 2555, 255, 0.55);
     text-decoration: underline;
   }
 
-  .feature p a:hover, .feature .p a:hover {
+  .feature p a:hover, .p a:hover {
     color: white;
   }
 
@@ -399,7 +399,11 @@ img.lazyload:not([src]) {
       text-decoration: underline;
   }
   .footer__copyright {
-    flex: 0 0 auto;
+    flex: 1 0 auto;
+    line-height: 24px;
+  }
+  .footer__nav {
+    line-height: 24px;
   }
   .footer__links {
     flex: 1 1 auto;
@@ -525,11 +529,11 @@ img.lazyload:not([src]) {
 }
 
 
-.feature .p  strong {
+.p  strong {
   font-weight: bold;
 }
 
-.feature .p code {
+.p code {
     display: inline-block;
     padding: 3px 6px;
     font-size: 95%;
