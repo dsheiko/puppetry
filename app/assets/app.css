@@ -1490,3 +1490,15 @@ summary:hover {
 .indent-left {
   margin-left: 8px;
 }
+
+.footer__copyright {
+  display: flex;
+  width: 100%;
+}
+.footer__copyright span:first-child {
+  flex: 0 0 auto;
+}
+.footer__copyright span:last-child {
+  flex: 1 1 auto;
+  text-align: center;
+}

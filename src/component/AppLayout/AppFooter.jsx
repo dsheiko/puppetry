@@ -15,11 +15,19 @@ export class AppFooter extends AbstractComponent {
         <Footer>
           <Row type="flex" align="middle" justify="space-between">
             <Col className="text-align-left" span={18}>
-              <span>&copy; { today.getFullYear() } MIT License. Created by
+              <span className="footer__copyright">
+                  <span>&copy; { today.getFullYear() } MIT License. Created by
                 { " " } <a href="http://dsheiko.com"
                   onClick={ this.onExtClick }
                   rel="noopener noreferrer"
-                  target="_blank">Dmitry Sheiko</a></span>
+                  target="_blank">Dmitry Sheiko</a>.
+                  </span>
+                  <span className="legal-links"><a href="https://puppetry.app/privacy/"
+                    onClick={ this.onExtClick }
+                    rel="noopener noreferrer"
+                    target="_blank">privacy policy</a>
+                  </span>
+              </span>
             </Col>
             <Col className="text-align-right" span={6}>
               <a onClick={ this.onExtClick }
