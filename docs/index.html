@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline</title>
+    <title>Puppetry - codeless end-to-end test automation tool</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noodp">
+    <link href="./assets/index.css?12" rel="stylesheet" type="text/css">
 
-    <link href="./assets/index.css?11" rel="stylesheet" type="text/css">
 
-
-    <meta name="description" content="Open source cross-platform IDE for functional automated testing built on top of Puppeteer and Jest. With Puppetry QA engineers can record and manage test cases instead of coding.">
+    <meta name="description" content="Open source tool (Windows, macOS, Linux) to record, manage and run automated tests for web-applications without writing a single line of code">
     <meta name="keywords" content="e2e, end-to-end testing, e2e testing, automated tests, ci testing, test recording, web testing, frontend testing, functional testing, mobile testing, puppetry" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="shortcut icon" href="./assets/img/favicon-96x96.png" type="image/x-icon">
@@ -18,7 +18,7 @@
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="Puppetry - codeless end-to-end test automation" />
-    <meta property="og:description" content="Puppetry is an open-source scriptless test automation IDE that can be used by QA engineers with no programming background. Tests can be included into CI/CD pipeline" />
+    <meta property="og:description" content="Automated testing tool built on top of Puppeteer, which allows QA engineers to record, manage and run functional tests as well as include into CI/CD pipeline" />
     <meta property="og:url" content="https://puppetry.app" />
     <meta property="og:site_name" content="Puppetry" />
     <meta property="article:publisher" content="https://github.com/dsheiko" />
@@ -28,7 +28,7 @@
     <meta property="og:image" content="https://puppetry.app/assets/img/puppetry-welcome.png">
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:description" content="Puppetry is an open-source scriptless test automation IDE that can be used by QA engineers with no programming background. Tests can be  included into CI/CD pipeline" />
+    <meta name="twitter:description" content="Puppetry is an open-source scriptless test automation tool that can be used by QA engineers with no programming background. Tests can be  included into CI/CD pipeline" />
     <meta name="twitter:title" content="Puppetry - codeless end-to-end test automation" />
     <meta name="twitter:site" content="@sheiko" />
     <meta name="twitter:image" content="https://puppetry.app/assets/img/puppetry-welcome.png" />
@@ -62,7 +62,7 @@
       "@type": "Product",
       "name": "Puppetry - codeless end-to-end testing",
       "image": "https://dsheiko.github.io/puppetry/assets/img/puppetry-welcome.png",
-      "description": "Open source cross-platform IDE for non-developers to record, manage, and integrate automated tests for Web",
+      "description": "Open source tool to record, manage and run automated tests for web-applications without writing a single line of code",
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "5.0",
@@ -87,7 +87,76 @@
       "thumbnailUrl": "https://puppetry.app/assets/img/v3/video-thumb.png",
       "contentUrl": "https://www.youtube.com/watch?v=dfuNhTCRMRg",
       "embedUrl": "https://www.youtube.com/embed/dfuNhTCRMRg",
-      "uploadDate": "2019-11-26"
+      "uploadDate": "2019-11-26",
+      "duration": "T00H4M56S"
+    }
+    </script>
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "HowTo",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://puppetry.app/assets/img/puppetry-welcome-620.png"
+      },
+      "name": "How to test a website with Puppetry",
+      "description": "End-to-end testing of a web application is mostly about locating a target (page or DOM element), performing a command on it (navigate to URL, modify DOM, etc.) and asserting that the target satisfies the provided conditions. Puppetry provides a user-friendly interface to define targets and manage test cases bundled in test suits.",
+      "totalTime": "PT10M",
+
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "Web-site to test"
+        }
+      ],
+
+      "tool": [
+        {
+          "@type": "HowToTool",
+          "name": "Puppetry - codeless end-to-end testing"
+        }
+      ],
+      "step":[
+        {
+          "@type": "HowToStep",
+          "name": "Manage your test structure",
+          "text": "The test organizational structure consists of projects. Every project has one or more test suites. Every suite is split in test cases, where test case may contain one or more browser methods and assertions.",
+          "image": "https://puppetry.app/assets/img/v3/manage-structure.gif",
+          "url": "https://puppetry.app/#howtoStep1"
+        }, {
+          "@type": "HowToStep",
+          "name": "Locate and define element targets",
+          "text": "Test target can be either page or an element on the page. In the second case we need to inform Puppetry project what exact elements we mean. Locating an element is quite easy in a modern browser. You just need to right-click on the target element and copy its CSS selector or XPath",
+          "image": "https://puppetry.app/assets/img/v3/manage-targets.gif",
+          "url": "https://puppetry.app/#howtoStep2"
+        }, {
+          "@type": "HowToStep",
+          "name": "Select a target",
+          "text": "Test cases we populate with commands. Command means settings a browser method or an assertion on a target. Available targets are page and all the already defined elements aliases.",
+          "image": "https://puppetry.app/assets/img/v3/select-target.png",
+          "url": "https://puppetry.app/#howtoStep3"
+        }, {
+          "@type": "HowToStep",
+          "name": "Call a method",
+          "text": "Underlying form dynamically adapts to actual target/method combination. So when both selected we get method parameters (mandatory and optional)",
+          "image": "https://puppetry.app/assets/img/v3/call-method.png",
+          "url": "https://puppetry.app/#howtoStep4"
+        }, {
+          "@type": "HowToStep",
+          "name": "Make an assertion",
+          "text": "With assertions we not just perform a browser method, but test the result. Usually it sounds like “I assert that the result equals/contains/greater than/lower than/.. a provided value.",
+          "image": "https://puppetry.app/assets/img/v3/make-assertion.png",
+          "url": "https://puppetry.app/#howtoStep5"
+        }, {
+          "@type": "HowToStep",
+          "name": "Get test report",
+          "text": "As we press F6 Puppetry generates Jest project and runs internally the tests. The report may include screenshots and network activity details.",
+          "image": "https://puppetry.app/assets/img/v3/get-report.png",
+          "url": "https://puppetry.app/#howtoStep6"
+        }
+      ]
     }
     </script>
 
@@ -148,6 +217,7 @@
 
             <a  href="https://github.com/dsheiko/puppetry/releases" target="_blank" class="btn btn--secondary btn--md"
                 title="Download Puppetry"
+                rel="noopener"
                 aria-label="Download Puppetry" role="button">Download</a>
             </div>
           </div>
@@ -177,6 +247,7 @@
             <a href="https://youtu.be/dfuNhTCRMRg"
                title="Watch video: Recording Automated Tests with Puppetry"
               aria-label="Watch video"
+              rel="noopener"
               target="_blank" role="button">
                 <img src="/assets/img/v3/video-thumb.png?" alt="Watch video" />
             </a>
@@ -186,10 +257,12 @@
 
           <a  href="https://docs.puppetry.app" target="_blank" class="btn btn--secondary btn--md"
                 title="Puppetry Documentation"
+                rel="noopener"
                 aria-label="Puppetry Documentation" role="button">Read docs</a>
           <a  href="https://github.com/dsheiko/puppetry/releases"
               title="Download Puppetry"
               aria-label="Download Puppetry"
+              rel="noopener"
               target="_blank" class="btn btn--secondary btn--md" role="button">Download</a>
           </div>
         </div>
@@ -201,7 +274,7 @@
             <p>
               Puppetry requires neither programming skills nor experience with any of web-drivers/frameworks.
               Everything you may need to create and manage tests is available via
-              <a target="_blank" href="https://docs.puppetry.app/getting-started">extensive UI</a> and achievable without any scripting.
+              <a target="_blank" rel="noopener" href="https://docs.puppetry.app/getting-started">extensive UI</a> and achievable without any scripting.
             </p>
           </div>
 
@@ -211,16 +284,17 @@
             <h3>Comprehensive E2E Testing</h3>
             <p>
               Puppetry supports various testing approaches including
-              <a target="_blank" href="https://docs.puppetry.app/getting-started">Functional testing</a>,
-              <a target="_blank" href="https://docs.puppetry.app/testing-techniques/testing-dynamic-content">Testing Dynamic Content</a>,
-              <a target="_blank" href="https://docs.puppetry.app/testing-techniques/exhaustive-testing">Exhaustive Testing</a>,
-              <a target="_blank" href="https://docs.puppetry.app/testing-techniques/performance-testing">Performance Testing</a>,
-              <a target="_blank" href="https://docs.puppetry.app/testing-techniques/css-regression-testing"><nobr>CSS Regression</nobr> Testing</a>,
-              <a target="_blank" href="https://docs.puppetry.app/testing-techniques/mocking-http-s-requests">Mocking <nobr>HTTP/S Requests</nobr></a>,
-              <a target="_blank" href="https://docs.puppetry.app/testing-techniques/testing-rest-api"><nobr>REST API</nobr> Testing</a>,
-              <a target="_blank" href="https://docs.puppetry.app/testing-techniques/testing-google-analytics-tracking-code">Testing Google Analytics tracking code</a>,
-              <a target="_blank" href="https://docs.puppetry.app/testing-techniques/testing-chrome-extensions">Testing Chrome Extensions</a>,
-              <a target="_blank" href="https://docs.puppetry.app/testing-techniques/testing-emails">Testing Transactional Emails</a>.
+              <a target="_blank" rel="noopener" href="https://docs.puppetry.app/getting-started">Functional testing</a>,
+              <a href="/tip/howto-test-responsive-web-design/">Testing RWD</a>,
+              <a target="_blank" rel="noopener" href="https://docs.puppetry.app/testing-techniques/testing-dynamic-content">Testing Dynamic Content</a>,
+              <a target="_blank" rel="noopener" href="https://docs.puppetry.app/testing-techniques/exhaustive-testing">Exhaustive Testing</a>,
+              <a target="_blank" rel="noopener" href="https://docs.puppetry.app/testing-techniques/performance-testing">Performance Testing</a>,
+              <a target="_blank" rel="noopener" href="https://docs.puppetry.app/testing-techniques/css-regression-testing"><nobr>Visual Regression</nobr> Testing</a>,
+              <a target="_blank" rel="noopener" href="https://docs.puppetry.app/testing-techniques/mocking-http-s-requests">Mocking <nobr>HTTP/S Requests</nobr></a>,
+              <a target="_blank" rel="noopener" href="https://docs.puppetry.app/testing-techniques/testing-rest-api"><nobr>REST API</nobr> Testing</a>,
+              <a target="_blank" rel="noopener" href="https://docs.puppetry.app/testing-techniques/testing-google-analytics-tracking-code">Testing Google Analytics tracking code</a>,
+              <a href="/tip/howto-test-chrome-extensions/">Testing Chrome Extensions</a>,
+              <a target="_blank" rel="noopener" href="https://docs.puppetry.app/testing-techniques/testing-emails">Testing Transactional Emails</a>.
             </p>
           </div>
 
@@ -239,23 +313,23 @@
           <div class="hero-card">
             <img class="hero-card__icon" src="./assets/img/round-developer_board-24px.svg" alt="Ready for Continuous Integration" />
             <h3>Ready for Continuous Integration</h3>
-            <p>Puppetry can <a target="_blank" href="https://docs.puppetry.app/export/exporting-tests-for-ci">export the tests</a> into a Jest.js project,
+            <p>Puppetry can <a target="_blank" rel="noopener" href="https://docs.puppetry.app/export/exporting-tests-for-ci">export the tests</a> into a Jest.js project,
               which can be easily included in CI/CD pipeline.</p>
           </div>
 
           <div class="hero-card">
             <img class="hero-card__icon" src="./assets/img/baseline-video-cam-24px.svg?12" alt="Automation recording" />
             <h3>Automation recording</h3>
-            <p>Puppetry can <a target="_blank" href="https://docs.puppetry.app/suite#record-suite">record your interactions with the application</a>
+            <p>Puppetry can <a target="_blank" rel="noopener" href="https://docs.puppetry.app/suite#record-suite">record your interactions with the application</a>
               under test and converts them into a test suite.
             </p>
           </div>
           <div class="hero-card">
             <img class="hero-card__icon" src="./assets/img/baseline-developer_mode-24px.svg" alt="Template expressions" />
             <h3>Template expressions</h3>
-            <p>With Puppetry you can use <a target="_blank" href="https://docs.puppetry.app/template">template tags</a> to refer variables defined per environment (test, stage, production).
+            <p>With Puppetry you can use <a target="_blank" rel="noopener" href="https://docs.puppetry.app/template">template tags</a> to refer variables defined per environment (test, stage, production).
               Moreover, you can apply template functions to build a value, e.g. by using
-              <a target="_blank" href="https://github.com/marak/Faker.js">Faker.js methods</a></p>
+              <a target="_blank" rel="noopener" href="https://github.com/marak/Faker.js">Faker.js methods</a></p>
           </div>
 
         </div>
@@ -267,7 +341,7 @@
       <div class="container">
         <h2>Create and run E2E tests</h2>
 
-        <div class="feature feature--left">
+        <div id="howtoStep1" class="feature feature--left">
 
          <div class="feature__ic">
            <div class="feature__img-frame">
@@ -289,14 +363,14 @@
 
         </div>
 
-        <div class="feature feature--right">
+        <div id="howtoStep2" class="feature feature--right">
           <div>
             <h3>Locate and define element targets</h3>
             <p>
               Test target can be either page or an element on the page.
               In the second case we need to inform Puppetry project what exact elements we mean.
               Locating an element is quite easy in a modern browser. You just need to right-click on the target element and copy its CSS selector or XPath.
-              Puppetry takes in both. See <a href="https://www.youtube.com/watch?v=bAoyZSQAZHg" target="_blank" title="How to add a target in Puppetry">how to</a>.
+              Puppetry takes in both. See <a href="https://www.youtube.com/watch?v=bAoyZSQAZHg" target="_blank" rel="noopener" title="How to add a target in Puppetry">how to</a>.
               We just need to assign a meaninful name (alias) to the element in "Test targets" tab and copy/paste the locator (selector/XPath)
             </p>
           </div>
@@ -314,7 +388,7 @@
           </div>
         </div>
 
-         <div class="feature feature--left">
+         <div  id="howtoStep3" class="feature feature--left">
           <div class="feature__ic">
             <img
               class="feature__img lazyload blur-up"
@@ -330,7 +404,7 @@
           </div>
         </div>
 
-        <div class="feature feature--right">
+        <div  id="howtoStep4" class="feature feature--right">
           <div>
             <h3>Call a method</h3>
             <p>Underlying form dynamically adapts to actual target/method combination.
@@ -344,7 +418,7 @@
           </div>
         </div>
 
-        <div class="feature feature--left">
+        <div  id="howtoStep5" class="feature feature--left">
           <div class="feature__ic">
             <img
               class="feature__img lazyload blur-up"
@@ -358,7 +432,7 @@
           </div>
         </div>
 
-        <div class="feature feature--right">
+        <div id="howtoStep6" class="feature feature--right">
           <div>
             <h3>Get test report</h3>
             <p>As we press F6 Puppetry generates Jest project and runs internally the tests.
@@ -392,7 +466,7 @@
           <div>
             <h3>Export your tests</h3>
             <p>You can export the tests into Jest project, which can be executed on any platform with
-              <a rel="noopener noreferrer" target="_blank" href="https://nodejs.org/" title="JavaScript runtime built on Chrome V8 JavaScript engine.">Node.js.</a>.
+              <a rel="noopener noreferrer" target="_blank" rel="noopener" href="https://nodejs.org/" title="JavaScript runtime built on Chrome V8 JavaScript engine.">Node.js.</a>.
               Since the tests generated by Puppetry perform browser methods on headless Chrome,
               they run perfectly also on machines with no display hardware and no physical input devices.
               Thus your automated UI tests can be simply plugged into Continuous Integration / Continuous Deployment pipeline</p>
@@ -426,8 +500,9 @@
 
         <div class="footer">
           <div class="footer__copyright">
-            © <span id="cYear">2019</span> MIT License. Created by  <a href="http://dsheiko.com" target="_blank">Dmitry Sheiko</a>
+            © <span id="cYear">2019</span> MIT License. Created by  <a href="http://dsheiko.com" target="_blank" rel="noopener">Dmitry Sheiko</a>
           </div>
+          <a class="footer__nav" href="/privacy">Privacy Policy</a>
           <div class="footer__links">
 
             <a rel="noopener noreferrer" title="Find me on Amazon" class="layout-icon" href="https://www.amazon.com/default/e/B0788FN46T/" target="_blank">

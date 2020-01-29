@@ -1,0 +1,42 @@
+
+{
+    "appId": "com.dsheiko.puppetry",
+    "productName": "puppetry",
+    "compression": "normal",
+    "artifactName": "${name}-${os}-v${version}-${arch}.${ext}",
+    "directories": {
+      "buildResources": "app/assets"
+    },
+    "copyright": "©2020 Dmitry Sheiko",
+    "files": [
+      "app",
+      "appx",
+      "jest-pkg",
+      "project-demo"
+    ],
+    "asar": true,
+    "asarUnpack": [
+      "jest-pkg/**/*",
+      "project-demo/**/*"
+    ],
+    "appx": {
+      "applicationId": "DmitrySheiko.Puppetry",
+      "identityName": "62994DmitrySheiko.Puppetry",
+      "displayName": "Puppetry",
+      "publisher": "CN=30C62CEC-B51F-4DD8-9C13-51C7224F5001",
+      "publisherDisplayName": "Dmitry Sheiko",
+      "languages": ["en"]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "appx",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "afterSign": "./after_sign_hook.js",
+    "afterAllArtifactBuild": "./after_sign_hook.js"
+  }

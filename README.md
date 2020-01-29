@@ -18,7 +18,8 @@ Puppetry is an open-source cross-platform desktop application that gives non-dev
 
 ![Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline](https://github.com/dsheiko/puppetry/raw/master/docs/assets/img/puppetry-welcome.png)
 
-[:tv: Watch introduction video](https://youtu.be/dfuNhTCRMRg  "Recording Automated Tests with Puppetry")
+- [:tv: Recording Automated Tests with Puppetry](https://youtu.be/dfuNhTCRMRg  "Recording Automated Tests with Puppetry")
+- [:tv: How to test Responsive Web Design with Puppetry](https://youtu.be/m1az-KLboG8  "How to test Responsive Web Design with Puppetry")
 
 # Welcome Puppetry
 Puppetry offers you an easy-to-use UI where you choose browser methods and assertions from a predefined list, with predefined settings, guided by extensive tips.
@@ -49,7 +50,7 @@ Namely you can do the following:
   - [Testing Dynamic Content](https://docs.puppetry.app/testing-techniques/testing-dynamic-content)
   - [Exhaustive Testing](https://docs.puppetry.app/testing-techniques/exhaustive-testing)
   - [Performance Testing](https://docs.puppetry.app/testing-techniques/performance-testing)
-  - [CSS Regression Testing](https://docs.puppetry.app/testing-techniques/css-regression-testing)
+  - [Visual Regression Testing](https://docs.puppetry.app/testing-techniques/css-regression-testing)
   - [Mocking HTTP/S Requests](https://docs.puppetry.app/testing-techniques/mocking-http-s-requests)
   - [Testing REST API](https://docs.puppetry.app/testing-techniques/testing-rest-api)
   - [Testing Google Analytics tracking code](https://docs.puppetry.app/testing-techniques/testing-google-analytics-tracking-code)
