@@ -635,8 +635,16 @@ margin-left: 8px;
 }
 
 .ant-layout > .ant-layout-footer {
-padding: 8px 24px;
+  padding: 0 24px;
 }
+
+.legal-links a, .legal-links a:visited {
+  color: black;
+}
+.legal-links a:hover {
+  color: var( --color-primary );
+}
+
 .ant-form.cell-form .ant-form-item {
 margin-bottom: 0;
 }

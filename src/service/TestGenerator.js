@@ -67,10 +67,12 @@ export default class TestGenerator {
   parseRef = ( ref, variables, parentId ) => {
     const groups = this.snippets.groups;
     if ( !groups.hasOwnProperty( SNIPPETS_GROUP_ID ) ) {
+      console.warn( `Cannot find ID: ${ SNIPPETS_GROUP_ID } in groups:`, groups );
       return ``;
     }
     const tests = groups[ SNIPPETS_GROUP_ID ].tests;
     if ( !tests.hasOwnProperty( ref ) ) {
+      console.warn( `Cannot find REF: ${ ref } in tests:`, tests );
       return ``;
     }
     const test = tests[ ref ],
