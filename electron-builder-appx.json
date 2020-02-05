@@ -10,7 +10,6 @@
     "copyright": "©2020 Dmitry Sheiko",
     "files": [
       "app",
-      "appx",
       "jest-pkg",
       "project-demo"
     ],
