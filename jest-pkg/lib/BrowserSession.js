@@ -30,6 +30,9 @@ class BrowserSession {
     }
 
     const options = {
+            product: setupOptions.puppeteerProduct !== null
+              ? setupOptions.puppeteerProduct
+              : ( process.env.PUPPETEER_PRODUCT || "chrome" ),
             headless: ( setupOptions.hasOwnProperty( "headless" )
               ? setupOptions.headless : !process.env.PUPPETEER_RUN_IN_BROWSER ),
             devtools: Boolean( process.env.PUPPETEER_DEVTOOLS || setupOptions.devtools ),
@@ -47,6 +50,7 @@ class BrowserSession {
     } else {
       this.page = await this.browser.newPage();
     }
+
     // launches 2 windows (one regular and one incognito)
     // but seems like cannot be fixed https://github.com/GoogleChrome/puppeteer/issues/4400
     this.target = createTargetMethods( this.page );

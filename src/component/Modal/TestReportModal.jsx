@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Alert, Checkbox, Modal, Button, Tabs } from "antd";
+import { Alert, Checkbox, Modal, Button, Tabs, Select } from "antd";
 import Tooltip from "component/Global/Tooltip";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractComponent from "component/AbstractComponent";
@@ -9,11 +9,13 @@ import If from "component/Global/If";
 import * as classes from "./classes";
 import { SelectEnv } from "component/Global/SelectEnv";
 import { MODAL_DEFAULT_PROPS } from "constant";
+import { SELECT_SEARCH_PROPS } from "service/utils";
 
 /*eslint no-empty: 0*/
 
 const CheckboxGroup = Checkbox.Group,
-      { TabPane } = Tabs;
+      { TabPane } = Tabs,
+      { Option } = Select;
 
 /**
  * Adds/removes args in the launcher args string
@@ -52,7 +54,8 @@ export class TestReportModal extends AbstractComponent {
     loading: false,
     browserOptions: false,
     updateSnapshot: false,
-    interactiveMode: false
+    interactiveMode: false,
+    product: "chrome"
   }
 
   constructor( props ) {
@@ -120,7 +123,8 @@ export class TestReportModal extends AbstractComponent {
           launcherArgs: browserOptions.launcherArgs,
           devtools: browserOptions.devtools,
           updateSnapshot: this.state.updateSnapshot,
-          interactiveMode: this.state.interactiveMode
+          interactiveMode: this.state.interactiveMode,
+          puppeteerProduct: this.state.product
         });
 
 
@@ -152,6 +156,10 @@ export class TestReportModal extends AbstractComponent {
     return currentFile || files[ 0 ];
   }
 
+  onBrowserChange = ( product ) => {
+    this.setState({ product });
+  }
+
   render() {
     const { isVisible, files } = this.props,
           current = this.getCurrentFile(),
@@ -167,7 +175,7 @@ export class TestReportModal extends AbstractComponent {
           onOk={this.onClickOk}
           { ...MODAL_DEFAULT_PROPS }
 
-          className="checkbox-group--vertical"
+          className="checkbox-group--vertical ant-modal--test-report"
 
           footer={[
             ( <Button
@@ -197,6 +205,21 @@ export class TestReportModal extends AbstractComponent {
             >
 
               <TabPane tab="General" key="1">
+
+                <div className="select-group-inline">
+                  <span className="select-group-inline__label">
+                    Browser:
+                  </span>
+                <Select
+                    { ...SELECT_SEARCH_PROPS }
+                    style={{ width: 282 }}
+                    defaultValue="chrome"
+                    onChange={ this.onBrowserChange }
+                  >
+                  <Option value="chrome" key="chrome">Chrome</Option>
+                  <Option value="firefox" key="firefox">Firefox</Option>
+                </Select>
+                </div>
 
 
                 <SelectEnv theme="test-reports" environments={ this.props.project.environments }

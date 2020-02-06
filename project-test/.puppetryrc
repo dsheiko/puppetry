@@ -596,9 +596,9 @@
       "tests": {}
     }
   },
-  "savedAt": 1576223356,
+  "savedAt": 1581001923,
   "modified": false,
-  "lastOpenSuite": "page.mockRequest.json",
+  "lastOpenSuite": "target.assertVisible.json",
   "variables": {},
   "targets": {
     "js4k1ukyk9a": {
@@ -616,5 +616,5 @@
   ],
   "autosave": true,
   "projectDirectory": "/home/sheiko/PUPPETRY/puppetry-test",
-  "puppetry": "3.1.0"
+  "puppetry": "3.1.2"
 }

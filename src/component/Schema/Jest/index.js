@@ -65,7 +65,8 @@ function getSetupOptions( options ) {
     ignoreHTTPSErrors: result( options, "ignoreHTTPSErrors", false ),
     headless: result( options, "headless", true ),
     launcherArgs: result( options, "launcherArgs", "" ),
-    devtools: result( options, "devtools", false )
+    devtools: result( options, "devtools", false ),
+    puppeteerProduct: result( options, "puppeteerProduct", null )
   });
 }
 
@@ -86,6 +87,8 @@ export const tplSuite = ({
  * on ${ String( Date() ) }
  * Suite: ${ suite.title }
  */
+
+console.log( "BROWSER: ", process.env.PUPPETEER_PRODUCT || "chrome" );
 
 ${ runner !== RUNNER_PUPPETRY ? `var nVer = process.version.match( /^v(\\d+)/ );
 if ( !nVer || nVer[ 1 ] < 9 ) {

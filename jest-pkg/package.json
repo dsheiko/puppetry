@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test:firefox": "cross-env PUPPETRY_DRIVER=firefox jest",
+    "test:firefox": "cross-env PUPPETEER_PRODUCT=firefox jest",
     "test:debug": "cross-env PUPPETEER_RUN_IN_BROWSER=true jest --detectOpenHandles",
     "report": "allure serve"
   },
@@ -27,8 +27,7 @@
     "jsonpath": "^1.0.2",
     "node-fetch": "^2.6.0",
     "node-localstorage": "^1.3.1",
-    "puppeteer": "^2.0.0",
-    "puppeteer-firefox": "*",
+    "puppeteer": "^2.1.0",
     "shelljs": "^0.8.2",
     "pixelmatch": "^5.1.0",
     "pngjs": "^3.4.0",

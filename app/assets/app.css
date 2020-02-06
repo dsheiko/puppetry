@@ -635,7 +635,7 @@ margin-left: 8px;
 }
 
 .ant-layout > .ant-layout-footer {
-  padding: 0 24px;
+  padding: 8px 24px;
 }
 
 .legal-links a, .legal-links a:visited {
@@ -1509,4 +1509,15 @@ summary:hover {
 .footer__copyright span:last-child {
   flex: 1 1 auto;
   text-align: center;
+}
+
+.tabgroup-test-reports .select-group-inline + .select-group-inline {
+  margin-top: 16px;
+}
+.tabgroup-test-reports .select-group-inline__label {
+  width: 86px;
+}
+
+.ant-modal.ant-modal--test-report {
+  top: 38px;
 }

@@ -92,7 +92,8 @@ export class TabGroup extends React.Component {
                   updateSnapshot: app.updateSnapshot,
                   interactiveMode: app.interactiveMode,
                   incognito: app.incognito,
-                  ignoreHTTPSErrors: app.ignoreHTTPSErrors
+                  ignoreHTTPSErrors: app.ignoreHTTPSErrors,
+                  puppeteerProduct: app.puppeteerProduct
                 }}
                 project={ project }
                 snippets={ snippets }

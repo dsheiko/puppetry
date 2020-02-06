@@ -87,6 +87,7 @@ export default {
     launcherArgs: "",
     updateSnapshot: false,
     interactiveMode: false,
+    puppeteerProduct: "chrome",
 
     // Dynamic info coming not from project file, but from file watcher
     project: {

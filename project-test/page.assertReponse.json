@@ -4,7 +4,7 @@
   "snippets": false,
   "description": "",
   "savedAt": 1575987430,
-  "loadedAt": 1575987203,
+  "loadedAt": 1581001776,
   "modified": false,
   "filename": "page.assertReponse.json",
   "targets": {
@@ -455,5 +455,5 @@
       }
     }
   },
-  "puppetry": "3.0.0"
+  "puppetry": "3.1.2"
 }

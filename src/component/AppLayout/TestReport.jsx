@@ -204,6 +204,7 @@ export class TestReport extends AbstractComponent {
 
   render() {
     const { report, loading, ok, stdErr, details } = this.state,
+          product = ( this.props.options.puppeteerProduct || "chrome" ).toUpperCase(),
           printableStdErr = convert.toHtml( stdErr )
             .replace( /\n/mg, "" )
             .replace( /<br\s*\/>+/mg, "\n" )
@@ -230,6 +231,7 @@ export class TestReport extends AbstractComponent {
       <If exp={ ok && !loading }>
         <div id="cTestReport">
 
+          <h3>Browser: { product }</h3>
 
           <div>{ report.success
             ? ( <div className="tr-badge is-ok">PASSED</div> )
@@ -241,6 +243,7 @@ export class TestReport extends AbstractComponent {
               <p dangerouslySetInnerHTML={{ __html: printableStdErr }}></p>
             </Panel>
           </Collapse> }
+
 
           <ReportBody details={ details }
             projectDirectory={ this.props.projectDirectory }
