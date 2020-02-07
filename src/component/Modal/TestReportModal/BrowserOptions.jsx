@@ -1,12 +1,20 @@
 import React from "react";
-import { Checkbox, Switch, Input } from "antd";
+import { Checkbox, Switch, Input, Select, Icon } from "antd";
 import Tooltip from "component/Global/Tooltip";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractComponent from "component/AbstractComponent";
 import BrowseDirectory from "component/Global/BrowseDirectory";
+import { SELECT_SEARCH_PROPS } from "service/utils";
+
+import { ExecutablePath } from "./ExecutablePath";
+import { ChromeArguments } from "./ChromeArguments";
+import { FirefoxArguments } from "./FirefoxArguments";
+
+
 
 /*eslint no-empty: 0*/
-const { TextArea } = Input;
+const { TextArea } = Input,
+      { Option } = Select;
 
 /**
  * Adds/removes args in the launcher args string
@@ -35,10 +43,8 @@ export class BrowserOptions extends AbstractComponent {
   }
 
   state = {
-    headless: true,
+    browser: "default",
     incognito: true,
-    launcherArgs: "",
-    ignoreHTTPSErrors: false,
     devtools: false,
     browseDirectoryValidateStatus: "",
     browseDirectoryValidateMessage: ""
@@ -46,7 +52,9 @@ export class BrowserOptions extends AbstractComponent {
 
   constructor( props ) {
     super( props );
-    this.inputLauncherArgsRef = React.createRef();
+    this.refChromeArguments = React.createRef();
+    this.refFirfoxArguments = React.createRef();
+    this.refExecutablePath = React.createRef();
   }
 
   onChangeCheckbox = ( checked, field ) => {
@@ -55,35 +63,10 @@ export class BrowserOptions extends AbstractComponent {
     });
   }
 
-  onSwitchChange = ( checked ) => {
-    this.setState({
-      headless: !checked
-    });
-  }
 
-  onCheckMaximize = ( e ) => {
-    this.setState({
-      launcherArgs: updateLauncherArgs( this.state.launcherArgs, `--start-maximized`, e.target.checked )
-    });
-  }
 
-  onCheckFullscreen = ( e ) => {
-    this.setState({
-      launcherArgs: updateLauncherArgs( this.state.launcherArgs, `--start-fullscreen`, e.target.checked )
-    });
-  }
-
-  onCheckIgnoreHttps = ( e ) => {
-    this.setState({
-      ignoreHTTPSErrors: e.target.checked,
-      launcherArgs: updateLauncherArgs( this.state.launcherArgs, `--ignore-certificate-errors`, e.target.checked )
-    });
-  }
-
-  onChangeLauncherArgs = ( e ) => {
-    this.setState({
-      launcherArgs: e.target.value
-    });
+  onBrowserChange = ( browser ) => {
+    this.setState({ browser });
   }
 
   getSelectedDirectory = ( selectedDirectory ) => {
@@ -104,18 +87,26 @@ export class BrowserOptions extends AbstractComponent {
       <ErrorBoundary>
 
         <div className="run-in-browser__layout">
-          <div>
-            <Switch
-              checkedChildren="On"
-              unCheckedChildren="Off"
-              checked={ checked }
-              onChange={ this.onSwitchChange } />
-            { " " } run in browser<Tooltip
-              title={ "By default the tests are running in headless mode (faster). "
-                  + "But you can switch for browser mode and see what is really happening on the page" }
-              icon="question-circle"
-            />
+
+          <div className="select-group-inline">
+              <span className="select-group-inline__label">
+                  <Icon type="desktop" title="Select a browser to run the tests in" />
+              </span>
+              <Select
+                  { ...SELECT_SEARCH_PROPS }
+                  style={{ width: 172 }}
+                  defaultValue="default"
+                  onChange={ this.onBrowserChange }
+                >
+                <Option value="default" key="default">Headless Chromium</Option>
+                <Option value="chromium" key="chromium">Chromium</Option>
+                <Option value="chrome" key="chrome">Chrome</Option>
+                <Option value="firefox" key="firefox">Firefox <Icon type="experiment" /></Option>
+              </Select>
           </div>
+
+
+
           <div className="chromium-checkbox-group">
             { " " } <Checkbox
               checked={ this.state.devtool }
@@ -134,44 +125,14 @@ export class BrowserOptions extends AbstractComponent {
 
         </div>
 
+        { ( this.state.browser === "chrome" || this.state.browser === "firefox" )
+         ? <ExecutablePath browser={ this.state.browser } ref={ this.refExecutablePath } /> : null }
+
+        { this.state.browser !== "firefox"
+        ? <ChromeArguments  ref={ this.refChromeArguments } />
+        : <FirefoxArguments  ref={ this.refFirfoxArguments } /> }
 
         <div className="browser-options-layout">
-          <div>
-
-            { " " } <Checkbox
-              onChange={ this.onCheckMaximize }
-            >
-                  maximized
-            </Checkbox>
-
-            { " " } <Checkbox
-              onChange={ this.onCheckFullscreen }
-            >
-                  fullscreen
-            </Checkbox>
-
-            { " " } <Checkbox
-              onChange={ this.onCheckIgnoreHttps }
-            >
-                  ignore HTTPS errors
-            </Checkbox>
-          </div>
-
-          <div className="ant-form-item-label">
-            <label htmlFor="target" title="Additional arguments">
-                Additional arguments to Chromium{ " " }
-              <a
-                onClick={ this.onExtClick }
-                href="http://peter.sh/experiments/chromium-command-line-switches/">
-                    (list of available options)</a></label>
-          </div>
-
-          <TextArea
-            onChange={ this.onChangeLauncherArgs }
-            ref={ this.inputLauncherArgsRef }
-            value={ this.state.launcherArgs }
-            placeholder="--start-maximized --ignore-certificate-errors" />
-
 
           <BrowseDirectory
             defaultDirectory={ this.state.projectDirectory }

@@ -840,6 +840,8 @@ td:hover .editable-cell-icon {
 .run-in-browser__layout {
   display: flex;
   justify-content: space-between;
+      align-items: center;
+
 }
 
 .run-in-browser__layout {
@@ -1511,13 +1513,29 @@ summary:hover {
   text-align: center;
 }
 
-.tabgroup-test-reports .select-group-inline + .select-group-inline {
-  margin-top: 16px;
-}
-.tabgroup-test-reports .select-group-inline__label {
-  width: 86px;
-}
 
 .ant-modal.ant-modal--test-report {
   top: 38px;
+}
+
+.browser-options-panel {
+/*  border-bottom: 1px solid rgba(0, 0, 0, 0.25);*/
+  padding: 0 4px;
+  margin: 8px 0;
+}
+
+.flex-row {
+  display: flex;
+  align-items: center;
+}
+
+.flex-item-00 {
+  flex: 0 0 auto;
+}
+.flex-item-11 {
+  flex: 1 1 auto;
+}
+
+.browser-options-panel.flex-row > * {
+  margin: 0 4px;
 }

@@ -1,5 +1,6 @@
 const puppeteer = process.env.PUPPETRY_DRIVER === "firefox" ? require( "puppeteer-firefox" ) : require( "puppeteer" ),
-      createTargetMethods = require( "./BrowserSession/targetMethods" );
+      createTargetMethods = require( "./BrowserSession/targetMethods" ),
+      ALLOWED_PRODUCTS = [ "chrome", "firefox" ];
 
 class BrowserSession {
 
@@ -22,7 +23,10 @@ class BrowserSession {
           // when called like PUPPETEER_RUN_IN_BROWSER=true jest open in a browser
           launcherArgsString =  process.env.PUPPETEER_LAUNCHER_ARGS
             ? process.env.PUPPETEER_LAUNCHER_ARGS : setupOptionsLauncherArgsString,
-          launcherArgs = launcherArgsString.split( " " ) ;
+          launcherArgs = launcherArgsString.split( " " ),
+          product = ALLOWED_PRODUCTS.includes( setupOptions.puppeteerProduct )
+              ? setupOptions.puppeteerProduct
+              : ( process.env.PUPPETEER_PRODUCT || "chrome" );
 
     if ( setupOptions.setUserAgent ) {
       launcherArgs.includes( "--no-sandbox" ) || launcherArgs.push( "--no-sandbox" );
@@ -30,9 +34,7 @@ class BrowserSession {
     }
 
     const options = {
-            product: setupOptions.puppeteerProduct !== null
-              ? setupOptions.puppeteerProduct
-              : ( process.env.PUPPETEER_PRODUCT || "chrome" ),
+            product,
             headless: ( setupOptions.hasOwnProperty( "headless" )
               ? setupOptions.headless : !process.env.PUPPETEER_RUN_IN_BROWSER ),
             devtools: Boolean( process.env.PUPPETEER_DEVTOOLS || setupOptions.devtools ),

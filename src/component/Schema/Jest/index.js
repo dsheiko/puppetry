@@ -88,8 +88,6 @@ export const tplSuite = ({
  * Suite: ${ suite.title }
  */
 
-console.log( "BROWSER: ", process.env.PUPPETEER_PRODUCT || "chrome" );
-
 ${ runner !== RUNNER_PUPPETRY ? `var nVer = process.version.match( /^v(\\d+)/ );
 if ( !nVer || nVer[ 1 ] < 9 ) {
   console.error( "WARNING: You have an outdated Node.js version " + process.version
@@ -125,6 +123,7 @@ ${ targets }
 describe( ${ JSON.stringify( title ) }, () => {
   beforeAll(async () => {
     await bs.setup(${ getSetupOptions( options ) });
+    console.log( "BROWSER: ", await bs.browser.version() );
 
     bs.page.on( "console", ( message ) => consoleLog.push( message ) );
     bs.page.on( "dialog", ( dialog ) => dialogLog.push( dialog ) );

@@ -96,7 +96,7 @@ export class TestReportModal extends AbstractComponent {
 
   getBrowserOptions() {
     return this.refBrowserOptions.current ? this.refBrowserOptions.current.state : {
-      headless: true,
+      browser: "default",
       incognito:true,
       ignoreHTTPSErrors: false,
       launcherArgs: "",
@@ -117,14 +117,14 @@ export class TestReportModal extends AbstractComponent {
         this.props.action.setApp({
           checkedList,
           testReportModal: false,
-          headless: ( this.state.interactiveMode === true ? false : browserOptions.headless ),
+          headless: ( this.state.interactiveMode === true ? false : browserOptions.browser === "default" ),
           incognito: browserOptions.incognito,
           ignoreHTTPSErrors: browserOptions.ignoreHTTPSErrors,
           launcherArgs: browserOptions.launcherArgs,
           devtools: browserOptions.devtools,
           updateSnapshot: this.state.updateSnapshot,
           interactiveMode: this.state.interactiveMode,
-          puppeteerProduct: this.state.product
+          puppeteerProduct: browserOptions.browser
         });
 
 
@@ -156,9 +156,6 @@ export class TestReportModal extends AbstractComponent {
     return currentFile || files[ 0 ];
   }
 
-  onBrowserChange = ( product ) => {
-    this.setState({ product });
-  }
 
   render() {
     const { isVisible, files } = this.props,
@@ -205,21 +202,6 @@ export class TestReportModal extends AbstractComponent {
             >
 
               <TabPane tab="General" key="1">
-
-                <div className="select-group-inline">
-                  <span className="select-group-inline__label">
-                    Browser:
-                  </span>
-                <Select
-                    { ...SELECT_SEARCH_PROPS }
-                    style={{ width: 282 }}
-                    defaultValue="chrome"
-                    onChange={ this.onBrowserChange }
-                  >
-                  <Option value="chrome" key="chrome">Chrome</Option>
-                  <Option value="firefox" key="firefox">Firefox</Option>
-                </Select>
-                </div>
 
 
                 <SelectEnv theme="test-reports" environments={ this.props.project.environments }

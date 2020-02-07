@@ -90,6 +90,8 @@
     "sqip-plugin-svgo": "^1.0.0-alpha.27",
     "tmp-promise": "^1.0.5",
     "uniqid": "^5.0.3",
+    "userhome": "^1.0.0",
+    "which": "^2.0.2",
     "write-file-atomic": "^2.4.3",
     "xml2js": "^0.4.19"
   },
