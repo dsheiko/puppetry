@@ -1267,6 +1267,10 @@ use it when we want label be aligned with following inline inputs
   margin-bottom: 16px;
 }
 
+.ant-modal-body .ant-alert {
+  margin-bottom: 16px;
+}
+
 .ant-form-item--layout .ant-form-item-label {
   text-align: left;
 }
@@ -1521,7 +1525,7 @@ summary:hover {
 .browser-options-panel {
 /*  border-bottom: 1px solid rgba(0, 0, 0, 0.25);*/
   padding: 0 4px;
-  margin: 8px 0;
+  margin: 16px 0 8px 0;
 }
 
 .flex-row {

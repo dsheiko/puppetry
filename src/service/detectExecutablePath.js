@@ -40,7 +40,7 @@ const strategy = {
 /**
  * @param {String} product - "google-chrome"|"firefox"
  */
-export default function executablePath( product ) {
+export default function detectExecutablePath( product ) {
     switch ( true ) {
       case process.platform === "darwin":
         return strategy.macOs( product );

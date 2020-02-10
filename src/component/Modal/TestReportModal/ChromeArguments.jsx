@@ -2,7 +2,7 @@ import React from "react";
 import { Checkbox, Input, Icon, message } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractComponent from "component/AbstractComponent";
-
+import { updateLauncherArgs } from "./utils";
 
 /*eslint no-empty: 0*/
 const { TextArea } = Input;
@@ -75,11 +75,10 @@ export class ChromeArguments extends AbstractComponent {
 
           <div className="ant-form-item-label">
             <label htmlFor="target" title="Additional arguments">
-                Additional arguments to pass to the browser instance{ " " }
-              <a
+                <a
                 onClick={ this.onExtClick }
-                href="http://peter.sh/experiments/chromium-command-line-switches/">
-                    (list of available options)</a></label>
+                href="http://peter.sh/experiments/chromium-command-line-switches/">Additional arguments</a>
+                { " " }to pass to the browser instance</label>
           </div>
 
           <TextArea

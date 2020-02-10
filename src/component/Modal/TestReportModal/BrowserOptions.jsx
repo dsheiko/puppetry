@@ -9,31 +9,14 @@ import { SELECT_SEARCH_PROPS } from "service/utils";
 import { ExecutablePath } from "./ExecutablePath";
 import { ChromeArguments } from "./ChromeArguments";
 import { FirefoxArguments } from "./FirefoxArguments";
-
+import { updateLauncherArgs } from "./utils";
 
 
 /*eslint no-empty: 0*/
 const { TextArea } = Input,
       { Option } = Select;
 
-/**
- * Adds/removes args in the launcher args string
- * @param {String} launcherArgs
- * @param {String} value
- * @param {Boolean} toggle
- * @returns {String}
- */
-export function updateLauncherArgs( launcherArgs, value, toggle ) {
-  const args = launcherArgs.split( " " )
-    .filter( arg => arg.trim().length )
-    .filter( arg => !arg.startsWith( value ) );
 
-  if ( toggle ) {
-    args.push( value );
-  }
-
-  return args.join( " " );
-}
 
 
 export class BrowserOptions extends AbstractComponent {
@@ -47,13 +30,14 @@ export class BrowserOptions extends AbstractComponent {
     incognito: true,
     devtools: false,
     browseDirectoryValidateStatus: "",
-    browseDirectoryValidateMessage: ""
+    browseDirectoryValidateMessage: "",
+    launcherArgs: ""
   }
 
   constructor( props ) {
     super( props );
     this.refChromeArguments = React.createRef();
-    this.refFirfoxArguments = React.createRef();
+    this.refFirefoxArguments = React.createRef();
     this.refExecutablePath = React.createRef();
   }
 
@@ -129,19 +113,17 @@ export class BrowserOptions extends AbstractComponent {
          ? <ExecutablePath browser={ this.state.browser } ref={ this.refExecutablePath } /> : null }
 
         { this.state.browser !== "firefox"
-        ? <ChromeArguments  ref={ this.refChromeArguments } />
-        : <FirefoxArguments  ref={ this.refFirfoxArguments } /> }
+        ? <ChromeArguments ref={ this.refChromeArguments } />
+        : <FirefoxArguments ref={ this.refFirefoxArguments } /> }
 
-        <div className="browser-options-layout">
-
+        { this.state.browser !== "firefox" && <div className="browser-options-layout">
           <BrowseDirectory
             defaultDirectory={ this.state.projectDirectory }
             validateStatus={ this.state.browseDirectoryValidateStatus }
             validateMessage={ this.state.browseDirectoryValidateMessage }
             getSelectedDirectory={ this.getSelectedDirectory }
             label="Chrome extension location (optional)" />
-
-        </div>
+        </div> }
 
 
       </ErrorBoundary>

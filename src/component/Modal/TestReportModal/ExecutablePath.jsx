@@ -5,7 +5,7 @@ import ErrorBoundary from "component/ErrorBoundary";
 import AbstractComponent from "component/AbstractComponent";
 import BrowseDirectory from "component/Global/BrowseDirectory";
 import { SELECT_SEARCH_PROPS } from "service/utils";
-import executablePath from "service/executablePath";
+import detectExecutablePath from "service/detectExecutablePath";
 
 /*eslint no-empty: 0*/
 const { TextArea } = Input,
@@ -34,11 +34,11 @@ export class ExecutablePath extends AbstractComponent {
 
   onDetect = ( e ) => {
     e.preventDefault();
-    const executablePath = executablePath( this.props.browser === "chrome" ? "google-chrome" : "firefox" );
+    const executablePath = detectExecutablePath( this.props.browser === "chrome" ? "google-chrome" : "firefox" );
     if ( !executablePath ) {
       return message( "Sorry, cannot find any matching executable" );
     }
-    this.setState({ executablePath: executablePath( "google-chrome" ) });
+    this.setState({ executablePath });
   }
 
 

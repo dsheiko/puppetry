@@ -55,7 +55,7 @@ export class TestReportModal extends AbstractComponent {
     browserOptions: false,
     updateSnapshot: false,
     interactiveMode: false,
-    product: "chrome"
+    error: ""
   }
 
   constructor( props ) {
@@ -95,12 +95,25 @@ export class TestReportModal extends AbstractComponent {
   }
 
   getBrowserOptions() {
-    return this.refBrowserOptions.current ? this.refBrowserOptions.current.state : {
-      browser: "default",
-      incognito:true,
-      ignoreHTTPSErrors: false,
-      launcherArgs: "",
-      devtools: false
+    const bopts = this.refBrowserOptions.current;
+    if ( !bopts ) {
+      return {
+        browser: "default",
+        incognito:true,
+        ignoreHTTPSErrors: false,
+        launcherArgs: "",
+        devtools: false,
+        executablePath: ""
+      };
+    }
+
+    return {
+      ...bopts.state,
+      executablePath: bopts.refExecutablePath.current.state.executablePath,
+      launcherArgs: ( bopts.state.browser === "firefox"
+       ? bopts.refFirefoxArguments.current.state.launcherArgs
+       : bopts.refChromeArguments.current.state.launcherArgs )
+         + ( bopts.state.launcherArgs ? ` ${ bopts.state.launcherArgs }` : "")
     };
   }
 
@@ -109,10 +122,23 @@ export class TestReportModal extends AbstractComponent {
     this.setState({ loading: true });
     setTimeout( () => {
 
+      console.log("???", this.getBrowserOptions());
+      this.setState({ loading: false, error: "" });
+      return;
+
       try {
         const current = this.getCurrentFile(),
               browserOptions = this.getBrowserOptions(),
               checkedList = this.state.modified  ? this.state.checkedList : [ current ];
+
+        if ( browserOptions.browser === "chrome" && !browserOptions.executablePath.trim().length ) {
+          return this.setState({ loading: false,
+            error: "You need to specify the path to Chrome executable in Browser Options" });
+        }
+        if ( browserOptions.browser === "firefox" && !browserOptions.executablePath.trim().length ) {
+          return this.setState({ loading: false,
+            error: "You need to specify the path to Firefox executable in Browser Options" });
+        }
 
         this.props.action.setApp({
           checkedList,
@@ -124,7 +150,8 @@ export class TestReportModal extends AbstractComponent {
           devtools: browserOptions.devtools,
           updateSnapshot: this.state.updateSnapshot,
           interactiveMode: this.state.interactiveMode,
-          puppeteerProduct: browserOptions.browser
+          puppeteerProduct: browserOptions.browser,
+          executablePath: browserOptions.executablePath
         });
 
 
@@ -192,6 +219,8 @@ export class TestReportModal extends AbstractComponent {
             </Button> )
           ]}
         >
+
+          { this.state.error ? <Alert message={ this.state.error } type="error" /> : null }
 
           <If exp={ files.length }>
 

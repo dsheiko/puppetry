@@ -2,7 +2,7 @@ import React from "react";
 import { Checkbox, Input, Icon, message } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractComponent from "component/AbstractComponent";
-
+import { updateLauncherArgs } from "./utils";
 
 /*eslint no-empty: 0*/
 const { TextArea } = Input;
@@ -11,12 +11,19 @@ const { TextArea } = Input;
 export class FirefoxArguments extends AbstractComponent {
 
   state = {
-    launcherArgs: ""
+    launcherArgs: "",
+    ignoreHTTPSErrors: false
   }
 
   constructor( props ) {
     super( props );
     this.inputLauncherArgsRef = React.createRef();
+  }
+
+  onCheckIgnoreHttps = ( e ) => {
+    this.setState({
+      ignoreHTTPSErrors: e.target.checked
+    });
   }
 
   onChangeLauncherArgs = ( e ) => {
@@ -32,13 +39,21 @@ export class FirefoxArguments extends AbstractComponent {
 
         <div className="browser-options-layout">
 
+        <div>
+
+            { " " } <Checkbox
+              onChange={ this.onCheckIgnoreHttps }
+            >
+                  ignore HTTPS errors
+            </Checkbox>
+          </div>
+
           <div className="ant-form-item-label">
             <label htmlFor="target" title="Additional arguments">
-                Additional arguments to pass to the browser instance{ " " }
-              <a
+                <a
                 onClick={ this.onExtClick }
-                href="https://developer.mozilla.org/en-US/docs/Mozilla/Command_Line_Options">
-                    (list of available options)</a></label>
+                href="https://developer.mozilla.org/en-US/docs/Mozilla/Command_Line_Options">Additional arguments</a>
+                { " " }to pass to the browser instance</label>
           </div>
 
           <TextArea
