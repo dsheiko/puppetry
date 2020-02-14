@@ -170,6 +170,7 @@ export class NewProjectModal extends AbstractForm {
 
 
             <BrowseDirectory
+              id="inNewProjectModal"
               defaultDirectory={ this.state.projectDirectory }
               validateStatus={ this.state.browseDirectoryValidateStatus }
               getSelectedDirectory={ this.getSelectedDirectory }

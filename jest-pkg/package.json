@@ -5,8 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "test:firefox": "cross-env PUPPETEER_PRODUCT=firefox jest",
-    "test:debug": "cross-env PUPPETEER_RUN_IN_BROWSER=true jest --detectOpenHandles",
     "report": "allure serve"
   },
   "keywords": [],

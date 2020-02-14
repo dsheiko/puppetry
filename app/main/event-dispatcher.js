@@ -88,11 +88,11 @@ module.exports = function( mainWindow ) {
   });
 
 
-  ipcMain.on( E_BROWSE_DIRECTORY, ( event ) => {
+  ipcMain.on( E_BROWSE_DIRECTORY, ( event, callerId = "id0" ) => {
     dialog.showOpenDialog({
       properties: [ "openDirectory", "createDirectory" ]
     }).then(result => {
-      event.sender.send( E_DIRECTORY_SELECTED, result.filePaths ? result.filePaths[ 0 ] : "" );
+      event.sender.send( E_DIRECTORY_SELECTED, result.filePaths ? result.filePaths[ 0 ] : "", callerId );
     }).catch( ( err ) => {
       console.log( err );
     });

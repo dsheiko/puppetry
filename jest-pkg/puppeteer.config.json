@@ -1,0 +1,12 @@
+{
+  "incognito": true,
+  "puppeteer.connect": {
+    "browserWSEndpoint": null
+  },
+  "launchOptions": {
+    "product": "chrome",
+    "headless": true,
+    "devtools": true,
+    "ignoreHTTPSErrors":false
+  }
+}

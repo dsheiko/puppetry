@@ -2,31 +2,23 @@ import React from "react";
 import { Checkbox, Switch, Input, Select, Icon, Button, message } from "antd";
 import Tooltip from "component/Global/Tooltip";
 import ErrorBoundary from "component/ErrorBoundary";
-import AbstractComponent from "component/AbstractComponent";
+import AbstractPersistentState from "component/AbstractPersistentState";
 import BrowseDirectory from "component/Global/BrowseDirectory";
 import { SELECT_SEARCH_PROPS } from "service/utils";
 import detectExecutablePath from "service/detectExecutablePath";
+import StateStorage from "service/StateStorage";
+
 
 /*eslint no-empty: 0*/
 const { TextArea } = Input,
-      { Option } = Select,
-      STORAGE_KEYS = {
-        chrome: "ChromeExecutablePath",
-        firefox: "FirefoxExecutablePath"
-      };
+      { Option } = Select;
 
-
-export class ExecutablePath extends AbstractComponent {
+export class FirefoxExecutablePath extends AbstractPersistentState {
 
   state = {
     executablePath: ""
   }
 
-  setExecutablePath( executablePath ) {
-    const key = STORAGE_KEYS[ this.props.browser ];
-    this.setState({ executablePath });
-    localStorage.setItem( key, executablePath );
-  }
 
   onChangePath = ( e ) => {
     this.setState({ executablePath: e.target.value });
@@ -34,17 +26,11 @@ export class ExecutablePath extends AbstractComponent {
 
   onDetect = ( e ) => {
     e.preventDefault();
-    const executablePath = detectExecutablePath( this.props.browser === "chrome" ? "google-chrome" : "firefox" );
+    const executablePath = detectExecutablePath( "firefox" );
     if ( !executablePath ) {
       return message( "Sorry, cannot find any matching executable" );
     }
     this.setState({ executablePath });
-  }
-
-
-  componentDidMount() {
-    const key = STORAGE_KEYS[ this.props.browser ];
-    this.setState({ executablePath: localStorage.getItem( key ) || "" });
   }
 
   render() {

@@ -114,6 +114,7 @@ export class OpenProjectModal extends AbstractForm {
           <Form >
 
             <BrowseDirectory
+              id="inOpenProjectModal"
               defaultDirectory={ this.state.projectDirectory }
               validateStatus={ this.state.browseDirectoryValidateStatus }
               validateMessage={ this.state.browseDirectoryValidateMessage }

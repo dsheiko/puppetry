@@ -135,6 +135,7 @@ export class GitCloneModal extends AbstractForm {
           <Form>
 
             <BrowseDirectory
+              id="inGitCloneModal"
               defaultDirectory={ this.state.projectDirectory }
               validateStatus={ this.state.browseDirectoryValidateStatus }
               getSelectedDirectory={ this.getSelectedDirectory }

@@ -81,13 +81,14 @@ export default {
     },
 
     checkedList: [],
-    headless: true,
-    incognito: true,
-    ignoreHTTPSErrors: false,
-    launcherArgs: "",
-    updateSnapshot: false,
-    interactiveMode: false,
-    puppeteerProduct: "chrome",
+
+    passSuiteOptions: {},
+    passExportOptions: {},
+    passProjectOptions: {
+      headless: true,
+      incognito: true,
+      ignoreHTTPSErrors: false
+    },
 
     // Dynamic info coming not from project file, but from file watcher
     project: {

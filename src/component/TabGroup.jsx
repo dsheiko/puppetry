@@ -88,13 +88,9 @@ export class TabGroup extends React.Component {
                 launcherArgs={ app.launcherArgs }
                 checkedList={ app.checkedList }
                 environment={ app.environment }
-                options={{
-                  updateSnapshot: app.updateSnapshot,
-                  interactiveMode: app.interactiveMode,
-                  incognito: app.incognito,
-                  ignoreHTTPSErrors: app.ignoreHTTPSErrors,
-                  puppeteerProduct: app.puppeteerProduct
-                }}
+                passSuiteOptions={ app.passSuiteOptions }
+                passExportOptions={ app.passExportOptions }
+                passProjectOptions={ app.passProjectOptions }
                 project={ project }
                 snippets={ snippets }
                 selector={ selector }

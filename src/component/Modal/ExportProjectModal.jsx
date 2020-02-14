@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Alert, Checkbox, Modal, Button, Select, Icon, message, notification, Spin, Tabs } from "antd";
-import AbstractComponent from "component/AbstractComponent";
+import AbstractTestRunnerModal from "./AbstractTestRunnerModal";
 import ErrorBoundary from "component/ErrorBoundary";
 import { exportProject, isDirEmpty  } from "service/io";
 import tmp from "tmp-promise";
@@ -23,7 +23,7 @@ const CheckboxGroup = Checkbox.Group,
       { TabPane } = Tabs,
       { Option } = Select;
 
-export class ExportProjectModal  extends AbstractComponent {
+export class ExportProjectModal  extends AbstractTestRunnerModal {
 
   static propTypes = {
     action:  PropTypes.shape({
@@ -54,7 +54,8 @@ export class ExportProjectModal  extends AbstractComponent {
     modified: false,
     format: "jest",
     loading: false,
-    allure: false
+    allure: false,
+    error: ""
   }
 
   constructor( props ) {
@@ -63,15 +64,6 @@ export class ExportProjectModal  extends AbstractComponent {
     this.refTestSpecificationPane = React.createRef();
   }
 
-  getBrowserOptions() {
-    return this.refBrowserOptions.current ? this.refBrowserOptions.current.state : {
-      headless: true,
-      incognito:true,
-      ignoreHTTPSErrors: false,
-      launcherArgs: "",
-      devtools: false
-    };
-  }
 
   onChangeAllure = ( e ) => {
     this.setState({
@@ -129,14 +121,13 @@ export class ExportProjectModal  extends AbstractComponent {
               variables: getSelectedVariables( project.variables, activeEnv ),
               environment: activeEnv
             },
-            browserOptions = this.getBrowserOptions(),
-            launcherOptions = {
-              headless: browserOptions.headless,
-              incognito: browserOptions.incognito,
-              ignoreHTTPSErrors: browserOptions.ignoreHTTPSErrors,
-              launcherArgs: browserOptions.launcherArgs,
-              devtools: browserOptions.devtools
-            };
+            browserOptions = this.getBrowserOptions();
+
+
+      if ( !this.checkExecutablePath( browserOptions ) ) {
+        this.setState({ locked: false, loading: false });
+        return;
+      }
 
       this.props.action.saveSettings({ exportDirectory: selectedDirectory });
       let filename;
@@ -158,7 +149,7 @@ export class ExportProjectModal  extends AbstractComponent {
             projectDirectory,
             selectedDirectory,
             checkedList,
-            launcherOptions,
+            browserOptions,
             project,
             snippets: this.props.snippets,
             envDto,
@@ -170,15 +161,18 @@ export class ExportProjectModal  extends AbstractComponent {
           break;
 
         default:
-          await exportProject(
+          await exportProject({
             projectDirectory,
-            selectedDirectory,
-            checkedList,
-            { runner: RUNNER_JEST, ...launcherOptions, allure: this.state.allure },
-            this.props.snippets,
-            project.targets,
-            envDto
-          );
+            outputDirectory: selectedDirectory,
+            suiteFiles: checkedList,
+            runner: RUNNER_JEST,
+            snippets: this.props.snippets,
+            sharedTargets: project.targets,
+            env: envDto,
+            projectOptions: browserOptions,
+            suiteOptions: { allure: this.state.allure },
+            exportOptions: {}
+          });
           message.info( `Project exported in ${ selectedDirectory }` );
           break;
         }
@@ -277,6 +271,7 @@ export class ExportProjectModal  extends AbstractComponent {
 
           <Spin tip="Exporting project..." spinning={ this.state.loading }>
 
+            { this.state.error ? <Alert message={ this.state.error } type="error" /> : null }
 
             <Tabs
               className="tabgroup-test-reports"
@@ -315,6 +310,7 @@ export class ExportProjectModal  extends AbstractComponent {
                   defaultDirectory={ ( this.props.exportDirectory || tmp.dirSync().name ) }
                   validateStatus={ this.state.browseDirectoryValidateStatus }
                   getSelectedDirectory={ this.getSelectedDirectory }
+                  id="inExportProjectModal"
                   label="Select a directory to export" />
 
                 { format === "jest" && <div className="allure-test-report-checkbox">

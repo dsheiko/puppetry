@@ -1,14 +1,15 @@
 import React from "react";
 import { Checkbox, Input, Icon, message } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
-import AbstractComponent from "component/AbstractComponent";
+import AbstractPersistentState from "component/AbstractPersistentState";
 import { updateLauncherArgs } from "./utils";
+
 
 /*eslint no-empty: 0*/
 const { TextArea } = Input;
 
 
-export class ChromeArguments extends AbstractComponent {
+export class ChromeArguments extends AbstractPersistentState {
 
   state = {
     launcherArgs: "",

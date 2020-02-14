@@ -133,9 +133,7 @@ export default class TestGenerator {
       }
 
       if ( src === "page" && method.startsWith( "debug" ) ) {
-        this.options.headless = false;
-        this.options.devtools = true;
-        this.options.jestTimeout = 1800000;
+          this.options.debug = true;
       }
       if ( src === "page" && method.startsWith( "assertResponse" ) ) {
         this.options.requireNetworkTraffic = true;

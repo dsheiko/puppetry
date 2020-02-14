@@ -1543,3 +1543,22 @@ summary:hover {
 .browser-options-panel.flex-row > * {
   margin: 0 4px;
 }
+
+.in-text-icon {
+  opacity: 0.65;
+}
+
+.browser-intro {
+  margin: 8px 0 0 0;
+  background: rgba(0,0,0,.05);
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.browser-intro p {
+  margin: 0 0 4px 0;
+}
+.browser-intro code {
+  color: var(--color-primary);
+}

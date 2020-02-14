@@ -9,16 +9,33 @@ After running the tests `npm test`, you can find the generated screenshots in th
 
 ## Available Automation Commands
 - `npm test` - run tests in command-line
-- `npm run test:firefox` - run tests in command-line with [puppeteer-firefox](https://www.npmjs.com/package/puppeteer-firefox)
-- `npm run test:debug` - run tests in command-line and in browser
 - `npm run report` - see report in browser with [Allure server](https://github.com/allure-framework/allure2)
 
+## puppeteer.config.json
 
-## Note
-You can pass additional arguments to pass to the browser instance by using env variable `PUPPETEER_LAUNCHER_ARGS` like:
-```
-npx cross-env PUPPETEER_RUN_IN_BROWSER=true PUPPETEER_LAUNCHER_ARGS="--start-maximized --ignore-certificate-errors" jest
-```
-[List of Chromium Command Line Switches](https://peter.sh/experiments/chromium-command-line-switches/)
+- `incognito` - when true the test will run in incognito window
+- `puppeteer.launch` - options to pass to [puppeteer.launch](https://pptr.dev/#?product=Puppeteer&version=v2.1.0&show=api-puppeteerlaunchoptions)
+- `puppeteer.connect` - options to pass to [puppeteer.connect](https://pptr.dev/#?product=Puppeteer&version=v2.1.0&show=api-puppeteerconnectoptions)
 
-Use `PUPPETEER_DEVTOOLS` env variable to enable DevTools
+### Example:
+
+```
+{
+  "incognito": true,
+  "puppeteer.connect": {
+    "browserWSEndpoint": null,
+    "ignoreHTTPSErrors": true
+  },
+  "puppeteer.launch": {
+    "product": "chrome",
+    "headless": false,
+    "devtools": false,
+    "ignoreHTTPSErrors": true,
+    "args": [
+      "--start-maximized",
+      "--ignore-certificate-errors"
+    ],
+    "executablePath": "/usr/bin/google-chrome"
+  }
+}
+```

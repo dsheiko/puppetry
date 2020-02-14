@@ -29,12 +29,16 @@ export default class BrowseDirectory extends React.Component {
 
   onBrowse = ( e ) => {
     e.preventDefault();
-    ipcRenderer.send( E_BROWSE_DIRECTORY );
+    ipcRenderer.send( E_BROWSE_DIRECTORY, this.props.id || "unknown" );
   }
 
   componentDidMount() {
     ipcRenderer.on( E_DIRECTORY_SELECTED, ( ...args ) => {
       const selectedDirectory = args[ 1 ];
+      // A foreign caller - all the instances of BrowseDirectory listen to this event
+      if ( this.props.id && this.props.id !== args[ 2 ] ) {
+        return;
+      }
       this.props.getSelectedDirectory( selectedDirectory );
       this.setState({ selectedDirectory });
     });

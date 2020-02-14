@@ -170,35 +170,32 @@ export async function exportSuite({
 /**
  * Export specified suite files to given directory
  *
- * @param {String} projectDirectory
- * @param {String} outputDirectory
- * @param {String[]} suiteFiles ["foo.json",..]
- * @param {Object} puppeteerOptions
- * @param {Object} snippets
- * @param {Object} sharedTargets
- * @param {Object} env
+
  * @returns {String[]} - ["foo.spec.js",..]
  */
-export async function exportProject(
-  projectDirectory,
-  outputDirectory,
-  suiteFiles,
-  { runner = RUNNER_PUPPETRY, ...options },
-  snippets,
-  sharedTargets,
-  env
-) {
+export async function exportProject({
+    projectDirectory,
+    outputDirectory,
+    suiteFiles,
+    runner = RUNNER_PUPPETRY,
+    snippets,
+    sharedTargets,
+    env,
+    projectOptions,
+    suiteOptions,
+    exportOptions
+  }) {
   const testDir = join( outputDirectory, "specs" ),
         specFiles = [],
         JEST_PKG = getJestPkgDirectory();
 
   try {
     removeExport( outputDirectory );
-    shell.mkdir( "-p" , testDir );
 
+    shell.mkdir( "-p" , testDir );
     shell.rm( "-rf" , join( projectDirectory, DIR_SCREENSHOTS ) );
 
-    if ( options.updateSnapshot ) {
+    if ( exportOptions.updateSnapshot ) {
       shell.rm( "-rf" , join( projectDirectory, DIR_SNAPSHOTS ) );
     } else {
       shell.rm( "-rf" , join( projectDirectory, DIR_SNAPSHOTS, "actual" ) );
@@ -212,11 +209,15 @@ export async function exportProject(
     shell.cp( "-RLf" , JEST_PKG + "/*", outputDirectory  );
     shell.mkdir( "-p" , join( outputDirectory, "specs" ) );
 
-    if ( runner === RUNNER_JEST && options.allure  ) {
+    if ( runner === RUNNER_JEST && suiteOptions.allure  ) {
       await writeFile( join( outputDirectory, "jest.config.js" ), `module.exports = {
   setupFilesAfterEnv: [ "jest-allure/dist/setup" ]
 };`, "utf8" );
     }
+
+    await writeFile( join( outputDirectory, "puppeteer.config.json" ),
+      JSON.stringify( projectOptions, null, 2 ) , "utf8"
+    );
 
     for ( const filename of suiteFiles ) {
       let specContent = await exportSuite({
@@ -227,7 +228,7 @@ export async function exportProject(
         snippets,
         sharedTargets,
         env,
-        options
+        options: suiteOptions
       });
 
       const specFilename = parse( filename ).name + ".spec.js",

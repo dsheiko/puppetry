@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Alert, Checkbox, Modal, Button, Tabs, Select } from "antd";
 import Tooltip from "component/Global/Tooltip";
 import ErrorBoundary from "component/ErrorBoundary";
-import AbstractComponent from "component/AbstractComponent";
+import AbstractTestRunnerModal from "./AbstractTestRunnerModal";
 import { BrowserOptions } from "./TestReportModal/BrowserOptions";
 import If from "component/Global/If";
 import * as classes from "./classes";
@@ -33,7 +33,7 @@ export function updateLauncherArgs( launcherArgs, value, toggle ) {
 }
 
 
-export class TestReportModal extends AbstractComponent {
+export class TestReportModal extends AbstractTestRunnerModal {
 
   static propTypes = {
     action:  PropTypes.shape({
@@ -94,64 +94,32 @@ export class TestReportModal extends AbstractComponent {
     this.props.action.setApp({ testReportModal: false });
   }
 
-  getBrowserOptions() {
-    const bopts = this.refBrowserOptions.current;
-    if ( !bopts ) {
-      return {
-        browser: "default",
-        incognito:true,
-        ignoreHTTPSErrors: false,
-        launcherArgs: "",
-        devtools: false,
-        executablePath: ""
-      };
-    }
-
-    return {
-      ...bopts.state,
-      executablePath: bopts.refExecutablePath.current.state.executablePath,
-      launcherArgs: ( bopts.state.browser === "firefox"
-       ? bopts.refFirefoxArguments.current.state.launcherArgs
-       : bopts.refChromeArguments.current.state.launcherArgs )
-         + ( bopts.state.launcherArgs ? ` ${ bopts.state.launcherArgs }` : "")
-    };
-  }
-
   onClickOk = async ( e ) => {
     e.preventDefault();
     this.setState({ loading: true });
     setTimeout( () => {
 
-      console.log("???", this.getBrowserOptions());
       this.setState({ loading: false, error: "" });
-      return;
 
       try {
         const current = this.getCurrentFile(),
               browserOptions = this.getBrowserOptions(),
               checkedList = this.state.modified  ? this.state.checkedList : [ current ];
 
-        if ( browserOptions.browser === "chrome" && !browserOptions.executablePath.trim().length ) {
-          return this.setState({ loading: false,
-            error: "You need to specify the path to Chrome executable in Browser Options" });
-        }
-        if ( browserOptions.browser === "firefox" && !browserOptions.executablePath.trim().length ) {
-          return this.setState({ loading: false,
-            error: "You need to specify the path to Firefox executable in Browser Options" });
+        if ( !this.checkExecutablePath( browserOptions ) ) {
+          return;
         }
 
         this.props.action.setApp({
           checkedList,
           testReportModal: false,
-          headless: ( this.state.interactiveMode === true ? false : browserOptions.browser === "default" ),
-          incognito: browserOptions.incognito,
-          ignoreHTTPSErrors: browserOptions.ignoreHTTPSErrors,
-          launcherArgs: browserOptions.launcherArgs,
-          devtools: browserOptions.devtools,
-          updateSnapshot: this.state.updateSnapshot,
-          interactiveMode: this.state.interactiveMode,
-          puppeteerProduct: browserOptions.browser,
-          executablePath: browserOptions.executablePath
+          passSuiteOptions: {
+            interactiveMode: this.state.interactiveMode
+          },
+          passExportOptions: {
+            updateSnapshot: this.state.updateSnapshot
+          },
+          passProjectOptions: browserOptions
         });
 
 

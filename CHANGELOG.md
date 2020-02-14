@@ -1,3 +1,11 @@
+# Puppetry 3.2.0
+
+### Features
+- improvement: added option to run tests in Firefox
+- improvement: added option to run tests in Chrome (before were only headless/chromium available)
+- improvement: added option to connect running Chrome instance (via WebSockets)
+- improvement: Puppeteer run options in exported project can be adjusted in puppeteer.config.json
+
 # Puppetry 3.1.1
 
 ### Features

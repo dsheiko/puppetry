@@ -60,14 +60,7 @@ ${ body }
 }
 
 function getSetupOptions( options ) {
-  return JSON.stringify({
-    incognito: result( options, "incognito", false ),
-    ignoreHTTPSErrors: result( options, "ignoreHTTPSErrors", false ),
-    headless: result( options, "headless", true ),
-    launcherArgs: result( options, "launcherArgs", "" ),
-    devtools: result( options, "devtools", false ),
-    puppeteerProduct: result( options, "puppeteerProduct", null )
-  });
+  return JSON.stringify( options );
 }
 
 /**
@@ -98,14 +91,16 @@ if ( !nVer || nVer[ 1 ] < 9 ) {
 const {
         bs, util, fetch, localStorage
       } = require( "../lib/bootstrap" )( ${ JSON.stringify( normalizeName( title ) ) } ),
+      puppeteerOptions = require( "../puppeteer.config.json" ),
       devices = require( "puppeteer/DeviceDescriptors" );
+
 
 ${ runner === RUNNER_PUPPETRY ? `
 util.setProjectDirectory( ${ JSON.stringify( projectDirectory ) } );
 ` : `` }
 
-jest.setTimeout( ${  result( options, "jestTimeout", 0 )
-    ? options.jestTimeout
+jest.setTimeout( ${  result( options, "debug", 0 )
+    ? INTERACTIVE_MODE_TIMEOUT
     : ( options.interactiveMode
       ? INTERACTIVE_MODE_TIMEOUT
       : ( suite.timeout || NETWORK_TIMEOUT ) )
@@ -122,7 +117,7 @@ ${ targets }
 
 describe( ${ JSON.stringify( title ) }, () => {
   beforeAll(async () => {
-    await bs.setup(${ getSetupOptions( options ) });
+    await bs.setup( puppeteerOptions, ${ getSetupOptions( options ) });
     console.log( "BROWSER: ", await bs.browser.version() );
 
     bs.page.on( "console", ( message ) => consoleLog.push( message ) );

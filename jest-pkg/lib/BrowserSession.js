@@ -16,47 +16,54 @@ class BrowserSession {
 
   /**
    * Obtain browser and page object on bootstrap
-   * @param {Object} setupOptions
+   * @param {Object} projectOptions
    */
-  async setup( setupOptions ) {
-    const setupOptionsLauncherArgsString = setupOptions.launcherArgs || "",
-          // when called like PUPPETEER_RUN_IN_BROWSER=true jest open in a browser
-          launcherArgsString =  process.env.PUPPETEER_LAUNCHER_ARGS
-            ? process.env.PUPPETEER_LAUNCHER_ARGS : setupOptionsLauncherArgsString,
-          launcherArgs = launcherArgsString.split( " " ),
-          product = ALLOWED_PRODUCTS.includes( setupOptions.puppeteerProduct )
-              ? setupOptions.puppeteerProduct
-              : ( process.env.PUPPETEER_PRODUCT || "chrome" );
+  async setup( projectOptions, suiteOptions ) {
+    const launchOptions = projectOptions[ "puppeteer.launch" ],
+          connectOptions = projectOptions[ "puppeteer.connect" ],
+          incognito = projectOptions.incognito;
 
-    if ( setupOptions.setUserAgent ) {
-      launcherArgs.includes( "--no-sandbox" ) || launcherArgs.push( "--no-sandbox" );
-      launcherArgs.includes( "--disable-setuid-sandbox" ) || launcherArgs.push( "--disable-setuid-sandbox" );
+    if ( suiteOptions.setUserAgent ) {
+      launchOptions.args.includes( "--no-sandbox" ) || launchOptions.args.push( "--no-sandbox" );
+      launchOptions.args.includes( "--disable-setuid-sandbox" )
+        || launchOptions.args.push( "--disable-setuid-sandbox" );
     }
 
-    const options = {
-            product,
-            headless: ( setupOptions.hasOwnProperty( "headless" )
-              ? setupOptions.headless : !process.env.PUPPETEER_RUN_IN_BROWSER ),
-            devtools: Boolean( process.env.PUPPETEER_DEVTOOLS || setupOptions.devtools ),
-            ignoreHTTPSErrors: setupOptions.ignoreHTTPSErrors || false,
-            args: launcherArgs
-          };
-
-    if ( options.headless ) {
-      options.slowMo = 30;
-    }
-    this.browser = await puppeteer.launch( options  );
-    if ( setupOptions.incognito ) {
-      this.context = await this.browser.createIncognitoBrowserContext();
-      this.page = await this.context.newPage();
-    } else {
-      this.page = await this.browser.newPage();
+    if ( suiteOptions.debug ) {
+      launchOptions.headless = false;
+      launchOptions.devtools = true;
     }
 
-    // launches 2 windows (one regular and one incognito)
-    // but seems like cannot be fixed https://github.com/GoogleChrome/puppeteer/issues/4400
-    this.target = createTargetMethods( this.page );
+    if ( !launchOptions.headless ) {
+      launchOptions.slowMo = 30;
+    }
+
+    try {
+      if ( connectOptions.browserWSEndpoint ) {
+        this.browser = await puppeteer.connect( connectOptions );
+      } else {
+        this.browser = await puppeteer.launch( launchOptions );
+      }
+      if ( incognito ) {
+        this.context = await this.browser.createIncognitoBrowserContext();
+        this.page = await this.context.newPage();
+      } else {
+        this.page = await this.browser.newPage();
+      }
+
+      // launches 2 windows (one regular and one incognito)
+      // but seems like cannot be fixed https://github.com/GoogleChrome/puppeteer/issues/4400
+      this.target = createTargetMethods( this.page );
+    } catch( err ) {
+      if ( connectOptions.browserWSEndpoint ) {
+        console.error( `Failed to run puppeteer.connect() with options `, connectOptions );
+      } else {
+        console.error( `Failed to run puppeteer.launch() with options `, launchOptions );
+      }
+      console.error( err.message );
+    }
   }
+
 
 
   /**

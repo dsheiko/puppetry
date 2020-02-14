@@ -102,6 +102,7 @@ export class SaveProjectAsModal extends AbstractForm {
         >
           <Form>
             <BrowseDirectory
+              id="inSaveProjectAsModal"
               defaultDirectory={ this.state.projectDirectory }
               validateStatus={ this.state.browseDirectoryValidateStatus }
               validateMessage={ this.state.browseDirectoryValidateMessage }

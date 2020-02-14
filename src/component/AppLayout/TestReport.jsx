@@ -2,7 +2,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ipcRenderer, shell } from "electron";
-import { E_RUN_TESTS, SNIPPETS_GROUP_ID, DIR_SCREENSHOTS } from "constant";
+import { RUNNER_PUPPETRY, E_RUN_TESTS, SNIPPETS_GROUP_ID, DIR_SCREENSHOTS } from "constant";
 import LoadingTip from "component/Global/LoadingTip";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
@@ -55,7 +55,11 @@ export class TestReport extends AbstractComponent {
   }
 
   run = async () => {
-    const { project, environment } = this.props,
+    const { project,
+            environment,
+            passSuiteOptions,
+            passExportOptions,
+            passProjectOptions } = this.props,
           // options from Report modal like interactiveMode, updateSnapshot
           options = this.props.options || {};
     this.props.action.saveSuite();
@@ -66,22 +70,21 @@ export class TestReport extends AbstractComponent {
       this.runtimeTemp = getRuntimeTestPath();
       this.setState({ loading: true });
       const activeEnv = getActiveEnvironment( project.environments, environment ),
-            specList = await exportProject(
-              this.props.projectDirectory,
-              this.runtimeTemp,
-              this.props.checkedList,
-              {
-                headless: ( options.interactiveMode ? false : this.props.headless ),
-                launcherArgs: this.props.launcherArgs,
-                ...options
+            specList = await exportProject({
+              projectDirectory: this.props.projectDirectory,
+              outputDirectory: this.runtimeTemp,
+              suiteFiles: this.props.checkedList,
+              runner: RUNNER_PUPPETRY,
+              snippets: this.props.snippets,
+              sharedTargets: project.targets,
+              env: {
+                  variables: getSelectedVariables( project.variables, activeEnv ),
+                  environment
               },
-              this.props.snippets,
-              project.targets,
-              {
-                variables: getSelectedVariables( project.variables, activeEnv ),
-                environment
-              }
-            ),
+              projectOptions: passProjectOptions,
+              suiteOptions:  passSuiteOptions,
+              exportOptions: passExportOptions
+            }),
             res = ipcRenderer.sendSync( E_RUN_TESTS, this.runtimeTemp, specList );
 
       this.setState({
@@ -204,7 +207,6 @@ export class TestReport extends AbstractComponent {
 
   render() {
     const { report, loading, ok, stdErr, details } = this.state,
-          product = ( this.props.options.puppeteerProduct || "chrome" ).toUpperCase(),
           printableStdErr = convert.toHtml( stdErr )
             .replace( /\n/mg, "" )
             .replace( /<br\s*\/>+/mg, "\n" )
@@ -230,8 +232,6 @@ export class TestReport extends AbstractComponent {
 
       <If exp={ ok && !loading }>
         <div id="cTestReport">
-
-          <h3>Browser: { product }</h3>
 
           <div>{ report.success
             ? ( <div className="tr-badge is-ok">PASSED</div> )

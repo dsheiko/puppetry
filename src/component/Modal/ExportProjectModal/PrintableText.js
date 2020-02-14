@@ -8,7 +8,7 @@ import shell from "shelljs";
 export default async function exportPrintableText({
   projectDirectory,
   checkedList,
-  launcherOptions,
+  browserOptions,
   selectedDirectory,
   project,
   snippets,
@@ -18,15 +18,18 @@ export default async function exportPrintableText({
 
   if ( runSpecTests ) {
     const runtimeTemp = getRuntimeTestPath(),
-          specList = await exportProject(
+          specList = await exportProject({
             projectDirectory,
-            runtimeTemp,
-            checkedList,
-            { runner: RUNNER_PUPPETRY, trace: true, ...launcherOptions },
+            outputDirectory: runtimeTemp,
+            suiteFiles: checkedList,
+            runner: RUNNER_PUPPETRY,
             snippets,
-            project.targets,
-            envDto
-          ),
+            sharedTargets: project.targets,
+            env: envDto,
+            projectOptions: browserOptions,
+            suiteOptions: { trace: true },
+            exportOptions: {}
+          }),
           report = ipcRenderer.sendSync( E_RUN_TESTS, runtimeTemp, specList );
 
     try {
