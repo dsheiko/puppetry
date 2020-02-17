@@ -28,6 +28,10 @@ class BrowserSession {
         || launchOptions.args.push( "--disable-setuid-sandbox" );
     }
 
+    if ( launchOptions.product === "firefox" && !launchOptions.args.includes( "--wait-for-browser" )  ) {
+      launchOptions.args.push( "--wait-for-browser" );
+    }
+
     if ( suiteOptions.debug ) {
       launchOptions.headless = false;
       launchOptions.devtools = true;
