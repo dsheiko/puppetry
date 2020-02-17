@@ -1,14 +1,23 @@
 import React from "react";
 import AbstractComponent from "component/AbstractComponent";
-
+import StateStorage from "service/StateStorage";
 
 
 export default class AbstractTestRunnerModal extends AbstractComponent {
 
   getBrowserOptions() {
+    const storage = new StateStorage( this.constructor.name );
+
+    // Browser options tab is not shown
     if ( this.refBrowserOptions.current === null ) {
-      return {
+
+      return this.storage.get() || {
         incognito: true,
+        "puppeteer.connect": {
+          ignoreHTTPSErrors: true,
+          slowMo: 30,
+          browserWSEndpoint: null
+        },
         "puppeteer.launch": {
           devtools: false,
           headless: true,
@@ -16,7 +25,10 @@ export default class AbstractTestRunnerModal extends AbstractComponent {
         }
       };
     }
-    return this.refBrowserOptions.current.getOptions();
+
+    const options = this.refBrowserOptions.current.getOptions();
+    storage.set( options );
+    return options;
   }
 
   checkExecutablePath( browserOptions ) {

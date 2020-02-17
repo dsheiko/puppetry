@@ -1,6 +1,5 @@
-const puppeteer = process.env.PUPPETRY_DRIVER === "firefox" ? require( "puppeteer-firefox" ) : require( "puppeteer" ),
-      createTargetMethods = require( "./BrowserSession/targetMethods" ),
-      ALLOWED_PRODUCTS = [ "chrome", "firefox" ];
+const puppeteer = require( "puppeteer" ),
+      createTargetMethods = require( "./BrowserSession/targetMethods" );
 
 class BrowserSession {
 

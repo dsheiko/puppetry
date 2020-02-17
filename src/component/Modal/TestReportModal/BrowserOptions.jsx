@@ -171,7 +171,7 @@ export class BrowserOptions extends AbstractPersistentState {
                 <Option value="headless" key="headless">Headless Chromium</Option>
                 <Option value="chromium" key="chromium">Chromium</Option>
                 <Option value="chrome" key="chrome">Chrome</Option>
-                <Option value="firefox" key="firefox">Firefox <Icon type="experiment" /></Option>
+                <Option value="firefox" key="firefox">Firefox 74+ <Icon type="experiment" /></Option>
                 <Option value="connect" key="connect">Connect to Chrome</Option>
               </Select>
           </div>

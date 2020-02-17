@@ -96,10 +96,8 @@ export class TestReportModal extends AbstractTestRunnerModal {
 
   onClickOk = async ( e ) => {
     e.preventDefault();
-    this.setState({ loading: true });
+    this.setState({ loading: true, error: "" });
     setTimeout( () => {
-
-      this.setState({ loading: false, error: "" });
 
       try {
         const current = this.getCurrentFile(),
@@ -126,11 +124,12 @@ export class TestReportModal extends AbstractTestRunnerModal {
         this.props.action.removeAppTab( "testReport" );
         this.props.action.addAppTab( "testReport" );
       } catch ( err ) {
+        this.setState({ loading: false, error: "Could not run the tests" });
         console.error( "TestReportModal", err );
       }
       this.setState({ loading: false });
 
-    }, 50 );
+    }, 150 );
 
   }
 

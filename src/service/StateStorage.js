@@ -27,6 +27,32 @@ const defaultState = {
   },
   "FirefoxExecutablePath" : {
     executablePath: ""
+  },
+  "TestReportModal": {
+    incognito: true,
+    "puppeteer.connect": {
+      ignoreHTTPSErrors: true,
+      slowMo: 30,
+      browserWSEndpoint: null
+    },
+    "puppeteer.launch": {
+      devtools: false,
+      headless: true,
+      ignoreHTTPSErrors: false
+    }
+  },
+  "ExportProjectModal": {
+    incognito: true,
+    "puppeteer.connect": {
+      ignoreHTTPSErrors: true,
+      slowMo: 30,
+      browserWSEndpoint: null
+    },
+    "puppeteer.launch": {
+      devtools: false,
+      headless: true,
+      ignoreHTTPSErrors: false
+    }
   }
 };
 

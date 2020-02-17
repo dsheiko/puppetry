@@ -23,7 +23,7 @@ const CheckboxGroup = Checkbox.Group,
       { TabPane } = Tabs,
       { Option } = Select;
 
-export class ExportProjectModal  extends AbstractTestRunnerModal {
+export class ExportProjectModal extends AbstractTestRunnerModal {
 
   static propTypes = {
     action:  PropTypes.shape({

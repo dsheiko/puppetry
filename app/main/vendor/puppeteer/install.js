@@ -16,13 +16,15 @@
 
 module.exports = function( puppeteerCwd, { handleDone, handleProgress, handleError }) {
 
-  const downloadHost = process.env.PUPPETEER_DOWNLOAD_HOST || process.env.npm_config_puppeteer_download_host;
+  const downloadHost = process.env.PUPPETEER_DOWNLOAD_HOST || process.env.npm_config_puppeteer_download_host
+    || process.env.npm_package_config_puppeteer_download_host;
   const { join } = require('path');
   const puppeteer = require( join( puppeteerCwd, './index' ) );
   const browserFetcher = puppeteer.createBrowserFetcher({ host: downloadHost });
 
   const revision = process.env.PUPPETEER_CHROMIUM_REVISION || process.env.npm_config_puppeteer_chromium_revision
-    || require( join( puppeteerCwd, './package.json' ) ).puppeteer.chromium_revision;
+    || process.env.npm_package_config_puppeteer_chromium_revision || require( join( puppeteerCwd, './package.json' ) )
+      .puppeteer.chromium_revision;
 
   const revisionInfo = browserFetcher.revisionInfo(revision);
 
@@ -86,25 +88,14 @@ module.exports = function( puppeteerCwd, { handleDone, handleProgress, handleErr
     return `${Math.round(mb * 10) / 10} Mb`;
   }
 
-  function supportsAsyncAwait() {
-    try {
-      new Function('async function test(){await 1}');
-    } catch (error) {
-      return false;
-    }
-    return true;
-  }
-
   function generateProtocolTypesIfNecessary(updated) {
-    if (!supportsAsyncAwait())
+    const fs = require('fs'),
+          path = require('path');
+    if (!fs.existsSync(path.join( puppeteerCwd, 'utils', 'protocol-types-generator')))
       return;
-    const fs = require('fs');
-    const path = require('path');
-    if (!fs.existsSync(path.join(__dirname, 'utils', 'protocol-types-generator')))
+    if (!updated && fs.existsSync(path.join( puppeteerCwd, 'lib', 'protocol.d.ts')))
       return;
-    if (!updated && fs.existsSync(path.join(__dirname, 'lib', 'protocol.d.ts')))
-      return;
-    return require( join( puppeteerCwd, './utils/protocol-types-generator' ) );
+    return require( join( puppeteerCwd, './utils/protocol-types-generator' ));
   }
 
 };
