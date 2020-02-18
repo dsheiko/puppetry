@@ -6,6 +6,9 @@
 - improvement: added option to connect running Chrome instance (via WebSockets)
 - improvement: Puppeteer run options in exported project can be adjusted in puppeteer.config.json
 
+### Bug fixes
+- fix: git integration restored
+
 # Puppetry 3.1.1
 
 ### Features

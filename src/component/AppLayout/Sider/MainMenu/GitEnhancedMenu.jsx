@@ -83,8 +83,7 @@ export class GitEnhancedMenu extends React.PureComponent {
   }
 
   onFileGitInitialize = () => {
-    const { projectDirectory, gitConfigUsername, gitConfigEmail } = this.props,
-          { git } = this.props.project;
+    const { projectDirectory, gitConfigUsername, gitConfigEmail } = this.props;
 
     if ( !projectDirectory ) {
       message.error( "Project directory is not specified" );
@@ -93,11 +92,11 @@ export class GitEnhancedMenu extends React.PureComponent {
 
     if ( !gitConfigUsername.trim() || !gitConfigEmail.trim() ) {
       message.error( "You need to provide GIT configuration first" );
-      this.props.action.addAppTab( "settings" );
+      this.props.action.addAppTab( "projectGit" );
       return;
     }
 
-    ipcRenderer.send( E_GIT_INIT, projectDirectory, git.configUsername, git.configEmail );
+    ipcRenderer.send( E_GIT_INIT, projectDirectory, gitConfigUsername, gitConfigEmail );
     this.props.action.saveGit({ initialized: true });
   }
 
