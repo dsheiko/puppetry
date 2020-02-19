@@ -1,10 +1,11 @@
+/* eslint spellcheck/spell-checker: 0 */
 const fs = require( "fs" );
 
 const strategy = {
 
   linux: ( product ) => {
     try {
-     return require( "which" ).sync( product );
+      return require( "which" ).sync( product );
     } catch ( e ) {
       console.warn( e );
       return null;
@@ -32,8 +33,8 @@ const strategy = {
             process.env[ "PROGRAMFILES(X86)" ]
           ];
     return prefixes
-      .map(( pref ) => pref + suffix[ product ] )
-      .find(( path ) => fs.existsSync( path ) );
+      .map( ( pref ) => pref + suffix[ product ])
+      .find( ( path ) => fs.existsSync( path ) );
   }
 };
 
@@ -41,13 +42,13 @@ const strategy = {
  * @param {String} product - "google-chrome"|"firefox"
  */
 export default function detectExecutablePath( product ) {
-    switch ( true ) {
-      case process.platform === "darwin":
-        return strategy.macOs( product );
-      case process.platform === "win32":
-        return strategy.windows( product );
-      default:
-        return strategy.linux( product );
-    }
+  switch ( true ) {
+  case process.platform === "darwin":
+    return strategy.macOs( product );
+  case process.platform === "win32":
+    return strategy.windows( product );
+  default:
+    return strategy.linux( product );
+  }
 
 }

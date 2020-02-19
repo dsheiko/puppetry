@@ -54,7 +54,7 @@ function buildEnv( env ) {
     .map( ([ k, v ]) => `  "${ k }": "${ v }"` )
     .join( ",\n" );
   return `// Environment variables
-const ENV = {
+let ENV = {
 ${ body }
 };`;
 }
@@ -165,7 +165,7 @@ ${body}
 
 export const tplTest = ({ title, body }) => `
     test( ${ JSON.stringify( title ) }, async () => {
-      let result, assert, searchStr;
+      let result, assert, searchStr, localEnv;
 ${body}
     });
 `;

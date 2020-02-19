@@ -1,5 +1,5 @@
 import React from "react";
-import { Checkbox, Input, Icon, message } from "antd";
+import { Checkbox, Input } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractPersistentState from "component/AbstractPersistentState";
 import { updateLauncherArgs } from "./utils";
@@ -13,7 +13,9 @@ export class ChromeArguments extends AbstractPersistentState {
 
   state = {
     launcherArgs: "",
-    ignoreHTTPSErrors: false
+    ignoreHTTPSErrors: false,
+    maximized: true,
+    fullscreen: false
   }
 
   constructor( props ) {
@@ -24,12 +26,14 @@ export class ChromeArguments extends AbstractPersistentState {
 
   onCheckMaximize = ( e ) => {
     this.setState({
+      maximized: e.target.checked,
       launcherArgs: updateLauncherArgs( this.state.launcherArgs, `--start-maximized`, e.target.checked )
     });
   }
 
   onCheckFullscreen = ( e ) => {
     this.setState({
+      fullscreen: e.target.checked,
       launcherArgs: updateLauncherArgs( this.state.launcherArgs, `--start-fullscreen`, e.target.checked )
     });
   }
@@ -56,18 +60,21 @@ export class ChromeArguments extends AbstractPersistentState {
           <div>
 
             { " " } <Checkbox
+              checked={ this.state.maximized }
               onChange={ this.onCheckMaximize }
             >
                   maximized
             </Checkbox>
 
             { " " } <Checkbox
+              checked={ this.state.fullscreen }
               onChange={ this.onCheckFullscreen }
             >
                   fullscreen
             </Checkbox>
 
             { " " } <Checkbox
+              checked={ this.state.ignoreHTTPSErrors }
               onChange={ this.onCheckIgnoreHttps }
             >
                   ignore HTTPS errors
@@ -76,10 +83,10 @@ export class ChromeArguments extends AbstractPersistentState {
 
           <div className="ant-form-item-label">
             <label htmlFor="target" title="Additional arguments">
-                <a
+              <a
                 onClick={ this.onExtClick }
                 href="http://peter.sh/experiments/chromium-command-line-switches/">Additional arguments</a>
-                { " " }to pass to the browser instance</label>
+              { " " }to pass to the browser instance</label>
           </div>
 
           <TextArea

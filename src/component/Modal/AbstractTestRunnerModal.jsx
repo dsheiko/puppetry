@@ -1,4 +1,3 @@
-import React from "react";
 import AbstractComponent from "component/AbstractComponent";
 import StateStorage from "service/StateStorage";
 
@@ -11,7 +10,7 @@ export default class AbstractTestRunnerModal extends AbstractComponent {
     // Browser options tab is not shown
     if ( this.refBrowserOptions.current === null ) {
 
-      return this.storage.get() || {
+      return storage.get() || {
         incognito: true,
         "puppeteer.connect": {
           ignoreHTTPSErrors: true,

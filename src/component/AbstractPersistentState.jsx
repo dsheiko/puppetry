@@ -1,4 +1,3 @@
-import React from "react";
 import AbstractComponent from "component/AbstractComponent";
 import StateStorage from "service/StateStorage";
 

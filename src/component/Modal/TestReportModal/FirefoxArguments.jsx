@@ -1,12 +1,10 @@
 import React from "react";
-import { Checkbox, Input, Icon, message } from "antd";
+import { Checkbox, Input } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractPersistentState from "component/AbstractPersistentState";
-import { updateLauncherArgs } from "./utils";
 
 /*eslint no-empty: 0*/
 const { TextArea } = Input;
-
 
 export class FirefoxArguments extends AbstractPersistentState {
 
@@ -39,7 +37,7 @@ export class FirefoxArguments extends AbstractPersistentState {
 
         <div className="browser-options-layout">
 
-        <div>
+          <div>
 
             { " " } <Checkbox
               onChange={ this.onCheckIgnoreHttps }
@@ -50,10 +48,10 @@ export class FirefoxArguments extends AbstractPersistentState {
 
           <div className="ant-form-item-label">
             <label htmlFor="target" title="Additional arguments">
-                <a
+              <a
                 onClick={ this.onExtClick }
                 href="https://developer.mozilla.org/en-US/docs/Mozilla/Command_Line_Options">Additional arguments</a>
-                { " " }to pass to the browser instance</label>
+              { " " }to pass to the browser instance</label>
           </div>
 
           <TextArea

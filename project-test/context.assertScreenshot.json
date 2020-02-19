@@ -1,0 +1,242 @@
+{
+  "title": "page.assertDialog",
+  "timeout": 50000,
+  "snippets": false,
+  "description": null,
+  "savedAt": 1582124095,
+  "loadedAt": 1582123295,
+  "modified": false,
+  "filename": "context.assertScreenshot.json",
+  "targets": {
+    "ltbk378vqoa": {
+      "editing": false,
+      "id": "ltbk378vqoa",
+      "key": "ltbk378vqoa",
+      "target": "ALERT_BTN",
+      "selector": "#alert",
+      "disabled": false,
+      "adding": false,
+      "parentType": "",
+      "ref": ""
+    },
+    "ltbk378vqvr": {
+      "editing": false,
+      "id": "ltbk378vqvr",
+      "key": "ltbk378vqvr",
+      "target": "PROMPT_BTN",
+      "selector": "#prompt",
+      "disabled": false,
+      "adding": false,
+      "parentType": "",
+      "ref": ""
+    },
+    "ltbk378vr3u": {
+      "editing": false,
+      "id": "ltbk378vr3u",
+      "key": "ltbk378vr3u",
+      "target": "CONFIRM_BTN",
+      "selector": "#confirm",
+      "disabled": false,
+      "adding": false,
+      "parentType": "",
+      "ref": ""
+    },
+    "ltbk378vrc6": {
+      "editing": false,
+      "id": "ltbk378vrc6",
+      "key": "ltbk378vrc6",
+      "target": "PROMPT_ACCEPT_BTN",
+      "selector": "#promptAccept",
+      "disabled": false,
+      "adding": false,
+      "parentType": "",
+      "ref": ""
+    },
+    "ltbk378vrkh": {
+      "editing": false,
+      "id": "ltbk378vrkh",
+      "key": "ltbk378vrkh",
+      "target": "CONFIRM_ACCEPT_BTN",
+      "selector": "#confirmAccept",
+      "disabled": false,
+      "adding": false,
+      "parentType": "",
+      "ref": ""
+    },
+    "cgmk6tf88t1": {
+      "editing": false,
+      "id": "cgmk6tf88t1",
+      "key": "cgmk6tf88t1",
+      "target": "CONTAINER",
+      "selector": "#container",
+      "disabled": false,
+      "adding": false,
+      "parentType": "",
+      "ref": ""
+    }
+  },
+  "groups": {
+    "ltbk378s7fb": {
+      "title": "assertScreenshot",
+      "id": "ltbk378s7fb",
+      "editing": false,
+      "key": "ltbk378s7fb",
+      "tests": {
+        "cgmk6tfd6wk": {
+          "editing": false,
+          "id": "cgmk6tfd6wk",
+          "key": "cgmk6tfd6wk",
+          "title": "page.goto",
+          "commands": {
+            "cgmk6tfd78e": {
+              "editing": false,
+              "id": "cgmk6tfd78e",
+              "key": "cgmk6tfd78e",
+              "target": "page",
+              "method": "setViewport",
+              "assert": {},
+              "params": {
+                "width": "1920",
+                "height": "1080",
+                "resolution": "1920x1080",
+                "deviceScaleFactor": 1,
+                "isMobile": false,
+                "hasTouch": false,
+                "isLandscape": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "ltbk378s7fb",
+              "testId": "cgmk6tfd6wk",
+              "waitForTarget": false
+            },
+            "cgmk6tfd7d2": {
+              "editing": false,
+              "id": "cgmk6tfd7d2",
+              "key": "cgmk6tfd7d2",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "http://127.0.0.1:8080/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "ltbk378s7fb",
+              "testId": "cgmk6tfd6wk",
+              "waitForTarget": false,
+              "entity": "command"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "ltbk378s7fb",
+          "entity": "test"
+        },
+        "cgmk6tfb7yn": {
+          "editing": false,
+          "id": "cgmk6tfb7yn",
+          "key": "cgmk6tfb7yn",
+          "title": "page.assertScreenshot",
+          "commands": {
+            "cgmk6tfb86h": {
+              "editing": false,
+              "id": "cgmk6tfb86h",
+              "key": "cgmk6tfb86h",
+              "target": "page",
+              "method": "assertScreenshot",
+              "assert": {
+                "assertion": "screenshot",
+                "mismatchTolerance": "0.2"
+              },
+              "params": {
+                "name": "Page 1",
+                "fullPage": true,
+                "omitBackground": true,
+                "x": null,
+                "y": null,
+                "width": null,
+                "height": null,
+                "includeAA": true,
+                "diffColor": "#FF0000",
+                "aaColor": "#FFFF00"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "ltbk378s7fb",
+              "testId": "cgmk6tfb7yn",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "ltbk378s7fb",
+          "failure": "",
+          "entity": "test"
+        },
+        "cgmk6tfbh3v": {
+          "editing": false,
+          "id": "cgmk6tfbh3v",
+          "key": "cgmk6tfbh3v",
+          "title": "target.assertScreenshot",
+          "commands": {
+            "cgmk6tfbhe3": {
+              "editing": false,
+              "id": "cgmk6tfbhe3",
+              "key": "cgmk6tfbhe3",
+              "target": "CONTAINER",
+              "method": "assertScreenshot",
+              "assert": {
+                "assertion": "screenshot",
+                "mismatchTolerance": "0.2"
+              },
+              "params": {
+                "name": "Page 1",
+                "includeAA": true,
+                "diffColor": "#FF0000",
+                "aaColor": "#FFFF00",
+                "omitBackground": false
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "ltbk378s7fb",
+              "testId": "cgmk6tfbh3v",
+              "waitForTarget": false
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "ltbk378s7fb",
+          "failure": "",
+          "entity": "test"
+        }
+      }
+    }
+  },
+  "puppetry": "3.2.0-RC.1"
+}

@@ -21,7 +21,21 @@ import { SELECT_SEARCH_PROPS } from "service/utils";
 
 const CheckboxGroup = Checkbox.Group,
       { TabPane } = Tabs,
-      { Option } = Select;
+      { Option } = Select,
+
+      DEFAULT_STATE = {
+        locked: false,
+        browseDirectoryValidateStatus: "",
+        selectedDirectory: "",
+        checkedList: [],
+        indeterminate: true,
+        checkAll: false,
+        modified: false,
+        format: "jest",
+        loading: false,
+        allure: false,
+        error: ""
+      };
 
 export class ExportProjectModal extends AbstractTestRunnerModal {
 
@@ -44,19 +58,7 @@ export class ExportProjectModal extends AbstractTestRunnerModal {
     environment: PropTypes.any
   }
 
-  state = {
-    locked: false,
-    browseDirectoryValidateStatus: "",
-    selectedDirectory: "",
-    checkedList: [],
-    indeterminate: true,
-    checkAll: false,
-    modified: false,
-    format: "jest",
-    loading: false,
-    allure: false,
-    error: ""
-  }
+  state = DEFAULT_STATE;
 
   constructor( props ) {
     super( props );
@@ -217,6 +219,7 @@ export class ExportProjectModal extends AbstractTestRunnerModal {
   // Do not update until visible
   shouldComponentUpdate( nextProps ) {
     if ( this.props.isVisible !== nextProps.isVisible ) {
+      this.setState( DEFAULT_STATE );
       return true;
     }
     if ( !nextProps.isVisible ) {

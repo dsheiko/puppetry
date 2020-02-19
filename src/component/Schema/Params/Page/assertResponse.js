@@ -35,7 +35,8 @@ export const assertResponse = {
         ( command.params && command.params.waitFor )
           ? `
 searchStr = ${ JSON.stringify( command.assert.url ) }.replace( /^\./, "" );
-await bs.page.waitForResponse( ( rsp ) => rsp.url().includes( searchStr ) );`
+await bs.page.waitForResponse(
+  ( rsp ) => rsp.url().includes( searchStr ) );`
           : `` }
 await bs.network.waitUntilResolved();`
 
@@ -70,8 +71,9 @@ await bs.network.waitUntilResolved();`
         {
           name: "params.waitFor",
           label: "Wait for response",
+          tooltip: "This method watches for on-page responses, but ignores internal like page.goto",
           control: CHECKBOX,
-          initialValue: true,
+          initialValue: false,
           placeholder: "",
           rules: []
         }

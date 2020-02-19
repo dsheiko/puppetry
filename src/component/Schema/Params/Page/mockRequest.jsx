@@ -1,8 +1,9 @@
-import { FILE, SELECT, INPUT, TEXTAREA } from "../../constants";
+import { SELECT, INPUT, TEXTAREA } from "../../constants";
 import ExpressionParser from "service/ExpressionParser";
 import contentTypes from "service/contentTypes";
 import statusCodes from "service/statusCodes";
 import fs from "fs";
+import { join } from "path";
 
 /**
  *
@@ -13,6 +14,18 @@ import fs from "fs";
 function stringifyTpl( tpl, id ) {
   const parser = new ExpressionParser( id );
   return parser.stringify( tpl );
+}
+
+/**
+ * @param {String} projectDirectory
+ * @param {String} filePath
+ */
+function readFile( projectDirectory, filePath ) {
+  const relPath = join( projectDirectory, filePath );
+  if ( fs.existsSync( relPath ) ) {
+    return fs.readFileSync( relPath, "utf8" );
+  }
+  return fs.readFileSync( filePath, "utf8" );
 }
 
 /**
@@ -30,13 +43,13 @@ export const mockRequest = {
    * @param {TemplatePayload} payload
    * @returns {String}
    */
-  template: ({ params, id }) => {
+  template: ({ params, id, projectDirectory }) => {
     const { url, method, statusCode, contentType, body, bodyPath, headers } = params,
           urlString = stringifyTpl( url, id ),
           me = JSON.stringify( method ),
           sc = JSON.stringify( statusCode ),
           ct = JSON.stringify( contentType ),
-          bo = bodyPath ? JSON.stringify( fs.readFileSync( bodyPath, "utf8" ) ) : stringifyTpl( body, id ),
+          bo = bodyPath ? JSON.stringify( readFile( projectDirectory, bodyPath ) ) : stringifyTpl( body, id ),
           he = typeof headers === "undefined" ? "[]" : stringifyTpl( headers
             .replace( /[\n\r]/, "\n" )
             .split( "\n" )
@@ -143,10 +156,10 @@ before every request that you want to mock.`,
         },
         {
           name: "params.bodyPath",
-          control: FILE,
+          control: INPUT,
           optional: true,
           label: "...or JSON file",
-          tooltip: "",
+          tooltip: "Please, provide a path relative to the project location",
           placeholder: "",
           rules: [{
             message: "Select a file path to seed the body"

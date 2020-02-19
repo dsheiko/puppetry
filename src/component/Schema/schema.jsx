@@ -64,6 +64,7 @@ import { tap as tapElement } from "./Params/Element/tap";
 import { scroll as scrollElement } from "./Params/Element/scroll";
 import { waitForTarget } from "./Params/Element/waitForTarget";
 import { assertScroll as assertScrollElement } from "./Params/Element/assertScroll";
+import { assertScreenshot as assertScreenshotElement } from "./Params/Element/assertScreenshot";
 import { checkBox }  from "./Params/Element/checkBox";
 import { assertNodeCount as assertNodeCountElement } from "./Params/Element/assertNodeCount";
 import { assertTextCount as assertTextCountElement } from "./Params/Element/assertTextCount";
@@ -113,7 +114,8 @@ export const schema = {
     assertNodeCount: assertNodeCountElement,
     assertTextCount: assertTextCountElement,
     assertContainsClass,
-    assertScroll: assertScrollElement
+    assertScroll: assertScrollElement,
+    assertScreenshot: assertScreenshotElement
   },
   page: {
     emulate,

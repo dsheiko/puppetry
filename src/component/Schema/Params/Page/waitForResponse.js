@@ -31,6 +31,10 @@ if ( ${ skip ? `!bs.performance.resources.find( item =>  item.url.includes( sear
 
   commonly: "wait for response",
 
+  description: `Waits for response.
+
+  NOTE: This method watches for on-page responses, but ignores internal like page.goto`,
+
   params: [
     {
       legend: "",

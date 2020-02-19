@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
 import { ruleValidateGenericString } from "service/utils";
-import { Form, Radio, Select, Input, Button } from "antd";
+import { Form, Radio, Select, Input, Button, message } from "antd";
 
 const FormItem = Form.Item,
       RadioGroup = Radio.Group,
@@ -44,6 +44,7 @@ export class RemoteForm extends AbstractForm {
         const { saveGit }  = this.props.action;
 
         saveGit({ ...values, hasRemote: true });
+        message.info( `Data has been successfully updated` );
         this.props.form.resetFields();
       }
     });

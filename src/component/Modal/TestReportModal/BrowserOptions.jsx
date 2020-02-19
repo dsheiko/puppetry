@@ -1,6 +1,5 @@
 import React from "react";
-import { Checkbox, Switch, Input, Select, Icon } from "antd";
-import Tooltip from "component/Global/Tooltip";
+import { Checkbox, Select, Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractPersistentState from "component/AbstractPersistentState";
 import BrowseDirectory from "component/Global/BrowseDirectory";
@@ -16,19 +15,17 @@ import { updateLauncherArgs } from "./utils";
 
 
 /*eslint no-empty: 0*/
-const { TextArea } = Input,
-      { Option } = Select,
-      NON_PRODUCTS = [ "headless", "chromium" , "connect"];
+const { Option } = Select,
+      NON_PRODUCTS = [ "headless", "chromium" , "connect" ];
 
 function filterNullable( obj ) {
   return Object.keys( obj ).reduce( ( carry, key ) => {
-      if ( obj[ key ] !== null ) {
-        carry[ key ] = obj[ key ];
-      }
-      return carry;
-    }, {});
+    if ( obj[ key ] !== null ) {
+      carry[ key ] = obj[ key ];
+    }
+    return carry;
+  }, {});
 }
-
 
 
 export class BrowserOptions extends AbstractPersistentState {
@@ -51,8 +48,8 @@ export class BrowserOptions extends AbstractPersistentState {
 
   getLauncherArgsInstance() {
     return ( this.state.product === "firefox"
-       ? this.refFirefoxArguments.current
-       : this.refChromeArguments.current );
+      ? this.refFirefoxArguments.current
+      : this.refChromeArguments.current );
   }
 
   getLauncherArgs() {
@@ -105,7 +102,7 @@ export class BrowserOptions extends AbstractPersistentState {
           ? this.getLauncherArgsInstance().state.ignoreHTTPSErrors
           : false,
         args: this.getLauncherArgs().split( " " ),
-        executablePath: (( this.state.product === "chrome" || this.state.product === "firefox" )
+        executablePath: ( ( this.state.product === "chrome" || this.state.product === "firefox" )
           ? this.getExecutablePath()
           : null )
       })
@@ -128,7 +125,6 @@ export class BrowserOptions extends AbstractPersistentState {
   }
 
 
-
   onBrowserChange = ( product ) => {
     this.setState({
       product,
@@ -149,45 +145,42 @@ export class BrowserOptions extends AbstractPersistentState {
   }
 
   render() {
-    const checked = !this.state.headless;
-
     return (
       <ErrorBoundary>
 
         <div className="run-in-browser__layout">
 
           <div className="select-group-inline">
-              <span className="select-group-inline__label" title="Select a browser to run the tests">
-                  <img src="./assets/open-in-browser.svg"
-                    className="in-text-icon"
-                    alt="Select a browser to run the tests" width="24" height="24" />
-              </span>
-              <Select
-                  { ...SELECT_SEARCH_PROPS }
-                  style={{ width: 172 }}
-                  value={ this.state.product }
-                  onChange={ this.onBrowserChange }
-                >
-                <Option value="headless" key="headless">Headless Chromium</Option>
-                <Option value="chromium" key="chromium">Chromium</Option>
-                <Option value="chrome" key="chrome">Chrome</Option>
-                <Option value="firefox" key="firefox">Firefox 74+ <Icon type="experiment" /></Option>
-                <Option value="connect" key="connect">Connect to Chrome</Option>
-              </Select>
+            <span className="select-group-inline__label" title="Select a browser to run the tests">
+              <img src="./assets/open-in-browser.svg"
+                className="in-text-icon"
+                alt="Select a browser to run the tests" width="24" height="24" />
+            </span>
+            <Select
+              { ...SELECT_SEARCH_PROPS }
+              style={{ width: 172 }}
+              value={ this.state.product }
+              onChange={ this.onBrowserChange }
+            >
+              <Option value="headless" key="headless">Headless Chromium</Option>
+              <Option value="chromium" key="chromium">Chromium</Option>
+              <Option value="chrome" key="chrome">Chrome</Option>
+              <Option value="firefox" key="firefox">Firefox 74+ <Icon type="experiment" /></Option>
+              <Option value="connect" key="connect">Connect to Chrome</Option>
+            </Select>
           </div>
-
 
 
           <div className="chromium-checkbox-group">
             { this.state.product !== "connect" ?
-            <ErrorBoundary>
-            { " " } <Checkbox
-              checked={ this.state.devtool }
-              onChange={ e => this.onChangeCheckbox( e.target.checked, "devtool" ) }
-            >
+              <ErrorBoundary>
+                { " " } <Checkbox
+                  checked={ this.state.devtool }
+                  onChange={ e => this.onChangeCheckbox( e.target.checked, "devtool" ) }
+                >
                   DevTools
-            </Checkbox>
-            </ErrorBoundary> :  null }
+                </Checkbox>
+              </ErrorBoundary> :  null }
 
             { " " } <Checkbox
               checked={ this.state.incognito }

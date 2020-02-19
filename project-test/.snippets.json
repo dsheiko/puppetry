@@ -1,0 +1,58 @@
+{
+  "title": null,
+  "timeout": 50000,
+  "snippets": true,
+  "description": null,
+  "savedAt": 1582120885,
+  "loadedAt": 1582120876,
+  "modified": false,
+  "filename": ".snippets.json",
+  "targets": {},
+  "groups": {
+    "snippets": {
+      "editing": false,
+      "id": "snippets",
+      "key": "snippets",
+      "title": "Snippets",
+      "tests": {
+        "by4k6tdt106": {
+          "title": "test template variables",
+          "id": "by4k6tdt106",
+          "editing": false,
+          "groupId": "snippets",
+          "key": "by4k6tdt106",
+          "commands": {
+            "by4k6tdu9hd": {
+              "editing": false,
+              "id": "by4k6tdu9hd",
+              "key": "by4k6tdu9hd",
+              "target": "page",
+              "method": "assertVar",
+              "assert": {
+                "assertion": "equals",
+                "value": "BAR"
+              },
+              "params": {
+                "name": "TMP"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "snippets",
+              "testId": "by4k6tdt106",
+              "waitForTarget": false
+            }
+          }
+        }
+      },
+      "disabled": false,
+      "expanded": false,
+      "adding": false
+    }
+  },
+  "puppetry": "3.2.0-RC.1"
+}

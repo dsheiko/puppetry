@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Alert, Checkbox, Modal, Button, Tabs, Select } from "antd";
+import { Alert, Checkbox, Modal, Button, Tabs } from "antd";
 import Tooltip from "component/Global/Tooltip";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractTestRunnerModal from "./AbstractTestRunnerModal";
@@ -9,13 +9,23 @@ import If from "component/Global/If";
 import * as classes from "./classes";
 import { SelectEnv } from "component/Global/SelectEnv";
 import { MODAL_DEFAULT_PROPS } from "constant";
-import { SELECT_SEARCH_PROPS } from "service/utils";
 
 /*eslint no-empty: 0*/
 
 const CheckboxGroup = Checkbox.Group,
       { TabPane } = Tabs,
-      { Option } = Select;
+
+      DEFAULT_STATE = {
+        checkedList: [],
+        indeterminate: true,
+        checkAll: false,
+        modified: false,
+        loading: false,
+        browserOptions: false,
+        updateSnapshot: false,
+        interactiveMode: false,
+        error: ""
+      };
 
 /**
  * Adds/removes args in the launcher args string
@@ -44,19 +54,9 @@ export class TestReportModal extends AbstractTestRunnerModal {
     isVisible: PropTypes.bool.isRequired,
     currentSuite: PropTypes.string.isRequired,
     files: PropTypes.arrayOf( PropTypes.string ).isRequired
-  }
+  };
 
-  state = {
-    checkedList: [],
-    indeterminate: true,
-    checkAll: false,
-    modified: false,
-    loading: false,
-    browserOptions: false,
-    updateSnapshot: false,
-    interactiveMode: false,
-    error: ""
-  }
+  state = DEFAULT_STATE;
 
   constructor( props ) {
     super( props );
@@ -136,6 +136,7 @@ export class TestReportModal extends AbstractTestRunnerModal {
   // Do not update until visible
   shouldComponentUpdate( nextProps ) {
     if ( this.props.isVisible !== nextProps.isVisible ) {
+      this.setState( DEFAULT_STATE );
       return true;
     }
     if ( !nextProps.isVisible ) {

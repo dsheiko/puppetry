@@ -1,0 +1,96 @@
+{
+  "title": "snippet local vars",
+  "timeout": 50000,
+  "snippets": false,
+  "description": null,
+  "savedAt": 1582121018,
+  "loadedAt": 1582121076,
+  "modified": false,
+  "filename": "snippet--local--vars.json",
+  "targets": {},
+  "groups": {
+    "by4k6tdw287": {
+      "title": "Main",
+      "id": "by4k6tdw287",
+      "editing": false,
+      "key": "by4k6tdw287",
+      "tests": {
+        "by4k6tdwa69": {
+          "title": "Test global vars not affected by snippets",
+          "id": "by4k6tdwa69",
+          "editing": false,
+          "groupId": "by4k6tdw287",
+          "key": "by4k6tdwa69",
+          "commands": {
+            "by4k6tdwgjv": {
+              "editing": false,
+              "id": "by4k6tdwgjv",
+              "key": "by4k6tdwgjv",
+              "target": "page",
+              "method": "assignVar",
+              "params": {
+                "name": "TMP",
+                "value": "FOO"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "by4k6tdw287",
+              "testId": "by4k6tdwa69",
+              "waitForTarget": false
+            },
+            "by4k6tdya1g": {
+              "editing": false,
+              "id": "by4k6tdya1g",
+              "key": "by4k6tdya1g",
+              "target": "",
+              "method": "",
+              "assert": {},
+              "params": {},
+              "disabled": false,
+              "failure": "",
+              "variables": {
+                "TMP": "BAR"
+              },
+              "expanded": false,
+              "refName": "test template variables",
+              "ref": "by4k6tdt106",
+              "isRef": true,
+              "groupId": "by4k6tdw287",
+              "testId": "by4k6tdwa69"
+            },
+            "by4k6tdyohc": {
+              "editing": false,
+              "id": "by4k6tdyohc",
+              "key": "by4k6tdyohc",
+              "target": "page",
+              "method": "assertVar",
+              "assert": {
+                "assertion": "equals",
+                "value": "FOO"
+              },
+              "params": {
+                "name": "TMP"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "by4k6tdw287",
+              "testId": "by4k6tdwa69",
+              "waitForTarget": false
+            }
+          }
+        }
+      }
+    }
+  },
+  "puppetry": "3.2.0-RC.1"
+}

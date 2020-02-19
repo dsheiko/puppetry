@@ -10,7 +10,7 @@ const pixelmatch = require( "pixelmatch" ),
  */
 module.exports = function( bs, util ) {
 
-    bs.assertScreenshot = async ( filename, screenshotOpts, pixelmatchOpts ) => {
+    bs.assertScreenshot = async ( filename, screenshotOpts, pixelmatchOpts, context ) => {
 
       const expectedPath = util.getComparePath( "expected", filename ),
             actualPath = util.getComparePath( "actual", filename ),
@@ -19,11 +19,11 @@ module.exports = function( bs, util ) {
       util.initCompareDirs();
 
       if ( !fs.existsSync( expectedPath ) ) {
-        await bs.page.screenshot({ path: expectedPath, ...screenshotOpts });
+        await context.screenshot({ path: expectedPath, ...screenshotOpts });
         return 0;
       }
 
-      await bs.page.screenshot({ path: actualPath, ...screenshotOpts });
+      await context.screenshot({ path: actualPath, ...screenshotOpts });
 
       const expectedImg = PNG.sync.read( fs.readFileSync( expectedPath ) );
             actualImg = PNG.sync.read( fs.readFileSync( actualPath ) ),

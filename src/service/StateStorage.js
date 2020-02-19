@@ -67,17 +67,17 @@ export default class StateStorage {
 
   set( update ) {
     const state = this.getAll();
-    state[ this.ns ] = Object.assign( {}, state[ this.ns ], update );
+    state[ this.ns ] = Object.assign({}, state[ this.ns ], update );
     localStorage.setItem( STORAGE_KEY_STATE, JSON.stringify( state ) );
   }
 
   getAll() {
-     const jsonString = localStorage.getItem( STORAGE_KEY_STATE );
-     return jsonString ? JSON.parse( jsonString ) : defaultState;
+    const jsonString = localStorage.getItem( STORAGE_KEY_STATE );
+    return jsonString ? JSON.parse( jsonString ) : defaultState;
   }
 
   get() {
     const state = this.getAll();
     return typeof state[ this.ns ] !== "undefined" ? state[ this.ns ] : defaultState[ this.ns ];
   }
-};
+}

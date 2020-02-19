@@ -75,13 +75,17 @@ export default class TestGenerator {
       console.warn( `Cannot find REF: ${ ref } in tests:`, tests );
       return ``;
     }
+
     const test = tests[ ref ],
           env = ( variables && Object.keys( variables ).length )
-            ? `      Object.assign( ENV, ${ JSON.stringify( variables ) } );\n` : ``,
+            ? `      localEnv = Object.assign( {}, ENV );\n` +
+              `      Object.assign( ENV, ${ JSON.stringify( variables ) } );\n` : ``,
           chunk = Object.values( test.commands )
             .map( command => Object.assign({}, command, { parentId }) )
             .map( this.parseCommand ).join( "\n" );
-    return `      // SNIPPET ${ test.title }: START\n${ env }${ chunk }\n      // SNIPPET ${ test.title }: END\n`;
+    return `      // SNIPPET ${ test.title }: START\n${ env }${ chunk }\n` +
+      `      ENV = Object.assign( {}, localEnv );\n` +
+      `      // SNIPPET ${ test.title }: END\n`;
   }
 
   getInteractiveModeTpl( command ) {
@@ -133,7 +137,7 @@ export default class TestGenerator {
       }
 
       if ( src === "page" && method.startsWith( "debug" ) ) {
-          this.options.debug = true;
+        this.options.debug = true;
       }
       if ( src === "page" && method.startsWith( "assertResponse" ) ) {
         this.options.requireNetworkTraffic = true;
@@ -177,7 +181,8 @@ export default class TestGenerator {
               method,
               id: command.id,
               testId: command.testId,
-              parentId: command.parentId
+              parentId: command.parentId,
+              projectDirectory: this.projectDirectory
             }) + traceCode + interactiveModeCode;
 
 

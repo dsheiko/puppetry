@@ -146,6 +146,10 @@ module.exports = {
            "identifiers": false,
            "lang": "en_US",
            "skipWords": [
+            "reCaptcha",
+            "Captcha",
+            "firefox",
+            "Namespace",
             "nowrap",
             "uniqid",
             "urlencoded",

@@ -1,11 +1,10 @@
 
-const { join } = require( "path" ),
+const { join, dirname } = require( "path" ),
       fs = require( "fs" ),
       os = require( "os" ),
       shell = require( "shelljs" ),
       fetch = require( "node-fetch" ),
       table = require( "text-table" ),
-      { dirname } = require( "path" ),
       { LocalStorage } = require( "node-localstorage" ),
       faker = require( "faker" ),
       localStorage = new LocalStorage( join( __dirname, "/../", "/storage" ) ),

@@ -5,9 +5,12 @@
 - improvement: added option to run tests in Chrome (before were only headless/chromium available)
 - improvement: added option to connect running Chrome instance (via WebSockets)
 - improvement: Puppeteer run options in exported project can be adjusted in puppeteer.config.json
+- improvement: added target.assertScreenshot (issue #55)
 
 ### Bug fixes
 - fix: git integration restored
+- fix: issues #63
+- fix: issues #52
 
 # Puppetry 3.1.1
 

@@ -10,6 +10,7 @@ const FormItem = Form.Item;
 export default class BrowseDirectory extends React.Component {
 
   static propTypes = {
+    id: PropTypes.string,
     label: PropTypes.string,
     defaultDirectory: PropTypes.string,
     validateStatus: PropTypes.string,
@@ -36,7 +37,7 @@ export default class BrowseDirectory extends React.Component {
     ipcRenderer.on( E_DIRECTORY_SELECTED, ( ...args ) => {
       const selectedDirectory = args[ 1 ];
       // A foreign caller - all the instances of BrowseDirectory listen to this event
-      if ( this.props.id && this.props.id !== args[ 2 ] ) {
+      if ( this.props.id && this.props.id !== args[ 2 ]) {
         return;
       }
       this.props.getSelectedDirectory( selectedDirectory );

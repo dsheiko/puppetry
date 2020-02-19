@@ -1,27 +1,20 @@
 import { buildAssertionTpl } from "service/assert";
 import { AssertScreenshot } from "../../Assert/AssertScreenshot";
-import { isEveryValueFalsy, ruleValidateGenericString } from "service/utils";
+import { ruleValidateGenericString } from "service/utils";
 import { getCounter } from "service/screenshotCounter";
+import { renderTarget } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
 import { hexToRgb } from "service/color";
-import { INPUT_NUMBER, INPUT, CHECKBOX } from "../../constants";
+import { INPUT, CHECKBOX } from "../../constants";
 
 export const assertScreenshot = {
   template: ( command ) => {
-    const { name, fullPage, omitBackground, x, y, width, height } = command.params,
+    const { name, omitBackground } = command.params,
           parser = new ExpressionParser( command.id ),
-          clip = {
-            x,
-            y,
-            width,
-            height
-          },
           baseOptions = {
-            fullPage,
             omitBackground
           },
-          isClipEmpty = isEveryValueFalsy( clip ),
-          screenshotOptions = isClipEmpty ? baseOptions : { ...baseOptions, clip },
+          screenshotOptions = baseOptions,
           pixelmatchOptions = {
             includeAA: command.params.includeAA,
             diffColor: hexToRgb( command.params.diffColor ),
@@ -33,39 +26,32 @@ export const assertScreenshot = {
           paramPixelmatchOpts = JSON.stringify( pixelmatchOptions, null, 2 );
 
     return buildAssertionTpl(
-      `await bs.assertScreenshot( ${ paramName }, ${ paramScreenshotOpts }, ${ paramPixelmatchOpts }, bs.page )`,
+      `await bs.assertScreenshot( ${ paramName }, ${ paramScreenshotOpts }, ${ paramPixelmatchOpts },` +
+    ` await ( ${ renderTarget( command.target ) } ) )`,
       command,
-      `// Asserts that screenshot of the page matches already approved one`
+      `// Asserts that screenshot of the target matches already approved one`
     );
   },
 
   toLabel: ({ params }) => `(\`${ params.name }\`)`,
   toGherkin: ({ params }) => `Asserts that screenshot \`${ params.name }\`
-    of the page matches already approved one`,
+    of the target matches already approved one`,
 
-  commonly: "assert page screenshot",
+  commonly: "assert target screenshot",
 
 
   validate: ( values ) => {
-
-    const { diffColor, aaColor, x, y, width, height } = values.params;
+    const { diffColor, aaColor } = values.params;
     if ( diffColor.trim().length !== 7 || !diffColor.startsWith( "#" ) ) {
       return "Invalid diff color";
     }
     if ( aaColor.trim().length !== 7 || !aaColor.startsWith( "#" ) ) {
       return "Invalid anti-alias color";
     }
-
-    if ( x !== null || y !== null || width !== null || height !== null ) {
-      if ( x === null || y === null || width === null || height === null ) {
-        return "You have to provide either all clip parameters or none";
-      }
-    }
-
     return null;
   },
 
-  description: `Asserts that screenshot of the page matches the original.
+  description: `Asserts that screenshot of the element matches the original.
 
   This method is meant for CSS regression testing where we compare visual differences on given targets.
   `,
@@ -100,15 +86,6 @@ export const assertScreenshot = {
           }]
         },
         {
-          name: "params.fullPage",
-          label: "fullpage",
-          control: CHECKBOX ,
-          tooltip: `When true, takes a screenshot of the full scrollable page.`,
-          initialValue: false,
-          placeholder: "",
-          rules: []
-        },
-        {
           name: "params.omitBackground",
           label: "omit background",
           control: CHECKBOX ,
@@ -125,32 +102,7 @@ export const assertScreenshot = {
       tooltip: "",
       collapsed: true,
 
-
       fields: [
-        {
-          name: "params.x",
-          control: INPUT_NUMBER,
-          label: "x (px)",
-          initialValue: null
-        },
-        {
-          name: "params.y",
-          control: INPUT_NUMBER,
-          label: "y (px)",
-          initialValue: null
-        },
-        {
-          name: "params.width",
-          control: INPUT_NUMBER,
-          label: "width (px)",
-          initialValue: null
-        },
-        {
-          name: "params.height",
-          control: INPUT_NUMBER,
-          label: "height (px)",
-          initialValue: null
-        },
         {
           name: "params.includeAA",
           label: "Include anti-aliased pixels",
@@ -195,12 +147,7 @@ export const assertScreenshot = {
     },
     "params": {
       "name": "INPUT",
-      "fullPage": "CHECKBOX",
       "omitBackground": "CHECKBOX",
-      "x": "INPUT_NUMBER",
-      "y": "INPUT_NUMBER",
-      "width": "INPUT_NUMBER",
-      "height": "INPUT_NUMBER",
       "includeAA": "CHECKBOX",
       "diffColor": "INPUT",
       "aaColor": "INPUT"
@@ -215,12 +162,7 @@ export const assertScreenshot = {
       },
       "params": {
         "name": "Page 1",
-        "fullPage": true,
         "omitBackground": true,
-        "x": null,
-        "y": null,
-        "width": null,
-        "height": null,
         "includeAA": false,
         "diffColor": "#FF0000",
         "aaColor": "#FFFF00"

@@ -174,17 +174,17 @@ export async function exportSuite({
  * @returns {String[]} - ["foo.spec.js",..]
  */
 export async function exportProject({
-    projectDirectory,
-    outputDirectory,
-    suiteFiles,
-    runner = RUNNER_PUPPETRY,
-    snippets,
-    sharedTargets,
-    env,
-    projectOptions,
-    suiteOptions,
-    exportOptions
-  }) {
+  projectDirectory,
+  outputDirectory,
+  suiteFiles,
+  runner = RUNNER_PUPPETRY,
+  snippets,
+  sharedTargets,
+  env,
+  projectOptions,
+  suiteOptions,
+  exportOptions
+}) {
   const testDir = join( outputDirectory, "specs" ),
         specFiles = [],
         JEST_PKG = getJestPkgDirectory();

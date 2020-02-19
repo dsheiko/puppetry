@@ -1,4 +1,3 @@
-/*eslint no-useless-escape: 0*/
 import React from "react";
 import PropTypes from "prop-types";
 import { ipcRenderer, shell } from "electron";
@@ -17,6 +16,7 @@ import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
 import { ReportBody } from "./TestReport/ReportBody";
 import path from "path";
 
+/*eslint no-useless-escape: 0*/
 
 const Panel = Collapse.Panel,
       convert = new Convert();
@@ -56,12 +56,11 @@ export class TestReport extends AbstractComponent {
 
   run = async () => {
     const { project,
-            environment,
-            passSuiteOptions,
-            passExportOptions,
-            passProjectOptions } = this.props,
-          // options from Report modal like interactiveMode, updateSnapshot
-          options = this.props.options || {};
+      environment,
+      passSuiteOptions,
+      passExportOptions,
+      passProjectOptions } = this.props;
+
     this.props.action.saveSuite();
     this.props.action.resetCommandFailures();
     try {
@@ -78,8 +77,8 @@ export class TestReport extends AbstractComponent {
               snippets: this.props.snippets,
               sharedTargets: project.targets,
               env: {
-                  variables: getSelectedVariables( project.variables, activeEnv ),
-                  environment
+                variables: getSelectedVariables( project.variables, activeEnv ),
+                environment
               },
               projectOptions: passProjectOptions,
               suiteOptions:  passSuiteOptions,

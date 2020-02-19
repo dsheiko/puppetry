@@ -121,27 +121,35 @@ export default {
      * @param {Entity} payload (EntityRef required)
      * @returns {object}
      */
-  [ actions.updateCommand ]: ( state, { payload }) => update( state, {
-    modified: {
-      $set: true
-    },
-    groups: {
-      [ payload.groupId ]: {
-        tests: {
-          [ payload.testId ]: {
-            commands: {
-              $apply: ( ref ) => {
-                const commands = { ...ref },
-                      id = payload.id;
-                commands[ id ] = { ...commands[ id ], ...payload, key: id };
-                return commands;
+  [ actions.updateCommand ]: ( state, { payload }) => {
+    if ( !state.groups.hasOwnProperty( payload.groupId ) ) {
+      return console.error( `actions.updateCommand: Cannot find group ${ payload.groupId }` );
+    }
+    if ( !state.groups[ payload.groupId ].tests.hasOwnProperty( payload.testId ) ) {
+      return console.error( `actions.updateCommand: Cannot find test ${ payload.groupId }:${ payload.testId }` );
+    }
+    return update( state, {
+      modified: {
+        $set: true
+      },
+      groups: {
+        [ payload.groupId ]: {
+          tests: {
+            [ payload.testId ]: {
+              commands: {
+                $apply: ( ref ) => {
+                  const commands = { ...ref },
+                        id = payload.id;
+                  commands[ id ] = { ...commands[ id ], ...payload, key: id };
+                  return commands;
+                }
               }
             }
           }
         }
       }
-    }
-  }),
+    });
+  },
 
   /**
      * Remove record
