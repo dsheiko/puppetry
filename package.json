@@ -59,7 +59,7 @@
     "faker": "^4.1.0",
     "hotkeys-js": "^3.3.8",
     "immutability-helper": "^3.0.1",
-    "isomorphic-git": "^0.54.2",
+    "isomorphic-git": "^0.78.4",
     "jest": "^24.9.0",
     "jest-cli": "^24.9.0",
     "lodash.debounce": "^4.0.8",

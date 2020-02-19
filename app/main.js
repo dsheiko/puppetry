@@ -60,10 +60,16 @@ function createWindow() {
     minWidth: 960,
     minHeight: 540,
     frame: false,
-    devTools: process.env.ELECTRON_ENV === "dev",
+    devTools: false,
     title: "Puppetry",
     icon
   }, position ));
+
+  mainWindow.webContents.on("did-frame-finish-load", () => {
+    if ( process.env.ELECTRON_ENV === "dev" ) {
+       mainWindow.webContents.openDevTools();
+    }
+  });
 
   // and load the index.html of the app.
   mainWindow.loadURL( url.format({

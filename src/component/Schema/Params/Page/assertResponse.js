@@ -35,7 +35,7 @@ export const assertResponse = {
         ( command.params && command.params.waitFor )
           ? `
 searchStr = ${ JSON.stringify( command.assert.url ) }.replace( /^\./, "" );
-await bs.page.waitForResponse( ( rsp ) => rsp.url().includes( searchStr ), {"timeout":30000} );`
+await bs.page.waitForResponse( ( rsp ) => rsp.url().includes( searchStr ) );`
           : `` }
 await bs.network.waitUntilResolved();`
 
