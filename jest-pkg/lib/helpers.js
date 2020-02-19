@@ -12,8 +12,10 @@ const { join, dirname } = require( "path" ),
 
 let PATH_SCREENSHOTS = join( __dirname, "/../", "/screenshots"),
     PATH_REPORTS = join( __dirname, "/../", "/reports"),
+    PATH_LOGS = join( __dirname, "/../", "/logs"),
     PATH_COMPARE = join( __dirname, "/../", "/snapshots"),
-    SUITE_NAME = "";
+    SUITE_NAME = "",
+    onceCounter = 0;
 
     /**
      * @see https://pptr.dev/#?product=Puppeteer&version=v1.5.0&show=api-class-page
@@ -113,8 +115,33 @@ const png = ( id, parentId, screenshotTitle, options = {} ) => {
        */
       endStep = () => {
         typeof global.reporter !== "undefined" && global.reporter.endStep();
-      };
+      },
 
+      once = async ( cb ) => {
+        onceCounter === 0 && await cb();
+        onceCounter++;
+      },
+
+      /**
+      * Save Puppeteer run-time data for Puppetry
+      * @param {String} json
+      */
+      savePuppetterInfo = async ( bs ) => {
+        const filePath = join( PATH_LOGS, "puppeteer.info.json" );
+
+        try {
+          const data = {
+            browser: {
+              version: await bs.browser.version(),
+              userAgent: await bs.browser.userAgent()
+            }
+          };
+          shell.mkdir( "-p" , dirname( filePath ) );
+          fs.writeFileSync( filePath, JSON.stringify( data, null, 2 ), "utf8" );
+        } catch ( e ) {
+          console.warn( `Could not create ${ filePath }` );
+        }
+      };
 
 /**
  *
@@ -211,9 +238,12 @@ exports.util = {
 
   png,
 
+  once,
+
   tracePng,
 
   startStep,
+
   endStep,
 
   getComparePath,
@@ -224,10 +254,13 @@ exports.util = {
 
   saveResourceReport,
 
+  savePuppetterInfo,
+
   setProjectDirectory: ( projectDirectory ) => {
     PATH_SCREENSHOTS = join( projectDirectory, "/screenshots");
     PATH_COMPARE = join( projectDirectory, "/snapshots");
     PATH_REPORTS = join( projectDirectory, "/reports");
+    PATH_LOGS = join( projectDirectory, "/logs");
   },
 
   setSuiteName: ( name ) => {

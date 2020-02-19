@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ipcRenderer, shell } from "electron";
-import { RUNNER_PUPPETRY, E_RUN_TESTS, SNIPPETS_GROUP_ID, DIR_SCREENSHOTS } from "constant";
+import { RUNNER_PUPPETRY, E_RUN_TESTS, SNIPPETS_GROUP_ID, DIR_SCREENSHOTS, DIR_LOGS } from "constant";
 import LoadingTip from "component/Global/LoadingTip";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
@@ -15,6 +15,7 @@ import Convert from "ansi-to-html";
 import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
 import { ReportBody } from "./TestReport/ReportBody";
 import path from "path";
+import fs from "fs";
 
 /*eslint no-useless-escape: 0*/
 
@@ -43,7 +44,8 @@ export class TestReport extends AbstractComponent {
     details: {},
     stdErr: "",
     loading: true,
-    ok: false
+    ok: false,
+    puppeteerInfo: null
   }
 
   onOpenDirectory = () => {
@@ -91,7 +93,8 @@ export class TestReport extends AbstractComponent {
         report: res.report.results,
         details: "testResults" in res.report.results ? this.getDetails( res.report.results.testResults ) : {},
         stdErr: res.stdErr,
-        ok: true
+        ok: true,
+        puppeteerInfo: this.getPuppeteerInfo()
       });
 
       this.highlightErrorsInSuite();
@@ -203,9 +206,21 @@ export class TestReport extends AbstractComponent {
     }, {});
   }
 
+  getPuppeteerInfo() {
+    try {
+      const filePath = join( this.props.projectDirectory, DIR_LOGS, "puppeteer.info.json" ),
+            text = fs.readFileSync( filePath, "utf8" );
+      return JSON.parse( text );
+    } catch ( e ) {
+      console.warn( `Cannot open ${ filePath }`, e );
+      return null;
+    }
+  }
+
+
 
   render() {
-    const { report, loading, ok, stdErr, details } = this.state,
+    const { report, loading, ok, stdErr, details, puppeteerInfo } = this.state,
           printableStdErr = convert.toHtml( stdErr )
             .replace( /\n/mg, "" )
             .replace( /<br\s*\/>+/mg, "\n" )
@@ -221,6 +236,7 @@ export class TestReport extends AbstractComponent {
         description: "Jest testing framework could not run the tests"
       });
     }
+
     return ( <ErrorBoundary>
       <If exp={ loading }>
         <div className="test-report-spin">
@@ -233,8 +249,12 @@ export class TestReport extends AbstractComponent {
         <div id="cTestReport">
 
           <div>{ report.success
-            ? ( <div className="tr-badge is-ok">PASSED</div> )
-            : ( <div className="tr-badge is-fail">FAILED</div> ) }</div>
+          ? ( <div className="tr-badge is-ok"><span>PASSED</span>
+            <span className="browser-info">{ puppeteerInfo === null ? null : puppeteerInfo.browser.version } </span>
+            </div> )
+          : ( <div className="tr-badge is-fail"><span>FAILED</span>
+            <span className="browser-info">{ puppeteerInfo === null ? null : puppeteerInfo.browser.version } </span>
+          </div> ) }</div>
 
 
           { ( stdErr && !report.success ) && <Collapse>

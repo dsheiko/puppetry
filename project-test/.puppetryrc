@@ -64,9 +64,9 @@
       }
     }
   },
-  "savedAt": 1582124123,
+  "savedAt": 1582133476,
   "modified": false,
-  "lastOpenSuite": "context.assertScreenshot.json",
+  "lastOpenSuite": "snippet-local-vars.json",
   "variables": {},
   "targets": {
     "js4k1ukyk9a": {

@@ -118,7 +118,10 @@ ${ targets }
 describe( ${ JSON.stringify( title ) }, () => {
   beforeAll(async () => {
     await bs.setup( puppeteerOptions, ${ getSetupOptions( options ) });
-    console.log( "BROWSER: ", await bs.browser.version() );
+    await util.once(async () => {
+      console.log( "BROWSER: ", await bs.browser.version() );
+      await util.savePuppetterInfo( bs );
+    });
 
     bs.page.on( "console", ( message ) => consoleLog.push( message ) );
     bs.page.on( "dialog", ( dialog ) => dialogLog.push( dialog ) );

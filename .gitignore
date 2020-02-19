@@ -17,9 +17,11 @@ src/__e2e__/screenshots
 project-test/reports
 project-test/screenshots
 project-test/snapshots
+project-test/logs
 project-demo/reports
 project-demo/screenshots
 project-demo/snapshots
+project-demo/logs
 
 # Runtime data
 pids
