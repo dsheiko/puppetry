@@ -146,6 +146,7 @@ module.exports = {
            "identifiers": false,
            "lang": "en_US",
            "skipWords": [
+            "Puppetter",
             "reCaptcha",
             "Captcha",
             "firefox",

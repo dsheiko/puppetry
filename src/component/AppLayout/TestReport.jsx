@@ -207,16 +207,15 @@ export class TestReport extends AbstractComponent {
   }
 
   getPuppeteerInfo() {
+    const filePath = join( this.props.projectDirectory, DIR_LOGS, "puppeteer.info.json" );
     try {
-      const filePath = join( this.props.projectDirectory, DIR_LOGS, "puppeteer.info.json" ),
-            text = fs.readFileSync( filePath, "utf8" );
+      const text = fs.readFileSync( filePath, "utf8" );
       return JSON.parse( text );
     } catch ( e ) {
       console.warn( `Cannot open ${ filePath }`, e );
       return null;
     }
   }
-
 
 
   render() {
@@ -249,12 +248,12 @@ export class TestReport extends AbstractComponent {
         <div id="cTestReport">
 
           <div>{ report.success
-          ? ( <div className="tr-badge is-ok"><span>PASSED</span>
-            <span className="browser-info">{ puppeteerInfo === null ? null : puppeteerInfo.browser.version } </span>
+            ? ( <div className="tr-badge is-ok"><span>PASSED</span>
+              <span className="browser-info">{ puppeteerInfo === null ? null : puppeteerInfo.browser.version } </span>
             </div> )
-          : ( <div className="tr-badge is-fail"><span>FAILED</span>
-            <span className="browser-info">{ puppeteerInfo === null ? null : puppeteerInfo.browser.version } </span>
-          </div> ) }</div>
+            : ( <div className="tr-badge is-fail"><span>FAILED</span>
+              <span className="browser-info">{ puppeteerInfo === null ? null : puppeteerInfo.browser.version } </span>
+            </div> ) }</div>
 
 
           { ( stdErr && !report.success ) && <Collapse>
