@@ -59,14 +59,14 @@
         },
         "cgmk6tfbh3v": {
           "key": "cgmk6tfbh3v",
-          "value": false
+          "value": true
         }
       }
     }
   },
-  "savedAt": 1582133582,
+  "savedAt": 1582189628,
   "modified": false,
-  "lastOpenSuite": "snippet-local-vars.json",
+  "lastOpenSuite": "context.assertScreenshot.json",
   "variables": {},
   "targets": {
     "js4k1ukyk9a": {

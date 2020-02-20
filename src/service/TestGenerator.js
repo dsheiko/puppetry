@@ -13,7 +13,8 @@ export default class TestGenerator {
    * {Object} targets
    */
   constructor({
-    suite, schema, targets, runner, projectDirectory, outputDirectory, snippets, sharedTargets, env, options
+    suite, schema, targets, runner, projectDirectory, outputDirectory, snippets, sharedTargets, env, options,
+    suiteFilename
   }) {
 
     // collect here information for interactive mode
@@ -28,6 +29,7 @@ export default class TestGenerator {
     this.snippets = { targets: {}, groups: {}, ...snippets };
     this.env = env;
     this.options = options;
+    this.suiteFilename = suiteFilename;
     this.runner = runner; // RUNNER_PUPPETRY when embedded
 
     this.allTargets = Object.values({ ...sharedTargets, ...snippets.targets, ...targets });
@@ -254,6 +256,9 @@ export default class TestGenerator {
 
   generate() {
     try {
+      if ( !this.suite.hasOwnProperty( "groups" ) || this.suite.groups === null ) {
+        throw new Error( `Selected '${ this.suiteFilename }' is not a valid Puppetry test suite` );
+      }
       const targets = this.parseTargets(),
             body = Object.values( this.suite.groups )
               .filter( group => group.disabled !== true )

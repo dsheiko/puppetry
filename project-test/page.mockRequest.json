@@ -181,7 +181,7 @@
                 "statusCode": "200 OK",
                 "contentType": "text/plain",
                 "body": "",
-                "bodyPath": "./mocked-response-body.json",
+                "bodyPath": "./fixtures/mocked-response-body.json",
                 "headers": ""
               },
               "disabled": false,

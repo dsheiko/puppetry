@@ -162,7 +162,8 @@ export async function exportSuite({
           snippets,
           sharedTargets,
           env,
-          options
+          options,
+          suiteFilename: filename
         });
   return gen.generate();
 }
