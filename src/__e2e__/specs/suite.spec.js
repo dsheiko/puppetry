@@ -114,7 +114,7 @@ describe( "New Project", () => {
     ctx.createTmpDir( "new-project" );
     await ctx.client.setValue( `${ S.MODAL_NEW_PROJECT } #name`, "Test Project" );
     await ctx.client.setValue( `${ S.MODAL_NEW_PROJECT } #suiteTitle`, "Test Suite" );
-    ctx.app.webContents.send( "directorySelected", ctx.getTmpDir( "new-project" ) );
+    ctx.app.webContents.send( "directorySelected", ctx.getTmpDir( "new-project" ), "inNewProjectModal" );
     await ctx.client.pause( 100 );
     await ctx.screenshot( "new-project-modal-populated" );
   });
