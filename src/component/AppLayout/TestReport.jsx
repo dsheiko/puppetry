@@ -245,49 +245,59 @@ export class TestReport extends AbstractComponent {
       </If>
 
       <If exp={ ok && !loading }>
-        <div id="cTestReport">
+        { ( puppeteerInfo !== null && puppeteerInfo.hasOwnProperty( "error" ) )
+          ? <div className="tr-badge is-fail">
+            <span>
+              { puppeteerInfo.error.message } with options
+              <br />
+              <pre><code>{ JSON.stringify( puppeteerInfo.error.options, null, 2 ) }</code></pre>
+              <br />
+              <i>{ puppeteerInfo.error.origin }</i>
+            </span>
+          </div>
+          : <div id="cTestReport">
 
-          <div>{ report.success
-            ? ( <div className="tr-badge is-ok"><span>PASSED</span>
-              <span className="browser-info">{ puppeteerInfo === null ? null : puppeteerInfo.browser.version } </span>
-            </div> )
-            : ( <div className="tr-badge is-fail"><span>FAILED</span>
-              <span className="browser-info">{ puppeteerInfo === null ? null : puppeteerInfo.browser.version } </span>
-            </div> ) }</div>
-
-
-          { ( stdErr && !report.success ) && <Collapse>
-            <Panel header="Error details" key="1">
-              <p dangerouslySetInnerHTML={{ __html: printableStdErr }}></p>
-            </Panel>
-          </Collapse> }
-
-
-          <ReportBody details={ details }
-            projectDirectory={ this.props.projectDirectory }
-            selector={ this.props.selector }
-            action={ this.props.action } />
+            <div>{ report.success
+              ? ( <div className="tr-badge is-ok"><span>PASSED</span>
+                <span className="browser-info">{ puppeteerInfo === null ? null : puppeteerInfo.browser.version } </span>
+              </div> )
+              : ( <div className="tr-badge is-fail"><span>FAILED</span>
+                <span className="browser-info">{ puppeteerInfo === null ? null : puppeteerInfo.browser.version } </span>
+              </div> ) }</div>
 
 
-          <dl className="tr-row">
-            <dt>Test Suites</dt>
-            <dd>{ report.numPassedTestSuites } passed</dd>
-            <dd>{ report.numTotalTestSuites } total</dd>
-          </dl>
-          <dl className="tr-row">
-            <dt>Tests</dt>
-            <dd>{ report.numPassedTests } passed</dd>
-            <dd>{ report.numTotalTests } total</dd>
-          </dl>
-          <dl className="tr-row">
-            <dt>Times</dt>
-            <dd>{
-              millisecondsToStr( Date.now() - parseInt( report.startTime, 10 ) )
-            }</dd>
-          </dl>
+            { ( stdErr && !report.success ) && <Collapse>
+              <Panel header="Error details" key="1">
+                <p dangerouslySetInnerHTML={{ __html: printableStdErr }}></p>
+              </Panel>
+            </Collapse> }
 
 
-        </div>
+            <ReportBody details={ details }
+              projectDirectory={ this.props.projectDirectory }
+              selector={ this.props.selector }
+              action={ this.props.action } />
+
+
+            <dl className="tr-row">
+              <dt>Test Suites</dt>
+              <dd>{ report.numPassedTestSuites } passed</dd>
+              <dd>{ report.numTotalTestSuites } total</dd>
+            </dl>
+            <dl className="tr-row">
+              <dt>Tests</dt>
+              <dd>{ report.numPassedTests } passed</dd>
+              <dd>{ report.numTotalTests } total</dd>
+            </dl>
+            <dl className="tr-row">
+              <dt>Times</dt>
+              <dd>{
+                millisecondsToStr( Date.now() - parseInt( report.startTime, 10 ) )
+              }</dd>
+            </dl>
+
+
+          </div> }
 
       </If>
     </ErrorBoundary> );

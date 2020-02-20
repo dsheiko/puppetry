@@ -12,6 +12,7 @@ import {
 import appActions from "./app";
 
 const actions = createActions({
+  RESET_GIT: ( options ) => options,
   SET_GIT: ( options ) => options
 });
 
@@ -29,12 +30,12 @@ actions.saveGit = ( options ) => async ( dispatch, getState ) => {
 };
 
 actions.loadGit = ( directory = null ) => async ( dispatch, getState ) => {
-  const projectDirectory = directory || getState().settings.projectDirectory,
-        lastSaveGitCfg = localStorage.getItem( "git" );
-  // Backup git config for non open project
-  if ( lastSaveGitCfg ) {
-    dispatch( actions.setGit( JSON.parse( lastSaveGitCfg ) ) );
-  }
+  const projectDirectory = directory || getState().settings.projectDirectory;
+  //        lastSaveGitCfg = localStorage.getItem( "git" );
+  //  // Backup git config for non open project
+  //  if ( lastSaveGitCfg ) {
+  //    dispatch( actions.setGit( JSON.parse( lastSaveGitCfg ) ) );
+  //  }
   if ( !directory ) {
     return;
   }
@@ -67,7 +68,7 @@ export const saveGit = debounce( async ( store, isTouch = false ) => {
           modified: false
         };
 
-  localStorage.setItem( "git", JSON.stringify( data ) );
+  // localStorage.setItem( "git", JSON.stringify( data ) );
   if ( !store.settings.projectDirectory ) {
     return;
   }

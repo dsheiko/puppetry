@@ -154,6 +154,7 @@ module.exports = {
     } catch ( err ) {
       log.error( `Main process: git-api.syncOnConflict ${ err.message }` );
       await this.unstashFiles( projectDirectory );
+      throw err;
     }
   },
 

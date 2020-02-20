@@ -130,16 +130,18 @@ const png = ( id, parentId, screenshotTitle, options = {} ) => {
         const filePath = join( PATH_LOGS, "puppeteer.info.json" );
 
         try {
-          const data = {
-            browser: {
-              version: await bs.browser.version(),
-              userAgent: await bs.browser.userAgent()
+          const data = bs.browser
+          ? {
+              browser: {
+                version: await bs.browser.version(),
+                userAgent: await bs.browser.userAgent()
+              }
             }
-          };
+          : { error: bs.error };
           shell.mkdir( "-p" , dirname( filePath ) );
           fs.writeFileSync( filePath, JSON.stringify( data, null, 2 ), "utf8" );
         } catch ( e ) {
-          console.warn( `Could not create ${ filePath }` );
+          console.warn( `Could not create ${ filePath }`, e );
         }
       };
 

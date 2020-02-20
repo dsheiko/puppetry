@@ -119,7 +119,7 @@ describe( ${ JSON.stringify( title ) }, () => {
   beforeAll(async () => {
     await bs.setup( puppeteerOptions, ${ getSetupOptions( options ) });
     await util.once(async () => {
-      console.log( "BROWSER: ", await bs.browser.version() );
+      bs.browser && console.log( "BROWSER: ", await bs.browser.version() );
       await util.savePuppetterInfo( bs );
     });
 

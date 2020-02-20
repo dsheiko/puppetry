@@ -13,6 +13,10 @@ class BrowserSession {
     }
   }
 
+  constructor() {
+    this.error = false;
+  }
+
   /**
    * Obtain browser and page object on bootstrap
    * @param {Object} projectOptions
@@ -41,6 +45,8 @@ class BrowserSession {
       launchOptions.slowMo = 30;
     }
 
+    this.error = false;
+
     try {
       if ( connectOptions.browserWSEndpoint ) {
         this.browser = await puppeteer.connect( connectOptions );
@@ -59,8 +65,10 @@ class BrowserSession {
       this.target = createTargetMethods( this.page );
     } catch( err ) {
       if ( connectOptions.browserWSEndpoint ) {
+        this.error = { message: `Failed to run puppeteer.connect()`, options: connectOptions, origin: err.message };
         console.error( `Failed to run puppeteer.connect() with options `, connectOptions );
       } else {
+        this.error = { message: `Failed to run puppeteer.launch()`, options: launchOptions, origin: err.message };
         console.error( `Failed to run puppeteer.launch() with options `, launchOptions );
       }
       console.error( err.message );

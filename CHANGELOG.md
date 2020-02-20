@@ -11,6 +11,7 @@
 - fix: git integration restored
 - fix: issues #63
 - fix: issues #52
+- fix: page.setCookie
 
 # Puppetry 3.1.1
 

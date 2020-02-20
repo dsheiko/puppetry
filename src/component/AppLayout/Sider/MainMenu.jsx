@@ -215,6 +215,7 @@ export class MainMenu extends GitEnhancedMenu {
   }
 
   onRendererError( ev, msg ) {
+    this.props.action.setApp({ loading: false });
     message.error( msg );
   }
 
@@ -223,7 +224,7 @@ export class MainMenu extends GitEnhancedMenu {
     ipcRenderer.removeAllListeners( E_RENDERER_INFO );
     ipcRenderer.on( E_RENDERER_INFO, this.onRendererInfo );
     ipcRenderer.removeAllListeners( E_RENDERER_ERROR );
-    ipcRenderer.on( E_RENDERER_ERROR, this.onRendererError );
+    ipcRenderer.on( E_RENDERER_ERROR, ( ev, msg ) => this.onRendererError( ev, msg ) );
     ipcRenderer.removeAllListeners( E_MENU_NEW_PROJECT );
     ipcRenderer.on( E_MENU_NEW_PROJECT, this.onNewProject );
     ipcRenderer.removeAllListeners( E_MENU_NEW_SUITE );

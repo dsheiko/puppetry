@@ -79,14 +79,14 @@ export default class TestGenerator {
     }
 
     const test = tests[ ref ],
+          saveEnv = `      localEnv = Object.assign( {}, ENV );\n`,
+          restoreEnv = `      ENV = Object.assign( {}, localEnv );\n`,
           env = ( variables && Object.keys( variables ).length )
-            ? `      localEnv = Object.assign( {}, ENV );\n` +
-              `      Object.assign( ENV, ${ JSON.stringify( variables ) } );\n` : ``,
+            ?  `      Object.assign( ENV, ${ JSON.stringify( variables ) } );\n` : ``,
           chunk = Object.values( test.commands )
             .map( command => Object.assign({}, command, { parentId }) )
             .map( this.parseCommand ).join( "\n" );
-    return `      // SNIPPET ${ test.title }: START\n${ env }${ chunk }\n` +
-      `      ENV = Object.assign( {}, localEnv );\n` +
+    return `      // SNIPPET ${ test.title }: START\n${ saveEnv }${ env }${ chunk }\n${ restoreEnv }` +
       `      // SNIPPET ${ test.title }: END\n`;
   }
 

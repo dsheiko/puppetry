@@ -17,11 +17,11 @@ export const setCookie = {
         name: ${ parser.stringify( name ) },
         value: ${ parser.stringify( value ) },
         domain: ${ parser.stringify( domain ) },
-        path: ${ path || "undefined" },
+        path: ${ path ? parser.stringify( path ) : "undefined" },
         expires: ${ expires || "undefined" },
-        httpOnly: ${ httpOnly || "undefined" },
-        secure: ${ secure || "undefined" },
-        sameSite: ${ sameSite || "undefined" }
+        httpOnly: ${ httpOnly ? httpOnly : "undefined" },
+        secure: ${ secure ? secure : "undefined" },
+        sameSite: ${ sameSite ? parser.stringify( sameSite ) : "undefined" }
       });
     `;
   },
@@ -91,14 +91,15 @@ export const setCookie = {
           name: "params.expires",
           control: INPUT_NUMBER,
           describe: "Unix time in seconds.",
-          label: "Expires"
+          label: "Expires",
+          initialValue: Date.now() + 86400000
         },
         {
           name: "params.httpOnly",
           control: SELECT,
           inputStyle: { maxWidth: 200 },
           label: "HTTP-only",
-          initialValue: "",
+          initialValue: "true",
           options: [ "", "true", "false" ]
         },
         {
@@ -106,7 +107,7 @@ export const setCookie = {
           control: SELECT,
           inputStyle: { maxWidth: 200 },
           label: "Secure",
-          initialValue: "",
+          initialValue: "false",
           options: [ "", "true", "false" ]
         },
         {
@@ -114,7 +115,7 @@ export const setCookie = {
           control: SELECT,
           inputStyle: { maxWidth: 200 },
           label: "Same site",
-          initialValue: "",
+          initialValue: "Lax",
           options: [ "", "Strict", "Lax" ]
         }
       ]
