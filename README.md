@@ -79,6 +79,9 @@ On Mac can be installed with [Homebrew](https://brew.sh/):
 ```
 brew cask install puppetry
 ```
+## FAQ
+
+- [Stackoverflow](https://stackoverflow.com/questions/tagged/puppetry)
 
 ## Feedback
 
