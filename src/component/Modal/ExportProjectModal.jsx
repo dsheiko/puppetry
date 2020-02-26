@@ -34,6 +34,7 @@ const CheckboxGroup = Checkbox.Group,
         format: "jest",
         loading: false,
         allure: false,
+        cleanup: true,
         error: ""
       };
 
@@ -58,7 +59,7 @@ export class ExportProjectModal extends AbstractTestRunnerModal {
     environment: PropTypes.any
   }
 
-  state = DEFAULT_STATE;
+  state = { ...DEFAULT_STATE };
 
   constructor( props ) {
     super( props );
@@ -70,6 +71,12 @@ export class ExportProjectModal extends AbstractTestRunnerModal {
   onChangeAllure = ( e ) => {
     this.setState({
       allure: e.target.checked
+    });
+  }
+
+  onChangeCleanUp = ( e ) => {
+    this.setState({
+      cleanup: e.target.checked
     });
   }
 
@@ -172,8 +179,12 @@ export class ExportProjectModal extends AbstractTestRunnerModal {
             sharedTargets: project.targets,
             env: envDto,
             projectOptions: browserOptions,
-            suiteOptions: { allure: this.state.allure },
-            exportOptions: {}
+            suiteOptions: {
+              allure: this.state.allure
+            },
+            exportOptions: {
+              cleanup: this.state.cleanup
+            }
           });
           message.info( `Project exported in ${ selectedDirectory }` );
           break;
@@ -219,7 +230,7 @@ export class ExportProjectModal extends AbstractTestRunnerModal {
   // Do not update until visible
   shouldComponentUpdate( nextProps ) {
     if ( this.props.isVisible !== nextProps.isVisible ) {
-      this.setState( DEFAULT_STATE );
+      nextProps.isVisible || this.setState( DEFAULT_STATE );
       return true;
     }
     if ( !nextProps.isVisible ) {
@@ -293,7 +304,7 @@ export class ExportProjectModal extends AbstractTestRunnerModal {
                     style={{ width: 348 }}
                     placeholder="Select an output format"
                     onChange={ this.onChangeFormat }
-                    defaultValue="jest"
+                    value={ format }
                   >
                     <Option value="jest" key="jest">Jest/Puppeteer project (CI-friendly)</Option>
                     <Option value="text" key="text">test specification</Option>
@@ -316,10 +327,14 @@ export class ExportProjectModal extends AbstractTestRunnerModal {
                   id="inExportProjectModal"
                   label="Select a directory to export" />
 
-                { format === "jest" && <div className="allure-test-report-checkbox">
-                  <Checkbox onChange={ this.onChangeAllure }>generate
+                <div className="export-extra-checkbox-group">
+                  { format === "jest" && <Checkbox onChange={ this.onChangeAllure }>generate
                     { " " } <a onClick={ this.onExtClick } href="http://allure.qatools.ru/">Allure Test Report</a>
-                  </Checkbox></div> }
+                  </Checkbox> }
+                  <Checkbox defaultChecked={ this.state.cleanup } onChange={ this.onChangeCleanUp }>
+                    clean up output folder
+                  </Checkbox>
+                </div>
 
                 <If exp={ files.length }>
                   <p>Please select suites to export:</p>

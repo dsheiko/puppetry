@@ -1506,9 +1506,12 @@ summary:hover {
   margin-bottom: 1em;
 }
 
-.allure-test-report-checkbox {
+.export-extra-checkbox-group {
   margin-top: -8px;
   margin-bottom: 8px;
+}
+.export-extra-checkbox-group > * {
+  margin-right: 16px;
 }
 
 .indent-left {

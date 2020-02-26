@@ -191,7 +191,9 @@ export async function exportProject({
         JEST_PKG = getJestPkgDirectory();
 
   try {
-    removeExport( outputDirectory );
+    if ( exportOptions.cleanup ) {
+      removeExport( outputDirectory );
+    }
 
     shell.mkdir( "-p" , testDir );
     shell.rm( "-rf" , join( projectDirectory, DIR_SCREENSHOTS ) );
