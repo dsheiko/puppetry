@@ -11,6 +11,7 @@
 [<img src="https://img.shields.io/badge/slack-puppetry.app-yellow.svg?logo=slack">](https://puppetry-app.slack.com)
 [![Total downloads](https://img.shields.io/github/downloads/dsheiko/puppetry/total.svg)](https://github.com/dsheiko/puppetry/releases)
 [![Latest download](https://img.shields.io/github/downloads/dsheiko/puppetry/v3.1.1/total.svg)](https://github.com/dsheiko/puppetry/releases/latest)
+[![RC download](https://img.shields.io/github/downloads/dsheiko/puppetry/v3.2.0-RC.1/total.svg)](https://github.com/dsheiko/puppetry/releases/tag/v3.2.0-RC.1)
 
 <h3 align="center">CODELESS END-TO-END AUTOMATED TESTING</h3>
 
@@ -78,6 +79,9 @@ On Mac can be installed with [Homebrew](https://brew.sh/):
 ```
 brew cask install puppetry
 ```
+## FAQ
+
+- [Stackoverflow](https://stackoverflow.com/questions/tagged/puppetry)
 
 ## Feedback
 
