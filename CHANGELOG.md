@@ -13,6 +13,11 @@
 - fix: issues #52
 - fix: page.setCookie
 
+
+### Updates
+
+- improvement: update to Puppeteer 2.1.1
+
 # Puppetry 3.1.1
 
 ### Features
