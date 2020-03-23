@@ -1,16 +1,25 @@
 import { FILE, INPUT, INPUT_NUMBER } from "../../constants";
 import { renderTarget, result } from "service/utils";
+import fs from "fs";
+import { join } from "path";
 
 export const upload = {
-  template: ({ target, params }) => {
-    const { path, name, size } = params;
+  template: ({ target, params, targetObj, projectDirectory }) => {
+    const { path, name, size } = params,
+          resolvedPath = path ? ( fs.existsSync( path ) ? path : join( projectDirectory, path ) ) : null;
 
     return `
       // Upload input[type=file]
       ${ ( name && size )
     ? `result = util.generateTmpUploadFile( "${ name }", ${ size } );`
-    : `result = "${ path }";` }
-      await ( ${ renderTarget( target ) } ).uploadFile( result );`;
+    : `result = "${ resolvedPath }";` }
+      await ( ${ renderTarget( target ) } ).uploadFile( result );
+      // workaround https://github.com/puppeteer/puppeteer/issues/5420
+      if ( ${ JSON.stringify( targetObj.css ) } ) {
+        await bs.page.evaluate(( inputSelector ) => {
+          document.querySelector( inputSelector ).dispatchEvent(new Event('change', { bubbles: true }));
+        }, ${ JSON.stringify( targetObj.selector ) } );
+      }`;
   },
 
   toLabel: ({ params }) => ( params.name && params.size )

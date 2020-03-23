@@ -1,3 +1,9 @@
+# Puppetry 3.2.1
+
+### Bug fixes
+- fix: accept relative path for target.upload
+- fix: workaround for https://github.com/puppeteer/puppeteer/issues/5420
+
 # Puppetry 3.2.0
 
 ### Features

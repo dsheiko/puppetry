@@ -67,6 +67,9 @@ export class ParamsFormBuilder extends React.Component {
 
   onClickSelectFile = ( e, item ) => {
     e.preventDefault();
+    if ( typeof item === "undefined" ) {
+      return;
+    }
     this.filepathName = item.name;
     ipcRenderer.send( E_BROWSE_FILE, "" );
   }
@@ -130,7 +133,7 @@ export class ParamsFormBuilder extends React.Component {
         placeholder={ field.placeholder }
         rows={ 4 } /> );
     case FILE:
-      return ( <Input style={ inputStyle } onClick={ this.onClickSelectFile } disabled  /> );
+      return ( <Input style={ inputStyle } onClick={ this.onClickSelectFile }  /> );
     case TARGET_SELECT:
       return ( <Select
         { ...SELECT_SEARCH_PROPS }
