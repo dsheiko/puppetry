@@ -1,3 +1,8 @@
+# Puppetry 3.2.2
+
+### Features
+- improvement: added "replace existing value" to target.type
+
 # Puppetry 3.2.1
 
 ### Bug fixes
