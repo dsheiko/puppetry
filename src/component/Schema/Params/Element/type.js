@@ -38,7 +38,7 @@ export const type = {
         },
         {
           name: "params.reset",
-          label: "replacwe the value",
+          label: "replace the value",
           control: CHECKBOX,
           tooltip: `Normally the provided text gets added to the existing one. This option allows to replace it.`,
           initialValue: false,
