@@ -6,12 +6,13 @@ import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
 import { DIR_SCREENSHOTS, DIR_SNAPSHOTS, DIR_REPORTS } from "constant";
 import { millisecondsToStr, result } from "service/utils";
-import { Icon, Button } from "antd";
+import { Button } from "antd";
 import { readdir } from "service/io";
 import { join, basename } from "path";
 import fs from "fs";
 import recursive from "recursive-readdir";
 import { Thumbnail } from "./Thumbnail";
+import { CloseOutlined, CheckOutlined } from "@ant-design/icons";
 
 let counter = 0;
 
@@ -288,14 +289,14 @@ export class ReportBody extends AbstractComponent {
       key={ `k${ counter++ }` }
       className="test-report__it">
       <If exp={ spec.status === "passed" }>
-        <Icon
+        <CheckOutlined
           className="test-report__ok"
-          type="check" theme="outlined" fill="#52c41a" width="16" height="16" />
+          fill="#52c41a" width="16" height="16" />
       </If>
       <If exp={ spec.status !== "passed" }>
-        <Icon
+        <CloseOutlined
           className="test-report__fail"
-          type="close" theme="outlined" fill="#eb2f96" width="16" height="16" />
+          fill="#eb2f96" width="16" height="16" />
       </If>
       { " " }<span className="test-report__it__title">{ spec.title }
         { " " }({ millisecondsToStr( spec.duration ) })

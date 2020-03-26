@@ -1,11 +1,12 @@
 import React from "react";
-import { Table, Icon, Button } from "antd";
+import { Table, Button } from "antd";
 import AbstractEditableTable from "./AbstractEditableTable";
 import { TargetSelectorCell } from "./EditableCell/TargetSelectorCell";
 import { TargetVariableCell } from "./EditableCell/TargetVariableCell";
 import { connectDnD } from "./DragableRow";
 import { validateSelector } from "service/selector";
 import ErrorBoundary from "component/ErrorBoundary";
+import { ArrowDownOutlined, EditOutlined } from "@ant-design/icons";
 
 @connectDnD
 export class TargetTable extends AbstractEditableTable {
@@ -126,7 +127,7 @@ export class TargetTable extends AbstractEditableTable {
     return (
       <div className="box-margin-vertical is-relative">
         <a className="btn-to-bottom" href="#cTargetTableEditCsvBtn">
-          <Icon type="arrow-down" /></a>
+          <ArrowDownOutlined /></a>
         <ErrorBoundary>
           <Table
             id="cTargetTable"
@@ -141,7 +142,7 @@ export class TargetTable extends AbstractEditableTable {
 
             footer={() => ( <div className="ant-table-footer__toolbar">
               <Button type="dashed" id="cTargetTableEditCsvBtn"
-                onClick={ this.onShowEditTargetsAsCsv }><Icon type="edit" />Edit as CSV</Button>
+                onClick={ this.onShowEditTargetsAsCsv }><EditOutlined />Edit as CSV</Button>
             </div> )}
           />
         </ErrorBoundary>

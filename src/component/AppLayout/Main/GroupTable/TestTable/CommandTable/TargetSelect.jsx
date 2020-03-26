@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Icon, Select } from "antd";
+import { Select } from "antd";
 import { connect } from "react-redux";
+import { FileOutlined, ScanOutlined } from "@ant-design/icons";
 
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
@@ -48,11 +49,11 @@ export class TargetSelect extends React.Component {
             .toLowerCase()
             .indexOf( input.toLowerCase() ) >= 0;
         }}>
-        <Option value="page"><span data-keyword="page"><Icon type="file" /> page</span></Option>
+        <Option value="page"><span data-keyword="page"><FileOutlined /> page</span></Option>
         { targets
           .filter( item => item.target )
           .map( ( item, inx ) => ( <Option key={inx} value={ item.target }>
-            <span data-keyword={ item.target }><Icon type="scan" /> { item.target }</span>
+            <span data-keyword={ item.target }><ScanOutlined /> { item.target }</span>
           </Option> ) ) }
       </Select>
     );

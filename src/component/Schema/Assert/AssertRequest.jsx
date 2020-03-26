@@ -1,11 +1,12 @@
 /*eslint react/no-unescaped-entities: 0*/
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Input, Select, Row, Col, Icon } from "antd";
+import { Form, Input, Select, Row, Col } from "antd";
 import { getAssertion } from "./helpers";
 import { result, SELECT_SEARCH_PROPS } from "service/utils";
 import AbstractComponent from "component/AbstractComponent";
 import statusCodes from "service/statusCodes";
+import { InfoCircleOutlined } from "@ant-design/icons";
 
 const FormItem = Form.Item,
       { Option } = Select;
@@ -87,7 +88,7 @@ export class AssertRequest extends AbstractComponent {
               Status code
               { " " } <a
                 href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status"
-                onClick={ this.onExtClick }><Icon type="info-circle" /></a>
+                onClick={ this.onExtClick }><InfoCircleOutlined /></a>
             </div>
           </Col>
 
@@ -134,7 +135,7 @@ export class AssertRequest extends AbstractComponent {
               Data (text)
               { " " } <a
                 href="https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseText"
-                onClick={ this.onExtClick }><Icon type="info-circle" /></a>
+                onClick={ this.onExtClick }><InfoCircleOutlined /></a>
             </div>
           </Col>
 
@@ -162,7 +163,7 @@ export class AssertRequest extends AbstractComponent {
               has header
               { " " } <a
                 href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers"
-                onClick={ this.onExtClick }><Icon type="info-circle" /></a>
+                onClick={ this.onExtClick }><InfoCircleOutlined /></a>
             </div>
           </Col>
 

@@ -1,7 +1,7 @@
 /*eslint jsx-a11y/no-static-element-interactions: 0*/
 import React from "react";
 import PropTypes from "prop-types";
-import { Tabs, Icon } from "antd";
+import { Tabs } from "antd";
 import { GroupTable  } from "./Main/GroupTable";
 import { SuiteForm  } from "./Main/SuiteForm";
 import { TargetTable  } from "./Main/TargetTable";
@@ -10,6 +10,7 @@ import AbstractComponent from "component/AbstractComponent";
 import LearnMore from "component/Global/LearnMore";
 import { connect } from "react-redux";
 import * as selectors from "selector/selectors";
+import { SelectOutlined, AuditOutlined } from "@ant-design/icons";
 
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
@@ -112,8 +113,8 @@ export class Main extends AbstractComponent {
             targetDataTable,
             groupDataTable
           } = this.props,
-          targetsLabel = ( <span><Icon type="select" />Targets</span> ),
-          groupsLabel = ( <span><Icon type="audit" />Test Cases</span> ),
+          targetsLabel = ( <span><SelectOutlined />Targets</span> ),
+          groupsLabel = ( <span><AuditOutlined />Test Cases</span> ),
           activeKey = this.getActivePane();
 
     return (

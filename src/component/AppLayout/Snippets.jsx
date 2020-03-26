@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Tabs, Icon } from "antd";
+import { Tabs } from "antd";
 import { SnippetTable } from "./Main/GroupTable/SnippetTable";
 import { TargetTable  } from "./Main/TargetTable";
 import ErrorBoundary from "component/ErrorBoundary";
@@ -9,6 +9,7 @@ import AbstractForm from "component/AbstractForm";
 import LearnMore from "component/Global/LearnMore";
 import { connect } from "react-redux";
 import * as selectors from "selector/selectors";
+import { SelectOutlined, AuditOutlined } from "@ant-design/icons";
 
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
@@ -70,8 +71,8 @@ export class Snippets extends AbstractForm {
             targetDataTable
           } = this.props,
 
-          targetsLabel = ( <span><Icon type="select" />Targets</span> ),
-          snippetsLabel = ( <span><Icon type="audit" />Snippets</span> ),
+          targetsLabel = ( <span><SelectOutlined />Targets</span> ),
+          snippetsLabel = ( <span><AuditOutlined />Snippets</span> ),
           group = groups.hasOwnProperty( SNIPPETS_GROUP_ID )? groups[ SNIPPETS_GROUP_ID ] : null,
           tests = group ? selector.getTestDataTable( group ) : [],
           targetValues = Object.values( targets );

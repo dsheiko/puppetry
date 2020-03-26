@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Menu, Icon, message } from "antd";
+import { Menu, message } from "antd";
 import { ipcRenderer } from "electron";
 import Hotkeys from "react-hot-keys";
 import ErrorBoundary from "component/ErrorBoundary";
@@ -12,6 +12,8 @@ import { E_MENU_NEW_PROJECT, E_MENU_NEW_SUITE, SNIPPETS_FILENAME,
   E_MENU_RUN, E_RENDERER_ERROR, E_RENDERER_INFO } from "constant";
 import { ostr } from "./MainMenu/helpers";
 import { GitEnhancedMenu } from "./MainMenu/GitEnhancedMenu";
+import { FileOutlined, BranchesOutlined, ProjectOutlined, SettingOutlined,
+  RightSquareOutlined } from "@ant-design/icons";
 
 const SubMenu = Menu.SubMenu;
 
@@ -265,7 +267,7 @@ export class MainMenu extends GitEnhancedMenu {
             <SubMenu
               key="file"
               id="cMainMenuFile"
-              title={<span><Icon type="file" /><span>File</span></span>}
+              title={<span><FileOutlined /><span>File</span></span>}
             >
               <Menu.Item key="file1" onClick={ this.onNewProject } id="cMainMenuNewProject">
                 New Project... { " " }<kbd>{ ostr( "Ctrl-Shift-N" ) }</kbd></Menu.Item>
@@ -287,7 +289,7 @@ export class MainMenu extends GitEnhancedMenu {
               <SubMenu
                 key="git"
                 id="cMainMenuFileGit"
-                title={<span><Icon type="branches" /><span>Git</span></span>}
+                title={<span><BranchesOutlined /><span>Git</span></span>}
               >
                 <Menu.Item key="git1" disabled={ !isSuiteOpen || isGitInitialized }
                   onClick={ this.onFileGitInitialize } id="cMainMenuFileGitInit">
@@ -322,7 +324,7 @@ export class MainMenu extends GitEnhancedMenu {
               key="project"
               id="cMainMenuFile"
               disabled={ !isProjectOpen }
-              title={<span><Icon type="project" /><span>Project</span></span>}
+              title={<span><ProjectOutlined /><span>Project</span></span>}
             >
 
               <Menu.Item key="101" onClick={ this.onSnippets } id="cMainMenuProjectSnippets">
@@ -348,14 +350,14 @@ export class MainMenu extends GitEnhancedMenu {
 
 
             <Menu.Item key="11" onClick={ () => this.openTab( "settings" ) } id="cMainMenuSettings">
-              <span><Icon type="setting" /><span>Settings</span></span></Menu.Item>
+              <span><SettingOutlined /><span>Settings</span></span></Menu.Item>
 
             <Menu.Item key="10"
               id="cMainMenuRun"
               className={ readyToRunTests ? "" : "is-not-ready" }
               disabled={ !isProjectOpen } onClick={ readyToRunTests
                 ? this.onTestReport : this.onRuntimeTestInstall }>
-              <span><Icon type="right-square-o" /><span>Run... <kbd>F6</kbd></span></span>
+              <span><RightSquareOutlined /><span>Run... <kbd>F6</kbd></span></span>
             </Menu.Item>
 
           </Menu>

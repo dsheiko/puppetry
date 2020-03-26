@@ -1,12 +1,13 @@
 import React from "react";
-import { Table, Icon } from "antd";
+import { Table } from "antd";
 import AbstractEditableTable from "../AbstractEditableTable";
 import { CommandTable } from "./TestTable/CommandTable";
 import { EditableCell } from "../EditableCell";
 import ErrorBoundary from "component/ErrorBoundary";
 import { connectDnD } from "../DragableRow";
+import { BarsOutlined } from "@ant-design/icons";
 
-const recordPrefIcon = <Icon type="bars" title="Test case, specification of commands and assertions" />;
+const recordPrefIcon = <BarsOutlined title="Test case, specification of commands and assertions" />;
 
 @connectDnD
 export class TestTable extends AbstractEditableTable {

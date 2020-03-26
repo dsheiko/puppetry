@@ -1,10 +1,11 @@
 import React from "react";
-import { Form, Input, Select, Icon } from "antd";
+import { Form, Input, Select } from "antd";
 import { AbstractEditableCell } from "./AbstractEditableCell";
 import Tooltip from "component/Global/Tooltip";
 import { ruleValidateNotEmptyString } from "service/utils";
 import { getActiveTargets } from "selector/selectors";
 import { SELECT_SEARCH_PROPS } from "service/utils";
+import { ApartmentOutlined } from "@ant-design/icons";
 
 const FormItem = Form.Item,
       { Option } = Select,
@@ -107,7 +108,7 @@ export class TargetSelectorCell extends AbstractEditableCell {
           ) : (
             <div className="container--editable-cell">
               { prefixIcon || null }
-              { record.ref ? <span className="target-ref"><Icon type="apartment" />{ record.ref } </span> : null }
+              { record.ref ? <span className="target-ref"><ApartmentOutlined />{ record.ref } </span> : null }
               { this.normalizeValue( value, type ) }
             </div>
           )

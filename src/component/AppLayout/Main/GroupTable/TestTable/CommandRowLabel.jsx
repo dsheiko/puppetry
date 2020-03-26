@@ -1,11 +1,11 @@
 import log from "electron-log";
 import React from "react";
 import PropTypes from "prop-types";
-import { Icon } from "antd";
 import Tooltip from "component/Global/Tooltip";
 import { getSchema } from "component/Schema/schema";
 import { truncate, extendToGherkin } from "service/utils";
 import { connect } from "react-redux";
+import { LinkOutlined, MessageOutlined, FileOutlined, ScanOutlined } from "@ant-design/icons";
 
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
@@ -57,13 +57,12 @@ export class CommandRowLabel extends React.Component {
 
      return ( <div className="container--editable-cell">
        <span className="command--ref">
-         <Icon
-           type="link"
+         <LinkOutlined
            title="Reference to a snippet" />
          { title }
        </span>
        { record.comment && <i className="is-optional comment-label">
-         <Icon type="message" title="Comment" /><span>{ record.comment }</span></i> }
+         <MessageOutlined title="Comment" /><span>{ record.comment }</span></i> }
      </div> );
    }
 
@@ -106,20 +105,24 @@ export class CommandRowLabel extends React.Component {
        </div> }
        { testStyle !== "gherkin" && <React.Fragment>
          { record.waitForTarget && <React.Fragment>
-           <Icon
-             type={ record.target === "page" ? "file" : "scan" }
-             title={ record.target === "page" ? "Page method" : `${ record.target } target method` } />
+
+           { record.target === "page" ? <FileOutlined
+             title="Page method" /> : <ScanOutlined
+             title={ `${ record.target } target method` } /> }
+
            <span className="token--target">{ record.target }</span>.waitForTarget
            <span className="token--param">()</span><br />
          </React.Fragment> }
-         <Icon
-           type={ record.target === "page" ? "file" : "scan" }
-           title={ record.target === "page" ? "Page method" : `${ record.target } target method` } />
+
+         { record.target === "page" ? <FileOutlined
+           title="Page method" /> : <ScanOutlined
+           title={ `${ record.target } target method` } /> }
+
          <span className="token--target">{ record.target }</span>.{ record.method }
          <span className="token--param">{ CommandRowLabel.buildAddon( record ) }</span>
        </React.Fragment> }
        { record.comment && <i className="is-optional comment-label">
-         <Icon type="message" title="Comment" /><span>{ record.comment }</span></i> }
+         <MessageOutlined title="Comment" /><span>{ record.comment }</span></i> }
      </div> );
    }
 

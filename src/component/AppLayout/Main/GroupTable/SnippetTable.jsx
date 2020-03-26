@@ -1,12 +1,13 @@
 import React from "react";
-import { Table, Icon } from "antd";
+import { Table } from "antd";
 import AbstractEditableTable from "../AbstractEditableTable";
 import { CommandTable } from "./TestTable/CommandTable";
 import { EditableCell } from "../EditableCell";
 import ErrorBoundary from "component/ErrorBoundary";
 import { connectDnD } from "../DragableRow";
+import { SnippetsOutlined } from "@ant-design/icons";
 
-const recordPrefIcon = <Icon type="snippets" title="Snippet" />;
+const recordPrefIcon = <SnippetsOutlined title="Snippet" />;
 
 @connectDnD
 export class SnippetTable extends AbstractEditableTable {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Icon, Button, Divider, Popconfirm } from "antd";
+import { Table, Button, Divider, Popconfirm } from "antd";
 import AbstractDnDTable from "../../AbstractDnDTable";
 import { connectDnD } from "../../DragableRow";
 import { CommandRowLabel } from "./CommandRowLabel";
@@ -10,6 +10,7 @@ import classNames from "classnames";
 import { SNIPPETS_GROUP_ID } from "constant";
 import { connect } from "react-redux";
 import * as selectors from "selector/selectors";
+import { PlusOutlined } from "@ant-design/icons";
 
 const { Menu, MenuItem } = remote,
       // Mapping state to the props
@@ -277,12 +278,12 @@ export class CommandTable extends AbstractDnDTable {
         footer={() => ( <div className="ant-table-footer__toolbar">
           <Button
             id="cCommandTableAddBtn"
-            onClick={ this.addRecord }><Icon type="plus" />Add a command/assertion</Button>
+            onClick={ this.addRecord }><PlusOutlined />Add a command/assertion</Button>
 
           { ( this.props.groupId !== SNIPPETS_GROUP_ID && Object.keys( cleanSnippets ).length ) ? <Button
             id="cCommandTableAddSnippetBtn"
             type="dashed"
-            onClick={ this.addSnippet }><Icon type="plus" />Add a reference</Button> :  null }
+            onClick={ this.addSnippet }><PlusOutlined />Add a reference</Button> :  null }
 
         </div> )}
       />

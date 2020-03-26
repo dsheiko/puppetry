@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Alert, Checkbox, Modal, Button, Select, Icon, message, notification, Spin, Tabs } from "antd";
+import { Alert, Checkbox, Modal, Button, Select,  message, notification, Spin, Tabs } from "antd";
 import AbstractTestRunnerModal from "./AbstractTestRunnerModal";
 import ErrorBoundary from "component/ErrorBoundary";
 import { exportProject, isDirEmpty  } from "service/io";
@@ -18,6 +18,8 @@ import { TestSpecificationPane } from "./ExportProjectModal/TestSpecificationPan
 import { JestPane } from "./ExportProjectModal/JestPane";
 import { BrowserOptions } from "./TestReportModal/BrowserOptions";
 import { SELECT_SEARCH_PROPS } from "service/utils";
+import { FileUnknownOutlined } from "@ant-design/icons";
+
 
 const CheckboxGroup = Checkbox.Group,
       { TabPane } = Tabs,
@@ -297,7 +299,7 @@ export class ExportProjectModal extends AbstractTestRunnerModal {
 
                 <div className="select-group-inline">
                   <span className="select-group-inline__label">
-                    <Icon type="file-unknown" title="Select an output format" />
+                    <FileUnknownOutlined title="Select an output format" />
                   </span>
                   <Select
                     { ...SELECT_SEARCH_PROPS }

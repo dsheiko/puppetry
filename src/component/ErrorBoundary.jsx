@@ -2,7 +2,7 @@ import log from "electron-log";
 import React from "react";
 import PropTypes from "prop-types";
 import { shell, remote } from "electron";
-import { Icon } from "antd";
+import { FrownOutlined } from "@ant-design/icons";
 import { getLogPath } from "service/io";
 
 export default class ErrorBoundary extends React.Component {
@@ -50,7 +50,7 @@ export default class ErrorBoundary extends React.Component {
     if ( this.state.hasError ) {
       // You can render any custom fallback UI
       return ( <div className={ "critical-error " + ( this.props.className || "" ) }>
-        <h2><Icon type="frown-o" /></h2>
+        <h2><FrownOutlined /></h2>
         <h1>Opps! Something went wrong.</h1>
         <p>Please report the issue on { " " }
           <a onClick={ this.onExtClick } href="https://github.com/dsheiko/puppetry/issues">GitHub</a>.

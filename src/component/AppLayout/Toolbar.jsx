@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { remote } from "electron";
-import { Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractPureComponent from "component/AbstractPureComponent";
 import { confirmUnsavedChanges } from "service/smalltalk";
 import If from "component/Global/If";
 import { truncate } from "service/utils";
+import { ProjectOutlined, ToolOutlined, ShrinkOutlined,
+  ArrowsAltOutlined, QuestionCircleOutlined, PoweroffOutlined } from "@ant-design/icons";
 
 const win = remote.getCurrentWindow();
 
@@ -72,29 +73,29 @@ export class Toolbar extends AbstractPureComponent {
         <div id="cToolbar" className="toolbar">
           <div>
             <If exp={ projectName }>
-              <Icon type="project" />{ " " }
+              <ProjectOutlined />{ " " }
               Project: { " " }<span id="cToolbarProjectName">{ truncate( projectName, 80 ) }</span>
               { " " }<a tabIndex={-3} role="button"
                 title="Edit project name"
-                onClick={ this.onEditProject }><Icon type="tool" /></a>
+                onClick={ this.onEditProject }><ToolOutlined /></a>
             </If>
           </div>
           <div>
 
             { isMaximized
               ? ( <a tabIndex={-2} role="button" className="layout-icon" onClick={this.onRestore}>
-                <Icon type="shrink" />
+                <ShrinkOutlined />
               </a> )
               : ( <a tabIndex={-2} role="button" className="layout-icon" onClick={this.onMaximize}>
-                <Icon type="arrows-alt" />
+                <ArrowsAltOutlined />
               </a> )
             }
             <a tabIndex={-1} role="button" className="layout-icon" href="https://docs.puppetry.app"
               onClick={ this.onExtClick }>
-              <Icon type="question-circle" />
+              <QuestionCircleOutlined />
             </a>
             <a tabIndex={-3} role="button" className="layout-icon" onClick={this.onClose}>
-              <Icon type="poweroff" />
+              <PoweroffOutlined />
             </a>
           </div>
         </div>

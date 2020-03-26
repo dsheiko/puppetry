@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Icon } from "antd";
 import classNames from "classnames";
+import { CloseOutlined } from "@ant-design/icons";
 
 export class InstantModal extends React.Component {
 
@@ -47,7 +47,7 @@ export class InstantModal extends React.Component {
           <div className="ant-modal-content">
             <button aria-label="Close" className="ant-modal-close" onClick={ onCancel }>
               <span className="ant-modal-close-x">
-                <Icon type="close" />
+                <CloseOutlined />
               </span>
             </button>
             <div className="ant-modal-header">

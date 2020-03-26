@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
-import { Form, Modal, Button, Input, Table, Icon, Popconfirm } from "antd";
+import { Form, Modal, Button, Input, Table, Popconfirm } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import * as classes from "./classes";
 import { MODAL_DEFAULT_PROPS } from "constant";
+import { PlusOutlined } from "@ant-design/icons";
 
 const FormItem = Form.Item,
       connectForm = Form.create();
@@ -151,7 +152,7 @@ export class EditEnvironmentsModal extends AbstractForm {
             <Form.Item>
               <Button
                 id="cEditEnvModalAdd"
-                onClick={ this.onClickOk }><Icon type="plus" />Add environment
+                onClick={ this.onClickOk }><PlusOutlined />Add environment
               </Button>
             </Form.Item>
           </Form>

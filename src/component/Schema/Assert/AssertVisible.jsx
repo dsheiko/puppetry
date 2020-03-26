@@ -1,11 +1,12 @@
 /*eslint react/no-unescaped-entities: 0*/
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Input, Select, Row, Col, Icon } from "antd";
+import { Form, Input, Select, Row, Col } from "antd";
 import { getAssertion } from "./helpers";
 import { result } from "service/utils";
 import { migrateAssertVisible } from "service/suite";
 import AbstractComponent from "component/AbstractComponent";
+import { InfoCircleOutlined } from "@ant-design/icons";
 
 const FormItem = Form.Item,
       { Option } = Select;
@@ -95,7 +96,7 @@ export class AssertVisible extends AbstractComponent {
             CSS display
               { " " } <a
                 href="https://developer.mozilla.org/en-US/docs/Web/CSS/display"
-                onClick={ this.onExtClick }><Icon type="info-circle" /></a>
+                onClick={ this.onExtClick }><InfoCircleOutlined /></a>
             </div>
           </Col>
 
@@ -121,7 +122,7 @@ export class AssertVisible extends AbstractComponent {
             CSS visibility
               { " " } <a
                 href="https://developer.mozilla.org/en-US/docs/Web/CSS/visibility"
-                onClick={ this.onExtClick }><Icon type="info-circle" /></a>
+                onClick={ this.onExtClick }><InfoCircleOutlined /></a>
             </div>
           </Col>
           <Col span={4} >
@@ -146,7 +147,7 @@ export class AssertVisible extends AbstractComponent {
             CSS opacity
               { " " } <a
                 href="https://developer.mozilla.org/en-US/docs/Web/CSS/opacity"
-                onClick={ this.onExtClick }><Icon type="info-circle" /></a>
+                onClick={ this.onExtClick }><InfoCircleOutlined /></a>
             </div>
           </Col>
           <Col span={4} >
@@ -172,7 +173,7 @@ export class AssertVisible extends AbstractComponent {
             offset
               { " " } <a
                 href="https://pptr.dev/#?product=Puppeteer&version=v2.0.0&show=api-elementhandleisintersectingviewport"
-                onClick={ this.onExtClick }><Icon type="info-circle" /></a>
+                onClick={ this.onExtClick }><InfoCircleOutlined /></a>
             </div>
           </Col>
           <Col span={4} >

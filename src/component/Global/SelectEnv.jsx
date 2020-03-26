@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AbstractComponent from "component/AbstractComponent";
-import { Icon, Select  } from "antd";
+import { Select  } from "antd";
 import { getActiveEnvironment } from "selector/selectors";
 import { SELECT_SEARCH_PROPS } from "service/utils";
+import { EnvironmentOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
@@ -26,7 +27,7 @@ export class SelectEnv extends AbstractComponent {
 
       return ( <div className="select-group-inline">
         { theme !== "test-reports" && ( <span className="select-group-inline__label">
-          <Icon type="environment" title="Select a target environment" />
+          <EnvironmentOutlined title="Select a target environment" />
         </span> ) }
         { theme === "test-reports" && ( <span className="select-group-inline__label">
           Environment:

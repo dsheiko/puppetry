@@ -1,5 +1,5 @@
 import React from "react";
-import { Checkbox, Select, Icon } from "antd";
+import { Checkbox, Select } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractPersistentState from "component/AbstractPersistentState";
 import BrowseDirectory from "component/Global/BrowseDirectory";
@@ -12,6 +12,7 @@ import { FirefoxArguments } from "./FirefoxArguments";
 import { ConnectOptions } from "./ConnectOptions";
 import { BrowserIntro } from "./BrowserIntro";
 import { updateLauncherArgs } from "./utils";
+import { ExperimentOutlined } from "@ant-design/icons";
 
 
 /*eslint no-empty: 0*/
@@ -165,7 +166,7 @@ export class BrowserOptions extends AbstractPersistentState {
               <Option value="headless" key="headless">Headless Chromium</Option>
               <Option value="chromium" key="chromium">Chromium</Option>
               <Option value="chrome" key="chrome">Chrome</Option>
-              <Option value="firefox" key="firefox">Firefox 74+ <Icon type="experiment" /></Option>
+              <Option value="firefox" key="firefox">Firefox 74+ <ExperimentOutlined /></Option>
               <Option value="connect" key="connect">Connect to Chrome</Option>
             </Select>
           </div>

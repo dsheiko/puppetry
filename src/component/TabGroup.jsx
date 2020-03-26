@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Tabs, Icon, Tooltip } from "antd";
+import { Tabs, Tooltip } from "antd";
 import { Main } from "./AppLayout/Main";
 import { Snippets } from "./AppLayout/Snippets";
 import { SettingsPanel } from "./AppLayout/Settings/SettingsPanel";
@@ -10,6 +10,7 @@ import { TargetsPane } from "./AppLayout/Project/Targets/TargetsPane";
 import { TestReport } from "./AppLayout/TestReport";
 import ErrorBoundary from "component/ErrorBoundary";
 import { confirmUnsavedChanges } from "service/smalltalk";
+import { ContainerOutlined } from "@ant-design/icons";
 
 const TabPane = Tabs.TabPane;
 
@@ -65,7 +66,7 @@ export class TabGroup extends React.Component {
             ? ( suiteSnippets
               ? "Snippets"
               :  <Tooltip placement="bottomRight" title={ suiteTitle }>
-                <Icon type="container" />{ suiteFilename }
+                <ContainerOutlined />{ suiteFilename }
               </Tooltip> )
             : "Loading..." ,
 

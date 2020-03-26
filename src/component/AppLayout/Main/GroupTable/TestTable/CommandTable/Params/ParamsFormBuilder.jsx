@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ErrorBoundary from "component/ErrorBoundary";
-import { Collapse, Button, Form, Input, InputNumber, Checkbox, Select, Radio, Icon  } from "antd";
+import { Collapse, Button, Form, Input, InputNumber, Checkbox, Select, Radio  } from "antd";
 import { validate } from "bycontract";
 import Tooltip from "component/Global/Tooltip";
 import { FILE, TEXTAREA, RADIO_GROUP, INPUT, INPUT_NUMBER, CHECKBOX, SELECT,
@@ -12,6 +12,7 @@ import Markdown from "component/Global/Markdown";
 import { TemplateHelper } from "./TemplateHelper";
 import { connect } from "react-redux";
 import { SELECT_SEARCH_PROPS } from "service/utils";
+import { RightOutlined } from "@ant-design/icons";
 
 function result( obj, prop, record ) {
   if ( typeof obj[ prop ] === "function" ) {
@@ -327,8 +328,7 @@ export class ParamsFormBuilder extends React.Component {
     const header = ( <span>{ section.legend || "Advanced Options" }</span> );
     return section.collapsed
       ? ( <Collapse key={ `collapse_${ inx }` }
-        expandIcon={({ isActive }) => ( <Icon
-          type="right" rotate={isActive ? 90 : 0} /> )}
+        expandIcon={({ isActive }) => ( <RightOutlined rotate={isActive ? 90 : 0} /> )}
       >
         <Panel key={ `panel_${ inx }` }
 

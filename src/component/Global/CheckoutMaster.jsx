@@ -3,8 +3,9 @@ import AbstractComponent from "component/AbstractComponent";
 import { ipcRenderer } from "electron";
 import { truncate } from "service/utils";
 import mediator from "service/mediator";
-import { message, Button, Icon } from "antd";
+import { message, Button } from "antd";
 import { E_CHECKOUT_MASTER_OPEN, E_CHECKOUT_MASTER_CLOSE, E_GIT_CHECKOUT_M, E_GIT_CHECKOUT_M_RESPONSE } from "constant";
+import { ApiOutlined } from "@ant-design/icons";
 
 export class CheckoutMaster extends AbstractComponent {
 
@@ -44,7 +45,7 @@ export class CheckoutMaster extends AbstractComponent {
 
       </React.Fragment> ),
       duration: 0,
-      icon: ( <Icon type="api" /> )
+      icon: ( <ApiOutlined /> )
     });
   }
 

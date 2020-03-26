@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Icon, Menu, Dropdown } from "antd";
+import { Menu, Dropdown } from "antd";
+import { MoreOutlined } from "@ant-design/icons";
 
 
 class RowDropdownOverlay extends React.Component {
@@ -91,7 +92,7 @@ export class RowDropdown extends React.Component {
       placement="bottomRight"
     >
       <a className="ant-dropdown-link" href="#">
-        <Icon type="more" />
+        <MoreOutlined />
       </a>
     </Dropdown> );
   }

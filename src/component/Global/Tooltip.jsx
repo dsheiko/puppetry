@@ -1,6 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Icon, Tooltip as AntdTooltip  } from "antd";
+import { Tooltip as AntdTooltip  } from "antd";
+import { ExclamationCircleOutlined, QuestionCircleOutlined, InfoCircleOutlined } from "@ant-design/icons";
+
+function renderIcon( icon ) {
+  switch ( icon ) {
+  case "exclamation-circle":
+    return <ExclamationCircleOutlined />;
+  case "question-circle":
+    return <QuestionCircleOutlined />;
+  case "info-circle":
+    return <InfoCircleOutlined />;
+  default:
+    return null;
+  }
+
+}
 
 export default function Tooltip( props ) {
   if ( !props.title ) {
@@ -8,7 +23,7 @@ export default function Tooltip( props ) {
   }
 
   return ( <AntdTooltip className="char-pad--left" title={ props.title }>{
-    props.icon ? ( <Icon type={ props.icon }  /> ) : props.children
+    props.icon ? renderIcon( props.icon ) : props.children
   }</AntdTooltip> );
 }
 

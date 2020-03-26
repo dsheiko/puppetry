@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { remote } from "electron";
 import { confirmUnsavedChanges, confirmDeleteFile } from "service/smalltalk";
 import classNames from "classnames";
+import { FileOutlined } from "@ant-design/icons";
 
 const { Menu, MenuItem } = remote;
 
@@ -132,7 +132,7 @@ export class FileList extends React.Component {
                 "is-active": active === file,
                 "is-clicked": parentCliked ==="" && this.state.clicked ===  file
               }) }>
-              <Icon type="file" /> { file }
+              <FileOutlined /> { file }
             </li>
           ) ) }
         </ul>

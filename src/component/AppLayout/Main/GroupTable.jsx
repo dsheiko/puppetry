@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Icon, Button } from "antd";
+import { Table, Button } from "antd";
 import AbstractEditableTable from "./AbstractEditableTable";
 import { connectDnD } from "./DragableRow";
 import ErrorBoundary from "component/ErrorBoundary";
@@ -8,8 +8,9 @@ import { EditableCell } from "./EditableCell";
 import { ipcRenderer } from "electron";
 import { confirmRecording } from "service/smalltalk";
 import { E_DELEGATE_RECORDER_SESSION, E_OPEN_RECORDER_WINDOW } from "constant";
+import { BorderOuterOutlined, ArrowDownOutlined } from "@ant-design/icons";
 
-const recordPrefIcon = <Icon type="border-outer" title="Scope starting a new browser session" />;
+const recordPrefIcon = <BorderOuterOutlined title="Scope starting a new browser session" />;
 
 @connectDnD
 export class GroupTable extends AbstractEditableTable {
@@ -128,7 +129,7 @@ export class GroupTable extends AbstractEditableTable {
     return (
       <div className="box-margin-vertical group-table is-relative">
         <a className="btn-to-bottom" href="#cGroupTableRecordBtn">
-          <Icon type="arrow-down" /></a>
+          <ArrowDownOutlined /></a>
         <ErrorBoundary>
           <Table
             id="cGroupTable"

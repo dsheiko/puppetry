@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { remote } from "electron";
 import { confirmUnsavedChanges  } from "service/smalltalk";
 import classNames from "classnames";
 import { FileList } from "./ProjectExplorer/FileList";
+import { FolderOutlined, FolderAddOutlined, FolderOpenOutlined } from "@ant-design/icons";
 
 const { Menu, MenuItem } = remote;
 
@@ -209,13 +209,13 @@ export class ProjectExplorer extends React.Component {
               tabIndex={1} role="button"
               title="Create a project"
               className="project-navigator__open" onClick={ this.onNewProject }>
-              <Icon type="folder-add" theme="filled" /></a>
+              <FolderAddOutlined theme="filled" /></a>
 
             <a
               tabIndex={2} role="button"
               title="Add a project into the list"
               className="project-navigator__add" onClick={ this.onOpenProject }>
-              <Icon type="folder-open" theme="filled" /></a>
+              <FolderOpenOutlined theme="filled" /></a>
 
           </h2>
 
@@ -239,8 +239,7 @@ export class ProjectExplorer extends React.Component {
                     "project-navigator__li": true,
                     "is-clicked": this.state.clicked === entity.dir
                   }) }>
-                  <Icon type={ projectDirectory === entity.dir
-                    ? "folder-open" : "folder" } /> { entity.name }
+                  { projectDirectory === entity.dir ? <FolderOpenOutlined /> : <FolderOutlined /> } { entity.name }
                 </div>
                 { projectDirectory === entity.dir && <FileList
                   { ...this.props }

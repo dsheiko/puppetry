@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Icon, Select, Button, Input } from "antd";
+import { Select, Button, Input } from "antd";
 import Link from "component/Global/Link";
+import { ArrowUpOutlined } from "@ant-design/icons";
 
 import { FAKER_METHODS, FAKER_LOCALES } from "./constants";
 import { getSelectedVariables } from "selector/selectors";
@@ -123,7 +124,7 @@ export class TemplateHelper extends React.Component {
           selStyle = { width: 160 };
 
     return ( <div className="template-helper" >
-      <span><Icon type="arrow-up" /> Here you can use{ " " }
+      <span><ArrowUpOutlined /> Here you can use{ " " }
         <Link to="https://docs.puppetry.app/template">template expressions</Link></span>
 
       <Select
