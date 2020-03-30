@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Row, Select, Input, InputNumber } from "antd";
+import { Form } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
+import { Row, Select, Input, InputNumber } from "antd";
 import { getAssertion } from "./helpers";
 
 const Option = Select.Option,

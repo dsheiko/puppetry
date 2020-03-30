@@ -2,7 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
 import { ruleValidateGenericString } from "service/utils";
-import { Form, Radio, Select, Input, Button, message } from "antd";
+import { Form } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
+import { Radio, Select, Input, Button, message } from "antd";
 
 const FormItem = Form.Item,
       RadioGroup = Radio.Group,

@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Input } from "antd";
+import { Form } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
+import { Input } from "antd";
 import { ruleValidateNotEmptyString, ruleValidateVariable } from "service/utils";
 const FormItem = Form.Item;
 

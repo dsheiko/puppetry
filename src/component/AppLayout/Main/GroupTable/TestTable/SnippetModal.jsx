@@ -3,7 +3,9 @@ import { InstantModal } from "component/Global/InstantModal";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractForm from "component/AbstractForm";
 import { SnippetVariables } from "./SnippetVariables";
-import { Form, Button, Select, Input } from "antd";
+import { Form } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
+import { Button, Select, Input } from "antd";
 import { SELECT_SEARCH_PROPS } from "service/utils";
 
 const FormItem = Form.Item,

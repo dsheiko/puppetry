@@ -1,7 +1,9 @@
 /*eslint spellcheck/spell-checker: 0*/
 import React from "react";
 import PropTypes from "prop-types";
-import { Form,  Row, Col, Select, Input, Checkbox } from "antd";
+import { Form } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
+import { Row, Col, Select, Input, Checkbox } from "antd";
 import If from "component/Global/If";
 import { getAssertion } from "./helpers";
 import AbstractComponent from "component/AbstractComponent";

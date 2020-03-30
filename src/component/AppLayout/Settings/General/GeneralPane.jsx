@@ -4,7 +4,9 @@ import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
 import { result } from "service/utils";
 import { FIELDSET_DEFAULT_LAYOUT } from "constant";
-import { Form, Select, Button, Checkbox, message } from "antd";
+import { Form } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
+import { Select, Button, Checkbox, message } from "antd";
 const FormItem = Form.Item,
       { Option } = Select,
       connectForm = Form.create();

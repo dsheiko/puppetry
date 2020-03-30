@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
-import { Form, Modal, Button, Input, Table, Popconfirm } from "antd";
+import { Form } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
+import { Modal, Button, Input, Table, Popconfirm } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import * as classes from "./classes";
 import { MODAL_DEFAULT_PROPS } from "constant";

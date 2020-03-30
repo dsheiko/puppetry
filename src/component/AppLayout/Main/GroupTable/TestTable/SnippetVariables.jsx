@@ -2,7 +2,9 @@ import React from "react";
 
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractForm from "component/AbstractForm";
-import { Row, Col, Collapse, Table, Form, Button, Input } from "antd";
+import { Form } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
+import { Row, Col, Collapse, Table, Button, Input } from "antd";
 
 const connectForm = Form.create(),
       Panel = Collapse.Panel;
@@ -77,67 +79,69 @@ export class SnippetVariables extends AbstractForm {
     const { getFieldDecorator } = this.props.form,
           { variables } = this.state;
 
-    return ( <ErrorBoundary>
+    return (
+      <ErrorBoundary>
 
-      <Collapse>
-        <Panel header="Local Template Variables (optional)" key="1">
-          <p>You can assign variables that will be available as
-            { "" }<a href="https://docs.puppetry.app/template" onClick={ this.onExtClick }>
-              { "" } template expressions</a>{ "" } in the snippet</p>
-          <Form>
-            <Row gutter={4}>
-              <Col span={10}>
-                <Form.Item >
-                  { getFieldDecorator( "name", {
-                    rules: [
-                      {
-                        required: true,
-                        message: `Field is required.`
-                      },
-                      {
-                        validator: ( rule, value, callback ) => {
-                          const reConst = /^[A-Z_\-0-9]+$/g;
-                          if ( !value ) {
-                            callback( `Field is required.` );
-                          }
-                          if ( !value.match( reConst ) ) {
-                            callback( `Shall be in all upper case with underscore separators` );
-                          }
-                          if ( this.state.variables.find( item => item.name === value ) ) {
-                            callback( `Variable already exists` );
-                          }
+        <Collapse>
+          <Panel header="Local Template Variables (optional)" key="1">
+            <p>You can assign variables that will be available as
+              { "" }<a href="https://docs.puppetry.app/template" onClick={ this.onExtClick }>
+                { "" } template expressions</a>{ "" } in the snippet</p>
+            <Form>
+              <Row gutter={4}>
+                <Col span={10}>
+                  <Form.Item >
+                    { getFieldDecorator( "name", {
+                      rules: [
+                        {
+                          required: true,
+                          message: `Field is required.`
+                        },
+                        {
+                          validator: ( rule, value, callback ) => {
+                            const reConst = /^[A-Z_\-0-9]+$/g;
+                            if ( !value ) {
+                              callback( `Field is required.` );
+                            }
+                            if ( !value.match( reConst ) ) {
+                              callback( `Shall be in all upper case with underscore separators` );
+                            }
+                            if ( this.state.variables.find( item => item.name === value ) ) {
+                              callback( `Variable already exists` );
+                            }
 
-                          callback();
+                            callback();
+                          }
                         }
-                      }
-                    ]
-                  })( <Input placeholder="Variable name" onPressEnter={ this.onAddVariable } /> )}
-                </Form.Item>
-              </Col>
-              <Col span={10}>
-                <Form.Item >
-                  { getFieldDecorator( "value", {
-                    rules: [
-                      {
-                        required: true,
-                        message: `Field is required.`
-                      }
-                    ]
-                  })( <Input placeholder="Variable value" onPressEnter={ this.onAddVariable } /> )}
-                </Form.Item>
-              </Col>
-              <Col span={4}>
-                <Form.Item >
-                  <Button onClick={ this.onAddVariable }>Add</Button>
-                </Form.Item>
-              </Col>
-            </Row>
-            <Table columns={ this.columns } dataSource={ variables } pagination={{ pageSize: 3 }} />
-          </Form>
-        </Panel>
-      </Collapse>
+                      ]
+                    })( <Input placeholder="Variable name" onPressEnter={ this.onAddVariable } /> )}
+                  </Form.Item>
+                </Col>
+                <Col span={10}>
+                  <Form.Item >
+                    { getFieldDecorator( "value", {
+                      rules: [
+                        {
+                          required: true,
+                          message: `Field is required.`
+                        }
+                      ]
+                    })( <Input placeholder="Variable value" onPressEnter={ this.onAddVariable } /> )}
+                  </Form.Item>
+                </Col>
+                <Col span={4}>
+                  <Form.Item >
+                    <Button onClick={ this.onAddVariable }>Add</Button>
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Table columns={ this.columns } dataSource={ variables } pagination={{ pageSize: 3 }} />
+            </Form>
+          </Panel>
+        </Collapse>
 
 
-    </ErrorBoundary> );
+      </ErrorBoundary>
+    );
   }
 }

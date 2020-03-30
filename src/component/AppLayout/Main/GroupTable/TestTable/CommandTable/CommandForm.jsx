@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Row, Col, Alert, Input, Checkbox } from "antd";
+import { Form } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
+import { Row, Col, Alert, Input, Checkbox } from "antd";
 import { TargetSelect } from "./TargetSelect";
 import { ElementMethodSelect } from "./ElementMethodSelect";
 import { PageMethodSelect } from "./PageMethodSelect";

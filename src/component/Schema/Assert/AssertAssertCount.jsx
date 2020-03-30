@@ -1,7 +1,9 @@
 /*eslint react/no-unescaped-entities: 0*/
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Row, Switch, Input  } from "antd";
+import { Form } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
+import { Row, Switch, Input } from "antd";
 import { getAssertion } from "./helpers";
 import { result } from "service/utils";
 
@@ -148,7 +150,8 @@ export class AssertAssertCount extends React.Component {
           </table>
         </Row>
 
-      </React.Fragment> );
+      </React.Fragment>
+    );
   }
 
 }

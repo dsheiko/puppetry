@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AbstractComponent from "component/AbstractComponent";
-import { Form, Checkbox } from "antd";
+import { Form } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
+import { Checkbox } from "antd";
 
 const FormItem = Form.Item,
       connectForm = Form.create();

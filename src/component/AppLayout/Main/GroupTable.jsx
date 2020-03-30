@@ -8,7 +8,7 @@ import { EditableCell } from "./EditableCell";
 import { ipcRenderer } from "electron";
 import { confirmRecording } from "service/smalltalk";
 import { E_DELEGATE_RECORDER_SESSION, E_OPEN_RECORDER_WINDOW } from "constant";
-import { BorderOuterOutlined, ArrowDownOutlined } from "@ant-design/icons";
+import { ArrowDownOutlined, BorderOuterOutlined, CameraOutlined } from "@ant-design/icons";
 
 const recordPrefIcon = <BorderOuterOutlined title="Scope starting a new browser session" />;
 
@@ -146,7 +146,7 @@ export class GroupTable extends AbstractEditableTable {
             expandedRowRender={ this.renderExpandedTable }
             footer={() => ( <div className="ant-table-footer__toolbar">
               <Button
-                icon="camera" id="cGroupTableRecordBtn"
+                icon={<CameraOutlined />} id="cGroupTableRecordBtn"
                 onClick={ this.onClickRecord }>Record</Button>
             </div> )}
           />

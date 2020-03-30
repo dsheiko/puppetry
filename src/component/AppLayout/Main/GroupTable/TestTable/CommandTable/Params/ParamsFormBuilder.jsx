@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ErrorBoundary from "component/ErrorBoundary";
-import { Collapse, Button, Form, Input, InputNumber, Checkbox, Select, Radio  } from "antd";
+import { Form } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
+import { Collapse, Button, Input, InputNumber, Checkbox, Select, Radio } from "antd";
 import { validate } from "bycontract";
 import Tooltip from "component/Global/Tooltip";
 import { FILE, TEXTAREA, RADIO_GROUP, INPUT, INPUT_NUMBER, CHECKBOX, SELECT,

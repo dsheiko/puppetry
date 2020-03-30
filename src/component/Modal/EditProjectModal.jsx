@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
-import { Form, Modal, Button, Input } from "antd";
+import { Form } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
+import { Modal, Button, Input } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import * as classes from "./classes";
 import { getAppInstallPath } from "service/io";

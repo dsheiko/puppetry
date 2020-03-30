@@ -2,7 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
 import { ruleValidateGenericString } from "service/utils";
-import { message, Form, Input, InputNumber, Button } from "antd";
+import { Form } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
+import { message, Input, InputNumber, Button } from "antd";
 import { ProfileOutlined } from "@ant-design/icons";
 const FormItem = Form.Item,
       { TextArea } = Input,

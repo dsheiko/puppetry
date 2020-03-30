@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ipcRenderer } from "electron";
-import { Form, Input, Button } from "antd";
+import { Form } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
+import { Input, Button } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { A_FORM_ITEM_ERROR, E_BROWSE_FILE, E_FILE_SELECTED } from "constant";
 

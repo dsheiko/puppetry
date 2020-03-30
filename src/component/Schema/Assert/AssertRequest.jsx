@@ -1,7 +1,9 @@
 /*eslint react/no-unescaped-entities: 0*/
 import React from "react";
 import PropTypes from "prop-types";
-import { Form, Input, Select, Row, Col } from "antd";
+import { Form } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
+import { Input, Select, Row, Col } from "antd";
 import { getAssertion } from "./helpers";
 import { result, SELECT_SEARCH_PROPS } from "service/utils";
 import AbstractComponent from "component/AbstractComponent";

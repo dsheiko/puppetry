@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AbstractForm from "component/AbstractForm";
-import { Form, Modal, Button } from "antd";
+import { Form } from "@ant-design/compatible";
+import "@ant-design/compatible/assets/index.css";
+import { Modal, Button } from "antd";
 import BrowseDirectory from "component/Global/BrowseDirectory";
 import ErrorBoundary from "component/ErrorBoundary";
 import { isProject } from "service/io";

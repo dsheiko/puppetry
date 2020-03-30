@@ -43,6 +43,8 @@
     "readme": "markserv ."
   },
   "dependencies": {
+    "@ant-design/compatible": "^1.0.2",
+    "@ant-design/icons": "^4.0.5",
     "@babel/core": "^7.1.2",
     "@babel/runtime": "^7.1.2",
     "ansi-to-html": "^0.6.10",
