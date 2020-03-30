@@ -3,6 +3,9 @@
 ### Features
 - improvement: added "replace existing value" to target.type
 
+### Bug fixes
+- improve error output in test report
+
 # Puppetry 3.2.1
 
 ### Bug fixes

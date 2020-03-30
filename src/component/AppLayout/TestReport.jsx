@@ -11,7 +11,7 @@ import { millisecondsToStr } from "service/utils";
 import { Spin, Collapse, notification } from "antd";
 import { join } from "path";
 import { TestGeneratorError } from "error";
-import Convert from "ansi-to-html";
+import ansiHTML from "ansi-html";
 import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
 import { ReportBody } from "./TestReport/ReportBody";
 import path from "path";
@@ -19,8 +19,7 @@ import fs from "fs";
 
 /*eslint no-useless-escape: 0*/
 
-const Panel = Collapse.Panel,
-      convert = new Convert();
+const Panel = Collapse.Panel;
 
 
 export class TestReport extends AbstractComponent {
@@ -220,13 +219,14 @@ export class TestReport extends AbstractComponent {
 
   render() {
     const { report, loading, ok, stdErr, details, puppeteerInfo } = this.state,
-          printableStdErr = convert.toHtml( stdErr )
+          printableStdErr = ansiHTML( stdErr )
             .replace( /\n/mg, "" )
+            .replace( /.\[K<br \/>/mg, "" )
+            .replace( /.\[1A<br \/>/mg, "" )
             .replace( /<br\s*\/>+/mg, "\n" )
             .replace( /\s[AD]\s/mg, "" )
             .replace( /\n+/mg, "<br />" )
             .replace( /color\:#FFF/mg, "color:rgba(0,0,0,0.65)" );
-
 
     if ( report !== {} && !report ) {
       this.props.action.setError({
@@ -268,7 +268,7 @@ export class TestReport extends AbstractComponent {
 
             { ( stdErr && !report.success ) && <Collapse>
               <Panel header="Error details" key="1">
-                <p dangerouslySetInnerHTML={{ __html: printableStdErr }}></p>
+                <div dangerouslySetInnerHTML={{ __html: printableStdErr }} />
               </Panel>
             </Collapse> }
 
