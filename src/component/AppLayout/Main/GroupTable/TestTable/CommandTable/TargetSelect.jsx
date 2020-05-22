@@ -21,7 +21,7 @@ export class TargetSelect extends React.Component {
     sharedTargets: PropTypes.object,
     changeTarget: PropTypes.func.isRequired,
     setFieldsValue: PropTypes.func.isRequired,
-    initialValue: PropTypes.string.isRequired
+    initialValue: PropTypes.string
   }
 
   onSelect = ( value ) => {

@@ -5,21 +5,21 @@ import StateStorage from "service/StateStorage";
 export default class AbstractTestRunnerModal extends AbstractComponent {
 
   getBrowserOptions() {
-    const storage = new StateStorage( this.constructor.name );
-
+    const storage = new StateStorage( this.constructor.name, sessionStorage );
     // Browser options tab is not shown
     if ( this.refBrowserOptions.current === null ) {
 
-      return storage.get() || {
+       return storage.get() || {
         incognito: true,
         "puppeteer.connect": {
           ignoreHTTPSErrors: true,
-          slowMo: 30,
           browserWSEndpoint: null
         },
         "puppeteer.launch": {
+          args: [],
           devtools: false,
           headless: true,
+          slowMo: 30,
           ignoreHTTPSErrors: false
         }
       };

@@ -1,7 +1,7 @@
 import devices from "vendor/puppeteer/DeviceDescriptors";
 import { SELECT } from "../../constants";
 
-const options = devices.map( i =>  ({
+const options = Object.values( devices ).map( i =>  ({
   value: i.name,
   description: `${i.name} (${i.viewport.width}x${i.viewport.height}, ${i.viewport.deviceScaleFactor}x)`
 }) );

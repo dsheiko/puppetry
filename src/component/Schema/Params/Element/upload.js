@@ -4,7 +4,7 @@ import fs from "fs";
 import { join } from "path";
 
 export const upload = {
-  template: ({ target, params, targetObj, projectDirectory }) => {
+  template: ({ target, params, projectDirectory }) => {
     const { path, name, size } = params,
           resolvedPath = path ? ( fs.existsSync( path ) ? path : join( projectDirectory, path ) ) : null;
 
@@ -13,13 +13,7 @@ export const upload = {
       ${ ( name && size )
     ? `result = util.generateTmpUploadFile( "${ name }", ${ size } );`
     : `result = "${ resolvedPath }";` }
-      await ( ${ renderTarget( target ) } ).uploadFile( result );
-      // workaround https://github.com/puppeteer/puppeteer/issues/5420
-      if ( ${ JSON.stringify( targetObj.css ) } ) {
-        await bs.page.evaluate(( inputSelector ) => {
-          document.querySelector( inputSelector ).dispatchEvent(new Event('change', { bubbles: true }));
-        }, ${ JSON.stringify( targetObj.selector ) } );
-      }`;
+      await ( ${ renderTarget( target ) } ).uploadFile( result );`;
   },
 
   toLabel: ({ params }) => ( params.name && params.size )

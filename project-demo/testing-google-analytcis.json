@@ -3,10 +3,10 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1574168588,
-  "loadedAt": 1574249943,
+  "savedAt": 1590157086,
+  "loadedAt": 1590157070,
   "modified": false,
-  "filename": "sandbox-ga.json",
+  "filename": "testing-google-analytcis.json",
   "targets": {
     "7ouk2g0j11z": {
       "editing": false,
@@ -585,5 +585,5 @@
       }
     }
   },
-  "puppetry": "3.0.0"
+  "puppetry": "3.2.2"
 }

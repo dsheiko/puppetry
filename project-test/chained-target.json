@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1581000669,
-  "loadedAt": 1581000666,
+  "savedAt": 1590157365,
+  "loadedAt": 1590157358,
   "modified": false,
   "filename": "chained-target.json",
   "targets": {
@@ -513,5 +513,5 @@
       }
     }
   },
-  "puppetry": "3.1.2"
+  "puppetry": "3.2.2"
 }

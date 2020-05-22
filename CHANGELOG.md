@@ -4,6 +4,12 @@
 - improvement: added "replace existing value" to target.type
 
 ### Bug fixes
+- fix: issues #71
+
+### Updates
+- improvement: update to Puppeteer 3.1.0
+
+### Bug fixes
 - improve error output in test report
 
 # Puppetry 3.2.1

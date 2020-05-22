@@ -64,9 +64,9 @@
       }
     }
   },
-  "savedAt": 1582189628,
+  "savedAt": 1590158770,
   "modified": false,
-  "lastOpenSuite": "context.assertScreenshot.json",
+  "lastOpenSuite": "chained-target.json",
   "variables": {},
   "targets": {
     "js4k1ukyk9a": {
@@ -84,5 +84,5 @@
   ],
   "autosave": true,
   "projectDirectory": "/home/sheiko/PUPPETRY/puppetry-test",
-  "puppetry": "3.2.0-RC.1"
+  "puppetry": "3.2.2"
 }
