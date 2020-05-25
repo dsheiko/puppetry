@@ -1,10 +1,10 @@
 {
   "title": "Chained Target",
-  "timeout": 50000,
+  "timeout": 150000,
   "snippets": false,
   "description": "",
-  "savedAt": 1576150036,
-  "loadedAt": 1590160606,
+  "savedAt": 1590424744,
+  "loadedAt": 1590423556,
   "modified": false,
   "filename": "page.assertRest.json",
   "targets": {},
@@ -56,6 +56,101 @@
                 "method": "GET"
               },
               "comment": "@assert [page.assertRest]"
+            }
+          },
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "k2vk2vvd4pi",
+          "entity": "test",
+          "failure": ""
+        },
+        "eivkamptonf": {
+          "editing": false,
+          "id": "eivkamptonf",
+          "key": "eivkamptonf",
+          "title": "Headers",
+          "commands": {
+            "eivkamptoyh": {
+              "editing": false,
+              "id": "eivkamptoyh",
+              "key": "eivkamptoyh",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "any",
+                "textOperator": "any",
+                "headerOperator": "specific",
+                "headerName": "content-type",
+                "headerValue": "application/json"
+              },
+              "params": {
+                "url": "http://127.0.0.1:8080/puppeteer.json",
+                "method": "GET"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "eivkamptonf",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "eivkamptp3b": {
+              "editing": true,
+              "id": "eivkamptp3b",
+              "key": "eivkamptp3b",
+              "target": "page",
+              "method": "waitFor",
+              "params": {
+                "value": 500
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "eivkamptonf",
+              "waitForTarget": false
+            },
+            "eivkamptp81": {
+              "editing": false,
+              "id": "eivkamptp81",
+              "key": "eivkamptp81",
+              "target": "page",
+              "method": "assertRest",
+              "assert": {
+                "assertion": "rest",
+                "statusOperator": "any",
+                "textOperator": "any",
+                "headerOperator": "specific",
+                "headerName": "content-type",
+                "headerValue": "Nope"
+              },
+              "params": {
+                "url": "http://127.0.0.1:8080/puppeteer.json",
+                "method": "GET"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "k2vk2vvd4pi",
+              "testId": "eivkamptonf",
+              "waitForTarget": false,
+              "entity": "command",
+              "comment": "@assert [page.assertRest] expected HTTP/S response matching http://127.0.0.1:8080/puppeteer.json to have header content-type: Nope, but it does not"
             }
           },
           "disabled": false,
@@ -471,81 +566,6 @@
               "groupId": "k2vk2vvd4pi",
               "testId": "2o6k42mliig",
               "waitForTarget": false
-            }
-          },
-          "disabled": false,
-          "expanded": false,
-          "adding": false,
-          "groupId": "k2vk2vvd4pi",
-          "entity": "test",
-          "failure": ""
-        },
-        "kxjk3kemtzz": {
-          "editing": false,
-          "id": "kxjk3kemtzz",
-          "key": "kxjk3kemtzz",
-          "title": "Headers",
-          "commands": {
-            "kxjk3kemuad": {
-              "editing": false,
-              "id": "kxjk3kemuad",
-              "key": "kxjk3kemuad",
-              "target": "page",
-              "method": "assertRest",
-              "assert": {
-                "assertion": "rest",
-                "statusOperator": "any",
-                "textOperator": "any",
-                "headerOperator": "specific",
-                "headerName": "content-type",
-                "headerValue": "application/json"
-              },
-              "params": {
-                "url": "http://127.0.0.1:8080/puppeteer.json",
-                "method": "GET"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "kxjk3kemtzz",
-              "waitForTarget": false,
-              "entity": "command"
-            },
-            "l69k3kewufu": {
-              "editing": false,
-              "id": "l69k3kewufu",
-              "key": "l69k3kewufu",
-              "target": "page",
-              "method": "assertRest",
-              "assert": {
-                "assertion": "rest",
-                "statusOperator": "any",
-                "textOperator": "any",
-                "headerOperator": "specific",
-                "headerName": "content-type",
-                "headerValue": "Nope"
-              },
-              "params": {
-                "url": "http://127.0.0.1:8080/puppeteer.json",
-                "method": "GET"
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "k2vk2vvd4pi",
-              "testId": "kxjk3kemtzz",
-              "waitForTarget": false,
-              "entity": "command",
-              "comment": "@assert [page.assertRest] expected HTTP/S response matching http://127.0.0.1:8080/puppeteer.json to have header content-type: Nope, but it does not"
             }
           },
           "disabled": false,
