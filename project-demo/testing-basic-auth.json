@@ -1,0 +1,117 @@
+{
+  "title": "Testing Basic Auth",
+  "timeout": 50000,
+  "snippets": false,
+  "description": null,
+  "savedAt": 1590411662,
+  "loadedAt": 1590411600,
+  "modified": false,
+  "filename": "testing-basic-auth.json",
+  "targets": {},
+  "groups": {
+    "5sckami04uh": {
+      "title": "Basic Auth",
+      "id": "5sckami04uh",
+      "editing": false,
+      "key": "5sckami04uh",
+      "tests": {
+        "5sckami0dao": {
+          "title": "Main flow",
+          "id": "5sckami0dao",
+          "editing": false,
+          "groupId": "5sckami04uh",
+          "key": "5sckami0dao",
+          "commands": {
+            "5sckami0tmz": {
+              "editing": false,
+              "id": "5sckami0tmz",
+              "key": "5sckami0tmz",
+              "target": "page",
+              "method": "authenticate",
+              "assert": {},
+              "params": {
+                "username": "guest",
+                "password": "guest"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "5sckami04uh",
+              "testId": "5sckami0dao",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "5sckami0tuk": {
+              "editing": false,
+              "id": "5sckami0tuk",
+              "key": "5sckami0tuk",
+              "target": "page",
+              "method": "goto",
+              "assert": {},
+              "params": {
+                "url": "https://jigsaw.w3.org/HTTP/Basic/",
+                "timeout": 30000,
+                "waitUntil": "load"
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "5sckami04uh",
+              "testId": "5sckami0dao",
+              "waitForTarget": false,
+              "entity": "command"
+            },
+            "5sckami0tzh": {
+              "editing": false,
+              "id": "5sckami0tzh",
+              "key": "5sckami0tzh",
+              "target": "page",
+              "method": "screenshot",
+              "params": {
+                "name": "Success",
+                "targets": [],
+                "fullPage": false,
+                "omitBackground": false,
+                "x": null,
+                "y": null,
+                "width": null,
+                "height": null
+              },
+              "disabled": false,
+              "failure": "",
+              "variables": {},
+              "expanded": false,
+              "refName": "",
+              "ref": "",
+              "isRef": false,
+              "groupId": "5sckami04uh",
+              "testId": "5sckami0dao",
+              "waitForTarget": false,
+              "entity": "command"
+            }
+          }
+        },
+        "5sckami0kp0": {
+          "editing": true,
+          "id": "5sckami0kp0",
+          "key": "5sckami0kp0",
+          "title": "",
+          "commands": {},
+          "disabled": false,
+          "expanded": false,
+          "adding": false,
+          "groupId": "5sckami04uh"
+        }
+      }
+    }
+  },
+  "puppetry": "3.2.2"
+}

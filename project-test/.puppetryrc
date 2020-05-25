@@ -64,9 +64,9 @@
       }
     }
   },
-  "savedAt": 1590158770,
+  "savedAt": 1590160613,
   "modified": false,
-  "lastOpenSuite": "chained-target.json",
+  "lastOpenSuite": "page.assertRest.json",
   "variables": {},
   "targets": {
     "js4k1ukyk9a": {

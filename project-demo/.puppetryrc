@@ -82,11 +82,21 @@
           "value": true
         }
       }
+    },
+    "5sckami04uh": {
+      "key": "5sckami04uh",
+      "value": true,
+      "tests": {
+        "5sckami0dao": {
+          "key": "5sckami0dao",
+          "value": true
+        }
+      }
     }
   },
-  "savedAt": 1590157157,
+  "savedAt": 1590412147,
   "modified": false,
-  "lastOpenSuite": "testing-google-analytcis.json",
+  "lastOpenSuite": "todomvc.json",
   "variables": {
     "dduk2fx8tvf": {
       "name": "SANDBOX_BASEURL",

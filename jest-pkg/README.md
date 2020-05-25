@@ -31,6 +31,7 @@ After running the tests `npm test`, you can find the generated screenshots in th
     "headless": false,
     "devtools": false,
     "ignoreHTTPSErrors": true,
+    "slowMo": 30,
     "args": [
       "--start-maximized",
       "--ignore-certificate-errors"

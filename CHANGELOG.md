@@ -2,6 +2,8 @@
 
 ### Features
 - improvement: added "replace existing value" to target.type
+- improvement: added page.authenticate (issue #70)
+- improvement: added target.assertText (to compare text ignoring HTML/styling)
 
 ### Bug fixes
 - fix: issues #71
