@@ -48,6 +48,10 @@
         "jotk2g3449f": {
           "key": "jotk2g3449f",
           "value": true
+        },
+        "dduk2fx8bwf": {
+          "key": "dduk2fx8bwf",
+          "value": true
         }
       }
     },
@@ -78,11 +82,21 @@
           "value": true
         }
       }
+    },
+    "5sckami04uh": {
+      "key": "5sckami04uh",
+      "value": true,
+      "tests": {
+        "5sckami0dao": {
+          "key": "5sckami0dao",
+          "value": true
+        }
+      }
     }
   },
-  "savedAt": 1578997458,
+  "savedAt": 1590421671,
   "modified": false,
-  "lastOpenSuite": "mocking-request.json",
+  "lastOpenSuite": "exhaustive-testing.json",
   "variables": {
     "dduk2fx8tvf": {
       "name": "SANDBOX_BASEURL",
@@ -129,5 +143,5 @@
     "local"
   ],
   "projectDirectory": "/home/sheiko/PUPPETRY/demo--project",
-  "puppetry": "3.1.1"
+  "puppetry": "3.2.2"
 }

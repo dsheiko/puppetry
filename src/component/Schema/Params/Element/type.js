@@ -1,5 +1,5 @@
 import { justify } from "service/assert";
-import { INPUT } from "../../constants";
+import { INPUT, CHECKBOX } from "../../constants";
 import ExpressionParser from "service/ExpressionParser";
 import { renderTarget } from "service/utils";
 
@@ -8,6 +8,7 @@ export const type = {
     const parser = new ExpressionParser( id );
     return justify(
       `// Emulating user input\n`
+    + ( params.reset ? `await ( ${ renderTarget( target ) } ).click({ clickCount: 3 });\n` : "" )
     + `await ( ${ renderTarget( target ) } ).type( ${ parser.stringify( params.value ) } );` );
   },
 
@@ -34,6 +35,15 @@ export const type = {
             required: true,
             message: "Text required"
           }]
+        },
+        {
+          name: "params.reset",
+          label: "replace the value",
+          control: CHECKBOX,
+          tooltip: `Normally the provided text gets added to the existing one. This option allows to replace it.`,
+          initialValue: false,
+          placeholder: "",
+          rules: []
         }
       ]
     }

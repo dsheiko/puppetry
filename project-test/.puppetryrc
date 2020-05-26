@@ -62,11 +62,26 @@
           "value": true
         }
       }
+    },
+    "eadk3y906y9": {
+      "key": "eadk3y906y9",
+      "value": true,
+      "tests": {}
+    },
+    "k2vk2vvd4pi": {
+      "key": "k2vk2vvd4pi",
+      "value": true,
+      "tests": {
+        "kxjk3kemtzz": {
+          "key": "kxjk3kemtzz",
+          "value": false
+        }
+      }
     }
   },
-  "savedAt": 1582189628,
+  "savedAt": 1590424783,
   "modified": false,
-  "lastOpenSuite": "context.assertScreenshot.json",
+  "lastOpenSuite": "page.assertRest.json",
   "variables": {},
   "targets": {
     "js4k1ukyk9a": {
@@ -84,5 +99,5 @@
   ],
   "autosave": true,
   "projectDirectory": "/home/sheiko/PUPPETRY/puppetry-test",
-  "puppetry": "3.2.0-RC.1"
+  "puppetry": "3.2.2"
 }

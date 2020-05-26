@@ -17,7 +17,7 @@ const { remote, ipcRenderer, shell } = require ( "electron" ),
       info = find( "#info" ),
       TOOLBAR_HEIGHT = 40,
       STORAGE_URL = "recordLastUrl",
-      options = devices.map( i =>  ({
+      options = Object.values( devices ).map( i =>  ({
         value: i.name,
         description: `${i.name} (${i.viewport.width}x${i.viewport.height})`
       }) );
@@ -267,7 +267,7 @@ emulateSelect.addEventListener( "input", ( e ) => {
       remote.getCurrentWindow().setSize( 1366, 768 + TOOLBAR_HEIGHT );
       return;
     }
-    const match = devices.find( data => data.name === val );
+    const match = devices[ val ];
     if ( match ) {
       remote.getCurrentWindow().setSize(
         match.viewport.width,

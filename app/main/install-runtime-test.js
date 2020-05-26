@@ -55,20 +55,6 @@ function downloadChromium( event, appInstallDirectory ) {
   }
 }
 
-/**
- * Hopefully a temporary workaround, described here https://github.com/puppeteer/puppeteer/issues/5425
- */
-function fixWinEPERM( appInstallDirectory, onDone ) {
-  npm.commands.install( join( appInstallDirectory, "node_modules/puppeteer" ), [
-      "rimraf@3.0.2"
-    ], ( err, data ) => {
-      if ( err ) {
-        log.error( `Main process: NPM(2.1): ${err}` );
-        return event.sender.send( E_RUNTIME_TEST_ERROR, err );
-      }
-      onDone();
-  });
-}
 
 exports.installRuntimeTest = ( event, appInstallDirectory ) => {
   if ( !appInstallDirectory ) {
@@ -138,7 +124,7 @@ exports.installRuntimeTest = ( event, appInstallDirectory ) => {
       "faker@^4.1.0",
       "jsonpath@^1.0.2",
       "node-localstorage@^1.3.1",
-      "puppeteer@2.1.0",
+      "puppeteer@3.1.0",
       "shelljs@^0.8.2",
       "pixelmatch@^5.1.0",
       "pngjs@^3.4.0",
@@ -149,11 +135,9 @@ exports.installRuntimeTest = ( event, appInstallDirectory ) => {
         return event.sender.send( E_RUNTIME_TEST_ERROR, err );
       }
 
-      fixWinEPERM( appInstallDirectory, () => {
-         log.silly( `\n\nDependencies installed in ${ appInstallDirectory }\n` );
-         event.sender.send( E_RUNTIME_TEST_MILESTONE, "" );
-         downloadChromium( event, appInstallDirectory );
-      });
+      log.silly( `\n\nDependencies installed in ${ appInstallDirectory }\n` );
+      event.sender.send( E_RUNTIME_TEST_MILESTONE, "" );
+      downloadChromium( event, appInstallDirectory );
 
     });
     npm.on("error", msg => {

@@ -32,12 +32,13 @@ const defaultState = {
     incognito: true,
     "puppeteer.connect": {
       ignoreHTTPSErrors: true,
-      slowMo: 30,
       browserWSEndpoint: null
     },
     "puppeteer.launch": {
       devtools: false,
       headless: true,
+      args: [],
+      slowMo: 30,
       ignoreHTTPSErrors: false
     }
   },
@@ -45,12 +46,13 @@ const defaultState = {
     incognito: true,
     "puppeteer.connect": {
       ignoreHTTPSErrors: true,
-      slowMo: 30,
       browserWSEndpoint: null
     },
     "puppeteer.launch": {
       devtools: false,
       headless: true,
+      args: [],
+      slowMo: 30,
       ignoreHTTPSErrors: false
     }
   }
@@ -58,8 +60,9 @@ const defaultState = {
 
 export default class StateStorage {
 
-  constructor( ns )   {
+  constructor( ns, webStorage =  localStorage )   {
     this.ns = ns;
+    this.webStorage = webStorage;
     if ( typeof defaultState[ this.ns ] === "undefined" ) {
       throw new Error( `Namespace ${ this.ns } not available in the storage` );
     }
@@ -68,11 +71,11 @@ export default class StateStorage {
   set( update ) {
     const state = this.getAll();
     state[ this.ns ] = Object.assign({}, state[ this.ns ], update );
-    localStorage.setItem( STORAGE_KEY_STATE, JSON.stringify( state ) );
+    this.webStorage.setItem( STORAGE_KEY_STATE, JSON.stringify( state ) );
   }
 
   getAll() {
-    const jsonString = localStorage.getItem( STORAGE_KEY_STATE );
+    const jsonString = this.webStorage.getItem( STORAGE_KEY_STATE );
     return jsonString ? JSON.parse( jsonString ) : defaultState;
   }
 

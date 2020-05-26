@@ -41,7 +41,7 @@ class BrowserSession {
       launchOptions.devtools = true;
     }
 
-    if ( !launchOptions.headless ) {
+    if ( launchOptions.headless ) {
       launchOptions.slowMo = 30;
     }
 

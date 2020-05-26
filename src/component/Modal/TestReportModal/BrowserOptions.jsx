@@ -1,7 +1,7 @@
 import React from "react";
 import { Checkbox, Select, Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
-import AbstractPersistentState from "component/AbstractPersistentState";
+import AbstractComponent from "component/AbstractComponent";
 import BrowseDirectory from "component/Global/BrowseDirectory";
 import { SELECT_SEARCH_PROPS } from "service/utils";
 
@@ -28,7 +28,7 @@ function filterNullable( obj ) {
 }
 
 
-export class BrowserOptions extends AbstractPersistentState {
+export class BrowserOptions extends AbstractComponent {
 
   static propTypes = {
 
@@ -82,12 +82,10 @@ export class BrowserOptions extends AbstractPersistentState {
   }
 
   getOptions() {
-    this.save();
     return {
       incognito: this.state.incognito,
       "puppeteer.connect": {
         ignoreHTTPSErrors: true,
-        slowMo: 30,
         browserWSEndpoint: this.state.product === "connect"
           ? this.getBrowserWSEndpoint()
           : null
@@ -98,6 +96,7 @@ export class BrowserOptions extends AbstractPersistentState {
           : this.state.product,
         headless: this.state.headless,
         devtools: this.state.devtools,
+        slowMo: 30,
         ignoreHTTPSErrors: this.getLauncherArgsInstance()
           ? this.getLauncherArgsInstance().state.ignoreHTTPSErrors
           : false,

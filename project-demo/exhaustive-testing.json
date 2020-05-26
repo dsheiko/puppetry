@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": null,
-  "savedAt": 1576141635,
-  "loadedAt": 1576141470,
+  "savedAt": 1590156924,
+  "loadedAt": 1590156907,
   "modified": false,
   "filename": "exhaustive-testing.json",
   "targets": {},
@@ -238,5 +238,5 @@
       }
     }
   },
-  "puppetry": "3.1.0"
+  "puppetry": "3.2.2"
 }

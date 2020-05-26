@@ -74,6 +74,10 @@ export function justify( text ) {
 }
 
 function parseTpl( value, id, type = "string" ) {
+  // @see ./src/component/Schema/Params/Element/assertText.js
+  if ( typeof type !== "undefined" || type === "text" ) {
+    return JSON.stringify( value.replace( /\n+/gm, "\n" ) );
+  }
   if ( typeof type === "undefined" || type !== "string" ) {
     return JSON.stringify( value );
   }

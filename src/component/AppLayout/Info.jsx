@@ -19,10 +19,11 @@ export class Info extends AbstractComponent {
   }
 
   onOpenDemoProject = async ( e ) => {
-    const { loadProject } = this.props.action;
+    const { loadProject, saveSettings } = this.props.action;
     e.preventDefault();
     try {
       const demoProject = await getDemoProjectDirectory();
+      demoProject && saveSettings({ projectDirectory: demoProject });
       demoProject && await loadProject( demoProject );
     } catch ( err ) {
       this.setState({ error: err.message });

@@ -39,6 +39,8 @@ import { assertRest } from "./Params/Page/assertRest";
 //import { assertRequest } from "./Params/Page/assertRequest";
 import { assertResponse } from "./Params/Page/assertResponse";
 import { mockRequest } from "./Params/Page/mockRequest";
+import { authenticate } from "./Params/Page/authenticate";
+
 
 import { screenshot as screenshotElement } from "./Params/Element/screenshot";
 import { assertProperty } from "./Params/Element/assertProperty";
@@ -47,6 +49,7 @@ import { assertVisible } from "./Params/Element/assertVisible";
 import { type } from "./Params/Element/type";
 import { upload } from "./Params/Element/upload";
 import { assertHtml } from "./Params/Element/assertHtml";
+import { assertText } from "./Params/Element/assertText";
 import { focus } from "./Params/Element/focus";
 import { click } from "./Params/Element/click";
 import { hover } from "./Params/Element/hover";
@@ -107,6 +110,7 @@ export const schema = {
     assertProperty,
     assertVisible,
     assertHtml,
+    assertText,
     assertBoundingBox,
     assertPosition,
     assertStyle,
@@ -136,6 +140,7 @@ export const schema = {
     waitForNavigation,
     waitForResponse,
     waitForRequest,
+    authenticate,
     evaluate,
     runjs,
     debug,
