@@ -1,7 +1,12 @@
 # Puppetry 3.2.3
 
+### Updates
+- improvement: update to Puppeteer 3.3.0
+
 ### Bug fixes
 - fix: parsing template expressions in TARGET.assertAttribute, page.assertConsoleMessage, page.assertDialog, TARGET.assertProperty, TARGET.assertHtml, TARGET.assertStyle, page.assertContent, page.assertTitle, page.assertUrl, page.assertVar
+- fix: TodoMVC example adapted for Firefox
+- fix: Firefox default parameter --kiosk to fix out of range elements issue
 
 # Puppetry 3.2.2
 

@@ -9,7 +9,7 @@ const { TextArea } = Input;
 export class FirefoxArguments extends AbstractPersistentState {
 
   state = {
-    launcherArgs: "",
+    launcherArgs: "--kiosk",
     ignoreHTTPSErrors: false
   }
 
@@ -58,7 +58,7 @@ export class FirefoxArguments extends AbstractPersistentState {
             onChange={ this.onChangeLauncherArgs }
             ref={ this.inputLauncherArgsRef }
             value={ this.state.launcherArgs }
-            placeholder="-private" />
+            placeholder="--kiosk" />
 
         </div>
 

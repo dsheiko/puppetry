@@ -2,8 +2,8 @@
   "title": "TodoMVC",
   "timeout": 50000,
   "snippets": false,
-  "savedAt": 1574684710,
-  "loadedAt": 1590420887,
+  "savedAt": 1591610463,
+  "loadedAt": 1591609462,
   "modified": false,
   "filename": "todomvc.json",
   "targets": {
@@ -348,42 +348,13 @@
           "groupId": "bx4k266y2x9",
           "key": "gask2ab771w",
           "commands": {
-            "gask2ab8mi1": {
-              "editing": false,
-              "id": "gask2ab8mi1",
-              "key": "gask2ab8mi1",
-              "target": "page",
-              "method": "setViewport",
-              "assert": {},
-              "params": {
-                "width": "1920",
-                "height": "1080",
-                "resolution": "1920x1080",
-                "deviceScaleFactor": 1,
-                "isMobile": false,
-                "hasTouch": false,
-                "isLandscape": false
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "bx4k266y2x9",
-              "testId": "gask2ab771w",
-              "entity": "command"
-            },
             "gask2ab8wor": {
               "editing": false,
               "id": "gask2ab8wor",
               "key": "gask2ab8wor",
               "target": "page",
-              "method": "goto",
-              "assert": {},
+              "method": "reload",
               "params": {
-                "url": "http://todomvc.com/examples/react/#/",
                 "timeout": 30000,
                 "waitUntil": "load"
               },
@@ -396,7 +367,8 @@
               "isRef": false,
               "groupId": "bx4k266y2x9",
               "testId": "gask2ab771w",
-              "entity": "command"
+              "entity": "command",
+              "waitForTarget": false
             },
             "gask2ab9pn7": {
               "editing": false,
@@ -528,42 +500,13 @@
           "groupId": "bx4k266y2x9",
           "key": "6kgk2bmpt6t",
           "commands": {
-            "6kgk2bmrfx1": {
-              "editing": false,
-              "id": "6kgk2bmrfx1",
-              "key": "6kgk2bmrfx1",
-              "target": "page",
-              "method": "setViewport",
-              "assert": {},
-              "params": {
-                "width": "1920",
-                "height": "1080",
-                "resolution": "1920x1080",
-                "deviceScaleFactor": 1,
-                "isMobile": false,
-                "hasTouch": false,
-                "isLandscape": false
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "bx4k266y2x9",
-              "testId": "6kgk2bmpt6t",
-              "entity": "command"
-            },
             "6kgk2bmrgbo": {
               "editing": false,
               "id": "6kgk2bmrgbo",
               "key": "6kgk2bmrgbo",
               "target": "page",
-              "method": "goto",
-              "assert": {},
+              "method": "reload",
               "params": {
-                "url": "http://todomvc.com/examples/react/#/",
                 "timeout": 30000,
                 "waitUntil": "load"
               },
@@ -576,7 +519,8 @@
               "isRef": false,
               "groupId": "bx4k266y2x9",
               "testId": "6kgk2bmpt6t",
-              "entity": "command"
+              "entity": "command",
+              "waitForTarget": false
             },
             "7ehk2bnw70t": {
               "editing": false,
@@ -868,42 +812,13 @@
           "groupId": "bx4k266y2x9",
           "key": "87ak2bpo1fm",
           "commands": {
-            "87ak2bpoqeo": {
-              "editing": false,
-              "id": "87ak2bpoqeo",
-              "key": "87ak2bpoqeo",
-              "target": "page",
-              "method": "setViewport",
-              "assert": {},
-              "params": {
-                "width": "1920",
-                "height": "1080",
-                "resolution": "1920x1080",
-                "deviceScaleFactor": 1,
-                "isMobile": false,
-                "hasTouch": false,
-                "isLandscape": false
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "bx4k266y2x9",
-              "testId": "87ak2bpo1fm",
-              "entity": "command"
-            },
             "87ak2bpoqqc": {
               "editing": false,
               "id": "87ak2bpoqqc",
               "key": "87ak2bpoqqc",
               "target": "page",
-              "method": "goto",
-              "assert": {},
+              "method": "reload",
               "params": {
-                "url": "http://todomvc.com/examples/react/#/",
                 "timeout": 30000,
                 "waitUntil": "load"
               },
@@ -916,7 +831,8 @@
               "isRef": false,
               "groupId": "bx4k266y2x9",
               "testId": "87ak2bpo1fm",
-              "entity": "command"
+              "entity": "command",
+              "waitForTarget": false
             },
             "87ak2bpphhk": {
               "editing": false,
@@ -1075,42 +991,13 @@
           "groupId": "bx4k266y2x9",
           "key": "9ick2bre8bz",
           "commands": {
-            "9ick2brfds6": {
-              "editing": false,
-              "id": "9ick2brfds6",
-              "key": "9ick2brfds6",
-              "target": "page",
-              "method": "setViewport",
-              "assert": {},
-              "params": {
-                "width": "1920",
-                "height": "1080",
-                "resolution": "1920x1080",
-                "deviceScaleFactor": 1,
-                "isMobile": false,
-                "hasTouch": false,
-                "isLandscape": false
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "bx4k266y2x9",
-              "testId": "9ick2bre8bz",
-              "entity": "command"
-            },
             "9ick2brfe3h": {
               "editing": false,
               "id": "9ick2brfe3h",
               "key": "9ick2brfe3h",
               "target": "page",
-              "method": "goto",
-              "assert": {},
+              "method": "reload",
               "params": {
-                "url": "http://todomvc.com/examples/react/#/",
                 "timeout": 30000,
                 "waitUntil": "load"
               },
@@ -1123,7 +1010,8 @@
               "isRef": false,
               "groupId": "bx4k266y2x9",
               "testId": "9ick2bre8bz",
-              "entity": "command"
+              "entity": "command",
+              "waitForTarget": false
             },
             "9ick2brg45b": {
               "editing": false,
@@ -1471,10 +1359,8 @@
               "id": "ajkk2btvmxo",
               "key": "ajkk2btvmxo",
               "target": "page",
-              "method": "goto",
-              "assert": {},
+              "method": "reload",
               "params": {
-                "url": "http://todomvc.com/examples/react/#/",
                 "timeout": 30000,
                 "waitUntil": "load"
               },
@@ -1487,7 +1373,8 @@
               "isRef": false,
               "groupId": "bx4k266y2x9",
               "testId": "ajkk2bsfcw4",
-              "entity": "command"
+              "entity": "command",
+              "waitForTarget": false
             },
             "9f9k2buvexm": {
               "editing": true,
@@ -1561,7 +1448,7 @@
               "isRef": false,
               "groupId": "bx4k266y2x9",
               "testId": "ajkk2bsfcw4",
-              "waitForTarget": true
+              "waitForTarget": false
             },
             "72sk2eix6x2": {
               "editing": true,
@@ -1681,7 +1568,7 @@
               "isRef": false,
               "groupId": "bx4k266y2x9",
               "testId": "ajkk2bsfcw4",
-              "waitForTarget": false
+              "waitForTarget": true
             },
             "72sk2eiym39": {
               "editing": true,
@@ -1747,42 +1634,13 @@
           "groupId": "bx4k266y2x9",
           "key": "72sk2ej2vb9",
           "commands": {
-            "72sk2ej5ir6": {
-              "editing": false,
-              "id": "72sk2ej5ir6",
-              "key": "72sk2ej5ir6",
-              "target": "page",
-              "method": "setViewport",
-              "assert": {},
-              "params": {
-                "width": "1920",
-                "height": "1080",
-                "resolution": "1920x1080",
-                "deviceScaleFactor": 1,
-                "isMobile": false,
-                "hasTouch": false,
-                "isLandscape": false
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "bx4k266y2x9",
-              "testId": "72sk2ej2vb9",
-              "entity": "command"
-            },
             "72sk2ej5j6k": {
               "editing": false,
               "id": "72sk2ej5j6k",
               "key": "72sk2ej5j6k",
               "target": "page",
-              "method": "goto",
-              "assert": {},
+              "method": "reload",
               "params": {
-                "url": "http://todomvc.com/examples/react/#/",
                 "timeout": 30000,
                 "waitUntil": "load"
               },
@@ -1795,7 +1653,8 @@
               "isRef": false,
               "groupId": "bx4k266y2x9",
               "testId": "72sk2ej2vb9",
-              "entity": "command"
+              "entity": "command",
+              "waitForTarget": false
             },
             "7esk2ejdy1u": {
               "editing": true,
@@ -2023,42 +1882,13 @@
           "groupId": "bx4k266y2x9",
           "key": "7esk2ejj5n9",
           "commands": {
-            "7esk2ejk3ya": {
-              "editing": false,
-              "id": "7esk2ejk3ya",
-              "key": "7esk2ejk3ya",
-              "target": "page",
-              "method": "setViewport",
-              "assert": {},
-              "params": {
-                "width": "1920",
-                "height": "1080",
-                "resolution": "1920x1080",
-                "deviceScaleFactor": 1,
-                "isMobile": false,
-                "hasTouch": false,
-                "isLandscape": false
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "bx4k266y2x9",
-              "testId": "7esk2ejj5n9",
-              "entity": "command"
-            },
             "7esk2ejk4h6": {
               "editing": false,
               "id": "7esk2ejk4h6",
               "key": "7esk2ejk4h6",
               "target": "page",
-              "method": "goto",
-              "assert": {},
+              "method": "reload",
               "params": {
-                "url": "http://todomvc.com/examples/react/#/",
                 "timeout": 30000,
                 "waitUntil": "load"
               },
@@ -2071,7 +1901,8 @@
               "isRef": false,
               "groupId": "bx4k266y2x9",
               "testId": "7esk2ejj5n9",
-              "entity": "command"
+              "entity": "command",
+              "waitForTarget": false
             },
             "7esk2ejl7wc": {
               "editing": true,
@@ -2344,42 +2175,13 @@
           "groupId": "bx4k266y2x9",
           "key": "7esk2ejsva9",
           "commands": {
-            "7esk2ejv2xz": {
-              "editing": false,
-              "id": "7esk2ejv2xz",
-              "key": "7esk2ejv2xz",
-              "target": "page",
-              "method": "setViewport",
-              "assert": {},
-              "params": {
-                "width": "1920",
-                "height": "1080",
-                "resolution": "1920x1080",
-                "deviceScaleFactor": 1,
-                "isMobile": false,
-                "hasTouch": false,
-                "isLandscape": false
-              },
-              "disabled": false,
-              "failure": "",
-              "variables": {},
-              "expanded": false,
-              "refName": "",
-              "ref": "",
-              "isRef": false,
-              "groupId": "bx4k266y2x9",
-              "testId": "7esk2ejsva9",
-              "entity": "command"
-            },
             "7esk2ejv3jp": {
               "editing": false,
               "id": "7esk2ejv3jp",
               "key": "7esk2ejv3jp",
               "target": "page",
-              "method": "goto",
-              "assert": {},
+              "method": "reload",
               "params": {
-                "url": "http://todomvc.com/examples/react/#/",
                 "timeout": 30000,
                 "waitUntil": "load"
               },
@@ -2392,7 +2194,8 @@
               "isRef": false,
               "groupId": "bx4k266y2x9",
               "testId": "7esk2ejsva9",
-              "entity": "command"
+              "entity": "command",
+              "waitForTarget": false
             },
             "7esk2ejvqx4": {
               "editing": false,
@@ -2547,6 +2350,6 @@
       }
     }
   },
-  "puppetry": "3.2.2",
+  "puppetry": "3.2.3",
   "description": "TODOMVC app functional tests based on the specification (https://github.com/tastejs/todomvc/blob/master/app-spec.md)"
 }
