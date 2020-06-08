@@ -536,6 +536,20 @@ root > .ant-spin-nested-loading > div > .ant-spin {
    -webkit-app-region: no-drag;
 }
 
+.toolbar > div > a {
+  color: #000;
+}
+.toolbar > div > a:visited {
+  color: #000;
+}
+
+/*
+
+.toolbar a.icon {
+  margin-left: 6px;
+}*/
+
+
 [data-balloon] {
   line-height: 16px;
   font-size: 14px;

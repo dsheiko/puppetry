@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { remote } from "electron";
-import { Icon } from "antd";
+import { Icon, Menu, Dropdown } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractPureComponent from "component/AbstractPureComponent";
 import { confirmUnsavedChanges } from "service/smalltalk";
@@ -9,6 +9,37 @@ import If from "component/Global/If";
 import { truncate } from "service/utils";
 
 const win = remote.getCurrentWindow();
+
+const menu = (
+  <Menu>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+        Edit project
+      </a>
+    </Menu.Item>
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+        Snippets
+      </a>
+    </Menu.Item>
+
+    <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+        Shared Targets
+      </a>
+    </Menu.Item>
+     <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+        Template expressions
+      </a>
+    </Menu.Item>
+     <Menu.Item>
+      <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+        GIT
+      </a>
+    </Menu.Item>
+  </Menu>
+);
 
 export class Toolbar extends AbstractPureComponent {
 
@@ -74,9 +105,19 @@ export class Toolbar extends AbstractPureComponent {
             <If exp={ projectName }>
               <Icon type="project" />{ " " }
               Project: { " " }<span id="cToolbarProjectName">{ truncate( projectName, 80 ) }</span>
-              { " " }<a tabIndex={-3} role="button"
+              { " " }
+              <Dropdown overlay={menu}>
+               <a className="icon--dd"><Icon type="more" /></a>
+              </Dropdown>
+               <div className="is-hidden">
+                <a tabIndex={-3} role="button"
                 title="Edit project name"
-                onClick={ this.onEditProject }><Icon type="tool" /></a>
+                className="text"
+                onClick={ this.onEditProject }><Icon type="snippets" /></a>
+                <a className="icon"><Icon type="interaction" /></a>
+                <a className="icon"><Icon type="scan" /></a>
+                <a className="icon"><Icon type="github" /></a>
+              </div>
             </If>
           </div>
           <div>
