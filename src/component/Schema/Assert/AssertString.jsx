@@ -39,6 +39,16 @@ export class AssertString extends AbstractComponent {
       <Row gutter={24}>
 
         <Col span={8} >
+
+          { /* Force template parsing */"" }
+          <FormItem className="is-hidden">
+            { getFieldDecorator( "assert.assertionType", {
+              initialValue: "string"
+            })(
+              <Input />
+            ) }
+          </FormItem>
+
           <FormItem label="Result">
             { getFieldDecorator( "assert.assertion", {
               initialValue: assertion,

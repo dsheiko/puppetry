@@ -42,7 +42,7 @@ export class AssertText extends AbstractComponent {
         <Col span={8} >
 
           <FormItem className="is-hidden">
-            { getFieldDecorator( "assert.type", {
+            { getFieldDecorator( "assert.assertionType", {
               initialValue: "text"
             })(
               <Input />

@@ -7,7 +7,9 @@ export const assertStyle = {
   template: ( command ) => buildAssertionTpl(
     `await bs.page.$eval( '${ command.targetSeletor }',
   ( el, prop, pseudoEl ) => window.getComputedStyle( el, pseudoEl || null )
-  .getPropertyValue( prop ), "${ command.params.name }", "${ command.params.pseudo }" )`,
+  .getPropertyValue( prop ), "${ command.params.name }", ${
+  command.params.pseudo ? JSON.stringify( command.params.pseudo ) : null
+} )`,
     command,
     `// Asserting that "${ command.params.name }" CSS property's `
       + `value of ${ command.target } satisfies the given constraint`

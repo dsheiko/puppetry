@@ -1,3 +1,8 @@
+# Puppetry 3.2.3
+
+### Bug fixes
+- fix: parsing template expressions in TARGET.assertAttribute, page.assertConsoleMessage, page.assertDialog, TARGET.assertProperty, TARGET.assertHtml, TARGET.assertStyle, page.assertContent, page.assertTitle, page.assertUrl, page.assertVar
+
 # Puppetry 3.2.2
 
 ### Features

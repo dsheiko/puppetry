@@ -60,6 +60,10 @@
         "cgmk6tfbh3v": {
           "key": "cgmk6tfbh3v",
           "value": true
+        },
+        "ltbk378vixm": {
+          "key": "ltbk378vixm",
+          "value": true
         }
       }
     },
@@ -79,9 +83,9 @@
       }
     }
   },
-  "savedAt": 1590424783,
+  "savedAt": 1591373051,
   "modified": false,
-  "lastOpenSuite": "page.assertRest.json",
+  "lastOpenSuite": "page.assertDialog.json",
   "variables": {},
   "targets": {
     "js4k1ukyk9a": {

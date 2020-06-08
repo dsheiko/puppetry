@@ -62,6 +62,15 @@ export class AssertConsoleMessage extends AbstractComponent {
       </FormItem>
       <span>messages sent to the console like the following</span></span>
 
+      { /* Force template parsing */"" }
+      <FormItem className="is-hidden">
+        { getFieldDecorator( "assert.assertionType", {
+          initialValue: "string"
+        })(
+          <Input />
+        ) }
+      </FormItem>
+
       <Row gutter={24} >
         <Col span={8} >
           <FormItem label="Message type">

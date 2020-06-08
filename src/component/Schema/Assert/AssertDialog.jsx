@@ -45,6 +45,15 @@ export class AssertDialog extends AbstractComponent {
           value = record.assert.value || "";
     return ( <React.Fragment>
 
+      { /* Force template parsing */"" }
+      <FormItem className="is-hidden">
+        { getFieldDecorator( "assert.assertionType", {
+          initialValue: "string"
+        })(
+          <Input />
+        ) }
+      </FormItem>
+
       <span className="assert-there-were"><span>Assert there</span><FormItem>
         { getFieldDecorator( "assert.not", {
           initialValue: not,

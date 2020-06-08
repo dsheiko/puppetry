@@ -73,13 +73,13 @@ export function justify( text ) {
   return ( "\n" + text ).split( "\n" ).map( line => "      " + line ).join( "\n" );
 }
 
-function parseTpl( value, id, type = "string" ) {
-  // @see ./src/component/Schema/Params/Element/assertText.js
-  if ( typeof type !== "undefined" || type === "text" ) {
-    return JSON.stringify( value.replace( /\n+/gm, "\n" ) );
-  }
+function parseTpl( value, id, type ) {
   if ( typeof type === "undefined" || type !== "string" ) {
     return JSON.stringify( value );
+  }
+   // @see ./src/component/Schema/Params/Element/assertText.js
+  if ( typeof type !== "undefined" && type === "text" ) {
+    value = value.replace( /\n+/gm, "\n" );
   }
   const parser = new ExpressionParser( id );
   return parser.stringify( value );
@@ -135,15 +135,16 @@ function createCbBody({ assert, target, method, id, params }) {
       + ` ${ getExpectation( method, params, assert ) }, "${ source }" );` );
 
   case "contains":
-    return justify( `expect( result ).toIncludeSubstring( ${ parseTpl( value, id, options.type ) }`
+    return justify( `expect( result ).toIncludeSubstring( ${ parseTpl( value, id, options.assertionType ) }`
         + `, "${ source }" );` );
   case "!contains":
-    return justify( `expect( result ).not.toIncludeSubstring( ${ parseTpl( value, id, options.type ) }`
+    return justify( `expect( result ).not.toIncludeSubstring( ${ parseTpl( value, id, options.assertionType ) }`
         + `, "${ source }" );` );
   case "equals":
-    return justify( `expect( result ).toBeEqual( ${ parseTpl( value, id, options.type ) }, "${ source }" );` );
+    return justify( `expect( result ).toBeEqual( ${ parseTpl( value, id, options.assertionType ) }, "${ source }" );` );
   case "!equals":
-    return justify( `expect( result ).not.toBeEqual( ${ parseTpl( value, id, options.type ) }, "${ source }" );` );
+    return justify( `expect( result )`
+    + `.not.toBeEqual( ${ parseTpl( value, id, options.assertionType ) }, "${ source }" );` );
   case "empty":
     return justify( `expect( result ).toBeEmpty( "${ source }" );` );
   case "!empty":
@@ -166,10 +167,12 @@ function createCbBody({ assert, target, method, id, params }) {
     return justify( `expect( result ).not.toHavePropertyTrue( "${ params.name }", "${ source }" );` );
 
   case "haveString":
-    return justify( `expect( result )${ negate( not ) }.toHaveString( ${ parseTpl( value, id, options.type ) }`
+    return justify( `expect( result )${ negate( not ) }`
+        + `.toHaveString( ${ parseTpl( value, id, options.assertionType ) }`
         + `, ${ getExpectation( method, params, assert ) }, "${ source }" );` );
   case "haveSubstring":
-    return justify( `expect( result )${ negate( not ) }.toHaveSubstring( ${ parseTpl( value, id, options.type ) }`
+    return justify( `expect( result )${ negate( not ) }`
+        + `.toHaveSubstring( ${ parseTpl( value, id, options.assertionType ) }`
         + `, ${ getExpectation( method, params, assert ) }, "${ source }" );` );
 
   case "position":
