@@ -510,6 +510,89 @@ root > .ant-spin-nested-loading > div > .ant-spin {
   position: fixed;
 }
 
+.experiment .ant-menu-horizontal {
+    line-height: 26px;
+}
+
+
+:root {
+  --header-height: 24px;
+  --footer-height: 24px;
+}
+
+.experiment > aside {
+  background-color: #001529;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.experiment > header {
+  background: #d7dde4;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  grid-column: 1 / 4;
+}
+.experiment > header > img {
+  width: 20px;
+}
+
+.experiment .ant-menu {
+  background: transparent;
+  margin-left: 100px;
+}
+
+.experiment > header > h1 {
+  font-size: 12px;
+  margin: 0 0 0 8px;
+}
+
+.experiment > footer {
+  grid-column: 1 / 4;
+}
+
+.experiment {
+  display: grid;
+  grid-gap: 0;
+  grid-template-columns: 250px calc(100% - 250px);
+  grid-template-rows: var(--header-height) calc(100% - var(--header-height) - var(--footer-height)) var(--footer-height);
+  background: #f0f2f5;
+  color: #444;
+  height: 100vh;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .toolbar {
    -webkit-app-region: drag;
    width: 100%;
@@ -519,6 +602,13 @@ root > .ant-spin-nested-loading > div > .ant-spin {
    align-items: center;
    background: #d7dde4;
    padding-left: 16px;
+}
+
+
+.toolbar > div > .ant-menu {
+  display: inline-block;
+  -webkit-app-region: no-drag;
+  background: #d7dde4;
 }
 
 .toolbar > div:first-child {

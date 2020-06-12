@@ -102,23 +102,23 @@ export class Toolbar extends AbstractPureComponent {
       <ErrorBoundary>
         <div id="cToolbar" className="toolbar">
           <div>
-            <If exp={ projectName }>
-              <Icon type="project" />{ " " }
-              Project: { " " }<span id="cToolbarProjectName">{ truncate( projectName, 80 ) }</span>
-              { " " }
-              <Dropdown overlay={menu}>
-               <a className="icon--dd"><Icon type="more" /></a>
-              </Dropdown>
-               <div className="is-hidden">
-                <a tabIndex={-3} role="button"
-                title="Edit project name"
-                className="text"
-                onClick={ this.onEditProject }><Icon type="snippets" /></a>
-                <a className="icon"><Icon type="interaction" /></a>
-                <a className="icon"><Icon type="scan" /></a>
-                <a className="icon"><Icon type="github" /></a>
-              </div>
-            </If>
+            <Menu  mode="horizontal">
+        <Menu.SubMenu
+              key="file"
+              id="cMainMenuFile"
+              title={<span><Icon type="file" /><span>File</span></span>}
+            >
+          <Menu.Item key="mail1">
+            File
+          </Menu.Item>
+        </Menu.SubMenu>
+        <Menu.Item key="mail2">
+          Settings
+        </Menu.Item>
+        <Menu.Item key="mail3">
+          Run
+        </Menu.Item>
+  </Menu>
           </div>
           <div>
 

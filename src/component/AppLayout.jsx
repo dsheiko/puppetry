@@ -34,6 +34,7 @@ import { AppLightbox } from "./Modal/AppLightbox";
 import { connect } from "react-redux";
 import * as selectors from "selector/selectors";
 import { TabGroup  } from "./TabGroup";
+import { Experiment } from "./Experiment";
 import If from "component/Global/If";
 
 
@@ -74,7 +75,10 @@ export class AppLayout extends React.Component {
     return (
       <ErrorBoundary>
         <Spin spinning={store.app.loading} size="large">
-          <Layout className={classNames({
+
+        <Experiment />
+
+          { false && <Layout className={classNames({
             layout: true,
             "is-loading": store.app.loading,
             "has-sticky-tabs-panel": tabs.active
@@ -160,7 +164,7 @@ export class AppLayout extends React.Component {
               <AppFooter action={action} />
             </Layout>
 
-          </Layout>
+          </Layout> }
 
 
         </Spin>
