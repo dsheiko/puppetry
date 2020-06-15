@@ -5,7 +5,7 @@ import classNames  from "classnames";
 import { Spin, Layout } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { CheckoutMaster } from "component/Global/CheckoutMaster";
-import { Toolbar } from "./AppLayout/Toolbar";
+
 import { MainMenu } from "./AppLayout/Sider/MainMenu";
 import { ProjectExplorer  } from "./AppLayout/Sider/ProjectExplorer";
 import { AppFooter } from "./AppLayout/AppFooter";
@@ -34,8 +34,8 @@ import { AppLightbox } from "./Modal/AppLightbox";
 import { connect } from "react-redux";
 import * as selectors from "selector/selectors";
 import { TabGroup  } from "./TabGroup";
-import { Experiment } from "./Experiment";
 import If from "component/Global/If";
+import { Toolbar } from "./AppLayout/Appbar/Toolbar";
 
 
 const { Sider } = Layout,
@@ -74,38 +74,20 @@ export class AppLayout extends React.Component {
 
     return (
       <ErrorBoundary>
-        <Spin spinning={store.app.loading} size="large">
+        <Spin spinning={ store.app.loading } size="large">
 
-        <Experiment />
-
-          { false && <Layout className={classNames({
-            layout: true,
+        <div className={classNames({
+            applayout: true,
+            layout: true, /*legacy*/
             "is-loading": store.app.loading,
             "has-sticky-tabs-panel": tabs.active
               && ( tabs.active === "suite" || tabs.active === "settings" )
 
           })} id="cLayout">
 
-            <Sider
-              collapsible
-              collapsed={this.state.collapsed}
-              onCollapse={this.onCollapse}
-              width="250"
-            >
-              <div className={ this.state.collapsed ? "logo is-collapsed" : "logo is-expanded"}>
-                <div className="logo__item logo__collapsed" >
-                  <img src="./assets/puppetry.svg" alt="Puppetry" />
-                </div>
-                <div className="logo__item logo__expanded" >
-                  <img src="./assets/puppetry.svg" alt="Puppetry" />
-                  <h1>Puppetry
-                    <span>ver.{ " " + remote.app.getVersion() }</span>
-                  </h1>
+          <header className="appbar">
 
-                </div>
-              </div>
-
-              <MainMenu
+            <MainMenu
                 action={ action }
                 isProjectEmpty={ !store.app.project.files.length }
                 isSuiteOpen={ !!store.suite.filename }
@@ -120,6 +102,23 @@ export class AppLayout extends React.Component {
                 hasGitRemote={ !!store.git.hasRemote }
               />
 
+
+            <Toolbar projectName={ store.project.name } suiteModified={ store.suite.modified } action={ action } />
+
+          </header>
+
+          <div className="applayout__layout">
+            <aside>
+
+              <div className={ "logo is-expanded" }>
+                <div className="logo__item logo__expanded" >
+                  <img src="./assets/puppetry.svg" alt="Puppetry" />
+                  <h1>Puppetry
+                    <span>ver.{ " " + remote.app.getVersion() }</span>
+                  </h1>
+                </div>
+              </div>
+
               { store.app.project.files.length && <ProjectExplorer
                 projectDirectory={ store.settings.projectDirectory }
                 projects={ store.settings.projects }
@@ -128,11 +127,12 @@ export class AppLayout extends React.Component {
                 active={ store.suite.filename }
                 action={ action } /> }
 
-            </Sider>
-            <Layout>
-              <Toolbar projectName={ store.project.name } suiteModified={ store.suite.modified } action={ action } />
 
-              <div className="layout-content">
+            </aside>
+            <main className="layout-content">
+
+
+            <div className="layout-content">
 
                 <If exp={ tabsAnyTrue }>
                   <TabGroup action={ action }
@@ -162,9 +162,13 @@ export class AppLayout extends React.Component {
               </div>
 
               <AppFooter action={action} />
-            </Layout>
 
-          </Layout> }
+            </main>
+          </div>
+
+
+
+        </div>
 
 
         </Spin>

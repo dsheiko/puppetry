@@ -258,9 +258,9 @@ export class MainMenu extends GitEnhancedMenu {
         >
           <Menu id="cMainMenu"
             forceSubMenuRender={ true }
-            theme="dark"
-            mode="vertical"
-            selectable={ false }>
+            mode="horizontal"
+            defaultOpenKeys={["file"]}
+            selectable={ true }>
 
             <SubMenu
               key="file"

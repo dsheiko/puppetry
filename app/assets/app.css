@@ -1,3 +1,5 @@
+@import "component/applayout.css";
+
 :root {
   --layout-background: #f0f2f5;
   --color-ok: #52c41a;
@@ -331,9 +333,6 @@ nav >  ul, nav >  ul ol {
   margin: 0;
 }
 
-.layout {
-  min-height: 100vh;
-}
 
 .ant-menu-item > kbd::before {
   content: "\0000a0";
@@ -343,15 +342,7 @@ nav >  ul, nav >  ul ol {
   opacity: 0.8;
 }
 
-.layout-content {
-  /* where header/footer height is 52px */
-  height: calc(100vh - 52px - 52px);
-  /* overflow-y: auto; */
-  padding: 16px 16px 0 16px;
-  /* disabling margincollapsing  */
-  display: inline-block;
-  width: 100%;
-}
+
 
 .layout-content > .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
   background: #fff;
@@ -509,136 +500,6 @@ root > .ant-spin-nested-loading > div > .ant-spin {
   height: 100vh;
   position: fixed;
 }
-
-.experiment .ant-menu-horizontal {
-    line-height: 26px;
-}
-
-
-:root {
-  --header-height: 24px;
-  --footer-height: 24px;
-}
-
-.experiment > aside {
-  background-color: #001529;
-  color: rgba(255, 255, 255, 0.65);
-}
-
-.experiment > header {
-  background: #d7dde4;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  grid-column: 1 / 4;
-}
-.experiment > header > img {
-  width: 20px;
-}
-
-.experiment .ant-menu {
-  background: transparent;
-  margin-left: 100px;
-}
-
-.experiment > header > h1 {
-  font-size: 12px;
-  margin: 0 0 0 8px;
-}
-
-.experiment > footer {
-  grid-column: 1 / 4;
-}
-
-.experiment {
-  display: grid;
-  grid-gap: 0;
-  grid-template-columns: 250px calc(100% - 250px);
-  grid-template-rows: var(--header-height) calc(100% - var(--header-height) - var(--footer-height)) var(--footer-height);
-  background: #f0f2f5;
-  color: #444;
-  height: 100vh;
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.toolbar {
-   -webkit-app-region: drag;
-   width: 100%;
-   padding: 8px 24px;
-   display: flex;
-   flex-flow: row nowrap;
-   align-items: center;
-   background: #d7dde4;
-   padding-left: 16px;
-}
-
-
-.toolbar > div > .ant-menu {
-  display: inline-block;
-  -webkit-app-region: no-drag;
-  background: #d7dde4;
-}
-
-.toolbar > div:first-child {
-  flex: 1 1 100%;
-  display: inline-block;
-  font-size: 16px;
-}
-
-.toolbar > div:last-child {
-  flex: 0 0 auto;
-  text-align: right;
-}
-
-.toolbar a {
-   -webkit-app-region: no-drag;
-}
-
-.toolbar > div > a {
-  color: #000;
-}
-.toolbar > div > a:visited {
-  color: #000;
-}
-
-/*
-
-.toolbar a.icon {
-  margin-left: 6px;
-}*/
-
 
 [data-balloon] {
   line-height: 16px;

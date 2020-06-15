@@ -10,36 +10,6 @@ import { truncate } from "service/utils";
 
 const win = remote.getCurrentWindow();
 
-const menu = (
-  <Menu>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
-        Edit project
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
-        Snippets
-      </a>
-    </Menu.Item>
-
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
-        Shared Targets
-      </a>
-    </Menu.Item>
-     <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
-        Template expressions
-      </a>
-    </Menu.Item>
-     <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
-        GIT
-      </a>
-    </Menu.Item>
-  </Menu>
-);
 
 export class Toolbar extends AbstractPureComponent {
 
@@ -101,26 +71,6 @@ export class Toolbar extends AbstractPureComponent {
     return (
       <ErrorBoundary>
         <div id="cToolbar" className="toolbar">
-          <div>
-            <Menu  mode="horizontal">
-        <Menu.SubMenu
-              key="file"
-              id="cMainMenuFile"
-              title={<span><Icon type="file" /><span>File</span></span>}
-            >
-          <Menu.Item key="mail1">
-            File
-          </Menu.Item>
-        </Menu.SubMenu>
-        <Menu.Item key="mail2">
-          Settings
-        </Menu.Item>
-        <Menu.Item key="mail3">
-          Run
-        </Menu.Item>
-  </Menu>
-          </div>
-          <div>
 
             { isMaximized
               ? ( <a tabIndex={-2} role="button" className="layout-icon" onClick={this.onRestore}>
@@ -138,7 +88,7 @@ export class Toolbar extends AbstractPureComponent {
               <Icon type="poweroff" />
             </a>
           </div>
-        </div>
+
       </ErrorBoundary>
     );
   }
