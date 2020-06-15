@@ -77,8 +77,7 @@ export class AppLayout extends React.Component {
         <Spin spinning={ store.app.loading } size="large">
 
         <div className={classNames({
-            applayout: true,
-            layout: true, /*legacy*/
+            layout: true,
             "is-loading": store.app.loading,
             "has-sticky-tabs-panel": tabs.active
               && ( tabs.active === "suite" || tabs.active === "settings" )
@@ -86,28 +85,28 @@ export class AppLayout extends React.Component {
           })} id="cLayout">
 
           <header className="appbar">
+            <div>
+              <MainMenu
+                  action={ action }
+                  isProjectEmpty={ !store.app.project.files.length }
+                  isSuiteOpen={ !!store.suite.filename }
+                  projectDirectory={ projectDirectory }
+                  isProjectOpen={ !!projectDirectory }
+                  suiteModified={ !!store.suite.modified }
+                  readyToRunTests={ !!store.app.readyToRunTests }
+                  gitDetachedHeadState={ !!store.app.gitDetachedHeadState }
+                  gitConfigUsername={ store.git.configUsername }
+                  gitConfigEmail={ store.git.configEmail }
+                  isGitInitialized={ !!store.git.initialized }
+                  hasGitRemote={ !!store.git.hasRemote }
+                />
 
-            <MainMenu
-                action={ action }
-                isProjectEmpty={ !store.app.project.files.length }
-                isSuiteOpen={ !!store.suite.filename }
-                projectDirectory={ projectDirectory }
-                isProjectOpen={ !!projectDirectory }
-                suiteModified={ !!store.suite.modified }
-                readyToRunTests={ !!store.app.readyToRunTests }
-                gitDetachedHeadState={ !!store.app.gitDetachedHeadState }
-                gitConfigUsername={ store.git.configUsername }
-                gitConfigEmail={ store.git.configEmail }
-                isGitInitialized={ !!store.git.initialized }
-                hasGitRemote={ !!store.git.hasRemote }
-              />
-
-
+            </div>
             <Toolbar projectName={ store.project.name } suiteModified={ store.suite.modified } action={ action } />
 
           </header>
 
-          <div className="applayout__layout">
+          <div className="layout__main">
             <aside>
 
               <div className={ "logo is-expanded" }>
@@ -129,7 +128,7 @@ export class AppLayout extends React.Component {
 
 
             </aside>
-            <main className="layout-content">
+            <main>
 
 
             <div className="layout-content">

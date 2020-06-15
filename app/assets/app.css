@@ -372,7 +372,7 @@ nav >  ul, nav >  ul ol {
 
 
 .project-navigator {
-  margin: 8px 0 0 0;
+  margin: 1px 0 0 0;
   background: #002549;
   opacity: 1;
   transition: opacity 300ms ease-in-out;
