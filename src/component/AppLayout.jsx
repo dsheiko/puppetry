@@ -2,12 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import { remote } from "electron";
 import classNames  from "classnames";
-import { Spin, Layout } from "antd";
+import { Spin, Layout, Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { CheckoutMaster } from "component/Global/CheckoutMaster";
 
 import { MainMenu } from "./AppLayout/Sider/MainMenu";
 import { ProjectExplorer  } from "./AppLayout/Sider/ProjectExplorer";
+import { SnippetExplorer  } from "./AppLayout/Sider/SnippetExplorer";
 import { AppFooter } from "./AppLayout/AppFooter";
 import { Welcome } from "./AppLayout/Welcome";
 import { Info } from "./AppLayout/Info";
@@ -35,7 +36,9 @@ import { connect } from "react-redux";
 import * as selectors from "selector/selectors";
 import { TabGroup  } from "./TabGroup";
 import If from "component/Global/If";
-import { Toolbar } from "./AppLayout/Appbar/Toolbar";
+import { Toolbar } from "./AppLayout/Toolbar";
+import { Projectbar } from "./AppLayout/Projectbar";
+import { truncate } from "service/utils";
 
 
 const { Sider } = Layout,
@@ -66,6 +69,12 @@ export class AppLayout extends React.Component {
     cleanSnippets: PropTypes.object.isRequired
   }
 
+  onEditProject = () => {
+    this.props.action.setApp({
+      editProjectModal: true
+    });
+  }
+
   render() {
     const { action, store, selector, cleanSnippets } = this.props,
           { projectDirectory, exportDirectory } = store.settings,
@@ -85,7 +94,7 @@ export class AppLayout extends React.Component {
           })} id="cLayout">
 
           <header className="appbar">
-            <div>
+            <div className="appbar__menu">
               <MainMenu
                   action={ action }
                   isProjectEmpty={ !store.app.project.files.length }
@@ -102,6 +111,7 @@ export class AppLayout extends React.Component {
                 />
 
             </div>
+            <div className="appbar__drag"></div>
             <Toolbar projectName={ store.project.name } suiteModified={ store.suite.modified } action={ action } />
 
           </header>
@@ -126,12 +136,20 @@ export class AppLayout extends React.Component {
                 active={ store.suite.filename }
                 action={ action } /> }
 
+                <SnippetExplorer projectDirectory={ store.settings.projectDirectory }
+                projects={ store.settings.projects }
+                suiteModified={ store.suite.modified }
+                files={ store.app.project.files }
+                active={ store.suite.filename }
+                action={ action }
+                />
 
             </aside>
             <main>
 
+              { store.project.name ? <Projectbar action={ action } projectName={ store.project.name } /> : null }
 
-            <div className="layout-content">
+              <div className="layout-content">
 
                 <If exp={ tabsAnyTrue }>
                   <TabGroup action={ action }

@@ -1,4 +1,4 @@
-@import "component/applayout.css";
+@import "css/applayout.css";
 
 :root {
   --layout-background: #f0f2f5;
@@ -9,6 +9,11 @@
   --color-bg-disabled: #fff3e0;
   --color-bg-selected: #e6f7ff;
   --rhythm: 8px;
+
+  --header-height: 32px;
+  --footer-height: 32px;
+  --project-height: 32px;
+  --sidebar-width: 250px;
 }
 
 body {
@@ -609,9 +614,6 @@ margin-left: 8px;
   margin-left: 4px;
 }
 
-.ant-layout > .ant-layout-footer {
-  padding: 8px 24px;
-}
 
 .legal-links a, .legal-links a:visited {
   color: black;
@@ -838,10 +840,6 @@ td:hover .editable-cell-icon {
   padding-top: 0;
 }
 
-.has-sticky-tabs-panel .ant-tabs-content.ant-tabs-content-no-animated.ant-tabs-top-content.ant-tabs-card-content {
-  height: calc(100vh - 52px - 52px - 72px);
-  overflow-y: auto;
-}
 
 .has-sticky-tabs-panel .panes-container > .ant-tabs {
   position: static;

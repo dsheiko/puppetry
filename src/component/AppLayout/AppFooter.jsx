@@ -12,9 +12,9 @@ export class AppFooter extends AbstractComponent {
 
     return (
       <ErrorBoundary>
-        <Footer>
-          <Row type="flex" align="middle" justify="space-between">
-            <Col className="text-align-left" span={18}>
+        <div className="layout-footer">
+
+            <div className="col">
               <span className="footer__copyright">
                 <span>&copy; { today.getFullYear() } MIT License. Created by
                   { " " } <a href="http://dsheiko.com"
@@ -28,8 +28,8 @@ export class AppFooter extends AbstractComponent {
                   target="_blank">privacy policy</a>
                 </span>
               </span>
-            </Col>
-            <Col className="text-align-right" span={6}>
+            </div>
+            <div className="col">
               <a onClick={ this.onExtClick }
                 rel="noopener noreferrer"
                 title="Find the author on Amazon" className="layout-icon"
@@ -56,10 +56,10 @@ export class AppFooter extends AbstractComponent {
                 title="Find Puppetry on Github" className="layout-icon"
                 href="https://github.com/dsheiko/puppetry" target="_blank"><Icon type="github" /></a>
 
-            </Col>
-          </Row>
+          </div>
 
-        </Footer>
+
+        </div>
       </ErrorBoundary>
     );
   }
