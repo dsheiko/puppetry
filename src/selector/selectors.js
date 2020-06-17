@@ -17,7 +17,10 @@ export function findCommandsByTestId( testId, groups ) {
   return null;
 }
 
-const stateSnippets = ( state ) => state.snippets,
+const stateGlobal = ( state ) => state,
+      stateSnippets = ( state ) => state.snippets,
+      stateSnippetsTargets = ( state ) => state.snippets.targets,
+
       stateSuiteTargets = ( state ) => state.suite.targets,
       stateProjectTargets = ( state ) => state.project.targets,
       stateSuiteGroups = ( state ) => state.suite.groups,
@@ -28,7 +31,9 @@ const stateSnippets = ( state ) => state.snippets,
       });
 
 export const getCleanSnippetsMemoized = createSelector( stateSnippets, getSnippets );
+export const getSnippetsTestMemoized = createSelector( stateGlobal, getSnippetsTest );
 export const getProjectTargetDataTableMemoized = createSelector( stateProjectTargets, getTargetDataTable );
+export const getSnippetsTargetDataTableMemoized = createSelector( stateSnippetsTargets, getTargetDataTable );
 export const getSuiteTargetDataTableMemoized = createSelector( stateSuiteTargets, getTargetDataTable );
 export const getSuiteGroupsMemoized = createSelector( stateSuiteGroups,
   ( groups ) => getStructureDataTable( groups, "group" ) );
@@ -187,4 +192,11 @@ export function getSnippets( snippets ) {
   return snippets.groups && snippets.groups.hasOwnProperty( SNIPPETS_GROUP_ID )
     ? snippets.groups[ SNIPPETS_GROUP_ID ].tests
     : {};
+}
+
+export function getSnippetsTest( store ) {
+  const tests = store.snippets.groups && store.snippets.groups.hasOwnProperty( SNIPPETS_GROUP_ID )
+    ? store.snippets.groups[ SNIPPETS_GROUP_ID ].tests
+    : {};
+  return tests[ store.project.lastOpenSnippetId ] ?? null;
 }

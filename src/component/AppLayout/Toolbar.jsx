@@ -72,22 +72,22 @@ export class Toolbar extends AbstractPureComponent {
       <ErrorBoundary>
         <div id="cToolbar" className="toolbar">
 
-            { isMaximized
-              ? ( <a tabIndex={-2} role="button" className="layout-icon" onClick={this.onRestore}>
-                <Icon type="shrink" />
-              </a> )
-              : ( <a tabIndex={-2} role="button" className="layout-icon" onClick={this.onMaximize}>
-                <Icon type="arrows-alt" />
-              </a> )
-            }
-            <a tabIndex={-1} role="button" className="layout-icon" href="https://docs.puppetry.app"
-              onClick={ this.onExtClick }>
-              <Icon type="question-circle" />
-            </a>
-            <a tabIndex={-3} role="button" className="layout-icon" onClick={this.onClose}>
-              <Icon type="poweroff" />
-            </a>
-          </div>
+          { isMaximized
+            ? ( <a tabIndex={-2} role="button" className="layout-icon" onClick={this.onRestore}>
+              <Icon type="shrink" />
+            </a> )
+            : ( <a tabIndex={-2} role="button" className="layout-icon" onClick={this.onMaximize}>
+              <Icon type="arrows-alt" />
+            </a> )
+          }
+          <a tabIndex={-1} role="button" className="layout-icon" href="https://docs.puppetry.app"
+            onClick={ this.onExtClick }>
+            <Icon type="question-circle" />
+          </a>
+          <a tabIndex={-3} role="button" className="layout-icon" onClick={this.onClose}>
+            <Icon type="poweroff" />
+          </a>
+        </div>
 
       </ErrorBoundary>
     );

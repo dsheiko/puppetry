@@ -33,7 +33,7 @@ import { targetDefaultState } from "reducer/defaultState";
  * @property {Position} [position]
  */
 
-export default {
+export default ( ns = "Target" ) => ({
 
   /**
   * Add record
@@ -41,7 +41,7 @@ export default {
   * @param {Payload} payload
   * @returns {object}
   */
-  [ actions.addTarget ]: ( state, { payload }) => {
+  [ actions[ `add${ ns }` ] ]: ( state, { payload }) => {
     const { options, id } = normalizeComplexPayload( payload ),
           merge = {},
           gid = id || uniqid();
@@ -68,7 +68,7 @@ export default {
    * @param {Payload} payload
    * @returns {object}
    */
-  [ actions.insertAdjacentTarget ]: ( state, { payload }) => {
+  [ actions[ `insertAdjacent${ ns }` ] ]: ( state, { payload }) => {
     const { options, position, id } = normalizeComplexPayload( payload ),
           { targets }  = state;
 
@@ -99,7 +99,7 @@ export default {
     });
   },
 
-  [ actions.clearTarget ]: ( state ) => update( state, {
+  [ actions[ `clear${ ns }` ] ]: ( state ) => update( state, {
     modified: {
       $set: true
     },
@@ -115,7 +115,7 @@ export default {
     * @param {Entity} payload (EntityRef required)
     * @returns {object}
     */
-  [ actions.setTarget ]: ( state, { payload }) => {
+  [ actions[ `set${ ns }` ] ]: ( state, { payload }) => {
     return update( state, {
       modified: {
         $set: true
@@ -137,7 +137,7 @@ export default {
     * @param {Entity} payload (EntityRef required)
     * @returns {object}
     */
-  [ actions.updateTarget ]: ( state, { payload }) => {
+  [ actions[ `update${ ns }` ] ]: ( state, { payload }) => {
     if ( isTargetNotUnique( state, payload ) ) {
       payload.target += "_" + uniqid().toUpperCase();
     }
@@ -167,7 +167,7 @@ export default {
    * @param {EntityRef} payload
    * @returns {object}
    */
-  [ actions.removeTarget ]: ( state, { payload }) => update( state, {
+  [ actions[ `remove${ ns }` ] ]: ( state, { payload }) => update( state, {
     modified: {
       $set: true
     },
@@ -177,6 +177,6 @@ export default {
   })
 
 
-};
+});
 
 

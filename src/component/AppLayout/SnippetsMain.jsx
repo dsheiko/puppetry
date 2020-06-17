@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Tabs, Icon } from "antd";
-import { SnippetTable } from "./Main/GroupTable/SnippetTable";
+import { SnippetCommandTable } from "./Main/GroupTable/TestTable/SnippetCommandTable";
 import { TargetTable  } from "./Main/TargetTable";
 import ErrorBoundary from "component/ErrorBoundary";
 import { SNIPPETS_GROUP_ID } from "constant";
@@ -12,11 +12,9 @@ import * as selectors from "selector/selectors";
 
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
-        panes: state.project.appPanels.suite.panes,
-        expandedGroups: state.project.groups,
-        groups: state.suite.groups,
-        targets: state.suite.targets,
-        targetDataTable: selectors.getSuiteTargetDataTableMemoized( state )
+        panes: state.project.appPanels.snippet.panes,
+        targets: state.snippets.targets,
+        targetDataTable: selectors.getSnippetsTargetDataTableMemoized( state )
       }),
       // Mapping actions to the props
       mapDispatchToProps = () => ({
@@ -25,7 +23,7 @@ const mapStateToProps = ( state ) => ({
       TabPane = Tabs.TabPane;
 
 @connect( mapStateToProps, mapDispatchToProps )
-export class Snippets extends AbstractForm {
+export class SnippetsMain extends AbstractForm {
 
   static propTypes = {
     expandedGroups: PropTypes.object,
@@ -33,6 +31,7 @@ export class Snippets extends AbstractForm {
     targets: PropTypes.object,
     panes: PropTypes.array,
     selector: PropTypes.object.isRequired,
+
     action: PropTypes.shape({
       updateProjectPanes: PropTypes.func.isRequired,
       setApp: PropTypes.func.isRequired
@@ -42,19 +41,16 @@ export class Snippets extends AbstractForm {
   onTabChange = ( targetKey ) => {
     this.props.action.setApp({ loading: true });
     setTimeout( () => {
-      this.props.action.updateProjectPanes( "suite", [ targetKey ]);
+      this.props.action.updateProjectPanes( "snippet", [ targetKey ]);
       this.props.action.setApp({ loading: false });
     }, 10 );
   }
 
   shouldComponentUpdate( nextProps ) {
 
-    if ( this.props.groups !== nextProps.groups
+    if ( this.props.snippetsTest !== nextProps.snippetsTest
       || this.props.panes !== nextProps.panes
-      || this.props.expandedGroups !== nextProps.expandedGroups
-      || this.props.targets !== nextProps.targets
-      || this.props.title !== nextProps.title
-      || this.props.timeout !== nextProps.timeout ) {
+      || this.props.targets !== nextProps.targets  ) {
       return true;
     }
     return false;
@@ -64,22 +60,24 @@ export class Snippets extends AbstractForm {
     const { action,
             selector,
             panes,
-            groups,
-            expandedGroups,
+            snippetsTest,
             targets,
             targetDataTable
           } = this.props,
 
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
-          snippetsLabel = ( <span><Icon type="audit" />Snippets</span> ),
-          group = groups.hasOwnProperty( SNIPPETS_GROUP_ID )? groups[ SNIPPETS_GROUP_ID ] : null,
-          tests = group ? selector.getTestDataTable( group ) : [],
+          commandsLabel = ( <span><Icon type="audit" />Commands</span> ),
+
           targetValues = Object.values( targets );
 
+    console.count("SnippetsMain");
+
     let activeKey = "targets";
+
     if ( panes.length ) {
       [ activeKey ] = panes;
     }
+
 
     return (
       <ErrorBoundary>
@@ -98,22 +96,24 @@ export class Snippets extends AbstractForm {
               </p>
 
               <p><LearnMore href="https://docs.puppetry.app/target"/></p>
-              <TargetTable action={action} targets={ targetDataTable } />
+              <TargetTable action={ action } targets={ targetDataTable } model="SnippetsTarget" />
             </TabPane>
 
-            <TabPane tab={ snippetsLabel } key="groups">
+            <TabPane tab={ commandsLabel } key="groups">
               <p>Snippets are reusable test cases in scope of project. So you can
               create a snippet and refer to it in your test suites.<br />
               </p>
               <p><LearnMore href="https://docs.puppetry.app/snippets" /></p>
 
-              { tests && <SnippetTable
-                expanded={ expandedGroups }
-                targets={ targetValues }
-                tests={ tests }
-                groupId={ SNIPPETS_GROUP_ID }
-                selector={ selector }
-                action={ action } /> }
+
+
+              <SnippetCommandTable
+                commands={ snippetsTest.commands }
+                targets={ targets }
+                testId={ snippetsTest.id }
+                groupId={ snippetsTest.groupId }
+                selector={ this.props.selector }
+                action={ this.props.action } />
 
             </TabPane>
 

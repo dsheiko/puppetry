@@ -6,9 +6,23 @@ import { remote } from "electron";
 import { confirmUnsavedChanges  } from "service/smalltalk";
 import classNames from "classnames";
 import { FileList } from "./ProjectExplorer/FileList";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import actions from "action";
 
 const { Menu, MenuItem } = remote;
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        snippets: Object.values( state.snippets.groups.snippets.tests ?? {}),
+        active: state.project.lastOpenSnippetId
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 export class SnippetExplorer extends React.Component {
 
   static propTypes = {
@@ -38,7 +52,7 @@ export class SnippetExplorer extends React.Component {
 
   onClick = ( e ) => {
     e.preventDefault();
-    this.setState({ clicked: e.target.dataset.dir });
+    this.setState({ clicked: e.target.dataset.id });
   }
 
   resetParentClicked = () => {
@@ -138,40 +152,12 @@ export class SnippetExplorer extends React.Component {
 
   onDblClick = async ( e ) => {
     e.preventDefault();
-    const { loadProject, saveSettings } = this.props.action,
-          { projectDirectory } = this.props,
-          dir = e.target.dataset.dir;
-
-    if ( projectDirectory === dir ) {
-      return;
-    }
-
-    if ( this.props.suiteModified ) {
-      await confirmUnsavedChanges({
-        saveSuite: this.props.action.saveSuite,
-        setSuite: this.props.action.setSuite
-      });
-    }
-    saveSettings({ projectDirectory: dir });
-    loadProject();
+    this.props.action.setProject({ lastOpenSnippetId: e.target.dataset.id });
+    this.props.action.addAppTab( "snippet" );
   }
 
 
-  onNewSuite = async () => {
-    const { projectDirectory } = this.props;
-    if ( !projectDirectory ) {
-      return;
-    }
-    if ( this.props.suiteModified ) {
-      await confirmUnsavedChanges({
-        saveSuite: this.props.action.saveSuite,
-        setSuite: this.props.action.setSuite
-      });
-    }
-    this.props.action.setApp({ newSuiteModal: true });
-  }
-
-  onNewProject = async () => {
+  onNewSnippet = async () => {
     if ( this.props.suiteModified ) {
       await confirmUnsavedChanges({
         saveSuite: this.props.action.saveSuite,
@@ -181,41 +167,28 @@ export class SnippetExplorer extends React.Component {
     this.props.action.setApp({ newProjectModal: true });
   }
 
-  onOpenProject = async () => {
-    if ( this.props.suiteModified ) {
-      await confirmUnsavedChanges({
-        saveSuite: this.props.action.saveSuite,
-        setSuite: this.props.action.setSuite
-      });
-    }
-    this.props.action.setApp({ openProjectModal: true });
-  }
+
 
 
   render() {
-    const { projectDirectory  } = this.props,
-          projects = Object.entries( this.props.projects )
-            .map( ([ dir, name ]) => ({ dir, name }) );
+    const { projectDirectory, snippets, active } = this.props;
 
-    if ( !projects.length ) {
-      return <div></div>;
-    }
     return (
       <ErrorBoundary>
-        <div id="cSnippetNavigator" className="project-navigator">
+        <div id="cSnippetNavigator" className="project-navigator project-navigator--snippet">
           <h2>Snippets
 
             <a
               tabIndex={1} role="button"
-              title="Create a project"
-              className="project-navigator__open" onClick={ this.onNewProject }>
-              <Icon type="file-add" theme="filled" /></a>
+              title="Create a snippet"
+              className="project-navigator__add" onClick={ this.onNewSnippet }>
+              <Icon type="plus-square" /></a>
 
 
           </h2>
 
           <nav className="project-navigator__nav">
-            { [1].map( ( entity, inx ) => (
+            { snippets.map( ( entity, inx ) => (
 
               <div
                 key={ `d${inx}` }
@@ -223,17 +196,21 @@ export class SnippetExplorer extends React.Component {
 
                 <ul>
 
-            <li key={ `f1` }
-              onClick={ this.onClick }
-              onDoubleClick={ this.onDblClick }
-              onContextMenu={ this.onRightClick }
+                  <li key={ `f${inx}` }
+                    onClick={ this.onClick }
+                    onDoubleClick={ this.onDblClick }
+                    onContextMenu={ () => this.onRightClick }
+                    data-id={ entity.id }
+                    className={ classNames({
+                      "project-navigator__li": true,
+                      "is-active": active === entity.id,
+                      "is-clicked": this.state.clicked ===  entity.id
+                    }) }>
+                    <Icon type="file" /> { entity.title }
+                  </li>
 
-              className={ classNames({
-                "project-navigator__li": true
-              }) }>
-              <Icon type="file" /> Foo
-            </li>
-        </ul>
+
+                </ul>
 
               </div>
 

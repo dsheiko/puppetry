@@ -386,12 +386,19 @@ nav >  ul, nav >  ul ol {
   /*display: flex;
   flex-flow: column nowrap;*/
 }
+
+
+
 .project-navigator__nav {
   /*flex: 1 1 auto;*/
   padding: 0;
   max-width: 250px;
   height: calc(100vh - 370px);
   overflow-y: auto;
+}
+
+.project-navigator--snippet .project-navigator__nav {
+  height: calc(100vh - 542px);
 }
 
 .project-navigator__nav:first-child {

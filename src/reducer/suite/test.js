@@ -31,7 +31,7 @@ import  { testDefaultState } from "reducer/defaultState";
  * @property {Position} [position]
  */
 
-export default {
+export default ( ns = "Test" ) => ({
 
   /**
      * Add record
@@ -39,7 +39,7 @@ export default {
      * @param {Payload} payload
      * @returns {object}
      */
-  [ actions.addTest ]: ( state, { payload }) => {
+  [ actions[ `add${ ns }` ] ]: ( state, { payload }) => {
     const { options, id } = normalizeComplexPayload( payload ),
           merge = {},
           gid = id || uniqid();
@@ -66,7 +66,7 @@ export default {
      * @param {Payload} payload
      * @returns {object}
      */
-  [ actions.insertAdjacentTest ]: ( state, { payload }) => {
+  [ actions[ `insertAdjacent${ ns }` ] ]: ( state, { payload }) => {
     const { options, position, id } = normalizeComplexPayload( payload ),
           { tests }  = state.groups[ options.groupId ],
 
@@ -104,7 +104,7 @@ export default {
      * @param {Entity} payload (EntityRef required)
      * @returns {object}
      */
-  [ actions.updateTest ]: ( state, { payload }) => update( state, {
+  [ actions[ `update${ ns }` ] ]: ( state, { payload }) => update( state, {
     modified: {
       $set: true
     },
@@ -131,7 +131,7 @@ export default {
      * @param {EntityRef} payload
      * @returns {object}
      */
-  [ actions.removeTest ]: ( state, { payload }) => update( state, {
+  [ actions[ `remove${ ns }` ] ]: ( state, { payload }) => update( state, {
     modified: {
       $set: true
     },
@@ -144,6 +144,6 @@ export default {
     }
   })
 
-};
+});
 
 

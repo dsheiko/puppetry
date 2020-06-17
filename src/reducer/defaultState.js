@@ -67,7 +67,7 @@ export default {
       isVisible: false,
       record: null
     },
-
+    // Application tabs
     tabs: {
       available: {
         suite: false,
@@ -75,7 +75,8 @@ export default {
         projectVariables: false,
         projectGit: false,
         projectTargets: false,
-        settings: false
+        settings: false,
+        snippet: false
       },
       active: "suite"
     },
@@ -99,12 +100,17 @@ export default {
   project: {
     name: "",
 
+    lastOpenSnippetId: null,
+
     // consider the structure: [Suite panel]-> [Targets pane][Groups pane]...
     appPanels: {
       suite: {
         panes: []
       },
       settings: {
+        panes: []
+      },
+      snippet: {
         panes: []
       }
     },
@@ -146,7 +152,12 @@ export default {
     credentialsPassword: ""
   },
 
-  snippets: {}
+  snippets: {
+
+    groups: {
+      snippets: {}
+    }
+  }
 };
 
 export const groupDefaultState = ( id ) => ({

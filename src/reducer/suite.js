@@ -2,10 +2,15 @@ import { handleActions } from "redux-actions";
 import actions from "action";
 import DEFAULT_STATE from "./defaultState";
 import update from "immutability-helper";
-import target from "./suite/target";
 import group from "./suite/group";
-import test from "./suite/test";
-import command from "./suite/command";
+
+import targetFn from "./suite/target";
+import testFn from "./suite/test";
+import commandFn from "./suite/command";
+
+const command = commandFn( "Command" ),
+      test = testFn( "Test"),
+      target = targetFn( "Target" );
 
 export default handleActions(
   {

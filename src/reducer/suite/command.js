@@ -33,7 +33,7 @@ import { commandDefaultState } from "reducer/defaultState";
  * @property {Position} [position]
  */
 
-export default {
+export default ( ns = "Command" ) => ({
 
 
   /**
@@ -42,7 +42,7 @@ export default {
      * @param {Payload} payload
      * @returns {object}
      */
-  [ actions.addCommand ]: ( state, { payload }) => {
+  [ actions[ `add${ ns }` ] ]: ( state, { payload }) => {
     const { options, id } = normalizeComplexPayload( payload ),
           uid = id || uniqid();
     return update( state, {
@@ -78,7 +78,7 @@ export default {
      * @param {Payload} payload - { record, position }
      * @returns {object}
      */
-  [ actions.insertAdjacentCommand ]: ( state, { payload }) => {
+  [ actions[ `insertAdjacent${ ns }`] ]: ( state, { payload }) => {
     const { options, position, id } = normalizeComplexPayload( payload ),
           { commands }  = state.groups[ options.groupId ].tests[ options.testId ],
 
@@ -121,12 +121,12 @@ export default {
      * @param {Entity} payload (EntityRef required)
      * @returns {object}
      */
-  [ actions.updateCommand ]: ( state, { payload }) => {
+  [ actions[ `update${ ns }` ] ]: ( state, { payload }) => {
     if ( !state.groups.hasOwnProperty( payload.groupId ) ) {
-      return console.error( `actions.updateCommand: Cannot find group ${ payload.groupId }` );
+      return console.error( `actions.update${ ns }: Cannot find group ${ payload.groupId }` );
     }
     if ( !state.groups[ payload.groupId ].tests.hasOwnProperty( payload.testId ) ) {
-      return console.error( `actions.updateCommand: Cannot find test ${ payload.groupId }:${ payload.testId }` );
+      return console.error( `actions.update${ ns }: Cannot find test ${ payload.groupId }:${ payload.testId }` );
     }
     return update( state, {
       modified: {
@@ -157,7 +157,7 @@ export default {
      * @param {EntityRef} payload
      * @returns {object}
      */
-  [ actions.removeCommand ]: ( state, { payload }) => update( state, {
+  [ actions[ `remove${ ns }` ] ]: ( state, { payload }) => update( state, {
     modified: {
       $set: true
     },
@@ -175,6 +175,6 @@ export default {
   })
 
 
-};
+});
 
 

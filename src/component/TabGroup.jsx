@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Tabs, Icon, Tooltip } from "antd";
 import { Main } from "./AppLayout/Main";
-import { Snippets } from "./AppLayout/Snippets";
+import { SnippetsMain } from "./AppLayout/SnippetsMain";
 import { SettingsPanel } from "./AppLayout/Settings/SettingsPanel";
 import { VariablesPane } from "./AppLayout/Project/Variables/VariablesPane";
 import { GitPane } from "./AppLayout/Project/Git/GitPane";
@@ -10,9 +10,31 @@ import { TargetsPane } from "./AppLayout/Project/Targets/TargetsPane";
 import { TestReport } from "./AppLayout/TestReport";
 import ErrorBoundary from "component/ErrorBoundary";
 import { confirmUnsavedChanges } from "service/smalltalk";
+import { truncate } from "service/utils";
+import { connect } from "react-redux";
+import * as selectors from "selector/selectors";
 
-const TabPane = Tabs.TabPane;
-
+const TabPane = Tabs.TabPane,
+      TAB_TEXT_MAX_LEN = 16,
+      // Mapping state to the props
+      mapStateToProps = ( state, props ) => ({
+        projectDirectory: state.settings.projectDirectory,
+        app: state.app,
+        suiteModified: state.suite.modified,
+        suiteSnippets: state.suite.snippets,
+        suiteTargets: state.suite.targets,
+        suiteFilename: state.suite.filename,
+        suiteTitle: state.suite.description || state.suite.title,
+        project: state.project,
+        git: state.git,
+        settings: state.settings,
+        snippetsTest: selectors.getSnippetsTestMemoized( state, props )
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = () => ({
+      });
+/*eslint react/prop-types: 0*/
+@connect( mapStateToProps, mapDispatchToProps )
 export class TabGroup extends React.Component {
 
   static propTypes = {
@@ -31,7 +53,7 @@ export class TabGroup extends React.Component {
     suiteFilename: PropTypes.any,
     suiteTitle: PropTypes.any,
     project: PropTypes.any,
-    snippets: PropTypes.any,
+    snippetsTest: PropTypes.any,
     git: PropTypes.any,
     settings: PropTypes.any
   }
@@ -56,26 +78,31 @@ export class TabGroup extends React.Component {
 
   render() {
     const {
-            action, selector, app, projectDirectory, suiteTitle,
+            action, selector, app, projectDirectory, suiteTitle, snippetsTest,
             suiteSnippets, suiteFilename, project, snippets, git, settings, suiteTargets
           } = this.props,
           { tabs } = app,
 
+
+
           suiteTabTitle = suiteFilename
-            ? ( suiteSnippets
-              ? "Snippets"
-              :  <Tooltip placement="bottomRight" title={ suiteTitle }>
-                <Icon type="container" />{ suiteFilename }
+            ? ( <Tooltip placement="bottomRight" title={ suiteTitle }>
+                <Icon type="container" />{ truncate( suiteFilename, TAB_TEXT_MAX_LEN ) }
               </Tooltip> )
             : "Loading..." ,
+
+          snippetTabTitle = snippetsTest
+            ? ( <Tooltip placement="bottomRight" title={ "Snippet: " + snippetsTest.title }>
+                <Icon type="snippets" />{ truncate( snippetsTest.title, TAB_TEXT_MAX_LEN ) }
+              </Tooltip> )
+            : "Loading...",
 
           panes = {
 
             suite: () => ( <TabPane tab={ suiteTabTitle } key="suite" closable={ true }>
-              { suiteSnippets && <Snippets action={ action } selector={ selector } /> }
-              { !suiteSnippets && <Main
+              <Main
                 action={ action }
-                selector={ selector } /> }
+                selector={ selector } />
             </TabPane> ),
 
             testReport: () => ( <TabPane tab="Test report"
@@ -119,6 +146,13 @@ export class TabGroup extends React.Component {
                 settings={ settings }
                 project={ project }
               />
+            </TabPane> ),
+
+            snippet: () => ( <TabPane tab={ snippetTabTitle } key="snippet" closable={ true }>
+              <SnippetsMain
+                snippetsTest={ snippetsTest }
+                action={ action }
+                selector={ selector } />
             </TabPane> )
           };
 

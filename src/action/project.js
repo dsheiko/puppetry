@@ -56,6 +56,11 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
     if ( typeof project === "undefined" ) {
       return {};
     }
+
+    if ( project.appPanels && typeof project.appPanels.snippet === "undefined" ) {
+      project.appPanels.snippet = { panes: [] };
+    }
+
     ipcRenderer.send( E_PROJECT_LOADED, projectDirectory );
 
     directory && dispatch( settingsActions.saveSettings({ projectDirectory }) );
@@ -72,6 +77,8 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
     dispatch( settingsActions.saveSettings() );
 
     dispatch( gitActions.setGit({ initialized: isGitInitialized( projectDirectory ) }) );
+
+    project.lastOpenSnippetId && dispatch( appActions.addAppTab( "snippet" ) );
 
   } catch ( err ) {
     log.warn( `Renderer process: actions.loadProject(${projectDirectory }): ${ err }` );

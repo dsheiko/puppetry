@@ -85,17 +85,17 @@ export class AppLayout extends React.Component {
       <ErrorBoundary>
         <Spin spinning={ store.app.loading } size="large">
 
-        <div className={classNames({
+          <div className={classNames({
             layout: true,
             "is-loading": store.app.loading,
             "has-sticky-tabs-panel": tabs.active
-              && ( tabs.active === "suite" || tabs.active === "settings" )
+              && ( tabs.active === "suite" || tabs.active === "settings" || tabs.active === "snippet" )
 
           })} id="cLayout">
 
-          <header className="appbar">
-            <div className="appbar__menu">
-              <MainMenu
+            <header className="appbar">
+              <div className="appbar__menu">
+                <MainMenu
                   action={ action }
                   isProjectEmpty={ !store.app.project.files.length }
                   isSuiteOpen={ !!store.suite.filename }
@@ -110,82 +110,69 @@ export class AppLayout extends React.Component {
                   hasGitRemote={ !!store.git.hasRemote }
                 />
 
-            </div>
-            <div className="appbar__drag"></div>
-            <Toolbar projectName={ store.project.name } suiteModified={ store.suite.modified } action={ action } />
-
-          </header>
-
-          <div className="layout__main">
-            <aside>
-
-              <div className={ "logo is-expanded" }>
-                <div className="logo__item logo__expanded" >
-                  <img src="./assets/puppetry.svg" alt="Puppetry" />
-                  <h1>Puppetry
-                    <span>ver.{ " " + remote.app.getVersion() }</span>
-                  </h1>
-                </div>
               </div>
+              <div className="appbar__drag"></div>
+              <Toolbar projectName={ store.project.name } suiteModified={ store.suite.modified } action={ action } />
 
-              { store.app.project.files.length && <ProjectExplorer
-                projectDirectory={ store.settings.projectDirectory }
-                projects={ store.settings.projects }
-                suiteModified={ store.suite.modified }
-                files={ store.app.project.files }
-                active={ store.suite.filename }
-                action={ action } /> }
+            </header>
+
+            <div className="layout__main">
+              <aside>
+
+                <div className={ "logo is-expanded" }>
+                  <div className="logo__item logo__expanded" >
+                    <img src="./assets/puppetry.svg" alt="Puppetry" />
+                    <h1>Puppetry
+                      <span>ver.{ " " + remote.app.getVersion() }</span>
+                    </h1>
+                  </div>
+                </div>
+
+                <ProjectExplorer
+                  projectDirectory={ store.settings.projectDirectory }
+                  projects={ store.settings.projects }
+                  suiteModified={ store.suite.modified }
+                  files={ store.app.project.files }
+                  active={ store.suite.filename }
+                  action={ action } />
 
                 <SnippetExplorer projectDirectory={ store.settings.projectDirectory }
-                projects={ store.settings.projects }
-                suiteModified={ store.suite.modified }
-                files={ store.app.project.files }
-                active={ store.suite.filename }
-                action={ action }
+                  projects={ store.settings.projects }
+                  suiteModified={ store.suite.modified }
+                  files={ store.app.project.files }
+                  action={ action }
                 />
 
-            </aside>
-            <main>
+              </aside>
+              <main>
 
-              { store.project.name ? <Projectbar action={ action } projectName={ store.project.name } /> : null }
+                { store.project.name ? <Projectbar action={ action } projectName={ store.project.name } /> : null }
 
-              <div className="layout-content">
+                <div className="layout-content">
 
-                <If exp={ tabsAnyTrue }>
-                  <TabGroup action={ action }
-                    projectDirectory={ store.settings.projectDirectory }
-                    app={ store.app }
-                    suiteModified={ store.suite.modified }
-                    suiteSnippets={ store.suite.snippets }
-                    suiteTargets={ store.suite.targets }
-                    suiteFilename={ store.suite.filename }
-                    suiteTitle={ store.suite.description || store.suite.title }
-                    project={ store.project }
-                    snippets={ store.snippets }
-                    git={ store.git }
-                    settings={ store.settings }
-                    selector={ selector } />
-                </If>
-                <If exp={ !tabsAnyTrue }>
-                  { projectDirectory ? ( <Info action={ action }
-                    projectFiles={ store.app.project.files }
-                    projectName={ store.project.name }
-                    projectDirectory={ store.settings.projectDirectory }
-                  /> )
-                    : ( <Welcome action={ action } projectDirectory={ projectDirectory } /> )
-                  }
-                </If>
+                  <If exp={ tabsAnyTrue }>
+                    <TabGroup action={ action }
+                      selector={ selector } />
+                  </If>
+                  <If exp={ !tabsAnyTrue }>
+                    { projectDirectory ? ( <Info action={ action }
+                      projectFiles={ store.app.project.files }
+                      projectName={ store.project.name }
+                      projectDirectory={ store.settings.projectDirectory }
+                    /> )
+                      : ( <Welcome action={ action } projectDirectory={ projectDirectory } /> )
+                    }
+                  </If>
 
-              </div>
+                </div>
 
-              <AppFooter action={action} />
+                <AppFooter action={action} />
 
-            </main>
+              </main>
+            </div>
+
+
           </div>
-
-
-
-        </div>
 
 
         </Spin>

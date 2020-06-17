@@ -65,7 +65,8 @@ module.exports = {
                 "@babel/plugin-proposal-object-rest-spread",
                 "@babel/plugin-syntax-dynamic-import",
                 "@babel/plugin-proposal-private-methods",
-                "@babel/plugin-transform-runtime"
+                "@babel/plugin-transform-runtime",
+                "@babel/plugin-proposal-nullish-coalescing-operator"
               ]
             }
           }]

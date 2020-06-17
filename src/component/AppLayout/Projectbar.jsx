@@ -35,37 +35,37 @@ export class Projectbar extends AbstractPureComponent {
       <ErrorBoundary>
         <div className="layout-project">
 
-        <div>
-          <Icon type="project" />{ " " }
-          <span id="cToolbarProjectName">{ truncate( projectName, 80 ) }</span>
-        </div>
+          <div>
+            <Icon type="project" />{ " " }
+            <span id="cToolbarProjectName">{ truncate( projectName, 80 ) }</span>
+          </div>
 
-           <Menu id="cProjectMenu"
+          <Menu id="cProjectMenu"
             forceSubMenuRender={ true }
             mode="horizontal"
             selectable={ false }>
 
-              <Menu.Item key="100" onClick={ this.onEditProject } id="cMainMenuProjectSettings">
+            <Menu.Item key="100" onClick={ this.onEditProject } id="cMainMenuProjectSettings">
                 Settings
-              </Menu.Item>
+            </Menu.Item>
 
 
-              <Menu.Item key="104"
-                onClick={ () => this.openTab( "projectTargets" ) } id="cMainMenuProjectTargets">
+            <Menu.Item key="104"
+              onClick={ () => this.openTab( "projectTargets" ) } id="cMainMenuProjectTargets">
                 Shared targets
-              </Menu.Item>
+            </Menu.Item>
 
-              <Menu.Item key="102"
-                onClick={ () => this.openTab( "projectVariables" ) } id="cMainMenuProjectVariables">
+            <Menu.Item key="102"
+              onClick={ () => this.openTab( "projectVariables" ) } id="cMainMenuProjectVariables">
                 Template variables
-              </Menu.Item>
+            </Menu.Item>
 
-              <Menu.Item key="103"
-                onClick={ () => this.openTab( "projectGit" ) } id="cMainMenuProjectGit">
+            <Menu.Item key="103"
+              onClick={ () => this.openTab( "projectGit" ) } id="cMainMenuProjectGit">
                 Git
-              </Menu.Item>
+            </Menu.Item>
 
-            </Menu>
+          </Menu>
 
 
         </div>

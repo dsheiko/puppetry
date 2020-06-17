@@ -77,7 +77,7 @@ function parseTpl( value, id, type ) {
   if ( typeof type === "undefined" || type !== "string" ) {
     return JSON.stringify( value );
   }
-   // @see ./src/component/Schema/Params/Element/assertText.js
+  // @see ./src/component/Schema/Params/Element/assertText.js
   if ( typeof type !== "undefined" && type === "text" ) {
     value = value.replace( /\n+/gm, "\n" );
   }
