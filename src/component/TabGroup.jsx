@@ -156,6 +156,8 @@ export class TabGroup extends React.Component {
             </TabPane> )
           };
 
+    window.consoleCount( __filename );
+    
     return (
       <ErrorBoundary>
         <Tabs

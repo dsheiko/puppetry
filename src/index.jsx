@@ -9,13 +9,17 @@ import promiseMiddleware from "redux-promise";
 import { composeWithDevTools } from "redux-devtools-extension";
 import ErrorBoundary from "component/ErrorBoundary";
 import log from "electron-log";
-
 import { App } from "./container/App.jsx";
 import reducer from "./reducer";
+import mediator from "service/mediator";
+import { RE_SNIPPETS_TEST_ADDED } from "constant";
 
 window.onerror = ( err, url, lineNumber ) => {
   log.error( `Renderer process: Caught exception: ${err} in ${ url }: ${ lineNumber }` );
 };
+
+window.consoleCount = console.count.bind( console );
+// window.consoleCount = () => {};
 
 process.on( "uncaughtException", ( err ) => {
   console.error( "uncaughtException", err );
@@ -42,4 +46,14 @@ render( <ErrorBoundary>
   </Provider>
 </ErrorBoundary>, document.querySelector( "root" ) );
 
+const prevState = {};
 
+store.subscribe(() => {
+  const state = store.getState();
+  if (prevState.snippetsLastInsertTestId !== state.snippets.lastInsertTestId) {
+    console.log("changed", state.snippets.lastInsertTestId );
+    mediator.emit( RE_SNIPPETS_TEST_ADDED, { lastInsertTestId: state.snippets.lastInsertTestId } );
+  }
+  prevState.snippetsLastInsertTestId = state.snippets.lastInsertTestId;
+
+});

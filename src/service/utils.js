@@ -6,7 +6,6 @@ export const isEveryValueNull = ( obj ) => Object.values( obj ).every( val => va
 export const isSomeValueNull = ( obj ) => Object.values( obj ).some( val => val === null );
 export const isEveryValueFalsy = ( obj ) => Object.values( obj ).every( val => !val );
 
-
 export const OPERATOR_MAP = {
   gt: ">",
   lt: "<",

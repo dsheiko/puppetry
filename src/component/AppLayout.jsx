@@ -31,6 +31,7 @@ import { GitCheckoutModal } from "./Modal/GitCheckoutModal";
 import { GitCloneModal } from "./Modal/GitCloneModal";
 import { EditProjectModal } from "./Modal/EditProjectModal";
 import { EditEnvironmentsModal } from "./Modal/EditEnvironmentsModal";
+import { NewSnippetModal } from "./Modal/NewSnippetModal";
 import { AppLightbox } from "./Modal/AppLightbox";
 import { connect } from "react-redux";
 import * as selectors from "selector/selectors";
@@ -80,7 +81,7 @@ export class AppLayout extends React.Component {
           { projectDirectory, exportDirectory } = store.settings,
           { commandModal, snippetModal, tabs } = store.app,
           tabsAnyTrue = Object.keys( tabs.available ).some( key => tabs.available[ key ]);
-
+    window.consoleCount( __filename );
     return (
       <ErrorBoundary>
         <Spin spinning={ store.app.loading } size="large">
@@ -176,6 +177,10 @@ export class AppLayout extends React.Component {
 
 
         </Spin>
+
+        <NewSnippetModal
+          action={action}
+          isVisible={store.app.newSnippetModal} />
 
         <NewProjectModal
           action={action}

@@ -56,6 +56,10 @@ exports.E_DELEGATE_RECORDER_SESSION = "delegateRecorderSession";
 exports.E_FILE_NAVIGATOR_UPDATED = "fileNavigatorUpdated";
 exports.E_WATCH_FILE_NAVIGATOR = "watchFileNavigator";
 
+// Redux Events
+exports.RE_SNIPPETS_TEST_ADDED = "RE_SNIPPETS_TEST_ADDED";
+
+
 exports.A_FORM_ITEM_SUCCESS = "success";
 exports.A_FORM_ITEM_WARNING = "warning";
 exports.A_FORM_ITEM_ERROR = "error";

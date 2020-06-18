@@ -47,6 +47,9 @@ export default ( ns = "Test" ) => ({
     merge[ gid ] = { ...testDefaultState( gid ), ...options, commands: {}};
 
     return update( state, {
+      lastInsertTestId: {
+        $set: gid
+      },
       modified: {
         $set: true
       },

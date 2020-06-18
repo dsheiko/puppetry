@@ -115,6 +115,8 @@ export class Main extends AbstractComponent {
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
           groupsLabel = ( <span><Icon type="audit" />Test Cases</span> ),
           activeKey = this.getActivePane();
+        
+    window.consoleCount( __filename );
 
     return (
       <ErrorBoundary>

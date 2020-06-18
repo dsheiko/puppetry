@@ -50,6 +50,7 @@ export default {
     gitCloneModal: false,
     editEnvironmentsModal: false,
     appLightbox: false,
+    newSnippetModal: false,
 
     lightbox: {
       index: 0,

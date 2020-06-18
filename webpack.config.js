@@ -10,6 +10,11 @@ const { join } = require( "path" ),
 module.exports = {
     mode: process.env.NODE_ENV || "development",
     target: "electron-renderer",
+
+    //...
+    node: {
+      __filename: true
+    },
     // Application entry scripts
     entry: {
       // script alias : path

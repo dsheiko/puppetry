@@ -158,13 +158,7 @@ export class SnippetExplorer extends React.Component {
 
 
   onNewSnippet = async () => {
-    if ( this.props.suiteModified ) {
-      await confirmUnsavedChanges({
-        saveSuite: this.props.action.saveSuite,
-        setSuite: this.props.action.setSuite
-      });
-    }
-    this.props.action.setApp({ newProjectModal: true });
+    this.props.action.setApp({ newSnippetModal: true });
   }
 
 
@@ -172,7 +166,7 @@ export class SnippetExplorer extends React.Component {
 
   render() {
     const { projectDirectory, snippets, active } = this.props;
-
+    window.consoleCount( __filename );
     return (
       <ErrorBoundary>
         <div id="cSnippetNavigator" className="project-navigator project-navigator--snippet">

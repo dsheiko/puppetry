@@ -5,6 +5,7 @@ import { handleException } from "./helpers";
 import uniqid from "uniqid";
 import commandActions from "./command";
 import { message } from "antd";
+import { SNIPPETS_GROUP_ID } from "constant";
 
 const actions = createActions({
   /**
@@ -12,10 +13,13 @@ const actions = createActions({
     * @param {object} [id] - injected id for new entity
     * @returns {object}
     */
-  ADD_SNIPPETS_TEST: ( options, id = null ) =>  ({
-    options: validate( options, { ...I.ENTITY, ...I.TEST }),
-    id: validate( id, I.ID_REF )
-  }),
+  ADD_SNIPPETS_TEST: ( options, id = null ) =>  {
+    options.groupId = SNIPPETS_GROUP_ID;
+    return {
+      options: validate( options, { ...I.ENTITY, ...I.TEST }),
+      id: validate( id, I.ID_REF )
+    };
+  },
   /**
     * @param {object} options = { title, editing }
     * @param {object} position = { "after": ID }

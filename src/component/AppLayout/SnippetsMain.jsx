@@ -70,7 +70,6 @@ export class SnippetsMain extends AbstractForm {
 
           targetValues = Object.values( targets );
 
-    console.count("SnippetsMain");
 
     let activeKey = "targets";
 
@@ -78,6 +77,7 @@ export class SnippetsMain extends AbstractForm {
       [ activeKey ] = panes;
     }
 
+    window.consoleCount( __filename );
 
     return (
       <ErrorBoundary>
