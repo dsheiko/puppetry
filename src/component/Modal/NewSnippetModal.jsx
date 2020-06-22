@@ -20,8 +20,8 @@ export class NewSnippetModal extends AbstractForm {
 
   static propTypes = {
     action:  PropTypes.shape({
-      setApp: PropTypes.func.isRequired
-//      createSnippet: PropTypes.func.isRequired
+      setApp: PropTypes.func.isRequired,
+      addSnippetsTest: PropTypes.func.isRequired
     }),
 
     isVisible: PropTypes.bool.isRequired
@@ -56,10 +56,11 @@ export class NewSnippetModal extends AbstractForm {
   }
 
   componentDidMount() {
+    mediator.removeAllListeners( RE_SNIPPETS_TEST_ADDED );
     mediator.on( RE_SNIPPETS_TEST_ADDED, ( options ) => {
-      console.log("????", options.lastInsertTestId );
-//      this.props.action.setProject({ lastOpenSnippetId: options.lastInsertTestId });
-//      this.props.action.addAppTab( "snippet" );
+      this.props.action.autosaveSnippets();
+      this.props.action.setProject({ lastOpenSnippetId: options.lastInsertTestId });
+      this.props.action.addAppTab( "snippet" );
     });
   }
 

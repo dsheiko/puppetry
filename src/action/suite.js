@@ -165,12 +165,6 @@ actions.saveSuite = ( options = {}, autosave = false ) => async ( dispatch, getS
       dispatch( actions.updateSuite({ savedAt: dateToTs(), modified: false }) );
     }
 
-    if ( store.suite.snippets ) {
-      await dispatch( snippetsActions.resetSnippets({
-        targets: store.suite.targets,
-        groups: store.suite.groups
-      }) );
-    }
 
   } catch ( e ) {
     dispatch( errorActions.setError({

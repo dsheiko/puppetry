@@ -86,6 +86,21 @@ export async function confirmUnsavedChanges({ saveSuite, setSuite }) {
   }
 }
 
+export async function confirmDeleteSnippets() {
+  document.addEventListener( "keydown", closeOnEnter, false );
+  try {
+    await smalltalk
+      .confirm( "Confirm Delete", `Are you sure you want to delete the snippet?` , {
+        buttons
+      });
+    document.removeEventListener( "keydown", closeOnEnter );
+    return true;
+  } catch ( e ) {
+    document.removeEventListener( "keydown", closeOnEnter );
+    return false;
+  }
+}
+
 export async function confirmDeleteFile( selectedFile = "" ) {
   document.addEventListener( "keydown", closeOnEnter, false );
   try {

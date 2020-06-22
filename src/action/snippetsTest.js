@@ -40,7 +40,7 @@ const actions = createActions({
     * @param {object} ref = { groupId, id }
     * @returns {object}
     */
-  REMOVE_SNIPPETS_TEST: ( ref ) => validate( ref, { ...I.UPDATE, ...I.TEST_REF })
+  REMOVE_SNIPPETS_TEST: ( ref ) => ({ ...ref, groupId: SNIPPETS_GROUP_ID })
 
 });
 

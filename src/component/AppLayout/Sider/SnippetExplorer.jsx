@@ -9,6 +9,7 @@ import { FileList } from "./ProjectExplorer/FileList";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import actions from "action";
+import { confirmDeleteSnippets } from "service/smalltalk";
 
 const { Menu, MenuItem } = remote;
 
@@ -55,59 +56,31 @@ export class SnippetExplorer extends React.Component {
     this.setState({ clicked: e.target.dataset.id });
   }
 
-  resetParentClicked = () => {
-    this.setState({ clicked: "" });
+  onDblClick = async ( e ) => {
+    e.preventDefault();
+    await this.openSnippet( e.target.dataset.id );
+  }
+
+  async openSnippet( lastOpenSnippetId ) {
+    this.props.action.setProject({ lastOpenSnippetId });
+    this.props.action.addAppTab( "snippet" );
   }
 
   onRightClick = ( e ) => {
-    const dir = e.target.dataset.dir,
+    const id = e.target.dataset.id,
           { projectDirectory } = this.props,
-          { loadProject,
-            saveSettings, removeSettingsProject, removeAppTab, resetSuite, resetProject } = this.props.action,
-
-          removeTheLastProject = () => {
-            removeSettingsProject( dir );
-            localStorage.setItem( "settings", "{}" );
-            removeAppTab( "suite" );
-            resetSuite();
-            resetProject();
-            saveSettings({ projectDirectory: "" });
-          };
+          { addSnippetsTest } = this.props.action;
 
     e.preventDefault();
 
-    if ( projectDirectory === dir ) {
+    if ( !projectDirectory  ) {
       const menu = new Menu();
 
       menu.append( new MenuItem({
-        label: "New Suite...",
+        label: "New Snippet...",
         click: this.onNewSuite
       }) );
 
-      menu.append( new MenuItem({
-        label: "Delete from the list",
-        click: async () => {
-
-          if ( this.props.suiteModified ) {
-            await confirmUnsavedChanges({
-              saveSuite: this.props.action.saveSuite,
-              setSuite: this.props.action.setSuite
-            });
-          }
-
-          // If current project the only one, clean start
-          const dirs = Object.keys( this.props.projects );
-          if ( dirs.length < 2 ) {
-            return removeTheLastProject();
-          }
-          // If more than one project than jump to it and remove last open
-          const otherDir = dirs.find( d => d !== dir );
-          removeSettingsProject( dir );
-          saveSettings({ projectDirectory: otherDir });
-          loadProject();
-        }
-
-      }) );
       menu.popup({
         x: e.x,
         y: e.y
@@ -115,7 +88,7 @@ export class SnippetExplorer extends React.Component {
       return;
     }
 
-    this.setState({ clicked: dir });
+    this.setState({ clicked: id });
 
     const menu = new Menu();
 
@@ -126,35 +99,33 @@ export class SnippetExplorer extends React.Component {
     menu.append( new MenuItem({
       label: "Open",
       click: async () => {
-        if ( this.props.suiteModified ) {
-          await confirmUnsavedChanges({
-            saveSuite: this.props.action.saveSuite,
-            setSuite: this.props.action.setSuite
-          });
-        }
-        saveSettings({ projectDirectory: dir });
-        loadProject();
+        await this.openSnippet( id );
       }
     }) );
 
+//    menu.append( new MenuItem({
+//      label: "Save as...",
+//      click: this.onSaveSuiteAs
+//    }) );
+
     menu.append( new MenuItem({
-      label: "Delete from the list",
+      label: "Delete",
       click: async () => {
-        removeSettingsProject( dir );
-        setTimeout( saveSettings, 100 );
+        const sure = await confirmDeleteSnippets( id );
+        if ( sure && id === this.props.active ) {
+          this.props.action.removeSnippetsTest( id );
+          //this.props.autosaveSnippets();
+        }
       }
     }) );
+
     menu.popup({
       x: e.x,
       y: e.y
     });
   }
 
-  onDblClick = async ( e ) => {
-    e.preventDefault();
-    this.props.action.setProject({ lastOpenSnippetId: e.target.dataset.id });
-    this.props.action.addAppTab( "snippet" );
-  }
+
 
 
   onNewSnippet = async () => {

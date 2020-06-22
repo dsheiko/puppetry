@@ -50,10 +50,10 @@ const prevState = {};
 
 store.subscribe(() => {
   const state = store.getState();
-  if (prevState.snippetsLastInsertTestId !== state.snippets.lastInsertTestId) {
+  if ( state.snippets.lastInsertTestId && prevState.snippetsLastInsertTestId !== state.snippets.lastInsertTestId ) {
     console.log("changed", state.snippets.lastInsertTestId );
+    prevState.snippetsLastInsertTestId = state.snippets.lastInsertTestId;
     mediator.emit( RE_SNIPPETS_TEST_ADDED, { lastInsertTestId: state.snippets.lastInsertTestId } );
   }
-  prevState.snippetsLastInsertTestId = state.snippets.lastInsertTestId;
 
 });
