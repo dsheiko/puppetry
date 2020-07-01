@@ -9,7 +9,7 @@ import testFn from "./suite/test";
 import commandFn from "./suite/command";
 
 const command = commandFn( "Command" ),
-      test = testFn( "Test"),
+      test = testFn( "Test" ),
       target = targetFn( "Target" );
 
 export default handleActions(

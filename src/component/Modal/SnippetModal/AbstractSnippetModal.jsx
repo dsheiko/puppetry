@@ -6,63 +6,14 @@ import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
 import { normalizeFilename } from "service/io";
 import { ruleValidateGenericString } from "service/utils";
-import * as classes from "./classes";
+import * as classes from "../classes";
 import mediator from "service/mediator";
 import { MODAL_DEFAULT_PROPS, RE_SNIPPETS_TEST_ADDED } from "constant";
 
-/*eslint no-useless-escape: 0*/
+const FormItem = Form.Item;
 
-const FormItem = Form.Item,
-      connectForm = Form.create();
+export default class AbstractSnippetModal extends AbstractForm {
 
-@connectForm
-export class NewSnippetModal extends AbstractForm {
-
-  static propTypes = {
-    action:  PropTypes.shape({
-      setApp: PropTypes.func.isRequired,
-      addSnippetsTest: PropTypes.func.isRequired
-    }),
-
-    isVisible: PropTypes.bool.isRequired
-  }
-
-  state = {
-    displayFilename: ""
-  };
-
-  onClickCancel = ( e ) => {
-    e.preventDefault();
-    this.props.action.setApp({ newSnippetModal: false });
-  }
-
-  onClickOk = ( e ) => {
-    e.preventDefault();
-    this.createSnippet();
-  }
-
-  createSnippet = () => {
-    const { addSnippetsTest, setApp } = this.props.action,
-          { validateFields } = this.props.form;
-
-    validateFields( async ( err, values ) => {
-      const { title } = values;
-      if ( err ) {
-        return;
-      }
-      await addSnippetsTest({ title });
-      setApp({ newSnippetModal: false });
-    });
-  }
-
-  componentDidMount() {
-    mediator.removeAllListeners( RE_SNIPPETS_TEST_ADDED );
-    mediator.on( RE_SNIPPETS_TEST_ADDED, ( options ) => {
-      this.props.action.autosaveSnippets();
-      this.props.action.setProject({ lastOpenSnippetId: options.lastInsertTestId });
-      this.props.action.addAppTab( "snippet" );
-    });
-  }
 
   // Do not update until visible
   shouldComponentUpdate( nextProps ) {
@@ -76,13 +27,13 @@ export class NewSnippetModal extends AbstractForm {
   }
 
   render() {
-    const { isVisible } = this.props,
+    const { isVisible, data, title } = this.props,
           { getFieldDecorator, getFieldsError } = this.props.form;
 
     return (
       <ErrorBoundary>
         <Modal
-          title="New Snippet"
+          title={ title }
           visible={ isVisible }
           className="c-new-snippet-modal"
           disabled={ this.hasErrors( getFieldsError() )  }
@@ -103,7 +54,7 @@ export class NewSnippetModal extends AbstractForm {
           <Form >
             <FormItem  label="Snippet name">
               { getFieldDecorator( "title", {
-                initialValue: "",
+                initialValue: data.title,
                 rules: [{
                   required: true,
                   message: "Please enter snippet name"
@@ -125,5 +76,5 @@ export class NewSnippetModal extends AbstractForm {
       </ErrorBoundary>
     );
   }
-};
 
+}

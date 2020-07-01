@@ -70,23 +70,27 @@ export default ( ns = "Test" ) => ({
      * @returns {object}
      */
   [ actions[ `insertAdjacent${ ns }` ] ]: ( state, { payload }) => {
+    let gid;
     const { options, position, id } = normalizeComplexPayload( payload ),
           { tests }  = state.groups[ options.groupId ],
 
           entities = Object.values( tests ).reduce( ( carry, test ) => {
             if ( position.before && position.before === test.id ) {
-              const gid = id || uniqid();
+              gid = id || uniqid();
               carry[ gid ] = { ...testDefaultState( gid ), ...options, commands: {}};
             }
             carry[ test.id ] = test;
             if ( position.after && position.after === test.id ) {
-              const gid = id || uniqid();
+              gid = id || uniqid();
               carry[ gid ] = { ...testDefaultState( gid ), ...options, commands: {}};
             }
             return carry;
           }, {});
 
     return update( state, {
+      lastInsertTestId: {
+        $set: gid
+      },
       modified: {
         $set: true
       },

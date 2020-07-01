@@ -78,7 +78,7 @@ export default ( ns = "Command" ) => ({
      * @param {Payload} payload - { record, position }
      * @returns {object}
      */
-  [ actions[ `insertAdjacent${ ns }`] ]: ( state, { payload }) => {
+  [ actions[ `insertAdjacent${ ns }` ] ]: ( state, { payload }) => {
     const { options, position, id } = normalizeComplexPayload( payload ),
           { commands }  = state.groups[ options.groupId ].tests[ options.testId ],
 

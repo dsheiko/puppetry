@@ -50,7 +50,7 @@ function getCommandsFlat( groups ) {
 }
 
 //actions.updateCommandByRef = ( ref, failure ) => async ( dispatch, getState ) => {
-//  const commands = getCommandsFlat( getState().suite.groups ),
+//  const commands = getCommandsFlat( getState().snippets.groups ),
 //        parentCommand = commands.find( command => command.ref === ref );
 //  dispatch( actions.updateCommand({ ...parentCommand, failure }) );
 //};
@@ -59,7 +59,7 @@ actions.swapSnippetsCommand = ( payload ) => async ( dispatch, getState ) => {
   const hideLoading = message.loading( "Moving record in progress..", 0 );
   try {
     const { sourceInx, targetInx, sourceId, targetId } = payload,
-          commands = getCommandsFlat( getState().suite.groups ),
+          commands = getCommandsFlat( getState().snippets.groups ),
           sourceCommand = commands.find( command => command.id === sourceId ),
           targetCommand = commands.find( command => command.id === targetId ),
           pos = sourceInx >= targetInx ? "before" : "after",
@@ -103,7 +103,7 @@ actions.pasteSnippetsCommand = ( payload, dest, uid ) => async ( dispatch ) => {
  */
 actions.cloneSnippetsCommand = ( command, options = {}) => async ( dispatch, getState ) => {
   try {
-    const groups = getState().suite.groups,
+    const groups = getState().snippets.groups,
           source = groups[ command.groupId ].tests[ command.testId ].commands[ command.id ],
           merged = { ...source, ...options },
           position = { after: command.id };
@@ -120,7 +120,7 @@ actions.cloneSnippetsCommand = ( command, options = {}) => async ( dispatch, get
  */
 actions.resetSnippetsCommandFailures = () => async ( dispatch, getState ) => {
   try {
-    const { groups } = getState().suite;
+    const { groups } = getState().snippets;
     Object.values( groups ).forEach( ( group ) => {
       Object.values( group.tests ).forEach( ( test ) => {
         const matches = Object.values( test.commands ).filter( command => Boolean( command.failure ) );

@@ -106,7 +106,6 @@ export class SnippetsMain extends AbstractForm {
               <p><LearnMore href="https://docs.puppetry.app/snippets" /></p>
 
 
-
               <SnippetCommandTable
                 commands={ snippetsTest.commands }
                 targets={ targets }

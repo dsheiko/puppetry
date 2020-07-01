@@ -58,7 +58,7 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
     }
 
     if ( project.appPanels && typeof project.appPanels.snippet === "undefined" ) {
-      project.appPanels.snippet = { panes: [] };
+      project.appPanels.snippet = { panes: []};
     }
 
     ipcRenderer.send( E_PROJECT_LOADED, projectDirectory );

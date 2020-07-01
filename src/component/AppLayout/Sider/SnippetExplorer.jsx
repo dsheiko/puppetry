@@ -11,10 +11,10 @@ import { bindActionCreators } from "redux";
 import actions from "action";
 import { confirmDeleteSnippets } from "service/smalltalk";
 
-const { Menu, MenuItem } = remote;
+const { Menu, MenuItem } = remote,
 
-// Mapping state to the props
-const mapStateToProps = ( state ) => ({
+      // Mapping state to the props
+      mapStateToProps = ( state ) => ({
         snippets: Object.values( state.snippets.groups.snippets.tests ?? {}),
         active: state.project.lastOpenSnippetId
       }),
@@ -28,15 +28,11 @@ export class SnippetExplorer extends React.Component {
 
   static propTypes = {
     action:  PropTypes.shape({
-      loadProject: PropTypes.func.isRequired,
-      saveSettings: PropTypes.func.isRequired,
-      removeSettingsProject: PropTypes.func.isRequired,
-      saveSuite: PropTypes.func.isRequired,
-      setSuite: PropTypes.func.isRequired,
-      setApp: PropTypes.func.isRequired,
-      removeAppTab: PropTypes.func.isRequired,
-      resetSuite: PropTypes.func.isRequired,
-      resetProject: PropTypes.func.isRequired
+      setProject: PropTypes.func.isRequired,
+      addAppTab: PropTypes.func.isRequired,
+      addSnippetsTest: PropTypes.func.isRequired,
+      addSnippetsTest: PropTypes.func.isRequired,
+      removeSnippetsTest: PropTypes.func.isRequired
     }),
 
     files: PropTypes.arrayOf( PropTypes.string ).isRequired,
@@ -68,25 +64,11 @@ export class SnippetExplorer extends React.Component {
 
   onRightClick = ( e ) => {
     const id = e.target.dataset.id,
+          title = e.target.dataset.title,
           { projectDirectory } = this.props,
           { addSnippetsTest } = this.props.action;
 
     e.preventDefault();
-
-    if ( !projectDirectory  ) {
-      const menu = new Menu();
-
-      menu.append( new MenuItem({
-        label: "New Snippet...",
-        click: this.onNewSuite
-      }) );
-
-      menu.popup({
-        x: e.x,
-        y: e.y
-      });
-      return;
-    }
 
     this.setState({ clicked: id });
 
@@ -96,6 +78,7 @@ export class SnippetExplorer extends React.Component {
       this.setState({ clicked: "" });
     });
 
+
     menu.append( new MenuItem({
       label: "Open",
       click: async () => {
@@ -103,18 +86,33 @@ export class SnippetExplorer extends React.Component {
       }
     }) );
 
-//    menu.append( new MenuItem({
-//      label: "Save as...",
-//      click: this.onSaveSuiteAs
-//    }) );
+    menu.append( new MenuItem({
+      label: "Rename...",
+      click: async () => {
+        this.props.action.setApp({
+          editSnippetModal: true,
+          snippetModal: { title, id }
+        });
+      }
+    }) );
+
+    menu.append( new MenuItem({
+      label: "Save as...",
+      click: async () => {
+        this.props.action.setApp({
+          saveSnippetAsModal: true,
+          snippetModal: { title, id }
+        });
+      }
+    }) );
 
     menu.append( new MenuItem({
       label: "Delete",
       click: async () => {
         const sure = await confirmDeleteSnippets( id );
-        if ( sure && id === this.props.active ) {
-          this.props.action.removeSnippetsTest( id );
-          //this.props.autosaveSnippets();
+        if ( sure ) {
+          this.props.action.removeSnippetsTest({ id });
+          this.props.action.autosaveSnippets();
         }
       }
     }) );
@@ -126,13 +124,9 @@ export class SnippetExplorer extends React.Component {
   }
 
 
-
-
   onNewSnippet = async () => {
     this.props.action.setApp({ newSnippetModal: true });
   }
-
-
 
 
   render() {
@@ -151,8 +145,7 @@ export class SnippetExplorer extends React.Component {
 
 
           </h2>
-
-          <nav className="project-navigator__nav">
+          { projectDirectory ? <nav className="project-navigator__nav">
             { snippets.map( ( entity, inx ) => (
 
               <div
@@ -164,8 +157,9 @@ export class SnippetExplorer extends React.Component {
                   <li key={ `f${inx}` }
                     onClick={ this.onClick }
                     onDoubleClick={ this.onDblClick }
-                    onContextMenu={ () => this.onRightClick }
+                    onContextMenu={ this.onRightClick }
                     data-id={ entity.id }
+                    data-title={ entity.title }
                     className={ classNames({
                       "project-navigator__li": true,
                       "is-active": active === entity.id,
@@ -180,7 +174,7 @@ export class SnippetExplorer extends React.Component {
               </div>
 
             ) ) }
-          </nav>
+          </nav> :  null }
 
         </div>
       </ErrorBoundary>

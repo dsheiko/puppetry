@@ -48,7 +48,7 @@ const actions = createActions({
 actions.swapSnippetsTarget = ( payload ) => async ( dispatch, getState ) => {
   try {
     const { sourceInx, targetInx, sourceId, targetId } = payload,
-          target = getState().suite.targets[ sourceId ],
+          target = getState().snippets.targets[ sourceId ],
           pos = sourceInx >= targetInx ? "before" : "after";
 
     dispatch( actions.removeSnippetsTarget({ id: sourceId }) );
@@ -77,8 +77,8 @@ actions.pasteSnippetsTarget = ( payload, dest, uid ) => async ( dispatch ) => {
  */
 actions.cloneSnippetsTarget = ( target ) => async ( dispatch, getState ) => {
   try {
-    const suite = getState().suite,
-          source = suite.targets[ target.id ],
+    const snippets = getState().snippets,
+          source = snippets.targets[ target.id ],
           id = uniqid(),
           merged = { ...source, id, key: id },
           position = { after: target.id };

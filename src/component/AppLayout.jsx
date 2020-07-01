@@ -31,7 +31,9 @@ import { GitCheckoutModal } from "./Modal/GitCheckoutModal";
 import { GitCloneModal } from "./Modal/GitCloneModal";
 import { EditProjectModal } from "./Modal/EditProjectModal";
 import { EditEnvironmentsModal } from "./Modal/EditEnvironmentsModal";
-import { NewSnippetModal } from "./Modal/NewSnippetModal";
+import { NewSnippetModal } from "./Modal/SnippetModal/NewSnippetModal";
+import { SaveSnippetAsModal } from "./Modal/SnippetModal/SaveSnippetAsModal";
+import { EditSnippetModal } from "./Modal/SnippetModal/EditSnippetModal";
 import { AppLightbox } from "./Modal/AppLightbox";
 import { connect } from "react-redux";
 import * as selectors from "selector/selectors";
@@ -179,8 +181,25 @@ export class AppLayout extends React.Component {
         </Spin>
 
         <NewSnippetModal
-          action={action}
-          isVisible={store.app.newSnippetModal} />
+          action={ action }
+          isVisible={ store.app.newSnippetModal }
+          title="New Snippet"
+          data={ { title: "" } }
+          />
+
+        <SaveSnippetAsModal
+          action={ action }
+          isVisible={ store.app.saveSnippetAsModal }
+          title="Save Snippet as..."
+          data={ store.app.snippetModal }
+          />
+
+        <EditSnippetModal
+          action={ action }
+          isVisible={ store.app.editSnippetModal }
+          title="Edit Snippet"
+          data={ store.app.snippetModal }
+          />
 
         <NewProjectModal
           action={action}

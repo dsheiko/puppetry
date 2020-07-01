@@ -26,16 +26,22 @@ const actions = createActions({
     * @param {object} [id] - injected id for new entity
     * @returns {object}
     */
-  INSERT_ADJACENT_SNIPPETS_TEST: ( options, position, id = null ) => ({
-    position,
-    options,
-    id
-  }),
+  INSERT_ADJACENT_SNIPPETS_TEST: ( options, position, id = null ) => {
+    options.groupId = SNIPPETS_GROUP_ID;
+    return {
+      position,
+      options,
+      id
+    };
+  },
   /**
     * @param {object} options = { groupId, id, title, editing }
     * @returns {object}
     */
-  UPDATE_SNIPPETS_TEST: ( options ) => validate( options, { ...I.ENTITY, ...I.TEST, ...I.UPDATE }),
+  UPDATE_SNIPPETS_TEST: ( options ) => {
+    options.groupId = SNIPPETS_GROUP_ID;
+    return validate( options, { ...I.ENTITY, ...I.TEST, ...I.UPDATE });
+  },
   /**
     * @param {object} ref = { groupId, id }
     * @returns {object}
@@ -55,7 +61,7 @@ actions.swapSnippetsTest = ( payload ) => async ( dispatch, getState ) => {
   const hideLoading = message.loading( "Moving record in progress..", 0 );
   try {
     const { sourceInx, targetInx, sourceId, targetId } = payload,
-          tests = getTestsFlat( getState().suite.groups ),
+          tests = getTestsFlat( getState().snippets.groups ),
           sourceTest = tests.find( test => test.id === sourceId ),
           targetTest = tests.find( test => test.id === targetId ),
           pos = sourceInx >= targetInx ? "before" : "after",
@@ -114,7 +120,8 @@ actions.pasteSnippetsTest = ( payload, dest, uid ) => async ( dispatch ) => {
  */
 actions.cloneSnippetsTest = ( test, options = {}) => async ( dispatch, getState ) => {
   try {
-    const groups = getState().suite.groups,
+    test.groupId = SNIPPETS_GROUP_ID;
+    const groups = getState().snippets.groups,
           source = groups[ test.groupId ].tests[ test.id ],
           id = uniqid(),
           merged = { ...source, ...options },
@@ -138,7 +145,7 @@ actions.cloneSnippetsTest = ( test, options = {}) => async ( dispatch, getState 
  */
 actions.transferSnippetsTest = ( test, options = {}) => async ( dispatch, getState ) => {
   try {
-    const groups = getState().suite.groups,
+    const groups = getState().snippets.groups,
           source = groups[ test.groupId ].tests[ test.id ],
           id = uniqid(),
           merged = { ...source, ...options };

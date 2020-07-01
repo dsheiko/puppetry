@@ -8,7 +8,7 @@ import testFn from "./suite/test";
 import commandFn from "./suite/command";
 
 const command = commandFn( "SnippetsCommand" ),
-      test = testFn( "SnippetsTest"),
+      test = testFn( "SnippetsTest" ),
       target = targetFn( "SnippetsTarget" );
 
 export default handleActions(

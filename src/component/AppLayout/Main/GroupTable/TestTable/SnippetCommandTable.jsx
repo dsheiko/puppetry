@@ -258,7 +258,7 @@ export class SnippetCommandTable extends AbstractDnDTable {
 
   render() {
     const { cleanSnippets } = this.props,
-          commands = Object.values( this.props.commands || {} )
+          commands = Object.values( this.props.commands || {})
             .filter( command => ( command.ref || ( command.target && command.method ) ) );
 
     return ( <ErrorBoundary>

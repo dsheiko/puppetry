@@ -50,7 +50,13 @@ export default {
     gitCloneModal: false,
     editEnvironmentsModal: false,
     appLightbox: false,
+
     newSnippetModal: false,
+    saveSnippetAsModal: false,
+    editSnippetModal: false,
+    // togather with newSnippetModal, saveSnippetAsModal
+    snippetModal: { title: null, id: null },
+
 
     lightbox: {
       index: 0,

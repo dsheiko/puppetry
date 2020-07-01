@@ -48,12 +48,12 @@ render( <ErrorBoundary>
 
 const prevState = {};
 
-store.subscribe(() => {
+store.subscribe( () => {
   const state = store.getState();
   if ( state.snippets.lastInsertTestId && prevState.snippetsLastInsertTestId !== state.snippets.lastInsertTestId ) {
-    console.log("changed", state.snippets.lastInsertTestId );
+    console.log( "changed", state.snippets.lastInsertTestId );
     prevState.snippetsLastInsertTestId = state.snippets.lastInsertTestId;
-    mediator.emit( RE_SNIPPETS_TEST_ADDED, { lastInsertTestId: state.snippets.lastInsertTestId } );
+    mediator.emit( RE_SNIPPETS_TEST_ADDED, { lastInsertTestId: state.snippets.lastInsertTestId });
   }
 
 });

@@ -84,17 +84,16 @@ export class TabGroup extends React.Component {
           { tabs } = app,
 
 
-
           suiteTabTitle = suiteFilename
             ? ( <Tooltip placement="bottomRight" title={ suiteTitle }>
-                <Icon type="container" />{ truncate( suiteFilename, TAB_TEXT_MAX_LEN ) }
-              </Tooltip> )
+              <Icon type="container" />{ truncate( suiteFilename, TAB_TEXT_MAX_LEN ) }
+            </Tooltip> )
             : "Loading..." ,
 
           snippetTabTitle = snippetsTest
             ? ( <Tooltip placement="bottomRight" title={ "Snippet: " + snippetsTest.title }>
-                <Icon type="snippets" />{ truncate( snippetsTest.title, TAB_TEXT_MAX_LEN ) }
-              </Tooltip> )
+              <Icon type="snippets" />{ truncate( snippetsTest.title, TAB_TEXT_MAX_LEN ) }
+            </Tooltip> )
             : "Loading...",
 
           panes = {
@@ -157,7 +156,7 @@ export class TabGroup extends React.Component {
           };
 
     window.consoleCount( __filename );
-    
+
     return (
       <ErrorBoundary>
         <Tabs
