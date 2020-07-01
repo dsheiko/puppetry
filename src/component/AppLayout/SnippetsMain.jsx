@@ -47,7 +47,6 @@ export class SnippetsMain extends AbstractForm {
   }
 
   shouldComponentUpdate( nextProps ) {
-
     if ( this.props.snippetsTest !== nextProps.snippetsTest
       || this.props.panes !== nextProps.panes
       || this.props.targets !== nextProps.targets  ) {

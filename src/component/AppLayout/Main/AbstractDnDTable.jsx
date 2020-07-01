@@ -171,8 +171,9 @@ export default class AbstractDnDTable extends React.Component {
       return payload
         && (
           record.entity === payload.model.toLowerCase()
-          || record.entity === "group" && payload.model === "Test"
-          || record.entity === "test" && payload.model === "Command"
+          || ( record.entity === "group" && payload.model === "Test" )
+          || ( record.entity === "test" && payload.model === "Command" )
+          || ( record.entity === "test" && payload.model === "SnippetsCommand" )
         )
         && payload.app.name === APP_NAME
         && payload.app.version === APP_VERSION;

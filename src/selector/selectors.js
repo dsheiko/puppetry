@@ -32,6 +32,7 @@ const stateGlobal = ( state ) => state,
 
 export const getCleanSnippetsMemoized = createSelector( stateSnippets, getSnippets );
 export const getSnippetsTestMemoized = createSelector( stateGlobal, getSnippetsTest );
+
 export const getProjectTargetDataTableMemoized = createSelector( stateProjectTargets, getTargetDataTable );
 export const getSnippetsTargetDataTableMemoized = createSelector( stateSnippetsTargets, getTargetDataTable );
 export const getSuiteTargetDataTableMemoized = createSelector( stateSuiteTargets, getTargetDataTable );
@@ -197,6 +198,10 @@ export function getSnippets( snippets ) {
 export function getSnippetsTest( store ) {
   const tests = store.snippets.groups && store.snippets.groups.hasOwnProperty( SNIPPETS_GROUP_ID )
     ? store.snippets.groups[ SNIPPETS_GROUP_ID ].tests
-    : {};
-  return tests[ store.project.lastOpenSnippetId ] ?? null;
+    : {},
+    test = tests[ store.project.lastOpenSnippetId ] ?? null;
+  if ( test ) {
+    test.commands = Object.values( test.commands ).map( record => ({ ...record, entity: "snippetscommand" }) );
+  }
+  return test;
 }

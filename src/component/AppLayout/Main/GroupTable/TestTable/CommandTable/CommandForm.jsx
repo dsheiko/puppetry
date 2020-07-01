@@ -10,6 +10,7 @@ import { getSchema } from "component/Schema/schema";
 import { Description } from "component/Schema/Params/Description";
 import ErrorBoundary from "component/ErrorBoundary";
 import { result } from "service/utils";
+import { SNIPPETS_GROUP_ID } from "constant";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
@@ -70,7 +71,8 @@ export class CommandForm extends React.Component {
     const { record, closeModal, resetSubmitted } = this.props,
           target = this.state.target || record.target,
           method = this.state.method || record.method,
-          schema = getSchema( target, method );
+          schema = getSchema( target, method ),
+          ns = record.groupId === SNIPPETS_GROUP_ID ? "Snippets" : "";
 
     e && e.preventDefault();
     resetSubmitted();
@@ -87,7 +89,7 @@ export class CommandForm extends React.Component {
           }
         }
 
-        this.props.action[ record.id ? "updateCommand" : "addCommand" ]({
+        this.props.action[ record.id ? `update${ ns }Command` : `add${ ns }Command` ]({
           id: record.id,
           testId: record.testId,
           groupId: record.groupId,
