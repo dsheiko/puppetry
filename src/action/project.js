@@ -22,6 +22,7 @@ import gitActions from "./git";
 import suiteActions from "./suite";
 import snippetsActions from "./snippets";
 import { result } from "service/utils";
+import { getSnippetsTest } from "selector/selectors";
 
 /*eslint no-empty: 0*/
 
@@ -78,7 +79,8 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
 
     dispatch( gitActions.setGit({ initialized: isGitInitialized( projectDirectory ) }) );
 
-    project.lastOpenSnippetId && dispatch( appActions.addAppTab( "snippet" ) );
+    ( project.lastOpenSnippetId && getSnippetsTest( getState() ) )
+      && dispatch( appActions.addAppTab( "snippet" ) );
 
   } catch ( err ) {
     log.warn( `Renderer process: actions.loadProject(${projectDirectory }): ${ err }` );

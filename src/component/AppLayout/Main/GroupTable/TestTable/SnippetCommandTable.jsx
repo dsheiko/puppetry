@@ -15,7 +15,8 @@ const { Menu, MenuItem } = remote,
       // Mapping state to the props
       mapStateToProps = ( state, props ) => ({
         title: state.suite.title,
-        cleanSnippets: selectors.getCleanSnippetsMemoized( state )
+        cleanSnippets: selectors.getCleanSnippetsMemoized( state ),
+        commands: selectors.getSnippetsCommandsMemoized( props.test )
       }),
       // Mapping actions to the props
       mapDispatchToProps = () => ({
@@ -258,8 +259,7 @@ export class SnippetCommandTable extends AbstractDnDTable {
 
   render() {
     const { cleanSnippets } = this.props,
-          commands = this.props.commands
-            .filter( command => ( command.ref || ( command.target && command.method ) ) );
+          commands = this.props.commands.filter( command => ( command.ref || ( command.target && command.method ) ) );
 
     return ( <ErrorBoundary>
       <Table

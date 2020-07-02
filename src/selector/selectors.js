@@ -200,8 +200,16 @@ export function getSnippetsTest( store ) {
     ? store.snippets.groups[ SNIPPETS_GROUP_ID ].tests
     : {},
     test = tests[ store.project.lastOpenSnippetId ] ?? null;
-  if ( test ) {
-    test.commands = Object.values( test.commands ).map( record => ({ ...record, entity: "snippetscommand" }) );
-  }
+
   return test;
 }
+
+
+const getSnippetsCommandsArray = ( test ) => {
+  return test ? test.commands : [];
+};
+
+export const getSnippetsCommandsMemoized = createSelector( getSnippetsCommandsArray,
+  ( commands ) => Object.values( commands )
+    .map( record => ({ ...record, entity: "snippetscommand" }) )
+);

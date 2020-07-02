@@ -105,13 +105,13 @@ export class SnippetsMain extends AbstractForm {
               <p><LearnMore href="https://docs.puppetry.app/snippets" /></p>
 
 
-              <SnippetCommandTable
-                commands={ snippetsTest.commands }
+              { snippetsTest ? <SnippetCommandTable
+                test={ snippetsTest }
                 targets={ targets }
                 testId={ snippetsTest.id }
                 groupId={ snippetsTest.groupId }
                 selector={ this.props.selector }
-                action={ this.props.action } />
+                action={ this.props.action } /> : null }
 
             </TabPane>
 

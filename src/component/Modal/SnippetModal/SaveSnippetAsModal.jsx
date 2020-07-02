@@ -40,10 +40,9 @@ export class SaveSnippetAsModal extends AbstractSnippetModal {
       if ( err ) {
         return;
       }
+
       setApp({ saveSnippetAsModal: false });
-      cloneSnippetsTest({
-        id
-      }, { title });
+      cloneSnippetsTest({ id }, { title });
     });
   }
 

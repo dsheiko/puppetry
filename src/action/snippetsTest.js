@@ -3,7 +3,7 @@ import { validate } from "bycontract";
 import * as I from "interface";
 import { handleException } from "./helpers";
 import uniqid from "uniqid";
-import commandActions from "./command";
+import commandActions from "./snippetsCommand";
 import { message } from "antd";
 import { SNIPPETS_GROUP_ID } from "constant";
 
@@ -72,7 +72,7 @@ actions.swapSnippetsTest = ( payload ) => async ( dispatch, getState ) => {
     dispatch( actions.insertAdjacentSnippetsTest( merged, { [ pos ]: targetId }, id ) );
 
     Object.values( sourceTest.commands ).forEach( command => {
-      dispatch( commandActions.addCommand({
+      dispatch( commandActions.addSnippetsCommand({
         ...command,
         testId: id,
         groupId: targetTest.groupId
@@ -103,7 +103,7 @@ actions.pasteSnippetsTest = ( payload, dest, uid ) => async ( dispatch ) => {
         : actions.addSnippetsTest( merged, id )
     );
     Object.values( payload.commands ).forEach( command => {
-      dispatch( commandActions.addCommand({ ...command, testId: id, groupId: merged.groupId }) );
+      dispatch( commandActions.addSnippetsCommand({ ...command, testId: id, groupId: merged.groupId }) );
     });
   } catch ( ex ) {
     handleException( ex, dispatch, "Cannot paste test" );
@@ -128,7 +128,7 @@ actions.cloneSnippetsTest = ( test, options = {}) => async ( dispatch, getState 
           position = { after: test.id };
     dispatch( actions.insertAdjacentSnippetsTest( merged, position, id ) );
     Object.values( source.commands ).forEach( command => {
-      dispatch( commandActions.addCommand({ ...command, testId: id, groupId: merged.groupId }) );
+      dispatch( commandActions.addSnippetsCommand({ ...command, testId: id, groupId: merged.groupId }) );
     });
   } catch ( ex ) {
     handleException( ex, dispatch, "Cannot clone test" );
@@ -153,7 +153,7 @@ actions.transferSnippetsTest = ( test, options = {}) => async ( dispatch, getSta
     dispatch( actions.addSnippetsTest( merged, id ) );
 
     Object.values( source.commands ).forEach( command => {
-      dispatch( commandActions.addCommand({ ...command, testId: id, groupId: options.groupId }) );
+      dispatch( commandActions.addSnippetsCommand({ ...command, testId: id, groupId: options.groupId }) );
     });
   } catch ( ex ) {
     handleException( ex, dispatch, "Cannot transfer test" );
