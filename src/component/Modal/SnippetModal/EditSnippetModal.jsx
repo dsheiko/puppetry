@@ -27,7 +27,7 @@ export class EditSnippetModal extends AbstractSnippetModal {
   onClickOk = ( e ) => {
     const { validateFields } = this.props.form,
           { id } = this.props.data,
-          { setApp, updateSnippetsTest } = this.props.action;
+          { setApp, updateSnippetsTest, autosaveSuite } = this.props.action;
 
     e.preventDefault();
 
@@ -41,6 +41,7 @@ export class EditSnippetModal extends AbstractSnippetModal {
         title,
         id
       });
+      autosaveSuite();
     });
   }
 

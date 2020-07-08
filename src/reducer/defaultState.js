@@ -1,3 +1,5 @@
+import { SNIPPETS_GROUP_ID } from "constant";
+
 export default {
   // Settings stored in localStorage
   settings: {
@@ -162,7 +164,9 @@ export default {
   snippets: {
 
     groups: {
-      snippets: {}
+      [ SNIPPETS_GROUP_ID ]: {
+        tests: {}
+      }
     }
   }
 };

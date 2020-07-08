@@ -10,13 +10,14 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import actions from "action";
 import { confirmDeleteSnippets } from "service/smalltalk";
+import * as selectors from "selector/selectors";
 
 const { Menu, MenuItem } = remote,
 
       // Mapping state to the props
       mapStateToProps = ( state ) => ({
-        snippets: Object.values( state.snippets.groups.snippets.tests ?? {}),
-        active: state.project.lastOpenSnippetId
+        active: state.project.lastOpenSnippetId,
+        tests: selectors.getSnippetsAllTestsMemoized( state )
       }),
       // Mapping actions to the props
       mapDispatchToProps = ( dispatch ) => ({
@@ -130,7 +131,7 @@ export class SnippetExplorer extends React.Component {
 
 
   render() {
-    const { projectDirectory, snippets, active } = this.props;
+    const { projectDirectory, active, tests } = this.props;
     window.consoleCount( __filename );
     return (
       <ErrorBoundary>
@@ -146,7 +147,7 @@ export class SnippetExplorer extends React.Component {
 
           </h2>
           { projectDirectory ? <nav className="project-navigator__nav">
-            { snippets.map( ( entity, inx ) => (
+            { Object.values( tests ).map( ( entity, inx ) => (
 
               <div
                 key={ `d${inx}` }

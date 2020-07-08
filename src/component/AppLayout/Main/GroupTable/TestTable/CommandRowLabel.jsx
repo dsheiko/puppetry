@@ -6,10 +6,12 @@ import Tooltip from "component/Global/Tooltip";
 import { getSchema } from "component/Schema/schema";
 import { truncate, extendToGherkin } from "service/utils";
 import { connect } from "react-redux";
+import * as selectors from "selector/selectors";
 
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
-        testCaseStyle: state.settings.testCaseStyle
+        testCaseStyle: state.settings.testCaseStyle,
+        snippetsTests: selectors.getCleanSnippetsMemoized( state )
       }),
       // Mapping actions to the props
       mapDispatchToProps = () => ({
@@ -20,7 +22,7 @@ export class CommandRowLabel extends React.Component {
 
    static propTypes = {
      record: PropTypes.object.isRequired,
-     snippets: PropTypes.any,
+     snippetsTests: PropTypes.any,
      testCaseStyle: PropTypes.string
    }
 
@@ -50,9 +52,9 @@ export class CommandRowLabel extends React.Component {
 
 
    renderRef() {
-     const { record, snippets } = this.props,
-           title = snippets.hasOwnProperty( record.ref )
-             ? snippets[ record.ref ].title
+     const { record, snippetsTests } = this.props,
+           title = snippetsTests.hasOwnProperty( record.ref )
+             ? snippetsTests[ record.ref ].title
              : ( record.refName || "reference not found" );
 
      return ( <div className="container--editable-cell">
@@ -70,6 +72,9 @@ export class CommandRowLabel extends React.Component {
    shouldComponentUpdate( nextProps ) {
      const prev = this.props.record,
            next = nextProps.record;
+     if ( this.props.snippetsTests !== nextProps.snippetsTests ) {
+       return true;
+     }
      if ( !this.props.record ) {
        return false;
      }

@@ -23,6 +23,20 @@ import  { testDefaultState } from "reducer/defaultState";
  * @typedef {object} Entity - Contents of test
  */
 
+
+function normalize( state, groupId ) {
+  if ( state.groups.hasOwnProperty( groupId ) ) {
+    return state;
+  }
+  return update( state, {
+    groups: {
+      [ groupId ]: {
+        $set: { tests: {} }
+      }
+    }
+  });
+}
+
 /**
  * Contents of test
  * @typedef {object} Payload
@@ -45,8 +59,7 @@ export default ( ns = "Test" ) => ({
           gid = id || uniqid();
 
     merge[ gid ] = { ...testDefaultState( gid ), ...options, commands: {}};
-
-    return update( state, {
+    return update( normalize( state, options.groupId ), {
       lastInsertTestId: {
         $set: gid
       },

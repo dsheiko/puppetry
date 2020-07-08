@@ -15,8 +15,7 @@ const { Menu, MenuItem } = remote,
       // Mapping state to the props
       mapStateToProps = ( state, props ) => ({
         title: state.suite.title,
-        snippets: state.snippets,
-        cleanSnippets: selectors.getCleanSnippetsMemoized( state ),
+        snippetsTests: selectors.getCleanSnippetsMemoized( state ),
         //commands: selectors.getCommandsArray( state, props.groupId, props.testId )
         commands: selectors.getCommandsMemoized( state, props )
       }),
@@ -39,7 +38,7 @@ export class CommandTable extends AbstractDnDTable {
         title: "Command",
         dataIndex: "target",
 
-        render: ( text, record ) => ( <CommandRowLabel record={ record } snippets={ props.cleanSnippets } /> )
+        render: ( text, record ) => ( <CommandRowLabel record={ record } /> )
       },
       this.getActionColumn()
     ];
@@ -230,7 +229,7 @@ export class CommandTable extends AbstractDnDTable {
     if ( this.props.commands !== nextProps.commands
           || this.props.groupId !== nextProps.groupId
           || this.props.testId !== nextProps.testId
-          || this.props.snippets !== nextProps.snippets
+          || this.props.snippetsTests !== nextProps.snippetsTests
           || this.props.targets !== nextProps.targets
     ) {
       return true;
@@ -260,7 +259,7 @@ export class CommandTable extends AbstractDnDTable {
   }
 
   render() {
-    const { cleanSnippets } = this.props,
+    const { snippetsTests } = this.props,
           commands = this.props.commands.filter( command => ( command.ref || ( command.target && command.method ) ) );
 
     return ( <ErrorBoundary>
@@ -279,7 +278,7 @@ export class CommandTable extends AbstractDnDTable {
             id="cCommandTableAddBtn"
             onClick={ this.addRecord }><Icon type="plus" />Add a command/assertion</Button>
 
-          { ( this.props.groupId !== SNIPPETS_GROUP_ID && Object.keys( cleanSnippets ).length ) ? <Button
+          { ( this.props.groupId !== SNIPPETS_GROUP_ID && Object.keys( snippetsTests ).length ) ? <Button
             id="cCommandTableAddSnippetBtn"
             type="dashed"
             onClick={ this.addSnippet }><Icon type="plus" />Add a reference</Button> :  null }

@@ -21,7 +21,9 @@ const TabPane = Tabs.TabPane,
         projectDirectory: state.settings.projectDirectory,
         app: state.app,
         suiteModified: state.suite.modified,
-        suiteSnippets: state.suite.snippets,
+
+        snippets: state.snippets,
+
         suiteTargets: state.suite.targets,
         suiteFilename: state.suite.filename,
         suiteTitle: state.suite.description || state.suite.title,

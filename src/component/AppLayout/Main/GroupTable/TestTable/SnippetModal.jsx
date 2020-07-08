@@ -43,6 +43,7 @@ export class SnippetModal extends AbstractForm {
           ...record, ref: values.snippet, comment: values.comment, isRef: true, refName: match.title
         });
       }
+      this.props.action.autosaveSuite();
       this.close();
     });
   }

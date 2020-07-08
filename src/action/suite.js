@@ -34,7 +34,6 @@ actions.updateSuite = ( suite ) => ( dispatch ) => {
 };
 
 actions.autosaveSuite = () => ( dispatch, getState ) => {
-
   const store = getState(),
         autosaveSuite = () => {
           autosaveTimeout = null;

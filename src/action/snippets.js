@@ -1,6 +1,6 @@
 import { createActions } from "redux-actions";
 import { readSuite, writeSuite } from "../service/io";
-import { SNIPPETS_FILENAME } from "constant";
+import { SNIPPETS_FILENAME, SNIPPETS_GROUP_ID } from "constant";
 import DEFAULT_STATE from "reducer/defaultState";
 import { dateToTs } from "service/utils";
 import { version, handleException, saveProject } from "./helpers";
@@ -49,7 +49,7 @@ actions.saveSnippets = ( options = {}, autosave = false ) => async ( dispatch, g
       throw new InvalidArgumentError( "Empty project directory" );
     }
     const data = { ...store.snippets, puppetry: version };
-  
+
     await writeSuite( projectDirectory, filename, JSON.stringify( data, null, "  " ) );
 
     if ( !autosave ) {
