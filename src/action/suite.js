@@ -34,6 +34,7 @@ actions.updateSuite = ( suite ) => ( dispatch ) => {
 };
 
 actions.autosaveSuite = () => ( dispatch, getState ) => {
+
   const store = getState(),
         autosaveSuite = () => {
           autosaveTimeout = null;
@@ -163,7 +164,6 @@ actions.saveSuite = ( options = {}, autosave = false ) => async ( dispatch, getS
     if ( !autosave ) {
       dispatch( actions.updateSuite({ savedAt: dateToTs(), modified: false }) );
     }
-
 
   } catch ( e ) {
     dispatch( errorActions.setError({

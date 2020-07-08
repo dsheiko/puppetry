@@ -5,6 +5,7 @@ import AbstractForm from "component/AbstractForm";
 import { SnippetVariables } from "./SnippetVariables";
 import { Form, Button, Select, Input } from "antd";
 import { SELECT_SEARCH_PROPS } from "service/utils";
+import { SNIPPETS_GROUP_ID } from "constant";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
@@ -22,7 +23,8 @@ export class SnippetModal extends AbstractForm {
 
   onClickOk = async ( e ) => {
     const { validateFields } = this.props.form,
-          { action, record, snippets } = this.props;
+          { action, record, snippets } = this.props,
+          ns = record.groupId === SNIPPETS_GROUP_ID ? "Snippets" : "";
     e.preventDefault();
 
     validateFields( async ( err, values ) => {
@@ -35,11 +37,11 @@ export class SnippetModal extends AbstractForm {
       record.variables = this.state.variables;
 
       if ( record.id ) {
-        action.updateCommand({
+        action[ `update${ ns }Command` ]({
           ...record, ref: values.snippet, comment: values.comment, isRef: true, refName: match.title
         });
       } else {
-        action.addCommand({
+        action[ `add${ ns }Command` ]({
           ...record, ref: values.snippet, comment: values.comment, isRef: true, refName: match.title
         });
       }
@@ -107,7 +109,9 @@ export class SnippetModal extends AbstractForm {
                 { ...SELECT_SEARCH_PROPS }
               >
                 {
-                  Object.values( snippets ).map( snippet => ( <Option key={ snippet.id }>
+                  Object.values( snippets )
+                    .filter( snippet => snippet.id !== record.testId )
+                    .map( snippet => ( <Option key={ snippet.id }>
                     { snippet.title }</Option> ) )
                 }
               </Select>

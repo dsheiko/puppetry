@@ -47,10 +47,7 @@ export class SnippetCommandTable extends AbstractDnDTable {
   model = "SnippetsCommand";
 
   updateSuiteModified() {
-    this.props.action.updateSuite({
-      modified: true
-    });
-    this.props.action.autosaveSuite();
+    this.props.action.autosaveSnippets();
     this.resetSelected();
   }
 
@@ -277,7 +274,7 @@ export class SnippetCommandTable extends AbstractDnDTable {
             id="cSnippetCommandTableAddBtn"
             onClick={ this.addRecord }><Icon type="plus" />Add a command/assertion</Button>
 
-          { ( this.props.groupId !== SNIPPETS_GROUP_ID && Object.keys( cleanSnippets ).length ) ? <Button
+          { ( Object.keys( cleanSnippets ).length ) ? <Button
             id="cCommandTableAddSnippetBtn"
             type="dashed"
             onClick={ this.addSnippet }><Icon type="plus" />Add a reference</Button> :  null }

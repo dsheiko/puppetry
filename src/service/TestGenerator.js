@@ -1,6 +1,6 @@
 import log from "electron-log";
 import { TestGeneratorError } from "error";
-import { COMMAND_ID_COMMENT, RUNNER_PUPPETRY, SNIPPETS_GROUP_ID } from "constant";
+import { COMMAND_ID_COMMENT, RUNNER_PUPPETRY, SNIPPETS_GROUP_ID, SNIPPET_NESTING_LEVEL_LIMIT } from "constant";
 import { getTargetChain, getActiveTargets } from "selector/selectors";
 import { mapSelectors } from "service/selector";
 import { renderTarget } from "service/utils";
@@ -64,9 +64,10 @@ export default class TestGenerator {
    * @param {string} ref
    * @param {object} variables
    * @param {string} parentId
+   * @param {number} nesting
    * @returns {string}
    */
-  parseRef = ( ref, variables, parentId ) => {
+  parseRef = ( ref, variables, parentId, nesting ) => {
     const groups = this.snippets.groups;
     if ( !groups.hasOwnProperty( SNIPPETS_GROUP_ID ) ) {
       console.warn( `Cannot find ID: ${ SNIPPETS_GROUP_ID } in groups:`, groups );
@@ -85,7 +86,7 @@ export default class TestGenerator {
             ?  `      Object.assign( ENV, ${ JSON.stringify( variables ) } );\n` : ``,
           chunk = Object.values( test.commands )
             .map( command => Object.assign({}, command, { parentId }) )
-            .map( this.parseCommand ).join( "\n" );
+            .map( c => this.parseCommand( c, nesting + 1 ) ).join( "\n" );
     return `      // SNIPPET ${ test.title }: START\n${ saveEnv }${ env }${ chunk }\n${ restoreEnv }` +
       `      // SNIPPET ${ test.title }: END\n`;
   }
@@ -122,16 +123,20 @@ export default class TestGenerator {
 
   /**
    * @param {Object} command
+   * @param {Number} nesting (level to control nesting)
    * @returns {string}
    */
-  parseCommand = ( command ) => {
+  parseCommand = ( command, nesting = 0 ) => {
     const { isRef, ref, target, method, params, assert, variables, disabled, id } = command,
           src = target === "page" ? "page" : "element";
     if ( disabled ) {
       return ``;
     }
+    if ( isRef && nesting > SNIPPET_NESTING_LEVEL_LIMIT ) {
+      return '';
+    }
     if ( isRef ) {
-      return this.parseRef( ref, variables, id );
+      return this.parseRef( ref, variables, id, nesting );
     }
     try {
       if ( ! ( method in this.schema[ src ]) ) {

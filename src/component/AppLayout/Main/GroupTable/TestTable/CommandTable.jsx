@@ -278,7 +278,7 @@ export class CommandTable extends AbstractDnDTable {
             id="cCommandTableAddBtn"
             onClick={ this.addRecord }><Icon type="plus" />Add a command/assertion</Button>
 
-          { ( this.props.groupId !== SNIPPETS_GROUP_ID && Object.keys( snippetsTests ).length ) ? <Button
+          { ( Object.keys( snippetsTests ).length ) ? <Button
             id="cCommandTableAddSnippetBtn"
             type="dashed"
             onClick={ this.addSnippet }><Icon type="plus" />Add a reference</Button> :  null }

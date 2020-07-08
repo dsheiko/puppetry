@@ -49,7 +49,6 @@ actions.saveSnippets = ( options = {}, autosave = false ) => async ( dispatch, g
       throw new InvalidArgumentError( "Empty project directory" );
     }
     const data = { ...store.snippets, puppetry: version };
-
     await writeSuite( projectDirectory, filename, JSON.stringify( data, null, "  " ) );
 
     if ( !autosave ) {
@@ -66,7 +65,6 @@ actions.saveSnippets = ( options = {}, autosave = false ) => async ( dispatch, g
 };
 
 actions.autosaveSnippets = () => ( dispatch, getState ) => {
-
   const store = getState(),
         autosaveSnippets = () => {
           autosaveTimeout = null;

@@ -96,6 +96,8 @@ exports.SELECTOR_XPATH = 2;
 exports.STORAGE_KEY_SETTINGS = "settings";
 exports.STORAGE_KEY_STATE = "state";
 
+exports.SNIPPET_NESTING_LEVEL_LIMIT = 10;
+
 exports.FIELDSET_DEFAULT_LAYOUT = {
   labelCol: {
     span: 3

@@ -102,7 +102,12 @@ export class CommandForm extends React.Component {
           waitForTarget: values.waitForTarget || false
         });
 
-        this.updateSuiteModified();
+        if ( ns === "Snippets" ) {
+          this.props.action.autosaveSnippets();
+        } else {
+          this.updateSuiteModified();
+        }
+
         this.resetState();
         closeModal();
       }
