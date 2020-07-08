@@ -273,6 +273,12 @@ exports.util = {
 
   pollForValue,
 
+  PATH_SCREENSHOTS,
+  PATH_REPORTS,
+  PATH_LOGS,
+  PATH_COMPARE,
+  SUITE_NAME,
+
   exp: {
     fake,
     /**
