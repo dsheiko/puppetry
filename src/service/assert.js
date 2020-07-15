@@ -141,10 +141,15 @@ function createCbBody({ assert, target, method, id, params }) {
     return justify( `expect( result ).not.toIncludeSubstring( ${ parseTpl( value, id, options.assertionType ) }`
         + `, "${ source }" );` );
   case "equals":
-    return justify( `expect( result ).toBeEqual( ${ parseTpl( value, id, options.assertionType ) }, "${ source }" );` );
+    return justify( options.assertionType === "text"
+      ? `expect( result ).toBeTextEqual( ${ parseTpl( value, id, options.assertionType ) }, "${ source }" );`
+      : `expect( result ).toBeEqual( ${ parseTpl( value, id, options.assertionType ) }, "${ source }" );`
+    );
   case "!equals":
-    return justify( `expect( result )`
-    + `.not.toBeEqual( ${ parseTpl( value, id, options.assertionType ) }, "${ source }" );` );
+    return justify( options.assertionType === "text"
+      ? `expect( result ).not.toBeTextEqual( ${ parseTpl( value, id, options.assertionType ) }, "${ source }" );`
+      : `expect( result ).not.toBeEqual( ${ parseTpl( value, id, options.assertionType ) }, "${ source }" );`
+    );
   case "empty":
     return justify( `expect( result ).toBeEmpty( "${ source }" );` );
   case "!empty":

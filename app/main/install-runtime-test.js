@@ -128,7 +128,8 @@ exports.installRuntimeTest = ( event, appInstallDirectory ) => {
       "shelljs@^0.8.2",
       "pixelmatch@^5.1.0",
       "pngjs@^3.4.0",
-      "text-table@^0.2.0"
+      "text-table@^0.2.0",
+      "text-diff@^1.0.1"
     ], ( err, data ) => {
       if ( err ) {
         log.error( `Main process: NPM(2): ${err}` );

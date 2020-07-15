@@ -4,7 +4,7 @@ import { normalizeAssertionVerb, normalizeAssertionValue, renderTarget } from "s
 
 export const assertText = {
   template: ( command ) => buildAssertionTpl(
-    `( await bs.target( ${ renderTarget( command.target ) } ).getProp( "innerText" ) ).replace( /\\n+/gm, "\\n" )`,
+    `await bs.target( ${ renderTarget( command.target ) } ).getProp( "innerText" )`,
     command,
     `// Asserting that rendered text content of the focused element satisfies the given constraint`
   ),

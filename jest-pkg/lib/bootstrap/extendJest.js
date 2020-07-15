@@ -1,5 +1,28 @@
 const { assertionMap, filterGaBeacons, validateGaBeacons, valsToString } = require( "../GaTracking/helpers" ),
-      jp = require( "jsonpath" );
+      jp = require( "jsonpath" ),
+      Diff = require( "text-diff" );
+
+Diff.prettyText = function( diffs ) {
+  const DIFF_DELETE = -1,
+        DIFF_INSERT = 1,
+        DIFF_EQUAL = 0;
+
+  return diffs.reduce(( chunks, diff ) => {
+    const [ op, text ] = diff;
+    switch ( op ) {
+      case DIFF_INSERT:
+        chunks.push( "[INS]" + text + "[/INS]" );
+        break;
+      case DIFF_DELETE:
+        chunks.push( "[DEL]" + text + "[/DEL]" );
+        break;
+      case DIFF_EQUAL:
+        chunks.push( text );
+        break;
+    }
+    return chunks;
+  }, []).join( "" );
+};
 
 function matchJsonPath( text, exp, val ) {
   try {
@@ -122,6 +145,10 @@ module.exports = function( expect, util ) {
     }
   }
 
+  function stripNb( value ) {
+    return value.replace( /\s+/gm, "\n" );
+  }
+
   expect.extend({
     /**
      * Assert value is truthy
@@ -204,6 +231,25 @@ module.exports = function( expect, util ) {
       return expectReturn( pass,
         `[${ source }] expected ${ JSON.stringify( received ) } to equal ${ JSON.stringify( value ) }`,
         `[${ source }] expected ${ JSON.stringify( received ) } not to equal ${ JSON.stringify( value ) }` );
+    },
+
+    /**
+     * Assert text values equal
+     * @param {String|Number|Boolean} received
+     * @param {String|Number|Boolean} value
+     * @param {String} source
+     * @returns {Object}
+     */
+    toBeTextEqual( received, value, source ) {
+      received = stripNb( received );
+      value = stripNb( value );
+      const pass = received === value,
+            diff = new Diff(),
+            textDiff = Diff.prettyText( diff.main( value, received ) );
+
+      return expectReturn( pass,
+        `[${ source }] expected to equal, but DIFF found ${ JSON.stringify( textDiff ) }`,
+        `[${ source }] expected not to equal, but they are` );
     },
 
      /**

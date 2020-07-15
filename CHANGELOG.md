@@ -1,3 +1,10 @@
+# Puppetry 4.0.0
+
+### Features
+- improvement: added text DIFF for text equality assertions
+- improvement: new UI
+- improvement: snippet
+
 # Puppetry 3.2.3
 
 ### Updates
