@@ -1,5 +1,5 @@
 import { SELECT, INPUT, INPUT_NUMBER } from "../../constants";
-import { isEveryValueMissing } from "service/utils";
+import { isEveryValueMissing, renderPage } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
 
 /**
@@ -17,7 +17,7 @@ export const goto = {
    * @param {TemplatePayload} payload
    * @returns {String}
    */
-  template: ({ params, id }) => {
+  template: ({ params, id, window }) => {
     const { url, timeout, waitUntil } = params,
           options = {
             timeout, waitUntil
@@ -28,7 +28,7 @@ export const goto = {
     return `
       // Navigating to ${ url }
       bs.performance.reset();
-      await bs.page.goto( ${ urlString }${ optArg });
+      await ${ renderPage( window ) }.goto( ${ urlString }${ optArg });
     `;
   },
 

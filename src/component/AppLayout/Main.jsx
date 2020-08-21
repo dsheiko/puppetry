@@ -5,6 +5,7 @@ import { Tabs, Icon } from "antd";
 import { GroupTable  } from "./Main/GroupTable";
 import { SuiteForm  } from "./Main/SuiteForm";
 import { TargetTable  } from "./Main/TargetTable";
+import { PageTable  } from "./Main/PageTable";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractComponent from "component/AbstractComponent";
 import LearnMore from "component/Global/LearnMore";
@@ -73,7 +74,7 @@ export class Main extends AbstractComponent {
     this.props.action.addAppTab( tabKey );
   }
 
-  panes = [ "targets", "groups", "options" ];
+  panes = [ "groups", "targets", "options" ];
 
   onKeyDown = ( e ) => {
     if ( e.keyCode === KEY_TAB && e.ctrlKey ) {
@@ -94,7 +95,7 @@ export class Main extends AbstractComponent {
 
   getActivePane() {
     const { panes  } = this.props;
-    let activeKey = "targets";
+    let activeKey = "groups";
     if ( panes.length ) {
       [ activeKey ] = panes;
     }
@@ -113,7 +114,9 @@ export class Main extends AbstractComponent {
             groupDataTable
           } = this.props,
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
+          windowsLabel = ( <span><Icon type="appstore" />Windows</span> ),
           groupsLabel = ( <span><Icon type="audit" />Test Cases</span> ),
+          optionsLabel = ( <span><Icon type="tool" />Suite Options</span> ),
           activeKey = this.getActivePane();
 
     window.consoleCount( __filename );
@@ -129,15 +132,6 @@ export class Main extends AbstractComponent {
             animated={ false }
             onChange={ this.onTabChange }
           >
-            <TabPane tab={ targetsLabel } key="targets">
-              <p>Targets are identifiers associated with locators (CSS selector or XPath)
-              that we can refer in the test cases.
-              </p>
-
-              <p><LearnMore href="https://docs.puppetry.app/target" />
-              </p>
-              <TargetTable action={action} targets={ targetDataTable } />
-            </TabPane>
 
             <TabPane tab={ groupsLabel } key="groups">
               <p>Test case is a specification of { "" }<a href="https://docs.puppetry.app/test-step"
@@ -163,7 +157,25 @@ export class Main extends AbstractComponent {
                 targets={ targets } />
             </TabPane>
 
-            <TabPane tab={ "Suite options" } key="options">
+            <TabPane tab={ targetsLabel } key="targets">
+              <p>Targets are identifiers associated with locators (CSS selector or XPath)
+              that we can refer in the test cases.
+              </p>
+
+              <p><LearnMore href="https://docs.puppetry.app/target" />
+              </p>
+              <TargetTable action={ action } targets={ targetDataTable } />
+            </TabPane>
+
+            <TabPane tab={ windowsLabel } key="windows">
+               <p>Windows represent open browser windows and tabs.
+              </p>
+              <PageTable action={ action } />
+            </TabPane>
+
+
+
+            <TabPane tab={ optionsLabel } key="options">
               <SuiteForm  action={ action } title={ title } timeout={ timeout } description={ description } />
             </TabPane>
 

@@ -22,6 +22,13 @@ export function renderTarget( targetName ) {
   return `await bs.getTarget( "${ targetName }" )`;
 }
 
+export function renderPage( name ) {
+  if ( !name || name === "main" ) {
+    return `bs.page`;
+  }
+  return `( await bs.findPage( "${ name }" ) )`;
+}
+
 export const SELECT_SEARCH_PROPS = {
   showSearch: true,
   optionFilterProp: "children",
@@ -29,11 +36,13 @@ export const SELECT_SEARCH_PROPS = {
 };
 
 export function extendToLabel( record, text ) {
-  return record.waitForTarget ? `target.waitForTarget(), ` + text : text;
+  const pref = record.page && record.page !== "main" ? `${ record.page }: ` : ``;
+  return pref + ( record.waitForTarget ? `target.waitForTarget(), ` + text : text );
 }
 
 export function extendToGherkin( record, text ) {
-  return record.waitForTarget ? `Wait for target \`${ record.target } \` and ` + lcfirst( text ) : text;
+  const pref = record.page && record.page !== "main" ? `${ record.page }: ` : ``;
+  return pref + ( record.waitForTarget ? `Wait for target \`${ record.target } \` and ` + lcfirst( text ) : text );
 }
 
 /**

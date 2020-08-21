@@ -20,7 +20,8 @@ export function findCommandsByTestId( testId, groups ) {
 const stateGlobal = ( state ) => state,
       stateSnippets = ( state ) => state.snippets,
       stateSnippetsTargets = ( state ) => state.snippets.targets,
-
+      stateSnippetsPages = ( state ) => state.snippets.pages,
+      stateSuitePage = ( state ) => state.suite.pages,
       stateSuiteTargets = ( state ) => state.suite.targets,
       stateProjectTargets = ( state ) => state.project.targets,
       stateSuiteGroups = ( state ) => state.suite.groups,
@@ -37,6 +38,7 @@ export const getSnippetsAllTestsMemoized = createSelector( stateGlobal, getSnipp
 export const getProjectTargetDataTableMemoized = createSelector( stateProjectTargets, getTargetDataTable );
 export const getSnippetsTargetDataTableMemoized = createSelector( stateSnippetsTargets, getTargetDataTable );
 export const getSuiteTargetDataTableMemoized = createSelector( stateSuiteTargets, getTargetDataTable );
+export const getSuitePageDataTableMemoized = createSelector( stateSuitePage, getTargetDataTable );
 export const getSuiteGroupsMemoized = createSelector( stateSuiteGroups,
   ( groups ) => getStructureDataTable( groups, "group" ) );
 export const getGroupTestsMemoized = createSelector( groupTests,

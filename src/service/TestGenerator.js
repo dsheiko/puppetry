@@ -189,7 +189,8 @@ export default class TestGenerator {
               id: command.id,
               testId: command.testId,
               parentId: command.parentId,
-              projectDirectory: this.projectDirectory
+              projectDirectory: this.projectDirectory,
+              window: command.window
             }) + traceCode + interactiveModeCode;
 
 

@@ -40,7 +40,7 @@ import { assertRest } from "./Params/Page/assertRest";
 import { assertResponse } from "./Params/Page/assertResponse";
 import { mockRequest } from "./Params/Page/mockRequest";
 import { authenticate } from "./Params/Page/authenticate";
-
+import { newPage } from "./Params/Page/newPage";
 
 import { screenshot as screenshotElement } from "./Params/Element/screenshot";
 import { assertProperty } from "./Params/Element/assertProperty";
@@ -145,6 +145,7 @@ export const schema = {
     runjs,
     debug,
     closeDialog,
+    newPage,
     assignVar,
     assignVarRemotely,
     assertTitle,

@@ -1,5 +1,5 @@
 import { INPUT, INPUT_NUMBER, TARGET_SELECT, CHECKBOX } from "../../constants";
-import { isEveryValueFalsy, isSomeValueNull, ruleValidateGenericString } from "service/utils";
+import { isEveryValueFalsy, isSomeValueNull, ruleValidateGenericString, renderPage } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
 import { getCounter } from "service/screenshotCounter";
 
@@ -12,7 +12,7 @@ ${ targetsArr.map(
 }
 
 export const screenshot = {
-  template: ({ params, id, parentId }) => {
+  template: ({ params, id, parentId, window }) => {
     const { name, fullPage, omitBackground, x, y, width, height } = params,
           parser = new ExpressionParser( id ),
           clip = {
@@ -33,7 +33,7 @@ export const screenshot = {
     }
 
     const optArg = isEveryValueFalsy( options ) ? ` ` : `, ${ JSON.stringify( options ) } `,
-          makeScreenshotCode = `await bs.page.screenshot( util.png( ${ JSON.stringify( id ) }, `
+          makeScreenshotCode = `await ${ renderPage( window ) }.screenshot( util.png( ${ JSON.stringify( id ) }, `
             + `${ parentId ? JSON.stringify( parentId ) : "null" }, ${ parser.stringify( name ) }${ optArg }) )`;
 
     return `

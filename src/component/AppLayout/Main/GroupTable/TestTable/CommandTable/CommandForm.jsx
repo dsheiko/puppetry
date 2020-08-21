@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Form, Row, Col, Alert, Input, Checkbox } from "antd";
+import { PageSelect } from "./PageSelect";
 import { TargetSelect } from "./TargetSelect";
 import { ElementMethodSelect } from "./ElementMethodSelect";
 import { PageMethodSelect } from "./PageMethodSelect";
@@ -45,6 +46,7 @@ export class CommandForm extends React.Component {
      this.state = {
        target: "",
        method: "",
+       page: "",
        error: "",
        validationError: ""
      };
@@ -54,6 +56,7 @@ export class CommandForm extends React.Component {
      this.setState({
        target: "",
        method: "",
+       page: "",
        error: "",
        validationError: ""
      });
@@ -89,11 +92,26 @@ export class CommandForm extends React.Component {
           }
         }
 
+console.log(values, {
+          id: record.id,
+          testId: record.testId,
+          groupId: record.groupId,
+          target: values.target,
+          page: values.page,
+          method: values.method,
+          params: values.params,
+          assert: values.assert,
+          comment: values.comment,
+          failure: "",
+          waitForTarget: values.waitForTarget || false
+        });
+
         this.props.action[ record.id ? `update${ ns }Command` : `add${ ns }Command` ]({
           id: record.id,
           testId: record.testId,
           groupId: record.groupId,
           target: values.target,
+          page: values.page,
           method: values.method,
           params: values.params,
           assert: values.assert,
@@ -113,6 +131,7 @@ export class CommandForm extends React.Component {
       }
     });
   }
+
 
   changeTarget = ( target ) => {
     this.setState({
@@ -217,6 +236,21 @@ export class CommandForm extends React.Component {
               closable />
           </If>
           <Row gutter={24}>
+
+
+            <Col xl={3} lg={8} md={24}>
+              <FormItem label="Page">
+                {getFieldDecorator( "page", {
+                  initialValue: record.page ? record.page : "main"
+                })(
+                  <PageSelect
+                    setFieldsValue={ setFieldsValue }
+                    initialValue={ record.page ? record.page : "main" }
+                    />
+                )}
+              </FormItem>
+            </Col>
+
             <Col xl={8} lg={12} md={24}>
               <FormItem label="Target">
                 {getFieldDecorator( "target", {

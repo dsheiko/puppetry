@@ -11,9 +11,11 @@ import testActions from "./test";
 import commandActions from "./command";
 import snippetsActions from "./snippets";
 import variableActions from "./variable";
+import pageActions from "./page";
 import snippetsCommandActions from "./snippetsCommand";
 import snippetsTestActions from "./snippetsTest";
 import snippetsTargetActions from "./snippetsTarget";
+import snippetsPageActions from "./snippetsPage";
 
 const actions = {
   ...errorActions,
@@ -31,7 +33,9 @@ const actions = {
   ...sharedTargetActions,
   ...snippetsCommandActions,
   ...snippetsTestActions,
-  ...snippetsTargetActions
+  ...snippetsTargetActions,
+  ...pageActions,
+  ...snippetsPageActions
 };
 
 export default actions;

@@ -144,7 +144,8 @@ export default {
     modified: false,
     filename: "",
     targets: {},
-    groups: {}
+    groups: {},
+    pages: {}
   },
 
   git: {
@@ -199,6 +200,7 @@ export const commandDefaultState = ( id ) => ({
   key: id,
   target: "",
   method: "",
+  page: "",
   assert: {},
   params: {},
   disabled: false,
@@ -221,6 +223,17 @@ export const targetDefaultState = ( id ) => ({
   parentType: "",
   ref: ""
 });
+
+export const pageDefaultState = ( id ) => ({
+  editing: false,
+  id,
+  key: id,
+  name: "",
+  url: "",
+  disabled: false,
+  adding: false
+});
+
 
 export const variableDefaultState = ( id ) => ({
   editing: false,

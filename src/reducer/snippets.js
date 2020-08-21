@@ -6,10 +6,12 @@ import update from "immutability-helper";
 import targetFn from "./suite/target";
 import testFn from "./suite/test";
 import commandFn from "./suite/command";
+import pageFn from "./suite/page";
 
 const command = commandFn( "SnippetsCommand" ),
       test = testFn( "SnippetsTest" ),
-      target = targetFn( "SnippetsTarget" );
+      target = targetFn( "SnippetsTarget" ),
+      win = pageFn( "PageTarget" );
 
 export default handleActions(
   {
@@ -27,7 +29,8 @@ export default handleActions(
 
     ...target,
     ...test,
-    ...command
+    ...command,
+    ...win
 
   },
   DEFAULT_STATE.snippets

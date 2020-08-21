@@ -7,10 +7,12 @@ import group from "./suite/group";
 import targetFn from "./suite/target";
 import testFn from "./suite/test";
 import commandFn from "./suite/command";
+import pageFn from "./suite/page";
 
 const command = commandFn( "Command" ),
       test = testFn( "Test" ),
-      target = targetFn( "Target" );
+      target = targetFn( "Target" ),
+      page = pageFn( "Page" );
 
 export default handleActions(
   {
@@ -31,7 +33,8 @@ export default handleActions(
     ...target,
     ...group,
     ...test,
-    ...command
+    ...command,
+    ...page
   },
   DEFAULT_STATE.suite
 );

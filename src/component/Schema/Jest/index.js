@@ -112,6 +112,11 @@ let consoleLog = [], // assetConsoleMessage
 
 bs.TARGETS = {};
 
+bs.PAGE_MAP = ${ JSON.stringify( Object.values( suite.windows ).reduce( ( carry, item ) => {
+  carry[ item.name ] = item.url;
+  return carry;
+}, {}), null, 2 ) };
+
 ${ buildEnv( env ) }
 
 ${ targets }

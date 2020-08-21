@@ -15,6 +15,9 @@ class BrowserSession {
 
   constructor() {
     this.error = false;
+    // support multiple windows
+    this.pages = {};
+    this.PAGE_MAP = {};
   }
 
   /**
@@ -75,7 +78,40 @@ class BrowserSession {
     }
   }
 
+  async newPage( name ) {
+    this.pages[ name ] = await this.browser.newPage();
+  }
 
+
+  /**
+   *
+   * @param {string} name
+   * @returns {Object}
+   */
+  async findPage( name ) {
+    if ( !name || name === "main" ) {
+      return this.page;
+    }
+
+    if ( this.pages.hasOwnProperty( name ) ) {
+      return this.pages[ name ];
+    }
+
+    if ( !this.PAGE_MAP.hasOwnProperty( name ) ) {
+      console.error( `Cannot find a window/tab ${ name }` );
+      return this.page;
+    }
+    const url = this.PAGE_MAP[ name ],
+          pages = await this.browser.pages(),
+          page = pages.find( page => page.url().includes( url ) );
+
+    if ( page ) {
+      return page;
+    }
+
+    console.error( `Cannot find a window/tab matching ${ url }` );
+    return this.page;
+  }
 
   /**
    * Close browser on teardown

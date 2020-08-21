@@ -50,6 +50,11 @@ export const TARGET = {
   selector: "string="
 };
 
+export const PAGE = {
+  name: "string=",
+  url: "string="
+};
+
 export const VARIABLE = {
   name: "string=",
   value: "string=",
