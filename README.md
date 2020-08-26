@@ -37,7 +37,7 @@ Namely you can do the following:
 - Features Headless Chrome ([Puppeteer](https://pptr.dev)) and [Jest](https://jestjs.io/)
 - Tests can run within the application as well as to be [exported e.g. for CI-server](https://docs.puppetry.app/exporting-tests-for-ci)
 - Exporting
-  - as [Jest.js project](https://docs.puppetry.app/export/exporting-tests-for-ci), ready to plugin in in CI/CD pipeline
+  - as [Jest.js project](https://docs.puppetry.app/export/exporting-tests-for-ci), ready to plugin in CI/CD pipeline
   - as [human-readable test specification](https://docs.puppetry.app/export/export-as-test-specification) provided with screenshots per test step.
 - [Staging, template variables and expressions](https://docs.puppetry.app/template)
 - [Reusable and configurable test scenarios](https://docs.puppetry.app/snippets)
