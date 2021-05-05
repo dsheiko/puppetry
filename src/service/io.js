@@ -4,7 +4,7 @@ import { join, parse, dirname } from "path";
 import { IoError, InvalidArgumentError, CaughtException } from "error";
 import util from "util";
 import { remote } from "electron";
-import log from "electron-log";
+//import log from "electron-log";
 import TestGenerator from "service/TestGenerator";
 import { schema } from "component/Schema/schema";
 import writeFileAtomic from "write-file-atomic";
@@ -22,9 +22,9 @@ import {
   DIR_SCREENSHOTS,
   DIR_SNAPSHOTS
 } from "constant";
-import findLogPath from "electron-log/lib/transports/file/findLogPath";
 
-const PROJECT_FILE_NAME = ".puppetryrc",
+const PROJECT_PATCH = () => "/tmp/", //join( dirname( log.transports.file.getFile().path ), ".." ),
+      PROJECT_FILE_NAME = ".puppetryrc",
       PROJECT_FALLBAK_NAME = ".puppertyrc",
       GIT_FILE_NAME = ".puppetrygit",
       cache = {},
@@ -34,6 +34,7 @@ const PROJECT_FILE_NAME = ".puppetryrc",
         "package.json",
         "README.md"
       ];
+
 export const readFile = util.promisify( fs.readFile );
 //writeFile = util.promisify( fs.writeFile ),
 export const writeFile = ( filename, data ) => new Promise( ( resolve, reject ) => {
@@ -488,7 +489,7 @@ export function getAppInstallPath() {
   if ( "appInstallPath" in cache ) {
     return cache[ "appInstallPath" ];
   }
-  const appInstallPath = dirname( findLogPath( remote.app.name ) );
+  const appInstallPath = PROJECT_PATCH;
   cache[ "appInstallPath" ] = appInstallPath;
   return appInstallPath;
 }

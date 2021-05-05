@@ -63,7 +63,7 @@ module.exports = function( mainWindow ) {
     const recorderWindow = new BrowserWindow(Object.assign({
       webPreferences: {
         webviewTag: true,
-        nodeIntegration: true
+        nodeIntegration: true,
       },
       width: APP_WIN_WIDTH,
       height: APP_WIN_HEIGHT,

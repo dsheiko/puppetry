@@ -28,32 +28,29 @@ function createWindow() {
         icon = path.join( __dirname, "assets/512x512.png" );
 
   if ( process.env.ELECTRON_ENV === "dev" ) {
-    const {
-      default: installExtension,
-      REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } = require( "electron-devtools-installer" );
+    const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer');
 
-    installExtension( REACT_DEVELOPER_TOOLS )
-        .then((name) => console.log(`Added Extension:  ${name}`))
-        .catch((err) => console.log('An error occurred: ', err));
-
-    installExtension( REDUX_DEVTOOLS )
-        .then((name) => console.log(`Added Extension:  ${name}`))
-        .catch((err) => console.log('An error occurred: ', err));
+    app.whenReady().then(() => {
+      installExtension( REACT_DEVELOPER_TOOLS )
+        .then( name => console.log( `Added Extension:  ${name}` ) )
+        .catch( err => console.log( `An error occurred: `, err ) );
+    });
   }
 
 
   const externalDisplay = findExternalDisplay(),
         position = externalDisplay
-            ? {
-              x: externalDisplay.bounds.x + Math.ceil( ( externalDisplay.bounds.width - APP_WIN_WIDTH ) / 2 ) ,
-              y: externalDisplay.bounds.y + Math.ceil( ( externalDisplay.bounds.height - APP_WIN_HEIGHT ) / 2 )
-            }
-            : {};
+          ? {
+            x: externalDisplay.bounds.x + Math.ceil( ( externalDisplay.bounds.width - APP_WIN_WIDTH ) / 2 ) ,
+            y: externalDisplay.bounds.y + Math.ceil( ( externalDisplay.bounds.height - APP_WIN_HEIGHT ) / 2 )
+          }
+          : {};
 
   // Create the browser window.
   mainWindow = new BrowserWindow( Object.assign({
     webPreferences: {
-        nodeIntegration: true
+      nodeIntegration: true,
+      preload: "./main/preload.js"
     },
     width: APP_WIN_WIDTH,
     height: APP_WIN_HEIGHT, // 768
