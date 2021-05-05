@@ -1,3 +1,9 @@
+# Puppetry 3.2.4
+
+### Updates
+- improvement: update to Puppeteer 9.1.1
+- improvement: update to Electron 12.0.6
+
 # Puppetry 3.2.3
 
 ### Updates

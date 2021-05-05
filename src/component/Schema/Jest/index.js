@@ -92,7 +92,7 @@ const {
         bs, util, fetch, localStorage
       } = require( "../lib/bootstrap" )( ${ JSON.stringify( normalizeName( title ) ) } ),
       puppeteerOptions = require( "../puppeteer.config.json" ),
-      devicesRaw = require( "puppeteer/DeviceDescriptors" ),
+      devicesRaw = require( "puppeteer" ).devices,
       devices = devicesRaw.devicesMap;
 
 

@@ -27,15 +27,15 @@ function createWindow() {
   const PROTOCOL = "file",
         icon = path.join( __dirname, "assets/512x512.png" );
 
-  if ( process.env.ELECTRON_ENV === "dev" ) {
-    const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer');
+  // if ( process.env.ELECTRON_ENV === "dev" ) {
+  //   const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer');
 
-    app.whenReady().then(() => {
-      installExtension( REACT_DEVELOPER_TOOLS )
-        .then( name => console.log( `Added Extension:  ${name}` ) )
-        .catch( err => console.log( `An error occurred: `, err ) );
-    });
-  }
+  //   app.whenReady().then(() => {
+  //     installExtension( REACT_DEVELOPER_TOOLS )
+  //       .then( name => console.log( `Added Extension:  ${name}` ) )
+  //       .catch( err => console.log( `An error occurred: `, err ) );
+  //   });
+  // }
 
 
   const externalDisplay = findExternalDisplay(),
@@ -50,7 +50,8 @@ function createWindow() {
   mainWindow = new BrowserWindow( Object.assign({
     webPreferences: {
       nodeIntegration: true,
-      preload: "./main/preload.js"
+      contextIsolation: false,
+      enableRemoteModule: true
     },
     width: APP_WIN_WIDTH,
     height: APP_WIN_HEIGHT, // 768

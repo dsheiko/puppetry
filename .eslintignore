@@ -4,3 +4,4 @@ src/vendor/**/*
 src/service/contentTypes.js
 src/service/statusCodes.js
 webpack.config.js
+app/main/vendor/**/*.js
