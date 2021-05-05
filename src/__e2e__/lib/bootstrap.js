@@ -63,7 +63,7 @@ class Ctx {
 
   async waitUntilLayoutUpdates() {
     // wait until loading state
-    await this.app.client.waitForExist( "#cLayout:not(.is-loading)" );
+    await (await this.app.client.$( "#cLayout:not(.is-loading)" )).waitForExist();
     // give it time to finish the animation
     await this.app.client.pause( 300 );
   }
@@ -133,6 +133,7 @@ class Ctx {
    * @param {type} value
    */
   async select( selector, value ) {
+    expect( await ( await this.app.client.$( selector ) ).isExisting() ).toBeOk( `selector=${ selector }` );  
     // Here what we do:
     // 1) find select parent node and click on it open
     // 2) find hash to match open global modal with dropdown menu
@@ -182,27 +183,33 @@ class Ctx {
   async expectMenuItemsAvailable( spec ) {
     const keys = Object.keys( spec );
     for ( const selector of keys ) {
-      const isDisabled = await this.hasClass( selector, "ant-menu-item-disabled" );
+      const isDisabled = await this.hasClass( selector, "ant-menu-item-disabled" );     
       expect( !isDisabled ).toBeEqual( spec[ selector ], `Menu.Item=${ selector }` );
     }
   }
 
+  screenshot() {
+    this.app.browserWindow.capturePage().then(function (imageBuffer) {
+      fs.writeFile('./page.png', imageBuffer)
+    });
+  }
+
   async hasClass( selector, className ) {
-    expect( await this.app.client.isExisting( selector ) ).toBeOk( `selector=${ selector }` );
+    expect( await ( await this.app.client.$( selector ) ).isExisting() ).toBeOk( `selector=${ selector }` );    
     return ( await this.app.client.execute( ( selector, className ) => {
       const el = document.querySelector( selector );
       return el.classList.contains( className );
-    }, selector, className ) ).value;
+    }, selector, className ) ) ;
   }
 
   async getTagName( selector ) {
     return ( await this.app.client.execute( ( selector ) => {
       return document.querySelector( selector ).tagName;
-    }, selector ) ).value;
+    }, selector ) );
   }
 
   async boundaryError() {
-    return await this.app.client.isExisting( ".critical-error" );
+    return await ( await this.app.client.$( ".critical-error" ) ).isExisting();
   }
 
  async checkLogErrors() {
