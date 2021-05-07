@@ -23,6 +23,7 @@ describe( "Main Navigation", () => {
   describe( "When no project is open", () => {
 
     test( "check items availability", async () => {
+      
       // update component
       await (await ctx.client.$( "#cMainMenuFile" )).moveTo();
 

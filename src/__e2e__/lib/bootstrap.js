@@ -188,12 +188,6 @@ class Ctx {
     }
   }
 
-  screenshot() {
-    this.app.browserWindow.capturePage().then(function (imageBuffer) {
-      fs.writeFile('./page.png', imageBuffer)
-    });
-  }
-
   async hasClass( selector, className ) {
     expect( await ( await this.app.client.$( selector ) ).isExisting() ).toBeOk( `selector=${ selector }` );    
     return ( await this.app.client.execute( ( selector, className ) => {
