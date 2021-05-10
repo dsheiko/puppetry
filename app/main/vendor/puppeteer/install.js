@@ -1,6 +1,6 @@
 
 
-module.exports = async function (puppeteerCwd, { handleDone, handleProgress, handleError }) {
+module.exports = async function ( puppeteerCwd, { handleDone, handleProgress, handleError }, product ) {
 
   // const compileTypeScriptIfRequired = require( join( puppeteerCwd, './typescript-if-required' ));
   // await compileTypeScriptIfRequired();
@@ -16,17 +16,18 @@ module.exports = async function (puppeteerCwd, { handleDone, handleProgress, han
     chrome: 'Chromium',
     firefox: 'Firefox Nightly',
   };
+  
 
   async function downloadBrowser () {
     const downloadHost =
       process.env.PUPPETEER_DOWNLOAD_HOST ||
       process.env.npm_config_puppeteer_download_host ||
       process.env.npm_package_config_puppeteer_download_host;
-    const product =
-      process.env.PUPPETEER_PRODUCT ||
-      process.env.npm_config_puppeteer_product ||
-      process.env.npm_package_config_puppeteer_product ||
-      'chrome';
+    // const product =
+    //   process.env.PUPPETEER_PRODUCT ||
+    //   process.env.npm_config_puppeteer_product ||
+    //   process.env.npm_package_config_puppeteer_product ||
+    //   'chrome';
     const downloadPath =
       process.env.PUPPETEER_DOWNLOAD_PATH ||
       process.env.npm_config_puppeteer_download_path ||

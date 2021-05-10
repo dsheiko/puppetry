@@ -38,11 +38,11 @@ export default class AbstractTestRunnerModal extends AbstractComponent {
         error: "You need to specify the path to Chrome executable in Browser Options" });
       return false;
     }
-    if ( options.product === "firefox" && !options.executablePath.trim().length ) {
-      this.setState({ loading: false,
-        error: "You need to specify the path to Firefox executable in Browser Options" });
-      return false;
-    }
+    // if ( options.product === "firefox" && !options.executablePath.trim().length ) {
+    //   this.setState({ loading: false,
+    //     error: "You need to specify the path to Firefox executable in Browser Options" });
+    //   return false;
+    // }
     return true;
   }
 

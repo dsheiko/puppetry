@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "report": "allure serve"
+    "report": "allure serve",
+    "postinstall": "cd node_modules/puppeteer && cross-env PUPPETEER_PRODUCT=firefox node install.js"
   },
   "keywords": [],
   "author": "",

@@ -1,4 +1,7 @@
-# Puppetry 3.2.4
+# Puppetry 3.2.5
+
+### Features
+- improvement: decent support of Firefox / headless Firefox
 
 ### Updates
 - improvement: update to Puppeteer 9.1.1
