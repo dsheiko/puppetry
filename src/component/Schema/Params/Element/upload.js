@@ -12,7 +12,7 @@ export const upload = {
       // Upload input[type=file]
       ${ ( name && size )
     ? `result = util.generateTmpUploadFile( "${ name }", ${ size } );`
-    : `result = "${ resolvedPath }";` }
+    : `result = ${ JSON.stringify( resolvedPath ) };` }
       await ( ${ renderTarget( target ) } ).uploadFile( result );`;
   },
 

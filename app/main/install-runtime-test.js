@@ -42,7 +42,7 @@ function downloadHeadlessBrowser( event, appInstallDirectory, product ) {
           event.sender.send( E_RUNTIME_TEST_PROGRESS, {
             progress: payload.progress,
             downloaded: `${ payload.downloadedBytes }/${ payload.totalBytes }`,
-            process: "Downloading Chromium",
+            process: `Downloading ${ product === "chrome" ? "Chromium" : "Firefox" }`,
             isDone: false,
             data: []
           });

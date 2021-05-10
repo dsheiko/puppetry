@@ -2,10 +2,15 @@
 
 ### Features
 - improvement: decent support of Firefox / headless Firefox
+- improvement: Edge support
 
 ### Updates
 - improvement: update to Puppeteer 9.1.1
 - improvement: update to Electron 12.0.6
+
+### Bug fixes
+- fix: issues #75
+- fix: upload file 
 
 # Puppetry 3.2.3
 
