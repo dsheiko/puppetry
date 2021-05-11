@@ -1,10 +1,10 @@
 {
   "name": "puppetry",
   "description": "Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline",
-  "version": "3.2.4",
+  "version": "3.2.5",
   "author": "Dmitry Sheiko <me@dsheiko.com> (http://dsheiko.com)",
   "engines": {
-    "node": ">=11.7.0"
+    "node": ">=14 <15"
   },
   "repository": {
     "type": "git",
@@ -31,7 +31,7 @@
     "dist:all": "electron-builder -wl",
     "dist": "electron-builder --linux snap",
     "start:project-test": "node ./project-test/server.js",
-    "start": "cross-env ELECTRON_ENV=dev electron .",
+    "start": "cross-env ELECTRON_ENV=dev electron . --trace-warnings",
     "start:prod": "cross-env ELECTRON_ENV=production electron .",
     "start:clean": "cross-env ELECTRON_ENV=dev PUPPETRY_CLEAN_START=true electron .",
     "start:prod:clean": "cross-env ELECTRON_ENV=production PUPPETRY_CLEAN_START=true electron .",
@@ -56,7 +56,7 @@
     "cross-env": "^5.2.0",
     "custom-error-instance": "^2.1.1",
     "electron-context-menu": "^0.10.1",
-    "electron-log": "^3.0.7",
+    "electron-log": "^4.3.5",
     "faker": "^4.1.0",
     "hotkeys-js": "^3.3.8",
     "immutability-helper": "^3.0.1",
@@ -82,7 +82,7 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "semver": "^5.6.0",
-    "shelljs": "^0.8.2",
+    "shelljs": "^0.8.4",
     "simple-xpath-position": "^2.0.2",
     "sqip": "^1.0.0-alpha.26",
     "sqip-plugin-blur": "^1.0.0-alpha.22",
@@ -114,10 +114,10 @@
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
-    "electron": "^7.0.1",
-    "electron-builder": "^21.2.0",
+    "electron": "^12.0.6",
+    "electron-builder": "^22.11.3",
     "electron-debug": "^3.0.1",
-    "electron-devtools-installer": "^2.2.4",
+    "electron-devtools-installer": "^3.2.0",
     "electron-notarize": "^0.2.1",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.6.0",
@@ -133,7 +133,7 @@
     "live-plugin-manager": "^0.12.0",
     "redux-devtools-extension": "^2.13.5",
     "regenerator-runtime": "^0.12.1",
-    "spectron": "^9.0.0",
+    "spectron": "^14.0.0",
     "style-loader": "^0.23.1",
     "text-diff": "^1.0.1",
     "uglifyjs-webpack-plugin": "^2.0.1",
@@ -160,7 +160,7 @@
     "directories": {
       "buildResources": "app/assets"
     },
-    "copyright": "©2020 Dmitry Sheiko",
+    "copyright": "©2021 Dmitry Sheiko",
     "files": [
       "app",
       "jest-pkg",
@@ -228,7 +228,7 @@
     "win": {
       "target": [
         {
-          "target": "nsis",
+          "target": "msi",
           "arch": [
             "x64"
           ]

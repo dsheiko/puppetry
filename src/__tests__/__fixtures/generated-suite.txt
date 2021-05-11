@@ -4,7 +4,7 @@
  * on Thu Apr 11 2019 10:41:06 GMT+0200 (CEST)
  */
 const { bs, png, query } = require( "../lib/bootstrap" )( "Functional--test" ),
-      devices = require( "puppeteer/DeviceDescriptors" );
+      devices = require( "puppeteer" ).devices;
 
 jest.setTimeout( 50000 );
 

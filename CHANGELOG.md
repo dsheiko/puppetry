@@ -1,7 +1,17 @@
-# Puppetry 3.2.4
+# Puppetry 3.2.5
+
+### Features
+- improvement: decent support of Firefox / headless Firefox
+- improvement: Edge support
+
+### Updates
+- improvement: update to Puppeteer 9.1.1
+- improvement: update to Electron 12.0.6
 
 ### Bug fixes
 - fix: issues #75
+- fix: upload file 
+- fix: file permissions for generated directories
 
 # Puppetry 3.2.3
 

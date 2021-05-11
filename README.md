@@ -10,7 +10,7 @@
 [![Gitter chat](https://badges.gitter.im/dsheiko/gitter.png)](https://gitter.im/dsheiko/puppetry)
 [<img src="https://img.shields.io/badge/slack-puppetry.app-yellow.svg?logo=slack">](https://puppetry-app.slack.com)
 [![Total downloads](https://img.shields.io/github/downloads/dsheiko/puppetry/total.svg)](https://github.com/dsheiko/puppetry/releases)
-[![Latest download](https://img.shields.io/github/downloads/dsheiko/puppetry/v3.2.4/total.svg)](https://github.com/dsheiko/puppetry/releases/latest)
+[![Latest download](https://img.shields.io/github/downloads/dsheiko/puppetry/v3.2.5/total.svg)](https://github.com/dsheiko/puppetry/releases/latest)
 
 <h3 align="center">CODELESS END-TO-END AUTOMATED TESTING</h3>
 
@@ -28,7 +28,7 @@ Namely you can do the following:
 - declare element targets as pairs `variable = locator`, where locator can be either CSS selector or Xpath.
 - manage your test structure in BDD style (project, suite, test context, test case)
 - manage page/element methods and assertions
-- run the tests in Headless Chromium/Chromium/Chrome/:fire: Firefox
+- run the tests in Chromium/Chromium/Chrome/Firefox/Edge
 - export the project as Jest/Puppeteer bundle ready to run in CLI (e.g. by a continuous integration server)
 
 # Key Features

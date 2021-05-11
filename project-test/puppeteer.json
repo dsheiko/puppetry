@@ -2,8 +2,8 @@
   "title": "puppeteer",
   "timeout": 50000,
   "snippets": false,
-  "savedAt": 1582123195,
-  "loadedAt": 1582123128,
+  "savedAt": 1620747553,
+  "loadedAt": 1620748467,
   "modified": false,
   "filename": "puppeteer.json",
   "targets": {
@@ -3630,7 +3630,7 @@
                 "aaColor": "#FFFF00"
               },
               "disabled": false,
-              "failure": "",
+              "failure": "Error: [page.assertScreenshot] expected to satisfy mismatch tolerance of 0.2",
               "variables": {},
               "expanded": false,
               "refName": "",
@@ -6407,5 +6407,5 @@
       }
     }
   },
-  "puppetry": "3.2.0-RC.1"
+  "puppetry": "3.2.5"
 }
