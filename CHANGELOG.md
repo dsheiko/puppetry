@@ -11,6 +11,7 @@
 ### Bug fixes
 - fix: issues #75
 - fix: upload file 
+- fix: file permissions for generated directories
 
 # Puppetry 3.2.3
 
