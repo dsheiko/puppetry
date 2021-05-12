@@ -1,0 +1,2 @@
+yarn install -std=c++17
+npm run dist:m

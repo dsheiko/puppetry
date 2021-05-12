@@ -16,6 +16,7 @@ import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
 import { ReportBody } from "./TestReport/ReportBody";
 import path from "path";
 import fs from "fs";
+import log from "electron-log";
 
 /*eslint no-useless-escape: 0*/
 
@@ -101,6 +102,7 @@ export class TestReport extends AbstractComponent {
     } catch ( err ) {
       console.error( err );
       const message = err instanceof TestGeneratorError ? "Test parser error" : "Cannot run tests";
+      log.warn( `Renderer process: TestReport::run: ${ message }: ${ err.message }` );
       this.props.action.setError({
         visible: true,
         message,
