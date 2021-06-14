@@ -74,7 +74,7 @@ export function justify( text ) {
 }
 
 function parseTpl( value, id, type ) {
-  if ( typeof type === "undefined" || type !== "string" ) {
+  if ( typeof type === "undefined" || !(type == "string" || type == "text") ) {
     return JSON.stringify( value );
   }
    // @see ./src/component/Schema/Params/Element/assertText.js
