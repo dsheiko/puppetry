@@ -1,18 +1,21 @@
 import { FILE, INPUT, INPUT_NUMBER } from "../../constants";
 import { renderTarget, result } from "service/utils";
 import fs from "fs";
+import ExpressionParser from "service/ExpressionParser";
 import { join } from "path";
 
 export const upload = {
-  template: ({ target, params, projectDirectory }) => {
-    const { path, name, size } = params,
-          resolvedPath = path ? ( fs.existsSync( path ) ? path : join( projectDirectory, path ) ) : null;
+  template: ({ id, target, params, projectDirectory }) => {
+    const { path, name, size } = params;
+    const parser = new ExpressionParser(id);
+    const expandedPath = parser.stringify( path ).replaceAll("`", "");
+    let resolvedPath = expandedPath ? ( fs.existsSync( expandedPath ) ? expandedPath : join( projectDirectory, expandedPath ) ) : null;
 
     return `
       // Upload input[type=file]
       ${ ( name && size )
     ? `result = util.generateTmpUploadFile( "${ name }", ${ size } );`
-    : `result = ${ JSON.stringify( resolvedPath ) };` }
+    : `result = \`${ resolvedPath }\`;` }
       await ( ${ renderTarget( target ) } ).uploadFile( result );`;
   },
 
