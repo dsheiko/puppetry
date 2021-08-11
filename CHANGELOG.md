@@ -1,3 +1,8 @@
+# Puppetry 3.2.6
+
+### Bug fixes
+- fix: issues #98
+
 # Puppetry 3.2.5
 
 ### Features
