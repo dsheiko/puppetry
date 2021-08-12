@@ -111,8 +111,9 @@ module.exports = function( mainWindow ) {
 
   ipcMain.on( E_RUN_TESTS, async ( event, cwd, targetFiles ) => {
     try {
-      event.returnValue = await runTests( cwd, targetFiles );
+      const res = await runTests( cwd, targetFiles );
       console.log( "\n" );
+      event.returnValue = res;
     } catch ( err ) {
       event.returnValue = { results: `Error: ${ err.message }` };
     }

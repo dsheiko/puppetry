@@ -16,7 +16,7 @@ import { updateLauncherArgs } from "./utils";
 
 /*eslint no-empty: 0*/
 const { Option, OptGroup } = Select,
-      NON_PRODUCTS = [ "headless", "chromium" , "connect", "_firefox" ];
+      NON_PRODUCTS = [ "headless", "chromium" , "connect" ];
 
 function filterNullable( obj ) {
   return Object.keys( obj ).reduce( ( carry, key ) => {
@@ -93,7 +93,7 @@ export class BrowserOptions extends AbstractComponent {
       "puppeteer.launch": filterNullable({
         product: NON_PRODUCTS.includes( this.state.product )
           ?  null
-          : this.state.product,
+          : ( this.state.product === "_firefox" ? "firefox" : this.state.product ),
         headless: this.state.product === "_firefox" || this.state.headless,
         devtools: this.state.devtools,
         slowMo: 30,
