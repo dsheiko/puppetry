@@ -1,6 +1,9 @@
 # Puppetry 3.2.6
+### Updates
+- improvement: update to Puppeteer 10.2.0
 
 ### Bug fixes
+- fix: issues #99
 - fix: issues #98
 
 # Puppetry 3.2.5

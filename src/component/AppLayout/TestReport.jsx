@@ -83,7 +83,7 @@ export class TestReport extends AbstractComponent {
               },
               projectOptions: passProjectOptions,
               suiteOptions:  passSuiteOptions,
-              exportOptions: passExportOptions
+              exportOptions: { ...passExportOptions, cleanup: true } // #99
             }),
             res = ipcRenderer.sendSync( E_RUN_TESTS, this.runtimeTemp, specList );
 
