@@ -1,5 +1,5 @@
 import React from "react";
-import { Checkbox, Select, Icon } from "antd";
+import { Checkbox, Select } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractComponent from "component/AbstractComponent";
 import BrowseDirectory from "component/Global/BrowseDirectory";
@@ -209,7 +209,8 @@ export class BrowserOptions extends AbstractComponent {
         { [ "headless", "chromium", "chrome" ].includes( this.state.product ) ?
           <ChromeArguments ref={ this.refChromeArguments } /> : null }
 
-        { [ "_firefox", "firefox" ].includes( this.state.product ) ? <FirefoxArguments ref={ this.refFirefoxArguments } /> :  null }
+        { [ "_firefox", "firefox" ].includes( this.state.product )
+          ? <FirefoxArguments ref={ this.refFirefoxArguments } /> :  null }
 
         { [ "headless", "chromium", "chrome" ].includes( this.state.product ) ?
           <div className="browser-options-layout">

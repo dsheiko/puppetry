@@ -52,6 +52,9 @@ class Parsers {
 
   // {{ FOO }}
   variable = ( key ) => `ENV[ "${ key }" ]`;
+
+  // {{ eval("process.cwd()") }}
+  eval = ([ key ]) => key;
 }
 
 export default class ExpressionParser {

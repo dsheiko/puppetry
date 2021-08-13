@@ -1,7 +1,6 @@
 import { FILE, INPUT, INPUT_NUMBER } from "../../constants";
 import { renderTarget, result } from "service/utils";
 import ExpressionParser from "service/ExpressionParser";
-import fs from "fs";
 import { join } from "path";
 
 export const upload = {

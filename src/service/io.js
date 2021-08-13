@@ -576,7 +576,7 @@ export function initRuntimeTestPath() {
     return;
   }
   try {
-    shell.mkdir( "-p" , DEST_DIR );   
+    shell.mkdir( "-p" , DEST_DIR );
     shell.cp( "-f" , SRC_DIR + "/package.json", DEST_DIR + "/" );
     shell.chmod( "-R", 777, DEST_DIR );
   } catch ( e ) {
