@@ -4,6 +4,31 @@
 - improvement: added text DIFF for text equality assertions
 - improvement: new UI
 - improvement: snippet
+# Puppetry 3.2.6
+
+### Updates
+- improvement: update to Puppeteer 10.2.0
+
+### Bug fixes
+- fix: issues #99
+- fix: issues #98
+- fix: issues #95
+- fix: issues #93
+
+# Puppetry 3.2.5
+
+### Features
+- improvement: decent support of Firefox / headless Firefox
+- improvement: Edge support
+
+### Updates
+- improvement: update to Puppeteer 9.1.1
+- improvement: update to Electron 12.0.6
+
+### Bug fixes
+- fix: issues #75
+- fix: upload file 
+- fix: file permissions for generated directories
 
 # Puppetry 3.2.3
 

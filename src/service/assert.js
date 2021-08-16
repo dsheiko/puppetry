@@ -74,7 +74,8 @@ export function justify( text ) {
 }
 
 function parseTpl( value, id, type ) {
-  if ( typeof type === "undefined" || type !== "string" ) {
+  // https://github.com/dsheiko/puppetry/pull/91/commits/8c939d2bd822a88eb49511e78ac5055d17828962
+  if ( typeof type === "undefined" || !( type == "string" || type == "text" ) ) {
     return JSON.stringify( value );
   }
   // @see ./src/component/Schema/Params/Element/assertText.js
@@ -236,4 +237,3 @@ function resolveAssetAssertion( assertionMethod, options, source ) {
     return carry;
   }, "" );
 }
-

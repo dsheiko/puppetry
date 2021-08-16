@@ -23,8 +23,9 @@ describe( "Main Navigation", () => {
   describe( "When no project is open", () => {
 
     test( "check items availability", async () => {
+      
       // update component
-      await ctx.client.moveToObject( "#cMainMenuFile" );
+      await (await ctx.client.$( "#cMainMenuFile" )).moveTo();
 
       await ctx.expectMenuItemsAvailable({
         "#cMainMenuNewProject": true,
@@ -47,7 +48,7 @@ describe( "Main Navigation", () => {
 //      await ctx.client.click( "#cWelcomeDemoProjectBtn" );
 //      await ctx.client.pause( 800 );
 //      // update component
-//      await ctx.client.moveToObject( "#cMainMenuFile" );
+//      await ctx.client.( "#cMainMenuFile" );
 //
 //      await ctx.expectMenuItemsAvailable({
 //        "#cMainMenuNewProject": true,

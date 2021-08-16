@@ -3,8 +3,8 @@
   "timeout": 50000,
   "snippets": false,
   "description": "",
-  "savedAt": 1573734166,
-  "loadedAt": 1573734154,
+  "savedAt": 1620747650,
+  "loadedAt": 1620747638,
   "modified": false,
   "filename": "target.waitForResponse.json",
   "targets": {
@@ -145,5 +145,5 @@
       }
     }
   },
-  "puppetry": "3.0.0-RC.2"
+  "puppetry": "3.2.5"
 }

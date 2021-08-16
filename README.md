@@ -10,7 +10,7 @@
 [![Gitter chat](https://badges.gitter.im/dsheiko/gitter.png)](https://gitter.im/dsheiko/puppetry)
 [<img src="https://img.shields.io/badge/slack-puppetry.app-yellow.svg?logo=slack">](https://puppetry-app.slack.com)
 [![Total downloads](https://img.shields.io/github/downloads/dsheiko/puppetry/total.svg)](https://github.com/dsheiko/puppetry/releases)
-[![Latest download](https://img.shields.io/github/downloads/dsheiko/puppetry/v3.2.2/total.svg)](https://github.com/dsheiko/puppetry/releases/latest)
+[![Latest download](https://img.shields.io/github/downloads/dsheiko/puppetry/v3.2.6/total.svg)](https://github.com/dsheiko/puppetry/releases/latest)
 
 <h3 align="center">CODELESS END-TO-END AUTOMATED TESTING</h3>
 
@@ -18,8 +18,8 @@ Puppetry is an open-source cross-platform desktop application that gives non-dev
 
 ![Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline](https://github.com/dsheiko/puppetry/raw/master/docs/assets/img/puppetry-welcome.png)
 
-- [:tv: Recording Automated Tests with Puppetry](https://youtu.be/dfuNhTCRMRg  "Recording Automated Tests with Puppetry")
-- [:tv: How to test Responsive Web Design with Puppetry](https://youtu.be/m1az-KLboG8  "How to test Responsive Web Design with Puppetry")
+- [:movie_camera:  Recording Automated Tests with Puppetry](https://youtu.be/dfuNhTCRMRg  "Recording Automated Tests with Puppetry")
+- [:movie_camera:  How to test Responsive Web Design with Puppetry](https://youtu.be/m1az-KLboG8  "How to test Responsive Web Design with Puppetry")
 
 # Welcome Puppetry
 Puppetry offers you an easy-to-use UI where you choose browser methods and assertions from a predefined list, with predefined settings, guided by extensive tips.
@@ -28,7 +28,7 @@ Namely you can do the following:
 - declare element targets as pairs `variable = locator`, where locator can be either CSS selector or Xpath.
 - manage your test structure in BDD style (project, suite, test context, test case)
 - manage page/element methods and assertions
-- run the tests in Headless Chromium/Chromium/Chrome/:fire: Firefox
+- run the tests in Chromium/Chromium/Chrome/Firefox/Edge
 - export the project as Jest/Puppeteer bundle ready to run in CLI (e.g. by a continuous integration server)
 
 # Key Features
@@ -37,7 +37,7 @@ Namely you can do the following:
 - Features Headless Chrome ([Puppeteer](https://pptr.dev)) and [Jest](https://jestjs.io/)
 - Tests can run within the application as well as to be [exported e.g. for CI-server](https://docs.puppetry.app/exporting-tests-for-ci)
 - Exporting
-  - as [Jest.js project](https://docs.puppetry.app/export/exporting-tests-for-ci), ready to plugin in in CI/CD pipeline
+  - as [Jest.js project](https://docs.puppetry.app/export/exporting-tests-for-ci), ready to plugin in CI/CD pipeline
   - as [human-readable test specification](https://docs.puppetry.app/export/export-as-test-specification) provided with screenshots per test step.
 - [Staging, template variables and expressions](https://docs.puppetry.app/template)
 - [Reusable and configurable test scenarios](https://docs.puppetry.app/snippets)

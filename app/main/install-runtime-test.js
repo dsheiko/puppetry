@@ -24,35 +24,40 @@ const npmlog = require( "npm/node_modules/npmlog" ),
       };
 
 
-function downloadChromium( event, appInstallDirectory ) {
-  const install = require( "./vendor/puppeteer/install" );
-  try {
-    install( join( appInstallDirectory, "node_modules/puppeteer" ), {
-      handleDone: ( revisionInfo ) => {
-         log.silly( `Chromium downloaded to ${ revisionInfo.folderPath }`);
-         event.sender.send( E_RUNTIME_TEST_PROGRESS, {
+function downloadHeadlessBrowser( event, appInstallDirectory, product ) {
+  return new Promise(( resolve ) => {
+    const install = require( "./vendor/puppeteer/install" );
+    try {
+      install( join( appInstallDirectory, "node_modules/puppeteer" ), {
+        handleDone: ( revisionInfo ) => {
+          log.silly( `${ product === "chrome" ? "Chromium" : "Firefox" } downloaded to ${ revisionInfo.folderPath }`);
+          event.sender.send( E_RUNTIME_TEST_PROGRESS, {
             progress: 100,
-            isDone: true,
+            isDone: product !== "chrome",
             data: []
           });
-      },
-      handleProgress: ( payload ) => {
-        event.sender.send( E_RUNTIME_TEST_PROGRESS, {
-          progress: payload.progress,
-          downloaded: `${ payload.downloadedBytes }/${ payload.totalBytes }`,
-          process: "Downloading Chromium",
-          isDone: false,
-          data: []
-        });
-      },
-      handleError: ( err ) => {
-        log.error( `Main process: NPM(4): ${err}` );
-        event.sender.send( E_RUNTIME_TEST_ERROR, err );
-      }
-    });
-  } catch ( err ) {
-    console.error( "Install error", err);
-  }
+          resolve();
+        },
+        handleProgress: ( payload ) => {
+          event.sender.send( E_RUNTIME_TEST_PROGRESS, {
+            progress: payload.progress,
+            downloaded: `${ payload.downloadedBytes }/${ payload.totalBytes }`,
+            process: `Downloading ${ product === "chrome" ? "Chromium" : "Firefox" }`,
+            isDone: false,
+            data: []
+          });
+        },
+        handleError: ( err ) => {
+          log.error( `Main process: NPM(4): ${err}` );
+          event.sender.send( E_RUNTIME_TEST_ERROR, err );
+          resolve();
+        }
+      }, product );
+    } catch ( err ) {
+      console.error( "Install error", err);
+    }
+
+  });
 }
 
 
@@ -124,7 +129,7 @@ exports.installRuntimeTest = ( event, appInstallDirectory ) => {
       "faker@^4.1.0",
       "jsonpath@^1.0.2",
       "node-localstorage@^1.3.1",
-      "puppeteer@3.3.0",
+      "puppeteer@10.2.0",
       "shelljs@^0.8.2",
       "pixelmatch@^5.1.0",
       "pngjs@^3.4.0",
@@ -138,7 +143,9 @@ exports.installRuntimeTest = ( event, appInstallDirectory ) => {
 
       log.silly( `\n\nDependencies installed in ${ appInstallDirectory }\n` );
       event.sender.send( E_RUNTIME_TEST_MILESTONE, "" );
-      downloadChromium( event, appInstallDirectory );
+      downloadHeadlessBrowser( event, appInstallDirectory, "chrome" ).then(() => {
+        downloadHeadlessBrowser( event, appInstallDirectory, "firefox" );
+      });
 
     });
     npm.on("error", msg => {

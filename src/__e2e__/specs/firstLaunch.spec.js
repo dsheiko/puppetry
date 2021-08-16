@@ -24,13 +24,13 @@ describe( "First launch", () => {
     test( "app shows welcome page", async () => {
       const win = ctx.app.browserWindow;
       expect( await win.isVisible() ).toBeTruthy();
-      expect( await ctx.client.isExisting( "#cWelcome" ) ).toBeTruthy();
+      expect( await ( await ctx.client.$( "#cWelcome" ) ).isExisting() ).toBeTruthy();     
       expect( await ctx.boundaryError() ).toBeFalsy();
       await ctx.screenshot( "welcome-screen" );
     });
 
     test( "toolbar does not have project name", async () => {
-      expect( await ctx.client.isExisting( "#cToolbarProjectName" ) ).not.toBeTruthy();
+      expect( await ( await ctx.client.$( "#cToolbarProjectName" ) ).isExisting() ).not.toBeTruthy(); 
     });
 
 
@@ -40,15 +40,15 @@ describe( "First launch", () => {
 
   describe( "Button Create project on welcome screen", () => {
     test( "pane has Create New Project button", async () => {
-      expect( await ctx.client.isExisting( "#cWelcomeNewProjectBtn" ) ).toBeTruthy();
+      expect( await ( await ctx.client.$( "#cWelcomeNewProjectBtn" ) ).isExisting() ).toBeTruthy();
     });
     test( "clicking on Create New Project opens modal", async () => {
-      await ctx.client.click( "#cWelcomeNewProjectBtn" );
+      await (await ctx.client.$( "#cWelcomeNewProjectBtn" )).click();
       await ctx.client.pause( 300 );
       expect( await ctx.boundaryError() ).toBeFalsy();
       await ctx.screenshot( "new-project-modal" );
-      expect( await ctx.client.isExisting( ".c-new-project-modal"  ) ).toBeTruthy();
-      await ctx.client.click( `.c-new-project-modal ${ S.MODAL_CLOSE_ICON }` );
+      expect( await ( await ctx.client.$( ".c-new-project-modal" ) ).isExisting() ).toBeTruthy();
+      await (await ctx.client.$( `.c-new-project-modal ${ S.MODAL_CLOSE_ICON }` )).click();
       await ctx.client.pause( 300 );
       await ctx.screenshot( "new-project-closed" );
     });
@@ -57,15 +57,15 @@ describe( "First launch", () => {
   describe( "Button Demo project on welcome screen", () => {
 
     test( "it loads demo project by click", async () => {
-      await ctx.client.click( "#cWelcomeDemoProjectBtn" );
+      await (await ctx.client.$( "#cWelcomeDemoProjectBtn" )).click();
       await ctx.client.pause( 200 );
-      if ( await ctx.client.isExisting( `.smalltalk button[data-name="js-ok"]`  ) ) {
-        await ctx.client.click( `.smalltalk button[data-name="js-ok"]` );
+      if ( await (await ctx.client.$( `.smalltalk button[data-name="js-ok"]`  )).isExisting() ) {
+        await (await ctx.client.$( `.smalltalk button[data-name="js-ok"]` )).click();
       }
 
       await ctx.waitUntilLayoutUpdates();
       await ctx.screenshot( "demo-project-screen" );
-      await ctx.client.waitForExist( "#cMain" );
+      await (await ctx.client.$( "#cMain" )).waitForExist();
       expect( await ctx.boundaryError() ).toBeFalsy();
     });
   });

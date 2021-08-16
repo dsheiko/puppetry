@@ -29,7 +29,7 @@ const png = ( id, parentId, screenshotTitle, options = {} ) => {
         const FILENAME_RE = /[^a-zA-Z\d\-\_]/g,
               normalizedTitle = screenshotTitle.replace( FILENAME_RE, "-" ),
               normalizedSuiteTitle = SUITE_NAME.replace( FILENAME_RE, "-" ),
-              fileName = `${ id }.${ normalizedTitle }.png`;
+              fileName = `${ id }.${ normalizedTitle }.png`,
               path = join( PATH_SCREENSHOTS, normalizedSuiteTitle,
                 parentId !== null ? parentId + "." + fileName : fileName );
         shell.mkdir( "-p" , dirname( path ) );

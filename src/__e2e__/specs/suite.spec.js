@@ -20,12 +20,12 @@ async function setActionInputValue( id, value, input ) {
     return;
   }
 
-  await ctx.client.waitForExist( selector );
+  await (await ctx.client.$( selector )).waitForExist();
   try {
     switch ( input ) {
       case "INPUT":
       case "INPUT_NUMBER":
-        return await ctx.client.setValue( selector, value );
+        return await ( await ctx.client.$( selector ) ).setValue( value );
       case "SELECT":
         await ctx.select( selector, value );
         return await ctx.client.pause( 300 );
@@ -104,77 +104,75 @@ describe( "New Project", () => {
   });
 
   test( "app opens New Project modal", async () => {
-    expect( await ctx.client.isExisting( "#cWelcome" ) ).toBeTruthy();
-    await ctx.client.click( "#cWelcomeNewProjectBtn" );
-    await ctx.client.waitForExist( S.MODAL_NEW_PROJECT );
+    expect( await ( await ctx.client.$( "#cWelcome" ) ).isExisting() ).toBeTruthy();
+    await (await ctx.client.$( "#cWelcomeNewProjectBtn" )).click();
+    await (await ctx.client.$( S.MODAL_NEW_PROJECT )).waitForExist();
     await ctx.screenshot( "new-project-modal-opened" );
   });
 
   test( "app populates New Project modal", async () => {
     ctx.createTmpDir( "new-project" );
-    await ctx.client.setValue( `${ S.MODAL_NEW_PROJECT } #name`, "Test Project" );
-    await ctx.client.setValue( `${ S.MODAL_NEW_PROJECT } #suiteTitle`, "Test Suite" );
+    await ( await ctx.client.$( `${ S.MODAL_NEW_PROJECT } #name` ) ).setValue( "Test Project" );
+    await ( await ctx.client.$( `${ S.MODAL_NEW_PROJECT } #suiteTitle` ) ).setValue( "Test Suite" );
     ctx.app.webContents.send( "directorySelected", ctx.getTmpDir( "new-project" ), "inNewProjectModal" );
     await ctx.client.pause( 100 );
     await ctx.screenshot( "new-project-modal-populated" );
   });
 
   test( "app lands on New Suite page", async () => {
-    await ctx.client.click( `${ S.MODAL_NEW_PROJECT } ${ S.MODAL_OK_BTN }` );
-    await ctx.client.waitForExist( S.PANEL_SUITE_TABGROUP );
+    await (await ctx.client.$( `${ S.MODAL_NEW_PROJECT } ${ S.MODAL_OK_BTN }` )).click();
+    await (await ctx.client.$( S.PANEL_SUITE_TABGROUP )).waitForExist();
     await ctx.screenshot( "newly-created-suite" );
   });
 
   test( "go tab OPTIONS", async() => {
-    await ctx.client.click( `${ S.PANEL_SUITE_TABGROUP } .ant-tabs-tab:nth-child(3)` );
-    await ctx.client.waitForExist( `#cSuiteForm #title` );
-    // expect( await ctx.client.isExisting( `#cSuiteForm #title` ) ).toBeTruthy();
+    await (await ctx.client.$( `${ S.PANEL_SUITE_TABGROUP } .ant-tabs-tab:nth-child(3)` )).click();
+    await (await ctx.client.$( `#cSuiteForm #title` )).waitForExist();
   });
 
   test( "change suite options", async() => {
-    await ctx.client.setValue( `#cSuiteForm #title`, "Test Suite Modified" );
-    await ctx.client.setValue( `#cSuiteForm #timeout`, 70000 );
-    await ctx.client.click( `#cSuiteFormChangeBtn` );
+    await ( await ctx.client.$( `#cSuiteForm #title` ) ).setValue( "Test Suite Modified" );
+    await ( await ctx.client.$( `#cSuiteForm #timeout` ) ).setValue( 70000 );
+    await (await ctx.client.$( `#cSuiteFormChangeBtn` )).click();
     await ctx.client.pause( 300 );
     expect( await ctx.boundaryError() ).toBeFalsy();
     await ctx.screenshot( "suite-form-modified" );
   });
 
   test( "go tab TARGETS", async() => {
-    await ctx.client.click( `${ S.PANEL_SUITE_TABGROUP } .ant-tabs-tab:nth-child(1)` );
-    await ctx.client.waitForExist( `#cTargetTable .input--target` );
+    await (await ctx.client.$( `${ S.PANEL_SUITE_TABGROUP } .ant-tabs-tab:nth-child(1)` )).click();
+    await (await ctx.client.$( `#cTargetTable .input--target` )).waitForExist();
     expect( await ctx.boundaryError() ).toBeFalsy();
     await ctx.screenshot( "goto-tab--targets" );
   });
 
   test( "add a target", async() => {
-    expect( await ctx.client.isExisting( "#cTargetTable .ant-form-item-control input.input--target" ) ).toBeTruthy();
-    expect( await ctx.client.isExisting( "#cTargetTable .ant-form-item-control input.input--selector" ) ).toBeTruthy();
-    await ctx.client.setValue( "#cTargetTable .ant-form-item-control input.input--target", FIX_TARGET );
-    await ctx.client.setValue( "#cTargetTable .ant-form-item-control input.input--selector", ".foo" );
-    await ctx.client.click( `#cTargetTable ${ S.EDITABLE_ROW_SUBMIT_BTN }` );
+    expect( await ( await ctx.client.$( "#cTargetTable .ant-form-item-control input.input--target" ) ).isExisting() ).toBeTruthy();
+    expect( await ( await ctx.client.$( "#cTargetTable .ant-form-item-control input.input--selector" ) ).isExisting() ).toBeTruthy();
+    await ( await ctx.client.$( "#cTargetTable .ant-form-item-control input.input--target" ) ).setValue( FIX_TARGET );
+    await ( await ctx.client.$( "#cTargetTable .ant-form-item-control input.input--selector" ) ).setValue( ".foo" );
+    await (await ctx.client.$( `#cTargetTable ${ S.EDITABLE_ROW_SUBMIT_BTN }` )).click();
     expect( await ctx.boundaryError() ).toBeFalsy();
     await ctx.screenshot( "new-target" );
   });
 
   test( "go tab GROUPS", async() => {
-    await ctx.client.click( `${ S.PANEL_SUITE_TABGROUP } .ant-tabs-tab:nth-child(2)` );
-    await ctx.client.waitForExist( "#cGroupTable .input--title > input" );
+    await (await ctx.client.$( `${ S.PANEL_SUITE_TABGROUP } .ant-tabs-tab:nth-child(2)` )).click();
+    await (await ctx.client.$( "#cGroupTable .input--title > input" )).waitForExist();
     expect( await ctx.boundaryError() ).toBeFalsy();
     await ctx.screenshot( "goto-tab--groups" );
   });
 
   test( "add a group", async() => {
-    await ctx.client.setValue( "#cGroupTable .input--title > input", "Test group" );
-    await ctx.client.click( `#cGroupTable ${ S.EDITABLE_ROW_SUBMIT_BTN }` );
-    await ctx.client.waitForExist( "#cTestTable .input--title > input" );
-    await ctx.screenshot( "new-group" );
+    await ( await ctx.client.$( "#cGroupTable .input--title > input" ) ).setValue( "Test group" );
+    await (await ctx.client.$( `#cGroupTable ${ S.EDITABLE_ROW_SUBMIT_BTN }` )).click();
+    await (await ctx.client.$( "#cTestTable .input--title > input" )).waitForExist();
   });
 
 
   test( "add a test", async() => {
-    await ctx.client.setValue( "#cTestTable .input--title > input", "Test" );
-    await ctx.client.click( `#cTestTable ${ S.EDITABLE_ROW_SUBMIT_BTN }` );
+    await ( await ctx.client.$( "#cTestTable .input--title > input" ) ).setValue( "Test" );
+    await (await ctx.client.$( `#cTestTable ${ S.EDITABLE_ROW_SUBMIT_BTN }` )).click();
     await ctx.client.pause( 300 );
     expect( await ctx.boundaryError() ).toBeFalsy();
     await ctx.screenshot( "new-test" );
@@ -188,6 +186,18 @@ describe( "New Project", () => {
 //      if ( method !== "assertNodeCount" ) {
 //        continue;
 //      }
+      
+      // the seed in logic is too complex to implement for now
+      if ( scope === "element" && method === "assertBoundingBox" ) {
+        continue;
+      }
+      if ( scope === "element" && method === "assertVisible" ) {
+        continue;
+      }
+      if ( scope === "page" && method === "mockRequest" ) {
+        continue;
+      }
+      
 
       if ( typeof config.testTypes === "undefined" ) {
         continue;
@@ -202,33 +212,47 @@ describe( "New Project", () => {
           ? `.select--page-method`
           : `.select--element-method`;
 
+        await ctx.screenshot( `command--${ method }--click-add` );
+
+        // If not closed during last pass - we do not want to screw all folowing tests
+        if ( await ( await ctx.client.$( `#cCommandModal` ) ).isExisting() ) {
+          await ctx.click( `#cCommandModal .btn--modal-command-cancel` );
+          await ctx.client.pause( 500 );
+        }
+
         // ADD COMMAND
-        await ctx.click( `#cCommandTableAddBtn` );
-        await ctx.client.waitForExist( "#cCommandForm .select--target" );
+        try {
+          await (await ctx.client.$( `[id="cCommandTableAddBtn"]` )).click();
+        } catch ( e ) {
+          console.log("LET US TO CLOSE");
+          await ctx.click( `#cCommandModal .btn--modal-command-cancel` );
+          await ctx.client.pause( 500 );
+        }
+        await (await ctx.client.$( "#cCommandForm .select--target" )).waitForExist()
         // SELECT PAGE/TARGET
         await ctx.select( "#cCommandForm .select--target", scope === "page" ? "page" : FIX_TARGET );
         // METHOD selector is disabled (input:disabled) until any value in TARGET selector picked
-        await ctx.client.waitForExist( `#cCommandForm ${ METHOD_SELECTOR }.ant-select-enabled` );
+        await (await ctx.client.$( `#cCommandForm ${ METHOD_SELECTOR }.ant-select-enabled` )).waitForExist();
 
         // SELECT METHOD
         await ctx.select( `#cCommandForm ${ METHOD_SELECTOR }`, method );
         // As soon as any value in METHOD selector picked we get description and .command-form sections into the view
-        await ctx.client.waitForExist( "#cCommandForm .command-form" );
+        await (await ctx.client.$( "#cCommandForm .command-form" )).waitForExist();
 
 
         expect( await ctx.boundaryError() ).toBeFalsy();
 
         // EXPAND OPTIONS if any
-        if (  await ctx.client.isExisting( S.TEST_STEP_COLLAPSABLE_ITEM ) ) {
+        if ( await ( await ctx.client.$( S.TEST_STEP_COLLAPSABLE_ITEM ) ).isExisting() ) {
           await ctx.click( S.TEST_STEP_COLLAPSABLE_ITEM );
-          await ctx.client.waitForExist( S.TEST_STEP_COLLAPSABLE_EXPANDED );
+          await (await ctx.client.$( S.TEST_STEP_COLLAPSABLE_EXPANDED )).waitForExist()
         }
 
         if ( typeof config.testTypes === "undefined" ) {
           await ctx.screenshot( `command--${ method }--empty` );
           // CLOSE MODAL
           await ctx.click( `#cCommandModal .btn--modal-command-cancel` );
-          await ctx.client.pause( 300 );
+          await ctx.client.pause( 500 );
           return;
         }
 
@@ -254,12 +278,13 @@ describe( "New Project", () => {
         await ctx.screenshot( `command--${ method }--filled` );
 
         // CLICK SAVE
-        await ctx.click( S.TEST_STEP_MODAL_OK );
+        await (await ctx.client.$( S.TEST_STEP_MODAL_OK )).click();
 
-        expect( await ctx.client.isExisting( `#cCommandModal .ant-form-item-control.has-error` ) )
+        await ctx.client.pause( 500 );
+
+        expect( await ( await ctx.client.$( `#cCommandModal .ant-form-item-control.has-error` ) ).isExisting() )
           .not.toBeOk( `Errored form fields for ${ scope }.${ method }` );
-
-        await ctx.client.pause( 300 );
+       
 
       });
 

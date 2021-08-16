@@ -45,7 +45,7 @@ export class BrowserIntro extends AbstractComponent {
 
 
         { product === "connect" ? <div>
-          <p>There are some cases when we need to connect to a ruining instance of chrome instead of
+          <p>There are some cases when we need to connect to a running instance of Chrome instead of
         starting a new one. For example to bypass reCaptcha we can solve it manually in
         Chrome and then run the tests on it. </p>
           <p>In order to connect we need to start Chrome in command-line with remote-debugging-port

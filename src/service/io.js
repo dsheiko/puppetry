@@ -22,10 +22,8 @@ import {
   DIR_SCREENSHOTS,
   DIR_SNAPSHOTS
 } from "constant";
-import findLogPath from "electron-log/lib/transports/file/findLogPath";
 
 const PROJECT_FILE_NAME = ".puppetryrc",
-      PROJECT_FALLBAK_NAME = ".puppertyrc",
       GIT_FILE_NAME = ".puppetrygit",
       cache = {},
       EXPORT_ASSETS = [
@@ -34,6 +32,7 @@ const PROJECT_FILE_NAME = ".puppetryrc",
         "package.json",
         "README.md"
       ];
+
 export const readFile = util.promisify( fs.readFile );
 //writeFile = util.promisify( fs.writeFile ),
 export const writeFile = ( filename, data ) => new Promise( ( resolve, reject ) => {
@@ -108,6 +107,7 @@ export function normalizeName( str ) {
 export function createRuntimeTemp() {
   const RUNTIME_TEMP = getRuntimeTestPath();
   shell.mkdir( "-p" , RUNTIME_TEMP );
+  shell.chmod( "-R", 777 , RUNTIME_TEMP );
   return RUNTIME_TEMP;
 }
 
@@ -208,8 +208,8 @@ export async function exportProject({
     shell.mkdir( "-p" , join( projectDirectory, DIR_SCREENSHOTS ) );
     shell.mkdir( "-p" , join( projectDirectory, DIR_SNAPSHOTS ) );
 
-    shell.chmod( "-R", "+w", outputDirectory );
     shell.cp( "-RLf" , JEST_PKG + "/*", outputDirectory  );
+    shell.chmod( "-R", 777, outputDirectory );
     shell.mkdir( "-p" , join( outputDirectory, "specs" ) );
 
     if ( runner === RUNNER_JEST && suiteOptions.allure  ) {
@@ -302,6 +302,7 @@ export async function readSuite( directory, file ) {
   }
 
   try {
+    await perf.process(`read ${filePath}`, async () => { await readFile( filePath, "utf8" ); })
     const text = await readFile( filePath, "utf8" );
     return parseJson( text, filePath );
   } catch ( e ) {
@@ -378,8 +379,7 @@ export function getBasename( filename ) {
 
 
 export  function isProject( directory ) {
-  return fs.existsSync( join( directory, PROJECT_FILE_NAME ) )
-    || fs.existsSync( join( directory, PROJECT_FALLBAK_NAME ) );
+  return fs.existsSync( join( directory, PROJECT_FILE_NAME ) );
 }
 
 export async function readGit( directory ) {
@@ -401,10 +401,9 @@ export async function readGit( directory ) {
  * @returns {Array|Object}
  */
 export async function readProject( directory ) {
-  const validPath = join( directory, PROJECT_FILE_NAME ),
-        fallbackPath = join( directory, PROJECT_FALLBAK_NAME ),
-        filePath = fs.existsSync( validPath ) ? validPath : fallbackPath;
+  const filePath = join( directory, PROJECT_FILE_NAME );
   try {
+    perf.process(`read ${filePath}`, async () => { await readFile( filePath, "utf8" ); });
     const text = await readFile( filePath, "utf8" );
     return parseJson( text, filePath );
   } catch ( e ) {
@@ -472,8 +471,8 @@ export async function getDemoProjectDirectory() {
   try {
     shell.rm( "-rf" , DEST_DIR );
     shell.mkdir( "-p" , DEST_DIR );
-    shell.chmod( "-R", "+w", DEST_DIR );
     shell.cp( "-Rf", SRC_DIR, getAppInstallPath() );
+    shell.chmod( "-R", 777, DEST_DIR );
   } catch ( e ) {
     log.warn( `Renderer process: io.getDemoProjectDirectory(${SRC_DIR}, ${DEST_DIR}):`
       + ` ${ e }` );
@@ -488,7 +487,7 @@ export function getAppInstallPath() {
   if ( "appInstallPath" in cache ) {
     return cache[ "appInstallPath" ];
   }
-  const appInstallPath = dirname( findLogPath( remote.app.name ) );
+  const appInstallPath = join( dirname( log.transports.file.getFile().path ), ".." );
   cache[ "appInstallPath" ] = appInstallPath;
   return appInstallPath;
 }
@@ -576,8 +575,8 @@ export function initRuntimeTestPath() {
   }
   try {
     shell.mkdir( "-p" , DEST_DIR );
-    shell.chmod( "-R", "+w", DEST_DIR );
     shell.cp( "-f" , SRC_DIR + "/package.json", DEST_DIR + "/" );
+    shell.chmod( "-R", 777, DEST_DIR );
   } catch ( e ) {
     log.warn( `Renderer process: io.initRuntimeTestPath(${SRC_DIR}, ${DEST_DIR}): ${ e }` );
   }

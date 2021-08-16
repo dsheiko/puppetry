@@ -13,6 +13,7 @@ import { App } from "./container/App.jsx";
 import reducer from "./reducer";
 import mediator from "service/mediator";
 import { RE_SNIPPETS_TEST_ADDED } from "constant";
+import "service/perf";
 
 window.onerror = ( err, url, lineNumber ) => {
   log.error( `Renderer process: Caught exception: ${err} in ${ url }: ${ lineNumber }` );

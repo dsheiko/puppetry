@@ -1,12 +1,12 @@
 import React from "react";
-import { Checkbox, Select, Icon } from "antd";
+import { Checkbox, Select } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractComponent from "component/AbstractComponent";
 import BrowseDirectory from "component/Global/BrowseDirectory";
 import { SELECT_SEARCH_PROPS } from "service/utils";
 
 import { ChromeExecutablePath } from "./ChromeExecutablePath";
-import { FirefoxExecutablePath } from "./FirefoxExecutablePath";
+// import { FirefoxExecutablePath } from "./FirefoxExecutablePath";
 import { ChromeArguments } from "./ChromeArguments";
 import { FirefoxArguments } from "./FirefoxArguments";
 import { ConnectOptions } from "./ConnectOptions";
@@ -15,7 +15,7 @@ import { updateLauncherArgs } from "./utils";
 
 
 /*eslint no-empty: 0*/
-const { Option } = Select,
+const { Option, OptGroup } = Select,
       NON_PRODUCTS = [ "headless", "chromium" , "connect" ];
 
 function filterNullable( obj ) {
@@ -93,15 +93,15 @@ export class BrowserOptions extends AbstractComponent {
       "puppeteer.launch": filterNullable({
         product: NON_PRODUCTS.includes( this.state.product )
           ?  null
-          : this.state.product,
-        headless: this.state.headless,
+          : ( this.state.product === "_firefox" ? "firefox" : this.state.product ),
+        headless: this.state.product === "_firefox" || this.state.headless,
         devtools: this.state.devtools,
         slowMo: 30,
         ignoreHTTPSErrors: this.getLauncherArgsInstance()
           ? this.getLauncherArgsInstance().state.ignoreHTTPSErrors
           : false,
         args: this.getLauncherArgs().split( " " ),
-        executablePath: ( ( this.state.product === "chrome" || this.state.product === "firefox" )
+        executablePath: ( ( this.state.product === "chrome" )
           ? this.getExecutablePath()
           : null )
       })
@@ -161,11 +161,18 @@ export class BrowserOptions extends AbstractComponent {
               value={ this.state.product }
               onChange={ this.onBrowserChange }
             >
-              <Option value="headless" key="headless">Headless Chromium</Option>
-              <Option value="chromium" key="chromium">Chromium</Option>
-              <Option value="chrome" key="chrome">Chrome</Option>
-              <Option value="firefox" key="firefox">Firefox 74+ <Icon type="experiment" /></Option>
-              <Option value="connect" key="connect">Connect to Chrome</Option>
+              <OptGroup label="Embedded browsers">
+                <Option value="headless" key="headless">Headless Chromium</Option>
+                <Option value="chromium" key="chromium">Chromium</Option>
+                <Option value="_firefox" key="hfirefox">Headless Firefox</Option>
+                <Option value="firefox" key="firefox">Firefox</Option>
+              </OptGroup>
+              <OptGroup label="External browsers">
+                <Option value="chrome" key="chrome">Chrome/Edge</Option>
+              </OptGroup>
+              <OptGroup label="Remote control">
+                <Option value="connect" key="connect">Connect to Chrome</Option>
+              </OptGroup>
             </Select>
           </div>
 
@@ -198,14 +205,12 @@ export class BrowserOptions extends AbstractComponent {
 
         { this.state.product === "chrome" ?
           <ChromeExecutablePath ref={ this.refChromeExecutablePath } /> : null }
-        { this.state.product === "firefox" ?
-          <FirefoxExecutablePath ref={ this.refFirefoxExecutablePath } /> : null }
-
 
         { [ "headless", "chromium", "chrome" ].includes( this.state.product ) ?
           <ChromeArguments ref={ this.refChromeArguments } /> : null }
 
-        { this.state.product === "firefox" ? <FirefoxArguments ref={ this.refFirefoxArguments } /> :  null }
+        { [ "_firefox", "firefox" ].includes( this.state.product )
+          ? <FirefoxArguments ref={ this.refFirefoxArguments } /> :  null }
 
         { [ "headless", "chromium", "chrome" ].includes( this.state.product ) ?
           <div className="browser-options-layout">
