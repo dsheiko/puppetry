@@ -232,4 +232,3 @@ function resolveAssetAssertion( assertionMethod, options, source ) {
     return carry;
   }, "" );
 }
-
