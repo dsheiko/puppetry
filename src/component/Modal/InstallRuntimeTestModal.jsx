@@ -84,11 +84,11 @@ export class InstallRuntimeTestModal extends AbstractComponent {
   }
 
   onOpenAppDataDirectory = () => {
-    shell.openItem( getRuntimeTestPathSafe() );
+    shell.openPath( getRuntimeTestPathSafe() );
   }
 
   onOpenLog = () => {
-    shell.openItem( getLogPath() );
+    shell.openPath( getLogPath() );
   }
 
   onReportIssue = ( e ) => {
