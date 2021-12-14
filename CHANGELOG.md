@@ -1,3 +1,11 @@
+# Puppetry 3.2.7
+
+### Updates
+- improvement: Element.upload now accepts URLs (e.g. like https://via.placeholder.com/150)
+
+### Bug fixes
+- fix: issue electron/electron#22312
+
 # Puppetry 3.2.6
 
 ### Updates

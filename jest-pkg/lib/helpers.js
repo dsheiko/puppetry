@@ -5,10 +5,14 @@ const { join, dirname } = require( "path" ),
       shell = require( "shelljs" ),
       fetch = require( "node-fetch" ),
       table = require( "text-table" ),
+      { pipeline } = require( "stream" ),
+      { promisify } = require( "util" ),
       { LocalStorage } = require( "node-localstorage" ),
+      streamPipeline = promisify( pipeline ),
       faker = require( "faker" ),
       localStorage = new LocalStorage( join( __dirname, "/../", "/storage" ) ),
-      DIR_SCREENSHOTS_TRACE = ".trace";
+      DIR_SCREENSHOTS_TRACE = ".trace",
+      { MIME_EXT } = require( "./mime-db" );
 
 let PATH_SCREENSHOTS = join( __dirname, "/../", "/screenshots"),
     PATH_REPORTS = join( __dirname, "/../", "/reports"),
@@ -51,6 +55,20 @@ const png = ( id, parentId, screenshotTitle, options = {} ) => {
         return path;
       },
 
+      download = async ( url ) => {
+        const rsp = await fetch( url );
+        
+        if ( !rsp.ok ) {
+          throw new Error( `download: Unexpected response ${ rsp.statusText }` );
+        }
+
+        const mime = rsp.headers.get( "content-type" ),
+              ext = mime in MIME_EXT ? MIME_EXT[ mime ] : "png",
+              dist = join( os.tmpdir(), `puppetry-upload-` 
+              + `${ Math.floor( Math.random() * 100 ) }${ ( new Date() ).getTime() }.${ ext }` );
+        await streamPipeline( rsp.body, fs.createWriteStream( dist ) );
+        return dist;
+      },
 
       performanceResourcesToTable = ( resources ) => {
         const arr = resources.map( r => ([ truncate( r.url, 90 ), r.type, bytesToString( r.length ) ]));
@@ -258,6 +276,8 @@ exports.util = {
 
   savePuppetterInfo,
 
+  download,
+
   setProjectDirectory: ( projectDirectory ) => {
     PATH_SCREENSHOTS = join( projectDirectory, "/screenshots");
     PATH_COMPARE = join( projectDirectory, "/snapshots");
@@ -304,4 +324,3 @@ exports.util = {
   }
 
 };
-

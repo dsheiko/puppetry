@@ -7,14 +7,17 @@ export const upload = {
   template: ({ target, params, projectDirectory, id }) => {
     const { path, name, size } = params,
           parser = new ExpressionParser( id ),
-          resolvedPath = ( path && path.startsWith( "./" ) ) ? join( projectDirectory, path ) : path;
+          resolvedPath = ( path && path.startsWith( "./" ) ) ? join( projectDirectory, path ) : path,
+          HTTP_RE = /^http(s):/;
 
     return `
       // Upload input[type=file]
       ${ ( name && size )
     ? `result = util.generateTmpUploadFile( "${ name }", ${ size } );`
-    : `result = ${ parser.stringify( resolvedPath ) };` }
-      await ( ${ renderTarget( target ) } ).uploadFile( result );`;
+    : ( path.match( HTTP_RE ) ? `result = await util.download( ${ parser.stringify( path ) } );` 
+        : `result = ${ parser.stringify( resolvedPath ) };` ) }
+      await ( ${ renderTarget( target ) } ).uploadFile( result );
+      ${ resolvedPath.match( HTTP_RE ) ? `fs.unlinkSync( result );` : `` }`;
   },
 
   toLabel: ({ params }) => ( params.name && params.size )
@@ -49,12 +52,12 @@ export const upload = {
         {
           name: "params.path",
           control: FILE,
-          label: "Select a file",
+          label: "File/URL",
           tooltip: "When the file path starts with ./ it is considered as relative to the project",
           placeholder: "",
           template: true,
           rules: [{
-            message: "Select a file path to attach to the input"
+            message: "Input URL ot select a file path to attach to the input."
           }]
         }
 
