@@ -489,6 +489,11 @@ export async function writeProject( directory, data ) {
   }
 }
 
+export function getProjectDirectory() {
+  const settings = JSON.parse( localStorage.getItem( "settings" ) );
+  return settings.projectDirectory;
+}
+
 function getAsarUnpackedAppDirectory() {
   return remote.app.getAppPath()
     .replace( /app\.asar\/?$/, "app.asar.unpacked" );

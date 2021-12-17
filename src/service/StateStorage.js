@@ -1,5 +1,5 @@
 import { STORAGE_KEY_STATE } from "constant";
-import { readProjectState, writeProjectState } from "service/io";
+import { writeProjectState, getProjectDirectory } from "service/io";
 
 const defaultState = {
   "ConnectOptions": {
@@ -59,10 +59,7 @@ const defaultState = {
   }
 };
 
-function getProjectDirector() {
-  const settings = JSON.parse( localStorage.getItem( "settings" ) );
-  return settings.projectDirectory;
-}
+
 
 export default class StateStorage {
 
@@ -71,15 +68,14 @@ export default class StateStorage {
     this.webStorage = webStorage;
     if ( typeof defaultState[ this.ns ] === "undefined" ) {
       throw new Error( `Namespace ${ this.ns } not available in the storage` );
-    }
-    readProjectState( getProjectDirector() ).then( state => this.webStorage.setItem( STORAGE_KEY_STATE, state ) );
+    }   
   }
 
   set( update ) {
     const state = this.getAll();
     state[ this.ns ] = Object.assign({}, state[ this.ns ], update );
     this.webStorage.setItem( STORAGE_KEY_STATE, JSON.stringify( state ) );
-    writeProjectState( getProjectDirector(), JSON.stringify( state ) );
+    writeProjectState( getProjectDirectory(), state );
   }
 
   getAll() {

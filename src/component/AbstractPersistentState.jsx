@@ -14,7 +14,7 @@ export default class AbstractPersistentState extends AbstractComponent {
   }
 
   assignStorage() {
-    this.storage = new StateStorage( this.constructor.name );
+    this.storage = new StateStorage( this.constructor.name, sessionStorage );
   }
 
   componentDidMount() {

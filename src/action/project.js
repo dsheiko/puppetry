@@ -12,10 +12,11 @@ import {
   getProjectFiles,
   readProject,
   copyProject,
-  isGitInitialized  } from "../service/io";
+  isGitInitialized,
+  readProjectState  } from "../service/io";
 import { ipcRenderer } from "electron";
 import { E_FILE_NAVIGATOR_UPDATED, E_WATCH_FILE_NAVIGATOR, SNIPPETS_FILENAME,
-  E_PROJECT_LOADED, E_SUITE_LIST_UPDATED } from "constant";
+  E_PROJECT_LOADED, E_SUITE_LIST_UPDATED, STORAGE_KEY_STATE } from "constant";
 import settingsActions from "./settings";
 import appActions from "./app";
 import gitActions from "./git";
@@ -51,11 +52,20 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
   }
 
   try {
+    let state = await readProjectState( projectDirectory );
+    sessionStorage.setItem( STORAGE_KEY_STATE, JSON.stringify( state ) );
+  } catch( e ) {
+    log.warn( `Renderer process: readProjectState ${ e }` );
+  }
+
+  try {
     dispatch( appActions.setApp({ loading: true }) );
     project = await readProject( projectDirectory );
     if ( typeof project === "undefined" ) {
       return {};
     }
+
+  
     ipcRenderer.send( E_PROJECT_LOADED, projectDirectory );
 
     directory && dispatch( settingsActions.saveSettings({ projectDirectory }) );

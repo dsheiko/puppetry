@@ -132,7 +132,6 @@ export class ExportProjectModal extends AbstractTestRunnerModal {
             },
             browserOptions = this.getBrowserOptions();
 
-
       if ( !this.checkExecutablePath( browserOptions ) ) {
         this.setState({ locked: false, loading: false });
         return;

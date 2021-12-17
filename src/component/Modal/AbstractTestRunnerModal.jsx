@@ -8,7 +8,6 @@ export default class AbstractTestRunnerModal extends AbstractComponent {
     const storage = new StateStorage( this.constructor.name, sessionStorage );
     // Browser options tab is not shown
     if ( this.refBrowserOptions.current === null ) {
-
       return storage.get() || {
         incognito: true,
         "puppeteer.connect": {
