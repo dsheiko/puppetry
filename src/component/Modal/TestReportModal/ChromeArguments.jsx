@@ -93,7 +93,7 @@ export class ChromeArguments extends AbstractPersistentState {
             onChange={ this.onChangeLauncherArgs }
             ref={ this.inputLauncherArgsRef }
             value={ this.state.launcherArgs }
-            placeholder="--start-maximized --ignore-certificate-errors" />
+            placeholder="--start-maximized --ignore-certificate-errors --no-sandbox" />
 
         </div>
 

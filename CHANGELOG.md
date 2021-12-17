@@ -2,9 +2,11 @@
 
 ### Updates
 - improvement: Element.upload now accepts URLs (e.g. like https://via.placeholder.com/150)
+- Element.assertTextCount now supports template expressions like `© {{ eval("(new Date()).getFullYear()") }} ACME All Rights Reserved`
 
 ### Bug fixes
 - fix: issue electron/electron#22312
+- fix: project state gets saved in the file .puppetrystate and not lost anymore togather with localStorage
 
 # Puppetry 3.2.6
 

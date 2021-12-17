@@ -25,6 +25,7 @@ import {
 
 const PROJECT_FILE_NAME = ".puppetryrc",
       PROJECT_FALLBAK_NAME = ".puppertyrc",
+      PROJECT_STATE_FILE_NAME = ".puppetrystate",
       GIT_FILE_NAME = ".puppetrygit",
       cache = {},
       EXPORT_ASSETS = [
@@ -443,6 +444,42 @@ export async function writeProject( directory, data ) {
     log.warn( `Renderer process: io.writeProject: empty name in ${ JSON.stringify( data ) } in ${ directory }` );
     return;
   }
+  try {
+    await writeFile( filePath, JSON.stringify( data, null, "  " ), "utf8" );
+  } catch ( e ) {
+    log.warn( `Renderer process: io.writeProject: ${ e }` );
+    throw new IoError( `Project file ${filePath} cannot be written.
+          Please make sure that you have write permission for it` );
+  }
+}
+
+/**
+ * Read project file from given directory
+ * @param {String} directory
+ * @returns {Array|Object}
+ */
+ export async function readProjectState( directory ) {
+  const filePath = join( directory, PROJECT_STATE_FILE_NAME );
+  try {
+    const text = await readFile( filePath, "utf8" );
+    return parseJson( text, filePath );
+  } catch ( e ) {
+    log.warn( `Renderer process: io.readProject: ${ e }` );
+    throw new IoError( `Project file ${filePath} cannot be open.
+          Please make sure that the file exists and that you have read permission for it` );
+  }
+}
+
+/**
+ * Write project file to given directory
+ * @param {String} directory
+ * @param {Object} data
+ */
+ export async function writeProjectState( directory, data ) {
+  if ( !directory ) {
+    return;
+  }
+  const filePath = join( directory, PROJECT_STATE_FILE_NAME );
   try {
     await writeFile( filePath, JSON.stringify( data, null, "  " ), "utf8" );
   } catch ( e ) {
