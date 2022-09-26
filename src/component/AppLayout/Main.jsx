@@ -33,6 +33,8 @@ const mapStateToProps = ( state ) => ({
 @connect( mapStateToProps, mapDispatchToProps )
 export class Main extends AbstractComponent {
 
+  whyDidYouRender = true;
+
   static propTypes = {
     selector: PropTypes.object.isRequired,
     expandedGroups: PropTypes.object,

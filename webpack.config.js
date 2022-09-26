@@ -10,11 +10,6 @@ const { join } = require( "path" ),
 module.exports = {
     mode: process.env.NODE_ENV || "development",
     target: "electron-renderer",
-
-    //...
-    node: {
-      __filename: true
-    },
     // Application entry scripts
     entry: {
       // script alias : path
@@ -63,15 +58,22 @@ module.exports = {
           use: [{
             loader: "babel-loader",
             options: {
-              presets: ["@babel/preset-env", "@babel/preset-react"],
+              presets: [
+              [
+                "@babel/preset-env", {
+                    "useBuiltIns": "entry",
+                    "corejs": 2,
+                    "targets": {
+                      "browsers": "last 2 versions, safari >= 7, ios_saf >= 9, chrome >= 52"
+                    },
+                    "loose": true
+                  }
+              ],
+              "@babel/preset-react"],
               plugins: [
-                ["@babel/plugin-proposal-decorators", { "legacy": true }],
-                "@babel/plugin-proposal-class-properties",
-                "@babel/plugin-proposal-object-rest-spread",
-                "@babel/plugin-syntax-dynamic-import",
-                "@babel/plugin-proposal-private-methods",
-                "@babel/plugin-transform-runtime",
-                "@babel/plugin-proposal-nullish-coalescing-operator"
+                [
+                  "@babel/plugin-proposal-decorators", { "legacy": true }
+                ]
               ]
             }
           }]

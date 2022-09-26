@@ -1,3 +1,4 @@
+import "./wdyr";
 import "antd/dist/antd.css";
 import "balloon-css/balloon.min.css";
 import React from "react";
@@ -19,8 +20,8 @@ window.onerror = ( err, url, lineNumber ) => {
   log.error( `Renderer process: Caught exception: ${err} in ${ url }: ${ lineNumber }` );
 };
 
-window.consoleCount = console.count.bind( console );
-// window.consoleCount = () => {};
+// window.consoleCount = console.count.bind( console );
+window.consoleCount = () => {};
 
 process.on( "uncaughtException", ( err ) => {
   console.error( "uncaughtException", err );

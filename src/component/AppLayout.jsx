@@ -57,6 +57,8 @@ const { Sider } = Layout,
 @connect( mapStateToProps, mapDispatchToProps )
 export class AppLayout extends React.Component {
 
+  whyDidYouRender = true;
+
   state = {
     collapsed: false
   };
