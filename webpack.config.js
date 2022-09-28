@@ -10,6 +10,11 @@ const { join } = require( "path" ),
 module.exports = {
     mode: process.env.NODE_ENV || "development",
     target: "electron-renderer",
+
+    context: __dirname,
+    node: {
+      __filename: true
+    },
     // Application entry scripts
     entry: {
       // script alias : path
@@ -53,23 +58,35 @@ module.exports = {
           use: [ "style-loader", "css-loader" ]
         },
         {
+          test: /\.js$/,
+          enforce: "pre",
+          use: ["source-map-loader"],
+        },
+        {
           test: /.jsx?$/,
           exclude: /node_modules/,
           use: [{
             loader: "babel-loader",
             options: {
               presets: [
-              [
-                "@babel/preset-env", {
-                    "useBuiltIns": "entry",
-                    "corejs": 2,
-                    "targets": {
-                      "browsers": "last 2 versions, safari >= 7, ios_saf >= 9, chrome >= 52"
-                    },
-                    "loose": true
+                [
+                  "@babel/preset-env", {
+                      "useBuiltIns": "entry",
+                      "corejs": 2,
+                      "targets": {
+                        "browsers": "last 2 versions, safari >= 7, ios_saf >= 9, chrome >= 52"
+                      },
+                      "loose": true
+                    }
+                ],
+                [
+                  "@babel/preset-react", {
+                    runtime: "automatic",
+                    development: process.env.NODE_ENV === "development",
+                    importSource: "@welldone-software/why-did-you-render",
                   }
+                ]
               ],
-              "@babel/preset-react"],
               plugins: [
                 [
                   "@babel/plugin-proposal-decorators", { "legacy": true }
