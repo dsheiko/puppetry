@@ -38,10 +38,8 @@ import If from "component/Global/If";
 import { Toolbar } from "./AppLayout/Toolbar";
 import { Projectbar } from "./AppLayout/Projectbar";
 
-
-const { Sider } = Layout,
       // Mapping state to the props
-      mapStateToProps = ( state ) => ({
+const mapStateToProps = ( state ) => ({
         store: state,
         cleanSnippets: selectors.getCleanSnippetsMemoized( state )
       }),
@@ -50,13 +48,17 @@ const { Sider } = Layout,
       });
 
 @connect( mapStateToProps, mapDispatchToProps )
-export class AppLayout extends React.Component {
+export class AppLayout extends React.PureComponent {
 
   whyDidYouRender = true;
 
   state = {
     collapsed: false
   };
+
+  componentDidMount() {
+    global.perf.time( "src/component/AppLayout.jsx did mount" );
+  }
 
   onCollapse = ( collapsed ) => {
     this.setState({ collapsed });
@@ -80,6 +82,7 @@ export class AppLayout extends React.Component {
           { projectDirectory, exportDirectory } = store.settings,
           { commandModal, snippetModal, tabs } = store.app,
           tabsAnyTrue = Object.keys( tabs.available ).some( key => tabs.available[ key ]);
+
     window.consoleCount( __filename );
     return (
       <ErrorBoundary>

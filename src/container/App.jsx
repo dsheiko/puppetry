@@ -56,6 +56,8 @@ export class App extends React.Component {
           } = this.props.action,
           settings = loadSettings();
 
+    global.perf.time( "src/container/App.jsx did mount" );
+
     // setApp({ greeting: GREETINGS[ Math.floor( Math.random() * GREETINGS.length ) ] });
     checkRuntimeTestDirReady();
     checkNewVersion();
@@ -72,7 +74,7 @@ export class App extends React.Component {
       log.warn( `Renderer process: App.loadProject: ${ e }` );
       console.warn( e );
     }
-    
+
     setApp({ bootstrapLoaded: true });
   }
 
