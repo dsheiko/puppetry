@@ -11,14 +11,12 @@ import errorActions from "./error";
 import {
   getProjectFiles,
   readProject,
-  copyProject,
-  isGitInitialized  } from "../service/io";
+  copyProject  } from "../service/io";
 import { ipcRenderer } from "electron";
 import { E_FILE_NAVIGATOR_UPDATED, E_WATCH_FILE_NAVIGATOR, SNIPPETS_FILENAME,
   E_PROJECT_LOADED, E_SUITE_LIST_UPDATED } from "constant";
 import settingsActions from "./settings";
 import appActions from "./app";
-import gitActions from "./git";
 import suiteActions from "./suite";
 import snippetsActions from "./snippets";
 import { result } from "service/utils";
@@ -66,7 +64,6 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
 
     directory && dispatch( settingsActions.saveSettings({ projectDirectory }) );
     dispatch( actions.resetProject( project ) );
-    dispatch( gitActions.loadGit( projectDirectory ) );
     await dispatch( actions.loadProjectFiles( projectDirectory ) );
     await dispatch( actions.watchProjectFiles( projectDirectory ) );
 
@@ -76,8 +73,6 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
       name: project.name
     }) );
     dispatch( settingsActions.saveSettings() );
-
-    dispatch( gitActions.setGit({ initialized: isGitInitialized( projectDirectory ) }) );
 
     ( project.lastOpenSnippetId && getSnippetsTest( getState() ) )
       && dispatch( appActions.addAppTab( "snippet" ) );

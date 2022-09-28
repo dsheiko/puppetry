@@ -32,8 +32,7 @@ export default {
     selectedFile: "",
     confirmSaveChangesFile: "",
 
-    gitLogs: [],
-    gitDetachedHeadState: false,
+    
 
     editTargetsAsCsvModal: false,
     newProjectModal: false,
@@ -46,10 +45,7 @@ export default {
     testReportModal: false,
     installRuntimeTestModal: false,
     editProjectModal: false,
-    gitCommitModal: false,
-    gitSyncModal: false,
-    gitCheckoutModal: false,
-    gitCloneModal: false,
+  
     editEnvironmentsModal: false,
     appLightbox: false,
 
@@ -82,7 +78,6 @@ export default {
         suite: false,
         testReport: false,
         projectVariables: false,
-        projectGit: false,
         projectTargets: false,
         settings: false,
         snippet: false

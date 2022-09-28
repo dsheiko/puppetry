@@ -11,11 +11,10 @@ import { E_MENU_NEW_PROJECT, E_MENU_NEW_SUITE, SNIPPETS_FILENAME,
   E_MENU_OPEN_SUITE, E_MENU_EXPORT_PROJECT, E_MENU_EXIT_APP,
   E_MENU_RUN, E_RENDERER_ERROR, E_RENDERER_INFO } from "constant";
 import { ostr } from "./MainMenu/helpers";
-import { GitEnhancedMenu } from "./MainMenu/GitEnhancedMenu";
 
 const SubMenu = Menu.SubMenu;
 
-export class MainMenu extends GitEnhancedMenu {
+export class MainMenu extends React.PureComponent {
 
   static propTypes = {
     action:  PropTypes.shape({
@@ -26,8 +25,7 @@ export class MainMenu extends GitEnhancedMenu {
       removeAppTab: PropTypes.func.isRequired
     }),
     isProjectEmpty: PropTypes.bool.isRequired,
-    isGitInitialized: PropTypes.bool.isRequired,
-    hasGitRemote: PropTypes.bool.isRequired,
+
     readyToRunTests: PropTypes.bool.isRequired,
     isProjectOpen: PropTypes.bool.isRequired,
     isSuiteOpen: PropTypes.bool.isRequired,
@@ -37,9 +35,6 @@ export class MainMenu extends GitEnhancedMenu {
   hotkeyMap = {
     "ctrl+s": "onSave",
     "command+s": "onSave",
-
-    "ctrl+shift+s": "onFileGitCommit",
-    "command+shift+s": "onFileGitCommit",
 
     "ctrl+n": "onNewSuite",
     "command+n": "onNewSuite",
@@ -220,7 +215,6 @@ export class MainMenu extends GitEnhancedMenu {
   }
 
   componentDidMount() {
-    this.gitEnhancedMenuDidMount();
     ipcRenderer.removeAllListeners( E_RENDERER_INFO );
     ipcRenderer.on( E_RENDERER_INFO, this.onRendererInfo );
     ipcRenderer.removeAllListeners( E_RENDERER_ERROR );
@@ -247,8 +241,7 @@ export class MainMenu extends GitEnhancedMenu {
 
   render() {
     const hotkeys = Object.keys( this.hotkeyMap ).join( ", " ),
-          { isProjectOpen, isGitInitialized, hasGitRemote, isSuiteOpen, readyToRunTests, isProjectEmpty,
-            gitDetachedHeadState } = this.props;
+          { isProjectOpen, isSuiteOpen, readyToRunTests, isProjectEmpty } = this.props;
 
     return (
       <ErrorBoundary>
@@ -283,31 +276,6 @@ export class MainMenu extends GitEnhancedMenu {
               <Menu.Item key="file6" disabled={ !isSuiteOpen } onClick={ this.onSaveAs } id="cMainMenuSaveAsSuite">
                 Save Suite As...</Menu.Item>
 
-              <SubMenu
-                key="git"
-                id="cMainMenuFileGit"
-                title={<span><Icon type="branches" /><span>Git</span></span>}
-              >
-                <Menu.Item key="git1" disabled={ !isSuiteOpen || isGitInitialized }
-                  onClick={ this.onFileGitInitialize } id="cMainMenuFileGitInit">
-                  Initialize</Menu.Item>
-                <Menu.Item key="git2" disabled={ !hasGitRemote }
-                  onClick={ this.onFileGitClone } id="cMainMenuFileGitClone">
-                  Clone...</Menu.Item>
-
-                <Menu.Item key="git3" disabled={ !isSuiteOpen || !isGitInitialized || gitDetachedHeadState }
-                  onClick={ this.onFileGitCheckout } id="cMainMenuFileGitCheckout">
-                  Checkout...</Menu.Item>
-
-                <Menu.Item key="git5" disabled={ !isSuiteOpen || !isGitInitialized || gitDetachedHeadState }
-                  onClick={ this.onFileGitCommit }
-                  id="cMainMenuFileGitCommit">Commit...{ " " }<kbd>{ ostr( "Ctrl-Shift-S" ) }</kbd></Menu.Item>
-                <Menu.Item key="git6"
-                  disabled={ !isSuiteOpen || !isGitInitialized  || !hasGitRemote || gitDetachedHeadState }
-                  onClick={ this.onFileGitSync } id="cMainMenuFileGitPull">
-                  Sync with remote...</Menu.Item>
-
-              </SubMenu>
 
               <Menu.Item key="7" disabled={ !isProjectOpen } id="cMainMenuExportProject"
                 onClick={ this.onExportProject }>

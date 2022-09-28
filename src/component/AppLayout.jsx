@@ -25,10 +25,6 @@ import { CommandModal } from "./AppLayout/Main/GroupTable/TestTable/CommandModal
 import { SnippetModal } from "./AppLayout/Main/GroupTable/TestTable/SnippetModal";
 import { InstallRuntimeTestModal } from "./Modal/InstallRuntimeTestModal";
 import { EditTargetsAsCsvModal } from "./Modal/EditTargetsAsCsvModal";
-import { GitCommitModal } from "./Modal/GitCommitModal";
-import { GitSyncModal } from "./Modal/GitSyncModal";
-import { GitCheckoutModal } from "./Modal/GitCheckoutModal";
-import { GitCloneModal } from "./Modal/GitCloneModal";
 import { EditProjectModal } from "./Modal/EditProjectModal";
 import { EditEnvironmentsModal } from "./Modal/EditEnvironmentsModal";
 import { NewSnippetModal } from "./Modal/SnippetModal/NewSnippetModal";
@@ -41,7 +37,6 @@ import { TabGroup  } from "./TabGroup";
 import If from "component/Global/If";
 import { Toolbar } from "./AppLayout/Toolbar";
 import { Projectbar } from "./AppLayout/Projectbar";
-import { truncate } from "service/utils";
 
 
 const { Sider } = Layout,
@@ -108,11 +103,6 @@ export class AppLayout extends React.Component {
                   isProjectOpen={ !!projectDirectory }
                   suiteModified={ !!store.suite.modified }
                   readyToRunTests={ !!store.app.readyToRunTests }
-                  gitDetachedHeadState={ !!store.app.gitDetachedHeadState }
-                  gitConfigUsername={ store.git.configUsername }
-                  gitConfigEmail={ store.git.configEmail }
-                  isGitInitialized={ !!store.git.initialized }
-                  hasGitRemote={ !!store.git.hasRemote }
                 />
 
               </div>
@@ -286,35 +276,7 @@ export class AppLayout extends React.Component {
           action={ action }
         />
 
-        <GitCommitModal
-          isVisible={ store.app.gitCommitModal }
-          git={ store.git }
-          projectDirectory={ projectDirectory }
-          action={ action }
-        />
-
-        <GitSyncModal
-          isVisible={ store.app.gitSyncModal }
-          git={ store.git }
-          savedAt={ store.project.savedAt }
-          projectDirectory={ projectDirectory }
-          action={ action }
-        />
-
-        <GitCheckoutModal
-          isVisible={ store.app.gitCheckoutModal }
-          logs={ store.app.gitLogs }
-          git={ store.git }
-          projectDirectory={ projectDirectory }
-          action={ action }
-        />
-
-        <GitCloneModal
-          isVisible={ store.app.gitCloneModal }
-          git={ store.git }
-          projectDirectory={ projectDirectory }
-          action={ action }
-        />
+       
 
         <CheckoutMaster
           projectDirectory={ projectDirectory }

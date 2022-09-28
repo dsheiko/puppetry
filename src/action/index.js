@@ -1,7 +1,6 @@
 import settingsActions from "./settings";
 import errorActions from "./error";
 import appActions from "./app";
-import gitActions from "./git";
 import projectActions from "./project";
 import suiteActions from "./suite";
 import targetActions from "./target";
@@ -21,7 +20,6 @@ const actions = {
   ...errorActions,
   ...settingsActions,
   ...appActions,
-  ...gitActions,
   ...projectActions,
   ...suiteActions,
   ...targetActions,

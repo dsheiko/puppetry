@@ -60,11 +60,6 @@ export class Projectbar extends AbstractPureComponent {
                 Template variables
             </Menu.Item>
 
-            <Menu.Item key="103"
-              onClick={ () => this.openTab( "projectGit" ) } id="cMainMenuProjectGit">
-                Git
-            </Menu.Item>
-
           </Menu>
 
 

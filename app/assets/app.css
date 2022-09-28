@@ -873,18 +873,6 @@ td:hover .editable-cell-icon {
 }
 
 
-.settings-git-form .ant-form-item {
-  display: flex;
-}
-.settings-git-form .ant-form-item > .ant-form-item-label {
-  flex: 0 0 152px;
-  /* text-align: left; */
-
-}
-.settings-git-form .ant-form-item > .ant-form-item-control-wrapper {
-  flex: 1 0 auto;
-}
-
 .form-buttons .ant-form-item-children {
   float: right;
 }

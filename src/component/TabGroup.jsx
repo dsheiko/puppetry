@@ -5,7 +5,6 @@ import { Main } from "./AppLayout/Main";
 import { SnippetsMain } from "./AppLayout/SnippetsMain";
 import { SettingsPanel } from "./AppLayout/Settings/SettingsPanel";
 import { VariablesPane } from "./AppLayout/Project/Variables/VariablesPane";
-import { GitPane } from "./AppLayout/Project/Git/GitPane";
 import { TargetsPane } from "./AppLayout/Project/Targets/TargetsPane";
 import { TestReport } from "./AppLayout/TestReport";
 import ErrorBoundary from "component/ErrorBoundary";
@@ -28,7 +27,6 @@ const TabPane = Tabs.TabPane,
         suiteFilename: state.suite.filename,
         suiteTitle: state.suite.description || state.suite.title,
         project: state.project,
-        git: state.git,
         settings: state.settings,
         snippetsTest: selectors.getSnippetsTestMemoized( state, props )
       }),
@@ -56,7 +54,6 @@ export class TabGroup extends React.Component {
     suiteTitle: PropTypes.any,
     project: PropTypes.any,
     snippetsTest: PropTypes.any,
-    git: PropTypes.any,
     settings: PropTypes.any
   }
 
@@ -81,7 +78,7 @@ export class TabGroup extends React.Component {
   render() {
     const {
             action, selector, app, projectDirectory, suiteTitle, snippetsTest,
-            suiteSnippets, suiteFilename, project, snippets, git, settings, suiteTargets
+            suiteSnippets, suiteFilename, project, snippets, settings, suiteTargets
           } = this.props,
           { tabs } = app,
 
@@ -132,12 +129,6 @@ export class TabGroup extends React.Component {
             projectTargets: () => ( <TabPane tab={ "Shared targets" } key="projectTargets" closable={ true }>
               <div className="tabpane-frame">
                 <TargetsPane action={ action }  />
-              </div>
-            </TabPane> ),
-
-            projectGit: () => ( <TabPane tab={ "GIT" } key="projectGit" closable={ true }>
-              <div className="tabpane-frame">
-                <GitPane action={ action } git={  git } projectDirectory={ projectDirectory } />
               </div>
             </TabPane> ),
 

@@ -24,7 +24,6 @@ import {
 } from "constant";
 
 const PROJECT_FILE_NAME = ".puppetryrc",
-      GIT_FILE_NAME = ".puppetrygit",
       cache = {},
       EXPORT_ASSETS = [
         "specs",
@@ -60,9 +59,6 @@ function findCommandIdInCode( lines, pos ) {
   return lines[ pos ];
 }
 
-export function isGitInitialized( projectDirectory ) {
-  return fs.existsSync( join( projectDirectory, ".git" ) );
-}
 
 export async function parseReportedFailures( reportedErrorPositions ) {
   const commands = [];
@@ -382,18 +378,6 @@ export  function isProject( directory ) {
   return fs.existsSync( join( directory, PROJECT_FILE_NAME ) );
 }
 
-export async function readGit( directory ) {
-  const filePath = join( directory, GIT_FILE_NAME );
-  try {
-    const text = await readFile( filePath, "utf8" );
-    return parseJson( text, filePath );
-  } catch ( e ) {
-    log.warn( `Renderer process: io.readGit: ${ e }` );
-    throw new IoError( `Project file ${filePath} cannot be open.
-          Please make sure that the file exists and that you have read permission for it` );
-  }
-}
-
 
 /**
  * Read project file from given directory
@@ -413,19 +397,6 @@ export async function readProject( directory ) {
   }
 }
 
-export async function writeGit( directory, data ) {
-  if ( !directory ) {
-    return;
-  }
-  const filePath = join( directory, GIT_FILE_NAME );
-  try {
-    await writeFile( filePath, JSON.stringify( data, null, "  " ), "utf8" );
-  } catch ( e ) {
-    log.warn( `Renderer process: io.writeGit: ${ e }` );
-    throw new IoError( `Project file ${filePath} cannot be written.
-          Please make sure that you have write permission for it` );
-  }
-}
 
 /**
  * Write project file to given directory
