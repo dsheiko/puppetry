@@ -1,3 +1,4 @@
+import fs from "fs";
 import { join } from "path";
 import { message } from "antd";
 import { writeFile, readFile } from "../io";
@@ -86,7 +87,8 @@ export default class JsonConvertor {
 
     this.output.suites = [];
     for ( const file of this.input.checkedList ) {
-      const json = JSON.parse( await readFile( join( this.input.projectDirectory, file ), "utf8" ) );
+      const json = perf.processSync(`read ${ file }`, 
+        () => JSON.parse( fs.readFileSync( join( this.input.projectDirectory, file ), "utf8" ) ) );
       this.convertSuite( json );
     }
     const outputFile = join( this.input.selectedDirectory, "puppetry-export.json" );

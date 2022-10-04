@@ -10,6 +10,9 @@ import { schema } from "component/Schema/schema";
 import writeFileAtomic from "write-file-atomic";
 import { confirmCreateProject } from "service/smalltalk";
 
+// fs.promises.readFile is 40% slower than fs.readFile 
+// https://github.com/nodejs/node/issues/37583
+
 import {
   PUPPETRY_LOCK_FILE,
   JEST_PKG_DIRECTORY,
@@ -32,7 +35,6 @@ const PROJECT_FILE_NAME = ".puppetryrc",
         "README.md"
       ];
 
-export const readFile = util.promisify( fs.readFile );
 //writeFile = util.promisify( fs.writeFile ),
 export const writeFile = ( filename, data ) => new Promise( ( resolve, reject ) => {
   writeFileAtomic( filename, data, ( err ) => {
@@ -64,7 +66,8 @@ export async function parseReportedFailures( reportedErrorPositions ) {
   const commands = [];
   try {
     for ( const [ file, errors ] of Object.entries( reportedErrorPositions ) ) {
-      let fileContents = await readFile( file, "utf8" );
+      let fileContents = perf.processSync(`read ${ lockFile }`, () => fs.readFileSync( file, "utf8" ) );
+      
       // when timeout qs file we get extrnal sources e.g. node_modules/jest-jasmine2/build/jasmine/Spec.js
       if ( fileContents.indexOf( COMMAND_ID_COMMENT ) === -1 ) {
         break;
@@ -298,8 +301,7 @@ export async function readSuite( directory, file ) {
   }
 
   try {
-    await perf.process(`read ${filePath}`, async () => { await readFile( filePath, "utf8" ); })
-    const text = await readFile( filePath, "utf8" );
+    const text = perf.processSync(`read ${ filePath }`, () => fs.readFileSync( filePath, "utf8" ));
     return parseJson( text, filePath );
   } catch ( e ) {
     log.warn( `Renderer process: io.readSuite: ${ e }` );
@@ -387,8 +389,7 @@ export  function isProject( directory ) {
 export async function readProject( directory ) {
   const filePath = join( directory, PROJECT_FILE_NAME );
   try {
-    perf.process(`read ${filePath}`, async () => { await readFile( filePath, "utf8" ); });
-    const text = await readFile( filePath, "utf8" );
+    const text = perf.processSync(`read ${ filePath }`, () => fs.readFileSync( filePath, "utf8" ) );
     return parseJson( text, filePath );
   } catch ( e ) {
     log.warn( `Renderer process: io.readProject: ${ e }` );
@@ -496,7 +497,8 @@ export async function isRuntimeTestPathReady() {
 
   try {
     // User propably installed dependencies manually
-    const lock = JSON.parse( await readFile( lockFile, "utf8" ) );
+    const lock = perf.processSync(`read ${ lockFile }`, () => JSON.parse( fs.readFileSync( lockFile, "utf8" ) ) )
+    
     if ( lock.version !== remote.app.getVersion() ) {
       log.warn( `Renderer process: RuntimeTest not ready, reason: version does not match` );
       return false;

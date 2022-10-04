@@ -10,9 +10,23 @@ global.perf = {
     lastStart = performance.now();
   },
   // ⌛ readSuite(/home/sheiko/.config/puppetry/project-demo/todomvc.json) takes 2.775 ms
+  processSync( label, func ) {
+    if ( !isOn ) {
+      return func();
+    }
+    const start = performance.now(),
+          retval = func(); 
+    console.log( `⌛ ${ label } takes` , ( performance.now() -  start ).toFixed( 3 ), "ms" );
+    return retval;
+  },
+
   async process( label, func ) {
-    const start = performance.now();
-    await func(); 
-    isOn && console.log( `⌛ ${ label } takes` , ( performance.now() -  start ).toFixed( 3 ), "ms" );
+    if ( !isOn ) {
+      return await func();
+    }
+    const start = performance.now(),
+          retval = await func(); 
+    console.log( `⌛ ${ label } takes` , ( performance.now() -  start ).toFixed( 3 ), "ms" );
+    return retval;
   }
 };
