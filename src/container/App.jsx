@@ -9,16 +9,17 @@ import * as selectors from "../selector/selectors";
 import { ipcRenderer } from "electron";
 import LoadingTip from "component/Global/LoadingTip";
 
-// Mapping state to the props
-const mapStateToProps = ( state ) => ({
-        bootstrapLoaded: state.app.bootstrapLoaded,
-        selector: {
+const selector = {
           getTestDataTable: ( group ) => selectors.getGroupTestsMemoized( group ),
           getSelectedTargets: ( selection ) => selectors.getSelectedTargetsMemoized({ ...state, selection }),
           hasTarget: ( target ) => selectors.hasTarget( target, state.suite.targets ),
           findCommandsByTestId:
             ( testId ) => selectors.findCommandsByTestId( testId, state.suite.groups )
-        }
+        };
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        bootstrapLoaded: state.app.bootstrapLoaded,
+        selector
       }),
       // Mapping actions to the props
       mapDispatchToProps = ( dispatch ) => ({

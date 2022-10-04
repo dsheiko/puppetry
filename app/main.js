@@ -27,15 +27,21 @@ function createWindow() {
   const PROTOCOL = "file",
         icon = path.join( __dirname, "assets/512x512.png" );
 
-  // if ( process.env.ELECTRON_ENV === "dev" ) {
-  //   const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer');
+  app.commandLine.appendSwitch( "ignore-certificate-errors", true );
 
-  //   app.whenReady().then(() => {
-  //     installExtension( REACT_DEVELOPER_TOOLS )
-  //       .then( name => console.log( `Added Extension:  ${name}` ) )
-  //       .catch( err => console.log( `An error occurred: `, err ) );
-  //   });
-  // }
+  if ( process.env.NODE_ENV !== "production" ) {
+    const { default: installExtension, REDUX_DEVTOOLS } = require( "electron-devtools-installer" );
+
+    app.whenReady().then(() => {
+      installExtension( REDUX_DEVTOOLS, {
+            loadExtensionOptions: {
+                allowFileAccess: true,
+            },
+        })
+        .then(( name ) => console.log( `Added Extension:  ${ name }` ))
+        .catch(( err ) => console.log( "An error occurred: ", err ));
+      });
+  }
 
 
   const externalDisplay = findExternalDisplay(),

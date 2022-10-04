@@ -57,9 +57,13 @@ module.exports = {
           test: /\.css$/,
           use: [ "style-loader", "css-loader" ]
         },
+        // to prevent ERROR:cert_verify_proc_builtin.cc(670)] CertVerifyProcBuiltin
         {
           test: /\.js$/,
           enforce: "pre",
+          // exclude: [
+          //   /node_modules\/mutationobserver-shim/g,
+          // ],
           use: ["source-map-loader"],
         },
         {

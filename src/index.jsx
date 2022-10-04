@@ -7,7 +7,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import thunkMiddleware from "redux-thunk";
 import promiseMiddleware from "redux-promise";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { composeWithDevTools } from "@redux-devtools/extension";
 import ErrorBoundary from "component/ErrorBoundary";
 import log from "electron-log";
 import { App } from "./container/App.jsx";
@@ -29,11 +29,11 @@ process.on( "uncaughtException", ( err ) => {
 });
 
 // Store enhancement
-const storeEnhancer = composeWithDevTools( compose(
+const storeEnhancer = composeWithDevTools( 
         applyMiddleware(
           thunkMiddleware,
           promiseMiddleware
-        ) )
+        ) 
       ),
 
       // Store creation
