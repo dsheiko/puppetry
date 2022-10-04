@@ -37,10 +37,12 @@ import { TabGroup  } from "./TabGroup";
 import If from "component/Global/If";
 import { Toolbar } from "./AppLayout/Toolbar";
 import { Projectbar } from "./AppLayout/Projectbar";
+import debounceRender from "react-debounce-render";
 
       // Mapping state to the props
 const mapStateToProps = ( state ) => ({
         store: state,
+        projectDirectory: store.settings.projectDirectory,
         cleanSnippets: selectors.getCleanSnippetsMemoized( state )
       }),
       // Mapping actions to the props
@@ -67,7 +69,6 @@ export class AppLayout extends React.PureComponent {
   static propTypes = {
     action: PropTypes.object.isRequired,
     store: PropTypes.object.isRequired,
-    selector: PropTypes.object.isRequired,
     cleanSnippets: PropTypes.object.isRequired
   }
 
@@ -78,8 +79,8 @@ export class AppLayout extends React.PureComponent {
   }
 
   render() {
-    const { action, store, selector, cleanSnippets } = this.props,
-          { projectDirectory, exportDirectory } = store.settings,
+    const { action, store, cleanSnippets, projectDirectory } = this.props,
+          { exportDirectory } = store.settings,
           { commandModal, snippetModal, tabs } = store.app,
           tabsAnyTrue = Object.keys( tabs.available ).some( key => tabs.available[ key ]);
 
@@ -98,19 +99,10 @@ export class AppLayout extends React.PureComponent {
 
             <header className="appbar">
               <div className="appbar__menu">
-                <MainMenu
-                  action={ action }
-                  isProjectEmpty={ !store.app.project.files.length }
-                  isSuiteOpen={ !!store.suite.filename }
-                  projectDirectory={ projectDirectory }
-                  isProjectOpen={ !!projectDirectory }
-                  suiteModified={ !!store.suite.modified }
-                  readyToRunTests={ !!store.app.readyToRunTests }
-                />
-
+                <MainMenu />
               </div>
               <div className="appbar__drag"></div>
-              <Toolbar projectName={ store.project.name } suiteModified={ store.suite.modified } action={ action } />
+              <Toolbar />
 
             </header>
 
@@ -126,38 +118,22 @@ export class AppLayout extends React.PureComponent {
                   </div>
                 </div>
 
-                <ProjectExplorer
-                  projectDirectory={ store.settings.projectDirectory }
-                  projects={ store.settings.projects }
-                  suiteModified={ store.suite.modified }
-                  files={ store.app.project.files }
-                  active={ store.suite.filename }
-                  action={ action } />
+                <ProjectExplorer />
 
-                <SnippetExplorer projectDirectory={ store.settings.projectDirectory }
-                  projects={ store.settings.projects }
-                  suiteModified={ store.suite.modified }
-                  files={ store.app.project.files }
-                  action={ action }
-                />
+                <SnippetExplorer />
 
               </aside>
               <main>
 
-                { store.project.name ? <Projectbar action={ action } projectName={ store.project.name } /> : null }
+                <Projectbar />
 
                 <div className="layout-content">
 
                   <If exp={ tabsAnyTrue }>
-                    <TabGroup action={ action }
-                      selector={ selector } />
+                    <TabGroup />
                   </If>
                   <If exp={ !tabsAnyTrue }>
-                    { projectDirectory ? ( <Info action={ action }
-                      projectFiles={ store.app.project.files }
-                      projectName={ store.project.name }
-                      projectDirectory={ store.settings.projectDirectory }
-                    /> )
+                    { projectDirectory ? ( <Info /> )
                       : ( <Welcome action={ action } projectDirectory={ projectDirectory } /> )
                     }
                   </If>

@@ -6,9 +6,26 @@ import { remote } from "electron";
 import { confirmUnsavedChanges  } from "service/smalltalk";
 import classNames from "classnames";
 import { FileList } from "./ProjectExplorer/FileList";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 const { Menu, MenuItem } = remote;
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        projectDirectory: state.settings.projectDirectory,
+        projects: state.settings.projects,
+        suiteModified: state.suite.modified,
+        files: state.app.project.files,
+        active: state.suite.filename 
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 export class ProjectExplorer extends React.Component {
 
   static propTypes = {
@@ -196,6 +213,8 @@ export class ProjectExplorer extends React.Component {
     const { projectDirectory  } = this.props,
           projects = Object.entries( this.props.projects )
             .map( ([ dir, name ]) => ({ dir, name }) );
+    
+    window.consoleCount( __filename );
 
     if ( !projects.length ) {
       return <div></div>;

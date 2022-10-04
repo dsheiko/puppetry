@@ -4,6 +4,22 @@ import { Button, Row, Col, Input, Alert } from "antd";
 import AbstractComponent from "component/AbstractComponent";
 import If from "component/Global/If";
 import { getDemoProjectDirectory } from "service/io";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        projectFiles: state.app.project.files,
+        projectName: state.project.name,
+        projectDirectory: state.settings.projectDirectory 
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 
 
 export class Info extends AbstractComponent {

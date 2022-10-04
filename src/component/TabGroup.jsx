@@ -11,6 +11,7 @@ import ErrorBoundary from "component/ErrorBoundary";
 import { confirmUnsavedChanges } from "service/smalltalk";
 import { truncate } from "service/utils";
 import { connect } from "react-redux";
+import actions from "action";
 import * as selectors from "selector/selectors";
 
 const TabPane = Tabs.TabPane,
@@ -31,7 +32,8 @@ const TabPane = Tabs.TabPane,
         snippetsTest: selectors.getSnippetsTestMemoized( state, props )
       }),
       // Mapping actions to the props
-      mapDispatchToProps = () => ({
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
       });
 /*eslint react/prop-types: 0*/
 @connect( mapStateToProps, mapDispatchToProps )

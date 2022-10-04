@@ -5,12 +5,23 @@ import { Icon, Menu, Dropdown } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractPureComponent from "component/AbstractPureComponent";
 import { confirmUnsavedChanges } from "service/smalltalk";
-import If from "component/Global/If";
-import { truncate } from "service/utils";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 const win = remote.getCurrentWindow();
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        projectName: state.project.name,
+        suiteModified: state.suite.modified 
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
 
+@connect( mapStateToProps, mapDispatchToProps )
 export class Toolbar extends AbstractPureComponent {
 
   static propTypes = {
@@ -67,6 +78,8 @@ export class Toolbar extends AbstractPureComponent {
   render() {
     const { isMaximized } = this.state,
           { projectName } = this.props;
+          
+    window.consoleCount( __filename );
 
     return (
       <ErrorBoundary>

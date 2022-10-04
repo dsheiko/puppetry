@@ -17,7 +17,11 @@ const { Menu, MenuItem } = remote,
       // Mapping state to the props
       mapStateToProps = ( state ) => ({
         active: state.project.lastOpenSnippetId,
-        tests: selectors.getSnippetsAllTestsMemoized( state )
+        tests: selectors.getSnippetsAllTestsMemoized( state ),
+        projectDirectory: state.settings.projectDirectory,
+        projects: state.settings.projects,
+        suiteModified: state.suite.modified,
+        files: state.app.project.files
       }),
       // Mapping actions to the props
       mapDispatchToProps = ( dispatch ) => ({

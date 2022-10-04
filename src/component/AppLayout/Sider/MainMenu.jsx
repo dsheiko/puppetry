@@ -11,26 +11,33 @@ import { E_MENU_NEW_PROJECT, E_MENU_NEW_SUITE, SNIPPETS_FILENAME,
   E_MENU_OPEN_SUITE, E_MENU_EXPORT_PROJECT, E_MENU_EXIT_APP,
   E_MENU_RUN, E_RENDERER_ERROR, E_RENDERER_INFO } from "constant";
 import { ostr } from "./MainMenu/helpers";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 const SubMenu = Menu.SubMenu;
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => {
+        const projectDirectory = state.settings;
+        return {
+          isProjectEmpty: !state.app.project.files.length,
+          isSuiteOpen: !!state.suite.filename,
+          projectDirectory: projectDirectory,
+          isProjectOpen: !!projectDirectory,
+          suiteModified: !!state.suite.modified,
+          readyToRunTests: !!state.app.readyToRunTests
+        };
+      },
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 export class MainMenu extends React.PureComponent {
 
-  static propTypes = {
-    action:  PropTypes.shape({
-      setApp: PropTypes.func.isRequired,
-      saveSuite: PropTypes.func.isRequired,
-      setSuite: PropTypes.func.isRequired,
-      closeApp: PropTypes.func.isRequired,
-      removeAppTab: PropTypes.func.isRequired
-    }),
-    isProjectEmpty: PropTypes.bool.isRequired,
-
-    readyToRunTests: PropTypes.bool.isRequired,
-    isProjectOpen: PropTypes.bool.isRequired,
-    isSuiteOpen: PropTypes.bool.isRequired,
-    suiteModified: PropTypes.bool.isRequired
-  }
+  whyDidYouRender = true;
 
   hotkeyMap = {
     "ctrl+s": "onSave",
@@ -242,6 +249,8 @@ export class MainMenu extends React.PureComponent {
   render() {
     const hotkeys = Object.keys( this.hotkeyMap ).join( ", " ),
           { isProjectOpen, isSuiteOpen, readyToRunTests, isProjectEmpty } = this.props;
+     
+    window.consoleCount( __filename );
 
     return (
       <ErrorBoundary>

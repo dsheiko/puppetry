@@ -7,8 +7,20 @@ import AbstractPureComponent from "component/AbstractPureComponent";
 import { confirmUnsavedChanges } from "service/smalltalk";
 import If from "component/Global/If";
 import { truncate } from "service/utils";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        projectName: state.project.name
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
 
+@connect( mapStateToProps, mapDispatchToProps )
 export class Projectbar extends AbstractPureComponent {
 
   static propTypes = {
@@ -30,7 +42,9 @@ export class Projectbar extends AbstractPureComponent {
 
   render() {
     const { projectName } = this.props;
-
+    if ( !projectName ) {
+      return null;
+    }
     return (
       <ErrorBoundary>
         <div className="layout-project">
