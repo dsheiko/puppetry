@@ -12,6 +12,9 @@ import { normalizeFilename, mkdir } from "service/io";
 import * as classes from "./classes";
 import { join } from "path";
 import { ruleValidateGenericString } from "service/utils";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
@@ -19,6 +22,18 @@ const FormItem = Form.Item,
         return normalizeFilename( val ).toLowerCase();
       };
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        isVisible: state.app.newProjectModal,
+        projectName: state.project.name,
+        projectDirectory: state.settings.projectDirectory
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 @connectForm
 export class NewProjectModal extends AbstractForm {
 

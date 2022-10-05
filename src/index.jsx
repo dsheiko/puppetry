@@ -28,6 +28,8 @@ process.on( "uncaughtException", ( err ) => {
   log.error( `Renderer process: Caught exception: ${err}` );
 });
 
+global.perf.time( "src/index.jsx started" );
+
 // Store enhancement
 const storeEnhancer = composeWithDevTools( 
         applyMiddleware(

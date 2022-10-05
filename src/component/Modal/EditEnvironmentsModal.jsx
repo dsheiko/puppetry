@@ -5,10 +5,24 @@ import { Form, Modal, Button, Input, Table, Icon, Popconfirm } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import * as classes from "./classes";
 import { MODAL_DEFAULT_PROPS } from "constant";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 const FormItem = Form.Item,
       connectForm = Form.create();
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        isVisible: state.app.editEnvironmentsModal,
+        environments: state.project.environments
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 @connectForm
 export class EditEnvironmentsModal extends AbstractForm {
 

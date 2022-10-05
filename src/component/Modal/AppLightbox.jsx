@@ -2,7 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import Carousel, { Modal, ModalGateway } from "react-images";
 import ErrorBoundary from "component/ErrorBoundary";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        isVisible: state.app.appLightbox,
+        data: state.app.lightbox
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 export class AppLightbox extends React.Component {
 
   state = {

@@ -18,6 +18,9 @@ import { TestSpecificationPane } from "./ExportProjectModal/TestSpecificationPan
 import { JestPane } from "./ExportProjectModal/JestPane";
 import { BrowserOptions } from "./TestReportModal/BrowserOptions";
 import { SELECT_SEARCH_PROPS } from "service/utils";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 const CheckboxGroup = Checkbox.Group,
       { TabPane } = Tabs,
@@ -38,6 +41,25 @@ const CheckboxGroup = Checkbox.Group,
         error: ""
       };
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({       
+        currentSuite: state.suite.filename,
+        files: state.app.project.files,
+        exportDirectory: state.settings.exportDirectory,
+        projectDirectory: state.settings.projectDirectory,
+        targets: state.suite.targets,
+        snippets: state.snippets,
+        project: state.project,
+        environment: state.app.environment,
+        readyToRunTests: state.app.readyToRunTests,
+        isVisible: state.app.exportProjectModal
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 export class ExportProjectModal extends AbstractTestRunnerModal {
 
   static propTypes = {

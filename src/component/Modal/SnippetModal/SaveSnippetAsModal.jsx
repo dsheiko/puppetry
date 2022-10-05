@@ -5,11 +5,25 @@ import { Form } from "antd";
 
 import mediator from "service/mediator";
 import { MODAL_DEFAULT_PROPS, RE_SNIPPETS_TEST_ADDED } from "constant";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 /*eslint no-useless-escape: 0*/
 
 const connectForm = Form.create();
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        isVisible: state.app.saveSnippetAsModal,
+        data: state.app.snippetModal 
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 @connectForm
 export class SaveSnippetAsModal extends AbstractSnippetModal {
 

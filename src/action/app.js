@@ -46,7 +46,7 @@ actions.checkNewVersion = () => async ( dispatch, getState ) => {
     if ( settings.checkDate !== checkDate ) {
       await checkNewVersion( settings.lastCheckedVersion );
     }
-    return dispatch( settingsActions.saveSettings({ checkDate }) );
+    return dispatch( settingsActions.saveSettings({ checkDate }, false ) );
   } catch ( ex ) {
     console.error( ex );
   }

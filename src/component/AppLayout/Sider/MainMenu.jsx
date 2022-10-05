@@ -19,7 +19,7 @@ const SubMenu = Menu.SubMenu;
 
 // Mapping state to the props
 const mapStateToProps = ( state ) => {
-        const projectDirectory = state.settings;
+        const { projectDirectory } = state.settings;
         return {
           isProjectEmpty: !state.app.project.files.length,
           isSuiteOpen: !!state.suite.filename,
@@ -294,7 +294,7 @@ export class MainMenu extends React.PureComponent {
             </SubMenu>
 
             <Menu.Item key="11" onClick={ () => this.openTab( "settings" ) } id="cMainMenuSettings">
-              <span><Icon type="setting" /><span>Settings</span></span></Menu.Item>
+              <span><Icon type="setting" /><span>Preferences</span></span></Menu.Item>
 
             <Menu.Item key="10"
               id="cMainMenuRun"

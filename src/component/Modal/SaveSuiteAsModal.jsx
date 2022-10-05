@@ -6,12 +6,27 @@ import { getBasename } from "service/io";
 import ErrorBoundary from "component/ErrorBoundary";
 import * as classes from "./classes";
 import { MODAL_DEFAULT_PROPS } from "constant";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        isVisible: state.app.saveSuiteAsModal,
+        files: state.app.project.files,
+        filename: state.suite.filename 
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
 
 /*eslint no-useless-escape: 0*/
 
 const FormItem = Form.Item,
       connectForm = Form.create();
 
+@connect( mapStateToProps, mapDispatchToProps )
 @connectForm
 export class SaveSuiteAsModal extends AbstractForm {
 

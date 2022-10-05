@@ -9,6 +9,9 @@ import If from "component/Global/If";
 import * as classes from "./classes";
 import { SelectEnv } from "component/Global/SelectEnv";
 import { MODAL_DEFAULT_PROPS } from "constant";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 /*eslint no-empty: 0*/
 
@@ -42,7 +45,21 @@ export function updateLauncherArgs( launcherArgs, value, toggle ) {
   return launcherArgs.replace( re, " " ).trim();
 }
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        isVisible: state.app.testReportModal,
+        currentSuite: state.suite.filename,
+        files: state.app.project.files,
+        snippets: state.snippets,
+        environment: state.app.environment,
+        project: state.project
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
 
+@connect( mapStateToProps, mapDispatchToProps )
 export class TestReportModal extends AbstractTestRunnerModal {
 
   static propTypes = {

@@ -6,7 +6,25 @@ import ErrorBoundary from "component/ErrorBoundary";
 import If from "component/Global/If";
 import { confirmUnsavedChanges } from "service/smalltalk";
 import { MODAL_DEFAULT_PROPS } from "constant";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        isVisible: state.app.openSuiteModal,
+        projectDirectory: state.settings.projectDirectory,
+        suiteModified: state.suite.modified,
+        files: state.app.project.files,
+        active: state.suite.filename,
+        isVisible: state.app.openSuiteModal
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 
 export class OpenSuiteModal extends AbstractForm {
 

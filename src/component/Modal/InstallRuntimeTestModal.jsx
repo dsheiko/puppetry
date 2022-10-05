@@ -10,11 +10,24 @@ import { E_RUNTIME_TEST_PROGRESS, E_RUNTIME_TEST_MILESTONE,
   E_RUNTIME_TEST_ERROR, E_INSTALL_RUNTIME_TEST, MODAL_DEFAULT_PROPS } from "constant";
 import { lockRuntimeTestPath, removeRuntimeTestPath, getRuntimeTestPath,
   initRuntimeTestPath, getLogPath, getRuntimeTestPathSafe } from "service/io";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 notification.config({
   placement: "bottomRight"
 });
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        isVisible: state.app.installRuntimeTestModal
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 export class InstallRuntimeTestModal extends AbstractComponent {
 
   static propTypes = {

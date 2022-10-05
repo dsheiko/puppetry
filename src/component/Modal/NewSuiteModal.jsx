@@ -8,6 +8,9 @@ import { normalizeFilename } from "service/io";
 import { ruleValidateGenericString } from "service/utils";
 import * as classes from "./classes";
 import { MODAL_DEFAULT_PROPS } from "constant";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 /*eslint no-useless-escape: 0*/
 
@@ -17,6 +20,17 @@ const FormItem = Form.Item,
         return normalizeFilename( val ).toLowerCase();
       },
       Panel = Collapse.Panel;
+
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        isVisible: state.app.newSuiteModal
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 
 @connectForm
 export class NewSuiteModal extends AbstractForm {

@@ -15,11 +15,11 @@ const actions = createActions({
 
 // SETTINGS
 
-actions.saveSettings = ( payload ) => ( dispatch, getState ) => {
+actions.saveSettings = ( payload, doDispatch = true ) => ( dispatch, getState ) => {
   try {
     const settings = { ...getState().settings, ...payload };
     localStorage.setItem( STORAGE_KEY_SETTINGS, JSON.stringify( settings ) );
-    dispatch( actions.setSettings( settings ) );
+    doDispatch && dispatch( actions.setSettings( settings ) );
   } catch ( ex ) {
     handleException( ex, dispatch, "Cannot save settings" );
   }

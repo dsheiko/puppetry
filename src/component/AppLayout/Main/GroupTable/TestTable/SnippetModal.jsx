@@ -6,11 +6,27 @@ import { SnippetVariables } from "./SnippetVariables";
 import { Form, Button, Select, Input } from "antd";
 import { SELECT_SEARCH_PROPS } from "service/utils";
 import { SNIPPETS_GROUP_ID } from "constant";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as selectors from "selector/selectors";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
       Option = Select.Option;
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        isVisible: state.app.snippetModal.isVisible,
+        record: state.app.snippetModal.record,
+        snippets: selectors.getCleanSnippetsMemoized( state )
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 @connectForm
 export class SnippetModal extends AbstractForm {
 
@@ -73,8 +89,8 @@ export class SnippetModal extends AbstractForm {
     const { isVisible, snippets, record } = this.props,
           { getFieldDecorator } = this.props.form,
           { loading } = this.state;
-
-    return ( <ErrorBoundary>
+          
+    return record === null ? null : ( <ErrorBoundary>
       <InstantModal
         visible={ isVisible }
         title="Edit Reference"

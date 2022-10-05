@@ -7,7 +7,21 @@ import { shell, remote } from "electron";
 import { getLogPath } from "service/io";
 import * as classes from "./classes";
 import { MODAL_DEFAULT_PROPS } from "constant";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        isVisible: state.app.alert.visible,
+        alert: state.app.alert
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 export class AlertMessageModal extends AbstractComponent {
 
   static propTypes = {

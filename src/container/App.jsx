@@ -45,12 +45,9 @@ export class App extends React.Component {
     const { loadProject,
               loadSettings,
               checkRuntimeTestDirReady,
-              checkNewVersion,
-              setApp
+              checkNewVersion
             } = this.props.action,
             settings = loadSettings();
-
-      global.perf.time( "src/container/App.jsx did mount" );
 
       // setApp({ greeting: GREETINGS[ Math.floor( Math.random() * GREETINGS.length ) ] });
       checkRuntimeTestDirReady();
@@ -75,6 +72,7 @@ export class App extends React.Component {
   }
 
   componentDidMount() {
+    global.perf.time( "src/container/App.jsx did mount" );
     this.bootstrap();
   }
 

@@ -13,6 +13,7 @@ import { truncate } from "service/utils";
 import { connect } from "react-redux";
 import actions from "action";
 import * as selectors from "selector/selectors";
+import { bindActionCreators } from "redux";
 
 const TabPane = Tabs.TabPane,
       TAB_TEXT_MAX_LEN = 16,

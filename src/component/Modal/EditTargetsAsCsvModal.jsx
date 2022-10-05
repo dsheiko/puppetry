@@ -5,6 +5,9 @@ import { Form, Modal, Button, Input } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import * as classes from "./classes";
 import { MODAL_DEFAULT_PROPS } from "constant";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 /*eslint no-useless-escape: 0*/
 
@@ -18,6 +21,17 @@ function targetToCsvLine( row ) {
    + ( row.parentType ? `,${ row.parentType }` : `` );
 }
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        isVisible: state.app.editTargetsAsCsvModal,
+        targets: state.suite.targets
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 @connectForm
 export class EditTargetsAsCsvModal extends AbstractForm {
 

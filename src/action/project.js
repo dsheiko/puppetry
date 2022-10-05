@@ -62,7 +62,7 @@ actions.loadProject = ( directory = null ) => async ( dispatch, getState ) => {
 
     ipcRenderer.send( E_PROJECT_LOADED, projectDirectory );
 
-    directory && dispatch( settingsActions.saveSettings({ projectDirectory }) );
+    directory && dispatch( settingsActions.saveSettings({ projectDirectory }, false ) );
     dispatch( actions.resetProject( project ) );
     await dispatch( actions.loadProjectFiles( projectDirectory ) );
     await dispatch( actions.watchProjectFiles( projectDirectory ) );

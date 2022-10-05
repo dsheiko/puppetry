@@ -15,14 +15,13 @@ import * as selectors from "selector/selectors";
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
         panes: state.project.appPanels.suite.panes,
-        expandedGroups: state.project.groups,
+        
         groups: state.suite.groups,
-        targets: state.suite.targets,
         title: state.suite.title,
         description: state.suite.description,
         timeout: state.suite.timeout,
-        targetDataTable: selectors.getSuiteTargetDataTableMemoized( state ),
-        groupDataTable: selectors.getSuiteGroupsMemoized( state )
+        targetDataTable: selectors.getSuiteTargetDataTableMemoized( state )
+        
       }),
       // Mapping actions to the props
       mapDispatchToProps = () => ({
@@ -36,10 +35,7 @@ export class Main extends AbstractComponent {
   whyDidYouRender = true;
 
   static propTypes = {
-    selector: PropTypes.object.isRequired,
-    expandedGroups: PropTypes.object,
     groups: PropTypes.object,
-    targets: PropTypes.object,
     timout: PropTypes.number,
     title: PropTypes.string,
     panes: PropTypes.array,
@@ -57,19 +53,17 @@ export class Main extends AbstractComponent {
     }, 10 );
   }
 
-  shouldComponentUpdate( nextProps ) {
+  // shouldComponentUpdate( nextProps ) {
 
-    if ( this.props.groups !== nextProps.groups
-      || this.props.panes !== nextProps.panes
-      || this.props.expandedGroups !== nextProps.expandedGroups
-      || this.props.targets !== nextProps.targets
-      || this.props.title !== nextProps.title
-      || this.props.description !== nextProps.description
-      || this.props.timeout !== nextProps.timeout ) {
-      return true;
-    }
-    return false;
-  }
+  //   if ( this.props.groups !== nextProps.groups
+  //     || this.props.panes !== nextProps.panes
+  //     || this.props.title !== nextProps.title
+  //     || this.props.description !== nextProps.description
+  //     || this.props.timeout !== nextProps.timeout ) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   openTab = async ( tabKey, e = null ) => {
     e && e.preventDefault();
@@ -106,14 +100,10 @@ export class Main extends AbstractComponent {
 
   render() {
     const { action,
-            selector,
-            expandedGroups,
-            targets,
             title,
             description,
             timeout,
-            targetDataTable,
-            groupDataTable
+            targetDataTable
           } = this.props,
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
           windowsLabel = ( <span><Icon type="appstore" />Windows</span> ),
@@ -147,16 +137,7 @@ export class Main extends AbstractComponent {
                 a new browser session</a> is created for every group.
               </p>
 
-              <p>
-              You can change test case representation style in
-                { " " }<a onClick={ ( e ) => this.openTab( "settings", e ) }>settings</a>.
-              </p>
-              <GroupTable
-                action={ action }
-                selector={ selector }
-                expanded={ expandedGroups }
-                groups={ groupDataTable }
-                targets={ targets } />
+              <GroupTable  />
             </TabPane>
 
             <TabPane tab={ targetsLabel } key="targets">
@@ -169,11 +150,12 @@ export class Main extends AbstractComponent {
               <TargetTable action={ action } targets={ targetDataTable } />
             </TabPane>
 
+            {/*
             <TabPane tab={ windowsLabel } key="windows">
                <p>Windows represent open browser windows and tabs.
               </p>
               <PageTable action={ action } />
-            </TabPane>
+            </TabPane> */}
 
 
 

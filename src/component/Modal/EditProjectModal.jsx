@@ -7,10 +7,25 @@ import * as classes from "./classes";
 import { getAppInstallPath } from "service/io";
 import { ruleValidateGenericString } from "service/utils";
 import { MODAL_DEFAULT_PROPS } from "constant";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 const FormItem = Form.Item,
       connectForm = Form.create();
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        isVisible: state.app.editProjectModal,
+        projectName: state.project.name,
+        projectDirectory: state.settings.projectDirectory
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 @connectForm
 export class EditProjectModal extends AbstractForm {
 

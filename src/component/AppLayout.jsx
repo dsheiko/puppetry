@@ -2,9 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { remote } from "electron";
 import classNames  from "classnames";
-import { Spin, Layout, Icon } from "antd";
+import { Spin } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
-import { CheckoutMaster } from "component/Global/CheckoutMaster";
 
 import { MainMenu } from "./AppLayout/Sider/MainMenu";
 import { ProjectExplorer  } from "./AppLayout/Sider/ProjectExplorer";
@@ -32,7 +31,6 @@ import { SaveSnippetAsModal } from "./Modal/SnippetModal/SaveSnippetAsModal";
 import { EditSnippetModal } from "./Modal/SnippetModal/EditSnippetModal";
 import { AppLightbox } from "./Modal/AppLightbox";
 import { connect } from "react-redux";
-import * as selectors from "selector/selectors";
 import { TabGroup  } from "./TabGroup";
 import If from "component/Global/If";
 import { Toolbar } from "./AppLayout/Toolbar";
@@ -41,9 +39,9 @@ import debounceRender from "react-debounce-render";
 
       // Mapping state to the props
 const mapStateToProps = ( state ) => ({
-        store: state,
-        projectDirectory: store.settings.projectDirectory,
-        cleanSnippets: selectors.getCleanSnippetsMemoized( state )
+        projectDirectory: state.settings.projectDirectory,
+        loading: state.app.loading,
+        tabs: state.app.tabs
       }),
       // Mapping actions to the props
       mapDispatchToProps = () => ({
@@ -68,8 +66,8 @@ export class AppLayout extends React.PureComponent {
 
   static propTypes = {
     action: PropTypes.object.isRequired,
-    store: PropTypes.object.isRequired,
-    cleanSnippets: PropTypes.object.isRequired
+    tabs: PropTypes.object.isRequired,
+    loading: PropTypes.bool.isRequired
   }
 
   onEditProject = () => {
@@ -79,19 +77,17 @@ export class AppLayout extends React.PureComponent {
   }
 
   render() {
-    const { action, store, cleanSnippets, projectDirectory } = this.props,
-          { exportDirectory } = store.settings,
-          { commandModal, snippetModal, tabs } = store.app,
+    const { action, projectDirectory, loading, tabs } = this.props,
           tabsAnyTrue = Object.keys( tabs.available ).some( key => tabs.available[ key ]);
 
     window.consoleCount( __filename );
     return (
       <ErrorBoundary>
-        <Spin spinning={ store.app.loading } size="large">
+        <Spin spinning={ loading } size="large">
 
-          <div className={classNames({
+          <div className={ classNames({
             layout: true,
-            "is-loading": store.app.loading,
+            "is-loading": loading,
             "has-sticky-tabs-panel": tabs.active
               && ( tabs.active === "suite" || tabs.active === "settings" || tabs.active === "snippet" )
 
@@ -140,7 +136,7 @@ export class AppLayout extends React.PureComponent {
 
                 </div>
 
-                <AppFooter action={action} />
+                <AppFooter action={ action } />
 
               </main>
             </div>
@@ -152,131 +148,26 @@ export class AppLayout extends React.PureComponent {
         </Spin>
 
         <NewSnippetModal
-          action={ action }
-          isVisible={ store.app.newSnippetModal }
           title="New Snippet"
           data={ { title: "" } }
           />
-
-        <SaveSnippetAsModal
-          action={ action }
-          isVisible={ store.app.saveSnippetAsModal }
-          title="Save Snippet as..."
-          data={ store.app.snippetModal }
-          />
-
-        <EditSnippetModal
-          action={ action }
-          isVisible={ store.app.editSnippetModal }
-          title="Edit Snippet"
-          data={ store.app.snippetModal }
-          />
-
-        <NewProjectModal
-          action={action}
-          isVisible={store.app.newProjectModal}
-          projectName={ store.project.name }
-          projectDirectory={ projectDirectory } />
-
-        <OpenProjectModal
-          action={action}
-          isVisible={store.app.openProjectModal}
-          projectDirectory={ projectDirectory } />
-
-        <OpenSuiteModal
-          action={action}
-          projectDirectory={ projectDirectory }
-          suiteModified={ store.suite.modified }
-          files={ store.app.project.files }
-          active={ store.suite.filename }
-          isVisible={store.app.openSuiteModal} />
-
-        <SaveSuiteAsModal
-          action={action}
-          isVisible={store.app.saveSuiteAsModal}
-          files={ store.app.project.files }
-          filename={ store.suite.filename } />
-
-        <SaveProjectAsModal
-          action={action}
-          isVisible={store.app.saveProjectAsModal}
-          files={ store.app.project.files }
-          filename={ store.suite.filename } />
-
-        <NewSuiteModal
-          action={action}
-          isVisible={store.app.newSuiteModal} />
-
-
-        <AlertMessageModal action={action}
-          isVisible={ store.app.alert.visible }
-          alert={ store.app.alert } />
-
-        <TestReportModal
-          action={action}
-          currentSuite={ store.suite.filename }
-          files={ store.app.project.files }
-          isVisible={store.app.testReportModal}
-          snippets={ store.snippets }
-          environment={ store.app.environment }
-          project={ store.project } />
-
-        <ExportProjectModal action={action}
-          currentSuite={ store.suite.filename }
-          files={ store.app.project.files }
-          exportDirectory={ exportDirectory }
-          projectDirectory={ projectDirectory }
-          targets={ store.suite.targets }
-          snippets={ store.snippets }
-          project={ store.project }
-          environment={ store.app.environment }
-          readyToRunTests={ store.app.readyToRunTests }
-          isVisible={ store.app.exportProjectModal } />
-
-        <CommandModal
-          isVisible={ commandModal.isVisible }
-          commands={ commandModal.commands }
-          action={ action }
-          record={ commandModal.record } />
-
-        { snippetModal.isVisible && <SnippetModal
-          isVisible={ true }
-          record={ snippetModal.record }
-          snippets={ cleanSnippets }
-          action={ action } /> }
-
-        <InstallRuntimeTestModal
-          action={ action }
-          isVisible={ store.app.installRuntimeTestModal } />
-
-        <EditTargetsAsCsvModal
-          isVisible={ store.app.editTargetsAsCsvModal }
-          targets={ store.suite.targets }
-          action={ action }
-        />
-
-       
-
-        <CheckoutMaster
-          projectDirectory={ projectDirectory }
-          action={ action }
-        />
-
-        <EditProjectModal
-          isVisible={ store.app.editProjectModal }
-          projectName={ store.project.name }
-          projectDirectory={ projectDirectory }
-          action={ action } />
-
-        <EditEnvironmentsModal
-          isVisible={ store.app.editEnvironmentsModal }
-          environments={ store.project.environments }
-          action={ action } />
-
-        <AppLightbox
-          isVisible={ store.app.appLightbox }
-          data={ store.app.lightbox }
-          action={ action } />
+        <SaveSnippetAsModal title="Save Snippet as..." />
+        <EditSnippetModal title="Edit Snippet" />
+        <NewProjectModal />
+        <OpenSuiteModal />
+        <SaveSuiteAsModal />
+        <SaveProjectAsModal />
+        <NewSuiteModal />
+        <AlertMessageModal  />
+        <TestReportModal />
+        <ExportProjectModal />
+        <CommandModal />
+        <SnippetModal />
+        <InstallRuntimeTestModal />
+        <EditTargetsAsCsvModal />
+        <EditProjectModal />
+        <EditEnvironmentsModal />
+        <AppLightbox />
 
       </ErrorBoundary>
     );

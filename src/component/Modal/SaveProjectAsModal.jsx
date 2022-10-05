@@ -6,9 +6,24 @@ import BrowseDirectory from "component/Global/BrowseDirectory";
 import ErrorBoundary from "component/ErrorBoundary";
 import { A_FORM_ITEM_ERROR, A_FORM_ITEM_SUCCESS, MODAL_DEFAULT_PROPS } from "constant";
 import * as classes from "./classes";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 const connectForm = Form.create();
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        isVisible: state.app.saveProjectAsModal,
+        files: state.app.project.files,
+        filename: state.suite.filename 
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 @connectForm
 export class SaveProjectAsModal extends AbstractForm {
 

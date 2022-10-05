@@ -8,9 +8,35 @@ import { EditableCell } from "./EditableCell";
 import { ipcRenderer } from "electron";
 import { confirmRecording } from "service/smalltalk";
 import { E_DELEGATE_RECORDER_SESSION, E_OPEN_RECORDER_WINDOW } from "constant";
+import * as selectors from "selector/selectors";
 
 const recordPrefIcon = <Icon type="border-outer" title="Scope starting a new browser session" />;
 
+const createSelector = ( state ) => ({
+          getTestDataTable: ( group ) => selectors.getGroupTestsMemoized( group ),
+          getSelectedTargets: ( selection ) => selectors.getSelectedTargetsMemoized({ ...state, selection }),
+          hasTarget: ( target ) => selectors.hasTarget( target, state.suite.targets ),
+          findCommandsByTestId:
+            ( testId ) => selectors.findCommandsByTestId( testId, state.suite.groups )
+        });
+
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        selector: createSelector( state ),
+        expanded: state.project.groups,
+        targets: state.suite.targets,
+        groupDataTable: selectors.getSuiteGroupsMemoized( state )
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 @connectDnD
 export class GroupTable extends AbstractEditableTable {
 
