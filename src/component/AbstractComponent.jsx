@@ -32,4 +32,11 @@ export default class AbstractComponent extends React.Component {
     });
   }
 
+
+  renderLoading = ( <div className="ant-spin ant-spin-lg ant-spin-spinning">
+      <span>
+        <img width="32" height="32" src="./assets/loading.svg" alt="Loading..." />
+      </span>
+    </div> );
+
 }

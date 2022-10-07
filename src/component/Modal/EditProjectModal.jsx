@@ -106,7 +106,7 @@ export class EditProjectModal extends AbstractForm {
             </Button> )
           ]}
         >
-          <Form>
+          { isVisible ? <Form>
 
 
             <FormItem  label="Project name">
@@ -148,7 +148,7 @@ export class EditProjectModal extends AbstractForm {
               )}
             </FormItem>
 
-          </Form>
+          </Form> : this.renderLoading }
         </Modal>
       </ErrorBoundary>
     );

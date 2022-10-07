@@ -11,6 +11,8 @@ const recordPrefIcon = <Icon type="bars" title="Test case, specification of comm
 @connectDnD
 export class TestTable extends AbstractEditableTable {
 
+  whyDidYouRender = true;
+
   constructor( props ) {
     super( props );
     this.columns = [

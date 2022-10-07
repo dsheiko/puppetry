@@ -163,7 +163,7 @@ export class NewProjectModal extends AbstractForm {
             </Button> )
           ]}
         >
-          <Form>
+          { isVisible ? <Form>
             <FormItem  label="Project name">
               { getFieldDecorator( "name", {
                 initialValue: projectName,
@@ -222,7 +222,7 @@ export class NewProjectModal extends AbstractForm {
               </p>
             </If>
 
-          </Form>
+          </Form> : this.renderLoading }
         </Modal>
       </ErrorBoundary>
     );

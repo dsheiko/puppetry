@@ -127,7 +127,7 @@ export class EditTargetsAsCsvModal extends AbstractForm {
             </Button> ) ]}
         >
 
-          { isVisible && <Form>
+          { isVisible ? <Form>
             <div className="markdown">
               Here you can edit targets in CSV (comma-separated values) format.
               Please, define lines representing simple targets as <code>TARGET,SELECTOR</code>
@@ -140,7 +140,7 @@ export class EditTargetsAsCsvModal extends AbstractForm {
                 <TextArea rows="8" />
               )}
             </FormItem>
-          </Form> }
+          </Form> : this.renderLoading }
 
         </Modal>
       </ErrorBoundary>

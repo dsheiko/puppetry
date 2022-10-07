@@ -115,7 +115,6 @@ export class AppLayout extends React.PureComponent {
                 </div>
 
                 <ProjectExplorer />
-
                 <SnippetExplorer />
 
               </aside>
@@ -125,14 +124,10 @@ export class AppLayout extends React.PureComponent {
 
                 <div className="layout-content">
 
-                  <If exp={ tabsAnyTrue }>
-                    <TabGroup />
-                  </If>
-                  <If exp={ !tabsAnyTrue }>
-                    { projectDirectory ? ( <Info /> )
-                      : ( <Welcome action={ action } projectDirectory={ projectDirectory } /> )
-                    }
-                  </If>
+                { projectDirectory // when all panels closed, show Info
+                  ? ( tabsAnyTrue ? <TabGroup /> : <Info /> ) 
+                  // if no project open, show Welcome 
+                  : ( <Welcome action={ action } projectDirectory={ projectDirectory } /> ) }
 
                 </div>
 

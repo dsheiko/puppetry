@@ -115,7 +115,7 @@ export class SaveProjectAsModal extends AbstractForm {
             </Button> )
           ]}
         >
-          <Form>
+          { isVisible ? <Form>
             <BrowseDirectory
               id="inSaveProjectAsModal"
               defaultDirectory={ this.state.projectDirectory }
@@ -124,7 +124,7 @@ export class SaveProjectAsModal extends AbstractForm {
               getSelectedDirectory={ this.getSelectedDirectory }
               label="Project new location" />
 
-          </Form>
+          </Form> : this.renderLoading }
         </Modal>
       </ErrorBoundary>
     );

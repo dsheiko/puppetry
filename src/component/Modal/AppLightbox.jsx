@@ -67,7 +67,7 @@ export class AppLightbox extends React.Component {
           <Modal onClose={ this.onClose }>
             <Carousel views={ data.images } currentIndex={ this.getCurrentIndex( data ) } />
           </Modal>
-        ) : null}
+        ) : this.renderLoading  }
       </ModalGateway>
     </ErrorBoundary> );
   }

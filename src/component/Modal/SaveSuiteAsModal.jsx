@@ -109,7 +109,7 @@ export class SaveSuiteAsModal extends AbstractForm {
             </Button> )
           ]}
         >
-          <Form >
+          { isVisible ? <Form >
             <FormItem  label="Suite filename (without extension)">
               { getFieldDecorator( "filename", {
                 initialValue: getBasename( filename ),
@@ -130,7 +130,7 @@ export class SaveSuiteAsModal extends AbstractForm {
                 <Input placeholder="e.g. my-new-suite" onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
               )}
             </FormItem>
-          </Form>
+          </Form>: this.renderLoading }
         </Modal>
       </ErrorBoundary>
     );

@@ -131,7 +131,7 @@ export class EditEnvironmentsModal extends AbstractForm {
             pagination={{ pageSize: 4 }}
           />
 
-          <Form layout="inline">
+          { isVisible ? <Form layout="inline">
 
             <FormItem>
               { getFieldDecorator( "name", {
@@ -168,7 +168,7 @@ export class EditEnvironmentsModal extends AbstractForm {
                 onClick={ this.onClickOk }><Icon type="plus" />Add environment
               </Button>
             </Form.Item>
-          </Form>
+          </Form> : this.renderLoading }
         </Modal>
       </ErrorBoundary>
     );

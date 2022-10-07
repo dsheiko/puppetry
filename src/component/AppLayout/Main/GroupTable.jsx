@@ -28,8 +28,9 @@ import { bindActionCreators } from "redux";
 const mapStateToProps = ( state ) => ({
         selector: createSelector( state ),
         expanded: state.project.groups,
+        // groups: state.suite.groups,
         targets: state.suite.targets,
-        groupDataTable: selectors.getSuiteGroupsMemoized( state )
+        groups: selectors.getSuiteGroupsMemoized( state )
       }),
       // Mapping actions to the props
       mapDispatchToProps = ( dispatch ) => ({
@@ -39,6 +40,8 @@ const mapStateToProps = ( state ) => ({
 @connect( mapStateToProps, mapDispatchToProps )
 @connectDnD
 export class GroupTable extends AbstractEditableTable {
+
+  whyDidYouRender = true;
 
   constructor( props ) {
     super( props );
@@ -146,11 +149,12 @@ export class GroupTable extends AbstractEditableTable {
   }
 
   render() {
+  
     const groups = this.props.groups,
           expanded = Object.values( this.props.expanded )
             .filter( item => Boolean( item.value ) )
             .map( item => item.key );
-
+console.log( "?", this.props, {expanded} );
     return (
       <div className="box-margin-vertical group-table is-relative">
         <a className="btn-to-bottom" href="#cGroupTableRecordBtn">

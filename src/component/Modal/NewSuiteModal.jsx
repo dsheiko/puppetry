@@ -115,7 +115,7 @@ export class NewSuiteModal extends AbstractForm {
             </Button> ) ]}
         >
 
-          <Form >
+          { isVisible ? <Form >
             <FormItem  label="Suite title">
               { getFieldDecorator( "title", {
                 initialValue: "",
@@ -168,7 +168,7 @@ export class NewSuiteModal extends AbstractForm {
             </Collapse>
 
 
-          </Form>
+          </Form> : this.renderLoading }
 
         </Modal>
       </ErrorBoundary>

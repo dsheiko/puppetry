@@ -51,7 +51,7 @@ export default class AbstractSnippetModal extends AbstractForm {
             </Button> ) ]}
         >
 
-          <Form >
+          { isVisible ? <Form >
             <FormItem  label="Snippet name">
               { getFieldDecorator( "title", {
                 initialValue: data.title,
@@ -70,7 +70,7 @@ export default class AbstractSnippetModal extends AbstractForm {
                   onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
               )}
             </FormItem>
-          </Form>
+          </Form>: this.renderLoading }
 
         </Modal>
       </ErrorBoundary>

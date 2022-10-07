@@ -207,7 +207,7 @@ export class InstallRuntimeTestModal extends AbstractComponent {
           { ...MODAL_DEFAULT_PROPS }
           footer={ buttons }
         >
-
+        { isVisible ? <>
           <p>In order to run the test within the application you need to install missing dependencies
           (<a onClick={ this.onExtClick } href="https://pptr.dev" rel="nofollow">Puppeteer</a>
           { " " } and <a onClick={ this.onExtClick } href="https://jestjs.io/" rel="nofollow">Jest</a>)
@@ -253,6 +253,8 @@ export class InstallRuntimeTestModal extends AbstractComponent {
               <Alert style={{ height: 56, overflow: "hidden" }} message={ milestone } type="success"   />
             </If>
           </div>
+
+          </> : this.renderLoading } 
         </Modal>
       </ErrorBoundary>
     );
