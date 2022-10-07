@@ -2,10 +2,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Tabs, Icon } from "antd";
-import { GroupTable  } from "./Main/GroupTable";
-import { SuiteForm  } from "./Main/SuiteForm";
-import { TargetTable  } from "./Main/TargetTable";
-import { PageTable  } from "./Main/PageTable";
+import { TestTable } from "./Main/GroupTable/TestTable";
+import { SuiteForm } from "./Main/SuiteForm";
+import { TargetTable } from "./Main/TargetTable";
+
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractComponent from "component/AbstractComponent";
 import LearnMore from "component/Global/LearnMore";
@@ -106,7 +106,7 @@ export class Main extends AbstractComponent {
             targetDataTable
           } = this.props,
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
-          windowsLabel = ( <span><Icon type="appstore" />Windows</span> ),
+          // windowsLabel = ( <span><Icon type="appstore" />Windows</span> ),
           groupsLabel = ( <span><Icon type="audit" />Test Cases</span> ),
           optionsLabel = ( <span><Icon type="tool" />Suite Options</span> ),
           activeKey = this.getActivePane();
@@ -137,7 +137,7 @@ export class Main extends AbstractComponent {
                 a new browser session</a> is created for every group.
               </p>
 
-              <GroupTable  />
+              <TestTable  />
             </TabPane>
 
             <TabPane tab={ targetsLabel } key="targets">

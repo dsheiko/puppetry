@@ -9,6 +9,7 @@ import TestGenerator from "service/TestGenerator";
 import { schema } from "component/Schema/schema";
 import writeFileAtomic from "write-file-atomic";
 import { confirmCreateProject } from "service/smalltalk";
+import { convertSuite, convertProject } from "./Converter/v4";
 
 // fs.promises.readFile is 40% slower than fs.readFile 
 // https://github.com/nodejs/node/issues/37583
@@ -286,6 +287,8 @@ export async function writeSuite( directory, file, data ) {
  */
 export async function readSuite( directory, file ) {
 
+  const isSnippetsFile = ( file === SNIPPETS_FILENAME );
+
   if ( !directory || typeof directory !== "string" ) {
     throw new InvalidArgumentError( `Directory is empty or not a string` );
   }
@@ -295,14 +298,19 @@ export async function readSuite( directory, file ) {
 
   const filePath = join( directory, file );
   // in case of snippets
-  if ( file === SNIPPETS_FILENAME && !fs.existsSync( filePath ) ) {
+  if ( isSnippetsFile && !fs.existsSync( filePath ) ) {
     log.warn( `Suite file ${filePath} not found.` );
     return null;
   }
 
   try {
-    const text = perf.processSync(`read ${ filePath }`, () => fs.readFileSync( filePath, "utf8" ));
-    return parseJson( text, filePath );
+    const text = perf.processSync(`read ${ filePath }`, () => fs.readFileSync( filePath, "utf8" )),
+          data = parseJson( text, filePath );
+    
+    if ( parseInt( data.puppetry.substr( 0, 1 ), 10 ) < 4 ) {
+      return convertSuite( data, isSnippetsFile );
+    }
+    return data;
   } catch ( e ) {
     log.warn( `Renderer process: io.readSuite: ${ e }` );
     throw new IoError( `Suite file ${filePath} cannot be open.
@@ -389,11 +397,15 @@ export  function isProject( directory ) {
 export async function readProject( directory ) {
   const filePath = join( directory, PROJECT_FILE_NAME );
   try {
-    const text = perf.processSync(`read ${ filePath }`, () => fs.readFileSync( filePath, "utf8" ) );
-    return parseJson( text, filePath );
+    const text = perf.processSync(`read ${ filePath }`, () => fs.readFileSync( filePath, "utf8" ) ),
+          data = parseJson( text, filePath );
+    if ( parseInt( data.puppetry.substr( 0, 1 ), 10 ) < 4 ) {
+      return convertProject( data );
+    }
+    return data;
   } catch ( e ) {
     log.warn( `Renderer process: io.readProject: ${ e }` );
-    throw new IoError( `Project file ${filePath} cannot be open.
+    throw new IoError( `Project file ${ filePath } cannot be open.
           Please make sure that the file exists and that you have read permission for it` );
   }
 }

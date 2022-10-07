@@ -20,16 +20,25 @@ export function findCommandsByTestId( testId, groups ) {
 const stateGlobal = ( state ) => state,
       stateSnippets = ( state ) => state.snippets,
       stateSnippetsTargets = ( state ) => state.snippets.targets,
-      stateSnippetsPages = ( state ) => state.snippets.pages,
+      
       stateSuitePage = ( state ) => state.suite.pages,
       stateSuiteTargets = ( state ) => state.suite.targets,
       stateProjectTargets = ( state ) => state.project.targets,
       stateSuiteGroups = ( state ) => state.suite.groups,
+
+      stateSuiteTests = ( state ) => state.suite.tests,
+
+      stateProjectExpanded = ( state ) => state.project.expanded,
+
       groupTests = ( group ) => group.tests,
       allTargets = ( state ) => ({
         targets: Object.assign({}, state.project.targets, state.suite.targets ),
         selection: state.selection
       });
+
+export const getProjectExpandedMemoized = createSelector( stateProjectExpanded, expanded => Object.values( expanded )
+            .filter( item => Boolean( item.value ) )
+            .map( item => item.key ) );
 
 export const getCleanSnippetsMemoized = createSelector( stateSnippets, getSnippets );
 export const getSnippetsTestMemoized = createSelector( stateGlobal, getSnippetsTest );
@@ -41,17 +50,16 @@ export const getSuiteTargetDataTableMemoized = createSelector( stateSuiteTargets
 export const getSuitePageDataTableMemoized = createSelector( stateSuitePage, getTargetDataTable );
 export const getSuiteGroupsMemoized = createSelector( stateSuiteGroups,
   ( groups ) => getStructureDataTable( groups, "group" ) );
-export const getGroupTestsMemoized = createSelector( groupTests,
+
+export const getSuiteTestsMemoized = createSelector( stateSuiteTests,
   ( tests ) => getStructureDataTable( tests, "test" ) );
+
+
 export const getSelectedTargetsMemoized = createSelector( allTargets,
   ({ targets, selection }) => getSelectedTargets( selection, targets ) );
 
 const getCommandsArray = ( state, props ) => {
-  const group = state.suite.groups[ props.groupId ];
-  if ( typeof group === "undefined" ) {
-    return {};
-  }
-  const test = group.tests[ props.testId ];
+  const test = state.suite.tests[ props.testId ];
   if ( typeof test === "undefined" ) {
     return {};
   }

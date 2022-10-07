@@ -163,3 +163,7 @@
 .toolbar .anticon {
   vertical-align: 0;
 }
+
+.ant-table .test-expanded td:last-child {
+  padding-right: 0;
+}

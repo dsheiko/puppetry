@@ -13,7 +13,7 @@ import * as selectors from "selector/selectors";
 const recordPrefIcon = <Icon type="border-outer" title="Scope starting a new browser session" />;
 
 const createSelector = ( state ) => ({
-          getTestDataTable: ( group ) => selectors.getGroupTestsMemoized( group ),
+          getTestDataTable: ( group ) => selectors.getSuiteTestsMemoized( group ),
           getSelectedTargets: ( selection ) => selectors.getSelectedTargetsMemoized({ ...state, selection }),
           hasTarget: ( target ) => selectors.hasTarget( target, state.suite.targets ),
           findCommandsByTestId:
@@ -154,7 +154,7 @@ export class GroupTable extends AbstractEditableTable {
           expanded = Object.values( this.props.expanded )
             .filter( item => Boolean( item.value ) )
             .map( item => item.key );
-console.log( "?", this.props, {expanded} );
+
     return (
       <div className="box-margin-vertical group-table is-relative">
         <a className="btn-to-bottom" href="#cGroupTableRecordBtn">

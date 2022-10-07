@@ -119,7 +119,7 @@ export default {
       }
     },
     // state of data-tables
-    groups: {},
+    expanded: {},
     savedAt: 0,
     modified: false,
     lastOpenSuite: "",
@@ -139,30 +139,12 @@ export default {
     modified: false,
     filename: "",
     targets: {},
-    groups: {},
+    tests: {},
     pages: {}
   },
 
-  git: {
-    initialized: false,
-    commitedAt: 0,
-    hasRemote: false,
-    remoteRepository: "",
-    configUsername: "",
-    configEmail: "",
-    credentialsAuthMethod: "",
-    credentialsAccessToken: "",
-    credentialsProvider: "",
-    credentialsUsername: "",
-    credentialsPassword: ""
-  },
-
   snippets: {
-
-    groups: {
-      [ SNIPPETS_GROUP_ID ]: {
-        tests: {}
-      }
+    tests: {
     }
   }
 };

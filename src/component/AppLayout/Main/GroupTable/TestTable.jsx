@@ -5,9 +5,26 @@ import { CommandTable } from "./TestTable/CommandTable";
 import { EditableCell } from "../EditableCell";
 import ErrorBoundary from "component/ErrorBoundary";
 import { connectDnD } from "../DragableRow";
+import actions from "action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as selectors from "selector/selectors";
 
 const recordPrefIcon = <Icon type="bars" title="Test case, specification of commands and assertions" />;
 
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        expanded: state.project.expanded,
+        expandedRowKeys: selectors.getProjectExpandedMemoized( state ),
+        targets: Object.values( state.suite.targets ),
+        tests: selectors.getSuiteTestsMemoized( state )
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 @connectDnD
 export class TestTable extends AbstractEditableTable {
 
@@ -47,12 +64,12 @@ export class TestTable extends AbstractEditableTable {
 
   onExpand = ( isExpanded, record ) => {
     const expanded = { ...this.props.expanded };
-    expanded[ record.groupId ].tests[ record.id ] = {
+    expanded[ record.id ] = {
       key: record.key,
       value: isExpanded
     };
     this.props.action.setProject({
-      groups: expanded
+      expanded
     });
     this.props.action.autosaveProject();
   }
@@ -62,20 +79,19 @@ export class TestTable extends AbstractEditableTable {
     return ( <CommandTable
       targets={ targets }
       testId={ test.id }
-      selector={ this.props.selector }
       groupId={ test.groupId }
       action={ this.props.action } /> );
   }
 
-  selectExpanded() {
-    const { groupId, expanded } = this.props;
-    if ( !expanded.hasOwnProperty( groupId ) ) {
-      return [];
-    }
-    return Object.values( expanded[ groupId ].tests )
-      .filter( item => Boolean( item.value ) )
-      .map( item => item.key );
-  }
+  // selectExpanded() {
+  //   const { groupId, expanded } = this.props;
+  //   if ( !expanded.hasOwnProperty( groupId ) ) {
+  //     return [];
+  //   }
+  //   return Object.values( expanded[ groupId ].tests )
+  //     .filter( item => Boolean( item.value ) )
+  //     .map( item => item.key );
+  // }
 
   onRowClassName = ( record ) => {
     return `model--test${ record.disabled ? " row-disabled" : "" } ` + this.buildRowClassName( record );
@@ -89,9 +105,11 @@ export class TestTable extends AbstractEditableTable {
     return this.props.tests || [];
   }
 
+  getExpandedRowClassName = () => "test-expanded";
+
   render() {
-    const { tests } = this.props,
-          expanded = this.selectExpanded();
+    const { tests, expandedRowKeys } = this.props;
+    console.log( "props", this.props );
 
     return (
       <ErrorBoundary>
@@ -102,7 +120,8 @@ export class TestTable extends AbstractEditableTable {
           onRow={this.onRow}
           rowClassName={ this.onRowClassName }
           expandedRowRender={ this.renderExpandedTable }
-          expandedRowKeys={ expanded }
+          expandedRowKeys={ expandedRowKeys }
+          expandedRowClassName={ this.getExpandedRowClassName }
           showHeader={ false }
           dataSource={ tests }
           columns={ this.columns }

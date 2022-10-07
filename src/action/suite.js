@@ -101,17 +101,14 @@ function createSnippetsSuite( dispatch ) {
   }) );
 }
 
-function normalizeSuite( suite ) {
-  Object.entries( suite.groups ).forEach( gPairs => {
-    const [ gid, group ] = gPairs;
-    Object.entries( group.tests ).forEach( tPairs => {
-      const [ tid, test ] = tPairs;
-      Object.entries( test.commands ).forEach( cPairs => {
-        const [ cid, command ] = cPairs;
-        if ( !command.target && !command.method && !command.ref ) {
-          delete suite.groups[ gid ].tests[ tid ].commands[ cid ];
-        }
-      });
+function normalizeSuite( suite ) { 
+  Object.entries( suite.tests ).forEach( tPairs => {
+    const [ tid, test ] = tPairs;
+    Object.entries( test.commands ).forEach( cPairs => {
+      const [ cid, command ] = cPairs;
+      if ( !command.target && !command.method && !command.ref ) {
+        delete suite.groups[ gid ].tests[ tid ].commands[ cid ];
+      }
     });
   });
   return suite;
