@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Tabs, Icon, Tooltip } from "antd";
-import { Main } from "./AppLayout/Main";
-import { SnippetsMain } from "./AppLayout/SnippetsMain";
-import { SettingsPanel } from "./AppLayout/Settings/SettingsPanel";
-import { VariablesPane } from "./AppLayout/Project/Variables/VariablesPane";
-import { TargetsPane } from "./AppLayout/Project/Targets/TargetsPane";
-import { TestReport } from "./AppLayout/TestReport";
+import { Main } from "./Main";
+import { SnippetsMain } from "./SnippetsMain";
+import { SettingsPanel } from "./Settings/SettingsPanel";
+import { VariablesPane } from "./Project/Variables/VariablesPane";
+import { TargetsPane } from "./Project/Targets/TargetsPane";
+import { TestReport } from "./Editor/TestReport";
 import ErrorBoundary from "component/ErrorBoundary";
 import { confirmUnsavedChanges } from "service/smalltalk";
 import { truncate } from "service/utils";
@@ -38,7 +38,7 @@ const TabPane = Tabs.TabPane,
       });
 /*eslint react/prop-types: 0*/
 @connect( mapStateToProps, mapDispatchToProps )
-export class TabGroup extends React.Component {
+export class Editor extends React.Component {
 
   static propTypes = {
     action:  PropTypes.shape({

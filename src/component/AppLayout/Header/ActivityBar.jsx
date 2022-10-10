@@ -10,7 +10,7 @@ import { E_MENU_NEW_PROJECT, E_MENU_NEW_SUITE, SNIPPETS_FILENAME,
   E_MENU_OPEN_PROJECT, E_MENU_SAVE_SUITE, E_MENU_SAVE_SUITE_AS,
   E_MENU_OPEN_SUITE, E_MENU_EXPORT_PROJECT, E_MENU_EXIT_APP,
   E_MENU_RUN, E_RENDERER_ERROR, E_RENDERER_INFO } from "constant";
-import { ostr } from "./MainMenu/helpers";
+import { ostr } from "./ActivityBar/helpers";
 import actions from "action";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -35,7 +35,7 @@ const mapStateToProps = ( state ) => {
       });
 
 @connect( mapStateToProps, mapDispatchToProps )
-export class MainMenu extends React.PureComponent {
+export class ActivityBar extends React.PureComponent {
 
   whyDidYouRender = true;
 

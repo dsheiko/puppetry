@@ -5,7 +5,7 @@ import ErrorBoundary from "component/ErrorBoundary";
 
 const { Footer } = Layout;
 
-export class AppFooter extends AbstractComponent {
+export class StatusBar extends AbstractComponent {
 
   render() {
     const today = new Date();

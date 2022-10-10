@@ -22,7 +22,7 @@ const mapStateToProps = ( state ) => ({
       });
 
 @connect( mapStateToProps, mapDispatchToProps )
-export class Toolbar extends AbstractPureComponent {
+export class WindowToolbar extends AbstractPureComponent {
 
   static propTypes = {
     action:  PropTypes.shape({

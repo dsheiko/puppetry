@@ -129,12 +129,6 @@ export class Main extends AbstractComponent {
               <p>Test case is a specification of { "" }<a href="https://docs.puppetry.app/test-step"
                 onClick={ this.onExtClick }>commands, assertions and references</a> { "" }
               to ensure that a targeted component of the test application acts as intended.
-              Tests cases are organized into logical { "" } <a href="https://docs.puppetry.app/group"
-                onClick={ this.onExtClick }>groups</a>, representing test contexts. During the test
-                execution <a
-                onClick={ this.onExtClick }
-                href="https://pptr.dev/#?product=Puppeteer&version=v2.0.0&show=api-class-browser">
-                a new browser session</a> is created for every group.
               </p>
 
               <TestTable  />

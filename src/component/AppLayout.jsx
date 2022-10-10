@@ -5,10 +5,10 @@ import classNames  from "classnames";
 import { Spin } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 
-import { MainMenu } from "./AppLayout/Sider/MainMenu";
+import { ActivityBar } from "./AppLayout/Header/ActivityBar";
 import { ProjectExplorer  } from "./AppLayout/Sider/ProjectExplorer";
 import { SnippetExplorer  } from "./AppLayout/Sider/SnippetExplorer";
-import { AppFooter } from "./AppLayout/AppFooter";
+import { StatusBar } from "./AppLayout/StatusBar";
 import { Welcome } from "./AppLayout/Welcome";
 import { Info } from "./AppLayout/Info";
 import { NewProjectModal  } from "./Modal/NewProjectModal";
@@ -31,9 +31,8 @@ import { SaveSnippetAsModal } from "./Modal/SnippetModal/SaveSnippetAsModal";
 import { EditSnippetModal } from "./Modal/SnippetModal/EditSnippetModal";
 import { AppLightbox } from "./Modal/AppLightbox";
 import { connect } from "react-redux";
-import { TabGroup  } from "./TabGroup";
-import If from "component/Global/If";
-import { Toolbar } from "./AppLayout/Toolbar";
+import { Editor } from "./AppLayout/Editor";
+import { WindowToolbar } from "./AppLayout/WindowToolbar";
 import { Projectbar } from "./AppLayout/Projectbar";
 import debounceRender from "react-debounce-render";
 
@@ -95,10 +94,10 @@ export class AppLayout extends React.PureComponent {
 
             <header className="appbar">
               <div className="appbar__menu">
-                <MainMenu />
+                <ActivityBar />
               </div>
               <div className="appbar__drag"></div>
-              <Toolbar />
+              <WindowToolbar />
 
             </header>
 
@@ -125,13 +124,13 @@ export class AppLayout extends React.PureComponent {
                 <div className="layout-content">
 
                 { projectDirectory // when all panels closed, show Info
-                  ? ( tabsAnyTrue ? <TabGroup /> : <Info /> ) 
+                  ? ( tabsAnyTrue ? <Editor /> : <Info /> ) 
                   // if no project open, show Welcome 
                   : ( <Welcome action={ action } projectDirectory={ projectDirectory } /> ) }
 
                 </div>
 
-                <AppFooter action={ action } />
+                <StatusBar action={ action } />
 
               </main>
             </div>
