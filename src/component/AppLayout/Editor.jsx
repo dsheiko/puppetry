@@ -20,7 +20,7 @@ const TabPane = Tabs.TabPane,
       // Mapping state to the props
       mapStateToProps = ( state, props ) => ({
         projectDirectory: state.settings.projectDirectory,
-        app: state.app,
+        tabPanels: selectors.getAppTabPanelsMemoized( state ),
         suiteModified: state.suite.modified,
 
         snippets: state.snippets,
@@ -30,6 +30,7 @@ const TabPane = Tabs.TabPane,
         suiteTitle: state.suite.description || state.suite.title,
         project: state.project,
         settings: state.settings,
+
         snippetsTest: selectors.getSnippetsTestMemoized( state, props )
       }),
       // Mapping actions to the props
@@ -43,7 +44,7 @@ export class Editor extends React.Component {
   static propTypes = {
     action:  PropTypes.shape({
       removeAppTab: PropTypes.func.isRequired,
-      setAppTab: PropTypes.func.isRequired,
+      setActiveAppTab: PropTypes.func.isRequired,
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired
     }),
@@ -57,7 +58,8 @@ export class Editor extends React.Component {
     suiteTitle: PropTypes.any,
     project: PropTypes.any,
     snippetsTest: PropTypes.any,
-    settings: PropTypes.any
+    settings: PropTypes.any,
+    activeAppTabId: PropTypes.any
   }
 
   onEdit = ( targetKey, action ) => {
@@ -65,7 +67,7 @@ export class Editor extends React.Component {
   }
 
   onChange = ( targetKey ) => {
-    this.props.action.setAppTab( targetKey );
+    this.props.action.setactiveAppTabId( targetKey );
   }
 
   remove = async ( targetKey ) => {
@@ -78,19 +80,23 @@ export class Editor extends React.Component {
     this.props.action.removeAppTab( targetKey );
   }
 
+  getSuiteTitle( panel ) {
+    return panel.title
+      ? ( <Tooltip placement="bottomRight" title={ panel.title }>
+        <Icon type="container" />{ truncate( panel.title, TAB_TEXT_MAX_LEN ) }
+      </Tooltip> )
+      : "Loading...";
+  } 
+
   render() {
+
     const {
-            action, selector, app, projectDirectory, suiteTitle, snippetsTest,
-            suiteSnippets, suiteFilename, project, snippets, settings, suiteTargets
+            action, selector, tabPanels, projectDirectory, snippetsTest,
+            project, snippets, settings, suiteTargets,
+            activeAppTabId
           } = this.props,
-          { tabs } = app,
 
-
-          suiteTabTitle = suiteFilename
-            ? ( <Tooltip placement="bottomRight" title={ suiteTitle }>
-              <Icon type="container" />{ truncate( suiteFilename, TAB_TEXT_MAX_LEN ) }
-            </Tooltip> )
-            : "Loading..." ,
+          
 
           snippetTabTitle = snippetsTest
             ? ( <Tooltip placement="bottomRight" title={ "Snippet: " + snippetsTest.title }>
@@ -100,10 +106,8 @@ export class Editor extends React.Component {
 
           panes = {
 
-            suite: () => ( <TabPane tab={ suiteTabTitle } key="suite" closable={ true }>
-              <Main
-                action={ action }
-                selector={ selector } />
+            suite: ( panel ) => ( <TabPane tab={ this.getSuiteTitle( panel ) } key={ panel.id } closable={ true }>
+              <Main />
             </TabPane> ),
 
             testReport: () => ( <TabPane tab="Test report"
@@ -111,14 +115,7 @@ export class Editor extends React.Component {
               <TestReport
                 action={ action }
                 targets={ suiteTargets }
-                projectDirectory={ projectDirectory }
-                headless={ app.headless }
-                launcherArgs={ app.launcherArgs }
-                checkedList={ app.checkedList }
-                environment={ app.environment }
-                passSuiteOptions={ app.passSuiteOptions }
-                passExportOptions={ app.passExportOptions }
-                passProjectOptions={ app.passProjectOptions }
+                projectDirectory={ projectDirectory }                
                 project={ project }
                 snippets={ snippets }
                 selector={ selector }
@@ -160,14 +157,13 @@ export class Editor extends React.Component {
           hideAdd={ true }
           animated={ false }
           type="editable-card"
-          activeKey={ tabs.active || "" }
+          activeKey={ activeAppTabId || "" }
           onChange={ this.onChange }
           onEdit={ this.onEdit }
         >
 
-          { Object.keys( tabs.available )
-            .filter( key => tabs.available[ key ])
-            .map( key => panes[ key ]() ) }
+          { tabPanels
+            .map( panel => panes[ panel.type ]( panel ) ) }
 
         </Tabs>
       </ErrorBoundary>

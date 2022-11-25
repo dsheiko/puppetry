@@ -41,7 +41,7 @@ export default class ErrorBoundary extends React.Component {
 
   componentDidCatch( error ) {
     log.warn( `Renderer process:ErrorBoundary: ${ error }` );
-    console.warn( error );
+    console.error( error );
     // Display fallback UI
     this.setState({ hasError: true });
   }

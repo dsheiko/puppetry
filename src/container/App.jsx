@@ -98,3 +98,5 @@ export class App extends React.Component {
     </React.Fragment> );
   }
 }
+
+App.displayName = "App";

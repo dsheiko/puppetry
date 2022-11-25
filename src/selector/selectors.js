@@ -3,6 +3,25 @@ import { validate } from "bycontract";
 import { SNIPPETS_GROUP_ID } from "constant";
 import { createSelector } from "reselect";
 
+
+
+// Plain filter
+export const getAppTabPanelsMemoized = createSelector(
+  ( state ) => state.app.tabs, 
+  ( tabs ) => tabs.panels.map( panel => ({ id: panel.id, type: panel.type, title: panel.data.title ?? "Loading..." }) )
+);
+
+export const getActiveAppTabDataMemoized = createSelector(
+  ( state ) => state.app.tabs, 
+  ( tabs ) => {
+    if ( tabs.active === null ) {
+      return null;
+    }
+    const fetch = tabs.panels.find( panel => panel.id === tabs.active );
+    return fetch ? fetch.data : null;
+  }
+);
+
 function setEntity( arr, entity ) {
   return arr.map( record => ({ ...record, entity }) );
 }
@@ -30,11 +49,13 @@ const stateGlobal = ( state ) => state,
 
       stateProjectExpanded = ( state ) => state.project.expanded,
 
-      groupTests = ( group ) => group.tests,
+
       allTargets = ( state ) => ({
         targets: Object.assign({}, state.project.targets, state.suite.targets ),
         selection: state.selection
       });
+
+
 
 export const getProjectExpandedMemoized = createSelector( stateProjectExpanded, expanded => Object.values( expanded )
             .filter( item => Boolean( item.value ) )

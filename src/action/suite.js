@@ -132,7 +132,7 @@ actions.loadSuite = ( filename, options = { silent: false }) => async ( dispatch
     if ( suite.snippets && !( SNIPPETS_GROUP_ID in suite.groups ) ) {
       createSnippetsSuite( dispatch );
     }
-    dispatch( appActions.addAppTab( "suite" ) );
+    dispatch( appActions.addAppTab( "suite", suite ) );
   } catch ( ex ) {
     !options.silent && handleException( ex, dispatch, `Cannot load suite ${ filename }` );
   }

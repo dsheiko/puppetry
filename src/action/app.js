@@ -8,6 +8,7 @@ import { removeRuntimeTestPath,
   isRuntimeTestPathReady } from "../service/io";
 import { getDateString, checkNewVersion } from "../service/http";
 import settingsActions from "./settings";
+import uniqid from "uniqid";
 
 const actions = createActions({
   /**
@@ -16,11 +17,11 @@ const actions = createActions({
     */
   SET_APP: ( options ) => validate( options, I.APP_OPTIONS ),
 
-  ADD_APP_TAB: ( tabKey ) => validate( tabKey, "string" ),
+  ADD_APP_TAB: ( type, data ) => ({ id: uniqid(), type, data }),
 
-  REMOVE_APP_TAB: ( tabKey ) => validate( tabKey, "string" ),
+  REMOVE_APP_TAB: ( tabId ) => validate( tabId, "string" ),
 
-  SET_APP_TAB: ( tabKey ) => validate( tabKey, "string" ),
+  SET_ACTIVE_APP_TAB: ( tabId ) => validate( tabId, "string" ),
 
   SET_LIGHTBOX_IMAGES: ( images ) => validate( images, "object[]" ),
 

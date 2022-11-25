@@ -72,18 +72,12 @@ export default {
       isVisible: false,
       record: null
     },
-    // Application tabs
+    // Editor tabs
     tabs: {
-      available: {
-        suite: false,
-        testReport: false,
-        projectVariables: false,
-        projectTargets: false,
-        settings: false,
-        snippet: false
-      },
-      active: "suite"
+      panels: [],
+      active: null
     },
+    activeTab: null,
 
     checkedList: [],
 

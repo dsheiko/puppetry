@@ -26,29 +26,29 @@ describe( "Reducer: app", () => {
     expect( DEFAULT_STATE.tabs.active ).toBe( "suite" );
   });
 
-  test( "removeAppTab", () => {
-    let state =  reducer( DEFAULT_STATE, {
-      type: actions.addAppTab,
-      payload: FIX_TAB
-    });
-    state = reducer( state, {
-      type: actions.removeAppTab,
-      payload: FIX_TAB
-    });
+  // test( "removeAppTab", () => {
+  //   let state =  reducer( DEFAULT_STATE, {
+  //     type: actions.addAppTab,
+  //     payload: FIX_TAB
+  //   });
+  //   state = reducer( state, {
+  //     type: actions.removeAppTab,
+  //     payload: FIX_TAB
+  //   });
 
-    expect( state.tabs.available[ FIX_TAB ] ).toBe( false );
-    expect( DEFAULT_STATE.tabs.active ).toBe( "suite" );
-  });
+  //   expect( state.tabs.available[ FIX_TAB ] ).toBe( false );
+  //   expect( DEFAULT_STATE.tabs.active ).toBe( "suite" );
+  // });
 
-  test( "setAppTab", () => {
-    let state =  reducer( DEFAULT_STATE, {
-      type: actions.setAppTab,
-      payload: FIX_TAB
-    });
-    expect( state.tabs.active ).toBe( FIX_TAB );
-    expect( state.tabs.available[ FIX_TAB ] ).toBe( false );
-    expect( DEFAULT_STATE.tabs.active ).toBe( "suite" );
-  });
+  // test( "setAppTab", () => {
+  //   let state =  reducer( DEFAULT_STATE, {
+  //     type: actions.setAppTab,
+  //     payload: FIX_TAB
+  //   });
+  //   expect( state.tabs.active ).toBe( FIX_TAB );
+  //   expect( state.tabs.available[ FIX_TAB ] ).toBe( false );
+  //   expect( DEFAULT_STATE.tabs.active ).toBe( "suite" );
+  // });
 
 
 

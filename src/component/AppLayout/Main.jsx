@@ -11,6 +11,8 @@ import AbstractComponent from "component/AbstractComponent";
 import LearnMore from "component/Global/LearnMore";
 import { connect } from "react-redux";
 import * as selectors from "selector/selectors";
+import actions from "action";
+import { bindActionCreators } from "redux";
 
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
@@ -20,11 +22,13 @@ const mapStateToProps = ( state ) => ({
         title: state.suite.title,
         description: state.suite.description,
         timeout: state.suite.timeout,
-        targetDataTable: selectors.getSuiteTargetDataTableMemoized( state )
+        targetDataTable: selectors.getSuiteTargetDataTableMemoized( state ),
+        suite: selectors.getActiveAppTabDataMemoized( state )   
         
       }),
       // Mapping actions to the props
-      mapDispatchToProps = () => ({
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
       }),
       KEY_TAB = 9,
       TabPane = Tabs.TabPane;
@@ -99,6 +103,9 @@ export class Main extends AbstractComponent {
   }
 
   render() {
+
+console.log( "MAIN>>>", this.props.suite );
+return null;
     const { action,
             title,
             description,

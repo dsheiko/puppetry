@@ -34,13 +34,14 @@ import { connect } from "react-redux";
 import { Editor } from "./AppLayout/Editor";
 import { WindowToolbar } from "./AppLayout/WindowToolbar";
 import { Projectbar } from "./AppLayout/Projectbar";
-import debounceRender from "react-debounce-render";
+import * as selectors from "selector/selectors";
 
       // Mapping state to the props
 const mapStateToProps = ( state ) => ({
         projectDirectory: state.settings.projectDirectory,
         loading: state.app.loading,
-        tabs: state.app.tabs
+        tabs: state.app.tabs,
+        activeAppTabId: state.app.tabs.active       
       }),
       // Mapping actions to the props
       mapDispatchToProps = () => ({
@@ -65,7 +66,7 @@ export class AppLayout extends React.PureComponent {
 
   static propTypes = {
     action: PropTypes.object.isRequired,
-    tabs: PropTypes.object.isRequired,
+    tabs: PropTypes.any.isRequired,
     loading: PropTypes.bool.isRequired
   }
 
@@ -76,8 +77,7 @@ export class AppLayout extends React.PureComponent {
   }
 
   render() {
-    const { action, projectDirectory, loading, tabs } = this.props,
-          tabsAnyTrue = Object.keys( tabs.available ).some( key => tabs.available[ key ]);
+    const { action, projectDirectory, loading, activeAppTabId } = this.props;
 
     window.consoleCount( __filename );
     return (
@@ -87,8 +87,7 @@ export class AppLayout extends React.PureComponent {
           <div className={ classNames({
             layout: true,
             "is-loading": loading,
-            "has-sticky-tabs-panel": tabs.active
-              && ( tabs.active === "suite" || tabs.active === "settings" || tabs.active === "snippet" )
+            "has-sticky-tabs-panel": !!activeAppTabId
 
           })} id="cLayout">
 
@@ -124,7 +123,7 @@ export class AppLayout extends React.PureComponent {
                 <div className="layout-content">
 
                 { projectDirectory // when all panels closed, show Info
-                  ? ( tabsAnyTrue ? <Editor /> : <Info /> ) 
+                  ? ( activeAppTabId !== null ? <Editor activeAppTabId={ activeAppTabId } /> : <Info /> ) 
                   // if no project open, show Welcome 
                   : ( <Welcome action={ action } projectDirectory={ projectDirectory } /> ) }
 
@@ -167,3 +166,5 @@ export class AppLayout extends React.PureComponent {
     );
   }
 }
+
+AppLayout.displayName = "AppLayout";

@@ -57,18 +57,14 @@ export default handleActions(
       });
     },
 
-    [ actions.addAppTab ]: ( state, { payload }) => {
+    
+
+    [ actions.setActiveAppTab ]: ( state, { payload }) => {
       if ( !payload ) {
         return state;
       }
       return update( state, {
-
         tabs: {
-          available: {
-            $merge: {
-              [ payload ]: true
-            }
-          },
           active: {
             $set: payload
           }
@@ -76,17 +72,22 @@ export default handleActions(
       });
     },
 
-    [ actions.setAppTab ]: ( state, { payload }) => {
+    [ actions.addAppTab ]: ( state, { payload }) => {
+    
       if ( !payload ) {
         return state;
       }
+      const panels = [ ...state.tabs.panels ];
+      panels.push({ id: payload.id, type: payload.type, data: payload.data });
       return update( state, {
-
-        tabs: {
-          active: {
-            $set: payload
-          }
-        }
+        tabs: {          
+            panels: {
+              $set: panels
+            },
+            active: {
+              $set: payload.id
+            }
+          }          
       });
     },
 
@@ -94,27 +95,17 @@ export default handleActions(
       if ( !payload ) {
         return state;
       }
-      const tmp = update( state, {
-              tabs: {
-                available: {
-                  $merge: {
-                    [ payload ]: false
-                  }
-                }
-              }
-            }),
-            { available } = tmp.tabs,
-            active = Object.keys( available )
-              .filter( key => available[ key ])
-              .pop();
-
-      return update( tmp, {
-
-        tabs: {
-          active: {
-            $set: active
-          }
-        }
+      const panels = state.tabs.panels.filter( item => item.id !== payload ),
+            [ activePanel ] = panels;
+      return update( state, {
+        tabs: {          
+            panels: {
+              $set: panels
+            },
+            active: {
+              $set: activePanel ? activePanel : null
+            }
+          }          
       });
     }
 
