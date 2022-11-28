@@ -11,7 +11,7 @@ import * as selectors from "selector/selectors";
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
         testCaseStyle: state.settings.testCaseStyle,
-        snippetsTests: selectors.getCleanSnippetsMemoized( state )
+        snippetsTests: selectors.getSnippetsMemoized( state )
       }),
       // Mapping actions to the props
       mapDispatchToProps = () => ({

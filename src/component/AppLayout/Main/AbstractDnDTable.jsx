@@ -23,7 +23,6 @@ export default class AbstractDnDTable extends React.Component {
       setApp: PropTypes.func,
       addTarget: PropTypes.func
     }),    
-    groupId: PropTypes.string.isRequired,
     testId: PropTypes.string.isRequired
   }
 

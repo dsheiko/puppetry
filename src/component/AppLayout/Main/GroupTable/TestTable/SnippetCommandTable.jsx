@@ -15,7 +15,7 @@ const { Menu, MenuItem } = remote,
       // Mapping state to the props
       mapStateToProps = ( state, props ) => ({
         title: state.suite.title,
-        cleanSnippets: selectors.getCleanSnippetsMemoized( state ),
+        cleanSnippets: selectors.getSnippetsMemoized( state ),
         commands: selectors.getSnippetsCommandsMemoized( props.test )
       }),
       // Mapping actions to the props

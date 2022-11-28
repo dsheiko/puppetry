@@ -17,7 +17,7 @@ const { Menu, MenuItem } = remote,
       // Mapping state to the props
       mapStateToProps = ( state ) => ({
         active: state.project.lastOpenSnippetId,
-        tests: selectors.getSnippetsAllTestsMemoized( state ),
+        tests: selectors.getSnippetsMemoized( state ),
         projectDirectory: state.settings.projectDirectory,
         projects: state.settings.projects,
         suiteModified: state.suite.modified,
@@ -29,7 +29,9 @@ const { Menu, MenuItem } = remote,
       });
 
 @connect( mapStateToProps, mapDispatchToProps )
-export class SnippetExplorer extends React.Component {
+export class SnippetExplorer extends React.PureComponent {
+
+whyDidYouRender = true;
 
   static propTypes = {
     action:  PropTypes.shape({

@@ -4,7 +4,7 @@ import { Spin, Button } from "antd";
 import { CommandForm } from "./CommandTable/CommandForm";
 import { InstantModal } from "component/Global/InstantModal";
 import ErrorBoundary from "component/ErrorBoundary";
-
+import * as selectors from "selector/selectors";
 import { connect } from "react-redux";
 
 // Mapping state to the props
@@ -12,8 +12,8 @@ const mapStateToProps = ( state ) => ({
         isVisible: state.app.commandModal.isVisible,
         commands: state.app.commandModal.commands,
         record: state.app.commandModal.record,
-        suiteTargets: state.suite.targets,
-        sharedTargets: state.project.targets
+        sharedTargets: state.project.targets,
+        suiteTargets: selectors.getTargetObjMemoized( state )
       }),
       // Mapping actions to the props
       mapDispatchToProps = () => ({

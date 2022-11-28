@@ -14,10 +14,14 @@ const recordPrefIcon = <Icon type="bars" title="Test case, specification of comm
 
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
+        // Expanded as objects to save it
+        // [ {key: "2qhk2xgp0zz", value: true}, ...]
         expanded: state.project.expanded,
+        // Expanded for table
+        // [ "a0wk305xfj8", ... ]
         expandedRowKeys: selectors.getProjectExpandedMemoized( state ),
-        targets: Object.values( state.suite.targets ),
-        tests: selectors.getSuiteTestsMemoized( state )
+
+        tests: selectors.getTestDataTableMemoized( state )
       }),
       // Mapping actions to the props
       mapDispatchToProps = ( dispatch ) => ({
@@ -75,11 +79,9 @@ export class TestTable extends AbstractEditableTable {
   }
 
   renderExpandedTable = ( test ) => {
-    const targets = this.props.targets;
     return ( <CommandTable
-      targets={ targets }
       testId={ test.id }
-      groupId={ test.groupId }
+      commands={ test.commands }
       action={ this.props.action } /> );
   }
 
@@ -109,7 +111,6 @@ export class TestTable extends AbstractEditableTable {
 
   render() {
     const { tests, expandedRowKeys } = this.props;
-    console.log( "props", this.props );
 
     return (
       <ErrorBoundary>

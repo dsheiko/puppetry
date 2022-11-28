@@ -17,12 +17,7 @@ import { bindActionCreators } from "redux";
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
         panes: state.project.appPanels.suite.panes,
-        
-        groups: state.suite.groups,
-        title: state.suite.title,
-        description: state.suite.description,
-        timeout: state.suite.timeout,
-        targetDataTable: selectors.getSuiteTargetDataTableMemoized( state ),
+        targetDataTable: selectors.getTargetDataTableMemoized( state ),
         suite: selectors.getActiveAppTabDataMemoized( state )   
         
       }),
@@ -39,9 +34,7 @@ export class Main extends AbstractComponent {
   whyDidYouRender = true;
 
   static propTypes = {
-    groups: PropTypes.object,
-    timout: PropTypes.number,
-    title: PropTypes.string,
+    suite: PropTypes.object,
     panes: PropTypes.array,
     action: PropTypes.shape({
       updateProjectPanes: PropTypes.func.isRequired,
@@ -104,14 +97,14 @@ export class Main extends AbstractComponent {
 
   render() {
 
-console.log( "MAIN>>>", this.props.suite );
-return null;
     const { action,
-            title,
-            description,
-            timeout,
+            suite,
             targetDataTable
           } = this.props,
+          { title,
+            description,
+            timeout
+          } = suite,
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
           // windowsLabel = ( <span><Icon type="appstore" />Windows</span> ),
           groupsLabel = ( <span><Icon type="audit" />Test Cases</span> ),
@@ -138,7 +131,7 @@ return null;
               to ensure that a targeted component of the test application acts as intended.
               </p>
 
-              <TestTable  />
+              <TestTable />
             </TabPane>
 
             <TabPane tab={ targetsLabel } key="targets">

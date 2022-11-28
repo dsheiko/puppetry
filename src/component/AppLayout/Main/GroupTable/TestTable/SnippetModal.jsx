@@ -19,7 +19,7 @@ const FormItem = Form.Item,
 const mapStateToProps = ( state ) => ({
         isVisible: state.app.snippetModal.isVisible,
         record: state.app.snippetModal.record,
-        snippets: selectors.getCleanSnippetsMemoized( state )
+        snippets: selectors.getSnippetsMemoized( state )
       }),
       // Mapping actions to the props
       mapDispatchToProps = ( dispatch ) => ({

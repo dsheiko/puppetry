@@ -7,7 +7,6 @@ import ErrorBoundary from "component/ErrorBoundary";
 import { RowDropdown } from "component/AppLayout/Main/RowDropdown";
 import { remote } from "electron";
 import classNames from "classnames";
-import { SNIPPETS_GROUP_ID } from "constant";
 import { connect } from "react-redux";
 import * as selectors from "selector/selectors";
 
@@ -15,8 +14,8 @@ const { Menu, MenuItem } = remote,
       // Mapping state to the props
       mapStateToProps = ( state, props ) => ({
         title: state.suite.title,
-        snippetsTests: selectors.getCleanSnippetsMemoized( state ),
-        commands: selectors.getCommandsMemoized( state, props )
+        // ??
+        snippetsTests: selectors.getSnippetsMemoized( state )
       }),
       // Mapping actions to the props
       mapDispatchToProps = () => ({
@@ -167,7 +166,6 @@ export class CommandTable extends AbstractDnDTable {
       commandModal: {
         isVisible: true,
         record,
-        targets: this.props.targets,
         commands: this.props.commands
       }
     });
@@ -221,20 +219,18 @@ export class CommandTable extends AbstractDnDTable {
   }
 
 
-  shouldComponentUpdate( nextProps, nextState ) {
-    if ( this.state !== nextState ) {
-      return true;
-    }
-    if ( this.props.commands !== nextProps.commands
-          || this.props.groupId !== nextProps.groupId
-          || this.props.testId !== nextProps.testId
-          || this.props.snippetsTests !== nextProps.snippetsTests
-          || this.props.targets !== nextProps.targets
-    ) {
-      return true;
-    }
-    return false;
-  }
+  // shouldComponentUpdate( nextProps, nextState ) {
+  //   if ( this.state !== nextState ) {
+  //     return true;
+  //   }
+  //   if ( this.props.commands !== nextProps.commands
+  //         || this.props.testId !== nextProps.testId
+  //         || this.props.snippetsTests !== nextProps.snippetsTests
+  //   ) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   addSnippet = () => {
     const { setApp } = this.props.action;
@@ -242,7 +238,6 @@ export class CommandTable extends AbstractDnDTable {
       snippetModal: {
         isVisible: true,
         record: {
-          groupId: this.props.groupId,
           testId: this.props.testId
         }
       }
@@ -259,7 +254,9 @@ export class CommandTable extends AbstractDnDTable {
 
   render() {
     const { snippetsTests } = this.props,
-          commands = this.props.commands.filter( command => ( command.ref || ( command.target && command.method ) ) );
+          commands = Object.values( this.props.commands )
+            .map( record => ({ ...record, entity: "command" }) )
+            .filter( command => ( command.ref || ( command.target && command.method ) ) );
 
     return ( <ErrorBoundary>
       <Table
@@ -284,6 +281,6 @@ export class CommandTable extends AbstractDnDTable {
 
         </div> )}
       />
-    </ErrorBoundary> ); //groupId
+    </ErrorBoundary> ); 
   }
 }
