@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import { Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { remote } from "electron";
-import { confirmUnsavedChanges  } from "service/smalltalk";
 import classNames from "classnames";
-import { FileList } from "./ProjectExplorer/FileList";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import actions from "action";
@@ -19,9 +17,7 @@ const { Menu, MenuItem } = remote,
         active: state.project.lastOpenSnippetId,
         tests: selectors.getSnippetsMemoized( state ),
         projectDirectory: state.settings.projectDirectory,
-        projects: state.settings.projects,
-        suiteModified: state.suite.modified,
-        files: state.app.project.files
+        suiteModified: state.suite.modified
       }),
       // Mapping actions to the props
       mapDispatchToProps = ( dispatch ) => ({
@@ -30,8 +26,6 @@ const { Menu, MenuItem } = remote,
 
 @connect( mapStateToProps, mapDispatchToProps )
 export class SnippetExplorer extends React.PureComponent {
-
-whyDidYouRender = true;
 
   static propTypes = {
     action:  PropTypes.shape({
@@ -42,9 +36,7 @@ whyDidYouRender = true;
       removeSnippetsTest: PropTypes.func.isRequired
     }),
 
-    files: PropTypes.arrayOf( PropTypes.string ).isRequired,
     projectDirectory: PropTypes.string.isRequired,
-    projects: PropTypes.object.isRequired,
 
     active: PropTypes.string,
     suiteModified: PropTypes.bool
@@ -66,14 +58,12 @@ whyDidYouRender = true;
 
   async openSnippet( lastOpenSnippetId ) {
     this.props.action.setProject({ lastOpenSnippetId });
-    this.props.action.addAppTab( "snippet" );
+    this.props.action.addAppTab( "snippet", {} );
   }
 
   onRightClick = ( e ) => {
     const id = e.target.dataset.id,
-          title = e.target.dataset.title,
-          { projectDirectory } = this.props,
-          { addSnippetsTest } = this.props.action;
+          title = e.target.dataset.title;
 
     e.preventDefault();
 

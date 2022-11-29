@@ -17,6 +17,8 @@ const actions = createActions({
     */
   SET_APP: ( options ) => validate( options, I.APP_OPTIONS ),
 
+  SET_PROJECT_FILES: ( files ) => files,
+
   ADD_APP_TAB: ( type, data ) => ({ id: uniqid(), type, data }),
 
   REMOVE_APP_TAB: ( tabId ) => validate( tabId, "string" ),

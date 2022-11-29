@@ -16,7 +16,7 @@ function getActiveAppTabData(tabs) {
 // Plain filter, get meta of tab panels available,
 // where EDITOR tabs are suite file, report and so on
 export const getAppTabPanelsMemoized = createSelector(
-  (state) => state.app.tabs,
+  ( state ) => state.app.tabs,
   (tabs) =>
     tabs.panels.map((panel) => ({
       id: panel.id,
@@ -26,12 +26,12 @@ export const getAppTabPanelsMemoized = createSelector(
 );
 // get data of the active tab panel
 export const getActiveAppTabDataMemoized = createSelector(
-  (state) => state.app.tabs,
+  ( state ) => state.app.tabs,
   getActiveAppTabData
 );
 
 export const getTargetDataTableMemoized = createSelector(
-  (state) => state.app.tabs,
+  ( state ) => state.app.tabs,
   (tabs) => {
     const { targets } = getActiveAppTabData(tabs),
       data = setEntity(!targets ? [] : Object.values(targets), "target"),
@@ -54,7 +54,7 @@ export const getTargetDataTableMemoized = createSelector(
 
 // see src/component/AppLayout/Main/GroupTable/TestTable/CommandModal.jsx
 export const getTargetObjMemoized = createSelector(
-  (state) => state.app.tabs,
+  ( state ) => state.app.tabs,
   (tabs) => {
     const { targets } = getActiveAppTabData(tabs);
     return targets;
@@ -63,7 +63,7 @@ export const getTargetObjMemoized = createSelector(
 
 // see src/component/AppLayout/Main/GroupTable/TestTable.jsx
 export const getTestDataTableMemoized = createSelector(
-  (state) => state.app.tabs,
+  ( state ) => state.app.tabs,
   (tabs) => {
     const { tests } = getActiveAppTabData(tabs);
     return getStructureDataTable(tests, "test");
@@ -89,7 +89,7 @@ function getStructureDataTable(records, entity) {
 
 // see src/component/AppLayout/Main/GroupTable/TestTable.jsx
 export const getProjectExpandedMemoized = createSelector(
-  (state) => state.project.expanded,
+  ( state ) => state.project.expanded,
   (expanded) =>
     Object.values(expanded)
       .filter((item) => Boolean(item.value))
@@ -115,34 +115,46 @@ export function findCommandsByTestId(testId, groups) {
   return null;
 }
 
-const stateSnippetsTargets = (state) => state.snippets.targets,
-  stateSuitePage = (state) => state.suite.pages,
-  stateSuiteTargets = (state) => state.suite.targets,
-  stateProjectTargets = (state) => state.project.targets,
-  stateSuiteGroups = (state) => state.suite.groups,
-  stateSuiteTests = (state) => state.suite.tests,
-  allTargets = (state) => ({
-    targets: Object.assign({}, state.project.targets, state.suite.targets),
-    selection: state.selection,
-  });
+const stateSuitePage = ( state ) => state.suite.pages,
+      stateSuiteTargets = ( state ) => state.suite.targets,
+      stateProjectTargets = ( state ) => state.project.targets,
+      stateSuiteGroups = ( state ) => state.suite.groups,
+      stateSuiteTests = ( state ) => state.suite.tests,
+      allTargets = ( state ) => ({
+        targets: Object.assign({}, state.project.targets, state.suite.targets),
+        selection: state.selection,
+      });
 
+/**
+ * SNIPPET 
+ */
 export const getSnippetsMemoized = createSelector(
-  (state) => state.snippets,
-  getSnippets
+  ( state ) => state.snippets.tests,
+  ( tests ) => tests
 );
 export const getSnippetsTestMemoized = createSelector(
-  (state) => state,
-  getSnippetsTest
+  ( state ) => state,
+  ( state ) => state.snippets.tests[ state.project.lastOpenSnippetId ] ?? null
+);
+export const getSnippetsTestDataTableMemoized = createSelector(
+  ( state ) => state.snippets.tests,
+  ( tests ) => getStructureDataTable( tests, "test" )
+);
+
+/**
+ * PROJECT
+ */
+
+export const getSnippetsTargetDataTableMemoized = createSelector(
+  ( state ) => state.snippets.targets,
+  getTargetDataTable
 );
 
 export const getProjectTargetDataTableMemoized = createSelector(
   stateProjectTargets,
   getTargetDataTable
 );
-export const getSnippetsTargetDataTableMemoized = createSelector(
-  stateSnippetsTargets,
-  getTargetDataTable
-);
+
 export const getSuiteTargetDataTableMemoized = createSelector(
   stateSuiteTargets,
   getTargetDataTable
@@ -165,14 +177,6 @@ export const getSelectedTargetsMemoized = createSelector(
   allTargets,
   ({ targets, selection }) => getSelectedTargets(selection, targets)
 );
-
-const getCommandsArray = (state, props) => {
-  const test = state.suite.tests[props.testId];
-  if (typeof test === "undefined") {
-    return {};
-  }
-  return test.commands;
-};
 
 export function getActiveEnvironment(environments, environment) {
   validate(arguments, ["string[]", "string"]);
@@ -242,9 +246,9 @@ export function getTargetChain(target, targets) {
   return getTargetChainRecursive(target, targets).reverse();
 }
 
-export function getTargetDataTable(targets) {
-  const data = setEntity(!targets ? [] : Object.values(targets), "target"),
-    id = uniqid();
+export function getTargetDataTable( targets ) {
+  const data = setEntity( !targets ? [] : Object.values( targets ), "target" ),
+        id = uniqid();
 
   data.push({
     disabled: false,
@@ -276,40 +280,20 @@ export function hasTarget(variable, targets) {
  * @param {Object} targets
  * @returns {Object}
  */
-export function getSelectedTargets(selection, targets) {
-  return Object.values(targets)
-    .filter((target) => selection.includes(target.target))
-    .reduce((carry, target) => {
-      carry[target.id] = target;
+export function getSelectedTargets( selection, targets ) {
+  return Object.values( targets )
+    .filter(( target ) => selection.includes( target.target ))
+    .reduce(( carry, target ) => {
+      carry[ target.id ] = target;
       return carry;
     }, {});
 }
 
-export function getSnippets(snippets) {
-  return snippets.groups && snippets.groups.hasOwnProperty(SNIPPETS_GROUP_ID)
-    ? snippets.groups[SNIPPETS_GROUP_ID].tests
-    : {};
-}
-
-export function getSnippetsTest(store) {
-  const tests =
-      store.snippets.groups &&
-      store.snippets.groups.hasOwnProperty(SNIPPETS_GROUP_ID)
-        ? store.snippets.groups[SNIPPETS_GROUP_ID].tests
-        : {},
-    test = tests[store.project.lastOpenSnippetId] ?? null;
-
-  return test;
-}
-
-const getSnippetsCommandsArray = (test) => {
-  return test ? test.commands : [];
-};
 
 export const getSnippetsCommandsMemoized = createSelector(
-  getSnippetsCommandsArray,
-  (commands) =>
-    Object.values(commands).map((record) => ({
+  ( test ) => test ? test.commands : [],
+  ( commands ) =>
+    Object.values( commands ).map(( record ) => ({
       ...record,
       entity: "snippetscommand",
     }))

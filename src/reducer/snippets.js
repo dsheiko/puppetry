@@ -24,7 +24,12 @@ export default handleActions(
     }),
 
     [ actions.resetSnippets ]: ( state, { payload }) => update( state, {
-      $set: payload
+      targets: {
+        $set: payload.targets
+      },
+      tests: {
+        $set: payload.tests
+      }
     }),
 
     ...target,

@@ -26,8 +26,8 @@ const mapStateToProps = ( state ) => ({
       });
 
 @connect( mapStateToProps, mapDispatchToProps )
-export class ProjectExplorer extends React.Component {
-
+export class ProjectExplorer extends React.PureComponent {
+ 
   static propTypes = {
     action:  PropTypes.shape({
       loadProject: PropTypes.func.isRequired,

@@ -17,6 +17,11 @@ import { bindActionCreators } from "redux";
 
 const TabPane = Tabs.TabPane,
       TAB_TEXT_MAX_LEN = 16,
+
+       snippetTabTitle = ( <Tooltip placement="bottomRight" title="Snippets">
+              <Icon type="snippets" />Snippets
+            </Tooltip> ),
+
       // Mapping state to the props
       mapStateToProps = ( state, props ) => ({
         projectDirectory: state.settings.projectDirectory,
@@ -67,7 +72,7 @@ export class Editor extends React.Component {
   }
 
   onChange = ( targetKey ) => {
-    this.props.action.setactiveAppTabId( targetKey );
+    this.props.action.setActiveAppTab( targetKey );
   }
 
   remove = async ( targetKey ) => {
@@ -96,13 +101,6 @@ export class Editor extends React.Component {
             activeAppTabId
           } = this.props,
 
-          
-
-          snippetTabTitle = snippetsTest
-            ? ( <Tooltip placement="bottomRight" title={ "Snippet: " + snippetsTest.title }>
-              <Icon type="snippets" />{ truncate( snippetsTest.title, TAB_TEXT_MAX_LEN ) }
-            </Tooltip> )
-            : "Loading...",
 
           panes = {
 
@@ -140,11 +138,8 @@ export class Editor extends React.Component {
               />
             </TabPane> ),
 
-            snippet: () => ( <TabPane tab={ snippetTabTitle } key="snippet" closable={ true }>
-              <SnippetsMain
-                snippetsTest={ snippetsTest }
-                action={ action }
-                selector={ selector } />
+            snippet: ( panel ) => ( <TabPane tab={ snippetTabTitle } key={ panel.id } closable={ true }>
+              <SnippetsMain />
             </TabPane> )
           };
 

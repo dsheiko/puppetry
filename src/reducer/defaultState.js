@@ -77,7 +77,6 @@ export default {
       panels: [],
       active: null
     },
-    activeTab: null,
 
     checkedList: [],
 

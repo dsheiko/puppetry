@@ -115,7 +115,8 @@ actions.loadProjectFiles = ( directory = null ) => async ( dispatch, getState ) 
             .filter( file => file !== SNIPPETS_FILENAME );
 
     ipcRenderer.send( E_SUITE_LIST_UPDATED, projectDirectory, store.suite.filename, files );
-    dispatch( appActions.setApp({ project: { files }}) );
+    
+    dispatch( appActions.setProjectFiles( files ) );
   } catch ( ex ) {
     handleException( ex, dispatch, "Cannot load project files" );
   }

@@ -297,9 +297,10 @@ export async function readSuite( directory, file ) {
   }
 
   const filePath = join( directory, file );
+
   // in case of snippets
   if ( isSnippetsFile && !fs.existsSync( filePath ) ) {
-    log.warn( `Suite file ${filePath} not found.` );
+    log.warn( `Snippet file ${filePath} not found.` );
     return null;
   }
 
@@ -307,7 +308,7 @@ export async function readSuite( directory, file ) {
     const text = perf.processSync(`read ${ filePath }`, () => fs.readFileSync( filePath, "utf8" )),
           data = parseJson( text, filePath );
     
-    if ( parseInt( data.puppetry.substr( 0, 1 ), 10 ) < 4 ) {
+    if ( typeof data.groups !== "undefined" && parseInt( data.puppetry.substr( 0, 1 ), 10 ) < 4 ) {
       return convertSuite( data, isSnippetsFile );
     }
     return data;

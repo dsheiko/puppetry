@@ -28,7 +28,7 @@ actions.loadSnippets = () => async ( dispatch, getState ) => {
     suite.snippets = true;
     dispatch( actions.resetSnippets({
       targets: suite.targets,
-      groups: suite.groups
+      tests: suite.tests
     }) );
   } catch ( ex ) {
     // That's fine, older project do not have this file

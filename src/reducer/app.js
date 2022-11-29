@@ -15,6 +15,19 @@ export default handleActions(
       });
     },
 
+    [ actions.setProjectFiles ]: ( state, { payload }) => {
+      if ( !payload ) {
+        return state;
+      }
+      return update( state, {
+        project: {
+          files: {
+            $set: [ ...payload ]
+          }
+        }        
+      });
+    },
+
     [ actions.setError ]: ( state, { payload }) => {
       const inject = { title: "Error", type: "error", ...payload };
       return update( state, {
@@ -78,6 +91,19 @@ export default handleActions(
         return state;
       }
       const panels = [ ...state.tabs.panels ];
+      // Suites can be multiple on Editor, but others are singletons
+      if ( payload.type !== "suite" ) {
+        const match = panels.find( panel => panel.type === payload.type );
+        if ( match ) {
+          return update( state, {
+            tabs: {   
+                active: {
+                  $set: match.id
+                }
+              }          
+          });  
+        }
+      }
       panels.push({ id: payload.id, type: payload.type, data: payload.data });
       return update( state, {
         tabs: {          

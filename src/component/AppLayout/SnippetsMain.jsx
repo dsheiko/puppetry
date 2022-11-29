@@ -1,14 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Tabs, Icon } from "antd";
-import { SnippetCommandTable } from "./Main/GroupTable/TestTable/SnippetCommandTable";
+import { SnippetTestTable } from "./Main/GroupTable/SnippetTestTable";
 import { TargetTable  } from "./Main/TargetTable";
 import ErrorBoundary from "component/ErrorBoundary";
-import { SNIPPETS_GROUP_ID } from "constant";
+
 import AbstractForm from "component/AbstractForm";
 import LearnMore from "component/Global/LearnMore";
 import { connect } from "react-redux";
 import * as selectors from "selector/selectors";
+import actions from "action";
+import { bindActionCreators } from "redux";
 
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
@@ -17,7 +19,8 @@ const mapStateToProps = ( state ) => ({
         targetDataTable: selectors.getSnippetsTargetDataTableMemoized( state )
       }),
       // Mapping actions to the props
-      mapDispatchToProps = () => ({
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
       }),
 
       TabPane = Tabs.TabPane;
@@ -46,15 +49,6 @@ export class SnippetsMain extends AbstractForm {
     }, 10 );
   }
 
-  shouldComponentUpdate( nextProps ) {
-    if ( this.props.snippetsTest !== nextProps.snippetsTest
-      || this.props.panes !== nextProps.panes
-      || this.props.targets !== nextProps.targets  ) {
-      return true;
-    }
-    return false;
-  }
-
   render() {
     const { action,
             selector,
@@ -65,9 +59,7 @@ export class SnippetsMain extends AbstractForm {
           } = this.props,
 
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
-          commandsLabel = ( <span><Icon type="audit" />Commands</span> ),
-
-          targetValues = Object.values( targets );
+          testCasesLabel = ( <span><Icon type="audit" />Test Cases</span> ),;
 
 
     let activeKey = "targets";
@@ -89,6 +81,17 @@ export class SnippetsMain extends AbstractForm {
             animated={ false }
             onChange={ this.onTabChange }
           >
+
+            <TabPane tab={ testCasesLabel } key="groups">
+              <p>Snippets are reusable test cases in scope of project. So you can
+              create a snippet and refer to it in your test suites.<br />
+              </p>
+              <p><LearnMore href="https://docs.puppetry.app/snippets" /></p>
+
+              <SnippetTestTable />
+
+            </TabPane>
+
             <TabPane tab={ targetsLabel } key="targets" id="cSuitePane">
               <p>Targets are identifiers associated with locators
               (CSS selector or XPath) that we can refer in the test cases.
@@ -98,22 +101,7 @@ export class SnippetsMain extends AbstractForm {
               <TargetTable action={ action } targets={ targetDataTable } model="SnippetsTarget" />
             </TabPane>
 
-            <TabPane tab={ commandsLabel } key="groups">
-              <p>Snippets are reusable test cases in scope of project. So you can
-              create a snippet and refer to it in your test suites.<br />
-              </p>
-              <p><LearnMore href="https://docs.puppetry.app/snippets" /></p>
-
-
-              { snippetsTest ? <SnippetCommandTable
-                test={ snippetsTest }
-                targets={ targets }
-                testId={ snippetsTest.id }
-                groupId={ snippetsTest.groupId }
-                selector={ this.props.selector }
-                action={ this.props.action } /> : null }
-
-            </TabPane>
+            
 
           </Tabs>
 

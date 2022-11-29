@@ -50,18 +50,6 @@ export class Main extends AbstractComponent {
     }, 10 );
   }
 
-  // shouldComponentUpdate( nextProps ) {
-
-  //   if ( this.props.groups !== nextProps.groups
-  //     || this.props.panes !== nextProps.panes
-  //     || this.props.title !== nextProps.title
-  //     || this.props.description !== nextProps.description
-  //     || this.props.timeout !== nextProps.timeout ) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
   openTab = async ( tabKey, e = null ) => {
     e && e.preventDefault();
     this.props.action.addAppTab( tabKey );
@@ -107,7 +95,7 @@ export class Main extends AbstractComponent {
           } = suite,
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
           // windowsLabel = ( <span><Icon type="appstore" />Windows</span> ),
-          groupsLabel = ( <span><Icon type="audit" />Test Cases</span> ),
+          testCasesLabel = ( <span><Icon type="audit" />Test Cases</span> ),
           optionsLabel = ( <span><Icon type="tool" />Suite Options</span> ),
           activeKey = this.getActivePane();
 
@@ -125,7 +113,7 @@ export class Main extends AbstractComponent {
             onChange={ this.onTabChange }
           >
 
-            <TabPane tab={ groupsLabel } key="groups">
+            <TabPane tab={ testCasesLabel } key="groups">
               <p>Test case is a specification of { "" }<a href="https://docs.puppetry.app/test-step"
                 onClick={ this.onExtClick }>commands, assertions and references</a> { "" }
               to ensure that a targeted component of the test application acts as intended.

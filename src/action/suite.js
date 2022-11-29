@@ -88,18 +88,6 @@ actions.createSuite = ( rawFilename, title ) => async ( dispatch, getState ) => 
   }
 };
 
-function createSnippetsSuite( dispatch ) {
-  dispatch( groupActions.addGroup({ title: "Snippets" }, SNIPPETS_GROUP_ID ) );
-  dispatch( projectActions.setProject({
-    groups: {
-      [ SNIPPETS_GROUP_ID ]: {
-        key: SNIPPETS_GROUP_ID,
-        value: true,
-        tests: {}
-      }
-    }
-  }) );
-}
 
 function normalizeSuite( suite ) { 
   Object.entries( suite.tests ).forEach( tPairs => {
@@ -129,9 +117,7 @@ actions.loadSuite = ( filename, options = { silent: false }) => async ( dispatch
     dispatch( projectActions.setProject({ lastOpenSuite: filename }) );
     dispatch( actions.resetSuite({ ...suite, loadedAt: dateToTs(), filename, modified: false }) );
     ipcRenderer.send( E_SUITE_LOADED, projectDirectory, filename, store.app.project.files );
-    if ( suite.snippets && !( SNIPPETS_GROUP_ID in suite.groups ) ) {
-      createSnippetsSuite( dispatch );
-    }
+  
     dispatch( appActions.addAppTab( "suite", suite ) );
   } catch ( ex ) {
     !options.silent && handleException( ex, dispatch, `Cannot load suite ${ filename }` );
