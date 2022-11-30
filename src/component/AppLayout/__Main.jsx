@@ -86,8 +86,7 @@ export class Main extends AbstractComponent {
   render() {
 
     const { action,
-            suite,
-            targetDataTable
+            suite
           } = this.props,
           { title,
             description,
@@ -129,7 +128,7 @@ export class Main extends AbstractComponent {
 
               <p><LearnMore href="https://docs.puppetry.app/target" />
               </p>
-              <TargetTable action={ action } targets={ targetDataTable } />
+              <TargetTable />
             </TabPane>
 
             {/*

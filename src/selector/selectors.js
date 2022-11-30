@@ -5,7 +5,7 @@ import { createSelector } from "reselect";
 
 const NULL_SUITE = { tests: {}, targets: {} };
 
-function getActiveAppTabData(tabs) {
+function getActiveAppTabData( tabs ) {
   if (tabs.active === null) {
     return NULL_SUITE;
   }
@@ -17,11 +17,11 @@ function getActiveAppTabData(tabs) {
 // where EDITOR tabs are suite file, report and so on
 export const getAppTabPanelsMemoized = createSelector(
   ( state ) => state.app.tabs,
-  (tabs) =>
+  ( tabs ) =>
     tabs.panels.map((panel) => ({
       id: panel.id,
       type: panel.type,
-      title: panel.data.title ?? "Loading...",
+      title: panel.data.filename ?? "unknown",
     }))
 );
 // get data of the active tab panel
@@ -32,31 +32,17 @@ export const getActiveAppTabDataMemoized = createSelector(
 
 export const getTargetDataTableMemoized = createSelector(
   ( state ) => state.app.tabs,
-  (tabs) => {
-    const { targets } = getActiveAppTabData(tabs),
-      data = setEntity(!targets ? [] : Object.values(targets), "target"),
-      id = uniqid();
-
-    data.push({
-      disabled: false,
-      editing: true,
-      adding: true,
-      id,
-      key: id,
-      target: "",
-      selector: "",
-      entity: "target",
-    });
-
-    return data;
+  ( tabs ) => {
+    const { targets } = getActiveAppTabData( tabs );
+    return getTargetDataTable( targets );      
   }
 );
 
 // see src/component/AppLayout/Main/GroupTable/TestTable/CommandModal.jsx
 export const getTargetObjMemoized = createSelector(
   ( state ) => state.app.tabs,
-  (tabs) => {
-    const { targets } = getActiveAppTabData(tabs);
+  ( tabs ) => {
+    const { targets } = getActiveAppTabData( tabs );
     return targets;
   }
 );
@@ -64,8 +50,8 @@ export const getTargetObjMemoized = createSelector(
 // see src/component/AppLayout/Main/GroupTable/TestTable.jsx
 export const getTestDataTableMemoized = createSelector(
   ( state ) => state.app.tabs,
-  (tabs) => {
-    const { tests } = getActiveAppTabData(tabs);
+  ( tabs ) => {
+    const { tests } = getActiveAppTabData( tabs );
     return getStructureDataTable(tests, "test");
   }
 );
@@ -96,10 +82,10 @@ export const getProjectExpandedMemoized = createSelector(
       .map((item) => item.key)
 );
 
-// export const getCommandsMemoized = createSelector( getCommandsArray,
-//   ( commands ) => Object.values( test.commands )
-//     .map( record => ({ ...record, entity: "command" }) )
-// );
+export const getAllTargetsMemoized = createSelector( 
+  ( state ) => ({ ...state.suite.targets, ...state.project.targets }),
+  ( targets ) => Object.values( targets ).filter( target => !!target.target ) 
+);
 
 function setEntity(arr, entity) {
   return arr.map((record) => ({ ...record, entity }));
@@ -247,21 +233,21 @@ export function getTargetChain(target, targets) {
 }
 
 export function getTargetDataTable( targets ) {
-  const data = setEntity( !targets ? [] : Object.values( targets ), "target" ),
+  const data = setEntity( typeof targets === "undefined" ? [] : Object.values( targets ) , "target" ),
         id = uniqid();
 
-  data.push({
-    disabled: false,
-    editing: true,
-    adding: true,
-    id,
-    key: id,
-    target: "",
-    selector: "",
-    entity: "target",
-  });
+    data.push({
+      disabled: false,
+      editing: true,
+      adding: true,
+      id,
+      key: id,
+      target: "",
+      selector: "",
+      entity: "target",
+    });
 
-  return data;
+    return data;
 }
 
 /**

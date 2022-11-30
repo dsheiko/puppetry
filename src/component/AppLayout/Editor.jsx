@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Tabs, Icon, Tooltip } from "antd";
-import { Main } from "./Main";
+
 import { SnippetsMain } from "./SnippetsMain";
 import { SettingsPanel } from "./Settings/SettingsPanel";
 import { VariablesPane } from "./Project/Variables/VariablesPane";
 import { TargetsPane } from "./Project/Targets/TargetsPane";
+import { TestTable } from "./Main/GroupTable/TestTable";
 import { TestReport } from "./Editor/TestReport";
 import ErrorBoundary from "component/ErrorBoundary";
 import { confirmUnsavedChanges } from "service/smalltalk";
@@ -105,7 +106,12 @@ export class Editor extends React.Component {
           panes = {
 
             suite: ( panel ) => ( <TabPane tab={ this.getSuiteTitle( panel ) } key={ panel.id } closable={ true }>
-              <Main />
+              <p className="test-table-intro">
+              Test case is a specification of { "" }<a href="https://docs.puppetry.app/test-step"
+                onClick={ this.onExtClick }>commands, assertions and references</a> { "" }
+              to ensure that a targeted component of the test application acts as intended.
+              </p>
+              <TestTable />
             </TabPane> ),
 
             testReport: () => ( <TabPane tab="Test report"

@@ -150,7 +150,7 @@ actions.saveProject = () => async ( dispatch, getState ) => {
 };
 
 
-actions.updateProject = ({ projectDirectory, name } = {}, reset = false ) => async ( dispatch ) => {
+actions.updateProject = ({ projectDirectory, name, timeout } = {}, reset = false ) => async ( dispatch ) => {
   try {
     if ( !name ) {
       throw new InvalidArgumentError( "Empty project name" );
@@ -159,9 +159,9 @@ actions.updateProject = ({ projectDirectory, name } = {}, reset = false ) => asy
       throw new InvalidArgumentError( "Empty project directory" );
     }
     if ( reset ) {
-      await dispatch( actions.resetProject({ projectDirectory, name }) );
+      await dispatch( actions.resetProject({ projectDirectory, name, timeout }) );
     } else {
-      await dispatch( actions.setProject({ projectDirectory, name }) );
+      await dispatch( actions.setProject({ projectDirectory, name, timeout }) );
     }
     // keep track of recent projects
     dispatch( settingsActions.addSettingsProject({

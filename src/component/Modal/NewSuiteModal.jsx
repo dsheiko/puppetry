@@ -11,6 +11,7 @@ import { MODAL_DEFAULT_PROPS } from "constant";
 import actions from "action";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import classNames from "classnames";
 
 /*eslint no-useless-escape: 0*/
 
@@ -66,11 +67,11 @@ export class NewSuiteModal extends AbstractForm {
       if ( !values.filename ) {
         values.filename = normalizeSuiteName( values.title );
       }
-      const { title, filename } = values;
+      const { filename } = values;
       if ( err ) {
         return;
       }
-      await createSuite( filename, title );
+      await createSuite( filename, filename );
       setApp({ newSuiteModal: false });
     });
   }
@@ -99,7 +100,10 @@ export class NewSuiteModal extends AbstractForm {
         <Modal
           title="New Suite"
           visible={ isVisible }
-          className="c-new-suite-modal"
+          className={ classNames({
+            "c-new-suite-modal": true,
+            "is-opaque": !isVisible
+          }) }
           disabled={ this.hasErrors( getFieldsError() )  }
           closable
           onCancel={this.onClickCancel}
@@ -116,59 +120,31 @@ export class NewSuiteModal extends AbstractForm {
         >
 
           { isVisible ? <Form >
-            <FormItem  label="Suite title">
-              { getFieldDecorator( "title", {
-                initialValue: "",
-                rules: [{
-                  required: true,
-                  message: "Please enter suite title"
-                },
-                {
-                  validator: ruleValidateGenericString
-                },
-                {
-                  transform: ( value ) => value.trim()
-                }]
-              })(
-                <Input onChange={ this.onNameChange } placeholder="e.g. Main page"
-                  onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
-              )}
-            </FormItem>
-            <p>Optionally you can specify suite file name manually, otherwise it will be generated automatically
-              <If exp={ this.state.displayFilename }>
-                { " " } as { " " } <b className="color--primary">
-                  <i id="cNewSuiteModalFilenamePreview">{ this.state.displayFilename }.json</i></b>
-              </If>
-            </p>
-            <Collapse>
-              <Panel header="Specify filename">
-                <FormItem
-                  label={ <span>Suite filename <span className="is-optional">(without extension)</span></span> }
-                >
-                  { getFieldDecorator( "filename", {
-                    initialValue: "",
-                    rules: [
-                      {
-                        pattern: /^[0-9a-zA-Z_\-\.]{3,250}$/,
-                        message: "Invalid filename"
-                      }]
-                  })(
-                    <Row>
-                      <Col span={ 22 }>
-                        <Input placeholder="e.g. main-page"
-                          onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
-                      </Col>
-                      <Col span={ 2 }>
-                        { " " }.json
-                      </Col>
-                    </Row>
-                  )}
-                </FormItem>
-              </Panel>
-            </Collapse>
+           
+            <FormItem
+                label={ <span>Suite filename <span className="is-optional">(without extension)</span></span> }
+              >
+                { getFieldDecorator( "filename", {
+                  initialValue: "",
+                  rules: [
+                    {
+                      pattern: /^[0-9a-zA-Z_\-\.]{3,250}$/,
+                      message: "Invalid filename"
+                    }]
+                })(
+                  <Row>
+                    <Col span={ 22 }>
+                      <Input placeholder="e.g. main-page"
+                        onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
+                    </Col>
+                    <Col span={ 2 }>
+                      { " " }.json
+                    </Col>
+                  </Row>
+                )}
+              </FormItem>
 
-
-          </Form> : this.renderLoading }
+          </Form> : null }
 
         </Modal>
       </ErrorBoundary>

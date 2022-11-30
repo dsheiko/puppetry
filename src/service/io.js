@@ -308,6 +308,8 @@ export async function readSuite( directory, file ) {
     const text = perf.processSync(`read ${ filePath }`, () => fs.readFileSync( filePath, "utf8" )),
           data = parseJson( text, filePath );
     
+    data.filename = file;
+    
     if ( typeof data.groups !== "undefined" && parseInt( data.puppetry.substr( 0, 1 ), 10 ) < 4 ) {
       return convertSuite( data, isSnippetsFile );
     }

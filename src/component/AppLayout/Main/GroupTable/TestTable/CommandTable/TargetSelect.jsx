@@ -2,44 +2,52 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Icon, Select } from "antd";
 import { connect } from "react-redux";
+import eventEmitter from "service/eventEmitter";
+import * as selectors from "selector/selectors";
+import {
+  HomeOutlined,
+  LoadingOutlined,
+  SettingFilled,
+  SmileOutlined,
+  SyncOutlined,
+} from '@ant-design/icons';
 
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
-        suiteTargets: state.suite.targets,
-        sharedTargets: state.project.targets
+        targets: selectors.getAllTargetsMemoized( state )        
       }),
       // Mapping actions to the props
       mapDispatchToProps = () => ({
       }),
-      Option = Select.Option;
+      Option = Select.Option,
 
-@connect( mapStateToProps, mapDispatchToProps )
-export class TargetSelect extends React.Component {
+      showModal = () => eventEmitter.emit( "showEditTargetsModal" ),
 
-  static propTypes = {
-    suiteTargets: PropTypes.object,
-    sharedTargets: PropTypes.object,
-    changeTarget: PropTypes.func.isRequired,
-    setFieldsValue: PropTypes.func.isRequired,
-    initialValue: PropTypes.string
-  }
+      onEditTargets = ( e ) => {
+        e.preventDefault();
+        showModal();
+      };
 
-  onSelect = ( value ) => {
-    this.props.changeTarget( value );
-    this.props.setFieldsValue({ target: value });
-  }
-
-  render() {
-    const { suiteTargets, sharedTargets, initialValue } = this.props,
-          targets = Object.values({ ...sharedTargets, ...suiteTargets });
-    return (
+const TargetSelect = React.forwardRef(( props, ref ) => {
+    const { targets, initialValue } = props,
+          
+          onSelect = ( value ) => {
+            if ( value === null ) {
+              props.setFieldsValue({ target: initialValue });
+              return showModal();
+            }
+            props.changeTarget( value );
+            props.setFieldsValue({ target: value });
+          };
+    return (<>
       <Select
+        ref={ ref }
         showSearch
         className="select--target"
         defaultValue={ initialValue }
         placeholder="Select a target"
         optionFilterProp="children"
-        onSelect={this.onSelect}
+        onSelect={ onSelect }
         filterOption={( input, option ) => {
           const optNode = option.props.children,
                 // <option>keyword OR <option><span className="method-title" data-keyword="keyword">
@@ -54,7 +62,18 @@ export class TargetSelect extends React.Component {
           .map( ( item, inx ) => ( <Option key={inx} value={ item.target }>
             <span data-keyword={ item.target }><Icon type="scan" /> { item.target }</span>
           </Option> ) ) }
+        <Option value={ null } className="edit-option"><span data-keyword="null"><Icon type="plus-square" /> add target</span></Option>
       </Select>
-    );
-  }
+      <a className="edit-targets-link" onClick={ onEditTargets }>Edit targets</a>
+    </>);
+  });
+
+TargetSelect.propTypes = {
+  suiteTargets: PropTypes.object,
+  sharedTargets: PropTypes.object,
+  changeTarget: PropTypes.func.isRequired,
+  setFieldsValue: PropTypes.func.isRequired,
+  initialValue: PropTypes.string
 }
+
+export default connect( mapStateToProps, mapDispatchToProps, null, { forwardRef: true } )( TargetSelect );

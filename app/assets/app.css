@@ -193,6 +193,25 @@ body {
   display: none !important;
 }
 
+.is-opaque {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.test-table-intro {
+    margin: 0;
+    padding: 16px 0;
+}
+
+.edit-option {
+  border-top: 1px solid #d9d9d9;
+}
+
+.edit-targets-link {
+  display: block;
+  line-height: 21px;
+}
+
 .row--centered {
   display: flex;
   justify-content: center;
@@ -223,6 +242,16 @@ body {
 .modal--instant.modal--instant-command .ant-modal-wrap .ant-modal {
   width: 90%;
 }
+.modal--instant.modal--instant-targets .ant-modal-wrap .ant-modal {
+  width: 95%;
+}
+
+.modal--instant.modal--instant-targets .ant-modal-body {
+  overflow-y: auto; 
+  max-height: calc(100vh - 166px);
+}
+
+
 .ant-modal-sentinel {
   width: 0;
   height: 0;

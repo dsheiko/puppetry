@@ -48,11 +48,6 @@ export class StatusBar extends AbstractComponent {
 
             <a onClick={ this.onExtClick }
               rel="noopener noreferrer"
-              title="Join Puppetry channel on Slack" className="layout-icon"
-              href="https://puppetry-app.slack.com" target="_blank"><Icon type="slack" /></a>
-
-            <a onClick={ this.onExtClick }
-              rel="noopener noreferrer"
               title="Find Puppetry on Github" className="layout-icon"
               href="https://github.com/dsheiko/puppetry" target="_blank"><Icon type="github" /></a>
 

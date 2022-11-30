@@ -59,7 +59,7 @@ export class SnippetsMain extends AbstractForm {
           } = this.props,
 
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
-          testCasesLabel = ( <span><Icon type="audit" />Test Cases</span> ),;
+          testCasesLabel = ( <span><Icon type="audit" />Test Cases</span> );
 
 
     let activeKey = "targets";

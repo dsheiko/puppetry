@@ -6,6 +6,8 @@ import { InstantModal } from "component/Global/InstantModal";
 import ErrorBoundary from "component/ErrorBoundary";
 import * as selectors from "selector/selectors";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import actions from "action";
 
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
@@ -16,7 +18,8 @@ const mapStateToProps = ( state ) => ({
         suiteTargets: selectors.getTargetObjMemoized( state )
       }),
       // Mapping actions to the props
-      mapDispatchToProps = () => ({
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
       });
 
 @connect( mapStateToProps, mapDispatchToProps )

@@ -11,7 +11,7 @@ export class InstantModal extends React.Component {
     title: PropTypes.string.isRequired,
     onOk: PropTypes.func,
     onCancel: PropTypes.func.isRequired,
-    footer: PropTypes.array.isRequired,
+    footer: PropTypes.any, // doesn't work as oneOfType([ PropTypes.array, () => null ]).isRequired
     className: PropTypes.string,
     children: PropTypes.any
   }
@@ -45,6 +45,7 @@ export class InstantModal extends React.Component {
         <div role="document" className="ant-modal">
           <div tabIndex={0} className="ant-modal-sentinel"></div>
           <div className="ant-modal-content">
+            { this.props.extraBtns ?? null }
             <button aria-label="Close" className="ant-modal-close" onClick={ onCancel }>
               <span className="ant-modal-close-x">
                 <Icon type="close" />

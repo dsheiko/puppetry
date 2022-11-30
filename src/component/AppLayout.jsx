@@ -29,12 +29,13 @@ import { EditEnvironmentsModal } from "./Modal/EditEnvironmentsModal";
 import { NewSnippetModal } from "./Modal/SnippetModal/NewSnippetModal";
 import { SaveSnippetAsModal } from "./Modal/SnippetModal/SaveSnippetAsModal";
 import { EditSnippetModal } from "./Modal/SnippetModal/EditSnippetModal";
+import { EditTargetsModal } from "./Modal/EditTargetsModal";
 import { AppLightbox } from "./Modal/AppLightbox";
 import { connect } from "react-redux";
 import { Editor } from "./AppLayout/Editor";
 import { WindowToolbar } from "./AppLayout/WindowToolbar";
 import { Projectbar } from "./AppLayout/Projectbar";
-import * as selectors from "selector/selectors";
+import eventEmitter from "service/eventEmitter";
 
       // Mapping state to the props
 const mapStateToProps = ( state ) => ({
@@ -161,6 +162,7 @@ export class AppLayout extends React.PureComponent {
         <EditProjectModal />
         <EditEnvironmentsModal />
         <AppLightbox />
+        <EditTargetsModal />
 
       </ErrorBoundary>
     );

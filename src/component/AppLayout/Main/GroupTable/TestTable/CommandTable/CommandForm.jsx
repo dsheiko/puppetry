@@ -1,17 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Form, Row, Col, Alert, Input, Checkbox } from "antd";
-import { PageSelect } from "./PageSelect";
-import { TargetSelect } from "./TargetSelect";
-import { ElementMethodSelect } from "./ElementMethodSelect";
-import { PageMethodSelect } from "./PageMethodSelect";
+import TargetSelect from "./TargetSelect";
+import ElementMethodSelect from "./ElementMethodSelect";
+import PageMethodSelect from "./PageMethodSelect";
 import { ParamsFormBuilder } from "./Params/ParamsFormBuilder";
 import If from "component/Global/If";
 import { getSchema } from "component/Schema/schema";
 import { Description } from "component/Schema/Params/Description";
 import ErrorBoundary from "component/ErrorBoundary";
 import { result } from "service/utils";
-import { SNIPPETS_GROUP_ID } from "constant";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
@@ -46,7 +44,6 @@ export class CommandForm extends React.Component {
      this.state = {
        target: "",
        method: "",
-       page: "",
        error: "",
        validationError: ""
      };
@@ -56,7 +53,6 @@ export class CommandForm extends React.Component {
      this.setState({
        target: "",
        method: "",
-       page: "",
        error: "",
        validationError: ""
      });
@@ -74,8 +70,7 @@ export class CommandForm extends React.Component {
     const { record, closeModal, resetSubmitted } = this.props,
           target = this.state.target || record.target,
           method = this.state.method || record.method,
-          schema = getSchema( target, method ),
-          ns = record.groupId === SNIPPETS_GROUP_ID ? "Snippets" : "";
+          schema = getSchema( target, method );
 
     e && e.preventDefault();
     resetSubmitted();
@@ -92,12 +87,11 @@ export class CommandForm extends React.Component {
           }
         }
 
-console.log(values, {
+        this.props.action[ record.id ? "updateCommand" : "addCommand" ]({
           id: record.id,
           testId: record.testId,
           groupId: record.groupId,
           target: values.target,
-          page: values.page,
           method: values.method,
           params: values.params,
           assert: values.assert,
@@ -106,32 +100,12 @@ console.log(values, {
           waitForTarget: values.waitForTarget || false
         });
 
-        this.props.action[ record.id ? `update${ ns }Command` : `add${ ns }Command` ]({
-          id: record.id,
-          testId: record.testId,
-          groupId: record.groupId,
-          target: values.target,
-          page: values.page,
-          method: values.method,
-          params: values.params,
-          assert: values.assert,
-          comment: values.comment,
-          failure: "",
-          waitForTarget: values.waitForTarget || false
-        });
-
-        if ( ns === "Snippets" ) {
-          this.props.action.autosaveSnippets();
-        } else {
-          this.updateSuiteModified();
-        }
-
+        this.updateSuiteModified();
         this.resetState();
         closeModal();
       }
     });
   }
-
 
   changeTarget = ( target ) => {
     this.setState({
@@ -236,24 +210,9 @@ console.log(values, {
               closable />
           </If>
           <Row gutter={24}>
-
-
-            <Col xl={3} lg={8} md={24}>
-              <FormItem label="Page">
-                {getFieldDecorator( "page", {
-                  initialValue: record.page ? record.page : "main"
-                })(
-                  <PageSelect
-                    setFieldsValue={ setFieldsValue }
-                    initialValue={ record.page ? record.page : "main" }
-                    />
-                )}
-              </FormItem>
-            </Col>
-
             <Col xl={8} lg={12} md={24}>
               <FormItem label="Target">
-                {getFieldDecorator( "target", {
+                { getFieldDecorator( "target", {
                   initialValue: record.target,
                   rules: [{
                     required: true,
@@ -267,7 +226,6 @@ console.log(values, {
                 )}
               </FormItem>
             </Col>
-
             <Col xl={8} lg={12} md={24}>
               <FormItem label="Method">
                 {getFieldDecorator( "method", {
@@ -292,6 +250,7 @@ console.log(values, {
                 )}
               </FormItem>
             </Col>
+            
 
           </Row>
 

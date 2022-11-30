@@ -6,7 +6,22 @@ import { TargetVariableCell } from "./EditableCell/TargetVariableCell";
 import { connectDnD } from "./DragableRow";
 import { validateSelector } from "service/selector";
 import ErrorBoundary from "component/ErrorBoundary";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import actions from "action";
+import * as selectors from "selector/selectors";
 
+
+// Mapping state to the props
+const mapStateToProps = ( state ) => ({
+        targets: selectors.getTargetDataTableMemoized( state ),
+      }),
+      // Mapping actions to the props
+      mapDispatchToProps = ( dispatch ) => ({
+        action: bindActionCreators( actions, dispatch )
+      });
+
+@connect( mapStateToProps, mapDispatchToProps )
 @connectDnD
 export class TargetTable extends AbstractEditableTable {
 
@@ -125,19 +140,18 @@ export class TargetTable extends AbstractEditableTable {
 
     return (
       <div className="box-margin-vertical is-relative">
-        <a className="btn-to-bottom" href="#cTargetTableEditCsvBtn">
-          <Icon type="arrow-down" /></a>
+       
         <ErrorBoundary>
           <Table
             id="cTargetTable"
             className="draggable-table"
-            components={this.components}
+            components={ this.components }
             rowClassName={ this.onRowClassName }
-            onRow={this.onRow}
+            onRow={ this.onRow }
             showHeader={ true }
             dataSource={ data }
-            columns={this.columns}
-            pagination={false}
+            columns={ this.columns }
+            pagination={ false }
 
             footer={() => ( <div className="ant-table-footer__toolbar">
               <Button type="dashed" id="cTargetTableEditCsvBtn"

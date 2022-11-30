@@ -8,6 +8,7 @@ import { MODAL_DEFAULT_PROPS } from "constant";
 import actions from "action";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import classNames from "classnames";
 
 /*eslint no-useless-escape: 0*/
 
@@ -111,7 +112,11 @@ export class EditTargetsAsCsvModal extends AbstractForm {
         <Modal
           title="Edit targets as CSV"
           visible={ isVisible }
-          className="c-new-suite-modal"
+
+          className={ classNames({
+            "is-opaque": !isVisible
+          }) }
+
           disabled={ this.hasErrors( getFieldsError() )  }
           closable
           { ...MODAL_DEFAULT_PROPS }
@@ -123,7 +128,7 @@ export class EditTargetsAsCsvModal extends AbstractForm {
               key="submit"
               type="primary"
               onClick={this.onClickOk}>
-              Create
+              Save
             </Button> ) ]}
         >
 
@@ -140,7 +145,7 @@ export class EditTargetsAsCsvModal extends AbstractForm {
                 <TextArea rows="8" />
               )}
             </FormItem>
-          </Form> : this.renderLoading }
+          </Form> : null }
 
         </Modal>
       </ErrorBoundary>
