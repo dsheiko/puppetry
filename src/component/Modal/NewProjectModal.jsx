@@ -15,6 +15,7 @@ import { ruleValidateGenericString } from "service/utils";
 import actions from "action";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import classNames from "classnames";
 
 const FormItem = Form.Item,
       connectForm = Form.create(),
@@ -141,7 +142,11 @@ export class NewProjectModal extends AbstractForm {
       <ErrorBoundary>
         <Modal
           title="New Project"
-          className="c-new-project-modal"
+          className={ classNames({
+            "c-new-project-modal": true,
+            "is-opaque": !isVisible
+          }) }
+		  
           visible={ isVisible }
           closable
           onCancel={this.onClickCancel}
@@ -222,7 +227,7 @@ export class NewProjectModal extends AbstractForm {
               </p>
             </If>
 
-          </Form> : this.renderLoading }
+          </Form> : null }
         </Modal>
       </ErrorBoundary>
     );

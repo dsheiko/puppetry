@@ -9,6 +9,7 @@ import * as classes from "./classes";
 import actions from "action";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import classNames from "classnames";
 
 const connectForm = Form.create();
 
@@ -96,6 +97,9 @@ export class SaveProjectAsModal extends AbstractForm {
           title="Save Project As..."
           visible={ isVisible }
           closable
+          className={ classNames({
+            "is-opaque": !isVisible
+          }) }
           onCancel={this.onClickCancel}
           onOk={this.onClickOk}
           { ...MODAL_DEFAULT_PROPS }
@@ -124,7 +128,7 @@ export class SaveProjectAsModal extends AbstractForm {
               getSelectedDirectory={ this.getSelectedDirectory }
               label="Project new location" />
 
-          </Form> : this.renderLoading }
+          </Form> : null }
         </Modal>
       </ErrorBoundary>
     );

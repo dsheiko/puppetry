@@ -10,6 +10,7 @@ import { MODAL_DEFAULT_PROPS } from "constant";
 import actions from "action";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import classNames from "classnames";
 
 const FormItem = Form.Item,
       connectForm = Form.create();
@@ -91,6 +92,9 @@ export class EditProjectModal extends AbstractForm {
           title="Edit Project"
           visible={ isVisible }
           closable
+          className={ classNames({
+            "is-opaque": !isVisible
+          }) }
           onCancel={this.onClickCancel}
           onOk={ this.onSubmit }
           { ...MODAL_DEFAULT_PROPS }
@@ -169,7 +173,7 @@ export class EditProjectModal extends AbstractForm {
               )}
             </FormItem>
 
-          </Form> : this.renderLoading }
+          </Form> : null }
         </Modal>
       </ErrorBoundary>
     );

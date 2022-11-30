@@ -8,6 +8,7 @@ import { MODAL_DEFAULT_PROPS } from "constant";
 import actions from "action";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import classNames from "classnames";
 
 const FormItem = Form.Item,
       connectForm = Form.create();
@@ -114,6 +115,9 @@ export class EditEnvironmentsModal extends AbstractForm {
         <Modal
           title="Edit Environments"
           visible={ isVisible }
+          className={ classNames({
+            "is-opaque": !isVisible
+          }) }
           closable
           { ...MODAL_DEFAULT_PROPS }
           onCancel={this.onClickCancel}
@@ -168,7 +172,7 @@ export class EditEnvironmentsModal extends AbstractForm {
                 onClick={ this.onClickOk }><Icon type="plus" />Add environment
               </Button>
             </Form.Item>
-          </Form> : this.renderLoading }
+          </Form> : null }
         </Modal>
       </ErrorBoundary>
     );

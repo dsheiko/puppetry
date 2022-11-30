@@ -9,6 +9,7 @@ import { ruleValidateGenericString } from "service/utils";
 import * as classes from "../classes";
 import mediator from "service/mediator";
 import { MODAL_DEFAULT_PROPS, RE_SNIPPETS_TEST_ADDED } from "constant";
+import classNames from "classnames";
 
 const FormItem = Form.Item;
 
@@ -35,7 +36,10 @@ export default class AbstractSnippetModal extends AbstractForm {
         <Modal
           title={ title }
           visible={ isVisible }
-          className="c-new-snippet-modal"
+          className={ classNames({
+            "c-new-snippet-modal": true,
+            "is-opaque": !isVisible
+          }) }
           disabled={ this.hasErrors( getFieldsError() )  }
           closable
           onCancel={this.onClickCancel}
@@ -70,7 +74,7 @@ export default class AbstractSnippetModal extends AbstractForm {
                   onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
               )}
             </FormItem>
-          </Form>: this.renderLoading }
+          </Form>: null }
 
         </Modal>
       </ErrorBoundary>

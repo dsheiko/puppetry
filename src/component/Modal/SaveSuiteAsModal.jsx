@@ -9,6 +9,7 @@ import { MODAL_DEFAULT_PROPS } from "constant";
 import actions from "action";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import classNames from "classnames";
 
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
@@ -91,6 +92,9 @@ export class SaveSuiteAsModal extends AbstractForm {
           title="Save Suite As"
           visible={ isVisible }
           closable
+          className={ classNames({
+            "is-opaque": !isVisible
+          }) }
           onCancel={ this.onClickCancel }
           { ...MODAL_DEFAULT_PROPS }
           footer={[
@@ -130,7 +134,7 @@ export class SaveSuiteAsModal extends AbstractForm {
                 <Input placeholder="e.g. my-new-suite" onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
               )}
             </FormItem>
-          </Form>: this.renderLoading }
+          </Form>: null }
         </Modal>
       </ErrorBoundary>
     );

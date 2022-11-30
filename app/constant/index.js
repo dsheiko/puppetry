@@ -41,6 +41,9 @@ exports.E_WATCH_FILE_NAVIGATOR = "watchFileNavigator";
 // Redux Events
 exports.RE_SNIPPETS_TEST_ADDED = "RE_SNIPPETS_TEST_ADDED";
 
+// EventEmitter Events
+exports.EE_SHOW_EDIT_TARGETS_MODAL = "showEditTargetsModal";
+
 
 exports.A_FORM_ITEM_SUCCESS = "success";
 exports.A_FORM_ITEM_WARNING = "warning";

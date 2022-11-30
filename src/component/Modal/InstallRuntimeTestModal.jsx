@@ -13,6 +13,7 @@ import { lockRuntimeTestPath, removeRuntimeTestPath, getRuntimeTestPath,
 import actions from "action";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import classNames from "classnames";
 
 notification.config({
   placement: "bottomRight"
@@ -203,7 +204,11 @@ export class InstallRuntimeTestModal extends AbstractComponent {
           closable={ Boolean( progress === 0 || error ) }
           onCancel={this.onClickCancel}
           onOk={this.onClickOk}
-          className="checkbox-group--vertical"
+          className={ classNames({
+            "checkbox-group--vertical": true,
+            "is-opaque": !isVisible
+          }) }
+		  
           { ...MODAL_DEFAULT_PROPS }
           footer={ buttons }
         >
@@ -254,7 +259,7 @@ export class InstallRuntimeTestModal extends AbstractComponent {
             </If>
           </div>
 
-          </> : this.renderLoading } 
+          </> : null } 
         </Modal>
       </ErrorBoundary>
     );

@@ -1,11 +1,7 @@
 import React from "react";
-import PropTypes from "prop-types";
 import AbstractComponent from "component/AbstractComponent";
 import { Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
-import { shell, remote } from "electron";
-import { getLogPath } from "service/io";
-import * as classes from "./classes";
 import { MODAL_DEFAULT_PROPS } from "constant";
 import actions from "action";
 import { connect } from "react-redux";
@@ -13,6 +9,8 @@ import { bindActionCreators } from "redux";
 import eventEmitter from "service/eventEmitter";
 import { TargetTable } from "component/AppLayout/Main/TargetTable";
 import { InstantModal } from "component/Global/InstantModal";
+import classNames from "classnames";
+import { EE_SHOW_EDIT_TARGETS_MODAL } from "constants";
 
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
@@ -28,8 +26,7 @@ const mapStateToProps = ( state ) => ({
 export class EditTargetsModal extends AbstractComponent {
 
   state = {
-    isVisible: false,
-    isRendered: false
+    isVisible: false
   }  
 
   close() {
@@ -42,17 +39,20 @@ export class EditTargetsModal extends AbstractComponent {
   }
 
   componentDidMount() {
-    eventEmitter.on( "showEditTargetsModal", () => {
-        this.setState({ isVisible: true, isRendered: true });
+    eventEmitter.on( EE_SHOW_EDIT_TARGETS_MODAL, () => {
+        this.setState({ isVisible: true });
     });
   }
 
 
   render() {
-    const { isVisible, isRendered } = this.state;
+    const { isVisible } = this.state;
 
-    return <InstantModal
-          className="modal--instant-targets"
+    return <InstantModal          
+          className={ classNames({
+            "modal--instant-targets": true,
+            "is-opaque": !isVisible
+          }) }
           title="Edit Targets"
           visible={ isVisible }
           closable
@@ -62,9 +62,9 @@ export class EditTargetsModal extends AbstractComponent {
           <span className="ant-modal-close-x" style={{ pointerEvents: "none" }}><Icon type="arrow-down" /></span></a> }
           { ...MODAL_DEFAULT_PROPS }          
         >
-          { isRendered ? <ErrorBoundary>
+          { isVisible ? <ErrorBoundary>
           <TargetTable />
-        </ErrorBoundary> :  this.renderLoading }
+        </ErrorBoundary> :  null }
 
         </InstantModal>;
   }

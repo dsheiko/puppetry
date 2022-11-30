@@ -4,13 +4,7 @@ import { Icon, Select } from "antd";
 import { connect } from "react-redux";
 import eventEmitter from "service/eventEmitter";
 import * as selectors from "selector/selectors";
-import {
-  HomeOutlined,
-  LoadingOutlined,
-  SettingFilled,
-  SmileOutlined,
-  SyncOutlined,
-} from '@ant-design/icons';
+import { EE_SHOW_EDIT_TARGETS_MODAL } from "constants";
 
 // Mapping state to the props
 const mapStateToProps = ( state ) => ({
@@ -21,7 +15,7 @@ const mapStateToProps = ( state ) => ({
       }),
       Option = Select.Option,
 
-      showModal = () => eventEmitter.emit( "showEditTargetsModal" ),
+      showModal = () => eventEmitter.emit( EE_SHOW_EDIT_TARGETS_MODAL ),
 
       onEditTargets = ( e ) => {
         e.preventDefault();
