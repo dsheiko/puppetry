@@ -15,7 +15,7 @@ export default class AbstractComponent extends React.Component {
 
   download = ( file, e = null ) => {
     e && e.preventDefault();
-    shell.openItem( file.replace( /\?[^\/\\]*$/, "" ) );
+    shell.openPath( file.replace( /\?[^\/\\]*$/, "" ) );
     notification.open({
       message: "Opening external file",
       description: "The requested file will open in a few seconds"

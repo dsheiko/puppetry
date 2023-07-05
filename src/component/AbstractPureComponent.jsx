@@ -14,7 +14,7 @@ export default class AbstractPureComponent extends React.PureComponent {
 
   download = ( file, e = null ) => {
     e && e.preventDefault();
-    shell.openItem( file );
+    shell.openPath( file );
     notification.open({
       message: "Opening external file",
       description: "The requested file will open in a few seconds"

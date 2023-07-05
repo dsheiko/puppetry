@@ -23,7 +23,7 @@ export class AlertMessageModal extends AbstractComponent {
 
   onOpenLog = () => {
     this.setState({ spinning: true });
-    shell.openItem( getLogPath() );
+    shell.openPath( getLogPath() );
     setTimeout( () => {
       this.setState({ spinning: false });
     }, 300 );
