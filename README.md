@@ -14,7 +14,7 @@
 
 <h3 align="center">CODELESS END-TO-END AUTOMATED TESTING</h3>
 
-Puppetry is an open-source cross-platform desktop application that gives non-developers the ability to create, manage, and integrate automated tests for Web
+Puppetry is a powerful, no-code/low-code test automation tool for end-to-end (E2E) testing of web applications. Built on top of [Puppeteer](https://pptr.dev/), it provides a user-friendly UI for creating, managing, and running automated browser tests—without writing complex scripts. Designed for developers, QA engineers, and testers, Puppetry simplifies web automation while offering flexibility for advanced users.
 
 ![Puppetry - codeless end-to-end test automation, integrated with CI/CD pipeline](https://github.com/dsheiko/puppetry/raw/master/docs/assets/img/puppetry-welcome.png)
 
