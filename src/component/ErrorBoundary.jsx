@@ -30,7 +30,7 @@ export default class ErrorBoundary extends React.Component {
 
   onOpenLog = ( e ) => {
     e.preventDefault();
-    shell.openItem( getLogPath() );
+    shell.openPath( getLogPath() );
     this.props.action.setLoadingFor( 500 );
   }
 

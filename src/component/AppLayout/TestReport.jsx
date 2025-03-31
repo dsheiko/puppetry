@@ -49,7 +49,7 @@ export class TestReport extends AbstractComponent {
   }
 
   onOpenDirectory = () => {
-    shell.openItem( join( this.props.projectDirectory, DIR_SCREENSHOTS ) );
+    shell.openPath( join( this.props.projectDirectory, DIR_SCREENSHOTS ) );
     notification.open({
       message: "Opening system file manager",
       description: "The requested directory will open in the default file manager in a few seconds"
