@@ -6,6 +6,19 @@
 	<br>
 </h1>
 
+> ## ⚠️ Project Deprecated
+>
+> After observing the market for many years since the last update, I’ve decided to officially deprecate **Puppetry**.  
+>
+> Over time, it became clear that [Playwright](https://playwright.dev/) has evolved to cover almost everything I originally aimed to achieve with this project — and they do it much better. The idea of **codeless end-to-end testing**, while exciting at the time, has proven to be a technological dead end.  
+>
+> Today, with the rise of **AI-assisted development**, it’s possible to create robust end-to-end tests simply by narrating what you want to achieve — something that goes far beyond the original Puppetry vision.  
+>
+> I’m keeping this repository available as an example and a part of the project’s history. Thank you to everyone who supported and used Puppetry over the years.  
+>
+> — *Dmitry Sheiko*
+
+
 [![Build Status](https://travis-ci.org/dsheiko/puppetry.png)](https://travis-ci.org/dsheiko/puppetry)
 [![Gitter chat](https://badges.gitter.im/dsheiko/gitter.png)](https://gitter.im/dsheiko/puppetry)
 [<img src="https://img.shields.io/badge/slack-puppetry.app-yellow.svg?logo=slack">](https://puppetry-app.slack.com)
