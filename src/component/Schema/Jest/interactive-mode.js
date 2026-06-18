@@ -1,17 +1,5 @@
-import { getSchema } from "component/Schema/schema";
-
-function buildAddon( record ) {
-  try {
-    const schema = getSchema( record.target === "page" ? "page" : "target", record.method ),
-          val = typeof schema.toLabel === "function" ? schema.toLabel( record ) : "";
-
-    return val
-      .replace( /\n/gm, " " )
-      .replace( /`/g, " " )
-      .replace( /"/g, "" );
-  } catch ( err ) {
-    console.warn( `Renderer process: CommandRowLabel::buildTargetAddon: ${ err }` );
-  }
+function buildAddon() {
+  return "";
 }
 
 function renderRef( ref, snippets ) {

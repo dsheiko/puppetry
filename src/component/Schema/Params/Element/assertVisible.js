@@ -41,11 +41,6 @@ export const assertVisible = {
     `// Asserting that ${ command.target } element is visible`
   ),
 
-  toLabel: ( command ) => {
-    const { assert } = migrateAssertVisible( command );
-    return `(${ visibleObjToString( assert ) })`;
-  },
-
   toGherkin: ( command ) => {
     const { target, assert } = migrateAssertVisible( command );
     return `Assert that target \`${ target }\` is ${ visibleObjToString( assert ) }`;

@@ -8,7 +8,6 @@ export const toggleClass = {
   ( el, className, toggle ) => el.classList.toggle( className, toggle ), `
     + `"${ command.params.name }", ${ command.params.toggle === "add" ? "true" : "false" } )` ),
 
-  toLabel: ({ params }) => `(${ params.toggle } \`${ params.name }\`)`,
   toGherkin: ({ target, params }) => `${ params.toggle === "add" ? "Add" : "Remove" }
     class \`${ params.name }\` to element \`${ target }\``,
   commonly: "toggle class",

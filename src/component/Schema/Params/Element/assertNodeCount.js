@@ -10,9 +10,6 @@ export const assertNodeCount = {
     `// Asserting that number of child elements matching "${ command.params.selector }" satisfies the given constraint`
   ),
 
-  toLabel: ({ params, assert }) =>
-    `(has ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value } \` elements matching \`${ params.selector }\`)`,
-
   toGherkin: ({ target, params, assert }) => `Assert that target \`${ target }\`
     has ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }\`
     nested elements matching \`${ params.selector }\``,

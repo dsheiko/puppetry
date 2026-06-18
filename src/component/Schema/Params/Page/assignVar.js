@@ -11,7 +11,6 @@ export const assignVar = {
   },
 
 
-  toLabel: ({ params }) => `(\`${ params.name }\`, \`${ params.value }\`)`,
   toGherkin: ({ params }) => `Set value \`${ params.value }\` to template variable ${ params.name }`,
 
   commonly: "set template variable dynamically",

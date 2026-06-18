@@ -51,10 +51,6 @@ await bs.page.keyboard.press( "${ key }" );
 ${ renderModifiers( "up" ) }` );
   },
 
-  toLabel: ({ params }) => {
-    return `(\`${ getKeyName( params ) }\`)`;
-  },
-
   toGherkin: ({ params }) => `Emulate pressing key \`${ getKeyName( params ) }\``,
 
 

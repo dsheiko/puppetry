@@ -27,7 +27,6 @@ export const setCookie = {
   },
 
 
-  toLabel: ({ params }) => `(\`${ params.name }\`, \`${ params.value }\`)`,
   toGherkin: ({ params }) => `Set page cookie \`${ params.name }\` = \`${ params.value }\``,
   commonly: "set page cookies",
 

@@ -15,11 +15,6 @@ export const assertStyle = {
       + `value of ${ command.target } satisfies the given constraint`
   ),
 
-  toLabel: ({ params, assert }) => {
-    return `(${ params.name + ( params.pseudo || "" ) } `
-          + `${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )})`;
-  },
-
   toGherkin: ({ target, params, assert }) => `Assert that
   \`${ params.name + ( params.pseudo || "" ) }\`
     computed style property of  \`${ target }\`

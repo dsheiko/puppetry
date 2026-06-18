@@ -11,7 +11,6 @@ await bs.page.evaluate(( x, y ) => {
 }, ${ parseInt( x, 10 ) }, ${ parseInt( y, 10 ) });` );
   },
 
-  toLabel: ({ params }) => `(x: \`${ params.x }px\`, y: \`${ params.y }px\`)`,
   toGherkin: ({ params }) => `Scroll the page by \`${ params.x }px\` horizontally and \`${ params.y }px\` vertically`,
   commonly: "",
 

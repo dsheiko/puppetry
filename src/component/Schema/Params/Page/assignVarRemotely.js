@@ -19,7 +19,6 @@ export const assignVarRemotely = {
   },
 
 
-  toLabel: ({ params }) => `(\`${ params.name }\` with \`${  params.url }\`)`,
   toGherkin: ({ params }) => `Set template variable \`${ params.name }\` with webhook \`${  params.url }\``,
   commonly: "set template variable with webhook",
 

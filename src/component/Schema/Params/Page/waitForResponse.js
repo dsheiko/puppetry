@@ -22,10 +22,6 @@ if ( ${ skip ? `!bs.performance.resources.find( item =>  item.url.includes( sear
 }` );
   },
 
-  toLabel: ({ params }) => {
-    return `(\`${ params.value }\`, timeout \`${ params.timeout }ms)`;
-  },
-
   toGherkin: ({ params }) => `Wait for response \`${ params.value }\`
     with timeout \`${ params.timeout }ms\`${ params.skip ? `, skip when already responded` : `` }`,
 

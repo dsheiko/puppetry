@@ -17,8 +17,6 @@ export const upload = {
       await ( ${ renderTarget( target ) } ).uploadFile( result );`;
   },
 
-  toLabel: ({ params }) => ( params.name && params.size )
-    ? `(\`${ params.name }\` of \`${ params.size }kB\` size)` : `(\`${ params.path }\`)`,
   toGherkin: ({ target, params }) => ( params.name && params.size )
     ? `Attach file \`${ params.name }\` of \`${ params.size }kB\` size to file input \`${ target }\``
     : `Attach file \`${ params.path }\` to file input \`${ target }\``,

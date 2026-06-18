@@ -53,9 +53,6 @@ ${ intercept }`
   NOTE: The method automatically assigns the response text data to template variable \`PUPPETRY_LAST_RESPONSE_TEXT\``,
   commonly: "make request and assert response",
 
-  toLabel: ({ params, assert }) => `(\`${ params.method || "GET" } ${ params.url }\``
-    + ` ${ renderConstraints( assert, ", " ) })`,
-
   toGherkin: ({ params, assert }) => `Make request \`${ params.method || "GET" } ${ params.url }\` `
     + `${ renderConstraints( assert, ` and assert that response has ` ) }`,
 

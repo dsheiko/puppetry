@@ -34,7 +34,7 @@ export class GeneralPane extends AbstractComponent {
       }
       this.props.action.saveSettings({
         autosave: values.autosave,
-        testCaseStyle: values.testCaseStyle
+        testCaseStyle: "gherkin"
       });
       message.info( `Data has been successfully updated` );
     });
@@ -56,25 +56,6 @@ export class GeneralPane extends AbstractComponent {
             valuePropName: ( autosave ? "checked" : "data-ok" )
           })(
             <Checkbox onChange={ this.onChange }>save changes automatically</Checkbox>
-          )}
-        </FormItem>
-
-
-        <FormItem { ...FIELDSET_DEFAULT_LAYOUT } className="ant-form-item--layout" label="Test case style">
-          { getFieldDecorator( "testCaseStyle", {
-            initialValue: result( settings, "testCaseStyle", "gherkin" )
-          })(
-            <Select
-              showSearch
-              style={{ maxWidth: 200 }}
-              onChange={ this.onChange }
-              optionFilterProp="children"
-              filterOption={( input, option ) => option.props.children.toLowerCase()
-                .indexOf( input.toLowerCase() ) >= 0}
-            >
-              <Option key={ 1 } value="declarative">Declarative</Option>
-              <Option key={ 2 } value="gherkin">Gherkin</Option>
-            </Select>
           )}
         </FormItem>
 

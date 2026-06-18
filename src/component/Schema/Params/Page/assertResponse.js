@@ -45,10 +45,6 @@ await bs.network.waitUntilResolved();`
   description: `Asserts that the HTTP/S response satisfies the given constraint`,
   commonly: "assert HTTP/S response",
 
-  toLabel: ({ assert }) => `(${ renderBoolean( assert.not ) === "true" ? "none" : "any" } `
-  + ` like \`${ assert.method || "GET" } ${ assert.url }\`,`
-    + ` ${ renderConstraints( assert ) })`,
-
   toGherkin: ({ assert }) => `Assert there were ${ assert.not === "true" ? "NO" : "" } requests like `
     + `\`${ assert.method || "GET" } ${ assert.url }\``
     + `${ renderConstraints( assert, " with response like " ) }`,

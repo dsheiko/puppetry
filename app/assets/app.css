@@ -696,6 +696,10 @@ margin: 16px 16px 16px 16px;
   margin: -16px -16px -17px 0;
 }
 
+#cTestTable .ant-table-expanded-row > td > .ant-table-wrapper {
+  width: auto;
+}
+
 .container--editable-cell {
   padding-right: 24px;
 }

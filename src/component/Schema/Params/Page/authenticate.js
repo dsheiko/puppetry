@@ -12,7 +12,6 @@ export const authenticate = {
       await bs.page.authenticate(${ JSON.stringify( options ) });`;
   },
 
-  toLabel: ({ params }) => `(username: \`${ params.username }\`, password: \`****\`)`,
   toGherkin: ({ params }) => `Authenticate
     username: \`${ params.username }\` and password: \`****\``,
   commonly: "authenticate",

@@ -12,7 +12,6 @@ await bs.page.$eval( '${ command.targetSeletor }',  ( el, x, y ) => {
 }, ${ parseInt( x, 10 ) }, ${ parseInt( y, 10 ) } );` );
   },
 
-  toLabel: ({ params }) => `(x: \`${ params.x }px\`, y: \`${ params.y }px\`)`,
   toGherkin: ({ target, params }) => `Scroll \`${ target }\`
     by \`${ params.x }px\` horizontally and \`${ params.y }px\` vertically`,
   commonly: "",

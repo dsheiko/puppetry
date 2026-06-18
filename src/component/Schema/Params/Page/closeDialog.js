@@ -1,14 +1,4 @@
-import { truncate } from "service/utils";
 import { INPUT, SELECT } from "../../constants";
-
-function getOptionsString( params ) {
-  const options = [];
-  options.push( params.action );
-  options.push( `\`${ params.type }\`` );
-  params.substring && options.push( `with \`${ truncate( params.substring, 60 ) }\`` );
-  return options.join( " " );
-}
-
 
 export const closeDialog = {
 
@@ -33,7 +23,6 @@ as they are called
 **NOTE**: the step must be defined before the expected dialog event`,
   commonly: "dismiss/accept dialog",
 
-  toLabel: ({ params }) => `(${ getOptionsString( params ) })`,
   toGherkin: ({ params }) => `Listen to dialog events and ${ params.action } any dialog
     of type \`${ params.type }\` ${ params.substring ? `with \`${ params.substring }\`` : `` }`
     + ( params.promptText  ? ` and type in it \`${ params.promptText }\`` : `` ),

@@ -27,10 +27,6 @@ await bs.page.${ ( typeof window !== "undefined" && validateSimpleSelector( para
     + `( ${ JSON.stringify( params.value ) }${ optArg } );` );
   },
 
-  toLabel: ({ params }) => {
-    return `(\`${ params.value }\` ${ renderState( params ) })`;
-  },
-
   toGherkin: ({ params }) => `Wait until element \`${ params.value }\`
      ${ renderState( params ) } with timeout \`${ params.timeout }ms\``,
 

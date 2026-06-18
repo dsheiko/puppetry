@@ -12,7 +12,6 @@ export const emulate = {
       await bs.page.emulate( devices[ "${ params.device }" ] );
   `,
 
-  toLabel: ({ params }) => `(\`${ params.device }\`)`,
   toGherkin: ({ params }) => `Emulate device \`${ params.device }\``,
   commonly: "emulate device",
 

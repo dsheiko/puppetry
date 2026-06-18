@@ -39,7 +39,6 @@ export const screenshot = {
   `;
   },
 
-  toLabel: ({ params }) => `(\`${ params.name }\`)`,
   commonly: "make screenshot",
 
   toGherkin: ({ target, params }) => `Take screenshot \`${ params.name }\` of \`${ target }\``,

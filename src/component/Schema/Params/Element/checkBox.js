@@ -13,7 +13,6 @@ export const checkBox = {
     }, `
     + `"${ params.checked }" );` ),
 
-  toLabel: ({ params }) => `(\`${ params.checked === "true" ? "checked" : "unchecked" }\`)`,
   toGherkin: ({ target, params }) => `Set checkbox \`${ target }\` ${ params.checked === "true" ? "on" : "off" }`,
 
   commonly: "toggle checkbox/radio",

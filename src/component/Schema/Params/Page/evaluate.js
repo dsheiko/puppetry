@@ -16,7 +16,6 @@ await bs.page.evaluate(() => {
 });` );
   },
 
-  toLabel: ({ params }) => `(\`${ sanitize( params.value ) }\`)`,
   toGherkin: ({ params }) => `Evaluate JavaScript in the page context: \`${ sanitize( params.value ) }\``,
   commonly: "evaluate JavaScript in the page context",
 

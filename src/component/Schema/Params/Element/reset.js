@@ -12,7 +12,6 @@ export const reset = {
     el.value = "";
   }
 });` ),
-  toLabel: () => ``,
   toGherkin: ({ target }) => `Reset form/input \`${ target }\``,
   commonly: "reset input or form",
   description: `Resets the input or form element`,

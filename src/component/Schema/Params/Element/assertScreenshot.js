@@ -33,7 +33,6 @@ export const assertScreenshot = {
     );
   },
 
-  toLabel: ({ params }) => `(\`${ params.name }\`)`,
   toGherkin: ({ params }) => `Asserts that screenshot \`${ params.name }\`
     of the target matches already approved one`,
 

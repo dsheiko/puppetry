@@ -10,7 +10,6 @@ export const assertUrl = {
   ),
 
 
-  toLabel: ({ assert }) => `(${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value }\`)`,
   toGherkin: ({ assert }) => `Assert that
     page URL ${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value }\``,
 

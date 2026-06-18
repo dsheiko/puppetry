@@ -5,7 +5,6 @@ export const hover = {
   template: ({ target }) => justify(
     `// Emulating element hover\n`
     + `await ( ${ renderTarget( target ) } ).hover();` ),
-  toLabel: () => ``,
   toGherkin: ({ target }) => `Hover \`${ target }\``,
   commonly: "",
   description: `Scrolls element into view if needed, and then hovers over the center of the element`,

@@ -1,6 +1,6 @@
 import { INPUT_NUMBER, SELECT } from "../../constants";
 import { isEveryValueMissing } from "service/utils";
-import { renderClick, renderTarget } from "service/utils";
+import { renderTarget } from "service/utils";
 
 export const click = {
   template: ({ target, params }) => {
@@ -14,7 +14,6 @@ export const click = {
       await ( ${ renderTarget( target ) } ).click(${optArg});`;
   },
 
-  toLabel: ({ params }) => `(${ renderClick( params ) })`,
   commonly: "",
   toGherkin: ({ target, params }) => `${ parseInt( params.clickCount, 10 ) === 2
     ? "Double-click" : "Click" } on \`${ target }\``,

@@ -11,9 +11,6 @@ export const assertProperty = {
       + `value of ${ command.target } satisfies the given constraint`
   ),
 
-  toLabel: ({ params, assert }) => `(\`${ params.name }\``
-    + ` ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )})`,
-
   toGherkin: ({ target, params, assert }) => `Assert that property \`${ params.name }\` of \`${ target }\`
     ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )}`,
 

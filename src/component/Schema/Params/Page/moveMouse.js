@@ -8,7 +8,6 @@ export const moveMouse = {
       await bs.page.mouse.move( ${ x }, ${ y } );`;
   },
 
-  toLabel: ({ params }) => `(x: \`${ params.x }px\`, y: \`${ params.y }px\`)`,
   toGherkin: ({ params }) => `Move mouse on the page to x = \`${ params.x }px\`, y = \`${ params.y }px\``,
   commonly: "move mouse",
 

@@ -6,7 +6,6 @@ export const waitFor = {
       await bs.page.waitFor( ${params.value} );
   `,
 
-  toLabel: ({ params }) => `(\`${ params.value }ms\`)`,
   toGherkin: ({ params }) => `Wait for \`${ params.value }ms\``,
   commonly: "wait for timeout",
 

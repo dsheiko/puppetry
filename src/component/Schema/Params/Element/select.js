@@ -6,7 +6,6 @@ export const select = {
     `// Emulating select\n`
     + `await bs.page.select( "${ targetSeletor }", "${ params.value }" );` ),
 
-  toLabel: ({ params }) => `(\`${ params.value }\`)`,
   toGherkin: ({ target, params }) => `Select \`${ params.value }\` in \`${ target }\``,
   commonly: "",
 

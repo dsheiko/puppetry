@@ -71,8 +71,6 @@ NOTE: As soon as a matching request intercepted the session gets detached,
 meaning Puppetry stop listening for mocking. You have to set \`page.mockRequest\`
 before every request that you want to mock.`,
 
-  toLabel: ({ params }) => `(\`${ params.method || "GET" } ${ params.url }\` => \`${ params.statusCode }\`,`
-    + `\`${ params.contentType }\`, \`${ params.bodyPath ? params.bodyPath : params.body }\`)`,
   commonly: "mock request",
 
   toGherkin: ({ params }) => `Listen for the next request like `

@@ -6,7 +6,6 @@ export const focus = {
     `// Focusing the element\n`
     + `await ( ${ renderTarget( target ) } ).focus();` ),
 
-  toLabel: () => ``,
   toGherkin: ({ target }) => `Focus on \`${ target }\``,
   commonly: "",
 

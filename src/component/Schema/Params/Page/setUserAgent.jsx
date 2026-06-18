@@ -28,7 +28,6 @@ export const setUserAgent = {
 
   description: "Set custom UserAgent",
 
-  toLabel: ({ params }) => `(\`${ params.value }\`)`,
   commonly: "set user-agent",
 
   toGherkin: ({ params }) => `Set custom UserAgent \`${ params.value }\``,

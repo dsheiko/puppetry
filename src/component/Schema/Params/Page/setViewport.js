@@ -13,9 +13,6 @@ export const setViewport = {
       });
   `,
 
-  toLabel: ({ params }) => `(\`${ params.width }x${ params.height }\`,`
-       + ` \`x${ params.deviceScaleFactor || 1 }\`${ params.isLandscape ? `, \`landscape\`` : "" })`,
-
   toGherkin: ({ params }) => `Set browser viewport as \`${ params.width }x${ params.height }\`,`
        + ` \`x${ params.deviceScaleFactor || 1 }\`${ params.isLandscape ? `, \`landscape\`` : "" }`,
 

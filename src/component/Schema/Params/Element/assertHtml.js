@@ -9,9 +9,6 @@ export const assertHtml = {
     `// Asserting that HTML content of the focused element satisfies the given constraint`
   ),
 
-  toLabel: ({ assert }) => {
-    return `(${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )})`;
-  },
   toGherkin: ({ target, assert }) => `Assert that HTML content of \`${ target }\`
     ${ normalizeAssertionVerb( assert.assertion ) }${ normalizeAssertionValue( assert )}`,
 

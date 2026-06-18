@@ -49,8 +49,6 @@ or [gtag.js](https://developers.google.com/analytics/devguides/collection/gtagjs
 We also assert that sent payloads are valid according to the Google API`,
   commonly: "assert GA tracking",
 
-  toLabel: ({ assert }) => `(\`${ renderLabel( assert ) }\` ${ renderParams( assert, "with" ) })`,
-
   toGherkin: ({ assert }) => `Assert that
     \`${ renderLabel( assert ) }\` data were sent to Google Analytics ${ renderParams( assert, "with" ) }`,
 

@@ -9,7 +9,6 @@ export const assertTitle = {
     `// Asserting that page title satisfies the given constraint`
   ),
 
-  toLabel: ({ assert }) => `(${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value }\`)`,
   toGherkin: ({ assert }) => `Assert that
     page title ${ normalizeAssertionVerb( assert.assertion ) } \`${  assert.value }\``,
 

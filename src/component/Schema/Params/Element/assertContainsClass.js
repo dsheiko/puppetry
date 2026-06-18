@@ -13,9 +13,6 @@ export const assertContainsClass = {
       + `value exists in ${ command.target } class attribute`
   ),
 
-  toLabel: ({ params, assert }) => `(${ assert.assertion === "hasClass"
-    ? "contains": "does not contain" } \`${ params.name }\`)`,
-
   toGherkin: ({ target, params, assert }) => `Assert that \`${ target }\`
     ${ assert.assertion === "hasClass" ? "contains": "does not contain" } class \`${ params.name }\``,
 

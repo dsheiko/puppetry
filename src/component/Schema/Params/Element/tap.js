@@ -5,7 +5,6 @@ export const tap = {
   template: ({ target }) => justify(
     `// Tap the element\n`
     + `await ( ${ renderTarget( target ) } ).tap();` ),
-  toLabel: () => ``,
   toGherkin: ({ target }) => `Tap \`${ target }\``,
   commonly: "",
   description: `Taps the element`,

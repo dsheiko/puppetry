@@ -18,8 +18,6 @@ export const assertPosition = {
     `// Asserting that the bounding box of the element satisfies the given constraint`
   ),
 
-  toLabel: ({ assert }) => `(is ${ assertToLabel( assert ) })`,
-
   toGherkin: ({ target, assert }) => `Assert that target \`${ target }\`
     is located ${ assertToLabel( assert ) }`,
 

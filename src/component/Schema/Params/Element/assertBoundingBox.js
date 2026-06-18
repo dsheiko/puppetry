@@ -25,10 +25,6 @@ export const assertBoundingBox = {
     `// Asserting that the bounding box of the element satisfies the given constraint`
   ),
 
-  toLabel: ({ assert }) => {
-    return `(${ assertsToLabel( assert ) })`;
-  },
-
   toGherkin: ({ target, assert }) => `Assert that size and position of \`${ target }\`
     comply ${ assertsToLabel( assert ) }`,
 

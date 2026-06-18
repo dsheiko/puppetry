@@ -12,9 +12,6 @@ export const assertScroll = {
       + `satisfies the given constraint`
   ),
 
-  toLabel: ({ params, assert }) =>
-    `(\`${ params.direction }\` by ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }px\`)`,
-
   toGherkin: ({ target, params, assert }) => `Assert that target \`${ target }\`
     is scrolled \`${ params.direction }\` by ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }px\``,
 

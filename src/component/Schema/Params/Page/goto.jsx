@@ -34,7 +34,6 @@ export const goto = {
 
   description: "Navigates to a given URL and waits until the page loaded",
 
-  toLabel: ({ params }) => `(\`${ params.url }\`)`,
   commonly: "visit page",
 
   toGherkin: ({ params }) => `Visit \`${ params.url }\``,

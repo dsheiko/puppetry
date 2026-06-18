@@ -11,9 +11,6 @@ export const assertScroll = {
     `// Asserting that window scroll offset satisfies the given constraint`
   ),
 
-  toLabel: ({ params, assert }) =>
-    `(\`${ params.direction }\` by ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }px\`)`,
-
   toGherkin: ({ params, assert }) => `Assert that page
     is scrolled \`${ params.direction }\` by ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }px\``,
 

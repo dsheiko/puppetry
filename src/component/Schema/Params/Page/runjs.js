@@ -17,7 +17,6 @@ ${ value }
   },
 
 
-  toLabel: ({ params }) => `(\`${ sanitize( params.value ) }\`)`,
   toGherkin: ({ params }) => `Run JavaScript: \`${ sanitize( params.value ) }\``,
 
   commonly: "run custom JavaScript in the suite",

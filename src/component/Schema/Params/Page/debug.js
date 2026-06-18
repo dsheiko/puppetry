@@ -9,7 +9,6 @@ await bs.page.evaluate(() => {
 });` );
   },
 
-  toLabel: () => ``,
   toGherkin: () => `Stop execution and call DevTools`,
   commonly: "stop execution and call DevTools",
 

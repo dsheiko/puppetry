@@ -18,9 +18,6 @@ export const assertDialog = {
   description: `Asserts there was called a dialog (alert, beforeunload, confirm or prompt).`,
   commonly: "assert dialog",
 
-  toLabel: ({ assert }) => `(${ renderBoolean( assert.not ) === "true" ? "none" : "any" }
-    of type \`${ assert.type }\` with \`${ assert.value }\`${ assert.reset !== false ? "and flush stack" : "" })`,
-
   toGherkin: ({ assert }) => `Assert that there were
     called ${ renderBoolean( assert.not ) === "true" ? "no" : "any" } dialogs
     of type \`${ assert.type }\` with \`${ assert.value }\`${ assert.reset !== false ? "and flush stack" : "" }`,
