@@ -63,15 +63,13 @@ export default class TextConvertor {
           recordLabel = `${ testRecLabel }${ this.commandRecLabels[ testRecLabel ] }.`;
 
     this.onCommand && this.onCommand( command, recordLabel );
-
-    if ( typeof schema.toGherkin === "function" ) {
-      this.print( `${ recordLabel } ${ printGherkin( extendToGherkin( command, schema.toGherkin( command ) ) ) }`, 3 );
-    } else {
-      if ( command.waitForTarget ) {
-        this.print( `${ recordLabel } ${ command.target }.waitForTarget()`, 3 );
-      }
-      this.print( `${ recordLabel } ${ command.target }.${ command.method }()`, 3 );
+    
+    if ( typeof schema.toGherkin !== "function" ) {
+      console.error( `Schema for ${ command.target }.${ command.method } is missing toGherkin` );
+      return;
     }
+    this.print( `${ recordLabel } ${ printGherkin( extendToGherkin( command, schema.toGherkin( command ) ) ) }`, 3 );
+   
     if ( command.comment ) {
       this.print( `▷ ${ command.comment }`, 4 );
     }
