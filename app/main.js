@@ -1,4 +1,11 @@
 
+// WSL2/Linux: disable GPU and sandbox before Chromium initializes renderer processes
+if ( process.platform === "linux" ) {
+  const { app: _app } = require( "electron" );
+  _app.commandLine.appendSwitch( "disable-gpu" );
+  _app.commandLine.appendSwitch( "no-sandbox" );
+}
+
 const electron = require( "electron" ),
       { session, protocol, app, BrowserWindow } = electron,
       path = require( "path" ),
