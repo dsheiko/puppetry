@@ -5,11 +5,20 @@ import ErrorBoundary from "component/ErrorBoundary";
 import { ConfigForm } from "./ConfigForm";
 import { RemoteForm } from "./RemoteForm";
 import LearnMore from "component/Global/LearnMore";
+import { connect } from "react-redux";
 
+const mapStateToProps = ( state ) => ({
+  git:              state.git,
+  projectDirectory: state.settings.projectDirectory
+});
+
+@connect( mapStateToProps )
 export class GitPane extends AbstractComponent {
 
   static propTypes = {
-    action: PropTypes.object.isRequired
+    action:          PropTypes.object.isRequired,
+    git:             PropTypes.object,
+    projectDirectory: PropTypes.string
   }
 
   render() {

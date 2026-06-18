@@ -43,6 +43,14 @@ export class TestTable extends AbstractEditableTable {
 
   model = "Test";
 
+  shouldComponentUpdate( nextProps, nextState ) {
+    if ( this.state !== nextState ) return true;
+    if ( this.props.tests !== nextProps.tests ) return true;
+    if ( this.props.targets !== nextProps.targets ) return true;
+    if ( this.props.expanded !== nextProps.expanded ) return true;
+    return false;
+  }
+
   onExpand = ( isExpanded, record ) => {
     const expanded = { ...this.props.expanded };
     expanded[ record.id ] = {

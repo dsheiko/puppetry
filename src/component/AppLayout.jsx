@@ -38,12 +38,49 @@ import If from "component/Global/If";
 
 
 const { Sider } = Layout,
-      // Mapping state to the props
       mapStateToProps = ( state ) => ({
-        store: state,
-        cleanSnippets: selectors.getCleanSnippetsMemoized( state )
+        loading:                 state.app.loading,
+        tabs:                    state.app.tabs,
+        commandModal:            state.app.commandModal,
+        snippetModal:            state.app.snippetModal,
+        newProjectModal:         state.app.newProjectModal,
+        openProjectModal:        state.app.openProjectModal,
+        openSuiteModal:          state.app.openSuiteModal,
+        saveSuiteAsModal:        state.app.saveSuiteAsModal,
+        saveProjectAsModal:      state.app.saveProjectAsModal,
+        newSuiteModal:           state.app.newSuiteModal,
+        alert:                   state.app.alert,
+        testReportModal:         state.app.testReportModal,
+        exportProjectModal:      state.app.exportProjectModal,
+        readyToRunTests:         state.app.readyToRunTests,
+        gitDetachedHeadState:    state.app.gitDetachedHeadState,
+        gitLogs:                 state.app.gitLogs,
+        gitCommitModal:          state.app.gitCommitModal,
+        gitSyncModal:            state.app.gitSyncModal,
+        gitCheckoutModal:        state.app.gitCheckoutModal,
+        gitCloneModal:           state.app.gitCloneModal,
+        editTargetsAsCsvModal:   state.app.editTargetsAsCsvModal,
+        editProjectModal:        state.app.editProjectModal,
+        editEnvironmentsModal:   state.app.editEnvironmentsModal,
+        appLightbox:             state.app.appLightbox,
+        lightbox:                state.app.lightbox,
+        installRuntimeTestModal: state.app.installRuntimeTestModal,
+        environment:             state.app.environment,
+        projectFiles:            state.app.project.files,
+        projectDirectory:        state.settings.projectDirectory,
+        exportDirectory:         state.settings.exportDirectory,
+        projects:                state.settings.projects,
+        suiteFilename:           state.suite.filename,
+        suiteModified:           state.suite.modified,
+        suiteTargets:            state.suite.targets,
+        projectName:             state.project.name,
+        projectSavedAt:          state.project.savedAt,
+        projectEnvironments:     state.project.environments,
+        git:                     state.git,
+        snippets:                state.snippets,
+        project:                 state.project,
+        cleanSnippets:           selectors.getCleanSnippetsMemoized( state )
       }),
-      // Mapping actions to the props
       mapDispatchToProps = () => ({
       });
 
@@ -59,24 +96,75 @@ export class AppLayout extends React.Component {
   }
 
   static propTypes = {
-    action: PropTypes.object.isRequired,
-    store: PropTypes.object.isRequired,
-    selector: PropTypes.object.isRequired,
-    cleanSnippets: PropTypes.object.isRequired
+    action:                  PropTypes.object.isRequired,
+    selector:                PropTypes.object.isRequired,
+    cleanSnippets:           PropTypes.object.isRequired,
+    loading:                 PropTypes.bool,
+    tabs:                    PropTypes.object,
+    commandModal:            PropTypes.object,
+    snippetModal:            PropTypes.object,
+    alert:                   PropTypes.object,
+    lightbox:                PropTypes.object,
+    git:                     PropTypes.object,
+    project:                 PropTypes.object,
+    snippets:                PropTypes.object,
+    projectFiles:            PropTypes.array,
+    gitLogs:                 PropTypes.array,
+    projectEnvironments:     PropTypes.array,
+    projectDirectory:        PropTypes.string,
+    exportDirectory:         PropTypes.string,
+    suiteFilename:           PropTypes.string,
+    projectName:             PropTypes.string,
+    environment:             PropTypes.string,
+    suiteTargets:            PropTypes.object,
+    projects:                PropTypes.object,
+    suiteModified:           PropTypes.bool,
+    readyToRunTests:         PropTypes.bool,
+    gitDetachedHeadState:    PropTypes.bool,
+    appLightbox:             PropTypes.bool,
+    newProjectModal:         PropTypes.bool,
+    openProjectModal:        PropTypes.bool,
+    openSuiteModal:          PropTypes.bool,
+    saveSuiteAsModal:        PropTypes.bool,
+    saveProjectAsModal:      PropTypes.bool,
+    newSuiteModal:           PropTypes.bool,
+    testReportModal:         PropTypes.bool,
+    exportProjectModal:      PropTypes.bool,
+    gitCommitModal:          PropTypes.bool,
+    gitSyncModal:            PropTypes.bool,
+    gitCheckoutModal:        PropTypes.bool,
+    gitCloneModal:           PropTypes.bool,
+    editTargetsAsCsvModal:   PropTypes.bool,
+    editProjectModal:        PropTypes.bool,
+    editEnvironmentsModal:   PropTypes.bool,
+    installRuntimeTestModal: PropTypes.bool,
+    projectSavedAt:          PropTypes.number
   }
 
   render() {
-    const { action, store, selector, cleanSnippets } = this.props,
-          { projectDirectory, exportDirectory } = store.settings,
-          { commandModal, snippetModal, tabs } = store.app,
+    const { action, selector, cleanSnippets,
+            loading, tabs, commandModal, snippetModal,
+            projectDirectory, exportDirectory, projects,
+            suiteFilename, suiteModified, suiteTargets,
+            projectName, projectSavedAt, projectEnvironments,
+            projectFiles, readyToRunTests, gitDetachedHeadState,
+            git, snippets, project, environment,
+            alert, appLightbox, lightbox, gitLogs,
+            gitCommitModal, gitSyncModal, gitCheckoutModal, gitCloneModal,
+            newProjectModal, openProjectModal, openSuiteModal,
+            saveSuiteAsModal, saveProjectAsModal, newSuiteModal,
+            testReportModal, exportProjectModal,
+            editTargetsAsCsvModal, editProjectModal, editEnvironmentsModal,
+            installRuntimeTestModal
+          } = this.props,
           tabsAnyTrue = Object.keys( tabs.available ).some( key => tabs.available[ key ]);
 
     return (
       <ErrorBoundary>
-        <Spin spinning={store.app.loading} size="large">
+        <Spin spinning={ loading } size="large">
           <Layout className={classNames({
             layout: true,
-            "is-loading": store.app.loading,
+            "is-loading": loading,
             "has-sticky-tabs-panel": tabs.active
               && ( tabs.active === "suite" || tabs.active === "settings" )
 
@@ -103,53 +191,41 @@ export class AppLayout extends React.Component {
 
               <MainMenu
                 action={ action }
-                isProjectEmpty={ !store.app.project.files.length }
-                isSuiteOpen={ !!store.suite.filename }
+                isProjectEmpty={ !projectFiles.length }
+                isSuiteOpen={ !!suiteFilename }
                 projectDirectory={ projectDirectory }
                 isProjectOpen={ !!projectDirectory }
-                suiteModified={ !!store.suite.modified }
-                readyToRunTests={ !!store.app.readyToRunTests }
-                gitDetachedHeadState={ !!store.app.gitDetachedHeadState }
-                gitConfigUsername={ store.git.configUsername }
-                gitConfigEmail={ store.git.configEmail }
-                isGitInitialized={ !!store.git.initialized }
-                hasGitRemote={ !!store.git.hasRemote }
+                suiteModified={ !!suiteModified }
+                readyToRunTests={ !!readyToRunTests }
+                gitDetachedHeadState={ !!gitDetachedHeadState }
+                gitConfigUsername={ git.configUsername }
+                gitConfigEmail={ git.configEmail }
+                isGitInitialized={ !!git.initialized }
+                hasGitRemote={ !!git.hasRemote }
               />
 
-              { store.app.project.files.length && <ProjectExplorer
-                projectDirectory={ store.settings.projectDirectory }
-                projects={ store.settings.projects }
-                suiteModified={ store.suite.modified }
-                files={ store.app.project.files }
-                active={ store.suite.filename }
+              { projectFiles.length && <ProjectExplorer
+                projectDirectory={ projectDirectory }
+                projects={ projects }
+                suiteModified={ suiteModified }
+                files={ projectFiles }
+                active={ suiteFilename }
                 action={ action } /> }
 
             </Sider>
             <Layout>
-              <Toolbar projectName={ store.project.name } suiteModified={ store.suite.modified } action={ action } />
+              <Toolbar projectName={ projectName } suiteModified={ suiteModified } action={ action } />
 
               <div className="layout-content">
 
                 <If exp={ tabsAnyTrue }>
-                  <TabGroup action={ action }
-                    projectDirectory={ store.settings.projectDirectory }
-                    app={ store.app }
-                    suiteModified={ store.suite.modified }
-                    suiteSnippets={ store.suite.snippets }
-                    suiteTargets={ store.suite.targets }
-                    suiteFilename={ store.suite.filename }
-                    suiteTitle={ store.suite.description || store.suite.title }
-                    project={ store.project }
-                    snippets={ store.snippets }
-                    git={ store.git }
-                    settings={ store.settings }
-                    selector={ selector } />
+                  <TabGroup action={ action } selector={ selector } />
                 </If>
                 <If exp={ !tabsAnyTrue }>
                   { projectDirectory ? ( <Info action={ action }
-                    projectFiles={ store.app.project.files }
-                    projectName={ store.project.name }
-                    projectDirectory={ store.settings.projectDirectory }
+                    projectFiles={ projectFiles }
+                    projectName={ projectName }
+                    projectDirectory={ projectDirectory }
                   /> )
                     : ( <Welcome action={ action } projectDirectory={ projectDirectory } /> )
                   }
@@ -167,64 +243,64 @@ export class AppLayout extends React.Component {
 
         <NewProjectModal
           action={action}
-          isVisible={store.app.newProjectModal}
-          projectName={ store.project.name }
+          isVisible={ newProjectModal }
+          projectName={ projectName }
           projectDirectory={ projectDirectory } />
 
         <OpenProjectModal
           action={action}
-          isVisible={store.app.openProjectModal}
+          isVisible={ openProjectModal }
           projectDirectory={ projectDirectory } />
 
         <OpenSuiteModal
           action={action}
           projectDirectory={ projectDirectory }
-          suiteModified={ store.suite.modified }
-          files={ store.app.project.files }
-          active={ store.suite.filename }
-          isVisible={store.app.openSuiteModal} />
+          suiteModified={ suiteModified }
+          files={ projectFiles }
+          active={ suiteFilename }
+          isVisible={ openSuiteModal } />
 
         <SaveSuiteAsModal
           action={action}
-          isVisible={store.app.saveSuiteAsModal}
-          files={ store.app.project.files }
-          filename={ store.suite.filename } />
+          isVisible={ saveSuiteAsModal }
+          files={ projectFiles }
+          filename={ suiteFilename } />
 
         <SaveProjectAsModal
           action={action}
-          isVisible={store.app.saveProjectAsModal}
-          files={ store.app.project.files }
-          filename={ store.suite.filename } />
+          isVisible={ saveProjectAsModal }
+          files={ projectFiles }
+          filename={ suiteFilename } />
 
         <NewSuiteModal
           action={action}
-          isVisible={store.app.newSuiteModal} />
+          isVisible={ newSuiteModal } />
 
 
         <AlertMessageModal action={action}
-          isVisible={ store.app.alert.visible }
-          alert={ store.app.alert } />
+          isVisible={ alert.visible }
+          alert={ alert } />
 
         <TestReportModal
           action={action}
-          currentSuite={ store.suite.filename }
-          files={ store.app.project.files }
-          isVisible={store.app.testReportModal}
-          snippets={ store.snippets }
-          environment={ store.app.environment }
-          project={ store.project } />
+          currentSuite={ suiteFilename }
+          files={ projectFiles }
+          isVisible={ testReportModal }
+          snippets={ snippets }
+          environment={ environment }
+          project={ project } />
 
         <ExportProjectModal action={action}
-          currentSuite={ store.suite.filename }
-          files={ store.app.project.files }
+          currentSuite={ suiteFilename }
+          files={ projectFiles }
           exportDirectory={ exportDirectory }
           projectDirectory={ projectDirectory }
-          targets={ store.suite.targets }
-          snippets={ store.snippets }
-          project={ store.project }
-          environment={ store.app.environment }
-          readyToRunTests={ store.app.readyToRunTests }
-          isVisible={ store.app.exportProjectModal } />
+          targets={ suiteTargets }
+          snippets={ snippets }
+          project={ project }
+          environment={ environment }
+          readyToRunTests={ readyToRunTests }
+          isVisible={ exportProjectModal } />
 
         <CommandModal
           isVisible={ commandModal.isVisible }
@@ -240,40 +316,40 @@ export class AppLayout extends React.Component {
 
         <InstallRuntimeTestModal
           action={ action }
-          isVisible={ store.app.installRuntimeTestModal } />
+          isVisible={ installRuntimeTestModal } />
 
         <EditTargetsAsCsvModal
-          isVisible={ store.app.editTargetsAsCsvModal }
-          targets={ store.suite.targets }
+          isVisible={ editTargetsAsCsvModal }
+          targets={ suiteTargets }
           action={ action }
         />
 
         <GitCommitModal
-          isVisible={ store.app.gitCommitModal }
-          git={ store.git }
+          isVisible={ gitCommitModal }
+          git={ git }
           projectDirectory={ projectDirectory }
           action={ action }
         />
 
         <GitSyncModal
-          isVisible={ store.app.gitSyncModal }
-          git={ store.git }
-          savedAt={ store.project.savedAt }
+          isVisible={ gitSyncModal }
+          git={ git }
+          savedAt={ projectSavedAt }
           projectDirectory={ projectDirectory }
           action={ action }
         />
 
         <GitCheckoutModal
-          isVisible={ store.app.gitCheckoutModal }
-          logs={ store.app.gitLogs }
-          git={ store.git }
+          isVisible={ gitCheckoutModal }
+          logs={ gitLogs }
+          git={ git }
           projectDirectory={ projectDirectory }
           action={ action }
         />
 
         <GitCloneModal
-          isVisible={ store.app.gitCloneModal }
-          git={ store.git }
+          isVisible={ gitCloneModal }
+          git={ git }
           projectDirectory={ projectDirectory }
           action={ action }
         />
@@ -284,19 +360,19 @@ export class AppLayout extends React.Component {
         />
 
         <EditProjectModal
-          isVisible={ store.app.editProjectModal }
-          projectName={ store.project.name }
+          isVisible={ editProjectModal }
+          projectName={ projectName }
           projectDirectory={ projectDirectory }
           action={ action } />
 
         <EditEnvironmentsModal
-          isVisible={ store.app.editEnvironmentsModal }
-          environments={ store.project.environments }
+          isVisible={ editEnvironmentsModal }
+          environments={ projectEnvironments }
           action={ action } />
 
         <AppLightbox
-          isVisible={ store.app.appLightbox }
-          data={ store.app.lightbox }
+          isVisible={ appLightbox }
+          data={ lightbox }
           action={ action } />
 
       </ErrorBoundary>

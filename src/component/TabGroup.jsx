@@ -10,30 +10,33 @@ import { TargetsPane } from "./AppLayout/Project/Targets/TargetsPane";
 import { TestReport } from "./AppLayout/TestReport";
 import ErrorBoundary from "component/ErrorBoundary";
 import { confirmUnsavedChanges } from "service/smalltalk";
+import { connect } from "react-redux";
 
-const TabPane = Tabs.TabPane;
+const TabPane = Tabs.TabPane,
+      mapStateToProps = ( state ) => ({
+        tabs:          state.app.tabs,
+        suiteModified: state.suite.modified,
+        suiteSnippets: state.suite.snippets,
+        suiteFilename: state.suite.filename,
+        suiteTitle:    state.suite.description || state.suite.title
+      });
 
+@connect( mapStateToProps )
 export class TabGroup extends React.Component {
 
   static propTypes = {
-    action:  PropTypes.shape({
+    action: PropTypes.shape({
       removeAppTab: PropTypes.func.isRequired,
       setAppTab: PropTypes.func.isRequired,
       saveSuite: PropTypes.func.isRequired,
       setSuite: PropTypes.func.isRequired
     }),
     selector: PropTypes.object,
-    projectDirectory: PropTypes.any,
-    app: PropTypes.any,
+    tabs: PropTypes.object,
     suiteModified: PropTypes.any,
     suiteSnippets: PropTypes.any,
-    suiteTargets: PropTypes.any,
     suiteFilename: PropTypes.any,
-    suiteTitle: PropTypes.any,
-    project: PropTypes.any,
-    snippets: PropTypes.any,
-    git: PropTypes.any,
-    settings: PropTypes.any
+    suiteTitle: PropTypes.any
   }
 
   onEdit = ( targetKey, action ) => {
@@ -56,10 +59,9 @@ export class TabGroup extends React.Component {
 
   render() {
     const {
-            action, selector, app, projectDirectory, suiteTitle,
-            suiteSnippets, suiteFilename, project, snippets, git, settings, suiteTargets
+            action, selector, tabs, suiteTitle,
+            suiteSnippets, suiteFilename
           } = this.props,
-          { tabs } = app,
 
           suiteTabTitle = suiteFilename
             ? ( suiteSnippets
@@ -82,17 +84,6 @@ export class TabGroup extends React.Component {
               key="testReport" closable={ true } className="report-panel-tab">
               <TestReport
                 action={ action }
-                targets={ suiteTargets }
-                projectDirectory={ projectDirectory }
-                headless={ app.headless }
-                launcherArgs={ app.launcherArgs }
-                checkedList={ app.checkedList }
-                environment={ app.environment }
-                passSuiteOptions={ app.passSuiteOptions }
-                passExportOptions={ app.passExportOptions }
-                passProjectOptions={ app.passProjectOptions }
-                project={ project }
-                snippets={ snippets }
                 selector={ selector }
               />
             </TabPane> ),
@@ -109,16 +100,12 @@ export class TabGroup extends React.Component {
 
             projectGit: () => ( <TabPane tab={ "GIT" } key="projectGit" closable={ true }>
               <div className="tabpane-frame">
-                <GitPane action={ action } git={  git } projectDirectory={ projectDirectory } />
+                <GitPane action={ action } />
               </div>
             </TabPane> ),
 
             settings: () => ( <TabPane tab={ "Settings" } key="settings" closable={ true }>
-              <SettingsPanel
-                action={ action }
-                settings={ settings }
-                project={ project }
-              />
+              <SettingsPanel action={ action } />
             </TabPane> )
           };
 

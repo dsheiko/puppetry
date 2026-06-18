@@ -3,14 +3,20 @@ import PropTypes from "prop-types";
 import { Tabs } from "antd";
 import { GeneralPane } from "./General/GeneralPane";
 import ErrorBoundary from "component/ErrorBoundary";
+import { connect } from "react-redux";
 
-const TabPane = Tabs.TabPane;
+const TabPane = Tabs.TabPane,
+      mapStateToProps = ( state ) => ({
+        settings:      state.settings,
+        settingsPanes: state.project.appPanels.settings.panes
+      });
 
+@connect( mapStateToProps )
 export class SettingsPanel extends React.Component {
 
   static propTypes = {
-    project: PropTypes.object.isRequired,
     settings: PropTypes.object,
+    settingsPanes: PropTypes.array,
     action: PropTypes.shape({
       updateProjectPanes: PropTypes.func.isRequired,
       setApp: PropTypes.func.isRequired
@@ -26,8 +32,7 @@ export class SettingsPanel extends React.Component {
   }
 
   render() {
-    const { action, project, settings } = this.props,
-          panes = project.appPanels.settings.panes;
+    const { action, settings, settingsPanes: panes } = this.props;
 
     let activeKey = "general";
     if ( panes.length ) {

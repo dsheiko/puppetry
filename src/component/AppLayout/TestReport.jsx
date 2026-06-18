@@ -17,12 +17,26 @@ import { ReportBody } from "./TestReport/ReportBody";
 import path from "path";
 import fs from "fs";
 import log from "electron-log";
+import { connect } from "react-redux";
 
 /*eslint no-useless-escape: 0*/
 
-const Panel = Collapse.Panel;
+const Panel = Collapse.Panel,
+      mapStateToProps = ( state ) => ({
+        targets:            state.suite.targets,
+        projectDirectory:   state.settings.projectDirectory,
+        headless:           state.app.headless,
+        launcherArgs:       state.app.launcherArgs,
+        checkedList:        state.app.checkedList,
+        environment:        state.app.environment,
+        passSuiteOptions:   state.app.passSuiteOptions,
+        passExportOptions:  state.app.passExportOptions,
+        passProjectOptions: state.app.passProjectOptions,
+        project:            state.project,
+        snippets:           state.snippets
+      });
 
-
+@connect( mapStateToProps )
 export class TestReport extends AbstractComponent {
 
   static propTypes = {

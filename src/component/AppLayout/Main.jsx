@@ -57,11 +57,7 @@ export class Main extends AbstractComponent {
   }
 
   onTabChange = ( targetKey ) => {
-    this.props.action.setApp({ loading: true });
-    setTimeout( () => {
-      this.props.action.updateProjectPanes( "suite", [ targetKey ]);
-      this.props.action.setApp({ loading: false });
-    }, 10 );
+    this.props.action.updateProjectPanes( "suite", [ targetKey ] );
   }
 
   shouldComponentUpdate( nextProps, nextState ) {
