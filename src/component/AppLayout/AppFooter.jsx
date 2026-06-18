@@ -45,12 +45,6 @@ export class AppFooter extends AbstractComponent {
                 title="Find Puppetry on Facebook" className="layout-icon"
                 href="https://www.facebook.com/puppetry.testing" target="_blank"><Icon type="facebook" /></a>
 
-
-              <a onClick={ this.onExtClick }
-                rel="noopener noreferrer"
-                title="Join Puppetry channel on Slack" className="layout-icon"
-                href="https://puppetry-app.slack.com" target="_blank"><Icon type="slack" /></a>
-
               <a onClick={ this.onExtClick }
                 rel="noopener noreferrer"
                 title="Find Puppetry on Github" className="layout-icon"

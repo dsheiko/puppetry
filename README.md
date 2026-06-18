@@ -20,7 +20,6 @@
 
 
 [![Build Status](https://travis-ci.org/dsheiko/puppetry.png)](https://travis-ci.org/dsheiko/puppetry)
-[![Gitter chat](https://badges.gitter.im/dsheiko/gitter.png)](https://gitter.im/dsheiko/puppetry)
 [<img src="https://img.shields.io/badge/slack-puppetry.app-yellow.svg?logo=slack">](https://puppetry-app.slack.com)
 [![Total downloads](https://img.shields.io/github/downloads/dsheiko/puppetry/total.svg)](https://github.com/dsheiko/puppetry/releases)
 [![Latest download](https://img.shields.io/github/downloads/dsheiko/puppetry/v3.2.6/total.svg)](https://github.com/dsheiko/puppetry/releases/latest)
@@ -97,7 +96,6 @@ brew cask install puppetry
 
 ## Feedback
 
-- [Join Puppetry on Slack](http://puppetry.dsheiko.com) :coffee:
 - [Chat](https://gitter.im/dsheiko/puppetry)
 - [Facebook](https://www.facebook.com/pg/puppetry.testing/)
 - [Feature requests](https://github.com/dsheiko/puppetry/issues)
