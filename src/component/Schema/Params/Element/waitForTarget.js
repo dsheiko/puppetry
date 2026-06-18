@@ -29,15 +29,14 @@ await bs.page.${ targetObj.css ? "waitForSelector" : "waitForXPath" }`
     + `( ${ JSON.stringify( targetObj.selector ) }${ optArg } );` );
   },
 
-  toGherkin: ({ params, target }) => `Wait until target \`${ target }\`
+  toGherkin: ({ params, target }) => `Wait until locator \`${ target }\`
      ${ renderState( params ) } with timeout \`${ params.timeout }ms\``,
 
-  commonly: "wait for target",
+  commonly: "wait for locator",
 
-  description: `Waits for an element matching a provided
-    target to appear in page.
+  description: `Waits for an element matching a provided locator to appear in the page.
 
-NOTE: This method is ignored by chained targets`,
+Ignored by chained locators.`,
   params: [
     {
       tooltip: "",

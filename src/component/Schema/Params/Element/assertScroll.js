@@ -12,13 +12,13 @@ export const assertScroll = {
       + `satisfies the given constraint`
   ),
 
-  toGherkin: ({ target, params, assert }) => `Assert that target \`${ target }\`
+  toGherkin: ({ target, params, assert }) => `Assert that locator \`${ target }\`
     is scrolled \`${ params.direction }\` by ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }px\``,
 
   commonly: "assert scroll offset",
 
   description: `Asserts that [scroll](https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTop)
-offset on the target satisfies the given constraint`,
+offset on the locator satisfies the given constraint`,
   assert: {
     node: AssertNumber,
     options: {

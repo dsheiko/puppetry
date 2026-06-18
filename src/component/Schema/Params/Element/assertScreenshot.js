@@ -36,7 +36,7 @@ export const assertScreenshot = {
   toGherkin: ({ params }) => `Asserts that screenshot \`${ params.name }\`
     of the target matches already approved one`,
 
-  commonly: "assert target screenshot",
+  commonly: "assert locator screenshot",
 
 
   validate: ( values ) => {

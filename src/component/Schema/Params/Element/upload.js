@@ -23,8 +23,8 @@ export const upload = {
 
   commonly: "attach a file to file input",
 
-  description: `Sets the value of a file input. Note that the target element must be INPUT of FILE type.
-   It is also recommended to emulate click on the target (or clickable element calling the file browser)
+  description: `Sets the value of a file input. The element must be \`<input type="file">\`.
+   It is also recommended to emulate click on the element (or a clickable element calling the file browser)
    before going with this command.`,
 
   validate: ( values ) => {

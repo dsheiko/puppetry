@@ -18,13 +18,13 @@ export const assertPosition = {
     `// Asserting that the bounding box of the element satisfies the given constraint`
   ),
 
-  toGherkin: ({ target, assert }) => `Assert that target \`${ target }\`
+  toGherkin: ({ target, assert }) => `Assert that locator \`${ target }\`
     is located ${ assertToLabel( assert ) }`,
 
   commonly: "assert relative position",
 
 
-  description: `Asserts \`{target}\` target's position relative to other given target`,
+  description: `Asserts \`{target}\` position relative to another locator`,
   assert: {
     node: AssertPosition
   },

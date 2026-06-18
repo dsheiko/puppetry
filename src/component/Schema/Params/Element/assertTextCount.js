@@ -11,7 +11,7 @@ export const assertTextCount = {
     `// Asserting that number of child elements containing a specified text satisfies the given constraint`
   ),
 
-  toGherkin: ({ target, params, assert }) => `Assert that target \`${ target }\` has
+  toGherkin: ({ target, params, assert }) => `Assert that locator \`${ target }\` has
    ${ HAS_OPERATOR_MAP[ assert.operator ] } \`${ assert.value }\` child elements containing \`${ params.text }\``,
 
   commonly: "assert count of elements with text",

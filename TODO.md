@@ -6,23 +6,13 @@ Make it more like VS Code - default window size like VS Code, options to change 
 BEsides Main menu goes on top left horizontally. On the very left top little logo of puppetry.
 On the left we have Explorer, one windoiws with Open Editors (suites) and other as it is suites available in the project.
 
-
+Locators and Test Cases are two subordinated editors under open Suite (file) tab.
 Switching between Locators and Test Cases cases rerendering the entire app and very heavy and slow. Maybe we can use React Router and make switch momentar?
 
 
-update texts in files inside src/component/Schema in accordance with the new model in ./MODEL.md, also prof-read and improve  the texts in (keep consistency in texdt style when possible)
-```
-toGherkin: ({ params, target }) => `Wait until target \`${ target }\`
-     ${ renderState( params ) } with timeout \`${ params.timeout }ms\``,
 
-  commonly: "wait for target",
 
-  description: `Waits for an element matching a provided
-    target to appear in page.
-
-NOTE: This method is ignored by chained targets`,
-  params: [
-```
+✅ update texts in files inside src/component/Schema in accordance with the new model in ./MODEL.md, also prof-read and improve  the texts in (keep consistency in texdt style when possible)
 
 
 ✅ Update terminology in the codebase and ./docs, README.md according to the following model change:

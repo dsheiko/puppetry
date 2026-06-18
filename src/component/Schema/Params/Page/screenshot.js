@@ -100,9 +100,9 @@ export const screenshot = {
         },
         {
           name: "params.targets",
-          label: "show targets",
+          label: "show locators",
           control: TARGET_SELECT,
-          tooltip: `Here you can select targets to be highlighted on the screenshot.`,
+          tooltip: `Here you can select locators to be highlighted on the screenshot.`,
           initialValue: [],
           placeholder: "",
           rules: []
