@@ -47,13 +47,13 @@ export class Welcome extends AbstractComponent {
           closable /></div> }
         <p>What you can do now is to open a
           { " " } <Button id="cWelcomeDemoProjectBtn"
-            onClick={ this.onOpenDemoProject }>demo project</Button> or
+            onClick={ this.onOpenDemoProject }>demo test plan</Button> or
           { " " } <Button id="cWelcomeNewProjectBtn"
             onClick={ this.onCreateProject }>create a new one</Button>.</p>
         <br />
         <p>
-        E2E testing for the Web in a nutshell is about locating a target, applying a browser method on it,
-asserting the new page (DOM) state. Where target can be either a <a onClick={ this.onExtClick }
+        E2E testing for the Web in a nutshell is about identifying a locator, applying a browser method on it,
+asserting the new page (DOM) state. Where a locator can be either a <a onClick={ this.onExtClick }
             href="https://en.wikipedia.org/wiki/HTML_element">HTML element</a> { " " }
             or the entire page. Page methods can be such as
             &quot;goto to a URL&quot;, &quot;make a screenshot&quot;.

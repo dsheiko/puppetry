@@ -18,12 +18,12 @@ export class TargetTable extends AbstractEditableTable {
 
     this.fields = [ "target",  "selector" ];
     this.extraFields = { "selector": [ "parentType", "ref" ]};
-    this.model = props.model || "Target";
+    this.model = props.model || "Locator";
 
 
     this.columns = [
       {
-        title: "Target",
+        title: "Locator",
         dataIndex: "target",
         width: "30%",
         render: ( text, record ) => {
@@ -35,7 +35,7 @@ export class TargetTable extends AbstractEditableTable {
             targets={ this.props.targets }
             dataIndex="target"
             className="input--target"
-            placeholder="Enter target name"
+            placeholder="Enter locator name"
             model={ this.model }
             updateRecord={ this.updateRecord }
           />

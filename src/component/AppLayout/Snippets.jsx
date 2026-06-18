@@ -65,8 +65,8 @@ export class Snippets extends AbstractForm {
             testDataTable
           } = this.props,
 
-          targetsLabel = ( <span><Icon type="select" />Targets</span> ),
-          snippetsLabel = ( <span><Icon type="audit" />Snippets</span> ),
+          targetsLabel = ( <span><Icon type="select" />Locators</span> ),
+          snippetsLabel = ( <span><Icon type="audit" />Shared Flows</span> ),
           targetValues = Object.values( targets );
 
     let activeKey = "targets";
@@ -85,7 +85,7 @@ export class Snippets extends AbstractForm {
             onChange={ this.onTabChange }
           >
             <TabPane tab={ targetsLabel } key="targets" id="cSuitePane">
-              <p>Targets are identifiers associated with locators
+              <p>Locators are identifiers associated with selectors
               (CSS selector or XPath) that we can refer in the test cases.
               </p>
 
@@ -94,8 +94,8 @@ export class Snippets extends AbstractForm {
             </TabPane>
 
             <TabPane tab={ snippetsLabel } key="tests">
-              <p>Snippets are reusable test cases in scope of project. So you can
-              create a snippet and refer to it in your test suites.<br />
+              <p>Shared Flows are reusable sequences of steps in scope of a test plan. So you can
+              create a shared flow and refer to it in your test suites.<br />
               </p>
               <p><LearnMore href="https://docs.puppetry.app/snippets" /></p>
 

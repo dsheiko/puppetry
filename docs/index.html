@@ -104,7 +104,7 @@
         "url": "https://puppetry.app/assets/img/puppetry-welcome-620.png"
       },
       "name": "How to test a website with Puppetry",
-      "description": "End-to-end testing of a web application is mostly about locating a target (page or DOM element), performing a command on it (navigate to URL, modify DOM, etc.) and asserting that the target satisfies the provided conditions. Puppetry provides a user-friendly interface to define targets and manage test cases bundled in test suits.",
+      "description": "End-to-end testing of a web application is mostly about identifying a locator (page or DOM element), performing a command on it (navigate to URL, modify DOM, etc.) and asserting that the locator satisfies the provided conditions. Puppetry provides a user-friendly interface to define locators and manage test cases bundled in test suites.",
       "totalTime": "PT10M",
 
       "supply": [
@@ -124,25 +124,25 @@
         {
           "@type": "HowToStep",
           "name": "Manage your test structure",
-          "text": "The test organizational structure consists of projects. Every project has one or more test suites. Every suite is split in test cases, where test case may contain one or more browser methods and assertions.",
+          "text": "The test organizational structure consists of test plans. Every test plan has one or more test suites. Every suite is split in test cases, where test case may contain one or more browser methods and assertions.",
           "image": "https://puppetry.app/assets/img/v3/manage-structure.gif",
           "url": "https://puppetry.app/#howtoStep1"
         }, {
           "@type": "HowToStep",
-          "name": "Locate and define element targets",
-          "text": "Test target can be either page or an element on the page. In the second case we need to inform Puppetry project what exact elements we mean. Locating an element is quite easy in a modern browser. You just need to right-click on the target element and copy its CSS selector or XPath",
+          "name": "Define locators",
+          "text": "A locator can target the page itself or a DOM element. You need to define each element in Puppetry. Locating an element is quite easy in a modern browser. You just need to right-click on the element and copy its CSS selector or XPath",
           "image": "https://puppetry.app/assets/img/v3/manage-targets.gif",
           "url": "https://puppetry.app/#howtoStep2"
         }, {
           "@type": "HowToStep",
-          "name": "Select a target",
-          "text": "Test cases we populate with commands. Command means settings a browser method or an assertion on a target. Available targets are page and all the already defined elements aliases.",
+          "name": "Select a locator",
+          "text": "Test cases we populate with commands. Command means setting a browser method or an assertion on a locator. Available locators are page and all defined element aliases.",
           "image": "https://puppetry.app/assets/img/v3/select-target.png",
           "url": "https://puppetry.app/#howtoStep3"
         }, {
           "@type": "HowToStep",
           "name": "Call a method",
-          "text": "Underlying form dynamically adapts to actual target/method combination. So when both selected we get method parameters (mandatory and optional)",
+          "text": "Underlying form dynamically adapts to actual locator/method combination. So when both selected we get method parameters (mandatory and optional)",
           "image": "https://puppetry.app/assets/img/v3/call-method.png",
           "url": "https://puppetry.app/#howtoStep4"
         }, {
@@ -358,7 +358,7 @@
           </div>
           <div>
             <h3>Manage your test structure</h3>
-            <p>The test organizational structure consists of projects. Every project has one or more test suites. Every suite is split in test cases,
+            <p>The test organizational structure consists of test plans. Every test plan has one or more test suites. Every suite is split in test cases,
               where test case may contain one or more browser methods and assertions.
             </p>
           </div>
@@ -367,13 +367,13 @@
 
         <div id="howtoStep2" class="feature feature--right">
           <div>
-            <h3>Locate and define element targets</h3>
+            <h3>Define locators</h3>
             <p>
-              Test target can be either page or an element on the page.
-              In the second case we need to inform Puppetry project what exact elements we mean.
-              Locating an element is quite easy in a modern browser. You just need to right-click on the target element and copy its CSS selector or XPath.
-              Puppetry takes in both. See <a href="https://www.youtube.com/watch?v=bAoyZSQAZHg" target="_blank" rel="noopener" title="How to add a target in Puppetry">how to</a>.
-              We just need to assign a meaninful name (alias) to the element in "Test targets" tab and copy/paste the locator (selector/XPath)
+              A locator can target the page itself or a DOM element.
+              You need to define each element in Puppetry.
+              Locating an element is quite easy in a modern browser. You just need to right-click on the element and copy its CSS selector or XPath.
+              Puppetry takes in both. See <a href="https://www.youtube.com/watch?v=bAoyZSQAZHg" target="_blank" rel="noopener" title="How to add a locator in Puppetry">how to</a>.
+              We just need to assign a meaningful name (alias) to the element in the "Locators" tab and copy/paste the selector (CSS or XPath)
             </p>
           </div>
           <div class="feature__ic">
@@ -384,7 +384,7 @@
               src="./assets/img/v3/manage-targets.gif"
               srcset="/assets/img/v3/manage-targets-prefetch.png"
               data-srcset="./assets/img/v3/manage-targets.gif"
-              alt="Locate and define element target"
+              alt="Define locators"
               />
             </div>
           </div>
@@ -395,13 +395,13 @@
             <img
               class="feature__img lazyload blur-up"
               data-sizes="auto"
-              src="./assets/img/v3/select-target.png" alt="Select a target"  />
+              src="./assets/img/v3/select-target.png" alt="Select a locator"  />
           </div>
           <div>
-            <h3>Select a target</h3>
+            <h3>Select a locator</h3>
             <p>
-              Test cases we populate with commands. Command means settings a browser method or an assertion on a target.
-              Available targets are page and all the already defined elements aliases.
+              Test cases we populate with commands. Command means setting a browser method or an assertion on a locator.
+              Available locators are page and all defined element aliases.
             </p>
           </div>
         </div>
@@ -409,7 +409,7 @@
         <div  id="howtoStep4" class="feature feature--right">
           <div>
             <h3>Call a method</h3>
-            <p>Underlying form dynamically adapts to actual target/method combination.
+            <p>Underlying form dynamically adapts to actual locator/method combination.
               So when both selected we get method parameters (mandatory and optional)</p>
           </div>
           <div class="feature__ic">

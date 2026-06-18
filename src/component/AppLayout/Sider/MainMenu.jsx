@@ -268,15 +268,15 @@ export class MainMenu extends GitEnhancedMenu {
               title={<span><Icon type="file" /><span>File</span></span>}
             >
               <Menu.Item key="file1" onClick={ this.onNewProject } id="cMainMenuNewProject">
-                New Project... { " " }<kbd>{ ostr( "Ctrl-Shift-N" ) }</kbd></Menu.Item>
+                New Test Plan... { " " }<kbd>{ ostr( "Ctrl-Shift-N" ) }</kbd></Menu.Item>
               <Menu.Item key="file7" disabled={ !isProjectOpen }
                 onClick={ this.onSaveProjectAs } id="cMainMenuSaveProjectAs">
-                Save Project As...</Menu.Item>
+                Save Test Plan As...</Menu.Item>
               <Menu.Item key="file2" disabled={ !isProjectOpen }
                 onClick={ this.onNewSuite } id="cMainMenuNewSuite">
                 New Suite... { " " }<kbd>{ ostr( "Ctrl-N" ) }</kbd></Menu.Item>
               <Menu.Item key="file3" onClick={ this.onOpenProject } id="cMainMenuOpenProject">
-                Open Project... { " " }<kbd>{ ostr( "Ctrl-Shift-O" ) }</kbd></Menu.Item>
+                Open Test Plan... { " " }<kbd>{ ostr( "Ctrl-Shift-O" ) }</kbd></Menu.Item>
               <Menu.Item key="file4" disabled={ !isProjectOpen || isProjectEmpty  } id="cMainMenuOpenSuite"
                 onClick={ this.onOpenSuite }>Open Suite...</Menu.Item>
               <Menu.Item key="file5" disabled={ !isSuiteOpen } onClick={ this.onSave } id="cMainMenuSaveSuite">
@@ -312,7 +312,7 @@ export class MainMenu extends GitEnhancedMenu {
 
               <Menu.Item key="7" disabled={ !isProjectOpen } id="cMainMenuExportProject"
                 onClick={ this.onExportProject }>
-                Export Project as... { " " }<kbd>{ ostr( "Ctrl-Shift-E" ) }</kbd></Menu.Item>
+                Export Test Plan as... { " " }<kbd>{ ostr( "Ctrl-Shift-E" ) }</kbd></Menu.Item>
               <Menu.Item key="8">Exit</Menu.Item>
 
             </SubMenu>
@@ -322,16 +322,16 @@ export class MainMenu extends GitEnhancedMenu {
               key="project"
               id="cMainMenuFile"
               disabled={ !isProjectOpen }
-              title={<span><Icon type="project" /><span>Project</span></span>}
+              title={<span><Icon type="project" /><span>Test Plan</span></span>}
             >
 
               <Menu.Item key="101" onClick={ this.onSnippets } id="cMainMenuProjectSnippets">
-                Snippets
+                Shared Flows
               </Menu.Item>
 
               <Menu.Item key="104"
                 onClick={ () => this.openTab( "projectTargets" ) } id="cMainMenuProjectTargets">
-                Shared targets
+                Shared Locators
               </Menu.Item>
 
               <Menu.Item key="102"

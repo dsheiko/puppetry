@@ -254,7 +254,7 @@ export class TestReportModal extends AbstractTestRunnerModal {
 
           </If>
           <If exp={ !files.length }>
-            <Alert message="No suites available in the project" type="error" />
+            <Alert message="No suites available in the test plan" type="error" />
           </If>
 
         </Modal>

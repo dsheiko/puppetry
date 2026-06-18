@@ -86,7 +86,7 @@ export class GitEnhancedMenu extends React.PureComponent {
     const { projectDirectory, gitConfigUsername, gitConfigEmail } = this.props;
 
     if ( !projectDirectory ) {
-      message.error( "Project directory is not specified" );
+      message.error( "Test plan directory is not specified" );
       return;
     }
 

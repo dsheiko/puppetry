@@ -89,7 +89,7 @@ export class OpenProjectModal extends AbstractForm {
     return (
       <ErrorBoundary>
         <Modal
-          title="Open Project"
+          title="Open Test Plan"
           visible={ isVisible }
           closable
           onCancel={this.onClickCancel}
@@ -119,7 +119,7 @@ export class OpenProjectModal extends AbstractForm {
               validateStatus={ this.state.browseDirectoryValidateStatus }
               validateMessage={ this.state.browseDirectoryValidateMessage }
               getSelectedDirectory={ this.getSelectedDirectory }
-              label="Project location" />
+              label="Test plan location" />
 
           </Form>
         </Modal>

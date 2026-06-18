@@ -6,7 +6,7 @@ import { EditableCell } from "../EditableCell";
 import ErrorBoundary from "component/ErrorBoundary";
 import { connectDnD } from "../DragableRow";
 
-const recordPrefIcon = <Icon type="snippets" title="Snippet" />;
+const recordPrefIcon = <Icon type="snippets" title="Shared Flow" />;
 
 @connectDnD
 export class SnippetTable extends AbstractEditableTable {
@@ -15,7 +15,7 @@ export class SnippetTable extends AbstractEditableTable {
     super( props );
     this.columns = [
       {
-        title: "Snippet",
+        title: "Shared Flow",
         dataIndex: "title",
 
         render: ( text, record ) => {
@@ -28,7 +28,7 @@ export class SnippetTable extends AbstractEditableTable {
               className="input--title"
               record={ record }
               dataIndex="title"
-              placeholder="Enter a snippet name"
+              placeholder="Enter a shared flow name"
               model={ this.model }
               updateRecord={ this.updateRecord }
             />

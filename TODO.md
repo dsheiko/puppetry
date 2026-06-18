@@ -12,7 +12,7 @@ Switching between Locators and Test Cases cases rerendering the entire app and v
 
 
 
-Update terminology in the codebase and docs according to the following model change:
+Update terminology in the codebase and ./docs, README.md according to the following model change:
 
 ## Previous Model
 

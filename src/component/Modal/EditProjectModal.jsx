@@ -94,13 +94,13 @@ export class EditProjectModal extends AbstractForm {
           <Form>
 
 
-            <FormItem  label="Project name">
+            <FormItem  label="Test plan name">
               { getFieldDecorator( "name", {
                 initialValue: projectName,
                 rules: [
                   {
                     required: true,
-                    message: "Please enter project name"
+                    message: "Please enter test plan name"
                   },
                   {
                     validator: ruleValidateGenericString
@@ -115,7 +115,7 @@ export class EditProjectModal extends AbstractForm {
               )}
             </FormItem>
 
-            <FormItem  label="Project location">
+            <FormItem  label="Test plan location">
               { getFieldDecorator( "location", {
                 initialValue: projectDirectory
 

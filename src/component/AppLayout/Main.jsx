@@ -119,7 +119,7 @@ export class Main extends AbstractComponent {
           } = this.props,
           { suiteOptionsOpen } = this.state,
           activeKey = this.getActivePane(),
-          targetsLabel = ( <span><Icon type="select" />Targets</span> ),
+          targetsLabel = ( <span><Icon type="select" />Locators</span> ),
           testsLabel = ( <span><Icon type="audit" />Test Cases</span> ),
           suiteOptionsBtn = (
             <Button size="small" onClick={ this.openSuiteOptions }>
@@ -140,7 +140,7 @@ export class Main extends AbstractComponent {
             tabBarExtraContent={ suiteOptionsBtn }
           >
             <TabPane tab={ targetsLabel } key="targets">
-              <p>Targets are identifiers associated with locators (CSS selector or XPath)
+              <p>Locators are identifiers associated with selectors (CSS selector or XPath)
               that we can refer in the test cases.
               </p>
 

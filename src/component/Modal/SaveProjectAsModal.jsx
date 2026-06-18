@@ -78,7 +78,7 @@ export class SaveProjectAsModal extends AbstractForm {
     return (
       <ErrorBoundary>
         <Modal
-          title="Save Project As..."
+          title="Save Test Plan As..."
           visible={ isVisible }
           closable
           onCancel={this.onClickCancel}
@@ -107,7 +107,7 @@ export class SaveProjectAsModal extends AbstractForm {
               validateStatus={ this.state.browseDirectoryValidateStatus }
               validateMessage={ this.state.browseDirectoryValidateMessage }
               getSelectedDirectory={ this.getSelectedDirectory }
-              label="Project new location" />
+              label="New test plan location" />
 
           </Form>
         </Modal>

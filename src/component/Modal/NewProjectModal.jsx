@@ -125,7 +125,7 @@ export class NewProjectModal extends AbstractForm {
     return (
       <ErrorBoundary>
         <Modal
-          title="New Project"
+          title="New Test Plan"
           className="c-new-project-modal"
           visible={ isVisible }
           closable
@@ -149,12 +149,12 @@ export class NewProjectModal extends AbstractForm {
           ]}
         >
           <Form>
-            <FormItem  label="Project name">
+            <FormItem  label="Test plan name">
               { getFieldDecorator( "name", {
                 initialValue: projectName,
                 rules: [{
                   required: true,
-                  message: "Please enter project name"
+                  message: "Please enter test plan name"
                 },
                 {
                   validator: ruleValidateGenericString
@@ -164,7 +164,7 @@ export class NewProjectModal extends AbstractForm {
                 }
                 ]
               })(
-                <Input placeholder="Project name" onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
+                <Input placeholder="Test plan name" onKeyPress={ ( e ) => this.onKeyPress( e, this.onClickOk ) } />
               )}
             </FormItem>
 
@@ -174,7 +174,7 @@ export class NewProjectModal extends AbstractForm {
               defaultDirectory={ this.state.projectDirectory }
               validateStatus={ this.state.browseDirectoryValidateStatus }
               getSelectedDirectory={ this.getSelectedDirectory }
-              label="Project location" />
+              label="Test plan location" />
 
 
             {

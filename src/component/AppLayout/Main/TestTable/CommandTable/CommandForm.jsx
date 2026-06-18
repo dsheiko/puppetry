@@ -210,12 +210,12 @@ export class CommandForm extends React.Component {
           </If>
           <Row gutter={24}>
             <Col xl={8} lg={12} md={24}>
-              <FormItem label="Target">
+              <FormItem label="Locator">
                 {getFieldDecorator( "target", {
                   initialValue: record.target,
                   rules: [{
                     required: true,
-                    message: "Please select target"
+                    message: "Please select locator"
                   }]
                 })(
                   <TargetSelect

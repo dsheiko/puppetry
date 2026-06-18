@@ -109,7 +109,7 @@ export class GitCloneModal extends AbstractForm {
     return (
       <ErrorBoundary>
         <Modal
-          title="Clone Project"
+          title="Clone Test Plan"
           className="c-git-clone-project-modal"
           visible={ isVisible }
           closable
@@ -139,7 +139,7 @@ export class GitCloneModal extends AbstractForm {
               defaultDirectory={ this.state.projectDirectory }
               validateStatus={ this.state.browseDirectoryValidateStatus }
               getSelectedDirectory={ this.getSelectedDirectory }
-              label="Project new location" />
+              label="New test plan location" />
 
           </Form>
         </Modal>

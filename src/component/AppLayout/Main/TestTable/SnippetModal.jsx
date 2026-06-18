@@ -74,7 +74,7 @@ export class SnippetModal extends AbstractForm {
     return ( <ErrorBoundary>
       <InstantModal
         visible={ isVisible }
-        title="Edit Reference"
+        title="Edit Flow Reference"
         id="cCommandModal"
         onCancel={ this.onClickCancel }
         footer={[
@@ -91,18 +91,18 @@ export class SnippetModal extends AbstractForm {
       >
         <Form>
 
-          <FormItem  label="Snippet">
+          <FormItem  label="Shared Flow">
             { getFieldDecorator( "snippet", {
               initialValue: ( record ? record.ref :  null ),
               rules: [
                 {
                   required: true,
-                  message: "Please select a snippet"
+                  message: "Please select a shared flow"
                 }
               ]
             })(
               <Select
-                placeholder="Select a snippet"
+                placeholder="Select a shared flow"
                 { ...SELECT_SEARCH_PROPS }
               >
                 {

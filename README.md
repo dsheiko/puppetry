@@ -37,8 +37,8 @@ Puppetry is a powerful, no-code/low-code test automation tool for end-to-end (E2
 Puppetry offers you an easy-to-use UI where you choose browser methods and assertions from a predefined list, with predefined settings, guided by extensive tips.
 Namely you can do the following:
 - record user flow
-- declare element targets as pairs `variable = locator`, where locator can be either CSS selector or Xpath.
-- manage your test structure in BDD style (project, suite, test context, test case)
+- define locators as pairs `name = selector`, where selector can be either CSS selector or Xpath.
+- manage your test structure in BDD style (test plan, suite, test case)
 - manage page/element methods and assertions
 - run the tests in Chromium/Chromium/Chrome/Firefox/Edge
 - export the project as Jest/Puppeteer bundle ready to run in CLI (e.g. by a continuous integration server)

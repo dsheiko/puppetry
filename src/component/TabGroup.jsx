@@ -63,7 +63,7 @@ export class TabGroup extends React.Component {
 
           suiteTabTitle = suiteFilename
             ? ( suiteSnippets
-              ? "Snippets"
+              ? "Shared Flows"
               :  <Tooltip placement="bottomRight" title={ suiteTitle }>
                 <Icon type="container" />{ suiteFilename }
               </Tooltip> )
@@ -101,7 +101,7 @@ export class TabGroup extends React.Component {
               <div className="tabpane-frame"><VariablesPane /></div>
             </TabPane> ),
 
-            projectTargets: () => ( <TabPane tab={ "Shared targets" } key="projectTargets" closable={ true }>
+            projectTargets: () => ( <TabPane tab={ "Shared Locators" } key="projectTargets" closable={ true }>
               <div className="tabpane-frame">
                 <TargetsPane action={ action }  />
               </div>

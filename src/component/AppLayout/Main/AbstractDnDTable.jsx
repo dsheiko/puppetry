@@ -280,7 +280,7 @@ export default class AbstractDnDTable extends React.Component {
             },
             model: this.model,
             data: records,
-            targets: [ "Target", "Variable" ].includes( this.model )
+            targets: [ "Locator", "Variable" ].includes( this.model )
               ? []
               // We attach targets referenced from copied records
               : this.props.selector.getSelectedTargets( AbstractDnDTable.findTargets( records ) )

@@ -45,7 +45,7 @@ export class Info extends AbstractComponent {
     const { projectFiles, projectName, projectDirectory } = this.props;
     return (
       <div className="welcome info" id="cInfo">
-        <h1>Project</h1>
+        <h1>Test Plan</h1>
         <Row gutter={16}>
           <Col span={2}>
               Name
@@ -69,7 +69,7 @@ export class Info extends AbstractComponent {
           type="warning"
           closable /></div> }
 
-        <p>You have a project open. { " " }
+        <p>You have a test plan open. { " " }
           <If exp={ projectFiles.length }>
             Now you can
             { " " } <Button id="cInfoCreateBtn"
@@ -86,7 +86,7 @@ export class Info extends AbstractComponent {
           </If>
         </p>
         <p>Besides, your can switch to the { " " } <Button id="cInfoDemoProjectBtn"
-          onClick={ this.onOpenDemoProject }>demo project</Button> </p>
+          onClick={ this.onOpenDemoProject }>demo test plan</Button> </p>
         <br />
         <p>While on that subject, let’s brush up on Puppetry structure:</p>
         <ul>
@@ -94,7 +94,7 @@ export class Info extends AbstractComponent {
         complies with the specified requirements.
         Basically tests are about sending commands to the browser and asserting the responds.</li>
           <li><strong>Suite</strong> - is a collection of logically related tests (<code>.json</code> files)</li>
-          <li><strong>Project</strong> – is a group of related test suites (a directory with suite files)</li>
+          <li><strong>Test Plan</strong> – is a group of related test suites (a directory with suite files)</li>
         </ul>
         <br />
         <p>If you experience any problems with application, please, report to { " " }

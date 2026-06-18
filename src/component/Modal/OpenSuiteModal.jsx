@@ -76,7 +76,7 @@ export class OpenSuiteModal extends AbstractForm {
               </Menu>
             </If>
             <If exp={ !files.length }>
-              <Alert message="Project is empty" type="warning" />
+              <Alert message="Test plan is empty" type="warning" />
             </If>
           </div>
         </Modal>

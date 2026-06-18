@@ -28,8 +28,8 @@ export class TargetsPane extends AbstractComponent {
 
     return (
       <ErrorBoundary>
-        <p>Targets are identifiers associated with locators (CSS selector or XPath)
-           that we can refer in the test cases. Shared targets are accessible in all suites of the open project.
+        <p>Locators are identifiers associated with selectors (CSS selector or XPath)
+           that we can refer in the test cases. Shared Locators are accessible in all suites of the open test plan.
         </p>
 
         <p><LearnMore href="https://docs.puppetry.app/target" />
