@@ -18,14 +18,12 @@ export default class AbstractDnDTable extends React.Component {
   static propTypes = {
     action:  PropTypes.shape({
       swapTest: PropTypes.func,
-      swapGroup: PropTypes.func,
       swapCommand: PropTypes.func,
       setApp: PropTypes.func,
       addTarget: PropTypes.func
     }),
     selector: PropTypes.object.isRequired,
-    groupId: PropTypes.string.isRequired,
-    testId: PropTypes.string.isRequired
+    testId: PropTypes.string
   }
 
  components = {
@@ -189,13 +187,10 @@ export default class AbstractDnDTable extends React.Component {
     records.forEach( record  => {
       const id = uniqid();
       update( record, destRec, id );
-      destRec = { id, testId: dest.testId, groupId: dest.groupId };
+      destRec = { id, testId: dest.testId };
 
       if ( typeof dest.testId === "undefined" ) {
         delete destRec.testId;
-      }
-      if ( typeof dest.groupId === "undefined" ) {
-        delete destRec.groupId;
       }
     });
   }
@@ -218,16 +213,9 @@ export default class AbstractDnDTable extends React.Component {
 
     setTimeout( () => {
 
-      if ( record.entity === "group" && payload.model === "Test" ) {
-        AbstractDnDTable.pasteRecords( update, records, {
-          groupId: record.id
-        });
-      }
-
       if ( record.entity === "test" && payload.model === "Command" ) {
         AbstractDnDTable.pasteRecords( update, records, {
-          testId: record.id,
-          groupId: record.groupId
+          testId: record.id
         });
       }
 
@@ -311,9 +299,6 @@ export default class AbstractDnDTable extends React.Component {
     if ( record.isRef ) {
       node.isRef = true;
     }
-    if ( "groupId" in record ) {
-      node.groupId = record.groupId;
-    }
     if ( "testId" in record ) {
       node.testId = record.testId;
     }
@@ -380,9 +365,6 @@ export default class AbstractDnDTable extends React.Component {
    * Extending for parents
    */
   extendActionOptions( options ) {
-    if ( this.props.hasOwnProperty( "groupId" ) ){
-      options.groupId = this.props.groupId;
-    }
     if ( this.props.hasOwnProperty( "testId" ) ){
       options.testId = this.props.testId;
     }

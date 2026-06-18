@@ -54,25 +54,31 @@ export default class JsonConvertor {
     };
   }
 
-  groupsToJSON = ( groups ) => {
-    return Object.values( groups )
+  testsToJSON = ( tests ) => {
+    return Object.values( tests )
       .filter( item => !item.disabled )
-      .map( item => ({
-        title: item.title,
-        tests: Object.values( item.tests )
-          .filter( test => !test.disabled )
-          .map( this.testToJson )
-      }) );
+      .map( this.testToJson );
   }
 
   convertSuite( suite ) {
+    const data = suite.groups ? this.migrateSuiteFormat( suite ) : suite;
     this.output.suites.push({
-      title: suite.title,
-      timeout: suite.timeout,
-      filename: suite.filename,
-      targets: JsonConvertor.targetsToJSON( suite.targets ),
-      groups: this.groupsToJSON( suite.groups )
+      title: data.title,
+      timeout: data.timeout,
+      filename: data.filename,
+      targets: JsonConvertor.targetsToJSON( data.targets ),
+      tests: this.testsToJSON( data.tests )
     });
+  }
+
+  migrateSuiteFormat( suite ) {
+    const tests = {};
+    Object.values( suite.groups ).forEach( group => {
+      Object.entries( group.tests || {}).forEach( ([ tid, test ]) => {
+        tests[ tid ] = test;
+      });
+    });
+    return { ...suite, tests };
   }
 
   async convert() {

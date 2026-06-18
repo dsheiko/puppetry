@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ipcRenderer, shell } from "electron";
-import { RUNNER_PUPPETRY, E_RUN_TESTS, SNIPPETS_GROUP_ID, DIR_SCREENSHOTS, DIR_LOGS } from "constant";
+import { RUNNER_PUPPETRY, E_RUN_TESTS, DIR_SCREENSHOTS, DIR_LOGS } from "constant";
 import LoadingTip from "component/Global/LoadingTip";
 import AbstractComponent from "component/AbstractComponent";
 import ErrorBoundary from "component/ErrorBoundary";
@@ -115,13 +115,8 @@ export class TestReport extends AbstractComponent {
   async highlightErrorsInSuite() {
     try {
       const commands = await parseReportedFailures( this.reportedFailures );
-      commands.forEach( ({ id, groupId, testId, failure }) => {
-        if ( groupId === SNIPPETS_GROUP_ID ) {
-          return this.props.action.updateCommandByRef( testId, failure );
-        }
-        this.props.action.updateCommand({
-          id, groupId, testId, failure
-        });
+      commands.forEach( ({ id, testId, failure }) => {
+        this.props.action.updateCommand({ id, testId, failure });
       });
     } catch ( err ) {
       console.error( err );

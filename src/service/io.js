@@ -83,8 +83,8 @@ export async function parseReportedFailures( reportedErrorPositions ) {
           break;
         }
         const idComment = match.substr( COMMAND_ID_COMMENT.length ),
-              [ groupId, testId, id ] = idComment.split( ":" );
-        commands.push({ groupId, testId, id, failure: error.message });
+              [ testId, id ] = idComment.split( ":" );
+        commands.push({ testId, id, failure: error.message });
       }
     }
   } catch ( err ) {

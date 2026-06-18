@@ -109,7 +109,7 @@ export default {
       }
     },
     // state of data-tables
-    groups: {},
+    tests: {},
     savedAt: 0,
     modified: false,
     lastOpenSuite: "",
@@ -129,7 +129,7 @@ export default {
     modified: false,
     filename: "",
     targets: {},
-    groups: {}
+    tests: {}
   },
 
   git: {
@@ -148,17 +148,6 @@ export default {
 
   snippets: {}
 };
-
-export const groupDefaultState = ( id ) => ({
-  editing: false,
-  id,
-  key: id,
-  title: "",
-  tests: {},
-  disabled: false,
-  expanded: false,
-  adding: false
-});
 
 export const testDefaultState = ( id ) => ({
   editing: false,

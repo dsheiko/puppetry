@@ -1,6 +1,6 @@
 import log from "electron-log";
 import { TestGeneratorError } from "error";
-import { COMMAND_ID_COMMENT, RUNNER_PUPPETRY, SNIPPETS_GROUP_ID } from "constant";
+import { COMMAND_ID_COMMENT, RUNNER_PUPPETRY } from "constant";
 import { getTargetChain, getActiveTargets } from "selector/selectors";
 import { mapSelectors } from "service/selector";
 import { renderTarget } from "service/utils";
@@ -26,7 +26,7 @@ export default class TestGenerator {
     this.suite = { ...suite };
     this.projectDirectory = projectDirectory;
     this.outputDirectory = outputDirectory;
-    this.snippets = { targets: {}, groups: {}, ...snippets };
+    this.snippets = { targets: {}, tests: {}, ...snippets };
     this.env = env;
     this.options = options;
     this.suiteFilename = suiteFilename;
@@ -67,12 +67,7 @@ export default class TestGenerator {
    * @returns {string}
    */
   parseRef = ( ref, variables, parentId ) => {
-    const groups = this.snippets.groups;
-    if ( !groups.hasOwnProperty( SNIPPETS_GROUP_ID ) ) {
-      console.warn( `Cannot find ID: ${ SNIPPETS_GROUP_ID } in groups:`, groups );
-      return ``;
-    }
-    const tests = groups[ SNIPPETS_GROUP_ID ].tests;
+    const tests = this.snippets.tests;
     if ( !tests.hasOwnProperty( ref ) ) {
       console.warn( `Cannot find REF: ${ ref } in tests:`, tests );
       return ``;
@@ -194,7 +189,7 @@ export default class TestGenerator {
       }
       // Provide source code with markers
       const code = this.runner === RUNNER_PUPPETRY
-        ? `      ${ COMMAND_ID_COMMENT }${ command.groupId }:${ command.testId }:${ command.id }\n${ chunk }`
+        ? `      ${ COMMAND_ID_COMMENT }${ command.testId }:${ command.id }\n${ chunk }`
         : chunk;
 
       return this.wrapCommandBody( ( typeof command.comment === "string" && command.comment.startsWith( "@assert " ) )
@@ -237,32 +232,15 @@ export default class TestGenerator {
     });
   }
 
-  parseGroup = ( group, gInx ) => {
-    const tests = Object.values( group.tests )
-      .filter( test => test.disabled !== true );
-    if ( !tests.length ) {
-      return "";
-      //throw new Error( `'groups.${gInx}.tests' shall not be empty` );
-    }
-    const body = tests
-      .map( ( test, tInx ) => this.parseTest( test, tInx, gInx ) )
-      .join( "\n" );
-
-    return this.schema.jest.tplGroup({
-      title: group.title,
-      body
-    });
-  }
-
   generate() {
     try {
-      if ( !this.suite.hasOwnProperty( "groups" ) || this.suite.groups === null ) {
+      if ( !this.suite.hasOwnProperty( "tests" ) || this.suite.tests === null ) {
         throw new Error( `Selected '${ this.suiteFilename }' is not a valid Puppetry test suite` );
       }
       const targets = this.parseTargets(),
-            body = Object.values( this.suite.groups )
-              .filter( group => group.disabled !== true )
-              .map( this.parseGroup )
+            body = Object.values( this.suite.tests )
+              .filter( test => test.disabled !== true )
+              .map( this.parseTest )
               .join( "\n" );
 
       return this.schema.jest.tplSuite({

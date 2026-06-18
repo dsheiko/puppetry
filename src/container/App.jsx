@@ -14,11 +14,10 @@ import LoadingTip from "component/Global/LoadingTip";
 const mapStateToProps = ( state ) => ({
         bootstrapLoaded: state.app.bootstrapLoaded,
         selector: {
-          getTestDataTable: ( group ) => selectors.getGroupTestsMemoized( group ),
           getSelectedTargets: ( selection ) => selectors.getSelectedTargetsMemoized({ ...state, selection }),
           hasTarget: ( target ) => selectors.hasTarget( target, state.suite.targets ),
           findCommandsByTestId:
-            ( testId ) => selectors.findCommandsByTestId( testId, state.suite.groups )
+            ( testId ) => selectors.findCommandsByTestId( testId, state.suite.tests )
         }
       }),
       // Mapping actions to the props

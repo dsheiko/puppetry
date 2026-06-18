@@ -73,7 +73,6 @@ exports.RUNNER_PUPPETRY = "RUNNER_PUPPETRY";
 exports.RUNNER_JEST = "RUNNER_JEST";
 
 exports.SNIPPETS_FILENAME = ".snippets.json";
-exports.SNIPPETS_GROUP_ID = "snippets";
 
 // screenshots/.trace for printable text
 exports.DIR_SCREENSHOTS_TRACE = ".trace";

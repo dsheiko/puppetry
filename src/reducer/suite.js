@@ -3,7 +3,6 @@ import actions from "action";
 import DEFAULT_STATE from "./defaultState";
 import update from "immutability-helper";
 import target from "./suite/target";
-import group from "./suite/group";
 import test from "./suite/test";
 import command from "./suite/command";
 
@@ -24,7 +23,6 @@ export default handleActions(
     },
 
     ...target,
-    ...group,
     ...test,
     ...command
   },

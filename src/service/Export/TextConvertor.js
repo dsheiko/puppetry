@@ -29,12 +29,10 @@ export default class TextConvertor {
     });
   }
 
-  printTest = ( test, tInx, gInx, variables = {}) => {
-    const groupTestRecLabel = `${ gInx + 1 }.${ tInx + 1 }.`;
-    if ( test.groupId !== "snippets" ) {
-      this.print( `\n` );
-      this.print( `${ groupTestRecLabel } test: ${ test.title }`, 2 );
-    }
+  printTest = ( test, tInx, variables = {}) => {
+    const testRecLabel = `${ tInx + 1 }.`;
+    this.print( `\n` );
+    this.print( `${ testRecLabel } test: ${ test.title }`, 1 );
 
     if ( variables && Object.keys( variables ).length ) {
       this.printLocalVariables( variables );
@@ -47,22 +45,22 @@ export default class TextConvertor {
           if ( !( command.ref in this.input.snippets ) ) {
             return ;
           }
-          return this.printTest( this.input.snippets[ command.ref ], tInx, gInx, command.variables );
+          return this.printTest( this.input.snippets[ command.ref ], tInx, command.variables );
         }
-        return this.printCommand( command, groupTestRecLabel );
+        return this.printCommand( command, testRecLabel );
       });
 
 
   }
 
-  printCommand = ( command, groupTestRecLabel ) => {
+  printCommand = ( command, testRecLabel ) => {
 
-    this.commandRecLabels[ groupTestRecLabel ] = groupTestRecLabel in this.commandRecLabels
-      ? this.commandRecLabels[ groupTestRecLabel ] + 1
+    this.commandRecLabels[ testRecLabel ] = testRecLabel in this.commandRecLabels
+      ? this.commandRecLabels[ testRecLabel ] + 1
       : 1;
 
     const schema = getSchema( command.target, command.method ),
-          recordLabel = `${ groupTestRecLabel }${ this.commandRecLabels[ groupTestRecLabel ] }.`;
+          recordLabel = `${ testRecLabel }${ this.commandRecLabels[ testRecLabel ] }.`;
 
     this.onCommand && this.onCommand( command, recordLabel );
 
@@ -101,15 +99,10 @@ export default class TextConvertor {
 
     this.print( `\n` );
 
-    Object.values( suite.groups )
-      .filter( group => !group.disabled )
-      .forEach( ( group, gInx ) => {
-        this.print( `\n`, 0 );
-        this.print( `${ gInx + 1 }. describe: ${ group.title }`, 1 );
-        Object.values( group.tests )
-          .filter( test => !test.disabled )
-          .forEach( ( test, tInx ) => this.printTest( test, tInx, gInx ) );
-      });
+    const tests = suite.tests || {};
+    Object.values( tests )
+      .filter( test => !test.disabled )
+      .forEach( ( test, tInx ) => this.printTest( test, tInx ) );
   }
 
   print( text, level = 0 ) {

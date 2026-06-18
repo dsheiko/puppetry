@@ -6,7 +6,6 @@ import projectActions from "./project";
 import suiteActions from "./suite";
 import targetActions from "./target";
 import sharedTargetActions from "./sharedTarget";
-import groupActions from "./group";
 import testActions from "./test";
 import commandActions from "./command";
 import snippetsActions from "./snippets";
@@ -20,7 +19,6 @@ const actions = {
   ...projectActions,
   ...suiteActions,
   ...targetActions,
-  ...groupActions,
   ...testActions,
   ...commandActions,
   ...snippetsActions,

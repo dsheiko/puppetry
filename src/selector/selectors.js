@@ -1,27 +1,19 @@
 import uniqid from "uniqid";
 import { validate } from "bycontract";
-import { SNIPPETS_GROUP_ID } from "constant";
 import { createSelector } from "reselect";
 
 function setEntity( arr, entity ) {
   return arr.map( record => ({ ...record, entity }) );
 }
 
-export function findCommandsByTestId( testId, groups ) {
-  const values = Object.values( groups );
-  for ( let group of values ) {
-    if ( testId in group.tests ) {
-      return group.tests[ testId ].commands;
-    }
-  }
-  return null;
+export function findCommandsByTestId( testId, tests ) {
+  return tests && tests[ testId ] ? tests[ testId ].commands : null;
 }
 
 const stateSnippets = ( state ) => state.snippets,
       stateSuiteTargets = ( state ) => state.suite.targets,
       stateProjectTargets = ( state ) => state.project.targets,
-      stateSuiteGroups = ( state ) => state.suite.groups,
-      groupTests = ( group ) => group.tests,
+      stateSuiteTests = ( state ) => state.suite.tests,
       allTargets = ( state ) => ({
         targets: Object.assign({}, state.project.targets, state.suite.targets ),
         selection: state.selection
@@ -30,19 +22,13 @@ const stateSnippets = ( state ) => state.snippets,
 export const getCleanSnippetsMemoized = createSelector( stateSnippets, getSnippets );
 export const getProjectTargetDataTableMemoized = createSelector( stateProjectTargets, getTargetDataTable );
 export const getSuiteTargetDataTableMemoized = createSelector( stateSuiteTargets, getTargetDataTable );
-export const getSuiteGroupsMemoized = createSelector( stateSuiteGroups,
-  ( groups ) => getStructureDataTable( groups, "group" ) );
-export const getGroupTestsMemoized = createSelector( groupTests,
+export const getSuiteTestsMemoized = createSelector( stateSuiteTests,
   ( tests ) => getStructureDataTable( tests, "test" ) );
 export const getSelectedTargetsMemoized = createSelector( allTargets,
   ({ targets, selection }) => getSelectedTargets( selection, targets ) );
 
 const getCommandsArray = ( state, props ) => {
-  const group = state.suite.groups[ props.groupId ];
-  if ( typeof group === "undefined" ) {
-    return {};
-  }
-  const test = group.tests[ props.testId ];
+  const test = state.suite.tests[ props.testId ];
   if ( typeof test === "undefined" ) {
     return {};
   }
@@ -157,22 +143,10 @@ export function getStructureDataTable( record, entity ) {
   return data;
 }
 
-/**
- *
- * @param {String} variable
- * @param {Object} targets
- * @returns {Boolean}
- */
 export function hasTarget( variable, targets ) {
   return Boolean( getTarget( variable, targets ) );
 }
 
-/**
- *
- * @param {String[]} selection
- * @param {Object} targets
- * @returns {Object}
- */
 export function getSelectedTargets( selection, targets ) {
   return Object.values( targets )
     .filter( target => selection.includes( target.target ) )
@@ -184,7 +158,5 @@ export function getSelectedTargets( selection, targets ) {
 
 
 export function getSnippets( snippets ) {
-  return snippets.groups && snippets.groups.hasOwnProperty( SNIPPETS_GROUP_ID )
-    ? snippets.groups[ SNIPPETS_GROUP_ID ].tests
-    : {};
+  return snippets && snippets.tests ? snippets.tests : {};
 }

@@ -1,5 +1,4 @@
 import { getSchema } from "component/Schema/schema";
-import { SNIPPETS_GROUP_ID } from "constant";
 
 function buildAddon( record ) {
   try {
@@ -16,12 +15,8 @@ function buildAddon( record ) {
 }
 
 function renderRef( ref, snippets ) {
-  const groups = snippets.groups;
-  if ( !groups.hasOwnProperty( SNIPPETS_GROUP_ID ) ) {
-    return ``;
-  }
-  const tests = groups[ SNIPPETS_GROUP_ID ].tests;
-  if ( !tests.hasOwnProperty( ref ) ) {
+  const tests = snippets.tests;
+  if ( !tests || !tests.hasOwnProperty( ref ) ) {
     return ``;
   }
   const test = tests[ ref ];
@@ -50,8 +45,5 @@ function renderTestCases( tests, snippets ) {
 }
 
 export function renderSuiteHtml( suite, snippets ) {
-  return Object.values( suite.groups )
-    .filter( group => group.disabled !== true )
-    .reduce( ( carry, group ) => `${ carry }<li><span>${ group.title }</span>`
-      + `<ul>${ renderTestCases( group.tests, snippets ) }</ul></li>`, "" );
+  return renderTestCases( suite.tests, snippets );
 }

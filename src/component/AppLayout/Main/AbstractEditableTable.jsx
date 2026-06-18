@@ -26,9 +26,6 @@ export default class AbstractEditableTable extends AbstractDnDTable {
       addTarget: PropTypes.func.isRequired,
       updateTarget: PropTypes.func.isRequired,
       removeTarget: PropTypes.func.isRequired,
-      addGroup: PropTypes.func.isRequired,
-      updateGroup: PropTypes.func.isRequired,
-      removeGroup: PropTypes.func.isRequired,
       addTest: PropTypes.func.isRequired,
       updateTest: PropTypes.func.isRequired,
       removeTest: PropTypes.func.isRequired,
@@ -36,8 +33,7 @@ export default class AbstractEditableTable extends AbstractDnDTable {
       updateCommand: PropTypes.func.isRequired,
       removeCommand: PropTypes.func.isRequired
     }),
-    testId: PropTypes.string,
-    groupId: PropTypes.string
+    testId: PropTypes.string
   }
 
   registerRef( id, field ) {

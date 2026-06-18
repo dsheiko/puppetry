@@ -1,8 +1,8 @@
 /*eslint jsx-a11y/no-static-element-interactions: 0*/
 import React from "react";
 import PropTypes from "prop-types";
-import { Tabs, Icon } from "antd";
-import { GroupTable  } from "./Main/GroupTable";
+import { Button, Drawer, Icon, Tabs } from "antd";
+import { TestTable  } from "./Main/TestTable";
 import { SuiteForm  } from "./Main/SuiteForm";
 import { TargetTable  } from "./Main/TargetTable";
 import ErrorBoundary from "component/ErrorBoundary";
@@ -11,19 +11,17 @@ import LearnMore from "component/Global/LearnMore";
 import { connect } from "react-redux";
 import * as selectors from "selector/selectors";
 
-// Mapping state to the props
 const mapStateToProps = ( state ) => ({
         panes: state.project.appPanels.suite.panes,
-        expandedGroups: state.project.groups,
-        groups: state.suite.groups,
+        expandedTests: state.project.tests,
+        tests: state.suite.tests,
         targets: state.suite.targets,
         title: state.suite.title,
         description: state.suite.description,
         timeout: state.suite.timeout,
         targetDataTable: selectors.getSuiteTargetDataTableMemoized( state ),
-        groupDataTable: selectors.getSuiteGroupsMemoized( state )
+        testDataTable: selectors.getSuiteTestsMemoized( state )
       }),
-      // Mapping actions to the props
       mapDispatchToProps = () => ({
       }),
       KEY_TAB = 9,
@@ -34,16 +32,28 @@ export class Main extends AbstractComponent {
 
   static propTypes = {
     selector: PropTypes.object.isRequired,
-    expandedGroups: PropTypes.object,
-    groups: PropTypes.object,
+    expandedTests: PropTypes.object,
+    tests: PropTypes.object,
     targets: PropTypes.object,
-    timout: PropTypes.number,
+    timeout: PropTypes.number,
     title: PropTypes.string,
     panes: PropTypes.array,
     action: PropTypes.shape({
       updateProjectPanes: PropTypes.func.isRequired,
       setApp: PropTypes.func.isRequired
     })
+  }
+
+  state = {
+    suiteOptionsOpen: false
+  }
+
+  openSuiteOptions = () => {
+    this.setState({ suiteOptionsOpen: true });
+  }
+
+  closeSuiteOptions = () => {
+    this.setState({ suiteOptionsOpen: false });
   }
 
   onTabChange = ( targetKey ) => {
@@ -54,26 +64,21 @@ export class Main extends AbstractComponent {
     }, 10 );
   }
 
-  shouldComponentUpdate( nextProps ) {
-
-    if ( this.props.groups !== nextProps.groups
+  shouldComponentUpdate( nextProps, nextState ) {
+    if ( this.props.tests !== nextProps.tests
       || this.props.panes !== nextProps.panes
-      || this.props.expandedGroups !== nextProps.expandedGroups
+      || this.props.expandedTests !== nextProps.expandedTests
       || this.props.targets !== nextProps.targets
       || this.props.title !== nextProps.title
       || this.props.description !== nextProps.description
-      || this.props.timeout !== nextProps.timeout ) {
+      || this.props.timeout !== nextProps.timeout
+      || this.state.suiteOptionsOpen !== nextState.suiteOptionsOpen ) {
       return true;
     }
     return false;
   }
 
-  openTab = async ( tabKey, e = null ) => {
-    e && e.preventDefault();
-    this.props.action.addAppTab( tabKey );
-  }
-
-  panes = [ "targets", "groups", "options" ];
+  panes = [ "targets", "tests" ];
 
   onKeyDown = ( e ) => {
     if ( e.keyCode === KEY_TAB && e.ctrlKey ) {
@@ -104,17 +109,23 @@ export class Main extends AbstractComponent {
   render() {
     const { action,
             selector,
-            expandedGroups,
+            expandedTests,
             targets,
             title,
             description,
             timeout,
             targetDataTable,
-            groupDataTable
+            testDataTable
           } = this.props,
+          { suiteOptionsOpen } = this.state,
+          activeKey = this.getActivePane(),
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
-          groupsLabel = ( <span><Icon type="audit" />Test Cases</span> ),
-          activeKey = this.getActivePane();
+          testsLabel = ( <span><Icon type="audit" />Test Cases</span> ),
+          suiteOptionsBtn = (
+            <Button size="small" onClick={ this.openSuiteOptions }>
+              <Icon type="setting" />{ " " }Suite options
+            </Button>
+          );
 
     return (
       <ErrorBoundary>
@@ -126,6 +137,7 @@ export class Main extends AbstractComponent {
             hideAdd={ true }
             animated={ false }
             onChange={ this.onTabChange }
+            tabBarExtraContent={ suiteOptionsBtn }
           >
             <TabPane tab={ targetsLabel } key="targets">
               <p>Targets are identifiers associated with locators (CSS selector or XPath)
@@ -134,38 +146,28 @@ export class Main extends AbstractComponent {
 
               <p><LearnMore href="https://docs.puppetry.app/target" />
               </p>
-              <TargetTable action={action} targets={ targetDataTable } />
+              <TargetTable action={ action } targets={ targetDataTable } />
             </TabPane>
 
-            <TabPane tab={ groupsLabel } key="groups">
-              <p>Test case is a specification of { "" }<a href="https://docs.puppetry.app/test-step"
-                onClick={ this.onExtClick }>commands, assertions and references</a> { "" }
-              to ensure that a targeted component of the test application acts as intended.
-              Tests cases are organized into logical { "" } <a href="https://docs.puppetry.app/group"
-                onClick={ this.onExtClick }>groups</a>, representing test contexts. During the test
-                execution <a
-                onClick={ this.onExtClick }
-                href="https://pptr.dev/#?product=Puppeteer&version=v2.0.0&show=api-class-browser">
-                a new browser session</a> is created for every group.
-              </p>
-
-              <p>
-              You can change test case representation style in
-                { " " }<a onClick={ ( e ) => this.openTab( "settings", e ) }>settings</a>.
-              </p>
-              <GroupTable
+            <TabPane tab={ testsLabel } key="tests">
+              <TestTable
                 action={ action }
                 selector={ selector }
-                expanded={ expandedGroups }
-                groups={ groupDataTable }
+                expanded={ expandedTests }
+                tests={ testDataTable }
                 targets={ targets } />
             </TabPane>
 
-            <TabPane tab={ "Suite options" } key="options">
-              <SuiteForm  action={ action } title={ title } timeout={ timeout } description={ description } />
-            </TabPane>
-
           </Tabs>
+
+          <Drawer
+            title="Suite options"
+            width={ 400 }
+            visible={ suiteOptionsOpen }
+            onClose={ this.closeSuiteOptions }
+          >
+            <SuiteForm action={ action } title={ title } timeout={ timeout } description={ description } />
+          </Drawer>
 
         </div>
       </ErrorBoundary>

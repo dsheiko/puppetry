@@ -1,10 +1,4 @@
-/**
- *
- * @param {Object} record
- * @returns {Object[]}
- */
 export function findTargets( record ) {
-  // group
   if ( "tests" in record ) {
     const targets = Object.values( record.tests ).reduce( ( carry, test ) => {
       return [ ...carry, ...findTargets( test ) ];
@@ -19,7 +13,6 @@ export function findTargets( record ) {
       }, []);
     return [ ...new Set( targets ) ];
   }
-  // command
   if ( record.target === "page" ) {
     return [];
   }
@@ -32,28 +25,21 @@ export function findTargets( record ) {
 function getCommandCoors( record ) {
   return {
     testId: record.testId,
-    groupId: record.groupId,
     id: record.id
   };
 }
 
 export function findTargetNodes( record, target ) {
   // suite
-  if ( "groups" in record ) {
-    return Object.values( record.groups ).reduce( ( carry, group ) => {
-      return [ ...carry, ...findTargetNodes( group, target ) ];
-    }, []);
-  }
-  // group
   if ( "tests" in record ) {
     return Object.values( record.tests ).reduce( ( carry, test ) => {
       return [ ...carry, ...findTargetNodes( test, target ) ];
     }, []);
   }
+  // test
   if ( "commands" in record ) {
     return Object.values( record.commands )
-      .filter( c => c.target === target
-        || hasTargetInAssert( c, target ) )
+      .filter( c => c.target === target || hasTargetInAssert( c, target ) )
       .reduce( ( carry, command ) => {
         return [ ...carry, getCommandCoors( command ) ];
       }, []);

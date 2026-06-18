@@ -9,11 +9,10 @@ import { dateToTs, result } from "service/utils";
 import errorActions from "./error";
 import { writeSuite, readSuite, removeSuite, normalizeFilename } from "../service/io";
 import { ipcRenderer } from "electron";
-import { E_SUITE_LOADED, SNIPPETS_FILENAME, SNIPPETS_GROUP_ID } from "constant";
+import { E_SUITE_LOADED, SNIPPETS_FILENAME } from "constant";
 import projectActions from "./project";
 import appActions from "./app";
 import targetActions from "./target";
-import groupActions from "./group";
 import testActions from "./test";
 import commandActions from "./command";
 import snippetsActions from "./snippets";
@@ -88,30 +87,34 @@ actions.createSuite = ( rawFilename, title ) => async ( dispatch, getState ) => 
   }
 };
 
-function createSnippetsSuite( dispatch ) {
-  dispatch( groupActions.addGroup({ title: "Snippets" }, SNIPPETS_GROUP_ID ) );
-  dispatch( projectActions.setProject({
-    groups: {
-      [ SNIPPETS_GROUP_ID ]: {
-        key: SNIPPETS_GROUP_ID,
-        value: true,
-        tests: {}
-      }
-    }
-  }) );
+function migrateSuiteFormat( suite ) {
+  if ( !suite.groups ) {
+    return suite;
+  }
+  suite.tests = {};
+  Object.values( suite.groups ).forEach( group => {
+    Object.entries( group.tests || {}).forEach( ([ tid, test ]) => {
+      const { groupId, ...cleanTest } = test,
+            commands = {};
+      Object.entries( cleanTest.commands || {}).forEach( ([ cid, cmd ]) => {
+        const { groupId: _g, ...cleanCmd } = cmd;
+        commands[ cid ] = cleanCmd;
+      });
+      suite.tests[ tid ] = { ...cleanTest, title: `${ group.title } : ${ test.title }`, commands };
+    });
+  });
+  delete suite.groups;
+  return suite;
 }
 
 function normalizeSuite( suite ) {
-  Object.entries( suite.groups ).forEach( gPairs => {
-    const [ gid, group ] = gPairs;
-    Object.entries( group.tests ).forEach( tPairs => {
-      const [ tid, test ] = tPairs;
-      Object.entries( test.commands ).forEach( cPairs => {
-        const [ cid, command ] = cPairs;
-        if ( !command.target && !command.method && !command.ref ) {
-          delete suite.groups[ gid ].tests[ tid ].commands[ cid ];
-        }
-      });
+  Object.entries( suite.tests ).forEach( tPairs => {
+    const [ tid, test ] = tPairs;
+    Object.entries( test.commands ).forEach( cPairs => {
+      const [ cid, command ] = cPairs;
+      if ( !command.target && !command.method && !command.ref ) {
+        delete suite.tests[ tid ].commands[ cid ];
+      }
     });
   });
   return suite;
@@ -122,19 +125,15 @@ actions.loadSuite = ( filename, options = { silent: false }) => async ( dispatch
     const store = getState(),
           { projectDirectory } = store.settings,
           data = await readSuite( projectDirectory, filename ),
-          // in case of snippets
           suite = data === null
             ? { ...DEFAULT_STATE.suite, filename }
-            : normalizeSuite( data );
+            : normalizeSuite( migrateSuiteFormat( data ) );
 
     suite.snippets = ( filename === SNIPPETS_FILENAME );
 
     dispatch( projectActions.setProject({ lastOpenSuite: filename }) );
     dispatch( actions.resetSuite({ ...suite, loadedAt: dateToTs(), filename, modified: false }) );
     ipcRenderer.send( E_SUITE_LOADED, projectDirectory, filename, store.app.project.files );
-    if ( suite.snippets && !( SNIPPETS_GROUP_ID in suite.groups ) ) {
-      createSnippetsSuite( dispatch );
-    }
     dispatch( appActions.addAppTab( "suite" ) );
   } catch ( ex ) {
     !options.silent && handleException( ex, dispatch, `Cannot load suite ${ filename }` );
@@ -168,7 +167,7 @@ actions.saveSuite = ( options = {}, autosave = false ) => async ( dispatch, getS
     if ( store.suite.snippets ) {
       await dispatch( snippetsActions.resetSnippets({
         targets: store.suite.targets,
-        groups: store.suite.groups
+        tests: store.suite.tests
       }) );
     }
 
@@ -192,33 +191,26 @@ actions.openSuiteFile = ( filename, options = { silent: false }) => ( dispatch )
 
 
 actions.createSuiteByRecording = ({ targets, commands }) => ( dispatch ) => {
-  const groupId = uniqid(),
-        testId = uniqid();
+  const testId = uniqid();
 
-  // fully reset suite after recording session
   dispatch( actions.updateSuite({
     modified: true,
     targets: {},
-    groups: {}
+    tests: {}
   }) );
 
   dispatch( appActions.setApp({ loading: true }) );
   setTimeout( () => {
     try {
-      // Seed targets
       Object.entries( targets ).forEach( ([ target, selector ]) => {
         dispatch( targetActions.addTarget({ target, selector }) );
       });
-      dispatch( groupActions.addGroup({ title: "Recorded session" }, groupId ) );
-      dispatch( testActions.addTest({ title: "Recorded test case", groupId }, testId ) );
-      // Seed commands
+      dispatch( testActions.addTest({ title: "Recorded test case" }, testId ) );
       commands.forEach( ({ method, target, params, waitForTarget }) => {
-
         dispatch( commandActions.addCommand({
           target,
           method,
           params,
-          groupId,
           testId,
           waitForTarget
         }) );
@@ -231,7 +223,6 @@ actions.createSuiteByRecording = ({ targets, commands }) => ( dispatch ) => {
     }
 
   }, 100 );
-
 
 };
 

@@ -1,24 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Tabs, Icon } from "antd";
-import { SnippetTable } from "./Main/GroupTable/SnippetTable";
+import { SnippetTable } from "./Main/SnippetTable";
 import { TargetTable  } from "./Main/TargetTable";
 import ErrorBoundary from "component/ErrorBoundary";
-import { SNIPPETS_GROUP_ID } from "constant";
 import AbstractForm from "component/AbstractForm";
 import LearnMore from "component/Global/LearnMore";
 import { connect } from "react-redux";
 import * as selectors from "selector/selectors";
 
-// Mapping state to the props
 const mapStateToProps = ( state ) => ({
         panes: state.project.appPanels.suite.panes,
-        expandedGroups: state.project.groups,
-        groups: state.suite.groups,
+        expandedTests: state.project.tests,
+        tests: state.suite.tests,
         targets: state.suite.targets,
-        targetDataTable: selectors.getSuiteTargetDataTableMemoized( state )
+        targetDataTable: selectors.getSuiteTargetDataTableMemoized( state ),
+        testDataTable: selectors.getSuiteTestsMemoized( state )
       }),
-      // Mapping actions to the props
       mapDispatchToProps = () => ({
       }),
 
@@ -28,8 +26,8 @@ const mapStateToProps = ( state ) => ({
 export class Snippets extends AbstractForm {
 
   static propTypes = {
-    expandedGroups: PropTypes.object,
-    groups: PropTypes.object,
+    expandedTests: PropTypes.object,
+    tests: PropTypes.object,
     targets: PropTypes.object,
     panes: PropTypes.array,
     selector: PropTypes.object.isRequired,
@@ -48,13 +46,10 @@ export class Snippets extends AbstractForm {
   }
 
   shouldComponentUpdate( nextProps ) {
-
-    if ( this.props.groups !== nextProps.groups
+    if ( this.props.tests !== nextProps.tests
       || this.props.panes !== nextProps.panes
-      || this.props.expandedGroups !== nextProps.expandedGroups
-      || this.props.targets !== nextProps.targets
-      || this.props.title !== nextProps.title
-      || this.props.timeout !== nextProps.timeout ) {
+      || this.props.expandedTests !== nextProps.expandedTests
+      || this.props.targets !== nextProps.targets ) {
       return true;
     }
     return false;
@@ -64,16 +59,14 @@ export class Snippets extends AbstractForm {
     const { action,
             selector,
             panes,
-            groups,
-            expandedGroups,
+            expandedTests,
             targets,
-            targetDataTable
+            targetDataTable,
+            testDataTable
           } = this.props,
 
           targetsLabel = ( <span><Icon type="select" />Targets</span> ),
           snippetsLabel = ( <span><Icon type="audit" />Snippets</span> ),
-          group = groups.hasOwnProperty( SNIPPETS_GROUP_ID )? groups[ SNIPPETS_GROUP_ID ] : null,
-          tests = group ? selector.getTestDataTable( group ) : [],
           targetValues = Object.values( targets );
 
     let activeKey = "targets";
@@ -84,7 +77,6 @@ export class Snippets extends AbstractForm {
     return (
       <ErrorBoundary>
         <div id="cSnippets" className="panes-container">
-
 
           <Tabs
             activeKey={ activeKey }
@@ -98,22 +90,21 @@ export class Snippets extends AbstractForm {
               </p>
 
               <p><LearnMore href="https://docs.puppetry.app/target"/></p>
-              <TargetTable action={action} targets={ targetDataTable } />
+              <TargetTable action={ action } targets={ targetDataTable } />
             </TabPane>
 
-            <TabPane tab={ snippetsLabel } key="groups">
+            <TabPane tab={ snippetsLabel } key="tests">
               <p>Snippets are reusable test cases in scope of project. So you can
               create a snippet and refer to it in your test suites.<br />
               </p>
               <p><LearnMore href="https://docs.puppetry.app/snippets" /></p>
 
-              { tests && <SnippetTable
-                expanded={ expandedGroups }
+              <SnippetTable
+                expanded={ expandedTests }
                 targets={ targetValues }
-                tests={ tests }
-                groupId={ SNIPPETS_GROUP_ID }
+                tests={ testDataTable }
                 selector={ selector }
-                action={ action } /> }
+                action={ action } />
 
             </TabPane>
 

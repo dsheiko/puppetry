@@ -170,8 +170,8 @@ ${body}
 `;
 
 export const tplTest = ({ title, body }) => `
-    test( ${ JSON.stringify( title ) }, async () => {
-      let result, assert, searchStr, localEnv;
+  test( ${ JSON.stringify( title ) }, async () => {
+    let result, assert, searchStr, localEnv;
 ${body}
-    });
+  });
 `;

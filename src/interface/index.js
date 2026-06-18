@@ -9,12 +9,12 @@ export * from "./suite";
 export const suitePropTypes = PropTypes.shape({
   title: PropTypes.string.isRequired,
   timeout: PropTypes.number.isRequired,
-  savedAt: PropTypes.any.isRequired, // Date, ""
-  loadedAt: PropTypes.any.isRequired, // Date, ""
+  savedAt: PropTypes.any.isRequired,
+  loadedAt: PropTypes.any.isRequired,
   modified: PropTypes.bool.isRequired,
   filename: PropTypes.string.isRequired,
   targets: PropTypes.object.isRequired,
-  groups: PropTypes.object.isRequired
+  tests: PropTypes.object.isRequired
 });
 
 
@@ -36,12 +36,9 @@ export const ENTITY = {
   expanded: "boolean="
 };
 
-export const TEST_REF = {
-  groupId: "string"
-};
+export const TEST_REF = {};
 
 export const COMMAND_REF = {
-  groupId: "string",
   testId: "string"
 };
 
@@ -56,15 +53,9 @@ export const VARIABLE = {
   env: "string="
 };
 
-export const GROUP = {
-  title: "string=",
-  tests: "object="
-};
-
 export const TEST = {
   title: "string=",
-  commands: "object=",
-  ...TEST_REF
+  commands: "object="
 };
 
 export const COMMAND = {
@@ -79,4 +70,3 @@ export const COMMAND = {
   isRef: "boolean=",
   ...COMMAND_REF
 };
-
