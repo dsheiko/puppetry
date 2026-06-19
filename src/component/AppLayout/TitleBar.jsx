@@ -40,6 +40,11 @@ export class TitleBar extends AbstractPureComponent {
     win.on( "unmaximize", this.updateState );
   }
 
+  componentWillUnmount() {
+    win.removeListener( "maximize", this.updateState );
+    win.removeListener( "unmaximize", this.updateState );
+  }
+
   updateState = () => {
     this.setState({ isMaximized: win.isMaximized() });
   }
@@ -50,10 +55,12 @@ export class TitleBar extends AbstractPureComponent {
 
   onRestore = () => {
     win.restore();
+    this.setState({ isMaximized: false });
   }
 
   onMaximize = () => {
     win.maximize();
+    this.setState({ isMaximized: true });
   }
 
   onClose = async () => {
