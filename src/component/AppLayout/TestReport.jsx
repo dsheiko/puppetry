@@ -250,7 +250,7 @@ export class TestReport extends AbstractComponent {
     return ( <ErrorBoundary>
       <If exp={ loading }>
         <div className="test-report-spin">
-          <Spin spinning={ loading } tip="Tests are running.."></Spin>
+          <Spin spinning={ loading } tip="Tests are running..."></Spin>
           <LoadingTip />
         </div>
       </If>

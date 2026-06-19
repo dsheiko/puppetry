@@ -77,7 +77,7 @@ or attribute has a specified value, or element{"'"}s position and size match the
           <li>to manage browser methods and assertions</li>
         </ul>
         <br />
-        <p>If you experience any problems with application, please, report to { " " }
+        <p>If you run into any problems, report them to { " " }
           <a onClick={ this.onExtClick }
             href="https://github.com/dsheiko/puppetry/issues"
             rel="noopener noreferrer">github.com/dsheiko/puppetry/issues</a></p>

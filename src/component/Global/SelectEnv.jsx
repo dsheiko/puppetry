@@ -34,7 +34,7 @@ export class SelectEnv extends AbstractComponent {
         <Select
           { ...SELECT_SEARCH_PROPS }
           style={{ width: ( theme === "test-reports" ? 282 : 348 ) }}
-          placeholder="Select a environment"
+          placeholder="Select an environment"
           onChange={ this.onEnvChange }
           defaultValue={ activeEnv }
         >

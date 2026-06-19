@@ -50,10 +50,10 @@ export class VariablesPane extends AbstractComponent {
     return (
       <ErrorBoundary>
         <p>
-    Here we can define a set of environment dependent variables. For an instance, we can declare a separate
-    target app URL for every environment (test.acme.com, stage.acme.com, www.acme.com).
-    Before running/exporting test project we specify the desired environment and the corresponding template
-    tags in test cases will be replaced with the value (URL) given for that environment.
+    Define environment-specific variables here. For instance, you can set a separate target app URL
+    for each environment (test.acme.com, stage.acme.com, www.acme.com).
+    When running or exporting, select the desired environment and template tags in test cases
+    will be replaced with the values defined for it.
         </p>
         <br />
         <div className="select-group-inline">
@@ -63,7 +63,7 @@ export class VariablesPane extends AbstractComponent {
           <Select
             { ...SELECT_SEARCH_PROPS }
             style={ INLINE_INPUT_STYLES }
-            placeholder="Select a environment"
+            placeholder="Select an environment"
             onChange={ this.onEnvChange }
             defaultValue={ activeEnv }
           >

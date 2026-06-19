@@ -60,7 +60,7 @@ export class SuiteForm extends AbstractForm {
             initialValue: this.props.title,
             rules: [
               {
-                required: true, message: "Please enter suite name"
+                required: true, message: "Please enter a suite name"
               },
               {
                 validator: ruleValidateGenericString

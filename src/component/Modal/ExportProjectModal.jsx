@@ -147,8 +147,7 @@ export class ExportProjectModal extends AbstractTestRunnerModal {
           if ( !this.props.readyToRunTests ) {
             notification.open({
               message: "Dependencies not installed",
-              description: "Please, run the tests (F6) "
-                    + " to install dependencies."
+              description: "Run the tests (F6) first to install dependencies."
             });
             this.setState({ loading: false, locked: false });
             return;

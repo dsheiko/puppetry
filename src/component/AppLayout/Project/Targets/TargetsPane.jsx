@@ -29,7 +29,7 @@ export class TargetsPane extends AbstractComponent {
     return (
       <ErrorBoundary>
         <p>Locators are identifiers associated with selectors (CSS selector or XPath)
-           that we can refer in the test cases. Shared Locators are accessible in all suites of the open test plan.
+           that you can refer to in test cases. Shared Locators are accessible in all suites of the open test plan.
         </p>
 
         <br />

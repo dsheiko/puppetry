@@ -115,9 +115,9 @@ export class EditTargetsAsCsvModal extends AbstractForm {
 
           { isVisible && <Form>
             <div className="markdown">
-              Here you can edit locators in CSV (comma-separated values) format.
-              Please, define lines representing simple locators as <code>LOCATOR,SELECTOR</code>
-              and chained locators as <code>LOCATOR,SELECTOR,PARENT_LOCATOR,PARENT_TYPE</code>
+              Edit locators in CSV (comma-separated values) format.
+              Simple locators: <code>LOCATOR,SELECTOR</code>.
+              Chained locators: <code>LOCATOR,SELECTOR,PARENT_LOCATOR,PARENT_TYPE</code>.
             </div>
             <FormItem  label="Locators">
               { getFieldDecorator( "csv", {

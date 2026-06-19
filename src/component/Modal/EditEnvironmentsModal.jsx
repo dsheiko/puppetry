@@ -126,10 +126,10 @@ export class EditEnvironmentsModal extends AbstractForm {
                     validator: ( rule, value, callback ) => {
                       value = value ? value.trim() : "";
                       if ( value.length < 3 ) {
-                        return callback( "The value shall not be less than 3 characters" );
+                        return callback( "Must be at least 3 characters" );
                       }
                       if ( value.length > 32 ) {
-                        return callback( "The value shall not be more than 32 characters" );
+                        return callback( "Must be 32 characters or fewer" );
                       }
                       callback();
                     }

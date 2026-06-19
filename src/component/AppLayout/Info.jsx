@@ -85,7 +85,7 @@ export class Info extends AbstractComponent {
             { " " } the first test suite file.
           </If>
         </p>
-        <p>Besides, your can switch to the { " " } <Button id="cInfoDemoProjectBtn"
+        <p>You can also switch to the { " " } <Button id="cInfoDemoProjectBtn"
           onClick={ this.onOpenDemoProject }>demo test plan</Button> </p>
         <br />
         <p>While on that subject, let’s brush up on Puppetry structure:</p>
@@ -97,7 +97,7 @@ export class Info extends AbstractComponent {
           <li><strong>Test Plan</strong> – is a group of related test suites (a directory with suite files)</li>
         </ul>
         <br />
-        <p>If you experience any problems with application, please, report to { " " }
+        <p>If you run into any problems, report them to { " " }
           <a onClick={ this.onExtClick }
             href="https://github.com/dsheiko/puppetry/issues"
             rel="noopener noreferrer">github.com/dsheiko/puppetry/issues</a></p>

@@ -137,7 +137,7 @@ export class Main extends AbstractComponent {
           >
             <TabPane tab={ targetsLabel } key="targets">
               <p>Locators are identifiers associated with selectors (CSS selector or XPath)
-              that we can refer in the test cases.
+              that you can refer to in test cases.
               </p>
 
               <TargetTable action={ action } targets={ targetDataTable } />

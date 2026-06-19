@@ -212,9 +212,8 @@ export class InstallRuntimeTestModal extends AbstractComponent {
             <div data-show="true" className="ant-alert ant-alert-error ant-alert-with-description ant-alert-no-icon">
               <div className="ant-alert-message">Cannot install the dependencies</div>
               <div className="ant-alert-description">
-              Unfortunately the application failed to install the required dependencies by
-              using NPM programmatically.
-              What you can do is to install the missing dependencies manually. Just follow the steps:
+              The application failed to install the required dependencies via NPM.
+              You can install them manually instead:
                 <ul>
                   <li>Install npm tool
                   (<a onClick={ this.onExtClick } href="https://www.npmjs.com/get-npm">see here how to</a>)</li>

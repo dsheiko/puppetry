@@ -86,7 +86,7 @@ export class Snippets extends AbstractForm {
           >
             <TabPane tab={ targetsLabel } key="targets" id="cSuitePane">
               <p>Locators are identifiers associated with selectors
-              (CSS selector or XPath) that we can refer in the test cases.
+              (CSS selector or XPath) that you can refer to in test cases.
               </p>
 
               <TargetTable action={ action } targets={ targetDataTable } />

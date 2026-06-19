@@ -51,14 +51,12 @@ export default class ErrorBoundary extends React.Component {
       // You can render any custom fallback UI
       return ( <div className={ "critical-error " + ( this.props.className || "" ) }>
         <h2><Icon type="frown-o" /></h2>
-        <h1>Opps! Something went wrong.</h1>
-        <p>Please report the issue on { " " }
+        <h1>Something went wrong.</h1>
+        <p>Report this on { " " }
           <a onClick={ this.onExtClick } href="https://github.com/dsheiko/puppetry/issues">GitHub</a>.
-            It would be very much appreciated if you attach
-          { " " }<a href="#errorlog" onClick={ this.onOpenLog }>Error log</a>{ " " } content to the report.
+          Attaching the { " " }<a href="#errorlog" onClick={ this.onOpenLog }>error log</a>{ " " } helps.
         </p>
-        <p>Besides, as as temporary measure you can
-        try to { " " }<a href="#reload"  onClick={ this.onReload } >reload</a>{ " " } the page</p>
+        <p>As a temporary fix, try to { " " }<a href="#reload" onClick={ this.onReload }>reload</a>{ " " } the page.</p>
       </div> );
     }
     return this.props.children;
