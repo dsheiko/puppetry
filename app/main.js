@@ -11,8 +11,8 @@ const electron = require( "electron" ),
       path = require( "path" ),
       log = require( "electron-log" ),
       url = require( "url" ),
-      APP_WIN_WIDTH = 1200,
-      APP_WIN_HEIGHT = 720; // 768
+      APP_WIN_WIDTH = 1280,
+      APP_WIN_HEIGHT = 800;
 
 // Keep a global reference of the window object, if you don"t, the window will
 // be closed automatically when the JavaScript object is garbage collected.

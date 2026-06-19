@@ -251,7 +251,7 @@ export class MainMenu extends React.PureComponent {
           <Menu id="cMainMenu"
             forceSubMenuRender={ true }
             theme="dark"
-            mode="vertical"
+            mode="horizontal"
             selectable={ false }>
 
             <SubMenu

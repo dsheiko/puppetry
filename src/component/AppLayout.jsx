@@ -1,12 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { remote } from "electron";
 import classNames  from "classnames";
 import { Spin, Layout } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
-import { Toolbar } from "./AppLayout/Toolbar";
-import { MainMenu } from "./AppLayout/Sider/MainMenu";
-import { ProjectExplorer  } from "./AppLayout/Sider/ProjectExplorer";
+import { TitleBar } from "./AppLayout/TitleBar";
+import { ExplorerSidebar } from "./AppLayout/ExplorerSidebar";
 import { AppFooter } from "./AppLayout/AppFooter";
 import { Welcome } from "./AppLayout/Welcome";
 import { Info } from "./AppLayout/Info";
@@ -32,8 +30,7 @@ import { TabGroup  } from "./TabGroup";
 import If from "component/Global/If";
 
 
-const { Sider } = Layout,
-      mapStateToProps = ( state ) => ({
+const mapStateToProps = ( state ) => ({
         loading:                 state.app.loading,
         tabs:                    state.app.tabs,
         commandModal:            state.app.commandModal,
@@ -73,14 +70,6 @@ const { Sider } = Layout,
 
 @connect( mapStateToProps, mapDispatchToProps )
 export class AppLayout extends React.Component {
-
-  state = {
-    collapsed: false
-  };
-
-  onCollapse = ( collapsed ) => {
-    this.setState({ collapsed });
-  }
 
   static propTypes = {
     action:                  PropTypes.object.isRequired,
@@ -145,68 +134,46 @@ export class AppLayout extends React.Component {
             "is-loading": loading,
             "has-sticky-tabs-panel": tabs.active
               && ( tabs.active === "suite" || tabs.active === "settings" )
-
           })} id="cLayout">
 
-            <Sider
-              collapsible
-              collapsed={this.state.collapsed}
-              onCollapse={this.onCollapse}
-              width="250"
-            >
-              <div className={ this.state.collapsed ? "logo is-collapsed" : "logo is-expanded"}>
-                <div className="logo__item logo__collapsed" >
-                  <img src="./assets/puppetry.svg" alt="Puppetry" />
-                </div>
-                <div className="logo__item logo__expanded" >
-                  <img src="./assets/puppetry.svg" alt="Puppetry" />
-                  <h1>Puppetry
-                    <span>ver.{ " " + remote.app.getVersion() }</span>
-                  </h1>
+            <TitleBar
+              projectName={ projectName }
+              suiteModified={ !!suiteModified }
+              action={ action }
+              isProjectEmpty={ !projectFiles.length }
+              isSuiteOpen={ !!suiteFilename }
+              isProjectOpen={ !!projectDirectory }
+              readyToRunTests={ !!readyToRunTests }
+            />
 
-                </div>
-              </div>
-
-              <MainMenu
-                action={ action }
-                isProjectEmpty={ !projectFiles.length }
-                isSuiteOpen={ !!suiteFilename }
-                projectDirectory={ projectDirectory }
-                isProjectOpen={ !!projectDirectory }
-                suiteModified={ !!suiteModified }
-                readyToRunTests={ !!readyToRunTests }
-              />
-
-              { projectFiles.length && <ProjectExplorer
+            <Layout className="layout-body">
+              <ExplorerSidebar
                 projectDirectory={ projectDirectory }
                 projects={ projects }
+                projectFiles={ projectFiles }
+                suiteFilename={ suiteFilename }
                 suiteModified={ suiteModified }
-                files={ projectFiles }
-                active={ suiteFilename }
-                action={ action } /> }
+                action={ action }
+              />
 
-            </Sider>
-            <Layout>
-              <Toolbar projectName={ projectName } suiteModified={ suiteModified } action={ action } />
+              <Layout className="layout-right">
+                <div className="layout-content">
+                  <If exp={ tabsAnyTrue }>
+                    <TabGroup action={ action } selector={ selector } />
+                  </If>
+                  <If exp={ !tabsAnyTrue }>
+                    { projectDirectory ? ( <Info action={ action }
+                      projectFiles={ projectFiles }
+                      projectName={ projectName }
+                      projectDirectory={ projectDirectory }
+                    /> )
+                      : ( <Welcome action={ action } projectDirectory={ projectDirectory } /> )
+                    }
+                  </If>
+                </div>
 
-              <div className="layout-content">
-
-                <If exp={ tabsAnyTrue }>
-                  <TabGroup action={ action } selector={ selector } />
-                </If>
-                <If exp={ !tabsAnyTrue }>
-                  { projectDirectory ? ( <Info action={ action }
-                    projectFiles={ projectFiles }
-                    projectName={ projectName }
-                    projectDirectory={ projectDirectory }
-                  /> )
-                    : ( <Welcome action={ action } projectDirectory={ projectDirectory } /> )
-                  }
-                </If>
-
-              </div>
-
-              <AppFooter action={action} />
+                <AppFooter action={action} />
+              </Layout>
             </Layout>
 
           </Layout>
