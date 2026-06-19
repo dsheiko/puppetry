@@ -27,10 +27,6 @@ exports.E_CONFIRM_DIALOG_VALUE = "confirmDialogValue";
 exports.E_ENTITY_CREATED = "entityCreated";
 exports.E_RENDERER_ERROR = "rendererError";
 exports.E_RENDERER_INFO = "rendererInfo";
-exports.E_OPEN_RECORDER_WINDOW = "openRecorderWindow";
-exports.E_RECEIVE_RECORDER_SESSION = "receiveRecorderSession";
-exports.E_DELEGATE_RECORDER_SESSION = "delegateRecorderSession";
-
 exports.E_FILE_NAVIGATOR_UPDATED = "fileNavigatorUpdated";
 exports.E_WATCH_FILE_NAVIGATOR = "watchFileNavigator";
 

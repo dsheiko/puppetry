@@ -42,22 +42,6 @@ export async function confirmClone( count ) {
   }
 }
 
-export async function confirmRecording() {
-  document.addEventListener( "keydown", closeOnEnter, false );
-  try {
-    await smalltalk
-      .confirm( "Confirm Suite Cleanup",
-        "By recording the current content of your suite will be removed. Are you sure you want to proceed?" , {
-          buttons
-        });
-    document.removeEventListener( "keydown", closeOnEnter );
-    return true;
-  } catch ( e ) {
-    document.removeEventListener( "keydown", closeOnEnter );
-    return false;
-  }
-}
-
 export async function confirmUnsavedChanges({ saveSuite, setSuite }) {
   try {
 
