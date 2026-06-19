@@ -89,7 +89,6 @@ export class Snippets extends AbstractForm {
               (CSS selector or XPath) that we can refer in the test cases.
               </p>
 
-              <p><LearnMore href="https://docs.puppetry.app/target"/></p>
               <TargetTable action={ action } targets={ targetDataTable } />
             </TabPane>
 
@@ -97,8 +96,6 @@ export class Snippets extends AbstractForm {
               <p>Shared Flows are reusable sequences of steps in scope of a test plan. So you can
               create a shared flow and refer to it in your test suites.<br />
               </p>
-              <p><LearnMore href="https://docs.puppetry.app/snippets" /></p>
-
               <SnippetTable
                 expanded={ expandedTests }
                 targets={ targetValues }

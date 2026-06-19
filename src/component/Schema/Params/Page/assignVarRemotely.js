@@ -24,7 +24,7 @@ export const assignVarRemotely = {
 
   description: `Polls \`URL\` with a given intervals until a response satisfying \`parserFn\` function received
 or a specified timeout exceeded. It can be used, for example,
-to retrieve a value from an [email sent by the application under test](https://docs.puppetry.app/testing-emails)`,
+to retrieve a value from an email sent by the application under test`,
 
   params: [
     {
@@ -107,7 +107,7 @@ it gets assigned to a given template variable. Otherwise the method proceeds pol
           label: "Request function",
           description: `By default the request is preformed by [node-fetch](https://www.npmjs.com/package/node-fetch)
 and it simply returns JSON data received from the remote URL. You can modify
-or extend it e.g. into [a chain of requests](https://docs.puppetry.app/testing-emails)`,
+or extend it e.g. into a chain of requests`,
           placeholder: `async ( url ) => {
   const rsp = await fetch( url );
   return await rsp.json();

@@ -124,7 +124,7 @@ export class TemplateHelper extends React.Component {
 
     return ( <div className="template-helper" >
       <span><Icon type="arrow-up" /> Here you can use{ " " }
-        <Link to="https://docs.puppetry.app/template">template expressions</Link></span>
+        template expressions</span>
 
       <Select
         placeholder="Select expression"

@@ -150,7 +150,7 @@ before every request that you want to mock.`,
           control: TEXTAREA,
           label: "Text body",
           placeholder: `{ status: "ok"}`,
-          description: `You can use [template expressions](https://docs.puppetry.app/template)`
+          description: `You can use template expressions`
         },
         {
           name: "params.bodyPath",
@@ -168,7 +168,7 @@ before every request that you want to mock.`,
           control: TEXTAREA,
           label: "Headers",
           placeholder: `Accept-Language: en;q=0.8\nX-Access-Token: SECRET`,
-          description: `You can use [template expressions](https://docs.puppetry.app/template)`
+          description: `You can use template expressions`
         }
       ]
     }

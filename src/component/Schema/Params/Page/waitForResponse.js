@@ -42,7 +42,7 @@ if ( ${ skip ? `!bs.performance.resources.find( item =>  item.url.includes( sear
           label: "URL",
           tooltip: "Specify here a part of URL to match a response we are waiting for",
           placeholder: "e.g. http://example.com/resource or /resource",
-          description: `You can use [template expressions](https://docs.puppetry.app/template)`,
+          description: `You can use template expressions`,
           rules: [{
             required: true,
             message: TXT_PARAM_IS_REQUIRED

@@ -140,8 +140,6 @@ export class Main extends AbstractComponent {
               that we can refer in the test cases.
               </p>
 
-              <p><LearnMore href="https://docs.puppetry.app/target" />
-              </p>
               <TargetTable action={ action } targets={ targetDataTable } />
             </TabPane>
 

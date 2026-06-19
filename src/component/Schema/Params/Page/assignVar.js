@@ -50,7 +50,7 @@ export const assignVar = {
           name: "params.value",
           control: INPUT,
           label: "Value",
-          description: `You can use [template expressions](https://docs.puppetry.app/template)`,
+          description: `You can use template expressions`,
           rules: [{
             required: true,
             message: "This field is required"

@@ -82,8 +82,7 @@ export class SnippetVariables extends AbstractForm {
       <Collapse>
         <Panel header="Local Template Variables (optional)" key="1">
           <p>You can assign variables that will be available as
-            { "" }<a href="https://docs.puppetry.app/template" onClick={ this.onExtClick }>
-              { "" } template expressions</a>{ "" } in the snippet</p>
+            { "" } template expressions{ "" } in the snippet</p>
           <Form>
             <Row gutter={4}>
               <Col span={10}>

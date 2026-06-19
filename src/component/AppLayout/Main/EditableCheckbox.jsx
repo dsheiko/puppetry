@@ -52,9 +52,7 @@ export class EditableCheckbox extends AbstractComponent {
                   <Checkbox
                     onChange={ this.onChange }
                     tabIndex={ 3 }>
-                    <span>hidden <span className="is-optional">(please, use for sensitive data <a
-                      onClick={ this.onExtClick }
-                      href="https://docs.puppetry.app/template#environment-variables">env variables</a>)</span>
+                    <span>hidden <span className="is-optional">(please, use for sensitive data env variables)</span>
                     </span>
                   </Checkbox>
                 )}

@@ -115,17 +115,6 @@ function buildAppMenu( win, projectDirectory = null, suiteFilename = null, files
       ]
     },
 
-    {
-      role: "help",
-      submenu: [
-        {
-          label: "Learn More",
-          click () {
-            shell.openExternalSync( "https://docs.puppetry.app" );
-          }
-        }
-      ]
-    }
   ];
 
   const menu = Menu.buildFromTemplate( template );

@@ -131,10 +131,7 @@ export class AssertConsoleMessage extends AbstractComponent {
                 <Input onPressEnter={ ( e ) => this.props.onPressEnter( e ) } />
               ) }
             </FormItem>
-            <div className="under-field-description">You can use
-              { "" } <a onClick={ this.onExtClick } href="https://docs.puppetry.app/template">
-              template expressions</a>
-            </div>
+            <div className="under-field-description">You can use template expressions</div>
           </Col>
         </If>
 

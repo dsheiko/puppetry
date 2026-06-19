@@ -55,7 +55,6 @@ export class VariablesPane extends AbstractComponent {
     Before running/exporting test project we specify the desired environment and the corresponding template
     tags in test cases will be replaced with the value (URL) given for that environment.
         </p>
-        <p><LearnMore href="https://docs.puppetry.app/template" /></p>
         <br />
         <div className="select-group-inline">
           <span className="select-group-inline__label">

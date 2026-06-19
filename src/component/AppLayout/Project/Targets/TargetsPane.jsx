@@ -32,8 +32,6 @@ export class TargetsPane extends AbstractComponent {
            that we can refer in the test cases. Shared Locators are accessible in all suites of the open test plan.
         </p>
 
-        <p><LearnMore href="https://docs.puppetry.app/target" />
-        </p>
         <br />
         <TargetTable model="SharedTarget" action={ action } targets={ targetDataTable } />
 
