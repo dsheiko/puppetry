@@ -94,11 +94,8 @@ export class TitleBar extends AbstractPureComponent {
             readyToRunTests={ !!readyToRunTests }
           />
 
-          <span className="vsc-titlebar__spacer" />
-
-          <If exp={ projectName }>
-            <span className="vsc-titlebar__project">
-              <Icon type="project" />{ " " }
+          <div className="vsc-titlebar__project">
+            <If exp={ projectName }>
               { truncate( projectName, 60 ) }
               { " " }
               <a
@@ -110,8 +107,8 @@ export class TitleBar extends AbstractPureComponent {
               >
                 <Icon type="tool" />
               </a>
-            </span>
-          </If>
+            </If>
+          </div>
 
           <div className="vsc-titlebar__controls">
             <a tabIndex={-4} role="button" className="layout-icon layout-icon--minimize" title="Minimize" onClick={ this.onMinimize }>

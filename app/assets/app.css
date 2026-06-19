@@ -400,6 +400,7 @@ nav >  ul, nav >  ul ol {
   z-index: 1000;
   border-bottom: 1px solid rgba(255,255,255,0.08);
   overflow: hidden;
+  position: relative;
 }
 .vsc-titlebar__logo {
   width: 22px;
@@ -408,14 +409,16 @@ nav >  ul, nav >  ul ol {
   flex-shrink: 0;
   -webkit-app-region: no-drag;
 }
-.vsc-titlebar__spacer {
-  flex: 1 1 auto;
-}
 .vsc-titlebar__project {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: center;
   font-size: 13px;
   color: rgba(255,255,255,0.7);
   padding: 0 8px;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   -webkit-app-region: no-drag;
 }
 .vsc-titlebar__project-edit {
