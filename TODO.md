@@ -1,6 +1,7 @@
 
 Then based on hte idea of this project create a new one in separate directory with latest npm dependencies (React, Electron, Puppeteer on demand) with https://dockview.dev/ instead of AntDesign
 
+My suggestings
 Layout
 Dockview
 
@@ -13,21 +14,20 @@ TanStack Table
 Drag & Drop
 dnd-kit
 
+
+
 State
 Zustand
-
-
 
 
 Add option to export as Playwright
 
 
-
-Group Menu items/subitem in new struture that better represent the model MODEL.md
+✅ Group Menu items/subitem in new struture that better represent the model MODEL.md
 
 Change file structure in src for better maintanability
 
-Make it more like VS Code - default window size like VS Code, options to change the window .
+✅ Make it more like VS Code - default window size like VS Code, options to change the window .
 BEsides Main menu goes on top left horizontally. On the very left top little logo of puppetry.
 On the left we have Explorer, one window with Open Editors (suites) and other as it is suites available in the project.
 

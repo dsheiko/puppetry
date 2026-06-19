@@ -25,7 +25,7 @@ export class AppFooter extends AbstractComponent {
                 <span className="legal-links"><a href="https://puppetry.app/privacy/"
                   onClick={ this.onExtClick }
                   rel="noopener noreferrer"
-                  target="_blank">privacy policy</a>
+                  target="_blank">Privacy Policy</a>
                 </span>
               </span>
             </Col>

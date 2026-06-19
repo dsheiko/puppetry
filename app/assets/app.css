@@ -862,9 +862,9 @@ root > .ant-spin-nested-loading > div > .ant-spin {
 }
 
 .layout-icon {
-font-size: 24px;
+font-size: 16px;
 color: #000;
-margin-left: 8px;
+margin-left: 6px;
 }
 
 .char-pad--left {
@@ -875,8 +875,16 @@ margin-left: 8px;
   padding: 8px 24px;
 }
 
+.legal-links {
+  margin-left: 12px;
+}
+.legal-links::before {
+  content: "·";
+  margin-right: 12px;
+  color: rgba(0, 0, 0, 0.25);
+}
 .legal-links a, .legal-links a:visited {
-  color: black;
+  color: rgba(0, 0, 0, 0.45);
 }
 .legal-links a:hover {
   color: var( --color-primary );
@@ -1757,8 +1765,7 @@ summary:hover {
   flex: 0 0 auto;
 }
 .footer__copyright span:last-child {
-  flex: 1 1 auto;
-  text-align: center;
+  flex: 0 0 auto;
 }
 
 
