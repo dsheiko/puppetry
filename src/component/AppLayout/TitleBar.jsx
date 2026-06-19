@@ -114,19 +114,27 @@ export class TitleBar extends AbstractPureComponent {
           </If>
 
           <div className="vsc-titlebar__controls">
-            <a tabIndex={-4} role="button" className="layout-icon" onClick={ this.onMinimize }>
-              <Icon type="minus" />
+            <a tabIndex={-4} role="button" className="layout-icon layout-icon--minimize" title="Minimize" onClick={ this.onMinimize }>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="1" viewBox="0 0 10 1">
+                <rect width="10" height="1" fill="currentColor" />
+              </svg>
             </a>
             { isMaximized
-              ? ( <a tabIndex={-3} role="button" className="layout-icon" onClick={ this.onRestore }>
-                <Icon type="shrink" />
+              ? ( <a tabIndex={-3} role="button" className="layout-icon" title="Restore" onClick={ this.onRestore }>
+                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 10 10">
+                  <path fill="currentColor" d="M2 0v2H0v8h8V8h2V0H2zm1 1h6v6H8V2H3V1zM1 3h6v6H1V3z" />
+                </svg>
               </a> )
-              : ( <a tabIndex={-3} role="button" className="layout-icon" onClick={ this.onMaximize }>
-                <Icon type="arrows-alt" />
+              : ( <a tabIndex={-3} role="button" className="layout-icon" title="Maximize" onClick={ this.onMaximize }>
+                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 10 10">
+                  <path fill="currentColor" d="M0 0v10h10V0H0zm9 9H1V1h8v8z" />
+                </svg>
               </a> )
             }
-            <a tabIndex={-2} role="button" className="layout-icon layout-icon--close" onClick={ this.onClose }>
-              <Icon type="poweroff" />
+            <a tabIndex={-2} role="button" className="layout-icon layout-icon--close" title="Close" onClick={ this.onClose }>
+              <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 10 10">
+                <path fill="currentColor" d="M6.279 5l3.607-3.607-.707-.707L5.572 4.293 1.965.686l-.707.707L4.865 5 1.258 8.607l.707.707L5.572 5.707l3.607 3.607.707-.707z" />
+              </svg>
             </a>
           </div>
         </div>

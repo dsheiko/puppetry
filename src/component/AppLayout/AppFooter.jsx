@@ -42,11 +42,6 @@ export class AppFooter extends AbstractComponent {
 
               <a onClick={ this.onExtClick }
                 rel="noopener noreferrer"
-                title="Find Puppetry on Facebook" className="layout-icon"
-                href="https://www.facebook.com/puppetry.testing" target="_blank"><Icon type="facebook" /></a>
-
-              <a onClick={ this.onExtClick }
-                rel="noopener noreferrer"
                 title="Find Puppetry on Github" className="layout-icon"
                 href="https://github.com/dsheiko/puppetry" target="_blank"><Icon type="github" /></a>
 

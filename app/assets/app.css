@@ -427,21 +427,35 @@ nav >  ul, nav >  ul ol {
 }
 .vsc-titlebar__controls {
   display: flex;
-  align-items: center;
-  padding-right: 8px;
+  align-items: stretch;
   flex-shrink: 0;
+  height: 38px;
   -webkit-app-region: no-drag;
 }
 .vsc-titlebar__controls .layout-icon {
-  font-size: 16px;
-  color: rgba(255,255,255,0.65);
-  margin-left: 6px;
+  width: 46px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.85);
+  margin-left: 0;
+  transition: background 0.1s;
+}
+.vsc-titlebar__controls .layout-icon svg {
+  display: block;
+  flex-shrink: 0;
+}
+.vsc-titlebar__controls .layout-icon--minimize svg {
+  height: 1px;
 }
 .vsc-titlebar__controls .layout-icon:hover {
+  background: rgba(255,255,255,0.12);
   color: white;
 }
 .vsc-titlebar__controls .layout-icon--close:hover {
-  color: #f47c7c;
+  background: #E81123;
+  color: white;
 }
 
 /* Compact Ant Design horizontal menu inside title bar */
