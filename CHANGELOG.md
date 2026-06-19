@@ -4,6 +4,16 @@ All notable changes to Puppetry are documented here.
 
 ---
 
+# 3.2.8 (2026-06-19)
+
+### Bug fixes
+- fix: Firefox Nightly download failed with 404 during runtime install — removed Firefox browser support from the runtime installer and test runner UI
+
+### Updates
+- remove: Firefox and Headless Firefox browser options removed from the test runner (Chromium/Chrome only)
+
+---
+
 # 3.2.7 (2026-06-18)
 
 ### Bug fixes

@@ -30,10 +30,10 @@ function downloadHeadlessBrowser( event, appInstallDirectory, product ) {
     try {
       install( join( appInstallDirectory, "node_modules/puppeteer" ), {
         handleDone: ( revisionInfo ) => {
-          log.silly( `${ product === "chrome" ? "Chromium" : "Firefox" } downloaded to ${ revisionInfo.folderPath }`);
+          log.silly( `Chromium downloaded to ${ revisionInfo.folderPath }`);
           event.sender.send( E_RUNTIME_TEST_PROGRESS, {
             progress: 100,
-            isDone: product !== "chrome",
+            isDone: true,
             data: []
           });
           resolve();
@@ -129,7 +129,7 @@ exports.installRuntimeTest = ( event, appInstallDirectory ) => {
       "faker@^4.1.0",
       "jsonpath@^1.0.2",
       "node-localstorage@^1.3.1",
-      "puppeteer@10.2.0",
+      "puppeteer@13.7.0",
       "shelljs@^0.8.2",
       "pixelmatch@^5.1.0",
       "pngjs@^3.4.0",
@@ -142,9 +142,7 @@ exports.installRuntimeTest = ( event, appInstallDirectory ) => {
 
       log.silly( `\n\nDependencies installed in ${ appInstallDirectory }\n` );
       event.sender.send( E_RUNTIME_TEST_MILESTONE, "" );
-      downloadHeadlessBrowser( event, appInstallDirectory, "chrome" ).then(() => {
-        downloadHeadlessBrowser( event, appInstallDirectory, "firefox" );
-      });
+      downloadHeadlessBrowser( event, appInstallDirectory, "chrome" );
 
     });
     npm.on("error", msg => {

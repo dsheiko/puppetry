@@ -37,13 +37,6 @@ export class BrowserIntro extends AbstractComponent {
         Google Chrome</a>{ "" } is a cross-platform web browser developed by Google.</p>
           : null }
 
-        { product === "firefox" ? <p><a
-          onClick={ this.onExtClick }
-          href="https://www.mozilla.org/en-US/firefox/">
-        Mozilla Firefox</a>{ "" } is a free and open-source web browser developed by the Mozilla Foundation.</p>
-          : null }
-
-
         { product === "connect" ? <div>
           <p>There are some cases when we need to connect to a running instance of Chrome instead of
         starting a new one. For example to bypass reCaptcha we can solve it manually in

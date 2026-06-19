@@ -14,8 +14,7 @@ const strategy = {
 
   macOs: ( product ) => {
     const regPathMap = {
-            chrome: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-            firefox: "/Applications/Firefox.app/Contents/MacOS/firefox-bin"
+            chrome: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
           },
           regPath = regPathMap[ product ],
           altPath = require( "userhome" )( regPath.slice( 1 ) );
@@ -24,8 +23,7 @@ const strategy = {
 
   windows: ( product ) => {
     const suffix = {
-            chrome: "\\Google\\Chrome\\Application\\chrome.exe",
-            firefox: "\\Mozilla Firefox\\firefox.exe"
+            chrome: "\\Google\\Chrome\\Application\\chrome.exe"
           },
           prefixes = [
             process.env.LOCALAPPDATA,

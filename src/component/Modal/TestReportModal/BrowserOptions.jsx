@@ -6,9 +6,7 @@ import BrowseDirectory from "component/Global/BrowseDirectory";
 import { SELECT_SEARCH_PROPS } from "service/utils";
 
 import { ChromeExecutablePath } from "./ChromeExecutablePath";
-// import { FirefoxExecutablePath } from "./FirefoxExecutablePath";
 import { ChromeArguments } from "./ChromeArguments";
-import { FirefoxArguments } from "./FirefoxArguments";
 import { ConnectOptions } from "./ConnectOptions";
 import { BrowserIntro } from "./BrowserIntro";
 import { updateLauncherArgs } from "./utils";
@@ -47,9 +45,7 @@ export class BrowserOptions extends AbstractComponent {
 
 
   getLauncherArgsInstance() {
-    return ( this.state.product === "firefox"
-      ? this.refFirefoxArguments.current
-      : this.refChromeArguments.current );
+    return this.refChromeArguments.current;
   }
 
   getLauncherArgs() {
@@ -59,18 +55,12 @@ export class BrowserOptions extends AbstractComponent {
     }
     instance.save();
     const argsString = instance.state.launcherArgs;
-    if ( this.state.product === "firefox" ) {
-      return argsString;
-    }
-    // browser args + chrome extension
     return ( argsString
       + ( this.state.chromeExtLauncherArgs ? ` ${ this.state.chromeExtLauncherArgs }` : `` ) ).trim();
   }
 
   getExecutablePath() {
-    const instance = this.state.product === "chrome"
-      ? this.refChromeExecutablePath.current
-      : this.refFirefoxExecutablePath.current;
+    const instance = this.refChromeExecutablePath.current;
     instance.save();
     return instance.state.executablePath;
   }
@@ -93,8 +83,8 @@ export class BrowserOptions extends AbstractComponent {
       "puppeteer.launch": filterNullable({
         product: NON_PRODUCTS.includes( this.state.product )
           ?  null
-          : ( this.state.product === "_firefox" ? "firefox" : this.state.product ),
-        headless: this.state.product === "_firefox" || this.state.headless,
+          : this.state.product,
+        headless: this.state.headless,
         devtools: this.state.devtools,
         slowMo: 30,
         ignoreHTTPSErrors: this.getLauncherArgsInstance()
@@ -111,9 +101,7 @@ export class BrowserOptions extends AbstractComponent {
   constructor( props ) {
     super( props );
     this.refChromeArguments = React.createRef();
-    this.refFirefoxArguments = React.createRef();
     this.refChromeExecutablePath = React.createRef();
-    this.refFirefoxExecutablePath = React.createRef();
     this.refConnectOptions = React.createRef();
   }
 
@@ -164,8 +152,6 @@ export class BrowserOptions extends AbstractComponent {
               <OptGroup label="Embedded browsers">
                 <Option value="headless" key="headless">Headless Chromium</Option>
                 <Option value="chromium" key="chromium">Chromium</Option>
-                <Option value="_firefox" key="hfirefox">Headless Firefox</Option>
-                <Option value="firefox" key="firefox">Firefox</Option>
               </OptGroup>
               <OptGroup label="External browsers">
                 <Option value="chrome" key="chrome">Chrome/Edge</Option>
@@ -208,9 +194,6 @@ export class BrowserOptions extends AbstractComponent {
 
         { [ "headless", "chromium", "chrome" ].includes( this.state.product ) ?
           <ChromeArguments ref={ this.refChromeArguments } /> : null }
-
-        { [ "_firefox", "firefox" ].includes( this.state.product )
-          ? <FirefoxArguments ref={ this.refFirefoxArguments } /> :  null }
 
         { [ "headless", "chromium", "chrome" ].includes( this.state.product ) ?
           <div className="browser-options-layout">

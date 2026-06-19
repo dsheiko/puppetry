@@ -18,14 +18,7 @@ const defaultState = {
     launcherArgs: "",
     ignoreHTTPSErrors: false
   },
-  "FirefoxArguments": {
-    launcherArgs: "--kiosk",
-    ignoreHTTPSErrors: false
-  },
   "ChromeExecutablePath" : {
-    executablePath: ""
-  },
-  "FirefoxExecutablePath" : {
     executablePath: ""
   },
   "TestReportModal": {

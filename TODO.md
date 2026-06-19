@@ -29,7 +29,7 @@ Change file structure in src for better maintanability
 
 Make it more like VS Code - default window size like VS Code, options to change the window .
 BEsides Main menu goes on top left horizontally. On the very left top little logo of puppetry.
-On the left we have Explorer, one windoiws with Open Editors (suites) and other as it is suites available in the project.
+On the left we have Explorer, one window with Open Editors (suites) and other as it is suites available in the project.
 
 
 ✅ Remove all undemanded fuinctionality like Git, in-browser vibing and so on.
