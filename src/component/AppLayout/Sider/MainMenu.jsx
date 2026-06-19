@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Menu, Icon, message } from "antd";
+import { Menu, message } from "antd";
 import { ipcRenderer } from "electron";
 import Hotkeys from "react-hot-keys";
 import ErrorBoundary from "component/ErrorBoundary";
@@ -186,6 +186,10 @@ export class MainMenu extends React.PureComponent {
     return this.props.action.setApp({ exportProjectModal: true });
   }
 
+  onEditProject = () => {
+    this.props.action.setApp({ editProjectModal: true });
+  }
+
   onSnippets = async () => {
     const { openSuiteFile, saveSuite, setSuite, autosaveProject } = this.props.action;
 
@@ -257,7 +261,7 @@ export class MainMenu extends React.PureComponent {
             <SubMenu
               key="file"
               id="cMainMenuFile"
-              title={<span><Icon type="file" /><span>File</span></span>}
+              title="File"
             >
               <Menu.Item key="file1" onClick={ this.onNewProject } id="cMainMenuNewProject">
                 New Test Plan... { " " }<kbd>{ ostr( "Ctrl-Shift-N" ) }</kbd></Menu.Item>
@@ -288,8 +292,12 @@ export class MainMenu extends React.PureComponent {
               key="project"
               id="cMainMenuFile"
               disabled={ !isProjectOpen }
-              title={<span><Icon type="project" /><span>Test Plan</span></span>}
+              title="Test Plan"
             >
+
+              <Menu.Item key="100" onClick={ this.onEditProject } id="cMainMenuProjectSettings">
+                Settings
+              </Menu.Item>
 
               <Menu.Item key="101" onClick={ this.onSnippets } id="cMainMenuProjectSnippets">
                 Shared Flows
@@ -309,14 +317,14 @@ export class MainMenu extends React.PureComponent {
 
 
             <Menu.Item key="11" onClick={ () => this.openTab( "settings" ) } id="cMainMenuSettings">
-              <span><Icon type="setting" /><span>Settings</span></span></Menu.Item>
+              Settings</Menu.Item>
 
             <Menu.Item key="10"
               id="cMainMenuRun"
               className={ readyToRunTests ? "" : "is-not-ready" }
               disabled={ !isProjectOpen } onClick={ readyToRunTests
                 ? this.onTestReport : this.onRuntimeTestInstall }>
-              <span><Icon type="right-square-o" /><span>Run... <kbd>F6</kbd></span></span>
+              Run... <kbd>F6</kbd>
             </Menu.Item>
 
           </Menu>

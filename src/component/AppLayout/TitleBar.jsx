@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { remote } from "electron";
-import { Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import AbstractPureComponent from "component/AbstractPureComponent";
 import { confirmUnsavedChanges } from "service/smalltalk";
@@ -96,16 +95,14 @@ export class TitleBar extends AbstractPureComponent {
 
           <div className="vsc-titlebar__project">
             <If exp={ projectName }>
-              { truncate( projectName, 60 ) }
-              { " " }
               <a
                 tabIndex={-3}
                 role="button"
-                className="vsc-titlebar__project-edit"
-                title="Edit project name"
+                className="vsc-titlebar__project-name"
+                title="Rename test plan"
                 onClick={ this.onEditProject }
               >
-                <Icon type="tool" />
+                { truncate( projectName, 60 ) }
               </a>
             </If>
           </div>

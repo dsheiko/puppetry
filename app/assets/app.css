@@ -421,12 +421,22 @@ nav >  ul, nav >  ul ol {
   text-overflow: ellipsis;
   -webkit-app-region: no-drag;
 }
-.vsc-titlebar__project-edit {
-  color: rgba(255,255,255,0.5);
-  margin-left: 4px;
+.vsc-titlebar__project-name {
+  display: inline-block;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+  padding: 1px 8px;
+  background: rgba(255,255,255,0.06);
+  transition: border-color 0.1s, color 0.1s, background 0.1s;
 }
-.vsc-titlebar__project-edit:hover {
-  color: white;
+.vsc-titlebar__project-name:hover {
+  color: rgba(255,255,255,0.9);
+  border-color: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.1);
+  text-decoration: none;
 }
 .vsc-titlebar__controls {
   display: flex;
@@ -473,7 +483,8 @@ nav >  ul, nav >  ul ol {
 .vsc-titlebar #cMainMenu.ant-menu-horizontal > .ant-menu-submenu {
   height: 38px;
   line-height: 38px;
-  padding: 0 10px;
+  padding: 0 6px;
+  font-size: 12px;
   color: rgba(255,255,255,0.75);
   border-bottom: none;
   top: 0;
@@ -496,6 +507,7 @@ nav >  ul, nav >  ul ol {
   color: rgba(255,255,255,0.75);
   height: 38px;
   line-height: 38px;
+  padding: 0 6px;
 }
 .vsc-titlebar #cMainMenu .ant-menu-submenu-title:hover {
   color: white;
