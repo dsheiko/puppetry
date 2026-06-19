@@ -4,7 +4,7 @@ import classNames  from "classnames";
 import { Spin, Layout } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { TitleBar } from "./AppLayout/TitleBar";
-import { ExplorerSidebar } from "./AppLayout/Sider/ExplorerSidebar";
+import { Sider } from "./AppLayout/Sider/Sider";
 import { AppFooter } from "./AppLayout/AppFooter";
 import { Welcome } from "./AppLayout/Welcome";
 import { Info } from "./AppLayout/Info";
@@ -147,7 +147,7 @@ export class AppLayout extends React.Component {
             />
 
             <Layout className="layout-body">
-              <ExplorerSidebar
+              <Sider
                 projectDirectory={ projectDirectory }
                 projects={ projects }
                 projectFiles={ projectFiles }

@@ -120,19 +120,23 @@ export class FileList extends React.Component {
     const { files, active, parentCliked } = this.props;
     return (
       <ErrorBoundary>
-        <ul>
+        <ul className="vsc-explorer-filelist">
           { files.map( ( file, inx ) => (
             <li key={ `f${inx}` }
               onClick={ this.onClick }
               onDoubleClick={ this.onDblClick }
               onContextMenu={ this.onRightClick }
               data-id={ file }
-              className={ classNames({
-                "project-navigator__li": true,
-                "is-active": active === file,
-                "is-clicked": parentCliked ==="" && this.state.clicked ===  file
-              }) }>
-              <Icon type="file" /> { file }
+              className={ classNames(
+                "vsc-explorer-item",
+                "vsc-explorer-item--nested",
+                {
+                  "is-active": active === file,
+                  "is-clicked": parentCliked === "" && this.state.clicked === file
+                }
+              ) }>
+              <Icon type="file" />
+              { file }
             </li>
           ) ) }
         </ul>

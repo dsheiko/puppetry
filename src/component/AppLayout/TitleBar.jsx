@@ -5,7 +5,7 @@ import ErrorBoundary from "component/ErrorBoundary";
 import AbstractPureComponent from "component/AbstractPureComponent";
 import { confirmUnsavedChanges } from "service/smalltalk";
 import { truncate } from "service/utils";
-import { MainMenu } from "./Sider/MainMenu";
+import { MainMenu } from "./MainMenu";
 import If from "component/Global/If";
 
 const win = remote.getCurrentWindow();

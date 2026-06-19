@@ -33,7 +33,12 @@ export class ProjectExplorer extends React.Component {
   }
 
   state = {
-    clicked: ""
+    clicked: "",
+    open: true
+  }
+
+  toggleOpen = () => {
+    this.setState( s => ({ open: !s.open }) );
   }
 
   onClick = ( e ) => {
@@ -202,54 +207,68 @@ export class ProjectExplorer extends React.Component {
     }
     return (
       <ErrorBoundary>
-        <div id="cProjectNavigator" className="project-navigator">
-          <h2>Workspace
-
-            <a
-              tabIndex={1} role="button"
-              title="Create a project"
-              className="project-navigator__open" onClick={ this.onNewProject }>
-              <Icon type="folder-add" theme="filled" /></a>
-
-            <a
-              tabIndex={2} role="button"
-              title="Add a project into the list"
-              className="project-navigator__add" onClick={ this.onOpenProject }>
-              <Icon type="folder-open" theme="filled" /></a>
-
-          </h2>
-
-          <nav className="project-navigator__nav">
-            { projects.map( ( entity, inx ) => (
-
-              <div
-                key={ `d${inx}` }
-                className={ classNames({
-                  "project-navigator__selection": projectDirectory === entity.dir
-                })}
+        <div id="cProjectNavigator" className="vsc-explorer-section">
+          <div
+            className="vsc-explorer-section__header"
+            role="button"
+            tabIndex={0}
+            onClick={ this.toggleOpen }
+          >
+            <Icon type={ this.state.open ? "caret-down" : "caret-right" } />
+            Workspace
+            <div className="vsc-explorer-section__actions">
+              <a
+                role="button"
+                tabIndex={0}
+                title="Create a test plan"
+                className="vsc-explorer-section__action-btn"
+                onClick={ e => { e.stopPropagation(); this.onNewProject(); } }
               >
-                <div
-                  role="button"
-                  tabIndex={0}
-                  data-dir={ entity.dir }
-                  onClick={ this.onClick }
-                  onDoubleClick={ this.onDblClick }
-                  onContextMenu={ this.onRightClick }
-                  className={ classNames({
-                    "project-navigator__li": true,
-                    "is-clicked": this.state.clicked === entity.dir
-                  }) }>
-                  <Icon type={ projectDirectory === entity.dir
-                    ? "folder-open" : "folder" } /> { entity.name }
-                </div>
-                { projectDirectory === entity.dir && <FileList
-                  { ...this.props }
-                  parentCliked={ this.state.clicked }
-                  resetParentClicked={ this.resetParentClicked } /> }
-              </div>
+                <Icon type="folder-add" />
+              </a>
+              <a
+                role="button"
+                tabIndex={0}
+                title="Add a test plan to the workspace"
+                className="vsc-explorer-section__action-btn"
+                onClick={ e => { e.stopPropagation(); this.onOpenProject(); } }
+              >
+                <Icon type="folder-open" />
+              </a>
+            </div>
+          </div>
 
-            ) ) }
-          </nav>
+          { this.state.open && (
+            <nav className="project-navigator__nav">
+              { projects.map( ( entity, inx ) => (
+                <div key={ `d${inx}` }>
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    data-dir={ entity.dir }
+                    onClick={ this.onClick }
+                    onDoubleClick={ this.onDblClick }
+                    onContextMenu={ this.onRightClick }
+                    className={ classNames({
+                      "vsc-explorer-item": true,
+                      "is-active": projectDirectory === entity.dir,
+                      "is-clicked": this.state.clicked === entity.dir
+                    }) }
+                  >
+                    <Icon type={ projectDirectory === entity.dir ? "folder-open" : "folder" } />
+                    { entity.name }
+                  </div>
+                  { projectDirectory === entity.dir && (
+                    <FileList
+                      { ...this.props }
+                      parentCliked={ this.state.clicked }
+                      resetParentClicked={ this.resetParentClicked }
+                    />
+                  ) }
+                </div>
+              ) ) }
+            </nav>
+          ) }
 
         </div>
       </ErrorBoundary>

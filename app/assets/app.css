@@ -552,6 +552,30 @@ nav >  ul, nav >  ul ol {
 .vsc-explorer-section__header:hover {
   background: rgba(255,255,255,0.06);
 }
+.vsc-explorer-section__actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  opacity: 0;
+}
+.vsc-explorer-section__header:hover .vsc-explorer-section__actions {
+  opacity: 1;
+}
+.vsc-explorer-section__action-btn {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+}
+.vsc-explorer-section__action-btn:hover {
+  background: rgba(255,255,255,0.12);
+  color: white;
+}
 .vsc-explorer-item {
   height: 22px;
   line-height: 22px;
@@ -572,6 +596,23 @@ nav >  ul, nav >  ul ol {
 }
 .vsc-explorer-item:hover:not(.is-active) {
   background: rgba(255,255,255,0.08);
+}
+.vsc-explorer-item--nested {
+  padding-left: 44px;
+}
+.vsc-explorer-item.is-clicked {
+  outline: 1px dotted rgba(255,255,255,0.5);
+  outline-offset: -1px;
+}
+.vsc-explorer-filelist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.vsc-explorer-separator {
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  margin: 8px 0;
 }
 .vsc-explorer-item__dot {
   color: #e6c07b;
@@ -602,20 +643,16 @@ nav >  ul, nav >  ul ol {
 .ant-layout-sider-children > *:not(:last-child) {
   flex: 0 0 auto;
 }
-.ant-layout-sider-children .project-navigator {
+.ant-layout-sider-children #cProjectNavigator {
   flex: 1 1 auto;
 }
 
 
 .project-navigator {
-  margin: 8px 0 0 0;
-  background: #002549;
   opacity: 1;
   transition: opacity 300ms ease-in-out;
   will-change: opacity;
   color: rgba(255, 255, 255, 0.65);
-  /*display: flex;
-  flex-flow: column nowrap;*/
 }
 .project-navigator__nav {
   padding: 0;
@@ -701,16 +738,25 @@ li.project-navigator__li {
 }
 
 .project-navigator h2 {
-  flex: 0 0 auto;
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.8);
-  padding: 8px 16px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 0 8px;
   margin: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.project-navigator h2:hover {
+  background: rgba(255, 255, 255, 0.06);
 }
 
-.ant-layout-sider-collapsed .project-navigator {
+.ant-layout-sider-collapsed #cProjectNavigator {
   opacity: 0;
   transition: none;
 }

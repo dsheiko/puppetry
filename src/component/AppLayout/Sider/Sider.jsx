@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { ProjectExplorer } from "./ProjectExplorer";
+import { OpenEditors } from "./OpenEditors";
 
-export class ExplorerSidebar extends React.PureComponent {
+export class Sider extends React.PureComponent {
 
   static propTypes = {
     action:           PropTypes.object.isRequired,
@@ -36,26 +36,16 @@ export class ExplorerSidebar extends React.PureComponent {
     return (
       <ErrorBoundary>
         <div className="vsc-explorer" id="cExplorer">
-          <div className="vsc-explorer-heading">Explorer</div>
+          
 
-          <div className="vsc-explorer-section">
-            <div
-              className="vsc-explorer-section__header"
-              role="button"
-              tabIndex={0}
-              onClick={ this.toggleOpenEditors }
-            >
-              <Icon type={ openEditorsOpen ? "caret-down" : "caret-right" } />
-              Open Editors
-            </div>
-            { openEditorsOpen && suiteFilename && (
-              <div className="vsc-explorer-item is-active">
-                <Icon type="file" />
-                { suiteFilename }
-                { suiteModified && <span className="vsc-explorer-item__dot" title="Unsaved changes">●</span> }
-              </div>
-            ) }
-          </div>
+          <OpenEditors
+            open={ openEditorsOpen }
+            onToggle={ this.toggleOpenEditors }
+            suiteFilename={ suiteFilename }
+            suiteModified={ suiteModified }
+          />
+
+          { projectFiles.length > 0 && <div className="vsc-explorer-separator" /> }
 
           { projectFiles.length > 0 && projectOpen && (
               <ProjectExplorer
