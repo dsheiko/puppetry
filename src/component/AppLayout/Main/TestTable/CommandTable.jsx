@@ -8,7 +8,7 @@ import { RowDropdown } from "component/AppLayout/Main/RowDropdown";
 import { remote } from "electron";
 import classNames from "classnames";
 import { connect } from "react-redux";
-import * as selectors from "selector/selectors";
+import * as selectors from "store/selectors";
 
 const { Menu, MenuItem } = remote,
       mapStateToProps = ( state, props ) => ({

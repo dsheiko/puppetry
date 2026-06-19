@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import AbstractComponent from "component/AbstractComponent";
 import { Icon, Select  } from "antd";
-import { getActiveEnvironment } from "selector/selectors";
+import { getActiveEnvironment } from "store/selectors";
 import { SELECT_SEARCH_PROPS } from "service/utils";
 
 const { Option } = Select;

@@ -6,12 +6,12 @@ import { handleException, saveProject } from "./helpers";
 import debounce from "lodash.debounce";
 import { InvalidArgumentError } from "error";
 import { validate } from "bycontract";
-import * as I from "interface";
+import * as I from "types";
 import errorActions from "./error";
 import {
   getProjectFiles,
   readProject,
-  copyProject } from "../service/io";
+  copyProject } from "service/io";
 import { ipcRenderer } from "electron";
 import { E_FILE_NAVIGATOR_UPDATED, E_WATCH_FILE_NAVIGATOR, SNIPPETS_FILENAME,
   E_PROJECT_LOADED, E_SUITE_LIST_UPDATED } from "constant";

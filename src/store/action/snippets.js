@@ -1,7 +1,7 @@
 import { createActions } from "redux-actions";
-import { readSuite } from "../service/io";
+import { readSuite } from "service/io";
 import { SNIPPETS_FILENAME } from "constant";
-import DEFAULT_STATE from "reducer/defaultState";
+import DEFAULT_STATE from "store/reducer/defaultState";
 
 const actions = createActions({
   SET_SNIPPETS: ( options ) => options,

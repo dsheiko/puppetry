@@ -1,11 +1,11 @@
 import uniqid from "uniqid";
-import actions from "action";
+import actions from "store/action";
 import update from "immutability-helper";
 import {
   normalizeComplexPayload
-} from "reducer/helpers";
+} from "store/reducer/helpers";
 
-import { groupDefaultState } from "reducer/defaultState";
+import { groupDefaultState } from "store/reducer/defaultState";
 
 /**
  * @typedef {object} Position

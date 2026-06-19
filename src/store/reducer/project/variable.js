@@ -1,12 +1,12 @@
 import uniqid from "uniqid";
-import actions from "action";
+import actions from "store/action";
 import update from "immutability-helper";
 import {
   isVariableNotUnique,
   normalizeComplexPayload
-} from "reducer/helpers";
+} from "store/reducer/helpers";
 
-import { variableDefaultState } from "reducer/defaultState";
+import { variableDefaultState } from "store/reducer/defaultState";
 
 
 /**

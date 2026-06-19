@@ -4,8 +4,8 @@ import ErrorBoundary from "component/ErrorBoundary";
 import { TargetTable } from "component/AppLayout/Main/TargetTable";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import actions from "action";
-import * as selectors from "selector/selectors";
+import actions from "store/action";
+import * as selectors from "store/selectors";
 
 import LearnMore from "component/Global/LearnMore";
 

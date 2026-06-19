@@ -25,7 +25,7 @@ Add option to export as Playwright
 
 ✅ Group Menu items/subitem in new struture that better represent the model MODEL.md
 
-Change file structure in src for better maintanability
+✅ Change file structure in src for better maintanability
 
 ✅ Make it more like VS Code - default window size like VS Code, options to change the window .
 BEsides Main menu goes on top left horizontally. On the very left top little logo of puppetry.

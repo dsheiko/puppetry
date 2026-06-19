@@ -1,6 +1,6 @@
 import { createActions } from "redux-actions";
 import { validate } from "bycontract";
-import * as I from "interface";
+import * as I from "types";
 import { handleException } from "./helpers";
 import uniqid from "uniqid";
 import commandActions from "./command";

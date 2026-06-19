@@ -1,5 +1,5 @@
 import { handleActions } from "redux-actions";
-import actions from "action";
+import actions from "store/action";
 import DEFAULT_STATE from "./defaultState";
 import update from "immutability-helper";
 

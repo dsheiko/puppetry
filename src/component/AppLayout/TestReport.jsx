@@ -12,7 +12,7 @@ import { Spin, Collapse, notification } from "antd";
 import { join } from "path";
 import { TestGeneratorError } from "error";
 import ansiHTML from "ansi-html";
-import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
+import { getSelectedVariables, getActiveEnvironment } from "store/selectors";
 import { ReportBody } from "./TestReport/ReportBody";
 import path from "path";
 import fs from "fs";

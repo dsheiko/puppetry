@@ -11,7 +11,7 @@ import If from "component/Global/If";
 import { TestGeneratorError } from "error";
 import { confirmExportProject } from "service/smalltalk";
 import * as classes from "./classes";
-import { getSelectedVariables, getActiveEnvironment } from "selector/selectors";
+import { getSelectedVariables, getActiveEnvironment } from "store/selectors";
 import { SelectEnv } from "component/Global/SelectEnv";
 import exportPrintableText from "./ExportProjectModal/PrintableText";
 import { TestSpecificationPane } from "./ExportProjectModal/TestSpecificationPane";

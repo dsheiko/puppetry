@@ -1,17 +1,17 @@
 import { createActions } from "redux-actions";
 import { validate } from "bycontract";
-import * as I from "interface";
+import * as I from "types";
 import { handleException } from "./helpers";
 import uniqid from "uniqid";
 
 const actions = createActions({
-  CLEAR_SHARED_TARGET: ( options ) => options,
+  CLEAR_TARGET: ( options ) => options,
   /**
     * @param {object} options = { target, selector, editing }
     * @param {object} [id] - injected id for new entity
     * @returns {object}
     */
-  ADD_SHARED_TARGET: ( options, id = null ) => ({
+  ADD_TARGET: ( options, id = null ) => ({
     options: validate( options, { ...I.ENTITY, ...I.TARGET }),
     id: validate( id, I.ID_REF )
   }),
@@ -21,7 +21,7 @@ const actions = createActions({
     * @param {object} [id] - injected id for new entity
     * @returns {object}
     */
-  INSERT_ADJACENT_SHARED_TARGET: ( options, position, id = null ) => ({
+  INSERT_ADJACENT_TARGET: ( options, position, id = null ) => ({
     position,
     options,
     id
@@ -30,39 +30,39 @@ const actions = createActions({
     * @param {object} options = { id, target, selector, editing }
     * @returns {object}
     */
-  SET_SHARED_TARGET: ( options ) => validate( options, { ...I.ENTITY, ...I.TARGET, ...I.UPDATE }),
+  SET_TARGET: ( options ) => validate( options, { ...I.ENTITY, ...I.TARGET, ...I.UPDATE }),
   /**
     * @param {object} options = { id, target, selector, editing }
     * @returns {object}
     */
-  UPDATE_SHARED_TARGET: ( options ) => validate( options, { ...I.ENTITY, ...I.TARGET, ...I.UPDATE }),
+  UPDATE_TARGET: ( options ) => validate( options, { ...I.ENTITY, ...I.TARGET, ...I.UPDATE }),
   /**
     * @param {object} ref = { id }
     * @returns {object}
     */
-  REMOVE_SHARED_TARGET: ( ref ) => validate( ref, I.UPDATE )
+  REMOVE_TARGET: ( ref ) => validate( ref, I.UPDATE )
 
 });
 
 
-actions.swapSharedTarget = ( payload ) => async ( dispatch, getState ) => {
+actions.swapTarget = ( payload ) => async ( dispatch, getState ) => {
   try {
     const { sourceInx, targetInx, sourceId, targetId } = payload,
           target = getState().suite.targets[ sourceId ],
           pos = sourceInx >= targetInx ? "before" : "after";
 
-    dispatch( actions.removeSharedTarget({ id: sourceId }) );
-    dispatch( actions.insertAdjacentSharedTarget( target, { [ pos ]: targetId }) );
+    dispatch( actions.removeTarget({ id: sourceId }) );
+    dispatch( actions.insertAdjacentTarget( target, { [ pos ]: targetId }) );
   } catch ( ex ) {
     handleException( ex, dispatch, "Cannot swap target" );
   }
 };
 
 
-actions.pasteSharedTarget = ( payload, dest, uid ) => async ( dispatch ) => {
+actions.pasteTarget = ( payload, dest, uid ) => async ( dispatch ) => {
   try {
     const position = { after: dest.id };
-    dispatch( actions.insertAdjacentSharedTarget( payload, position, uid ) );
+    dispatch( actions.insertAdjacentTarget( payload, position, uid ) );
   } catch ( ex ) {
     handleException( ex, dispatch, "Cannot paste target" );
   }
@@ -75,7 +75,7 @@ actions.pasteSharedTarget = ( payload, dest, uid ) => async ( dispatch ) => {
  * @param {Object} group
  * @returns {Function}
  */
-actions.cloneSharedTarget = ( target ) => async ( dispatch, getState ) => {
+actions.cloneTarget = ( target ) => async ( dispatch, getState ) => {
   try {
     const suite = getState().suite,
           source = suite.targets[ target.id ],
@@ -83,7 +83,7 @@ actions.cloneSharedTarget = ( target ) => async ( dispatch, getState ) => {
           merged = { ...source, id, key: id },
           position = { after: target.id };
 
-    dispatch( actions.insertAdjacentSharedTarget( merged, position, id ) );
+    dispatch( actions.insertAdjacentTarget( merged, position, id ) );
   } catch ( ex ) {
     handleException( ex, dispatch, "Cannot clone target" );
   }

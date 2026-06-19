@@ -3,7 +3,7 @@ import { Form, Input, Select, Icon } from "antd";
 import { AbstractEditableCell } from "./AbstractEditableCell";
 import Tooltip from "component/Global/Tooltip";
 import { ruleValidateNotEmptyString } from "service/utils";
-import { getActiveTargets } from "selector/selectors";
+import { getActiveTargets } from "store/selectors";
 import { SELECT_SEARCH_PROPS } from "service/utils";
 
 const FormItem = Form.Item,

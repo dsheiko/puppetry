@@ -10,8 +10,8 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import ErrorBoundary from "component/ErrorBoundary";
 import log from "electron-log";
 
-import { App } from "./container/App.jsx";
-import reducer from "./reducer";
+import { App } from "./component/App";
+import reducer from "./store/reducer";
 
 window.onerror = ( err, url, lineNumber ) => {
   log.error( `Renderer process: Caught exception: ${err} in ${ url }: ${ lineNumber }` );

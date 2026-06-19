@@ -1,13 +1,13 @@
 import { createActions } from "redux-actions";
 import { validate } from "bycontract";
-import * as I from "interface";
+import * as I from "types";
 import { version, handleException, saveProject } from "./helpers";
 import uniqid from "uniqid";
-import DEFAULT_STATE from "reducer/defaultState";
+import DEFAULT_STATE from "store/reducer/defaultState";
 import { InvalidArgumentError } from "error";
 import { dateToTs, result } from "service/utils";
 import errorActions from "./error";
-import { writeSuite, readSuite, removeSuite, normalizeFilename } from "../service/io";
+import { writeSuite, readSuite, removeSuite, normalizeFilename } from "service/io";
 import { ipcRenderer } from "electron";
 import { E_SUITE_LOADED, SNIPPETS_FILENAME } from "constant";
 import projectActions from "./project";

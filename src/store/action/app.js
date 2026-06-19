@@ -1,12 +1,12 @@
 import { createActions } from "redux-actions";
 import { validate } from "bycontract";
-import * as I from "interface";
+import * as I from "types";
 import log from "electron-log";
 import { saveProject } from "./helpers";
 import { closeApp } from "service/utils";
 import { removeRuntimeTestPath,
-  isRuntimeTestPathReady } from "../service/io";
-import { getDateString, checkNewVersion } from "../service/http";
+  isRuntimeTestPathReady } from "service/io";
+import { getDateString, checkNewVersion } from "service/http";
 import settingsActions from "./settings";
 
 const actions = createActions({

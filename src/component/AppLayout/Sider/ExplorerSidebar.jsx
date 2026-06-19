@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
-import { ProjectExplorer } from "./Sider/ProjectExplorer";
+import { ProjectExplorer } from "./ProjectExplorer";
 
 export class ExplorerSidebar extends React.PureComponent {
 
@@ -57,26 +57,15 @@ export class ExplorerSidebar extends React.PureComponent {
             ) }
           </div>
 
-          { projectFiles.length > 0 && (
-            <div className="vsc-explorer-section">
-              <div
-                className="vsc-explorer-section__header"
-                role="button"
-                tabIndex={0}
-                onClick={ this.toggleProject }
-              >
-                <Icon type={ projectOpen ? "caret-down" : "caret-right" } />
-                Project
-              </div>
-              { projectOpen && <ProjectExplorer
+          { projectFiles.length > 0 && projectOpen && (
+              <ProjectExplorer
                 projectDirectory={ projectDirectory }
                 projects={ projects }
                 suiteModified={ suiteModified }
                 files={ projectFiles }
                 active={ suiteFilename }
                 action={ action }
-              /> }
-            </div>
+              />
           ) }
         </div>
       </ErrorBoundary>

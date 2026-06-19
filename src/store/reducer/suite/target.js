@@ -1,12 +1,13 @@
 import uniqid from "uniqid";
-import actions from "action";
+import actions from "store/action";
 import update from "immutability-helper";
 import {
+  updateTagetsInSuite,
   isTargetNotUnique,
   normalizeComplexPayload
-} from "reducer/helpers";
+} from "store/reducer/helpers";
 
-import { targetDefaultState } from "reducer/defaultState";
+import { targetDefaultState } from "store/reducer/defaultState";
 
 
 /**
@@ -40,7 +41,7 @@ export default {
   * @param {Payload} payload
   * @returns {object}
   */
-  [ actions.addSharedTarget ]: ( state, { payload }) => {
+  [ actions.addTarget ]: ( state, { payload }) => {
     const { options, id } = normalizeComplexPayload( payload ),
           merge = {},
           gid = id || uniqid();
@@ -52,6 +53,9 @@ export default {
     merge[ gid ] = { ...targetDefaultState( gid ), ...options };
 
     return update( state, {
+      modified: {
+        $set: true
+      },
       targets: {
         $merge: merge
       }
@@ -64,7 +68,7 @@ export default {
    * @param {Payload} payload
    * @returns {object}
    */
-  [ actions.insertAdjacentSharedTarget ]: ( state, { payload }) => {
+  [ actions.insertAdjacentTarget ]: ( state, { payload }) => {
     const { options, position, id } = normalizeComplexPayload( payload ),
           { targets }  = state;
 
@@ -86,13 +90,19 @@ export default {
     }, {});
 
     return update( state, {
+      modified: {
+        $set: true
+      },
       targets: {
         $set: entities
       }
     });
   },
 
-  [ actions.clearSharedTarget ]: ( state ) => update( state, {
+  [ actions.clearTarget ]: ( state ) => update( state, {
+    modified: {
+      $set: true
+    },
     targets: {
       $set: {}
     }
@@ -105,8 +115,11 @@ export default {
     * @param {Entity} payload (EntityRef required)
     * @returns {object}
     */
-  [ actions.setSharedTarget ]: ( state, { payload }) => {
+  [ actions.setTarget ]: ( state, { payload }) => {
     return update( state, {
+      modified: {
+        $set: true
+      },
       targets: {
         $apply: ( ref ) => {
           const targets = { ...ref },
@@ -124,12 +137,17 @@ export default {
     * @param {Entity} payload (EntityRef required)
     * @returns {object}
     */
-  [ actions.updateSharedTarget ]: ( state, { payload }) => {
+  [ actions.updateTarget ]: ( state, { payload }) => {
     if ( isTargetNotUnique( state, payload ) ) {
       payload.target += "_" + uniqid().toUpperCase();
     }
-    return update( state, {
-
+    if ( typeof payload.selector === "string" ) {
+      payload.selector = payload.selector.trim();
+    }
+    const newState = update( state, {
+      modified: {
+        $set: true
+      },
       targets: {
         $apply: ( ref ) => {
           const targets = { ...ref },
@@ -139,6 +157,8 @@ export default {
         }
       }
     });
+
+    return updateTagetsInSuite( state, newState, payload.id );
   },
 
   /**
@@ -147,7 +167,10 @@ export default {
    * @param {EntityRef} payload
    * @returns {object}
    */
-  [ actions.removeSharedTarget ]: ( state, { payload }) => update( state, {
+  [ actions.removeTarget ]: ( state, { payload }) => update( state, {
+    modified: {
+      $set: true
+    },
     targets: {
       $unset:[ payload.id ]
     }

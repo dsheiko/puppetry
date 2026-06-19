@@ -1,7 +1,7 @@
 import log from "electron-log";
 import { TestGeneratorError } from "error";
 import { COMMAND_ID_COMMENT, RUNNER_PUPPETRY } from "constant";
-import { getTargetChain, getActiveTargets } from "selector/selectors";
+import { getTargetChain, getActiveTargets } from "store/selectors";
 import { mapSelectors } from "service/selector";
 import { renderTarget } from "service/utils";
 

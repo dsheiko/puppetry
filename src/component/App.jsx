@@ -3,9 +3,9 @@ import log from "electron-log";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { AppLayout } from "../component/AppLayout";
-import actions from "../action";
-import * as selectors from "../selector/selectors";
+import { AppLayout } from "./AppLayout";
+import actions from "store/action";
+import * as selectors from "store/selectors";
 
 import LoadingTip from "component/Global/LoadingTip";
 

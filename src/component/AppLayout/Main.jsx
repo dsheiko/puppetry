@@ -9,7 +9,7 @@ import ErrorBoundary from "component/ErrorBoundary";
 import AbstractComponent from "component/AbstractComponent";
 import LearnMore from "component/Global/LearnMore";
 import { connect } from "react-redux";
-import * as selectors from "selector/selectors";
+import * as selectors from "store/selectors";
 
 const mapStateToProps = ( state ) => ({
         panes: state.project.appPanels.suite.panes,

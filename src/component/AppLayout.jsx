@@ -4,7 +4,7 @@ import classNames  from "classnames";
 import { Spin, Layout } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
 import { TitleBar } from "./AppLayout/TitleBar";
-import { ExplorerSidebar } from "./AppLayout/ExplorerSidebar";
+import { ExplorerSidebar } from "./AppLayout/Sider/ExplorerSidebar";
 import { AppFooter } from "./AppLayout/AppFooter";
 import { Welcome } from "./AppLayout/Welcome";
 import { Info } from "./AppLayout/Info";
@@ -25,7 +25,7 @@ import { EditProjectModal } from "./Modal/EditProjectModal";
 import { EditEnvironmentsModal } from "./Modal/EditEnvironmentsModal";
 import { AppLightbox } from "./Modal/AppLightbox";
 import { connect } from "react-redux";
-import * as selectors from "selector/selectors";
+import * as selectors from "store/selectors";
 import { TabGroup  } from "./TabGroup";
 import If from "component/Global/If";
 

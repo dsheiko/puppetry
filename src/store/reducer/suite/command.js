@@ -1,12 +1,12 @@
 import uniqid from "uniqid";
-import actions from "action";
+import actions from "store/action";
 import update from "immutability-helper";
 import {
   normalizeComplexPayload,
   normalizePayload
-} from "reducer/helpers";
+} from "store/reducer/helpers";
 
-import { commandDefaultState } from "reducer/defaultState";
+import { commandDefaultState } from "store/reducer/defaultState";
 
 export default {
 

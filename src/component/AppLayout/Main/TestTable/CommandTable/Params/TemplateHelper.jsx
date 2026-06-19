@@ -4,7 +4,7 @@ import { Icon, Select, Button, Input } from "antd";
 import Link from "component/Global/Link";
 
 import { FAKER_METHODS, FAKER_LOCALES } from "./constants";
-import { getSelectedVariables } from "selector/selectors";
+import { getSelectedVariables } from "store/selectors";
 
 const { Option, OptGroup } = Select;
 

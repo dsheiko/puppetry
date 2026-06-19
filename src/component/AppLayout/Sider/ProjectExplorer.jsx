@@ -203,7 +203,7 @@ export class ProjectExplorer extends React.Component {
     return (
       <ErrorBoundary>
         <div id="cProjectNavigator" className="project-navigator">
-          <h2>Projects
+          <h2>Workspace
 
             <a
               tabIndex={1} role="button"
