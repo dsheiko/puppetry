@@ -265,25 +265,30 @@ export class MainMenu extends React.PureComponent {
             >
               <Menu.Item key="file1" onClick={ this.onNewProject } id="cMainMenuNewProject">
                 New Test Plan... { " " }<kbd>{ ostr( "Ctrl-Shift-N" ) }</kbd></Menu.Item>
+              <Menu.Item key="file3" onClick={ this.onOpenProject } id="cMainMenuOpenProject">
+                Open Test Plan... { " " }<kbd>{ ostr( "Ctrl-Shift-O" ) }</kbd></Menu.Item>
               <Menu.Item key="file7" disabled={ !isProjectOpen }
                 onClick={ this.onSaveProjectAs } id="cMainMenuSaveProjectAs">
                 Save Test Plan As...</Menu.Item>
-              <Menu.Item key="file2" disabled={ !isProjectOpen }
-                onClick={ this.onNewSuite } id="cMainMenuNewSuite">
-                New Suite... { " " }<kbd>{ ostr( "Ctrl-N" ) }</kbd></Menu.Item>
-              <Menu.Item key="file3" onClick={ this.onOpenProject } id="cMainMenuOpenProject">
-                Open Test Plan... { " " }<kbd>{ ostr( "Ctrl-Shift-O" ) }</kbd></Menu.Item>
-              <Menu.Item key="file4" disabled={ !isProjectOpen || isProjectEmpty  } id="cMainMenuOpenSuite"
-                onClick={ this.onOpenSuite }>Open Suite...</Menu.Item>
-              <Menu.Item key="file5" disabled={ !isSuiteOpen } onClick={ this.onSave } id="cMainMenuSaveSuite">
-                Save Suite { " " }<kbd>{ ostr( "Ctrl-S" ) }</kbd></Menu.Item>
-              <Menu.Item key="file6" disabled={ !isSuiteOpen } onClick={ this.onSaveAs } id="cMainMenuSaveAsSuite">
-                Save Suite As...</Menu.Item>
-
               <Menu.Item key="7" disabled={ !isProjectOpen } id="cMainMenuExportProject"
                 onClick={ this.onExportProject }>
                 Export Test Plan as... { " " }<kbd>{ ostr( "Ctrl-Shift-E" ) }</kbd></Menu.Item>
-              <Menu.Item key="8">Exit</Menu.Item>
+
+              <Menu.Divider />
+
+              <Menu.Item key="file2" disabled={ !isProjectOpen }
+                onClick={ this.onNewSuite } id="cMainMenuNewSuite">
+                New Test Suite... { " " }<kbd>{ ostr( "Ctrl-N" ) }</kbd></Menu.Item>
+              <Menu.Item key="file4" disabled={ !isProjectOpen || isProjectEmpty  } id="cMainMenuOpenSuite"
+                onClick={ this.onOpenSuite }>Open Test Suite...</Menu.Item>
+              <Menu.Item key="file5" disabled={ !isSuiteOpen } onClick={ this.onSave } id="cMainMenuSaveSuite">
+                Save Test Suite { " " }<kbd>{ ostr( "Ctrl-S" ) }</kbd></Menu.Item>
+              <Menu.Item key="file6" disabled={ !isSuiteOpen } onClick={ this.onSaveAs } id="cMainMenuSaveAsSuite">
+                Save Test Suite As...</Menu.Item>
+
+              <Menu.Divider />
+
+              <Menu.Item key="8" onClick={ this.onExit }>Exit</Menu.Item>
 
             </SubMenu>
 
