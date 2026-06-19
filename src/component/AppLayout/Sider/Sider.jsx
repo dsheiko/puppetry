@@ -11,7 +11,9 @@ export class Sider extends React.PureComponent {
     projectDirectory: PropTypes.string,
     projects:         PropTypes.object.isRequired,
     projectFiles:     PropTypes.array.isRequired,
+    tabs:             PropTypes.object.isRequired,
     suiteFilename:    PropTypes.string,
+    suiteSnippets:    PropTypes.any,
     suiteModified:    PropTypes.bool
   }
 
@@ -31,7 +33,7 @@ export class Sider extends React.PureComponent {
   render() {
     const { openEditorsOpen, projectOpen } = this.state,
           { action, projectDirectory, projects, projectFiles,
-            suiteFilename, suiteModified } = this.props;
+            tabs, suiteFilename, suiteSnippets, suiteModified } = this.props;
 
     return (
       <ErrorBoundary>
@@ -41,8 +43,10 @@ export class Sider extends React.PureComponent {
           <OpenEditors
             open={ openEditorsOpen }
             onToggle={ this.toggleOpenEditors }
+            onTabClick={ action.setAppTab }
+            tabs={ tabs }
             suiteFilename={ suiteFilename }
-            suiteModified={ suiteModified }
+            suiteSnippets={ suiteSnippets }
           />
 
           { projectFiles.length > 0 && <div className="vsc-explorer-separator" /> }

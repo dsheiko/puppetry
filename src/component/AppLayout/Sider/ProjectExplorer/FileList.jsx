@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Icon } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
+import { FileIcon } from "../FileIcon";
 import { remote } from "electron";
 import { confirmUnsavedChanges, confirmDeleteFile } from "service/smalltalk";
 import classNames from "classnames";
@@ -135,7 +135,7 @@ export class FileList extends React.Component {
                   "is-clicked": parentCliked === "" && this.state.clicked === file
                 }
               ) }>
-              <Icon type="file" />
+              <FileIcon filename={ file } />
               { file }
             </li>
           ) ) }

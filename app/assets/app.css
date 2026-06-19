@@ -527,18 +527,23 @@ nav >  ul, nav >  ul ol {
   flex-shrink: 0;
 }
 .vsc-explorer-heading {
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.5);
   padding: 12px 12px 4px 12px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+.vsc-explorer-heading:hover .vsc-explorer-section__actions {
+  opacity: 1;
 }
 .vsc-explorer-section__header {
   height: 24px;
   line-height: 24px;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   color: rgba(255,255,255,0.85);
@@ -580,7 +585,7 @@ nav >  ul, nav >  ul ol {
   height: 22px;
   line-height: 22px;
   padding: 0 0 0 28px;
-  font-size: 13px;
+  font-size: 14px;
   color: rgba(255,255,255,0.65);
   cursor: pointer;
   display: flex;
@@ -597,9 +602,7 @@ nav >  ul, nav >  ul ol {
 .vsc-explorer-item:hover:not(.is-active) {
   background: rgba(255,255,255,0.08);
 }
-.vsc-explorer-item--nested {
-  padding-left: 44px;
-}
+
 .vsc-explorer-item.is-clicked {
   outline: 1px dotted rgba(255,255,255,0.5);
   outline-offset: -1px;
@@ -612,7 +615,7 @@ nav >  ul, nav >  ul ol {
 .vsc-explorer-separator {
   height: 1px;
   background: rgba(255,255,255,0.08);
-  margin: 8px 0;
+  margin: 8px 0 -2px 0;
 }
 .vsc-explorer-item__dot {
   color: #e6c07b;

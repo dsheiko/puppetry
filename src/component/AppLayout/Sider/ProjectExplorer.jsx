@@ -208,13 +208,7 @@ export class ProjectExplorer extends React.Component {
     return (
       <ErrorBoundary>
         <div id="cProjectNavigator" className="vsc-explorer-section">
-          <div
-            className="vsc-explorer-section__header"
-            role="button"
-            tabIndex={0}
-            onClick={ this.toggleOpen }
-          >
-            <Icon type={ this.state.open ? "caret-down" : "caret-right" } />
+          <div className="vsc-explorer-heading">
             Workspace
             <div className="vsc-explorer-section__actions">
               <a
@@ -224,7 +218,7 @@ export class ProjectExplorer extends React.Component {
                 className="vsc-explorer-section__action-btn"
                 onClick={ e => { e.stopPropagation(); this.onNewProject(); } }
               >
-                <Icon type="folder-add" />
+                <Icon type="plus-square" style={{ fontSize: "14px" }} />
               </a>
               <a
                 role="button"
@@ -233,7 +227,7 @@ export class ProjectExplorer extends React.Component {
                 className="vsc-explorer-section__action-btn"
                 onClick={ e => { e.stopPropagation(); this.onOpenProject(); } }
               >
-                <Icon type="folder-open" />
+                <Icon type="import" style={{ fontSize: "14px" }} />
               </a>
             </div>
           </div>
@@ -241,7 +235,7 @@ export class ProjectExplorer extends React.Component {
           { this.state.open && (
             <nav className="project-navigator__nav">
               { projects.map( ( entity, inx ) => (
-                <div key={ `d${inx}` }>
+                <div key={ `d${inx}` } className="vsc-explorer-section">
                   <div
                     role="button"
                     tabIndex={0}
@@ -250,12 +244,12 @@ export class ProjectExplorer extends React.Component {
                     onDoubleClick={ this.onDblClick }
                     onContextMenu={ this.onRightClick }
                     className={ classNames({
-                      "vsc-explorer-item": true,
+                      "vsc-explorer-section__header": true,
                       "is-active": projectDirectory === entity.dir,
                       "is-clicked": this.state.clicked === entity.dir
                     }) }
                   >
-                    <Icon type={ projectDirectory === entity.dir ? "folder-open" : "folder" } />
+                    <Icon type={ projectDirectory === entity.dir ? "caret-down" : "caret-right" } />
                     { entity.name }
                   </div>
                   { projectDirectory === entity.dir && (

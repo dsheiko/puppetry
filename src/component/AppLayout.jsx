@@ -57,6 +57,7 @@ const mapStateToProps = ( state ) => ({
         exportDirectory:         state.settings.exportDirectory,
         projects:                state.settings.projects,
         suiteFilename:           state.suite.filename,
+        suiteSnippets:           state.suite.snippets,
         suiteModified:           state.suite.modified,
         suiteTargets:            state.suite.targets,
         projectName:             state.project.name,
@@ -88,6 +89,7 @@ export class AppLayout extends React.Component {
     projectDirectory:        PropTypes.string,
     exportDirectory:         PropTypes.string,
     suiteFilename:           PropTypes.string,
+    suiteSnippets:           PropTypes.any,
     projectName:             PropTypes.string,
     environment:             PropTypes.string,
     suiteTargets:            PropTypes.object,
@@ -113,7 +115,7 @@ export class AppLayout extends React.Component {
     const { action, selector, cleanSnippets,
             loading, tabs, commandModal, snippetModal,
             projectDirectory, exportDirectory, projects,
-            suiteFilename, suiteModified, suiteTargets,
+            suiteFilename, suiteSnippets, suiteModified, suiteTargets,
             projectName, projectEnvironments,
             projectFiles, readyToRunTests,
             snippets, project, environment,
@@ -152,7 +154,9 @@ export class AppLayout extends React.Component {
                 projects={ projects }
                 projectFiles={ projectFiles }
                 suiteFilename={ suiteFilename }
+                suiteSnippets={ suiteSnippets }
                 suiteModified={ suiteModified }
+                tabs={ tabs }
                 action={ action }
               />
 

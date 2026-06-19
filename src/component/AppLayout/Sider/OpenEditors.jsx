@@ -1,8 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Icon } from "antd";
+import { FileIcon } from "./FileIcon";
 
-export function OpenEditors({ open, suiteFilename, suiteModified, onToggle }) {
+const TAB_LABELS = {
+  testReport:       "Test report",
+  projectVariables: "Template variables",
+  projectTargets:   "Shared Locators",
+  settings:         "Settings"
+};
+
+export function OpenEditors({ open, tabs, suiteFilename, suiteSnippets, onToggle, onTabClick }) {
+  const suiteLabel = suiteFilename
+    ? ( suiteSnippets ? "Shared Flows" : suiteFilename )
+    : "Loading...";
+
+  const labels = { suite: suiteLabel, ...TAB_LABELS };
+
   return (
     <>
     <div className="vsc-explorer-heading">Explorer</div>
@@ -16,13 +30,20 @@ export function OpenEditors({ open, suiteFilename, suiteModified, onToggle }) {
         <Icon type={ open ? "caret-down" : "caret-right" } />
         Open Editors
       </div>
-      { open && suiteFilename && (
-        <div className="vsc-explorer-item is-active">
-          <Icon type="file" />
-          { suiteFilename }
-          { suiteModified && <span className="vsc-explorer-item__dot" title="Unsaved changes">●</span> }
-        </div>
-      ) }
+      { open && Object.keys( tabs.available )
+          .filter( key => tabs.available[ key ] )
+          .map( key => (
+            <div key={ key }
+              role="button"
+              tabIndex={0}
+              className={ `vsc-explorer-item${ key === tabs.active ? " is-active" : "" }` }
+              onClick={ () => onTabClick( key ) }
+            >
+              <FileIcon tabKey={ key } />
+              { labels[ key ] }
+            </div>
+          ) )
+      }
     </div>
     </>
   );
@@ -31,6 +52,8 @@ export function OpenEditors({ open, suiteFilename, suiteModified, onToggle }) {
 OpenEditors.propTypes = {
   open:          PropTypes.bool.isRequired,
   onToggle:      PropTypes.func.isRequired,
+  onTabClick:    PropTypes.func.isRequired,
+  tabs:          PropTypes.object.isRequired,
   suiteFilename: PropTypes.string,
-  suiteModified: PropTypes.bool
+  suiteSnippets: PropTypes.any
 };
