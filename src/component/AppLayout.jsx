@@ -4,7 +4,6 @@ import { remote } from "electron";
 import classNames  from "classnames";
 import { Spin, Layout } from "antd";
 import ErrorBoundary from "component/ErrorBoundary";
-import { CheckoutMaster } from "component/Global/CheckoutMaster";
 import { Toolbar } from "./AppLayout/Toolbar";
 import { MainMenu } from "./AppLayout/Sider/MainMenu";
 import { ProjectExplorer  } from "./AppLayout/Sider/ProjectExplorer";
@@ -24,10 +23,6 @@ import { CommandModal } from "./AppLayout/Main/TestTable/CommandModal";
 import { SnippetModal } from "./AppLayout/Main/TestTable/SnippetModal";
 import { InstallRuntimeTestModal } from "./Modal/InstallRuntimeTestModal";
 import { EditTargetsAsCsvModal } from "./Modal/EditTargetsAsCsvModal";
-import { GitCommitModal } from "./Modal/GitCommitModal";
-import { GitSyncModal } from "./Modal/GitSyncModal";
-import { GitCheckoutModal } from "./Modal/GitCheckoutModal";
-import { GitCloneModal } from "./Modal/GitCloneModal";
 import { EditProjectModal } from "./Modal/EditProjectModal";
 import { EditEnvironmentsModal } from "./Modal/EditEnvironmentsModal";
 import { AppLightbox } from "./Modal/AppLightbox";
@@ -53,12 +48,6 @@ const { Sider } = Layout,
         testReportModal:         state.app.testReportModal,
         exportProjectModal:      state.app.exportProjectModal,
         readyToRunTests:         state.app.readyToRunTests,
-        gitDetachedHeadState:    state.app.gitDetachedHeadState,
-        gitLogs:                 state.app.gitLogs,
-        gitCommitModal:          state.app.gitCommitModal,
-        gitSyncModal:            state.app.gitSyncModal,
-        gitCheckoutModal:        state.app.gitCheckoutModal,
-        gitCloneModal:           state.app.gitCloneModal,
         editTargetsAsCsvModal:   state.app.editTargetsAsCsvModal,
         editProjectModal:        state.app.editProjectModal,
         editEnvironmentsModal:   state.app.editEnvironmentsModal,
@@ -74,9 +63,7 @@ const { Sider } = Layout,
         suiteModified:           state.suite.modified,
         suiteTargets:            state.suite.targets,
         projectName:             state.project.name,
-        projectSavedAt:          state.project.savedAt,
         projectEnvironments:     state.project.environments,
-        git:                     state.git,
         snippets:                state.snippets,
         project:                 state.project,
         cleanSnippets:           selectors.getCleanSnippetsMemoized( state )
@@ -105,11 +92,9 @@ export class AppLayout extends React.Component {
     snippetModal:            PropTypes.object,
     alert:                   PropTypes.object,
     lightbox:                PropTypes.object,
-    git:                     PropTypes.object,
     project:                 PropTypes.object,
     snippets:                PropTypes.object,
     projectFiles:            PropTypes.array,
-    gitLogs:                 PropTypes.array,
     projectEnvironments:     PropTypes.array,
     projectDirectory:        PropTypes.string,
     exportDirectory:         PropTypes.string,
@@ -120,7 +105,6 @@ export class AppLayout extends React.Component {
     projects:                PropTypes.object,
     suiteModified:           PropTypes.bool,
     readyToRunTests:         PropTypes.bool,
-    gitDetachedHeadState:    PropTypes.bool,
     appLightbox:             PropTypes.bool,
     newProjectModal:         PropTypes.bool,
     openProjectModal:        PropTypes.bool,
@@ -130,15 +114,10 @@ export class AppLayout extends React.Component {
     newSuiteModal:           PropTypes.bool,
     testReportModal:         PropTypes.bool,
     exportProjectModal:      PropTypes.bool,
-    gitCommitModal:          PropTypes.bool,
-    gitSyncModal:            PropTypes.bool,
-    gitCheckoutModal:        PropTypes.bool,
-    gitCloneModal:           PropTypes.bool,
     editTargetsAsCsvModal:   PropTypes.bool,
     editProjectModal:        PropTypes.bool,
     editEnvironmentsModal:   PropTypes.bool,
-    installRuntimeTestModal: PropTypes.bool,
-    projectSavedAt:          PropTypes.number
+    installRuntimeTestModal: PropTypes.bool
   }
 
   render() {
@@ -146,11 +125,10 @@ export class AppLayout extends React.Component {
             loading, tabs, commandModal, snippetModal,
             projectDirectory, exportDirectory, projects,
             suiteFilename, suiteModified, suiteTargets,
-            projectName, projectSavedAt, projectEnvironments,
-            projectFiles, readyToRunTests, gitDetachedHeadState,
-            git, snippets, project, environment,
-            alert, appLightbox, lightbox, gitLogs,
-            gitCommitModal, gitSyncModal, gitCheckoutModal, gitCloneModal,
+            projectName, projectEnvironments,
+            projectFiles, readyToRunTests,
+            snippets, project, environment,
+            alert, appLightbox, lightbox,
             newProjectModal, openProjectModal, openSuiteModal,
             saveSuiteAsModal, saveProjectAsModal, newSuiteModal,
             testReportModal, exportProjectModal,
@@ -197,11 +175,6 @@ export class AppLayout extends React.Component {
                 isProjectOpen={ !!projectDirectory }
                 suiteModified={ !!suiteModified }
                 readyToRunTests={ !!readyToRunTests }
-                gitDetachedHeadState={ !!gitDetachedHeadState }
-                gitConfigUsername={ git.configUsername }
-                gitConfigEmail={ git.configEmail }
-                isGitInitialized={ !!git.initialized }
-                hasGitRemote={ !!git.hasRemote }
               />
 
               { projectFiles.length && <ProjectExplorer
@@ -321,41 +294,6 @@ export class AppLayout extends React.Component {
         <EditTargetsAsCsvModal
           isVisible={ editTargetsAsCsvModal }
           targets={ suiteTargets }
-          action={ action }
-        />
-
-        <GitCommitModal
-          isVisible={ gitCommitModal }
-          git={ git }
-          projectDirectory={ projectDirectory }
-          action={ action }
-        />
-
-        <GitSyncModal
-          isVisible={ gitSyncModal }
-          git={ git }
-          savedAt={ projectSavedAt }
-          projectDirectory={ projectDirectory }
-          action={ action }
-        />
-
-        <GitCheckoutModal
-          isVisible={ gitCheckoutModal }
-          logs={ gitLogs }
-          git={ git }
-          projectDirectory={ projectDirectory }
-          action={ action }
-        />
-
-        <GitCloneModal
-          isVisible={ gitCloneModal }
-          git={ git }
-          projectDirectory={ projectDirectory }
-          action={ action }
-        />
-
-        <CheckoutMaster
-          projectDirectory={ projectDirectory }
           action={ action }
         />
 

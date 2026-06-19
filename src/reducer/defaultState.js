@@ -30,9 +30,6 @@ export default {
     selectedFile: "",
     confirmSaveChangesFile: "",
 
-    gitLogs: [],
-    gitDetachedHeadState: false,
-
     editTargetsAsCsvModal: false,
     newProjectModal: false,
     saveProjectAsModal: false,
@@ -44,10 +41,6 @@ export default {
     testReportModal: false,
     installRuntimeTestModal: false,
     editProjectModal: false,
-    gitCommitModal: false,
-    gitSyncModal: false,
-    gitCheckoutModal: false,
-    gitCloneModal: false,
     editEnvironmentsModal: false,
     appLightbox: false,
 
@@ -73,7 +66,6 @@ export default {
         suite: false,
         testReport: false,
         projectVariables: false,
-        projectGit: false,
         projectTargets: false,
         settings: false
       },
@@ -130,20 +122,6 @@ export default {
     filename: "",
     targets: {},
     tests: {}
-  },
-
-  git: {
-    initialized: false,
-    commitedAt: 0,
-    hasRemote: false,
-    remoteRepository: "",
-    configUsername: "",
-    configEmail: "",
-    credentialsAuthMethod: "",
-    credentialsAccessToken: "",
-    credentialsProvider: "",
-    credentialsUsername: "",
-    credentialsPassword: ""
   },
 
   snippets: {}

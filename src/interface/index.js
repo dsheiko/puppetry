@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 
 export * from "./settings";
-export * from "./git";
 export * from "./app";
 export * from "./project";
 export * from "./suite";

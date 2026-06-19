@@ -1,4 +1,4 @@
-Remove all undemanded fuinctionality like Git, in-browser vibing and so on.
+
 Then based on hte idea of this project create a new one in separate directory with latest npm dependencies (React, Electron, Puppeteer on demand) with https://dockview.dev/ instead of AntDesign
 
 Layout
@@ -23,7 +23,7 @@ Add option to export as Playwright
 
 
 
-Group Menu items/subitem in new struture that better represent the model
+Group Menu items/subitem in new struture that better represent the model MODEL.md
 
 Change file structure in src for better maintanability
 
@@ -32,7 +32,7 @@ BEsides Main menu goes on top left horizontally. On the very left top little log
 On the left we have Explorer, one windoiws with Open Editors (suites) and other as it is suites available in the project.
 
 
-
+Remove all undemanded fuinctionality like Git, in-browser vibing and so on.
 
 ✅ Locators and Test Cases are two subordinated editors under open Suite (file) tab.
 Switching between Locators and Test Cases cases rerendering the entire app and very heavy and slow. Maybe we can use React Router and make switch momentar?

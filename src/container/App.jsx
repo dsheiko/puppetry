@@ -6,8 +6,7 @@ import { bindActionCreators } from "redux";
 import { AppLayout } from "../component/AppLayout";
 import actions from "../action";
 import * as selectors from "../selector/selectors";
-import { E_GIT_SYNC_RESPONSE } from "constant";
-import { ipcRenderer } from "electron";
+
 import LoadingTip from "component/Global/LoadingTip";
 
 // Mapping state to the props
@@ -36,40 +35,23 @@ export class App extends React.Component {
       checkRuntimeTestDirReady: PropTypes.func.isRequired,
       checkNewVersion: PropTypes.func.isRequired,
       setApp: PropTypes.func.isRequired,
-      checkGit: PropTypes.func.isRequired,
-      loadGit: PropTypes.func,
       loadSnippets: PropTypes.func.isRequired
     }),
     bootstrapLoaded: PropTypes.bool.isRequired,
     selector: PropTypes.object
   }
 
-  onSyncResponse = () => {
-    this.props.action.loadProject();
-    this.props.action.setApp({ loading: false });
-  }
-
   async componentDidMount() {
     const { loadProject,
-            checkGit,
             loadSettings,
             checkRuntimeTestDirReady,
             checkNewVersion,
-            setApp,
-            loadGit
+            setApp
           } = this.props.action,
           settings = loadSettings();
 
-
-    ipcRenderer.removeAllListeners( E_GIT_SYNC_RESPONSE );
-    ipcRenderer.once( E_GIT_SYNC_RESPONSE, this.onSyncResponse );
-
-    // setApp({ greeting: GREETINGS[ Math.floor( Math.random() * GREETINGS.length ) ] });
     checkRuntimeTestDirReady();
     checkNewVersion();
-
-    // from storage
-    loadGit();
 
     if ( !settings.projectDirectory ) {
       setApp({ bootstrapLoaded: true });
@@ -81,12 +63,6 @@ export class App extends React.Component {
     } catch ( e ) {
       log.warn( `Renderer process: App.loadProject: ${ e }` );
       console.warn( e );
-    }
-
-    try {
-      await checkGit( settings.projectDirectory );
-    } catch ( e ) {
-      log.warn( `Renderer process: App.checkGit: ${ e }` );
     }
 
     setApp({ bootstrapLoaded: true });
